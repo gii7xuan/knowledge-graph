@@ -1,0 +1,120 @@
+# Artillery Domain Ontology Building System Configuration
+# 火炮领域本体构建系统配置文件
+
+# LLM Configuration - LLM API 配置
+llm:
+  api_type: "openai"  # API 类型: openai, azure, or custom
+  api_key: "sk-45jfj2wN89d0hwLFA18c71D7D3A3462b9eBe96F6Ea7d8cF5"  # API Key (use environment variable)
+  base_url: "http://43.143.151.41:3000/v1"  # API Base URL (optional, for custom endpoints)
+  model_name: "Qwen3-Coder-Next"  # 模型名称
+  temperature: 0.1  # 温度参数 (lower = more deterministic)
+  max_tokens: 2000  # 最大生成长度
+  retry_count: 3  # 失败重试次数
+  timeout: 60  # 超时时间 (秒)
+
+# Chunking Configuration - 文档分块配置
+chunking:
+  max_tokens: 1500  # 最大token数
+  min_tokens: 100  # 最小token数
+  overlap_tokens: 50  # 重叠token数
+  preserve_chapter_boundaries: true  # 是否保留章节边界
+
+# Normalization Configuration - 术语归一化配置
+normalization:
+  min_confidence: 0.5  # 最小置信度阈值
+  merge_similar_terms: true  # 是否合并相似术语
+  similarity_threshold: 0.85  # 相似度阈值
+  case_sensitive: false  # 是否区分大小写
+
+# Aggregation Configuration - 术语聚合配置
+aggregation:
+  merge_threshold: 0.8  # 合并阈值
+  min_support: 1  # 最小支持度
+
+# Ontology Configuration - 本体构建配置
+ontology:
+  # 类配置
+  classes:
+    - name: "GunSystem"
+      label_cn: "火炮系统"
+      label_en: "Gun System"
+      parent: "WeaponSystem"
+    
+    - name: "GunComponent"
+      label_cn: "火炮部件"
+      label_en: "Gun Component"
+      parent: "EquipmentComponent"
+  
+  # 参数配置
+  parameters:
+    - name: "Caliber"
+      label_cn: "口径"
+      label_en: "Caliber"
+      type: "geometric"
+      unit: "mm"
+    
+    - name: "MuzzleVelocity"
+      label_cn: "初速"
+      label_en: "Muzzle Velocity"
+      type: "performance"
+      unit: "m/s"
+  
+  # 关系配置
+  relations:
+    - id: "hasPart"
+      label_cn: "有部分"
+      label_en: "has part"
+      domain: "GunSystem"
+      range: "GunComponent"
+    
+    - id: "partOf"
+      label_cn: "部分是"
+      label_en: "part of"
+      domain: "GunComponent"
+      range: "GunSystem"
+
+# Validation Configuration - 验证配置
+validation:
+  min_confidence: 0.5  # 最小置信度
+  required_fields:
+    - "term"
+    - "category"
+    - "evidence"
+    - "source_chunk_id"
+  allowed_categories:
+    - "ArtilleryEquipment"
+    - "EquipmentSystem"
+    - "EquipmentComponent"
+    - "Ammunition"
+    - "Material"
+    - "EquipmentModel"
+    - "ComponentModel"
+    - "AmmunitionModel"
+    - "ManufacturingProcess"
+    - "OperationalProcess"
+    - "PhysicalPhenomenon"
+    - "Parameter"
+    - "Fault"
+    - "FaultMode"
+    - "FaultCause"
+    - "FaultSymptom"
+    - "DetectionMethod"
+    - "DetectionObject"
+    - "DetectionResult"
+    - "MaintenanceAction"
+    - "DocumentSection"
+
+# Export Configuration - 导出配置
+export:
+  output_dir: "output"
+  json_filename: "ontology.json"
+  owl_filename: "ontology.owl"
+  include_provenance: true
+  include_review_status: true
+
+# Mock LLM for testing without API keys
+mock_llm: false
+
+input_extensions:
+  - md
+  - txt
