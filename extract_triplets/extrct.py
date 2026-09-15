@@ -9,6 +9,17 @@ from openai import OpenAI
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from tqdm import tqdm
 
+from confidence.calibrator import load_calibrator
+from confidence.feature_extractor import TripleFeatureExtractor
+from confidence.risk_policy import load_policy
+from document.hierarchy_index import (
+    build_document_index,
+    normalize_document_id,
+    split_markdown_text as split_markdown_with_hierarchy,
+)
+from evidence.hierarchical_retriever import HierarchicalEvidenceRetriever
+from schema.subontology_retriever import SubOntologyRetriever
+
 # 将当前脚本所在目录的父目录添加到 Python 路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.abspath(os.path.join(script_dir, os.pardir))  # 项目根目录
@@ -181,7 +192,7 @@ def get_relation_domain_range_constraints(ontology):
     }
 
 
-def get_ontology_text(ontology=None, ontology_name=None):
+def get_ontology_text(ontology=None, ontology_name=None, sub_schema=None):
     """
     生成本体文本描述，用于 Prompt
 
@@ -197,6 +208,9 @@ def get_ontology_text(ontology=None, ontology_name=None):
     elif ontology is None:
         ontology = load_ontology_from_json()
 
+    if sub_schema:
+        return json.dumps(sub_schema, ensure_ascii=False, indent=2)
+
     text = []
     text.append("【火炮领域本体结构】")
     text.append("")
@@ -204,10 +218,11 @@ def get_ontology_text(ontology=None, ontology_name=None):
     # 类定义
     classes = ontology.get("classes", {})
     text.append("### 实体类型（类）：")
-    for class_id, class_data in list(classes.items())[:10]:  # 限制显示前10个类
+    for class_id, class_data in classes.items():
         label = class_data.get("label", class_id)
         desc = class_data.get("description", "")
-        text.append(f"  - {label}: {desc[:100]}...")
+        parent = class_data.get("parent") or ""
+        text.append(f"  - {class_id} ({label}), parent={parent}: {desc[:120]}")
     text.append(f"  ... 共 {len(classes)} 个类")
     text.append("")
 
@@ -223,19 +238,20 @@ def get_ontology_text(ontology=None, ontology_name=None):
                         all_relations.append(prop_data)
 
     text.append("### 关系类型（对象属性）：")
-    for prop_data in list(all_relations)[:20]:  # 限制显示前20个关系
+    for prop_data in all_relations:
         label = prop_data.get("label", "")
         domain = prop_data.get("domain", [])
         range_val = prop_data.get("range", [])
-        text.append(f"  - {label}: {domain} -> {range_val}")
+        desc = prop_data.get("description") or prop_data.get("definition") or ""
+        text.append(f"  - {label}: {domain} -> {range_val}。{desc[:120]}")
     text.append(f"  ... 共 {len(all_relations)} 个关系")
     text.append("")
 
     return "\n".join(text)
 
 # ================= 配置区域 =================
-API_KEY = "sk-45jfj2wN89d0hwLFA18c71D7D3A3462b9eBe96F6Ea7d8cF5"
-BASE_URL = "http://43.143.151.41:3000/v1"
+API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "")
+BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "http://43.143.151.41:3000/v1")
 MODEL = "Qwen3-Coder-Next"
 
 
@@ -256,6 +272,7 @@ OUTPUT_JSON_PATH = 'triplets\\Ballistics.json'
 EVIDENCE_MD_PATH = 'evidence\\Ballistics_evidence.md'
 BOOK_NAME = "《Ballistics》"
 DISCARDED_TRIPLETS_PATH = 'rejected_triplets\\Ballistics_rejected_triplets.json'  # 被丢弃三元组的输出文件路径
+RUNS_V2_DIR = os.environ.get("KG_RUNS_V2_DIR", "runs/v2")
 
 # ===========================================
 
@@ -266,7 +283,7 @@ except ImportError:
     from confidence.confidence_scorer import ConfidenceScorer
 
 # 初始化客户端
-client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
+client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL)
 
 class ArtilleryProcessor:
     """火炮学知识图谱三元组后置处理器（支持多本体和置信度评分）"""
@@ -342,6 +359,10 @@ class ArtilleryProcessor:
         self.class_hierarchy = get_class_hierarchy(self.ontology)
         self.relation_constraints = get_relation_domain_range_constraints(self.ontology)
         self.entity_type_cache = {}
+        self.evidence_retriever = HierarchicalEvidenceRetriever()
+        self.feature_extractor = TripleFeatureExtractor()
+        self.calibrator = load_calibrator()
+        self.risk_policy = load_policy()
 
     def _class_options_text(self):
         """生成实体类型预测用的本体类清单。"""
@@ -526,315 +547,310 @@ other_entity: {other_entity}
 
         return False
 
-    def validate_and_fix(self, triplets, evidence_text=""):
+    def _map_relation(self, surface_relation, head="", tail=""):
+        """Map an original surface relation to the closest ontology relation."""
+        surface_relation = str(surface_relation or "").strip()
+        if not surface_relation:
+            return {
+                "surface_relation": "",
+                "relation": "",
+                "score": 0.0,
+                "margin": 0.0,
+                "method": "empty",
+                "candidates": [],
+            }
+        if surface_relation in self.allowed_relations:
+            return {
+                "surface_relation": surface_relation,
+                "relation": surface_relation,
+                "score": 1.0,
+                "margin": 1.0,
+                "method": "exact",
+                "candidates": [{"relation": surface_relation, "score": 1.0}],
+            }
+
+        ranked = []
+        for relation in self.allowed_relations:
+            score = get_close_matches(surface_relation, [relation], n=1, cutoff=0.0)
+            if score:
+                similarity = 1.0 if surface_relation == relation else self._string_similarity(surface_relation, relation)
+                ranked.append({"relation": relation, "score": similarity})
+        ranked.sort(key=lambda item: item["score"], reverse=True)
+        best = ranked[0] if ranked else {"relation": "", "score": 0.0}
+        second_score = ranked[1]["score"] if len(ranked) > 1 else 0.0
+        if best["score"] < 0.45:
+            return {
+                "surface_relation": surface_relation,
+                "relation": "",
+                "score": best["score"],
+                "margin": best["score"] - second_score,
+                "method": "unmatched",
+                "candidates": ranked[:5],
+            }
+        return {
+            "surface_relation": surface_relation,
+            "relation": best["relation"],
+            "score": best["score"],
+            "margin": best["score"] - second_score,
+            "method": "string_similarity",
+            "candidates": ranked[:5],
+        }
+
+    def _string_similarity(self, left, right):
+        import difflib
+
+        return difflib.SequenceMatcher(None, str(left), str(right)).ratio()
+
+    def _decision_to_legacy_shunt(self, decision, probability):
+        action = {
+            "auto_accept": "自动接纳",
+            "human_accept": "人工接纳",
+            "manual_review": "进入人工审核队列",
+            "auto_reject": "自动拒绝",
+        }.get(decision, "进入人工审核队列")
+        shunt = "high" if decision == "auto_accept" else "medium_low"
+        if decision == "auto_reject":
+            shunt = "low"
+        return {
+            "shunt": shunt,
+            "reason": f"校准概率 {probability:.4f}，风险策略决策为 {decision}",
+            "action": action,
+        }
+
+    def _build_v2_record(
+        self,
+        triplet,
+        evidence_result,
+        mapping_result,
+        type_predictions,
+        type_validation,
+        confidence_result,
+        features,
+        probability,
+        decision,
+        source_chunk,
+    ):
+        best_evidence = evidence_result.get("best_evidence") or {}
+        relation = mapping_result.get("relation") or triplet.get("relation", "")
+        record = dict(triplet)
+        record["head"] = str(record.get("head", "")).strip()
+        record["tail"] = str(record.get("tail", "")).strip()
+        record["surface_relation"] = mapping_result.get("surface_relation") or record.get("surface_relation") or record.get("relation", "")
+        record["relation"] = relation
+        record["head_type"] = type_predictions["head"]["class_id"]
+        record["tail_type"] = type_predictions["tail"]["class_id"]
+        record["document_id"] = source_chunk.get("document_id")
+        record["source_id"] = source_chunk.get("chunk_id")
+        record["breadcrumb_path"] = source_chunk.get("breadcrumb_path")
+        record["evidence"] = best_evidence.get("text") or record.get("evidence") or record.get("evidence_quote", "")
+        record["evidence_items"] = evidence_result.get("support_items") or ([best_evidence] if best_evidence else [])
+        record["relation_mapping"] = mapping_result
+        record["entity_type_prediction"] = type_predictions
+        record["type_validation"] = type_validation
+        record["confidence_features"] = features
+        record["raw_score"] = confidence_result.get("raw_final_score", confidence_result.get("final_score", 0.0))
+        record["calibrated_probability"] = round(probability, 4)
+        record["confidence"] = round(probability, 4)
+        record["decision"] = decision
+        record["calibrator_version"] = self.calibrator.version
+        record["policy_version"] = self.risk_policy.version
+        record["confidence_detail"] = {
+            "raw_confidence": confidence_result,
+            "relation_mapping": mapping_result,
+            "evidence_result": evidence_result,
+            "entity_type_prediction": type_predictions,
+            "type_validation_info": self._type_validation_info(type_validation),
+        }
+        record["confidence_decision"] = self._decision_to_legacy_shunt(decision, probability)
+        return record
+
+    def validate_and_fix(self, triplets, evidence_text="", source_chunk=None, document_index=None):
         """
-        验证并修复三元组中的关系词，同时过滤黑名单实体，并计算置信度
+        按 v2 顺序处理三元组：
+        证据检索 -> 关系映射 -> 实体分类 -> domain/range 校验 ->
+        特征生成 -> 概率校准 -> 风险分流。
 
-        Args:
-            triplets: 三元组列表
-            evidence_text: 原文证据文本（用于证据匹配）
-
-        Returns:
-            tuple: (valid_triplets, discarded_triplets)
-                valid_triplets: 通过验证的三元组列表（包含 confidence 字段）
-                discarded_triplets: 被丢弃的三元组列表（包含 confidence 和 discard_reason）
+        仍返回旧接口形态，便于现有审核页面继续读取 review 文件。
         """
         valid_triplets = []
         discarded_triplets = []
 
+        if source_chunk is None:
+            source_chunk = {
+                "document_id": "legacy_document",
+                "chunk_id": "legacy_chunk",
+                "section_id": "legacy_section",
+                "parent_section_id": None,
+                "breadcrumb_path": "",
+                "content": evidence_text or "",
+                "sentences": [
+                    {
+                        "sentence_id": "legacy_chunk_s0",
+                        "text": evidence_text or "",
+                        "start": 0,
+                        "end": len(evidence_text or ""),
+                    }
+                ],
+            }
+        if document_index is None:
+            document_index = build_document_index([source_chunk])
+
         for t in triplets:
-            # ====== 格式转换：兼容不同格式的三元组 ======
-            # 格式1: {"triple": ["a", "b", "c"]} -> {"head": "a", "relation": "b", "tail": "c"}
-            # 格式2: {"head": "a", "relation": "b", "tail": "c"} (标准格式)
+            if not isinstance(t, dict):
+                continue
+
             if "triple" in t and isinstance(t["triple"], list) and len(t["triple"]) >= 3:
-                head = t["triple"][0]
-                relation = t["triple"][1]
-                tail = t["triple"][2]
-                # 转换为标准格式
                 t = {
-                    "head": head,
-                    "relation": relation,
-                    "tail": tail,
+                    "head": t["triple"][0],
+                    "surface_relation": t["triple"][1],
+                    "relation": t["triple"][1],
+                    "tail": t["triple"][2],
                     "source_id": t.get("source_id", ""),
                     "thought": t.get("thought", ""),
                     "evidence": t.get("evidence", ""),
-                    "confidence": t.get("confidence", 0.5)
+                    "evidence_quote": t.get("evidence_quote") or t.get("evidence", ""),
+                    "confidence": t.get("confidence", 0.5),
                 }
             elif "triple" in t and isinstance(t["triple"], list) and len(t["triple"]) == 2:
-                # 只有 head 和 tail 的情况（可能是遗漏了 relation）
-                head = t["triple"][0]
-                tail = t["triple"][1]
-                relation = "相关"  # 默认关系
                 t = {
-                    "head": head,
-                    "relation": relation,
-                    "tail": tail,
+                    "head": t["triple"][0],
+                    "surface_relation": "相关",
+                    "relation": "相关",
+                    "tail": t["triple"][1],
                     "source_id": t.get("source_id", ""),
                     "thought": t.get("thought", ""),
                     "evidence": t.get("evidence", ""),
-                    "confidence": t.get("confidence", 0.5)
+                    "evidence_quote": t.get("evidence_quote") or t.get("evidence", ""),
+                    "confidence": t.get("confidence", 0.5),
                 }
-            else:
-                # 已经是标准格式或无法识别的格式
-                head = t.get("head", "")
-                relation = t.get("relation", "")
-                tail = t.get("tail", "")
 
-            # 如果 head 或 tail 为空，丢弃该三元组
+            head = str(t.get("head", "")).strip()
+            tail = str(t.get("tail", "")).strip()
+            surface_relation = str(t.get("surface_relation") or t.get("relation") or t.get("predicate") or "").strip()
+            t["head"] = head
+            t["tail"] = tail
+            t["surface_relation"] = surface_relation
+            t["relation"] = surface_relation
+            t.setdefault("evidence_quote", t.get("evidence", ""))
+
             if not head or not tail:
                 discarded_triplets.append({
                     "head": head,
-                    "relation": relation,
+                    "surface_relation": surface_relation,
+                    "relation": surface_relation,
                     "tail": tail,
-                    "source_id": t.get("source_id", ""),
+                    "source_id": source_chunk.get("chunk_id"),
+                    "document_id": source_chunk.get("document_id"),
                     "discard_reason": "head 或 tail 为空",
                     "confidence": 0.0,
+                    "calibrated_probability": 0.0,
+                    "decision": "auto_reject",
                     "confidence_detail": {},
-                    "confidence_decision": {"shunt": "low", "reason": "head 或 tail 为空", "action": "丢弃"},
+                    "confidence_decision": {"shunt": "low", "reason": "head 或 tail 为空", "action": "自动拒绝"},
                 })
                 continue
 
-            source_id = t.get("source_id", "")
-
-            # 添加实体类别信息（用于 Neo4j 导入时的颜色区分）
-            head_type = self.entity_to_type.get(head, "Unknown")
-            tail_type = self.entity_to_type.get(tail, "Unknown")
-            t["head_type"] = head_type
-            t["tail_type"] = tail_type
-
-            # 保存原始关系词用于记录
-            if "relation" in t:
-                original_pred = t.get("relation", "")
-            elif "predicate" in t:
-                original_pred = t.get("predicate", "")
-            else:
-                original_pred = ""
-
-             # 检查 head 是否在黑名单中
+            blacklist_reason = None
             if self._is_entity_in_blacklist(head):
-                # 计算置信度（使用新的接口）
-                confidence_result = self.confidence_scorer.compute_confidence(t, evidence_text=evidence_text)
-                confidence = confidence_result["final_score"]
-                detail = {
-                    "logic_info": confidence_result["logic_info"],
-                    "map_info": confidence_result["map_info"],
-                    "evidence_info": confidence_result["evidence_info"],
-                }
-
-                reason = f"head '{head}' 匹配黑名单模式"
-                print(f"  过滤：{reason} (置信度: {confidence:.3f})")
-
-                discarded_triplets.append({
-                    "head": head,
-                    "head_type": head_type,
-                    "relation": original_pred,
-                    "tail": tail,
-                    "tail_type": tail_type,
-                    "source_id": source_id,
-                    "discard_reason": reason,
-                    "confidence": confidence,
-                    "confidence_detail": detail,
+                blacklist_reason = f"head '{head}' 匹配黑名单模式"
+            elif self._is_entity_in_blacklist(tail):
+                blacklist_reason = f"tail '{tail}' 匹配黑名单模式"
+            if blacklist_reason:
+                record = dict(t)
+                record.update({
+                    "source_id": source_chunk.get("chunk_id"),
+                    "document_id": source_chunk.get("document_id"),
+                    "discard_reason": blacklist_reason,
+                    "confidence": 0.0,
+                    "calibrated_probability": 0.0,
+                    "decision": "auto_reject",
+                    "confidence_decision": {"shunt": "low", "reason": blacklist_reason, "action": "自动拒绝"},
                 })
+                discarded_triplets.append(record)
+                print(f"  过滤：{blacklist_reason}")
                 continue
 
-            # 检查 tail 是否在黑名单中
-            if self._is_entity_in_blacklist(tail):
-                # 计算置信度（使用新的接口）
-                confidence_result = self.confidence_scorer.compute_confidence(t, evidence_text=evidence_text)
-                confidence = confidence_result["final_score"]
-                detail = {
-                    "logic_info": confidence_result["logic_info"],
-                    "map_info": confidence_result["map_info"],
-                    "evidence_info": confidence_result["evidence_info"],
-                }
+            evidence_result = self.evidence_retriever.retrieve(t, source_chunk, document_index)
+            best_evidence = evidence_result.get("best_evidence") or {}
+            evidence_for_scoring = best_evidence.get("text") or t.get("evidence_quote") or evidence_text
 
-                reason = f"tail '{tail}' 匹配黑名单模式"
-                print(f"  过滤：{reason} (置信度: {confidence:.3f})")
-
-                discarded_triplets.append({
-                    "head": head,
-                    "head_type": head_type,
-                    "relation": original_pred,
-                    "tail": tail,
-                    "tail_type": tail_type,
-                    "source_id": source_id,
-                    "discard_reason": reason,
-                    "confidence": confidence,
-                    "confidence_detail": detail,
-                })
+            mapping_result = self._map_relation(surface_relation, head=head, tail=tail)
+            if not mapping_result.get("relation"):
+                record = self._build_v2_record(
+                    t,
+                    evidence_result,
+                    mapping_result,
+                    {
+                        "head": {"class_id": "Unknown", "confidence": 0.0},
+                        "tail": {"class_id": "Unknown", "confidence": 0.0},
+                    },
+                    {
+                        "relation": "",
+                        "head_type": "Unknown",
+                        "tail_type": "Unknown",
+                        "domain_ok": False,
+                        "range_ok": False,
+                        "passed": False,
+                        "errors": [f"关系词 '{surface_relation}' 无法映射到本体关系"],
+                    },
+                    {"final_score": 0.0, "raw_final_score": 0.0, "S_evidence": 0.0},
+                    {},
+                    0.0,
+                    "auto_reject",
+                    source_chunk,
+                )
+                record["discard_reason"] = f"关系词 '{surface_relation}' 无法映射到本体关系"
+                discarded_triplets.append(record)
+                print(f"  警告：舍弃非法关系 -> '{surface_relation}'")
                 continue
 
-            # 处理不同格式的三元组（head/relation 或 subject/predicate）
-            if "relation" in t:
-                pred = t.get("relation", "")
-            elif "predicate" in t:
-                pred = t.get("predicate", "")
-                t["relation"] = pred  # 统一字段名
-            else:
-                pred = ""
+            t["relation"] = mapping_result["relation"]
 
-            type_predictions = self._predict_triplet_entity_types(t, evidence_text)
+            type_predictions = self._predict_triplet_entity_types(t, evidence_for_scoring)
             head_type = type_predictions["head"]["class_id"]
             tail_type = type_predictions["tail"]["class_id"]
-            t["head_type"] = head_type
-            t["tail_type"] = tail_type
-            t["entity_type_prediction"] = type_predictions
+            type_validation = self._validate_domain_range_types(mapping_result["relation"], head_type, tail_type)
+            confidence_result = self.confidence_scorer.compute_confidence(t, evidence_text=evidence_for_scoring)
+            features = self.feature_extractor.extract(
+                triplet=t,
+                evidence_result=evidence_result,
+                mapping_result=mapping_result,
+                type_result=type_predictions,
+                ontology_result=type_validation,
+                confidence_result=confidence_result,
+            )
+            raw_score = confidence_result.get("final_score", 0.0)
+            probability = self.calibrator.predict_proba(features, raw_score=raw_score)
+            decision = self.risk_policy.route(probability)
 
-            # 计算置信度（使用新的接口）
-            confidence_result = self.confidence_scorer.compute_confidence(t, evidence_text=evidence_text)
-            confidence = confidence_result["final_score"]
-            detail = {
-                "logic_info": confidence_result["logic_info"],
-                "map_info": confidence_result["map_info"],
-                "evidence_info": confidence_result["evidence_info"],
-                "entity_type_prediction": type_predictions,
-            }
+            if not type_validation.get("passed") and decision == "auto_accept":
+                decision = "manual_review"
 
-            # 分析分流决策（使用新的接口）
-            shunt_result = self.confidence_scorer.analyze_shunt(confidence_result)
+            record = self._build_v2_record(
+                t,
+                evidence_result,
+                mapping_result,
+                type_predictions,
+                type_validation,
+                confidence_result,
+                features,
+                probability,
+                decision,
+                source_chunk,
+            )
+            if mapping_result.get("method") != "exact":
+                record["corrected_relation"] = mapping_result.get("relation")
 
-            # 检查关系是否在本体中
-            if pred in self.allowed_relations:
-                type_validation = self._validate_domain_range_types(pred, head_type, tail_type)
-                detail["type_validation_info"] = self._type_validation_info(type_validation)
-                shunt_result = self._apply_type_validation_to_shunt(shunt_result, type_validation)
-                t["relation"] = pred
-                t["confidence"] = confidence
-                t["confidence_detail"] = detail
-                t["confidence_decision"] = shunt_result
-                t["type_validation"] = type_validation
-                print(f"  本体关系三元组: {head} - {pred} - {tail} (置信度: {confidence:.3f})")
-                print(f"  分流: {shunt_result['action']}")
-
-                # 即使关系已在本体中，也必须统一经过置信度阈值分流。
-                if shunt_result['shunt'] in ['high', 'medium_high']:
-                    valid_triplets.append(t)
-                elif shunt_result['shunt'] == 'medium_low':
-                    discarded_triplets.append({
-                        "head": head,
-                        "head_type": head_type,
-                        "relation": original_pred,
-                        "tail": tail,
-                        "tail_type": tail_type,
-                        "source_id": source_id,
-                        "discard_reason": shunt_result['reason'],
-                        "confidence": confidence,
-                        "confidence_detail": detail,
-                        "confidence_decision": shunt_result,
-                        "type_validation": type_validation,
-                        "needs_review": True,
-                    })
-                else:
-                    discarded_triplets.append({
-                        "head": head,
-                        "head_type": head_type,
-                        "relation": original_pred,
-                        "tail": tail,
-                        "tail_type": tail_type,
-                        "source_id": source_id,
-                        "discard_reason": shunt_result['reason'],
-                        "confidence": confidence,
-                        "confidence_detail": detail,
-                        "confidence_decision": shunt_result,
-                        "type_validation": type_validation,
-                    })
-                continue
-
-            # 模糊匹配修正（处理模型多字少字的问题）
-            matches = get_close_matches(pred, self.allowed_relations, n=1, cutoff=0.6)
-            if matches:
-                corrected_relation = matches[0]
-                t["relation"] = corrected_relation
-
-                # 获取分流结果（使用新的接口）
-                shunt_result = self.confidence_scorer.analyze_shunt(confidence_result)
-                type_validation = self._validate_domain_range_types(corrected_relation, head_type, tail_type)
-                detail["type_validation_info"] = self._type_validation_info(type_validation)
-                shunt_result = self._apply_type_validation_to_shunt(shunt_result, type_validation)
-
-                t["confidence"] = confidence
-                t["confidence_detail"] = detail
-                t["confidence_decision"] = shunt_result
-                t["type_validation"] = type_validation
-
-                print(f"  修正关系: '{pred}' -> '{corrected_relation}' (置信度: {confidence:.3f})")
-                print(f"  分流: {shunt_result['action']}")
-
-                # 根据分流结果处理
-                if shunt_result['shunt'] in ['high', 'medium_high']:
-                    # 高/中高置信度，直接保留
-                    valid_triplets.append(t)
-                elif shunt_result['shunt'] == 'medium_low':
-                    # 中置信度，进入人工审核队列
-                    discarded_triplets.append({
-                        "head": head,
-                        "head_type": head_type,
-                        "relation": original_pred,
-                        "tail": tail,
-                        "tail_type": tail_type,
-                        "corrected_relation": corrected_relation,
-                        "source_id": source_id,
-                        "discard_reason": shunt_result['reason'],
-                        "confidence": confidence,
-                        "confidence_detail": detail,
-                        "confidence_decision": shunt_result,
-                        "type_validation": type_validation,
-                        "needs_review": True,
-                    })
-                else:
-                    # 低置信度，丢弃
-                    discarded_triplets.append({
-                        "head": head,
-                        "head_type": head_type,
-                        "relation": original_pred,
-                        "tail": tail,
-                        "tail_type": tail_type,
-                        "corrected_relation": corrected_relation,
-                        "source_id": source_id,
-                        "discard_reason": shunt_result['reason'],
-                        "confidence": confidence,
-                        "confidence_detail": detail,
-                        "confidence_decision": shunt_result,
-                        "type_validation": type_validation,
-                    })
+            print(
+                f"  v2处理: {head} - {mapping_result['relation']} - {tail} "
+                f"(校准概率: {probability:.3f}, 决策: {decision})"
+            )
+            if decision in {"auto_accept", "human_accept"}:
+                valid_triplets.append(record)
             else:
-                # 无法匹配，丢弃
-                shunt_result = self.confidence_scorer.analyze_shunt(confidence_result)
-
-                reason = f"关系词 '{original_pred}' 无法匹配或修正（不在允许的关系列表中）"
-                # 显示详细的置信度分解信息
-                confidence_detail_full = {
-                    "S_llm": confidence_result.get("S_llm", 0),
-                    "S_sim_new": confidence_result.get("S_sim_new", 0),
-                    "S_evidence": confidence_result.get("S_evidence", 0),
-                    "M_logic": confidence_result.get("M_logic", 0),
-                    "M_map": confidence_result.get("M_map", 0),
-                    "logic_info": confidence_result.get("logic_info", ""),
-                    "map_info": confidence_result.get("map_info", ""),
-                    "evidence_info": confidence_result.get("evidence_info", ""),
-                    "match_relation": confidence_result.get("match_relation", ""),
-                }
-                print(f"  警告：舍弃非法关系 -> '{original_pred}' (置信度: {confidence:.3f})")
-                print(f"    置信度分解:")
-                print(f"      base_score = 0.4 * S_llm({confidence_result.get('S_llm', 0):.3f}) + 0.3 * S_sim_new({confidence_result.get('S_sim_new', 0):.3f}) + 0.3 * S_evidence({confidence_result.get('S_evidence', 0):.3f}) = {0.4 * confidence_result.get('S_llm', 0) + 0.3 * confidence_result.get('S_sim_new', 0) + 0.3 * confidence_result.get('S_evidence', 0):.3f}")
-                print(f"      Final = base_score * M_logic({confidence_result.get('M_logic', 0)}) * M_map({confidence_result.get('M_map', 0)}) = {confidence:.3f}")
-                print(f"    {confidence_result.get('logic_info', '')}")
-                print(f"    {confidence_result.get('map_info', '')}")
-                print(f"    {confidence_result.get('evidence_info', '')}")
-                print(f"    匹配关系: {confidence_result.get('match_relation', '')}")
-
-                discarded_triplets.append({
-                    "head": head,
-                    "head_type": head_type,
-                    "relation": original_pred,
-                    "tail": tail,
-                    "tail_type": tail_type,
-                    "source_id": source_id,
-                    "discard_reason": reason,
-                    "confidence": confidence,
-                    "confidence_detail": detail,
-                    "confidence_decision": shunt_result,
-                })
+                record["needs_review"] = decision == "manual_review"
+                record["discard_reason"] = record["confidence_decision"]["reason"]
+                discarded_triplets.append(record)
 
         return valid_triplets, discarded_triplets
 
@@ -986,7 +1002,7 @@ def build_breadcrumb_path(metadata):
     return " > ".join(parts)
 
 
-def call_qwen_traditional(chunk, breadcrumb_path, retry_count=3, ontology=None):
+def call_qwen_traditional(chunk, breadcrumb_path, retry_count=3, ontology=None, sub_schema=None):
     """
     GraphRAG
     整合了火炮学知识图谱本体，强制使用本体定义的实体类型、关系类型和抽取规则。
@@ -997,7 +1013,7 @@ def call_qwen_traditional(chunk, breadcrumb_path, retry_count=3, ontology=None):
         # 如果没有传入 ontology，则使用默认的 JSON 文件加载
         ontology_info = get_ontology_text()
     else:
-        ontology_info = get_ontology_text(ontology=ontology)
+        ontology_info = get_ontology_text(ontology=ontology, sub_schema=sub_schema)
 
     prompt = f"""
 Goal:
@@ -1009,7 +1025,7 @@ Attention:
 2. Entity Integrity: Do not modify the names in the Entity List.
 3. Concise Relations: Use professional engineering terms for relations (e.g., "composed_of", "determines", "proportional_to", "increases", "constrains").
 4. Avoid Descriptive Objects: Do not use "factor of..." as an entity. Instead, use the action as a relation (e.g., instead of [A, is, factor of B], use [A, affects, B]).
-5. Confidence Score: For each triple, provide a confidence score (0.0-1.0) and the original snippet from the text as evidence.
+5. Evidence First: For each triple, provide the original surface relation and an exact evidence quote from the text. Do not provide confidence or thought fields.
 
 Example (Artillery Domain):
 Text: "制退机产生制退阻力，制退阻力决定火炮后坐长度。"
@@ -1018,21 +1034,15 @@ Semantic Graph:
   "triplets": [
     {{
       "head": "制退机",
-      "relation": "导致",
+      "surface_relation": "产生",
       "tail": "制退阻力",
-      "evidence": "制退机产生制退阻力",
-      "reason": "原文明确说明制退机产生制退阻力，可归一为导致关系",
-      "confidence": 0.95,
-      "thought": "实体包括制退机和制退阻力；关系由原文的产生归一为导致。"
+      "evidence_quote": "制退机产生制退阻力"
     }},
     {{
       "head": "制退阻力",
-      "relation": "决定",
+      "surface_relation": "决定",
       "tail": "火炮后坐长度",
-      "evidence": "制退阻力决定火炮后坐长度",
-      "reason": "原文直接表达决定关系",
-      "confidence": 0.95,
-      "thought": "实体包括制退阻力和火炮后坐长度；关系为原文直接出现的决定。"
+      "evidence_quote": "制退阻力决定火炮后坐长度"
     }}
   ]
 }}
@@ -1048,23 +1058,22 @@ Semantic Graph:
 - **理论边界**：仅提取通用的、教科书定义的理论知识。例题中的具体数值、特定计算过程、虚构情境均不得入库。
 - ❌ 错误：从例题"已知某炮弹的初速为800 m/s，试分析其射程。"中提取任何三元组。
 - ❌ 错误：从"如图12-3所示的炮架结构"中提取结构参数。
-- ✅ 正确：如果正文明确描述"初速是影响射程的关键因素"，则可以在统一 schema 中提取 {{"head": "初速", "relation": "受...影响", "tail": "射程", "evidence": "初速是影响射程的关键因素", "reason": "原文说明初速影响射程", "confidence": 0.9, "thought": "初速为影响因素，射程为被影响对象。"}}。
+- ✅ 正确：如果正文明确描述"初速是影响射程的关键因素"，则可以提取 {{"head": "初速", "surface_relation": "影响", "tail": "射程", "evidence_quote": "初速是影响射程的关键因素"}}。
 
 ### 铁律二：去重三元组
 - **全局去重**：在整个文档范围内，完全相同的三元组只保留一条。
 - **输出前自行去重**，绝对禁止让重复三元组进入后续的 Neo4j 导入环节！
 
-【强制执行的思维链路 (CoT)】
-在输出 JSON 前，请按以下步骤在 `thought` 字段中进行分析：
+【抽取前检查】
+在输出 JSON 前自行完成以下检查，但不要输出 thought 字段：
 1. **实体识别与分类**：识别文中提到的参数（如 $i_c$）、过程（如膛内压力）或模型。判断它们属于哪14类实体。
 2. **指代消解（Rule 1）**：检查文中是否有"该"、"其"、"此"或省略主语的情况。必须回溯并替换为具体的实体名词（如将"其"替换为"弹道系数"）。
 3. **符号转中文（Rule 9 - 新增）**：检查所有提取的实体，如果包含数学符号（如 v0, x, A, p），必须替换为对应的中文概念名称。
 4. **实体名称校验（Rule 9 - 新增）**：检查实体长度是否 ≤ 2 个字符，或是否为纯 LaTeX 符号。如果满足任一条件，必须将其合并到父级概念中或丢弃。
-5. **关系对齐（核心步骤）**：
+5. **关系保真（核心步骤）**：
    - 分析实体间的物理逻辑。
-   - **检查**：拟使用的关系名是否在本体预定义关系列表中？
-   - **转换**：如果原文是"正相关"，必须对齐为"正比于"；如果原文是"取决于"，必须对齐为"决定"。
-   - **剔除**：如果关系无法映射到本体的定义中，宁可不提取，也不得自创。
+   - surface_relation 尽量保留原文关系表达。
+   - 不要把所有关系强行改写成本体标准关系，标准 relation 由后置映射模块生成。
 6. **嵌套分解（Rule 2）**：如果遇到复合参数（如弹道系数 $C$），检查文中是否提到了它的组成部分，并拆解为多条"由...组成"关系。
 ---
 
@@ -1079,12 +1088,11 @@ Semantic Graph:
   "triplets": [
     {{
       "head": "string，非空名词或名词短语",
-      "relation": "string，必须是本体允许关系之一",
+      "surface_relation": "string，原文中的关系表达或最接近的短语",
       "tail": "string，非空名词或名词短语",
-      "evidence": "string，必须是待处理文本中的原文片段，不得改写",
-      "reason": "string，说明为什么该证据支持这个三元组",
-      "confidence": 0.0,
-      "thought": "string，按上方思维链路给出简短抽取依据"
+      "evidence_quote": "string，必须是待处理文本中的原文片段，不得改写",
+      "head_type_candidate": "string，可为空",
+      "tail_type_candidate": "string，可为空"
     }}
   ]
 }}
@@ -1094,21 +1102,19 @@ Semantic Graph:
   "triplets": [
     {{
       "head": "空气密度",
-      "relation": "正比于",
+      "surface_relation": "成正比",
       "tail": "空气阻力加速度",
-      "evidence": "空气阻力加速度与空气密度成正比",
-      "reason": "原文直接说明空气密度与空气阻力加速度的正比关系",
-      "confidence": 0.95,
-      "thought": "空气密度和空气阻力加速度均为物理量，关系为正比于。"
+      "evidence_quote": "空气阻力加速度与空气密度成正比",
+      "head_type_candidate": "C_PhysicalParameter",
+      "tail_type_candidate": "C_PhysicalParameter"
     }},
     {{
       "head": "初速",
-      "relation": "决定",
+      "surface_relation": "决定",
       "tail": "射程",
-      "evidence": "初速决定射程",
-      "reason": "原文直接表达初速对射程的决定作用",
-      "confidence": 0.95,
-      "thought": "初速为影响弹道结果的参数，射程为结果参数。"
+      "evidence_quote": "初速决定射程",
+      "head_type_candidate": "C_PhysicalParameter",
+      "tail_type_candidate": "C_PhysicalParameter"
     }}
   ]
 }}
@@ -1119,7 +1125,7 @@ Semantic Graph:
             response = client.chat.completions.create(
                 model=MODEL,
                 messages=[
-                    {"role": "system", "content": "You are a GraphRAG Expert. You strictly use ONLY relations defined in the Artillery Ontology Schema. You FORBID abstract disciplines (like '外弹道学') from causing/affecting physical metrics. You MUST auto-generate Aggregation Hubs (e.g., '影响X的因素') using the '属于' relation whenever a specific factor affects a core metric. Entities MUST be pure nouns and conform to the defined entity types. Relations MUST be one of: 决定, 正比于, 受...影响, 由...组成, 用于, 需满足, 导致, 通过...影响, 属于, 在...条件下, 需通过...反算, 可减小, 需重复, 替代...存在误差."},
+                    {"role": "system", "content": "You are a GraphRAG extraction expert. Preserve the original surface relation from the source text, require exact evidence quotes, and output only JSON. Do not output thought or confidence fields."},
                     {"role": "user", "content": prompt}
                 ],
                 response_format={'type': 'json_object'},
@@ -1191,6 +1197,85 @@ def write_evidence_library(chunk_id, breadcrumb_path, content, filename):
         f.write("---\n\n")
 
 
+def normalize_fact_part(value):
+    return "".join(str(value or "").split()).casefold()
+
+
+def fact_key_for(item):
+    raw = "\t".join(
+        [
+            normalize_fact_part(item.get("head")),
+            str(item.get("relation") or "").strip(),
+            normalize_fact_part(item.get("tail")),
+        ]
+    )
+    return hashlib.sha1(raw.encode("utf-8")).hexdigest()
+
+
+def deduplicate_triplets(items):
+    merged = {}
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        key = fact_key_for(item)
+        current = merged.get(key)
+        if current is None:
+            current = dict(item)
+            current["fact_key"] = key
+            current["evidence_items"] = list(item.get("evidence_items") or [])
+            merged[key] = current
+            continue
+
+        current_items = current.setdefault("evidence_items", [])
+        seen = {
+            (
+                ev.get("chunk_id"),
+                ev.get("sentence_id"),
+                ev.get("start"),
+                ev.get("end"),
+                ev.get("text"),
+            )
+            for ev in current_items
+            if isinstance(ev, dict)
+        }
+        for ev in item.get("evidence_items") or []:
+            if not isinstance(ev, dict):
+                continue
+            ev_key = (
+                ev.get("chunk_id"),
+                ev.get("sentence_id"),
+                ev.get("start"),
+                ev.get("end"),
+                ev.get("text"),
+            )
+            if ev_key not in seen:
+                current_items.append(ev)
+                seen.add(ev_key)
+
+        if float(item.get("calibrated_probability", 0.0) or 0.0) > float(current.get("calibrated_probability", 0.0) or 0.0):
+            preserved_evidence = current_items
+            current.update(item)
+            current["fact_key"] = key
+            current["evidence_items"] = preserved_evidence
+
+    return list(merged.values())
+
+
+def write_v2_outputs(candidates, accepted, review_queue, rejected):
+    groups = {
+        "candidates": candidates,
+        "accepted": accepted,
+        "review_queue": review_queue,
+        "rejected": rejected,
+    }
+    for group_name, data in groups.items():
+        output_dir = os.path.join(RUNS_V2_DIR, group_name)
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, f"{normalize_document_id(os.path.basename(MARKDOWN_FILE_PATH))}.json")
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+
 def main():
     # 打印配置信息
     print("=" * 60)
@@ -1213,24 +1298,11 @@ def main():
         print(f"读取失败: {e}")
         return
 
-    print("2. 执行基于层级的切分...")
-    # 定义 LangChain 要识别的标题级别
-    headers_to_split_on = [
-        ("#", "Header 1"),
-        ("##", "Header 2"),
-        ("###", "Header 3"),
-        ("####", "Header 4")
-    ]
-
-    # 第一步：按标题层级切分
-    markdown_splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
-    md_header_splits = markdown_splitter.split_text(text)
-
-    # 第二步：对超长内容进行二次切分（保留 Metadata）
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
-    final_docs = text_splitter.split_documents(md_header_splits)
-
-    print(f"   共切分为 {len(final_docs)} 个逻辑片段。")
+    print("2. 执行基于层级的统一切分...")
+    document_id = normalize_document_id(os.path.basename(MARKDOWN_FILE_PATH))
+    chunks = split_markdown_with_hierarchy(text, document_id=document_id)
+    document_index = build_document_index(chunks)
+    print(f"   共切分为 {len(chunks)} 个逻辑片段。")
 
     all_triplets = []
     all_discarded = []  # 收集所有被丢弃的三元组
@@ -1259,8 +1331,10 @@ def main():
     with open(EVIDENCE_MD_PATH, 'w', encoding='utf-8') as ev_file:
         ev_file.write("# 知识溯源证据库\n\n")
 
-    for doc in tqdm(final_docs, desc="Processing"):
-        content = doc.page_content.strip()
+    schema_retriever = SubOntologyRetriever(ontology)
+
+    for chunk in tqdm(chunks, desc="Processing"):
+        content = chunk["content"].strip()
         if len(content) < 10:  # 跳过毫无意义的超短文本
             continue
 
@@ -1269,20 +1343,23 @@ def main():
             print(f"  [知识屏蔽] 例题/计算段落，跳过提取")
             continue  # 跳过例题/计算段落，不进行三元组提取
 
-        # ====== 提取面包屑路径 ======
-        metadata = doc.metadata
-        if metadata:
-            # metadata 示例: {'Header 1': '第1章', 'Header 2': '1.1节'}
-            breadcrumb_path = " > ".join(metadata.values())
-            # 取最后一级标题用于生成 ID 前缀
-            last_header = list(metadata.values())[-1]
-        else:
-            breadcrumb_path = "前言/正文"
-            last_header = "正文"
+        breadcrumb_path = chunk.get("breadcrumb_path", "正文")
+        last_header = breadcrumb_path.split(" > ")[-1] if breadcrumb_path else "正文"
+        sub_schema = schema_retriever.retrieve(
+            breadcrumb_path=breadcrumb_path,
+            text=content,
+            top_k_classes=8,
+            top_k_relations=12,
+        )
 
         # ====== 组装大模型 Prompt ======
         # 直接传入 content 和 breadcrumb_path，函数内部会构建 Prompt
-        triplets = call_qwen_traditional(content, breadcrumb_path, ontology=ontology)
+        triplets = call_qwen_traditional(
+            content,
+            breadcrumb_path,
+            ontology=ontology,
+            sub_schema=sub_schema,
+        )
 
         # ====== 如果提取成功，生成 ID 并落盘 ======
         if triplets and len(triplets) > 0:
@@ -1295,20 +1372,21 @@ def main():
             if not triplets:
                 continue
 
-            # 生成可读的标识（用于证据文件和三元组 reference）
-            # 清洗标题中的非法字符（只保留汉字、字母、数字）
-            clean_header = re.sub(r'[^\w\u4e00-\u9fa5]+', '_', last_header).strip('_')
-            content_hash = hashlib.md5((breadcrumb_path + content).encode('utf-8')).hexdigest()[:8]
-            chunk_id = f"{clean_header}_{content_hash}"
-
             # 为每个三元组打上 source_id 烙印
             for t in triplets:
                 if isinstance(t, dict):
-                    t['source_id'] = chunk_id
+                    t["source_id"] = chunk["chunk_id"]
+                    t["document_id"] = chunk["document_id"]
+                    t["breadcrumb_path"] = breadcrumb_path
 
             # 后置处理：验证和修复三元组
             print(f"  后置处理：验证和修复三元组...")
-            valid_triplets, discarded_triplets = processor.validate_and_fix(triplets, evidence_text=content)
+            valid_triplets, discarded_triplets = processor.validate_and_fix(
+                triplets,
+                evidence_text=content,
+                source_chunk=chunk,
+                document_index=document_index,
+            )
             print(f"  有效三元组数量: {len(valid_triplets)} / {len(triplets)}")
             print(f"  被丢弃三元组数量: {len(discarded_triplets)}")
 
@@ -1319,18 +1397,26 @@ def main():
 
             # 写入 Markdown 证据库
             with open(EVIDENCE_MD_PATH, 'a', encoding='utf-8') as ev_file:
-                ev_file.write(f"## ID: {chunk_id}\n")
+                ev_file.write(f"## ID: {chunk['chunk_id']}\n")
                 ev_file.write(f"**文献路径**： `{breadcrumb_path}`\n\n")
                 ev_file.write(f"> {content}\n\n")
                 ev_file.write("---\n\n")
+    all_candidates = deduplicate_triplets(all_triplets + all_discarded)
+    all_triplets = deduplicate_triplets(all_triplets)
+    all_discarded = deduplicate_triplets(all_discarded)
+    review_queue = [item for item in all_discarded if item.get("needs_review") or item.get("decision") == "manual_review"]
+    rejected = [item for item in all_discarded if item.get("decision") == "auto_reject"]
 
-    print(f"4. 提取完成，共获得 {len(all_triplets)} 个三元组。")
+    print(f"4. 提取完成，共获得 {len(all_triplets)} 个自动接纳三元组。")
     with open(OUTPUT_JSON_PATH, 'w', encoding='utf-8') as f:
         json.dump(all_triplets, f, ensure_ascii=False, indent=2)
 
     print(f"4. 被丢弃的三元组已保存到: {DISCARDED_TRIPLETS_PATH}")
     with open(DISCARDED_TRIPLETS_PATH, 'w', encoding='utf-8') as f:
         json.dump(all_discarded, f, ensure_ascii=False, indent=2)
+
+    write_v2_outputs(all_candidates, all_triplets, review_queue, rejected)
+    print(f"4. v2 分层结果已保存到: {RUNS_V2_DIR}")
 
     # 打印置信度分布统计
     print("\n5. 置信度分布统计:")

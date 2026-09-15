@@ -13,6 +13,7 @@ REJECTED_DIR = ROOT / "rejected_triplets"
 TRIPLETS_DIR = ROOT / "triplets"
 REVIEW_LOG_DIR = ROOT / "review_logs"
 EVIDENCE_DIR = ROOT / "evidence"
+RUNS_V2_ACCEPTED_DIR = ROOT / "runs" / "v2" / "accepted"
 EVIDENCE_CACHE = {}
 
 
@@ -144,6 +145,7 @@ def normalize_triplet(item):
     for key in ["discard_reason", "needs_review", "corrected_relation", "review_status"]:
         result.pop(key, None)
     result["review_decision"] = "accepted"
+    result["decision"] = "human_accept"
     result["review_time"] = now_iso()
     return result
 
@@ -155,6 +157,17 @@ def append_unique_triplet(review_file, item):
         raise ValueError(f"{path.name} 必须是 JSON 数组")
 
     candidate = normalize_triplet(item)
+    legacy_written = append_unique_to_path(path, candidate)
+
+    v2_path = RUNS_V2_ACCEPTED_DIR / target_triplets_path(review_file).name
+    append_unique_to_path(v2_path, candidate)
+    return legacy_written
+
+
+def append_unique_to_path(path, candidate):
+    triplets = read_json(path, [])
+    if not isinstance(triplets, list):
+        raise ValueError(f"{path.name} 必须是 JSON 数组")
     key = (
         candidate.get("head", ""),
         candidate.get("relation", ""),
@@ -629,6 +642,9 @@ function renderCard(item) {
   const relation = item.corrected_relation || item.relation || "";
   const status = item.review_status || "pending";
   const confidence = item.confidence_display ?? confidenceDisplay(item.confidence);
+  const rawConfidence = item.confidence_detail?.raw_confidence || item.confidence_detail || {};
+  const bestEvidence = item.confidence_detail?.evidence_result?.best_evidence || {};
+  const typeValidation = item.type_validation || item.confidence_detail?.type_validation || {};
   return `<article class="card" id="card-${escapeAttr(item.review_id)}">
     <div class="triple">
       <div class="node">${escapeHtml(item.head || "")}<div class="meta">${escapeHtml(item.head_type || "Unknown")}</div></div>
@@ -640,16 +656,23 @@ function renderCard(item) {
     <div class="reason">${escapeHtml(item.discard_reason || item.confidence_decision?.reason || "")}</div>
     <details>
       <summary>查看评分细节和证据</summary>
-      <div class="reason">${escapeHtml(item.confidence_detail?.logic_info || "")}</div>
-      <div class="reason">${escapeHtml(item.confidence_detail?.map_info || "")}</div>
-      <div class="reason">${escapeHtml(item.confidence_detail?.evidence_info || "")}</div>
-      ${item.evidence ? `<div class="reason">证据片段：${escapeHtml(item.evidence)}</div>` : ""}
+      <div class="reason">${escapeHtml(rawConfidence.logic_info || "")}</div>
+      <div class="reason">${escapeHtml(rawConfidence.map_info || "")}</div>
+      <div class="reason">${escapeHtml(rawConfidence.evidence_info || "")}</div>
+      <div class="reason">domain/range：${escapeHtml(typeValidation.passed === false ? (typeValidation.errors || []).join("；") : "通过")}</div>
+      ${item.evidence || bestEvidence.text ? `<div class="reason">证据片段：${escapeHtml(item.evidence || bestEvidence.text)}</div>` : ""}
+      ${bestEvidence.level ? `<div class="reason">证据层级：${escapeHtml(bestEvidence.level)} · 位置 ${escapeHtml(bestEvidence.start)}-${escapeHtml(bestEvidence.end)}</div>` : ""}
       <div class="evidence-box">${renderMarkdown(item.evidence_chunk || "未找到对应 source_id 的原文 chunk")}</div>
     </details>
     <div class="edit">
       <label>head<input id="h-${escapeAttr(item.review_id)}" value="${escapeAttr(item.head || "")}"></label>
       <label>relation<input id="r-${escapeAttr(item.review_id)}" value="${escapeAttr(relation)}"></label>
       <label>tail<input id="t-${escapeAttr(item.review_id)}" value="${escapeAttr(item.tail || "")}"></label>
+    </div>
+    <div class="edit">
+      <label>三元组正确性<select id="tc-${escapeAttr(item.review_id)}"><option value="1">正确</option><option value="0">错误</option></select></label>
+      <label>证据支持<select id="es-${escapeAttr(item.review_id)}"><option value="full">完整支持</option><option value="partial">部分支持</option><option value="none">不支持</option></select></label>
+      <label>关系映射<select id="rmc-${escapeAttr(item.review_id)}"><option value="1">正确</option><option value="0">错误</option></select></label>
     </div>
     <textarea id="c-${escapeAttr(item.review_id)}" placeholder="审核备注"></textarea>
     <div class="actions">
@@ -662,16 +685,23 @@ function renderCard(item) {
 }
 
 async function decide(id, decision) {
+  const correctedTriple = decision === "modify" ? {
+    head: document.getElementById(`h-${id}`).value,
+    relation: document.getElementById(`r-${id}`).value,
+    tail: document.getElementById(`t-${id}`).value
+  } : null;
   const body = {
     file: state.file,
     review_id: id,
     decision,
     comment: document.getElementById(`c-${id}`).value,
-    modifications: decision === "modify" ? {
-      head: document.getElementById(`h-${id}`).value,
-      relation: document.getElementById(`r-${id}`).value,
-      tail: document.getElementById(`t-${id}`).value
-    } : null
+    annotation: {
+      triple_correct: Number(document.getElementById(`tc-${id}`).value),
+      evidence_support: document.getElementById(`es-${id}`).value,
+      relation_mapping_correct: Number(document.getElementById(`rmc-${id}`).value),
+      corrected_triple: correctedTriple
+    },
+    modifications: correctedTriple
   };
   await api("/api/decision", {
     method: "POST",
@@ -968,6 +998,19 @@ class ReviewHandler(BaseHTTPRequestHandler):
             raise ValueError("未找到对应待审三元组")
 
         original = copy.deepcopy(target)
+        annotation = payload.get("annotation") or {}
+        if not isinstance(annotation, dict):
+            annotation = {}
+        annotation.setdefault("triple_correct", 1 if decision == "accept" else 0)
+        annotation.setdefault("evidence_support", "full" if decision in {"accept", "modify"} else "none")
+        annotation.setdefault("relation_mapping_correct", 1 if decision == "accept" else 0)
+        if decision == "modify":
+            annotation["triple_correct"] = 0
+            annotation["relation_mapping_correct"] = 0
+            annotation["corrected_triple"] = payload.get("modifications") or annotation.get("corrected_triple")
+        else:
+            annotation.setdefault("corrected_triple", None)
+
         if decision == "modify":
             modifications = payload.get("modifications") or {}
             for key in ["head", "relation", "tail"]:
@@ -975,11 +1018,15 @@ class ReviewHandler(BaseHTTPRequestHandler):
                     target[key] = str(modifications[key]).strip()
             target.pop("corrected_relation", None)
 
+        target["review_annotation"] = annotation
+
         accepted_written = False
         if decision in {"accept", "modify"}:
+            target["decision"] = "human_accept"
             accepted_written = append_unique_triplet(review_file, target)
             target["review_status"] = "accepted"
         elif decision == "reject":
+            target["decision"] = "human_reject"
             target["review_status"] = "rejected"
         else:
             target["review_status"] = "deferred"
@@ -994,6 +1041,7 @@ class ReviewHandler(BaseHTTPRequestHandler):
             "decision": decision,
             "accepted_written": accepted_written,
             "comment": payload.get("comment"),
+            "annotation": annotation,
             "time": target["review_time"],
             "original": original,
             "current": copy.deepcopy(target),

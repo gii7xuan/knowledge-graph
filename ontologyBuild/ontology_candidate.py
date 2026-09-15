@@ -34,10 +34,15 @@ if PARENT_DIR not in sys.path:
 if os.getcwd() != PROJECT_ROOT:
     os.chdir(PROJECT_ROOT)
 
+from document.hierarchy_index import (
+    normalize_document_id,
+    split_markdown_text as split_markdown_with_hierarchy,
+)
+
 
 # ================= 大模型配置 =================
-API_KEY = "sk-45jfj2wN89d0hwLFA18c71D7D3A3462b9eBe96F6Ea7d8cF5"
-BASE_URL = "http://43.143.151.41:3000/v1"
+API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "")
+BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "http://43.143.151.41:3000/v1")
 MODEL = "Qwen3-Coder-Next"
 
 MARKDOWN_FILE_PATH = os.environ.get(
@@ -48,7 +53,7 @@ OUTPUT_JSON_PATH = "ontologyBuild/ontology_candidates.json"
 REVIEW_JSON_PATH = "ontologyBuild/ontology_candidates_review.json"
 PROCESSING_LOG_PATH = "ontologyBuild/ontology_candidates_processing.json"
 
-client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
+client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL)
 # ==============================================
 
 
@@ -105,39 +110,11 @@ def split_markdown_text(text):
 
     返回包含 breadcrumb_path、content 和 metadata 的字典列表。
     """
-    headers_to_split_on = [
-        ("#", "Header-1"),
-        ("##", "Header-2"),
-        ("###", "Header-3"),
-    ]
-
-    markdown_splitter = MarkdownHeaderTextSplitter(
-        headers_to_split_on=headers_to_split_on,
-        strip_headers=False,
+    chunks = split_markdown_with_hierarchy(
+        text,
+        document_id=normalize_document_id(os.path.basename(MARKDOWN_FILE_PATH)),
     )
-    doc_chunks = markdown_splitter.split_text(text)
-    print(f"MarkdownHeaderTextSplitter 切分后得到 {len(doc_chunks)} 个文档片段")
-
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=100,
-        separators=["\n\n", "\n", "。", "！", "？", "，", "、", ""],
-    )
-    final_docs = text_splitter.split_documents(doc_chunks)
-    print(f"RecursiveCharacterTextSplitter 二次切分后得到 {len(final_docs)} 个最终片段")
-
-    chunks = []
-    for doc in final_docs:
-        breadcrumb_path = build_breadcrumb_path(doc.metadata)
-        content = doc.page_content.strip()
-        chunks.append(
-            {
-                "chunk_id": generate_chunk_id(breadcrumb_path, content),
-                "breadcrumb_path": breadcrumb_path,
-                "content": content,
-                "metadata": doc.metadata,
-            }
-        )
+    print(f"统一层级切分后得到 {len(chunks)} 个最终片段")
     return chunks
 
 

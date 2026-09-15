@@ -17,7 +17,7 @@ except ImportError:
     )
 
 
-DEFAULT_ONTOLOGY_PATH = Path(__file__).parents[1] / "ontology_md" / "ontology.json"
+DEFAULT_ONTOLOGY_PATH = Path(__file__).parents[1] / "ontology" / "ontology.json"
 
 
 class BusinessValidationIssue(BaseModel):
