@@ -19,6 +19,14 @@ from document.hierarchy_index import (
 )
 from evidence.hierarchical_retriever import HierarchicalEvidenceRetriever
 from schema.subontology_retriever import SubOntologyRetriever
+from ontologyBuild.ontology_adapter import (
+    build_class_hierarchy as adapter_build_class_hierarchy,
+    build_relation_constraints,
+    iter_classes,
+    iter_datatype_properties,
+    iter_object_properties,
+    normalize_name as normalize_ontology_name,
+)
 
 # 将当前脚本所在目录的父目录添加到 Python 路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -63,24 +71,12 @@ def get_ontology_relations(ontology):
         list: 关系名称列表
     """
     relations = []
-
-    # ontology.json 的结构是每个类（class）内部有 object_properties
-    # 需要遍历所有类的 object_properties 来提取关系
-    classes = ontology.get("classes", {})
-
-    for class_id, class_data in classes.items():
-        if isinstance(class_data, dict):
-            # 获取该类的 object_properties
-            object_properties = class_data.get("object_properties", [])
-
-            # 如果 object_properties 是列表格式（如 [{...}, {...}]）
-            if isinstance(object_properties, list):
-                for prop_data in object_properties:
-                    if isinstance(prop_data, dict):
-                        label = prop_data.get("label", "")
-                        if label and label not in relations:
-                            relations.append(label)
-
+    seen = set()
+    for prop_data in iter_object_properties(ontology):
+        label = prop_data.get("label") or prop_data.get("name") or prop_data.get("id")
+        if label and label not in seen:
+            seen.add(label)
+            relations.append(label)
     return relations
 
 
@@ -96,100 +92,51 @@ def get_entity_to_type_map(ontology):
         dict: {实体名称: 类型} 映射
     """
     entity_to_type = {}
-    classes = ontology.get("classes", {})
-
-    for class_id, class_data in classes.items():
-        label = class_data.get("label", class_id)
+    for class_data in iter_classes(ontology):
+        class_id = class_data.get("id")
+        if not class_id:
+            continue
+        label = class_data.get("label") or class_id
         entity_to_type[label] = class_id
-
-        # 添加子类名称到映射
-        for subclass_id in class_data.get("subclasses", []):
-            subclass_data = classes.get(subclass_id, {})
-            subclass_label = subclass_data.get("label", subclass_id)
-            if subclass_label:
-                entity_to_type[subclass_label] = subclass_id
-
     return entity_to_type
 
 
 def get_class_label_to_id(ontology):
     """构建本体类 label/id 到 class_id 的索引。"""
     result = {}
-    classes = ontology.get("classes", {})
-    for class_id, class_data in classes.items():
-        if not isinstance(class_data, dict):
+    for class_data in iter_classes(ontology):
+        class_id = class_data.get("id")
+        if not class_id:
             continue
-        result[class_id] = class_id
-        label = class_data.get("label")
-        if label:
-            result[label] = class_id
+        for value in (
+            class_id,
+            class_data.get("label"),
+            class_data.get("name"),
+            class_data.get("field"),
+        ):
+            if value:
+                value = str(value).strip()
+                result[value] = class_id
+                result[normalize_ontology_name(value)] = class_id
     return result
 
 
 def get_class_hierarchy(ontology):
     """构建 child_class_id -> parent_class_id 的层级索引。"""
-    hierarchy = {}
-    classes = ontology.get("classes", {})
-    for class_id, class_data in classes.items():
-        if not isinstance(class_data, dict):
-            continue
-        parent = class_data.get("parent")
-        if parent:
-            hierarchy[class_id] = parent
-        for subclass_id in class_data.get("subclasses", []) or []:
-            hierarchy.setdefault(subclass_id, class_id)
-    return hierarchy
+    return adapter_build_class_hierarchy(ontology)
 
 
 def resolve_class_id(class_ref, class_label_to_id):
     """将 class id 或中文 label 统一解析为 class_id。"""
     if not class_ref:
         return None
-    return class_label_to_id.get(str(class_ref).strip())
+    value = str(class_ref).strip()
+    return class_label_to_id.get(value) or class_label_to_id.get(normalize_ontology_name(value))
 
 
 def get_relation_domain_range_constraints(ontology):
     """提取关系 label -> domain/range class_id 集合。"""
-    class_label_to_id = get_class_label_to_id(ontology)
-    constraints = {}
-
-    def add_constraint(prop_data):
-        if not isinstance(prop_data, dict):
-            return
-        label = prop_data.get("label")
-        if not label:
-            return
-        item = constraints.setdefault(label, {"domain": set(), "range": set()})
-        for class_ref in prop_data.get("domain", []) or []:
-            class_id = resolve_class_id(class_ref, class_label_to_id)
-            if class_id:
-                item["domain"].add(class_id)
-        for class_ref in prop_data.get("range", []) or []:
-            class_id = resolve_class_id(class_ref, class_label_to_id)
-            if class_id:
-                item["range"].add(class_id)
-
-    object_properties = ontology.get("object_properties", {})
-    if isinstance(object_properties, dict):
-        for prop_data in object_properties.values():
-            add_constraint(prop_data)
-    elif isinstance(object_properties, list):
-        for prop_data in object_properties:
-            add_constraint(prop_data)
-
-    for class_data in ontology.get("classes", {}).values():
-        if not isinstance(class_data, dict):
-            continue
-        for prop_data in class_data.get("object_properties", []) or []:
-            add_constraint(prop_data)
-
-    return {
-        relation: {
-            "domain": sorted(value["domain"]),
-            "range": sorted(value["range"]),
-        }
-        for relation, value in constraints.items()
-    }
+    return build_relation_constraints(ontology)
 
 
 def get_ontology_text(ontology=None, ontology_name=None, sub_schema=None):
@@ -210,6 +157,43 @@ def get_ontology_text(ontology=None, ontology_name=None, sub_schema=None):
 
     if sub_schema:
         return json.dumps(sub_schema, ensure_ascii=False, indent=2)
+
+    class_items = list(iter_classes(ontology))
+    relation_items = list(iter_object_properties(ontology))
+    datatype_items = list(iter_datatype_properties(ontology))
+
+    text = ["[Ontology Structure]", "", "### Entity Classes:"]
+    for class_data in class_items:
+        class_id = class_data.get("id") or class_data.get("label")
+        label = class_data.get("label") or class_id
+        desc = class_data.get("description", "")
+        parent = class_data.get("parent") or ""
+        text.append(f"  - {class_id} ({label}), parent={parent}: {desc[:120]}")
+    text.append(f"  ... total {len(class_items)} classes")
+    text.append("")
+
+    text.append("### Object Properties:")
+    for prop_data in relation_items:
+        label = prop_data.get("label") or prop_data.get("name") or prop_data.get("id")
+        domain = prop_data.get("domain", [])
+        range_val = prop_data.get("range", [])
+        desc = prop_data.get("description") or prop_data.get("definition") or ""
+        text.append(f"  - {label}: {domain} -> {range_val}. {desc[:120]}")
+    text.append(f"  ... total {len(relation_items)} object properties")
+    text.append("")
+
+    text.append("### Datatype Properties:")
+    for prop_data in datatype_items:
+        label = prop_data.get("label") or prop_data.get("name") or prop_data.get("field") or prop_data.get("id")
+        domain = prop_data.get("domain", [])
+        datatype = prop_data.get("datatype") or "string"
+        desc = prop_data.get("description") or prop_data.get("definition") or ""
+        text.append(f"  - {label}: domain={domain}, datatype={datatype}. {desc[:120]}")
+    text.append(f"  ... total {len(datatype_items)} datatype properties")
+    text.append("")
+
+    return "\n".join(text)
+    '''
 
     text = []
     text.append("【火炮领域本体结构】")
@@ -250,6 +234,7 @@ def get_ontology_text(ontology=None, ontology_name=None, sub_schema=None):
     return "\n".join(text)
 
 # ================= 配置区域 =================
+'''
 API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "")
 BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "http://43.143.151.41:3000/v1")
 MODEL = "Qwen3-Coder-Next"
@@ -367,10 +352,11 @@ class ArtilleryProcessor:
     def _class_options_text(self):
         """生成实体类型预测用的本体类清单。"""
         lines = []
-        for class_id, class_data in self.ontology.get("classes", {}).items():
-            if not isinstance(class_data, dict):
+        for class_data in iter_classes(self.ontology):
+            class_id = class_data.get("id")
+            if not class_id:
                 continue
-            label = class_data.get("label", class_id)
+            label = class_data.get("label") or class_id
             desc = class_data.get("description", "")
             parent = class_data.get("parent") or "None"
             lines.append(f"- {class_id} ({label}), parent={parent}: {desc}")
@@ -379,7 +365,7 @@ class ArtilleryProcessor:
     def _predict_entity_type(self, entity, relation, role, other_entity, evidence_text):
         """第一阶段：用 LLM 预测文档实体对应的本体 class_id。"""
         entity = str(entity or "").strip()
-        direct_type = self.class_label_to_id.get(entity)
+        direct_type = self.class_label_to_id.get(entity) or self.class_label_to_id.get(normalize_ontology_name(entity))
         if direct_type:
             return {
                 "entity": entity,

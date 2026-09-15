@@ -4,6 +4,21 @@ import json
 from difflib import SequenceMatcher
 from typing import Any, Dict, Iterable, List
 
+try:
+    from ontologyBuild.ontology_adapter import (
+        build_class_hierarchy,
+        iter_classes,
+        iter_datatype_properties,
+        iter_object_properties as adapter_iter_object_properties,
+    )
+except ImportError:
+    from ontology_adapter import (
+        build_class_hierarchy,
+        iter_classes,
+        iter_datatype_properties,
+        iter_object_properties as adapter_iter_object_properties,
+    )
+
 
 def _text(value: Any) -> str:
     if value is None:
@@ -27,25 +42,7 @@ def _score(query: str, candidate: str) -> float:
 
 
 def _iter_object_properties(ontology: Dict[str, Any]) -> Iterable[Dict[str, Any]]:
-    seen = set()
-    object_properties = ontology.get("object_properties", {})
-    values = object_properties.values() if isinstance(object_properties, dict) else object_properties
-    for prop in values or []:
-        if not isinstance(prop, dict):
-            continue
-        key = prop.get("id") or prop.get("label")
-        if key and key not in seen:
-            seen.add(key)
-            yield prop
-    for class_data in ontology.get("classes", {}).values():
-        if not isinstance(class_data, dict):
-            continue
-        for prop in class_data.get("object_properties", []) or []:
-            if isinstance(prop, dict):
-                key = prop.get("id") or prop.get("label")
-                if key and key not in seen:
-                    seen.add(key)
-                    yield prop
+    yield from adapter_iter_object_properties(ontology)
 
 
 class SubOntologyRetriever:
@@ -68,14 +65,11 @@ class SubOntologyRetriever:
             class_ids.update(item for item in rel.get("domain", []) or [] if isinstance(item, str))
             class_ids.update(item for item in rel.get("range", []) or [] if isinstance(item, str))
 
-        class_hierarchy = []
-        ontology_classes = self.ontology.get("classes", {})
-        for class_id in sorted(class_ids):
-            class_data = ontology_classes.get(class_id, {})
-            if isinstance(class_data, dict):
-                parent = class_data.get("parent")
-                if parent:
-                    class_hierarchy.append({"child": class_id, "parent": parent})
+        class_hierarchy = [
+            {"child": child, "parent": parent}
+            for child, parent in build_class_hierarchy(self.ontology).items()
+            if child in class_ids or parent in class_ids
+        ]
 
         return {
             "class_list": classes,
@@ -98,10 +92,11 @@ class SubOntologyRetriever:
 
     def _rank_classes(self, query: str, limit: int) -> List[Dict[str, Any]]:
         items = []
-        for class_id, class_data in self.ontology.get("classes", {}).items():
-            if not isinstance(class_data, dict):
+        for class_data in iter_classes(self.ontology):
+            class_id = class_data.get("id")
+            if not class_id:
                 continue
-            label = class_data.get("label", class_id)
+            label = class_data.get("label") or class_id
             description = class_data.get("description", "")
             candidate_text = f"{class_id} {label} {description} {_text(class_data.get('subclasses'))}"
             items.append(
@@ -142,13 +137,13 @@ class SubOntologyRetriever:
 
     def _datatype_properties_for(self, class_ids: set) -> List[Dict[str, Any]]:
         result = []
-        for class_id in class_ids:
-            class_data = self.ontology.get("classes", {}).get(class_id, {})
-            if not isinstance(class_data, dict):
+        for prop in iter_datatype_properties(self.ontology):
+            domains = prop.get("domain", [])
+            if isinstance(domains, str):
+                domains = [domains]
+            if class_ids and not any(domain in class_ids for domain in domains):
                 continue
-            for prop in class_data.get("data_properties", []) or []:
-                if isinstance(prop, dict):
-                    item = dict(prop)
-                    item["domain"] = class_id
-                    result.append(item)
+            item = dict(prop)
+            item["domain"] = domains
+            result.append(item)
         return result[:20]

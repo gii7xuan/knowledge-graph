@@ -10,11 +10,13 @@ try:
         OntologyCandidateExtractionResult,
         validate_candidate_data,
     )
+    from ontologyBuild.ontology_adapter import build_element_indexes
 except ImportError:
     from ontology_candidate_schema import (
         OntologyCandidateExtractionResult,
         validate_candidate_data,
     )
+    from ontology_adapter import build_element_indexes
 
 
 DEFAULT_ONTOLOGY_PATH = Path(__file__).parents[1] / "ontology" / "ontology.json"
@@ -61,6 +63,8 @@ def add_named_element(index: Set[str], element_id: Any, element: Any):
 
 def build_ontology_indexes(ontology: Dict[str, Any]) -> Dict[str, Set[str]]:
     """从 ontology.json 构建业务校验所需的已有元素索引。"""
+    return build_element_indexes(ontology)
+
     classes: Set[str] = set()
     object_properties: Set[str] = set()
     datatype_properties: Set[str] = set()

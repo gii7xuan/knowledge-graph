@@ -17,6 +17,14 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import quote
 
+try:
+    from ontologyBuild.ontology_adapter import (
+        normalize_triples_for_consistency,
+        to_legacy_ontology,
+    )
+except ImportError:
+    from ontology_adapter import normalize_triples_for_consistency, to_legacy_ontology
+
 # =================== 可选依赖 ===================
 
 # 尝试导入 rdflib
@@ -942,8 +950,8 @@ def rule_based_consistency_check(
     options = copy.deepcopy(options)
     
     # 确保输入不被修改
-    triples = copy.deepcopy(triples)
-    ontology = copy.deepcopy(ontology)
+    triples = normalize_triples_for_consistency(copy.deepcopy(triples))
+    ontology = to_legacy_ontology(copy.deepcopy(ontology))
     
     # 合并所有 violation 和 warning
     all_violations: List[dict] = []
@@ -1652,8 +1660,8 @@ def run_consistency_checks(
     options = copy.deepcopy(options)
     
     # 确保输入不被修改
-    triples = copy.deepcopy(triples)
-    ontology = copy.deepcopy(ontology)
+    triples = normalize_triples_for_consistency(copy.deepcopy(triples))
+    ontology = to_legacy_ontology(copy.deepcopy(ontology))
     
     # 获取选项
     enable_shacl = options.get("enable_shacl", True)

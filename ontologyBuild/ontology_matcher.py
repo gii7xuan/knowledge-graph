@@ -12,6 +12,11 @@ import copy
 import difflib
 from typing import Any, Dict, List, Optional, Tuple
 
+try:
+    from ontologyBuild.ontology_adapter import to_legacy_ontology
+except ImportError:
+    from ontology_adapter import to_legacy_ontology
+
 
 # ================= 公共常量 =================
 
@@ -439,6 +444,7 @@ def match_ontology_candidates(
         return result_dict
     
     # 3. 提取本体元素列表
+    ontology = to_legacy_ontology(ontology)
     known_classes = ontology.get("classes", [])
     known_object_properties = ontology.get("object_properties", [])
     known_datatype_properties = ontology.get("datatype_properties", [])
