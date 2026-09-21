@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent
 ONTOLOGY_BUILD_DIR = ROOT / "ontologyBuild"
 MDFILES_DIR = ROOT / "mdfiles"
 DEFAULT_CANDIDATES_PATH = ONTOLOGY_BUILD_DIR / "ontology_candidates.json"
+DEFAULT_MODULES_PATH = ONTOLOGY_BUILD_DIR / "ontology_modules.json"
 DEFAULT_REVIEW_RESULT_PATH = ONTOLOGY_BUILD_DIR / "ontology_review_result.json"
 DEFAULT_REVIEW_LOG_PATH = ONTOLOGY_BUILD_DIR / "ontology_review_log.json"
 
@@ -148,6 +149,15 @@ def enrich_candidate_for_response(candidate):
     item = copy.deepcopy(candidate)
     item["display_name"] = display_name(item)
     item["confidence_display"] = f"{confidence_of(item):.4f}"
+    source_module = item.get("source_module")
+    if isinstance(source_module, dict):
+        item["source_module_text"] = source_module.get("module_name") or ""
+        item["directory_context_text"] = source_module.get("breadcrumb_path") or ""
+        item["directory_role_text"] = source_module.get("directory_role") or ""
+    else:
+        item["source_module_text"] = ""
+        item["directory_context_text"] = ""
+        item["directory_role_text"] = ""
     evidence = item.get("evidence")
     if isinstance(evidence, list):
         item["evidence_text"] = "\n\n".join(
@@ -190,8 +200,9 @@ def build_review_from_candidates(source_path, review_mode, reviewer):
 def run_extraction(markdown_path):
     env = os.environ.copy()
     env["ONTOLOGY_MARKDOWN_FILE"] = str(markdown_path)
+    script_name = env.get("ONTOLOGY_EXTRACTION_SCRIPT", "directory_guided_builder.py")
     proc = subprocess.run(
-        [sys.executable, str(ONTOLOGY_BUILD_DIR / "ontology_candidate.py")],
+        [sys.executable, str(ONTOLOGY_BUILD_DIR / script_name)],
         cwd=str(ROOT),
         env=env,
         text=True,
@@ -462,12 +473,16 @@ function render() {
 function renderCard(item) {
   const id = item.candidate_id || "";
   const evidence = item.evidence_text || "";
+  const moduleLine = item.source_module_text
+    ? `<div class="meta">子本体模块 <strong>${escapeHtml(item.source_module_text)}</strong> · 目录路径 ${escapeHtml(item.directory_context_text || "")}</div>`
+    : "";
   return `<article class="card" id="card-${escapeAttr(id)}">
     <div class="title">
       <strong>${escapeHtml(item.display_name || item.name || id)}</strong>
       <span class="badge">${escapeHtml(item.candidate_type || "")}</span>
     </div>
     <div class="meta">置信度 <span class="confidence">${escapeHtml(item.confidence_display || "0.0000")}</span> · 状态 ${escapeHtml(item.final_decision || "")} · 推荐 ${escapeHtml(item.system_recommendation || "")}</div>
+    ${moduleLine}
     <div class="reason">${escapeHtml((item.recommendation_reasons || []).join("；") || item.reason || item.why_uncertain || "")}</div>
     <div class="grid">
       <label>名称<input id="name-${escapeAttr(id)}" value="${escapeAttr(item.name || item.property_name || item.text_mention || "")}"></label>
@@ -566,10 +581,15 @@ class OntologyBuildHandler(BaseHTTPRequestHandler):
             if parsed.path == "/":
                 self.send_html()
             elif parsed.path == "/api/init":
-                self.send_json({"markdown_files": list_markdown_files()})
+                self.send_json({
+                    "markdown_files": list_markdown_files(),
+                    "module_index": read_json(DEFAULT_MODULES_PATH, {}),
+                })
             elif parsed.path == "/api/review-result":
                 result = get_review_result()
                 self.send_json(enrich_review_result(result))
+            elif parsed.path == "/api/module-index":
+                self.send_json(read_json(DEFAULT_MODULES_PATH, {}))
             else:
                 self.send_json({"error": "not found"}, 404)
         except Exception as exc:

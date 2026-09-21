@@ -252,11 +252,14 @@ CONFIDENCE_THRESHOLD_MEDIUM_LOW = 0.4   # 0.4-0.6: 人工审核
 # 向量模型配置
 EMBEDDING_MODEL = "Qwen3-Embedding-4B"
 
-MARKDOWN_FILE_PATH = 'mdfiles\\MinerU_markdown_Ballistics.md'
-OUTPUT_JSON_PATH = 'triplets\\Ballistics.json'
-EVIDENCE_MD_PATH = 'evidence\\Ballistics_evidence.md'
-BOOK_NAME = "《Ballistics》"
-DISCARDED_TRIPLETS_PATH = 'rejected_triplets\\Ballistics_rejected_triplets.json'  # 被丢弃三元组的输出文件路径
+MARKDOWN_FILE_PATH = os.environ.get("TRIPLET_MARKDOWN_FILE", 'mdfiles\\MinerU_markdown_Ballistics.md')
+OUTPUT_JSON_PATH = os.environ.get("TRIPLET_OUTPUT_JSON", 'triplets\\Ballistics.json')
+EVIDENCE_MD_PATH = os.environ.get("TRIPLET_EVIDENCE_MD", 'evidence\\Ballistics_evidence.md')
+BOOK_NAME = os.environ.get("TRIPLET_BOOK_NAME", "Ballistics")
+DISCARDED_TRIPLETS_PATH = os.environ.get(
+    "TRIPLET_REJECTED_JSON",
+    'rejected_triplets\\Ballistics_rejected_triplets.json',
+)
 RUNS_V2_DIR = os.environ.get("KG_RUNS_V2_DIR", "runs/v2")
 
 # ===========================================
