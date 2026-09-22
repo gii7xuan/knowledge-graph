@@ -1,42 +1,40 @@
-import atexit
+"""Single-process API and static host for the Vue review workbench."""
+
 import json
+import mimetypes
 import os
 import re
-import socket
 import subprocess
 import sys
-from datetime import datetime
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import threading
+from datetime import datetime, timezone
+from http.server import ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, unquote, urlparse
+
+import ontology_build_app as ontology
+import review_triplets_app as triplets
+from ontologyBuild.candidate_quality import approval_errors, describe_quality
 
 
 ROOT = Path(__file__).resolve().parent
+FRONTEND_DIR = ROOT / "frontend" / "workbench" / "dist"
 MDFILES_DIR = ROOT / "mdfiles"
 WORKBENCH_RUN_DIR = ROOT / "runs" / "workbench"
+HOST = "127.0.0.1"
+PORT = int(os.environ.get("WORKBENCH_PORT", "8770"))
 
-WORKBENCH_HOST = "127.0.0.1"
-WORKBENCH_PORT = int(os.environ.get("WORKBENCH_PORT", "8764"))
-ONTOLOGY_BUILD_PORT = int(os.environ.get("ONTOLOGY_BUILD_PORT", "8766"))
-TRIPLET_REVIEW_PORT = int(os.environ.get("TRIPLET_REVIEW_PORT", "8765"))
-
-SERVICES = {
-    "ontology": {
-        "name": "本体抽取",
-        "script": ROOT / "ontology_build_app.py",
-        "port": ONTOLOGY_BUILD_PORT,
-        "env_port": "ONTOLOGY_BUILD_PORT",
-    },
-    "review": {
-        "name": "三元组审核",
-        "script": ROOT / "review_triplets_app.py",
-        "port": TRIPLET_REVIEW_PORT,
-        "env_port": "TRIPLET_REVIEW_PORT",
-    },
-}
-
-child_processes = {}
+triplet_lock = threading.Lock()
 triplet_job = None
+ontology_lock = threading.Lock()
+ontology_job = {"exists": False, "running": False}
+ontology_data_lock = threading.RLock()
+ontology_cache_key = None
+ontology_cache_result = None
+
+
+def now_iso():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
 def now_stamp():
@@ -44,25 +42,15 @@ def now_stamp():
 
 
 def rel_path(path):
-    path = Path(path)
-    try:
-        return str(path.resolve().relative_to(ROOT)).replace("\\", "/")
-    except ValueError:
-        return str(path)
+    return str(Path(path).resolve().relative_to(ROOT)).replace("\\", "/")
 
 
-def safe_root_path(value, default=None):
+def safe_markdown_path(value):
     if not value:
-        if default is None:
-            raise ValueError("缺少路径")
-        value = default
-    path = Path(value)
-    if not path.is_absolute():
-        path = ROOT / path
-    path = path.resolve()
-    root = ROOT.resolve()
-    if path != root and root not in path.parents:
-        raise ValueError("路径必须位于当前项目目录内")
+        raise ValueError("请选择 Markdown 文档")
+    path = (ROOT / value).resolve()
+    if MDFILES_DIR.resolve() not in path.parents or not path.is_file() or path.suffix.lower() != ".md":
+        raise ValueError("请选择 mdfiles 目录内存在的 Markdown 文档")
     return path
 
 
@@ -72,84 +60,19 @@ def list_markdown_files():
     return sorted(rel_path(path) for path in MDFILES_DIR.rglob("*.md"))
 
 
-def port_open(port):
-    try:
-        with socket.create_connection((WORKBENCH_HOST, int(port)), timeout=0.25):
-            return True
-    except OSError:
-        return False
-
-
-def service_url(port):
-    return f"http://{WORKBENCH_HOST}:{port}"
-
-
-def service_status(service_id):
-    spec = SERVICES[service_id]
-    process = child_processes.get(service_id)
-    running = port_open(spec["port"]) or (process is not None and process.poll() is None)
-    return {
-        "id": service_id,
-        "name": spec["name"],
-        "running": running,
-        "port": spec["port"],
-        "url": service_url(spec["port"]),
-        "pid": process.pid if process is not None and process.poll() is None else None,
-    }
-
-
-def start_service(service_id):
-    if service_id not in SERVICES:
-        raise ValueError("未知服务")
-    spec = SERVICES[service_id]
-    if port_open(spec["port"]):
-        return service_status(service_id)
-    process = child_processes.get(service_id)
-    if process is not None and process.poll() is None:
-        return service_status(service_id)
-
-    WORKBENCH_RUN_DIR.mkdir(parents=True, exist_ok=True)
-    log_path = WORKBENCH_RUN_DIR / f"{service_id}_{now_stamp()}.log"
-    env = os.environ.copy()
-    env[spec["env_port"]] = str(spec["port"])
-    with log_path.open("w", encoding="utf-8", errors="replace") as log_file:
-        child_processes[service_id] = subprocess.Popen(
-            [sys.executable, "-u", str(spec["script"])],
-            cwd=str(ROOT),
-            env=env,
-            stdout=log_file,
-            stderr=subprocess.STDOUT,
-            text=True,
-        )
-    status = service_status(service_id)
-    status["log_path"] = rel_path(log_path)
-    return status
-
-
-def stop_children():
-    for process in child_processes.values():
-        if process is not None and process.poll() is None:
-            process.terminate()
-
-
-atexit.register(stop_children)
-
-
 def sanitize_stem(value):
-    text = re.sub(r"[^\w\u4e00-\u9fff.-]+", "_", str(value or "").strip())
-    text = text.strip("._")
-    return text or "triplets"
+    value = re.sub(r"[^\w\u4e00-\u9fff.-]+", "_", str(value or "").strip()).strip("._")
+    return value or "triplets"
 
 
-def default_stem(markdown_path):
-    stem = Path(markdown_path).stem
+def default_stem(path):
+    stem = Path(path).stem
     if stem.startswith("MinerU_markdown_"):
         stem = stem[len("MinerU_markdown_"):]
     return sanitize_stem(stem)
 
 
 def json_count(path):
-    path = Path(path)
     if not path.exists():
         return 0
     try:
@@ -164,666 +87,398 @@ def json_count(path):
     return 0
 
 
-def start_triplet_extraction(payload):
-    global triplet_job
-    if triplet_job and triplet_job["process"].poll() is None:
-        return triplet_status()
-
-    markdown_path = safe_root_path(
-        payload.get("markdown_path"),
-        "mdfiles/MinerU_markdown_Ballistics.md",
-    )
-    if not markdown_path.exists() or markdown_path.suffix.lower() != ".md":
-        raise ValueError("请选择项目内存在的 Markdown 文件")
-
-    output_stem = sanitize_stem(payload.get("output_stem") or default_stem(markdown_path))
-    output_json = ROOT / "triplets" / f"{output_stem}.json"
-    evidence_md = ROOT / "evidence" / f"{output_stem}_evidence.md"
-    rejected_json = ROOT / "rejected_triplets" / f"{output_stem}_rejected_triplets.json"
-
-    output_json.parent.mkdir(parents=True, exist_ok=True)
-    evidence_md.parent.mkdir(parents=True, exist_ok=True)
-    rejected_json.parent.mkdir(parents=True, exist_ok=True)
-    WORKBENCH_RUN_DIR.mkdir(parents=True, exist_ok=True)
-    log_path = WORKBENCH_RUN_DIR / f"triplet_extract_{output_stem}_{now_stamp()}.log"
-
-    env = os.environ.copy()
-    env["TRIPLET_MARKDOWN_FILE"] = str(markdown_path)
-    env["TRIPLET_OUTPUT_JSON"] = str(output_json)
-    env["TRIPLET_EVIDENCE_MD"] = str(evidence_md)
-    env["TRIPLET_REJECTED_JSON"] = str(rejected_json)
-    env["TRIPLET_BOOK_NAME"] = output_stem
-
-    with log_path.open("w", encoding="utf-8", errors="replace") as log_file:
-        process = subprocess.Popen(
-            [sys.executable, "-u", str(ROOT / "extract_triplets" / "extrct.py")],
-            cwd=str(ROOT),
-            env=env,
-            stdout=log_file,
-            stderr=subprocess.STDOUT,
-            text=True,
-        )
-
-    triplet_job = {
-        "process": process,
-        "started_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
-        "markdown_path": markdown_path,
-        "output_stem": output_stem,
-        "output_json": output_json,
-        "evidence_md": evidence_md,
-        "rejected_json": rejected_json,
-        "log_path": log_path,
-    }
-    return triplet_status()
-
-
-def read_log_tail(path, limit=60000):
-    path = Path(path)
+def read_log_tail(path, limit=30000):
     if not path.exists():
         return ""
     with path.open("rb") as file:
         file.seek(0, os.SEEK_END)
-        size = file.tell()
-        file.seek(max(0, size - limit), os.SEEK_SET)
+        file.seek(max(0, file.tell() - limit))
         return file.read().decode("utf-8", errors="replace")
 
 
 def triplet_status():
-    if not triplet_job:
-        return {"running": False, "exists": False}
-    process = triplet_job["process"]
-    returncode = process.poll()
-    running = returncode is None
+    with triplet_lock:
+        job = triplet_job
+    if job is None:
+        return {"exists": False, "running": False}
+    returncode = job["process"].poll()
     return {
         "exists": True,
-        "running": running,
-        "pid": process.pid,
+        "running": returncode is None,
+        "pid": job["process"].pid,
         "returncode": returncode,
-        "started_at": triplet_job["started_at"],
-        "markdown_path": rel_path(triplet_job["markdown_path"]),
-        "output_stem": triplet_job["output_stem"],
-        "outputs": {
-            "accepted": rel_path(triplet_job["output_json"]),
-            "rejected": rel_path(triplet_job["rejected_json"]),
-            "evidence": rel_path(triplet_job["evidence_md"]),
-            "log": rel_path(triplet_job["log_path"]),
-        },
+        "started_at": job["started_at"],
+        "markdown_path": rel_path(job["markdown_path"]),
+        "output_stem": job["output_stem"],
+        "outputs": {key: rel_path(path) for key, path in job["outputs"].items()},
         "counts": {
-            "accepted": json_count(triplet_job["output_json"]),
-            "rejected": json_count(triplet_job["rejected_json"]),
+            "accepted": json_count(job["outputs"]["accepted"]),
+            "rejected": json_count(job["outputs"]["rejected"]),
         },
-        "log_tail": read_log_tail(triplet_job["log_path"]),
+        "log_tail": read_log_tail(job["outputs"]["log"]),
     }
 
 
-def html_page():
-    return r"""<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>知识图谱工作台</title>
-  <style>
-    :root {
-      --bg: #f4f6f8;
-      --panel: #ffffff;
-      --line: #d8dee7;
-      --text: #1f2933;
-      --muted: #657282;
-      --accent: #1769aa;
-      --accent-soft: #e8f2fb;
-      --ok: #177245;
-      --warn: #8a6100;
-      --bad: #aa2e25;
+def start_triplet_extraction(payload):
+    global triplet_job
+    markdown_path = safe_markdown_path(payload.get("markdown_path"))
+    output_stem = sanitize_stem(payload.get("output_stem") or default_stem(markdown_path))
+    outputs = {
+        "accepted": ROOT / "triplets" / f"{output_stem}.json",
+        "rejected": ROOT / "rejected_triplets" / f"{output_stem}_rejected_triplets.json",
+        "evidence": ROOT / "evidence" / f"{output_stem}_evidence.md",
+        "log": WORKBENCH_RUN_DIR / f"triplet_extract_{output_stem}_{now_stamp()}.log",
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-    }
-    .shell {
-      display: grid;
-      grid-template-columns: 232px minmax(0, 1fr);
-      min-height: 100vh;
-    }
-    aside {
-      background: #182333;
-      color: #eef4fb;
-      padding: 18px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .brand {
-      padding: 4px 8px 12px;
-      border-bottom: 1px solid rgba(255,255,255,.14);
-    }
-    .brand h1 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-    .nav {
-      display: grid;
-      gap: 8px;
-    }
-    .nav button {
-      width: 100%;
-      min-height: 42px;
-      padding: 0 12px;
-      border: 1px solid transparent;
-      border-radius: 7px;
-      color: #dce8f4;
-      background: transparent;
-      text-align: left;
-      font: inherit;
-      cursor: pointer;
-    }
-    .nav button.active {
-      color: #ffffff;
-      background: #245071;
-      border-color: rgba(255,255,255,.16);
-    }
-    .service-stack {
-      margin-top: auto;
-      display: grid;
-      gap: 8px;
-    }
-    .service {
-      border: 1px solid rgba(255,255,255,.14);
-      border-radius: 7px;
-      padding: 9px;
-      color: #d6e2ef;
-      font-size: 12px;
-      display: grid;
-      gap: 7px;
-    }
-    .service button {
-      height: 30px;
-      border-radius: 6px;
-      border: 0;
-      background: #eef4fb;
-      color: #182333;
-      cursor: pointer;
-    }
-    main {
-      min-width: 0;
-      display: grid;
-      grid-template-rows: 58px minmax(0, 1fr);
-    }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 0 18px;
-      border-bottom: 1px solid var(--line);
-      background: var(--panel);
-    }
-    header h2 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 680;
-    }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    a.button, button.primary, button.ghost {
-      height: 34px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 0 12px;
-      border-radius: 6px;
-      font: inherit;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    a.button, button.ghost {
-      color: var(--text);
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-    button.primary {
-      color: #fff;
-      background: var(--accent);
-      border: 1px solid var(--accent);
-    }
-    .view {
-      min-height: 0;
-      padding: 14px;
-      display: none;
-    }
-    .view.active {
-      display: grid;
-      gap: 12px;
-      grid-template-rows: auto minmax(0, 1fr);
-    }
-    .frame-wrap {
-      min-height: 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      overflow: hidden;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      min-height: calc(100vh - 100px);
-      border: 0;
-      display: block;
-      background: #fff;
-    }
-    .extract-grid {
-      display: grid;
-      grid-template-columns: 340px minmax(0, 1fr);
-      gap: 12px;
-      min-height: 0;
-    }
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      padding: 14px;
-    }
-    .form {
-      display: grid;
-      gap: 12px;
-      align-content: start;
-    }
-    label {
-      display: grid;
-      gap: 6px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    select, input {
-      width: 100%;
-      height: 34px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 0 9px;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-    }
-    .metric-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-    }
-    .metric {
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 10px;
-      background: #fbfcfe;
-    }
-    .metric span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .metric strong {
-      display: block;
-      margin-top: 4px;
-      font-size: 22px;
-      line-height: 1.1;
-    }
-    .status-line {
-      min-height: 34px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--muted);
-    }
-    .dot.running { background: var(--accent); }
-    .dot.done { background: var(--ok); }
-    .dot.failed { background: var(--bad); }
-    pre {
-      height: 100%;
-      min-height: 420px;
-      margin: 0;
-      padding: 12px;
-      overflow: auto;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #111827;
-      color: #dbeafe;
-      font: 12px/1.6 Consolas, "Courier New", monospace;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .paths {
-      display: grid;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.55;
-    }
-    .paths code {
-      color: var(--text);
-      background: #f0f3f7;
-      border-radius: 4px;
-      padding: 1px 4px;
-    }
-    @media (max-width: 880px) {
-      .shell { grid-template-columns: 1fr; }
-      aside { min-height: auto; }
-      .service-stack { margin-top: 0; }
-      .extract-grid { grid-template-columns: 1fr; }
-      iframe { min-height: calc(100vh - 230px); }
-    }
-  </style>
-</head>
-<body>
-  <div class="shell">
-    <aside>
-      <div class="brand"><h1>知识图谱工作台</h1></div>
-      <nav class="nav">
-        <button data-view="ontology" onclick="activate('ontology')">本体抽取</button>
-        <button data-view="triplet-extract" onclick="activate('triplet-extract')">三元组抽取</button>
-        <button data-view="triplet-review" onclick="activate('triplet-review')">三元组审核</button>
-      </nav>
-      <div class="service-stack" id="serviceStack"></div>
-    </aside>
-    <main>
-      <header>
-        <h2 id="pageTitle">本体抽取</h2>
-        <div class="header-actions" id="headerActions"></div>
-      </header>
-
-      <section id="ontology" class="view">
-        <div class="status-line"><span class="dot" id="ontologyDot"></span><span id="ontologyStatus">检查中</span></div>
-        <div class="frame-wrap"><iframe id="ontologyFrame" title="本体抽取"></iframe></div>
-      </section>
-
-      <section id="triplet-extract" class="view">
-        <div class="status-line"><span class="dot" id="extractDot"></span><span id="extractStatus">空闲</span></div>
-        <div class="extract-grid">
-          <div class="panel form">
-            <label>Markdown 文件<select id="markdownSelect" onchange="syncOutputStem()"></select></label>
-            <label>输出名称<input id="outputStem"></label>
-            <button class="primary" onclick="startTripletExtraction()">开始抽取</button>
-            <button class="ghost" onclick="refreshTripletStatus()">刷新状态</button>
-            <div class="metric-row">
-              <div class="metric"><span>已接收</span><strong id="acceptedCount">0</strong></div>
-              <div class="metric"><span>待审核</span><strong id="rejectedCount">0</strong></div>
-              <div class="metric"><span>进程</span><strong id="extractPid">-</strong></div>
-            </div>
-            <div class="paths" id="outputPaths"></div>
-          </div>
-          <pre id="extractLog">等待抽取任务</pre>
-        </div>
-      </section>
-
-      <section id="triplet-review" class="view">
-        <div class="status-line"><span class="dot" id="reviewDot"></span><span id="reviewStatus">检查中</span></div>
-        <div class="frame-wrap"><iframe id="reviewFrame" title="三元组审核"></iframe></div>
-      </section>
-    </main>
-  </div>
-
-<script>
-const titles = {
-  ontology: "本体抽取",
-  "triplet-extract": "三元组抽取",
-  "triplet-review": "三元组审核"
-};
-let state = {
-  active: "ontology",
-  markdownFiles: [],
-  services: {},
-  triplet: {}
-};
-
-async function api(path, options) {
-  const res = await fetch(path, options);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || "请求失败");
-  return data;
-}
-
-function activate(view) {
-  state.active = view;
-  history.replaceState(null, "", view === "ontology" ? "/" : `/${view}`);
-  document.querySelectorAll(".view").forEach(el => el.classList.toggle("active", el.id === view));
-  document.querySelectorAll(".nav button").forEach(el => el.classList.toggle("active", el.dataset.view === view));
-  document.getElementById("pageTitle").textContent = titles[view] || "";
-  renderHeaderActions();
-  if (view === "ontology") ensureFrame("ontology");
-  if (view === "triplet-review") ensureFrame("review");
-}
-
-function renderHeaderActions() {
-  const box = document.getElementById("headerActions");
-  if (state.active === "ontology") {
-    box.innerHTML = `<button class="ghost" onclick="startService('ontology')">启动页面</button><a class="button" target="_blank" href="${serviceUrl("ontology")}">新窗口</a>`;
-  } else if (state.active === "triplet-review") {
-    box.innerHTML = `<button class="ghost" onclick="startService('review')">启动页面</button><a class="button" target="_blank" href="${serviceUrl("review")}">新窗口</a>`;
-  } else {
-    box.innerHTML = `<button class="ghost" onclick="refreshTripletStatus()">刷新</button><a class="button" onclick="activate('triplet-review')">去审核</a>`;
-  }
-}
-
-function serviceUrl(id) {
-  return state.services[id]?.url || "#";
-}
-
-function ensureFrame(id) {
-  const service = state.services[id];
-  if (!service || !service.running) return;
-  const frame = document.getElementById(id === "ontology" ? "ontologyFrame" : "reviewFrame");
-  if (!frame.src) frame.src = service.url;
-}
-
-async function startService(id) {
-  const data = await api("/api/services/start", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({service: id})
-  });
-  state.services[id] = data;
-  renderServices();
-  ensureFrame(id);
-}
-
-async function refreshServices() {
-  const data = await api("/api/services");
-  state.services = data.services;
-  renderServices();
-  ensureFrame("ontology");
-  ensureFrame("review");
-}
-
-function renderServices() {
-  document.getElementById("serviceStack").innerHTML = ["ontology", "review"].map(id => {
-    const item = state.services[id] || {};
-    const text = item.running ? `运行中 :${item.port}` : `未运行 :${item.port}`;
-    return `<div class="service"><strong>${escapeHtml(item.name || id)}</strong><span>${escapeHtml(text)}</span><button onclick="startService('${id}')">启动</button></div>`;
-  }).join("");
-  setServiceStatus("ontology");
-  setServiceStatus("review");
-}
-
-function setServiceStatus(id) {
-  const item = state.services[id] || {};
-  const dot = document.getElementById(id === "ontology" ? "ontologyDot" : "reviewDot");
-  const label = document.getElementById(id === "ontology" ? "ontologyStatus" : "reviewStatus");
-  if (!dot || !label) return;
-  dot.className = `dot ${item.running ? "done" : "failed"}`;
-  label.textContent = item.running ? `${item.name}页面运行中：${item.url}` : `${item.name || id}页面未运行`;
-}
-
-function syncOutputStem() {
-  const select = document.getElementById("markdownSelect");
-  const value = select.value || "";
-  let stem = value.split("/").pop().replace(/\.md$/i, "");
-  if (stem.startsWith("MinerU_markdown_")) stem = stem.slice("MinerU_markdown_".length);
-  document.getElementById("outputStem").value = stem || "triplets";
-}
-
-async function startTripletExtraction() {
-  setExtractStatus({running: true, log_tail: "任务启动中"});
-  const body = {
-    markdown_path: document.getElementById("markdownSelect").value,
-    output_stem: document.getElementById("outputStem").value
-  };
-  state.triplet = await api("/api/triplet/start", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(body)
-  });
-  renderTripletStatus();
-}
-
-async function refreshTripletStatus() {
-  state.triplet = await api("/api/triplet/status");
-  renderTripletStatus();
-}
-
-function setExtractStatus(job) {
-  const dot = document.getElementById("extractDot");
-  const label = document.getElementById("extractStatus");
-  dot.className = `dot ${job.running ? "running" : job.returncode === 0 ? "done" : job.exists ? "failed" : ""}`;
-  if (job.running) label.textContent = "抽取运行中";
-  else if (!job.exists) label.textContent = "空闲";
-  else if (job.returncode === 0) label.textContent = "抽取完成";
-  else label.textContent = `抽取结束，退出码 ${job.returncode}`;
-}
-
-function renderTripletStatus() {
-  const job = state.triplet || {};
-  setExtractStatus(job);
-  document.getElementById("extractPid").textContent = job.pid || "-";
-  document.getElementById("acceptedCount").textContent = job.counts?.accepted ?? 0;
-  document.getElementById("rejectedCount").textContent = job.counts?.rejected ?? 0;
-  document.getElementById("extractLog").textContent = job.log_tail || "等待抽取任务";
-  const outputs = job.outputs || {};
-  document.getElementById("outputPaths").innerHTML = Object.entries(outputs)
-    .map(([name, path]) => `<div>${escapeHtml(name)} <code>${escapeHtml(path)}</code></div>`)
-    .join("");
-}
-
-async function init() {
-  const data = await api("/api/init");
-  state.markdownFiles = data.markdown_files || [];
-  state.services = data.services || {};
-  document.getElementById("markdownSelect").innerHTML = state.markdownFiles
-    .map(path => `<option value="${escapeAttr(path)}">${escapeHtml(path)}</option>`)
-    .join("");
-  syncOutputStem();
-  renderServices();
-  await refreshTripletStatus();
-  const pathView = location.pathname.replace("/", "") || "ontology";
-  activate(titles[pathView] ? pathView : "ontology");
-}
-
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-}
-
-function escapeAttr(value) {
-  return escapeHtml(value).replace(/`/g, "&#96;");
-}
-
-setInterval(() => {
-  refreshServices().catch(() => {});
-  refreshTripletStatus().catch(() => {});
-}, 4000);
-
-init().catch(err => {
-  document.getElementById("extractLog").textContent = err.message;
-});
-</script>
-</body>
-</html>"""
+    with triplet_lock:
+        if triplet_job and triplet_job["process"].poll() is None:
+            raise ValueError("三元组抽取任务正在运行")
+        for path in outputs.values():
+            path.parent.mkdir(parents=True, exist_ok=True)
+        env = os.environ.copy()
+        env.update({
+            "TRIPLET_MARKDOWN_FILE": str(markdown_path),
+            "TRIPLET_OUTPUT_JSON": str(outputs["accepted"]),
+            "TRIPLET_REJECTED_JSON": str(outputs["rejected"]),
+            "TRIPLET_EVIDENCE_MD": str(outputs["evidence"]),
+            "TRIPLET_BOOK_NAME": output_stem,
+        })
+        with outputs["log"].open("w", encoding="utf-8", errors="replace") as log_file:
+            process = subprocess.Popen(
+                [sys.executable, "-u", str(ROOT / "extract_triplets" / "extrct.py")],
+                cwd=ROOT,
+                env=env,
+                stdout=log_file,
+                stderr=subprocess.STDOUT,
+            )
+        triplet_job = {
+            "process": process,
+            "started_at": now_iso(),
+            "markdown_path": markdown_path,
+            "output_stem": output_stem,
+            "outputs": outputs,
+        }
+    return triplet_status()
 
 
-class WorkbenchHandler(BaseHTTPRequestHandler):
-    def send_json(self, data, status=200):
-        body = json.dumps(data, ensure_ascii=False).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Cache-Control", "no-store")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+def ontology_build_status():
+    with ontology_lock:
+        return ontology_job.copy()
 
-    def send_html(self):
-        body = html_page().encode("utf-8")
+
+def run_ontology_build(markdown_path, review_mode, reviewer):
+    global ontology_job
+    try:
+        ontology.run_extraction(markdown_path)
+        with ontology_data_lock:
+            result = ontology.build_review_from_candidates(
+                ontology.DEFAULT_CANDIDATES_PATH, review_mode, reviewer
+            )
+            cache_ontology_result(result)
+    except Exception as exc:
+        with ontology_lock:
+            ontology_job = {**ontology_job, "running": False, "error": str(exc), "finished_at": now_iso()}
+    else:
+        with ontology_lock:
+            ontology_job = {**ontology_job, "running": False, "error": "", "finished_at": now_iso()}
+
+
+def start_ontology_build(payload):
+    global ontology_job
+    markdown_path = safe_markdown_path(payload.get("markdown_path"))
+    review_mode = payload.get("review_mode", "manual")
+    if review_mode not in {"manual", "hybrid", "auto"}:
+        raise ValueError("review_mode 必须是 manual/hybrid/auto")
+    reviewer = str(payload.get("reviewer") or "human")
+    with ontology_lock:
+        if ontology_job.get("running"):
+            raise ValueError("本体抽取任务正在运行")
+        ontology_job = {
+            "exists": True,
+            "running": True,
+            "error": "",
+            "started_at": now_iso(),
+            "markdown_path": rel_path(markdown_path),
+        }
+        threading.Thread(
+            target=run_ontology_build,
+            args=(markdown_path, review_mode, reviewer),
+            daemon=True,
+            name="ontology-build",
+        ).start()
+        return ontology_job.copy()
+
+
+def triplet_items_page(query):
+    review_file = query.get("file", [""])[0]
+    if review_file not in triplets.list_review_files():
+        raise ValueError("非法或不存在的待审文件")
+    relation = query.get("relation", [""])[0]
+    min_confidence = triplets.parse_float_arg(query, "min_confidence")
+    max_confidence = triplets.parse_float_arg(query, "max_confidence")
+    include_done = query.get("include_done", ["0"])[0] == "1"
+    page = max(1, int(query.get("page", ["1"])[0]))
+    page_size = min(100, max(1, int(query.get("page_size", ["20"])[0])))
+    filtered = []
+    for item in triplets.load_review_items(review_file):
+        if not isinstance(item, dict):
+            continue
+        if not include_done and triplets.review_status(item) in {"accepted", "rejected"}:
+            continue
+        confidence = triplets.confidence_value(item)
+        if min_confidence is not None and confidence < min_confidence:
+            continue
+        if max_confidence is not None and confidence > max_confidence:
+            continue
+        if relation and triplets.item_relation(item) != relation:
+            continue
+        filtered.append(item)
+    filtered.sort(key=lambda item: (triplets.item_relation(item), triplets.confidence_value(item)))
+    start = (page - 1) * page_size
+    return {
+        "items": [triplets.item_for_response(review_file, item) for item in filtered[start:start + page_size]],
+        "total": len(filtered),
+        "page": page,
+        "page_size": page_size,
+    }
+
+
+def cache_ontology_result(result):
+    global ontology_cache_key, ontology_cache_result
+    path = ontology.DEFAULT_REVIEW_RESULT_PATH
+    stat = path.stat() if path.exists() else None
+    ontology_cache_key = (stat.st_mtime_ns, stat.st_size) if stat else None
+    ontology_cache_result = result
+
+
+def cached_ontology_result():
+    global ontology_cache_key, ontology_cache_result
+    with ontology_data_lock:
+        path = ontology.DEFAULT_REVIEW_RESULT_PATH
+        stat = path.stat() if path.exists() else None
+        key = (stat.st_mtime_ns, stat.st_size) if stat else None
+        if ontology_cache_result is None or key != ontology_cache_key:
+            ontology_cache_result = ontology.get_review_result()
+            ontology_cache_key = key
+        return ontology_cache_result
+
+
+def ontology_overview(result=None):
+    result = result if result is not None else cached_ontology_result()
+    pending = result.get("pending_review_candidates", [])
+    cleanup_count = sum(ontology_review_quality(item)["needs_cleanup"] for item in pending)
+    summary = dict(result.get("summary", {}))
+    summary["actionable_pending"] = len(pending) - cleanup_count
+    summary["cleanup_pending"] = cleanup_count
+    return {
+        "summary": summary,
+        "source_file": result.get("source_file", ""),
+        "review_mode": result.get("review_mode", ""),
+        "generated_at": result.get("generated_at", ""),
+        "errors": result.get("errors", []),
+    }
+
+
+def ontology_items_page(query):
+    status = query.get("status", ["pending_review_candidates"])[0]
+    if status not in {
+        "pending_review_candidates", "accepted_candidates",
+        "rejected_candidates", "deferred_candidates", "cleanup_candidates",
+    }:
+        raise ValueError("无效的审核状态")
+    keyword = query.get("keyword", [""])[0].strip().lower()
+    page = max(1, int(query.get("page", ["1"])[0]))
+    page_size = min(100, max(1, int(query.get("page_size", ["20"])[0])))
+    result = cached_ontology_result()
+    if status in {"pending_review_candidates", "cleanup_candidates"}:
+        needs_cleanup = status == "cleanup_candidates"
+        items = [
+            item for item in result.get("pending_review_candidates", [])
+            if ontology_review_quality(item)["needs_cleanup"] == needs_cleanup
+        ]
+    else:
+        items = result.get(status, [])
+    if keyword:
+        items = [item for item in items if keyword in json.dumps(item, ensure_ascii=False).lower()]
+    start = (page - 1) * page_size
+    return {
+        "items": [enrich_ontology_item(item) for item in items[start:start + page_size]],
+        "total": len(items),
+        "page": page,
+        "page_size": page_size,
+    }
+
+
+def ontology_review_quality(item):
+    quality = describe_quality(item)
+    quality["approval_errors"] = approval_errors(item)
+    quality["needs_cleanup"] = quality["needs_cleanup"] or bool(quality["approval_errors"])
+    return quality
+
+
+def enrich_ontology_item(item):
+    enriched = ontology.enrich_candidate_for_response(item)
+    enriched["review_quality"] = ontology_review_quality(item)
+    return enriched
+
+
+def run_ontology_review(payload):
+    source_path = ontology.safe_root_path(payload.get("source_path"), ontology.DEFAULT_CANDIDATES_PATH)
+    review_mode = payload.get("review_mode", "manual")
+    if review_mode not in {"manual", "hybrid", "auto"}:
+        raise ValueError("review_mode 必须是 manual/hybrid/auto")
+    with ontology_data_lock:
+        result = ontology.build_review_from_candidates(
+            source_path, review_mode, payload.get("reviewer", "human")
+        )
+        cache_ontology_result(result)
+        return ontology_overview(result)
+
+
+def decide_ontology(payload):
+    with ontology_data_lock:
+        current = cached_ontology_result()
+        candidate_id = payload.get("candidate_id", "")
+        decision = payload.get("decision", "")
+        if decision not in {"accept", "modify", "reject", "defer"}:
+            raise ValueError("无效的审核决定")
+        candidate = next(
+            (item for key in (
+                "pending_review_candidates", "accepted_candidates",
+                "rejected_candidates", "deferred_candidates",
+            ) for item in current.get(key, []) if item.get("candidate_id") == candidate_id),
+            None,
+        )
+        if candidate is None:
+            raise ValueError("未找到待审核候选项")
+        if decision in {"accept", "modify"}:
+            modifications = payload.get("modifications")
+            if decision == "modify" and (not isinstance(modifications, dict) or not modifications):
+                raise ValueError("修改后通过需要提交字段修改")
+            effective = {**candidate, **(modifications or {})} if decision == "modify" else candidate
+            errors = approval_errors(effective)
+            if errors:
+                raise ValueError("候选字段不完整：" + "；".join(errors))
+        updated = ontology.apply_user_decision(
+            current,
+            candidate_id=candidate_id,
+            user_decision=decision,
+            reviewer=payload.get("reviewer", "human"),
+            review_comment=payload.get("comment"),
+            modifications=payload.get("modifications"),
+        )
+        if len(updated.get("errors", [])) > len(current.get("errors", [])):
+            raise ValueError(updated["errors"][-1].get("message", "审核失败"))
+        ontology.write_json(ontology.DEFAULT_REVIEW_RESULT_PATH, updated)
+        ontology.write_json(ontology.DEFAULT_REVIEW_LOG_PATH, updated.get("review_log", []))
+        cache_ontology_result(updated)
+        return {"ok": True}
+
+
+def frontend_file_for(request_path):
+    if request_path in {"/", "/ontology", "/triplet-extract", "/triplet-review"}:
+        path = FRONTEND_DIR / "index.html"
+    elif request_path.startswith("/assets/"):
+        path = FRONTEND_DIR / unquote(request_path).lstrip("/")
+    else:
+        return None
+    path = path.resolve()
+    if FRONTEND_DIR.resolve() not in [path, *path.parents] or not path.is_file():
+        return None
+    return path
+
+
+class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
+    """Serve both existing business APIs under one origin."""
+
+    def send_file(self, path):
+        path = Path(path)
+        body = path.read_bytes()
+        content_type = {
+            ".js": "application/javascript; charset=utf-8",
+            ".css": "text/css; charset=utf-8",
+            ".woff": "font/woff",
+            ".woff2": "font/woff2",
+            ".ttf": "font/ttf",
+        }.get(path.suffix.lower(), mimetypes.guess_type(path.name)[0] or "application/octet-stream")
         self.send_response(200)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Type", content_type)
         self.send_header("Cache-Control", "no-store")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
-
-    def read_payload(self):
-        length = int(self.headers.get("Content-Length", "0"))
-        if length <= 0:
-            return {}
-        return json.loads(self.rfile.read(length).decode("utf-8"))
 
     def do_GET(self):
-        parsed = urlparse(self.path)
+        path = urlparse(self.path).path
         try:
-            if parsed.path in {"/", "/ontology", "/triplet-extract", "/triplet-review"}:
-                self.send_html()
-            elif parsed.path == "/api/init":
-                self.send_json({
-                    "markdown_files": list_markdown_files(),
-                    "services": {key: service_status(key) for key in SERVICES},
-                })
-            elif parsed.path == "/api/services":
-                self.send_json({"services": {key: service_status(key) for key in SERVICES}})
-            elif parsed.path == "/api/triplet/status":
+            if path == "/api/triplets/items":
+                self.send_json(triplet_items_page(parse_qs(urlparse(self.path).query)))
+            elif path == "/api/ontology/overview":
+                self.send_json(ontology_overview())
+            elif path == "/api/ontology/items":
+                self.send_json(ontology_items_page(parse_qs(urlparse(self.path).query)))
+            elif path.startswith("/api/triplets/"):
+                self.dispatch_legacy(triplets.ReviewHandler.do_GET, "/api/triplets")
+            elif path.startswith("/api/ontology/") and path != "/api/ontology/build-status":
+                self.dispatch_legacy(ontology.OntologyBuildHandler.do_GET, "/api/ontology")
+            elif path == "/api/init":
+                self.send_json({"markdown_files": list_markdown_files()})
+            elif path == "/api/triplet/status":
                 self.send_json(triplet_status())
+            elif path == "/api/ontology/build-status":
+                self.send_json(ontology_build_status())
             else:
-                self.send_json({"error": "not found"}, 404)
-        except Exception as exc:
+                frontend_path = frontend_file_for(path)
+                if frontend_path:
+                    self.send_file(frontend_path)
+                elif path == "/" and not FRONTEND_DIR.exists():
+                    self.send_json({"error": "前端未构建，请在 frontend/workbench 中运行 npm install 和 npm run build"}, 503)
+                else:
+                    self.send_json({"error": "not found"}, 404)
+        except (ValueError, FileNotFoundError) as exc:
             self.send_json({"error": str(exc)}, 400)
+        except Exception as exc:
+            self.send_json({"error": str(exc)}, 500)
 
     def do_POST(self):
-        parsed = urlparse(self.path)
+        path = urlparse(self.path).path
         try:
-            payload = self.read_payload()
-            if parsed.path == "/api/services/start":
-                self.send_json(start_service(payload.get("service", "")))
-            elif parsed.path == "/api/triplet/start":
-                self.send_json(start_triplet_extraction(payload))
+            if path.startswith("/api/triplets/"):
+                self.dispatch_legacy(triplets.ReviewHandler.do_POST, "/api/triplets")
+            elif path == "/api/ontology/review-run":
+                self.send_json(run_ontology_review(self.read_payload()))
+            elif path == "/api/ontology/review-decision":
+                self.send_json(decide_ontology(self.read_payload()))
+            elif path.startswith("/api/ontology/") and path != "/api/ontology/build-run":
+                self.dispatch_legacy(ontology.OntologyBuildHandler.do_POST, "/api/ontology")
+            elif path == "/api/triplet/start":
+                self.send_json(start_triplet_extraction(self.read_payload()))
+            elif path == "/api/ontology/build-run":
+                self.send_json(start_ontology_build(self.read_payload()), 202)
             else:
                 self.send_json({"error": "not found"}, 404)
-        except Exception as exc:
+        except (ValueError, FileNotFoundError, json.JSONDecodeError) as exc:
             self.send_json({"error": str(exc)}, 400)
+        except Exception as exc:
+            self.send_json({"error": str(exc)}, 500)
 
-    def log_message(self, fmt, *args):
-        return
+    def dispatch_legacy(self, handler, prefix):
+        original_path = self.path
+        try:
+            self.path = "/api" + original_path[len(prefix):]
+            handler(self)
+        finally:
+            self.path = original_path
 
 
 def main():
-    for service_id in SERVICES:
-        try:
-            start_service(service_id)
-        except Exception as exc:
-            print(f"{SERVICES[service_id]['name']}启动失败: {exc}")
-    server = ThreadingHTTPServer((WORKBENCH_HOST, WORKBENCH_PORT), WorkbenchHandler)
-    print(f"知识图谱工作台已启动: http://{WORKBENCH_HOST}:{WORKBENCH_PORT}")
+    server = ThreadingHTTPServer((HOST, PORT), WorkbenchHandler)
+    server.daemon_threads = True
+    print(f"知识图谱审核工作台: http://{HOST}:{PORT}")
     print("按 Ctrl+C 停止服务")
-    server.serve_forever()
+    try:
+        server.serve_forever()
+    finally:
+        server.server_close()
 
 
 if __name__ == "__main__":

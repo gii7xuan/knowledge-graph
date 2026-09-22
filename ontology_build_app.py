@@ -13,9 +13,11 @@ from ontologyBuild.review_module import apply_user_decision, review_candidates
 
 ROOT = Path(__file__).resolve().parent
 ONTOLOGY_BUILD_DIR = ROOT / "ontologyBuild"
+ONTOLOGY_DIR = ROOT / "ontology"
 MDFILES_DIR = ROOT / "mdfiles"
 DEFAULT_CANDIDATES_PATH = ONTOLOGY_BUILD_DIR / "ontology_candidates.json"
-DEFAULT_MODULES_PATH = ONTOLOGY_BUILD_DIR / "ontology_modules.json"
+DEFAULT_MODULES_PATH = ONTOLOGY_DIR / "ontology_modules.json"
+DEFAULT_TOPIC_MAPPING_PATH = ONTOLOGY_DIR / "topic_schema_mapping.json"
 DEFAULT_REVIEW_RESULT_PATH = ONTOLOGY_BUILD_DIR / "ontology_review_result.json"
 DEFAULT_REVIEW_LOG_PATH = ONTOLOGY_BUILD_DIR / "ontology_review_log.json"
 
@@ -210,344 +212,60 @@ def run_extraction(markdown_path):
     )
     if proc.returncode != 0:
         raise RuntimeError((proc.stderr or proc.stdout or "本体候选抽取失败").strip())
-    return {"stdout": proc.stdout, "stderr": proc.stderr}
+    normalize_stdout = ""
+    normalize_stderr = ""
+    if env.get("ONTOLOGY_RUN_NORMALIZATION", "1").strip().lower() not in {"0", "false", "no"}:
+        normalize_proc = subprocess.run(
+            [sys.executable, str(ONTOLOGY_BUILD_DIR / "ontology_normalizer.py")],
+            cwd=str(ROOT),
+            env=env,
+            text=True,
+            capture_output=True,
+        )
+        normalize_stdout = normalize_proc.stdout
+        normalize_stderr = normalize_proc.stderr
+        if normalize_proc.returncode != 0:
+            raise RuntimeError(
+                (normalize_proc.stderr or normalize_proc.stdout or "本体规范化导出失败").strip()
+            )
+    return {
+        "stdout": proc.stdout,
+        "stderr": proc.stderr,
+        "normalization_stdout": normalize_stdout,
+        "normalization_stderr": normalize_stderr,
+    }
 
 
-def html_page():
-    return """<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>本体构建与人工审核</title>
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --panel: #ffffff;
-      --line: #d8dee9;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --accent: #1769aa;
-      --ok: #14743a;
-      --bad: #a61b1b;
-      --warn: #8a5a00;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-    }
-    header {
-      height: 58px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 0 18px;
-      border-bottom: 1px solid var(--line);
-      background: var(--panel);
-    }
-    h1 { margin: 0; font-size: 18px; font-weight: 650; }
-    button, select, input, textarea { font: inherit; }
-    select, input, textarea {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--text);
-    }
-    select, input { height: 34px; padding: 0 9px; }
-    button {
-      height: 34px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fff;
-      cursor: pointer;
-    }
-    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    button.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
-    button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
-    button.warn { background: #fff8e6; color: var(--warn); border-color: #f0c36a; }
-    main {
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      min-height: calc(100vh - 58px);
-    }
-    aside {
-      border-right: 1px solid var(--line);
-      background: var(--panel);
-      padding: 14px;
-      overflow: auto;
-    }
-    .content { padding: 14px 18px 28px; overflow: auto; }
-    .controls { display: grid; gap: 10px; }
-    label { display: grid; gap: 5px; font-size: 12px; color: var(--muted); }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(96px, 1fr));
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .stat, .card, .log {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-    .stat { padding: 10px; }
-    .stat strong { display: block; font-size: 20px; }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .card {
-      padding: 14px;
-      margin-bottom: 10px;
-    }
-    .title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .title strong { font-size: 16px; }
-    .badge {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 2px 8px;
-      color: var(--muted);
-      background: #fff;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .meta, .reason { color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .confidence { color: var(--accent); font-weight: 650; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
-    textarea { width: 100%; min-height: 58px; padding: 8px; resize: vertical; margin-top: 8px; }
-    .evidence {
-      margin-top: 8px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fbfcfe;
-      padding: 10px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      line-height: 1.7;
-      max-height: 260px;
-      overflow: auto;
-      font-size: 13px;
-    }
-    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .empty { color: var(--muted); padding: 32px; text-align: center; }
-    .log { padding: 10px; white-space: pre-wrap; max-height: 220px; overflow: auto; font-size: 12px; color: var(--muted); }
-    @media (max-width: 900px) {
-      main { grid-template-columns: 1fr; }
-      aside { border-right: 0; border-bottom: 1px solid var(--line); }
-      .stats, .grid, .row { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>本体构建与人工审核</h1>
-    <button class="primary" onclick="refresh()">刷新</button>
-  </header>
-  <main>
-    <aside>
-      <div class="controls">
-        <label>Markdown 文档<select id="markdownSelect"></select></label>
-        <label>候选本体 JSON<input id="sourcePath" value="ontologyBuild/ontology_candidates.json"></label>
-        <div class="row">
-          <label>审核模式<select id="reviewMode"><option value="manual">人工审核</option><option value="hybrid">混合审核</option><option value="auto">自动审核</option></select></label>
-          <label>审核人<input id="reviewer" value="human"></label>
-        </div>
-        <button class="primary" onclick="runReview()">生成审核队列</button>
-        <button onclick="runExtractionAndReview()">抽取并进入最后审核</button>
-        <div class="meta">选择“人工审核”时，所有候选本体元素都会进入待审队列；选择“混合审核”时，只展示系统判定需要人工处理的候选。</div>
-        <div id="runLog" class="log">等待操作</div>
-      </div>
-    </aside>
-    <section class="content">
-      <div id="stats" class="stats"></div>
-      <div class="toolbar">
-        <select id="statusFilter" onchange="render()">
-          <option value="pending_review_candidates">待人工审核</option>
-          <option value="accepted_candidates">已通过</option>
-          <option value="rejected_candidates">已拒绝</option>
-          <option value="deferred_candidates">已暂缓</option>
-        </select>
-        <input id="keyword" placeholder="搜索名称、类型、证据" oninput="render()">
-      </div>
-      <div id="cards"></div>
-    </section>
-  </main>
-<script>
-let state = { result: null, markdownFiles: [] };
+FRONTEND_DIR = ROOT / "frontend" / "ontology_build"
 
-async function api(path, options) {
-  const res = await fetch(path, options);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || "请求失败");
-  return data;
+CONTENT_TYPES = {
+    ".html": "text/html; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
 }
 
-async function init() {
-  const info = await api("/api/init");
-  state.markdownFiles = info.markdown_files;
-  document.getElementById("markdownSelect").innerHTML = state.markdownFiles
-    .map(path => `<option value="${escapeAttr(path)}">${escapeHtml(path)}</option>`).join("");
-  await refresh();
-}
 
-async function refresh() {
-  state.result = await api("/api/review-result");
-  render();
-}
+def content_type_for(path):
+    return CONTENT_TYPES.get(path.suffix.lower(), "application/octet-stream")
 
-async function runReview() {
-  setLog("正在生成审核队列...");
-  const body = {
-    source_path: document.getElementById("sourcePath").value,
-    review_mode: document.getElementById("reviewMode").value,
-    reviewer: document.getElementById("reviewer").value
-  };
-  state.result = await api("/api/review-run", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(body)
-  });
-  setLog("审核队列已生成。");
-  document.getElementById("statusFilter").value = "pending_review_candidates";
-  render();
-}
 
-async function runExtractionAndReview() {
-  setLog("正在抽取候选本体元素，可能需要较长时间...");
-  const body = {
-    markdown_path: document.getElementById("markdownSelect").value,
-    review_mode: document.getElementById("reviewMode").value,
-    reviewer: document.getElementById("reviewer").value
-  };
-  state.result = await api("/api/build-run", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(body)
-  });
-  setLog("抽取完成，并已进入最后审核。");
-  document.getElementById("sourcePath").value = "ontologyBuild/ontology_candidates.json";
-  document.getElementById("statusFilter").value = "pending_review_candidates";
-  render();
-}
+def frontend_file_for(request_path):
+    if request_path == "/":
+        relative = Path("index.html")
+    elif request_path.startswith("/static/"):
+        relative = Path(request_path[len("/static/"):])
+    else:
+        return None
+    path = (FRONTEND_DIR / relative).resolve()
+    if FRONTEND_DIR.resolve() not in [path, *path.parents] or not path.is_file():
+        return None
+    return path
 
-function render() {
-  const result = state.result || {};
-  const summary = result.summary || {};
-  const stats = [
-    ["总数", summary.total || 0],
-    ["待审", summary.pending_review || 0],
-    ["通过", summary.accepted || 0],
-    ["拒绝", summary.rejected || 0],
-    ["暂缓", summary.deferred || 0],
-  ];
-  document.getElementById("stats").innerHTML = stats
-    .map(([k, v]) => `<div class="stat"><span>${k}</span><strong>${v}</strong></div>`).join("");
-
-  const listName = document.getElementById("statusFilter").value;
-  const keyword = document.getElementById("keyword").value.trim().toLowerCase();
-  let items = result[listName] || [];
-  if (keyword) {
-    items = items.filter(item => JSON.stringify(item).toLowerCase().includes(keyword));
-  }
-  const cards = document.getElementById("cards");
-  if (!items.length) {
-    cards.innerHTML = `<div class="empty">当前没有需要展示的本体候选项</div>`;
-    return;
-  }
-  cards.innerHTML = items.map(renderCard).join("");
-}
-
-function renderCard(item) {
-  const id = item.candidate_id || "";
-  const evidence = item.evidence_text || "";
-  const moduleLine = item.source_module_text
-    ? `<div class="meta">子本体模块 <strong>${escapeHtml(item.source_module_text)}</strong> · 目录路径 ${escapeHtml(item.directory_context_text || "")}</div>`
-    : "";
-  return `<article class="card" id="card-${escapeAttr(id)}">
-    <div class="title">
-      <strong>${escapeHtml(item.display_name || item.name || id)}</strong>
-      <span class="badge">${escapeHtml(item.candidate_type || "")}</span>
-    </div>
-    <div class="meta">置信度 <span class="confidence">${escapeHtml(item.confidence_display || "0.0000")}</span> · 状态 ${escapeHtml(item.final_decision || "")} · 推荐 ${escapeHtml(item.system_recommendation || "")}</div>
-    ${moduleLine}
-    <div class="reason">${escapeHtml((item.recommendation_reasons || []).join("；") || item.reason || item.why_uncertain || "")}</div>
-    <div class="grid">
-      <label>名称<input id="name-${escapeAttr(id)}" value="${escapeAttr(item.name || item.property_name || item.text_mention || "")}"></label>
-      <label>上位/domain<input id="domain-${escapeAttr(id)}" value="${escapeAttr(item.parent_candidate || item.domain_candidate || "")}"></label>
-      <label>range/映射<input id="range-${escapeAttr(id)}" value="${escapeAttr(item.range_candidate || item.range_datatype || item.mapped_to || "")}"></label>
-    </div>
-    <textarea id="comment-${escapeAttr(id)}" placeholder="审核备注"></textarea>
-    <details>
-      <summary>证据与完整 JSON</summary>
-      <div class="evidence">${escapeHtml(evidence || "没有证据文本")}</div>
-      <div class="evidence">${escapeHtml(JSON.stringify(item, null, 2))}</div>
-    </details>
-    <div class="actions">
-      <button class="ok" onclick="decide(${jsArg(id)}, 'accept')">通过</button>
-      <button class="primary" onclick="decide(${jsArg(id)}, 'modify')">修改后通过</button>
-      <button class="bad" onclick="decide(${jsArg(id)}, 'reject')">拒绝</button>
-      <button class="warn" onclick="decide(${jsArg(id)}, 'defer')">暂缓</button>
-    </div>
-  </article>`;
-}
-
-async function decide(id, decision) {
-  const modifications = {
-    name: document.getElementById(`name-${id}`).value,
-    property_name: document.getElementById(`name-${id}`).value,
-    domain_candidate: document.getElementById(`domain-${id}`).value,
-    parent_candidate: document.getElementById(`domain-${id}`).value,
-    range_candidate: document.getElementById(`range-${id}`).value,
-    mapped_to: document.getElementById(`range-${id}`).value
-  };
-  state.result = await api("/api/review-decision", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      candidate_id: id,
-      decision,
-      reviewer: document.getElementById("reviewer").value,
-      comment: document.getElementById(`comment-${id}`).value,
-      modifications: decision === "modify" ? modifications : null
-    })
-  });
-  render();
-}
-
-function setLog(message) {
-  document.getElementById("runLog").textContent = message;
-}
-
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-}
-function escapeAttr(value) {
-  return escapeHtml(value).replace(/`/g, "&#96;");
-}
-function jsArg(value) {
-  return `decodeURIComponent('${encodeURIComponent(String(value ?? ""))}')`;
-}
-
-init().catch(err => {
-  setLog(err.message);
-  document.getElementById("cards").innerHTML = `<div class="empty">${escapeHtml(err.message)}</div>`;
-});
-</script>
-</body>
-</html>"""
 
 
 class OntologyBuildHandler(BaseHTTPRequestHandler):
@@ -560,14 +278,17 @@ class OntologyBuildHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
-    def send_html(self):
-        body = html_page().encode("utf-8")
+    def send_file(self, path):
+        body = Path(path).read_bytes()
         self.send_response(200)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Type", content_type_for(Path(path)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def send_html(self):
+        self.send_file(FRONTEND_DIR / "index.html")
 
     def read_payload(self):
         length = int(self.headers.get("Content-Length", "0"))
@@ -580,16 +301,25 @@ class OntologyBuildHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/":
                 self.send_html()
+            elif parsed.path.startswith("/static/"):
+                frontend_path = frontend_file_for(parsed.path)
+                if frontend_path is None:
+                    self.send_json({"error": "not found"}, 404)
+                else:
+                    self.send_file(frontend_path)
             elif parsed.path == "/api/init":
                 self.send_json({
                     "markdown_files": list_markdown_files(),
                     "module_index": read_json(DEFAULT_MODULES_PATH, {}),
+                    "topic_schema_mapping": read_json(DEFAULT_TOPIC_MAPPING_PATH, {}),
                 })
             elif parsed.path == "/api/review-result":
                 result = get_review_result()
                 self.send_json(enrich_review_result(result))
             elif parsed.path == "/api/module-index":
                 self.send_json(read_json(DEFAULT_MODULES_PATH, {}))
+            elif parsed.path == "/api/topic-schema-mapping":
+                self.send_json(read_json(DEFAULT_TOPIC_MAPPING_PATH, {}))
             else:
                 self.send_json({"error": "not found"}, 404)
         except Exception as exc:

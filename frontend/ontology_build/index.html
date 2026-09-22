@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本体构建与人工审核</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>本体构建与人工审核</h1>
+    <button class="primary" onclick="refresh()">刷新</button>
+  </header>
+  <main>
+    <aside>
+      <div class="controls">
+        <label>Markdown 文档<select id="markdownSelect"></select></label>
+        <label>候选本体 JSON<input id="sourcePath" value="ontologyBuild/ontology_candidates.json"></label>
+        <div class="row">
+          <label>审核模式<select id="reviewMode"><option value="manual">人工审核</option><option value="hybrid">混合审核</option><option value="auto">自动审核</option></select></label>
+          <label>审核人<input id="reviewer" value="human"></label>
+        </div>
+        <button class="primary" onclick="runReview()">生成审核队列</button>
+        <button onclick="runExtractionAndReview()">抽取并进入最后审核</button>
+        <div class="meta">选择“人工审核”时，所有候选本体元素都会进入待审队列；选择“混合审核”时，只展示系统判定需要人工处理的候选。</div>
+        <div id="runLog" class="log">等待操作</div>
+      </div>
+    </aside>
+    <div id="sidebarResizer" class="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="调整左侧栏宽度"></div>
+    <section class="content">
+      <div id="stats" class="stats"></div>
+      <div class="toolbar">
+        <select id="statusFilter" onchange="render()">
+          <option value="pending_review_candidates">待人工审核</option>
+          <option value="accepted_candidates">已通过</option>
+          <option value="rejected_candidates">已拒绝</option>
+          <option value="deferred_candidates">已暂缓</option>
+        </select>
+        <input id="keyword" placeholder="搜索名称、类型、证据" oninput="render()">
+      </div>
+      <div id="cards"></div>
+    </section>
+  </main>
+<script src="/static/app.js"></script>
+</body>
+</html>

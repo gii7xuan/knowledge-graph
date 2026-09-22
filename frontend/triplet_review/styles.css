@@ -1,0 +1,255 @@
+:root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --line: #d9dee7;
+      --text: #20242c;
+      --muted: #6b7280;
+      --accent: #1668dc;
+      --ok: #16803c;
+      --bad: #b42318;
+      --warn: #946200;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    header h1 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 650;
+    }
+    select, input, textarea, button {
+      font: inherit;
+    }
+    select, input, textarea {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+    }
+    select, input {
+      height: 34px;
+      padding: 0 9px;
+    }
+    button {
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+    }
+    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    button.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+    button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
+    button.warn { background: #fff7e6; color: var(--warn); border-color: #ffd591; }
+    main {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: calc(100vh - 56px);
+    }
+    aside {
+      border-right: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+      overflow: auto;
+    }
+    .content {
+      padding: 14px 18px 28px;
+      overflow: auto;
+    }
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: end;
+      margin-bottom: 14px;
+    }
+    label {
+      display: grid;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(90px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 20px;
+    }
+    .relation {
+      width: 100%;
+      height: auto;
+      min-height: 36px;
+      padding: 8px;
+      margin-bottom: 6px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .relation.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: #eef5ff;
+    }
+    .badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: var(--muted);
+      background: #fff;
+      font-size: 12px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .triple {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .node, .rel {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: #fbfcfe;
+      min-height: 38px;
+    }
+    .rel {
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .meta, .reason {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .confidence {
+      color: var(--accent);
+      font-weight: 650;
+    }
+    .evidence-box {
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfcfe;
+      padding: 10px;
+      word-break: break-word;
+      line-height: 1.7;
+      max-height: 360px;
+      overflow: auto;
+      font-size: 13px;
+    }
+    .evidence-box h1,
+    .evidence-box h2,
+    .evidence-box h3 {
+      margin: 10px 0 6px;
+      line-height: 1.35;
+    }
+    .evidence-box h1 { font-size: 18px; }
+    .evidence-box h2 { font-size: 16px; }
+    .evidence-box h3 { font-size: 14px; }
+    .evidence-box p {
+      margin: 6px 0;
+    }
+    .evidence-box ul,
+    .evidence-box ol {
+      margin: 6px 0 6px 22px;
+      padding: 0;
+    }
+    .evidence-box blockquote {
+      margin: 8px 0;
+      padding: 2px 10px;
+      border-left: 3px solid var(--line);
+      color: var(--muted);
+      background: #fff;
+    }
+    .evidence-box code {
+      padding: 1px 4px;
+      border-radius: 4px;
+      background: #eef1f5;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+    }
+    .evidence-box pre {
+      margin: 8px 0;
+      padding: 10px;
+      overflow: auto;
+      border-radius: 6px;
+      background: #eef1f5;
+    }
+    .evidence-box pre code {
+      padding: 0;
+      background: transparent;
+    }
+    .evidence-box .math-display {
+      overflow-x: auto;
+      margin: 8px 0;
+      padding: 4px 0;
+    }
+    details {
+      margin-top: 8px;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .edit {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 56px;
+      padding: 8px;
+      resize: vertical;
+      margin-top: 8px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .empty {
+      color: var(--muted);
+      padding: 30px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid var(--line); max-height: 280px; }
+      .filters, .stats, .edit { grid-template-columns: 1fr 1fr; }
+      .triple { grid-template-columns: 1fr; }
+      .rel { white-space: normal; }
+    }

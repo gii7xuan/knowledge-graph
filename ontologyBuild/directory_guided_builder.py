@@ -15,6 +15,7 @@ from document.hierarchy_index import (  # noqa: E402
     normalize_document_id,
     split_markdown_text as split_markdown_with_hierarchy,
 )
+from ontologyBuild.candidate_quality import is_fragment_name  # noqa: E402
 
 
 MARKDOWN_FILE_PATH = os.environ.get(
@@ -133,6 +134,7 @@ def split_path(breadcrumb_path):
 
 def clean_term(value):
     value = re.sub(r"^[第\d一二三四五六七八九十百章节篇部.\s、（）()]+", "", str(value or "")).strip()
+    value = re.sub(r"(?:[·.⋯…]+\s*\d{1,4}|\d{2,4})$", "", value).strip()
     value = re.sub(r"[，。；：、,.!?！？;:]+$", "", value).strip()
     value = re.sub(r"\s+", "", value)
     if len(value) < 2 or len(value) > 24:
@@ -140,6 +142,15 @@ def clean_term(value):
     if value in GENERIC_TITLES:
         return ""
     return value
+
+
+def is_domain_term(value, suffixes):
+    return bool(value and value.endswith(suffixes) and not is_fragment_name(value))
+
+
+def infer_definition(name, text):
+    match = re.search(rf"{re.escape(name)}(?:是|指|定义为)([^。；！？]{{4,120}})", text or "")
+    return match.group(0).strip() if match else None
 
 
 def infer_module_name(breadcrumb_path):
@@ -225,7 +236,7 @@ def candidate_base(chunk, module_index, text):
 
 def add_class(result, seen, name, chunk, module_index, reason, confidence=0.72, parent=None, evidence_text=None):
     name = clean_term(name)
-    if not name:
+    if not name or is_fragment_name(name):
         return
     key = name
     if key in seen:
@@ -235,7 +246,7 @@ def add_class(result, seen, name, chunk, module_index, reason, confidence=0.72, 
         "name": name,
         "normalized_name": name,
         "parent_candidate": clean_term(parent) or None,
-        "definition_candidate": None,
+        "definition_candidate": infer_definition(name, evidence_text),
         "status": "new_candidate",
         "matched_existing_class": None,
         "confidence": confidence,
@@ -247,7 +258,7 @@ def add_class(result, seen, name, chunk, module_index, reason, confidence=0.72, 
 
 def add_datatype_property(result, seen, name, domain, chunk, module_index, evidence_text):
     name = clean_term(name)
-    if not name:
+    if not is_domain_term(name, QUANTITY_SUFFIXES):
         return
     key = (name, clean_term(domain))
     if key in seen:
@@ -256,7 +267,7 @@ def add_datatype_property(result, seen, name, domain, chunk, module_index, evide
     item = {
         "name": name,
         "normalized_name": name,
-        "definition_candidate": None,
+        "definition_candidate": infer_definition(name, evidence_text),
         "status": "new_candidate",
         "matched_existing_property": None,
         "domain_candidate": clean_term(domain) or None,
@@ -268,26 +279,12 @@ def add_datatype_property(result, seen, name, domain, chunk, module_index, evide
     }
     item.update(candidate_base(chunk, module_index, evidence_text))
     result["candidate_datatype_properties"].append(item)
-    result["candidate_constraints"].append(
-        {
-            "property_name": name,
-            "property_type": "datatype_property",
-            "domain_candidate": item["domain_candidate"],
-            "range_candidate": None,
-            "range_datatype": "float",
-            "constraint_status": "new_candidate",
-            "matched_existing_constraint": None,
-            "confidence": 0.66,
-            "reason": "由数据属性候选同步生成 domain/range 约束候选。",
-            **candidate_base(chunk, module_index, evidence_text),
-        }
-    )
 
 
 def add_object_property(result, seen, prop, domain, range_value, chunk, module_index, evidence_text):
     domain = clean_term(domain)
     range_value = clean_term(range_value)
-    if not prop or not domain or not range_value:
+    if not prop or not domain or not range_value or is_fragment_name(domain) or is_fragment_name(range_value):
         return
     key = (prop, domain, range_value)
     if key in seen:
@@ -296,7 +293,7 @@ def add_object_property(result, seen, prop, domain, range_value, chunk, module_i
     item = {
         "name": prop,
         "normalized_name": prop,
-        "definition_candidate": None,
+        "definition_candidate": infer_definition(prop, evidence_text),
         "status": "new_candidate",
         "matched_existing_property": None,
         "domain_candidate": domain,
@@ -323,12 +320,12 @@ def add_object_property(result, seen, prop, domain, range_value, chunk, module_i
 
 
 def infer_unit(text):
-    match = re.search(r"(m/s|米/秒|MPa|Pa|kg|g|mm|cm|m|s|℃|K|度)", text or "")
+    match = re.search(r"(?<![A-Za-z])(m/s|米/秒|MPa|Pa|kg|mm|cm|℃|度|g|m|s|K)(?![A-Za-z])", text or "")
     return match.group(1) if match else None
 
 
 def infer_example_value(text):
-    match = re.search(r"[-+]?\d+(?:\.\d+)?\s*(?:m/s|米/秒|MPa|Pa|kg|g|mm|cm|m|s|℃|K|度)?", text or "")
+    match = re.search(r"[-+]?\d+(?:\.\d+)?\s*(?:m/s|米/秒|MPa|Pa|kg|mm|cm|℃|度|g|m|s|K)(?![A-Za-z])", text or "")
     return match.group(0).strip() if match else None
 
 
@@ -345,24 +342,32 @@ def title_candidates(chunk):
         title = clean_term(part)
         if not title:
             continue
-        if any(title.endswith(suffix) or suffix in title for suffix in CLASS_SUFFIXES):
+        if is_domain_term(title, CLASS_SUFFIXES):
             yield title, "目录标题中出现稳定领域概念，但目录父子关系不会直接作为本体继承关系。"
 
 
 def phrase_candidates(text):
-    for match in re.finditer(r"[\u4e00-\u9fa5A-Za-z0-9（）()]{2,18}", text or ""):
-        term = clean_term(match.group(0))
-        if not term:
-            continue
-        if any(term.endswith(suffix) or suffix in term for suffix in CLASS_SUFFIXES):
+    for segment in re.split(r"[，。；：、,;:\n]|包括|包含|论述了|论述|介绍了|介绍|以及|和|是|指|定义为", text or ""):
+        term = clean_term(segment)
+        if is_domain_term(term, CLASS_SUFFIXES):
             yield term
 
 
 def quantity_candidates(text):
-    for match in re.finditer(r"[\u4e00-\u9fa5A-Za-z0-9（）()]{2,18}", text or ""):
-        term = clean_term(match.group(0))
-        if term and any(term.endswith(suffix) or suffix in term for suffix in QUANTITY_SUFFIXES):
-            yield term
+    for segment in re.split(r"[，。；：、,;:\n]|包括|包含|以及|和|是|为|达到|等于", text or ""):
+        term = clean_term(segment)
+        if not term:
+            continue
+        domain = None
+        if "的" in term:
+            possible_domain, quantity = term.rsplit("的", 1)
+            if is_domain_term(quantity, QUANTITY_SUFFIXES):
+                term = quantity
+                domain = clean_term(possible_domain)
+                if not is_domain_term(domain, CLASS_SUFFIXES):
+                    domain = None
+        if is_domain_term(term, QUANTITY_SUFFIXES):
+            yield term, domain
 
 
 def nearest_domain(chunk):
@@ -378,7 +383,6 @@ def generate_candidates(chunks, module_index):
     seen_object = set()
 
     for chunk in chunks:
-        domain = nearest_domain(chunk)
         for title, reason in title_candidates(chunk):
             add_class(result, seen_classes, title, chunk, module_index, reason, confidence=0.74, parent=None, evidence_text=title)
 
@@ -392,11 +396,11 @@ def generate_candidates(chunks, module_index):
                     module_index,
                     "正文中出现稳定领域概念。",
                     confidence=0.7,
-                    parent=domain if domain and domain != phrase else None,
+                    parent=None,
                     evidence_text=sentence,
                 )
 
-            for quantity in quantity_candidates(sentence):
+            for quantity, domain in quantity_candidates(sentence):
                 add_datatype_property(result, seen_datatype, quantity, domain, chunk, module_index, sentence)
 
             for prop, pattern in RELATION_PATTERNS:

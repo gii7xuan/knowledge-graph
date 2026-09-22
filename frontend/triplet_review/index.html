@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>三元组人工审核</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/mathjax-config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" onerror="window.mathJaxLoadFailed = true; window.resolveMathJaxReady();"></script>
+</head>
+<body>
+  <header>
+    <h1>三元组人工审核</h1>
+    <select id="fileSelect"></select>
+    <button class="primary" onclick="loadAll()">刷新</button>
+  </header>
+  <main>
+    <aside>
+      <div class="filters">
+        <label>最低置信度<input id="minConfidence" type="number" step="0.01" min="0" max="1" placeholder="如 0.4"></label>
+        <label>最高置信度<input id="maxConfidence" type="number" step="0.01" min="0" max="1" placeholder="如 0.6"></label>
+        <label>状态<select id="includeDone"><option value="0">待处理</option><option value="1">全部</option></select></label>
+        <button class="primary" onclick="loadAll()">筛选</button>
+      </div>
+      <div id="relations"></div>
+    </aside>
+    <section class="content">
+      <div id="stats" class="stats"></div>
+      <div id="cards"></div>
+    </section>
+  </main>
+<script src="/static/app.js"></script>
+</body>
+</html>
