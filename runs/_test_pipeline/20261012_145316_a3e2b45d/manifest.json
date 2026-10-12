@@ -1,0 +1,71 @@
+{
+  "run_id": "20261012_145316_a3e2b45d",
+  "status": "succeeded",
+  "started_at": "2026-10-12T06:53:16+00:00",
+  "finished_at": "2026-10-12T06:53:16+00:00",
+  "markdown_path": "D:\\knowledge-huopao\\tests\\fixtures\\ontology_sample.md",
+  "config": {
+    "extraction_engine": "mock",
+    "review_mode": "manual",
+    "auto_accept_new": false,
+    "corpus_role": "build",
+    "timeout_seconds": 90,
+    "max_retries": 2,
+    "context_max_chars": 16000,
+    "base_policy": "draft",
+    "enable_shacl": false,
+    "enable_owl": false,
+    "model": "mock-model",
+    "api_key_configured": true,
+    "base_url_configured": true,
+    "max_chunks": 5
+  },
+  "outputs": {
+    "run_dir": "D:\\knowledge-huopao\\runs\\_test_pipeline\\20261012_145316_a3e2b45d",
+    "raw_candidates": "D:\\knowledge-huopao\\runs\\_test_pipeline\\20261012_145316_a3e2b45d\\raw_candidates.json",
+    "validated_candidates": "D:\\knowledge-huopao\\runs\\_test_pipeline\\20261012_145316_a3e2b45d\\validated_candidates.json",
+    "review_result": "D:\\knowledge-huopao\\runs\\_test_pipeline\\20261012_145316_a3e2b45d\\review_result.json"
+  },
+  "stage_status": {
+    "base_audit": "failed",
+    "document_preprocess": "passed",
+    "context_build": "passed",
+    "candidate_extraction": "succeeded",
+    "candidate_validation": "passed",
+    "normalization": "passed",
+    "review_queue": "passed"
+  },
+  "errors": [],
+  "input_snapshot": {
+    "markdown": {
+      "path": "D:\\knowledge-huopao\\tests\\fixtures\\ontology_sample.md",
+      "sha256": "a4e31ae9934f4bdbdf2d362d527f20d701dcbcb9d36f2794729bc5f7b8a54969"
+    },
+    "ontology": {
+      "path": "D:\\knowledge-huopao\\ontology\\ontology.json",
+      "sha256": "fe94b15a6f36719cb4b55e223559f3189e6529cd99fd1bca4029d0b2c43de9d8"
+    }
+  },
+  "context_summary": {
+    "ontology_version": "sha256:fe94b15a6f36719cb4b55e223559f3189e6529cd99fd1bca4029d0b2c43de9d8",
+    "class_count": 49,
+    "object_property_count": 32,
+    "datatype_property_count": 211,
+    "constraint_count": 243,
+    "max_chars": 16000
+  },
+  "extraction_stats": {
+    "total_chunks": 1,
+    "successful_chunks": 1,
+    "failed_chunks": 0,
+    "legal_empty_chunks": 0
+  },
+  "candidate_counts": {
+    "candidate_classes": 1,
+    "candidate_object_properties": 0,
+    "candidate_datatype_properties": 0,
+    "candidate_constraints": 0,
+    "ontology_mapping": 0,
+    "uncertain_candidates": 0
+  }
+}

@@ -111,7 +111,7 @@ label { display: grid; gap: 5px; min-width: 0; color: #63727a; font-size: 12px; 
 .pagination { display: flex; align-items: center; justify-content: flex-end; gap: 7px; padding-top: 16px; color: #697780; font-size: 12px; }
 
 .run-panel { padding: 14px 20px; border-bottom: 1px solid #dce2e4; background: #eef4f4; flex-shrink: 0; max-height: 42vh; overflow: auto; }
-.run-fields { display: grid; grid-template-columns: minmax(240px, 2fr) minmax(150px, 1fr) auto; gap: 10px; align-items: end; }
+.run-fields { display: grid; grid-template-columns: minmax(240px, 1.6fr) minmax(150px, .8fr) minmax(260px, 1.4fr) auto; gap: 10px; align-items: end; }
 .run-button { height: 34px; }
 .run-status { display: flex; align-items: center; gap: 7px; margin-top: 10px; color: #56666e; font-size: 12px; flex-wrap: wrap; }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #9aa8ad; flex-shrink: 0; }
@@ -121,6 +121,12 @@ label { display: grid; gap: 5px; min-width: 0; color: #63727a; font-size: 12px; 
 .output-paths { display: flex; flex-wrap: wrap; gap: 5px 16px; margin: 9px 0; font-size: 11px; color: #627078; }
 .output-paths code { color: #2d4147; overflow-wrap: anywhere; }
 .run-log { max-height: 170px; overflow: auto; padding: 10px; background: #263239; color: #e2eef0; font: 11px/1.5 Consolas, monospace; white-space: pre-wrap; word-break: break-word; }
+.model-selector { min-width: 0; display: grid; gap: 7px; }
+.model-selector > button { width: 100%; }
+.model-meta { display: flex; gap: 8px; flex-wrap: wrap; color: #697780; font-size: 11px; overflow-wrap: anywhere; }
+.model-form { display: grid; gap: 8px; padding: 10px; border: 1px solid #dce2e4; border-radius: 6px; background: #fff; }
+.model-actions { display: flex; gap: 7px; flex-wrap: wrap; }
+.model-actions button { flex: 1; }
 
 @media (max-width: 900px) {
   .app-shell { height: auto; min-height: 100vh; }
@@ -142,7 +148,7 @@ label { display: grid; gap: 5px; min-width: 0; color: #63727a; font-size: 12px; 
   .stats-row > div:nth-child(n+4) { border-top: 1px solid #e6ebed; }
   .run-panel { max-height: none; padding: 12px; }
   .run-fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .run-fields label:first-child { grid-column: 1 / -1; }
+  .run-fields label:first-child, .run-fields .model-selector { grid-column: 1 / -1; }
 }
 
 @media (max-width: 620px) {

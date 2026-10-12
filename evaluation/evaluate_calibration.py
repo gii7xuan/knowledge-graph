@@ -17,7 +17,7 @@ def load_rows(path):
 def probability(item):
     value = item.get("calibrated_probability")
     if value is None:
-        value = item.get("raw_score", 0.0)
+        return None
     try:
         return max(0.0, min(1.0, float(value)))
     except (TypeError, ValueError):
@@ -34,7 +34,9 @@ def ece(rows, bins=10):
         high = (index + 1) / bins
         bucket = [
             item for item in rows
-            if low <= probability(item) < high or (index == bins - 1 and probability(item) == 1.0)
+            if probability(item) is not None and (
+                low <= probability(item) < high or (index == bins - 1 and probability(item) == 1.0)
+            )
         ]
         if not bucket:
             continue
@@ -45,13 +47,15 @@ def ece(rows, bins=10):
 
 
 def brier(rows):
+    rows = [item for item in rows if probability(item) is not None]
     if not rows:
-        return 0.0
+        return None
     return sum((probability(item) - int(item.get("label", 0))) ** 2 for item in rows) / len(rows)
 
 
 def coverage_at_precision(rows, target_precision):
     best = 0.0
+    rows = [item for item in rows if probability(item) is not None]
     for threshold in sorted({probability(item) for item in rows}):
         selected = [item for item in rows if probability(item) >= threshold]
         if not selected:
@@ -81,17 +85,19 @@ def main():
     args = parser.parse_args()
 
     rows = load_rows(args.dataset)
+    probability_rows = [item for item in rows if probability(item) is not None]
     positives = sum(int(item.get("label", 0)) for item in rows)
     metrics = {
         "total": len(rows),
         "precision_at_0_5": (
-            sum(int(item.get("label", 0)) for item in rows if probability(item) >= 0.5)
-            / max(1, sum(1 for item in rows if probability(item) >= 0.5))
+            sum(int(item.get("label", 0)) for item in probability_rows if probability(item) >= 0.5)
+            / max(1, sum(1 for item in probability_rows if probability(item) >= 0.5))
         ),
         "positive_rate": positives / len(rows) if rows else 0.0,
-        "ece": ece(rows),
-        "brier": brier(rows),
-        "coverage_at_target_precision": coverage_at_precision(rows, args.target_precision),
+        "probability_sample_count": len(probability_rows),
+        "ece": ece(probability_rows),
+        "brier": brier(probability_rows),
+        "coverage_at_target_precision": coverage_at_precision(probability_rows, args.target_precision),
         "duplicate_rate": duplicate_rate(rows),
     }
     print(json.dumps(metrics, ensure_ascii=False, indent=2))

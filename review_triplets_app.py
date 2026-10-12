@@ -2,10 +2,24 @@ import copy
 import json
 import os
 import re
+import hashlib
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+from uuid import uuid4
+
+from review_agent.contracts import candidate_id_for, fact_key_for
+from review_agent.feedback import FeedbackService
+from review_agent.ontology_guard import OntologyGuard, load_snapshot
+from review_agent.repository import (
+    ConflictError,
+    NotFoundError,
+    ReviewRepository,
+    UnprocessableEntityError,
+    ValidationError,
+)
+from review_agent.service import ServiceUnavailableError, get_default_service
 
 
 ROOT = Path(__file__).resolve().parent
@@ -14,6 +28,7 @@ TRIPLETS_DIR = ROOT / "triplets"
 REVIEW_LOG_DIR = ROOT / "review_logs"
 EVIDENCE_DIR = ROOT / "evidence"
 RUNS_V2_ACCEPTED_DIR = ROOT / "runs" / "v2" / "accepted"
+V3_DATABASE_PATH = ROOT / "runs" / "v3" / "review.sqlite3"
 EVIDENCE_CACHE = {}
 
 
@@ -127,14 +142,70 @@ def load_review_items(review_file):
     data = read_json(path, [])
     if not isinstance(data, list):
         raise ValueError("待审文件必须是 JSON 数组")
-    changed = False
     for index, item in enumerate(data):
         if isinstance(item, dict) and not item.get("review_id"):
             item["review_id"] = item_id(item, index)
-            changed = True
-    if changed:
-        write_json(path, data)
     return data
+
+
+def _file_hash(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def ensure_v3_candidate(review_file, item):
+    """Migrate one legacy UI item on demand without treating old status as a v3 decision."""
+    source_path = REJECTED_DIR / review_file
+    source_hash = _file_hash(source_path)
+    identity_hash = hashlib.sha256(review_file.encode("utf-8")).hexdigest()
+    run_id = f"legacy_ui_{identity_hash[:16]}"
+    document_hash = _file_hash(evidence_path(review_file)) if evidence_path(review_file).exists() else source_hash
+    repository = ReviewRepository(V3_DATABASE_PATH)
+    repository.initialize()
+    try:
+        repository.get_run(run_id)
+    except NotFoundError:
+        ontology_path = ROOT / "ontology" / "ontology.json"
+        ontology_hash = load_snapshot(ontology_path).ontology_version if ontology_path.exists() else "legacy_unknown"
+        repository.create_run({
+            "run_id": run_id, "schema_version": "triple_review_v3", "mode": "legacy",
+            "source_hash": document_hash, "ontology_hash": ontology_hash,
+            "source_path": str(source_path.relative_to(ROOT)).replace("\\", "/"),
+        })
+    review_id = str(item.get("review_id") or "")
+    candidate_id = "cand_legacy_" + hashlib.sha256(
+        f"{run_id}\n{review_id}".encode("utf-8")
+    ).hexdigest()[:20]
+    try:
+        return repository, repository.get_candidate(candidate_id)
+    except NotFoundError:
+        ontology_path = ROOT / "ontology" / "ontology.json"
+        ontology_hash = load_snapshot(ontology_path).ontology_version if ontology_path.exists() else "legacy_unknown"
+        quote = item.get("evidence_quote") or item.get("evidence") or evidence_chunk_for(
+            review_file, item.get("source_id", "")
+        )
+        triple = {
+            "head": item.get("head"),
+            "surface_relation": item.get("surface_relation") or item.get("relation"),
+            "relation_id": item.get("relation_id") or item.get("corrected_relation") or item.get("relation"),
+            "relation_label": item.get("corrected_relation") or item.get("relation"),
+            "tail": item.get("tail"), "tail_kind": item.get("tail_kind", "entity"),
+            "qualifiers": item.get("qualifiers") or {"polarity": item.get("polarity", "positive")},
+            "head_type": item.get("head_type"), "tail_type": item.get("tail_type"),
+        }
+        candidate = {
+            "schema_version": "triple_review_v3", "run_id": run_id,
+            "candidate_id": candidate_id, "revision": 1,
+            "document_id": str(item.get("document_id") or Path(review_file).stem),
+            "document_version": document_hash, "source_chunk_id": item.get("source_id"),
+            "section_id": item.get("section_id"), "ontology_version": ontology_hash,
+            "domain": item.get("domain") or "firearm_artillery",
+            "fact_namespace": item.get("fact_namespace") or item.get("domain") or "firearm_artillery",
+            "triple": triple, "extraction_quote": quote,
+            "extraction_model": item.get("extraction_model", "legacy_unknown"),
+            "extraction_prompt_version": item.get("extraction_prompt_version", "legacy_unknown"),
+        }
+        candidate["fact_key"] = fact_key_for(candidate)
+        return repository, repository.add_candidate(candidate)
 
 
 def normalize_triplet(item):
@@ -301,6 +372,10 @@ class ReviewHandler(BaseHTTPRequestHandler):
     def send_html(self):
         self.send_file(FRONTEND_DIR / "index.html")
 
+    def read_payload(self):
+        length = int(self.headers.get("Content-Length", "0"))
+        return json.loads(self.rfile.read(length).decode("utf-8"))
+
     def do_GET(self):
         parsed = urlparse(self.path)
         query = parse_qs(parsed.query)
@@ -315,6 +390,38 @@ class ReviewHandler(BaseHTTPRequestHandler):
                     self.send_file(frontend_path)
             elif parsed.path == "/api/files":
                 self.send_json(list_review_files())
+            elif parsed.path == "/api/runs":
+                self.send_json(get_default_service().runs(
+                    int(query.get("page", ["1"])[0]), int(query.get("page_size", ["20"])[0])
+                ))
+            elif parsed.path == "/api/config-status":
+                self.send_json(get_default_service().config_status())
+            elif parsed.path == "/api/summary" and query.get("run_id", [""])[0]:
+                self.send_json(get_default_service().summary(query["run_id"][0]))
+            elif parsed.path == "/api/items" and query.get("run_id", [""])[0]:
+                self.send_json(get_default_service().items(
+                    query["run_id"][0], status=query.get("status", [None])[0],
+                    relation_id=query.get("relation_id", [None])[0],
+                    page=int(query.get("page", ["1"])[0]),
+                    page_size=int(query.get("page_size", ["20"])[0]),
+                ))
+            elif re.fullmatch(r"/api/audit-jobs/[^/]+", parsed.path):
+                self.send_json(get_default_service().job(parsed.path.rsplit("/", 1)[-1]))
+            elif re.fullmatch(r"/api/candidates/[^/]+/audit", parsed.path):
+                candidate_id = parsed.path.split("/")[-2]
+                self.send_json(get_default_service().audit(candidate_id, query.get("audit_id", [None])[0]))
+            elif re.fullmatch(r"/api/candidates/[^/]+", parsed.path):
+                candidate_id = parsed.path.rsplit("/", 1)[-1]
+                revision = query.get("revision", [None])[0]
+                self.send_json(get_default_service().candidate(
+                    candidate_id, int(revision) if revision is not None else None
+                ))
+            elif re.fullmatch(r"/api/evidence/[^/]+/context", parsed.path):
+                evidence_id = parsed.path.split("/")[-2]
+                self.send_json(get_default_service().evidence_context(
+                    evidence_id, before=int(query.get("before", ["1"])[0]),
+                    after=int(query.get("after", ["1"])[0]),
+                ))
             elif parsed.path == "/api/summary":
                 review_file = query.get("file", [""])[0]
                 self.ensure_safe_file(review_file)
@@ -328,20 +435,49 @@ class ReviewHandler(BaseHTTPRequestHandler):
                 self.handle_items(query)
             else:
                 self.send_json({"error": "not found"}, 404)
-        except Exception as exc:
+        except NotFoundError as exc:
+            self.send_json({"error": str(exc)}, 404)
+        except ConflictError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
+        except ServiceUnavailableError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)
+        except (ValueError, ValidationError, FileNotFoundError) as exc:
             self.send_json({"error": str(exc)}, 400)
+        except Exception as exc:
+            self.send_json({"error": str(exc)}, 500)
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path != "/api/decision":
-            self.send_json({"error": "not found"}, 404)
-            return
         try:
-            length = int(self.headers.get("Content-Length", "0"))
-            payload = json.loads(self.rfile.read(length).decode("utf-8"))
-            self.handle_decision(payload)
-        except Exception as exc:
+            if parsed.path == "/api/audit-jobs":
+                self.send_json(get_default_service().create_audit_job(self.read_payload()), 202)
+            elif re.fullmatch(r"/api/audit-jobs/[^/]+/cancel", parsed.path):
+                self.send_json(get_default_service().cancel_job(parsed.path.split("/")[-2]))
+            elif re.fullmatch(r"/api/candidates/[^/]+/reaudit", parsed.path):
+                payload = self.read_payload()
+                self.send_json(get_default_service().create_reaudit_job(
+                    parsed.path.split("/")[-2], payload
+                ), 202)
+            elif parsed.path == "/api/decision":
+                payload = self.read_payload()
+                if payload.get("file"):
+                    self.handle_decision(payload)
+                else:
+                    self.send_json(get_default_service().decide(payload))
+            else:
+                self.send_json({"error": "not found"}, 404)
+        except NotFoundError as exc:
+            self.send_json({"error": str(exc)}, 404)
+        except ConflictError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
+        except ServiceUnavailableError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)
+        except UnprocessableEntityError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["INVALID_FEEDBACK"]}, 422)
+        except (ValueError, ValidationError, FileNotFoundError, json.JSONDecodeError) as exc:
             self.send_json({"error": str(exc)}, 400)
+        except Exception as exc:
+            self.send_json({"error": str(exc)}, 500)
 
     def handle_items(self, query):
         review_file = query.get("file", [""])[0]
@@ -386,55 +522,49 @@ class ReviewHandler(BaseHTTPRequestHandler):
             raise ValueError("未找到对应待审三元组")
 
         original = copy.deepcopy(target)
-        annotation = payload.get("annotation") or {}
-        if not isinstance(annotation, dict):
-            annotation = {}
-        annotation.setdefault("triple_correct", 1 if decision == "accept" else 0)
-        annotation.setdefault("evidence_support", "full" if decision in {"accept", "modify"} else "none")
-        annotation.setdefault("relation_mapping_correct", 1 if decision == "accept" else 0)
-        if decision == "modify":
-            annotation["triple_correct"] = 0
-            annotation["relation_mapping_correct"] = 0
-            annotation["corrected_triple"] = payload.get("modifications") or annotation.get("corrected_triple")
-        else:
-            annotation.setdefault("corrected_triple", None)
+        repository, candidate = ensure_v3_candidate(review_file, target)
+        annotation = payload.get("annotation") if isinstance(payload.get("annotation"), dict) else {}
+        labels = {
+            "valid_for_kg": annotation.get("valid_for_kg", annotation.get("triple_correct")),
+            "source_support": annotation.get("source_support", annotation.get("evidence_support")),
+            "relation_mapping_correct": annotation.get("relation_mapping_correct"),
+            "schema_compatible": annotation.get("schema_compatible"),
+        }
+        modifications = payload.get("modifications") or None
+        if decision == "modify" and modifications:
+            modifications = {"triple": {
+                "head": str(modifications.get("head", target.get("head", ""))).strip(),
+                "surface_relation": str(modifications.get("relation", target.get("relation", ""))).strip(),
+                "relation_id": modifications.get("relation_id"),
+                "relation_label": str(modifications.get("relation", target.get("relation", ""))).strip(),
+                "tail": str(modifications.get("tail", target.get("tail", ""))).strip(),
+            }}
+        request = {
+            "run_id": candidate["run_id"], "candidate_id": candidate["candidate_id"],
+            "revision": candidate["revision"], "expected_row_version": candidate["row_version"],
+            "idempotency_key": payload.get("idempotency_key") or f"legacy-ui-{uuid4().hex}",
+            "action": decision, "reason_code": payload.get("reason_code"),
+            "labels": labels, "comment": payload.get("comment"),
+            "evidence_ids": payload.get("evidence_ids") or [], "modifications": modifications,
+            "reviewer": "local_operator",
+            "active_review_seconds": payload.get("active_review_seconds"),
+        }
+        ontology_path = ROOT / "ontology" / "ontology.json"
+        guard = OntologyGuard(load_snapshot(ontology_path, candidate.get("ontology_version"))) if ontology_path.exists() else None
+        result = FeedbackService(repository, ontology_guard=guard).submit(request)
 
-        if decision == "modify":
-            modifications = payload.get("modifications") or {}
-            for key in ["head", "relation", "tail"]:
-                if key in modifications:
-                    target[key] = str(modifications[key]).strip()
-            target.pop("corrected_relation", None)
-
-        target["review_annotation"] = annotation
-
-        accepted_written = False
-        if decision in {"accept", "modify"}:
-            target["decision"] = "human_accept"
-            accepted_written = append_unique_triplet(review_file, target)
-            target["review_status"] = "accepted"
-        elif decision == "reject":
-            target["decision"] = "human_reject"
-            target["review_status"] = "rejected"
-        else:
-            target["review_status"] = "deferred"
-
+        # Keep the legacy file as a rebuildable view; it no longer grants import eligibility.
+        target["v3_candidate_id"] = candidate["candidate_id"]
+        target["v3_event_id"] = result["event"]["event_id"]
+        target["review_status"] = result["candidate"]["human_status"]
         target["review_decision"] = decision
         target["review_comment"] = payload.get("comment")
         target["review_time"] = now_iso()
+        target["review_annotation"] = result["event"]["labels"]
+        if decision == "modify":
+            target["proposed_revision"] = result["candidate"]["revision"]
         write_json(path, data)
-
-        append_review_log(review_file, {
-            "review_id": review_id,
-            "decision": decision,
-            "accepted_written": accepted_written,
-            "comment": payload.get("comment"),
-            "annotation": annotation,
-            "time": target["review_time"],
-            "original": original,
-            "current": copy.deepcopy(target),
-        })
-        self.send_json({"ok": True, "accepted_written": accepted_written})
+        self.send_json({"ok": True, "accepted_written": False, **result})
 
     def ensure_safe_file(self, review_file):
         if not review_file or Path(review_file).name != review_file or review_file not in list_review_files():

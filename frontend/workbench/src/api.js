@@ -7,7 +7,13 @@ export async function api(path, options = {}) {
     }
   });
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error || `请求失败 (${response.status})`);
+  if (!response.ok) {
+    const error = new Error(data.error || `请求失败 (${response.status})`);
+    error.status = response.status;
+    error.data = data;
+    error.reasonCodes = data.reason_codes || [];
+    throw error;
+  }
   return data;
 }
 

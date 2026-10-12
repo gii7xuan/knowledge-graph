@@ -1,358 +1,379 @@
-import json
-import re
-import os
+"""Transactional Neo4j projection of current, authoritative v3 decisions."""
+
+from __future__ import annotations
+
+import argparse
 import hashlib
-from glob import glob
-from tqdm import tqdm
-from neo4j import GraphDatabase
+import json
+import os
+import re
+from pathlib import Path
+from typing import Any, Dict, Iterable, Mapping, Optional
 
-# ================= 配置区域 =================
-# 1. Neo4j 配置
-NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
-NEO4J_USER = os.environ.get("NEO4J_USER", "neo4j")
-NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD", "")
+from ontologyBuild.ontology_adapter import iter_object_properties
+from review_agent.contracts import fact_key_for
+from review_agent.ontology_guard import load_snapshot
+from review_agent.repository import NotFoundError, ReviewRepository
 
-# 2. 数据源目录
-INPUT_DIR = os.environ.get("KG_IMPORT_DIR", "runs/v2/accepted")  # 导入该目录下所有 JSON 文件
 
-# ===========================================
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def relation_type_map(ontology_path: Any) -> Dict[str, str]:
+    ontology = json.loads(Path(ontology_path).read_text(encoding="utf-8"))
+    result = {}
+    for item in iter_object_properties(ontology):
+        relation_id = str(item.get("id") or "").strip()
+        if not relation_id:
+            continue
+        safe = re.sub(r"[^A-Za-z0-9_]", "_", relation_id).strip("_")
+        if not safe or not re.match(r"^[A-Za-z_]", safe):
+            safe = "R_" + safe
+        result[relation_id] = safe
+    return result
+
 
 class Neo4jImporter:
-    def __init__(self, uri, user, password):
+    def __init__(
+        self, uri: str, user: str, password: str, *,
+        relation_types: Optional[Mapping[str, str]] = None, create_constraints: bool = True,
+    ):
+        from neo4j import GraphDatabase
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
-        self._create_constraints()
+        self.relation_types = dict(relation_types or {})
+        if create_constraints:
+            self._create_constraints()
 
-    def _create_constraints(self):
-        """
-        创建唯一约束，防止节点重复
-        在各个实体类别上创建唯一约束（如 C_Gun, C_Ammunition 等）
-        """
+    def _create_constraints(self) -> None:
+        statements = [
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE e.entity_key IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (f:Fact) REQUIRE f.fact_key IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (e:Evidence) REQUIRE e.evidence_key IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (c:Chunk) REQUIRE c.chunk_key IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (s:Section) REQUIRE s.section_key IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (d:Document) REQUIRE d.document_key IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (r:ReviewDecision) REQUIRE r.decision_id IS UNIQUE",
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (c:CandidateContribution) REQUIRE c.contribution_key IS UNIQUE",
+        ]
         with self.driver.session() as session:
-            try:
-                session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE e.entity_key IS UNIQUE")
-                session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (f:Fact) REQUIRE f.fact_key IS UNIQUE")
-                session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (e:Evidence) REQUIRE e.evidence_key IS UNIQUE")
-                session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (c:Chunk) REQUIRE c.chunk_id IS UNIQUE")
-                session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (s:Section) REQUIRE s.section_id IS UNIQUE")
-                session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (d:Document) REQUIRE d.document_id IS UNIQUE")
-                print("唯一约束已创建（或已存在）")
-            except Exception as e:
-                print(f"创建唯一约束时出错: {e}")
+            for statement in statements:
+                session.run(statement)
 
-    def close(self):
+    def close(self) -> None:
         self.driver.close()
 
-    def clean_relation_type(self, relation):
-        """
-        清洗关系名称，使其符合 Neo4j 的 Type 命名规范
-        1. 替换非字母数字下划线的字符
-        2. 如果清洗后为空，给默认值
-        """
-        # 替换括号、空格、标点为下划线
-        clean_rel = re.sub(r'[^\w\u4e00-\u9fa5]+', '_', relation)
-        clean_rel = clean_rel.strip('_')
-
-        if not clean_rel:
-            return "RELATED_TO"
-        return clean_rel
-
-    def make_fact_key(self, head, relation, tail):
-        """同一事实只由 head/relation/tail 决定，不包含来源片段。"""
-        raw = f"{self.normalize_entity_name(head)}\t{relation}\t{self.normalize_entity_name(tail)}"
-        return hashlib.sha1(raw.encode("utf-8")).hexdigest()
-
-    def make_evidence_key(self, fact_key, source_id, evidence, start=None, end=None):
-        """同一事实下的同一来源证据只保存一次。"""
-        raw = f"{fact_key}\t{source_id}\t{start}\t{end}\t{evidence}"
-        return hashlib.sha1(raw.encode("utf-8")).hexdigest()
-
-    def normalize_entity_name(self, name):
+    @staticmethod
+    def normalize_entity_name(name: Any) -> str:
         return "".join(str(name or "").split()).casefold()
 
-    def make_entity_key(self, name, domain="firearm_artillery"):
-        raw = f"{self.normalize_entity_name(name)}\t{domain}"
-        return hashlib.sha1(raw.encode("utf-8")).hexdigest()
+    @classmethod
+    def make_entity_key(cls, name: Any, domain: str = "default") -> str:
+        return hashlib.sha256(f"{domain}\n{cls.normalize_entity_name(name)}".encode("utf-8")).hexdigest()
 
-    def is_importable(self, item):
-        if item.get("decision") in {"auto_accept", "human_accept"}:
-            return True
-        if item.get("review_status") == "accepted":
-            return True
-        if item.get("review_decision") in {"accept", "modify"}:
-            return True
+    @staticmethod
+    def make_evidence_key(fact_key: str, item: Mapping[str, Any]) -> str:
+        raw = "\n".join(str(item.get(key) or "") for key in (
+            "document_id", "document_version", "chunk_id", "sentence_id", "start", "end", "quote", "text"
+        ))
+        return hashlib.sha256(f"{fact_key}\n{raw}".encode("utf-8")).hexdigest()
+
+    def is_importable(self, item: Mapping[str, Any]) -> bool:
+        """Reject legacy flags; only a matching active v3 decision grants admission."""
+        decision = item.get("latest_decision")
+        if not isinstance(decision, Mapping):
+            return False
+        if decision.get("active") is False:
+            return False
+        if int(decision.get("revision") or -1) != int(item.get("revision") or -2):
+            return False
+        final = decision.get("decision") or decision.get("final_decision")
+        if final == "human_accept":
+            return bool(decision.get("source") == "human_confirmed" and decision.get("review_event_id"))
+        if final == "auto_accept":
+            consensus = decision.get("consensus") or {}
+            return bool(
+                decision.get("audit_id")
+                and consensus.get("result") == "accept_consensus"
+                and decision.get("calibrated_probability") is not None
+                and decision.get("calibration_status") == "ok"
+                and decision.get("policy_version")
+                and not str(decision.get("policy_version")).startswith("disabled")
+            )
         return False
 
-    def safe_float(self, value):
-        try:
-            return float(value)
-        except (TypeError, ValueError):
-            return None
+    def _relation_type(self, relation_id: str) -> str:
+        if relation_id not in self.relation_types:
+            raise ValueError(f"relation_id is not in frozen ontology whitelist: {relation_id}")
+        return self.relation_types[relation_id]
 
-    def json_text(self, value):
-        if value is None:
-            return None
-        return json.dumps(value, ensure_ascii=False)
+    def _prepare(self, item: Mapping[str, Any]) -> Dict[str, Any]:
+        triple = item.get("triple") if isinstance(item.get("triple"), Mapping) else item
+        head = str(triple.get("head") or "").strip()
+        tail = str(triple.get("tail") or "").strip()
+        relation_id = str(triple.get("relation_id") or "").strip()
+        if not head or not tail or not relation_id:
+            raise ValueError("candidate has empty head, relation_id, or tail")
+        if str(triple.get("tail_kind") or "entity") != "entity":
+            raise ValueError("literal import requires an explicit datatype adapter")
+        decision = dict(item["latest_decision"])
+        fact_key = str(item.get("fact_key") or fact_key_for(item))
+        return {
+            "head": head, "tail": tail, "head_key": self.make_entity_key(head, str(item.get("domain") or "default")),
+            "tail_key": self.make_entity_key(tail, str(item.get("domain") or "default")),
+            "relation_id": relation_id, "relation_type": self._relation_type(relation_id),
+            "relation_label": triple.get("relation_label") or triple.get("surface_relation") or relation_id,
+            "qualifiers_json": json.dumps(triple.get("qualifiers") or {}, ensure_ascii=False, sort_keys=True),
+            "fact_key": fact_key, "candidate_id": item["candidate_id"], "revision": int(item["revision"]),
+            "decision_id": decision["decision_id"], "decision_version": int(decision["decision_version"]),
+            "audit_id": decision.get("audit_id"), "ontology_version": item.get("ontology_version"),
+            "document_version": item.get("document_version"),
+            "contribution_key": f"{item['candidate_id']}:{item['revision']}",
+        }
 
-    def clean_text(self, value):
-        return str(value or "").strip()
+    @staticmethod
+    def _import_transaction(tx: Any, values: Mapping[str, Any], item: Mapping[str, Any]) -> None:
+        relation_type = values["relation_type"]
+        tx.run(f"""
+            MERGE (h:Entity {{entity_key: $head_key}})
+            SET h.name=$head, h.updated_at=datetime()
+            MERGE (t:Entity {{entity_key: $tail_key}})
+            SET t.name=$tail, t.updated_at=datetime()
+            MERGE (f:Fact {{fact_key: $fact_key}})
+            ON CREATE SET f.created_at=datetime()
+            SET f.head=$head, f.tail=$tail, f.relation_id=$relation_id,
+                f.relation_label=$relation_label, f.qualifiers_json=$qualifiers_json,
+                f.active=true, f.applied_decision_version=$decision_version,
+                f.ontology_version=$ontology_version, f.updated_at=datetime()
+            MERGE (h)-[:FACT_SUBJECT]->(f)
+            MERGE (f)-[:FACT_OBJECT]->(t)
+            MERGE (h)-[edge:{relation_type} {{fact_key: $fact_key}}]->(t)
+            SET edge.active=true, edge.qualifiers_json=$qualifiers_json,
+                edge.applied_decision_version=$decision_version, edge.updated_at=datetime()
+            MERGE (c:CandidateContribution {{contribution_key: $contribution_key}})
+            SET c.candidate_id=$candidate_id, c.revision=$revision, c.decision_id=$decision_id,
+                c.active=true, c.updated_at=datetime()
+            MERGE (c)-[:SUPPORTS_FACT]->(f)
+            MERGE (d:ReviewDecision {{decision_id: $decision_id}})
+            SET d.candidate_id=$candidate_id, d.revision=$revision, d.audit_id=$audit_id,
+                d.decision_version=$decision_version, d.updated_at=datetime()
+            MERGE (d)-[:AUTHORIZED]->(c)
+        """, **dict(values))
+        evidence_items = item.get("evidence_items") or item.get("evidence_bundle", {}).get("items", [])
+        for evidence in evidence_items:
+            if not isinstance(evidence, Mapping):
+                continue
+            evidence = dict(evidence)
+            evidence_key = Neo4jImporter.make_evidence_key(values["fact_key"], evidence)
+            stance = evidence.get("semantic_status", "unknown")
+            relationship = {
+                "supported": "SUPPORTED_BY", "contradicted": "CONTRADICTED_BY"
+            }.get(stance, "HAS_CONTEXT")
+            section_id = evidence.get("section_id") or ""
+            tx.run(f"""
+                MATCH (f:Fact {{fact_key: $fact_key}})
+                MERGE (e:Evidence {{evidence_key: $evidence_key}})
+                SET e.document_id=$document_id, e.document_version=$document_version,
+                    e.chunk_id=$chunk_id, e.section_id=$section_id, e.sentence_id=$sentence_id,
+                    e.quote=$quote, e.start=$start, e.end=$end, e.offset_basis=$offset_basis,
+                    e.semantic_status=$semantic_status, e.updated_at=datetime()
+                MERGE (f)-[:{relationship}]->(e)
+                WITH e WHERE $chunk_id <> ''
+                MERGE (c:Chunk {{chunk_key: $chunk_key}})
+                SET c.chunk_id=$chunk_id, c.document_version=$document_version,
+                    c.updated_at=datetime()
+                MERGE (e)-[:FROM_CHUNK]->(c)
+                WITH c WHERE $section_id <> ''
+                MERGE (s:Section {{section_key: $section_key}})
+                SET s.section_id=$section_id, s.document_version=$document_version,
+                    s.updated_at=datetime()
+                MERGE (c)-[:BELONGS_TO]->(s)
+                WITH s WHERE $document_id <> ''
+                MERGE (doc:Document {{document_key: $document_key}})
+                SET doc.document_id=$document_id, doc.document_version=$document_version,
+                    doc.updated_at=datetime()
+                MERGE (doc)-[:HAS_SECTION]->(s)
+            """, fact_key=values["fact_key"], evidence_key=evidence_key,
+                   document_id=evidence.get("document_id") or item.get("document_id", ""),
+                   document_version=evidence.get("document_version") or item.get("document_version", ""),
+                   document_key=hashlib.sha256(
+                       (str(evidence.get("document_id") or item.get("document_id", "")) + "\n" +
+                        str(evidence.get("document_version") or item.get("document_version", ""))).encode("utf-8")
+                   ).hexdigest(),
+                   chunk_id=evidence.get("chunk_id", ""),
+                   chunk_key=hashlib.sha256(
+                       (str(evidence.get("document_version") or item.get("document_version", "")) + "\n" +
+                        str(evidence.get("chunk_id", ""))).encode("utf-8")
+                   ).hexdigest(),
+                   section_id=section_id,
+                   section_key=hashlib.sha256(
+                       (str(evidence.get("document_version") or item.get("document_version", "")) + "\n" +
+                        str(section_id)).encode("utf-8")
+                   ).hexdigest(),
+                   sentence_id=evidence.get("sentence_id"), quote=evidence.get("quote") or evidence.get("text", ""),
+                   start=evidence.get("start"), end=evidence.get("end"),
+                   offset_basis=evidence.get("offset_basis", "chunk"), semantic_status=stance)
 
-    def get_existing_entity_names(self) -> set:
-        """获取数据库中已存在的所有实体名称"""
-        with self.driver.session() as session:
-            result = session.run("MATCH (e:Entity) RETURN e.name AS name")
-            return {record["name"] for record in result}
-
-    def import_triplet(self, session, item):
+    def import_triplet(self, session: Any, item: Mapping[str, Any]) -> bool:
         if not self.is_importable(item):
             return False
-
-        head = self.clean_text(item.get('head'))
-        tail = self.clean_text(item.get('tail'))
-        raw_relation = self.clean_text(item.get('relation'))
-        source_id = self.clean_text(item.get('source_id'))
-        evidence = self.clean_text(item.get('evidence'))
-        confidence = self.safe_float(item.get('confidence'))
-
-        # 获取实体类别信息（用于 Neo4j 导入时的颜色区分）
-        head_type = item.get('head_type', 'Unknown')
-        tail_type = item.get('tail_type', 'Unknown')
-
-        # 基础校验
-        if not head or not tail or not raw_relation:
-            return False
-
-        # 关系名清洗
-        safe_relation = self.clean_relation_type(raw_relation)
-
-        head_key = self.make_entity_key(head)
-        tail_key = self.make_entity_key(tail)
-        fact_key = item.get("fact_key") or self.make_fact_key(head, raw_relation, tail)
-
-        query = f"""
-        MERGE (h:Entity {{entity_key: $head_key}})
-        SET h.name = $head,
-            h.type_id = $head_type,
-            h.updated_at = datetime()
-        MERGE (t:Entity {{entity_key: $tail_key}})
-        SET t.name = $tail,
-            t.type_id = $tail_type,
-            t.updated_at = datetime()
-        MERGE (f:Fact {{fact_key: $fact_key}})
-        ON CREATE SET
-            f.head = $head,
-            f.relation = $raw_relation,
-            f.tail = $tail,
-            f.created_at = datetime()
-        SET
-            f.updated_at = datetime(),
-            f.raw_score = $raw_score,
-            f.calibrated_probability = $calibrated_probability,
-            f.decision = $decision,
-            f.calibrator_version = $calibrator_version,
-            f.policy_version = $policy_version,
-            f.best_confidence = CASE
-                WHEN f.best_confidence IS NULL OR $confidence > f.best_confidence
-                THEN $confidence
-                ELSE f.best_confidence
-            END,
-            f.source_ids = CASE
-                WHEN $source_id = '' OR $source_id IN coalesce(f.source_ids, [])
-                THEN coalesce(f.source_ids, [])
-                ELSE coalesce(f.source_ids, []) + [$source_id]
-            END
-        MERGE (h)-[:FACT_SUBJECT]->(f)
-        MERGE (f)-[:FACT_OBJECT]->(t)
-        MERGE (h)-[r:{safe_relation}]->(t)
-        ON CREATE SET r.created_at = datetime()
-        SET
-            r.fact_key = $fact_key,
-            r.surface_relation = $surface_relation,
-            r.relation = $raw_relation,
-            r.updated_at = datetime(),
-            r.best_confidence = f.best_confidence
-        """
-
-        session.run(
-            query,
-            head_key=head_key,
-            tail_key=tail_key,
-            head=head,
-            tail=tail,
-            head_type=head_type,
-            tail_type=tail_type,
-            raw_relation=raw_relation,
-            surface_relation=item.get("surface_relation", raw_relation),
-            source_id=source_id,
-            evidence=evidence,
-            fact_key=fact_key,
-            confidence=confidence,
-            raw_score=self.safe_float(item.get("raw_score")),
-            calibrated_probability=self.safe_float(item.get("calibrated_probability")),
-            decision=item.get("decision"),
-            calibrator_version=item.get("calibrator_version"),
-            policy_version=item.get("policy_version"),
-            confidence_detail_json=self.json_text(item.get('confidence_detail')),
-            confidence_decision_json=self.json_text(item.get('confidence_decision')),
-        )
-        evidence_items = item.get("evidence_items") or []
-        if not evidence_items and (source_id or evidence):
-            evidence_items = [{"chunk_id": source_id, "text": evidence}]
-        for evidence_item in evidence_items:
-            if not isinstance(evidence_item, dict):
-                continue
-            self.import_evidence(session, fact_key, item, evidence_item)
+        values = self._prepare(item)
+        session.execute_write(self._import_transaction, values, item)
         return True
 
-    def import_evidence(self, session, fact_key, item, evidence_item):
-        text = evidence_item.get("text", "") or item.get("evidence", "")
-        chunk_id = evidence_item.get("chunk_id") or item.get("source_id", "")
-        evidence_key = self.make_evidence_key(
-            fact_key,
-            chunk_id,
-            text,
-            evidence_item.get("start"),
-            evidence_item.get("end"),
-        )
-        document_id = evidence_item.get("document_id") or item.get("document_id", "")
-        breadcrumb_path = evidence_item.get("breadcrumb_path") or item.get("breadcrumb_path", "")
-        section_id = hashlib.sha1(f"{document_id}\n{breadcrumb_path}".encode("utf-8")).hexdigest()[:12] if breadcrumb_path else ""
-        query = """
-        MATCH (f:Fact {fact_key: $fact_key})
-        MERGE (e:Evidence {evidence_key: $evidence_key})
-        ON CREATE SET e.created_at = datetime()
-        SET
-            e.updated_at = datetime(),
-            e.document_id = $document_id,
-            e.chunk_id = $chunk_id,
-            e.sentence_id = $sentence_id,
-            e.breadcrumb_path = $breadcrumb_path,
-            e.text = $text,
-            e.start = $start,
-            e.end = $end,
-            e.level = $level,
-            e.retrieval_score = $retrieval_score,
-            e.entailment_score = $entailment_score,
-            e.contradiction_score = $contradiction_score,
-            e.confidence = $confidence
-        MERGE (f)-[:SUPPORTED_BY]->(e)
-        WITH e
-        WHERE $chunk_id <> ''
-        MERGE (c:Chunk {chunk_id: $chunk_id})
-        SET c.document_id = $document_id,
-            c.breadcrumb_path = $breadcrumb_path
-        MERGE (e)-[:FROM_CHUNK]->(c)
-        WITH c
-        WHERE $section_id <> ''
-        MERGE (s:Section {section_id: $section_id})
-        SET s.document_id = $document_id,
-            s.breadcrumb_path = $breadcrumb_path
-        MERGE (c)-[:BELONGS_TO]->(s)
-        WITH s
-        WHERE $document_id <> ''
-        MERGE (d:Document {document_id: $document_id})
-        MERGE (d)-[:HAS_SECTION]->(s)
-        """
-        session.run(
-            query,
-            fact_key=fact_key,
-            evidence_key=evidence_key,
-            document_id=document_id,
-            chunk_id=chunk_id,
-            sentence_id=evidence_item.get("sentence_id"),
-            breadcrumb_path=breadcrumb_path,
-            text=text,
-            start=evidence_item.get("start"),
-            end=evidence_item.get("end"),
-            level=evidence_item.get("level"),
-            retrieval_score=self.safe_float(evidence_item.get("retrieval_score")),
-            entailment_score=self.safe_float(evidence_item.get("entailment_score")),
-            contradiction_score=self.safe_float(evidence_item.get("contradiction_score")),
-            section_id=section_id,
-            confidence=self.safe_float(item.get("confidence")),
-        )
+    @staticmethod
+    def _retract_transaction(tx: Any, candidate_id: str, revision: int, decision_version: int) -> None:
+        tx.run("""
+            MATCH (c:CandidateContribution {candidate_id: $candidate_id, revision: $revision})-[:SUPPORTS_FACT]->(f:Fact)
+            SET c.active=false, c.retracted_at=datetime(), c.applied_decision_version=$decision_version
+            WITH f
+            OPTIONAL MATCH (other:CandidateContribution {active: true})-[:SUPPORTS_FACT]->(f)
+            WITH f, count(other) AS remaining
+            SET f.active = remaining > 0, f.updated_at=datetime(),
+                f.applied_decision_version=$decision_version
+            WITH f, remaining
+            OPTIONAL MATCH (:Entity)-[edge {fact_key: f.fact_key}]->(:Entity)
+            SET edge.active = remaining > 0, edge.updated_at=datetime()
+        """, candidate_id=candidate_id, revision=revision, decision_version=decision_version)
 
-    def import_data(self, triplets):
-        print("正在连接 Neo4j 并写入数据...")
-
-        # 获取已存在的实体名称
-        existing_names = self.get_existing_entity_names()
-        print(f"数据库中已存在 {len(existing_names)} 个实体")
-
-        # 统计计数
-        success_count = 0
-
-        with self.driver.session() as session:
-            for item in tqdm(triplets, desc="Importing"):
-                try:
-                    if self.import_triplet(session, item):
-                        success_count += 1
-                except Exception as e:
-                    head = self.clean_text(item.get('head'))
-                    tail = self.clean_text(item.get('tail'))
-                    safe_relation = self.clean_relation_type(self.clean_text(item.get('relation')))
-                    print(f"写入失败 [{head} -> {safe_relation} -> {tail}]: {e}")
-
-        print(f"\n导入完成!成功导入或合并 {success_count} 条三元组事实。")
+    def retract(self, session: Any, *, candidate_id: str, revision: int, decision_version: int) -> None:
+        session.execute_write(self._retract_transaction, candidate_id, revision, decision_version)
 
 
-def main():
-    # 检查目录是否存在
-    if not os.path.exists(INPUT_DIR):
-        print(f"错误：目录 {INPUT_DIR} 不存在。")
-        return
+def authoritative_item(repository: ReviewRepository, outbox: Mapping[str, Any]) -> Optional[Dict[str, Any]]:
+    candidate = repository.get_candidate(outbox["candidate_id"])
+    decision = repository.latest_decision(outbox["candidate_id"])
+    if decision is None:
+        return None
+    if decision.get("decision_id") != outbox["decision_id"]:
+        return None
+    if int(decision.get("decision_version", -1)) != int(outbox["decision_version"]):
+        return None
+    evidence_items = [dict(item) for item in candidate.get("evidence_items") or [] if isinstance(item, Mapping)]
+    audit_id = decision.get("audit_id")
+    if audit_id:
+        try:
+            audit = repository.get_audit(outbox["candidate_id"], str(audit_id))
+            rounds = audit.get("rounds") or []
+            if rounds:
+                evidence_items = [
+                    dict(item) for item in (rounds[-1].get("evidence_bundle") or {}).get("items", [])
+                    if isinstance(item, Mapping)
+                ]
+                supporting = {
+                    evidence_id for vote in audit.get("votes") or []
+                    if vote.get("response_status") == "ok"
+                    for evidence_id in vote.get("supporting_evidence_ids") or []
+                }
+                contradicting = {
+                    evidence_id for vote in audit.get("votes") or []
+                    if vote.get("response_status") == "ok"
+                    for evidence_id in vote.get("counter_evidence_ids") or []
+                }
+                for evidence in evidence_items:
+                    evidence_id = evidence.get("evidence_id")
+                    if evidence_id in supporting and evidence_id not in contradicting:
+                        evidence["semantic_status"] = "supported"
+                    elif evidence_id in contradicting and evidence_id not in supporting:
+                        evidence["semantic_status"] = "contradicted"
+                    else:
+                        evidence["semantic_status"] = "unknown"
+        except NotFoundError:
+            # Import eligibility remains decision-based; missing audit evidence is visible as an empty bundle.
+            evidence_items = []
+    selected_human_evidence = set(decision.get("evidence_ids") or [])
+    if decision.get("source") == "human_confirmed" and selected_human_evidence:
+        for evidence in evidence_items:
+            if evidence.get("evidence_id") in selected_human_evidence:
+                evidence["semantic_status"] = "supported"
+    return {
+        **candidate, "evidence_items": evidence_items,
+        "latest_decision": {**decision, "active": True},
+    }
 
-    # 获取目录下所有 JSON 文件
-    json_files = glob(os.path.join(INPUT_DIR, '*.json'))
 
-    if not json_files:
-        print(f"错误：在目录 {INPUT_DIR} 中没有找到 JSON 文件。")
-        return
+def dry_run(repository: ReviewRepository, *, run_id: Optional[str] = None) -> Dict[str, Any]:
+    events = repository.list_outbox(status="pending", run_id=run_id, limit=1_000_000)
+    counts = {"upsert": 0, "retract": 0, "stale": 0}
+    reasons: Dict[str, int] = {}
+    for event in events:
+        if authoritative_item(repository, event) is None:
+            counts["stale"] += 1
+            reasons["STALE_DECISION"] = reasons.get("STALE_DECISION", 0) + 1
+        else:
+            counts[event["operation"]] = counts.get(event["operation"], 0) + 1
+    return {"run_id": run_id, "pending": len(events), "counts": counts, "reasons": reasons}
 
-    print(f"找到 {len(json_files)} 个 JSON 文件待导入。")
 
-    # 初始化数据库连接器
-    importer = Neo4jImporter(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
-
-    total_success = 0
-    total_triplets = 0
-
-    try:
-        # 遍历每个 JSON 文件
-        for json_file in tqdm(json_files, desc="Processing Files"):
-            try:
-                # 读取 JSON 文件
-                with open(json_file, 'r', encoding='utf-8') as f:
-                    triplets = json.load(f)
-
-                file_triplets = len(triplets)
-                total_triplets += file_triplets
-
-                # 导入数据
-                file_success = 0
-                with importer.driver.session() as session:
-                    for item in triplets:
-                        try:
-                            if importer.import_triplet(session, item):
-                                file_success += 1
-                                total_success += 1
-                        except Exception as e:
-                            head = importer.clean_text(item.get('head'))
-                            tail = importer.clean_text(item.get('tail'))
-                            safe_relation = importer.clean_relation_type(importer.clean_text(item.get('relation')))
-                            print(f"写入失败 [{head} -> {safe_relation} -> {tail}]: {e}")
-
-                print(f"文件 [{os.path.basename(json_file)}] 导入完成: {file_success}/{file_triplets} 条三元组事实")
-
-            except Exception as e:
-                print(f"处理文件 {json_file} 时出错: {e}")
+def apply_outbox(
+    repository: ReviewRepository, importer: Neo4jImporter, *, run_id: Optional[str] = None,
+) -> Dict[str, int]:
+    result = {"completed": 0, "failed": 0, "stale": 0}
+    events = [
+        *repository.list_outbox(status="pending", run_id=run_id, limit=1_000_000),
+        *repository.list_outbox(status="failed", run_id=run_id, limit=1_000_000),
+    ]
+    for event in events:
+        item = authoritative_item(repository, event)
+        if item is None:
+            repository.mark_outbox(event["event_id"], "retracted", "stale decision")
+            result["stale"] += 1
+            continue
+        try:
+            with importer.driver.session() as session:
+                if event["operation"] == "retract":
+                    importer.retract(session, candidate_id=event["candidate_id"], revision=event["revision"],
+                                     decision_version=event["decision_version"])
+                elif not importer.import_triplet(session, item):
+                    raise ValueError("current decision is not importable")
+            if authoritative_item(repository, event) is None:
+                if event["operation"] == "upsert":
+                    with importer.driver.session() as session:
+                        importer.retract(
+                            session, candidate_id=event["candidate_id"], revision=event["revision"],
+                            decision_version=event["decision_version"],
+                        )
+                repository.mark_outbox(event["event_id"], "retracted", "decision changed during import")
+                result["stale"] += 1
                 continue
+            repository.mark_outbox(event["event_id"], "completed")
+            result["completed"] += 1
+        except Exception as exc:
+            repository.mark_outbox(event["event_id"], "failed", str(exc))
+            result["failed"] += 1
+    return result
 
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Project authoritative v3 review decisions to Neo4j.")
+    parser.add_argument("--run-id")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--dry-run", action="store_true")
+    group.add_argument("--apply", action="store_true")
+    parser.add_argument("--database", default=str(ROOT / "runs" / "v3" / "review.sqlite3"))
+    parser.add_argument("--ontology")
+    args = parser.parse_args()
+    repository = ReviewRepository(args.database)
+    repository.initialize()
+    if args.dry_run:
+        print(json.dumps(dry_run(repository, run_id=args.run_id), ensure_ascii=False, indent=2))
+        return
+    if not args.run_id:
+        raise SystemExit("--run-id is required with --apply so one frozen ontology is used")
+    manifest = repository.get_run(args.run_id)
+    ontology_path = Path(args.ontology or manifest.get("ontology_path") or ROOT / "ontology" / "ontology.json")
+    if not ontology_path.is_absolute():
+        ontology_path = ROOT / ontology_path
+    snapshot = load_snapshot(ontology_path, manifest.get("ontology_hash"))
+    importer = Neo4jImporter(
+        os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
+        os.environ.get("NEO4J_USER", "neo4j"), os.environ.get("NEO4J_PASSWORD", ""),
+        relation_types=relation_type_map(snapshot.source_path or ontology_path),
+    )
+    try:
+        result = apply_outbox(repository, importer, run_id=args.run_id)
     finally:
         importer.close()
-
-    print(f"\n所有文件导入完成!")
-    print(f"共处理 {len(json_files)} 个文件, {total_triplets} 条三元组")
-    print(f"成功导入或合并 {total_success} 条三元组事实到 Neo4j。")
+    print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

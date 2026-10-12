@@ -74,6 +74,24 @@ CLASS_SUFFIXES = (
     "炮闩",
     "弹丸",
     "装药",
+    "武器",
+    "枪械",
+    "传感器",
+    "结构",
+    "特性",
+    "参数",
+    "变量",
+    "自由度",
+    "载荷",
+    "振动",
+    "变形",
+    "精度",
+    "可靠性",
+    "稳定性",
+    "密集度",
+    "散布",
+    "坐标",
+    "黏性",
 )
 
 QUANTITY_SUFFIXES = (
@@ -99,14 +117,53 @@ QUANTITY_SUFFIXES = (
 )
 
 RELATION_PATTERNS = (
-    ("由...组成", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})由(?P<tail>[\u4e00-\u9fa5A-Za-z0-9、，和及与（）()]{2,40})组成")),
-    ("包括", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})包括(?P<tail>[\u4e00-\u9fa5A-Za-z0-9、，和及与（）()]{2,40})")),
-    ("影响", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})影响(?P<tail>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})")),
-    ("决定", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})决定(?P<tail>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})")),
-    ("导致", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})导致(?P<tail>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})")),
-    ("产生", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})产生(?P<tail>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})")),
-    ("作用于", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})作用于(?P<tail>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})")),
-    ("用于", re.compile(r"(?P<head>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})用于(?P<tail>[\u4e00-\u9fa5A-Za-z0-9（）()]{2,20})")),
+    ("影响", re.compile(r"影响")),
+    ("决定", re.compile(r"决定")),
+    ("导致", re.compile(r"导致")),
+    ("产生", re.compile(r"产生")),
+    ("作用于", re.compile(r"作用于")),
+    ("用于", re.compile(r"用于")),
+)
+
+GENERIC_TERMS = {
+    "方法", "模型", "理论", "系统", "过程", "方程", "算法", "装置", "机构",
+    "部件", "现象", "效应", "参数", "质量", "速度", "时间", "距离", "坐标", "系数",
+}
+
+TERM_BAD_PREFIXES = (
+    "本书", "本章", "本节", "为了", "为了解决", "根据", "通过", "采用", "利用", "使用",
+    "介绍", "论述", "研究", "分析", "给出", "提出", "实现", "形成", "有必要", "可以",
+    "能够", "需要", "应当", "并按照", "分别", "式中", "其中", "因此", "所以", "但是",
+    "都要", "使", "非常", "人们", "已知", "对于", "已经", "直接", "有助于", "能动地",
+    "不受", "受到", "则称", "如果", "可得", "这个", "则这个", "求解", "其", "式(",
+    "式（", "得到", "用", "从", "将", "把", "为多个", "依照", "这里", "某", "另一类",
+    "该", "此", "这种", "若干", "即", "故", "因而", "不论", "是最快", "不设置",
+)
+
+TERM_CLAUSE_MARKERS = (
+    "提供了", "称为", "视为", "存在着", "要经过", "控制", "获得", "完成", "可用", "只需要",
+    "如图", "所示", "为例", "进行", "成为", "归结为", "简化为", "选择", "设定", "按照",
+    "认为",
+)
+
+ENDPOINT_FORBIDDEN = (
+    "本书", "本章", "本节", "可以", "能够", "需要", "为了", "根据", "通过", "采用",
+    "利用", "使用", "介绍", "论述", "讨论", "研究", "分析", "给出", "提出", "找出",
+    "表示", "借助", "如果", "虽然", "因为", "是否", "应从", "使得", "从而", "进而", "考虑",
+    "测量", "影响", "选择", "建立", "完成", "由", "称为", "归结为", "简化为", "作用在",
+    "带动", "终了时",
+)
+
+ENDPOINT_SUFFIXES = CLASS_SUFFIXES + QUANTITY_SUFFIXES + (
+    "特性", "精度", "响应", "载荷", "振动", "变形", "因素", "气体", "力矩", "动作",
+    "位置", "结构", "参数", "变量", "刚度", "位移", "频率", "可靠性", "稳定性", "密集度",
+    "散布", "能量", "功", "力", "角", "点", "源", "值", "规律", "性能", "模态", "自由度",
+    "身管", "枪管", "机枪", "武器", "构件", "零件", "元件", "材料", "弹簧", "车体", "枪架",
+    "机匣", "摇架", "立轴", "炮", "枪", "器", "机", "片",
+)
+
+NON_OBJECT_GROUP_SUFFIXES = (
+    "质量", "参数", "特性", "载荷", "变量", "速度", "加速度", "压力", "温度", "系数",
 )
 
 
@@ -133,8 +190,14 @@ def split_path(breadcrumb_path):
 
 
 def clean_term(value):
-    value = re.sub(r"^[第\d一二三四五六七八九十百章节篇部.\s、（）()]+", "", str(value or "")).strip()
-    value = re.sub(r"(?:[·.⋯…]+\s*\d{1,4}|\d{2,4})$", "", value).strip()
+    value = str(value or "").strip()
+    value = re.sub(r"^\s{0,3}#{1,6}\s*", "", value)
+    value = re.sub(r"^\s*第[\d一二三四五六七八九十百]+[章节篇部]\s*", "", value)
+    value = re.sub(r"^\s*\d+(?:[.．]\d+){1,5}\s*", "", value)
+    value = re.sub(r"^\s*(?:[-*+]\s+|[（(]?\d+[）).、]\s*)", "", value)
+    value = re.sub(r"(?:[·.⋯…]+\s*)?\s+\d{1,4}$", "", value).strip()
+    value = re.sub(r"[*_`]+", "", value)
+    value = value.strip(" 《》“”\"'（）()[]【】")
     value = re.sub(r"[，。；：、,.!?！？;:]+$", "", value).strip()
     value = re.sub(r"\s+", "", value)
     if len(value) < 2 or len(value) > 24:
@@ -148,8 +211,46 @@ def is_domain_term(value, suffixes):
     return bool(value and value.endswith(suffixes) and not is_fragment_name(value))
 
 
+def is_quality_class_term(value, from_body=False):
+    value = clean_term(value)
+    if not value or value in GENERIC_TERMS or is_fragment_name(value, from_body):
+        return False
+    if from_body and len(value) > 16:
+        return False
+    if from_body and any(value.startswith(prefix) for prefix in TERM_BAD_PREFIXES):
+        return False
+    if from_body and any(marker in value for marker in TERM_CLAUSE_MARKERS):
+        return False
+    if re.search(r"[$\\={}<>]|(?:^|[^A-Za-z])(图|表|式)\d", value):
+        return False
+    return is_domain_term(value, CLASS_SUFFIXES)
+
+
+def clean_endpoint(value):
+    value = clean_term(value)
+    if not value:
+        return ""
+    value = re.sub(r"^(?:了|着|该|其|此|上述|这些|那些|它们|因此|所以|但|而|并|则|故|即|如)+", "", value)
+    value = re.sub(r"(?:直接|主要|显著|较大|很大|会|将|也|又|既|不|所|就)+$", "", value)
+    value = clean_term(value)
+    if (
+        not value
+        or len(value) > 16
+        or value.startswith(("使", "让"))
+        or any(token in value for token in ("使", "为"))
+        or any(word in value for word in ENDPOINT_FORBIDDEN)
+        or value == "试系统"
+    ):
+        return ""
+    if re.search(r"[$\\={}<>]", value) or is_fragment_name(value, from_body=True):
+        return ""
+    if not value.endswith(ENDPOINT_SUFFIXES):
+        return ""
+    return value
+
+
 def infer_definition(name, text):
-    match = re.search(rf"{re.escape(name)}(?:是|指|定义为)([^。；！？]{{4,120}})", text or "")
+    match = re.search(rf"{re.escape(name)}(?:是指|是|指|称为|定义为)([^。；！？]{{4,120}})", text or "")
     return match.group(0).strip() if match else None
 
 
@@ -236,7 +337,11 @@ def candidate_base(chunk, module_index, text):
 
 def add_class(result, seen, name, chunk, module_index, reason, confidence=0.72, parent=None, evidence_text=None):
     name = clean_term(name)
-    if not name or is_fragment_name(name):
+    from_body = reason == "正文中出现稳定领域概念。"
+    from_relation = reason.startswith("关系句中的")
+    if from_relation:
+        name = clean_endpoint(name)
+    if not name or (not from_relation and not is_quality_class_term(name, from_body=from_body)):
         return
     key = name
     if key in seen:
@@ -258,9 +363,16 @@ def add_class(result, seen, name, chunk, module_index, reason, confidence=0.72, 
 
 def add_datatype_property(result, seen, name, domain, chunk, module_index, evidence_text):
     name = clean_term(name)
-    if not is_domain_term(name, QUANTITY_SUFFIXES):
+    domain = clean_endpoint(domain)
+    if (
+        not is_domain_term(name, QUANTITY_SUFFIXES)
+        or not domain
+        or len(domain) > 10
+        or domain.endswith(QUANTITY_SUFFIXES)
+        or any(word in domain for word in ("提高", "得到", "求出", "缩短", "相对", "作用时期"))
+    ):
         return
-    key = (name, clean_term(domain))
+    key = (name, domain)
     if key in seen:
         return
     seen.add(key)
@@ -270,7 +382,7 @@ def add_datatype_property(result, seen, name, domain, chunk, module_index, evide
         "definition_candidate": infer_definition(name, evidence_text),
         "status": "new_candidate",
         "matched_existing_property": None,
-        "domain_candidate": clean_term(domain) or None,
+        "domain_candidate": domain,
         "range_datatype": "float",
         "unit": infer_unit(evidence_text),
         "example_value": infer_example_value(evidence_text),
@@ -303,20 +415,6 @@ def add_object_property(result, seen, prop, domain, range_value, chunk, module_i
     }
     item.update(candidate_base(chunk, module_index, evidence_text))
     result["candidate_object_properties"].append(item)
-    result["candidate_constraints"].append(
-        {
-            "property_name": prop,
-            "property_type": "object_property",
-            "domain_candidate": domain,
-            "range_candidate": range_value,
-            "range_datatype": None,
-            "constraint_status": "weak_candidate",
-            "matched_existing_constraint": None,
-            "confidence": 0.62,
-            "reason": "由单句关系归纳出的约束候选，需要人工确认后再写入正式本体。",
-            **candidate_base(chunk, module_index, evidence_text),
-        }
-    )
 
 
 def infer_unit(text):
@@ -332,8 +430,11 @@ def infer_example_value(text):
 def sentence_texts(chunk):
     sentences = [item.get("text", "") for item in chunk.get("sentences", []) if item.get("text")]
     if sentences:
-        return sentences
-    return [part.strip() for part in re.split(r"(?<=[。！？；;])", chunk["content"]) if part.strip()]
+        return [sentence for sentence in sentences if not re.match(r"^\s*#{1,6}\s+", sentence)]
+    return [
+        part.strip() for part in re.split(r"(?<=[。！？；;])", chunk["content"])
+        if part.strip() and not re.match(r"^\s*#{1,6}\s+", part)
+    ]
 
 
 def title_candidates(chunk):
@@ -342,19 +443,43 @@ def title_candidates(chunk):
         title = clean_term(part)
         if not title:
             continue
-        if is_domain_term(title, CLASS_SUFFIXES):
+        if is_quality_class_term(title):
             yield title, "目录标题中出现稳定领域概念，但目录父子关系不会直接作为本体继承关系。"
 
 
 def phrase_candidates(text):
-    for segment in re.split(r"[，。；：、,;:\n]|包括|包含|论述了|论述|介绍了|介绍|以及|和|是|指|定义为", text or ""):
-        term = clean_term(segment)
-        if is_domain_term(term, CLASS_SUFFIXES):
+    text = str(text or "").strip()
+    values = []
+
+    for match in re.finditer(r"(?:^|[，；;])(?P<term>[^，；;。]{2,24}?)(?:是指|是|指|定义为)", text):
+        values.append(match.group("term"))
+    for match in re.finditer(r"(?:称为|叫作|叫做|定义为|就是)(?P<term>[^，；;。]{2,20})", text):
+        values.append(match.group("term"))
+    for match in re.finditer(r"[“\"](?P<term>[^”\"]{2,20})[”\"]", text):
+        values.append(match.group("term"))
+
+    for marker in ("主要有", "包括", "包含", "分为", "可分为"):
+        if marker not in text:
+            continue
+        tail = text.split(marker, 1)[1]
+        tail = re.split(r"[。；;]|等(?:内容|方法|类型|部分|参数|因素|载荷)?", tail, maxsplit=1)[0]
+        values.extend(re.split(r"[、，,]|以及|和|及", tail))
+
+    seen = set()
+    for value in values:
+        term = clean_term(value)
+        if term in seen:
+            continue
+        if is_quality_class_term(term, from_body=True):
+            seen.add(term)
             yield term
 
 
 def quantity_candidates(text):
-    for segment in re.split(r"[，。；：、,;:\n]|包括|包含|以及|和|是|为|达到|等于", text or ""):
+    for segment in re.split(
+        r"[，。；：、,;:\n]|包括|包含|以及|和|是|为|达到|等于|影响|决定|导致|产生|作用于|用于",
+        text or "",
+    ):
         term = clean_term(segment)
         if not term:
             continue
@@ -363,11 +488,39 @@ def quantity_candidates(text):
             possible_domain, quantity = term.rsplit("的", 1)
             if is_domain_term(quantity, QUANTITY_SUFFIXES):
                 term = quantity
-                domain = clean_term(possible_domain)
-                if not is_domain_term(domain, CLASS_SUFFIXES):
-                    domain = None
-        if is_domain_term(term, QUANTITY_SUFFIXES):
+                domain = clean_endpoint(possible_domain)
+        if domain and is_domain_term(term, QUANTITY_SUFFIXES):
             yield term, domain
+
+
+def relation_candidates(text):
+    clauses = [part.strip() for part in re.split(r"[。！？；;\n]", text or "") if part.strip()]
+    for clause in clauses:
+        composition = re.search(r"(?P<head>[^，,:：]{2,30})由(?P<tail>[^，。；;]{2,80})组成", clause)
+        if composition:
+            domain = clean_endpoint(composition.group("head"))
+            for raw_range in re.split(r"[、，和及与]", composition.group("tail")):
+                range_value = clean_endpoint(raw_range)
+                if domain and range_value:
+                    yield "由...组成", domain, range_value
+
+        inclusion = re.search(r"(?P<head>[^，,:：]{2,30})(?:包括|包含)(?P<tail>[^。；;]{2,80})", clause)
+        if inclusion:
+            domain = clean_endpoint(inclusion.group("head"))
+            tail = re.split(r"等(?:内容|方法|类型|部分|参数|因素|载荷)?", inclusion.group("tail"), maxsplit=1)[0]
+            for raw_range in re.split(r"[、，和及与]", tail):
+                range_value = clean_endpoint(raw_range)
+                if domain and range_value and not domain.endswith(NON_OBJECT_GROUP_SUFFIXES):
+                    yield "包括", domain, range_value
+
+        for prop, pattern in RELATION_PATTERNS:
+            for match in pattern.finditer(clause):
+                before = re.split(r"[，,:：]", clause[:match.start()])[-1]
+                after = re.split(r"[，,:：]", clause[match.end():])[0]
+                domain = clean_endpoint(before)
+                range_value = clean_endpoint(after)
+                if domain and range_value:
+                    yield prop, domain, range_value
 
 
 def nearest_domain(chunk):
@@ -376,13 +529,34 @@ def nearest_domain(chunk):
     return parts[-1] if parts else None
 
 
+def content_chunks(chunks):
+    """Exclude book front matter, table of contents, references, and index."""
+    if not chunks:
+        return []
+    chapter_one = []
+    for index, chunk in enumerate(chunks):
+        root = split_path(chunk.get("breadcrumb_path"))[0] if split_path(chunk.get("breadcrumb_path")) else ""
+        if re.match(r"^第(?:1|一)章", root):
+            chapter_one.append(index)
+    start = chapter_one[-1] if chapter_one else 0
+
+    end = len(chunks)
+    for index in range(start + 1, len(chunks)):
+        parts = split_path(chunks[index].get("breadcrumb_path"))
+        root = parts[0].strip() if parts else ""
+        if re.match(r"^(?:参考文献|索引)(?:\s|·|$)", root):
+            end = index
+            break
+    return chunks[start:end]
+
+
 def generate_candidates(chunks, module_index):
     result = {field: [] for field in RESULT_FIELDS}
     seen_classes = set()
     seen_datatype = set()
     seen_object = set()
 
-    for chunk in chunks:
+    for chunk in content_chunks(chunks):
         for title, reason in title_candidates(chunk):
             add_class(result, seen_classes, title, chunk, module_index, reason, confidence=0.74, parent=None, evidence_text=title)
 
@@ -403,13 +577,10 @@ def generate_candidates(chunks, module_index):
             for quantity, domain in quantity_candidates(sentence):
                 add_datatype_property(result, seen_datatype, quantity, domain, chunk, module_index, sentence)
 
-            for prop, pattern in RELATION_PATTERNS:
-                for match in pattern.finditer(sentence):
-                    head = match.group("head")
-                    tail = re.split(r"[、，和及与]", match.group("tail"))[0]
-                    add_class(result, seen_classes, head, chunk, module_index, "关系句中的 domain 候选。", 0.64, evidence_text=sentence)
-                    add_class(result, seen_classes, tail, chunk, module_index, "关系句中的 range 候选。", 0.64, evidence_text=sentence)
-                    add_object_property(result, seen_object, prop, head, tail, chunk, module_index, sentence)
+            for prop, head, tail in relation_candidates(sentence):
+                add_class(result, seen_classes, head, chunk, module_index, "关系句中的 domain 候选。", 0.64, evidence_text=sentence)
+                add_class(result, seen_classes, tail, chunk, module_index, "关系句中的 range 候选。", 0.64, evidence_text=sentence)
+                add_object_property(result, seen_object, prop, head, tail, chunk, module_index, sentence)
 
     return result
 

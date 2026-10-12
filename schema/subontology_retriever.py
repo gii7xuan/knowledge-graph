@@ -6,14 +6,14 @@ from typing import Any, Dict, Iterable, List
 
 try:
     from ontologyBuild.ontology_adapter import (
-        build_class_hierarchy,
+        build_real_class_hierarchy,
         iter_classes,
         iter_datatype_properties,
         iter_object_properties as adapter_iter_object_properties,
     )
 except ImportError:
     from ontology_adapter import (
-        build_class_hierarchy,
+        build_real_class_hierarchy,
         iter_classes,
         iter_datatype_properties,
         iter_object_properties as adapter_iter_object_properties,
@@ -65,9 +65,12 @@ class SubOntologyRetriever:
             class_ids.update(item for item in rel.get("domain", []) or [] if isinstance(item, str))
             class_ids.update(item for item in rel.get("range", []) or [] if isinstance(item, str))
 
+        classes = self._classes_for_ids(class_ids, classes)
+        class_ids = {item["id"] for item in classes if item.get("id")}
+
         class_hierarchy = [
             {"child": child, "parent": parent}
-            for child, parent in build_class_hierarchy(self.ontology).items()
+            for child, parent in build_real_class_hierarchy(self.ontology).items()
             if child in class_ids or parent in class_ids
         ]
 
@@ -97,8 +100,11 @@ class SubOntologyRetriever:
             if not class_id:
                 continue
             label = class_data.get("label") or class_id
-            description = class_data.get("description", "")
-            candidate_text = f"{class_id} {label} {description} {_text(class_data.get('subclasses'))}"
+            description = class_data.get("definition") or class_data.get("description", "")
+            candidate_text = (
+                f"{class_id} {label} {description} "
+                f"{class_data.get('parent') or ''} {_text(class_data.get('subclasses'))}"
+            )
             items.append(
                 (
                     _score(query, candidate_text),
@@ -111,6 +117,27 @@ class SubOntologyRetriever:
                 )
             )
         return [item for _, item in sorted(items, key=lambda pair: pair[0], reverse=True)[:limit]]
+
+    def _classes_for_ids(self, class_ids: set, ranked_classes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        result = {item.get("id"): item for item in ranked_classes if item.get("id")}
+        hierarchy = build_real_class_hierarchy(self.ontology)
+        wanted = set(class_ids)
+        for class_id in list(class_ids):
+            parent = hierarchy.get(class_id)
+            while parent and parent not in wanted:
+                wanted.add(parent)
+                parent = hierarchy.get(parent)
+        for class_data in iter_classes(self.ontology):
+            class_id = class_data.get("id")
+            if not class_id or class_id not in wanted or class_id in result:
+                continue
+            result[class_id] = {
+                "id": class_id,
+                "label": class_data.get("label") or class_id,
+                "description": class_data.get("definition") or class_data.get("description", ""),
+                "parent": class_data.get("parent"),
+            }
+        return list(result.values())
 
     def _rank_relations(self, query: str, limit: int) -> List[Dict[str, Any]]:
         items = []

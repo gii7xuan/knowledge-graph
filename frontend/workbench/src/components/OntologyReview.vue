@@ -3,12 +3,19 @@ import { computed, onActivated, onDeactivated, onUnmounted, reactive, ref, watch
 import { Check, ChevronLeft, ChevronRight, Clock3, Pencil, Play, RefreshCw, X } from 'lucide-vue-next';
 import { api, post } from '../api';
 import { candidateModifications, draftForCandidate } from '../ontologyDraft';
+import ModelSelector from './ModelSelector.vue';
 
-const props = defineProps({ markdownFiles: { type: Array, default: () => [] } });
+const props = defineProps({
+  markdownFiles: { type: Array, default: () => [] },
+  modelConfigs: { type: Array, default: () => [] },
+  selectedModelId: { type: String, default: 'default' }
+});
+const emit = defineEmits(['update:selectedModelId', 'model-created']);
 const markdownPath = ref('');
 const sourcePath = ref('ontologyBuild/ontology_candidates.json');
 const reviewMode = ref('manual');
 const reviewer = ref('human');
+const basePolicy = ref('draft');
 const result = ref({});
 const items = ref([]);
 const total = ref(0);
@@ -117,13 +124,23 @@ async function startBuild() {
     job.value = await post('/api/ontology/build-run', {
       markdown_path: markdownPath.value,
       review_mode: reviewMode.value,
-      reviewer: reviewer.value
+      reviewer: reviewer.value,
+      base_policy: basePolicy.value,
+      model_id: props.selectedModelId
     });
   } catch (cause) {
     error.value = cause.message;
   } finally {
     busyAction.value = '';
   }
+}
+
+function updateSelectedModel(value) {
+  emit('update:selectedModelId', value);
+}
+
+function onModelCreated(model) {
+  emit('model-created', model);
 }
 
 async function refreshBuildStatus() {
@@ -266,12 +283,26 @@ onUnmounted(() => {
             <label>审核模式<select v-model="reviewMode"><option value="manual">人工审核</option><option value="hybrid">混合审核</option><option value="auto">自动审核</option></select></label>
             <label>审核人<input v-model="reviewer" /></label>
           </div>
+          <ModelSelector
+            :model-configs="modelConfigs"
+            :selected-model-id="selectedModelId"
+            :disabled="!!busyAction || job.running"
+            @update:selected-model-id="updateSelectedModel"
+            @model-created="onModelCreated"
+          />
+          <label>基础本体策略<select v-model="basePolicy"><option value="draft">草案生成</option><option value="strict">严格审计</option></select></label>
           <button class="primary" :disabled="!!busyAction || job.running" @click="runReview">生成审核队列</button>
           <button :disabled="!markdownPath || !!busyAction || job.running" @click="startBuild"><Play :size="16" />抽取并进入审核</button>
           <div class="run-status">
             <span :class="['status-dot', job.running ? 'running' : job.exists && !job.error ? 'done' : job.exists ? 'failed' : '']"></span>
             {{ job.running ? '本体抽取中' : job.exists ? job.error ? '抽取失败' : '最近一次抽取完成' : '空闲' }}
           </div>
+          <div v-if="result.run_id" class="run-meta">
+            <span>{{ result.run_status || 'run' }} · {{ result.base_policy || basePolicy }}</span>
+            <strong>{{ result.run_id }}</strong>
+          </div>
+          <div v-if="result.model?.model" class="subtle run-path">模型：{{ result.model.name }} · {{ result.model.model }}</div>
+          <div v-if="result.run_dir" class="subtle run-path">{{ result.run_dir }}</div>
         </div>
       </aside>
       <div class="sidebar-resizer" role="separator" tabindex="0" aria-label="调整左侧栏宽度" aria-orientation="vertical" :aria-valuenow="sidebarWidth" aria-valuemin="280" @pointerdown="startResize" @keydown="resizeByKeyboard"></div>

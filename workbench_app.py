@@ -7,6 +7,7 @@ import re
 import subprocess
 import sys
 import threading
+from uuid import uuid4
 from datetime import datetime, timezone
 from http.server import ThreadingHTTPServer
 from pathlib import Path
@@ -15,20 +16,35 @@ from urllib.parse import parse_qs, unquote, urlparse
 import ontology_build_app as ontology
 import review_triplets_app as triplets
 from ontologyBuild.candidate_quality import approval_errors, describe_quality
+from ontologyBuild.config import OntologyPipelineConfig, configured_base_url
+from review_agent.repository import (
+    ConflictError,
+    NotFoundError,
+    UnprocessableEntityError,
+    ValidationError,
+)
+from review_agent.service import ServiceUnavailableError, get_default_service
+from scripts.freeze_ontology import freeze_ontology
 
 
 ROOT = Path(__file__).resolve().parent
 FRONTEND_DIR = ROOT / "frontend" / "workbench" / "dist"
 MDFILES_DIR = ROOT / "mdfiles"
 WORKBENCH_RUN_DIR = ROOT / "runs" / "workbench"
+MODEL_CONFIG_PATH = ROOT / "config" / "workbench_models.json"
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("WORKBENCH_PORT", "8770"))
+PROXY_ENV_NAMES = (
+    "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
+    "http_proxy", "https_proxy", "all_proxy",
+)
 
 triplet_lock = threading.Lock()
 triplet_job = None
 ontology_lock = threading.Lock()
 ontology_job = {"exists": False, "running": False}
 ontology_data_lock = threading.RLock()
+model_config_lock = threading.RLock()
 ontology_cache_key = None
 ontology_cache_result = None
 
@@ -96,6 +112,147 @@ def read_log_tail(path, limit=30000):
         return file.read().decode("utf-8", errors="replace")
 
 
+def write_json_atomic(path, data):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    with tmp_path.open("w", encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, indent=2)
+    os.replace(tmp_path, path)
+
+
+def read_model_store():
+    if not MODEL_CONFIG_PATH.exists():
+        return []
+    try:
+        with MODEL_CONFIG_PATH.open("r", encoding="utf-8") as file:
+            data = json.load(file)
+    except (OSError, json.JSONDecodeError):
+        return []
+    if isinstance(data, dict):
+        data = data.get("models", [])
+    if not isinstance(data, list):
+        return []
+    return [item for item in data if isinstance(item, dict)]
+
+
+def normalize_model_record(record):
+    record_id = re.sub(r"[^A-Za-z0-9_.-]+", "_", str(record.get("id") or "")).strip("._")
+    return {
+        "id": record_id or f"model_{uuid4().hex[:12]}",
+        "name": str(record.get("name") or record.get("model") or "未命名模型").strip(),
+        "base_url": str(record.get("base_url") or "").strip(),
+        "api_key": str(record.get("api_key") or "").strip(),
+        "model": str(record.get("model") or "").strip(),
+        "created_at": str(record.get("created_at") or now_iso()),
+    }
+
+
+def default_model_record():
+    config = OntologyPipelineConfig.from_env()
+    return {
+        "id": "default",
+        "name": "当前默认配置",
+        "base_url": configured_base_url(config),
+        "api_key": config.api_key,
+        "model": config.model,
+        "created_at": "",
+        "source": "default",
+    }
+
+
+def sanitize_model_record(record):
+    ready = bool(record.get("api_key") and record.get("base_url") and record.get("model"))
+    return {
+        "id": record.get("id", ""),
+        "name": record.get("name", ""),
+        "base_url": record.get("base_url", ""),
+        "model": record.get("model", ""),
+        "source": record.get("source", "saved"),
+        "created_at": record.get("created_at", ""),
+        "has_api_key": bool(record.get("api_key")),
+        "ready": ready,
+    }
+
+
+def list_model_configs():
+    with model_config_lock:
+        saved = [normalize_model_record(item) for item in read_model_store()]
+    models = [sanitize_model_record(default_model_record())]
+    models.extend(sanitize_model_record(item) for item in saved)
+    return {"models": models}
+
+
+def create_model_config(payload):
+    name = str(payload.get("name") or payload.get("model") or "").strip()
+    base_url = str(payload.get("base_url") or "").strip()
+    api_key = str(payload.get("api_key") or "").strip()
+    model = str(payload.get("model") or "").strip()
+    missing = []
+    if not base_url:
+        missing.append("url")
+    if not api_key:
+        missing.append("key")
+    if not model:
+        missing.append("模型名称")
+    if missing:
+        raise ValueError("模型配置缺少：" + "、".join(missing))
+    if not re.match(r"^https?://", base_url, flags=re.I):
+        raise ValueError("模型 URL 必须以 http:// 或 https:// 开头")
+    record = normalize_model_record({
+        "id": f"model_{uuid4().hex[:12]}",
+        "name": name or model,
+        "base_url": base_url,
+        "api_key": api_key,
+        "model": model,
+        "created_at": now_iso(),
+    })
+    with model_config_lock:
+        saved = [normalize_model_record(item) for item in read_model_store()]
+        saved.append(record)
+        write_json_atomic(MODEL_CONFIG_PATH, {"models": saved})
+    return {"model": sanitize_model_record(record), "models": list_model_configs()["models"]}
+
+
+def resolve_model_config(model_id):
+    model_id = str(model_id or "default").strip() or "default"
+    if model_id == "default":
+        record = default_model_record()
+    else:
+        with model_config_lock:
+            record = next(
+                (item for item in (normalize_model_record(value) for value in read_model_store()) if item["id"] == model_id),
+                None,
+            )
+        if record is None:
+            raise ValueError("未找到选择的大模型配置")
+    missing = []
+    if not record.get("base_url"):
+        missing.append("url")
+    if not record.get("api_key"):
+        missing.append("key")
+    if not record.get("model"):
+        missing.append("模型名称")
+    if missing:
+        raise ValueError("选择的大模型配置不完整：" + "、".join(missing))
+    return record
+
+
+def apply_model_env(env, model_config):
+    for name in PROXY_ENV_NAMES:
+        env.pop(name, None)
+    env.update({
+        "OPENAI_API_KEY": model_config["api_key"],
+        "QWEN_API_KEY": model_config["api_key"],
+        "OPENAI_BASE_URL": model_config["base_url"],
+        "QWEN_BASE_URL": model_config["base_url"],
+        "OPENAI_MODEL": model_config["model"],
+        "QWEN_MODEL": model_config["model"],
+        "ONTOLOGY_MODEL": model_config["model"],
+        "TRIPLET_MODEL": model_config["model"],
+    })
+
+
 def triplet_status():
     with triplet_lock:
         job = triplet_job
@@ -110,7 +267,10 @@ def triplet_status():
         "started_at": job["started_at"],
         "markdown_path": rel_path(job["markdown_path"]),
         "output_stem": job["output_stem"],
+        "run_id": job.get("run_id"),
+        "audit_stage": "candidate_persistence" if returncode is None else "manual_review",
         "outputs": {key: rel_path(path) for key, path in job["outputs"].items()},
+        "model": job.get("model", {}),
         "counts": {
             "accepted": json_count(job["outputs"]["accepted"]),
             "rejected": json_count(job["outputs"]["rejected"]),
@@ -123,6 +283,8 @@ def start_triplet_extraction(payload):
     global triplet_job
     markdown_path = safe_markdown_path(payload.get("markdown_path"))
     output_stem = sanitize_stem(payload.get("output_stem") or default_stem(markdown_path))
+    model_config = resolve_model_config(payload.get("model_id"))
+    run_id = "run_" + now_stamp() + "_" + uuid4().hex[:8]
     outputs = {
         "accepted": ROOT / "triplets" / f"{output_stem}.json",
         "rejected": ROOT / "rejected_triplets" / f"{output_stem}_rejected_triplets.json",
@@ -141,10 +303,14 @@ def start_triplet_extraction(payload):
             "TRIPLET_REJECTED_JSON": str(outputs["rejected"]),
             "TRIPLET_EVIDENCE_MD": str(outputs["evidence"]),
             "TRIPLET_BOOK_NAME": output_stem,
+            "KG_RUN_ID": run_id,
+            "KG_REVIEW_MODE": str(payload.get("review_mode") or "shadow"),
         })
+        apply_model_env(env, model_config)
         with outputs["log"].open("w", encoding="utf-8", errors="replace") as log_file:
             process = subprocess.Popen(
-                [sys.executable, "-u", str(ROOT / "extract_triplets" / "extrct.py")],
+                [sys.executable, "-u", "-m", "extract_triplets.extrct", "--review-mode",
+                 str(payload.get("review_mode") or "shadow")],
                 cwd=ROOT,
                 env=env,
                 stdout=log_file,
@@ -155,6 +321,8 @@ def start_triplet_extraction(payload):
             "started_at": now_iso(),
             "markdown_path": markdown_path,
             "output_stem": output_stem,
+            "run_id": run_id,
+            "model": sanitize_model_record(model_config),
             "outputs": outputs,
         }
     return triplet_status()
@@ -165,21 +333,42 @@ def ontology_build_status():
         return ontology_job.copy()
 
 
-def run_ontology_build(markdown_path, review_mode, reviewer):
+def run_ontology_build(markdown_path, review_mode, reviewer, base_policy, model_config):
     global ontology_job
     try:
-        ontology.run_extraction(markdown_path)
+        manifest = ontology.run_extraction(
+            markdown_path,
+            review_mode=review_mode,
+            base_policy=base_policy,
+            model_config=model_config,
+        )
         with ontology_data_lock:
             result = ontology.build_review_from_candidates(
                 ontology.DEFAULT_CANDIDATES_PATH, review_mode, reviewer
             )
+            result["run_id"] = manifest.get("run_id")
+            result["run_status"] = manifest.get("status")
+            result["run_dir"] = manifest.get("outputs", {}).get("run_dir")
+            result["base_policy"] = manifest.get("config", {}).get("base_policy")
+            result["model"] = sanitize_model_record(model_config)
+            ontology.write_json(ontology.DEFAULT_REVIEW_RESULT_PATH, result)
             cache_ontology_result(result)
     except Exception as exc:
         with ontology_lock:
             ontology_job = {**ontology_job, "running": False, "error": str(exc), "finished_at": now_iso()}
     else:
         with ontology_lock:
-            ontology_job = {**ontology_job, "running": False, "error": "", "finished_at": now_iso()}
+            ontology_job = {
+                **ontology_job,
+                "running": False,
+                "error": "",
+                "finished_at": now_iso(),
+                "run_id": manifest.get("run_id"),
+                "run_status": manifest.get("status"),
+                "run_dir": manifest.get("outputs", {}).get("run_dir"),
+                "base_policy": manifest.get("config", {}).get("base_policy"),
+                "model": sanitize_model_record(model_config),
+            }
 
 
 def start_ontology_build(payload):
@@ -188,7 +377,9 @@ def start_ontology_build(payload):
     review_mode = payload.get("review_mode", "manual")
     if review_mode not in {"manual", "hybrid", "auto"}:
         raise ValueError("review_mode 必须是 manual/hybrid/auto")
+    base_policy = ontology.normalize_base_policy(payload.get("base_policy") or "draft")
     reviewer = str(payload.get("reviewer") or "human")
+    model_config = resolve_model_config(payload.get("model_id"))
     with ontology_lock:
         if ontology_job.get("running"):
             raise ValueError("本体抽取任务正在运行")
@@ -198,10 +389,13 @@ def start_ontology_build(payload):
             "error": "",
             "started_at": now_iso(),
             "markdown_path": rel_path(markdown_path),
+            "review_mode": review_mode,
+            "base_policy": base_policy,
+            "model": sanitize_model_record(model_config),
         }
         threading.Thread(
             target=run_ontology_build,
-            args=(markdown_path, review_mode, reviewer),
+            args=(markdown_path, review_mode, reviewer, base_policy, model_config),
             daemon=True,
             name="ontology-build",
         ).start()
@@ -274,6 +468,11 @@ def ontology_overview(result=None):
         "source_file": result.get("source_file", ""),
         "review_mode": result.get("review_mode", ""),
         "generated_at": result.get("generated_at", ""),
+        "run_id": result.get("run_id", ""),
+        "run_status": result.get("run_status", ""),
+        "run_dir": result.get("run_dir", ""),
+        "base_policy": result.get("base_policy", ""),
+        "model": result.get("model", {}),
         "errors": result.get("errors", []),
     }
 
@@ -409,9 +608,42 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        query = parse_qs(urlparse(self.path).query)
         try:
-            if path == "/api/triplets/items":
-                self.send_json(triplet_items_page(parse_qs(urlparse(self.path).query)))
+            if path == "/api/triplets/runs":
+                self.send_json(get_default_service().runs(
+                    int(query.get("page", ["1"])[0]), int(query.get("page_size", ["20"])[0])
+                ))
+            elif path == "/api/triplets/config-status":
+                self.send_json(get_default_service().config_status())
+            elif path == "/api/triplets/items" and query.get("run_id", [""])[0]:
+                self.send_json(get_default_service().items(
+                    query["run_id"][0], status=query.get("status", [None])[0],
+                    relation_id=query.get("relation_id", [None])[0],
+                    page=int(query.get("page", ["1"])[0]),
+                    page_size=int(query.get("page_size", ["20"])[0]),
+                ))
+            elif path == "/api/triplets/summary" and query.get("run_id", [""])[0]:
+                self.send_json(get_default_service().summary(query["run_id"][0]))
+            elif re.fullmatch(r"/api/triplets/audit-jobs/[^/]+", path):
+                self.send_json(get_default_service().job(path.rsplit("/", 1)[-1]))
+            elif re.fullmatch(r"/api/triplets/candidates/[^/]+/audit", path):
+                candidate_id = path.split("/")[-2]
+                self.send_json(get_default_service().audit(candidate_id, query.get("audit_id", [None])[0]))
+            elif re.fullmatch(r"/api/triplets/candidates/[^/]+", path):
+                candidate_id = path.rsplit("/", 1)[-1]
+                revision = query.get("revision", [None])[0]
+                self.send_json(get_default_service().candidate(
+                    candidate_id, int(revision) if revision is not None else None
+                ))
+            elif re.fullmatch(r"/api/triplets/evidence/[^/]+/context", path):
+                evidence_id = path.split("/")[-2]
+                self.send_json(get_default_service().evidence_context(
+                    evidence_id, before=int(query.get("before", ["1"])[0]),
+                    after=int(query.get("after", ["1"])[0]),
+                ))
+            elif path == "/api/triplets/items":
+                self.send_json(triplet_items_page(query))
             elif path == "/api/ontology/overview":
                 self.send_json(ontology_overview())
             elif path == "/api/ontology/items":
@@ -421,7 +653,9 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
             elif path.startswith("/api/ontology/") and path != "/api/ontology/build-status":
                 self.dispatch_legacy(ontology.OntologyBuildHandler.do_GET, "/api/ontology")
             elif path == "/api/init":
-                self.send_json({"markdown_files": list_markdown_files()})
+                self.send_json({"markdown_files": list_markdown_files(), "model_configs": list_model_configs()["models"]})
+            elif path == "/api/models":
+                self.send_json(list_model_configs())
             elif path == "/api/triplet/status":
                 self.send_json(triplet_status())
             elif path == "/api/ontology/build-status":
@@ -434,7 +668,13 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                     self.send_json({"error": "前端未构建，请在 frontend/workbench 中运行 npm install 和 npm run build"}, 503)
                 else:
                     self.send_json({"error": "not found"}, 404)
-        except (ValueError, FileNotFoundError) as exc:
+        except NotFoundError as exc:
+            self.send_json({"error": str(exc)}, 404)
+        except ConflictError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
+        except ServiceUnavailableError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)
+        except (ValueError, ValidationError, FileNotFoundError) as exc:
             self.send_json({"error": str(exc)}, 400)
         except Exception as exc:
             self.send_json({"error": str(exc)}, 500)
@@ -442,10 +682,40 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
     def do_POST(self):
         path = urlparse(self.path).path
         try:
-            if path.startswith("/api/triplets/"):
+            if path == "/api/triplets/audit-jobs":
+                self.send_json(get_default_service().create_audit_job(self.read_payload()), 202)
+            elif re.fullmatch(r"/api/triplets/audit-jobs/[^/]+/cancel", path):
+                self.send_json(get_default_service().cancel_job(path.split("/")[-2]))
+            elif re.fullmatch(r"/api/triplets/candidates/[^/]+/reaudit", path):
+                payload = self.read_payload()
+                self.send_json(get_default_service().create_reaudit_job(
+                    path.split("/")[-2], payload
+                ), 202)
+            elif path == "/api/triplets/decision":
+                payload = self.read_payload()
+                if payload.get("file"):
+                    original_path = self.path
+                    try:
+                        self.path = "/api/decision"
+                        self.handle_decision(payload)
+                    finally:
+                        self.path = original_path
+                else:
+                    self.send_json(get_default_service().decide(payload))
+            elif path.startswith("/api/triplets/"):
                 self.dispatch_legacy(triplets.ReviewHandler.do_POST, "/api/triplets")
             elif path == "/api/ontology/review-run":
                 self.send_json(run_ontology_review(self.read_payload()))
+            elif path == "/api/ontology/freeze":
+                payload = self.read_payload()
+                ontology_path = ontology.safe_root_path(
+                    payload.get("ontology_path"), ROOT / "ontology" / "ontology.json"
+                )
+                result = freeze_ontology(
+                    ontology_path, payload.get("output_root"),
+                    approved_event_id=payload.get("approved_event_id"),
+                )
+                self.send_json(result, 201 if result.get("ok") else 422)
             elif path == "/api/ontology/review-decision":
                 self.send_json(decide_ontology(self.read_payload()))
             elif path.startswith("/api/ontology/") and path != "/api/ontology/build-run":
@@ -454,9 +724,19 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(start_triplet_extraction(self.read_payload()))
             elif path == "/api/ontology/build-run":
                 self.send_json(start_ontology_build(self.read_payload()), 202)
+            elif path == "/api/models":
+                self.send_json(create_model_config(self.read_payload()), 201)
             else:
                 self.send_json({"error": "not found"}, 404)
-        except (ValueError, FileNotFoundError, json.JSONDecodeError) as exc:
+        except NotFoundError as exc:
+            self.send_json({"error": str(exc)}, 404)
+        except ConflictError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
+        except ServiceUnavailableError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)
+        except UnprocessableEntityError as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["INVALID_FEEDBACK"]}, 422)
+        except (ValueError, ValidationError, FileNotFoundError, json.JSONDecodeError) as exc:
             self.send_json({"error": str(exc)}, 400)
         except Exception as exc:
             self.send_json({"error": str(exc)}, 500)

@@ -7,6 +7,8 @@ import { api } from './api';
 
 const activeView = ref(location.pathname === '/ontology' ? 'ontology' : 'triplet');
 const markdownFiles = ref([]);
+const modelConfigs = ref([]);
+const selectedModelId = ref(localStorage.getItem('workbench.selectedModelId') || 'default');
 const initError = ref('');
 
 function navigate(view) {
@@ -19,11 +21,34 @@ function onPopState() {
   activeView.value = location.pathname === '/ontology' ? 'ontology' : 'triplet';
 }
 
+function chooseAvailableModel(preferredId) {
+  const ids = new Set(modelConfigs.value.map(item => item.id));
+  selectedModelId.value = ids.has(preferredId) ? preferredId : modelConfigs.value[0]?.id || 'default';
+  localStorage.setItem('workbench.selectedModelId', selectedModelId.value);
+}
+
+async function refreshModels(preferredId = selectedModelId.value) {
+  const data = await api('/api/models');
+  modelConfigs.value = data.models || [];
+  chooseAvailableModel(preferredId);
+}
+
+async function onModelCreated(model) {
+  await refreshModels(model?.id || selectedModelId.value);
+}
+
+function updateSelectedModel(id) {
+  selectedModelId.value = id || 'default';
+  localStorage.setItem('workbench.selectedModelId', selectedModelId.value);
+}
+
 onMounted(async () => {
   window.addEventListener('popstate', onPopState);
   try {
     const data = await api('/api/init');
     markdownFiles.value = data.markdown_files || [];
+    modelConfigs.value = data.model_configs || [];
+    chooseAvailableModel(selectedModelId.value);
   } catch (error) {
     initError.value = error.message;
   }
@@ -48,7 +73,14 @@ onUnmounted(() => window.removeEventListener('popstate', onPopState));
     <div v-if="initError" class="global-error" role="alert">{{ initError }}</div>
     <main class="work-area">
       <KeepAlive>
-        <component :is="activeView === 'triplet' ? TripletReview : OntologyReview" :markdown-files="markdownFiles" />
+        <component
+          :is="activeView === 'triplet' ? TripletReview : OntologyReview"
+          :markdown-files="markdownFiles"
+          :model-configs="modelConfigs"
+          :selected-model-id="selectedModelId"
+          @update:selected-model-id="updateSelectedModel"
+          @model-created="onModelCreated"
+        />
       </KeepAlive>
     </main>
   </div>

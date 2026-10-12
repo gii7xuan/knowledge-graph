@@ -1,0 +1,21 @@
+{
+  "document": "传感器A可以测量温度。传感器A不能测量湿度。仅在条件X下，传感器A支持功能Y。模块B连接模块A。",
+  "ontology": {
+    "domain": "demo",
+    "classes": {
+      "C_Device": {"id": "C_Device", "label": "设备"}
+    },
+    "object_properties": {
+      "R_measures": {"id": "R_measures", "label": "测量", "domain": ["C_Device"], "range": ["C_Device"]},
+      "R_supports": {"id": "R_supports", "label": "支持", "domain": ["C_Device"], "range": ["C_Device"]},
+      "R_connects": {"id": "R_connects", "label": "连接", "domain": ["C_Device"], "range": ["C_Device"]}
+    }
+  },
+  "scenarios": [
+    {"id": "correct", "quote": "传感器A可以测量温度。", "triple": {"head": "传感器A", "head_type": "C_Device", "surface_relation": "测量", "relation_id": "R_measures", "relation_label": "测量", "tail": "温度", "tail_type": "C_Device", "tail_kind": "entity", "qualifiers": {"polarity": "positive"}}},
+    {"id": "negation_error", "quote": "传感器A不能测量湿度。", "triple": {"head": "传感器A", "head_type": "C_Device", "surface_relation": "测量", "relation_id": "R_measures", "relation_label": "测量", "tail": "湿度", "tail_type": "C_Device", "tail_kind": "entity", "qualifiers": {"polarity": "positive"}}},
+    {"id": "schema_gap", "quote": "仅在条件X下，传感器A支持功能Y。", "triple": {"head": "传感器A", "head_type": "C_Device", "surface_relation": "控制", "relation_id": "R_missing", "relation_label": "控制", "tail": "功能Y", "tail_type": "C_Device", "tail_kind": "entity", "qualifiers": {"polarity": "positive", "condition": "条件X"}}},
+    {"id": "counterevidence", "quote": "传感器A不能测量湿度。", "triple": {"head": "传感器A", "head_type": "C_Device", "surface_relation": "测量", "relation_id": "R_measures", "relation_label": "测量", "tail": "湿度", "tail_type": "C_Device", "tail_kind": "entity", "qualifiers": {"polarity": "positive"}}},
+    {"id": "direction_error", "quote": "模块B连接模块A。", "triple": {"head": "模块A", "head_type": "C_Device", "surface_relation": "连接", "relation_id": "R_connects", "relation_label": "连接", "tail": "模块B", "tail_type": "C_Device", "tail_kind": "entity", "qualifiers": {"polarity": "positive"}}}
+  ]
+}

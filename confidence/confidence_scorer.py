@@ -14,6 +14,7 @@ FinalScore = (0.4 * S_llm + 0.3 * S_sim_new + 0.3 * S_evidence) * M_logic * M_ma
 """
 
 from openai import OpenAI
+import httpx
 from difflib import SequenceMatcher
 from typing import Dict, List, Tuple, Optional
 import time
@@ -71,7 +72,7 @@ class ConfidenceScorer:
                 - "entailment" / "llm": 使用大模型判断证据句是否蕴含三元组陈述
                 - "embedding": 使用嵌入模型匹配三元组陈述与证据句
         """
-        self.client = OpenAI(api_key=api_key, base_url=base_url)
+        self.client = OpenAI(api_key=api_key, base_url=base_url, http_client=httpx.Client(trust_env=False))
         self.embedding_model = embedding_model
         self.relations = relations
         self.entity_to_type = entity_to_type
@@ -515,7 +516,7 @@ class ConfidenceScorer:
 
         try:
             response = self.client.chat.completions.create(
-                model="Qwen3-Coder-Next",
+                model="Qwen",
                 messages=[
                     {"role": "system", "content": "你是一位工程/物理逻辑审计专家。请严格根据工程常识判断三元组的合理性。"},
                     {"role": "user", "content": prompt}
@@ -669,7 +670,7 @@ class ConfidenceScorer:
 
         try:
             response = self.client.chat.completions.create(
-                model="Qwen3-Coder-Next",
+                model="Qwen",
                 messages=[
                     {"role": "system", "content": "你是一位严谨的信息抽取证据审计专家。只判断证据句是否语义蕴含三元组陈述。"},
                     {"role": "user", "content": prompt}

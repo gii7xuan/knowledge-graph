@@ -9,7 +9,6 @@ from langchain_text_splitters import (
     MarkdownHeaderTextSplitter,
     RecursiveCharacterTextSplitter,
 )
-from openai import OpenAI
 from tqdm import tqdm
 
 try:
@@ -23,16 +22,13 @@ except ImportError:
     from business_validate import validate_and_process_business_data, validate_business_data
 
 
-# 将项目根目录加入 Python 路径，并确保相对路径从项目根目录解析。
+# 将项目根目录加入 Python 路径；不要在导入模块时切换 cwd 或创建远程 client。
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir))
 PARENT_DIR = os.path.dirname(SCRIPT_DIR)
 
-if PARENT_DIR not in sys.path:
-    sys.path.insert(0, PARENT_DIR)
-
-if os.getcwd() != PROJECT_ROOT:
-    os.chdir(PROJECT_ROOT)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 from document.hierarchy_index import (
     normalize_document_id,
@@ -41,9 +37,9 @@ from document.hierarchy_index import (
 
 
 # ================= 大模型配置 =================
-API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "")
-BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "http://43.143.151.41:3000/v1")
-MODEL = "Qwen3-Coder-Next"
+API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "sk-45jfj2wN89d0hwLFA18c71D7D3A3462b9eBe96F6Ea7d8cF5")
+BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "https://43.143.151.41:3000/v1")
+MODEL = os.environ.get("ONTOLOGY_MODEL") or os.environ.get("OPENAI_MODEL") or os.environ.get("QWEN_MODEL", "Qwen")
 
 MARKDOWN_FILE_PATH = os.environ.get(
     "ONTOLOGY_MARKDOWN_FILE",
@@ -53,12 +49,36 @@ OUTPUT_JSON_PATH = "ontologyBuild/ontology_candidates.json"
 REVIEW_JSON_PATH = "ontologyBuild/ontology_candidates_review.json"
 PROCESSING_LOG_PATH = "ontologyBuild/ontology_candidates_processing.json"
 
-client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL)
 # ==============================================
 
 
 class SchemaValidationError(ValueError):
     """LLM 返回 JSON 可解析，但不符合候选本体 Schema。"""
+
+
+class ChunkExtractionError(RuntimeError):
+    """单个 chunk 在重试后仍无法完成抽取。"""
+
+    def __init__(self, chunk_id, message, attempts=None):
+        super().__init__(message)
+        self.chunk_id = chunk_id
+        self.attempts = attempts or []
+
+
+def create_default_client():
+    if not API_KEY:
+        raise ValueError("缺少 OPENAI_API_KEY 或 QWEN_API_KEY，不能执行真实 LLM 本体抽取")
+    if not BASE_URL:
+        raise ValueError("缺少 OPENAI_BASE_URL 或 QWEN_BASE_URL，不能执行真实 LLM 本体抽取")
+    try:
+        from openai import OpenAI
+    except ImportError as exc:
+        raise RuntimeError("缺少 openai 依赖，请先安装 openai 包") from exc
+    try:
+        import httpx
+    except ImportError:
+        return OpenAI(api_key=API_KEY, base_url=BASE_URL)
+    return OpenAI(api_key=API_KEY, base_url=BASE_URL, http_client=httpx.Client(trust_env=False))
 
 
 def read_markdown(markdown_path=MARKDOWN_FILE_PATH):
@@ -149,9 +169,20 @@ def normalize_extraction_result(parsed, chunk):
     return parsed
 
 
-def extract_candidates_from_chunk(chunk, retry_count=3, ontology_context=None):
+def extract_candidates_from_chunk(
+    chunk,
+    retry_count=3,
+    ontology_context=None,
+    llm_client=None,
+    model=None,
+    allow_empty_on_failure=False,
+):
     """调用 LLM，从一个文档片段中抽取候选类别、关系、domain 和 range。"""
     ontology_context = ontology_context or {}
+    llm_client = llm_client or create_default_client()
+    model = model or MODEL
+    if not model:
+        raise ValueError("缺少 ONTOLOGY_MODEL，不能执行真实 LLM 本体抽取")
     class_list = json.dumps(
         ontology_context.get("class_list", []), ensure_ascii=False, indent=2
     )
@@ -450,6 +481,7 @@ chunk_text:
 """.strip()
 
     retry_feedback = ""
+    attempts = []
     for attempt in range(1, retry_count + 1):
         try:
             current_user_prompt = user_prompt
@@ -458,8 +490,8 @@ chunk_text:
                     "\n\n【上一次输出错误，请修正后重新输出】\n"
                     f"{retry_feedback}"
                 )
-            response = client.chat.completions.create(
-                model=MODEL,
+            response = llm_client.chat.completions.create(
+                model=model,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": current_user_prompt},
@@ -470,6 +502,7 @@ chunk_text:
             parsed = json.loads(response.choices[0].message.content)
             return normalize_extraction_result(parsed, chunk)
         except json.JSONDecodeError as error:
+            attempts.append({"attempt": attempt, "error_type": "json_decode", "message": str(error)})
             print(
                 f"片段 {chunk['chunk_id']} 第 {attempt}/{retry_count} 次 JSON 解析失败，"
                 f"要求 LLM 重新输出: {error}"
@@ -478,6 +511,7 @@ chunk_text:
             if attempt < retry_count:
                 time.sleep(2)
         except SchemaValidationError as error:
+            attempts.append({"attempt": attempt, "error_type": "schema_validation", "message": str(error)})
             print(
                 f"片段 {chunk['chunk_id']} 第 {attempt}/{retry_count} 次 Schema 校验失败，"
                 f"要求 LLM 重新输出: {error}"
@@ -486,22 +520,26 @@ chunk_text:
             if attempt < retry_count:
                 time.sleep(2)
         except Exception as error:
+            attempts.append({"attempt": attempt, "error_type": type(error).__name__, "message": str(error)})
             print(
                 f"片段 {chunk['chunk_id']} 第 {attempt}/{retry_count} 次抽取失败: {error}"
             )
             if attempt < retry_count:
                 time.sleep(2)
 
-    print(f"片段 {chunk['chunk_id']} 多次输出不合格，已丢弃该 chunk。")
-    return empty_extraction_result()
+    message = f"片段 {chunk['chunk_id']} 多次输出不合格，已停止该 chunk。"
+    print(message)
+    if allow_empty_on_failure:
+        return empty_extraction_result()
+    raise ChunkExtractionError(chunk["chunk_id"], message, attempts)
 
 
-def extract_ontology_candidates(chunks, ontology_context=None):
+def extract_ontology_candidates(chunks, ontology_context=None, llm_client=None, model=None):
     """逐片段调用 LLM，汇总本体候选关系。"""
     candidates = empty_extraction_result()
     for chunk in tqdm(chunks, desc="抽取本体候选"):
         chunk_result = extract_candidates_from_chunk(
-            chunk, ontology_context=ontology_context
+            chunk, ontology_context=ontology_context, llm_client=llm_client, model=model
         )
         for field in RESULT_FIELDS:
             candidates[field].extend(chunk_result[field])

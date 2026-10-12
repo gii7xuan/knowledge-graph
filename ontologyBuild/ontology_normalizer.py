@@ -16,7 +16,7 @@ BUILD_CANDIDATES_PATH = BUILD_DIR / "ontology_candidates.json"
 BUILD_MODULES_PATH = BUILD_DIR / "ontology_modules.json"
 BUILD_RAW_CANDIDATES_PATH = BUILD_DIR / "ontology_candidates_raw.json"
 
-OUTPUT_ONTOLOGY_PATH = ONTOLOGY_DIR / "ontology.json"
+OUTPUT_ONTOLOGY_PREVIEW_PATH = BUILD_DIR / "ontology_preview.json"
 OUTPUT_MODULES_PATH = ONTOLOGY_DIR / "ontology_modules.json"
 OUTPUT_TOPIC_MAPPING_PATH = ONTOLOGY_DIR / "topic_schema_mapping.json"
 
@@ -220,12 +220,19 @@ def merge_duplicate_candidates(candidates):
             item["candidate_id"] = ensure_candidate_id(section, item, index)
             name = item_name(item)
             key = (section, normalize_name(name))
-            if section == "candidate_constraints":
+            if section in {"candidate_object_properties", "candidate_constraints"}:
                 key = (
                     section,
-                    normalize_name(item.get("property_name")),
+                    normalize_name(item.get("property_name") or item.get("name")),
                     normalize_name(item.get("domain_candidate")),
                     normalize_name(item.get("range_candidate") or item.get("range_datatype")),
+                )
+            elif section == "candidate_datatype_properties":
+                key = (
+                    section,
+                    normalize_name(name),
+                    normalize_name(item.get("domain_candidate")),
+                    normalize_name(item.get("range_datatype")),
                 )
             if not key[1]:
                 result[section].append(item)
@@ -542,14 +549,47 @@ def build_normalized_ontology(base_ontology, candidates, corpus_role, allow_new_
     return ontology
 
 
+def normalize_candidate_data(
+    base_ontology,
+    raw_candidates,
+    modules,
+    *,
+    corpus_role="build",
+    allow_new_concepts=False,
+):
+    candidates = merge_duplicate_candidates(raw_candidates)
+    candidates = normalize_classes(candidates, base_ontology)
+    candidates = normalize_relations_and_constraints(candidates, base_ontology)
+    candidates = apply_leakage_policy(candidates, corpus_role, allow_new_concepts)
+
+    topic_mapping = build_topic_schema_mapping(candidates, modules)
+    enriched_modules = enrich_modules(modules, topic_mapping)
+    normalized_ontology = build_normalized_ontology(
+        base_ontology,
+        candidates,
+        corpus_role,
+        allow_new_concepts,
+    )
+    return {
+        "candidates": candidates,
+        "modules": enriched_modules,
+        "topic_mapping": topic_mapping,
+        "ontology_preview": normalized_ontology,
+        "candidate_counts": {field: len(candidates.get(field, [])) for field in RESULT_FIELDS},
+    }
+
+
 def normalize_outputs(
     base_ontology_path=BASE_ONTOLOGY_PATH,
     candidates_path=BUILD_CANDIDATES_PATH,
     modules_path=BUILD_MODULES_PATH,
     corpus_role=None,
     allow_new_concepts=None,
+    ontology_preview_path=OUTPUT_ONTOLOGY_PREVIEW_PATH,
+    output_modules_path=OUTPUT_MODULES_PATH,
+    output_topic_mapping_path=OUTPUT_TOPIC_MAPPING_PATH,
 ):
-    corpus_role = corpus_role or os.environ.get("ONTOLOGY_CORPUS_ROLE", "test").strip().lower()
+    corpus_role = corpus_role or os.environ.get("ONTOLOGY_CORPUS_ROLE", "build").strip().lower()
     allow_new_concepts = (
         allow_new_concepts
         if allow_new_concepts is not None
@@ -570,31 +610,26 @@ def normalize_outputs(
     if Path(candidates_path).exists():
         write_json(BUILD_RAW_CANDIDATES_PATH, raw_candidates)
 
-    candidates = merge_duplicate_candidates(raw_candidates)
-    candidates = normalize_classes(candidates, base_ontology)
-    candidates = normalize_relations_and_constraints(candidates, base_ontology)
-    candidates = apply_leakage_policy(candidates, corpus_role, allow_new_concepts)
-
-    topic_mapping = build_topic_schema_mapping(candidates, modules)
-    enriched_modules = enrich_modules(modules, topic_mapping)
-    normalized_ontology = build_normalized_ontology(
+    normalized = normalize_candidate_data(
         base_ontology,
-        candidates,
-        corpus_role,
-        allow_new_concepts,
+        raw_candidates,
+        modules,
+        corpus_role=corpus_role,
+        allow_new_concepts=allow_new_concepts,
     )
 
-    write_json(candidates_path, candidates)
-    write_json(OUTPUT_ONTOLOGY_PATH, normalized_ontology)
-    write_json(OUTPUT_MODULES_PATH, enriched_modules)
-    write_json(OUTPUT_TOPIC_MAPPING_PATH, topic_mapping)
+    write_json(candidates_path, normalized["candidates"])
+    write_json(ontology_preview_path, normalized["ontology_preview"])
+    write_json(output_modules_path, normalized["modules"])
+    write_json(output_topic_mapping_path, normalized["topic_mapping"])
     return {
-        "ontology_path": str(OUTPUT_ONTOLOGY_PATH),
-        "modules_path": str(OUTPUT_MODULES_PATH),
-        "topic_mapping_path": str(OUTPUT_TOPIC_MAPPING_PATH),
-        "candidate_counts": {field: len(candidates.get(field, [])) for field in RESULT_FIELDS},
+        "ontology_preview_path": str(ontology_preview_path),
+        "modules_path": str(output_modules_path),
+        "topic_mapping_path": str(output_topic_mapping_path),
+        "candidate_counts": normalized["candidate_counts"],
         "corpus_role": corpus_role,
         "allow_new_concepts": allow_new_concepts,
+        "formal_ontology_updated": False,
     }
 
 

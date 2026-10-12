@@ -213,6 +213,26 @@ def build_class_hierarchy(ontology: Dict[str, Any]) -> Dict[str, str]:
     return hierarchy
 
 
+def build_real_class_hierarchy(ontology: Dict[str, Any]) -> Dict[str, str]:
+    """Return only resolved class-id parent edges, excluding alias compatibility edges."""
+    hierarchy: Dict[str, str] = {}
+    ref_index = class_reference_index(ontology)
+    for class_item in iter_classes(ontology):
+        class_id = class_item.get("id")
+        if not class_id:
+            continue
+        class_id = str(class_id)
+        parent = class_item.get("parent")
+        resolved_parent = ref_index.get(normalize_name(parent)) if parent else None
+        if resolved_parent and resolved_parent != class_id:
+            hierarchy[class_id] = resolved_parent
+        for subclass in _list(class_item.get("subclasses")):
+            resolved_child = ref_index.get(normalize_name(subclass))
+            if resolved_child and resolved_child != class_id:
+                hierarchy.setdefault(resolved_child, class_id)
+    return hierarchy
+
+
 def build_element_indexes(ontology: Dict[str, Any]) -> Dict[str, Set[str]]:
     indexes = {
         "classes": set(),

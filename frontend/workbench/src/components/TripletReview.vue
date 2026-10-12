@@ -3,13 +3,20 @@ import { computed, onActivated, onDeactivated, onUnmounted, reactive, ref, watch
 import { Check, ChevronLeft, ChevronRight, Clock3, Pencil, Play, RefreshCw, X } from 'lucide-vue-next';
 import MarkdownIt from 'markdown-it';
 import { api, post } from '../api';
+import ModelSelector from './ModelSelector.vue';
 
-const props = defineProps({ markdownFiles: { type: Array, default: () => [] } });
+const props = defineProps({
+  markdownFiles: { type: Array, default: () => [] },
+  modelConfigs: { type: Array, default: () => [] },
+  selectedModelId: { type: String, default: 'default' }
+});
+const emit = defineEmits(['update:selectedModelId', 'model-created']);
 const markdown = new MarkdownIt({ html: false, linkify: true, breaks: true });
 const openEvidence = reactive(new Set());
 const renderedEvidence = reactive({});
 let markdownReady;
 const files = ref([]);
+const runs = ref([]);
 const file = ref('');
 const relation = ref('');
 const minConfidence = ref('');
@@ -37,6 +44,8 @@ watch(() => props.markdownFiles, value => {
 }, { immediate: true });
 
 const pageCount = computed(() => Math.max(1, Math.ceil(total.value / pageSize)));
+const isV3 = computed(() => file.value.startsWith('v3:'));
+const runId = computed(() => isV3.value ? file.value.slice(3) : '');
 const jobLabel = computed(() => {
   if (job.value.running) return '抽取中';
   if (!job.value.exists) return '空闲';
@@ -51,10 +60,13 @@ function selectMarkdown(value) {
 }
 
 function query(includePage = false) {
-  const params = new URLSearchParams({ file: file.value, include_done: includeDone.value ? '1' : '0' });
-  if (relation.value) params.set('relation', relation.value);
-  if (minConfidence.value !== '') params.set('min_confidence', minConfidence.value);
-  if (maxConfidence.value !== '') params.set('max_confidence', maxConfidence.value);
+  const params = isV3.value
+    ? new URLSearchParams({ run_id: runId.value })
+    : new URLSearchParams({ file: file.value, include_done: includeDone.value ? '1' : '0' });
+  if (relation.value) params.set(isV3.value ? 'relation_id' : 'relation', relation.value);
+  if (!isV3.value && minConfidence.value !== '') params.set('min_confidence', minConfidence.value);
+  if (!isV3.value && maxConfidence.value !== '') params.set('max_confidence', maxConfidence.value);
+  if (isV3.value && !includeDone.value) params.set('status', 'pending');
   if (includePage) {
     params.set('page', String(page.value));
     params.set('page_size', String(pageSize));
@@ -64,7 +76,11 @@ function query(includePage = false) {
 
 async function loadFiles() {
   try {
-    files.value = await api('/api/triplets/files');
+    const [legacyFiles, runPage] = await Promise.all([
+      api('/api/triplets/files'), api('/api/triplets/runs?page_size=100')
+    ]);
+    runs.value = runPage.items || [];
+    files.value = [...runs.value.map(item => `v3:${item.run_id}`), ...legacyFiles];
     if (!files.value.includes(file.value)) file.value = files.value[0] || '';
     if (file.value) await loadAll();
   } catch (cause) {
@@ -97,14 +113,23 @@ async function loadAll() {
       return;
     }
     for (const item of items.value) {
-      drafts[item.review_id] = {
-        head: item.head || '',
-        relation: item.corrected_relation || item.relation || '',
-        tail: item.tail || '',
-        triple_correct: 1,
-        evidence_support: 'full',
-        relation_mapping_correct: 1,
-        comment: ''
+      const id = idFor(item);
+      const triple = tripleFor(item);
+      drafts[id] = {
+        head: triple.head || '',
+        head_type: triple.head_type || '',
+        relation: triple.relation_label || triple.surface_relation || triple.relation_id || '',
+        relation_id: triple.relation_id || '',
+        original_relation: triple.relation_label || triple.surface_relation || triple.relation_id || '',
+        original_relation_id: triple.relation_id || '',
+        tail: triple.tail || '',
+        tail_type: triple.tail_type || '',
+        triple_correct: null,
+        evidence_support: 'insufficient',
+        relation_mapping_correct: null,
+        reason_code: '',
+        comment: '',
+        activeStartedAt: Date.now()
       };
     }
   } catch (cause) {
@@ -135,28 +160,62 @@ function changePage(next) {
 }
 
 async function decide(item, decision) {
-  const draft = drafts[item.review_id];
+  const id = idFor(item);
+  const draft = drafts[id];
   if (!draft) return;
-  busyId.value = item.review_id;
+  busyId.value = id;
   error.value = '';
   try {
-    const corrected = decision === 'modify' ? {
-      head: draft.head,
-      relation: draft.relation,
-      tail: draft.tail
-    } : null;
-    await post('/api/triplets/decision', {
+    const corrected = decision === 'modify'
+      ? (isV3.value ? {
+          head: draft.head,
+          head_type: draft.head_type || null,
+          surface_relation: draft.relation,
+          relation_label: draft.relation,
+          relation_id: (
+            draft.relation !== draft.original_relation && draft.relation_id === draft.original_relation_id
+              ? null
+              : (draft.relation_id || null)
+          ),
+          tail: draft.tail,
+          tail_type: draft.tail_type || null
+        } : {
+          head: draft.head,
+          relation: draft.relation,
+          relation_id: draft.relation_id || null,
+          tail: draft.tail
+        })
+      : null;
+    const reasonCode = draft.reason_code || ({
+      accept: 'HUMAN_CONFIRMED', reject: 'FACT_INCORRECT',
+      modify: 'REVISION_REQUIRED', defer: 'EVIDENCE_INSUFFICIENT'
+    }[decision]);
+    const factualReject = !['DUPLICATE', 'OUT_OF_SCOPE', 'NOT_RELEVANT_TO_TASK'].includes(reasonCode);
+    const labels = decision === 'accept'
+      ? { valid_for_kg: 1, source_support: 'supported', relation_mapping_correct: draft.relation_mapping_correct }
+      : decision === 'reject'
+        ? { valid_for_kg: factualReject ? 0 : null, source_support: factualReject ? 'contradicted' : null, relation_mapping_correct: draft.relation_mapping_correct }
+        : decision === 'modify'
+          ? { valid_for_kg: null, source_support: null, relation_mapping_correct: null }
+          : { valid_for_kg: null, source_support: null, relation_mapping_correct: null };
+    const base = isV3.value ? {
+      run_id: runId.value,
+      candidate_id: item.candidate_id,
+      revision: item.revision,
+      expected_row_version: item.row_version
+    } : {
       file: file.value,
-      review_id: item.review_id,
+      review_id: item.review_id
+    };
+    await post('/api/triplets/decision', {
+      ...base,
       decision,
+      idempotency_key: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`,
+      reason_code: reasonCode,
       comment: draft.comment,
       modifications: corrected,
-      annotation: {
-        triple_correct: Number(draft.triple_correct),
-        evidence_support: draft.evidence_support,
-        relation_mapping_correct: Number(draft.relation_mapping_correct),
-        corrected_triple: corrected
-      }
+      active_review_seconds: Math.max(0, Math.round((Date.now() - draft.activeStartedAt) / 1000)),
+      annotation: labels
     });
     await loadAll();
   } catch (cause) {
@@ -182,7 +241,8 @@ async function startExtraction() {
   try {
     job.value = await post('/api/triplet/start', {
       markdown_path: markdownPath.value,
-      output_stem: outputStem.value
+      output_stem: outputStem.value,
+      model_id: props.selectedModelId
     });
     if (!job.value.running) await loadFiles();
   } catch (cause) {
@@ -190,6 +250,14 @@ async function startExtraction() {
   } finally {
     extractionBusy.value = false;
   }
+}
+
+function updateSelectedModel(value) {
+  emit('update:selectedModelId', value);
+}
+
+function onModelCreated(model) {
+  emit('model-created', model);
 }
 
 function loadMathRenderer() {
@@ -212,7 +280,7 @@ function loadMathRenderer() {
 }
 
 async function onEvidenceToggle(event, item) {
-  const id = item.review_id;
+  const id = idFor(item);
   if (!event.target.open) {
     openEvidence.delete(id);
     return;
@@ -222,11 +290,11 @@ async function onEvidenceToggle(event, item) {
   try {
     await loadMathRenderer();
     if (openEvidence.has(id)) {
-      renderedEvidence[id] = markdown.render(item.evidence_chunk || '未找到对应 source_id 的原文');
+      renderedEvidence[id] = markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
     }
   } catch (cause) {
     error.value = `证据排版失败：${cause.message}`;
-    renderedEvidence[id] = markdown.render(item.evidence_chunk || '未找到对应 source_id 的原文');
+    renderedEvidence[id] = markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
   }
 }
 
@@ -241,6 +309,30 @@ function bestEvidence(item) {
 
 function validation(item) {
   return item.type_validation || item.confidence_detail?.type_validation || {};
+}
+
+function calibratedLabel(item) {
+  const value = item.audit_summary?.calibrated_probability ?? item.calibrated_probability;
+  return value === null || value === undefined ? '尚未校准' : Number(value).toFixed(4);
+}
+
+function votes(item) {
+  return item.audit_summary?.votes || item.validator_votes || [];
+}
+
+function idFor(item) {
+  return item.review_id || item.candidate_id;
+}
+
+function tripleFor(item) {
+  return item.triple || item;
+}
+
+function sourceLabel(value) {
+  if (!value.startsWith('v3:')) return value;
+  const id = value.slice(3);
+  const run = runs.value.find(item => item.run_id === id);
+  return `v3 · ${run?.document_id || run?.source_path || id}`;
 }
 
 function stopPolling() {
@@ -267,7 +359,7 @@ onUnmounted(stopPolling);
       <div class="toolbar-actions">
         <select v-model="file" aria-label="待审核文件" @change="selectFile">
           <option v-if="!files.length" value="">暂无待审文件</option>
-          <option v-for="name in files" :key="name" :value="name">{{ name }}</option>
+          <option v-for="name in files" :key="name" :value="name">{{ sourceLabel(name) }}</option>
         </select>
         <button class="icon-button" title="刷新审核列表" aria-label="刷新审核列表" @click="loadFiles"><RefreshCw :size="17" /></button>
         <button :class="{ selected: extractionOpen }" @click="extractionOpen = !extractionOpen"><Play :size="16" />三元组抽取</button>
@@ -283,6 +375,13 @@ onUnmounted(stopPolling);
           </select>
         </label>
         <label>输出名称<input v-model="outputStem" /></label>
+        <ModelSelector
+          :model-configs="modelConfigs"
+          :selected-model-id="selectedModelId"
+          :disabled="job.running || extractionBusy"
+          @update:selected-model-id="updateSelectedModel"
+          @model-created="onModelCreated"
+        />
         <button class="primary run-button" :disabled="!markdownPath || job.running || extractionBusy" @click="startExtraction"><Play :size="16" />开始抽取</button>
       </div>
       <div class="run-status">
@@ -291,6 +390,7 @@ onUnmounted(stopPolling);
         <span v-if="job.exists">已接收 {{ job.counts?.accepted || 0 }} · 待审核 {{ job.counts?.rejected || 0 }} · 进程 {{ job.pid || '-' }}</span>
       </div>
       <div v-if="job.exists" class="output-paths">
+        <span v-if="job.model?.model">model: <code>{{ job.model.name }} · {{ job.model.model }}</code></span>
         <span v-for="(path, name) in job.outputs" :key="name">{{ name }}: <code>{{ path }}</code></span>
       </div>
       <details v-if="job.exists"><summary>运行日志</summary><pre class="run-log">{{ job.log_tail || '等待输出' }}</pre></details>
@@ -326,13 +426,13 @@ onUnmounted(stopPolling);
         <div v-else-if="!files.length" class="empty-state">没有找到待审文件</div>
         <div v-else-if="!items.length" class="empty-state">当前筛选条件下没有待审三元组</div>
         <div v-else class="review-list">
-          <article v-for="item in items" :key="item.review_id" class="review-card">
+          <article v-for="item in items" :key="idFor(item)" class="review-card">
             <div class="triple-line">
-              <div class="triple-node"><strong>{{ item.head }}</strong><small>{{ item.head_type || 'Unknown' }}</small></div>
-              <div class="triple-relation">{{ item.corrected_relation || item.relation }}</div>
-              <div class="triple-node"><strong>{{ item.tail }}</strong><small>{{ item.tail_type || 'Unknown' }}</small></div>
+              <div class="triple-node"><strong>{{ tripleFor(item).head }}</strong><small>{{ tripleFor(item).head_type || item.head_type || 'Unknown' }}</small></div>
+              <div class="triple-relation">{{ tripleFor(item).relation_label || tripleFor(item).surface_relation || item.corrected_relation || tripleFor(item).relation_id || item.relation }}</div>
+              <div class="triple-node"><strong>{{ tripleFor(item).tail }}</strong><small>{{ tripleFor(item).tail_type || item.tail_type || 'Unknown' }}</small></div>
             </div>
-            <div class="meta-line">置信度 <strong>{{ item.confidence_display }}</strong> · 状态 {{ item.review_status || 'pending' }} · 来源 {{ item.source_id || '-' }}</div>
+            <div class="meta-line">校准概率 <strong>{{ calibratedLabel(item) }}</strong> · 旧机制分数 {{ item.confidence_display }} · 版本 {{ item.revision || 1 }} · 状态 {{ item.review_status || item.human_status || 'pending' }} · 来源 {{ item.source_id || item.source_chunk_id || '-' }}</div>
             <p v-if="item.corrected_relation" class="reason">原关系：{{ item.relation }}，建议关系：{{ item.corrected_relation }}</p>
             <p v-if="item.discard_reason || item.confidence_decision?.reason" class="reason">{{ item.discard_reason || item.confidence_decision?.reason }}</p>
             <details class="evidence-details" @toggle="onEvidenceToggle($event, item)">
@@ -343,23 +443,45 @@ onUnmounted(stopPolling);
               <div class="detail-line">domain/range：{{ validation(item).passed === false ? (validation(item).errors || []).join('；') : '通过' }}</div>
               <div v-if="item.evidence || bestEvidence(item).text" class="detail-line">证据片段：{{ item.evidence || bestEvidence(item).text }}</div>
               <div v-if="bestEvidence(item).level" class="detail-line">证据层级：{{ bestEvidence(item).level }} · 位置 {{ bestEvidence(item).start }}-{{ bestEvidence(item).end }}</div>
-              <div v-if="openEvidence.has(item.review_id)" class="markdown-evidence" v-html="renderedEvidence[item.review_id] || '正在排版证据...' "></div>
+              <div class="detail-line">引用定位：{{ bestEvidence(item).semantic_status === 'unknown' ? '已定位，语义待审核' : (bestEvidence(item).semantic_status || '未知') }}</div>
+              <div v-if="votes(item).length" class="detail-line">
+                模型意见：
+                <span v-for="vote in votes(item)" :key="`${vote.round_id}-${vote.voter_id}`">
+                  {{ vote.voter_id }}={{ vote.response_status === 'ok' ? vote.verdict : vote.response_status }}
+                </span>
+              </div>
+              <div v-if="openEvidence.has(idFor(item))" class="markdown-evidence" v-html="renderedEvidence[idFor(item)] || '正在排版证据...' "></div>
             </details>
-            <template v-if="drafts[item.review_id]">
+            <template v-if="drafts[idFor(item)]">
               <div class="edit-grid">
-                <label>head<input v-model="drafts[item.review_id].head" /></label>
-                <label>relation<input v-model="drafts[item.review_id].relation" /></label>
-                <label>tail<input v-model="drafts[item.review_id].tail" /></label>
+                <label>head<input v-model="drafts[idFor(item)].head" /></label>
+                <label v-if="isV3">head_type<input v-model="drafts[idFor(item)].head_type" /></label>
+                <label>relation<input v-model="drafts[idFor(item)].relation" /></label>
+                <label v-if="isV3">relation_id<input v-model="drafts[idFor(item)].relation_id" /></label>
+                <label>tail<input v-model="drafts[idFor(item)].tail" /></label>
+                <label v-if="isV3">tail_type<input v-model="drafts[idFor(item)].tail_type" /></label>
               </div>
               <div class="edit-grid">
-                <label>三元组正确性<select v-model.number="drafts[item.review_id].triple_correct"><option :value="1">正确</option><option :value="0">错误</option></select></label>
-                <label>证据支持<select v-model="drafts[item.review_id].evidence_support"><option value="full">完整支持</option><option value="partial">部分支持</option><option value="none">不支持</option></select></label>
-                <label>关系映射<select v-model.number="drafts[item.review_id].relation_mapping_correct"><option :value="1">正确</option><option :value="0">错误</option></select></label>
+                <label>三元组正确性<select v-model="drafts[idFor(item)].triple_correct"><option :value="null">未判断</option><option :value="1">正确</option><option :value="0">错误</option></select></label>
+                <label>证据支持<select v-model="drafts[idFor(item)].evidence_support"><option value="insufficient">证据不足</option><option value="supported">完整支持</option><option value="contradicted">明确反驳</option></select></label>
+                <label>关系映射<select v-model="drafts[idFor(item)].relation_mapping_correct"><option :value="null">未判断</option><option :value="1">正确</option><option :value="0">错误</option></select></label>
               </div>
-              <textarea v-model="drafts[item.review_id].comment" placeholder="审核备注" aria-label="审核备注"></textarea>
+              <label>原因
+                <select v-model="drafts[idFor(item)].reason_code">
+                  <option value="">按动作使用默认原因</option>
+                  <option value="NEGATION_IGNORED">忽略否定</option>
+                  <option value="CONDITION_MISSING">遗漏条件</option>
+                  <option value="DIRECTION_MISMATCH">方向错误</option>
+                  <option value="RELATION_MISMATCH">关系错误</option>
+                  <option value="DUPLICATE">重复事实</option>
+                  <option value="OUT_OF_SCOPE">超出范围</option>
+                  <option value="EVIDENCE_INSUFFICIENT">证据不足</option>
+                </select>
+              </label>
+              <textarea v-model="drafts[idFor(item)].comment" placeholder="审核备注" aria-label="审核备注"></textarea>
               <div class="decision-actions">
                 <button class="success" :disabled="!!busyId" @click="decide(item, 'accept')"><Check :size="16" />通过</button>
-                <button class="primary" :disabled="!!busyId" @click="decide(item, 'modify')"><Pencil :size="16" />修改后通过</button>
+                <button class="primary" :disabled="!!busyId" @click="decide(item, 'modify')"><Pencil :size="16" />保存修改并复审</button>
                 <button class="danger" :disabled="!!busyId" @click="decide(item, 'reject')"><X :size="16" />拒绝</button>
                 <button :disabled="!!busyId" @click="decide(item, 'defer')"><Clock3 :size="16" />暂缓</button>
               </div>

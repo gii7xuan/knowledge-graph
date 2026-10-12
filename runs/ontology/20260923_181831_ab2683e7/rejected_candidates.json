@@ -1,0 +1,4394 @@
+[
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "水蒸气",
+      "normalized_name": "水蒸气",
+      "parent_candidate": null,
+      "definition_candidate": "湿空气中的水蒸气成分",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_55f1bdf179fe",
+          "text": "水蒸气的气体常数  $R_{\\text {水}}$  与干空气的气体常数  $R$  之间的关系为"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档提到水蒸气及其气体常数，作为湿空气的组成成分。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "激波",
+      "normalized_name": "激波",
+      "parent_candidate": "C_ProjectileMotion",
+      "definition_candidate": "超声速气流中因扰动叠加形成的压力、密度和温度突变现象。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_06774a642486",
+          "text": "当弹丸超声速飞行时，就会在弹头部及其他部位产生激波，激波的形成也会大量消耗能量，它相应形成的阻力就是波动阻力。"
+        },
+        {
+          "chunk_id": "chunk_06774a642486",
+          "text": "这就是超声速气流中特有的激波现象。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文直接出现“激波”并给出解释，属于弹丸飞行中的空气动力学现象，已有本体未覆盖，作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹道波",
+      "normalized_name": "弹道波",
+      "parent_candidate": "C_ProjectileMotion",
+      "definition_candidate": "超声速弹丸飞行中所形成的波。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_06774a642486",
+          "text": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+        },
+        {
+          "chunk_id": "chunk_06774a642486",
+          "text": "弹道波总是形成强烈的压缩，它也消耗着弹丸的动能，因此，也产生相应的阻力，这就是波动阻力。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文直接出现“弹道波”并说明其与波动阻力的关系，属于弹丸飞行中的现象，已有本体未覆盖，作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "空气阻力",
+      "normalized_name": "空气阻力",
+      "parent_candidate": null,
+      "definition_candidate": "弹丸受到的空气阻力，方向与弹丸质心速度矢量共线反向",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "$R_{x}$  为空气阻力，也称为迎面阻力或切向阻力，其方向与弹丸质心速度矢量共线反向， $\\mathrm{N}$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确给出空气阻力定义，作为领域物理概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "涡阻系数",
+      "normalized_name": "涡阻系数",
+      "parent_candidate": "空气阻力系数",
+      "definition_candidate": "空气阻力系数的分量之一",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "成为涡阻系数  $C_{xb}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确涡阻系数是空气阻力系数分量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "波阻系数",
+      "normalized_name": "波阻系数",
+      "parent_candidate": "空气阻力系数",
+      "definition_candidate": "空气阻力系数的分量之一",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "成为波阻系数  $C_{xw}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确波阻系数是空气阻力系数分量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹丸",
+      "normalized_name": "弹丸",
+      "parent_candidate": "C_Ammunition",
+      "definition_candidate": "火炮发射的弹丸",
+      "status": "existing",
+      "matched_existing_class": "C_Projectile",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "设 $x$ 为从射出点到弹丸在地面上投影（即 $O_{1}O^{\\prime}$ 连线与地面的交点）的曲线距离。"
+        }
+      ],
+      "confidence": 0.95,
+      "reason": "原文明确提到弹丸，且与已有类别 C_Projectile 匹配。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "风",
+      "normalized_name": "风",
+      "parent_candidate": "C_ClimaticEnvironment",
+      "definition_candidate": "有风情况下的环境因素，其速度特性可分解为纵风和横风。",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_b5a7f1dfbd09",
+          "text": "本节研究有风情况下的质心运动方程组。"
+        },
+        {
+          "chunk_id": "chunk_b5a7f1dfbd09",
+          "text": "风速可以分解为纵风和横风。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文多次提及‘风’和‘风速’，并作为研究条件，可归纳为环境因素类别。上位类推测为气候环境，但未明确，故置信度适中。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "空气阻力",
+      "normalized_name": "空气阻力",
+      "parent_candidate": null,
+      "definition_candidate": "空气对运动弹丸产生的阻力。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "空气阻力矢量也与相对速度矢量重合，只是方向相反。"
+        },
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "这时空气阻力 $R_{x}$ 可以分解出一个与绝对速度 $\\pmb{v}$ 垂直的分力 $R_{y}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "空气阻力是弹丸飞行中受到的力，已有本体类别中无直接对应，但对象属性中有C_Force作为range。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "分力",
+      "normalized_name": "分力",
+      "parent_candidate": null,
+      "definition_candidate": "合力分解得到的力分量。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "这时空气阻力 $R_{x}$ 可以分解出一个与绝对速度 $\\pmb{v}$ 垂直的分力 $R_{y}$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "分力是力学中的概念，文档中明确出现，可作为候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "赤道阻尼力矩",
+      "normalized_name": "赤道阻尼力矩",
+      "parent_candidate": "C_PerformanceParameter",
+      "definition_candidate": "弹丸围绕其赤道轴摆动时产生阻滞，其摆动的力矩称为赤道阻尼力矩。",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_422ab2250173",
+          "text": "其摆动的力矩称为赤道阻尼力矩"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "文档明确定义了赤道阻尼力矩，是一个稳定的物理概念，可作为性能参数子类。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "马格努斯力矩",
+      "normalized_name": "马格努斯力矩",
+      "parent_candidate": "C_DynamicsObject",
+      "definition_candidate": "马格努斯力向重心简化形成的力矩，或由马格努斯力偶产生的力矩。",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "当将其向重心简化时，就形成一个力矩，叫马格努斯力矩，用 $M_y$ 表示。"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文明确定义了马格努斯力矩。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "攻角",
+      "normalized_name": "攻角",
+      "parent_candidate": "C_PerformanceParameter",
+      "definition_candidate": "弹轴与速度矢量之间的夹角。",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "又由于有攻角 $\\delta$ 存在"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确出现‘攻角’，并用于弹道分析。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "自转角速度",
+      "normalized_name": "自转角速度",
+      "parent_candidate": "C_PerformanceParameter",
+      "definition_candidate": "弹丸绕自身轴旋转的角速度。",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "随弹体自转的、包围弹体周围的一薄层空气（边界层）的阻滞"
+        },
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "以右手四指由弹丸自转角速度矢量 $\\dot{\\gamma}$ 向速度矢量 $v$ 方向卷曲时"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文出现‘自转角速度矢量’，可归纳为自转角速度。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "坐标系",
+      "normalized_name": "坐标系",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "用于描述弹丸运动的空间参考系统。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "为描述弹丸的一般运动，必须规定一定的坐标系，坐标系不同，弹丸运动规律的表达式也不相同。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确提到多种用于描述弹丸运动的坐标系，属于稳定的领域概念，但已有本体未覆盖。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "基准坐标系",
+      "normalized_name": "基准坐标系",
+      "parent_candidate": "坐标系",
+      "definition_candidate": "坐标原点在弹丸质心上，包含质心速度矢量的铅垂面为参考面的直角坐标系。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "基准坐标系的坐标原点 $O^{\\prime}$ 在弹丸质心上，取包含质心 $O^{\\prime}$ 的速度矢量 $\\pmb{v}$ 的铅垂面为参考面，该平面上的直角坐标系 $xO^{\\prime}y$ 的 $O^{\\prime}x$ 及 $O^{\\prime}y$ 轴分别为水平轴与铅垂轴。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档明确定义了基准坐标系，是坐标系的一种具体类型。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹轴坐标系",
+      "normalized_name": "弹轴坐标系",
+      "parent_candidate": "坐标系",
+      "definition_candidate": "以弹轴与速度矢量所形成的阻力面为参考面，原点在弹丸质心，固联于弹轴的坐标系。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "弹轴坐标系则以弹轴 $O'\\xi$ 与速度矢量 $\\pmb{v}$ 所形成的阻力面为参考面"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档明确定义了弹轴坐标系，是坐标系的一种具体类型。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "旋转弹",
+      "normalized_name": "旋转弹",
+      "parent_candidate": "C_Projectile",
+      "definition_candidate": "在飞行中绕弹轴自转的弹丸。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "归纳起来，旋转弹在只计入翻转力矩时 $M_z$、$\\delta$ 很小，且 $\\sigma >0$ 的条件下，弹丸绕质心运动由三部分组成："
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确提及'旋转弹'，并描述其运动特性，是弹丸的一个子类。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "旋转弹",
+      "normalized_name": "旋转弹",
+      "parent_candidate": "C_Projectile",
+      "definition_candidate": "能够旋转稳定的弹丸。",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "只有 σ > 0 时，才能保证旋转弹的陀螺稳定性"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档中提及‘旋转弹’，它是一类弹丸，但未给出详细定义。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "侧向动力平衡角",
+      "normalized_name": "侧向动力平衡角",
+      "parent_candidate": "C_PerformanceParameter",
+      "definition_candidate": "由定性分析得出并与严密数学解一致的弹丸侧向动力平衡角表达形式。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "上式即侧向动力平衡角  $\\delta_{\\mathrm {1p}}$  或  $\\delta_{\\mathrm {p}} \\approx \\delta_{\\mathrm {1p}}$  的一种表达形式"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文直接出现‘侧向动力平衡角’，但已有类别中无完全匹配；按其为弹道参数推测可归入性能参数类，parent 未直接出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹丸一般运动",
+      "normalized_name": "弹丸一般运动",
+      "parent_candidate": "C_ProjectileMotion",
+      "definition_candidate": "研究弹丸在全部力和力矩作用下，同时考虑其质心运动和围绕质心的运动规律。",
+      "status": "new_candidate",
+      "matched_existing_class": "C_ProjectileMotion",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dcc1406714e6",
+          "text": "研究弹丸一般运动的研究基础上"
+        },
+        {
+          "chunk_id": "chunk_dcc1406714e6",
+          "text": "弹丸一般运动的理论成果"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文多次提及'弹丸一般运动'，是弹丸飞行动力学的一个具体研究领域，可归为C_ProjectileMotion的子类候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹丸绕质心运动",
+      "normalized_name": "弹丸绕质心运动",
+      "parent_candidate": "C_ProjectileMotion",
+      "definition_candidate": "",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dcc1406714e6",
+          "text": "只考虑了主要力矩——俯仰力矩 $M_z$ 条件下的弹丸绕质心运动"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确提及'弹丸绕质心运动'，是弹丸飞行动力学中的一种运动形式，可归为C_ProjectileMotion的子类候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "俯仰力矩",
+      "normalized_name": "俯仰力矩",
+      "parent_candidate": null,
+      "definition_candidate": "",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dcc1406714e6",
+          "text": "只考虑了主要力矩——俯仰力矩 $M_z$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确提及'俯仰力矩'，是作用在弹丸上的力矩类型，可作为新的物理量类别候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "理想弹道",
+      "normalized_name": "理想弹道",
+      "parent_candidate": "C_ProjectileMotion",
+      "definition_candidate": "弹丸运动的理想轨迹，其切线方向为理想弹道坐标系O'x_I轴方向，其与水平面的夹角为弹道倾角。",
+      "status": "new_candidate",
+      "matched_existing_class": "C_ProjectileMotion",
+      "evidence": [
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'x_{I} 轴为理想弹道切线方向"
+        },
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'x_{I} 轴与水平面的夹角为理想弹道的弹道倾角  $\\theta$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文多次提及‘理想弹道’，如‘理想弹道切线方向’、‘理想弹道的弹道倾角’，可归纳为弹丸的理想运动轨迹，作为 C_ProjectileMotion 的子类候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "内弹道性能",
+      "normalized_name": "内弹道性能",
+      "parent_candidate": "C_FirepowerParameter",
+      "definition_candidate": null,
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_479aa7407ec2",
+          "text": "火药压力全冲量对内弹道性能的影响"
+        },
+        {
+          "chunk_id": "chunk_479aa7407ec2",
+          "text": "计算不同 $I_{k}$ 值对各弹道性能影响"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档中直接出现‘内弹道性能’术语，且与已有火力性能参数相关，但已有本体未覆盖，作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "药室",
+      "normalized_name": "药室",
+      "parent_candidate": null,
+      "definition_candidate": "",
+      "status": "new_candidate",
+      "matched_existing_class": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_6c4218f91021",
+          "text": "如果在相同的药室容积下， χ_{W_0} 值越大，则药室长度就越小。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档中多次提及药室，作为火炮的组成部分，但已有本体未覆盖，故作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "分解出",
+      "normalized_name": "分解出",
+      "definition_candidate": "空气阻力分解出垂直分力。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "空气阻力",
+      "range_candidate": "分力",
+      "evidence": [
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "这时空气阻力 $R_{x}$ 可以分解出一个与绝对速度 $\\pmb{v}$ 垂直的分力 $R_{y}$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "明确描述了力的分解关系。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "自转",
+      "normalized_name": "自转",
+      "definition_candidate": "弹丸绕自身弹轴旋转。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "弹轴",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "① 弹丸以等角速度 $r_0$ 绕弹轴自转；"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确描述弹丸绕弹轴自转，是一个稳定的运动关系。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "进动",
+      "normalized_name": "进动",
+      "definition_candidate": "物体绕某一轴线的旋转运动，此处指阻力面绕速度矢量线进动。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "阻力面",
+      "range_candidate": "速度矢量线",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "②阻力面以等角速度 $a$ 绕速度矢量线 $\\nu$ 进动；"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文描述阻力面绕速度矢量线进动，但 domain 和 range 是否为稳定类别不确定。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "射高",
+      "normalized_name": "射高",
+      "definition_candidate": "火炮射击时弹丸所能达到的最大高度。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "km",
+      "example_value": "10km 以下",
+      "evidence": [
+        {
+          "chunk_id": "chunk_3e65105128da",
+          "text": "在火炮目前的射高（10km 以下）和射程（50km 以下）范围内"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档提及火炮的射高，并给出数值范围，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "水蒸气气体常数",
+      "normalized_name": "水蒸气气体常数",
+      "definition_candidate": "水蒸气的气体常数",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "水蒸气",
+      "range_datatype": "float",
+      "unit": "J/(kg·K)",
+      "example_value": "R_水 = 8/5 R",
+      "evidence": [
+        {
+          "chunk_id": "chunk_55f1bdf179fe",
+          "text": "水蒸气的气体常数  $R_{\\text {水}}$  与干空气的气体常数  $R$  之间的关系为"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档定义水蒸气的气体常数及其与干空气气体常数的关系。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "干空气密度",
+      "normalized_name": "干空气密度",
+      "definition_candidate": "干空气的密度",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "干空气",
+      "range_datatype": "float",
+      "unit": "kg/m^3",
+      "example_value": "\\rho_干",
+      "evidence": [
+        {
+          "chunk_id": "chunk_55f1bdf179fe",
+          "text": "$\\rho_ {\\text {干}} = \\frac {p _ {\\text {干}}}{R T}$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档给出干空气密度的计算公式。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "水蒸气密度",
+      "normalized_name": "水蒸气密度",
+      "definition_candidate": "水蒸气的密度",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "水蒸气",
+      "range_datatype": "float",
+      "unit": "kg/m^3",
+      "example_value": "\\rho_水",
+      "evidence": [
+        {
+          "chunk_id": "chunk_55f1bdf179fe",
+          "text": "$\\rho_ {\\text {水}} = \\frac {a}{R _ {\\text {水}} T}$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档给出水蒸气密度的计算公式。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "气压",
+      "normalized_name": "气压",
+      "definition_candidate": "大气气压 p 随高度 y 的变化关系。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "大气气压和密度随高度的标准分布",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "求出大气气压  $p$  和密度  $\\rho$  随高度  $y$  的变化关系"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "文档将大气气压 p 作为标准分布描述的量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "密度",
+      "normalized_name": "密度",
+      "definition_candidate": "大气密度 ρ 随高度 y 的变化关系。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "大气气压和密度随高度的标准分布",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "求出大气气压  $p$  和密度  $\\rho$  随高度  $y$  的变化关系"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "文档将大气密度 ρ 作为标准分布描述的量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "系数 A1",
+      "normalized_name": "系数A1",
+      "definition_candidate": "温度分布标准定律中的系数 A1。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "温度分布的标准定律",
+      "range_datatype": "float",
+      "unit": "K",
+      "example_value": "230.0 K",
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "式中系数分别为"
+        },
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "$A _ {1} = 2 3 0. 0 \\mathrm {K}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档明确给出温度标准定律的系数 A1 及其单位 K。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "系数 G1",
+      "normalized_name": "系数G1",
+      "definition_candidate": "温度分布标准定律中的系数 G1。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "温度分布的标准定律",
+      "range_datatype": "float",
+      "unit": "K/m",
+      "example_value": "6.328×10^-3 K/m",
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "式中系数分别为"
+        },
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "$G _ {1} = 6. 3 2 8 \\times 1 0 ^ {- 3} \\mathrm {K / m}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档明确给出温度标准定律的系数 G1 及其单位 K/m。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "系数 C1",
+      "normalized_name": "系数C1",
+      "definition_candidate": "温度分布标准定律中的系数 C1。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "温度分布的标准定律",
+      "range_datatype": "float",
+      "unit": "K/m",
+      "example_value": "1.172×10^-6 K/m",
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "式中系数分别为"
+        },
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "$C _ {1} = 1. 1 7 2 \\times 1 0 ^ {- 6} \\mathrm {K / m}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档明确给出温度标准定律的系数 C1 及其单位 K/m。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹丸飞行速度",
+      "normalized_name": "弹丸飞行速度",
+      "definition_candidate": "弹丸飞行的速度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "弹丸",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_17e3fd7ff7e9",
+          "text": "涡流区的形成不仅与弹丸截面形状有关，还与弹丸飞行速度有关，弹丸速度越高，越易形成涡流区，涡流阻力也越大。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档提及弹丸飞行速度，但未给出具体数值或定义，属于可能的数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "空气阻力",
+      "normalized_name": "空气阻力",
+      "definition_candidate": "弹丸飞行时受到的空气阻力",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "N",
+      "example_value": "R_x",
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "$R_{x}$  为空气阻力，也称为迎面阻力或切向阻力，其方向与弹丸质心速度矢量共线反向， $\\mathrm{N}$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确空气阻力为弹丸相关物理量并给出单位N。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "空气密度",
+      "normalized_name": "空气密度",
+      "definition_candidate": "空气的密度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": null,
+      "range_datatype": "float",
+      "unit": "kg/m^3",
+      "example_value": "ρ",
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "$\\rho$  为空气密度，  $\\mathrm{kg / m^3}$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确空气密度及单位，但未给出适用主体类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "涡阻系数",
+      "normalized_name": "涡阻系数",
+      "definition_candidate": "空气阻力系数的分量之一",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "空气阻力系数",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "C_xb",
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "成为涡阻系数  $C_{xb}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确涡阻系数是空气阻力系数分量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "波阻系数",
+      "normalized_name": "波阻系数",
+      "definition_candidate": "空气阻力系数的分量之一",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "空气阻力系数",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "C_xw",
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "成为波阻系数  $C_{xw}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确波阻系数是空气阻力系数分量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹形系数",
+      "normalized_name": "弹形系数",
+      "definition_candidate": "描述弹丸形状对空气阻力影响的系数",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "0.9~1.1",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c47cac0371de",
+          "text": "必须确定实际弹丸的弹形系数  $i$"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文明确弹形系数是弹丸的属性，用于弹道计算，有数值范围。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "倾角",
+      "normalized_name": "弹道倾角",
+      "definition_candidate": "弹道切线与水平方向的夹角。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹道",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": "θ",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f90ad1b8d68f",
+          "text": "倾角  $\\theta >0^{\\circ}$"
+        },
+        {
+          "chunk_id": "chunk_f90ad1b8d68f",
+          "text": " $\\theta = 0^{\\circ}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档使用倾角 θ 描述弹道状态，有明确符号和单位。原文称为“倾角”，归一为“弹道倾角”。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹道系数",
+      "normalized_name": "弹道系数",
+      "definition_candidate": "描述弹丸飞行阻力特性的系数",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "0.39",
+      "evidence": [
+        {
+          "chunk_id": "chunk_3564ce7d129d",
+          "text": "<td>弹道系数</td>"
+        },
+        {
+          "chunk_id": "chunk_3564ce7d129d",
+          "text": "<td>0.39</td>"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档中表格列“弹道系数”直接出现，且给出数值0.39和0.8，可视为弹丸的数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "射程",
+      "normalized_name": "射程",
+      "definition_candidate": "弹丸落点与发射点之间的水平距离",
+      "status": "existing",
+      "matched_existing_property": "range",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c6323e5c4a78",
+          "text": "X = X (C, v _ {0}, \\theta _ {0})"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "X 通常表示射程，匹配已有数据属性 range。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "落点时间",
+      "normalized_name": "落点时间",
+      "definition_candidate": "弹丸从发射到落地点的时间",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_DynamicsObject",
+      "range_datatype": "float",
+      "unit": "s",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c6323e5c4a78",
+          "text": "T = T (C, v _ {0}, \\theta _ {0})"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "T 通常表示落点时间，文档中作为变量出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "落点速度",
+      "normalized_name": "落点速度",
+      "definition_candidate": "弹丸落地点时的速度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_DynamicsObject",
+      "range_datatype": "float",
+      "unit": "m/s",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c6323e5c4a78",
+          "text": "v _ {c} = v _ {c} (C, v _ {0}, \\theta _ {0})"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "vc 通常表示落点速度，文档中作为变量出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "落点角度",
+      "normalized_name": "落点角度",
+      "definition_candidate": "弹丸落地点时的速度方向与水平面的夹角",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_DynamicsObject",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c6323e5c4a78",
+          "text": "\\theta _ {c} = \\theta _ {c} (C, v _ {0}, \\theta _ {0})"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "θc 通常表示落点角度，文档中作为变量出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "水平分速",
+      "normalized_name": "水平分速",
+      "definition_candidate": "弹丸的水平分速度",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "v_x",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "式中， $\\dot{x}$ 为弹丸在地面上投影的移动速率，它与弹丸的水平分速 $v_{x}$ 之间的关系为"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文明确提到弹丸的水平分速，可作为数据属性，但 domain 和单位未明确说明。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "质心到地面的高度",
+      "normalized_name": "质心高度",
+      "definition_candidate": "弹丸质心到地面的高度",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "y",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "式中， $y$ 为弹丸质心到地面的高度（图1-16）"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文明确提到弹丸质心到地面的高度，可作为数据属性，但 domain 和单位未明确说明。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "在地面上投影的移动速率",
+      "normalized_name": "移动速率",
+      "definition_candidate": "弹丸在地面上投影的移动速率",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "x_dot",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "式中， $\\dot{x}$ 为弹丸在地面上投影的移动速率"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文明确提到弹丸在地面上投影的移动速率，可作为数据属性，但 domain 和单位未明确说明。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "风速",
+      "normalized_name": "风速",
+      "definition_candidate": "风的运动速度，可分解为纵风和横风。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": null,
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b5a7f1dfbd09",
+          "text": "风速的一般变化是平行于地面的，忽略其铅直分量的影响。"
+        },
+        {
+          "chunk_id": "chunk_b5a7f1dfbd09",
+          "text": "风速可以分解为纵风和横风。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文直接提及‘风速’，是数值型环境参数，但未明确其归属类别和单位，故置信度适中。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大允许动力平衡角",
+      "normalized_name": "最大允许动力平衡角",
+      "definition_candidate": "弹轴跟随弹道切线向下转动时允许的最大动力平衡角。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": "[δ_pm]",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "以保证弹轴以小于最大允许动力平衡角 [δ_pm] 跟随弹道切线向下转动"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确提及最大允许动力平衡角，是角度参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "阻心与质心距离与全长比值",
+      "normalized_name": "阻心与质心距离与全长比值",
+      "definition_candidate": "尾翼弹阻力中心与质心之间的距离与弹丸全长的比值。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "%",
+      "example_value": "10%～15%",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "当尾翼弹的阻心和质心的距离与全长的比值为 10%～15% 时"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确给出该比值及其范围，名称由原文归纳得到。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "全长",
+      "normalized_name": "全长",
+      "definition_candidate": "弹丸的总长度。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "当尾翼弹的阻心和质心的距离与全长的比值为 10%～15% 时"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文提及全长，但无单位，作为弹丸尺寸参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "升力特征数",
+      "normalized_name": "升力特征数",
+      "definition_candidate": "升力特征数，记为 K_Y(Ma)，是马赫数的函数。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "称 $K_{Y}(Ma)$ 为升力特征数"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档明确称 $K_Y(Ma)$ 为升力特征数，但未明确其主体，根据上下文推测为弹丸的气动参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "全弹长",
+      "normalized_name": "全弹长",
+      "definition_candidate": "全弹长，记为 l。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $l$ 为全弹长。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档明确 $l$ 为全弹长，属于弹丸几何参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "升力系数导数",
+      "normalized_name": "升力系数导数",
+      "definition_candidate": "升力系数导数，记为 C_y'。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "升力系数导数 $C_y^\\prime$ 的计算方法载于空气动力学文献"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档明确升力系数导数，属于弹丸气动参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大横断面积",
+      "normalized_name": "最大横断面积",
+      "definition_candidate": "弹丸的最大横断面积，记为 S。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "m^2",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S$ 为弹丸的最大横断面积， $\\mathrm{m}^2$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确弹丸的最大横断面积，单位平方米。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹底面积",
+      "normalized_name": "弹底面积",
+      "definition_candidate": "弹底面积，记为 S_b。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "m^2",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S_{\\mathrm{b}}$ 为弹底面积， $\\mathrm{m}^2$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确弹底面积，单位平方米。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹丸体积",
+      "normalized_name": "弹丸体积",
+      "definition_candidate": "弹丸体积，记为 V。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "图中 $V$ 为弹丸体积"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档明确弹丸体积。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹体附面层厚度",
+      "normalized_name": "弹体附面层厚度",
+      "definition_candidate": "弹体附面层厚度，记为 Δ。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "弹体附面层厚度 $\\Delta$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档明确弹体附面层厚度。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "尾翼投影面积",
+      "normalized_name": "尾翼投影面积",
+      "definition_candidate": "考虑了弹体附面层厚度的尾翼投影面积，记为 S_w'。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "m^2",
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S_{\\mathrm{w}}'$ 为考虑了弹体附面层厚度 $\\Delta$ 的尾翼投影面积， $\\mathrm{m}^2$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确尾翼投影面积，单位平方米。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "翼弦",
+      "normalized_name": "翼弦",
+      "definition_candidate": "翼弦，单位m，记为 b。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "尾翼",
+      "range_datatype": "float",
+      "unit": "m",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c1159a095689",
+          "text": "式中，  $b$  为翼弦，  $\\mathrm{m}$  。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文直接定义 b 为翼弦，单位为m；结合尾翼展弦比公式将其 domain 归为尾翼。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "攻角",
+      "normalized_name": "攻角",
+      "definition_candidate": "弹轴与速度矢量之间的夹角。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "又由于有攻角 $\\delta$ 存在"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文出现攻角，作为弹道参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "自转角速度",
+      "normalized_name": "自转角速度",
+      "definition_candidate": "弹丸绕自身轴旋转的角速度。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "以右手四指由弹丸自转角速度矢量 $\\dot{\\gamma}$ 向速度矢量 $v$ 方向卷曲时"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文出现自转角速度矢量，可归纳为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "振动周期",
+      "normalized_name": "振动周期",
+      "definition_candidate": "简谐振动的周期。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "章动运动",
+      "range_datatype": "float",
+      "unit": "s",
+      "example_value": "T = 2π/(a√σ)",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "其振动周期为 $T = \\frac {2 \\pi}{a \\sqrt {\\sigma}}$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确给出振动周期公式，属于章动运动的属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "振幅",
+      "normalized_name": "振幅",
+      "definition_candidate": "简谐振动的振幅。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "章动运动",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "δ_m = δ0/(a√σ)",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "振幅为 $\\delta_{\\mathrm{m}} = \\frac{\\delta_0}{a\\sqrt{\\sigma}}$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确给出振幅公式，属于章动运动的属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "自转角速度",
+      "normalized_name": "自转角速度",
+      "definition_candidate": "弹丸绕弹轴自转的角速度。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "旋转弹",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "r0",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "① 弹丸以等角速度 $r_0$ 绕弹轴自转；"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提及等角速度 r0，是自转的角速度。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "进动角速度",
+      "normalized_name": "进动角速度",
+      "definition_candidate": "阻力面绕速度矢量线进动的角速度。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "旋转弹",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "a",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "②阻力面以等角速度 $a$ 绕速度矢量线 $\\nu$ 进动；"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提及等角速度 a，是进动的角速度。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "自转角速度",
+      "normalized_name": "自转角速度",
+      "definition_candidate": "弹丸绕弹轴自转的角速度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "r_0",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "弹丸以等角速度 $r_0$ 绕弹轴自转"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "名称“自转角速度”未直接出现，由原文“等角速度 r_0 绕弹轴自转”归纳得到，根据额外限制 confidence 不超过 0.75。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "速度",
+      "normalized_name": "速度",
+      "definition_candidate": "弹丸飞行速度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "v",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "v = v_0 + a t"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "名称“速度”未直接出现，由公式 v = v_0 + a t 及上下文归纳，根据额外限制 confidence 不超过 0.75。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "初速",
+      "normalized_name": "初速",
+      "definition_candidate": "弹丸的初始速度",
+      "status": "existing",
+      "matched_existing_property": "muzzle_velocity",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "m/s",
+      "example_value": "v_0",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "v = v_0 + a t"
+        },
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "\\dot {\\gamma} = r _ {0} = \\frac {2 \\pi v _ {0}}{\\eta d}"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "文档中出现 v_0 表示初速，已有数据属性 muzzle_velocity (初速)，domain 包括 C_Ammunition 等，此处弹丸可作为主体。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "攻角",
+      "normalized_name": "攻角",
+      "definition_candidate": "弹丸速度矢量与弹轴之间的夹角",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "\\delta",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "$\\delta = \\frac {\\delta_ {0}}{a \\sqrt {\\sigma}} \\sin (a \\sqrt {\\sigma}) t$"
+        },
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "图2-15 $\\delta -\\gamma$ 曲线"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文未直接出现“攻角”一词，但 δ 在弹道学中常表示攻角，且图标题为 δ-γ 曲线，结合上下文推断。根据额外限制，名称未直接出现，confidence 不超过 0.75，且 domain 未直接出现，confidence 不超过 0.70，故取 0.65。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "章动角幅度",
+      "normalized_name": "章动角幅度",
+      "definition_candidate": "弹丸章动角的变化幅度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "\\delta_m",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "此力矩使弹丸的章动角幅度衰减"
+        },
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "也不再摆到 $\\delta_{\\mathrm{m}}$ 的位置"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档中直接出现“章动角幅度”，且明确属于弹丸的属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "赤道阻尼力矩",
+      "normalized_name": "赤道阻尼力矩",
+      "definition_candidate": "使弹丸章动角幅度衰减的力矩",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "M_{zz}",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "弹丸在实际飞行中还受到赤道阻尼力矩 $M_{zz}$ 的作用"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档中直接出现“赤道阻尼力矩”，且明确作用于弹丸。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "陀螺稳定参数",
+      "normalized_name": "陀螺稳定参数",
+      "definition_candidate": "描述弹丸陀螺稳定性的参数，符号为 σ。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "弹丸",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "σ",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "所表达的 σ 这个量，是一个十分重要的参数，称为陀螺稳定参数。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档定义 σ 为陀螺稳定参数，是弹丸运动方程中的数值参数。domain 由上下文‘弹丸’推断。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "陀螺稳定因子",
+      "normalized_name": "陀螺稳定因子",
+      "definition_candidate": "描述弹丸陀螺稳定性的因子，符号为 S_g。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "弹丸",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "S_g",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "称 S_g 为陀螺稳定因子"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档定义 S_g 为陀螺稳定因子，是弹丸运动方程中的数值参数。domain 由上下文‘弹丸’推断。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "膛线缠度",
+      "normalized_name": "膛线缠度",
+      "definition_candidate": "火炮膛线的缠度，存在上限以保证陀螺稳定性",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e137ca96171e",
+          "text": "$\\eta_{\\text{上}}$ 是保证旋转弹丸陀螺稳定性的膛线缠度上限。火炮的膛线缠度必须小于  $\\eta_{\\text{上}}$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确提及火炮的膛线缠度及上限，属于火炮的参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "自转速度",
+      "normalized_name": "自转速度",
+      "definition_candidate": "文中表示自转速度的物理量，记为 \\dot{\\gamma}。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_ProjectileMotion",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "\\dot{\\gamma}",
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "应用轴向速度  $r$  代替了自转速度  $\\dot{\\gamma}$  是恰当的"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文直接出现‘自转速度’及符号，但未明确所属类别；domain 未直接出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "轴向速度",
+      "normalized_name": "轴向速度",
+      "definition_candidate": "文中表示沿轴向速度的物理量，记为 r。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_ProjectileMotion",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "r",
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "应用轴向速度  $r$  代替了自转速度  $\\dot{\\gamma}$  是恰当的"
+        }
+      ],
+      "confidence": 0.62,
+      "reason": "原文直接出现‘轴向速度’及符号 r，但未明确所属类别且符号与转速同形；domain 未直接出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "安全系数",
+      "normalized_name": "安全系数",
+      "definition_candidate": "计算膛线缠度时采用的小于1的安全系数。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": null,
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "0.75~0.85",
+      "evidence": [
+        {
+          "chunk_id": "chunk_2fdef7fa2060",
+          "text": "a  值一般为  $0.75\\sim 0.85$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确给出安全系数 a 及其取值范围，但未明确其领域类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹道倾角",
+      "normalized_name": "弹道倾角",
+      "definition_candidate": "理想弹道坐标系 O'x_I 轴与水平面的夹角。",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "理想弹道",
+      "range_datatype": "float",
+      "unit": null,
+      "example_value": "θ",
+      "evidence": [
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'x_{I} 轴与水平面的夹角为理想弹道的弹道倾角  $\\theta$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文定义弹道倾角为O'x_I轴与水平面的夹角，属于理想弹道的角度参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "身管寿命",
+      "normalized_name": "身管寿命",
+      "definition_candidate": "以武器丧失一定战术与弹道性能前所能射击的发数表示的身管寿命。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "integer",
+      "unit": "发",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f050b13daf12",
+          "text": "通常以武器在丧失一定的战术与弹道性能以前所能射击的发数来表示武器寿命。"
+        },
+        {
+          "chunk_id": "chunk_f050b13daf12",
+          "text": "身管寿命终止"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文说明寿命以射击发数表示，且出现“身管寿命”；可作为火炮/身管的数值属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "药室扩大系数",
+      "normalized_name": "药室扩大系数",
+      "definition_candidate": "",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": null,
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_6c4218f91021",
+          "text": "在设计内弹道时，药室扩大系数 χ_{W_0} 也是事先确定的。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档中明确提到药室扩大系数，作为内弹道设计参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "药室容积",
+      "normalized_name": "药室容积",
+      "definition_candidate": "",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "药室",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_6c4218f91021",
+          "text": "如果在相同的药室容积下， χ_{W_0} 值越大，则药室长度就越小。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档中提及药室容积，作为药室的属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "射高",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3e65105128da",
+          "text": "在火炮目前的射高（10km 以下）和射程（50km 以下）范围内"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档表明火炮具有射高，可作为数据属性约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "射程",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "existing",
+      "matched_existing_constraint": "range",
+      "evidence": [
+        {
+          "chunk_id": "chunk_3e65105128da",
+          "text": "在火炮目前的射高（10km 以下）和射程（50km 以下）范围内"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "射程是已有数据属性 range，文档明确火炮的射程。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "气压",
+      "property_type": "datatype_property",
+      "domain_candidate": "大气气压和密度随高度的标准分布",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "求出大气气压  $p$  和密度  $\\rho$  随高度  $y$  的变化关系"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "文档将大气气压 p 作为标准分布描述的量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "密度",
+      "property_type": "datatype_property",
+      "domain_candidate": "大气气压和密度随高度的标准分布",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "求出大气气压  $p$  和密度  $\\rho$  随高度  $y$  的变化关系"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "文档将大气密度 ρ 作为标准分布描述的量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "系数 A1",
+      "property_type": "datatype_property",
+      "domain_candidate": "温度分布的标准定律",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "式中系数分别为"
+        },
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "$A _ {1} = 2 3 0. 0 \\mathrm {K}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档明确给出温度标准定律的系数 A1 及其单位 K。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "系数 G1",
+      "property_type": "datatype_property",
+      "domain_candidate": "温度分布的标准定律",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "式中系数分别为"
+        },
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "$G _ {1} = 6. 3 2 8 \\times 1 0 ^ {- 3} \\mathrm {K / m}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档明确给出温度标准定律的系数 G1 及其单位 K/m。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "系数 C1",
+      "property_type": "datatype_property",
+      "domain_candidate": "温度分布的标准定律",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "式中系数分别为"
+        },
+        {
+          "chunk_id": "chunk_ca4964b24325",
+          "text": "$C _ {1} = 1. 1 7 2 \\times 1 0 ^ {- 6} \\mathrm {K / m}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "文档明确给出温度标准定律的系数 C1 及其单位 K/m。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "空气阻力",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "$R_{x}$  为空气阻力，也称为迎面阻力或切向阻力，其方向与弹丸质心速度矢量共线反向， $\\mathrm{N}$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确弹丸空气阻力及单位N。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "空气密度",
+      "property_type": "datatype_property",
+      "domain_candidate": null,
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "$\\rho$  为空气密度，  $\\mathrm{kg / m^3}$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确空气密度及单位，但未给出适用主体类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "涡阻系数",
+      "property_type": "datatype_property",
+      "domain_candidate": "空气阻力系数",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "成为涡阻系数  $C_{xb}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确涡阻系数是空气阻力系数分量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "波阻系数",
+      "property_type": "datatype_property",
+      "domain_candidate": "空气阻力系数",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_650e2571080a",
+          "text": "成为波阻系数  $C_{xw}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确波阻系数是空气阻力系数分量。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹形系数",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c47cac0371de",
+          "text": "必须确定实际弹丸的弹形系数  $i$"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "弹形系数是弹丸的数据属性，取值为浮点数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "射程",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "range",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c6323e5c4a78",
+          "text": "X = X (C, v _ {0}, \\theta _ {0})"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "文档中 X 作为变量出现，通常表示射程，匹配已有数据属性 range。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "分解出",
+      "property_type": "object_property",
+      "domain_candidate": "空气阻力",
+      "range_candidate": "分力",
+      "range_datatype": "",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "这时空气阻力 $R_{x}$ 可以分解出一个与绝对速度 $\\pmb{v}$ 垂直的分力 $R_{y}$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "明确描述力的分解关系，提出新约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "最大允许动力平衡角",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "以保证弹轴以小于最大允许动力平衡角 [δ_pm] 跟随弹道切线向下转动"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "最大允许动力平衡角是弹丸的角度参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "阻心与质心距离与全长比值",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "当尾翼弹的阻心和质心的距离与全长的比值为 10%～15% 时"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "该比值是尾翼弹的参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "全长",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "当尾翼弹的阻心和质心的距离与全长的比值为 10%～15% 时"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "全长是弹丸的尺寸参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "升力特征数",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "称 $K_{Y}(Ma)$ 为升力特征数"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档未明确升力特征数的主体，根据上下文推测为弹丸。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "升力系数导数",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "升力系数导数 $C_y^\\prime$ 的计算方法载于空气动力学文献"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档未明确升力系数导数的主体，根据上下文推测为弹丸。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "最大横断面积",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S$ 为弹丸的最大横断面积， $\\mathrm{m}^2$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确弹丸的最大横断面积及其单位。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹底面积",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S_{\\mathrm{b}}$ 为弹底面积， $\\mathrm{m}^2$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确弹底面积及其单位。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹丸体积",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "图中 $V$ 为弹丸体积"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档未明确弹丸体积的主体，根据上下文推测为弹丸。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹体附面层厚度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "弹体附面层厚度 $\\Delta$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档未明确弹体附面层厚度的主体，根据上下文推测为弹丸。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "尾翼投影面积",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S_{\\mathrm{w}}'$ 为考虑了弹体附面层厚度 $\\Delta$ 的尾翼投影面积， $\\mathrm{m}^2$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档明确尾翼投影面积及其单位。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "翼弦",
+      "property_type": "datatype_property",
+      "domain_candidate": "尾翼",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c1159a095689",
+          "text": "式中，  $b$  为翼弦，  $\\mathrm{m}$  。"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "由尾翼展弦比公式推测翼弦适用于尾翼，domain 为归纳。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "具有性能参数",
+      "property_type": "object_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "赤道阻尼力矩",
+      "range_datatype": null,
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "R_has_performance_parameter",
+      "evidence": [
+        {
+          "chunk_id": "chunk_422ab2250173",
+          "text": "弹丸围绕其赤道轴（过质心并与弹轴垂直的轴）摆动时产生阻滞，其摆动的力矩称为赤道阻尼力矩"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "文档暗示弹丸产生赤道阻尼力矩，可视为弹丸具有性能参数赤道阻尼力矩，但非直接表述，故为 weak_candidate。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "攻角",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "又由于有攻角 $\\delta$ 存在"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "从原文句子直接提取。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "自转角速度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "以右手四指由弹丸自转角速度矢量 $\\dot{\\gamma}$ 向速度矢量 $v$ 方向卷曲时"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "从原文句子直接提取。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "自转",
+      "property_type": "object_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "弹轴",
+      "range_datatype": "",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "① 弹丸以等角速度 $r_0$ 绕弹轴自转；"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文描述弹丸绕弹轴自转，但弹轴未作为类别，约束较弱。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "进动",
+      "property_type": "object_property",
+      "domain_candidate": "阻力面",
+      "range_candidate": "速度矢量线",
+      "range_datatype": "",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "②阻力面以等角速度 $a$ 绕速度矢量线 $\\nu$ 进动；"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "原文描述进动，但 domain 和 range 是否为稳定类别不确定。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "自转角速度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "弹丸以等角速度 $r_0$ 绕弹轴自转"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "根据单个句子推测弹丸具有自转角速度属性，domain 为 C_Projectile，datatype 为 float，属于弱约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "速度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "v = v_0 + a t"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "根据公式推测弹丸具有速度属性，domain 为 C_Projectile，datatype 为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "初速",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "muzzle_velocity",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "v = v_0 + a t"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档中初速属于弹丸，已有属性 muzzle_velocity 的 domain 不包含 C_Projectile，此处提出扩展约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "攻角",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "$\\delta = \\frac {\\delta_ {0}}{a \\sqrt {\\sigma}} \\sin (a \\sqrt {\\sigma}) t$"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "根据公式推测攻角属于弹丸，domain 为 C_Projectile，datatype 为 float，置信度受名称未直接出现影响。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "赤道阻尼力矩",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "弹丸在实际飞行中还受到赤道阻尼力矩 $M_{zz}$ 的作用"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "文档明确弹丸受到赤道阻尼力矩作用，datatype 为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "陀螺稳定参数",
+      "property_type": "datatype_property",
+      "domain_candidate": "弹丸",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "所表达的 σ 这个量，是一个十分重要的参数，称为陀螺稳定参数。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "陀螺稳定参数是弹丸的数值参数，domain 为弹丸，数据类型为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "陀螺稳定因子",
+      "property_type": "datatype_property",
+      "domain_candidate": "弹丸",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "称 S_g 为陀螺稳定因子"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "陀螺稳定因子是弹丸的数值参数，domain 为弹丸，数据类型为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "膛线缠度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e137ca96171e",
+          "text": "$\\eta_{\\text{上}}$ 是保证旋转弹丸陀螺稳定性的膛线缠度上限。火炮的膛线缠度必须小于  $\\eta_{\\text{上}}$"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "火炮具有膛线缠度这一数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "自转速度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_ProjectileMotion",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "应用轴向速度  $r$  代替了自转速度  $\\dot{\\gamma}$  是恰当的"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "从单句推测弹丸飞行动力学对象具有自转速度数据属性，domain 未直接出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "轴向速度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_ProjectileMotion",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "应用轴向速度  $r$  代替了自转速度  $\\dot{\\gamma}$  是恰当的"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "从单句推测弹丸飞行动力学对象具有轴向速度数据属性，domain 未直接出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹道倾角",
+      "property_type": "datatype_property",
+      "domain_candidate": "理想弹道",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'x_{I} 轴与水平面的夹角为理想弹道的弹道倾角  $\\theta$"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确理想弹道具有弹道倾角属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "身管寿命",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "",
+      "range_datatype": "integer",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f050b13daf12",
+          "text": "通常以武器在丧失一定的战术与弹道性能以前所能射击的发数来表示武器寿命。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文说明寿命以射击发数表示，domain 可对应火炮，range 为整数发数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "药室容积",
+      "property_type": "datatype_property",
+      "domain_candidate": "药室",
+      "range_candidate": null,
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_6c4218f91021",
+          "text": "如果在相同的药室容积下， χ_{W_0} 值越大，则药室长度就越小。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "药室具有容积属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "具有部件",
+      "property_type": "object_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "药室",
+      "range_datatype": null,
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "R_has_component",
+      "evidence": [
+        {
+          "chunk_id": "chunk_6c4218f91021",
+          "text": "如果在相同的药室容积下， χ_{W_0} 值越大，则药室长度就越小。"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "文档提及药室容积，暗示火炮具有药室，但未直接表述。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_54bfe2d00b6f",
+          "text": "3.1 坐标系，作用于弹丸上的全部的力和力矩 057"
+        },
+        {
+          "chunk_id": "chunk_54bfe2d00b6f",
+          "text": "3.1.2 作用于弹丸上的全部力及力矩 061"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "力矩",
+      "mapped_to": "C_Moment",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_54bfe2d00b6f",
+          "text": "3.1 坐标系，作用于弹丸上的全部的力和力矩 057"
+        },
+        {
+          "chunk_id": "chunk_54bfe2d00b6f",
+          "text": "3.1.2 作用于弹丸上的全部力及力矩 061"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "空气阻力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.6,
+      "evidence": [
+        {
+          "chunk_id": "chunk_190c9494b502",
+          "text": "空气阻力"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "瞄准具",
+      "mapped_to": "C_OpticalSight",
+      "mapped_type": "class",
+      "mapping_confidence": 0.6,
+      "evidence": [
+        {
+          "chunk_id": "chunk_190c9494b502",
+          "text": "瞄准具设计"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火控指控系统",
+      "mapped_to": "C_FireControlSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.6,
+      "evidence": [
+        {
+          "chunk_id": "chunk_190c9494b502",
+          "text": "火控指控系统设计"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火炮",
+      "mapped_to": "C_Gun",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3e65105128da",
+          "text": "在火炮目前的射高（10km 以下）和射程（50km 以下）范围内"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "射程",
+      "mapped_to": "range",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3e65105128da",
+          "text": "在火炮目前的射高（10km 以下）和射程（50km 以下）范围内"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "X",
+      "mapped_to": "range",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c6323e5c4a78",
+          "text": "X = X (C, v _ {0}, \\theta _ {0})"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹丸",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "设 $x$ 为从射出点到弹丸在地面上投影（即 $O_{1}O^{\\prime}$ 连线与地面的交点）的曲线距离。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "科氏惯性力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_abdf3e8d5537",
+          "text": "二是产生科氏惯性力。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "科氏惯性力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_086152de5e14",
+          "text": "得考虑科氏惯性力时的运动方程组"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "力矩",
+      "mapped_to": "C_Moment",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_1cc9383e0283",
+          "text": "$R$  对质心产生了力矩（称为静力矩） $M_z$"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹丸",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S$ 为弹丸的最大横断面积， $\\mathrm{m}^2$"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "力矩",
+      "mapped_to": "C_Moment",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_532de45f86ae",
+          "text": "# 2.1.3 翻转（或稳定）力矩  $M_z$  及阻力臂  $h$"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "攻角",
+      "mapped_to": "C_PerformanceParameter",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "又由于有攻角 $\\delta$ 存在"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "自转角速度",
+      "mapped_to": "C_PerformanceParameter",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "以右手四指由弹丸自转角速度矢量 $\\dot{\\gamma}$ 向速度矢量 $v$ 方向卷曲时"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "外力矩",
+      "mapped_to": "C_Moment",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_6839cd7d639d",
+          "text": "外力矩"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹丸",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "弹丸以等角速度 $r_0$ 绕弹轴自转"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "初速",
+      "mapped_to": "muzzle_velocity",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "v = v_0 + a t"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "旋转弹",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "只有 σ > 0 时，才能保证旋转弹的陀螺稳定性"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "榴弹",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e137ca96171e",
+          "text": "对于一般的榴弹，$\\mu = 0.55 \\sim 0.65$"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "膛线缠度",
+      "mapped_to": "twist_rate",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.6,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e137ca96171e",
+          "text": "$\\eta_{\\text{上}}$ 是保证旋转弹丸陀螺稳定性的膛线缠度上限。火炮的膛线缠度必须小于  $\\eta_{\\text{上}}$"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "侧向动力平衡角",
+      "mapped_to": "C_PerformanceParameter",
+      "mapped_type": "class",
+      "mapping_confidence": 0.6,
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "上式即侧向动力平衡角  $\\delta_{\\mathrm {1p}}$  或  $\\delta_{\\mathrm {p}} \\approx \\delta_{\\mathrm {1p}}$  的一种表达形式"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_d81118831a8f",
+          "text": "作用于弹丸上的全部的力和力矩"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "力矩",
+      "mapped_to": "C_Moment",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_d81118831a8f",
+          "text": "作用于弹丸上的全部的力和力矩"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "理想弹道",
+      "mapped_to": "C_ProjectileMotion",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'x_{I} 轴为理想弹道切线方向"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "76 mm",
+      "mapped_to": "caliber",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_479aa7407ec2",
+          "text": "现在以  $76~\\mathrm {mm}$  加农炮为例"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "加农炮",
+      "mapped_to": "C_Gun",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_479aa7407ec2",
+          "text": "现在以  $76~\\mathrm {mm}$  加农炮为例"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_706fdd499f4c",
+          "text": "致使身管寿命降低"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹丸质心运动微分方程组",
+      "candidate_type": "class",
+      "why_uncertain": "原文标题给出方程组，可能是理论模型，但已有本体未覆盖且无定义。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_5c6106d611f0",
+          "text": "1.2.2 以时间 $t$ 为自变量的弹丸质心运动微分方程组 015"
+        }
+      ],
+      "confidence": 0.55
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "能量",
+      "candidate_type": "class",
+      "why_uncertain": "通用物理概念，不适合作为领域本体类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_06774a642486",
+          "text": "激波的形成也会大量消耗能量，它相应形成的阻力就是波动阻力。"
+        },
+        {
+          "chunk_id": "chunk_06774a642486",
+          "text": "弹道波总是形成强烈的压缩，它也消耗着弹丸的动能，因此，也产生相应的阻力，这就是波动阻力。"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "水平分速",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "由 v_x 符号归纳得到，原文未出现“水平分速”中文属性名，无法确认是否应作为本体数据属性。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_23e964742bf5",
+          "text": "$v _ {x} ^ {2}$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹丸质心",
+      "candidate_type": "class",
+      "why_uncertain": "可能是弹丸的部分或动力学对象，但不确定是否为独立类别",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "式中， $y$ 为弹丸质心到地面的高度（图1-16）"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹丸在地面上投影",
+      "candidate_type": "class",
+      "why_uncertain": "可能是弹道轨迹上的一个几何点，不确定是否为稳定领域类别",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "设 $x$ 为从射出点到弹丸在地面上投影（即 $O_{1}O^{\\prime}$ 连线与地面的交点）的曲线距离。"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "曲线距离",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "作为弹道参数，但 domain 和单位不明确",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "设 $x$ 为从射出点到弹丸在地面上投影（即 $O_{1}O^{\\prime}$ 连线与地面的交点）的曲线距离。"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "圆心角",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "数学变量，不确定是否应作为数据属性",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "为了消去 $\\varphi$ ，应用圆心角之间的关系"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "地球半径",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "常数参数，但 domain 不明确",
+      "evidence": [
+        {
+          "chunk_id": "chunk_7d702d891e26",
+          "text": "$R$ 为地球半径"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹轴",
+      "candidate_type": "class",
+      "why_uncertain": "弹轴可能是弹丸的部件或几何特征，但已有本体无明确对应，且不确定是否应作为独立类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "有风时弹轴在相对速度矢量附近做角运动"
+        },
+        {
+          "chunk_id": "chunk_45e858cfb4a1",
+          "text": "弹轴时刻保持与相对速度矢量重合"
+        }
+      ],
+      "confidence": 0.6
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "速度分量",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文给出初始速度分量 vx, vy, vz，但不确定是否作为通用数据属性。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c7d01e0428e4",
+          "text": "t = 0  时，  $v_{x} = v_{0}\\cos \\theta_{0}$  ，  $v_{y} = v_{0}\\sin \\theta_{0}$  ，  $v_{z} = 0$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "翻转力矩",
+      "candidate_type": "class",
+      "why_uncertain": "力矩类型，可能是动力学概念，但不确定是否应作为本体类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "将产生一个翻转力矩使 δ 增大"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "阻心",
+      "candidate_type": "class",
+      "why_uncertain": "物理参考点，可能是弹丸的属性或部件，但不确定是否应作为本体类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "当尾翼弹的阻心和质心的距离与全长的比值为 10%～15% 时"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "动力平衡角",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "与最大允许动力平衡角相关，但原文只提及最大允许动力平衡角，不确定是否需要单独抽取。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_fbdf250dcc43",
+          "text": "以保证弹轴以小于最大允许动力平衡角 [δ_pm] 跟随弹道切线向下转动"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹体",
+      "candidate_type": "class",
+      "why_uncertain": "文中仅出现“弹体”一词，未定义，难以判断是类别还是部件实例。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $C_y'$ 为弹体的升力系数导数"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "尾翼",
+      "candidate_type": "class",
+      "why_uncertain": "文中仅出现“尾翼”一词，未定义，难以判断是类别还是部件实例。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $S_{\\mathrm{w}}'$ 为考虑了弹体附面层厚度 $\\Delta$ 的尾翼投影面积"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "马赫数",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "文中出现马赫数，但未明确其主体和范围。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": "当马赫数 $Ma < 1$ 时， $f_{1} = 1$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "系数 f_1",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "公式中的系数，过于具体，难以确定是否应作为本体数据属性。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_0ad173dc6c15",
+          "text": " $f_{1}$ 为系数，当马赫数 $Ma < 1$ 时， $f_{1} = 1$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "Ma",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中仅出现符号Ma，未明确其含义，可能为马赫数，但无定义。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_48418b5a6ab2",
+          "text": "超声速时  $C_{\\mathrm{yw}}^{\\prime} \\approx \\frac{4}{\\sqrt{Ma^{2} - 1}}$"
+        },
+        {
+          "chunk_id": "chunk_48418b5a6ab2",
+          "text": "$S _ {\\mathrm {w}} ^ {\\prime} \\approx 1. 6 l _ {\\mathrm {w}} b (M a = 1. 6) \\tag {2-16b}$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "C_yw'",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中仅出现符号C_yw'，未明确其含义，可能为气动系数。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_48418b5a6ab2",
+          "text": "$C _ {y w} ^ {\\prime} = \\left(\\frac {4}{\\sqrt {M a ^ {2} - 1}}\\right) \\left(1 - \\frac {1}{2 \\lambda \\sqrt {M a ^ {2} - 1}}\\right) \\tag {2-15}$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "S_w'",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中仅出现符号S_w'，未明确其含义，可能为面积。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_48418b5a6ab2",
+          "text": "$S _ {\\mathrm {w}} ^ {\\prime} \\approx 0. 5 l _ {\\mathrm {w}} b$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "l_w",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中仅出现符号l_w，未明确其含义，可能为长度。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_48418b5a6ab2",
+          "text": "$S _ {\\mathrm {w}} ^ {\\prime} \\approx 0. 5 l _ {\\mathrm {w}} b$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "b",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中仅出现符号b，未明确其含义，可能为宽度。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_48418b5a6ab2",
+          "text": "$S _ {\\mathrm {w}} ^ {\\prime} \\approx 0. 5 l _ {\\mathrm {w}} b$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "质心",
+      "candidate_type": "class",
+      "why_uncertain": "物理点，可能是部件或属性，不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d1782c5fd8da",
+          "text": "R 作用在质心与弹顶之间"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹顶",
+      "candidate_type": "class",
+      "why_uncertain": "弹丸部位，可能是部件，不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d1782c5fd8da",
+          "text": "R 作用在质心与弹顶之间"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹尾",
+      "candidate_type": "class",
+      "why_uncertain": "弹丸部位，可能是部件，不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d1782c5fd8da",
+          "text": "R 作用在质心与弹尾之间"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "取决于",
+      "candidate_type": "object_property",
+      "why_uncertain": "文档中赤道阻尼力矩系数是弹形、Ma 及弹丸摆动角速度的函数，但这是数据属性之间的依赖，作为对象属性可能不合适。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_422ab2250173",
+          "text": "它是弹形、Ma 及弹丸摆动角速度 \\dot{\\varphi} 的函数"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "马赫数",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "公式中出现 Ma，通常指马赫数，但文中未明确解释。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_71445516530a",
+          "text": "C_z(Ma)"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹丸质心",
+      "candidate_type": "class",
+      "why_uncertain": "文档中多次提及弹丸质心，但无法确定应作为独立类别还是弹丸的属性/部件。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "基准坐标系的坐标原点 $O^{\\prime}$ 在弹丸质心上"
+        }
+      ],
+      "confidence": 0.6
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "速度矢量",
+      "candidate_type": "class",
+      "why_uncertain": "文档中作为物理量出现，但不确定应作为类别还是数据属性。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "取包含质心 $O^{\\prime}$ 的速度矢量 $\\pmb{v}$ 的铅垂面为参考面"
+        }
+      ],
+      "confidence": 0.6
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "参考面",
+      "candidate_type": "class",
+      "why_uncertain": "文档中用于定义坐标系，但可能不是稳定的领域类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "取包含质心 $O^{\\prime}$ 的速度矢量 $\\pmb{v}$ 的铅垂面为参考面"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "阻力面",
+      "candidate_type": "class",
+      "why_uncertain": "文档中用于定义弹轴坐标系，但可能不是稳定的领域类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "弹轴坐标系则以弹轴 $O'\\xi$ 与速度矢量 $\\pmb{v}$ 所形成的阻力面为参考面"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "具有坐标轴",
+      "candidate_type": "object_property",
+      "why_uncertain": "文档描述了坐标系由坐标轴构成，但可能过于具体，不适合作为本体关系。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_860fa083e7ba",
+          "text": "该平面上的直角坐标系 $xO^{\\prime}y$ 的 $O^{\\prime}x$ 及 $O^{\\prime}y$ 轴分别为水平轴与铅垂轴"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹轴",
+      "candidate_type": "class",
+      "why_uncertain": "原文中提及'弹轴'，但它是弹丸的几何轴线，是否为独立类别不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "① 弹丸以等角速度 $r_0$ 绕弹轴自转；"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "速度矢量线",
+      "candidate_type": "class",
+      "why_uncertain": "原文中提及'速度矢量线'，是几何概念，是否为稳定类别不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "②阻力面以等角速度 $a$ 绕速度矢量线 $\\nu$ 进动；"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "σ",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中定义σ = 1 - β/a²，但它是中间变量，是否为稳定数据属性不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "令 $\\sigma = 1 - \\frac{\\beta}{a^2}$"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "β",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中提及β含有H(y), v, K_{m_z}(Ma)，但β定义不明确。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d19167d10cd0",
+          "text": "由于 $\\beta$ 含有 $H(y), v, K_{m_z}(Ma)$"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹轴",
+      "candidate_type": "class",
+      "why_uncertain": "弹轴是弹丸的几何轴，可能属于部件或几何概念，但已有本体无对应类别，且无法判断是类别还是实例。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "弹轴在阻力面内相对于 v 矢量做简谐振动"
+        }
+      ],
+      "confidence": 0.6
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "阻力面",
+      "candidate_type": "class",
+      "why_uncertain": "阻力面在文档中出现，但定义不明确，可能是一个物理概念，但稳定性不足。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "阻力面以等角速度 a 绕速度矢量线 ν 进动"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "δ-γ 曲线",
+      "candidate_type": "class",
+      "why_uncertain": "图标题，可能是一种关系曲线，但缺乏定义，不适合直接作为类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "图2-15 $\\delta -\\gamma$ 曲线"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "进动角速度",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "文档中“阻力面以等角速度 a 绕速度矢量线 ν 进动”，a 可能是进动角速度，但阻力面不是明确类别，domain 不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "阻力面以等角速度 a 绕速度矢量线 ν 进动"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "γ 角",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "文档中 $\\dot{\\gamma} = r_0$，γ 可能是弹轴方位角，但未明确说明，domain 不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "$\\dot {\\gamma} = r _ {0} = \\frac {2 \\pi v _ {0}}{\\eta d}$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "速度矢量线",
+      "candidate_type": "class",
+      "why_uncertain": "文档中“绕速度矢量线 ν 进动”，速度矢量线可能是一个几何概念，但稳定性不足。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c392334c2e72",
+          "text": "阻力面以等角速度 a 绕速度矢量线 ν 进动"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "陀螺稳定性",
+      "candidate_type": "class",
+      "why_uncertain": "文档提到‘陀螺稳定性’，但未明确它是类别还是属性，且没有定义。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dc466c81d935",
+          "text": "只有 σ > 0 时，才能保证旋转弹的陀螺稳定性"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "陀螺稳定性条件",
+      "candidate_type": "constraint",
+      "why_uncertain": "原文给出条件 a^2 > β，但未明确其为本体约束。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b287a5e05455",
+          "text": "必须在弹道上每一点都满足下面条件  $$a ^ {2} > \\beta , a = \\frac {J r _ {0}}{2 I}, \\beta = k _ {z} v ^ {2} \\tag {2-69}$$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "轴向速度代替自转速度",
+      "candidate_type": "object_property",
+      "why_uncertain": "‘代替’是公式变量替换描述，不是稳定领域关系。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_574f0a3561ec",
+          "text": "应用轴向速度  $r$  代替了自转速度  $\\dot{\\gamma}$  是恰当的"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹丸特性",
+      "candidate_type": "class",
+      "why_uncertain": "过于泛化，可能是参数类别的一部分。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_2fdef7fa2060",
+          "text": "揭示膛线缠度与弹丸特性、弹道特性、气动及气象特性等有关参数之间的基本关系"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹道特性",
+      "candidate_type": "class",
+      "why_uncertain": "过于泛化，可能是参数类别的一部分。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_2fdef7fa2060",
+          "text": "揭示膛线缠度与弹丸特性、弹道特性、气动及气象特性等有关参数之间的基本关系"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "气动特性",
+      "candidate_type": "class",
+      "why_uncertain": "过于泛化，可能是参数类别的一部分。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_2fdef7fa2060",
+          "text": "揭示膛线缠度与弹丸特性、弹道特性、气动及气象特性等有关参数之间的基本关系"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "气象特性",
+      "candidate_type": "class",
+      "why_uncertain": "过于泛化，可能是参数类别的一部分。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_2fdef7fa2060",
+          "text": "揭示膛线缠度与弹丸特性、弹道特性、气动及气象特性等有关参数之间的基本关系"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "射击面",
+      "candidate_type": "class",
+      "why_uncertain": "射击面是描述坐标系轴垂直关系的参考平面，可能不是稳定领域类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'z_{I} 轴始终保持与射击面垂直"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "垂直于",
+      "candidate_type": "object_property",
+      "why_uncertain": "该关系描述轴与射击面的方向关系，可能过于具体，不适合作为通用本体关系。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_865891274a5d",
+          "text": "O'z_{I} 轴始终保持与射击面垂直"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹丸赤道平面",
+      "candidate_type": "class",
+      "why_uncertain": "文档中仅提到‘在弹丸赤道平面内选择两个轴’，未给出定义，且可能是一个几何平面而非稳定类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d94964a409cf",
+          "text": "在弹丸赤道平面内选择两个与弹体固联而又相互垂直的轴  $O^{\\prime}\\eta$  和  $O^{\\prime}\\zeta$  。"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹轴",
+      "candidate_type": "class",
+      "why_uncertain": "文档中提及弹轴 O′ξ，但未明确它是部件还是几何轴，可能属于 C_DynamicsObject 或部件，但不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d94964a409cf",
+          "text": "与弹轴  $O^{\\prime}\\xi$  构成直角坐标系。"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "弹道性能",
+      "candidate_type": "class",
+      "why_uncertain": "文档中出现‘各弹道性能’，但可能为内弹道性能的泛称，且已有本体有性能参数类别，无法确定是否应新建。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_479aa7407ec2",
+          "text": "计算不同 $I_{k}$ 值对各弹道性能影响"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "气体生成速率",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "文档中定义为 dψ/dt，但其 domain 不明确，可能属于内弹道过程，暂无明确类别归属。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_479aa7407ec2",
+          "text": "根据气体生成速率公式  $$\\frac {\\mathrm {d} \\psi}{\\mathrm {d} t} = \\frac {\\chi}{I _ {k}} \\sigma$$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "m_m",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文仅出现符号 \\(m_m\\)，未给出中文名称和定义，无法确认其语义和数据类型。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f6e636e2839e",
+          "text": "<td>\\(m_m\\)</td>"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "m_W0",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文仅出现符号 \\(m_{W_0}\\)，未给出中文名称和定义，无法确认其语义和数据类型。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f6e636e2839e",
+          "text": "<td>\\(m_{W_0}\\)</td>"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "l_W0",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文仅出现符号 \\(l_{W_0}\\)，未给出中文名称和定义，无法确认其语义和数据类型。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f6e636e2839e",
+          "text": "<td>\\(l_{W_0}\\)</td>"
+        }
+      ],
+      "confidence": 0.4
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "l_{W_0}",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "该符号仅作为表格行标签出现，文档片段未给出其名称、定义、量纲、单位或所属领域实体，无法确认是否为数据属性、类别或其他本体元素。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_86cf4cbc385a",
+          "text": "\\\\(l_{W_0}\\\\)"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "武器性能",
+      "candidate_type": "class",
+      "why_uncertain": "原文提到 η_g 与武器性能有关，但‘武器性能’过于泛化，不宜直接作为类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_8434358c6068",
+          "text": "η_g 的大小与武器性能有关"
+        }
+      ],
+      "confidence": 0.4
+    }
+  }
+]

@@ -1,13 +1,14 @@
 import copy
 import json
 import os
-import subprocess
-import sys
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
+from ontologyBuild.candidate_validator import annotate_legacy_candidate
+from ontologyBuild.config import OntologyPipelineConfig
+from ontologyBuild.pipeline import run_ontology_pipeline
 from ontologyBuild.review_module import apply_user_decision, review_candidates
 
 
@@ -98,7 +99,14 @@ def confidence_of(item):
 
 def display_name(item):
     if item.get("name"):
-        return str(item["name"])
+        name = str(item["name"])
+        candidate_type = item.get("candidate_type")
+        if candidate_type in {"object_property", "datatype_property"}:
+            domain = item.get("domain_candidate")
+            range_value = item.get("range_candidate") or item.get("range_datatype")
+            if domain or range_value:
+                return f"{name}: {domain or '?'} -> {range_value or '?'}"
+        return name
     if item.get("property_name"):
         name = str(item["property_name"])
         domain = item.get("domain_candidate")
@@ -125,6 +133,7 @@ def flatten_candidates(data):
                     candidate = copy.deepcopy(item)
                 candidate.setdefault("candidate_type", candidate.get("candidate_type") or "manual_review")
                 candidate.setdefault("candidate_id", f"manual_{index + 1:06d}")
+                candidate = annotate_legacy_candidate(candidate)
                 result.append(candidate)
         return result
 
@@ -143,6 +152,7 @@ def flatten_candidates(data):
             candidate["source_section"] = section
             candidate.setdefault("candidate_type", SECTION_TYPE.get(section, section))
             candidate.setdefault("candidate_id", f"{section}_{index + 1:06d}")
+            candidate = annotate_legacy_candidate(candidate)
             result.append(candidate)
     return result
 
@@ -199,41 +209,27 @@ def build_review_from_candidates(source_path, review_mode, reviewer):
     return result
 
 
-def run_extraction(markdown_path):
-    env = os.environ.copy()
-    env["ONTOLOGY_MARKDOWN_FILE"] = str(markdown_path)
-    script_name = env.get("ONTOLOGY_EXTRACTION_SCRIPT", "directory_guided_builder.py")
-    proc = subprocess.run(
-        [sys.executable, str(ONTOLOGY_BUILD_DIR / script_name)],
-        cwd=str(ROOT),
-        env=env,
-        text=True,
-        capture_output=True,
-    )
-    if proc.returncode != 0:
-        raise RuntimeError((proc.stderr or proc.stdout or "本体候选抽取失败").strip())
-    normalize_stdout = ""
-    normalize_stderr = ""
-    if env.get("ONTOLOGY_RUN_NORMALIZATION", "1").strip().lower() not in {"0", "false", "no"}:
-        normalize_proc = subprocess.run(
-            [sys.executable, str(ONTOLOGY_BUILD_DIR / "ontology_normalizer.py")],
-            cwd=str(ROOT),
-            env=env,
-            text=True,
-            capture_output=True,
-        )
-        normalize_stdout = normalize_proc.stdout
-        normalize_stderr = normalize_proc.stderr
-        if normalize_proc.returncode != 0:
-            raise RuntimeError(
-                (normalize_proc.stderr or normalize_proc.stdout or "本体规范化导出失败").strip()
-            )
-    return {
-        "stdout": proc.stdout,
-        "stderr": proc.stderr,
-        "normalization_stdout": normalize_stdout,
-        "normalization_stderr": normalize_stderr,
+def normalize_base_policy(value):
+    base_policy = str(value or os.environ.get("ONTOLOGY_BASE_POLICY", "strict")).strip().lower()
+    if base_policy not in {"strict", "draft"}:
+        raise ValueError("base_policy 必须是 strict/draft")
+    return base_policy
+
+
+def run_extraction(markdown_path, review_mode=None, base_policy=None, model_config=None):
+    overrides = {
+        "review_mode": review_mode or os.environ.get("ONTOLOGY_REVIEW_MODE", "manual"),
+        "base_policy": normalize_base_policy(base_policy),
     }
+    if model_config:
+        overrides.update({
+            "api_key": str(model_config.get("api_key") or ""),
+            "model": str(model_config.get("model") or ""),
+            "openai_base_url": "",
+            "qwen_base_url": str(model_config.get("base_url") or ""),
+        })
+    config = OntologyPipelineConfig.from_env(**overrides)
+    return run_ontology_pipeline(markdown_path, config)
 
 
 FRONTEND_DIR = ROOT / "frontend" / "ontology_build"
@@ -355,7 +351,7 @@ class OntologyBuildHandler(BaseHTTPRequestHandler):
             raise ValueError("请选择项目内存在的 Markdown 文档")
         review_mode = payload.get("review_mode", "manual")
         reviewer = payload.get("reviewer", "human")
-        run_extraction(markdown_path)
+        run_extraction(markdown_path, review_mode=review_mode, base_policy=payload.get("base_policy"))
         result = build_review_from_candidates(DEFAULT_CANDIDATES_PATH, review_mode, reviewer)
         self.send_json(enrich_review_result(result))
 

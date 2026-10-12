@@ -85,7 +85,8 @@ async function runExtractionAndReview() {
   const body = {
     markdown_path: document.getElementById("markdownSelect").value,
     review_mode: document.getElementById("reviewMode").value,
-    reviewer: document.getElementById("reviewer").value
+    reviewer: document.getElementById("reviewer").value,
+    base_policy: document.getElementById("basePolicy").value
   };
   state.result = await api("/api/build-run", {
     method: "POST",

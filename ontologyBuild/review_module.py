@@ -9,6 +9,29 @@ import copy
 from datetime import datetime
 from typing import Any, Optional
 
+try:
+    from ontologyBuild.candidate_quality import approval_errors
+except ImportError:
+    from candidate_quality import approval_errors
+
+
+MODIFIABLE_FIELDS = {
+    "name",
+    "normalized_name",
+    "parent_candidate",
+    "definition_candidate",
+    "property_name",
+    "property_type",
+    "domain_candidate",
+    "range_candidate",
+    "range_datatype",
+    "unit",
+    "example_value",
+    "text_mention",
+    "mapped_to",
+    "mapped_type",
+}
+
 
 def get_default_policy() -> dict:
     """返回默认审核策略"""
@@ -69,6 +92,10 @@ def safe_float(value: Any, default: float = 0.0) -> float:
 def is_false(value: Any) -> bool:
     """只有 value is False 或字符串 'false' 时返回 True"""
     return value is False or value == "false"
+
+
+def is_true(value: Any) -> bool:
+    return value is True or value == "true"
 
 
 def ensure_candidate_id(candidate: dict, index: int) -> dict:
@@ -143,6 +170,27 @@ def recommend_decision(candidate: dict, policy: dict) -> dict:
     status = candidate.get("status")
     ontology_match_status = candidate.get("ontology_match_status")
     constraint_strength = candidate.get("constraint_strength")
+    validation_status = candidate.get("validation_status")
+
+    if validation_status and validation_status != "passed":
+        result["recommendation"] = "review"
+        result["reasons"].append("候选尚未通过新流水线必要校验")
+        return result
+
+    if any(key in candidate for key in ("format_passed", "evidence_passed", "business_passed")):
+        missing_checks = [
+            label
+            for key, label in (
+                ("format_passed", "格式校验"),
+                ("evidence_passed", "证据校验"),
+                ("business_passed", "业务校验"),
+            )
+            if not is_true(candidate.get(key))
+        ]
+        if missing_checks:
+            result["recommendation"] = "review"
+            result["reasons"].append("必要校验未通过或未执行：" + "、".join(missing_checks))
+            return result
     
     # 规则 1: 格式校验失败
     if is_false(format_passed) and policy.get("reject_on_format_failed", True):
@@ -589,6 +637,14 @@ def apply_user_decision(
     timestamp = utc_now()
     
     if user_decision == "accept":
+        errors = approval_errors(candidate)
+        if errors:
+            result["errors"].append({
+                "error_type": "candidate_not_approvable",
+                "message": "候选不能通过：" + "；".join(errors),
+            })
+            result["passed"] = False
+            return result
         # 从原列表移除
         if list_name and index is not None:
             if list_name == "accepted_candidates":
@@ -660,6 +716,27 @@ def apply_user_decision(
             result["passed"] = False
             return result
         
+        unsafe_fields = sorted(set(modifications) - MODIFIABLE_FIELDS)
+        if unsafe_fields:
+            result["errors"].append({
+                "error_type": "protected_field_update",
+                "message": "禁止修改受保护字段：" + "、".join(unsafe_fields),
+            })
+            result["passed"] = False
+            return result
+
+        proposed_candidate = copy.deepcopy(candidate)
+        for key, value in modifications.items():
+            proposed_candidate[key] = value
+        errors = approval_errors(proposed_candidate)
+        if errors:
+            result["errors"].append({
+                "error_type": "candidate_not_approvable",
+                "message": "修改后候选仍不能通过：" + "；".join(errors),
+            })
+            result["passed"] = False
+            return result
+
         # 从原列表移除
         if list_name and index is not None:
             if list_name == "accepted_candidates":

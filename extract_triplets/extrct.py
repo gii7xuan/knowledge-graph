@@ -4,14 +4,26 @@ import json
 import time
 import re
 import hashlib
+import argparse
+from datetime import datetime, timezone
+from pathlib import Path
+from uuid import uuid4
 from difflib import get_close_matches
+
+# Direct-script compatibility must be established before importing project packages.
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(script_dir, os.pardir))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+import httpx
 from openai import OpenAI
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from tqdm import tqdm
 
-from confidence.calibrator import load_calibrator
+from confidence.calibrator import TripleCalibrator, load_calibrator
 from confidence.feature_extractor import TripleFeatureExtractor
-from confidence.risk_policy import load_policy
+from confidence.risk_policy import RiskPolicy, load_policy
 from document.hierarchy_index import (
     build_document_index,
     normalize_document_id,
@@ -27,18 +39,8 @@ from ontologyBuild.ontology_adapter import (
     iter_object_properties,
     normalize_name as normalize_ontology_name,
 )
-
-# 将当前脚本所在目录的父目录添加到 Python 路径
-script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.abspath(os.path.join(script_dir, os.pardir))  # 项目根目录
-parent_dir = os.path.dirname(script_dir)
-if parent_dir not in sys.path:
-    sys.path.insert(0, parent_dir)
-
-# 切换到项目根目录，确保文件路径配置正确
-if os.getcwd() != project_root:
-    os.chdir(project_root)
-    print(f"工作目录切换到: {project_root}")
+from review_agent.contracts import candidate_id_for, fact_key_for as v3_fact_key_for
+from review_agent.repository import ReviewRepository
 
 
 # ============= 新增：本体文件导入 =============
@@ -236,8 +238,13 @@ def get_ontology_text(ontology=None, ontology_name=None, sub_schema=None):
 # ================= 配置区域 =================
 '''
 API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "")
-BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "http://43.143.151.41:3000/v1")
-MODEL = "Qwen3-Coder-Next"
+BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "https://43.143.151.41:3000/v1")
+MODEL = (
+    os.environ.get("TRIPLET_MODEL")
+    or os.environ.get("OPENAI_MODEL")
+    or os.environ.get("QWEN_MODEL")
+    or "Qwen"
+)
 
 
 # 置信度阈值（根据置信度机制.md）
@@ -261,6 +268,13 @@ DISCARDED_TRIPLETS_PATH = os.environ.get(
     'rejected_triplets\\Ballistics_rejected_triplets.json',
 )
 RUNS_V2_DIR = os.environ.get("KG_RUNS_V2_DIR", "runs/v2")
+REVIEW_DATABASE_PATH = os.environ.get("KG_REVIEW_DATABASE", "runs/v3/review.sqlite3")
+REVIEW_MODE = os.environ.get("KG_REVIEW_MODE", "shadow")
+REVIEW_CONFIG_PATH = os.environ.get("KG_REVIEW_CONFIG")
+REVIEW_CALIBRATOR_PATH = None
+REVIEW_POLICY_PATH = None
+REVIEW_ROUTING = {"auto_accept_enabled": False, "semantic_auto_reject_enabled": False}
+REVIEW_CONFIG = {}
 
 # ===========================================
 
@@ -271,7 +285,81 @@ except ImportError:
     from confidence.confidence_scorer import ConfidenceScorer
 
 # 初始化客户端
-client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL)
+client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL, http_client=httpx.Client(trust_env=False))
+
+
+def parse_cli_args(argv=None):
+    parser = argparse.ArgumentParser(description="Extract triples and register an immutable v3 review run.")
+    parser.add_argument("--config", help="v3 review configuration JSON")
+    parser.add_argument("--review-mode", choices=["legacy", "assist_only", "shadow", "active", "offline_demo"])
+    parser.add_argument("--input", help="Markdown input path (overrides TRIPLET_MARKDOWN_FILE)")
+    parser.add_argument("--output-stem", help="legacy JSON/evidence output stem")
+    return parser.parse_args(argv)
+
+
+def configure_from_cli(args):
+    """Resolve explicit CLI values before config and compatibility environment values."""
+    global API_KEY, BASE_URL, MODEL, MARKDOWN_FILE_PATH, OUTPUT_JSON_PATH
+    global EVIDENCE_MD_PATH, BOOK_NAME, DISCARDED_TRIPLETS_PATH, RUNS_V2_DIR
+    global REVIEW_DATABASE_PATH, REVIEW_MODE, REVIEW_CONFIG_PATH, client
+    global REVIEW_CALIBRATOR_PATH, REVIEW_POLICY_PATH, REVIEW_ROUTING
+    global REVIEW_CONFIG
+
+    config = {}
+    default_config = Path(project_root) / "config" / "review_agent.json"
+    if not default_config.exists():
+        default_config = Path(project_root) / "config" / "review_agent.example.json"
+    config_value = args.config or REVIEW_CONFIG_PATH or (str(default_config) if default_config.exists() else None)
+    if config_value:
+        config_path = Path(config_value)
+        if not config_path.is_absolute():
+            config_path = Path(project_root) / config_path
+        if not config_path.is_file():
+            raise FileNotFoundError(f"找不到审核配置: {config_path}")
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        REVIEW_CONFIG_PATH = str(config_path)
+    REVIEW_CONFIG = config
+
+    REVIEW_MODE = args.review_mode or config.get("mode") or os.environ.get("KG_REVIEW_MODE", "shadow")
+    calibration_config = dict(config.get("calibration") or {})
+    REVIEW_CALIBRATOR_PATH = calibration_config.get("model_path")
+    REVIEW_POLICY_PATH = calibration_config.get("policy_path")
+    if REVIEW_CALIBRATOR_PATH and not Path(REVIEW_CALIBRATOR_PATH).is_absolute():
+        REVIEW_CALIBRATOR_PATH = str(Path(project_root) / REVIEW_CALIBRATOR_PATH)
+    if REVIEW_POLICY_PATH and not Path(REVIEW_POLICY_PATH).is_absolute():
+        REVIEW_POLICY_PATH = str(Path(project_root) / REVIEW_POLICY_PATH)
+    REVIEW_ROUTING = {
+        "auto_accept_enabled": bool((config.get("routing") or {}).get("auto_accept_enabled", False)),
+        "semantic_auto_reject_enabled": bool(
+            (config.get("routing") or {}).get("semantic_auto_reject_enabled", False)
+        ),
+    }
+    database_value = config.get("database_path") or os.environ.get("KG_REVIEW_DATABASE", "runs/v3/review.sqlite3")
+    database_path = Path(database_value)
+    REVIEW_DATABASE_PATH = str(database_path if database_path.is_absolute() else Path(project_root) / database_path)
+    MARKDOWN_FILE_PATH = args.input or os.environ.get("TRIPLET_MARKDOWN_FILE", MARKDOWN_FILE_PATH)
+    RUNS_V2_DIR = os.environ.get("KG_RUNS_V2_DIR", RUNS_V2_DIR)
+
+    if args.output_stem:
+        safe_stem = re.sub(r"[^\w\-.\u4e00-\u9fff]+", "_", args.output_stem).strip("._")
+        if not safe_stem:
+            raise ValueError("output-stem 不能为空")
+        BOOK_NAME = safe_stem
+        OUTPUT_JSON_PATH = str(Path(project_root) / "triplets" / f"{safe_stem}.json")
+        EVIDENCE_MD_PATH = str(Path(project_root) / "evidence" / f"{safe_stem}_evidence.md")
+        DISCARDED_TRIPLETS_PATH = str(
+            Path(project_root) / "rejected_triplets" / f"{safe_stem}_rejected_triplets.json"
+        )
+
+    API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("QWEN_API_KEY", "")
+    BASE_URL = os.environ.get("OPENAI_BASE_URL") or os.environ.get("QWEN_BASE_URL", "https://43.143.151.41:3000/v1")
+    MODEL = os.environ.get("TRIPLET_MODEL") or os.environ.get("OPENAI_MODEL") or os.environ.get("QWEN_MODEL") or "Qwen"
+    try:
+        client.close()
+    except Exception:
+        pass
+    client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL, http_client=httpx.Client(trust_env=False))
+    return config
 
 class ArtilleryProcessor:
     """火炮学知识图谱三元组后置处理器（支持多本体和置信度评分）"""
@@ -349,8 +437,8 @@ class ArtilleryProcessor:
         self.entity_type_cache = {}
         self.evidence_retriever = HierarchicalEvidenceRetriever()
         self.feature_extractor = TripleFeatureExtractor()
-        self.calibrator = load_calibrator()
-        self.risk_policy = load_policy()
+        self.calibrator = load_calibrator(REVIEW_CALIBRATOR_PATH) if REVIEW_CALIBRATOR_PATH else TripleCalibrator()
+        self.risk_policy = load_policy(REVIEW_POLICY_PATH) if REVIEW_POLICY_PATH else RiskPolicy()
 
     def _class_options_text(self):
         """生成实体类型预测用的本体类清单。"""
@@ -372,13 +460,18 @@ class ArtilleryProcessor:
         if direct_type:
             return {
                 "entity": entity,
-                "class_id": direct_type,
-                "confidence": 1.0,
-                "method": "ontology_label_exact",
-                "reason": "实体名称直接命中本体类 label/id",
+                "class_id": "Unknown",
+                "class_concept_candidate": direct_type,
+                "confidence": 0.0,
+                "method": "class_concept_match",
+                "reason": "名称命中本体类概念，不能据此把文本提及自动断言为该类实例",
             }
 
-        cache_key = (entity, relation, role, other_entity)
+        ontology_version = hashlib.sha256(
+            json.dumps(self.ontology, ensure_ascii=False, sort_keys=True).encode("utf-8")
+        ).hexdigest()
+        evidence_version = hashlib.sha256(str(evidence_text or "").encode("utf-8")).hexdigest()
+        cache_key = (entity, relation, role, other_entity, evidence_version, ontology_version)
         if cache_key in self.entity_type_cache:
             return self.entity_type_cache[cache_key]
 
@@ -567,22 +660,14 @@ other_entity: {other_entity}
         ranked.sort(key=lambda item: item["score"], reverse=True)
         best = ranked[0] if ranked else {"relation": "", "score": 0.0}
         second_score = ranked[1]["score"] if len(ranked) > 1 else 0.0
-        if best["score"] < 0.45:
-            return {
-                "surface_relation": surface_relation,
-                "relation": "",
-                "score": best["score"],
-                "margin": best["score"] - second_score,
-                "method": "unmatched",
-                "candidates": ranked[:5],
-            }
         return {
             "surface_relation": surface_relation,
-            "relation": best["relation"],
+            "relation": "",
             "score": best["score"],
             "margin": best["score"] - second_score,
-            "method": "string_similarity",
+            "method": "candidate_recall" if ranked else "unmatched",
             "candidates": ranked[:5],
+            "requires_semantic_confirmation": True,
         }
 
     def _string_similarity(self, left, right):
@@ -602,7 +687,10 @@ other_entity: {other_entity}
             shunt = "low"
         return {
             "shunt": shunt,
-            "reason": f"校准概率 {probability:.4f}，风险策略决策为 {decision}",
+            "reason": (
+                f"校准概率 {probability:.4f}，风险策略决策为 {decision}"
+                if probability is not None else f"校准器未就绪，风险策略决策为 {decision}"
+            ),
             "action": action,
         }
 
@@ -638,8 +726,10 @@ other_entity: {other_entity}
         record["type_validation"] = type_validation
         record["confidence_features"] = features
         record["raw_score"] = confidence_result.get("raw_final_score", confidence_result.get("final_score", 0.0))
-        record["calibrated_probability"] = round(probability, 4)
-        record["confidence"] = round(probability, 4)
+        record["calibrated_probability"] = round(probability, 4) if probability is not None else None
+        record["calibration_status"] = "ok" if probability is not None else "unavailable"
+        record["legacy_score"] = confidence_result.get("raw_final_score", confidence_result.get("final_score", 0.0))
+        record["confidence"] = record["legacy_score"]
         record["decision"] = decision
         record["calibrator_version"] = self.calibrator.version
         record["policy_version"] = self.risk_policy.version
@@ -784,11 +874,13 @@ other_entity: {other_entity}
                     },
                     {"final_score": 0.0, "raw_final_score": 0.0, "S_evidence": 0.0},
                     {},
-                    0.0,
-                    "auto_reject",
+                    None,
+                    "manual_review",
                     source_chunk,
                 )
-                record["discard_reason"] = f"关系词 '{surface_relation}' 无法映射到本体关系"
+                record["discard_reason"] = f"关系词 '{surface_relation}' 需要语义映射确认或本体修订"
+                record["reason_codes"] = ["SCHEMA_GAP"]
+                record["needs_review"] = True
                 discarded_triplets.append(record)
                 print(f"  警告：舍弃非法关系 -> '{surface_relation}'")
                 continue
@@ -811,6 +903,14 @@ other_entity: {other_entity}
             raw_score = confidence_result.get("final_score", 0.0)
             probability = self.calibrator.predict_proba(features, raw_score=raw_score)
             decision = self.risk_policy.route(probability)
+            if decision == "auto_accept" and (
+                REVIEW_MODE != "active" or not REVIEW_ROUTING.get("auto_accept_enabled", False)
+            ):
+                decision = "manual_review"
+            if decision == "auto_reject" and (
+                REVIEW_MODE != "active" or not REVIEW_ROUTING.get("semantic_auto_reject_enabled", False)
+            ):
+                decision = "manual_review"
 
             if not type_validation.get("passed") and decision == "auto_accept":
                 decision = "manual_review"
@@ -832,7 +932,7 @@ other_entity: {other_entity}
 
             print(
                 f"  v2处理: {head} - {mapping_result['relation']} - {tail} "
-                f"(校准概率: {probability:.3f}, 决策: {decision})"
+                f"(校准概率: {probability if probability is not None else '未就绪'}, 决策: {decision})"
             )
             if decision in {"auto_accept", "human_accept"}:
                 valid_triplets.append(record)
@@ -1191,14 +1291,7 @@ def normalize_fact_part(value):
 
 
 def fact_key_for(item):
-    raw = "\t".join(
-        [
-            normalize_fact_part(item.get("head")),
-            str(item.get("relation") or "").strip(),
-            normalize_fact_part(item.get("tail")),
-        ]
-    )
-    return hashlib.sha1(raw.encode("utf-8")).hexdigest()
+    return v3_fact_key_for(item, str(item.get("domain") or "firearm_artillery"))
 
 
 def deduplicate_triplets(items):
@@ -1241,11 +1334,10 @@ def deduplicate_triplets(items):
                 current_items.append(ev)
                 seen.add(ev_key)
 
-        if float(item.get("calibrated_probability", 0.0) or 0.0) > float(current.get("calibrated_probability", 0.0) or 0.0):
-            preserved_evidence = current_items
-            current.update(item)
-            current["fact_key"] = key
-            current["evidence_items"] = preserved_evidence
+        current.setdefault("candidate_sources", []).append({
+            "source_id": item.get("source_id"), "document_id": item.get("document_id"),
+            "evidence_items": item.get("evidence_items") or [],
+        })
 
     return list(merged.values())
 
@@ -1265,7 +1357,93 @@ def write_v2_outputs(candidates, accepted, review_queue, rejected):
             json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def main():
+def write_v3_run(candidates, document_index, ontology):
+    """Persist immutable run inputs and candidate revisions; JSON is only an export."""
+    run_id = os.environ.get("KG_RUN_ID") or (
+        "run_" + datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_") + uuid4().hex[:8]
+    )
+    run_root = Path(project_root) / "runs" / "v3"
+    run_dir = run_root / run_id
+    document_id = document_index.get("document_id") or normalize_document_id(os.path.basename(MARKDOWN_FILE_PATH))
+    document_version = document_index.get("document_version") or hashlib.sha256(
+        Path(MARKDOWN_FILE_PATH).read_bytes()
+    ).hexdigest()
+    ontology_text = json.dumps(ontology, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    ontology_version = hashlib.sha256(ontology_text.encode("utf-8")).hexdigest()
+    document_path = run_dir / "documents" / document_id / f"{document_version}.json"
+    ontology_path = run_dir / "ontology" / "ontology_snapshot.json"
+    config_path = run_dir / "config" / "review_config.json"
+    export_path = run_dir / "exports" / "candidates.json"
+    for path in (document_path, ontology_path, config_path, export_path):
+        path.parent.mkdir(parents=True, exist_ok=True)
+    document_path.write_text(json.dumps({
+        "document_id": document_id, "document_version": document_version,
+        "chunks": document_index.get("chunks", []), "sections": document_index.get("sections", []),
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    ontology_path.write_text(json.dumps(ontology, ensure_ascii=False, indent=2), encoding="utf-8")
+    def redact(value):
+        if isinstance(value, dict):
+            return {
+                key: ("<redacted>" if any(token in key.lower() for token in ("api_key", "password", "secret", "token"))
+                      else redact(item))
+                for key, item in value.items()
+            }
+        if isinstance(value, list):
+            return [redact(item) for item in value]
+        return value
+    frozen_config = redact({**REVIEW_CONFIG, "mode": REVIEW_MODE})
+    config_path.write_text(json.dumps(frozen_config, ensure_ascii=False, indent=2), encoding="utf-8")
+    config_hash = hashlib.sha256(
+        json.dumps(frozen_config, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    repository = ReviewRepository(REVIEW_DATABASE_PATH)
+    repository.initialize()
+    manifest = {
+        "run_id": run_id, "schema_version": "triple_review_v3", "mode": REVIEW_MODE,
+        "source_hash": document_version, "ontology_hash": ontology_version,
+        "document_id": document_id, "document_path": str(document_path),
+        "ontology_path": str(ontology_path), "feature_schema_version": "review_features_v3",
+        "calibrator_version": "untrained", "policy_version": "disabled_cold_start_v3",
+        "review_config_path": str(config_path), "review_config_hash": config_hash,
+        "planner_strategy": (REVIEW_CONFIG.get("planner") or {}).get("strategy", "deterministic"),
+    }
+    repository.create_run(manifest)
+    exported = []
+    for index, item in enumerate(candidates):
+        candidate_id = candidate_id_for(run_id, document_id, str(item.get("source_id") or "unknown"), index)
+        triple = {
+            "head": item.get("head"), "surface_relation": item.get("surface_relation") or item.get("relation"),
+            "relation_id": item.get("relation_id") or item.get("relation") or None,
+            "relation_label": item.get("relation"), "tail": item.get("tail"),
+            "head_type": item.get("head_type"), "tail_type": item.get("tail_type"),
+            "tail_kind": item.get("tail_kind", "entity"),
+            "qualifiers": item.get("qualifiers") or {"polarity": item.get("polarity", "positive"),
+                                                        "condition": item.get("condition")},
+        }
+        candidate = {
+            "schema_version": "triple_review_v3", "run_id": run_id, "candidate_id": candidate_id,
+            "revision": 1, "document_id": document_id, "document_version": document_version,
+            "source_chunk_id": item.get("source_id"), "section_id": item.get("section_id"),
+            "domain": item.get("domain") or ontology.get("domain") or "default",
+            "fact_namespace": item.get("fact_namespace") or item.get("domain") or ontology.get("domain") or "default",
+            "ontology_version": ontology_version, "triple": triple,
+            "extraction_quote": item.get("evidence_quote") or item.get("evidence"),
+            "evidence_items": item.get("evidence_items") or [],
+            "extraction_model": MODEL, "extraction_prompt_version": "extract_legacy_bridge_v3",
+            "legacy_score": item.get("legacy_score", item.get("raw_score")),
+        }
+        candidate["fact_key"] = fact_key_for(candidate)
+        repository.add_candidate(candidate)
+        exported.append(candidate)
+    export_path.write_text(json.dumps(exported, ensure_ascii=False, indent=2), encoding="utf-8")
+    manifest_path = run_dir / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    return manifest
+
+
+def main(argv=None):
+    args = parse_cli_args(argv)
+    configure_from_cli(args)
     # 打印配置信息
     print("=" * 60)
     print("火炮学知识图谱三元组提取配置")
@@ -1280,6 +1458,7 @@ def main():
     print(f"   处理文件: {file_source}")
 
     print("1. 读取并预处理markdown文件...")
+    ontology = {}
     try:
         text = read_markdown()
         print(f"   成功读取文本，长度: {len(text)} 字符")
@@ -1406,6 +1585,8 @@ def main():
 
     write_v2_outputs(all_candidates, all_triplets, review_queue, rejected)
     print(f"4. v2 分层结果已保存到: {RUNS_V2_DIR}")
+    manifest = write_v3_run(all_candidates, document_index, ontology)
+    print(f"4. v3 审核运行已登记: {manifest['run_id']}")
 
     # 打印置信度分布统计
     print("\n5. 置信度分布统计:")

@@ -9,6 +9,15 @@ FRAGMENT_WORDS = (
     "等内容", "为对象", "是由", "进行了", "研究了", "分析了",
 )
 DANGLING_ENDINGS = ("和", "与", "及", "的", "为", "由", "在", "等", "将", "把", "或")
+GENERIC_NAMES = {
+    "方法", "模型", "理论", "系统", "过程", "方程", "算法", "装置", "机构",
+    "部件", "现象", "效应", "参数", "质量", "速度", "时间", "距离", "坐标", "系数",
+}
+CLAUSE_MARKERS = (
+    "本书", "本章", "本节", "可以", "能够", "需要", "为了", "根据", "通过", "采用",
+    "利用", "使用", "介绍", "论述", "研究了", "分析了", "给出", "提出", "表明",
+    "该方程", "这种", "认为", "因而", "不论", "即假设", "带动", "终了时",
+)
 TERM_ENDINGS = (
     "理论", "方程", "模型", "方法", "算法", "系统", "装置", "机构", "部件",
     "现象", "过程", "效应", "阻力", "弹道", "火炮", "炮身", "炮架", "炮闩",
@@ -23,14 +32,25 @@ DERIVED_CONSTRAINT_REASONS = (
 
 
 def is_fragment_name(name, from_body=False):
-    text = re.sub(r"\s+", "", str(name or ""))
+    raw = str(name or "").strip()
+    text = re.sub(r"\s+", "", raw)
     if not text or any(word in text for word in FRAGMENT_WORDS):
+        return True
+    if re.search(r"^#{1,6}|\$|\\(?:frac|dot|mathrm|pmb|Delta|Omega)|[{}]", text):
+        return True
+    if re.match(r"^(?:第?[\d一二三四五六七八九十百]+(?:[.．、-][\d一二三四五六七八九十百]+)*)", text):
+        return True
+    if text in GENERIC_NAMES or any(marker in text for marker in CLAUSE_MARKERS):
+        return True
+    if text.startswith(("该", "此", "这种", "若干", "即", "故", "因而", "不论")):
+        return True
+    if text.count("(") != text.count(")") or text.count("（") != text.count("）"):
         return True
     if text.endswith(DANGLING_ENDINGS):
         return True
     if re.search(r"[^\d]\d{2,4}$", text):
         return True
-    if from_body and len(text) >= 18 and not text.endswith(TERM_ENDINGS):
+    if from_body and len(text) > 16:
         return True
     return False
 
@@ -84,6 +104,10 @@ def quality_issues(item):
             value = item.get(field)
             if value and is_fragment_name(value):
                 issues.append({"code": "fragment_endpoint", "message": f"{field} 像句子残片", "cleanup": True})
+    if candidate_type == "datatype_property":
+        domain = item.get("domain_candidate")
+        if domain and is_fragment_name(domain, from_body=True):
+            issues.append({"code": "fragment_endpoint", "message": "domain_candidate 像句子残片", "cleanup": True})
     if candidate_type == "constraint" and str(item.get("reason") or "").startswith(DERIVED_CONSTRAINT_REASONS):
         issues.append({"code": "derived_constraint", "message": "自动派生约束，需先确认属性及 domain/range", "cleanup": True})
     if candidate_type in {"object_property", "datatype_property", "constraint"}:
@@ -104,6 +128,22 @@ def describe_quality(item):
 
 def approval_errors(item):
     errors = [f"缺少{label}" for label in required_fields(item)]
+    validation_status = item.get("validation_status")
+    if validation_status and validation_status != "passed":
+        labels = {
+            "legacy_unverified": "候选未经过新流水线校验",
+            "dependency_pending": "候选依赖尚未通过校验",
+            "failed": "候选校验失败",
+            "not_run": "候选校验尚未执行",
+        }
+        errors.append(labels.get(validation_status, f"候选校验状态为 {validation_status}"))
+    for field, label in (
+        ("format_passed", "格式校验"),
+        ("evidence_passed", "证据校验"),
+        ("business_passed", "业务校验"),
+    ):
+        if field in item and item.get(field) is not True:
+            errors.append(f"{label}未通过")
     from_body = "正文" in str(item.get("reason") or "")
     if item.get("candidate_type") in {"class", "datatype_property"} and is_fragment_name(candidate_name(item), from_body):
         errors.append("名称像句子残片，请修改后再通过")
@@ -111,4 +151,8 @@ def approval_errors(item):
         for field in ("domain_candidate", "range_candidate"):
             if item.get(field) and is_fragment_name(item[field]):
                 errors.append(f"{field} 像句子残片")
+    if item.get("candidate_type") == "datatype_property":
+        domain = item.get("domain_candidate")
+        if domain and is_fragment_name(domain, from_body=True):
+            errors.append("domain_candidate 像句子残片")
     return errors

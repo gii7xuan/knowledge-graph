@@ -20,6 +20,7 @@
           <label>审核模式<select id="reviewMode"><option value="manual">人工审核</option><option value="hybrid">混合审核</option><option value="auto">自动审核</option></select></label>
           <label>审核人<input id="reviewer" value="human"></label>
         </div>
+        <label>基础本体策略<select id="basePolicy"><option value="draft">草案生成</option><option value="strict">严格审计</option></select></label>
         <button class="primary" onclick="runReview()">生成审核队列</button>
         <button onclick="runExtractionAndReview()">抽取并进入最后审核</button>
         <div class="meta">选择“人工审核”时，所有候选本体元素都会进入待审队列；选择“混合审核”时，只展示系统判定需要人工处理的候选。</div>
