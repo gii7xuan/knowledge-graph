@@ -1,0 +1,3837 @@
+[
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "制导炮弹",
+      "normalized_name": "制导炮弹",
+      "parent_candidate": "C_Projectile",
+      "definition_candidate": "配备制导系统的炮弹，如“神剑”制导炮弹",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "美国的M109A6 155mm 自行榴弹炮配备了“神剑”制导炮弹，最大射程达到 40km ，精度小于 10m 。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中明确提到“制导炮弹”，属于炮弹的一种，可归纳为C_Projectile的子类。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "自行榴弹炮",
+      "normalized_name": "自行榴弹炮",
+      "parent_candidate": "C_HowitzerCannon",
+      "definition_candidate": "具备自行机动能力的榴弹炮，如PzH2000和M109A6",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "德国的 PzH2000155mm 自行榴弹炮，能够单炮多发同时打击一个目标"
+        },
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "美国的M109A6 155mm 自行榴弹炮配备了“神剑”制导炮弹"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中多次提到“自行榴弹炮”，属于加榴炮的一种，可归纳为C_HowitzerCannon的子类。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "炮膛",
+      "normalized_name": "炮膛",
+      "parent_candidate": "C_Gun",
+      "definition_candidate": "火炮内部容纳弹丸运动的腔体，具有横截面面积。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "S ——炮膛横截面面积"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "“炮膛”在原文中作为具有横截面面积的结构出现，可视为火炮部件，但已有本体未明确覆盖，故作为新候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "最大膛压",
+      "normalized_name": "最大膛压",
+      "parent_candidate": "C_DynamicsObject",
+      "definition_candidate": "膛压达到最大值，称为最大膛压。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_26868671cb26",
+          "text": "膛压达到最大值  $p_{\\mathrm{max}}$  ，称为最大膛压。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确指出“最大膛压”是膛压达到最大值的特定状态，是内弹道学中的关键参数概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "重力",
+      "normalized_name": "重力",
+      "parent_candidate": "C_Force",
+      "definition_candidate": "弹丸在空中飞行时受到的重力",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "一般只考虑空气阻力 $R_{\\mathrm{x}}$ 和重力 $G$ 的作用"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "重力是弹丸飞行中受力的具体类型，可作为力的子类。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹道系数",
+      "normalized_name": "弹道系数",
+      "parent_candidate": "C_PerformanceParameter",
+      "definition_candidate": "反映了弹丸特性对空气阻力加速度的影响，C值越大，阻力越大。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "C ——弹道系数，反映了弹丸特性对 a_x 的影响，C 值越大，阻力越大，即 a_x 越大；"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确定义了弹道系数C，并说明其物理意义，属于描述弹丸空气动力学特性的稳定参数概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "空气阻力加速度",
+      "normalized_name": "空气阻力加速度",
+      "parent_candidate": "C_PerformanceParameter",
+      "definition_candidate": "弹丸在飞行过程中受到的空气阻力产生的加速度，可表示为C H(y) F(v)或C H(y) v G(v)。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "a_x ——空气阻力加速度，可表示为"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确定义了空气阻力加速度a_x，并给出了其计算公式，属于弹丸飞行动力学中的稳定物理量概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "空气密度函数",
+      "normalized_name": "空气密度函数",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "描述空气密度随高度y变化的函数H(y)。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "H(y) ——空气密度函数；"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确定义了空气密度函数H(y)，属于弹道计算中使用的数学模型/函数概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "阻力函数",
+      "normalized_name": "阻力函数",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "描述空气阻力与弹速v和声速c关系的函数F(v)和G(v)。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "F(v), G(v) ——阻力函数，是弹速 v 与声速 c 的函数。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确定义了阻力函数F(v)和G(v)，属于弹道计算中使用的数学模型/函数概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹丸飞行稳定性",
+      "normalized_name": "弹丸飞行稳定性",
+      "parent_candidate": "C_ProjectileMotion",
+      "definition_candidate": "长圆柱形弹丸虽然有利于减小弹丸飞行的阻力，但随之带来弹丸飞行稳定性问题。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_0a46124378df",
+          "text": "长圆柱形弹丸虽然有利于减小弹丸飞行的阻力，但随之带来弹丸飞行稳定性问题。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提到弹丸飞行稳定性问题，属于弹丸飞行动力学中的稳定概念，可归入弹丸飞行动力学相关类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "进动",
+      "normalized_name": "进动",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "弹轴在翻转力矩作用下绕着质心速度矢量向右转动的运动现象。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "如此类推，弹轴就不断地绕着 $M_z$ 向右转动，这就是进动。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确定义了进动是弹轴绕着 $M_z$ 向右转动的运动，属于弹道动力学中的稳定运动现象，可归入理论、方法与模型。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "追随运动",
+      "normalized_name": "追随运动",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "弹轴为了与弯曲弹道切线方向基本一致而随弹道切线下降而向下转动的运动。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "弹轴必须对弹道切线 $\\nu$ 做追随运动，称其为“追随稳定性”。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确提出了追随运动的概念，指弹轴跟随弹道切线方向转动的运动，属于弹道动力学理论。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "攻角平面",
+      "normalized_name": "攻角平面",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "由弹轴和质心速度矢量构成的平面。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "当弹轴运动到一个新的位置，就与 $\\nu$ 构成一个新的攻角平面。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文提到弹轴与速度矢量构成攻角平面，是描述弹道姿态的几何概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "稳定力矩",
+      "normalized_name": "稳定力矩",
+      "parent_candidate": "C_Moment",
+      "definition_candidate": "使弹轴向弹道切线靠拢，使得弹丸飞行稳定的力矩。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dbd13a68e49c",
+          "text": "此力矩使弹轴向弹道切线靠拢，使得弹丸飞行稳定。因此， $M_z$ 成为稳定力矩。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确定义了稳定力矩的作用和名称，属于稳定领域概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "膛线",
+      "normalized_name": "膛线",
+      "parent_candidate": "C_Gun",
+      "definition_candidate": "炮膛内壁的螺旋线，用于赋予弹丸旋转。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "AB 为膛线"
+        },
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "弹带作用在膛线导转侧的力较大"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "膛线是火炮身管的重要组成部分，原文中多次提及，属于稳定领域概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "炮膛",
+      "normalized_name": "炮膛",
+      "parent_candidate": "C_Gun",
+      "definition_candidate": "火炮内部容纳弹丸和发射药的腔体。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "若将炮膛展开成平面"
+        },
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "AC 为炮膛轴线"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "炮膛是火炮的核心部件，原文中作为几何展开的对象出现，属于稳定领域概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "减振装置",
+      "normalized_name": "减振装置",
+      "parent_candidate": "C_ComponentMechanism",
+      "definition_candidate": "用于增大阻尼，衰减并消除炮架的振动，使炮架在垂直方向因冲击而获得的机械能通过摩擦不可逆地转化为热能散失于空气中的装置。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_27573f0ea825",
+          "text": "因此在有些高速行驶的火炮上（尤其在现代坦克上）一般都设有减振装置。其作用就是增大阻尼，衰减并消除炮架的振动，使炮架在垂直方向因冲击而获得的机械能通过摩擦不可逆地转化为热能散失于空气中。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确提到“减振装置”并说明其作用，属于火炮构造中的稳定部件概念，可归纳为减振装置类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹簧",
+      "normalized_name": "弹簧",
+      "parent_candidate": "C_ComponentMechanism",
+      "definition_candidate": "用于连接炮架与车轮，将冲击转化为变形能的弹性构件。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_27573f0ea825",
+          "text": "如果炮架与车轮间通过弹性构件相连，车轮受到的冲击通过弹簧传到炮架上，炮架受力大为减小，它只是弹簧受压后的抗力"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提到“弹簧”作为弹性构件连接炮架与车轮，属于火炮构造中的部件概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "橡胶式缓冲器",
+      "normalized_name": "橡胶式缓冲器",
+      "parent_candidate": "C_RecoilMechanism",
+      "definition_candidate": "在旧式火炮中曾采用过，由曲臂与被缓冲部分用很厚的橡胶管连接，缓冲时橡胶管受到扭转载荷的缓冲器。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "在旧式火炮中曾采用过橡胶式缓冲器，这种缓冲器由于行军速度的提高，早已被弹簧式缓冲器代替了。"
+        },
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "图3-81所示是一种有代表性的橡胶缓冲器，曲臂与被缓冲部分用一个很厚的橡胶管连接起来。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确描述了“橡胶式缓冲器”的结构和工作原理，属于火炮反后坐/缓冲机构的一种具体类型，可作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "弹簧式缓冲器",
+      "normalized_name": "弹簧式缓冲器",
+      "parent_candidate": "C_RecoilMechanism",
+      "definition_candidate": "代替旧式橡胶式缓冲器的缓冲器。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "这种缓冲器由于行军速度的提高，早已被弹簧式缓冲器代替了。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提及“弹簧式缓冲器”作为替代橡胶式缓冲器的类型，虽未详细描述结构，但作为稳定领域概念可作新候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "平衡机",
+      "normalized_name": "平衡机",
+      "parent_candidate": "C_ComponentMechanism",
+      "definition_candidate": "用于施加与火炮起落部分重力作用相反的力来平衡起落部分重力矩的机构或装置。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。"
+        },
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机（equilibrator）的结构类型较多，一般可分类如图3一96所示。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确指出平衡机是一种机构或装置，用于平衡火炮起落部分的重力矩，具有稳定语义，可作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "平衡机平衡法",
+      "normalized_name": "平衡机平衡法",
+      "parent_candidate": "C_TheoryMethod",
+      "definition_candidate": "需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩的方法。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确描述了平衡机平衡法的定义和应用，属于火炮设计中的方法，可作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "自动机",
+      "normalized_name": "自动机",
+      "parent_candidate": "C_AutomaticWeapon",
+      "definition_candidate": "火炮中实现自动装填和发射的机构，具有循环频率（射频）。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "火炮的理论射速取决于自动机的循环频率，即射击频率（射频）。"
+        },
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "现代火炮自动机具有多用途性，既可对付空中的快速飞行目标，也可对付地面上慢速运动的目标。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文多次提及“自动机”作为火炮的核心机构，具有明确的领域语义，且与已有本体中的“C_AutomaticMechanism”（在R_has_mechanism的range中出现）语义高度相关，但已有类别列表中未直接列出“自动机”类别，故作为新候选提出，其上位类可关联至自动武器或火炮系统。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "导气式自动机",
+      "normalized_name": "导气式自动机",
+      "parent_candidate": "C_AutomaticWeapon",
+      "definition_candidate": "利用由炮膛内导出的火药燃气的能量来驱动自动机各机构工作的自动机。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d0ae42c16137",
+          "text": "这种自动机又称气退式自动机。它是利用由炮膛内导出的火药燃气的能量来驱动自动机各机构工作。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确定义了导气式自动机的工作原理，属于自动武器的一种具体类型，可作为新候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "炮身",
+      "normalized_name": "炮身",
+      "parent_candidate": "C_Gun",
+      "definition_candidate": "炮身的作用是赋予弹丸正确的飞行方向并使其旋转。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_45c5ada6fea6",
+          "text": "85mm 加农炮炮身的作用是赋予弹丸正确的飞行方向并使其旋转。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确指出炮身是加农炮的组成部分，并描述了其作用，属于稳定的领域概念。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "高射炮",
+      "normalized_name": "高射炮",
+      "parent_candidate": "C_Gun",
+      "definition_candidate": "一种小口径防空武器，战斗任务是歼灭斜距离在6000m以内的各种空中目标，用以掩护地面部队的战斗行动和保卫地面的重要设施。必要时还可以对地面和水上目标射击。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "57mm 高射炮是一种小口径防空武器（图5-1），其战斗任务是歼灭斜距离在 6000m 以内的各种空中目标，用以掩护地面部队的战斗行动和保卫地面的重要设施。必要时还可以对地面和水上目标射击。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确指出“高射炮”是一种小口径防空武器，并描述了其战斗任务，符合稳定领域概念的特征，且未包含在已有本体类别中，故作为新候选类别提出，其上位类推测为火炮（C_Gun）。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_classes",
+    "candidate": {
+      "name": "空中目标",
+      "normalized_name": "空中目标",
+      "parent_candidate": null,
+      "definition_candidate": "高射炮战斗任务中需要歼灭的斜距离在6000m以内的目标。",
+      "status": "new_candidate",
+      "matched_existing_class": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "其战斗任务是歼灭斜距离在 6000m 以内的各种空中目标"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文提到“各种空中目标”，表明这是一个具有稳定语义的领域概念，但缺乏更详细的定义，故置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "命中",
+      "normalized_name": "命中",
+      "definition_candidate": "50%是被火炮命中的",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "火炮",
+      "range_candidate": "坦克",
+      "evidence": [
+        {
+          "chunk_id": "chunk_aabd0ce61cc3",
+          "text": "50%是被火炮命中的"
+        }
+      ],
+      "confidence": 0.5,
+      "reason": "原文表达“火炮命中坦克”的作战效果关系，但“命中”作为本体关系可能过于具体，且domain/range未在本体中明确定义，置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "配备",
+      "normalized_name": "配备",
+      "definition_candidate": "武器系统配备特定弹药或设备",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_WeaponEquipment",
+      "range_candidate": "C_Ammunition",
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "美国的M109A6 155mm 自行榴弹炮配备了“神剑”制导炮弹"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文中“配备”表示武器系统（自行榴弹炮）与弹药（制导炮弹）之间的关系，可归纳为对象属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "取决于",
+      "normalized_name": "取决于",
+      "definition_candidate": "描述某一物理量由哪些因素决定。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹丸速度",
+      "range_candidate": "火药燃气所做的功, 弹丸质量, 炮膛横截面面积",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "弹丸在膛内运动的速度及其在炮口处的速度值取决于火药燃气所做的功、弹丸的质量和炮膛的横截面面积等因素。"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "原文明确表达速度值取决于多个因素，但“取决于”作为关系较为泛化，且 domain/range 为具体物理量而非稳定类别，故置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "受到重力作用",
+      "normalized_name": "受到重力作用",
+      "definition_candidate": "弹丸在空中飞行时受到重力的作用",
+      "status": "new_candidate",
+      "matched_existing_property": "R_subject_to_force",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "重力",
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "一般只考虑空气阻力 $R_{\\mathrm{x}}$ 和重力 $G$ 的作用"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文描述了弹丸受到重力作用，可映射到受力作用关系，但具体力类型为新候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "反映",
+      "normalized_name": "反映",
+      "definition_candidate": "弹道系数反映弹丸特性对空气阻力加速度的影响。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹道系数",
+      "range_candidate": "空气阻力加速度",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "C ——弹道系数，反映了弹丸特性对 a_x 的影响"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文表述'反映了弹丸特性对a_x的影响'，可归纳为弹道系数与空气阻力加速度之间的语义关系，但'反映'作为本体关系可能过于宽泛，且domain/range为本次新抽取的候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "产生",
+      "normalized_name": "产生",
+      "definition_candidate": "攻角产生翻转力矩。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "攻角",
+      "range_candidate": "翻转力矩",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "因有攻角 $\\delta \\rightarrow$ 产生翻转力矩 $M_{\\mathrm{z}}$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文描述了攻角导致翻转力矩产生的因果关系。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "作用于",
+      "normalized_name": "作用于",
+      "definition_candidate": "翻转力矩作用于弹轴使其产生进动。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "翻转力矩",
+      "range_candidate": "弹轴",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "高速旋转的弹丸使弹轴矢端朝着矢量 $M_{\\mathrm{z}}$ 方向运动"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文描述了翻转力矩 $M_z$ 对弹轴运动方向的影响。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "产生稳定力矩",
+      "normalized_name": "produces_stabilizing_moment",
+      "definition_candidate": "弹丸在飞行中产生使弹轴向弹道切线靠拢的力矩。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "尾翼弹丸",
+      "range_candidate": "稳定力矩",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dbd13a68e49c",
+          "text": "此力矩使弹轴向弹道切线靠拢，使得弹丸飞行稳定。因此， $M_z$ 成为稳定力矩。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文描述了力矩的产生和作用，关系名称为归纳所得，domain和range为本次抽取的候选类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "由...组成",
+      "normalized_name": "由...组成",
+      "definition_candidate": "描述混合膛线由渐速膛线和等齐膛线组成的关系。",
+      "status": "existing",
+      "matched_existing_property": "R_composed_of",
+      "domain_candidate": "混合膛线",
+      "range_candidate": "渐速膛线",
+      "evidence": [
+        {
+          "chunk_id": "chunk_5dd6b828a52c",
+          "text": "这种膛线吸取了等齐膛线和渐速膛线的优点：在膛线起始部采用渐速膛线...在炮口部采用等齐膛线"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "混合膛线由渐速膛线和等齐膛线两部分组成，符合已有本体中的组成关系。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "具有部件",
+      "normalized_name": "具有部件",
+      "definition_candidate": "火炮或火炮系统具有某个部件。",
+      "status": "existing",
+      "matched_existing_property": "R_has_component",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "C_ComponentMechanism",
+      "evidence": [
+        {
+          "chunk_id": "chunk_27573f0ea825",
+          "text": "因此在有些高速行驶的火炮上（尤其在现代坦克上）一般都设有减振装置。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文提到火炮设有减振装置，可映射到已有关系“具有部件”。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "代替",
+      "normalized_name": "代替",
+      "definition_candidate": "弹簧式缓冲器代替橡胶式缓冲器。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹簧式缓冲器",
+      "range_candidate": "橡胶式缓冲器",
+      "evidence": [
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "这种缓冲器由于行军速度的提高，早已被弹簧式缓冲器代替了。"
+        }
+      ],
+      "confidence": 0.55,
+      "reason": "原文提及弹簧式缓冲器代替橡胶式缓冲器，可归纳为“代替”关系，但属于历史演变描述，本体价值有限。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "具有机构",
+      "normalized_name": "具有机构",
+      "definition_candidate": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。",
+      "status": "existing",
+      "matched_existing_property": "R_has_mechanism",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "C_ComponentMechanism",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提到平衡机平衡法需要专门的机构或装置，可映射到已有的'具有机构'关系，但domain和range需要归纳。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_object_properties",
+    "candidate": {
+      "name": "歼灭",
+      "normalized_name": "歼灭",
+      "definition_candidate": "高射炮对空中目标执行的战斗任务。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "高射炮",
+      "range_candidate": "空中目标",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "其战斗任务是歼灭斜距离在 6000m 以内的各种空中目标"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确表达了高射炮对空中目标的“歼灭”关系，但“歼灭”作为对象属性可能过于具体，且domain和range为本次新抽取的候选类别，故置信度为0.70。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大射速",
+      "normalized_name": "最大射速",
+      "definition_candidate": "火炮、弹药和人员在良好的准备状态下火炮所能达到的射速",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "发/分",
+      "example_value": "12发/min",
+      "evidence": [
+        {
+          "chunk_id": "chunk_17e45e914b4e",
+          "text": "德国的PzH2000  $155\\mathrm{mm}$  自行榴弹炮的...最大射速为12发/min"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文给出了最大射速的具体数值和单位，属于火炮的数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "持续射速",
+      "normalized_name": "持续射速",
+      "definition_candidate": "在较长的时间段内火炮实际能达到的射速",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "发/分",
+      "example_value": "3发/min",
+      "evidence": [
+        {
+          "chunk_id": "chunk_17e45e914b4e",
+          "text": "德国的PzH2000  $155\\mathrm{mm}$  自行榴弹炮的...持续射速为3发/min"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文给出了持续射速的具体数值和单位，属于火炮的数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "火炮密度",
+      "normalized_name": "火炮密度",
+      "definition_candidate": "每1000m进攻正面上达到了300门的密度",
+      "status": "new_candidate",
+      "matched_existing_property": null,
+      "domain_candidate": "火炮",
+      "range_datatype": "integer",
+      "unit": "门/1000m",
+      "example_value": "300",
+      "evidence": [
+        {
+          "chunk_id": "chunk_aabd0ce61cc3",
+          "text": "在一些重要战役突破地段，每1000m进攻正面上达到了300门的密度"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文提到“密度”，指单位正面宽度上的火炮数量，属于火力配置参数，可作为新候选数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大射程",
+      "normalized_name": "最大射程",
+      "definition_candidate": "武器系统能够达到的最远射击距离",
+      "status": "existing",
+      "matched_existing_property": "range",
+      "domain_candidate": "C_WeaponEquipment",
+      "range_datatype": "float",
+      "unit": "km",
+      "example_value": "40",
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "最大射程达到 40km"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文中明确提到“最大射程”，与已有数据属性“range”（射程）匹配，单位为km。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "精度",
+      "normalized_name": "精度",
+      "definition_candidate": "武器系统射击的精确程度",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_WeaponEquipment",
+      "range_datatype": "float",
+      "unit": "m",
+      "example_value": "10",
+      "evidence": [
+        {
+          "chunk_id": "_39f0d3f49ab6",
+          "text": "精度小于 10m"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中明确提到“精度”，表示武器系统的射击精确程度，可归纳为数据属性，单位为m。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "质量",
+      "normalized_name": "质量",
+      "definition_candidate": "火箭的质量和速度分别为 m 、 v",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "火箭",
+      "range_datatype": "float",
+      "unit": "kg",
+      "example_value": "m",
+      "evidence": [
+        {
+          "chunk_id": "chunk_4c6c6449f381",
+          "text": "设在某一时刻 t 火箭的质量和速度分别为 m 、 v"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文在公式推导中提到火箭的质量，可作为火箭的数据属性，但单位未明确，故置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "速度",
+      "normalized_name": "速度",
+      "definition_candidate": "火箭的质量和速度分别为 m 、 v",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "火箭",
+      "range_datatype": "float",
+      "unit": "m/s",
+      "example_value": "v",
+      "evidence": [
+        {
+          "chunk_id": "chunk_4c6c6449f381",
+          "text": "设在某一时刻 t 火箭的质量和速度分别为 m 、 v"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "原文在公式推导中提到火箭的速度，可作为火箭的数据属性，但单位未明确，故置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹丸质量",
+      "normalized_name": "弹丸质量",
+      "definition_candidate": "弹丸的质量，影响其在膛内运动的速度。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹丸",
+      "range_datatype": "float",
+      "unit": "kg",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "m ——弹丸质量"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“弹丸质量”作为公式变量 m 的定义出现，是弹丸的数值属性，数据类型为浮点数，单位通常为 kg。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "炮膛横截面面积",
+      "normalized_name": "炮膛横截面面积",
+      "definition_candidate": "炮膛的横截面面积，影响弹丸在膛内运动的速度。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "炮膛",
+      "range_datatype": "float",
+      "unit": "m²",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "S ——炮膛横截面面积"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“炮膛横截面面积”作为公式变量 S 的定义出现，是炮膛的数值属性，数据类型为浮点数，单位通常为 m²。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "膛内平均压力",
+      "normalized_name": "膛内平均压力",
+      "definition_candidate": "膛内的平均压力，影响火药燃气所做的功。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "炮膛",
+      "range_datatype": "float",
+      "unit": "Pa",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "p ——膛内平均压力"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“膛内平均压力”作为公式变量 p 的定义出现，是炮膛的数值属性，数据类型为浮点数，单位通常为 Pa。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹丸在膛内运动的行程",
+      "normalized_name": "弹丸在膛内运动的行程",
+      "definition_candidate": "弹丸在膛内运动的距离，影响火药燃气所做的功。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹丸",
+      "range_datatype": "float",
+      "unit": "m",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "l_g ——弹丸在膛内运动的行程"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文中“弹丸在膛内运动的行程”作为公式变量 l_g 的定义出现，是弹丸运动的数值属性，数据类型为浮点数，单位通常为 m。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大膛压",
+      "normalized_name": "最大膛压",
+      "definition_candidate": "膛压达到最大值，记为 $p_{\\mathrm{max}}$。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_DynamicsObject",
+      "range_datatype": "float",
+      "unit": "MPa",
+      "example_value": "p_max",
+      "evidence": [
+        {
+          "chunk_id": "chunk_26868671cb26",
+          "text": "膛压达到最大值  $p_{\\mathrm{max}}$  ，称为最大膛压。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确指出最大膛压是一个具体的数值参数，记为 $p_{\\mathrm{max}}$，属于数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "空气阻力加速度",
+      "normalized_name": "空气阻力加速度",
+      "definition_candidate": "空气阻力产生的加速度矢量",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "m/s²",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "式中 $a_{\\mathrm{x}}$ 、 $\\pmb{g}$ ——分别为空气阻力加速度矢量和重力加速度矢量。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文定义了空气阻力加速度，可作为弹丸的数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "重力加速度",
+      "normalized_name": "重力加速度",
+      "definition_candidate": "重力产生的加速度矢量",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "m/s²",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "式中 $a_{\\mathrm{x}}$ 、 $\\pmb{g}$ ——分别为空气阻力加速度矢量和重力加速度矢量。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文定义了重力加速度，可作为弹丸的数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹道系数值",
+      "normalized_name": "ballistic_coefficient_value",
+      "definition_candidate": "弹道系数C的具体数值，C值越大，阻力越大。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹道系数",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "C 值越大，阻力越大，即 a_x 越大；"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文提到'C值越大'，暗示C是一个可比较大小的数值属性，但未给出具体数据类型和单位，故range_datatype设为float，confidence不超过0.75。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "攻角",
+      "normalized_name": "攻角",
+      "definition_candidate": "弹轴与质心速度矢量之间的夹角。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "弹丸",
+      "range_datatype": "float",
+      "unit": "rad",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "因有攻角 $\\delta \\rightarrow$ 产生翻转力矩 $M_{\\mathrm{z}}$"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文中攻角 $\\delta$ 作为物理量出现，是描述弹丸姿态的参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大长度",
+      "normalized_name": "最大长度",
+      "definition_candidate": "弹丸的最大长度限制",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "倍口径",
+      "example_value": "5.5 ~ 6",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b4edb35dc9a8",
+          "text": "弹丸的最大长度一般不超过 5.5 ~ 6 倍口径。"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提到“弹丸的最大长度一般不超过 5.5 ~ 6 倍口径”，最大长度是描述弹丸尺寸限制的数据属性，domain为弹丸（C_Projectile），range为浮点数，单位为倍口径。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "攻角",
+      "normalized_name": "angle_of_attack",
+      "definition_candidate": "弹轴与弹道切线间的夹角。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "尾翼弹丸",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dbd13a68e49c",
+          "text": "炮弹出炮口后，在弹轴与弹道切线间通常有攻角 $\\delta$ 存在"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确提到攻角是弹轴与弹道切线间的夹角，属于数值型数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "章动角",
+      "normalized_name": "nutation_angle",
+      "definition_candidate": "弹轴与弹道切线间的瞬时夹角。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "尾翼弹丸",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dbd13a68e49c",
+          "text": "在某一瞬时，若弹轴与弹道切线有章动角 $\\delta$"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文提到章动角是弹轴与弹道切线间的瞬时夹角，属于数值型数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "锥角",
+      "normalized_name": "锥角",
+      "definition_candidate": "紧塞圆锥的锥角，一般为28°~30°。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "紧塞圆锥",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": "28~30",
+      "evidence": [
+        {
+          "chunk_id": "chunk_07f36bb21733",
+          "text": "紧塞圆锥的锥角一般为  $28^{°} \\sim 30^{°}$  。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确给出了紧塞圆锥的锥角数值范围，可作为新候选数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "缠角",
+      "normalized_name": "缠角",
+      "definition_candidate": "膛线在炮膛展开平面上的倾斜角度。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "膛线",
+      "range_datatype": "float",
+      "unit": "度",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "这种膛线的缠角为常数。"
+        },
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "α 为缠角"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "缠角是膛线的几何参数，原文中明确提及，属于稳定数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "口径",
+      "normalized_name": "口径",
+      "definition_candidate": "炮膛的直径。",
+      "status": "existing",
+      "matched_existing_property": "caliber",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "mm",
+      "example_value": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "d 为口径"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "口径是火炮的基本参数，原文中明确提及，可映射到已有的口径属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "摩擦系数",
+      "normalized_name": "摩擦系数",
+      "definition_candidate": "描述两个接触面之间摩擦特性的无量纲参数。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "闩体",
+      "range_datatype": "float",
+      "unit": "",
+      "example_value": "f3",
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "f3 是闩体与曲臂滑轮的摩擦系数"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确定义 f3 为“闩体与曲臂滑轮的摩擦系数”，属于数值型数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "初始角",
+      "normalized_name": "初始角",
+      "definition_candidate": "曲臂在初始状态下的角度参数，影响闭锁可靠性。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "曲臂",
+      "range_datatype": "float",
+      "unit": "rad",
+      "example_value": "ψ",
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "曲臂的初始角 ψ 应取得小一些"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文明确提及“曲臂的初始角 ψ”，属于几何角度参数，数据类型为浮点数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "滑轮中心到曲臂轴中心的距离",
+      "normalized_name": "滑轮中心到曲臂轴中心的距离",
+      "definition_candidate": "曲臂滑轮中心与曲臂轴中心之间的几何距离。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "曲臂",
+      "range_datatype": "float",
+      "unit": "mm",
+      "example_value": "lk",
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "lk ——曲臂的滑轮中心到曲臂轴中心的距离"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确定义 lk 为“曲臂的滑轮中心到曲臂轴中心的距离”，属于几何尺寸参数。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "射速",
+      "normalized_name": "射速",
+      "definition_candidate": "火炮在单位时间内能够发射的弹丸数量。",
+      "status": "existing",
+      "matched_existing_property": "firing_rate",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "发/分",
+      "example_value": "100",
+      "evidence": [
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "发射速度（rate of fire）又称射速，是指火炮在单位时间内能够发射的弹丸数量。"
+        },
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "射频100发/min时，立靶密集度小于 1.0mil×1.0mil"
+        }
+      ],
+      "confidence": 0.95,
+      "reason": "原文明确定义了“射速”并给出了具体数值和单位，与已有本体中的“firing_rate”完全匹配。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "立靶密集度",
+      "normalized_name": "立靶密集度",
+      "definition_candidate": "描述射击精度的参数，表示弹丸在立靶上的散布范围。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_AimingParameter",
+      "range_datatype": "string",
+      "unit": "mil",
+      "example_value": "1.0mil×1.0mil",
+      "evidence": [
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "射频100发/min时，立靶密集度小于 1.0mil×1.0mil"
+        },
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "射频400发/min时，立靶密集度为 2.0mil×3.0mil"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文给出了“立靶密集度”的具体数值和单位，是描述射击精度的关键参数，可归入瞄准性能参数类别。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大速度",
+      "normalized_name": "最大速度",
+      "definition_candidate": "战斗机和攻击机的最大速度，已达到2Ma以上。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "战斗机",
+      "range_datatype": "float",
+      "unit": "Ma",
+      "example_value": "2",
+      "evidence": [
+        {
+          "chunk_id": "chunk_3fb5236c15ab",
+          "text": "战斗机和攻击机的最大速度已达到 $2Ma$ 以上。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文提到战斗机和攻击机的最大速度，可归纳为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "口径",
+      "normalized_name": "口径",
+      "definition_candidate": "高射炮的口径，原文中为57mm。",
+      "status": "existing",
+      "matched_existing_property": "caliber",
+      "domain_candidate": "高射炮",
+      "range_datatype": "float",
+      "unit": "mm",
+      "example_value": "57",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "57mm 高射炮"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文明确给出了高射炮的口径为57mm，且已有本体中存在“口径”数据属性，故匹配到已有属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "斜距离",
+      "normalized_name": "斜距离",
+      "definition_candidate": "高射炮战斗任务中歼灭空中目标的距离限制，原文中为6000m以内。",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "高射炮",
+      "range_datatype": "float",
+      "unit": "m",
+      "example_value": "6000",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "歼灭斜距离在 6000m 以内的各种空中目标"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确给出了高射炮歼灭空中目标的斜距离限制为6000m以内，这是一个具有稳定语义的数据属性，但已有本体中未包含，故作为新候选提出。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "理论射速",
+      "normalized_name": "理论射速",
+      "definition_candidate": "火炮在正常工作情况下的理论射速",
+      "status": "new_candidate",
+      "matched_existing_property": "rate_of_fire",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "发/分",
+      "example_value": "105 ~ 120",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f223fd724efa",
+          "text": "正常工作情况下，该火炮 $t_{\\mathrm{x}} = 0.5 \\sim 0.57 \\mathrm{~s}$ ，因而理论射速为 $105 \\sim 120$ 发 $/ \\mathrm{min}$ 。"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "原文明确给出了火炮的理论射速数值及单位，可归纳为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大行驶里程",
+      "normalized_name": "最大行驶里程",
+      "definition_candidate": "装备平台最大行驶距离",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_EquipmentPlatformSystem",
+      "range_datatype": "float",
+      "unit": "km",
+      "example_value": "420",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "最大行驶里程/km 420"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“最大行驶里程/km”及数值420，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大爬坡度",
+      "normalized_name": "最大爬坡度",
+      "definition_candidate": "装备平台最大爬坡能力",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_EquipmentPlatformSystem",
+      "range_datatype": "float",
+      "unit": "%",
+      "example_value": "60",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "最大爬坡度/% 60"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“最大爬坡度/%”及数值60，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "最大侧倾坡度",
+      "normalized_name": "最大侧倾坡度",
+      "definition_candidate": "装备平台最大侧倾能力",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_EquipmentPlatformSystem",
+      "range_datatype": "float",
+      "unit": "%",
+      "example_value": "30",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "最大侧倾坡度/% 30"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“最大侧倾坡度/%”及数值30，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "弹丸质量",
+      "normalized_name": "弹丸质量",
+      "definition_candidate": "炮弹的质量",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Projectile",
+      "range_datatype": "float",
+      "unit": "kg",
+      "example_value": "43.5",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "弹丸质量/kg 43.5"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“弹丸质量/kg”及数值43.5，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "携弹量",
+      "normalized_name": "携弹量",
+      "definition_candidate": "装备平台携带的弹药数量",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_EquipmentPlatformSystem",
+      "range_datatype": "integer",
+      "unit": "发",
+      "example_value": "60",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "携弹量/发 60"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“携弹量/发”及数值60，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "携药量",
+      "normalized_name": "携药量",
+      "definition_candidate": "装备平台携带的发射药数量",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_EquipmentPlatformSystem",
+      "range_datatype": "string",
+      "unit": "",
+      "example_value": "67组(药包装药); 288件(模块装药)",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "携药量 67组(药包装药) 288件(模块装药)"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“携药量”及数值，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "高低射界",
+      "normalized_name": "高低射界",
+      "definition_candidate": "火炮高低方向射击范围",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "string",
+      "unit": "°",
+      "example_value": "-2.5~+60",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "高低射界/(°) -2.5~+60"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“高低射界/(°)”及数值，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_datatype_properties",
+    "candidate": {
+      "name": "方向射界",
+      "normalized_name": "方向射界",
+      "definition_candidate": "火炮方向方向射击范围",
+      "status": "new_candidate",
+      "matched_existing_property": "",
+      "domain_candidate": "C_Gun",
+      "range_datatype": "float",
+      "unit": "°",
+      "example_value": "360",
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "方向射界/(°) 360"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文表格中明确出现“方向射界/(°)”及数值360，可作为数据属性。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "最大射速",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_17e45e914b4e",
+          "text": "德国的PzH2000  $155\\mathrm{mm}$  自行榴弹炮的...最大射速为12发/min"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档中多个火炮实例均具有最大射速属性，可归纳为C_Gun的数据属性约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "持续射速",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_17e45e914b4e",
+          "text": "德国的PzH2000  $155\\mathrm{mm}$  自行榴弹炮的...持续射速为3发/min"
+        }
+      ],
+      "confidence": 0.85,
+      "reason": "文档中多个火炮实例均具有持续射速属性，可归纳为C_Gun的数据属性约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "命中",
+      "property_type": "object_property",
+      "domain_candidate": "火炮",
+      "range_candidate": "坦克",
+      "range_datatype": null,
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": null,
+      "evidence": [
+        {
+          "chunk_id": "chunk_aabd0ce61cc3",
+          "text": "50%是被火炮命中的"
+        }
+      ],
+      "confidence": 0.5,
+      "reason": "仅从单个实例句子推测，domain/range未在本体中明确定义，标记为weak_candidate。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "最大射程",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_WeaponEquipment",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "existing",
+      "matched_existing_constraint": "range",
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "最大射程达到 40km"
+        }
+      ],
+      "confidence": 0.9,
+      "reason": "原文中“最大射程”与已有数据属性“range”匹配，domain为C_WeaponEquipment，range_datatype为float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "精度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_WeaponEquipment",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "精度小于 10m"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“精度”表示武器系统的射击精确程度，domain为C_WeaponEquipment，range_datatype为float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹丸质量",
+      "property_type": "datatype_property",
+      "domain_candidate": "弹丸",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "m ——弹丸质量"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“弹丸质量”作为弹丸的属性出现，domain 为弹丸，range 为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "炮膛横截面面积",
+      "property_type": "datatype_property",
+      "domain_candidate": "炮膛",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "S ——炮膛横截面面积"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“炮膛横截面面积”作为炮膛的属性出现，domain 为炮膛，range 为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "膛内平均压力",
+      "property_type": "datatype_property",
+      "domain_candidate": "炮膛",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "p ——膛内平均压力"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文中“膛内平均压力”作为炮膛的属性出现，domain 为炮膛，range 为 float。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "最大膛压",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_DynamicsObject",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_26868671cb26",
+          "text": "膛压达到最大值  $p_{\\mathrm{max}}$  ，称为最大膛压。"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "根据单个句子推测最大膛压属于动力学对象的数据属性，domain/range不够明确，故标记为weak_candidate。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "受到重力作用",
+      "property_type": "object_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "重力",
+      "range_datatype": "",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "一般只考虑空气阻力 $R_{\\mathrm{x}}$ 和重力 $G$ 的作用"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "基于单个句子推测的domain/range约束，置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "弹道系数值",
+      "property_type": "datatype_property",
+      "domain_candidate": "弹道系数",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "C 值越大，阻力越大，即 a_x 越大；"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "仅从单个句子推测弹道系数具有数值属性，domain为本次新抽取的候选类别，故标记为weak_candidate。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "产生",
+      "property_type": "object_property",
+      "domain_candidate": "攻角",
+      "range_candidate": "翻转力矩",
+      "range_datatype": "",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "因有攻角 $\\delta \\rightarrow$ 产生翻转力矩 $M_{\\mathrm{z}}$"
+        }
+      ],
+      "confidence": 0.6,
+      "reason": "基于单个句子推测的因果关系，攻角和翻转力矩未作为稳定类别出现。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "最大长度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Projectile",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b4edb35dc9a8",
+          "text": "弹丸的最大长度一般不超过 5.5 ~ 6 倍口径。"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "从单个句子推测弹丸具有最大长度属性，domain/range约束较弱。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "产生稳定力矩",
+      "property_type": "object_property",
+      "domain_candidate": "尾翼弹丸",
+      "range_candidate": "稳定力矩",
+      "range_datatype": "",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_dbd13a68e49c",
+          "text": "此力矩使弹轴向弹道切线靠拢，使得弹丸飞行稳定。因此， $M_z$ 成为稳定力矩。"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "基于单个句子推测的domain/range约束，属于弱候选。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "锥角",
+      "property_type": "datatype_property",
+      "domain_candidate": "紧塞圆锥",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_07f36bb21733",
+          "text": "紧塞圆锥的锥角一般为  $28^{°} \\sim 30^{°}$  。"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "基于单个句子推测的domain/range约束，标记为weak_candidate。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "摩擦系数",
+      "property_type": "datatype_property",
+      "domain_candidate": "闩体",
+      "range_candidate": "",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "f3 是闩体与曲臂滑轮的摩擦系数"
+        }
+      ],
+      "confidence": 0.75,
+      "reason": "原文明确说明摩擦系数是闩体与曲臂滑轮之间的属性，可归纳为闩体的数据属性约束。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "具有部件",
+      "property_type": "object_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "C_ComponentMechanism",
+      "range_datatype": "",
+      "constraint_status": "existing",
+      "matched_existing_constraint": "具有部件",
+      "evidence": [
+        {
+          "chunk_id": "chunk_27573f0ea825",
+          "text": "因此在有些高速行驶的火炮上（尤其在现代坦克上）一般都设有减振装置。"
+        }
+      ],
+      "confidence": 0.8,
+      "reason": "原文提到火炮设有减振装置，可映射到已有约束“具有部件”。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "立靶密集度",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_AimingParameter",
+      "range_candidate": "string",
+      "range_datatype": "string",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_4eeba6f25f33",
+          "text": "射频100发/min时，立靶密集度小于 1.0mil×1.0mil"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "“立靶密集度”作为瞄准性能参数，其domain可归纳为C_AimingParameter，但原文未明确说明该参数属于哪类武器，故置信度较低。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "口径",
+      "property_type": "datatype_property",
+      "domain_candidate": "高射炮",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "57mm 高射炮"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确指出高射炮的口径为57mm，可以归纳出高射炮具有口径这一数据属性，但domain为本次新抽取的候选类别，故置信度为0.70。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "斜距离",
+      "property_type": "datatype_property",
+      "domain_candidate": "高射炮",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "new_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "歼灭斜距离在 6000m 以内的各种空中目标"
+        }
+      ],
+      "confidence": 0.7,
+      "reason": "原文明确指出高射炮歼灭空中目标的斜距离限制为6000m以内，可以归纳出高射炮具有斜距离这一数据属性，但domain为本次新抽取的候选类别，故置信度为0.70。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "candidate_constraints",
+    "candidate": {
+      "property_name": "理论射速",
+      "property_type": "datatype_property",
+      "domain_candidate": "C_Gun",
+      "range_candidate": "float",
+      "range_datatype": "float",
+      "constraint_status": "weak_candidate",
+      "matched_existing_constraint": "",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f223fd724efa",
+          "text": "正常工作情况下，该火炮 $t_{\\mathrm{x}} = 0.5 \\sim 0.57 \\mathrm{~s}$ ，因而理论射速为 $105 \\sim 120$ 发 $/ \\mathrm{min}$ 。"
+        }
+      ],
+      "confidence": 0.65,
+      "reason": "仅从单个实例句子推测火炮具有理论射速属性，domain/range 约束较弱。"
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火力控制系统",
+      "mapped_to": "C_FireControlSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_49bde4f5bc4d",
+          "text": "且侦察手段和火力控制系统不断精确完善"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "瞄准具",
+      "mapped_to": "C_TargetingSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_af3e7177c7ca",
+          "text": "④ 对炮架和瞄准具等比较复杂的机构和部件，尽量使不同的火炮采用相同的结构型式。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "制导炮弹",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "美国的M109A6 155mm 自行榴弹炮配备了“神剑”制导炮弹"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "自行榴弹炮",
+      "mapped_to": "C_HowitzerCannon",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "德国的 PzH2000155mm 自行榴弹炮，能够单炮多发同时打击一个目标"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "最大射程",
+      "mapped_to": "range",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_39f0d3f49ab6",
+          "text": "最大射程达到 40km"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮闩",
+      "mapped_to": "C_BreechBlock",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_812cba760f8a",
+          "text": "并被炮闩可靠地支撑，与炮闩一起闭锁炮膛"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "复进机",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_812cba760f8a",
+          "text": "而炮身则在复进机的作用下又回到发射前的位置"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_8f8cd3b2f030",
+          "text": "由于身管受火药燃气作用向后运动，有一个后坐速度  $W$"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "重力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_ab87bc3b7cf6",
+          "text": "此时弹丸只受重力的作用"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "重力",
+      "mapped_to": "C_Force",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f66fdbd3b9c5",
+          "text": "在该方向上弹丸受到重力作用"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "空气弹道",
+      "mapped_to": "空气弹道",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "在弹道学中把弹丸质心在空气中运动的轨迹称为空气弹道。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "空气阻力",
+      "mapped_to": "空气阻力",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "火炮射击时，弹丸在大气中飞行将受到空气阻力的作用"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "重力",
+      "mapped_to": "重力",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_9131a3141ac9",
+          "text": "一般只考虑空气阻力 $R_{\\mathrm{x}}$ 和重力 $G$ 的作用"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹速",
+      "mapped_to": "C_ProjectileMotion",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "F(v), G(v) ——阻力函数，是弹速 v 与声速 c 的函数。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹丸飞行动力学",
+      "mapped_to": "C_ProjectileMotion",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_0a46124378df",
+          "text": "长圆柱形弹丸虽然有利于减小弹丸飞行的阻力，但随之带来弹丸飞行稳定性问题。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹丸",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "高速旋转的弹丸使弹轴矢端朝着矢量 $M_{\\mathrm{z}}$ 方向运动"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹轴",
+      "mapped_to": "C_Projectile",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "弹轴就不断地绕着 $M_z$ 向右转动"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a00b528ed4e6",
+          "text": "在身管制造时，便可根据  $\\alpha$  值来加工膛线"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火控系统",
+      "mapped_to": "C_FireControlSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c70b9e6c1b42",
+          "text": "通过采用数字式火控系统"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_07f36bb21733",
+          "text": "为了防止射击时火药气体从身管后端面泄漏出来"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_82882d253de3",
+          "text": "膛线是在身管内表面制出的与身管轴线具有一定倾斜角度的螺旋槽。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮膛",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_82882d253de3",
+          "text": "膛线相对炮膛轴线的倾斜角叫作缠角"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "口径",
+      "mapped_to": "caliber",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "d 为口径"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "膛线",
+      "mapped_to": "膛线",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f4f4f50349da",
+          "text": "AB 为膛线"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火炮",
+      "mapped_to": "C_Gun",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a63b60619a13",
+          "text": "因而在火炮上广泛使用。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_d41a46e5f5c1",
+          "text": "筒紧身管是由两层或多层同心圆筒通过过盈配合组装而成的一种身管"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_fe093c81aad3",
+          "text": "在制造身管时，在身管的外表面缠绕具有一定拉力的钢丝或钢带所形成的身管结构"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_889e218989db",
+          "text": "以增强身管的强度"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e57ce404dfdf",
+          "text": "活动身管的结构和工作原理与活动衬管的基本相同"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "被筒",
+      "mapped_to": "C_BreechBlock",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e57ce404dfdf",
+          "text": "被筒比活动身管短，只覆盖身管后部烧蚀严重段。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_710c407f2886",
+          "text": "被筒与身管之间留有较大的间隙"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "身管",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_489efcda5e8c",
+          "text": "由于身管是火炮的主要构件"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管寿命",
+      "mapped_to": "身管寿命",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_489efcda5e8c",
+          "text": "身管的寿命是指火炮按规定的条件射击"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "烧蚀寿命",
+      "mapped_to": "烧蚀寿命",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_489efcda5e8c",
+          "text": "一般可用烧蚀寿命和疲劳寿命两种方法来衡量身管的寿命"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "疲劳寿命",
+      "mapped_to": "疲劳寿命",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_489efcda5e8c",
+          "text": "一般可用烧蚀寿命和疲劳寿命两种方法来衡量身管的寿命"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮闩",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_5a708bf80722",
+          "text": "楔式炮闩的闩体为楔形块状，工作时垂直于炮膛轴线做直线运动，进行闭锁、开锁等动作"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "闭锁、击发、抽筒、保险和开关闩机构",
+      "mapped_to": "C_Subsystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_5a708bf80722",
+          "text": "该炮闩由闭锁、击发、抽筒、保险和开关闩机构等组成。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "闭锁装置",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "闭锁装置的自锁条件"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "闩体",
+      "mapped_to": "C_BreechBlock",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "发射时闩体作用于曲臂的力有"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "曲臂",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_12d7f6974e84",
+          "text": "作用在曲臂上的力示意图"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "击发装置",
+      "mapped_to": "击发机构",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a491bec73b07",
+          "text": "击发装置一般由击发机和发射机组成。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮闩",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_7e845e0ee87a",
+          "text": "要使炮闩可靠工作，应针对不同的情况设置保险装置。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "反后坐装置",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_7e845e0ee87a",
+          "text": "炮身、反后坐装置、摇架相互连接不正确时，不得击发"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮口制退器",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_fc52f1678448",
+          "text": "其反作用力作用于炮口制退器形成制退力。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "复进机",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_b1717a4c5b91",
+          "text": "复进机根据其弹性贮能介质的不同，一般其分类如图3-50所示。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "反后坐装置",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e03abf747245",
+          "text": "这类摇架的U形槽内可容纳反后坐装置、变后坐长度的机构、开闩机构等"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "开闩机构",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_e03abf747245",
+          "text": "这类摇架的U形槽内可容纳反后坐装置、变后坐长度的机构、开闩机构等"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "减振装置",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_27573f0ea825",
+          "text": "因此在有些高速行驶的火炮上（尤其在现代坦克上）一般都设有减振装置。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "缓冲器",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_27573f0ea825",
+          "text": "弹性缓冲器如图3-77所示。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "橡胶式缓冲器",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "在旧式火炮中曾采用过橡胶式缓冲器"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "弹簧式缓冲器",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "早已被弹簧式缓冲器代替了"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "扭转载荷",
+      "mapped_to": "C_Moment",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_370480c66e5a",
+          "text": "在缓冲时，橡胶管受到扭转载荷。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮架",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_456c7d6d7340",
+          "text": "双脚式和四脚式炮架的火炮有4个接地支点。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "平衡机平衡法",
+      "mapped_to": "C_TheoryMethod",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "平衡机",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机（equilibrator）的结构类型较多，一般可分类如图3一96所示。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火药燃气",
+      "mapped_to": "C_Charge",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_d0ae42c16137",
+          "text": "它是利用由炮膛内导出的火药燃气的能量来驱动自动机各机构工作。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "供弹机构",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_8812f4fadf82",
+          "text": "供弹机构是自动机中比较复杂的机构"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "加农炮",
+      "mapped_to": "C_Cannon",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_45c5ada6fea6",
+          "text": "85mm 加农炮炮身的作用是赋予弹丸正确的飞行方向并使其旋转。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "身管",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.9,
+      "evidence": [
+        {
+          "chunk_id": "chunk_8c07a9d968b2",
+          "text": "炮口制退器一般用左旋螺纹固定在身管上。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "开关闩机构",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_32af9d034fc4",
+          "text": "开关闩机构的作用是在发射完成后打开炮膛，装填弹药后闭锁炮膛。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "关门机",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_32af9d034fc4",
+          "text": "关门机：用来自动关门"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "开闩板",
+      "mapped_to": "C_BreechingMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_32af9d034fc4",
+          "text": "开闩板：用于自动开闩"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "制退机",
+      "mapped_to": "制退机",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f0ebfe1f8b35",
+          "text": "该火炮的反后坐装置采用典型的制退机和复进机结构组成，且均为筒后坐形式。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "复进机",
+      "mapped_to": "复进机",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f0ebfe1f8b35",
+          "text": "该火炮的反后坐装置采用典型的制退机和复进机结构组成，且均为筒后坐形式。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "反后坐装置",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_1efb43dfc92f",
+          "text": "图4-26 反后坐装置的动作"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮身",
+      "mapped_to": "C_GunTube",
+      "mapped_type": "class",
+      "mapping_confidence": 0.7,
+      "evidence": [
+        {
+          "chunk_id": "chunk_1efb43dfc92f",
+          "text": "3个筒随炮身一起后坐"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "瞄准装置",
+      "mapped_to": "C_TargetingSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a491e97fed33",
+          "text": "瞄准装置用来给火炮装定射击诸元——射角和方向角，并与瞄准机构配合进行火炮的瞄准。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "机械式瞄准具",
+      "mapped_to": "C_OpticalSight",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a491e97fed33",
+          "text": "机械式瞄准具用来给火炮装定射角（炮目高低角和高角），并作为周视瞄准镜的基座。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "周视瞄准镜",
+      "mapped_to": "C_OpticalSight",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a491e97fed33",
+          "text": "周视瞄准镜用来进行方向瞄准。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "直接瞄准镜",
+      "mapped_to": "C_OpticalSight",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a491e97fed33",
+          "text": "直接瞄准镜用来进行直接瞄准。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "标定器",
+      "mapped_to": "C_TargetingSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a491e97fed33",
+          "text": "标定器的作用是当没有合适的瞄准点或自然条件不能满足瞄准时，为周视瞄准镜提供一个近旁瞄准点或夜间瞄准点，以便进行间接瞄准的方向瞄准。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "高射炮",
+      "mapped_to": "C_Gun",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "57mm 高射炮是一种小口径防空武器"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "口径",
+      "mapped_to": "caliber",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "57mm 高射炮"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮瞄雷达",
+      "mapped_to": "C_TargetingSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3c09ae0ce9f4",
+          "text": "该火炮配有炮瞄雷达、指挥仪和电源。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "指挥仪",
+      "mapped_to": "C_FireControlSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3c09ae0ce9f4",
+          "text": "该火炮配有炮瞄雷达、指挥仪和电源。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "随动系统",
+      "mapped_to": "C_AutomaticMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3c09ae0ce9f4",
+          "text": "火炮上装有随动系统，可以自动跟踪瞄准射击"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火炮",
+      "mapped_to": "C_Gun",
+      "mapped_type": "class",
+      "mapping_confidence": 0.95,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f223fd724efa",
+          "text": "正常工作情况下，该火炮 $t_{\\mathrm{x}} = 0.5 \\sim 0.57 \\mathrm{~s}$ ，因而理论射速为 $105 \\sim 120$ 发 $/ \\mathrm{min}$ 。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "理论射速",
+      "mapped_to": "rate_of_fire",
+      "mapped_type": "datatype_property",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f223fd724efa",
+          "text": "正常工作情况下，该火炮 $t_{\\mathrm{x}} = 0.5 \\sim 0.57 \\mathrm{~s}$ ，因而理论射速为 $105 \\sim 120$ 发 $/ \\mathrm{min}$ 。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "光学瞄具",
+      "mapped_to": "C_OpticalSight",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_a5971f68e4ce",
+          "text": "搜索、跟踪、光学瞄具、导弹和火炮同车装载"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "通古斯卡火力系统",
+      "mapped_to": "火力系统",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_2ec9271d754f",
+          "text": "通古斯卡火力系统由  $30\\mathrm{mm}$  双管高射炮和双四联装9M311防空导弹组成。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "9M311防空导弹",
+      "mapped_to": "防空导弹",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_2ec9271d754f",
+          "text": "通古斯卡火力系统由  $30\\mathrm{mm}$  双管高射炮和双四联装9M311防空导弹组成。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮口制退器",
+      "mapped_to": "C_ComponentMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "炮口制退器"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "炮闩",
+      "mapped_to": "C_BreechBlock",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_139484eab18d",
+          "text": "炮闩类型"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "莱茵金属公司",
+      "mapped_to": "C_Organization",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_f04d00e3c26c",
+          "text": "莱茵金属公司开始研制配属PzH2000自行火炮使用的新一代榴弹"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "动力和传动系统",
+      "mapped_to": "动力与传动系统",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_08d3eecc2375",
+          "text": "PzH 2000自行火炮的动力和传动系统采用了德国“豹”I、“豹”Ⅱ主战坦克的成熟技术。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "主战坦克",
+      "mapped_to": "主战坦克",
+      "mapped_type": "class",
+      "mapping_confidence": 0.75,
+      "evidence": [
+        {
+          "chunk_id": "chunk_08d3eecc2375",
+          "text": "PzH 2000自行火炮的动力和传动系统采用了德国“豹”I、“豹”Ⅱ主战坦克的成熟技术。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火控自动化",
+      "mapped_to": "C_FireControlSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.6,
+      "evidence": [
+        {
+          "chunk_id": "chunk_c759f309fb89",
+          "text": "PzH 2000 自行火炮的特点是自动化，而这种自动化有两层含义：一是火炮操作自动化，二是火控自动化。"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "数传无线电装置",
+      "mapped_to": "数传无线电装置",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_bc7744dec1ba",
+          "text": "都安装有数传无线电装置，这是一种SEM52手持式甚高频数字无线电台的扩容、加密改进型号"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "SEM52电台",
+      "mapped_to": "电台",
+      "mapped_type": "class",
+      "mapping_confidence": 0.8,
+      "evidence": [
+        {
+          "chunk_id": "chunk_bc7744dec1ba",
+          "text": "PzH2000自行火炮上还安装了一部基本型SEM52电台"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "反后坐装置",
+      "mapped_to": "C_RecoilMechanism",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3ae5ccee0ff2",
+          "text": "前方包夹大半部分火炮反后坐装置"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "ontology_mapping",
+    "candidate": {
+      "text_mention": "火控电子设备",
+      "mapped_to": "C_FireControlSystem",
+      "mapped_type": "class",
+      "mapping_confidence": 0.85,
+      "evidence": [
+        {
+          "chunk_id": "chunk_3ae5ccee0ff2",
+          "text": "火控电子设备散热风扇风口"
+        }
+      ]
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "次要功计算系数",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中“次要功计算系数”作为公式变量 φ 的定义出现，但其具体数据类型和单位不明确，且是否应作为独立属性存在不确定。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "φ ——次要功计算系数"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "身管长度",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文中提到“身管的长度”，但已有本体中已存在“身管长度”数据属性，且原文未明确其作为新属性的证据，故不确定是否需要新增。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_89fe23014e56",
+          "text": "而火药燃气做功的大小又与火药燃气的压力规律和身管的长度有关。"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "匀速运动",
+      "candidate_type": "class",
+      "why_uncertain": "原文提及“匀速运动”，是弹丸在水平方向的运动状态，但未明确作为独立类别定义。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_f66fdbd3b9c5",
+          "text": "所以弹丸在水平方向做匀速运动"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "声速",
+      "candidate_type": "class",
+      "why_uncertain": "原文仅提到'声速c'作为阻力函数的自变量之一，未明确其是否作为独立领域概念使用，可能是物理常数而非本体类别。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_199fe98d4551",
+          "text": "F(v), G(v) ——阻力函数，是弹速 v 与声速 c 的函数。"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "翻转力矩",
+      "candidate_type": "class",
+      "why_uncertain": "原文中作为物理量出现，但未明确定义为独立类别，可能是力矩的一种类型。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_e96683cc6dcf",
+          "text": "产生翻转力矩 $M_{\\mathrm{z}}$"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "陀螺稳定性",
+      "candidate_type": "class",
+      "why_uncertain": "原文提到陀螺稳定性，但未明确定义其作为独立类别的边界。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b8ac03f8b5ec",
+          "text": "如果弹丸的旋转速度很大，弹丸陀螺稳定性增强"
+        }
+      ],
+      "confidence": 0.55
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "空气阻力",
+      "candidate_type": "class",
+      "why_uncertain": "原文提到“它所受到的空气阻力 R”，空气阻力可能是一个力学概念，但文档中未明确将其作为独立类别定义，且已有本体中未包含此类力学概念。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b4edb35dc9a8",
+          "text": "弹丸越长，它所受到的空气阻力 R 及阻力力偶臂越大"
+        }
+      ],
+      "confidence": 0.55
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "阻力力偶臂",
+      "candidate_type": "class",
+      "why_uncertain": "原文提到“阻力力偶臂越大”，阻力力偶臂是力学参数，但文档中未明确将其作为独立类别定义，且已有本体中未包含此类力学概念。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_b4edb35dc9a8",
+          "text": "弹丸越长，它所受到的空气阻力 R 及阻力力偶臂越大"
+        }
+      ],
+      "confidence": 0.55
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "起落部分",
+      "candidate_type": "class",
+      "why_uncertain": "原文提到'火炮起落部分'，但未明确其是否作为一个独立的部件类别，还是火炮的一个组成部分。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "重力矩",
+      "candidate_type": "datatype_property",
+      "why_uncertain": "原文提到'重力矩'，但未明确其数据类型和单位，且可能属于物理量而非直接的本体属性。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_c49f5203e118",
+          "text": "平衡机平衡法需用专门的机构或装置来施加一个与火炮起落部分重力作用相反的力来平衡起落部分的重力矩。"
+        }
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "炮膛",
+      "candidate_type": "class",
+      "why_uncertain": "原文中“炮膛”作为部件出现，但未明确其是否应作为独立类别，且已有本体中无直接对应。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d0ae42c16137",
+          "text": "它是利用由炮膛内导出的火药燃气的能量来驱动自动机各机构工作。"
+        }
+      ],
+      "confidence": 0.5
+    }
+  },
+  {
+    "reason": "业务校验失败，删除对应候选",
+    "source_section": "uncertain_candidates",
+    "candidate": {
+      "name": "57mm 高射炮",
+      "candidate_type": "class",
+      "why_uncertain": "无法判断“57mm 高射炮”是一个具体的武器实例还是一个新的类别，虽然原文将其描述为一种小口径防空武器，但“57mm”是具体的数值，可能表示特定型号。",
+      "evidence": [
+        {
+          "chunk_id": "chunk_d56d1d5dc2b6",
+          "text": "57mm 高射炮是一种小口径防空武器（图5-1）"
+        }
+      ],
+      "confidence": 0.5
+    }
+  }
+]

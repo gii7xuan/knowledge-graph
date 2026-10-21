@@ -252,8 +252,11 @@ def extract_with_llm(
     chunk_status = []
     legal_empty = 0
     retry_count = config.max_retries + 1
-    for chunk in chunks:
+    total_chunks = len(chunks)
+    for chunk_index, chunk in enumerate(chunks, start=1):
         context = context_builder.for_chunk(chunk)
+        chunk_state = "failed"
+        candidate_count = 0
         try:
             chunk_result = extract_candidates_from_chunk(
                 chunk,
@@ -261,12 +264,17 @@ def extract_with_llm(
                 ontology_context=context,
                 llm_client=client,
                 model=config.model or "mock-model",
+                max_output_tokens=config.max_output_tokens,
+                adaptive_retry_chunk_size=config.adaptive_retry_chunk_size,
+                adaptive_retry_chunk_overlap=config.adaptive_retry_chunk_overlap,
             )
             count = sum(len(chunk_result.get(field, [])) for field in RESULT_FIELDS)
+            candidate_count = count
             if count == 0:
                 legal_empty += 1
             batches.append(chunk_result)
-            chunk_status.append({"chunk_id": chunk["chunk_id"], "status": "succeeded_empty" if count == 0 else "succeeded", "candidate_count": count})
+            chunk_state = "succeeded_empty" if count == 0 else "succeeded"
+            chunk_status.append({"chunk_id": chunk["chunk_id"], "status": chunk_state, "candidate_count": count})
         except ChunkExtractionError as exc:
             chunk_status.append(
                 {
@@ -284,6 +292,11 @@ def extract_with_llm(
                     "error": str(exc),
                 }
             )
+        print(
+            f"[ontology] {chunk_index}/{total_chunks} "
+            f"chunk={chunk['chunk_id']} status={chunk_state} candidates={candidate_count}",
+            flush=True,
+        )
     stats = {
         "total_chunks": len(chunks),
         "successful_chunks": sum(1 for item in chunk_status if item["status"] in {"succeeded", "succeeded_empty"}),
@@ -385,7 +398,12 @@ def run_ontology_pipeline(
         if config.base_policy == "strict" and not audit["passed"]:
             raise RuntimeError("基础本体审计未通过；可修复本体后重试，或显式设置 ONTOLOGY_BASE_POLICY=draft 生成候选草案")
 
-        preprocess = preprocess_markdown(markdown_path, max_chunks=config.max_chunks)
+        preprocess = preprocess_markdown(
+            markdown_path,
+            max_chunks=config.max_chunks,
+            chunk_size=config.chunk_size,
+            chunk_overlap=config.chunk_overlap,
+        )
         write_preprocess_artifacts(preprocess, run_dir)
         manifest["stage_status"]["document_preprocess"] = "passed"
         chunks = preprocess["included_chunks"]

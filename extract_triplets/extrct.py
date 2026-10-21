@@ -263,6 +263,7 @@ MARKDOWN_FILE_PATH = os.environ.get("TRIPLET_MARKDOWN_FILE", 'mdfiles\\MinerU_ma
 OUTPUT_JSON_PATH = os.environ.get("TRIPLET_OUTPUT_JSON", 'triplets\\Ballistics.json')
 EVIDENCE_MD_PATH = os.environ.get("TRIPLET_EVIDENCE_MD", 'evidence\\Ballistics_evidence.md')
 BOOK_NAME = os.environ.get("TRIPLET_BOOK_NAME", "Ballistics")
+ONTOLOGY_FILE_PATH = os.environ.get("TRIPLET_ONTOLOGY_FILE", "ontology/ontology.json")
 DISCARDED_TRIPLETS_PATH = os.environ.get(
     "TRIPLET_REJECTED_JSON",
     'rejected_triplets\\Ballistics_rejected_triplets.json',
@@ -278,6 +279,17 @@ REVIEW_CONFIG = {}
 
 # ===========================================
 
+def create_llm_http_client():
+    """Build the model HTTP client with TLS verification secure by default."""
+    verify_ssl = os.environ.get("KG_LLM_VERIFY_SSL", "true").strip().lower() not in {
+        "0", "false", "no", "off",
+    }
+    return httpx.Client(trust_env=False, verify=verify_ssl)
+
+
+def llm_timeout_seconds():
+    return float(os.environ.get("KG_LLM_TIMEOUT_SECONDS", "90"))
+
 # 导入新模块
 try:
     from confidence.confidence_scorer import ConfidenceScorer
@@ -285,7 +297,13 @@ except ImportError:
     from confidence.confidence_scorer import ConfidenceScorer
 
 # 初始化客户端
-client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL, http_client=httpx.Client(trust_env=False))
+client = OpenAI(
+    api_key=API_KEY or "EMPTY",
+    base_url=BASE_URL,
+    timeout=llm_timeout_seconds(),
+    max_retries=0,
+    http_client=create_llm_http_client(),
+)
 
 
 def parse_cli_args(argv=None):
@@ -294,6 +312,7 @@ def parse_cli_args(argv=None):
     parser.add_argument("--review-mode", choices=["legacy", "assist_only", "shadow", "active", "offline_demo"])
     parser.add_argument("--input", help="Markdown input path (overrides TRIPLET_MARKDOWN_FILE)")
     parser.add_argument("--output-stem", help="legacy JSON/evidence output stem")
+    parser.add_argument("--ontology", help="ontology JSON path (overrides TRIPLET_ONTOLOGY_FILE)")
     return parser.parse_args(argv)
 
 
@@ -301,7 +320,7 @@ def configure_from_cli(args):
     """Resolve explicit CLI values before config and compatibility environment values."""
     global API_KEY, BASE_URL, MODEL, MARKDOWN_FILE_PATH, OUTPUT_JSON_PATH
     global EVIDENCE_MD_PATH, BOOK_NAME, DISCARDED_TRIPLETS_PATH, RUNS_V2_DIR
-    global REVIEW_DATABASE_PATH, REVIEW_MODE, REVIEW_CONFIG_PATH, client
+    global REVIEW_DATABASE_PATH, REVIEW_MODE, REVIEW_CONFIG_PATH, client, ONTOLOGY_FILE_PATH
     global REVIEW_CALIBRATOR_PATH, REVIEW_POLICY_PATH, REVIEW_ROUTING
     global REVIEW_CONFIG
 
@@ -338,6 +357,13 @@ def configure_from_cli(args):
     database_path = Path(database_value)
     REVIEW_DATABASE_PATH = str(database_path if database_path.is_absolute() else Path(project_root) / database_path)
     MARKDOWN_FILE_PATH = args.input or os.environ.get("TRIPLET_MARKDOWN_FILE", MARKDOWN_FILE_PATH)
+    ontology_value = args.ontology or os.environ.get("TRIPLET_ONTOLOGY_FILE", ONTOLOGY_FILE_PATH)
+    ontology_path = Path(ontology_value)
+    if not ontology_path.is_absolute():
+        ontology_path = Path(project_root) / ontology_path
+    if not ontology_path.is_file():
+        raise FileNotFoundError(f"找不到本体文件: {ontology_path}")
+    ONTOLOGY_FILE_PATH = str(ontology_path)
     RUNS_V2_DIR = os.environ.get("KG_RUNS_V2_DIR", RUNS_V2_DIR)
 
     if args.output_stem:
@@ -358,7 +384,13 @@ def configure_from_cli(args):
         client.close()
     except Exception:
         pass
-    client = OpenAI(api_key=API_KEY or "EMPTY", base_url=BASE_URL, http_client=httpx.Client(trust_env=False))
+    client = OpenAI(
+        api_key=API_KEY or "EMPTY",
+        base_url=BASE_URL,
+        timeout=llm_timeout_seconds(),
+        max_retries=0,
+        http_client=create_llm_http_client(),
+    )
     return config
 
 class ArtilleryProcessor:
@@ -749,10 +781,12 @@ other_entity: {other_entity}
         证据检索 -> 关系映射 -> 实体分类 -> domain/range 校验 ->
         特征生成 -> 概率校准 -> 风险分流。
 
-        仍返回旧接口形态，便于现有审核页面继续读取 review 文件。
+        返回自动接纳、待审核、明确拒绝三个独立列表。待审核候选不会
+        再被混入 discarded/rejected，从而可完整进入 v3 agent 审核。
         """
-        valid_triplets = []
-        discarded_triplets = []
+        accepted_triplets = []
+        review_triplets = []
+        rejected_triplets = []
 
         if source_chunk is None:
             source_chunk = {
@@ -813,7 +847,7 @@ other_entity: {other_entity}
             t.setdefault("evidence_quote", t.get("evidence", ""))
 
             if not head or not tail:
-                discarded_triplets.append({
+                rejected_triplets.append({
                     "head": head,
                     "surface_relation": surface_relation,
                     "relation": surface_relation,
@@ -845,7 +879,7 @@ other_entity: {other_entity}
                     "decision": "auto_reject",
                     "confidence_decision": {"shunt": "low", "reason": blacklist_reason, "action": "自动拒绝"},
                 })
-                discarded_triplets.append(record)
+                rejected_triplets.append(record)
                 print(f"  过滤：{blacklist_reason}")
                 continue
 
@@ -878,11 +912,11 @@ other_entity: {other_entity}
                     "manual_review",
                     source_chunk,
                 )
-                record["discard_reason"] = f"关系词 '{surface_relation}' 需要语义映射确认或本体修订"
+                record["review_reason"] = f"关系词 '{surface_relation}' 需要语义映射确认或本体修订"
                 record["reason_codes"] = ["SCHEMA_GAP"]
                 record["needs_review"] = True
-                discarded_triplets.append(record)
-                print(f"  警告：舍弃非法关系 -> '{surface_relation}'")
+                review_triplets.append(record)
+                print(f"  待审核：本体关系缺口 -> '{surface_relation}'")
                 continue
 
             t["relation"] = mapping_result["relation"]
@@ -934,14 +968,18 @@ other_entity: {other_entity}
                 f"  v2处理: {head} - {mapping_result['relation']} - {tail} "
                 f"(校准概率: {probability if probability is not None else '未就绪'}, 决策: {decision})"
             )
-            if decision in {"auto_accept", "human_accept"}:
-                valid_triplets.append(record)
-            else:
+            bucket = v2_bucket_for(decision)
+            if bucket == "accepted":
+                accepted_triplets.append(record)
+            elif bucket == "review_queue":
                 record["needs_review"] = decision == "manual_review"
+                record["review_reason"] = record["confidence_decision"]["reason"]
+                review_triplets.append(record)
+            else:
                 record["discard_reason"] = record["confidence_decision"]["reason"]
-                discarded_triplets.append(record)
+                rejected_triplets.append(record)
 
-        return valid_triplets, discarded_triplets
+        return accepted_triplets, review_triplets, rejected_triplets
 
 
 def is_example_or_calculation_paragraph(text):
@@ -1115,6 +1153,7 @@ Attention:
 3. Concise Relations: Use professional engineering terms for relations (e.g., "composed_of", "determines", "proportional_to", "increases", "constrains").
 4. Avoid Descriptive Objects: Do not use "factor of..." as an entity. Instead, use the action as a relation (e.g., instead of [A, is, factor of B], use [A, affects, B]).
 5. Evidence First: For each triple, provide the original surface relation and an exact evidence quote from the text. Do not provide confidence or thought fields.
+6. Bounded Output: Return at most 8 triples. When more facts are present, keep the 8 most explicit and technically important facts.
 
 Example (Artillery Domain):
 Text: "制退机产生制退阻力，制退阻力决定火炮后坐长度。"
@@ -1170,7 +1209,7 @@ Semantic Graph:
 {chunk}
 
 【输出格式要求】
-严格输出 JSON 对象。如果无高价值结构化知识，返回 `{{"triplets": []}}`。
+严格输出 JSON 对象，triplets 最多 8 条。如果无高价值结构化知识，返回 `{{"triplets": []}}`。
 
 必须使用且只能使用以下 JSON schema。不要输出 `triple` 数组字段，不要输出 `subject/predicate/object`，不要在 JSON 外添加任何文本。
 {{
@@ -1218,7 +1257,8 @@ Semantic Graph:
                     {"role": "user", "content": prompt}
                 ],
                 response_format={'type': 'json_object'},
-                temperature=0.0
+                temperature=0.0,
+                max_tokens=int(os.environ.get("TRIPLET_MAX_TOKENS", "2048")),
             )
             content = response.choices[0].message.content
             parsed = json.loads(content)
@@ -1292,6 +1332,15 @@ def normalize_fact_part(value):
 
 def fact_key_for(item):
     return v3_fact_key_for(item, str(item.get("domain") or "firearm_artillery"))
+
+
+def v2_bucket_for(decision):
+    """Map a routing decision to a lossless v2 output bucket."""
+    if decision in {"auto_accept", "human_accept"}:
+        return "accepted"
+    if decision == "manual_review":
+        return "review_queue"
+    return "rejected"
 
 
 def deduplicate_triplets(items):
@@ -1448,8 +1497,8 @@ def main(argv=None):
     print("=" * 60)
     print("火炮学知识图谱三元组提取配置")
     print("=" * 60)
-    print(f"  本体文件: ontology/ontology.json")
-    print(f"  置信度阈值: >{CONFIDENCE_THRESHOLD_HIGH} 保留, {CONFIDENCE_THRESHOLD_MEDIUM_HIGH}-{CONFIDENCE_THRESHOLD_HIGH} 自动映射, {CONFIDENCE_THRESHOLD_MEDIUM_LOW}-{CONFIDENCE_THRESHOLD_MEDIUM_HIGH} 人工审核, ≤{CONFIDENCE_THRESHOLD_MEDIUM_LOW} 丢弃")
+    print(f"  本体文件: {ONTOLOGY_FILE_PATH}")
+    print("  v2 分流: accepted / review_queue / rejected；shadow 模式不按语义置信度提前丢弃")
     print(f"  向量模型: {EMBEDDING_MODEL}")
     print("=" * 60)
 
@@ -1473,12 +1522,13 @@ def main(argv=None):
     print(f"   共切分为 {len(chunks)} 个逻辑片段。")
 
     all_triplets = []
-    all_discarded = []  # 收集所有被丢弃的三元组
+    all_review_queue = []
+    all_rejected = []
 
     # 加载本体信息（用于打印本体关系列表）
     try:
         # 从 JSON 文件加载本体
-        ontology = load_ontology_from_json("ontology/ontology.json")
+        ontology = load_ontology_from_json(ONTOLOGY_FILE_PATH)
         relations = get_ontology_relations(ontology)
         entity_to_type = get_entity_to_type_map(ontology)
         print(f"   本体关系列表: {relations}")
@@ -1549,19 +1599,19 @@ def main(argv=None):
 
             # 后置处理：验证和修复三元组
             print(f"  后置处理：验证和修复三元组...")
-            valid_triplets, discarded_triplets = processor.validate_and_fix(
+            accepted_triplets, review_triplets, rejected_triplets = processor.validate_and_fix(
                 triplets,
                 evidence_text=content,
                 source_chunk=chunk,
                 document_index=document_index,
             )
-            print(f"  有效三元组数量: {len(valid_triplets)} / {len(triplets)}")
-            print(f"  被丢弃三元组数量: {len(discarded_triplets)}")
+            print(f"  自动接纳三元组数量: {len(accepted_triplets)} / {len(triplets)}")
+            print(f"  进入审核队列数量: {len(review_triplets)}")
+            print(f"  明确拒绝三元组数量: {len(rejected_triplets)}")
 
-            all_triplets.extend(valid_triplets)
-
-            # 收集所有被丢弃的三元组
-            all_discarded.extend(discarded_triplets)
+            all_triplets.extend(accepted_triplets)
+            all_review_queue.extend(review_triplets)
+            all_rejected.extend(rejected_triplets)
 
             # 写入 Markdown 证据库
             with open(EVIDENCE_MD_PATH, 'a', encoding='utf-8') as ev_file:
@@ -1569,19 +1619,18 @@ def main(argv=None):
                 ev_file.write(f"**文献路径**： `{breadcrumb_path}`\n\n")
                 ev_file.write(f"> {content}\n\n")
                 ev_file.write("---\n\n")
-    all_candidates = deduplicate_triplets(all_triplets + all_discarded)
+    all_candidates = deduplicate_triplets(all_triplets + all_review_queue + all_rejected)
     all_triplets = deduplicate_triplets(all_triplets)
-    all_discarded = deduplicate_triplets(all_discarded)
-    review_queue = [item for item in all_discarded if item.get("needs_review") or item.get("decision") == "manual_review"]
-    rejected = [item for item in all_discarded if item.get("decision") == "auto_reject"]
+    review_queue = deduplicate_triplets(all_review_queue)
+    rejected = deduplicate_triplets(all_rejected)
 
     print(f"4. 提取完成，共获得 {len(all_triplets)} 个自动接纳三元组。")
     with open(OUTPUT_JSON_PATH, 'w', encoding='utf-8') as f:
         json.dump(all_triplets, f, ensure_ascii=False, indent=2)
 
-    print(f"4. 被丢弃的三元组已保存到: {DISCARDED_TRIPLETS_PATH}")
+    print(f"4. 明确拒绝的三元组已保存到: {DISCARDED_TRIPLETS_PATH}")
     with open(DISCARDED_TRIPLETS_PATH, 'w', encoding='utf-8') as f:
-        json.dump(all_discarded, f, ensure_ascii=False, indent=2)
+        json.dump(rejected, f, ensure_ascii=False, indent=2)
 
     write_v2_outputs(all_candidates, all_triplets, review_queue, rejected)
     print(f"4. v2 分层结果已保存到: {RUNS_V2_DIR}")
@@ -1595,7 +1644,7 @@ def main(argv=None):
         decision = t.get("confidence_decision", {})
         shunt = decision.get("shunt", "low")
         confidence_levels[shunt] = confidence_levels.get(shunt, 0) + 1
-    for t in all_discarded:
+    for t in review_queue + rejected:
         decision = t.get("confidence_decision", {})
         shunt = decision.get("shunt", "low")
         confidence_levels[shunt] = confidence_levels.get(shunt, 0) + 1

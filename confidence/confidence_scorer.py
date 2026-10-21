@@ -23,6 +23,18 @@ import json
 import os
 
 
+def create_llm_http_client():
+    """Build the model HTTP client with TLS verification secure by default."""
+    verify_ssl = os.environ.get("KG_LLM_VERIFY_SSL", "true").strip().lower() not in {
+        "0", "false", "no", "off",
+    }
+    return httpx.Client(trust_env=False, verify=verify_ssl)
+
+
+def llm_timeout_seconds():
+    return float(os.environ.get("KG_LLM_TIMEOUT_SECONDS", "90"))
+
+
 class ConfidenceScorer:
     """
     置信度评分器
@@ -72,7 +84,13 @@ class ConfidenceScorer:
                 - "entailment" / "llm": 使用大模型判断证据句是否蕴含三元组陈述
                 - "embedding": 使用嵌入模型匹配三元组陈述与证据句
         """
-        self.client = OpenAI(api_key=api_key, base_url=base_url, http_client=httpx.Client(trust_env=False))
+        self.client = OpenAI(
+            api_key=api_key,
+            base_url=base_url,
+            timeout=llm_timeout_seconds(),
+            max_retries=0,
+            http_client=create_llm_http_client(),
+        )
         self.embedding_model = embedding_model
         self.relations = relations
         self.entity_to_type = entity_to_type

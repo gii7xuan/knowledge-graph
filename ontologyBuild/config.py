@@ -9,6 +9,7 @@ from typing import Any, Optional
 
 
 TRUE_VALUES = {"1", "true", "yes", "on"}
+FALSE_VALUES = {"0", "false", "no", "off"}
 VALID_ENGINES = {"llm", "mock"}
 VALID_BASE_POLICIES = {"strict", "draft"}
 VALID_CORPUS_ROLES = {"build", "train", "validation", "test"}
@@ -33,9 +34,14 @@ class OntologyPipelineConfig:
     review_mode: str = "manual"
     auto_accept_new: bool = False
     corpus_role: str = "build"
-    timeout_seconds: int = 90
+    timeout_seconds: int = 180
     max_retries: int = 2
-    context_max_chars: int = 16000
+    context_max_chars: int = 8000
+    chunk_size: int = 600
+    chunk_overlap: int = 80
+    max_output_tokens: int = 1500
+    adaptive_retry_chunk_size: int = 400
+    adaptive_retry_chunk_overlap: int = 40
     base_policy: str = "strict"
     enable_shacl: bool = False
     enable_owl: bool = False
@@ -73,9 +79,14 @@ class OntologyPipelineConfig:
             "review_mode": env.get("ONTOLOGY_REVIEW_MODE", "manual").strip().lower(),
             "auto_accept_new": bool_env("ONTOLOGY_AUTO_ACCEPT_NEW", False),
             "corpus_role": env.get("ONTOLOGY_CORPUS_ROLE", "build").strip().lower(),
-            "timeout_seconds": int_env("ONTOLOGY_TIMEOUT_SECONDS", 90),
+            "timeout_seconds": int_env("ONTOLOGY_TIMEOUT_SECONDS", 180),
             "max_retries": int_env("ONTOLOGY_MAX_RETRIES", 2),
-            "context_max_chars": int_env("ONTOLOGY_CONTEXT_MAX_CHARS", 16000),
+            "context_max_chars": int_env("ONTOLOGY_CONTEXT_MAX_CHARS", 8000),
+            "chunk_size": int_env("ONTOLOGY_CHUNK_SIZE", 600),
+            "chunk_overlap": int_env("ONTOLOGY_CHUNK_OVERLAP", 80),
+            "max_output_tokens": int_env("ONTOLOGY_MAX_OUTPUT_TOKENS", 1500),
+            "adaptive_retry_chunk_size": int_env("ONTOLOGY_ADAPTIVE_RETRY_CHUNK_SIZE", 400),
+            "adaptive_retry_chunk_overlap": int_env("ONTOLOGY_ADAPTIVE_RETRY_CHUNK_OVERLAP", 40),
             "base_policy": env.get("ONTOLOGY_BASE_POLICY", "strict").strip().lower(),
             "enable_shacl": bool_env("ONTOLOGY_ENABLE_SHACL", False),
             "enable_owl": bool_env("ONTOLOGY_ENABLE_OWL", False),
@@ -108,6 +119,22 @@ class OntologyPipelineConfig:
             raise ValueError("ONTOLOGY_MAX_RETRIES 不能小于 0")
         if self.context_max_chars < 1000:
             raise ValueError("ONTOLOGY_CONTEXT_MAX_CHARS 不能小于 1000")
+        if self.chunk_size < 100:
+            raise ValueError("ONTOLOGY_CHUNK_SIZE 不能小于 100")
+        if self.chunk_overlap < 0 or self.chunk_overlap >= self.chunk_size:
+            raise ValueError("ONTOLOGY_CHUNK_OVERLAP 必须大于等于 0 且小于 ONTOLOGY_CHUNK_SIZE")
+        if self.max_output_tokens <= 0:
+            raise ValueError("ONTOLOGY_MAX_OUTPUT_TOKENS 必须大于 0")
+        if self.adaptive_retry_chunk_size < 100:
+            raise ValueError("ONTOLOGY_ADAPTIVE_RETRY_CHUNK_SIZE 不能小于 100")
+        if (
+            self.adaptive_retry_chunk_overlap < 0
+            or self.adaptive_retry_chunk_overlap >= self.adaptive_retry_chunk_size
+        ):
+            raise ValueError(
+                "ONTOLOGY_ADAPTIVE_RETRY_CHUNK_OVERLAP 必须大于等于 0 且小于 "
+                "ONTOLOGY_ADAPTIVE_RETRY_CHUNK_SIZE"
+            )
         if self.max_chunks is not None and self.max_chunks <= 0:
             raise ValueError("ONTOLOGY_MAX_CHUNKS 必须大于 0")
 
@@ -119,6 +146,17 @@ def configured_api_key(environ: Optional[dict[str, str]] = None) -> str:
 
 def configured_base_url(config: OntologyPipelineConfig) -> str:
     return config.openai_base_url or config.qwen_base_url
+
+
+def llm_verify_ssl(environ: Optional[dict[str, str]] = None) -> bool:
+    """Resolve TLS verification without silently weakening the default."""
+    env = os.environ if environ is None else environ
+    value = str(env.get("KG_LLM_VERIFY_SSL", "true")).strip().lower()
+    if value in TRUE_VALUES:
+        return True
+    if value in FALSE_VALUES:
+        return False
+    raise ValueError("KG_LLM_VERIFY_SSL 必须是 true/false")
 
 
 def create_llm_client(config: OntologyPipelineConfig, *, environ: Optional[dict[str, str]] = None):
@@ -139,12 +177,22 @@ def create_llm_client(config: OntologyPipelineConfig, *, environ: Optional[dict[
     try:
         import httpx
     except ImportError:
-        return OpenAI(api_key=api_key, base_url=base_url, timeout=config.timeout_seconds)
+        return OpenAI(
+            api_key=api_key,
+            base_url=base_url,
+            timeout=config.timeout_seconds,
+            max_retries=0,
+        )
     return OpenAI(
         api_key=api_key,
         base_url=base_url,
         timeout=config.timeout_seconds,
-        http_client=httpx.Client(timeout=config.timeout_seconds, trust_env=False),
+        max_retries=0,
+        http_client=httpx.Client(
+            timeout=config.timeout_seconds,
+            trust_env=False,
+            verify=llm_verify_ssl(environ),
+        ),
     )
 
 
@@ -158,11 +206,17 @@ def public_config(config: OntologyPipelineConfig) -> dict[str, Any]:
         "timeout_seconds": config.timeout_seconds,
         "max_retries": config.max_retries,
         "context_max_chars": config.context_max_chars,
+        "chunk_size": config.chunk_size,
+        "chunk_overlap": config.chunk_overlap,
+        "max_output_tokens": config.max_output_tokens,
+        "adaptive_retry_chunk_size": config.adaptive_retry_chunk_size,
+        "adaptive_retry_chunk_overlap": config.adaptive_retry_chunk_overlap,
         "base_policy": config.base_policy,
         "enable_shacl": config.enable_shacl,
         "enable_owl": config.enable_owl,
         "model": config.model,
         "api_key_configured": bool(config.api_key or configured_api_key()),
         "base_url_configured": bool(configured_base_url(config)),
+        "tls_verify": llm_verify_ssl(),
         "max_chunks": config.max_chunks,
     }

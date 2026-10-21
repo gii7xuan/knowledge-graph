@@ -21,7 +21,7 @@ except ImportError:
     from directory_guided_builder import build_module_index, clean_term
 
 
-SPLITTER_VERSION = "ontology_preprocess_v1"
+SPLITTER_VERSION = "ontology_preprocess_v2"
 
 
 def now_iso() -> str:
@@ -79,13 +79,26 @@ def classify_chunk(chunk: dict[str, Any]) -> tuple[str, str]:
     return "include", "body"
 
 
-def preprocess_markdown(markdown_path: str | Path, *, max_chunks: int | None = None) -> dict[str, Any]:
+def preprocess_markdown(
+    markdown_path: str | Path,
+    *,
+    max_chunks: int | None = None,
+    chunk_size: int = 600,
+    chunk_overlap: int = 80,
+) -> dict[str, Any]:
     path = Path(markdown_path)
     if not path.exists():
         raise FileNotFoundError(f"找不到 Markdown 文件: {path}")
     text = read_markdown(path)
     document_id = normalize_document_id(path.name)
-    chunks = split_markdown_text(text, document_id=document_id, splitter_version=SPLITTER_VERSION)
+    splitter_version = f"{SPLITTER_VERSION}_chunk{chunk_size}_overlap{chunk_overlap}"
+    chunks = split_markdown_text(
+        text,
+        document_id=document_id,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        splitter_version=splitter_version,
+    )
 
     chunk_report = []
     included = []
@@ -123,7 +136,7 @@ def preprocess_markdown(markdown_path: str | Path, *, max_chunks: int | None = N
         },
         "chunk_filter_report": {
             "generated_at": now_iso(),
-            "splitter_version": SPLITTER_VERSION,
+            "splitter_version": splitter_version,
             "total_chunks": len(chunks),
             "included_chunks": len(included),
             "excluded_chunks": sum(1 for item in chunk_report if item["decision"] == "exclude"),

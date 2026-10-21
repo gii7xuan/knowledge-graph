@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import time
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional
@@ -60,8 +61,18 @@ class OpenAICompatibleClient:
 
     def _get_client(self):
         if self._client is None:
+            import httpx
             from openai import OpenAI
-            self._client = OpenAI(api_key=self.api_key, base_url=self.base_url, timeout=self.timeout_seconds)
+            verify_ssl = os.environ.get("KG_LLM_VERIFY_SSL", "true").strip().lower() not in {
+                "0", "false", "no", "off",
+            }
+            self._client = OpenAI(
+                api_key=self.api_key,
+                base_url=self.base_url,
+                timeout=self.timeout_seconds,
+                max_retries=0,
+                http_client=httpx.Client(trust_env=False, verify=verify_ssl),
+            )
         return self._client
 
     def complete_json(self, payload: Mapping[str, Any], *, system_prompt: str = "", **kwargs: Any) -> LLMResponse:

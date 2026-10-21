@@ -1,0 +1,3707 @@
+{
+  "version": "1.0.0",
+  "created_date": "2026-06-02",
+  "domain": "firearm_artillery",
+  "classes": {
+    "C_WeaponEquipment": {
+      "id": "C_WeaponEquipment",
+      "label": "武器装备",
+      "description": "用于作战、训练、试验或装备平台搭载的火炮、自动武器及相关武器系统。",
+      "parent": null,
+      "subclasses": [
+        "C_Gun",
+        "C_AutomaticWeapon",
+        "C_WeaponSystem",
+        "C_EquipmentPlatformSystem"
+      ],
+      "data_properties": [
+        {
+          "name": "名称",
+          "field": "name",
+          "datatype": "string",
+          "required": true
+        },
+        {
+          "name": "别名",
+          "field": "alias",
+          "datatype": "array"
+        },
+        {
+          "name": "型号",
+          "field": "model",
+          "datatype": "string"
+        },
+        {
+          "name": "型号代号",
+          "field": "designation",
+          "datatype": "string"
+        },
+        {
+          "name": "口径",
+          "field": "caliber",
+          "datatype": "quantity",
+          "unit": "mm",
+          "required": true
+        },
+        {
+          "name": "原产国",
+          "field": "country_of_origin",
+          "datatype": "string"
+        },
+        {
+          "name": "服役时间",
+          "field": "service_time",
+          "datatype": "string_or_date"
+        },
+        {
+          "name": "服役状态",
+          "field": "service_status",
+          "datatype": "string",
+          "enum": [
+            "现役",
+            "退役",
+            "试验",
+            "停产"
+          ]
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_has_subsystem",
+          "label": "具有子系统",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_WeaponSystem"
+          ],
+          "range": [
+            "C_ArtillerySystem"
+          ]
+        },
+        {
+          "id": "R_has_component",
+          "label": "具有部件",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_ArtillerySystem"
+          ],
+          "range": [
+            "C_ComponentMechanism"
+          ]
+        },
+        {
+          "id": "R_has_mechanism",
+          "label": "具有机构",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_ArtillerySystem",
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_ComponentMechanism",
+            "C_AutomaticMechanism"
+          ]
+        },
+        {
+          "id": "R_uses_ammunition",
+          "label": "使用弹药",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_Gun",
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_Ammunition"
+          ]
+        },
+        {
+          "id": "R_has_performance_parameter",
+          "label": "具有性能参数",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_Gun",
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_PerformanceParameter"
+          ]
+        },
+        {
+          "id": "R_designed_for",
+          "label": "设计用于",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_Gun",
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_EnvironmentScenario"
+          ]
+        },
+        {
+          "id": "R_equipped_on",
+          "label": "装备于",
+          "domain": [
+            "C_WeaponEquipment",
+            "C_Gun",
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_EnvironmentScenario"
+          ]
+        },
+        {
+          "id": "R_developed_by",
+          "label": "研制单位为",
+          "domain": [
+            "C_WeaponEquipment"
+          ],
+          "range": [
+            "C_ModelLineage"
+          ]
+        },
+        {
+          "id": "R_variant_of",
+          "label": "改型自",
+          "domain": [
+            "C_WeaponEquipment"
+          ],
+          "range": [
+            "C_WeaponEquipment"
+          ]
+        }
+      ]
+    },
+    "C_Gun": {
+      "id": "C_Gun",
+      "label": "火炮",
+      "description": "发射炮弹的长身管身管武器。",
+      "parent": "C_WeaponEquipment",
+      "subclasses": [
+        "C_Howitzer",
+        "C_Cannon",
+        "C_HowitzerCannon",
+        "C_Mortar",
+        "C_RocketArtillery",
+        "C_NavalGun",
+        "C_AAGun",
+        "C_AntiTankGun"
+      ],
+      "data_properties": [
+        {
+          "name": "发射原理",
+          "field": "firing_principle",
+          "datatype": "string",
+          "enum": [
+            "后坐式",
+            "导气式",
+            "管退式",
+            "自由后坐式"
+          ]
+        },
+        {
+          "name": "闩楔机构",
+          "field": "breaching_mechanism",
+          "datatype": "string",
+          "enum": [
+            "楔式炮闩",
+            "螺式炮闩",
+            "半自动炮闩"
+          ]
+        },
+        {
+          "name": "反后坐装置",
+          "field": "recoil_mechanism",
+          "datatype": "string",
+          "enum": [
+            "液力",
+            "气动",
+            "液气联合"
+          ]
+        },
+        {
+          "name": "炮架类型",
+          "field": "carriage_type",
+          "datatype": "string",
+          "enum": [
+            "牵引式",
+            "自行式",
+            "车载式",
+            "舰载式"
+          ]
+        },
+        {
+          "name": "射速",
+          "field": "firing_rate",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "射程",
+          "field": "range",
+          "datatype": "quantity",
+          "unit": "km"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "身管长度",
+          "field": "barrel_length",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "膛线缠距",
+          "field": "twist_rate",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "后坐长度",
+          "field": "recoil_length",
+          "datatype": "quantity",
+          "unit": "mm"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_part_of",
+          "label": "隶属于",
+          "domain": [
+            "C_Gun"
+          ],
+          "range": [
+            "C_WeaponEquipment"
+          ]
+        },
+        {
+          "id": "R_has_subsystem",
+          "label": "具有子系统",
+          "domain": [
+            "C_Gun"
+          ],
+          "range": [
+            "C_ArtillerySystem"
+          ]
+        },
+        {
+          "id": "R_has_component",
+          "label": "具有部件",
+          "domain": [
+            "C_Gun"
+          ],
+          "range": [
+            "C_ComponentMechanism"
+          ]
+        },
+        {
+          "id": "R_has_mechanism",
+          "label": "具有机构",
+          "domain": [
+            "C_Gun"
+          ],
+          "range": [
+            "C_AutomaticMechanism"
+          ]
+        },
+        {
+          "id": "R_uses_ammunition",
+          "label": "使用弹药",
+          "domain": [
+            "C_Gun"
+          ],
+          "range": [
+            "C_Ammunition"
+          ]
+        },
+        {
+          "id": "R_has_performance_parameter",
+          "label": "具有性能参数",
+          "domain": [
+            "C_Gun"
+          ],
+          "range": [
+            "C_PerformanceParameter"
+          ]
+        }
+      ]
+    },
+    "C_Howitzer": {
+      "id": "C_Howitzer",
+      "label": "榴弹炮",
+      "description": "身管较短、弹道较弯曲、高角射击能力好的火炮。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "bore_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "药室容积",
+          "field": "chamber_volume",
+          "datatype": "quantity",
+          "unit": "cm³"
+        },
+        {
+          "name": "最大仰角",
+          "field": "max_elevation",
+          "datatype": "quantity",
+          "unit": "度",
+          "range": [
+            0,
+            90
+          ]
+        },
+        {
+          "name": "最小仰角",
+          "field": "min_elevation",
+          "datatype": "quantity",
+          "unit": "度",
+          "range": [
+            -90,
+            0
+          ]
+        },
+        {
+          "name": "方向射界",
+          "field": "traverse",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HE",
+              "HEAT",
+              "AP",
+              "ILLUM",
+              "SMOKE",
+              "CLUSTER"
+            ]
+          }
+        },
+        {
+          "name": "发射药型",
+          "field": "propellant_type",
+          "datatype": "string",
+          "enum": [
+            "定装式",
+            "分装式",
+            "药包式"
+          ]
+        }
+      ]
+    },
+    "C_Cannon": {
+      "id": "C_Cannon",
+      "label": "加农炮",
+      "description": "身管较长、弹道低伸、初速高、适合直瞄和远距离射击的火炮。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "倍径",
+          "field": "l_caliber",
+          "datatype": "quantity",
+          "unit": "倍径"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s",
+          "min": 600
+        },
+        {
+          "name": "平直弹道",
+          "field": "flat_trajectory",
+          "datatype": "boolean",
+          "default": true
+        },
+        {
+          "name": "瞄准方式",
+          "field": "aiming_mode",
+          "datatype": "string",
+          "enum": [
+            "直瞄",
+            "间瞄",
+            "直间瞄"
+          ]
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AP",
+              "APC",
+              "APBC",
+              "HE",
+              "HE-T",
+              "SAPT"
+            ]
+          }
+        }
+      ]
+    },
+    "C_HowitzerCannon": {
+      "id": "C_HowitzerCannon",
+      "label": "加榴炮",
+      "description": "兼具加农炮和榴弹炮射击性能的火炮，弹道可调。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "射击方式",
+          "field": "firing_mode",
+          "datatype": "string",
+          "enum": [
+            "加农",
+            "榴弹"
+          ]
+        },
+        {
+          "name": "倍径",
+          "field": "l_caliber",
+          "datatype": "quantity",
+          "unit": "倍径"
+        },
+        {
+          "name": "最大仰角",
+          "field": "max_elevation",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HE",
+              "HEAT",
+              "AP",
+              "SAPT",
+              "ILLUM"
+            ]
+          }
+        }
+      ]
+    },
+    "C_Mortar": {
+      "id": "C_Mortar",
+      "label": "迫击炮",
+      "description": "炮身较短、弹道弯曲、采用前装方式的曲射火炮。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "bore_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "射角范围",
+          "field": "elevation_range",
+          "datatype": "quantity",
+          "unit": "度",
+          "range": [
+            45,
+            85
+          ]
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "射程",
+          "field": "range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "弹重",
+          "field": "shell_weight",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "炮重",
+          "field": "gun_weight",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HE",
+              "SMOKE",
+              "ILLUM",
+              "WP"
+            ]
+          }
+        }
+      ]
+    },
+    "C_RocketArtillery": {
+      "id": "C_RocketArtillery",
+      "label": "火箭炮",
+      "description": "发射火箭弹的多管发射装置，具有高射速和大面积火力覆盖能力。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "bore_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "管数",
+          "field": "tube_count",
+          "datatype": "integer",
+          "min": 1
+        },
+        {
+          "name": "射程",
+          "field": "range",
+          "datatype": "quantity",
+          "unit": "km"
+        },
+        {
+          "name": "齐射时间",
+          "field": "salvo_time",
+          "datatype": "quantity",
+          "unit": "秒"
+        },
+        {
+          "name": "再装填时间",
+          "field": "reload_time",
+          "datatype": "quantity",
+          "unit": "分钟"
+        },
+        {
+          "name": "火箭弹类型",
+          "field": "rocket_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HE",
+              "HE-FRAG",
+              "CLUSTER",
+              "ILLUM",
+              "EM"
+            ]
+          }
+        }
+      ]
+    },
+    "C_AAGun": {
+      "id": "C_AAGun",
+      "label": "高射炮",
+      "description": "用于对空中目标射击的火炮，具有高射速和高仰角。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "bore_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "最大射高",
+          "field": "max_ceiling",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "最大仰角",
+          "field": "max_elevation",
+          "datatype": "quantity",
+          "unit": "度",
+          "range": [
+            0,
+            90
+          ]
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "方向射界",
+          "field": "traverse",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AP",
+              "HE",
+              "APHE",
+              "AAM"
+            ]
+          }
+        },
+        {
+          "name": "瞄准方式",
+          "field": "aiming_mode",
+          "datatype": "string",
+          "enum": [
+            "光学",
+            "雷达",
+            "光电复合"
+          ]
+        }
+      ]
+    },
+    "C_AntiTankGun": {
+      "id": "C_AntiTankGun",
+      "label": "反坦克炮",
+      "description": "用于摧毁坦克和其他装甲目标的火炮，具有高初速和强穿甲能力。",
+      "parent": "C_Gun",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "bore_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s",
+          "min": 1000
+        },
+        {
+          "name": "穿甲厚度",
+          "field": "armor_penetration",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AP",
+              "APC",
+              "APDS",
+              "APFSDS",
+              "HEAT"
+            ]
+          }
+        }
+      ]
+    },
+    "C_AutomaticWeapon": {
+      "id": "C_AutomaticWeapon",
+      "label": "自动武器",
+      "description": "利用火药燃气、后坐力或导气机构实现自动装填和发射的武器。",
+      "parent": "C_WeaponEquipment",
+      "subclasses": [
+        "C_AutomaticCannon",
+        "C_MachineGun",
+        "C_Automatic Grenade Launcher",
+        "C_SniperRifle",
+        "C_EquipmentAutomatic"
+      ],
+      "data_properties": [
+        {
+          "name": "自动原理",
+          "field": "automatic_principle",
+          "datatype": "string",
+          "enum": [
+            "后坐式",
+            "导气式",
+            "管退式",
+            "转管式",
+            "转膛式"
+          ]
+        },
+        {
+          "name": "供弹方式",
+          "field": "feeding_method",
+          "datatype": "string",
+          "enum": [
+            "弹匣",
+            "弹链",
+            "弹鼓",
+            "弹轮"
+          ]
+        },
+        {
+          "name": "射击方式",
+          "field": "firing_mode",
+          "datatype": "string",
+          "enum": [
+            "单发",
+            "连发",
+            "点射",
+            "全自动"
+          ]
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "枪口动能",
+          "field": "muzzle_energy",
+          "datatype": "quantity",
+          "unit": "J"
+        },
+        {
+          "name": "有效射程",
+          "field": "effective_range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "枪重",
+          "field": "weapon_weight",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "全长",
+          "field": "overall_length",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "枪管长度",
+          "field": "barrel_length",
+          "datatype": "quantity",
+          "unit": "mm"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_uses_ammunition",
+          "label": "使用弹药",
+          "domain": [
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_Ammunition"
+          ]
+        },
+        {
+          "id": "R_has_mechanism",
+          "label": "具有机构",
+          "domain": [
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_AutomaticMechanism"
+          ]
+        },
+        {
+          "id": "R_has_component",
+          "label": "具有部件",
+          "domain": [
+            "C_AutomaticWeapon"
+          ],
+          "range": [
+            "C_ComponentMechanism"
+          ]
+        }
+      ]
+    },
+    "C_AutomaticCannon": {
+      "id": "C_AutomaticCannon",
+      "label": "自动炮",
+      "description": "口径在20mm以上、具有自动装填机构的火炮。",
+      "parent": "C_AutomaticWeapon",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "caliber",
+          "datatype": "quantity",
+          "unit": "mm",
+          "min": 20
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "供弹方式",
+          "field": "feeding_method",
+          "datatype": "string",
+          "enum": [
+            "弹链",
+            "弹鼓",
+            "弹匣"
+          ]
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HE",
+              "AP",
+              "APDS",
+              "HEI",
+              "HE-T",
+              "APDS-T"
+            ]
+          }
+        }
+      ]
+    },
+    "C_MachineGun": {
+      "id": "C_MachineGun",
+      "label": "机枪",
+      "description": "可连续射击的自动枪械，具有较高射速和持续火力能力。",
+      "parent": "C_AutomaticWeapon",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "caliber",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "有效射程",
+          "field": "effective_range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "供弹方式",
+          "field": "feeding_method",
+          "datatype": "string",
+          "enum": [
+            "弹链",
+            "弹匣",
+            "弹鼓"
+          ]
+        },
+        {
+          "name": "枪重",
+          "field": "weapon_weight",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FMJ",
+              "JSP",
+              "JHP",
+              "AP",
+              "tracer"
+            ]
+          }
+        }
+      ]
+    },
+    "C_AutomaticGrenadeLauncher": {
+      "id": "C_AutomaticGrenadeLauncher",
+      "label": "自动榴弹发射器",
+      "description": "发射榴弹的自动武器，通常口径在20-40mm之间。",
+      "parent": "C_AutomaticWeapon",
+      "data_properties": [
+        {
+          "name": "口径",
+          "field": "caliber",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "射程",
+          "field": "range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HE",
+              "HEDP",
+              "AIRBurst",
+              "SMOKE",
+              "ILLUM"
+            ]
+          }
+        }
+      ]
+    },
+    "C_ArtillerySystem": {
+      "id": "C_ArtillerySystem",
+      "label": "火炮系统",
+      "description": "由火炮、瞄准具、射击指挥系统、辅助设备等组成的完整作战系统。",
+      "parent": "C_WeaponEquipment",
+      "subclasses": [
+        "C_DirectFireSystem",
+        "C_IndirectFireSystem",
+        "C_ArtilleryBatterySystem"
+      ],
+      "data_properties": [
+        {
+          "name": "系统类型",
+          "field": "system_type",
+          "datatype": "string",
+          "enum": [
+            "牵引式",
+            "自行式",
+            "车载式",
+            "舰载式"
+          ]
+        },
+        {
+          "name": "炮架类型",
+          "field": "carriage_type",
+          "datatype": "string",
+          "enum": [
+            "开架式",
+            "闭架式",
+            "箱式"
+          ]
+        },
+        {
+          "name": "瞄准方式",
+          "field": "aiming_mode",
+          "datatype": "string",
+          "enum": [
+            "光学",
+            "光学-机械",
+            "光电",
+            "数字"
+          ]
+        },
+        {
+          "name": "稳定系统",
+          "field": "stabilization_system",
+          "datatype": "boolean",
+          "default": false
+        },
+        {
+          "name": "自动装填",
+          "field": "auto_loading",
+          "datatype": "boolean",
+          "default": false
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_composed_of",
+          "label": "由...组成",
+          "domain": [
+            "C_ArtillerySystem"
+          ],
+          "range": [
+            "C_Gun",
+            "C_OpticalSight",
+            "C_FireControlSystem"
+          ]
+        },
+        {
+          "id": "R_has_targeting_system",
+          "label": "具有瞄准系统",
+          "domain": [
+            "C_ArtillerySystem"
+          ],
+          "range": [
+            "C_TargetingSystem"
+          ]
+        },
+        {
+          "id": "R_has_fire_control",
+          "label": "具有火控系统",
+          "domain": [
+            "C_ArtillerySystem"
+          ],
+          "range": [
+            "C_FireControlSystem"
+          ]
+        }
+      ]
+    },
+    "C_DirectFireSystem": {
+      "id": "C_DirectFireSystem",
+      "label": "直射火炮系统",
+      "description": "主要进行直瞄射击的火炮系统，通常用于反坦克和步兵支援。",
+      "parent": "C_ArtillerySystem",
+      "data_properties": [
+        {
+          "name": "瞄准具类型",
+          "field": "sight_type",
+          "datatype": "string",
+          "enum": [
+            "直瞄镜",
+            "望远镜",
+            "测距瞄准镜"
+          ]
+        },
+        {
+          "name": "主瞄准具",
+          "field": "main_sight",
+          "datatype": "string"
+        },
+        {
+          "name": "辅助瞄准具",
+          "field": "auxiliary_sight",
+          "datatype": "string"
+        },
+        {
+          "name": "测距方式",
+          "field": "range_finding_method",
+          "datatype": "string",
+          "enum": [
+            "基线式",
+            "光学合像式",
+            "激光式"
+          ]
+        }
+      ]
+    },
+    "C_IndirectFireSystem": {
+      "id": "C_IndirectFireSystem",
+      "label": "间射火炮系统",
+      "description": "主要进行间瞄射击的火炮系统，通常用于火力支援。",
+      "parent": "C_ArtillerySystem",
+      "data_properties": [
+        {
+          "name": "射击诸元计算",
+          "field": "firing_solution",
+          "datatype": "boolean",
+          "default": true
+        },
+        {
+          "name": "初始瞄准方向",
+          "field": "initial_bearing",
+          "datatype": "quantity",
+          "unit": "密位"
+        },
+        {
+          "name": "射击诸元输入方式",
+          "field": "solution_input",
+          "datatype": "string",
+          "enum": [
+            "人工",
+            "半自动",
+            "自动"
+          ]
+        }
+      ]
+    },
+    "C_Ammunition": {
+      "id": "C_Ammunition",
+      "label": "弹药",
+      "description": "火炮、自动武器发射的弹药，包括炮弹、枪弹、火箭弹等。",
+      "parent": null,
+      "subclasses": [
+        "C_Projectile",
+        "C_Cartridge",
+        "C_Rocket",
+        "C_Charge",
+        "C_Accessory"
+      ],
+      "data_properties": [
+        {
+          "name": "弹种",
+          "field": "ammo_type",
+          "datatype": "string"
+        },
+        {
+          "name": "口径",
+          "field": "caliber",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "弹重",
+          "field": "weight",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "全长",
+          "field": "overall_length",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "弹道系数",
+          "field": "ballistic_coefficient",
+          "datatype": "quantity",
+          "unit": "kg/mm²"
+        },
+        {
+          "name": "装药量",
+          "field": "charge_weight",
+          "datatype": "quantity",
+          "unit": "g"
+        },
+        {
+          "name": "装药类型",
+          "field": "charge_type",
+          "datatype": "string",
+          "enum": [
+            "TNT",
+            "RDX",
+            "Composition B",
+            "ANFO",
+            "PBX"
+          ]
+        },
+        {
+          "name": "引信类型",
+          "field": "fuze_type",
+          "datatype": "string",
+          "enum": [
+            "触发引信",
+            "时间引信",
+            "近炸引信",
+            "编程引信",
+            "自毁引信"
+          ]
+        },
+        {
+          "name": "有效射程",
+          "field": "effective_range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "穿甲厚度",
+          "field": "armor_penetration",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "破片数",
+          "field": "fragment_count",
+          "datatype": "integer"
+        },
+        {
+          "name": "杀伤半径",
+          "field": "lethal_radius",
+          "datatype": "quantity",
+          "unit": "m"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_uses_propellant",
+          "label": "使用发射药",
+          "domain": [
+            "C_Ammunition",
+            "C_Charge"
+          ],
+          "range": [
+            "C_Propellant"
+          ]
+        },
+        {
+          "id": "R_has_fuzes",
+          "label": "配备引信",
+          "domain": [
+            "C_Projectile"
+          ],
+          "range": [
+            "C_Fuze"
+          ]
+        },
+        {
+          "id": "R_pairs_with",
+          "label": "适配于",
+          "domain": [
+            "C_Ammunition"
+          ],
+          "range": [
+            "C_Gun",
+            "C_AutomaticWeapon"
+          ]
+        }
+      ]
+    },
+    "C_Projectile": {
+      "id": "C_Projectile",
+      "label": "炮弹",
+      "description": "火炮发射的弹丸，包括杀伤爆破弹、穿甲弹等。",
+      "parent": "C_Ammunition",
+      "subclasses": [
+        "C_HEProjectile",
+        "C_APProjectile",
+        "C_HEATProjectile",
+        "C_SAPProjectile",
+        "C_IlluminatingProjectile",
+        "C_SmokeProjectile",
+        "C_ClusterProjectile",
+        "C_TargetPracticeProjectile"
+      ],
+      "data_properties": [
+        {
+          "name": "弹头类型",
+          "field": "warhead_type",
+          "datatype": "string",
+          "enum": [
+            "爆破",
+            "穿甲",
+            "破甲",
+            "燃烧",
+            "烟雾",
+            "照明",
+            "训练",
+            "子母"
+          ]
+        },
+        {
+          "name": "弹带材料",
+          "field": "band_material",
+          "datatype": "string",
+          "enum": [
+            "铜",
+            "钢",
+            "合金"
+          ]
+        },
+        {
+          "name": "弹心材料",
+          "field": "core_material",
+          "datatype": "string",
+          "enum": [
+            "碳化钨",
+            "贫铀",
+            "高速钢"
+          ]
+        },
+        {
+          "name": "风帽类型",
+          "field": "ogive_type",
+          "datatype": "string",
+          "enum": [
+            "平底",
+            "尖底",
+            "平尖底",
+            "流线型"
+          ]
+        },
+        {
+          "name": "弹底类型",
+          "field": "base_type",
+          "datatype": "string",
+          "enum": [
+            "平底",
+            "凹底",
+            "船尾型"
+          ]
+        },
+        {
+          "name": "弹质量",
+          "field": "projectile_weight",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "弹径",
+          "field": "projectile_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        }
+      ]
+    },
+    "C_HEProjectile": {
+      "id": "C_HEProjectile",
+      "label": "杀伤爆破弹",
+      "description": "以杀伤有生力量和破坏轻型装甲目标为主要目的的炮弹。",
+      "parent": "C_Projectile",
+      "data_properties": [
+        {
+          "name": "装药类型",
+          "field": "charge_type",
+          "datatype": "string",
+          "enum": [
+            "TNT",
+            "RDX",
+            "Composition B"
+          ]
+        },
+        {
+          "name": "装药量",
+          "field": "charge_weight",
+          "datatype": "quantity",
+          "unit": "g"
+        },
+        {
+          "name": "破片数",
+          "field": "fragment_count",
+          "datatype": "integer"
+        },
+        {
+          "name": "杀伤半径",
+          "field": "lethal_radius",
+          "datatype": "quantity",
+          "unit": "m"
+        }
+      ]
+    },
+    "C_APProjectile": {
+      "id": "C_APProjectile",
+      "label": "穿甲弹",
+      "description": "用于穿透装甲目标的弹药，具有高硬度弹心。",
+      "parent": "C_Projectile",
+      "data_properties": [
+        {
+          "name": "弹心材料",
+          "field": "core_material",
+          "datatype": "string",
+          "enum": [
+            "碳化钨",
+            "贫铀",
+            "高速钢"
+          ]
+        },
+        {
+          "name": "弹心直径",
+          "field": "core_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "穿甲厚度",
+          "field": "armor_penetration",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "发射距离",
+          "field": "penetration_distance",
+          "datatype": "quantity",
+          "unit": "m"
+        }
+      ]
+    },
+    "C_HEATProjectile": {
+      "id": "C_HEATProjectile",
+      "label": "破甲弹",
+      "description": "利用聚能效应穿透装甲的弹药，对均质装甲有较好效果。",
+      "parent": "C_Projectile",
+      "data_properties": [
+        {
+          "name": "战斗部类型",
+          "field": "warhead_type",
+          "datatype": "string",
+          "enum": [
+            "聚能装药"
+          ]
+        },
+        {
+          "name": "战斗部直径",
+          "field": "warhead_diameter",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "穿甲厚度",
+          "field": "armor_penetration",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "引爆高度",
+          "field": "standoff_distance",
+          "datatype": "quantity",
+          "unit": "mm"
+        }
+      ]
+    },
+    "C_ClusterProjectile": {
+      "id": "C_ClusterProjectile",
+      "label": "子母弹",
+      "description": "发射后在空中抛撒子弹的弹药，用于大面积杀伤。",
+      "parent": "C_Projectile",
+      "data_properties": [
+        {
+          "name": "子弹数量",
+          "field": "submunition_count",
+          "datatype": "integer"
+        },
+        {
+          "name": "子弹类型",
+          "field": "submunition_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "杀伤",
+              "穿甲",
+              "燃烧",
+              "反装甲"
+            ]
+          }
+        },
+        {
+          "name": "覆盖面积",
+          "field": "coverage_area",
+          "datatype": "quantity",
+          "unit": "m²"
+        },
+        {
+          "name": "抛撒高度",
+          "field": "dispense_altitude",
+          "datatype": "quantity",
+          "unit": "m"
+        }
+      ]
+    },
+    "C_TargetPracticeProjectile": {
+      "id": "C_TargetPracticeProjectile",
+      "label": "训练弹",
+      "description": "用于射击训练的模拟弹，通常无装药或装填少量指示剂。",
+      "parent": "C_Projectile",
+      "data_properties": [
+        {
+          "name": "指示方式",
+          "field": "indicator",
+          "datatype": "string",
+          "enum": [
+            "染色剂",
+            "烟雾",
+            "闪光"
+          ]
+        },
+        {
+          "name": "装药量",
+          "field": "charge_weight",
+          "datatype": "quantity",
+          "unit": "g",
+          "default": 0
+        }
+      ]
+    },
+    "C_Charge": {
+      "id": "C_Charge",
+      "label": "发射药",
+      "description": "火炮的发射药，提供膛压推动弹丸发射。",
+      "parent": "C_Ammunition",
+      "subclasses": [
+        "C_DefensivePropellant",
+        "C_BallPropellant",
+        "C_SingleBasePropellant",
+        "C_DoubleBasePropellant",
+        "C_PlasticPropellant"
+      ],
+      "data_properties": [
+        {
+          "name": "药型",
+          "field": "shape",
+          "datatype": "string",
+          "enum": [
+            "管状",
+            "片状",
+            "球状",
+            "柱状",
+            "星状"
+          ]
+        },
+        {
+          "name": "药柱孔数",
+          "field": "hole_count",
+          "datatype": "integer"
+        },
+        {
+          "name": "单包质量",
+          "field": "charge_weight",
+          "datatype": "quantity",
+          "unit": "g"
+        },
+        {
+          "name": "密度",
+          "field": "density",
+          "datatype": "quantity",
+          "unit": "g/cm³"
+        },
+        {
+          "name": "燃速",
+          "field": "burn_rate",
+          "datatype": "quantity",
+          "unit": "mm/s"
+        },
+        {
+          "name": "能量等级",
+          "field": "energy_level",
+          "datatype": "string",
+          "enum": [
+            "低",
+            "中",
+            "高"
+          ]
+        },
+        {
+          "name": "温度敏感性",
+          "field": "temperature_sensitivity",
+          "datatype": "string",
+          "enum": [
+            "低",
+            "中",
+            "高"
+          ]
+        },
+        {
+          "name": "稳定剂含量",
+          "field": "stabilizer_content",
+          "datatype": "quantity",
+          "unit": "%"
+        }
+      ]
+    },
+    "C_Fuze": {
+      "id": "C_Fuze",
+      "label": "引信",
+      "description": "控制弹药在特定条件下起爆的装置。",
+      "parent": null,
+      "subclasses": [
+        "C_DetonatingFuze",
+        "C_TimeFuze",
+        "C_ProximityFuze",
+        "C_TraumaFuze"
+      ],
+      "data_properties": [
+        {
+          "name": "引信类型",
+          "field": "fuze_type",
+          "datatype": "string",
+          "enum": [
+            "触发",
+            "时间",
+            "近炸",
+            "压电"
+          ]
+        },
+        {
+          "name": "起爆方式",
+          "field": "firing_mode",
+          "datatype": "string",
+          "enum": [
+            "瞬发",
+            "延时",
+            "瞬发延时",
+            "可调"
+          ]
+        },
+        {
+          "name": "触发方式",
+          "field": "impact_mode",
+          "datatype": "string",
+          "enum": [
+            "直发",
+            "弯发",
+            "弯直发"
+          ]
+        },
+        {
+          "name": "安全距离",
+          "field": "safe_distance",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "自毁时间",
+          "field": "self_destruct_time",
+          "datatype": "quantity",
+          "unit": "秒"
+        }
+      ]
+    },
+    "C_DynamicsObject": {
+      "id": "C_DynamicsObject",
+      "label": "动力学对象",
+      "description": "在发射和飞行过程中受力和力矩作用的物理对象。",
+      "parent": null,
+      "subclasses": [
+        "C_ProjectileMotion",
+        "C_GunRecoil",
+        "C_CarriageMotion",
+        "C_ChamberPressure"
+      ],
+      "data_properties": [
+        {
+          "name": "质量",
+          "field": "mass",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "转动惯量",
+          "field": "moment_of_inertia",
+          "datatype": "quantity",
+          "unit": "kg·m²"
+        },
+        {
+          "name": "质心位置",
+          "field": "center_of_gravity",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "阻尼系数",
+          "field": "damping_coefficient",
+          "datatype": "quantity"
+        },
+        {
+          "name": "刚度系数",
+          "field": "stiffness_coefficient",
+          "datatype": "quantity",
+          "unit": "N/m"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_subject_to_force",
+          "label": "受力作用",
+          "domain": [
+            "C_DynamicsObject"
+          ],
+          "range": [
+            "C_Force"
+          ]
+        },
+        {
+          "id": "R_subject_to_moment",
+          "label": "受力矩作用",
+          "domain": [
+            "C_DynamicsObject"
+          ],
+          "range": [
+            "C_Moment"
+          ]
+        },
+        {
+          "id": "R_coupled_with",
+          "label": "耦合于",
+          "domain": [
+            "C_DynamicsObject"
+          ],
+          "range": [
+            "C_DynamicsObject"
+          ]
+        }
+      ]
+    },
+    "C_ProjectileMotion": {
+      "id": "C_ProjectileMotion",
+      "label": "弹丸飞行动力学",
+      "description": "描述弹丸在空中飞行的运动规律和受力情况。",
+      "parent": "C_DynamicsObject",
+      "data_properties": [
+        {
+          "name": "质量",
+          "field": "mass",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "转动惯量",
+          "field": "moment_of_inertia",
+          "datatype": "quantity",
+          "unit": "kg·m²"
+        },
+        {
+          "name": "弹道系数",
+          "field": "ballistic_coefficient",
+          "datatype": "quantity",
+          "unit": "kg/mm²"
+        },
+        {
+          "name": "风偏系数",
+          "field": "crosswind_coefficient",
+          "datatype": "quantity"
+        },
+        {
+          "name": "纵风系数",
+          "field": "longitudinal_coefficient",
+          "datatype": "quantity"
+        },
+        {
+          "name": "攻角",
+          "field": "angle_of_attack",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "倾侧角",
+          "field": "sideslip_angle",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "滚转角速度",
+          "field": "roll_rate",
+          "datatype": "quantity",
+          "unit": "度/秒"
+        }
+      ]
+    },
+    "C_GunRecoil": {
+      "id": "C_GunRecoil",
+      "label": "火炮后坐动力学",
+      "description": "描述火炮发射时后坐部件的运动规律。",
+      "parent": "C_DynamicsObject",
+      "data_properties": [
+        {
+          "name": "后坐质量",
+          "field": "recoil_mass",
+          "datatype": "quantity",
+          "unit": "kg"
+        },
+        {
+          "name": "后坐长度",
+          "field": "recoil_length",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "后坐速度",
+          "field": "recoil_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "复进力",
+          "field": "recoil_force",
+          "datatype": "quantity",
+          "unit": "kN"
+        },
+        {
+          "name": "驻退缸容积",
+          "field": "buffer_volume",
+          "datatype": "quantity",
+          "unit": "cm³"
+        },
+        {
+          "name": "复进簧刚度",
+          "field": "recuperator_stiffness",
+          "datatype": "quantity",
+          "unit": "N/mm"
+        }
+      ]
+    },
+    "C_PerformanceParameter": {
+      "id": "C_PerformanceParameter",
+      "label": "性能参数",
+      "description": "描述武器装备性能的技术指标。",
+      "parent": null,
+      "subclasses": [
+        "C_FirepowerParameter",
+        "C_AimingParameter",
+        "C_ReliabilityParameter",
+        "C_EngineeringParameter"
+      ],
+      "data_properties": [
+        {
+          "name": "参数名称",
+          "field": "name",
+          "datatype": "string"
+        },
+        {
+          "name": "参数值",
+          "field": "value",
+          "datatype": "quantity_or_number"
+        },
+        {
+          "name": "单位",
+          "field": "unit",
+          "datatype": "string"
+        },
+        {
+          "name": "测试条件",
+          "field": "test_condition",
+          "datatype": "string"
+        },
+        {
+          "name": "备注",
+          "field": "remark",
+          "datatype": "string"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_belongs_to",
+          "label": "属于",
+          "domain": [
+            "C_PerformanceParameter"
+          ],
+          "range": [
+            "C_WeaponEquipment",
+            "C_Ammunition"
+          ]
+        }
+      ]
+    },
+    "C_FirepowerParameter": {
+      "id": "C_FirepowerParameter",
+      "label": "火力性能参数",
+      "description": "描述武器威力和射程等火力相关性能的参数。",
+      "parent": "C_PerformanceParameter",
+      "data_properties": [
+        {
+          "name": "最大射程",
+          "field": "max_range",
+          "datatype": "quantity",
+          "unit": "km"
+        },
+        {
+          "name": "最小射程",
+          "field": "min_range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "最大射高",
+          "field": "max_ceiling",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "初速",
+          "field": "muzzle_velocity",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "射速",
+          "field": "rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "连发射速",
+          "field": "rapid_fire_rate",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "持续射速",
+          "field": "sustained_rate_of_fire",
+          "datatype": "quantity",
+          "unit": "发/分"
+        },
+        {
+          "name": "首发发弹时间",
+          "field": "first_shot_time",
+          "datatype": "quantity",
+          "unit": "秒"
+        },
+        {
+          "name": "齐射时间",
+          "field": "salvo_time",
+          "datatype": "quantity",
+          "unit": "秒"
+        }
+      ]
+    },
+    "C_AimingParameter": {
+      "id": "C_AimingParameter",
+      "label": "瞄准性能参数",
+      "description": "描述武器瞄准和射击精度相关的参数。",
+      "parent": "C_PerformanceParameter",
+      "data_properties": [
+        {
+          "name": "方向射界",
+          "field": "traverse",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "高低射界",
+          "field": "elevation",
+          "datatype": "quantity",
+          "unit": "度"
+        },
+        {
+          "name": "瞄准基线长",
+          "field": "sight_base",
+          "datatype": "quantity",
+          "unit": "mm"
+        },
+        {
+          "name": "分划精度",
+          "field": "scale_precision",
+          "datatype": "quantity",
+          "unit": "密位"
+        },
+        {
+          "name": "射击精度",
+          "field": "firing_accuracy",
+          "datatype": "quantity",
+          "unit": "mrad"
+        },
+        {
+          "name": "首发命中率",
+          "field": "first_shot_hit_probability",
+          "datatype": "quantity",
+          "unit": "%"
+        }
+      ]
+    },
+    "C_FaultMaintenance": {
+      "id": "C_FaultMaintenance",
+      "label": "故障、失效与维修",
+      "description": "描述武器装备在使用过程中出现的故障、失效模式及维修措施。",
+      "parent": null,
+      "subclasses": [
+        "C_FailureMode",
+        "C_FailureCause",
+        "C_MaintenanceProcedure",
+        "C_DiagnosisMethod"
+      ],
+      "data_properties": [
+        {
+          "name": "故障类型",
+          "field": "failure_type",
+          "datatype": "string",
+          "enum": [
+            "机械故障",
+            "电气故障",
+            "液压故障",
+            "气动故障",
+            "材料故障"
+          ]
+        },
+        {
+          "name": "故障现象",
+          "field": "symptom",
+          "datatype": "string"
+        },
+        {
+          "name": "故障模式",
+          "field": "failure_mode",
+          "datatype": "string",
+          "enum": [
+            "卡滞",
+            "断裂",
+            "磨损",
+            "变形",
+            "腐蚀",
+            "松动",
+            "漏气",
+            "漏液"
+          ]
+        },
+        {
+          "name": "故障等级",
+          "field": "severity",
+          "datatype": "string",
+          "enum": [
+            "轻微",
+            "一般",
+            "严重",
+            "致命"
+          ]
+        },
+        {
+          "name": "故障概率",
+          "field": "failure_probability",
+          "datatype": "quantity",
+          "unit": "次/千发"
+        },
+        {
+          "name": "平均故障间隔",
+          "field": "mtbf",
+          "datatype": "quantity",
+          "unit": "小时"
+        },
+        {
+          "name": "维修工时",
+          "field": "repair_time",
+          "datatype": "quantity",
+          "unit": "小时"
+        },
+        {
+          "name": "预防措施",
+          "field": "preventive_measure",
+          "datatype": "string"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_occurs_in",
+          "label": "发生在",
+          "domain": [
+            "C_FaultMaintenance"
+          ],
+          "range": [
+            "C_WeaponEquipment",
+            "C_AutomaticWeapon"
+          ]
+        },
+        {
+          "id": "R_leads_to",
+          "label": "导致",
+          "domain": [
+            "C_FailureCause"
+          ],
+          "range": [
+            "C_FailureMode"
+          ]
+        },
+        {
+          "id": "R_resolved_by",
+          "label": "通过...解决",
+          "domain": [
+            "C_FailureMode"
+          ],
+          "range": [
+            "C_MaintenanceProcedure"
+          ]
+        }
+      ]
+    },
+    "C_FailureMode": {
+      "id": "C_FailureMode",
+      "label": "故障模式",
+      "description": "武器装备故障的具体表现形式。",
+      "parent": "C_FaultMaintenance",
+      "data_properties": [
+        {
+          "name": "故障现象",
+          "field": "symptom",
+          "datatype": "string"
+        },
+        {
+          "name": "故障模式编码",
+          "field": "failure_code",
+          "datatype": "string"
+        },
+        {
+          "name": "后果严重度",
+          "field": "severity",
+          "datatype": "integer",
+          "range": [
+            1,
+            10
+          ]
+        },
+        {
+          "name": "故障频度",
+          "field": "occurrence",
+          "datatype": "integer",
+          "range": [
+            1,
+            10
+          ]
+        },
+        {
+          "name": "可探测度",
+          "field": "detectability",
+          "datatype": "integer",
+          "range": [
+            1,
+            10
+          ]
+        }
+      ]
+    },
+    "C_FailureCause": {
+      "id": "C_FailureCause",
+      "label": "故障原因",
+      "description": "导致故障模式发生的根本原因。",
+      "parent": "C_FaultMaintenance",
+      "data_properties": [
+        {
+          "name": "原因类型",
+          "field": "cause_type",
+          "datatype": "string",
+          "enum": [
+            "设计缺陷",
+            "制造缺陷",
+            "材料缺陷",
+            "装配错误",
+            "使用不当",
+            "维护不当",
+            "环境因素"
+          ]
+        },
+        {
+          "name": "原因描述",
+          "field": "cause_description",
+          "datatype": "string"
+        },
+        {
+          "name": "根本原因",
+          "field": "root_cause",
+          "datatype": "string"
+        }
+      ]
+    },
+    "C_MaintenanceProcedure": {
+      "id": "C_MaintenanceProcedure",
+      "label": "维修程序",
+      "description": "排除故障、恢复装备功能的维修步骤。",
+      "parent": "C_FaultMaintenance",
+      "data_properties": [
+        {
+          "name": "维修类别",
+          "field": "maintenance_type",
+          "datatype": "string",
+          "enum": [
+            "日常保养",
+            "定期检修",
+            "故障修理",
+            "大修"
+          ]
+        },
+        {
+          "name": "维修步骤",
+          "field": "steps",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "所需工具",
+          "field": "tools_required",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "所需时间",
+          "field": "time_required",
+          "datatype": "quantity",
+          "unit": "小时"
+        },
+        {
+          "name": "安全注意事项",
+          "field": "safety_precautions",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "C_ModelLineage": {
+      "id": "C_ModelLineage",
+      "label": "型号、谱系与装备信息",
+      "description": "描述武器装备的型号、发展历程、装备单位和服役信息。",
+      "parent": null,
+      "subclasses": [
+        "C_WeaponModel",
+        "C_DevelopmentLineage",
+        "C_EquipmentInfo"
+      ],
+      "data_properties": [
+        {
+          "name": "型号名称",
+          "field": "model_name",
+          "datatype": "string"
+        },
+        {
+          "name": "型号代号",
+          "field": "designation",
+          "datatype": "string"
+        },
+        {
+          "name": "缩写",
+          "field": "abbreviation",
+          "datatype": "string"
+        },
+        {
+          "name": "原产国",
+          "field": "country_of_origin",
+          "datatype": "string"
+        },
+        {
+          "name": "研制单位",
+          "field": "developer",
+          "datatype": "string"
+        },
+        {
+          "name": "生产单位",
+          "field": "manufacturer",
+          "datatype": "string"
+        },
+        {
+          "name": "研制时间",
+          "field": "development_time",
+          "datatype": "string_or_date"
+        },
+        {
+          "name": "服役时间",
+          "field": "service_time",
+          "datatype": "string_or_date"
+        },
+        {
+          "name": "退役时间",
+          "field": "retirement_time",
+          "datatype": "string_or_date"
+        },
+        {
+          "name": "装备状态",
+          "field": "equipment_status",
+          "datatype": "string",
+          "enum": [
+            "研制中",
+            "定型",
+            "装备",
+            "退役",
+            "报废"
+          ]
+        },
+        {
+          "name": "装备数量",
+          "field": "equipment_quantity",
+          "datatype": "integer"
+        },
+        {
+          "name": "装备单位",
+          "field": "equipment_unit",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "出口国家",
+          "field": "export_countries",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "总设计师",
+          "field": "chief_designer",
+          "datatype": "string"
+        },
+        {
+          "name": "备注",
+          "field": "remark",
+          "datatype": "string"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_derived_from",
+          "label": "源自",
+          "domain": [
+            "C_ModelLineage"
+          ],
+          "range": [
+            "C_ModelLineage"
+          ]
+        },
+        {
+          "id": "R_developed_by",
+          "label": "研制单位为",
+          "domain": [
+            "C_ModelLineage"
+          ],
+          "range": [
+            "C_Organization"
+          ]
+        },
+        {
+          "id": "R_equipped_by",
+          "label": "装备于",
+          "domain": [
+            "C_ModelLineage"
+          ],
+          "range": [
+            "C_MilitaryUnit"
+          ]
+        }
+      ]
+    },
+    "C_WeaponModel": {
+      "id": "C_WeaponModel",
+      "label": "武器型号",
+      "description": "具体的武器装备型号信息。",
+      "parent": "C_ModelLineage",
+      "data_properties": [
+        {
+          "name": "型号全称",
+          "field": "full_name",
+          "datatype": "string"
+        },
+        {
+          "name": "装备序号",
+          "field": "equipment_number",
+          "datatype": "string"
+        },
+        {
+          "name": "技术状态",
+          "field": "technical_status",
+          "datatype": "string",
+          "enum": [
+            "G1",
+            "G2",
+            "G3",
+            "G4",
+            "G5"
+          ]
+        },
+        {
+          "name": "图纸编号",
+          "field": "drawing_number",
+          "datatype": "string"
+        },
+        {
+          "name": "技术条件",
+          "field": "technical_specification",
+          "datatype": "string"
+        }
+      ]
+    },
+    "C_DevelopmentLineage": {
+      "id": "C_DevelopmentLineage",
+      "label": "发展谱系",
+      "description": "武器装备的发展历史和代际关系。",
+      "parent": "C_ModelLineage",
+      "data_properties": [
+        {
+          "name": "代际",
+          "field": "generation",
+          "datatype": "string",
+          "enum": [
+            "第一代",
+            "第二代",
+            "第三代",
+            "第四代",
+            "第五代"
+          ]
+        },
+        {
+          "name": "发展特征",
+          "field": "development_characteristics",
+          "datatype": "string"
+        },
+        {
+          "name": "改进型号",
+          "field": "improved_versions",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "C_EnvironmentScenario": {
+      "id": "C_EnvironmentScenario",
+      "label": "使用环境与应用场景",
+      "description": "描述武器装备的使用环境条件和应用场景。",
+      "parent": null,
+      "subclasses": [
+        "C_ClimaticEnvironment",
+        "C_TerrainEnvironment",
+        "C_OperationScenario",
+        "C_SafetyEnvironment"
+      ],
+      "data_properties": [
+        {
+          "name": "环境类型",
+          "field": "environment_type",
+          "datatype": "string",
+          "enum": [
+            "气候",
+            "地形",
+            "作战",
+            "运输",
+            "存储"
+          ]
+        },
+        {
+          "name": "环境条件",
+          "field": "conditions",
+          "datatype": "string"
+        },
+        {
+          "name": "适用温度",
+          "field": "temperature_range",
+          "datatype": "quantity",
+          "unit": "°C",
+          "range": [
+            -50,
+            60
+          ]
+        },
+        {
+          "name": "适用湿度",
+          "field": "humidity_range",
+          "datatype": "quantity",
+          "unit": "%",
+          "range": [
+            0,
+            100
+          ]
+        },
+        {
+          "name": "适用海拔",
+          "field": "altitude_range",
+          "datatype": "quantity",
+          "unit": "m",
+          "range": [
+            0,
+            5500
+          ]
+        },
+        {
+          "name": "抗风能力",
+          "field": "wind_resistance",
+          "datatype": "quantity",
+          "unit": "m/s"
+        },
+        {
+          "name": "抗雨能力",
+          "field": "rain_resistance",
+          "datatype": "string",
+          "enum": [
+            "小雨",
+            "中雨",
+            "大雨",
+            "暴雨"
+          ]
+        },
+        {
+          "name": "抗雪能力",
+          "field": "snow_resistance",
+          "datatype": "string",
+          "enum": [
+            "无雪",
+            "积雪",
+            "暴雪"
+          ]
+        },
+        {
+          "name": "抗盐雾能力",
+          "field": "salt_fog_resistance",
+          "datatype": "boolean",
+          "default": false
+        },
+        {
+          "name": "应用场景",
+          "field": "application_scenario",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "陆战",
+              "海战",
+              "空战",
+              "训练",
+              "试验",
+              "执法"
+            ]
+          }
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_subject_to",
+          "label": "受...影响",
+          "domain": [
+            "C_EnvironmentScenario"
+          ],
+          "range": [
+            "C_WeaponEquipment"
+          ]
+        },
+        {
+          "id": "R_has_constraint",
+          "label": "存在约束",
+          "domain": [
+            "C_EnvironmentScenario"
+          ],
+          "range": [
+            "C_Constraint"
+          ]
+        }
+      ]
+    },
+    "C_ClimaticEnvironment": {
+      "id": "C_ClimaticEnvironment",
+      "label": "气候环境",
+      "description": "描述武器装备所处的气候条件。",
+      "parent": "C_EnvironmentScenario",
+      "data_properties": [
+        {
+          "name": "温度范围",
+          "field": "temperature_range",
+          "datatype": "quantity",
+          "unit": "°C"
+        },
+        {
+          "name": "湿度范围",
+          "field": "humidity_range",
+          "datatype": "quantity",
+          "unit": "%"
+        },
+        {
+          "name": "气压范围",
+          "field": "pressure_range",
+          "datatype": "quantity",
+          "unit": "hPa"
+        },
+        {
+          "name": "降水量",
+          "field": "precipitation",
+          "datatype": "quantity",
+          "unit": "mm/h"
+        },
+        {
+          "name": "太阳辐射",
+          "field": "solar_radiation",
+          "datatype": "quantity",
+          "unit": "W/m²"
+        }
+      ]
+    },
+    "C_TerrainEnvironment": {
+      "id": "C_TerrainEnvironment",
+      "label": "地形环境",
+      "description": "描述武器装备所处的地形条件。",
+      "parent": "C_EnvironmentScenario",
+      "data_properties": [
+        {
+          "name": "地形类型",
+          "field": "terrain_type",
+          "datatype": "string",
+          "enum": [
+            "平原",
+            "山地",
+            "丘陵",
+            "高原",
+            "沙漠",
+            "丛林",
+            "水网",
+            "雪地"
+          ]
+        },
+        {
+          "name": "坡度",
+          "field": "slope",
+          "datatype": "quantity",
+          "unit": "度",
+          "range": [
+            0,
+            45
+          ]
+        },
+        {
+          "name": "地面承载力",
+          "field": "ground承载力",
+          "datatype": "quantity",
+          "unit": "t/m²"
+        },
+        {
+          "name": "障碍物密度",
+          "field": "obstacle_density",
+          "datatype": "string",
+          "enum": [
+            "低",
+            "中",
+            "高"
+          ]
+        }
+      ]
+    },
+    "C_OperationScenario": {
+      "id": "C_OperationScenario",
+      "label": "作战场景",
+      "description": "描述武器装备在实际作战中的使用场景。",
+      "parent": "C_EnvironmentScenario",
+      "data_properties": [
+        {
+          "name": "作战任务",
+          "field": "mission",
+          "datatype": "string",
+          "enum": [
+            "火力压制",
+            "反坦克",
+            "防空",
+            "边境防卫",
+            "城市作战",
+            "山地作战"
+          ]
+        },
+        {
+          "name": "交战距离",
+          "field": "engagement_range",
+          "datatype": "quantity",
+          "unit": "m"
+        },
+        {
+          "name": "射击方式",
+          "field": "firing_mode",
+          "datatype": "string",
+          "enum": [
+            "单发",
+            "连发",
+            "点射",
+            "齐射"
+          ]
+        },
+        {
+          "name": "目标类型",
+          "field": "target_type",
+          "datatype": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "步兵",
+              "装甲车辆",
+              "直升机",
+              "无人机",
+              "工事",
+              "轻型车辆"
+            ]
+          }
+        }
+      ]
+    },
+    "C_TheoryMethod": {
+      "id": "C_TheoryMethod",
+      "label": "理论、方法与模型",
+      "description": "火炮设计、试验、分析中使用的理论、方法和数学模型。",
+      "parent": null,
+      "subclasses": [
+        "C_DesignTheory",
+        "C_TestMethod",
+        "C_CalculatedModel",
+        "C_AnalysisMethod"
+      ],
+      "data_properties": [
+        {
+          "name": "理论/方法名称",
+          "field": "name",
+          "datatype": "string"
+        },
+        {
+          "name": "提出者",
+          "field": "proposer",
+          "datatype": "string"
+        },
+        {
+          "name": "提出时间",
+          "field": "proposed_time",
+          "datatype": "string_or_date"
+        },
+        {
+          "name": "应用领域",
+          "field": "application_domain",
+          "datatype": "string"
+        },
+        {
+          "name": "数学表达",
+          "field": "mathematical_expression",
+          "datatype": "string"
+        },
+        {
+          "name": "适用范围",
+          "field": "applicable_range",
+          "datatype": "string"
+        },
+        {
+          "name": "文献来源",
+          "field": "source",
+          "datatype": "string"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_applied_to",
+          "label": "应用于",
+          "domain": [
+            "C_TheoryMethod"
+          ],
+          "range": [
+            "C_WeaponEquipment",
+            "C_Ammunition"
+          ]
+        },
+        {
+          "id": "R_based_on",
+          "label": "基于",
+          "domain": [
+            "C_TheoryMethod"
+          ],
+          "range": [
+            "C_TheoryMethod"
+          ]
+        }
+      ]
+    },
+    "C_DesignTheory": {
+      "id": "C_DesignTheory",
+      "label": "设计理论",
+      "description": "武器装备设计中使用的理论基础。",
+      "parent": "C_TheoryMethod",
+      "data_properties": [
+        {
+          "name": "理论类型",
+          "field": "theory_type",
+          "datatype": "string",
+          "enum": [
+            "结构设计",
+            "强度设计",
+            "刚度设计",
+            "热设计",
+            "可靠性设计"
+          ]
+        },
+        {
+          "name": "设计准则",
+          "field": "design_criterion",
+          "datatype": "string"
+        },
+        {
+          "name": "安全系数",
+          "field": "safety_factor",
+          "datatype": "quantity",
+          "range": [
+            1,
+            10
+          ]
+        },
+        {
+          "name": "设计变量",
+          "field": "design_variables",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "C_TestMethod": {
+      "id": "C_TestMethod",
+      "label": "试验方法",
+      "description": "武器装备试验中采用的测试方法。",
+      "parent": "C_TheoryMethod",
+      "data_properties": [
+        {
+          "name": "试验类型",
+          "field": "test_type",
+          "datatype": "string",
+          "enum": [
+            "强度试验",
+            "寿命试验",
+            "环境试验",
+            "射击试验",
+            "可靠性试验"
+          ]
+        },
+        {
+          "name": "试验标准",
+          "field": "test_standard",
+          "datatype": "string"
+        },
+        {
+          "name": "试验设备",
+          "field": "test_equipment",
+          "datatype": "string"
+        },
+        {
+          "name": "测试参数",
+          "field": "test_parameters",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "C_MaterialProcess": {
+      "id": "C_MaterialProcess",
+      "label": "材料与工艺",
+      "description": "武器装备制造中使用的材料和制造工艺。",
+      "parent": null,
+      "subclasses": [
+        "C_Material",
+        "C_Process",
+        "C_Treatment"
+      ],
+      "data_properties": [
+        {
+          "name": "材料/工艺名称",
+          "field": "name",
+          "datatype": "string"
+        },
+        {
+          "name": "标准号",
+          "field": "standard_number",
+          "datatype": "string"
+        },
+        {
+          "name": "适用范围",
+          "field": "application",
+          "datatype": "string"
+        },
+        {
+          "name": "性能指标",
+          "field": "performance_indicators",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_used_in",
+          "label": "用于",
+          "domain": [
+            "C_MaterialProcess"
+          ],
+          "range": [
+            "C_WeaponEquipment",
+            "C_Ammunition"
+          ]
+        },
+        {
+          "id": "R_consists_of",
+          "label": "由...组成",
+          "domain": [
+            "C_Material"
+          ],
+          "range": [
+            "C_ComponentMaterial"
+          ]
+        }
+      ]
+    },
+    "C_Material": {
+      "id": "C_Material",
+      "label": "材料",
+      "description": "武器装备制造中使用的材料。",
+      "parent": "C_MaterialProcess",
+      "subclasses": [
+        "C_MetalMaterial",
+        "C_CeramicMaterial",
+        "C_PolymerMaterial",
+        "C_CompositeMaterial"
+      ],
+      "data_properties": [
+        {
+          "name": "材料类型",
+          "field": "material_type",
+          "datatype": "string",
+          "enum": [
+            "金属",
+            "陶瓷",
+            "高分子",
+            "复合材料",
+            "合金",
+            "钢材",
+            "铜材",
+            "铝合金"
+          ]
+        },
+        {
+          "name": "牌号",
+          "field": "grade",
+          "datatype": "string"
+        },
+        {
+          "name": "标准",
+          "field": "standard",
+          "datatype": "string"
+        },
+        {
+          "name": "密度",
+          "field": "density",
+          "datatype": "quantity",
+          "unit": "g/cm³"
+        },
+        {
+          "name": "抗拉强度",
+          "field": "tensile_strength",
+          "datatype": "quantity",
+          "unit": "MPa"
+        },
+        {
+          "name": "屈服强度",
+          "field": "yield_strength",
+          "datatype": "quantity",
+          "unit": "MPa"
+        },
+        {
+          "name": "延伸率",
+          "field": "elongation",
+          "datatype": "quantity",
+          "unit": "%"
+        },
+        {
+          "name": "硬度",
+          "field": "hardness",
+          "datatype": "quantity",
+          "unit": "HRC/HB"
+        },
+        {
+          "name": "导热系数",
+          "field": "thermal_conductivity",
+          "datatype": "quantity",
+          "unit": "W/(m·K)"
+        },
+        {
+          "name": "热膨胀系数",
+          "field": "thermal_expansion",
+          "datatype": "quantity",
+          "unit": "1/°C"
+        }
+      ]
+    },
+    "C_MetalMaterial": {
+      "id": "C_MetalMaterial",
+      "label": "金属材料",
+      "description": "以金属元素为主的材料。",
+      "parent": "C_Material",
+      "data_properties": [
+        {
+          "name": "材料类别",
+          "field": "category",
+          "datatype": "string",
+          "enum": [
+            "钢",
+            "铜",
+            "铝",
+            "钛",
+            "镍合金"
+          ]
+        },
+        {
+          "name": "热处理状态",
+          "field": "heat_treatment",
+          "datatype": "string",
+          "enum": [
+            "退火",
+            "正火",
+            "淬火",
+            "回火",
+            "固溶",
+            "时效"
+          ]
+        },
+        {
+          "name": "屈强比",
+          "field": "yield_ratio",
+          "datatype": "quantity",
+          "range": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "冲击韧性",
+          "field": "impact_toughness",
+          "datatype": "quantity",
+          "unit": "J/cm²"
+        }
+      ]
+    },
+    "C_EquipmentPlatformSystem": {
+      "id": "C_EquipmentPlatformSystem",
+      "label": "装备平台系统",
+      "description": "武器装备所部署的平台系统，如坦克、装甲车、舰船等。",
+      "parent": "C_WeaponEquipment",
+      "subclasses": [
+        "C_TankSystem",
+        "C_ArmoredVehicleSystem",
+        "C_ShipSystem",
+        "C_AircraftSystem",
+        "C_TrainingSystem"
+      ],
+      "data_properties": [
+        {
+          "name": "平台类型",
+          "field": "platform_type",
+          "datatype": "string",
+          "enum": [
+            "坦克",
+            "装甲车",
+            "舰船",
+            "飞机",
+            "训练平台"
+          ]
+        },
+        {
+          "name": "平台型号",
+          "field": "platform_model",
+          "datatype": "string"
+        },
+        {
+          "name": "武器配置",
+          "field": "weapon_configuration",
+          "datatype": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "防护等级",
+          "field": "armor_level",
+          "datatype": "string",
+          "enum": [
+            "轻型",
+            "中型",
+            "重型",
+            "主动防护"
+          ]
+        },
+        {
+          "name": "动力系统",
+          "field": "propulsion_system",
+          "datatype": "string"
+        },
+        {
+          "name": "最大速度",
+          "field": "max_speed",
+          "datatype": "quantity",
+          "unit": "km/h"
+        },
+        {
+          "name": "续航里程",
+          "field": "range",
+          "datatype": "quantity",
+          "unit": "km"
+        }
+      ],
+      "object_properties": [
+        {
+          "id": "R_carries",
+          "label": "携带",
+          "domain": [
+            "C_EquipmentPlatformSystem"
+          ],
+          "range": [
+            "C_WeaponEquipment"
+          ]
+        },
+        {
+          "id": "R_composed_of",
+          "label": "由...组成",
+          "domain": [
+            "C_EquipmentPlatformSystem"
+          ],
+          "range": [
+            "C_Subsystem"
+          ]
+        }
+      ]
+    }
+  },
+  "object_properties": {
+    "R_has_subsystem": {
+      "id": "R_has_subsystem",
+      "label": "具有子系统",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_WeaponSystem",
+        "C_ArtillerySystem",
+        "C_EquipmentPlatformSystem"
+      ],
+      "range": [
+        "C_ArtillerySystem",
+        "C_FireControlSystem",
+        "C_OpticalSight",
+        "C_AutomaticMechanism"
+      ],
+      "characteristics": [
+        "transitive",
+        "reflexive"
+      ]
+    },
+    "R_has_component": {
+      "id": "R_has_component",
+      "label": "具有部件",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_ArtillerySystem",
+        "C_AutomaticWeapon"
+      ],
+      "range": [
+        "C_ComponentMechanism",
+        "C_GunTube",
+        "C_BreechBlock",
+        "C_RecoilMechanism"
+      ]
+    },
+    "R_has_mechanism": {
+      "id": "R_has_mechanism",
+      "label": "具有机构",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_ArtillerySystem",
+        "C_AutomaticWeapon"
+      ],
+      "range": [
+        "C_AutomaticMechanism",
+        "C_BreechingMechanism",
+        "C_RecoilMechanism"
+      ]
+    },
+    "R_uses_ammunition": {
+      "id": "R_uses_ammunition",
+      "label": "使用弹药",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_Gun",
+        "C_AutomaticWeapon"
+      ],
+      "range": [
+        "C_Ammunition",
+        "C_Projectile",
+        "C_Cartridge",
+        "C_Charge"
+      ],
+      "characteristics": [
+        "functional"
+      ]
+    },
+    "R_has_performance_parameter": {
+      "id": "R_has_performance_parameter",
+      "label": "具有性能参数",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_Gun",
+        "C_AutomaticWeapon",
+        "C_Ammunition"
+      ],
+      "range": [
+        "C_PerformanceParameter",
+        "C_FirepowerParameter",
+        "C_AimingParameter"
+      ],
+      "characteristics": [
+        "functional"
+      ]
+    },
+    "R_designed_for": {
+      "id": "R_designed_for",
+      "label": "设计用于",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_Gun",
+        "C_AutomaticWeapon"
+      ],
+      "range": [
+        "C_EnvironmentScenario",
+        "C_OperationScenario"
+      ]
+    },
+    "R_equipped_on": {
+      "id": "R_equipped_on",
+      "label": "装备于",
+      "domain": [
+        "C_WeaponEquipment"
+      ],
+      "range": [
+        "C_EquipmentPlatformSystem",
+        "C_MilitaryPlatform"
+      ]
+    },
+    "R_developed_by": {
+      "id": "R_developed_by",
+      "label": "研制单位为",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_ModelLineage"
+      ],
+      "range": [
+        "C_ModelLineage",
+        "C_Organization"
+      ]
+    },
+    "R_variant_of": {
+      "id": "R_variant_of",
+      "label": "改型自",
+      "domain": [
+        "C_WeaponEquipment",
+        "C_ModelLineage"
+      ],
+      "range": [
+        "C_WeaponEquipment",
+        "C_ModelLineage"
+      ],
+      "characteristics": [
+        "symmetric",
+        "transitive"
+      ]
+    },
+    "R_part_of": {
+      "id": "R_part_of",
+      "label": "隶属于",
+      "domain": [
+        "C_Gun"
+      ],
+      "range": [
+        "C_WeaponEquipment"
+      ]
+    },
+    "R_derived_from": {
+      "id": "R_derived_from",
+      "label": "源自",
+      "domain": [
+        "C_ModelLineage"
+      ],
+      "range": [
+        "C_ModelLineage"
+      ],
+      "characteristics": [
+        "transitive"
+      ]
+    },
+    "R_composed_of": {
+      "id": "R_composed_of",
+      "label": "由...组成",
+      "domain": [
+        "C_ArtillerySystem",
+        "C_EquipmentPlatformSystem"
+      ],
+      "range": [
+        "C_Gun",
+        "C_OpticalSight",
+        "C_FireControlSystem",
+        "C_Subsystem"
+      ],
+      "characteristics": [
+        "functional"
+      ]
+    },
+    "R_has_targeting_system": {
+      "id": "R_has_targeting_system",
+      "label": "具有瞄准系统",
+      "domain": [
+        "C_ArtillerySystem"
+      ],
+      "range": [
+        "C_TargetingSystem"
+      ]
+    },
+    "R_has_fire_control": {
+      "id": "R_has_fire_control",
+      "label": "具有火控系统",
+      "domain": [
+        "C_ArtillerySystem"
+      ],
+      "range": [
+        "C_FireControlSystem"
+      ]
+    },
+    "R_uses_propellant": {
+      "id": "R_uses_propellant",
+      "label": "使用发射药",
+      "domain": [
+        "C_Ammunition",
+        "C_Charge"
+      ],
+      "range": [
+        "C_Propellant"
+      ],
+      "characteristics": [
+        "functional"
+      ]
+    },
+    "R_has_fuzes": {
+      "id": "R_has_fuzes",
+      "label": "配备引信",
+      "domain": [
+        "C_Projectile"
+      ],
+      "range": [
+        "C_Fuze"
+      ],
+      "characteristics": [
+        "functional"
+      ]
+    },
+    "R_subject_to_force": {
+      "id": "R_subject_to_force",
+      "label": "受力作用",
+      "domain": [
+        "C_DynamicsObject"
+      ],
+      "range": [
+        "C_Force"
+      ]
+    },
+    "R_subject_to_moment": {
+      "id": "R_subject_to_moment",
+      "label": "受力矩作用",
+      "domain": [
+        "C_DynamicsObject"
+      ],
+      "range": [
+        "C_Moment"
+      ]
+    },
+    "R_coupled_with": {
+      "id": "R_coupled_with",
+      "label": "耦合于",
+      "domain": [
+        "C_DynamicsObject"
+      ],
+      "range": [
+        "C_DynamicsObject"
+      ],
+      "characteristics": [
+        "symmetric"
+      ]
+    },
+    "R_occurs_in": {
+      "id": "R_occurs_in",
+      "label": "发生在",
+      "domain": [
+        "C_FaultMaintenance"
+      ],
+      "range": [
+        "C_WeaponEquipment",
+        "C_AutomaticWeapon"
+      ]
+    },
+    "R_leads_to": {
+      "id": "R_leads_to",
+      "label": "导致",
+      "domain": [
+        "C_FailureCause"
+      ],
+      "range": [
+        "C_FailureMode"
+      ],
+      "characteristics": [
+        "transitive"
+      ]
+    },
+    "R_resolved_by": {
+      "id": "R_resolved_by",
+      "label": "通过...解决",
+      "domain": [
+        "C_FailureMode"
+      ],
+      "range": [
+        "C_MaintenanceProcedure"
+      ]
+    },
+    "R_applied_to": {
+      "id": "R_applied_to",
+      "label": "应用于",
+      "domain": [
+        "C_TheoryMethod"
+      ],
+      "range": [
+        "C_WeaponEquipment",
+        "C_Ammunition"
+      ]
+    },
+    "R_based_on": {
+      "id": "R_based_on",
+      "label": "基于",
+      "domain": [
+        "C_TheoryMethod"
+      ],
+      "range": [
+        "C_TheoryMethod"
+      ],
+      "characteristics": [
+        "transitive"
+      ]
+    },
+    "R_used_in": {
+      "id": "R_used_in",
+      "label": "用于",
+      "domain": [
+        "C_MaterialProcess"
+      ],
+      "range": [
+        "C_WeaponEquipment",
+        "C_Ammunition"
+      ]
+    },
+    "R_consists_of": {
+      "id": "R_consists_of",
+      "label": "由...组成",
+      "domain": [
+        "C_Material"
+      ],
+      "range": [
+        "C_ComponentMaterial"
+      ]
+    },
+    "R_carries": {
+      "id": "R_carries",
+      "label": "携带",
+      "domain": [
+        "C_EquipmentPlatformSystem"
+      ],
+      "range": [
+        "C_WeaponEquipment"
+      ],
+      "characteristics": [
+        "functional"
+      ]
+    }
+  },
+  "data_properties": {},
+  "instances": [
+    {
+      "id": "I_Type95HMG",
+      "class": "C_MachineGun",
+      "properties": {
+        "name": "QJY-95通用机枪",
+        "caliber": 5.8,
+        "automatic_principle": "导气式",
+        "feeding_method": "弹链",
+        "firing_mode": "连发",
+        "rate_of_fire": 650,
+        "muzzle_velocity": 880,
+        "effective_range": 600,
+        "weapon_weight": 10.1,
+        "overall_length": 1130,
+        "barrel_length": 556,
+        "ammo_type": [
+          "FMJ",
+          "tracer"
+        ]
+      }
+    },
+    {
+      "id": "I_Type92AGS",
+      "class": "C_AutomaticGrenadeLauncher",
+      "properties": {
+        "name": "QLZ-04自动榴弹发射器",
+        "caliber": 35,
+        "rate_of_fire": 350,
+        "muzzle_velocity": 225,
+        "range": 800,
+        "ammo_type": [
+          "HE",
+          "HEDP",
+          "AIRBurst"
+        ]
+      }
+    },
+    {
+      "id": "I_Type99Tank",
+      "class": "C_TankSystem",
+      "properties": {
+        "name": "99式主战坦克",
+        "platform_type": "坦克",
+        "platform_model": "ZTZ99",
+        "max_speed": 80,
+        "range": 400,
+        "armor_level": "重型",
+        "weapon_configuration": [
+          "125mm滑膛炮",
+          "12.7mm高射机枪",
+          "7.62mm并列机枪"
+        ]
+      }
+    },
+    {
+      "id": "I_Type03APDS",
+      "class": "C_APProjectile",
+      "properties": {
+        "name": "03式穿甲弹",
+        "caliber": 125,
+        "ammo_type": "穿甲弹",
+        "core_material": "碳化钨",
+        "armor_penetration": 600,
+        "penetration_distance": 2000,
+        "weight": 10.5
+      }
+    },
+    {
+      "id": "I_Type02HE",
+      "class": "C_HEProjectile",
+      "properties": {
+        "name": "02式杀伤爆破弹",
+        "caliber": 125,
+        "ammo_type": "杀伤爆破弹",
+        "charge_type": "RDX",
+        "charge_weight": 1.2,
+        "lethal_radius": 15,
+        "weight": 11.2
+      }
+    },
+    {
+      "id": "I_Type02SingleBase",
+      "class": "C_SingleBasePropellant",
+      "properties": {
+        "name": "02式单基发射药",
+        "shape": "管状",
+        "hole_count": 7,
+        "charge_weight": 1.8,
+        "density": 1.58,
+        "burn_rate": 12.5,
+        "energy_level": "高"
+      }
+    },
+    {
+      "id": "I_Failure_CarrierJammed",
+      "class": "C_FailureMode",
+      "properties": {
+        "failure_type": "机械故障",
+        "symptom": "供弹不畅，卡壳",
+        "failure_mode": "卡滞",
+        "severity": 5,
+        "occurrence": 6,
+        "detectability": 4,
+        "cause": "弹匣弹簧疲劳，供弹坡磨损"
+      }
+    },
+    {
+      "id": "I_ZTZ99A",
+      "class": "C_WeaponModel",
+      "properties": {
+        "model_name": "ZTZ99A主战坦克",
+        "designation": "99A",
+        "country_of_origin": "中国",
+        "developer": "中国兵器工业集团",
+        "development_time": "2005-2010",
+        "service_time": "2010",
+        "equipment_status": "装备",
+        "equipment_quantity": 1000,
+        "equipment_unit": [
+          "集团军装甲旅",
+          "装甲师"
+        ],
+        "chief_designer": "王哲然",
+        "generation": "第三代主战坦克"
+      }
+    },
+    {
+      "id": "I_Environment_NorthChina",
+      "class": "C_TerrainEnvironment",
+      "properties": {
+        "terrain_type": "平原",
+        "slope": 2,
+        "ground承载力": 20,
+        "obstacle_density": "低"
+      }
+    },
+    {
+      "id": "I_Theory_Jacobi",
+      "class": "C_AnalysisMethod",
+      "properties": {
+        "name": "雅可比矩阵法",
+        "proposer": "Jacobi",
+        "proposed_time": "1846",
+        "application_domain": "火炮后坐力计算",
+        "mathematical_expression": "J = ∂f/∂x",
+        "source": "《火炮理论与设计》"
+      }
+    },
+    {
+      "id": "I_Material_34CrMo4",
+      "class": "C_MetalMaterial",
+      "properties": {
+        "material_type": "合金钢",
+        "grade": "34CrMo4",
+        "standard": "GB/T 3077",
+        "density": 7.85,
+        "tensile_strength": 980,
+        "yield_strength": 835,
+        "elongation": 12,
+        "hardness": 217,
+        "heat_treatment": "调质"
+      }
+    }
+  ],
+  "normalization": {
+    "generated_at": "2026-10-21T02:06:47Z",
+    "corpus_role": "build",
+    "allow_new_concepts_without_review": false,
+    "leakage_guard": "enabled",
+    "candidate_policy": "new concepts remain candidates until human review",
+    "candidate_counts": {
+      "candidate_classes": 1,
+      "candidate_object_properties": 0,
+      "candidate_datatype_properties": 0,
+      "candidate_constraints": 0,
+      "ontology_mapping": 0,
+      "uncertain_candidates": 0
+    }
+  }
+}

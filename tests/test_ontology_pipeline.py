@@ -1,11 +1,13 @@
 import json
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import ontology_build_app
 import ontologyBuild.config as config_module
 from ontologyBuild import pipeline
+from ontologyBuild import ontology_candidate
 from ontologyBuild.config import OntologyPipelineConfig
 
 
@@ -68,6 +70,63 @@ class OntologyPipelineTests(unittest.TestCase):
         self.assertEqual(config.model, "qwen-test")
         self.assertEqual(config.qwen_base_url, "https://qwen.example.test/v1")
         self.assertEqual(api_key, "test-key")
+
+    def test_default_client_timeout_is_180_seconds(self):
+        config = OntologyPipelineConfig.from_env({
+            "OPENAI_API_KEY": "test-key",
+            "OPENAI_BASE_URL": "https://example.test/v1",
+            "ONTOLOGY_MODEL": "qwen-test",
+        })
+
+        self.assertEqual(config.timeout_seconds, 180)
+        self.assertEqual(config.context_max_chars, 8000)
+        self.assertEqual(config.chunk_size, 600)
+        self.assertEqual(config.chunk_overlap, 80)
+        self.assertEqual(config.max_output_tokens, 1500)
+
+    def test_retry_backoff_is_exponential_and_capped(self):
+        with patch.object(ontology_candidate.random, "uniform", return_value=0.0):
+            delays = [
+                ontology_candidate.retry_backoff_seconds(attempt)
+                for attempt in range(1, 6)
+            ]
+
+        self.assertEqual(delays, [10.0, 20.0, 40.0, 60.0, 60.0])
+
+    def test_timeout_fallback_splits_large_chunk_and_limits_output(self):
+        empty_result = {field: [] for field in ontology_candidate.RESULT_FIELDS}
+
+        class FakeCompletions:
+            def __init__(self):
+                self.calls = []
+
+            def create(self, **kwargs):
+                self.calls.append(kwargs)
+                if len(self.calls) == 1:
+                    raise RuntimeError("504 Gateway Time-out")
+                message = SimpleNamespace(content=json.dumps(empty_result, ensure_ascii=False))
+                return SimpleNamespace(choices=[SimpleNamespace(message=message)])
+
+        completions = FakeCompletions()
+        client = SimpleNamespace(chat=SimpleNamespace(completions=completions))
+        chunk = {"chunk_id": "chunk_timeout", "content": "火炮结构。" * 120}
+
+        with patch.object(ontology_candidate, "wait_before_retry") as wait:
+            result = ontology_candidate.extract_candidates_from_chunk(
+                chunk,
+                retry_count=2,
+                ontology_context={"document_id": "test"},
+                llm_client=client,
+                model="qwen-test",
+                max_output_tokens=1500,
+                adaptive_retry_chunk_size=400,
+                adaptive_retry_chunk_overlap=40,
+            )
+
+        self.assertEqual(result, empty_result)
+        self.assertGreater(len(completions.calls), 2)
+        self.assertTrue(all(call["max_tokens"] == 1500 for call in completions.calls))
+        wait.assert_called_once_with("chunk_timeout", 1)
 
 
 if __name__ == "__main__":

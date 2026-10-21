@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -49,6 +50,14 @@ OUTPUT_JSON_PATH = "ontologyBuild/ontology_candidates.json"
 REVIEW_JSON_PATH = "ontologyBuild/ontology_candidates_review.json"
 PROCESSING_LOG_PATH = "ontologyBuild/ontology_candidates_processing.json"
 
+DEFAULT_LLM_TIMEOUT_SECONDS = 180
+RETRY_BACKOFF_BASE_SECONDS = 10.0
+RETRY_BACKOFF_MAX_SECONDS = 60.0
+RETRY_BACKOFF_JITTER_RATIO = 0.2
+DEFAULT_MAX_OUTPUT_TOKENS = 1500
+DEFAULT_ADAPTIVE_RETRY_CHUNK_SIZE = 400
+DEFAULT_ADAPTIVE_RETRY_CHUNK_OVERLAP = 40
+
 # ==============================================
 
 
@@ -77,8 +86,93 @@ def create_default_client():
     try:
         import httpx
     except ImportError:
-        return OpenAI(api_key=API_KEY, base_url=BASE_URL)
-    return OpenAI(api_key=API_KEY, base_url=BASE_URL, http_client=httpx.Client(trust_env=False))
+        return OpenAI(
+            api_key=API_KEY,
+            base_url=BASE_URL,
+            timeout=DEFAULT_LLM_TIMEOUT_SECONDS,
+            max_retries=0,
+        )
+    verify_value = os.environ.get("KG_LLM_VERIFY_SSL", "true").strip().lower()
+    if verify_value in {"1", "true", "yes", "on"}:
+        verify_ssl = True
+    elif verify_value in {"0", "false", "no", "off"}:
+        verify_ssl = False
+    else:
+        raise ValueError("KG_LLM_VERIFY_SSL 必须是 true/false")
+    return OpenAI(
+        api_key=API_KEY,
+        base_url=BASE_URL,
+        timeout=DEFAULT_LLM_TIMEOUT_SECONDS,
+        max_retries=0,
+        http_client=httpx.Client(
+            timeout=DEFAULT_LLM_TIMEOUT_SECONDS,
+            trust_env=False,
+            verify=verify_ssl,
+        ),
+    )
+
+
+def retry_backoff_seconds(
+    failed_attempt,
+    *,
+    base_seconds=RETRY_BACKOFF_BASE_SECONDS,
+    max_seconds=RETRY_BACKOFF_MAX_SECONDS,
+    jitter_ratio=RETRY_BACKOFF_JITTER_RATIO,
+):
+    """Return capped exponential backoff with positive jitter for a failed attempt."""
+    if failed_attempt < 1:
+        raise ValueError("failed_attempt 必须大于等于 1")
+    if base_seconds <= 0 or max_seconds <= 0:
+        raise ValueError("退避时间必须大于 0")
+    if jitter_ratio < 0:
+        raise ValueError("jitter_ratio 不能小于 0")
+    exponential = min(max_seconds, base_seconds * (2 ** (failed_attempt - 1)))
+    jitter = random.uniform(0.0, exponential * jitter_ratio)
+    return min(max_seconds, exponential + jitter)
+
+
+def wait_before_retry(chunk_id, failed_attempt):
+    delay = retry_backoff_seconds(failed_attempt)
+    print(f"片段 {chunk_id} 将在 {delay:.1f} 秒后进行第 {failed_attempt + 1} 次尝试。")
+    time.sleep(delay)
+
+
+def is_timeout_error(error):
+    message = str(error).lower()
+    return any(
+        marker in message
+        for marker in (
+            "504",
+            "gateway time-out",
+            "gateway timeout",
+            "request timed out",
+            "timeout",
+            "timed out",
+        )
+    )
+
+
+def split_chunk_for_timeout_retry(chunk, *, chunk_size, chunk_overlap):
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        separators=["\n\n", "\n", "。", "！", "？", "；", "，", "、", ""],
+    )
+    return [part for part in splitter.split_text(str(chunk.get("content") or "")) if part.strip()]
+
+
+def merge_extraction_results(results):
+    merged = empty_extraction_result()
+    seen = {field: set() for field in RESULT_FIELDS}
+    for result in results:
+        for field in RESULT_FIELDS:
+            for item in result.get(field, []) or []:
+                key = json.dumps(item, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                if key in seen[field]:
+                    continue
+                seen[field].add(key)
+                merged[field].append(item)
+    return merged
 
 
 def read_markdown(markdown_path=MARKDOWN_FILE_PATH):
@@ -176,6 +270,10 @@ def extract_candidates_from_chunk(
     llm_client=None,
     model=None,
     allow_empty_on_failure=False,
+    max_output_tokens=DEFAULT_MAX_OUTPUT_TOKENS,
+    adaptive_split_on_timeout=True,
+    adaptive_retry_chunk_size=DEFAULT_ADAPTIVE_RETRY_CHUNK_SIZE,
+    adaptive_retry_chunk_overlap=DEFAULT_ADAPTIVE_RETRY_CHUNK_OVERLAP,
 ):
     """调用 LLM，从一个文档片段中抽取候选类别、关系、domain 和 range。"""
     ontology_context = ontology_context or {}
@@ -498,6 +596,7 @@ chunk_text:
                 ],
                 response_format={"type": "json_object"},
                 temperature=0.0,
+                max_tokens=max_output_tokens,
             )
             parsed = json.loads(response.choices[0].message.content)
             return normalize_extraction_result(parsed, chunk)
@@ -509,7 +608,7 @@ chunk_text:
             )
             retry_feedback = f"上一次输出不是合法 JSON：{error}"
             if attempt < retry_count:
-                time.sleep(2)
+                wait_before_retry(chunk["chunk_id"], attempt)
         except SchemaValidationError as error:
             attempts.append({"attempt": attempt, "error_type": "schema_validation", "message": str(error)})
             print(
@@ -518,14 +617,48 @@ chunk_text:
             )
             retry_feedback = f"上一次输出不符合 Schema：{error}"
             if attempt < retry_count:
-                time.sleep(2)
+                wait_before_retry(chunk["chunk_id"], attempt)
         except Exception as error:
             attempts.append({"attempt": attempt, "error_type": type(error).__name__, "message": str(error)})
             print(
                 f"片段 {chunk['chunk_id']} 第 {attempt}/{retry_count} 次抽取失败: {error}"
             )
+            if (
+                attempt == 1
+                and adaptive_split_on_timeout
+                and is_timeout_error(error)
+                and len(str(chunk.get("content") or "")) > adaptive_retry_chunk_size
+            ):
+                wait_before_retry(chunk["chunk_id"], attempt)
+                parts = split_chunk_for_timeout_retry(
+                    chunk,
+                    chunk_size=adaptive_retry_chunk_size,
+                    chunk_overlap=adaptive_retry_chunk_overlap,
+                )
+                print(
+                    f"片段 {chunk['chunk_id']} 首次超时，拆分为 {len(parts)} 个子片段后重试。"
+                )
+                part_results = []
+                for part in parts:
+                    part_chunk = dict(chunk)
+                    part_chunk["content"] = part
+                    part_results.append(
+                        extract_candidates_from_chunk(
+                            part_chunk,
+                            retry_count=retry_count,
+                            ontology_context=ontology_context,
+                            llm_client=llm_client,
+                            model=model,
+                            allow_empty_on_failure=allow_empty_on_failure,
+                            max_output_tokens=max_output_tokens,
+                            adaptive_split_on_timeout=False,
+                            adaptive_retry_chunk_size=adaptive_retry_chunk_size,
+                            adaptive_retry_chunk_overlap=adaptive_retry_chunk_overlap,
+                        )
+                    )
+                return merge_extraction_results(part_results)
             if attempt < retry_count:
-                time.sleep(2)
+                wait_before_retry(chunk["chunk_id"], attempt)
 
     message = f"片段 {chunk['chunk_id']} 多次输出不合格，已停止该 chunk。"
     print(message)

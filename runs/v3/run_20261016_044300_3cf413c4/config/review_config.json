@@ -1,0 +1,85 @@
+{
+  "schema_version": "review_config_v1",
+  "mode": "shadow",
+  "local_operator": "local_operator",
+  "database_path": "runs/v3/review.sqlite3",
+  "ontology_path": "ontology/ontology.json",
+  "planner": {
+    "enabled": true,
+    "strategy": "deterministic",
+    "model_env": "KG_PLANNER_MODEL",
+    "api_key_env": "<redacted>",
+    "base_url_env": "KG_PLANNER_BASE_URL"
+  },
+  "validators": [
+    {
+      "id": "judge_a",
+      "model_env": "KG_JUDGE_A_MODEL",
+      "family_env": "KG_JUDGE_A_FAMILY",
+      "api_key_env": "<redacted>",
+      "base_url_env": "KG_JUDGE_A_BASE_URL"
+    },
+    {
+      "id": "judge_b",
+      "model_env": "KG_JUDGE_B_MODEL",
+      "family_env": "KG_JUDGE_B_FAMILY",
+      "api_key_env": "<redacted>",
+      "base_url_env": "KG_JUDGE_B_BASE_URL"
+    },
+    {
+      "id": "judge_c",
+      "model_env": "KG_JUDGE_C_MODEL",
+      "family_env": "KG_JUDGE_C_FAMILY",
+      "api_key_env": "<redacted>",
+      "base_url_env": "KG_JUDGE_C_BASE_URL"
+    },
+    {
+      "id": "judge_d",
+      "model_env": "KG_JUDGE_D_MODEL",
+      "family_env": "KG_JUDGE_D_FAMILY",
+      "api_key_env": "<redacted>",
+      "base_url_env": "KG_JUDGE_D_BASE_URL"
+    }
+  ],
+  "consensus": {
+    "committee_size": 4,
+    "required_votes": 3,
+    "minimum_distinct_families": 3,
+    "weighted_quorum_enabled": false,
+    "max_rounds": 2
+  },
+  "budget": {
+    "max_tool_calls": 6,
+    "max_llm_calls_per_candidate": 12,
+    "max_evidence_items": 12,
+    "max_evidence_chars": 12000,
+    "per_call_timeout_seconds": 45,
+    "total_timeout_seconds": 180,
+    "max_retries_per_request": 1,
+    "max_parallel_validators": 4,
+    "max_parallel_candidates": 2
+  },
+  "calibration": {
+    "enabled": true,
+    "feature_schema_version": "review_features_v3",
+    "model_path": null,
+    "policy_path": null,
+    "target_precision": 0.95,
+    "min_policy_selected": 100
+  },
+  "routing": {
+    "auto_accept_enabled": false,
+    "semantic_auto_reject_enabled": false,
+    "random_audit_fraction": 0.05
+  },
+  "memory": {
+    "enabled": true,
+    "max_positive_cases": 3,
+    "max_negative_cases": 3,
+    "snapshot_policy": "freeze_per_audit"
+  },
+  "neo4j": {
+    "auto_import_enabled": false,
+    "require_current_decision": true
+  }
+}
