@@ -421,6 +421,8 @@ class ReviewHandler(BaseHTTPRequestHandler):
                 self.send_json(get_default_service().evidence_context(
                     evidence_id, before=int(query.get("before", ["1"])[0]),
                     after=int(query.get("after", ["1"])[0]),
+                    audit_id=query.get("audit_id", [None])[0],
+                    round_id=int(query["round_id"][0]) if query.get("round_id") else None,
                 ))
             elif parsed.path == "/api/summary":
                 review_file = query.get("file", [""])[0]

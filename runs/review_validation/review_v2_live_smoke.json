@@ -1,0 +1,1621 @@
+{
+  "created_at": "2026-10-21T08:46:53.935132+00:00",
+  "run_id": "run_20261016_044300_3cf413c4",
+  "database_unchanged": true,
+  "mode": "smoke_only",
+  "live": true,
+  "review_versions": {
+    "prompt_version": "validator_v2",
+    "response_contract_version": "validator_response_v2",
+    "evidence_bundle_version": "evidence_bundle_v2",
+    "committee_version": "committee_v1"
+  },
+  "model_configuration": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek"
+    },
+    {
+      "id": "judge_d",
+      "model_id": "Qwen",
+      "model_family": "qwen"
+    }
+  ],
+  "budget": {
+    "max_tool_calls": 6,
+    "max_llm_calls_per_candidate": 12,
+    "max_evidence_items": 12,
+    "max_evidence_chars": 12000,
+    "per_call_timeout_seconds": 45,
+    "total_timeout_seconds": 180,
+    "max_retries_per_request": 1,
+    "max_parallel_validators": 4,
+    "max_parallel_candidates": 2
+  },
+  "committee": {
+    "committee_size": 4,
+    "required_votes": 3,
+    "minimum_distinct_families": 3,
+    "weighted_quorum_enabled": false,
+    "max_rounds": 2
+  },
+  "baseline_final_statuses": {
+    "ok": 6,
+    "invalid_contract": 2,
+    "api_error": 3,
+    "invalid_reference": 1
+  },
+  "comparison_controls": "same candidate set; prompt/contract/evidence selection intentionally changed",
+  "candidates": [
+    {
+      "candidate_id": "cand_01ba4bfb6445bec4f6f1",
+      "revision": 1,
+      "evidence_count": 4,
+      "rejected_anchors": [],
+      "evidence_hash": "4fdeda3c0d0bfa85e4f5aeb4896eb7757ac8b0ac07329c7919c6d896f4aea921",
+      "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+      "votes": [
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_fbcee90414e373863459",
+            "ev_f6ecfa0833977c5f6034"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "原文明确说明空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成，支持三元组中的关系。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "三元组中的修饰符（polarity: positive）与原文一致，无否定或条件限制。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "关系方向正确，空气阻力（head）主要由涡流阻力（tail）等组成。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，存在 SCHEMA_GAP，无法确认类型约束是否满足。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_087a7a59d62aa6b76265",
+          "round_id": 1,
+          "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 28531,
+          "input_tokens": 2859,
+          "output_tokens": 565,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "原文明确说明空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成，支持三元组中的关系。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "三元组中的修饰符（polarity: positive）与原文一致，无否定或条件限制。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "关系方向正确，空气阻力（head）主要由涡流阻力（tail）等组成。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，存在 SCHEMA_GAP，无法确认类型约束是否满足。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_087a7a59d62aa6b76265",
+              "round_id": 1,
+              "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 28531,
+              "input_tokens": 2859,
+              "output_tokens": 565,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_fbcee90414e373863459",
+            "ev_f6ecfa0833977c5f6034"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "原文明确指出空气阻力主要由摩擦阻力、涡流阻力及波动阻力组成，三元组提取了其中一项。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "涡流阻力作为组成部分，无特定条件限制。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "关系方向正确。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查报告 SCHEMA_GAP，关系和类型未定义。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_087a7a59d62aa6b76265",
+          "round_id": 1,
+          "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "latency_ms": 34562,
+          "input_tokens": 3032,
+          "output_tokens": 1801,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "原文明确指出空气阻力主要由摩擦阻力、涡流阻力及波动阻力组成，三元组提取了其中一项。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "涡流阻力作为组成部分，无特定条件限制。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "关系方向正确。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查报告 SCHEMA_GAP，关系和类型未定义。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_087a7a59d62aa6b76265",
+              "round_id": 1,
+              "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "response_status": "ok",
+              "latency_ms": 34562,
+              "input_tokens": 3032,
+              "output_tokens": 1801,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_fbcee90414e373863459",
+            "ev_f6ecfa0833977c5f6034"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "原文明确将涡流阻力列为空气阻力的主要组成成分之一；未单独声称仅由涡流阻力组成。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "极性为肯定，原文无否定；超声速条件仅修饰波动阻力，不影响涡流阻力成分。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "原文方向为“空气阻力”包含“涡流阻力”作为组成成分，与候选方向一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "关系未在本体中确认，类型未知，存在 SCHEMA_GAP，但未构成硬性约束失败。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_087a7a59d62aa6b76265",
+          "round_id": 1,
+          "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "latency_ms": 12640,
+          "input_tokens": 2725,
+          "output_tokens": 1994,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "原文明确将涡流阻力列为空气阻力的主要组成成分之一；未单独声称仅由涡流阻力组成。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "极性为肯定，原文无否定；超声速条件仅修饰波动阻力，不影响涡流阻力成分。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "原文方向为“空气阻力”包含“涡流阻力”作为组成成分，与候选方向一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "关系未在本体中确认，类型未知，存在 SCHEMA_GAP，但未构成硬性约束失败。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_087a7a59d62aa6b76265",
+              "round_id": 1,
+              "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+              "voter_id": "judge_c",
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "response_status": "ok",
+              "latency_ms": 12640,
+              "input_tokens": 2725,
+              "output_tokens": 1994,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_fbcee90414e373863459",
+            "ev_f6ecfa0833977c5f6034"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "原文明确说明空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成，支持三元组中的关系。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "三元组中的修饰符（polarity: positive）与原文一致，无否定或条件冲突。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "note": "关系方向正确，空气阻力（head）主要由涡流阻力（tail）等组成。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，存在 SCHEMA_GAP，无法确认类型约束是否满足。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_087a7a59d62aa6b76265",
+          "round_id": 1,
+          "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+          "voter_id": "judge_d",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 28531,
+          "input_tokens": 2859,
+          "output_tokens": 565,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_fbcee90414e373863459",
+                "ev_f6ecfa0833977c5f6034"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "原文明确说明空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成，支持三元组中的关系。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "三元组中的修饰符（polarity: positive）与原文一致，无否定或条件冲突。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_fbcee90414e373863459",
+                    "ev_f6ecfa0833977c5f6034"
+                  ],
+                  "note": "关系方向正确，空气阻力（head）主要由涡流阻力（tail）等组成。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，存在 SCHEMA_GAP，无法确认类型约束是否满足。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_087a7a59d62aa6b76265",
+              "round_id": 1,
+              "proposal_digest": "73bb506c261fda0c705391ba13135b85f2ae48d472bb0e56e698da0d8753426e",
+              "voter_id": "judge_d",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 28531,
+              "input_tokens": 2859,
+              "output_tokens": 565,
+              "attempt_no": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_070b9f83fa18469ac048",
+      "revision": 1,
+      "evidence_count": 3,
+      "rejected_anchors": [],
+      "evidence_hash": "b80aa1d5aee7786713c8cbf16e893dc65032ae3915fb0b9aea7e42a63db855ba",
+      "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+      "votes": [
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_9ad248f57789929a9bb9"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "原文明确说明湿空气的总气压是干空气分压和水蒸气分压之和，支持了湿空气总气压与干空气分压之间的组成关系。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "原文未包含否定、条件、时间或数量限制，候选三元组的限定词（polarity: positive, condition: null, time_scope: null, applicability: null）与原文一致。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "关系方向正确，湿空气的总气压包含干空气分压，符合原文“总气压是...之和”的表述。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，关系“总气压是...之和”未被本体识别，存在 SCHEMA_GAP，无法确认本体约束是否满足。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现任何反证，所有提供的证据均支持或中性，无矛盾信息。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_5a0faf899769de65acc4",
+          "round_id": 1,
+          "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 25687,
+          "input_tokens": 2617,
+          "output_tokens": 541,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "原文明确说明湿空气的总气压是干空气分压和水蒸气分压之和，支持了湿空气总气压与干空气分压之间的组成关系。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "原文未包含否定、条件、时间或数量限制，候选三元组的限定词（polarity: positive, condition: null, time_scope: null, applicability: null）与原文一致。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "关系方向正确，湿空气的总气压包含干空气分压，符合原文“总气压是...之和”的表述。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，关系“总气压是...之和”未被本体识别，存在 SCHEMA_GAP，无法确认本体约束是否满足。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现任何反证，所有提供的证据均支持或中性，无矛盾信息。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_5a0faf899769de65acc4",
+              "round_id": 1,
+              "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 25687,
+              "input_tokens": 2617,
+              "output_tokens": 541,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "audit_id": "smoke_5a0faf899769de65acc4",
+          "round_id": 1,
+          "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "response_status": "timeout",
+          "verdict": null,
+          "error": "Request timed out.",
+          "latency_ms": 45781,
+          "attempt_no": 2,
+          "attempts": [
+            {
+              "audit_id": "smoke_5a0faf899769de65acc4",
+              "round_id": 1,
+              "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "response_status": "timeout",
+              "verdict": null,
+              "error": "Request timed out.",
+              "latency_ms": 45000,
+              "attempt_no": 1
+            },
+            {
+              "audit_id": "smoke_5a0faf899769de65acc4",
+              "round_id": 1,
+              "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "response_status": "timeout",
+              "verdict": null,
+              "error": "Request timed out.",
+              "latency_ms": 45781,
+              "attempt_no": 2
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_9ad248f57789929a9bb9"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "原文明确说明湿空气总气压是干空气分压与水蒸气分压之和，干空气分压作为其中一项被支持；二元表述未完整列示水蒸气分压。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "极性为肯定，未发现需保留的否定、条件、数量或时间限定。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "关系方向为总气压指向其分压组成项，与原文一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "关系未在本体中确定，头尾类型未知，存在 SCHEMA_GAP，但未触发硬失败。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现与候选三元组直接冲突的反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_5a0faf899769de65acc4",
+          "round_id": 1,
+          "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "latency_ms": 23484,
+          "input_tokens": 2488,
+          "output_tokens": 4235,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "原文明确说明湿空气总气压是干空气分压与水蒸气分压之和，干空气分压作为其中一项被支持；二元表述未完整列示水蒸气分压。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "极性为肯定，未发现需保留的否定、条件、数量或时间限定。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "关系方向为总气压指向其分压组成项，与原文一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "关系未在本体中确定，头尾类型未知，存在 SCHEMA_GAP，但未触发硬失败。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现与候选三元组直接冲突的反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_5a0faf899769de65acc4",
+              "round_id": 1,
+              "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+              "voter_id": "judge_c",
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "response_status": "ok",
+              "latency_ms": 23484,
+              "input_tokens": 2488,
+              "output_tokens": 4235,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_9ad248f57789929a9bb9"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "原文明确说明湿空气的总气压是干空气分压和水蒸气分压之和，支持了湿空气总气压与干空气分压之间的组成关系。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "原文未包含否定、条件、时间或数量限制，候选三元组的限定词（polarity: positive, condition: null, time_scope: null, applicability: null）与原文一致。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "note": "关系方向正确，湿空气的总气压包含干空气分压，符合原文“总气压是...之和”的表述。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，关系“总气压是...之和”未被本体识别，存在 SCHEMA_GAP，无法确认本体约束是否满足。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现任何反证，所有提供的证据均支持或中性，无矛盾信息。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_5a0faf899769de65acc4",
+          "round_id": 1,
+          "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+          "voter_id": "judge_d",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 25672,
+          "input_tokens": 2617,
+          "output_tokens": 541,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_9ad248f57789929a9bb9"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "原文明确说明湿空气的总气压是干空气分压和水蒸气分压之和，支持了湿空气总气压与干空气分压之间的组成关系。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "原文未包含否定、条件、时间或数量限制，候选三元组的限定词（polarity: positive, condition: null, time_scope: null, applicability: null）与原文一致。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_9ad248f57789929a9bb9"
+                  ],
+                  "note": "关系方向正确，湿空气的总气压包含干空气分压，符合原文“总气压是...之和”的表述。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，关系“总气压是...之和”未被本体识别，存在 SCHEMA_GAP，无法确认本体约束是否满足。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现任何反证，所有提供的证据均支持或中性，无矛盾信息。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_5a0faf899769de65acc4",
+              "round_id": 1,
+              "proposal_digest": "fed45a73eb4f2dd716eee7d24ad0ee75c9bcc51d8ed78270fc84081e8ca30eba",
+              "voter_id": "judge_d",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 25672,
+              "input_tokens": 2617,
+              "output_tokens": 541,
+              "attempt_no": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_08259a5558322391f56c",
+      "revision": 1,
+      "evidence_count": 4,
+      "rejected_anchors": [],
+      "evidence_hash": "a50586dcb35408a54a165a8a6ae8325de7865be7ffaf85259df232faf6af3599",
+      "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+      "votes": [
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_b769e4ce598026c2679f",
+            "ev_2c5a437405ba426010b8"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文“最后再根据状态方程，即可分别得到空气密度函数的标准定律”支持“状态方程”通过“得到”关系指向“空气密度函数标准定律”。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文为肯定陈述，未出现否定、条件、数量或时间限定，qualifiers 与原文一致。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文表达为“根据状态方程...得到...”，方向为状态方程 -> 空气密度函数标准定律，与候选三元组一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，tail_type 为 Unknown，存在 ENTITY_TYPE_UNKNOWN，无法确认本体约束是否满足。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_80eb9fb91959e9b4b706",
+          "round_id": 1,
+          "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 29155,
+          "input_tokens": 2995,
+          "output_tokens": 607,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文“最后再根据状态方程，即可分别得到空气密度函数的标准定律”支持“状态方程”通过“得到”关系指向“空气密度函数标准定律”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文为肯定陈述，未出现否定、条件、数量或时间限定，qualifiers 与原文一致。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文表达为“根据状态方程...得到...”，方向为状态方程 -> 空气密度函数标准定律，与候选三元组一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，tail_type 为 Unknown，存在 ENTITY_TYPE_UNKNOWN，无法确认本体约束是否满足。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_80eb9fb91959e9b4b706",
+              "round_id": 1,
+              "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 29155,
+              "input_tokens": 2995,
+              "output_tokens": 607,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_b769e4ce598026c2679f",
+            "ev_2c5a437405ba426010b8"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文明确指出根据状态方程可以得到空气密度函数的标准定律。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f"
+              ],
+              "note": "无缺失的限定条件。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f"
+              ],
+              "note": "关系方向正确，状态方程是手段/依据，标准定律是结果。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "尾实体类型未知，存在本体缺口。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_80eb9fb91959e9b4b706",
+          "round_id": 1,
+          "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "latency_ms": 38671,
+          "input_tokens": 3123,
+          "output_tokens": 2144,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文明确指出根据状态方程可以得到空气密度函数的标准定律。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f"
+                  ],
+                  "note": "无缺失的限定条件。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f"
+                  ],
+                  "note": "关系方向正确，状态方程是手段/依据，标准定律是结果。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "尾实体类型未知，存在本体缺口。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_80eb9fb91959e9b4b706",
+              "round_id": 1,
+              "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "response_status": "ok",
+              "latency_ms": 38671,
+              "input_tokens": 3123,
+              "output_tokens": 2144,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_b769e4ce598026c2679f",
+            "ev_2c5a437405ba426010b8"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文明确表述根据状态方程得到空气密度函数的标准定律，主谓宾与三元组一致。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文为肯定表述，无否定、数量或时间限定冲突；条件“根据状态方程”与头实体一致。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "方向为状态方程→空气密度函数标准定律，与原文“根据状态方程……得到”一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "关系已知，但头实体和尾实体类型无法完整验证域/值域，未触发硬失败。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "当前证据中未发现反驳该三元组的原文。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_80eb9fb91959e9b4b706",
+          "round_id": 1,
+          "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "latency_ms": 8983,
+          "input_tokens": 2790,
+          "output_tokens": 1562,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文明确表述根据状态方程得到空气密度函数的标准定律，主谓宾与三元组一致。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文为肯定表述，无否定、数量或时间限定冲突；条件“根据状态方程”与头实体一致。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "方向为状态方程→空气密度函数标准定律，与原文“根据状态方程……得到”一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "关系已知，但头实体和尾实体类型无法完整验证域/值域，未触发硬失败。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "当前证据中未发现反驳该三元组的原文。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_80eb9fb91959e9b4b706",
+              "round_id": 1,
+              "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+              "voter_id": "judge_c",
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "response_status": "ok",
+              "latency_ms": 8983,
+              "input_tokens": 2790,
+              "output_tokens": 1562,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_b769e4ce598026c2679f",
+            "ev_2c5a437405ba426010b8"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文“最后再根据状态方程，即可分别得到空气密度函数的标准定律”支持“状态方程”通过“得到”关系指向“空气密度函数标准定律”。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文为肯定陈述，未出现否定、条件、数量或时间限定，qualifiers 与原文一致。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "note": "原文表达为“根据状态方程...得到...”，方向为状态方程 -> 空气密度函数标准定律，与候选三元组一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，tail_type 为 Unknown，存在 ENTITY_TYPE_UNKNOWN，无法确认本体约束是否满足。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_80eb9fb91959e9b4b706",
+          "round_id": 1,
+          "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+          "voter_id": "judge_d",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 29155,
+          "input_tokens": 2995,
+          "output_tokens": 607,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_b769e4ce598026c2679f",
+                "ev_2c5a437405ba426010b8"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文“最后再根据状态方程，即可分别得到空气密度函数的标准定律”支持“状态方程”通过“得到”关系指向“空气密度函数标准定律”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文为肯定陈述，未出现否定、条件、数量或时间限定，qualifiers 与原文一致。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_b769e4ce598026c2679f",
+                    "ev_2c5a437405ba426010b8"
+                  ],
+                  "note": "原文表达为“根据状态方程...得到...”，方向为状态方程 -> 空气密度函数标准定律，与候选三元组一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，tail_type 为 Unknown，存在 ENTITY_TYPE_UNKNOWN，无法确认本体约束是否满足。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_80eb9fb91959e9b4b706",
+              "round_id": 1,
+              "proposal_digest": "702dbd7aa16a539693c8033d8657d9162b1cf0e87618b0e9031b3b9876a1af2d",
+              "voter_id": "judge_d",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 29155,
+              "input_tokens": 2995,
+              "output_tokens": 607,
+              "attempt_no": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "candidates": 3,
+    "candidates_with_verified_evidence": 3,
+    "model_tasks": 12,
+    "actual_requests": 13,
+    "interface_success_rate": 0.8461538461538461,
+    "first_contract_and_reference_pass_rate": 0.9166666666666666,
+    "final_response_pass_rate": 0.9166666666666666,
+    "reference_occurrences": 72,
+    "valid_reference_occurrences": 72,
+    "reference_validity_rate": 1.0,
+    "final_statuses": {
+      "ok": 11,
+      "timeout": 1
+    },
+    "input_tokens": 31100,
+    "output_tokens": 15162,
+    "elapsed_seconds": 164.172,
+    "fact_accuracy": null,
+    "uncertain_fraction": 0.9166666666666666,
+    "auto_accept_precision": null,
+    "manual_review_fraction": null,
+    "evaluation_note": "No human truth labels; no routing/automatic admission in this smoke test."
+  }
+}

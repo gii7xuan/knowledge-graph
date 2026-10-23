@@ -28,10 +28,14 @@ def explain_from_verified_records(
         "checks": [
             {"check": "ontology", "status": guard.get("status", "unknown"),
              "constraint_ids": [guard.get("relation_id")] if guard.get("relation_id") else []},
-            {"check": "quote_location", "status": "pass" if evidence.get("items") else "unknown",
+            {"check": "quote_location", "status": "pass" if evidence.get("anchor_validation_complete") and evidence.get("items") else "unknown",
              "evidence_ids": [item.get("evidence_id") for item in evidence.get("items", [])[:3]]},
         ],
         "supporting_evidence_ids": list(dict.fromkeys(support_ids)),
         "counter_evidence_ids": list(dict.fromkeys(counter_ids)),
+        "anchor_failures": evidence.get("rejected_items", []),
+        "source_support": [v.get("source_support") for v in votes if v.get("response_status") == "ok"],
+        "response_errors": [{"voter_id": v.get("voter_id"), "status": v.get("response_status"),
+                             "error": v.get("error")} for v in votes if v.get("response_status") != "ok"],
         "open_questions": list(route.get("open_questions") or []),
     }

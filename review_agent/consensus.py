@@ -55,6 +55,8 @@ def aggregate_votes(
     verdict_families: Dict[str, Set[str]] = {"valid": set(), "invalid": set(), "uncertain": set()}
     material_counter_ids: Set[str] = set()
     material_support_ids: Set[str] = set()
+    seen_models: Set[str] = set()
+    duplicate_model_votes = 0
     for voter_id in committee.voter_ids:
         vote = unique.get(voter_id)
         if vote is None:
@@ -63,6 +65,13 @@ def aggregate_votes(
         if vote.get("response_status") != ResponseStatus.OK.value:
             counts["error"] += 1
             continue
+        model_identity = str(vote.get("model_id") or "").strip().casefold()
+        if model_identity and model_identity in seen_models:
+            counts["error"] += 1
+            duplicate_model_votes += 1
+            continue
+        if model_identity:
+            seen_models.add(model_identity)
         verdict = vote.get("verdict")
         if verdict not in {item.value for item in ValidatorVerdict}:
             counts["error"] += 1
@@ -77,6 +86,13 @@ def aggregate_votes(
         if verdict == ValidatorVerdict.VALID.value:
             material_support_ids.update(vote.get("supporting_evidence_ids") or [])
 
+    # A verified minority conflict is retained even when the caller omitted a flag.
+    unresolved_counterevidence = bool(unresolved_counterevidence or (
+        counts["valid"] > 0 and material_counter_ids
+    ))
+    unresolved_support_conflict = bool(unresolved_support_conflict or (
+        counts["invalid"] > 0 and material_support_ids and material_counter_ids
+    ))
     valid_diversity_ready = len(verdict_families["valid"]) >= committee.minimum_distinct_families
     invalid_diversity_ready = len(verdict_families["invalid"]) >= committee.minimum_distinct_families
     diversity_ready = len(families) >= committee.minimum_distinct_families
@@ -96,6 +112,7 @@ def aggregate_votes(
         "error_votes": counts["error"],
         "missing_votes": counts["missing"],
         "duplicate_attempts": duplicate_attempts,
+        "duplicate_model_votes": duplicate_model_votes,
         "invalid_attempts": invalid_attempts,
         "distinct_family_count": len(families),
         "valid_distinct_family_count": len(verdict_families["valid"]),

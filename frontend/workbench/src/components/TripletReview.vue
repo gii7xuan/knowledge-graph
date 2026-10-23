@@ -4,6 +4,7 @@ import { Check, ChevronLeft, ChevronRight, Clock3, Pencil, Play, RefreshCw, X } 
 import MarkdownIt from 'markdown-it';
 import { api, post } from '../api';
 import ModelSelector from './ModelSelector.vue';
+import { agentTimeline } from '../reviewAgentTimeline';
 
 const props = defineProps({
   markdownFiles: { type: Array, default: () => [] },
@@ -114,6 +115,7 @@ async function loadAll() {
     }
     for (const item of items.value) {
       const id = idFor(item);
+      delete renderedEvidence[id];
       const triple = tripleFor(item);
       drafts[id] = {
         head: triple.head || '',
@@ -194,7 +196,7 @@ async function decide(item, decision) {
     const labels = decision === 'accept'
       ? { valid_for_kg: 1, source_support: 'supported', relation_mapping_correct: draft.relation_mapping_correct }
       : decision === 'reject'
-        ? { valid_for_kg: factualReject ? 0 : null, source_support: factualReject ? 'contradicted' : null, relation_mapping_correct: draft.relation_mapping_correct }
+        ? { valid_for_kg: factualReject ? 0 : null, source_support: draft.evidence_support, relation_mapping_correct: draft.relation_mapping_correct }
         : decision === 'modify'
           ? { valid_for_kg: null, source_support: null, relation_mapping_correct: null }
           : { valid_for_kg: null, source_support: null, relation_mapping_correct: null };
@@ -202,7 +204,8 @@ async function decide(item, decision) {
       run_id: runId.value,
       candidate_id: item.candidate_id,
       revision: item.revision,
-      expected_row_version: item.row_version
+      expected_row_version: item.row_version,
+      audit_id: item.audit_summary?.status === 'completed' ? item.audit_summary.audit_id : null
     } : {
       file: file.value,
       review_id: item.review_id
@@ -290,11 +293,23 @@ async function onEvidenceToggle(event, item) {
   try {
     await loadMathRenderer();
     if (openEvidence.has(id)) {
-      renderedEvidence[id] = markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
+      if (isV3.value && item.audit_summary?.evidence_bundle) {
+        const audit = item.audit_summary;
+        const contexts = await Promise.all((audit.evidence_bundle.items || []).map(ev => api(
+          '/api/triplets/evidence/' + encodeURIComponent(ev.evidence_id) + '/context?' +
+          new URLSearchParams({ audit_id: audit.audit_id, round_id: audit.final_round_id })
+        )));
+        renderedEvidence[id] = markdown.render(contexts.map(result =>
+          '锚点状态：' + result.status + '\n\n' + result.context.map(s => s.text).join('\n')
+        ).join('\n\n---\n\n') || '本轮没有可核验的原文证据。');
+      } else {
+        renderedEvidence[id] = markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
+      }
     }
   } catch (cause) {
     error.value = `证据排版失败：${cause.message}`;
-    renderedEvidence[id] = markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
+    renderedEvidence[id] = isV3.value ? '冻结原文上下文加载失败：' + cause.message
+      : markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
   }
 }
 
@@ -304,6 +319,7 @@ function rawConfidence(item) {
 }
 
 function bestEvidence(item) {
+  if (isV3.value) return item.audit_summary?.evidence_bundle?.items?.[0] || {};
   return item.confidence_detail?.evidence_result?.best_evidence || {};
 }
 
@@ -440,7 +456,8 @@ onUnmounted(stopPolling);
               <div v-if="rawConfidence(item).logic_info" class="detail-line">{{ rawConfidence(item).logic_info }}</div>
               <div v-if="rawConfidence(item).map_info" class="detail-line">{{ rawConfidence(item).map_info }}</div>
               <div v-if="rawConfidence(item).evidence_info" class="detail-line">{{ rawConfidence(item).evidence_info }}</div>
-              <div class="detail-line">domain/range：{{ validation(item).passed === false ? (validation(item).errors || []).join('；') : '通过' }}</div>
+              <div v-if="isV3" class="detail-line">冻结本体检查：{{ item.audit_summary?.ontology_check?.status || '未审核' }} · {{ (item.audit_summary?.ontology_check?.reason_codes || []).join('；') }}</div>
+              <div v-else class="detail-line">domain/range：{{ validation(item).passed === false ? (validation(item).errors || []).join('；') : '通过' }}</div>
               <div v-if="item.evidence || bestEvidence(item).text" class="detail-line">证据片段：{{ item.evidence || bestEvidence(item).text }}</div>
               <div v-if="bestEvidence(item).level" class="detail-line">证据层级：{{ bestEvidence(item).level }} · 位置 {{ bestEvidence(item).start }}-{{ bestEvidence(item).end }}</div>
               <div class="detail-line">引用定位：{{ bestEvidence(item).semantic_status === 'unknown' ? '已定位，语义待审核' : (bestEvidence(item).semantic_status || '未知') }}</div>
@@ -448,8 +465,41 @@ onUnmounted(stopPolling);
                 模型意见：
                 <span v-for="vote in votes(item)" :key="`${vote.round_id}-${vote.voter_id}`">
                   {{ vote.voter_id }}={{ vote.response_status === 'ok' ? vote.verdict : vote.response_status }}
+                  {{ vote.error || '' }}
                 </span>
               </div>
+              <div v-if="item.audit_summary" class="detail-line">
+                本轮审核：{{ item.audit_summary.audit_id }} · 提示 {{ item.audit_summary.versions?.prompt_version || '历史版本' }}
+                · 契约 {{ item.audit_summary.versions?.response_contract_version || '未记录' }}
+                <div v-for="ev in item.audit_summary.evidence_bundle?.items || []" :key="ev.evidence_id">
+                  {{ ev.evidence_id }}：{{ ev.anchor_valid ? '原文锚点已核验，语义由模型审核' : ev.anchor_status || '未核验' }}
+                  · {{ ev.retrieval_level }} · {{ ev.quote }}
+                </div>
+                <div v-for="ev in item.audit_summary.evidence_bundle?.rejected_items || []" :key="ev.evidence_id + ev.anchor_status">
+                  排除证据 {{ ev.evidence_id }}：{{ ev.anchor_status }}
+                </div>
+              </div>
+              <details v-if="isV3 && item.audit_summary?.planner_steps?.length" class="agent-timeline">
+                <summary>Agent 调查过程（已保存记录）</summary>
+                <p>配置策略 {{ item.audit_summary.configured_strategy }} → 实际策略 {{ item.audit_summary.executed_strategy }}</p>
+                <ol>
+                  <li v-for="event in agentTimeline(item.audit_summary)" :key="event.step">
+                    <div>{{ event.role }} · 第 {{ event.step }} 步 · {{ event.action }} · {{ event.status }}</div>
+                    <div>{{ event.purpose }}</div>
+                    <div v-if="event.observation">
+                      工具观察：{{ event.observation.status }}
+                      <span v-if="event.observation.new_evidence_count != null"> · 新证据 {{ event.observation.new_evidence_count }} 条</span>
+                      <span v-if="event.observation.error"> · {{ event.observation.error }}</span>
+                      <span v-if="event.observation.validation"> · 提案 {{ event.observation.validation.proposal_digest }} · {{ event.observation.validation.consensus?.result }}</span>
+                    </div>
+                    <div v-else>无已确认的工具结果</div>
+                  </li>
+                </ol>
+                <div v-for="issue in item.audit_summary.unresolved_issues || []" :key="`${issue.code}:${issue.description}`">待解决：{{ issue.description }}</div>
+                <div v-for="(draft, n) in item.audit_summary.revision_drafts || []" :key="`draft-${n}`">模型修订建议（待人工确认，不覆盖候选）：{{ JSON.stringify(draft.changes) }}</div>
+                <div>系统最终决定：{{ item.latest_decision?.decision || '尚未提交' }} · 停止原因 {{ item.audit_summary.stop_reason || '调查中' }}</div>
+                <div v-if="item.audit_summary.agent_budget">实际模型调用 {{ item.audit_summary.agent_budget.usage?.llm_calls }} · 工具调用 {{ item.audit_summary.agent_budget.usage?.tool_calls }}</div>
+              </details>
               <div v-if="openEvidence.has(idFor(item))" class="markdown-evidence" v-html="renderedEvidence[idFor(item)] || '正在排版证据...' "></div>
             </details>
             <template v-if="drafts[idFor(item)]">
@@ -476,6 +526,8 @@ onUnmounted(stopPolling);
                   <option value="DUPLICATE">重复事实</option>
                   <option value="OUT_OF_SCOPE">超出范围</option>
                   <option value="EVIDENCE_INSUFFICIENT">证据不足</option>
+                  <option value="SCHEMA_GAP">本体缺口（不表示原文事实错误）</option>
+                  <option value="CONSTRAINT_VIOLATION">违反冻结本体约束</option>
                 </select>
               </label>
               <textarea v-model="drafts[idFor(item)].comment" placeholder="审核备注" aria-label="审核备注"></textarea>

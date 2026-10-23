@@ -16,7 +16,10 @@ from typing import Any, Dict, List, Mapping, Optional
 
 SCHEMA_VERSION = "triple_review_v3"
 FEATURE_SCHEMA_VERSION = "review_features_v3"
-EVIDENCE_BUNDLE_VERSION = "evidence_bundle_v1"
+EVIDENCE_BUNDLE_VERSION = "evidence_bundle_v2"
+REVIEW_VERSION_FIELDS = ("prompt_version", "response_contract_version", "evidence_bundle_version", "committee_version")
+AGENT_VERSION_FIELDS = ("planner_prompt_version", "planner_contract_version", "planner_strategy_version",
+                       "planner_model_id", "planner_model_family", "configured_strategy", "executed_strategy")
 
 
 class StringEnum(str, Enum):
@@ -30,6 +33,7 @@ class TaskStatus(StringEnum):
     COMPLETED = "completed"
     FAILED = "failed"
     CANCELLED = "cancelled"
+    PAUSED = "paused"
 
 
 class DocumentSupport(StringEnum):
@@ -223,7 +227,7 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "candidate_id", "revision", "canonical_triple", "document_version",
             "ontology_version", "evidence_bundle_hash", "prompt_version",
             "rubric_version", "committee_version", "memory_snapshot_id",
-            "memory_bundle_hash", "round_id",
+            "memory_bundle_hash", "round_id", "response_contract_version", "evidence_bundle_version",
         )
     }
     return sha256_json(fields)

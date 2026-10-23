@@ -15,6 +15,7 @@ from .memory import ReviewMemory
 from .ontology_guard import OntologyGuard, load_snapshot
 from .orchestrator import ReviewOrchestrator
 from .repository import NotFoundError, ReviewRepository, ValidationError
+from .model_settings import validator_settings, configured_planner, create_planner_client
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -58,10 +59,10 @@ class ReviewService:
 
         slots = []
         for item in self.config.get("validators") or []:
-            model = os.environ.get(str(item.get("model_env") or ""), "")
-            family = os.environ.get(str(item.get("family_env") or ""), "")
-            has_api_key = bool(os.environ.get(str(item.get("api_key_env") or "")))
-            has_base_url = bool(os.environ.get(str(item.get("base_url_env") or "")))
+            settings = validator_settings(item)
+            model, family = settings["model"], settings["family"]
+            has_api_key = bool(settings["api_key"])
+            has_base_url = bool(settings["base_url"])
             slots.append({"id": item.get("id"),
                           "configured": bool(model and family and has_api_key and has_base_url),
                           "model": model, "family": family, "has_api_key": has_api_key,
@@ -79,6 +80,10 @@ class ReviewService:
                         "feature_schema_version", "review_features_v3"
                     )
                 )
+                from .batch import versions_for
+                versions = versions_for(self.config)
+                versions["executed_strategy"] = (self.config.get("planner") or {}).get("strategy", "deterministic")
+                calibrator_ready = calibrator_ready and all(calibrator.metadata.get(k) == v for k, v in versions.items())
             except Exception:
                 calibrator_ready = False
         if policy_path and policy_path.is_file():
@@ -87,9 +92,23 @@ class ReviewService:
             except Exception:
                 policy_ready = False
         consensus = self.config.get("consensus") or {}
+        planner = self.config.get("planner") or {}
+        planner_connection = configured_planner(self.config)
+        configured_strategy = planner.get("strategy", "deterministic")
+        planner_ready = bool(planner.get("enabled") and all(planner_connection.get(k)
+            for k in ("model", "family", "api_key", "base_url")))
+        latest_strategy = None
+        try:
+            with self.repository.connect() as connection:
+                row = connection.execute("SELECT context_json FROM audit_runs ORDER BY created_at DESC,rowid DESC LIMIT 1").fetchone()
+                if row:
+                    latest_strategy = json.loads(row["context_json"]).get("executed_strategy")
+        except Exception:
+            pass
         configured_slots = [item for item in slots if item["configured"]]
         distinct_families = len({item["family"] for item in configured_slots})
         distinct_slot_ids = len({item["id"] for item in configured_slots if item.get("id")})
+        distinct_models = len({str(item["model"]).strip().casefold() for item in configured_slots})
         committee_size = int(consensus.get("committee_size", 4))
         required_votes = int(consensus.get("required_votes", 3))
         minimum_families = int(consensus.get("minimum_distinct_families", 3))
@@ -100,10 +119,14 @@ class ReviewService:
             and len(configured_slots) == committee_size
             and distinct_slot_ids == len(configured_slots)
             and distinct_families >= minimum_families
+            and distinct_models == committee_size
         )
         return {
             "mode": self.config.get("mode", "shadow"),
             "planner_strategy": (self.config.get("planner") or {}).get("strategy", "deterministic"),
+            "configured_strategy": configured_strategy, "last_executed_strategy": latest_strategy,
+            "planner_ready": planner_ready, "planner_model": planner_connection["model"],
+            "planner_family": planner_connection["family"], "planner_readiness_scope": "configuration_only_not_live_health",
             "validators": slots,
             "committee_ready": committee_ready, "distinct_model_families": distinct_families,
             "calibrator_ready": calibrator_ready,
@@ -133,7 +156,9 @@ class ReviewService:
         for item in items:
             decision = self.repository.latest_decision(item["candidate_id"])
             try:
-                audit = self.repository.get_audit(item["candidate_id"])
+                audit = self.repository.get_audit(item["candidate_id"], (decision or {}).get("audit_id"))
+                if int(audit["revision"]) != int(item["revision"]):
+                    audit = None
             except NotFoundError:
                 audit = None
             summaries.append({**item, "latest_decision": decision,
@@ -142,6 +167,22 @@ class ReviewService:
                                   "calibrated_probability": audit["calibrated_probability"],
                                   "calibration_status": audit["calibration_status"],
                                   "rounds": len(audit["rounds"]), "votes": audit["votes"],
+                                  "revision": audit["revision"], "versions": audit["context"],
+                                  "final_round_id": (audit["rounds"][-1]["round_id"] if audit["rounds"] else None),
+                                  "evidence_bundle": (audit["rounds"][-1].get("evidence_bundle") if audit["rounds"] else {}),
+                                  "gaps": (audit["rounds"][-1].get("gaps") if audit["rounds"] else {}),
+                                  "ontology_check": (audit["rounds"][-1].get("ontology_check") if audit["rounds"] else {}),
+                                  "planner_steps": [{k: v for k, v in step.items() if k != "attempts"}
+                                                    for step in audit["planner_steps"]],
+                                  "tool_calls": [{k: v for k, v in call.items() if k in {
+                                      "tool_call_id", "step_no", "tool", "status", "error", "new_evidence_count",
+                                      "scope", "arguments", "validation"}} for call in audit["tool_calls"]],
+                                  "configured_strategy": audit["context"].get("configured_strategy", "deterministic"),
+                                  "executed_strategy": audit["context"].get("executed_strategy", "historical_unrecorded"),
+                                  "stop_reason": audit["context"].get("agent_stop_reason"),
+                                  "unresolved_issues": audit["context"].get("unresolved_issues", []),
+                                  "agent_budget": audit["context"].get("agent_budget"),
+                                  "revision_drafts": audit["context"].get("revision_drafts", []),
                               }})
         return {"items": summaries, "total": total, "page": page, "page_size": page_size}
 
@@ -183,11 +224,17 @@ class ReviewService:
             "groups": [{"relation": row["relation"], "count": row["count"]} for row in relations],
         }
 
-    def evidence_context(self, evidence_id: str, *, before: int = 1, after: int = 1) -> Dict[str, Any]:
+    def evidence_context(self, evidence_id: str, *, before: int = 1, after: int = 1,
+                         audit_id: Optional[str] = None, round_id: Optional[int] = None) -> Dict[str, Any]:
+        from evidence.verification import verify_evidence_bundle, make_evidence_bundle
         before, after = min(5, max(0, int(before))), min(5, max(0, int(after)))
         with self.repository.connect() as connection:
             rows = connection.execute(
-                "SELECT p.proposal_json, a.candidate_id FROM proposals p JOIN audit_runs a ON a.audit_id=p.audit_id ORDER BY p.created_at DESC"
+                """SELECT p.proposal_json, a.candidate_id, a.revision FROM proposals p
+                   JOIN audit_runs a ON a.audit_id=p.audit_id
+                   WHERE (? IS NULL OR a.audit_id=?) AND (? IS NULL OR p.round_id=?)
+                   ORDER BY p.created_at DESC, p.round_id DESC""",
+                (audit_id, audit_id, round_id, round_id),
             ).fetchall()
         selected = None
         candidate_id = None
@@ -197,23 +244,33 @@ class ReviewService:
                              if item.get("evidence_id") == evidence_id), None)
             if selected:
                 candidate_id = row["candidate_id"]
+                revision = row["revision"]
                 break
         if selected is None:
             raise NotFoundError(f"evidence not found: {evidence_id}")
-        candidate = self.repository.get_candidate(candidate_id)
+        candidate = self.repository.get_revision(candidate_id, revision)
         manifest = self.repository.get_run(candidate["run_id"])
         context = []
         document_path = manifest.get("document_path")
+        status = "source_missing"
         if document_path and Path(document_path).exists():
             document = json.loads(Path(document_path).read_text(encoding="utf-8"))
+            verified = verify_evidence_bundle(make_evidence_bundle([selected], []), document, candidate)
+            selected = (verified["items"] or verified["rejected_items"])[0]
+            status = "exact" if selected["anchor_valid"] else selected["anchor_status"]
             chunk = next((item for item in document.get("chunks", [])
                           if item.get("chunk_id") == selected.get("chunk_id")), None)
-            if chunk:
+            if chunk and selected["anchor_valid"]:
                 sentences = chunk.get("sentences") or []
-                index = next((i for i, sentence in enumerate(sentences)
-                              if sentence.get("sentence_id") == selected.get("sentence_id")), 0)
-                context = sentences[max(0, index - before): index + after + 1]
-        return {"evidence": selected, "context": context, "before": before, "after": after}
+                start = selected.get("chunk_start") if selected.get("offset_basis") == "canonical_document" else selected["start"]
+                end = selected.get("chunk_end") if selected.get("offset_basis") == "canonical_document" else selected["end"]
+                covered = [i for i, s in enumerate(sentences) if s["start"] < end and s["end"] > start]
+                context = sentences[max(0, covered[0] - before):covered[-1] + after + 1] if covered else [
+                    {"text": selected["quote"], "start": start, "end": end}]
+        else:
+            selected = {**selected, "anchor_valid": False, "anchor_status": "source_missing"}
+        return {"evidence": selected, "context": context, "before": before, "after": after,
+                "status": status, "audit_id": proposal["audit_id"], "round_id": proposal["round_id"]}
 
     def candidate(self, candidate_id: str, revision: Optional[int] = None) -> Dict[str, Any]:
         candidate = self.repository.get_candidate(candidate_id) if revision is None else self.repository.get_revision(candidate_id, revision)
@@ -224,6 +281,8 @@ class ReviewService:
 
     def decide(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
         request = {**dict(payload), "reviewer": self.config.get("local_operator", "local_operator")}
+        if "labels" not in request and isinstance(request.get("annotation"), dict):
+            request["labels"] = request["annotation"]
         candidate = self.repository.get_candidate(str(request.get("candidate_id") or ""))
         if request.get("run_id") and str(request["run_id"]) != candidate["run_id"]:
             raise ValidationError("candidate does not belong to the requested run")
@@ -246,6 +305,7 @@ class ReviewService:
             if self.repository.get_candidate(str(candidate_id))["run_id"] != run_id:
                 raise ValidationError("candidate does not belong to the requested run")
         requested_mode = payload.get("mode") or self.config.get("mode", "shadow")
+        payload = {**dict(payload), "mode": requested_mode, "force": bool(payload.get("force", False))}
         if requested_mode == "active":
             status = self.config_status()
             missing = [
@@ -263,66 +323,23 @@ class ReviewService:
     ) -> Dict[str, Any]:
         candidate = self.repository.get_candidate(candidate_id)
         request = {**dict(payload or {}), "run_id": candidate["run_id"],
-                   "candidate_ids": [candidate_id]}
+                   "candidate_ids": [candidate_id], "force": True}
         return self.create_audit_job(request)
 
     def execute_audit_job(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
-        from confidence.calibrator import TripleCalibrator, load_calibrator
-        from confidence.risk_policy import RiskPolicy, load_policy
-        from document.hierarchy_index import load_document_index
+        from .batch import run_review_batch
 
-        run_id = str(payload.get("run_id") or "")
-        manifest = self.repository.get_run(run_id)
-        document_path = Path(manifest["document_path"])
-        document_index = load_document_index(document_path)
-        guard = OntologyGuard(load_snapshot(manifest["ontology_path"], manifest.get("ontology_hash")))
-        validators = []
-        for slot in self.config.get("validators") or []:
-            model = os.environ.get(str(slot.get("model_env") or ""), "")
-            family = os.environ.get(str(slot.get("family_env") or ""), "")
-            key = os.environ.get(str(slot.get("api_key_env") or ""), "")
-            url = os.environ.get(str(slot.get("base_url_env") or ""), "")
-            if all((model, family, key, url)):
-                validators.append({
-                    "id": slot["id"], "model_id": model, "model_family": family,
-                    "client": OpenAICompatibleClient(
-                        api_key=key, base_url=url, model_id=model, model_family=family,
-                        timeout_seconds=float((self.config.get("budget") or {}).get("per_call_timeout_seconds", 45)),
-                    ),
-                })
-        calibration = self.config.get("calibration") or {}
-        model_path, policy_path = calibration.get("model_path"), calibration.get("policy_path")
-        if model_path and not Path(model_path).is_absolute():
-            model_path = str(ROOT / model_path)
-        if policy_path and not Path(policy_path).is_absolute():
-            policy_path = str(ROOT / policy_path)
-        calibrator = load_calibrator(model_path) if model_path else TripleCalibrator()
-        policy = load_policy(policy_path) if policy_path else RiskPolicy()
+        job_id = payload.get("_job_id")
         effective_config = {**self.config, "mode": payload.get("mode") or self.config.get("mode", "shadow")}
-        orchestrator = ReviewOrchestrator(
-            self.repository, guard, validators, calibrator=calibrator,
-            risk_policy=policy, config=effective_config,
-        )
-        candidate_ids = list(payload.get("candidate_ids") or [])
-        if not candidate_ids:
-            candidate_ids = [item["candidate_id"] for item in self.repository.list_candidates(
-                run_id, human_status="pending", limit=1_000_000
-            )]
-        results = []
-        memory_snapshot = ReviewMemory(self.repository).current_version()
-        for candidate_id in candidate_ids:
-            job_id = payload.get("_job_id")
-            if job_id and self.repository.get_job(str(job_id)).get("cancel_requested"):
-                break
-            candidate = self.repository.get_candidate(candidate_id)
-            if candidate["run_id"] != run_id:
-                raise ValidationError("candidate does not belong to the audit run")
-            results.append(orchestrator.audit_candidate(
-                candidate_id, int(candidate["revision"]), document_index,
-                context={"memory_snapshot_id": memory_snapshot},
-            ))
-        return {"run_id": run_id, "total": len(candidate_ids), "completed": len(results),
-                "failed": 0, "cancelled": len(results) < len(candidate_ids), "results": results}
+        return run_review_batch(self.repository, str(payload.get("run_id") or ""), effective_config,
+            job_id=job_id,
+            candidate_ids=payload.get("candidate_ids"), force=bool(payload.get("force", False)),
+            limit=payload.get("limit"), status_file=payload.get("status_file"),
+            on_progress=(lambda progress: self.repository.heartbeat_job(str(job_id), progress)) if job_id else None,
+            should_cancel=(lambda: bool(self.repository.get_job(str(job_id)).get("cancel_requested"))) if job_id else None)
+
+    def create_planner_client(self):
+        return create_planner_client(self.config)
 
     def job(self, job_id: str) -> Dict[str, Any]:
         return self.repository.get_job(job_id)

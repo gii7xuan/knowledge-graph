@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 from pathlib import Path
 from typing import Any, Dict, List
@@ -19,8 +18,10 @@ from review_agent.llm_clients import MockLLMClient, OpenAICompatibleClient
 from review_agent.memory import ReviewMemory
 from review_agent.ontology_guard import OntologyGuard, load_snapshot
 from review_agent.orchestrator import ReviewOrchestrator
-from review_agent.repository import ReviewRepository
+from review_agent.repository import ReviewRepository, MIGRATION_VERSION
 from review_agent.service import ReviewService, load_config
+from review_agent.response_contract import CHECK_NAMES
+from review_agent.model_settings import validator_settings
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,16 +65,15 @@ def _document_index(document_id: str, text: str) -> Dict[str, Any]:
 def _configured_validators(config: Dict[str, Any]) -> List[Dict[str, Any]]:
     validators = []
     for slot in config.get("validators") or []:
-        model = os.environ.get(str(slot.get("model_env") or ""), "")
-        family = os.environ.get(str(slot.get("family_env") or ""), "")
-        key = os.environ.get(str(slot.get("api_key_env") or ""), "")
-        url = os.environ.get(str(slot.get("base_url_env") or ""), "")
+        settings = validator_settings(slot)
+        model, family, key, url = (settings[name] for name in ("model", "family", "api_key", "base_url"))
         if not all((model, family, key, url)):
             continue
         validators.append({
             "id": slot["id"], "model_id": model, "model_family": family,
             "client": OpenAICompatibleClient(api_key=key, base_url=url, model_id=model, model_family=family,
-                                             timeout_seconds=float((config.get("budget") or {}).get("per_call_timeout_seconds", 45))),
+                                             timeout_seconds=float((config.get("budget") or {}).get("per_call_timeout_seconds", 45)),
+                                             verify_ssl=settings["verify_ssl"]),
         })
     return validators
 
@@ -82,7 +82,7 @@ def command_init(args: Any) -> Dict[str, Any]:
     config = load_config(args.config)
     repository = ReviewRepository(_database(args, config))
     repository.initialize()
-    return {"ok": True, "database_path": str(repository.database_path), "migration_version": 1}
+    return {"ok": True, "database_path": str(repository.database_path), "migration_version": MIGRATION_VERSION}
 
 
 def command_export(args: Any) -> Dict[str, Any]:
@@ -152,37 +152,30 @@ def command_build_memory(args: Any) -> Dict[str, Any]:
 
 
 def command_audit(args: Any) -> Dict[str, Any]:
-    from document.hierarchy_index import load_document_index
+    from .batch import run_review_batch
 
     config = load_config(args.config)
     if args.mode:
         config["mode"] = args.mode
     repository = ReviewRepository(_database(args, config))
     repository.initialize()
-    manifest = repository.get_run(args.run_id)
-    document_index = load_document_index(manifest["document_path"])
-    guard = OntologyGuard(load_snapshot(manifest["ontology_path"], manifest.get("ontology_hash")))
-    validators = _configured_validators(config)
-    calibration = config.get("calibration") or {}
-    model_path = calibration.get("model_path")
-    policy_path = calibration.get("policy_path")
-    if model_path and not Path(model_path).is_absolute():
-        model_path = str(ROOT / model_path)
-    if policy_path and not Path(policy_path).is_absolute():
-        policy_path = str(ROOT / policy_path)
-    orchestrator = ReviewOrchestrator(
-        repository, guard, validators,
-        calibrator=load_calibrator(model_path) if model_path else TripleCalibrator(),
-        risk_policy=load_policy(policy_path) if policy_path else RiskPolicy(),
-        config=config,
-    )
-    results = []
-    for candidate in repository.list_candidates(args.run_id, limit=1_000_000):
-        results.append(orchestrator.audit_candidate(
-            candidate["candidate_id"], candidate["revision"], document_index,
-            context={"memory_snapshot_id": ReviewMemory(repository).current_version()},
-        ))
-    return {"run_id": args.run_id, "mode": config.get("mode"), "audited": len(results), "results": results}
+    status_file = getattr(args, "status_file", None) or str(
+        ROOT / "runs" / "review_jobs" / ("audit_" + uuid4().hex[:12]) / "status.json")
+    previous = None
+
+    def progress(state):
+        nonlocal previous
+        key = (state["status"], state["completed"], state["failed"], state["skipped"])
+        if key != previous:
+            print(f'[review] status={state["status"]} completed={state["completed"]}/{state["selected"]} '
+                  f'skipped={state["skipped"]} failed={state["failed"]}', flush=True)
+            previous = key
+
+    print(f"[review] status_file={status_file}", flush=True)
+    return run_review_batch(repository, args.run_id, config,
+        candidate_ids=getattr(args, "candidate_id", None),
+        force=bool(getattr(args, "force", False)), limit=getattr(args, "limit", None),
+        status_file=status_file, on_progress=progress)
 
 
 def command_demo(args: Any) -> Dict[str, Any]:
@@ -213,9 +206,11 @@ def command_demo(args: Any) -> Dict[str, Any]:
         repository.add_candidate(candidate)
         candidates.append(candidate)
 
+    scenarios_by_candidate = {item["candidate_id"]: item["scenario"] for item in candidates}
+
     def response_for(voter_index: int):
         def respond(payload):
-            scenario = payload["candidate"].get("scenario")
+            scenario = scenarios_by_candidate.get(payload["candidate"]["candidate_id"])
             evidence_id = payload["evidence"][0]["evidence_id"] if payload.get("evidence") else None
             if scenario == "correct" or (scenario == "counterevidence" and voter_index < 3):
                 verdict, support, reasons = "valid", "supported", []
@@ -229,7 +224,12 @@ def command_demo(args: Any) -> Dict[str, Any]:
             return {
                 "verdict": verdict, "source_support": support,
                 "schema_status": "unknown" if scenario == "schema_gap" else "pass",
-                "reason_codes": reasons, "checks": [],
+                "reason_codes": reasons,
+                "checks": [{"check": name, "status": ("unknown" if scenario == "schema_gap" else "pass")
+                            if name == "ontology" else ("pass" if verdict == "valid" else "unknown"),
+                            "evidence_ids": [evidence_id] if evidence_id else [], "note": "offline fixture"}
+                           for name in CHECK_NAMES],
+                "suggested_revision": None,
                 "supporting_evidence_ids": [evidence_id] if verdict == "valid" and evidence_id else [],
                 "counter_evidence_ids": [evidence_id] if verdict == "invalid" and evidence_id else [],
                 "requested_context": {"scope": "same_section", "query": "限定条件", "limit": 4}
@@ -298,6 +298,10 @@ def main() -> None:
     audit = sub.add_parser("audit")
     audit.add_argument("--run-id", required=True)
     audit.add_argument("--mode", choices=["legacy", "assist_only", "shadow", "active", "offline_demo"])
+    audit.add_argument("--candidate-id", action="append", help="only review these candidate IDs")
+    audit.add_argument("--limit", type=int, help="maximum candidates after healthy checkpoints are skipped")
+    audit.add_argument("--force", action="store_true", help="also re-audit healthy completed revisions")
+    audit.add_argument("--status-file", help="atomic live progress JSON")
     export = sub.add_parser("export")
     export.add_argument("--run-id", required=True)
     export.add_argument("--output")

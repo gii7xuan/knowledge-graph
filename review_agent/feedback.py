@@ -35,7 +35,7 @@ class FeedbackService:
             if submitted.get("valid_for_kg") not in (None, expected):
                 raise ValidationError("reject label conflicts with reason_code")
             submitted["valid_for_kg"] = expected
-            if expected == 0:
+            if expected == 0 and reason in FACTUAL_REJECTIONS:
                 submitted.setdefault("source_support", "contradicted")
         elif action == "defer":
             if submitted.get("valid_for_kg") is not None:

@@ -1,0 +1,463 @@
+{
+  "created_at": "2026-10-23T02:39:33.478196+00:00",
+  "run_id": "run_20261016_044300_3cf413c4",
+  "database_unchanged": true,
+  "mode": "smoke_only",
+  "live": true,
+  "review_versions": {
+    "prompt_version": "validator_v2",
+    "response_contract_version": "validator_response_v2",
+    "evidence_bundle_version": "evidence_bundle_v2",
+    "committee_version": "committee_qwen_gemma_llama_gptoss_v1"
+  },
+  "model_configuration": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "llama4",
+      "model_family": "llama"
+    },
+    {
+      "id": "judge_d",
+      "model_id": "gpt-oss",
+      "model_family": "gpt-oss"
+    }
+  ],
+  "budget": {
+    "max_tool_calls": 6,
+    "max_llm_calls_per_candidate": 12,
+    "max_evidence_items": 12,
+    "max_evidence_chars": 12000,
+    "per_call_timeout_seconds": 45,
+    "total_timeout_seconds": 180,
+    "max_retries_per_request": 1,
+    "max_parallel_validators": 4,
+    "max_parallel_candidates": 2
+  },
+  "committee": {
+    "version": "committee_qwen_gemma_llama_gptoss_v1",
+    "committee_size": 4,
+    "required_votes": 3,
+    "minimum_distinct_families": 3,
+    "weighted_quorum_enabled": false,
+    "max_rounds": 2
+  },
+  "baseline_final_statuses": {
+    "ok": 3
+  },
+  "comparison_controls": "same candidate set; prompt/contract/evidence selection intentionally changed",
+  "candidates": [
+    {
+      "candidate_id": "cand_004e8d1dff118c97e010",
+      "revision": 1,
+      "evidence_count": 6,
+      "rejected_anchors": [],
+      "evidence_hash": "ca1ae5828c1f19578a4ea92ee7a6c223fd15d802e3941c47433ef326b781ba63",
+      "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+      "votes": [
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_4da83c5542dcc8e307a7",
+            "ev_d2e368c793e1f124b602"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_4da83c5542dcc8e307a7",
+                "ev_d2e368c793e1f124b602"
+              ],
+              "note": "原文明确表述“对于一般火炮弹丸落速，vc > vmin”，支持“一般火炮弹丸落速大于速度极小值”的三元组。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_4da83c5542dcc8e307a7"
+              ],
+              "note": "原文限定为“一般火炮弹丸”，与三元组头部一致；未引入额外否定或条件。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_4da83c5542dcc8e307a7"
+              ],
+              "note": "关系方向为“大于”，与原文“vc > vmin”一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体检查状态为 unknown，存在 SCHEMA_GAP，无法确认类型约束。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+          "round_id": 1,
+          "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "latency_ms": 14561,
+          "input_tokens": 3840,
+          "output_tokens": 529,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_4da83c5542dcc8e307a7",
+                "ev_d2e368c793e1f124b602"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_4da83c5542dcc8e307a7",
+                    "ev_d2e368c793e1f124b602"
+                  ],
+                  "note": "原文明确表述“对于一般火炮弹丸落速，vc > vmin”，支持“一般火炮弹丸落速大于速度极小值”的三元组。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_4da83c5542dcc8e307a7"
+                  ],
+                  "note": "原文限定为“一般火炮弹丸”，与三元组头部一致；未引入额外否定或条件。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_4da83c5542dcc8e307a7"
+                  ],
+                  "note": "关系方向为“大于”，与原文“vc > vmin”一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体检查状态为 unknown，存在 SCHEMA_GAP，无法确认类型约束。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+              "round_id": 1,
+              "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "response_status": "ok",
+              "latency_ms": 14561,
+              "input_tokens": 3840,
+              "output_tokens": 529,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "verdict": "uncertain",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "supporting_evidence_ids": [
+            "ev_4da83c5542dcc8e307a7",
+            "ev_d2e368c793e1f124b602"
+          ],
+          "counter_evidence_ids": [],
+          "reason_codes": [
+            "SCHEMA_GAP"
+          ],
+          "checks": [
+            {
+              "check": "triple_support",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_4da83c5542dcc8e307a7"
+              ],
+              "note": "原文明确指出对于一般火炮弹丸落速，$v_c > v_{\\mathrm{min}}$，支持该三元组。"
+            },
+            {
+              "check": "qualifiers",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_4da83c5542dcc8e307a7"
+              ],
+              "note": "限定词‘一般火炮弹丸’已包含在主语中，无其他缺失条件。"
+            },
+            {
+              "check": "relation_direction",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_4da83c5542dcc8e307a7"
+              ],
+              "note": "关系方向‘大于’与原文 $v_c > v_{\\mathrm{min}}$ 一致。"
+            },
+            {
+              "check": "ontology",
+              "status": "unknown",
+              "evidence_ids": [],
+              "note": "本体中缺失关系‘大于’，存在 SCHEMA_GAP。"
+            },
+            {
+              "check": "counterevidence",
+              "status": "pass",
+              "evidence_ids": [],
+              "note": "未发现反证。"
+            }
+          ],
+          "requested_context": null,
+          "suggested_revision": null,
+          "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+          "round_id": 1,
+          "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "latency_ms": 35436,
+          "input_tokens": 4014,
+          "output_tokens": 1869,
+          "attempt_no": 1,
+          "attempts": [
+            {
+              "verdict": "uncertain",
+              "source_support": "supported",
+              "schema_status": "unknown",
+              "supporting_evidence_ids": [
+                "ev_4da83c5542dcc8e307a7",
+                "ev_d2e368c793e1f124b602"
+              ],
+              "counter_evidence_ids": [],
+              "reason_codes": [
+                "SCHEMA_GAP"
+              ],
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_4da83c5542dcc8e307a7"
+                  ],
+                  "note": "原文明确指出对于一般火炮弹丸落速，$v_c > v_{\\mathrm{min}}$，支持该三元组。"
+                },
+                {
+                  "check": "qualifiers",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_4da83c5542dcc8e307a7"
+                  ],
+                  "note": "限定词‘一般火炮弹丸’已包含在主语中，无其他缺失条件。"
+                },
+                {
+                  "check": "relation_direction",
+                  "status": "pass",
+                  "evidence_ids": [
+                    "ev_4da83c5542dcc8e307a7"
+                  ],
+                  "note": "关系方向‘大于’与原文 $v_c > v_{\\mathrm{min}}$ 一致。"
+                },
+                {
+                  "check": "ontology",
+                  "status": "unknown",
+                  "evidence_ids": [],
+                  "note": "本体中缺失关系‘大于’，存在 SCHEMA_GAP。"
+                },
+                {
+                  "check": "counterevidence",
+                  "status": "pass",
+                  "evidence_ids": [],
+                  "note": "未发现反证。"
+                }
+              ],
+              "requested_context": null,
+              "suggested_revision": null,
+              "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+              "round_id": 1,
+              "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "response_status": "ok",
+              "latency_ms": 35436,
+              "input_tokens": 4014,
+              "output_tokens": 1869,
+              "attempt_no": 1
+            }
+          ]
+        },
+        {
+          "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+          "round_id": 1,
+          "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+          "voter_id": "judge_c",
+          "model_id": "llama4",
+          "model_family": "llama",
+          "response_status": "api_error",
+          "verdict": null,
+          "error": "Error code: 503 - {'error': {'message': '当前分组 default 下对于模型 llama4 无可用渠道 (request id: 2026102310393554159365518414219)', 'type': 'one_api_error'}}",
+          "http_status": 503,
+          "retryable": true,
+          "pause_job": false,
+          "error_code": "TRANSIENT_API_ERROR",
+          "latency_ms": 92,
+          "attempt_no": 2,
+          "attempts": [
+            {
+              "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+              "round_id": 1,
+              "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+              "voter_id": "judge_c",
+              "model_id": "llama4",
+              "model_family": "llama",
+              "response_status": "api_error",
+              "verdict": null,
+              "error": "Error code: 503 - {'error': {'message': '当前分组 default 下对于模型 llama4 无可用渠道 (request id: 2026102310393544873871762335248)', 'type': 'one_api_error'}}",
+              "http_status": 503,
+              "retryable": true,
+              "pause_job": false,
+              "error_code": "TRANSIENT_API_ERROR",
+              "latency_ms": 1766,
+              "attempt_no": 1
+            },
+            {
+              "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+              "round_id": 1,
+              "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+              "voter_id": "judge_c",
+              "model_id": "llama4",
+              "model_family": "llama",
+              "response_status": "api_error",
+              "verdict": null,
+              "error": "Error code: 503 - {'error': {'message': '当前分组 default 下对于模型 llama4 无可用渠道 (request id: 2026102310393554159365518414219)', 'type': 'one_api_error'}}",
+              "http_status": 503,
+              "retryable": true,
+              "pause_job": false,
+              "error_code": "TRANSIENT_API_ERROR",
+              "latency_ms": 92,
+              "attempt_no": 2
+            }
+          ]
+        },
+        {
+          "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+          "round_id": 1,
+          "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+          "voter_id": "judge_d",
+          "model_id": "gpt-oss",
+          "model_family": "gpt-oss",
+          "response_status": "api_error",
+          "verdict": null,
+          "error": "Error code: 503 - {'error': {'message': '当前分组 default 下对于模型 gpt-oss 无可用渠道 (request id: 2026102310393549916299754376215)', 'type': 'one_api_error'}}",
+          "http_status": 503,
+          "retryable": true,
+          "pause_job": false,
+          "error_code": "TRANSIENT_API_ERROR",
+          "latency_ms": 93,
+          "attempt_no": 2,
+          "attempts": [
+            {
+              "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+              "round_id": 1,
+              "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+              "voter_id": "judge_d",
+              "model_id": "gpt-oss",
+              "model_family": "gpt-oss",
+              "response_status": "api_error",
+              "verdict": null,
+              "error": "Error code: 503 - {'error': {'message': '当前分组 default 下对于模型 gpt-oss 无可用渠道 (request id: 2026102310393538909405589468781)', 'type': 'one_api_error'}}",
+              "http_status": 503,
+              "retryable": true,
+              "pause_job": false,
+              "error_code": "TRANSIENT_API_ERROR",
+              "latency_ms": 1733,
+              "attempt_no": 1
+            },
+            {
+              "audit_id": "smoke_b3e77c1cf0ee4b480acd",
+              "round_id": 1,
+              "proposal_digest": "550dc78466078ae61b9143f2df5cef7721c2574dd1e47054debe4c204201f980",
+              "voter_id": "judge_d",
+              "model_id": "gpt-oss",
+              "model_family": "gpt-oss",
+              "response_status": "api_error",
+              "verdict": null,
+              "error": "Error code: 503 - {'error': {'message': '当前分组 default 下对于模型 gpt-oss 无可用渠道 (request id: 2026102310393549916299754376215)', 'type': 'one_api_error'}}",
+              "http_status": 503,
+              "retryable": true,
+              "pause_job": false,
+              "error_code": "TRANSIENT_API_ERROR",
+              "latency_ms": 93,
+              "attempt_no": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "candidates": 1,
+    "candidates_with_verified_evidence": 1,
+    "model_tasks": 4,
+    "actual_requests": 6,
+    "interface_success_rate": 0.3333333333333333,
+    "first_contract_pass_rate": 0.5,
+    "first_contract_and_reference_pass_rate": 0.5,
+    "final_response_pass_rate": 0.5,
+    "reference_occurrences": 11,
+    "valid_reference_occurrences": 11,
+    "reference_validity_rate": 1.0,
+    "final_statuses": {
+      "ok": 2,
+      "api_error": 2
+    },
+    "input_tokens": 7854,
+    "output_tokens": 2398,
+    "elapsed_seconds": 35.469,
+    "fact_accuracy": null,
+    "uncertain_fraction": 0.5,
+    "auto_accept_precision": null,
+    "manual_review_fraction": null,
+    "evaluation_note": "No human truth labels; no routing/automatic admission in this smoke test."
+  }
+}

@@ -51,12 +51,14 @@ class OpenAICompatibleClient:
     def __init__(
         self, *, api_key: str, base_url: str, model_id: str, model_family: str,
         timeout_seconds: float = 45.0,
+        verify_ssl: Optional[bool] = None,
     ):
         self.api_key = api_key
         self.base_url = base_url
         self.model_id = model_id
         self.model_family = model_family
         self.timeout_seconds = timeout_seconds
+        self.verify_ssl = verify_ssl
         self._client = None
 
     def _get_client(self):
@@ -66,6 +68,8 @@ class OpenAICompatibleClient:
             verify_ssl = os.environ.get("KG_LLM_VERIFY_SSL", "true").strip().lower() not in {
                 "0", "false", "no", "off",
             }
+            if self.verify_ssl is not None:
+                verify_ssl = self.verify_ssl
             self._client = OpenAI(
                 api_key=self.api_key,
                 base_url=self.base_url,
@@ -80,11 +84,12 @@ class OpenAICompatibleClient:
         response = self._get_client().chat.completions.create(
             model=self.model_id,
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "system", "content": system_prompt + "\nReturn only a valid JSON object."},
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
             ],
             response_format={"type": "json_object"},
             temperature=float(kwargs.get("temperature", 0.0)),
+            **({"max_tokens": int(kwargs["max_tokens"])} if kwargs.get("max_tokens") else {}),
         )
         usage = getattr(response, "usage", None)
         return LLMResponse(

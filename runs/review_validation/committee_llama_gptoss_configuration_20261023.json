@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-23",
+  "status": "configured_provider_channels_unavailable",
+  "committee_version": "committee_qwen_gemma_llama_gptoss_v1",
+  "members": [
+    {"id": "judge_a", "model": "Qwen", "family": "qwen", "smoke_status": "ok"},
+    {"id": "judge_b", "model": "Gemma", "family": "gemma", "smoke_status": "ok"},
+    {"id": "judge_c", "model": "llama4", "family": "llama", "smoke_status": "http_503_no_available_channel"},
+    {"id": "judge_d", "model": "gpt-oss", "family": "gpt-oss", "smoke_status": "http_503_no_available_channel"}
+  ],
+  "alternative_id_checked": {"model": "gpt-oss:120b", "http_status": 503, "reason": "default group has no available channel"},
+  "smoke_report": "runs/review_validation/committee_llama_gptoss_smoke_20261023.json",
+  "production_review_database_unchanged_by_smoke": true,
+  "full_book_audit_started": false,
+  "tests_passed": 98,
+  "required_external_action": "Provider administrator must enable valid llama4 and gpt-oss upstream channels for the current API key/group."
+}

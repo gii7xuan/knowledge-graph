@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from confidence.calibrator import TripleCalibrator
+from review_agent.contracts import REVIEW_VERSION_FIELDS, FEATURE_SCHEMA_VERSION, AGENT_VERSION_FIELDS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,23 @@ def load_dataset(path):
     with Path(path).open("r", encoding="utf-8") as file:
         data = json.load(file)
     return [item for item in data if isinstance(item, dict) and item.get("features")]
+
+
+def training_versions(rows):
+    fields = REVIEW_VERSION_FIELDS
+    if any((row.get("review_versions") or {}).get("planner_contract_version") for row in rows):
+        fields += AGENT_VERSION_FIELDS
+    elif any((row.get("review_versions") or {}).get("executed_strategy") for row in rows):
+        fields += ("configured_strategy", "executed_strategy")
+    signatures = {tuple((row.get("review_versions") or {}).get(key) for key in fields)
+                  for row in rows}
+    if len(signatures) != 1 or not all(next(iter(signatures), ())):
+        raise ValueError("training rows must have one complete prompt/contract/evidence/committee version set")
+    if any(not row.get("audit_id") or row.get("audit_snapshot_status") != "bound" for row in rows):
+        raise ValueError("training requires labels bound to completed audit snapshots")
+    if any(row.get("feature_schema_version") != FEATURE_SCHEMA_VERSION for row in rows):
+        raise ValueError("training feature schema is missing or incompatible")
+    return dict(zip(fields, next(iter(signatures))))
 
 
 def main():
@@ -40,10 +58,11 @@ def main():
             raise SystemExit("split manifest leaks document groups across train and held-out data")
         rows = [item for item in rows if not train_groups or item.get("document_id") in train_groups]
         labels = [int(item["label"]) for item in rows]
+    versions = training_versions(rows)
     calibrator.fit(
         [item["features"] for item in rows], labels,
         training_data_version=args.training_data_version,
-        metadata={"split_manifest": args.split_manifest},
+        metadata={"split_manifest": args.split_manifest, **versions},
     )
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     calibrator.save(args.output)

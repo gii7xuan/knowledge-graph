@@ -79,12 +79,29 @@ class RiskPolicy:
         if malformed_required_fields:
             return {"decision": "auto_reject", "reason_codes": ["MALFORMED_REQUIRED_FIELDS"]}
         reasons: List[str] = []
+        for flag, code in (("validation_missing", "CURRENT_VALIDATION_MISSING"),
+                           ("ontology_not_checked", "ONTOLOGY_CHECK_REQUIRED"),
+                           ("critical_issues_unresolved", "CRITICAL_ISSUES_UNRESOLVED"),
+                           ("protected_evidence_omitted", "PROTECTED_EVIDENCE_OUTSIDE_PROMPT"),
+                           ("unreviewed_discovered_evidence", "DISCOVERED_EVIDENCE_OUTSIDE_PROMPT")):
+            if gaps.get(flag):
+                reasons.append(code)
         if guard.get("status") != "pass":
             reasons.extend(guard.get("reason_codes") or ["ONTOLOGY_NOT_CONFIRMED"])
         if not evidence.get("items"):
             reasons.append("EVIDENCE_MISSING")
+        if not evidence.get("anchor_validation_complete") or any(
+            item.get("anchor_valid") is not True for item in evidence.get("items") or []
+        ):
+            reasons.append("EVIDENCE_ANCHOR_UNVERIFIED")
         if gaps.get("unresolved_counterevidence"):
             reasons.append("UNRESOLVED_COUNTEREVIDENCE")
+        if gaps.get("unresolved_support_conflict"):
+            reasons.append("UNRESOLVED_SUPPORT_CONFLICT")
+        if gaps.get("ontology_disagreement"):
+            reasons.append("ONTOLOGY_DISAGREEMENT")
+        if gaps.get("need_more_evidence"):
+            reasons.append("EVIDENCE_GAP_UNRESOLVED")
         if gaps.get("version_stale"):
             reasons.append("VERSION_STALE")
         if reasons:

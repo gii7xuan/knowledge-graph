@@ -13,7 +13,7 @@ def span_key(item: Mapping[str, Any]) -> Tuple[Any, ...]:
     document_version = item.get("document_version")
     basis = item.get("offset_basis") or "chunk"
     if basis == "canonical_document" and item.get("start") is not None and item.get("end") is not None:
-        return (document_id, document_version, basis, int(item["start"]), int(item["end"]))
+        return (document_id, document_version, basis, item["start"], item["end"])
     return (
         document_id, document_version, item.get("chunk_id"), item.get("sentence_id"),
         item.get("chunk_start", item.get("start")), item.get("chunk_end", item.get("end")),
@@ -29,11 +29,9 @@ def verify_anchor(item: Mapping[str, Any], document_or_chunk: str) -> Dict[str, 
         return {"valid": False, "status": "empty_quote", "actual_quote": ""}
     if start is None or end is None:
         return {"valid": False, "status": "missing_offset", "actual_quote": ""}
-    try:
-        start, end = int(start), int(end)
-    except (TypeError, ValueError):
+    if type(start) is not int or type(end) is not int:
         return {"valid": False, "status": "invalid_offset", "actual_quote": ""}
-    if start < 0 or end < start or end > len(document_or_chunk):
+    if start < 0 or end <= start or end > len(document_or_chunk):
         return {"valid": False, "status": "out_of_range", "actual_quote": ""}
     actual = document_or_chunk[start:end]
     return {"valid": actual == quote, "status": "exact" if actual == quote else "mismatch", "actual_quote": actual}
@@ -80,6 +78,65 @@ def make_evidence_bundle(items: Iterable[Mapping[str, Any]], searched_levels: It
     return payload
 
 
+def verify_evidence_bundle(bundle: Mapping[str, Any], document_snapshot: Mapping[str, Any],
+                           candidate: Mapping[str, Any]) -> Dict[str, Any]:
+    """Only exact frozen-source anchors may enter a round's reference catalogue."""
+    chunks = document_snapshot.get("by_chunk_id") or {
+        item["chunk_id"]: item for item in document_snapshot.get("chunks", [])
+    }
+    groups: Dict[str, set] = {}
+    for item in bundle.get("items") or []:
+        identity = {key: item.get(key) for key in (
+            "document_id", "document_version", "offset_basis", "start", "end", "quote")}
+        if item.get("offset_basis") != "canonical_document":
+            identity["chunk_id"] = item.get("chunk_id")
+        signature = canonical_json(identity)
+        groups.setdefault(str(item.get("evidence_id") or ""), set()).add(signature)
+    valid, rejected = [], list(bundle.get("rejected_items") or [])
+    for raw in bundle.get("items") or []:
+        item = dict(raw)
+        chunk = chunks.get(item.get("chunk_id"))
+        status = "exact"
+        if not item.get("evidence_id"):
+            status = "missing_evidence_id"
+        elif len(groups[str(item["evidence_id"])]) > 1:
+            status = "conflicting_evidence_id"
+        elif chunk is None:
+            status = "chunk_missing"
+        elif any(not item.get(key) or item.get(key) != candidate.get(key)
+                 or item.get(key) != chunk.get(key) for key in ("document_id", "document_version")):
+            status = "document_version_mismatch"
+        elif item.get("section_id") != chunk.get("section_id"):
+            status = "section_mismatch"
+        else:
+            basis = item.get("offset_basis")
+            if basis == "chunk":
+                status = verify_anchor(item, chunk.get("content", ""))["status"]
+                if status == "exact" and any(item.get(key, item[other]) != item[other]
+                                               for key, other in (("chunk_start", "start"), ("chunk_end", "end"))):
+                    status = "document_chunk_offset_mismatch"
+            elif basis == "canonical_document":
+                block_start = chunk.get("document_start")
+                cs, ce = item.get("chunk_start"), item.get("chunk_end")
+                if (any(type(x) is not int for x in (block_start, cs, ce, item.get("start"), item.get("end")))
+                        or block_start < 0 or item["start"] != block_start + cs
+                        or item["end"] != block_start + ce):
+                    status = "document_chunk_offset_mismatch"
+                else:
+                    status = verify_anchor({**item, "start": cs, "end": ce}, chunk.get("content", ""))["status"]
+            else:
+                status = "unknown_offset_basis"
+        item.update(anchor_valid=status == "exact", anchor_status=status, semantic_status="unknown")
+        (valid if item["anchor_valid"] else rejected).append(item)
+    verified = make_evidence_bundle(valid, bundle.get("searched_levels") or [])
+    verified["rejected_items"] = rejected
+    verified["anchor_validation_complete"] = True
+    verified["evidence_hash"] = hashlib.sha256(canonical_json({
+        key: value for key, value in verified.items() if key != "evidence_hash"
+    }).encode("utf-8")).hexdigest()
+    return verified
+
+
 def verify_vote_references(vote: Mapping[str, Any], evidence_items: Iterable[Mapping[str, Any]]) -> Dict[str, Any]:
     result = dict(vote)
     available = {str(item.get("evidence_id")) for item in evidence_items if item.get("evidence_id")}
@@ -97,4 +154,5 @@ def verify_vote_references(vote: Mapping[str, Any], evidence_items: Iterable[Map
         if "INVALID_EVIDENCE_REFERENCE" not in reasons:
             reasons.append("INVALID_EVIDENCE_REFERENCE")
         result["reason_codes"] = reasons
+        result["error"] = "references not present in this round: " + ", ".join(missing)
     return result

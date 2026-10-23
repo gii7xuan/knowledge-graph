@@ -49,6 +49,7 @@ class JobRunner:
                 result = {**result, "cancelled": True}
             self.repository.complete_job(
                 job["job_id"], result, cancelled=bool(latest.get("cancel_requested")),
+                paused=bool(result.get("paused")), failed=bool(result.get("failed")),
             )
         return self.repository.get_job(job["job_id"])
 

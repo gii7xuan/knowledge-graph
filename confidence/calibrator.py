@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
-from review_agent.contracts import CalibrationResult, FEATURE_SCHEMA_VERSION
+from review_agent.contracts import CalibrationResult, FEATURE_SCHEMA_VERSION, REVIEW_VERSION_FIELDS, AGENT_VERSION_FIELDS
 
 
 FEATURE_ORDER = [
@@ -74,10 +74,12 @@ class TripleCalibrator:
             return CalibrationResult(None, "incompatible", self.version, feature_schema_version, False,
                                      ["FEATURE_SCHEMA_MISMATCH"])
         context = dict(context or {})
-        for field in ("domain", "committee_version", "prompt_version"):
+        for field in ("domain", *REVIEW_VERSION_FIELDS, *AGENT_VERSION_FIELDS):
             allowed = self.metadata.get(field)
             actual = context.get(field)
-            if allowed and actual and allowed != actual:
+            if (field in (*REVIEW_VERSION_FIELDS, *AGENT_VERSION_FIELDS) and (actual or allowed) and actual != allowed) or (
+                field == "domain" and allowed and actual and allowed != actual
+            ):
                 return CalibrationResult(None, "incompatible", self.version, feature_schema_version, False,
                                          [f"{field.upper()}_MISMATCH"])
         probability = float(self.model.predict_proba([feature_vector(features, self.feature_order)])[0, 1])

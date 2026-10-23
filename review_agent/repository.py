@@ -8,6 +8,7 @@ versions and explicit transactions.
 from __future__ import annotations
 
 import json
+import time
 import sqlite3
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
@@ -18,7 +19,7 @@ from uuid import uuid4
 from .contracts import canonical_json, fact_key_for, sha256_json
 
 
-MIGRATION_VERSION = 1
+MIGRATION_VERSION = 3
 EDITABLE_TRIPLE_FIELDS = {
     "head", "surface_relation", "relation_id", "relation_label", "tail",
     "head_type", "tail_type", "tail_kind", "datatype", "value", "unit", "qualifiers",
@@ -269,6 +270,39 @@ class ReviewRepository:
                     result_json TEXT NOT NULL,
                     created_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS planner_steps (
+                    audit_id TEXT NOT NULL REFERENCES audit_runs(audit_id),
+                    step_no INTEGER NOT NULL,
+                    state_version INTEGER NOT NULL,
+                    state_hash TEXT NOT NULL,
+                    record_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    PRIMARY KEY(audit_id, step_no)
+                );
+                CREATE TABLE IF NOT EXISTS agent_tool_calls (
+                    tool_call_id TEXT PRIMARY KEY,
+                    audit_id TEXT NOT NULL REFERENCES audit_runs(audit_id),
+                    step_no INTEGER NOT NULL,
+                    tool_name TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    record_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    UNIQUE(audit_id, step_no)
+                );
+                CREATE TABLE IF NOT EXISTS agent_checkpoints (
+                    audit_id TEXT PRIMARY KEY REFERENCES audit_runs(audit_id),
+                    phase TEXT NOT NULL,
+                    state_hash TEXT NOT NULL,
+                    checkpoint_json TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS validation_requests (
+                    request_key TEXT PRIMARY KEY,
+                    owner TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    vote_json TEXT,
+                    updated_at TEXT NOT NULL
+                );
                 CREATE INDEX IF NOT EXISTS idx_candidates_run_status
                     ON candidates(run_id, human_status, current_revision);
                 CREATE INDEX IF NOT EXISTS idx_events_candidate ON review_events(candidate_id, revision, active);
@@ -282,6 +316,96 @@ class ReviewRepository:
             )
 
     init_db = initialize
+
+    def claim_validation_request(self, request_key, owner):
+        """Only a known failed request may be retried; unknown/in-flight work stays fenced."""
+        with self.transaction(immediate=True) as connection:
+            row = connection.execute("SELECT * FROM validation_requests WHERE request_key=?", (request_key,)).fetchone()
+            if row is None or row["status"] == "failed":
+                connection.execute("""INSERT INTO validation_requests VALUES(?,?,'running',NULL,?)
+                    ON CONFLICT(request_key) DO UPDATE SET owner=excluded.owner,status='running',
+                    vote_json=NULL,updated_at=excluded.updated_at""", (request_key, owner, utc_now()))
+                return {"status": "claimed"}
+            return {"status": row["status"], "vote": _loads(row["vote_json"], {})}
+
+    def validation_request(self, request_key):
+        with self.connect() as connection:
+            row = connection.execute("SELECT status,vote_json FROM validation_requests WHERE request_key=?", (request_key,)).fetchone()
+        return None if row is None else {"status": row["status"], "vote": _loads(row["vote_json"], {})}
+
+    def finish_validation_request(self, request_key, owner, vote):
+        status = "completed" if vote.get("response_status") == "ok" else (
+            "unknown" if vote.get("outcome_unknown") else "failed")
+        with self.transaction(immediate=True) as connection:
+            changed = connection.execute("""UPDATE validation_requests SET status=?,vote_json=?,updated_at=?
+                WHERE request_key=? AND owner=? AND status='running'""",
+                (status, _json(vote), utc_now(), request_key, owner)).rowcount
+            if changed != 1:
+                raise ConflictError("validation request reservation is no longer owned")
+
+    def update_audit_context(self, audit_id, updates):
+        with self.transaction(immediate=True) as connection:
+            row = connection.execute("SELECT context_json FROM audit_runs WHERE audit_id=?", (audit_id,)).fetchone()
+            if row:
+                context = {**_loads(row["context_json"], {}), **dict(updates)}
+                connection.execute("UPDATE audit_runs SET context_json=? WHERE audit_id=?", (_json(context), audit_id))
+
+    def save_agent_checkpoint(self, audit_id, state, budget, phase="ready"):
+        checkpoint = {"state": state, "budget": budget}
+        with self.transaction(immediate=True) as connection:
+            connection.execute("""INSERT INTO agent_checkpoints VALUES(?,?,?,?,?)
+                ON CONFLICT(audit_id) DO UPDATE SET phase=excluded.phase,state_hash=excluded.state_hash,
+                checkpoint_json=excluded.checkpoint_json,updated_at=excluded.updated_at""",
+                (audit_id, phase, sha256_json(state), _json(checkpoint), utc_now()))
+
+    def get_agent_checkpoint(self, audit_id):
+        with self.connect() as connection:
+            row = connection.execute("SELECT * FROM agent_checkpoints WHERE audit_id=?", (audit_id,)).fetchone()
+        return None if row is None else {"phase": row["phase"], **_loads(row["checkpoint_json"], {})}
+
+    def record_planner_step(self, audit_id, step_no, state_version, state_hash, record, checkpoint=None):
+        with self.transaction(immediate=True) as connection:
+            connection.execute("""INSERT INTO planner_steps VALUES(?,?,?,?,?,?)
+                ON CONFLICT(audit_id,step_no) DO UPDATE SET record_json=excluded.record_json
+                WHERE json_extract(planner_steps.record_json,'$.status')='started'""",
+                (audit_id, step_no, state_version, state_hash, _json(record), utc_now()))
+            if checkpoint:
+                state, budget, phase = checkpoint
+                connection.execute("""INSERT INTO agent_checkpoints VALUES(?,?,?,?,?)
+                    ON CONFLICT(audit_id) DO UPDATE SET phase=excluded.phase,state_hash=excluded.state_hash,
+                    checkpoint_json=excluded.checkpoint_json,updated_at=excluded.updated_at""",
+                    (audit_id, phase, sha256_json(state), _json({"state": state, "budget": budget}), utc_now()))
+
+    def record_agent_tool(self, audit_id, step_no, tool_name, status, record, checkpoint=None):
+        call_id = f"{audit_id}:tool:{step_no}"
+        with self.transaction(immediate=True) as connection:
+            connection.execute("""INSERT INTO agent_tool_calls VALUES(?,?,?,?,?,?,?)
+                ON CONFLICT(tool_call_id) DO UPDATE SET status=excluded.status,record_json=excluded.record_json""",
+                (call_id, audit_id, step_no, tool_name, status, _json(record), utc_now()))
+            if checkpoint:
+                state, budget, phase = checkpoint
+                connection.execute("""INSERT INTO agent_checkpoints VALUES(?,?,?,?,?)
+                    ON CONFLICT(audit_id) DO UPDATE SET phase=excluded.phase,state_hash=excluded.state_hash,
+                    checkpoint_json=excluded.checkpoint_json,updated_at=excluded.updated_at""",
+                    (audit_id, phase, sha256_json(state), _json({"state": state, "budget": budget}), utc_now()))
+        return call_id
+
+    def resumable_agent_audit(self, candidate_id, revision, versions, members=None):
+        with self.connect() as connection:
+            rows = connection.execute("""SELECT a.audit_id,a.context_json FROM audit_runs a
+                JOIN agent_checkpoints s ON s.audit_id=a.audit_id
+                WHERE a.candidate_id=? AND a.revision=? AND a.status='interrupted'
+                AND s.phase!='finished' ORDER BY a.created_at DESC,a.rowid DESC""", (candidate_id, revision)).fetchall()
+        for row in rows:
+            context = _loads(row["context_json"], {})
+            if (all(context.get(k) == v for k, v in versions.items())
+                    and (members is None or context.get("committee_members") == members)):
+                return {"audit_id": row["audit_id"], "context": context}
+        return None
+
+    def resume_agent_audit(self, audit_id):
+        with self.transaction(immediate=True) as connection:
+            connection.execute("UPDATE audit_runs SET status='running',completed_at=NULL WHERE audit_id=? AND status='interrupted'", (audit_id,))
 
     def create_run(self, manifest: Mapping[str, Any]) -> Dict[str, Any]:
         run_id = str(manifest.get("run_id") or f"run_{uuid4().hex[:16]}")
@@ -495,14 +619,16 @@ class ReviewRepository:
                  _json(consensus), _json(gaps), utc_now()),
             )
             for vote in votes:
-                connection.execute(
+                inserted = connection.execute(
                     """INSERT OR IGNORE INTO validator_votes(audit_id, round_id, voter_id,
                        proposal_digest, model_id, model_family, response_status, verdict,
                        vote_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                     (audit_id, round_id, vote["voter_id"], digest, vote.get("model_id", ""),
                      vote.get("model_family", ""), vote.get("response_status", "invalid_contract"),
                      vote.get("verdict"), _json(vote), utc_now()),
-                )
+                ).rowcount
+                if not inserted:
+                    continue
                 for attempt in vote.get("attempts") or []:
                     connection.execute(
                         """INSERT INTO validator_attempts(attempt_id, audit_id, round_id, voter_id,
@@ -512,6 +638,23 @@ class ReviewRepository:
                          attempt.get("response_status", "invalid_contract"),
                          int(attempt.get("attempt_no", 1)), _json(attempt), utc_now()),
                     )
+
+    def update_round_gaps(self, audit_id: str, round_id: int, gaps: Mapping[str, Any]) -> None:
+        with self.transaction(immediate=True) as connection:
+            connection.execute("UPDATE proposals SET gaps_json=? WHERE audit_id=? AND round_id=?",
+                               (_json(gaps), audit_id, round_id))
+
+    def finish_incomplete_audit(self, audit_id: str, status: str, detail: Mapping[str, Any]) -> None:
+        """Close a killed/paused audit without creating a semantic decision."""
+        if status not in {"paused", "timeout", "interrupted", "failed"}:
+            raise ValidationError("invalid incomplete audit status")
+        with self.transaction(immediate=True) as connection:
+            row = connection.execute("SELECT context_json FROM audit_runs WHERE audit_id=? AND status='running'",
+                                     (audit_id,)).fetchone()
+            if row:
+                context = {**_loads(row["context_json"], {}), "execution_failure": dict(detail)}
+                connection.execute("UPDATE audit_runs SET status=?,context_json=?,completed_at=? WHERE audit_id=? AND status='running'",
+                                   (status, _json(context), utc_now(), audit_id))
 
     def record_attempt(self, attempt: Mapping[str, Any]) -> str:
         attempt_id = str(attempt.get("attempt_id") or f"attempt_{uuid4().hex}")
@@ -529,10 +672,30 @@ class ReviewRepository:
     ) -> bool:
         now = utc_now()
         with self.transaction(immediate=True) as connection:
+            audit = connection.execute("SELECT context_json,status FROM audit_runs WHERE audit_id=?", (audit_id,)).fetchone()
+            context = _loads(audit["context_json"], {}) if audit else {}
+            job_id = context.get("job_id")
+            if job_id:
+                job = connection.execute("SELECT cancel_requested,status FROM jobs WHERE job_id=?", (job_id,)).fetchone()
+                if job and (job["cancel_requested"] or job["status"] == "cancelled"):
+                    connection.execute("UPDATE audit_runs SET status='interrupted',completed_at=? WHERE audit_id=? AND status='running'", (now, audit_id))
+                    return False
+            deadline = context.get("execution_deadline_epoch")
+            if deadline and time.time() >= float(deadline):
+                context["execution_failure"] = {"reason_code": "HARD_CANDIDATE_TIMEOUT"}
+                connection.execute("UPDATE audit_runs SET status='timeout',context_json=?,completed_at=? WHERE audit_id=? AND status='running'",
+                                   (_json(context), now, audit_id))
+                return False
+            if audit and audit["status"] != "running":
+                return False
             current = connection.execute(
-                "SELECT current_revision, import_status FROM candidates WHERE candidate_id=?", (candidate_id,)
+                "SELECT current_revision, import_status,row_version FROM candidates WHERE candidate_id=?", (candidate_id,)
             ).fetchone()
             is_current = current is not None and int(current["current_revision"]) == int(revision)
+            if context.get("execution_row_version") is not None and (
+                current is None or current["row_version"] != context["execution_row_version"]):
+                connection.execute("UPDATE audit_runs SET status='interrupted',completed_at=? WHERE audit_id=? AND status='running'", (now, audit_id))
+                return False
             connection.execute(
                 """UPDATE audit_runs SET status='completed', features_json=?, calibrated_probability=?,
                    calibration_status=?, completed_at=? WHERE audit_id=?""",
@@ -626,6 +789,21 @@ class ReviewRepository:
                 raise ConflictError("candidate row_version changed")
             if int(candidate["current_revision"]) != revision:
                 raise ConflictError("candidate revision is stale")
+            displayed_decision = connection.execute(
+                "SELECT * FROM decisions WHERE decision_id=? AND active=1",
+                (candidate["latest_decision_id"],),
+            ).fetchone()
+            audit_id = payload.get("audit_id")
+            if not audit_id and displayed_decision and int(displayed_decision["revision"]) == revision:
+                audit_id = displayed_decision["audit_id"]
+            if audit_id:
+                if not isinstance(audit_id, str):
+                    raise ValidationError("audit_id must be a string")
+                audit = connection.execute("SELECT * FROM audit_runs WHERE audit_id=?", (audit_id,)).fetchone()
+                if (audit is None or audit["candidate_id"] != candidate_id
+                        or int(audit["revision"]) != revision or audit["status"] != "completed"):
+                    raise ValidationError("audit_id must identify a completed audit of this candidate revision")
+            payload["audit_id"] = audit_id
             revision_row = connection.execute(
                 "SELECT * FROM candidate_revisions WHERE candidate_id=? AND revision=?",
                 (candidate_id, revision),
@@ -716,7 +894,7 @@ class ReviewRepository:
                 """INSERT INTO decisions(decision_id, candidate_id, revision, audit_id,
                    decision_version, route, final_decision, reason_codes_json, decision_json,
                    supersedes_decision_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (decision_id, candidate_id, decision_payload["revision"], payload.get("audit_id"),
+                (decision_id, candidate_id, decision_payload["revision"], None if action == "modify" else audit_id,
                  decision_version, final_decision, final_decision, _json(reason_codes),
                  _json(decision_payload), old_decision["decision_id"] if old_decision else None, now),
             )
@@ -724,6 +902,7 @@ class ReviewRepository:
                 "event_id": event_id, "candidate_id": candidate_id, "revision": revision,
                 "new_revision": new_revision if action == "modify" else None,
                 "audit_id": payload.get("audit_id"), "action": action,
+                "audit_snapshot_status": "bound" if audit_id else "missing",
                 "reason_code": payload.get("reason_code"), "labels": labels,
                 "reviewer": payload.get("reviewer", "human"), "label_source": "human_confirmed",
                 "evidence_ids": evidence_ids, "comment": payload.get("comment"),
@@ -867,10 +1046,29 @@ class ReviewRepository:
             ).fetchone()
         return None if row is None else _loads(row["decision_json"], {})
 
+    def has_healthy_audit(self, candidate_id, revision, versions, members) -> bool:
+        """Skip completed semantic reviews; retry unfinished or infrastructure-broken ones."""
+        if not members:
+            return False
+        with self.connect() as connection:
+            audit = connection.execute("""SELECT audit_id,context_json FROM audit_runs
+                WHERE candidate_id=? AND revision=? AND status='completed'
+                ORDER BY created_at DESC,rowid DESC LIMIT 1""", (candidate_id, revision)).fetchone()
+            if not audit or any(_loads(audit["context_json"], {}).get(key) != value for key, value in versions.items()):
+                return False
+            rows = connection.execute("""SELECT vote_json FROM validator_votes WHERE audit_id=?
+                AND round_id=(SELECT MAX(round_id) FROM proposals WHERE audit_id=?)""",
+                (audit["audit_id"], audit["audit_id"])).fetchall()
+        votes = {_loads(row["vote_json"], {}).get("voter_id"): _loads(row["vote_json"], {}) for row in rows}
+        return all(votes.get(m["id"], {}).get("response_status") == "ok" and
+                   votes[m["id"]].get("model_id") == m["model_id"] and
+                   votes[m["id"]].get("model_family") == m["model_family"] for m in members)
+
     def feedback_rows(self) -> List[Dict[str, Any]]:
         with self.connect() as connection:
             rows = connection.execute(
-                """SELECT e.event_json, r.candidate_json, a.features_json
+                """SELECT e.event_json, r.candidate_json, a.features_json, a.context_json,
+                          a.status AS audit_status, a.feature_schema_version
                    FROM review_events e
                    JOIN candidate_revisions r ON r.candidate_id=e.candidate_id AND r.revision=e.revision
                    LEFT JOIN audit_runs a ON a.audit_id=e.audit_id
@@ -888,6 +1086,14 @@ class ReviewRepository:
                 "features": _loads(row["features_json"], {}), "label": int(label),
                 "labels": event.get("labels", {}), "reason_code": event.get("reason_code"),
                 "label_source": "human_confirmed",
+                "document_id": _loads(row["candidate_json"], {}).get("document_id"),
+                "audit_id": event.get("audit_id"),
+                "audit_snapshot_status": "bound" if event.get("audit_id") and row["audit_status"] == "completed" else "missing",
+                "feature_schema_version": row["feature_schema_version"],
+                "review_versions": {key: value for key, value in _loads(row["context_json"], {}).items()
+                    if key in ("prompt_version", "response_contract_version", "evidence_bundle_version", "committee_version",
+                        "planner_prompt_version", "planner_contract_version", "planner_strategy_version", "planner_model_id",
+                        "planner_model_family", "configured_strategy", "executed_strategy")},
             })
         return result
 
@@ -900,7 +1106,7 @@ class ReviewRepository:
                 ).fetchone()
             else:
                 audit = connection.execute(
-                    "SELECT * FROM audit_runs WHERE candidate_id=? ORDER BY created_at DESC LIMIT 1",
+                    "SELECT * FROM audit_runs WHERE candidate_id=? ORDER BY created_at DESC,rowid DESC LIMIT 1",
                     (candidate_id,),
                 ).fetchone()
             if audit is None:
@@ -917,6 +1123,9 @@ class ReviewRepository:
                    ORDER BY round_id, voter_id, attempt_no""",
                 (audit["audit_id"],),
             ).fetchall()
+            planner_steps = connection.execute("SELECT step_no,state_version,state_hash,record_json,created_at FROM planner_steps WHERE audit_id=? ORDER BY step_no", (audit["audit_id"],)).fetchall()
+            tool_calls = connection.execute("SELECT tool_call_id,step_no,tool_name,status,record_json,created_at FROM agent_tool_calls WHERE audit_id=? ORDER BY step_no", (audit["audit_id"],)).fetchall()
+            checkpoint = connection.execute("SELECT phase,checkpoint_json FROM agent_checkpoints WHERE audit_id=?", (audit["audit_id"],)).fetchone()
         return {
             "audit_id": audit["audit_id"], "candidate_id": audit["candidate_id"],
             "revision": audit["revision"], "status": audit["status"], "mode": audit["mode"],
@@ -928,17 +1137,31 @@ class ReviewRepository:
                         "gaps": _loads(row["gaps_json"], {})} for row in proposals],
             "votes": [_loads(row["vote_json"], {}) for row in votes],
             "attempts": [_loads(row["response_json"], {}) for row in attempts],
+            "planner_steps": [{"step_no": r["step_no"], "state_version": r["state_version"],
+                               "state_hash": r["state_hash"], "created_at": r["created_at"], **_loads(r["record_json"], {})} for r in planner_steps],
+            "tool_calls": [{"tool_call_id": r["tool_call_id"], "step_no": r["step_no"], "tool": r["tool_name"],
+                            "created_at": r["created_at"], **_loads(r["record_json"], {}), "status": r["status"]} for r in tool_calls],
+            "agent_state": None if checkpoint is None else {"phase": checkpoint["phase"], **_loads(checkpoint["checkpoint_json"], {})},
         }
 
     def create_job(self, job_type: str, payload: Mapping[str, Any]) -> Dict[str, Any]:
+        payload = dict(payload)
+        if job_type == "audit" and payload.get("candidate_ids"):
+            payload["candidate_ids"] = sorted(set(payload["candidate_ids"]))
         job_id = f"job_{uuid4().hex}"
         now = utc_now()
         with self.transaction(immediate=True) as connection:
-            connection.execute(
-                """INSERT INTO jobs(job_id, job_type, status, payload_json, progress_json,
-                   created_at, updated_at) VALUES (?, ?, 'queued', ?, '{}', ?, ?)""",
-                (job_id, job_type, _json(payload), now, now),
-            )
+            existing = connection.execute("""SELECT job_id FROM jobs WHERE job_type='audit'
+                AND payload_json=? AND status IN ('queued','running') AND cancel_requested=0
+                ORDER BY created_at,rowid LIMIT 1""", (_json(payload),)).fetchone() if job_type == "audit" else None
+            if existing:
+                job_id = existing["job_id"]
+            else:
+                connection.execute(
+                    """INSERT INTO jobs(job_id, job_type, status, payload_json, progress_json,
+                       created_at, updated_at) VALUES (?, ?, 'queued', ?, '{}', ?, ?)""",
+                    (job_id, job_type, _json(payload), now, now),
+                )
         return self.get_job(job_id)
 
     def get_job(self, job_id: str) -> Dict[str, Any]:
@@ -953,7 +1176,7 @@ class ReviewRepository:
         with self.transaction(immediate=True) as connection:
             changed = connection.execute(
                 """UPDATE jobs SET cancel_requested=1,
-                   status=CASE WHEN status IN ('queued', 'running') THEN 'cancelled' ELSE status END,
+                   status=CASE WHEN status IN ('queued', 'running', 'paused') THEN 'cancelled' ELSE status END,
                    lease_owner=NULL, lease_expires_at=NULL, updated_at=? WHERE job_id=?""",
                 (utc_now(), job_id),
             ).rowcount
@@ -981,15 +1204,22 @@ class ReviewRepository:
             job_id = row["job_id"]
         return self.get_job(job_id)
 
+    def heartbeat_job(self, job_id: str, progress: Mapping[str, Any], lease_seconds: int = 210) -> None:
+        expires = (datetime.now(timezone.utc) + timedelta(seconds=lease_seconds)).isoformat(timespec="seconds").replace("+00:00", "Z")
+        with self.transaction(immediate=True) as connection:
+            connection.execute("""UPDATE jobs SET progress_json=?,lease_expires_at=?,updated_at=?
+                WHERE job_id=? AND status='running' AND cancel_requested=0""",
+                (_json(progress), expires, utc_now(), job_id))
+
     def complete_job(
         self, job_id: str, progress: Mapping[str, Any], *, failed: bool = False,
-        cancelled: bool = False,
+        cancelled: bool = False, paused: bool = False,
     ) -> None:
         with self.transaction(immediate=True) as connection:
             connection.execute(
                 """UPDATE jobs SET status=?, progress_json=?, lease_owner=NULL,
                    lease_expires_at=NULL, updated_at=? WHERE job_id=?""",
-                ("cancelled" if cancelled else "failed" if failed else "completed",
+                ("cancelled" if cancelled else "paused" if paused else "failed" if failed else "completed",
                  _json(progress), utc_now(), job_id),
             )
 

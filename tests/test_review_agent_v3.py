@@ -378,10 +378,12 @@ class VoteReferenceTests(unittest.TestCase):
 
     def test_retry_attempts_are_preserved_separately_from_the_final_vote(self):
         client = MockLLMClient([
-            TimeoutError("temporary timeout"),
+            RuntimeError("HTTP 503 temporary server error"),
             {"verdict": "valid", "source_support": "supported", "schema_status": "pass",
              "supporting_evidence_ids": ["ev_1"], "counter_evidence_ids": [],
-             "reason_codes": [], "checks": []},
+             "reason_codes": [], "requested_context": None, "suggested_revision": None,
+             "checks": [{"check": name, "status": "pass", "evidence_ids": ["ev_1"], "note": "checked"}
+                        for name in ("triple_support", "qualifiers", "relation_direction", "ontology", "counterevidence")]},
         ])
         result = judge_validator(
             {"id": "judge_a", "model_id": "mock", "model_family": "family_a", "client": client},
@@ -393,7 +395,7 @@ class VoteReferenceTests(unittest.TestCase):
         )
         self.assertEqual(result["response_status"], "ok")
         self.assertEqual(result["attempt_no"], 2)
-        self.assertEqual([item["response_status"] for item in result["attempts"]], ["timeout", "ok"])
+        self.assertEqual([item["response_status"] for item in result["attempts"]], ["api_error", "ok"])
 
 
 if __name__ == "__main__":
