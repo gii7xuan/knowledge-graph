@@ -668,6 +668,7 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(get_default_service().items(
                     query["run_id"][0], status=query.get("status", [None])[0],
                     relation_id=query.get("relation_id", [None])[0],
+                    workflow_state=query.get("workflow_state", [None])[0],
                     page=int(query.get("page", ["1"])[0]),
                     page_size=int(query.get("page_size", ["20"])[0]),
                 ))
@@ -698,6 +699,8 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(ontology_overview())
             elif path == "/api/ontology/items":
                 self.send_json(ontology_items_page(parse_qs(urlparse(self.path).query)))
+            elif re.fullmatch(r"/api/ontology/extensions/[^/]+", path):
+                self.send_json(get_default_service().repository.extension_status(path.rsplit("/", 1)[-1]))
             elif path == "/api/ontology/releases":
                 self.send_json(ontology_releases())
             elif path.startswith("/api/triplets/"):

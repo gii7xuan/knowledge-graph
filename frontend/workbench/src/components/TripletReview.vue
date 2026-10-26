@@ -23,6 +23,13 @@ const relation = ref('');
 const minConfidence = ref('');
 const maxConfidence = ref('');
 const includeDone = ref(false);
+const workflow = ref('');
+const extensionDetails = reactive({});
+const workflowLabels = { ready_for_review: '待审核', manual_review: '待人工审核', revision_required: '需修改候选', schema_unresolved: '本体问题待处理', awaiting_ontology_review: '等待本体审核', awaiting_ontology_release: '等待本体发布', reaudit_required: '需按新版本重审', review_completed: '审核完成', human_reviewed: '人工已处理' };
+async function showExtension(id) {
+  try { extensionDetails[id] = await api('/api/ontology/extensions/' + encodeURIComponent(id)); }
+  catch (cause) { error.value = cause.message; }
+}
 const summary = ref({});
 const items = ref([]);
 const total = ref(0);
@@ -68,6 +75,7 @@ function query(includePage = false) {
   if (!isV3.value && minConfidence.value !== '') params.set('min_confidence', minConfidence.value);
   if (!isV3.value && maxConfidence.value !== '') params.set('max_confidence', maxConfidence.value);
   if (isV3.value && !includeDone.value) params.set('status', 'pending');
+  if (isV3.value && workflow.value) params.set('workflow_state', workflow.value);
   if (includePage) {
     params.set('page', String(page.value));
     params.set('page_size', String(pageSize));
@@ -421,6 +429,7 @@ onUnmounted(stopPolling);
           <label>最低置信度<input v-model="minConfidence" type="number" step="0.01" min="0" max="1" placeholder="0.00" @keyup.enter="applyFilters" /></label>
           <label>最高置信度<input v-model="maxConfidence" type="number" step="0.01" min="0" max="1" placeholder="1.00" @keyup.enter="applyFilters" /></label>
           <label>状态<select v-model="includeDone" @change="applyFilters"><option :value="false">待处理</option><option :value="true">全部</option></select></label>
+          <label v-if="isV3">审核流程<select v-model="workflow" @change="applyFilters"><option value="">全部流程</option><option v-for="(label, state) in workflowLabels" :key="state" :value="state">{{ label }}</option></select></label>
           <button class="filter-button" @click="applyFilters">应用筛选</button>
         </div>
         <div class="sidebar-heading relations-heading">关系</div>
@@ -465,6 +474,13 @@ onUnmounted(stopPolling);
               <div v-if="rawConfidence(item).map_info" class="detail-line">{{ rawConfidence(item).map_info }}</div>
               <div v-if="rawConfidence(item).evidence_info" class="detail-line">{{ rawConfidence(item).evidence_info }}</div>
               <div v-if="isV3" class="detail-line">冻结本体检查：{{ item.audit_summary?.ontology_check?.status || '未审核' }} · {{ (item.audit_summary?.ontology_check?.reason_codes || []).join('；') }}</div>
+              <div v-if="isV3" class="detail-line">流程：{{ workflowLabels[item.workflow_state] || item.workflow_state }} · 原文共识：{{ item.audit_summary?.source_support_consensus?.result || '未形成' }} · 准入共识：{{ item.audit_summary?.admission_consensus?.result || '未形成' }}</div>
+              <div v-if="item.pending_extension_id" class="detail-line">
+                <button @click="showExtension(item.pending_extension_id)">查看本体扩展请求 {{ item.pending_extension_id }}</button>
+                <p>等待本体处理；当前原文审核票不能用于新本体版本的准入。</p>
+                <div v-if="extensionDetails[item.pending_extension_id]">任务状态：{{ extensionDetails[item.pending_extension_id].status }} · 基线 release：{{ extensionDetails[item.pending_extension_id].base_release_id }} · {{ extensionDetails[item.pending_extension_id].ontology_review_executed ? '本体审核已有执行记录' : '尚未执行本体审核' }}</div>
+              </div>
+              <details v-if="item.audit_summary?.issue_history?.length"><summary>问题处理记录</summary><p v-for="issue in item.audit_summary.issue_history" :key="issue.issue_id">{{ issue.code }}：{{ issue.status === 'resolved' ? '已解决' : (issue.requires_revision ? '需新修订' : '未解决') }} · {{ issue.description }} <span v-if="issue.resolution_rule">· {{ issue.resolution_rule }}</span></p></details>
               <div v-else class="detail-line">domain/range：{{ validation(item).passed === false ? (validation(item).errors || []).join('；') : '通过' }}</div>
               <div v-if="item.evidence || bestEvidence(item).text" class="detail-line">证据片段：{{ item.evidence || bestEvidence(item).text }}</div>
               <div v-if="bestEvidence(item).level" class="detail-line">证据层级：{{ bestEvidence(item).level }} · 位置 {{ bestEvidence(item).start }}-{{ bestEvidence(item).end }}</div>

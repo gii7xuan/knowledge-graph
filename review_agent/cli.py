@@ -71,6 +71,7 @@ def _configured_validators(config: Dict[str, Any]) -> List[Dict[str, Any]]:
             continue
         validators.append({
             "id": slot["id"], "model_id": model, "model_family": family,
+            "model_identity": settings["model_identity"],
             "client": OpenAICompatibleClient(api_key=key, base_url=url, model_id=model, model_family=family,
                                              timeout_seconds=float((config.get("budget") or {}).get("per_call_timeout_seconds", 45)),
                                              verify_ssl=settings["verify_ssl"]),
@@ -224,6 +225,7 @@ def command_demo(args: Any) -> Dict[str, Any]:
             return {
                 "verdict": verdict, "source_support": support,
                 "schema_status": "unknown" if scenario == "schema_gap" else "pass",
+                "schema_issue": "not_covered" if scenario == "schema_gap" else "none", "schema_change_hint": None,
                 "reason_codes": reasons,
                 "checks": [{"check": name, "status": ("unknown" if scenario == "schema_gap" else "pass")
                             if name == "ontology" else ("pass" if verdict == "valid" else "unknown"),

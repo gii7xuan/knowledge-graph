@@ -17,9 +17,10 @@ def validation_request_key(voter, proposal):
     client = voter["client"]
     binding = vote_binding(voter, proposal)
     frozen = {k: proposal.get(k) for k in (
-        "prompt_version", "response_contract_version", "evidence_bundle_version", "rubric_version",
-        "committee_version", "committee_members", "evidence_bundle_hash", "memory_snapshot_id", "memory_bundle_hash", "agent_versions")}
-    return sha256_json({"version": "validation_single_flight_v1", "role": "validator",
+        "prompt_version", "prompt_hash", "response_contract_version", "response_contract_hash", "evidence_bundle_version", "rubric_version",
+        "committee_version", "committee_policy_hash", "committee_members", "candidate_review_hash", "ontology_check_hash", "evidence_bundle_hash", "memory_snapshot_id", "memory_bundle_hash", "agent_versions")}
+    return sha256_json({"version": "validation_single_flight_v2", "role": "validator", "task_type": "triple_review",
+        "object_revision": proposal["candidate"]["revision"], "model_identity": binding["model_identity"],
         "namespace": proposal.get("request_cache_namespace", "default"),
         "model_id": binding["model_id"], "model_family": binding["model_family"],
         "client_kind": type(client).__module__ + "." + type(client).__qualname__,

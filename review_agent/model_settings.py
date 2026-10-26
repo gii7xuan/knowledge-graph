@@ -46,6 +46,7 @@ def validator_settings(slot, *, root=ROOT):
         "id": slot["id"],
         "model": env("model") or str(slot.get("model") or "").strip(),
         "family": env("family") or str(slot.get("family") or "").strip(),
+        "model_identity": str(slot.get("model_identity") or env("model") or slot.get("model") or "").strip().casefold(),
         "api_key": key or str(connection.get("api_key") or "").strip(),
         "base_url": base_url,
         "verify_ssl": verify_ssl,

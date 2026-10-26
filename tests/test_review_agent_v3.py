@@ -379,7 +379,7 @@ class VoteReferenceTests(unittest.TestCase):
     def test_retry_attempts_are_preserved_separately_from_the_final_vote(self):
         client = MockLLMClient([
             RuntimeError("HTTP 503 temporary server error"),
-            {"verdict": "valid", "source_support": "supported", "schema_status": "pass",
+            {"verdict": "valid", "source_support": "supported", "schema_status": "pass", "schema_issue": "none", "schema_change_hint": None,
              "supporting_evidence_ids": ["ev_1"], "counter_evidence_ids": [],
              "reason_codes": [], "requested_context": None, "suggested_revision": None,
              "checks": [{"check": name, "status": "pass", "evidence_ids": ["ev_1"], "note": "checked"}

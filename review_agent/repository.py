@@ -17,9 +17,10 @@ from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional
 from uuid import uuid4
 
 from .contracts import canonical_json, fact_key_for, sha256_json
+from .lifecycle_repository import LifecycleRepository
 
 
-MIGRATION_VERSION = 3
+MIGRATION_VERSION = 4
 EDITABLE_TRIPLE_FIELDS = {
     "head", "surface_relation", "relation_id", "relation_label", "tail",
     "head_type", "tail_type", "tail_kind", "datatype", "value", "unit", "qualifiers",
@@ -70,7 +71,7 @@ class _ClosingConnection(sqlite3.Connection):
             self.close()
 
 
-class ReviewRepository:
+class ReviewRepository(LifecycleRepository):
     def __init__(self, database_path: Any = "runs/v3/review.sqlite3", *, busy_timeout_ms: int = 5000):
         self.database_path = Path(database_path)
         self.busy_timeout_ms = int(busy_timeout_ms)
@@ -101,6 +102,7 @@ class ReviewRepository:
             connection.close()
 
     def initialize(self) -> None:
+        self.ensure_lifecycle_backup()
         with self.transaction(immediate=True) as connection:
             connection.executescript(
                 """
@@ -311,6 +313,7 @@ class ReviewRepository:
                 CREATE INDEX IF NOT EXISTS idx_jobs_status ON jobs(status, created_at);
                 """
             )
+            self.initialize_lifecycle(connection)
             connection.execute(
                 "INSERT OR IGNORE INTO schema_migrations(migration_version, applied_at) VALUES (?, ?)",
                 (MIGRATION_VERSION, utc_now()),
@@ -509,6 +512,7 @@ class ReviewRepository:
             "revision": row["current_revision"], "row_version": row["row_version"],
             "human_status": row["human_status"], "import_status": row["import_status"],
             "latest_decision_id": row["latest_decision_id"],
+            "workflow_state": row["workflow_state"], "pending_extension_id": row["pending_extension_id"],
         })
         return payload
 
@@ -531,10 +535,13 @@ class ReviewRepository:
 
     def list_candidates(
         self, run_id: str, *, human_status: Optional[str] = None,
-        relation_id: Optional[str] = None, limit: int = 20, offset: int = 0,
+        relation_id: Optional[str] = None, workflow_state: Optional[str] = None, limit: int = 20, offset: int = 0,
     ) -> List[Dict[str, Any]]:
         clauses = ["c.run_id=?"]
         values: List[Any] = [run_id]
+        if workflow_state:
+            clauses.append("c.workflow_state=?")
+            values.append(workflow_state)
         if human_status:
             clauses.append("c.human_status=?")
             values.append(human_status)
@@ -551,10 +558,13 @@ class ReviewRepository:
 
     def count_candidates(
         self, run_id: str, *, human_status: Optional[str] = None,
-        relation_id: Optional[str] = None,
+        relation_id: Optional[str] = None, workflow_state: Optional[str] = None,
     ) -> int:
         clauses = ["c.run_id=?"]
         values: List[Any] = [run_id]
+        if workflow_state:
+            clauses.append("c.workflow_state=?")
+            values.append(workflow_state)
         if human_status:
             clauses.append("c.human_status=?")
             values.append(human_status)
@@ -609,12 +619,13 @@ class ReviewRepository:
             )
             changed = connection.execute(
                 """UPDATE candidates SET current_revision=?, row_version=row_version+1,
-                   human_status='pending', latest_decision_id=NULL, updated_at=?
+                   human_status='pending', latest_decision_id=NULL, workflow_state='ready_for_review',pending_extension_id=NULL,updated_at=?
                    WHERE candidate_id=? AND row_version=?""",
                 (new_revision, now, candidate_id, expected_row_version),
             ).rowcount
             if changed != 1:
                 raise ConflictError("candidate was concurrently changed")
+            connection.execute("UPDATE ontology_extension_subscriptions SET status='revoked' WHERE candidate_id=? AND status='active'", (candidate_id,))
         return self.get_candidate(candidate_id)
 
     def start_audit(self, candidate_id: str, revision: int, context: Mapping[str, Any]) -> str:
@@ -743,6 +754,11 @@ class ReviewRepository:
             if old:
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old["decision_id"],))
             route = str(result.get("decision") or result.get("route") or "manual_review")
+            from .response_contract import CONTRACT_VERSION
+            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") == CONTRACT_VERSION:
+                from .proposal_resolver import selected_proposal
+                candidate = self.get_revision(candidate_id, revision)
+                selected_proposal(self, candidate, result)
             decision_payload = {
                 **dict(result), "decision_id": decision_id, "candidate_id": candidate_id,
                 "revision": revision, "audit_id": audit_id, "decision_version": version,
@@ -758,7 +774,10 @@ class ReviewRepository:
             )
             operation = None
             outbox_revision = revision
-            if route == "auto_accept":
+            waiting = result.get("workflow_state") in {"awaiting_ontology_review", "awaiting_ontology_release", "reaudit_required", "schema_unresolved"}
+            if waiting:
+                operation = None
+            elif route == "auto_accept":
                 operation = "upsert"
             elif (old and old["final_decision"] in {"human_accept", "auto_accept"}) or (
                 current and current["import_status"] in {"pending", "imported", "failed"}
@@ -783,6 +802,11 @@ class ReviewRepository:
                    import_status=?, updated_at=? WHERE candidate_id=?""",
                 (decision_id, "pending" if operation else "not_queued", now, candidate_id),
             )
+            connection.execute("UPDATE candidates SET workflow_state=?,pending_extension_id=? WHERE candidate_id=?",
+                               (result.get("workflow_state", "manual_review"), result.get("pending_extension_id"), candidate_id))
+            if waiting and result.get("pending_extension_id"):
+                connection.execute("UPDATE ontology_extension_subscriptions SET expected_row_version=? WHERE extension_id=? AND candidate_id=? AND revision=? AND status='active'",
+                                   (int(current["row_version"])+1, result["pending_extension_id"], candidate_id, revision))
         return True
 
     def apply_human_feedback(self, request: Mapping[str, Any]) -> Dict[str, Any]:
@@ -960,6 +984,9 @@ class ReviewRepository:
                  now, candidate_id, expected_row_version),
             )
 
+            connection.execute("UPDATE ontology_extension_subscriptions SET status='revoked' WHERE candidate_id=? AND status='active'", (candidate_id,))
+            connection.execute("UPDATE candidates SET workflow_state=?,pending_extension_id=NULL WHERE candidate_id=?",
+                               ("ready_for_review" if action == "modify" else "human_reviewed", candidate_id))
             label = labels.get("valid_for_kg")
             if label in (0, 1) and action in {"accept", "accept_corrected", "reject"}:
                 memory_version = int(connection.execute(
@@ -1134,11 +1161,18 @@ class ReviewRepository:
                 "audit_snapshot_status": "bound" if event.get("audit_id") and row["audit_status"] == "completed" else "missing",
                 "feature_schema_version": row["feature_schema_version"],
                 "review_versions": {key: value for key, value in _loads(row["context_json"], {}).items()
-                    if key in ("prompt_version", "response_contract_version", "evidence_bundle_version", "committee_version",
+                    if key in ("prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
+                        "planner_prompt_hash",
                         "planner_prompt_version", "planner_contract_version", "planner_strategy_version", "planner_model_id",
                         "planner_model_family", "configured_strategy", "executed_strategy")},
             })
         return result
+
+    def previous_revision_audit(self, candidate_id, revision, exclude_audit_id):
+        with self.connect() as connection:
+            row = connection.execute("SELECT audit_id FROM audit_runs WHERE candidate_id=? AND revision=? AND audit_id<>? AND status IN ('completed','paused','interrupted') ORDER BY created_at DESC,rowid DESC LIMIT 1",
+                                     (candidate_id, revision, exclude_audit_id)).fetchone()
+        return self.get_audit(candidate_id, row[0]) if row else None
 
     def get_audit(self, candidate_id: str, audit_id: Optional[str] = None) -> Dict[str, Any]:
         with self.connect() as connection:
@@ -1169,6 +1203,7 @@ class ReviewRepository:
             planner_steps = connection.execute("SELECT step_no,state_version,state_hash,record_json,created_at FROM planner_steps WHERE audit_id=? ORDER BY step_no", (audit["audit_id"],)).fetchall()
             tool_calls = connection.execute("SELECT tool_call_id,step_no,tool_name,status,record_json,created_at FROM agent_tool_calls WHERE audit_id=? ORDER BY step_no", (audit["audit_id"],)).fetchall()
             checkpoint = connection.execute("SELECT phase,checkpoint_json FROM agent_checkpoints WHERE audit_id=?", (audit["audit_id"],)).fetchone()
+            issue_events = connection.execute("SELECT event_json FROM issue_events WHERE audit_id=? ORDER BY rowid", (audit["audit_id"],)).fetchall()
         return {
             "audit_id": audit["audit_id"], "candidate_id": audit["candidate_id"],
             "revision": audit["revision"], "status": audit["status"], "mode": audit["mode"],
@@ -1180,6 +1215,7 @@ class ReviewRepository:
                         "gaps": _loads(row["gaps_json"], {})} for row in proposals],
             "votes": [_loads(row["vote_json"], {}) for row in votes],
             "attempts": [_loads(row["response_json"], {}) for row in attempts],
+            "issue_events": [_loads(row["event_json"], {}) for row in issue_events],
             "planner_steps": [{"step_no": r["step_no"], "state_version": r["state_version"],
                                "state_hash": r["state_hash"], "created_at": r["created_at"], **_loads(r["record_json"], {})} for r in planner_steps],
             "tool_calls": [{"tool_call_id": r["tool_call_id"], "step_no": r["step_no"], "tool": r["tool_name"],

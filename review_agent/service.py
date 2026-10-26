@@ -73,7 +73,7 @@ class ReviewService:
             has_base_url = bool(settings["base_url"])
             slots.append({"id": item.get("id"),
                           "configured": bool(model and family and has_api_key and has_base_url),
-                          "model": model, "family": family, "has_api_key": has_api_key,
+                          "model": model, "model_identity": settings["model_identity"], "family": family, "has_api_key": has_api_key,
                           "has_base_url": has_base_url})
         calibration = self.config.get("calibration") or {}
         model_path = resolved_path(calibration.get("model_path"))
@@ -116,7 +116,7 @@ class ReviewService:
         configured_slots = [item for item in slots if item["configured"]]
         distinct_families = len({item["family"] for item in configured_slots})
         distinct_slot_ids = len({item["id"] for item in configured_slots if item.get("id")})
-        distinct_models = len({str(item["model"]).strip().casefold() for item in configured_slots})
+        distinct_models = len({item["model_identity"] for item in configured_slots})
         committee_size = int(consensus.get("committee_size", 4))
         required_votes = int(consensus.get("required_votes", 3))
         minimum_families = int(consensus.get("minimum_distinct_families", 3))
@@ -149,15 +149,15 @@ class ReviewService:
 
     def items(
         self, run_id: str, *, status: Optional[str] = None, relation_id: Optional[str] = None,
-        page: int = 1, page_size: int = 20,
+        page: int = 1, page_size: int = 20, workflow_state: Optional[str] = None,
     ) -> Dict[str, Any]:
         page, page_size = max(1, int(page)), min(100, max(1, int(page_size)))
         self.repository.get_run(run_id)
         total = self.repository.count_candidates(
-            run_id, human_status=status, relation_id=relation_id,
+            run_id, human_status=status, relation_id=relation_id, workflow_state=workflow_state,
         )
         items = self.repository.list_candidates(
-            run_id, human_status=status, relation_id=relation_id,
+            run_id, human_status=status, relation_id=relation_id, workflow_state=workflow_state,
             limit=page_size, offset=(page - 1) * page_size,
         )
         summaries = []
@@ -169,17 +169,29 @@ class ReviewService:
                     audit = None
             except NotFoundError:
                 audit = None
+            selected = None
+            if audit and decision and decision.get("selected_proposal_digest"):
+                selected = next((r for r in audit["rounds"] if r["round_id"] == decision.get("selected_round_id")
+                                 and r["proposal_digest"] == decision["selected_proposal_digest"]), None)
+            # Unfinished/history remains inspectable, but is not an authoritative decision bundle.
+            displayed = selected or ((audit or {}).get("rounds") or [{}])[-1]
+            displayed_votes = [v for v in (audit or {}).get("votes", []) if v["round_id"] == displayed.get("round_id")
+                               and v.get("proposal_digest") == displayed.get("proposal_digest")]
             summaries.append({**public_candidate(item), "latest_decision": decision,
                               "audit_summary": None if audit is None else {
                                   "audit_id": audit["audit_id"], "status": audit["status"],
                                   "calibrated_probability": audit["calibrated_probability"],
                                   "calibration_status": audit["calibration_status"],
-                                  "rounds": len(audit["rounds"]), "votes": audit["votes"],
+                                  "rounds": len(audit["rounds"]), "votes": displayed_votes,
+                                  "authoritative_selection": selected is not None,
+                                  "source_support_consensus": ((decision or {}) if selected else displayed.get("consensus") or {}).get("source_support_consensus", {}),
+                                  "admission_consensus": ((decision or {}) if selected else displayed.get("consensus") or {}).get("admission_consensus", {}),
+                                  "issue_history": audit["context"].get("issue_history", []), "issue_events": audit["issue_events"],
                                   "revision": audit["revision"], "versions": audit["context"],
-                                  "final_round_id": (audit["rounds"][-1]["round_id"] if audit["rounds"] else None),
-                                  "evidence_bundle": (audit["rounds"][-1].get("evidence_bundle") if audit["rounds"] else {}),
-                                  "gaps": (audit["rounds"][-1].get("gaps") if audit["rounds"] else {}),
-                                  "ontology_check": (audit["rounds"][-1].get("ontology_check") if audit["rounds"] else {}),
+                                  "final_round_id": displayed.get("round_id"),
+                                  "evidence_bundle": displayed.get("evidence_bundle", {}),
+                                  "gaps": displayed.get("gaps", {}),
+                                  "ontology_check": displayed.get("ontology_check", {}),
                                   "planner_steps": [{k: v for k, v in step.items() if k != "attempts"}
                                                     for step in audit["planner_steps"]],
                                   "tool_calls": [{k: v for k, v in call.items() if k in {
@@ -197,6 +209,7 @@ class ReviewService:
     def summary(self, run_id: str) -> Dict[str, Any]:
         self.repository.get_run(run_id)
         with self.repository.connect() as connection:
+            workflows = connection.execute("SELECT workflow_state,COUNT(*) AS count FROM candidates WHERE run_id=? GROUP BY workflow_state", (run_id,)).fetchall()
             rows = connection.execute(
                 "SELECT human_status, import_status, COUNT(*) AS count FROM candidates WHERE run_id=? GROUP BY human_status, import_status",
                 (run_id,),
@@ -224,6 +237,7 @@ class ReviewService:
             "run_id": run_id,
             "human_status": human,
             "import_status": imports,
+            "workflow_states": {row["workflow_state"]: row["count"] for row in workflows},
             "routes": {row["final_decision"]: row["count"] for row in routes},
             "total": sum(row["count"] for row in rows),
             "pending": human.get("pending", 0), "accepted": human.get("accepted", 0),

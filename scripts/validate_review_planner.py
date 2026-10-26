@@ -26,7 +26,8 @@ def mock_vote(payload):
     eid = payload["allowed_evidence_ids"][0]
     conditional = any("仅在" in e["quote"] for e in payload["evidence"])
     return {"verdict": "uncertain" if conditional else "valid", "source_support": "insufficient" if conditional else "supported",
-        "schema_status": "pass", "supporting_evidence_ids": [] if conditional else [eid], "counter_evidence_ids": [],
+        "schema_status": "pass", "schema_issue": "none", "schema_change_hint": None,
+        "supporting_evidence_ids": [] if conditional else [eid], "counter_evidence_ids": [],
         "reason_codes": ["CONDITION_MISSING"] if conditional else [],
         "checks": [{"check": name, "status": "unknown" if conditional and name == "qualifiers" else "pass",
                     "evidence_ids": [eid], "note": "MOCK committee fixture observation"} for name in CHECK_NAMES],

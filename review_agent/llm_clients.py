@@ -16,6 +16,8 @@ class LLMResponse:
     input_tokens: Optional[int] = None
     output_tokens: Optional[int] = None
     cached: bool = False
+    returned_model_id: Optional[str] = None
+    response_id: Optional[str] = None
 
 
 class MockLLMClient:
@@ -97,4 +99,5 @@ class OpenAICompatibleClient:
             latency_ms=int((time.monotonic() - started) * 1000),
             input_tokens=getattr(usage, "prompt_tokens", None),
             output_tokens=getattr(usage, "completion_tokens", None),
+            returned_model_id=getattr(response, "model", None), response_id=getattr(response, "id", None),
         )

@@ -79,6 +79,9 @@ class RiskPolicy:
         if malformed_required_fields:
             return {"decision": "auto_reject", "reason_codes": ["MALFORMED_REQUIRED_FIELDS"]}
         reasons: List[str] = []
+        source_rejected = consensus.get("source_support_consensus", {}).get("result") == "contradicted"
+        if gaps.get("identity_unresolved") and not source_rejected:
+            reasons.append("CANDIDATE_IDENTITY_UNRESOLVED")
         for flag, code in (("validation_missing", "CURRENT_VALIDATION_MISSING"),
                            ("ontology_not_checked", "ONTOLOGY_CHECK_REQUIRED"),
                            ("critical_issues_unresolved", "CRITICAL_ISSUES_UNRESOLVED"),
@@ -86,7 +89,7 @@ class RiskPolicy:
                            ("unreviewed_discovered_evidence", "DISCOVERED_EVIDENCE_OUTSIDE_PROMPT")):
             if gaps.get(flag):
                 reasons.append(code)
-        if guard.get("status") != "pass":
+        if guard.get("status") != "pass" and not source_rejected:
             reasons.extend(guard.get("reason_codes") or ["ONTOLOGY_NOT_CONFIRMED"])
         if not evidence.get("items"):
             reasons.append("EVIDENCE_MISSING")

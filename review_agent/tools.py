@@ -49,7 +49,8 @@ class AgentTools:
         registry = {"inspect_context": self.inspect_context, "search_evidence": self.search_evidence,
                     "inspect_ontology": self.inspect_ontology, "lookup_review_memory": self.lookup_review_memory,
                     "run_validation": self.run_validation, "propose_revision": self.propose_revision,
-                    "finish_review": self.finish_review}
+                    "finish_review": self.finish_review, "request_ontology_extension": self.request_ontology_extension,
+                    "get_ontology_extension_status": self.get_ontology_extension_status}
         return registry[name](**args)
 
     def inspect_context(self, evidence_id, before, after):
@@ -78,6 +79,12 @@ class AgentTools:
         state = self.state
         found = retrieve_more(state.candidate, self.runtime.document,
             {"scope": scope, "query": query, "limit": limit}, [i["evidence_id"] for i in state.archive])
+        import re
+        for item in found["items"]:
+            item["query_purpose"] = purpose
+            item["review_obligation"] = bool(purpose in {"check_qualifiers", "find_counterevidence"}
+                or item.get("lexical_relevance_score", 0) > 0
+                or re.search(r"不能|不得|仅在|除非|否定|\b(?:not|never|only|unless)\b", item["quote"], re.I))
         if scope not in state.searched_scopes:
             state.searched_scopes.append(scope)
         count = self.merge_evidence(found)
@@ -85,17 +92,92 @@ class AgentTools:
                 "query_used_for": "lexical_recall_and_ranking", "new_evidence_count": count,
                 "items": found["items"], "semantic_status": "unknown", "deduplicated_against_archive": True}
 
-    def inspect_ontology(self, relation_id, issue, endpoint_types=None):
+    def inspect_ontology(self, relation_id, issue, endpoint_types=None, surface_relation=None, query=None):
         guard = self.runtime.orchestrator.ontology_guard
         self.state.guard = guard.check(self.state.candidate)
         self.state.ontology_checked = True
         definition = getattr(guard, "relations", {}).get(relation_id)
+        from schema.relation_registry import RelationRegistry
+        from ontologyBuild.ontology_adapter import normalize_name
+        registry = RelationRegistry(guard.ontology)
+        triple = self.state.candidate.get("triple") or {}
+        candidate_lookup = registry.resolve(triple.get("relation_id") or triple.get("surface_relation") or triple.get("relation") or "")
+        searches = [registry.resolve(value) for value in (relation_id, surface_relation, query) if value]
+        matched = {candidate_lookup["relation_id"]} if candidate_lookup["relation_id"] else set(candidate_lookup.get("matched_ids", []))
+        for result in searches:
+            matched.update([result["relation_id"]] if result["relation_id"] else result.get("matched_ids", []))
+        class_queries = {name: (endpoint_types or {}).get(name) or triple.get(name + "_type") for name in ("head", "tail")}
+        class_matches = {name: guard.class_index.get(normalize_name(value)) for name, value in class_queries.items() if value}
+        terms = {normalize_name(value) for value in (query, surface_relation, triple.get("surface_relation")) if value}
+        recall = [{"id": identity, "label": item.get("label"), "kind": item.get("property_kind"), "confirmed_mapping": False}
+                  for identity, item in registry.properties.items() if any(term and term in normalize_name(str(item.get("label") or identity)) for term in terms)]
+        self.state.ontology_lookup = {"scope": "full_frozen_ontology", "status": candidate_lookup["status"],
+            "matched_ids": sorted(matched), "candidate_revision": self.state.candidate["revision"],
+            "ontology_version": guard.snapshot.ontology_version, "query": query or surface_relation or triple.get("surface_relation"),
+            "ontology_release_id": self.state.candidate.get("ontology_release_id"), "profile_hash": self.state.candidate.get("profile_hash"),
+            "endpoint_class_queries": class_queries, "endpoint_class_matches": class_matches,
+            "matched_definitions": [registry.properties[identity] for identity in sorted(matched)],
+            "recall_suggestions": recall[:12], "recall_is_not_mapping_confirmation": True,
+            "class_ids_checked": len(guard.classes), "relation_ids_checked": len(guard.relations)}
         if self.state.guard.get("status") != "pass":
             self.runtime.issue("ontology_gap", "冻结本体检查未通过", critical=True)
         return {"status": "ok", "relation_id": relation_id, "definition": definition,
                 "requested_endpoint_types": endpoint_types, "issue": issue,
                 "check": self.state.guard,
+                "existing_schema_search": self.state.ontology_lookup,
                 "ontology_version": self.state.candidate["ontology_version"]}
+
+    def request_ontology_extension(self, change_kind, description, proposed_changes, evidence_ids):
+        from .planner_contracts import ActionError
+        state = self.state
+        validation = state.current_validation()
+        if not validation or validation["consensus"].get("source_support_consensus", {}).get("result") != "supported":
+            raise ActionError("ontology extension requires current independent source-support consensus")
+        if state.ontology_lookup.get("scope") != "full_frozen_ontology":
+            raise ActionError("full frozen schema lookup is required before extension")
+        current_issue = {vote.get("schema_issue") for vote in validation["votes"] if vote.get("voter_id") in validation["consensus"].get("eligible_voter_ids", [])}
+        if change_kind in {"revise_constraint", "revise_definition", "merge_terms"}:
+            if not current_issue & {"suspected_schema_error", "incompatible"}:
+                raise ActionError("constraint revision requires an independent schema diagnostic")
+        elif change_kind == "add_class":
+            from ontologyBuild.ontology_adapter import normalize_name
+            label = proposed_changes.get("label") or proposed_changes.get("name")
+            queried = state.ontology_lookup.get("endpoint_class_queries", {})
+            missing = {normalize_name(value) for name, value in queried.items() if value
+                       and not state.ontology_lookup.get("endpoint_class_matches", {}).get(name)}
+            if (current_issue != {"not_covered"} or not label or normalize_name(label) not in missing
+                    or self.runtime.orchestrator.ontology_guard.class_index.get(normalize_name(label))):
+                raise ActionError("class extension requires an unrepresented, source-supported endpoint class from full lookup")
+        elif state.guard.get("relation_known") or state.ontology_lookup.get("matched_ids") or current_issue != {"not_covered"}:
+            raise ActionError("existing/ambiguous schema or unconfirmed gap must be remapped/reviewed, not duplicated")
+        from .issue_ledger import IssueLedger
+        if any(i["code"] in {"source_conflict", "CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISMATCH", "revision_proposed"}
+               for i in IssueLedger(state).unresolved()):
+            raise ActionError("unresolved source/candidate issue cannot be repaired by ontology extension")
+        proposal = self.runtime.repository.get_audit(state.candidate["candidate_id"], state.audit_id)["rounds"]
+        proposal = next(p for p in proposal if p["round_id"] == validation["round_id"])
+        supporting = {eid for vote in validation["votes"] for eid in vote.get("supporting_evidence_ids", [])}
+        if not evidence_ids or not set(evidence_ids) <= supporting:
+            raise ActionError("extension requires supported current evidence IDs")
+        result = self.runtime.repository.create_extension_request(state.candidate,
+            expected_row_version=state.context["execution_row_version"], proposal=proposal, change_kind=change_kind,
+            description=description, proposed_changes=proposed_changes, evidence_ids=evidence_ids, full_lookup=state.ontology_lookup)
+        state.pending_extension_id = result["task"]["extension_id"]
+        state.workflow_state = result["workflow_state"]
+        state.context["execution_row_version"] = result["row_version"]
+        state.stop_reason = state.workflow_state
+        return {"status": "waiting", "extension_id": state.pending_extension_id,
+                "workflow_state": state.workflow_state, "release_published": False, "worker_wait_required": False}
+
+    def get_ontology_extension_status(self, extension_id):
+        result = self.runtime.repository.extension_status(extension_id, self.state.candidate["candidate_id"])
+        self.state.pending_extension_id = extension_id
+        self.state.workflow_state = ("reaudit_required" if result["status"] == "published" else
+            "schema_unresolved" if result["status"] in {"rejected", "needs_human"} else
+            "awaiting_ontology_release" if result["status"] == "approved" else "awaiting_ontology_review")
+        self.state.stop_reason = self.state.workflow_state
+        return {"status": "ok", "task": result, "workflow_state": self.state.workflow_state,
+                "old_votes_reusable_for_new_release": False, "automatic_rebind_implemented": False}
 
     def lookup_review_memory(self, relation_id, issue_type, limit):
         state = self.state
@@ -160,31 +242,26 @@ class AgentTools:
     def accept_validation(self, proposal, votes, key):
         """Also used to recover a committee that committed before a crash."""
         runtime, state = self.runtime, self.state
-        valid = [v for v in votes if v.get("response_status") == "ok"]
-        supports = any(v.get("source_support") == "supported" for v in valid)
-        contradicts = any(v.get("source_support") == "contradicted" for v in valid)
-        counter = any(v.get("verdict") == "invalid" and v.get("counter_evidence_ids") for v in valid)
-        if supports and (contradicts or counter):
-            runtime.issue("source_conflict", "独立审核发现支持与反证冲突，需核查适用范围或转人工", critical=True)
-            state.gaps.update(unresolved_counterevidence=True, unresolved_support_conflict=True)
-        material = {"CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISMATCH", "EVIDENCE_INSUFFICIENT"}
+        consensus = aggregate_votes(votes, runtime.orchestrator.committee, proposal_digest=proposal["proposal_digest"], proposal=proposal)
+        from .issue_ledger import IssueLedger
+        ledger = IssueLedger(state)
+        ledger.observe(proposal, votes, consensus, runtime.orchestrator.committee.required_votes)
+        valid = [v for v in votes if v.get("voter_id") in consensus.get("eligible_voter_ids", [])]
         for vote in valid:
-            for code in set(vote.get("reason_codes", [])) & material:
-                runtime.issue(code, "审核委员报告关键限定条件/方向/证据缺口", critical=True)
-            if vote.get("ontology_disagreement"):
-                state.gaps["ontology_disagreement"] = True
             for eid in vote.get("counter_evidence_ids", []):
-                if eid not in state.protected_ids:
-                    state.protected_ids.append(eid)
-        state.gaps["need_more_evidence"] = bool(state.issues or any(
-            v.get("source_support") == "insufficient" or v.get("requested_context") for v in valid))
-        consensus = aggregate_votes(votes, runtime.orchestrator.committee,
-            proposal_digest=proposal["proposal_digest"],
-            unresolved_counterevidence=bool(state.gaps.get("unresolved_counterevidence")),
-            unresolved_support_conflict=bool(state.gaps.get("unresolved_support_conflict")))
+                if eid not in state.protected_ids: state.protected_ids.append(eid)
+        unresolved = ledger.unresolved()
+        conflict = any(i["code"] in {"source_conflict", "counterevidence"} for i in unresolved)
+        state.gaps.update(unresolved_counterevidence=conflict, unresolved_support_conflict=conflict,
+            ontology_disagreement=any(v.get("ontology_disagreement") for v in valid),
+            need_more_evidence=any(i["code"] in {"source_conflict", "counterevidence", "EVIDENCE_INSUFFICIENT"} for i in unresolved))
+        consensus = aggregate_votes(votes, runtime.orchestrator.committee, proposal_digest=proposal["proposal_digest"], proposal=proposal,
+                                    admission_blocked=any(i.get("critical") for i in unresolved),
+                                    unresolved_counterevidence=conflict, unresolved_support_conflict=conflict)
         validation = {"proposal_digest": proposal["proposal_digest"], "round_id": proposal["round_id"],
             "evidence_hash": state.bundle.get("evidence_hash"), "votes": votes, "consensus": consensus}
         state.validations[key], state.votes, state.consensus = validation, votes, consensus
+        runtime.repository.record_issue_events(state.audit_id, state.issue_events)
         runtime.repository.update_round_gaps(state.audit_id, proposal["round_id"], {**state.gaps, "validation_key": key})
         # append_round's frozen proposal is immutable; consensus is a system result.
         with runtime.repository.transaction(immediate=True) as connection:

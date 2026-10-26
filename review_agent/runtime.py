@@ -25,8 +25,8 @@ class AgentRuntime:
         self.initial_ids = set()
 
     def issue(self, code, description, critical=False):
-        if not any(x["code"] == code and x["description"] == description for x in self.state.issues):
-            self.state.issues.append({"code": code, "description": description, "critical": critical})
+        from .issue_ledger import IssueLedger
+        IssueLedger(self.state).open(code, description, critical)
 
     def should_stop(self):
         current = self.repository.get_candidate(self.state.candidate["candidate_id"])
@@ -42,6 +42,7 @@ class AgentRuntime:
             raise AgentStopped("total_timeout")
 
     def checkpoint(self, phase="ready"):
+        self.repository.record_issue_events(self.state.audit_id, self.state.issue_events)
         self.repository.save_agent_checkpoint(self.state.audit_id, self.state.export(), self.budget.snapshot(), phase)
 
     def planner_started(self, payload, attempts):
@@ -101,10 +102,12 @@ class AgentRuntime:
             "execution_deadline_epoch": self.budget.deadline_epoch}
         ctx["execution_row_version"] = self.repository.get_candidate(candidate_id)["row_version"]
         self.state = AgentState(candidate=candidate, context=ctx, audit_id=audit_id)
+        from .issue_ledger import IssueLedger
+        IssueLedger(self.state).inherit(self.repository)
         self.state.consensus = aggregate_votes([], self.orchestrator.committee)
         self.repository.start_audit(candidate_id, revision, ctx)
         initial = retrieve_initial(candidate, self.document, max_items=6)
-        self.initial_ids = {i["evidence_id"] for i in initial["items"] if i.get("retrieval_level") == "local_sentence"}
+        self.initial_ids = {i["evidence_id"] for i in initial["items"] if i.get("retrieval_level") == "local_sentence" or i.get("source_anchor_kind") == "document_span"}
         ctx["initial_evidence_ids"] = sorted(self.initial_ids)
         self.tools.merge_evidence(initial)
         self.repository.update_audit_context(audit_id, ctx)
@@ -272,7 +275,10 @@ class AgentRuntime:
             self.check_live()
             gaps = {**self.policy.final_gaps(state), "stop_reason": state.stop_reason}
             state.context.update(executed_strategy=state.executed_strategy, agent_stop_reason=state.stop_reason,
-                agent_budget=budget.snapshot(), unresolved_issues=state.issues, revision_drafts=state.revision_drafts)
+                agent_budget=budget.snapshot(), unresolved_issues=[i for i in state.issues if i.get("status", "open") != "resolved"],
+                issue_history=state.issues, evidence_exclusions=state.evidence_exclusions, ontology_lookup=state.ontology_lookup,
+                workflow_state=state.workflow_state, pending_extension_id=state.pending_extension_id,
+                revision_drafts=state.revision_drafts)
             self.repository.update_audit_context(state.audit_id, state.context)
             current = state.current_validation()
             votes = current["votes"] if current else []
@@ -280,7 +286,12 @@ class AgentRuntime:
             result = self.orchestrator._finalize(state.candidate, state.context, state.audit_id, state.guard,
                 state.bundle, votes, consensus, gaps, current["round_id"] if current else 0,
                 {**budget.usage, "deadline_epoch": budget.deadline_epoch})
-            self.checkpoint("finished")
+            if result.get("committed"):
+                state.workflow_state = result["workflow_state"]
+                state.context["workflow_state"] = state.workflow_state
+                state.context["execution_row_version"] = self.repository.get_candidate(candidate_id)["row_version"]
+                self.repository.update_audit_context(state.audit_id, {"workflow_state": state.workflow_state})
+            self.checkpoint("waiting_ontology" if state.workflow_state.startswith("awaiting_") else "finished")
             return result
         except AuditPaused as exc:
             self.checkpoint("paused")

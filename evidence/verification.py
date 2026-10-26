@@ -161,6 +161,7 @@ def verify_vote_references(vote: Mapping[str, Any], evidence_items: Iterable[Map
     result = dict(vote)
     available = {str(item.get("evidence_id")) for item in evidence_items if item.get("evidence_id")}
     referenced = set(result.get("supporting_evidence_ids") or []) | set(result.get("counter_evidence_ids") or [])
+    referenced.update(a.get("evidence_id") for a in result.get("evidence_assessments") or [] if isinstance(a, Mapping))
     for check in result.get("checks") or []:
         if isinstance(check, Mapping):
             referenced.update(check.get("evidence_ids") or [])

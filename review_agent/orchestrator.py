@@ -13,7 +13,7 @@ from evidence.verification import make_evidence_bundle, verify_evidence_bundle
 
 from .consensus import Committee, aggregate_votes
 from .contracts import FEATURE_SCHEMA_VERSION, EVIDENCE_BUNDLE_VERSION, canonical_triple, proposal_digest, sha256_json
-from .response_contract import PROMPT_VERSION, CONTRACT_VERSION, CONTEXT_SCOPES
+from .response_contract import PROMPT_VERSION, CONTRACT_VERSION, CONTEXT_SCOPES, PROMPT_HASH, RESPONSE_SCHEMA
 from .explanation import explain_from_verified_records
 from .execution import AuditPaused
 from .memory import ReviewMemory
@@ -110,10 +110,13 @@ class ReviewOrchestrator:
             minimum_distinct_families=int(consensus_config.get("minimum_distinct_families", 3)),
             version=str(consensus_config.get("version", "committee_v1")),
         )
+        self.committee_policy_hash = sha256_json({"committee_size": len(self.committee.voter_ids),
+            "required_votes": self.committee.required_votes, "minimum_distinct_families": self.committee.minimum_distinct_families})
 
     def committee_members(self):
         return [{"id": v["id"],
             "model_id": v.get("model_id") or getattr(v["client"], "model_id", ""),
+            "model_identity": v.get("model_identity") or str(v.get("model_id") or getattr(v["client"], "model_id", "")).casefold(),
             "model_family": v.get("model_family") or getattr(v["client"], "model_family", "")}
             for v in self.validators]
 
@@ -121,18 +124,24 @@ class ReviewOrchestrator:
         self, audit_id: str, candidate: Mapping[str, Any], guard: Mapping[str, Any],
         bundle: Mapping[str, Any], round_id: int, context: Mapping[str, Any],
     ) -> Dict[str, Any]:
+        from .response_contract import PROMPT_HASH, RESPONSE_SCHEMA
         seed = {
             "candidate_id": candidate["candidate_id"], "revision": candidate["revision"],
+            "candidate_review_hash": sha256_json(candidate), "ontology_check_hash": sha256_json(guard),
             "canonical_triple": canonical_triple(candidate),
             "document_version": candidate["document_version"],
             "ontology_version": candidate["ontology_version"],
             **{key: candidate.get(key) for key in ("contract_version", "source_index_hash", "ontology_release_id", "profile_hash")},
             "evidence_bundle_hash": bundle["evidence_hash"],
             "prompt_version": PROMPT_VERSION,
+            "prompt_hash": PROMPT_HASH, "response_contract_hash": sha256_json(RESPONSE_SCHEMA),
             "response_contract_version": CONTRACT_VERSION,
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
             "rubric_version": context.get("rubric_version", "triple_review_rubric_v1"),
             "committee_version": self.committee.version,
+            "committee_policy_hash": self.committee_policy_hash,
+            "committee_policy": {"committee_size": len(self.committee.voter_ids), "required_votes": self.committee.required_votes,
+                                 "minimum_distinct_families": self.committee.minimum_distinct_families},
             "committee_members": self.committee_members(),
             "memory_snapshot_id": context.get("memory_snapshot_id", 0),
             "memory_bundle_hash": context.get("memory_bundle_hash"), "round_id": round_id,
@@ -171,9 +180,12 @@ class ReviewOrchestrator:
             "executed_strategy": "deterministic",
             **dict(context or {}),
             "prompt_version": PROMPT_VERSION,
+            "prompt_hash": PROMPT_HASH,
+            "response_contract_hash": sha256_json(RESPONSE_SCHEMA), "committee_policy_hash": self.committee_policy_hash,
             "response_contract_version": CONTRACT_VERSION,
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
             "committee_version": self.committee.version,
+            "committee_members": self.committee_members(),
         }
         candidate = self.repository.get_revision(candidate_id, revision)
         memory_config = dict(self.config.get("memory") or {})
@@ -208,6 +220,15 @@ class ReviewOrchestrator:
         last_votes: List[Dict[str, Any]] = []
         consensus: Dict[str, Any] = aggregate_votes([], self.committee)
         gaps: Dict[str, Any] = {"need_more_evidence": False}
+        from .agent_state import AgentState
+        from .issue_ledger import IssueLedger
+        lifecycle = AgentState(candidate=dict(candidate), context=context, audit_id=audit_id)
+        ledger = IssueLedger(lifecycle)
+        ledger.inherit(self.repository)
+        if lifecycle.archive:
+            bundle = bounded_evidence_bundle(verify_evidence_bundle(make_evidence_bundle(
+                [*lifecycle.archive, *bundle["items"]], bundle.get("searched_levels", [])), document_snapshot, candidate),
+                max_items=max_evidence_items, max_chars=max_evidence_chars)
         final_round = 0
         for round_id in range(1, budget.max_rounds + 1):
             final_round = round_id
@@ -248,7 +269,8 @@ class ReviewOrchestrator:
                 budget.refund_llm(reserved_calls - actual_calls)
             else:
                 last_votes = []
-            preliminary = aggregate_votes(last_votes, self.committee, proposal_digest=proposal["proposal_digest"])
+            preliminary = aggregate_votes(last_votes, self.committee, proposal_digest=proposal["proposal_digest"], proposal=proposal)
+            ledger.observe(proposal, last_votes, preliminary, self.committee.required_votes)
             material_counter = any(
                 vote.get("response_status") == "ok" and vote.get("verdict") == "invalid"
                 and vote.get("counter_evidence_ids") for vote in last_votes
@@ -264,8 +286,10 @@ class ReviewOrchestrator:
             )
             consensus = aggregate_votes(
                 last_votes, self.committee, proposal_digest=proposal["proposal_digest"],
-                unresolved_counterevidence=material_counter,
-                unresolved_support_conflict=material_support,
+                proposal=proposal,
+                admission_blocked=any(i.get("critical") for i in ledger.unresolved()),
+                unresolved_counterevidence=any(i["code"] in {"source_conflict", "counterevidence"} for i in ledger.unresolved()),
+                unresolved_support_conflict=any(i["code"] in {"source_conflict", "counterevidence"} for i in ledger.unresolved()),
             )
             gaps = {
                 "need_more_evidence": bool(material_counter or material_support or material_reason
@@ -276,6 +300,8 @@ class ReviewOrchestrator:
                 "ontology_disagreement": any(v.get("ontology_disagreement") for v in last_votes),
                 "material_reason": material_reason,
                 "budget_exhausted": call_budget_exhausted,
+                "critical_issues_unresolved": any(i.get("critical") for i in ledger.unresolved()),
+                "protected_evidence_omitted": bool(set(lifecycle.protected_ids) - {i["evidence_id"] for i in bundle["items"]}),
             }
             self.repository.append_round(audit_id, proposal, last_votes, consensus, gaps)
             if call_budget_exhausted or not gaps["need_more_evidence"] or round_id >= budget.max_rounds:
@@ -326,12 +352,30 @@ class ReviewOrchestrator:
             bundle = next_bundle
             self.repository.update_round_gaps(audit_id, round_id, gaps)
 
+        context.update(issue_history=lifecycle.issues, evidence_exclusions=lifecycle.evidence_exclusions)
+        self.repository.record_issue_events(audit_id, lifecycle.issue_events)
+        self.repository.update_audit_context(audit_id, context)
         return self._finalize(candidate, context, audit_id, guard, bundle, last_votes, consensus, gaps,
                               final_round, {"llm_calls": budget.llm_calls, "tool_calls": budget.tool_calls})
 
     def _finalize(self, candidate, context, audit_id, guard, bundle, last_votes, consensus, gaps,
                   final_round, usage):
         candidate_id, revision = candidate["candidate_id"], candidate["revision"]
+        gaps = dict(gaps)
+        if candidate.get("contract_version") == "extraction_candidate_v4" and candidate.get("fact_key_state") != "canonical":
+            gaps["identity_unresolved"] = True
+        rounds = self.repository.get_audit(candidate_id, audit_id)["rounds"]
+        selected = next((p for p in rounds if p["round_id"] == final_round), None)
+        if (not selected or selected["evidence_bundle"]["evidence_hash"] != bundle.get("evidence_hash")
+                or any(v.get("round_id") != final_round or v.get("proposal_digest") != selected["proposal_digest"] for v in last_votes)):
+            selected = None
+            gaps["validation_missing"] = True
+        if selected:
+            consensus = aggregate_votes(last_votes, self.committee, proposal=selected, proposal_digest=selected["proposal_digest"],
+                unresolved_counterevidence=bool(gaps.get("unresolved_counterevidence")),
+                unresolved_support_conflict=bool(gaps.get("unresolved_support_conflict")),
+                admission_blocked=any(gaps.get(key) for key in ("critical_issues_unresolved", "protected_evidence_omitted",
+                    "unreviewed_discovered_evidence", "validation_missing", "version_stale", "ontology_not_checked", "identity_unresolved")))
         features = TripleFeatureExtractor().extract_v3(
             candidate, guard, bundle, last_votes, consensus,
             round_count=final_round,
@@ -342,6 +386,7 @@ class ReviewOrchestrator:
             "prompt_version": PROMPT_VERSION,
             "response_contract_version": CONTRACT_VERSION,
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
+            **{key: context.get(key) for key in ("prompt_hash", "response_contract_hash", "committee_policy_hash")},
             **{key: context[key] for key in context if key.startswith("planner_") or key in {"executed_strategy", "configured_strategy"}},
         })
         route = self.risk_policy.route_v3(
@@ -365,6 +410,18 @@ class ReviewOrchestrator:
                 "reason_codes": [*route.get("reason_codes", []), "NON_ACTIVE_MODE_REQUIRES_HUMAN"],
             }
         explanation = explain_from_verified_records(candidate, guard, bundle, last_votes, route)
+        source_result = consensus.get("source_support_consensus", {}).get("result", "unresolved")
+        workflow = context.get("workflow_state") or "manual_review"
+        if workflow not in {"awaiting_ontology_review", "awaiting_ontology_release", "reaudit_required", "schema_unresolved"}:
+            if any(i.get("requires_revision") and i.get("status", "open") != "resolved" for i in context.get("issue_history", [])):
+                workflow = "revision_required"
+            elif any(v.get("schema_issue") == "candidate_mapping_error" for v in last_votes):
+                workflow = "revision_required"
+            elif source_result == "supported" and guard.get("status") != "pass":
+                workflow = "schema_unresolved"
+            elif source_result == "contradicted" or route["decision"] in {"auto_accept", "auto_reject"}:
+                workflow = "review_completed"
+            else: workflow = "manual_review"
         result = {
             "audit_id": audit_id, "candidate_id": candidate_id, "revision": revision,
             "final_round_id": final_round, "consensus": consensus,
@@ -373,14 +430,26 @@ class ReviewOrchestrator:
             "policy_version": self.risk_policy.version,
             "decision": route["decision"], "reason_codes": route.get("reason_codes", []),
             "review_versions": {field: context[field] for field in (
-                "prompt_version", "response_contract_version", "evidence_bundle_version", "committee_version",
-                "planner_prompt_version", "planner_contract_version", "planner_strategy_version", "planner_model_id",
+                "prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
+                "planner_prompt_version", "planner_prompt_hash", "planner_contract_version", "planner_strategy_version", "planner_model_id",
                 "planner_model_family", "configured_strategy", "executed_strategy") if field in context},
             "features": features, "feature_schema_version": FEATURE_SCHEMA_VERSION,
             "explanation": explanation, "budget": usage,
             "configured_strategy": context.get("configured_strategy", "deterministic"),
             "executed_strategy": context.get("executed_strategy", "deterministic"),
             "stop_reason": gaps.get("stop_reason"),
+            "workflow_state": workflow, "pending_extension_id": context.get("pending_extension_id") or None,
+            "source_support_result": source_result, "schema_status": guard.get("status"),
+            "schema_diagnostics": sorted({v.get("schema_issue") for v in last_votes if v.get("schema_issue")}),
+            "source_support_consensus": consensus.get("source_support_consensus", {}),
+            "admission_consensus": consensus.get("admission_consensus", {}),
+            "selected_round_id": final_round if selected else None,
+            "selected_proposal_digest": selected["proposal_digest"] if selected else None,
+            "selected_evidence_hash": selected["evidence_bundle"]["evidence_hash"] if selected else None,
+            "committee_version": self.committee.version,
+            **{key: candidate.get(key) for key in ("ontology_release_id", "profile_hash", "ontology_version")},
+            "issue_history": context.get("issue_history", []),
+            "evidence_exclusions": context.get("evidence_exclusions", {}),
         }
         result["committed"] = self.repository.commit_audit_if_current(
             candidate_id, revision, audit_id, result

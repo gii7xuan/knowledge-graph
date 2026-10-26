@@ -267,7 +267,7 @@ class BatchExecutionTests(unittest.TestCase):
                                          "finish_reason": "stop"}]}, http_status)
                         return
                     eid = payload["allowed_evidence_ids"][0]
-                    vote = {"verdict": "valid", "source_support": "supported", "schema_status": "pass",
+                    vote = {"verdict": "valid", "source_support": "supported", "schema_status": "pass", "schema_issue": "none", "schema_change_hint": None,
                         "supporting_evidence_ids": [eid], "counter_evidence_ids": [], "reason_codes": [],
                         "checks": [{"check": name, "status": "pass", "evidence_ids": [eid], "note": "checked"}
                                    for name in CHECK_NAMES], "requested_context": None, "suggested_revision": None}

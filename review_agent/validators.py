@@ -23,7 +23,7 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
     triple = candidate.get("triple") or candidate
     safe_candidate = {key: candidate.get(key) for key in (
         "candidate_id", "revision", "document_id", "document_version", "ontology_version",
-        "source_chunk_id", "section_id", "ontology_release_id", "profile_hash", "contract_version",
+        "source_chunk_id", "section_id", "ontology_release_id", "profile_hash", "contract_version", "source_snapshot_id", "source_index_hash",
     )}
     safe_candidate["triple"] = {key: triple.get(key) for key in (
         "head", "head_type", "head_entity_id", "surface_relation", "relation_id", "relation_label",
@@ -34,6 +34,7 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
     safe_candidate["triple"]["qualifier_status"] = dict(triple.get("qualifier_status") or {})
     evidence = proposal.get("evidence_bundle", {}).get("items", [])
     return {
+        "task_type": "triple_review", "task_id": candidate.get("candidate_id"), "object_revision": candidate.get("revision"),
         "proposal_digest": proposal["proposal_digest"],
         "candidate": safe_candidate,
         "ontology_check": proposal.get("ontology_check", {}),
@@ -67,10 +68,19 @@ def _parse_content(content: Any) -> Dict[str, Any]:
 def vote_binding(voter, proposal):
     client = voter["client"]
     return {
+        "task_type": "triple_review", "task_id": (proposal.get("candidate") or {}).get("candidate_id"),
+        "object_revision": (proposal.get("candidate") or {}).get("revision"),
+        "source_snapshot_hash": (proposal.get("candidate") or {}).get("source_snapshot_id"),
         "audit_id": proposal["audit_id"], "round_id": proposal["round_id"],
         "proposal_digest": proposal["proposal_digest"], "voter_id": str(voter["id"]),
         "model_id": str(voter.get("model_id") or getattr(client, "model_id", "")),
         "model_family": str(voter.get("model_family") or getattr(client, "model_family", "")),
+        "model_identity": str(voter.get("model_identity") or getattr(client, "canonical_model_id", None)
+                              or voter.get("model_id") or getattr(client, "model_id", "")).strip().casefold(),
+        **{key: proposal.get(key) for key in ("source_index_hash", "document_version", "ontology_version",
+                                            "ontology_release_id", "profile_hash", "committee_version", "committee_policy_hash", "prompt_version")},
+        "evidence_hash": (proposal.get("evidence_bundle") or {}).get("evidence_hash"),
+        "response_contract_version": CONTRACT_VERSION,
     }
 
 
@@ -123,6 +133,9 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
     parsed["latency_ms"] = getattr(response, "latency_ms", None)
     parsed["input_tokens"] = getattr(response, "input_tokens", None)
     parsed["output_tokens"] = getattr(response, "output_tokens", None)
+    parsed["returned_model_id"] = getattr(response, "returned_model_id", None)
+    parsed["response_id"] = getattr(response, "response_id", None)
+    parsed["model_version_verification"] = "reported" if parsed["returned_model_id"] else "unavailable"
     if proposal.get("ontology_check", {}).get("status") == "fail" and parsed["schema_status"] != "fail":
         parsed["ontology_disagreement"] = True
         parsed["reason_codes"].append("ONTOLOGY_DISAGREEMENT")
@@ -167,10 +180,7 @@ def _bounded_attempt(voter, proposal, feedback, timeout_seconds):
         try:
             output.put(_judge_validator_once(voter, proposal, feedback))
         except Exception as exc:
-            output.put({"audit_id": proposal["audit_id"], "round_id": proposal["round_id"],
-                        "proposal_digest": proposal["proposal_digest"], "voter_id": str(voter["id"]),
-                        "model_id": str(voter.get("model_id") or ""),
-                        "model_family": str(voter.get("model_family") or ""),
+            output.put({**vote_binding(voter, proposal),
                         "response_status": "api_error", "verdict": None, "error": str(exc)})
 
     threading.Thread(target=invoke, daemon=True, name="bounded-model-request").start()
@@ -178,10 +188,7 @@ def _bounded_attempt(voter, proposal, feedback, timeout_seconds):
         remaining = timeout_seconds - (time.monotonic() - started)
         if remaining <= 0:
             client = voter["client"]
-            return {"audit_id": proposal["audit_id"], "round_id": proposal["round_id"],
-                    "proposal_digest": proposal["proposal_digest"], "voter_id": str(voter["id"]),
-                    "model_id": str(voter.get("model_id") or getattr(client, "model_id", "")),
-                    "model_family": str(voter.get("model_family") or getattr(client, "model_family", "")),
+            return {**vote_binding(voter, proposal),
                     "response_status": "timeout", "verdict": None, "retryable": False, "outcome_unknown": True,
                     "error_code": "HARD_REQUEST_TIMEOUT", "error": "request exceeded hard deadline",
                     "latency_ms": int((time.monotonic() - started) * 1000)}

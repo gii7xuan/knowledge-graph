@@ -53,7 +53,7 @@ class ReviewModelSettingsTests(unittest.TestCase):
         with patch.dict("os.environ", {"TEST_SLOT_URL": "https://other.test/v1", "TEST_SLOT_KEY": "other-key",
                                       "TEST_SLOT_MODEL": "other-model", "TEST_SLOT_FAMILY": "other-family"}):
             self.assertEqual(configured_members({"validators": [slot]}), [
-                {"id": "a", "model_id": "other-model", "model_family": "other-family"}])
+            {"id": "a", "model_id": "other-model", "model_family": "other-family", "model_identity": "other-model"}])
 
     def test_saved_registry_connection_selects_explicit_id_without_copying_credentials(self):
         registry = self.root / "models.json"

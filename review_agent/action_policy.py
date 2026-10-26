@@ -39,8 +39,14 @@ class ActionPolicy:
         validation = state.current_validation()
         gaps["validation_missing"] = validation is None
         gaps["version_stale"] = bool(state.validations and validation is None)
-        gaps["critical_issues_unresolved"] = any(i.get("critical") for i in state.issues)
+        unresolved = [i for i in state.issues if i.get("status", "open") != "resolved"]
+        gaps["critical_issues_unresolved"] = any(i.get("critical") for i in unresolved)
         selected = {i["evidence_id"] for i in state.bundle.get("items", [])}
-        gaps["protected_evidence_omitted"] = bool(set(state.protected_ids) - selected)
-        gaps["unreviewed_discovered_evidence"] = bool({x["evidence_id"] for x in state.archive} - selected)
+        gaps["protected_evidence_omitted"] = bool(set(state.protected_ids) - selected - set(state.evidence_exclusions))
+        material = {x["evidence_id"] for x in state.archive if x.get("review_obligation")}
+        material.update(state.protected_ids)
+        gaps["unreviewed_discovered_evidence"] = bool(material - selected - set(state.evidence_exclusions))
+        gaps["unresolved_counterevidence"] = any(i["code"] in {"source_conflict", "counterevidence"} for i in unresolved)
+        gaps["unresolved_support_conflict"] = gaps["unresolved_counterevidence"]
+        gaps["need_more_evidence"] = any(i["code"] in {"EVIDENCE_INSUFFICIENT", "source_conflict", "counterevidence"} for i in unresolved)
         return gaps

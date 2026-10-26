@@ -67,6 +67,17 @@ class FinalRoute(StringEnum):
     MANUAL_REVIEW = "manual_review"
 
 
+class CandidateWorkflowState(StringEnum):
+    READY = "ready_for_review"
+    MANUAL_REVIEW = "manual_review"
+    AWAITING_ONTOLOGY_REVIEW = "awaiting_ontology_review"
+    AWAITING_ONTOLOGY_RELEASE = "awaiting_ontology_release"
+    REAUDIT_REQUIRED = "reaudit_required"
+    SCHEMA_UNRESOLVED = "schema_unresolved"
+    REVISION_REQUIRED = "revision_required"
+    COMPLETED = "review_completed"
+
+
 class HumanStatus(StringEnum):
     PENDING = "pending"
     ACCEPTED = "accepted"
@@ -206,6 +217,9 @@ class ValidatorVote:
     verdict: Optional[str] = None
     source_support: Optional[str] = None
     schema_status: Optional[str] = None
+    schema_issue: Optional[str] = None
+    schema_change_hint: Optional[Dict[str, Any]] = None
+    evidence_assessments: List[Dict[str, Any]] = field(default_factory=list)
     reason_codes: List[str] = field(default_factory=list)
     checks: List[Dict[str, Any]] = field(default_factory=list)
     supporting_evidence_ids: List[str] = field(default_factory=list)
@@ -242,6 +256,10 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "rubric_version", "committee_version", "memory_snapshot_id",
             "memory_bundle_hash", "round_id", "response_contract_version", "evidence_bundle_version",
             "contract_version", "source_index_hash", "ontology_release_id", "profile_hash",
+            "committee_members", "agent_versions", "prompt_hash", "response_contract_hash",
+            "candidate_review_hash", "ontology_check_hash",
+            "committee_policy_hash",
+            "committee_policy",
         )
     }
     return sha256_json(fields)

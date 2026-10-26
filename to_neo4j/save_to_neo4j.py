@@ -259,7 +259,17 @@ def authoritative_item(repository: ReviewRepository, outbox: Mapping[str, Any]) 
         return None
     evidence_items = [dict(item) for item in candidate.get("evidence_items") or [] if isinstance(item, Mapping)]
     audit_id = decision.get("audit_id")
-    if audit_id:
+    if decision.get("decision") in {"auto_accept", "auto_reject"}:
+        from review_agent.proposal_resolver import selected_proposal
+        proposal, votes = selected_proposal(repository, candidate, decision)
+        evidence_items = [dict(item) for item in proposal["evidence_bundle"]["items"]]
+        supporting = {eid for vote in votes if vote.get("response_status") == "ok" for eid in vote.get("supporting_evidence_ids", [])}
+        contradicting = {eid for vote in votes if vote.get("response_status") == "ok" for eid in vote.get("counter_evidence_ids", [])}
+        for evidence in evidence_items:
+            eid = evidence["evidence_id"]
+            evidence["semantic_status"] = ("supported" if eid in supporting and eid not in contradicting else
+                                           "contradicted" if eid in contradicting and eid not in supporting else "unknown")
+    elif audit_id:
         try:
             audit = repository.get_audit(outbox["candidate_id"], str(audit_id))
             rounds = audit.get("rounds") or []

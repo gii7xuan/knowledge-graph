@@ -37,7 +37,8 @@ def ontology():
 def valid_response(payload, invalid=False):
     eid = payload["allowed_evidence_ids"][0]
     return {"verdict": "invalid" if invalid else "valid", "source_support": "contradicted" if invalid else "supported",
-        "schema_status": "pass", "supporting_evidence_ids": [] if invalid else [eid],
+        "schema_status": "pass", "schema_issue": "none", "schema_change_hint": None,
+        "supporting_evidence_ids": [] if invalid else [eid],
         "counter_evidence_ids": [eid] if invalid else [], "reason_codes": ["SOURCE_CONTRADICTS"] if invalid else [],
         "checks": [{"check": k, "status": "pass" if not invalid or k == "ontology" else "unknown", "evidence_ids": [eid], "note": "核查原文"} for k in CHECK_NAMES],
         "requested_context": None, "suggested_revision": None}
@@ -126,7 +127,7 @@ class PlannerRuntimeTests(unittest.TestCase):
     def test_intentional_human_handoff_is_reusable_completed_work(self):
         from review_agent.batch import versions_for
         result = self.run_script([ontology(), finish()])
-        members = [{k: v[k] for k in ("id", "model_id", "model_family")} for v in self.validators]
+        members = [{**{k: v[k] for k in ("id", "model_id", "model_family")}, "model_identity": v["model_id"].casefold()} for v in self.validators]
         versions = versions_for(self.config)
         self.assertEqual(result["decision"], "manual_review")
         self.assertTrue(self.repo.has_healthy_audit("c", 1, versions, members))

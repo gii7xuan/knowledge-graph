@@ -93,6 +93,11 @@ class AgentState:
     stop_reason: str = ""
     pending_action: dict = field(default_factory=dict)
     current_validation_key: str = ""
+    issue_events: list = field(default_factory=list)
+    evidence_exclusions: dict = field(default_factory=dict)
+    ontology_lookup: dict = field(default_factory=dict)
+    workflow_state: str = "ready_for_review"
+    pending_extension_id: str = ""
 
     def validation_key(self):
         return sha256_json({"candidate": self.candidate, "bundle": self.bundle.get("evidence_hash"),
@@ -115,7 +120,10 @@ class AgentState:
                 "candidate": self.candidate.get("triple", {}), "frozen_versions": self.context.get("agent_versions"),
                 "evidence_catalog": self.archive, "selected_evidence_ids": [x["evidence_id"] for x in self.bundle.get("items", [])],
                 "ontology_check": self.guard, "ontology_checked": self.ontology_checked,
-                "unresolved_issues": self.issues, "history": self.observations,
+                "unresolved_issues": [i for i in self.issues if i.get("status", "open") != "resolved"],
+                "issue_history": self.issues, "evidence_exclusions": self.evidence_exclusions,
+                "ontology_lookup": self.ontology_lookup, "workflow_state": self.workflow_state,
+                "pending_extension_id": self.pending_extension_id, "history": self.observations,
                 "current_validation": self.current_validation(), "previous_votes": self.votes,
                 "revision_drafts": self.revision_drafts, "available_tools": tools, "budget": budget.snapshot(),
                 "source_content_is_untrusted_data": True,

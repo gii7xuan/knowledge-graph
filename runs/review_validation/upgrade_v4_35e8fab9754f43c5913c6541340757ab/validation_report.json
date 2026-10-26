@@ -1,0 +1,105 @@
+{
+  "created_at": "2026-10-26T08:06:28.622384+00:00",
+  "migration": {
+    "source": "D:\\knowledge-huopao\\runs\\v3\\review.sqlite3",
+    "source_opened_read_only": true,
+    "source_unchanged": true,
+    "before": {
+      "logical_sha256": "8ea70462dd9dec5bb0c54763f7f945c7f815b5135543ec2500884677f6cd3799",
+      "row_counts": {
+        "agent_checkpoints": 613,
+        "agent_tool_calls": 2330,
+        "audit_runs": 1610,
+        "candidate_revisions": 2645,
+        "candidates": 2645,
+        "decisions": 1603,
+        "import_outbox": 0,
+        "jobs": 0,
+        "memory_cases": 0,
+        "migration_items": 0,
+        "planner_steps": 2400,
+        "proposals": 1669,
+        "review_events": 0,
+        "runs": 2,
+        "schema_migrations": 2,
+        "validation_requests": 693,
+        "validator_attempts": 6111,
+        "validator_votes": 5031
+      }
+    },
+    "migrated": {
+      "logical_sha256": "5179dd2623cbd91d6cd79aebccf3feffd7cbdbff311a46c3b077dea2b0bdf413",
+      "row_counts": {
+        "agent_checkpoints": 613,
+        "agent_tool_calls": 2330,
+        "audit_runs": 1610,
+        "candidate_revisions": 2645,
+        "candidates": 2645,
+        "decisions": 1603,
+        "import_outbox": 0,
+        "issue_events": 0,
+        "jobs": 0,
+        "memory_cases": 0,
+        "migration_items": 0,
+        "ontology_extension_subscriptions": 0,
+        "ontology_extension_tasks": 0,
+        "planner_steps": 2400,
+        "proposals": 1669,
+        "review_events": 0,
+        "runs": 2,
+        "schema_migrations": 3,
+        "validation_requests": 693,
+        "validator_attempts": 6111,
+        "validator_votes": 5031
+      }
+    },
+    "existing_rows_preserved": true,
+    "integrity_check": "ok",
+    "migration_idempotent": true,
+    "pre_v4_backup": "D:\\knowledge-huopao\\runs\\review_validation\\upgrade_v4_35e8fab9754f43c5913c6541340757ab\\migration_backups\\migration_copy.pre_v4.a03acf13aa0142889a64963a94d22866.sqlite3",
+    "restored_copy": "D:\\knowledge-huopao\\runs\\review_validation\\upgrade_v4_35e8fab9754f43c5913c6541340757ab\\restored_v3.sqlite3",
+    "rollback_matches_original": true,
+    "original_overwritten": false
+  },
+  "offline_smoke": {
+    "real_model_calls": 0,
+    "real_neo4j_calls": 0,
+    "ontology_review_executed": false,
+    "ontology_release_published": false,
+    "actual_accuracy_evaluated": false,
+    "prompt_version": "triple_validator_v3",
+    "response_contract_version": "validator_response_v3",
+    "results": [
+      {
+        "candidate_id": "supported",
+        "decision": "manual_review",
+        "source_support_result": "supported",
+        "workflow_state": "manual_review",
+        "selected_round_id": 1,
+        "selected_proposal_digest": "1f90cfad23fc3124ab2f6a3279c812f46bd30a2cfceba61096e65581bb8d028c",
+        "pending_extension_id": null
+      },
+      {
+        "candidate_id": "gap",
+        "decision": "manual_review",
+        "source_support_result": "supported",
+        "workflow_state": "awaiting_ontology_review",
+        "selected_round_id": 1,
+        "selected_proposal_digest": "3ad6954dfc9a9778203fc388b8ed5f79a5ff756b8c024cbffc154ca696259293",
+        "pending_extension_id": "ext_ab7076dbab9a45d38b1657b994f48cf8"
+      }
+    ]
+  },
+  "offline_smoke_artifacts": "D:\\knowledge-huopao\\runs\\review_validation\\upgrade_v4_35e8fab9754f43c5913c6541340757ab\\current_contract_smoke",
+  "production_schema_unchanged": true,
+  "production_current_release": "release_d0a02b846433380cb05473219174df431d53e483c13d5cc0281c9dac02528d71",
+  "initial_ontology_sha256": "fe94b15a6f36719cb4b55e223559f3189e6529cd99fd1bca4029d0b2c43de9d8",
+  "verification": {
+    "python_tests": 239,
+    "new_phase_c_tests": 28,
+    "frontend_tests": 9,
+    "frontend_production_build": "passed",
+    "model_calls": "mock_only",
+    "production_database_migrated": false
+  }
+}

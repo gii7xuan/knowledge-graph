@@ -29,6 +29,7 @@ from scripts.train_calibrator import training_versions
 def response(verdict="valid", eid="ev_1", schema="pass"):
     support = {"valid": "supported", "invalid": "contradicted", "uncertain": "insufficient"}[verdict]
     return {"verdict": verdict, "source_support": support, "schema_status": schema,
+            "schema_issue": "none" if schema in {"pass", "not_applicable"} else "not_covered", "schema_change_hint": None,
             "supporting_evidence_ids": [eid] if support == "supported" else [],
             "counter_evidence_ids": [eid] if support == "contradicted" else [],
             "reason_codes": ["SOURCE_CONTRADICTS"] if verdict == "invalid" else [],
@@ -103,7 +104,7 @@ class ContractTests(unittest.TestCase):
 
     def test_schema_gap_retains_source_support(self):
         value = response()
-        value.update(verdict="uncertain", schema_status="unknown", reason_codes=["SCHEMA_GAP"])
+        value.update(verdict="uncertain", schema_status="unknown", schema_issue="not_covered", reason_codes=["SCHEMA_GAP"])
         value["checks"][3]["status"] = "unknown"
         self.assertEqual(validate_response(value), [])
 

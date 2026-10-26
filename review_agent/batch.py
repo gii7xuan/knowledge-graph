@@ -10,11 +10,11 @@ from multiprocessing.connection import wait
 from pathlib import Path
 from uuid import uuid4
 
-from .contracts import EVIDENCE_BUNDLE_VERSION
+from .contracts import EVIDENCE_BUNDLE_VERSION, sha256_json
 from .execution import AuditPaused
 from .repository import ReviewRepository
 from .model_settings import validator_settings, configured_planner, create_planner_client
-from .response_contract import PROMPT_VERSION, CONTRACT_VERSION
+from .response_contract import PROMPT_VERSION, CONTRACT_VERSION, PROMPT_HASH, RESPONSE_SCHEMA
 from .progress import write_status_snapshot
 
 
@@ -23,19 +23,24 @@ def configured_members(config):
     for slot in config.get("validators") or []:
         values = validator_settings(slot)
         if all(values[key] for key in ("model", "family", "api_key", "base_url")):
-            members.append({"id": slot["id"], "model_id": values["model"], "model_family": values["family"]})
+            members.append({"id": slot["id"], "model_id": values["model"], "model_family": values["family"], "model_identity": values["model_identity"]})
     return members
 
 
 def versions_for(config):
     versions = {"prompt_version": PROMPT_VERSION, "response_contract_version": CONTRACT_VERSION,
+            "prompt_hash": PROMPT_HASH,
+            "response_contract_hash": sha256_json(RESPONSE_SCHEMA),
+            "committee_policy_hash": sha256_json({key: (config.get("consensus") or {}).get(key, default)
+                for key, default in (("committee_size", 4), ("required_votes", 3), ("minimum_distinct_families", 3))}),
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
             "committee_version": (config.get("consensus") or {}).get("version", "committee_v1")}
     planner = config.get("planner") or {}
     if planner.get("enabled") and planner.get("strategy") == "llm_react":
-        from .planner_contracts import PLANNER_CONTRACT_VERSION, PLANNER_PROMPT_VERSION, AGENT_STRATEGY_VERSION
+        from .planner_contracts import PLANNER_CONTRACT_VERSION, PLANNER_PROMPT_VERSION, AGENT_STRATEGY_VERSION, PLANNER_PROMPT_HASH
         settings = configured_planner(config)
         versions.update(planner_contract_version=PLANNER_CONTRACT_VERSION, planner_prompt_version=PLANNER_PROMPT_VERSION,
+            planner_prompt_hash=PLANNER_PROMPT_HASH,
             planner_strategy_version=AGENT_STRATEGY_VERSION, planner_model_id=settings["model"],
             planner_model_family=settings["family"], configured_strategy="llm_react")
     return versions
@@ -121,7 +126,9 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
     versions = versions_for(config)
     pending, skipped = [], 0
     for candidate in candidates:
-        if not force and repository.has_healthy_audit(candidate["candidate_id"], candidate["revision"], versions, members):
+        if candidate.get("workflow_state") in {"awaiting_ontology_review", "awaiting_ontology_release"}:
+            skipped += 1
+        elif not force and repository.has_healthy_audit(candidate["candidate_id"], candidate["revision"], versions, members):
             skipped += 1
         else:
             pending.append(candidate)
@@ -204,6 +211,10 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
             while index < len(pending) and len(active) < parallel:
                 candidate = pending[index]
                 index += 1
+                if repository.get_candidate(candidate["candidate_id"]).get("workflow_state") in {"awaiting_ontology_review", "awaiting_ontology_release"}:
+                    state["skipped"] += 1
+                    state["selected"] -= 1
+                    continue
                 # Another job may have finished this candidate since queue selection.
                 if not force and repository.has_healthy_audit(candidate["candidate_id"], candidate["revision"], versions, members):
                     state["skipped"] += 1

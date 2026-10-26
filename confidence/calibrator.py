@@ -74,10 +74,11 @@ class TripleCalibrator:
             return CalibrationResult(None, "incompatible", self.version, feature_schema_version, False,
                                      ["FEATURE_SCHEMA_MISMATCH"])
         context = dict(context or {})
-        for field in ("domain", *REVIEW_VERSION_FIELDS, *AGENT_VERSION_FIELDS):
+        hash_fields = ("prompt_hash", "response_contract_hash", "committee_policy_hash", "planner_prompt_hash")
+        for field in ("domain", *REVIEW_VERSION_FIELDS, *AGENT_VERSION_FIELDS, *hash_fields):
             allowed = self.metadata.get(field)
             actual = context.get(field)
-            if (field in (*REVIEW_VERSION_FIELDS, *AGENT_VERSION_FIELDS) and (actual or allowed) and actual != allowed) or (
+            if (field in (*REVIEW_VERSION_FIELDS, *AGENT_VERSION_FIELDS, *hash_fields) and (actual or allowed) and actual != allowed) or (
                 field == "domain" and allowed and actual and allowed != actual
             ):
                 return CalibrationResult(None, "incompatible", self.version, feature_schema_version, False,
