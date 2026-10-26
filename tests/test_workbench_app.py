@@ -165,6 +165,8 @@ class WorkbenchPagingTests(unittest.TestCase):
             with (
                 patch.object(workbench, "WORKBENCH_RUN_DIR", run_dir),
                 patch.object(workbench, "triplet_job", None),
+                patch.object(workbench, "select_release", return_value=Mock(
+                    path=Path("D:/fixture_release"), binding=lambda: {"ontology_release_id": "release_fixture"})),
                 patch.object(workbench, "safe_markdown_path", return_value=workbench.ROOT / "mdfiles" / "sample.md"),
                 patch.object(workbench.subprocess, "Popen", return_value=process) as popen,
             ):
@@ -179,6 +181,7 @@ class WorkbenchPagingTests(unittest.TestCase):
         self.assertEqual(env["OPENAI_API_KEY"], "secret-key")
         self.assertEqual(env["QWEN_BASE_URL"], "https://qwen.example.test/v1")
         self.assertEqual(env["TRIPLET_MODEL"], "qwen-plus")
+        self.assertEqual(env["TRIPLET_ONTOLOGY_RELEASE"], str(Path("D:/fixture_release")))
         self.assertNotIn("HTTP_PROXY", env)
         self.assertNotIn("HTTPS_PROXY", env)
         self.assertNotIn("ALL_PROXY", env)

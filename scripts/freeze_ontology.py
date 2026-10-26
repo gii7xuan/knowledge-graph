@@ -2,40 +2,34 @@
 
 import argparse
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 
-from review_agent.ontology_guard import load_snapshot, validate_ontology
+from ontologyBuild.providers import LegacyOntologyProvider, OntologyImportRequest
+from ontologyBuild.release_service import artifact_files, digest, publish_release, validation_report
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def freeze_ontology(input_path, output_root=None, *, approved_event_id=None):
-    snapshot = load_snapshot(input_path)
-    report = validate_ontology(snapshot.ontology)
-    report.update({
-        "ontology_version": snapshot.ontology_version,
-        "source_path": str(Path(input_path)),
-        "approved_event_id": approved_event_id,
-        "approval_status": "approved_release" if approved_event_id else "operator_selected_baseline",
-        "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+    artifact = LegacyOntologyProvider().build_or_import(OntologyImportRequest(Path(input_path)))
+    report = validation_report(artifact)
+    root = Path(output_root or ROOT / "runs" / "ontology_releases")
+    if not report["project_validation"]["valid"]:
+        from uuid import uuid4
+        draft = root / ("invalid_" + uuid4().hex)
+        draft.mkdir(parents=True)
+        for name, content in artifact_files(artifact, {"status": "pending"}).items():
+            (draft / name).write_bytes(content)
+        return {"ok": False, "report": str(draft / "validation_report.json"), **report["project_validation"]}
+    release = publish_release(artifact, root, approval={
+        "status": "approved", "approved_by": "freeze_ontology_operator",
+        "reason": "approved_event" if approved_event_id else "operator_selected_baseline",
+        "approved_event_id": approved_event_id, "ontology_version": digest(artifact.project_schema),
     })
-    root = Path(output_root or ROOT / "runs" / "v3" / "ontology")
-    target = root / snapshot.ontology_version
-    target.mkdir(parents=True, exist_ok=True)
-    report_path = target / "validation_report.json"
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    if not report["valid"]:
-        return {"ok": False, "report": str(report_path), **report}
-    snapshot_path = target / "ontology_snapshot.json"
-    if snapshot_path.exists():
-        existing = load_snapshot(snapshot_path)
-        if existing.ontology_version != snapshot.ontology_version:
-            raise RuntimeError("immutable ontology snapshot collision")
-    else:
-        snapshot_path.write_text(json.dumps(snapshot.ontology, ensure_ascii=False, indent=2), encoding="utf-8")
-    return {"ok": True, "snapshot": str(snapshot_path), "report": str(report_path), **report}
+    return {"ok": True, "snapshot": str(release.snapshot_path),
+            "report": str(release.path / "validation_report.json"),
+            **report["project_validation"], **release.binding()}
 
 
 def main():

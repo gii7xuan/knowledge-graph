@@ -5,6 +5,7 @@ import time
 import re
 import hashlib
 import argparse
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -41,6 +42,8 @@ from ontologyBuild.ontology_adapter import (
 )
 from review_agent.contracts import candidate_id_for, fact_key_for as v3_fact_key_for
 from review_agent.repository import ReviewRepository
+from ontologyBuild.release_service import load_release
+from ontologyBuild.release_catalog import select_release
 
 
 # ============= 新增：本体文件导入 =============
@@ -264,6 +267,7 @@ OUTPUT_JSON_PATH = os.environ.get("TRIPLET_OUTPUT_JSON", 'triplets\\Ballistics.j
 EVIDENCE_MD_PATH = os.environ.get("TRIPLET_EVIDENCE_MD", 'evidence\\Ballistics_evidence.md')
 BOOK_NAME = os.environ.get("TRIPLET_BOOK_NAME", "Ballistics")
 ONTOLOGY_FILE_PATH = os.environ.get("TRIPLET_ONTOLOGY_FILE", "ontology/ontology.json")
+ONTOLOGY_RELEASE = None
 DISCARDED_TRIPLETS_PATH = os.environ.get(
     "TRIPLET_REJECTED_JSON",
     'rejected_triplets\\Ballistics_rejected_triplets.json',
@@ -312,7 +316,9 @@ def parse_cli_args(argv=None):
     parser.add_argument("--review-mode", choices=["legacy", "assist_only", "shadow", "active", "offline_demo"])
     parser.add_argument("--input", help="Markdown input path (overrides TRIPLET_MARKDOWN_FILE)")
     parser.add_argument("--output-stem", help="legacy JSON/evidence output stem")
-    parser.add_argument("--ontology", help="ontology JSON path (overrides TRIPLET_ONTOLOGY_FILE)")
+    ontology_group = parser.add_mutually_exclusive_group()
+    ontology_group.add_argument("--ontology", help="legacy ontology JSON path (no published release binding)")
+    ontology_group.add_argument("--ontology-release", help="verified published release directory or manifest")
     return parser.parse_args(argv)
 
 
@@ -322,7 +328,7 @@ def configure_from_cli(args):
     global EVIDENCE_MD_PATH, BOOK_NAME, DISCARDED_TRIPLETS_PATH, RUNS_V2_DIR
     global REVIEW_DATABASE_PATH, REVIEW_MODE, REVIEW_CONFIG_PATH, client, ONTOLOGY_FILE_PATH
     global REVIEW_CALIBRATOR_PATH, REVIEW_POLICY_PATH, REVIEW_ROUTING
-    global REVIEW_CONFIG
+    global REVIEW_CONFIG, ONTOLOGY_RELEASE
 
     config = {}
     default_config = Path(project_root) / "config" / "review_agent.json"
@@ -358,6 +364,18 @@ def configure_from_cli(args):
     REVIEW_DATABASE_PATH = str(database_path if database_path.is_absolute() else Path(project_root) / database_path)
     MARKDOWN_FILE_PATH = args.input or os.environ.get("TRIPLET_MARKDOWN_FILE", MARKDOWN_FILE_PATH)
     ontology_value = args.ontology or os.environ.get("TRIPLET_ONTOLOGY_FILE", ONTOLOGY_FILE_PATH)
+    release_value = getattr(args, "ontology_release", None) or (
+        os.environ.get("TRIPLET_ONTOLOGY_RELEASE") if not args.ontology else None)
+    if not args.ontology and not release_value:
+        if (Path(project_root) / "runs" / "ontology_releases" / "release_catalog.sqlite3").exists():
+            release_value = "current"
+    ONTOLOGY_RELEASE = None
+    if release_value:
+        release_path = Path(release_value)
+        if str(release_path) != "current" and not release_path.is_absolute():
+            release_path = Path(project_root) / release_path
+        ONTOLOGY_RELEASE = select_release(release_path, root=Path(project_root) / "runs" / "ontology_releases")
+        ontology_value = str(ONTOLOGY_RELEASE.snapshot_path)
     ontology_path = Path(ontology_value)
     if not ontology_path.is_absolute():
         ontology_path = Path(project_root) / ontology_path
@@ -1419,6 +1437,13 @@ def write_v3_run(candidates, document_index, ontology):
     ).hexdigest()
     ontology_text = json.dumps(ontology, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     ontology_version = hashlib.sha256(ontology_text.encode("utf-8")).hexdigest()
+    release = None
+    if ONTOLOGY_RELEASE is not None:
+        release = load_release(ONTOLOGY_RELEASE.path)
+        if release.manifest["ontology_version"] != ontology_version:
+            raise ValueError("extraction ontology does not match the selected published release")
+    if run_dir.exists():
+        raise FileExistsError(f"immutable extraction run already exists: {run_dir}")
     document_path = run_dir / "documents" / document_id / f"{document_version}.json"
     ontology_path = run_dir / "ontology" / "ontology_snapshot.json"
     config_path = run_dir / "config" / "review_config.json"
@@ -1430,6 +1455,15 @@ def write_v3_run(candidates, document_index, ontology):
         "chunks": document_index.get("chunks", []), "sections": document_index.get("sections", []),
     }, ensure_ascii=False, indent=2), encoding="utf-8")
     ontology_path.write_text(json.dumps(ontology, ensure_ascii=False, indent=2), encoding="utf-8")
+    release_binding = {}
+    if release is not None:
+        local_release_path = run_dir / "ontology" / "release"
+        if not local_release_path.exists():
+            shutil.copytree(release.path, local_release_path)
+        local_release = load_release(local_release_path)
+        if local_release.manifest != release.manifest:
+            raise ValueError("run already contains a different ontology release")
+        release_binding = local_release.binding()
     def redact(value):
         if isinstance(value, dict):
             return {
@@ -1455,6 +1489,8 @@ def write_v3_run(candidates, document_index, ontology):
         "calibrator_version": "untrained", "policy_version": "disabled_cold_start_v3",
         "review_config_path": str(config_path), "review_config_hash": config_hash,
         "planner_strategy": (REVIEW_CONFIG.get("planner") or {}).get("strategy", "deterministic"),
+        "ontology_binding_status": "published_release" if release else "legacy_unreleased",
+        **release_binding,
     }
     repository.create_run(manifest)
     exported = []
@@ -1480,6 +1516,7 @@ def write_v3_run(candidates, document_index, ontology):
             "evidence_items": item.get("evidence_items") or [],
             "extraction_model": MODEL, "extraction_prompt_version": "extract_legacy_bridge_v3",
             "legacy_score": item.get("legacy_score", item.get("raw_score")),
+            **release_binding,
         }
         candidate["fact_key"] = fact_key_for(candidate)
         repository.add_candidate(candidate)

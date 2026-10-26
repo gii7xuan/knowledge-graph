@@ -209,6 +209,10 @@ npm run build
 
 工程测试只验证调用链、约束、事务和页面接口按预期工作，不代表真实模型已达到某个准确率；真实质量需要冻结样本上的人工评估。
 
+## 本体制品接入
+
+TTL/OWL 与旧项目 JSON 的导入、校验、不可变 release 和抽取版本绑定已提供。详见 [本体接入说明](docs/ontology_import.md)和[初始版本发布核对报告](docs/ontology_initial_release_audit_20261026.md)。串联入口、抽取器和工作台使用显式指定或已登记的当前 release；候选生成成功不代表版本已发布。
+
 ## 回退
 
 回退时把配置模式切回 `shadow` 或 `assist_only`，并关闭 `routing.auto_accept_enabled` 和 `neo4j.auto_import_enabled`。保留 v3 SQLite、冻结快照和审计记录，不删除历史，也不要把旧 heuristic probability 接回自动入库。推荐上线顺序是 `offline_demo → shadow → 人工标注与校准 → 小范围 active`。

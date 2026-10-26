@@ -32,6 +32,21 @@ def _values(value: Any) -> Iterable[Any]:
     return _list(value)
 
 
+def _property_values(value: Any) -> Iterable[Any]:
+    if isinstance(value, dict):
+        for key, item in value.items():
+            yield {**item, "id": item.get("id") or key} if isinstance(item, dict) else item
+    else:
+        yield from _list(value)
+
+
+def _preserve_property_metadata(current, item):
+    for field in ("iri", "aliases", "labels", "definitions", "domain_semantics", "range_semantics",
+                  "domain_expressions", "range_expressions", "datatypes", "range", "auto_review_blocked"):
+        if field in item and field not in current:
+            current[field] = deepcopy(item[field])
+
+
 def _add_unique(target: List[str], seen: Set[str], value: Any) -> None:
     if value is None:
         return
@@ -109,6 +124,7 @@ def iter_object_properties(ontology: Dict[str, Any]) -> Iterable[Dict[str, Any]]
             current["description"] = item.get("description")
         if item.get("definition") and not current.get("definition"):
             current["definition"] = item.get("definition")
+        _preserve_property_metadata(current, item)
         domains = _list(item.get("domain"))
         if owner_class_id and not domains:
             domains = [owner_class_id]
@@ -117,7 +133,7 @@ def iter_object_properties(ontology: Dict[str, Any]) -> Iterable[Dict[str, Any]]
         for value in _list(item.get("range")):
             _add_unique(current["range"], set(map(normalize_name, current["range"])), value)
 
-    for prop in _values(ontology.get("object_properties", {})):
+    for prop in _property_values(ontology.get("object_properties", {})):
         add(prop)
     for class_item in iter_classes(ontology):
         for prop in _list(class_item.get("object_properties")):
@@ -153,6 +169,7 @@ def iter_datatype_properties(ontology: Dict[str, Any]) -> Iterable[Dict[str, Any
         for field in ("id", "label", "name", "field", "datatype", "unit"):
             if prop.get(field) and not current.get(field):
                 current[field] = prop.get(field)
+        _preserve_property_metadata(current, prop)
         domains = _list(prop.get("domain"))
         if owner_class_id and not domains:
             domains = [owner_class_id]
@@ -160,7 +177,7 @@ def iter_datatype_properties(ontology: Dict[str, Any]) -> Iterable[Dict[str, Any
             _add_unique(current["domain"], set(map(normalize_name, current["domain"])), value)
 
     for field in ("data_properties", "datatype_properties"):
-        for prop in _values(ontology.get(field, {})):
+        for prop in _property_values(ontology.get(field, {})):
             add(prop)
     for class_item in iter_classes(ontology):
         for prop in _list(class_item.get("data_properties")):
@@ -177,7 +194,7 @@ def class_reference_index(ontology: Dict[str, Any]) -> Dict[str, str]:
         class_id = class_item.get("id")
         if not class_id:
             continue
-        for value in _named_values(class_id, class_item):
+        for value in [*_named_values(class_id, class_item), *_list(class_item.get("aliases"))]:
             index[normalize_name(value)] = str(class_id)
     return index
 

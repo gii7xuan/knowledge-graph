@@ -1,4 +1,4 @@
-"""Run ontology candidate extraction and then triple extraction in sequence."""
+"""Extract with an explicitly published release, or build legacy candidates for review."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ import yaml
 
 from ontologyBuild.config import OntologyPipelineConfig
 from ontologyBuild.pipeline import run_ontology_pipeline
+from ontologyBuild.release_catalog import ReleaseCatalog, select_release
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +66,7 @@ def parse_args(argv=None):
     parser.add_argument("--review-mode", default="shadow")
     parser.add_argument("--chain-id", required=True)
     parser.add_argument("--base-policy", choices=["strict", "draft"], default="draft")
+    parser.add_argument("--ontology-release", help="已发布 release 目录或 release_manifest.json；提供时跳过候选构建")
     return parser.parse_args(argv)
 
 
@@ -86,7 +88,7 @@ def main(argv=None) -> int:
         "ontology_run_id": None,
         "triplet_exit_code": None,
         "errors": [],
-        "note": "本体阶段生成候选与审核结果，不会未经人工发布就覆盖正式 ontology/ontology.json。",
+        "note": "仅使用显式发布的 release 抽取；本体候选生成成功不代表发布成功。",
     }
     write_json(status_path, state)
 
@@ -103,30 +105,34 @@ def main(argv=None) -> int:
         state["status"] = "running"
         write_json(status_path, state)
 
-        ontology_config = OntologyPipelineConfig.from_env(
-            base_policy=args.base_policy,
-            review_mode="manual",
-        )
-        ontology_manifest = run_ontology_pipeline(
-            input_path,
-            ontology_config,
-            write_compatibility=True,
-        )
-        state["ontology_run_id"] = ontology_manifest.get("run_id")
-        state["ontology_status"] = ontology_manifest.get("status")
-        state["ontology_manifest"] = str(
-            ROOT / "runs" / "ontology" / str(ontology_manifest.get("run_id")) / "manifest.json"
-        )
-        write_json(status_path, state)
-
-        if ontology_manifest.get("status") not in {"succeeded", "succeeded_empty"}:
+        release = None
+        if args.ontology_release:
+            release_path = Path(args.ontology_release)
+            if str(release_path) != "current" and not release_path.is_absolute():
+                release_path = ROOT / release_path
+            release = select_release(release_path, root=ROOT / "runs" / "ontology_releases")
+        else:
+            release = ReleaseCatalog(ROOT / "runs" / "ontology_releases").current()
+        if release is not None:
+            state.update(release.binding())
+            state["ontology_status"] = "published"
+        else:
+            ontology_config = OntologyPipelineConfig.from_env(
+                base_policy=args.base_policy, review_mode="manual",
+            )
+            ontology_manifest = run_ontology_pipeline(input_path, ontology_config, write_compatibility=True)
+            state["ontology_run_id"] = ontology_manifest.get("run_id")
+            state["ontology_status"] = ontology_manifest.get("status")
+            state["ontology_manifest"] = str(
+                ROOT / "runs" / "ontology" / str(ontology_manifest.get("run_id")) / "manifest.json"
+            )
             state["status"] = "stopped"
-            state["stage"] = "ontology"
+            state["stage"] = "awaiting_ontology_release"
             state["finished_at"] = now_iso()
             state["errors"].append(
                 {
-                    "type": "OntologyIncomplete",
-                    "message": f"本体阶段状态为 {ontology_manifest.get('status')}，未启动三元组抽取",
+                    "type": "OntologyReleaseRequired",
+                    "message": f"本体候选状态为 {ontology_manifest.get('status')}；请审核发布后通过 --ontology-release 指定版本",
                 }
             )
             write_json(status_path, state)
@@ -150,6 +156,8 @@ def main(argv=None) -> int:
             str(review_config),
             "--review-mode",
             args.review_mode,
+            "--ontology-release",
+            str(release.path),
         ]
         completed = subprocess.run(command, cwd=ROOT, env=os.environ.copy(), check=False)
         state["triplet_exit_code"] = completed.returncode

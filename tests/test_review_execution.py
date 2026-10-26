@@ -16,6 +16,7 @@ from review_agent.batch import run_review_batch, versions_for
 from review_agent.execution import AuditPaused
 from review_agent.jobs import JobRunner
 from review_agent.llm_clients import MockLLMClient
+from review_agent.progress import write_status_snapshot
 from review_agent.repository import ReviewRepository
 from review_agent.validators import judge_independently, judge_validator
 
@@ -127,6 +128,58 @@ class BatchExecutionTests(unittest.TestCase):
         repaired = self.run_batch(candidate_ids=["c1"])
         self.assertEqual(repaired["completed"], 1)
         self.assertEqual(repaired["skipped"], 0)
+
+    def test_persistently_locked_status_file_does_not_interrupt_review(self):
+        states = []
+        config = {**self.config, "budget": {**self.config["budget"], "total_timeout_seconds": 8}}
+        with patch("review_agent.batch.write_status_snapshot", side_effect=PermissionError("status file locked")), \
+                self.assertLogs("review_agent.batch", level="WARNING") as logged:
+            result = self.run_batch(config, candidate_ids=["c0", "c1"],
+                status_file=Path(self.tmp.name) / "status.json", on_progress=states.append)
+        self.assertEqual(result["status"], "completed")
+        self.assertEqual(result["completed"], 2)
+        self.assertEqual(result["interrupted"], 0)
+        self.assertTrue(result["progress_file_stale"])
+        self.assertGreater(result["progress_write_failures"], 0)
+        self.assertEqual(states[-1]["status"], "completed")
+        self.assertEqual(len(logged.records), 1)
+        self.assertFalse(any(p.name == "review-candidate" for p in multiprocessing.active_children()))
+
+    def test_status_file_recovers_on_next_publish_after_lock_is_released(self):
+        path = Path(self.tmp.name) / "status.json"
+        calls = []
+        def initially_locked(path, state):
+            calls.append(state["status"])
+            if len(calls) == 1:
+                raise PermissionError("temporarily locked")
+            write_status_snapshot(path, state)
+        with patch("review_agent.batch.write_status_snapshot", side_effect=initially_locked), \
+                self.assertLogs("review_agent.batch", level="WARNING"):
+            result = self.run_batch(candidate_ids=["c0"], status_file=path)
+        self.assertEqual(result["completed"], 1)
+        self.assertEqual(result["progress_write_failures"], 1)
+        self.assertFalse(result["progress_file_stale"])
+        saved = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(saved["status"], "completed")
+        self.assertEqual(saved["progress_write_failures"], 1)
+
+    def test_status_write_failure_does_not_mask_a_billing_pause(self):
+        with patch("review_agent.batch.write_status_snapshot", side_effect=PermissionError("locked")), \
+                self.assertLogs("review_agent.batch", level="WARNING"):
+            result = self.run_batch({**self.config, "test_mode": "paused"},
+                                    status_file=Path(self.tmp.name) / "status.json")
+        self.assertEqual(result["status"], "paused")
+        self.assertTrue(result["paused"])
+        self.assertTrue(result["progress_file_stale"])
+
+    def test_expired_agent_checkpoint_does_not_reuse_an_expired_execution_deadline(self):
+        versions = versions_for(self.config)
+        members = [{"id": "a", "model_id": "test-model", "model_family": "test-family"}]
+        aid = self.repo.start_audit("c0", 1, {**versions, "committee_members": members,
+                                               "execution_deadline_epoch": time.time() - 1})
+        self.repo.save_agent_checkpoint(aid, {}, {}, "planning")
+        self.repo.finish_incomplete_audit(aid, "interrupted", {})
+        self.assertIsNone(self.repo.resumable_agent_audit("c0", 1, versions, members))
 
     def test_total_deadline_kills_blocked_process_and_keeps_audit(self):
         config = {**self.config, "test_mode": "blocked", "budget": {

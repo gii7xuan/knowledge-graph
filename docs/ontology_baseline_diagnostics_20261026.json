@@ -1,0 +1,569 @@
+{
+  "checked_on": "2026-10-26",
+  "source": "ontology/ontology.json",
+  "source_sha256": "fe94b15a6f36719cb4b55e223559f3189e6529cd99fd1bca4029d0b2c43de9d8",
+  "read_only": true,
+  "external_validation": {
+    "status": "not_run"
+  },
+  "project_validation": {
+    "valid": false,
+    "errors": [
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_subsystem",
+        "field": "domain",
+        "value": "C_WeaponSystem"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_subsystem",
+        "field": "range",
+        "value": "C_FireControlSystem"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_subsystem",
+        "field": "range",
+        "value": "C_OpticalSight"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_subsystem",
+        "field": "range",
+        "value": "C_AutomaticMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_component",
+        "field": "range",
+        "value": "C_ComponentMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_component",
+        "field": "range",
+        "value": "C_GunTube"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_component",
+        "field": "range",
+        "value": "C_BreechBlock"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_component",
+        "field": "range",
+        "value": "C_RecoilMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_mechanism",
+        "field": "range",
+        "value": "C_AutomaticMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_mechanism",
+        "field": "range",
+        "value": "C_BreechingMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_mechanism",
+        "field": "range",
+        "value": "C_RecoilMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_mechanism",
+        "field": "range",
+        "value": "C_ComponentMechanism"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_uses_ammunition",
+        "field": "range",
+        "value": "C_Cartridge"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_equipped_on",
+        "field": "range",
+        "value": "C_MilitaryPlatform"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_developed_by",
+        "field": "range",
+        "value": "C_Organization"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_composed_of",
+        "field": "range",
+        "value": "C_OpticalSight"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_composed_of",
+        "field": "range",
+        "value": "C_FireControlSystem"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_composed_of",
+        "field": "range",
+        "value": "C_Subsystem"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_targeting_system",
+        "field": "range",
+        "value": "C_TargetingSystem"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_fire_control",
+        "field": "range",
+        "value": "C_FireControlSystem"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_uses_propellant",
+        "field": "range",
+        "value": "C_Propellant"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_subject_to_force",
+        "field": "range",
+        "value": "C_Force"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_subject_to_moment",
+        "field": "range",
+        "value": "C_Moment"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_consists_of",
+        "field": "range",
+        "value": "C_ComponentMaterial"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_equipped_by",
+        "field": "range",
+        "value": "C_MilitaryUnit"
+      },
+      {
+        "code": "DANGLING_CLASS_REFERENCE",
+        "relation_id": "R_has_constraint",
+        "field": "range",
+        "value": "C_Constraint"
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_subsystem",
+        "field": "domain",
+        "previous": [
+          "C_ArtillerySystem",
+          "C_EquipmentPlatformSystem",
+          "C_WeaponEquipment",
+          "C_WeaponSystem"
+        ],
+        "observed": [
+          "C_WeaponEquipment",
+          "C_WeaponSystem"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_subsystem",
+        "field": "range",
+        "previous": [
+          "C_ArtillerySystem",
+          "C_AutomaticMechanism",
+          "C_FireControlSystem",
+          "C_OpticalSight"
+        ],
+        "observed": [
+          "C_ArtillerySystem"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_component",
+        "field": "domain",
+        "previous": [
+          "C_ArtillerySystem",
+          "C_AutomaticWeapon",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_ArtillerySystem",
+          "C_WeaponEquipment"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_component",
+        "field": "range",
+        "previous": [
+          "C_BreechBlock",
+          "C_ComponentMechanism",
+          "C_GunTube",
+          "C_RecoilMechanism"
+        ],
+        "observed": [
+          "C_ComponentMechanism"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_mechanism",
+        "field": "range",
+        "previous": [
+          "C_AutomaticMechanism",
+          "C_BreechingMechanism",
+          "C_RecoilMechanism"
+        ],
+        "observed": [
+          "C_AutomaticMechanism",
+          "C_ComponentMechanism"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_uses_ammunition",
+        "field": "range",
+        "previous": [
+          "C_Ammunition",
+          "C_Cartridge",
+          "C_Charge",
+          "C_Projectile"
+        ],
+        "observed": [
+          "C_Ammunition"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_performance_parameter",
+        "field": "domain",
+        "previous": [
+          "C_Ammunition",
+          "C_AutomaticWeapon",
+          "C_Gun",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_AutomaticWeapon",
+          "C_Gun",
+          "C_WeaponEquipment"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_performance_parameter",
+        "field": "range",
+        "previous": [
+          "C_AimingParameter",
+          "C_FirepowerParameter",
+          "C_PerformanceParameter"
+        ],
+        "observed": [
+          "C_PerformanceParameter"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_designed_for",
+        "field": "range",
+        "previous": [
+          "C_EnvironmentScenario",
+          "C_OperationScenario"
+        ],
+        "observed": [
+          "C_EnvironmentScenario"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_equipped_on",
+        "field": "domain",
+        "previous": [
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_AutomaticWeapon",
+          "C_Gun",
+          "C_WeaponEquipment"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_equipped_on",
+        "field": "range",
+        "previous": [
+          "C_EquipmentPlatformSystem",
+          "C_MilitaryPlatform"
+        ],
+        "observed": [
+          "C_EnvironmentScenario"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_developed_by",
+        "field": "domain",
+        "previous": [
+          "C_ModelLineage",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_WeaponEquipment"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_developed_by",
+        "field": "range",
+        "previous": [
+          "C_ModelLineage",
+          "C_Organization"
+        ],
+        "observed": [
+          "C_ModelLineage"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_variant_of",
+        "field": "domain",
+        "previous": [
+          "C_ModelLineage",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_WeaponEquipment"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_variant_of",
+        "field": "range",
+        "previous": [
+          "C_ModelLineage",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_WeaponEquipment"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_subsystem",
+        "field": "domain",
+        "previous": [
+          "C_WeaponEquipment",
+          "C_WeaponSystem"
+        ],
+        "observed": [
+          "C_Gun"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_component",
+        "field": "domain",
+        "previous": [
+          "C_ArtillerySystem",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_Gun"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_mechanism",
+        "field": "domain",
+        "previous": [
+          "C_ArtillerySystem",
+          "C_AutomaticWeapon",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_Gun"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_mechanism",
+        "field": "range",
+        "previous": [
+          "C_AutomaticMechanism",
+          "C_ComponentMechanism"
+        ],
+        "observed": [
+          "C_AutomaticMechanism"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_uses_ammunition",
+        "field": "domain",
+        "previous": [
+          "C_AutomaticWeapon",
+          "C_Gun",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_Gun"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_performance_parameter",
+        "field": "domain",
+        "previous": [
+          "C_AutomaticWeapon",
+          "C_Gun",
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_Gun"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_uses_ammunition",
+        "field": "domain",
+        "previous": [
+          "C_Gun"
+        ],
+        "observed": [
+          "C_AutomaticWeapon"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_mechanism",
+        "field": "domain",
+        "previous": [
+          "C_Gun"
+        ],
+        "observed": [
+          "C_AutomaticWeapon"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_has_component",
+        "field": "domain",
+        "previous": [
+          "C_Gun"
+        ],
+        "observed": [
+          "C_AutomaticWeapon"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_composed_of",
+        "field": "domain",
+        "previous": [
+          "C_ArtillerySystem",
+          "C_EquipmentPlatformSystem"
+        ],
+        "observed": [
+          "C_ArtillerySystem"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_composed_of",
+        "field": "range",
+        "previous": [
+          "C_FireControlSystem",
+          "C_Gun",
+          "C_OpticalSight",
+          "C_Subsystem"
+        ],
+        "observed": [
+          "C_FireControlSystem",
+          "C_Gun",
+          "C_OpticalSight"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "ammo_type",
+        "field": "datatype",
+        "previous": "array",
+        "observed": "string"
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "severity",
+        "field": "datatype",
+        "previous": "string",
+        "observed": "integer"
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_developed_by",
+        "field": "domain",
+        "previous": [
+          "C_WeaponEquipment"
+        ],
+        "observed": [
+          "C_ModelLineage"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_developed_by",
+        "field": "range",
+        "previous": [
+          "C_ModelLineage"
+        ],
+        "observed": [
+          "C_Organization"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_composed_of",
+        "field": "domain",
+        "previous": [
+          "C_ArtillerySystem"
+        ],
+        "observed": [
+          "C_EquipmentPlatformSystem"
+        ]
+      },
+      {
+        "code": "PROPERTY_DEFINITION_CONFLICT",
+        "id": "R_composed_of",
+        "field": "range",
+        "previous": [
+          "C_FireControlSystem",
+          "C_Gun",
+          "C_OpticalSight"
+        ],
+        "observed": [
+          "C_Subsystem"
+        ]
+      }
+    ],
+    "warnings": [],
+    "class_count": 49,
+    "relation_count": 243
+  },
+  "auto_review_allowed": true
+}

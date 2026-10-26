@@ -25,6 +25,9 @@ from review_agent.repository import (
 )
 from review_agent.service import ServiceUnavailableError, get_default_service
 from scripts.freeze_ontology import freeze_ontology
+from ontologyBuild.release_catalog import ReleaseCatalog, ReleaseConflictError, select_release
+from ontologyBuild.providers import OntologyImportRequest
+from ontologyBuild.import_service import create_draft, publish_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -271,6 +274,9 @@ def triplet_status():
         "audit_stage": "candidate_persistence" if returncode is None else "manual_review",
         "outputs": {key: rel_path(path) for key, path in job["outputs"].items()},
         "model": job.get("model", {}),
+        "ontology_release_id": job.get("ontology_release_id"),
+        "ontology_version": job.get("ontology_version"),
+        "profile_hash": job.get("profile_hash"),
         "counts": {
             "accepted": json_count(job["outputs"]["accepted"]),
             "rejected": json_count(job["outputs"]["rejected"]),
@@ -284,6 +290,9 @@ def start_triplet_extraction(payload):
     markdown_path = safe_markdown_path(payload.get("markdown_path"))
     output_stem = sanitize_stem(payload.get("output_stem") or default_stem(markdown_path))
     model_config = resolve_model_config(payload.get("model_id"))
+    release_value = payload.get("ontology_release") or "current"
+    release_path = (ontology.safe_root_path(release_value, ROOT) if release_value != "current" else "current")
+    release = select_release(release_path, root=ROOT / "runs" / "ontology_releases")
     run_id = "run_" + now_stamp() + "_" + uuid4().hex[:8]
     outputs = {
         "accepted": ROOT / "triplets" / f"{output_stem}.json",
@@ -305,11 +314,12 @@ def start_triplet_extraction(payload):
             "TRIPLET_BOOK_NAME": output_stem,
             "KG_RUN_ID": run_id,
             "KG_REVIEW_MODE": str(payload.get("review_mode") or "shadow"),
+            "TRIPLET_ONTOLOGY_RELEASE": str(release.path),
         })
         apply_model_env(env, model_config)
         with outputs["log"].open("w", encoding="utf-8", errors="replace") as log_file:
             process = subprocess.Popen(
-                [sys.executable, "-u", "-m", "extract_triplets.extrct", "--review-mode",
+                [sys.executable, "-u", "-m", "extract_triplets.extrct", "--ontology-release", str(release.path), "--review-mode",
                  str(payload.get("review_mode") or "shadow")],
                 cwd=ROOT,
                 env=env,
@@ -324,8 +334,46 @@ def start_triplet_extraction(payload):
             "run_id": run_id,
             "model": sanitize_model_record(model_config),
             "outputs": outputs,
+            **release.binding(),
         }
     return triplet_status()
+
+
+def ontology_releases():
+    catalog = ReleaseCatalog(ROOT / "runs" / "ontology_releases")
+    current = catalog.current()
+    return {"current": ({**current.binding(), "application_profile": current.application_profile}
+                        if current else None), "history": catalog.history()}
+
+
+def inspect_ontology_import(payload):
+    source = ontology.safe_root_path(payload.get("source_path"), ROOT / "ontology" / "ontology.json")
+    def read(field, default):
+        value = payload.get(field)
+        if not value:
+            return default
+        return json.loads(ontology.safe_root_path(value, ROOT).read_text(encoding="utf-8-sig"))
+    request = OntologyImportRequest(source=source, method_manifest=read("method_manifest_path", {}),
+                                    validation_report=read("validation_report_path", {}),
+                                    requirements=read("requirements_path", []),
+                                    competency_questions=read("competency_questions_path", []))
+    return create_draft(request, provider=payload.get("provider", "auto"),
+                        quarantine=bool(payload.get("quarantine_invalid")),
+                        draft_root=ROOT / "runs" / "ontology_imports", release_root=ROOT / "runs" / "ontology_releases")
+
+
+def publish_ontology_import(payload):
+    draft_root = (ROOT / "runs" / "ontology_imports").resolve()
+    path = ontology.safe_root_path(payload.get("draft_path"), draft_root)
+    if path.parent != draft_root:
+        raise ValueError("only a frozen import draft can be published")
+    release = publish_draft(
+        path, expected_artifact_digest=payload.get("artifact_digest"),
+        expected_base_release_id=payload.get("expected_base_release_id"),
+        approved_by=payload.get("approved_by"), reason=payload.get("reason"),
+        confirm_differences=bool(payload.get("confirm_profile_differences")),
+        release_root=ROOT / "runs" / "ontology_releases")
+    return {"status": "published", **release.binding(), "application_profile": release.application_profile}
 
 
 def ontology_build_status():
@@ -650,6 +698,8 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(ontology_overview())
             elif path == "/api/ontology/items":
                 self.send_json(ontology_items_page(parse_qs(urlparse(self.path).query)))
+            elif path == "/api/ontology/releases":
+                self.send_json(ontology_releases())
             elif path.startswith("/api/triplets/"):
                 self.dispatch_legacy(triplets.ReviewHandler.do_GET, "/api/triplets")
             elif path.startswith("/api/ontology/") and path != "/api/ontology/build-status":
@@ -672,7 +722,7 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                     self.send_json({"error": "not found"}, 404)
         except NotFoundError as exc:
             self.send_json({"error": str(exc)}, 404)
-        except ConflictError as exc:
+        except (ConflictError, ReleaseConflictError) as exc:
             self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
         except ServiceUnavailableError as exc:
             self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)
@@ -708,13 +758,17 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.dispatch_legacy(triplets.ReviewHandler.do_POST, "/api/triplets")
             elif path == "/api/ontology/review-run":
                 self.send_json(run_ontology_review(self.read_payload()))
+            elif path == "/api/ontology/import":
+                self.send_json(inspect_ontology_import(self.read_payload()), 201)
+            elif path == "/api/ontology/releases":
+                self.send_json(publish_ontology_import(self.read_payload()), 201)
             elif path == "/api/ontology/freeze":
                 payload = self.read_payload()
                 ontology_path = ontology.safe_root_path(
                     payload.get("ontology_path"), ROOT / "ontology" / "ontology.json"
                 )
                 result = freeze_ontology(
-                    ontology_path, payload.get("output_root"),
+                    ontology_path, ontology.safe_root_path(payload.get("output_root"), ROOT / "runs" / "ontology_releases"),
                     approved_event_id=payload.get("approved_event_id"),
                 )
                 self.send_json(result, 201 if result.get("ok") else 422)
@@ -732,7 +786,7 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json({"error": "not found"}, 404)
         except NotFoundError as exc:
             self.send_json({"error": str(exc)}, 404)
-        except ConflictError as exc:
+        except (ConflictError, ReleaseConflictError) as exc:
             self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
         except ServiceUnavailableError as exc:
             self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)

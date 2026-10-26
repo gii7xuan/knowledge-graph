@@ -398,6 +398,9 @@ class ReviewRepository:
                 AND s.phase!='finished' ORDER BY a.created_at DESC,a.rowid DESC""", (candidate_id, revision)).fetchall()
         for row in rows:
             context = _loads(row["context_json"], {})
+            deadline = context.get("execution_deadline_epoch")
+            if deadline is not None and float(deadline) <= time.time():
+                continue  # Restart under a fresh audit; the request cache still fences old paid calls.
             if (all(context.get(k) == v for k, v in versions.items())
                     and (members is None or context.get("committee_members") == members)):
                 return {"audit_id": row["audit_id"], "context": context}
@@ -1059,7 +1062,18 @@ class ReviewRepository:
             rows = connection.execute("""SELECT vote_json FROM validator_votes WHERE audit_id=?
                 AND round_id=(SELECT MAX(round_id) FROM proposals WHERE audit_id=?)""",
                 (audit["audit_id"], audit["audit_id"])).fetchall()
+            checkpoint = connection.execute("SELECT phase,checkpoint_json FROM agent_checkpoints WHERE audit_id=?",
+                                            (audit["audit_id"],)).fetchone()
         votes = {_loads(row["vote_json"], {}).get("voter_id"): _loads(row["vote_json"], {}) for row in rows}
+        if not votes and checkpoint and checkpoint["phase"] == "finished":
+            context = _loads(audit["context_json"], {})
+            state = _loads(checkpoint["checkpoint_json"], {}).get("state", {})
+            last = (state.get("observations") or [{}])[-1]
+            # An intentional human handoff is completed work, not a failed committee
+            # request.  Do not pay the planner again on every batch restart.
+            return bool(context.get("executed_strategy") == "llm_react"
+                and context.get("committee_members") == members
+                and last.get("tool") == "finish_review" and last.get("status") == "finish_requested")
         return all(votes.get(m["id"], {}).get("response_status") == "ok" and
                    votes[m["id"]].get("model_id") == m["model_id"] and
                    votes[m["id"]].get("model_family") == m["model_family"] for m in members)

@@ -30,6 +30,17 @@ const busyAction = ref('');
 const error = ref('');
 const message = ref('');
 const job = ref({ exists: false, running: false });
+const releases = ref({ current: null, history: [] });
+const releaseSource = ref('ontology/ontology.json');
+const provider = ref('auto');
+const quarantineInvalid = ref(false);
+const methodManifestPath = ref('');
+const validationReportPath = ref('');
+const requirementsPath = ref('');
+const competencyQuestionsPath = ref('');
+const importPreview = ref(null);
+const confirmProfileDifferences = ref(false);
+const publicationReason = ref('');
 const sidebarWidth = ref(Number(localStorage.getItem('ontologyBuild.sidebarWidth')) || 360);
 let pollTimer;
 let dragging = false;
@@ -47,6 +58,10 @@ watch(keyword, () => {
   keywordTimer = setTimeout(loadItems, 250);
 });
 watch(page, loadItems);
+watch([releaseSource, provider, quarantineInvalid, methodManifestPath, validationReportPath, requirementsPath, competencyQuestionsPath], () => {
+  importPreview.value = null;
+  confirmProfileDifferences.value = false;
+});
 
 const summary = computed(() => result.value.summary || {});
 const pageCount = computed(() => Math.max(1, Math.ceil(total.value / pageSize)));
@@ -66,10 +81,53 @@ watch(visibleItems, setupDrafts, { immediate: true });
 async function refresh() {
   error.value = '';
   try {
-    result.value = await api('/api/ontology/overview');
+    const [overview, published] = await Promise.all([api('/api/ontology/overview'), api('/api/ontology/releases')]);
+    result.value = overview;
+    releases.value = published;
     await loadItems();
   } catch (cause) {
     error.value = cause.message;
+  }
+}
+
+async function inspectImport() {
+  busyAction.value = 'import';
+  error.value = '';
+  message.value = '';
+  importPreview.value = null;
+  confirmProfileDifferences.value = false;
+  try {
+    importPreview.value = await post('/api/ontology/import', {
+      source_path: releaseSource.value, provider: provider.value, quarantine_invalid: quarantineInvalid.value,
+      method_manifest_path: methodManifestPath.value, validation_report_path: validationReportPath.value,
+      requirements_path: requirementsPath.value, competency_questions_path: competencyQuestionsPath.value
+    });
+  } catch (cause) {
+    error.value = cause.message;
+  } finally {
+    busyAction.value = '';
+  }
+}
+
+async function publishImport() {
+  const preview = importPreview.value;
+  if (!preview) return;
+  busyAction.value = 'publish';
+  error.value = '';
+  try {
+    const published = await post('/api/ontology/releases', {
+      draft_path: preview.draft_path, artifact_digest: preview.artifact_digest,
+      expected_base_release_id: preview.base_release_id,
+      approved_by: reviewer.value, reason: publicationReason.value,
+      confirm_profile_differences: confirmProfileDifferences.value
+    });
+    importPreview.value = null;
+    message.value = `已发布 ${published.ontology_release_id}`;
+    releases.value = await api('/api/ontology/releases');
+  } catch (cause) {
+    error.value = cause.status === 409 ? '当前本体版本已变化，请重新导入检查后发布。' : cause.message;
+  } finally {
+    busyAction.value = '';
   }
 }
 
@@ -307,6 +365,33 @@ onUnmounted(() => {
       </aside>
       <div class="sidebar-resizer" role="separator" tabindex="0" aria-label="调整左侧栏宽度" aria-orientation="vertical" :aria-valuenow="sidebarWidth" aria-valuemin="280" @pointerdown="startResize" @keydown="resizeByKeyboard"></div>
       <div class="review-content ontology-content">
+        <section class="review-card" aria-label="本体版本发布">
+          <div class="candidate-title"><strong>初始本体接入与版本发布</strong></div>
+          <p v-if="releases.current" class="run-path" :title="releases.current.ontology_release_id">
+            当前版本：{{ releases.current.ontology_release_id }}
+          </p>
+          <p v-else class="subtle">尚未发布本体版本</p>
+          <p v-if="releases.current?.application_profile?.auto_review_blocked" class="quality-notes">当前版本用于调查和人工检查，自动准入已关闭。原始来源和差异报告随版本保留。</p>
+          <div class="edit-grid">
+            <label>本体制品路径（TTL / JSON）<input v-model="releaseSource" :disabled="!!busyAction" /></label>
+            <label>导入方式<select v-model="provider" :disabled="!!busyAction"><option value="auto">按文件类型识别</option><option value="neon">Extended NeOn-GPT TTL 制品</option><option value="legacy">已有项目 JSON</option></select></label>
+            <label>方法来源记录 JSON（可选）<input v-model="methodManifestPath" :disabled="!!busyAction" /></label>
+            <label>外部校验报告 JSON（可选）<input v-model="validationReportPath" :disabled="!!busyAction" /></label>
+            <label>领域需求 JSON（可选）<input v-model="requirementsPath" :disabled="!!busyAction" /></label>
+            <label>能力问题 JSON（可选）<input v-model="competencyQuestionsPath" :disabled="!!busyAction" /></label>
+          </div>
+          <label><input v-model="quarantineInvalid" type="checkbox" :disabled="!!busyAction" />将旧 JSON 的冲突和悬空定义隔离为待审项，保留完整来源</label>
+          <button :disabled="!!busyAction || !releaseSource" @click="inspectImport">导入并检查</button>
+          <div v-if="importPreview">
+            <p>{{ importPreview.validation.project_validation.valid ? '项目结构校验通过' : '项目结构校验失败，不能发布' }} · {{ importPreview.validation.auto_review_allowed ? '应用约束可执行' : '自动准入已阻断' }}</p>
+            <p class="subtle">结构通过不代表领域语义正确；未运行的外部工具会单独记录。</p>
+            <details class="evidence-details"><summary>校验、隔离清单与转换差异</summary><pre class="evidence-text">{{ JSON.stringify({ validation: importPreview.validation, mapping: importPreview.mapping_report, profile: importPreview.application_profile }, null, 2) }}</pre></details>
+            <label v-if="importPreview.requires_difference_confirmation"><input v-model="confirmProfileDifferences" type="checkbox" />已核对并确认本次应用范围差异</label>
+            <label>发布理由<input v-model="publicationReason" placeholder="记录本次版本的用途和审核依据" /></label>
+            <button class="primary" :disabled="!!busyAction || !importPreview.validation.project_validation.valid || !publicationReason.trim() || !reviewer.trim() || importPreview.requires_difference_confirmation && !confirmProfileDifferences" @click="publishImport">发布并设为当前版本</button>
+          </div>
+          <details v-if="releases.history.length" class="evidence-details"><summary>发布历史（{{ releases.history.length }}）</summary><pre class="evidence-text">{{ JSON.stringify(releases.history, null, 2) }}</pre></details>
+        </section>
         <div class="stats-row">
           <div><span>总数</span><strong>{{ summary.total || 0 }}</strong></div>
           <div><span>可审核</span><strong>{{ summary.actionable_pending || 0 }}</strong></div>

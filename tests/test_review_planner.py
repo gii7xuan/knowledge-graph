@@ -123,6 +123,24 @@ class PlannerRuntimeTests(unittest.TestCase):
         self.assertIn("ONTOLOGY_CHECK_REQUIRED", result["reason_codes"])
         self.assertEqual(sum(len(c.calls) for c in self.clients), 0)
 
+    def test_intentional_human_handoff_is_reusable_completed_work(self):
+        from review_agent.batch import versions_for
+        result = self.run_script([ontology(), finish()])
+        members = [{k: v[k] for k in ("id", "model_id", "model_family")} for v in self.validators]
+        versions = versions_for(self.config)
+        self.assertEqual(result["decision"], "manual_review")
+        self.assertTrue(self.repo.has_healthy_audit("c", 1, versions, members))
+        self.assertFalse(self.repo.has_healthy_audit("c", 1, {**versions, "prompt_version": "changed"}, members))
+        changed = [*members[:-1], {**members[-1], "model_id": "different-model"}]
+        self.assertFalse(self.repo.has_healthy_audit("c", 1, versions, changed))
+
+    def test_planner_connection_failure_is_not_reusable_human_handoff(self):
+        from review_agent.batch import versions_for
+        result = self.run_script([RuntimeError("HTTP 503 unavailable")])
+        members = [{k: v[k] for k in ("id", "model_id", "model_family")} for v in self.validators]
+        self.assertEqual(result["executed_strategy"], "manual_degraded")
+        self.assertFalse(self.repo.has_healthy_audit("c", 1, versions_for(self.config), members))
+
     def test_ready_current_validation_can_route_only_through_system_policy(self):
         result = self.run_script([ontology(), action("run_validation"), finish()], config=self.active_config(),
             risk_policy=self.ready_policy(), calibrator=self.ready_calibrator())

@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import json
+import logging
 import multiprocessing
-import os
 import time
 from multiprocessing.connection import wait
 from pathlib import Path
@@ -15,6 +15,7 @@ from .execution import AuditPaused
 from .repository import ReviewRepository
 from .model_settings import validator_settings, configured_planner, create_planner_client
 from .response_contract import PROMPT_VERSION, CONTRACT_VERSION
+from .progress import write_status_snapshot
 
 
 def configured_members(config):
@@ -138,27 +139,39 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
     state = {"execution_id": execution_id, "run_id": run_id, "status": "running",
              "started_at_epoch": time.time(), "total": len(candidates), "selected": len(pending),
              "skipped": skipped, "completed": 0, "failed": 0, "interrupted": 0,
-             "paused": False, "cancelled": False, "results": [], "review_versions": versions}
+             "paused": False, "cancelled": False, "results": [], "review_versions": versions,
+             "progress_write_failures": 0, "progress_file_stale": False}
     ctx = multiprocessing.get_context("spawn")
     active, index = {}, 0
     last_progress, last_published = None, 0.0
+    last_write_warning = None
 
     def publish():
-        nonlocal last_progress, last_published
+        nonlocal last_progress, last_published, last_write_warning
         progress = {k: v for k, v in state.items() if k != "results"}
         progress.update(active=[{"pid": w["process"].pid,
             "audit_id": w["payload"]["audit_id"], "candidate_id": w["payload"]["candidate_id"]} for w in active.values()],
             remaining=len(pending) - index + len(active))
         if progress == last_progress and time.monotonic() - last_published < 5:
             return
-        last_progress, last_published = dict(progress), time.monotonic()
         progress["updated_at_epoch"] = time.time()
         if status_file:
-            path = Path(status_file)
-            path.parent.mkdir(parents=True, exist_ok=True)
-            temp = path.with_suffix(path.suffix + ".tmp")
-            temp.write_text(json.dumps(progress, ensure_ascii=False, indent=2), encoding="utf-8")
-            os.replace(temp, path)
+            progress["progress_file_stale"] = False
+            try:
+                write_status_snapshot(status_file, progress)
+                state["progress_file_stale"] = False
+            except OSError as exc:
+                state["progress_write_failures"] += 1
+                state["progress_file_stale"] = True
+                state["last_progress_write_error"] = str(exc)
+                progress.update({k: state[k] for k in (
+                    "progress_write_failures", "progress_file_stale", "last_progress_write_error")})
+                if last_write_warning is None or time.monotonic() - last_write_warning >= 60:
+                    logging.getLogger(__name__).warning(
+                        "Progress file unavailable; review continues and results remain in SQLite: %s", exc)
+                    last_write_warning = time.monotonic()
+        last_progress = {k: v for k, v in progress.items() if k != "updated_at_epoch"}
+        last_published = time.monotonic()
         if on_progress:
             on_progress(progress)
 

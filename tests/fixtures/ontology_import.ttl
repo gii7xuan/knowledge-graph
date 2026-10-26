@@ -1,0 +1,18 @@
+@prefix ex: <https://example.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Device a owl:Class ; rdfs:label "设备"@zh .
+ex:Calibrated a owl:Class ; rdfs:label "已校准对象"@zh .
+ex:Sensor a owl:Class ; rdfs:label "传感器"@zh ;
+    rdfs:subClassOf ex:Device, ex:Calibrated .
+ex:Quantity a owl:Class ; rdfs:label "物理量"@zh .
+ex:measures a owl:ObjectProperty ; rdfs:label "测量"@zh ;
+    rdfs:comment "表达设备测量物理量的关系。"@zh ;
+    rdfs:domain ex:Device, ex:Calibrated ; rdfs:range ex:Quantity .
+ex:count a owl:DatatypeProperty ; rdfs:label "数量"@zh ;
+    rdfs:domain ex:Device ; rdfs:range xsd:integer .
+
+# Author-method example assertions must stay out of the fact pipeline.
+ex:example a ex:Sensor ; ex:count 2 .

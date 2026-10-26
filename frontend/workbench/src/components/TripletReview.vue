@@ -407,6 +407,7 @@ onUnmounted(stopPolling);
       </div>
       <div v-if="job.exists" class="output-paths">
         <span v-if="job.model?.model">model: <code>{{ job.model.name }} · {{ job.model.model }}</code></span>
+          <span v-if="job.ontology_release_id" :title="job.ontology_release_id">本体版本：<code>{{ job.ontology_release_id }}</code></span>
         <span v-for="(path, name) in job.outputs" :key="name">{{ name }}: <code>{{ path }}</code></span>
       </div>
       <details v-if="job.exists"><summary>运行日志</summary><pre class="run-log">{{ job.log_tail || '等待输出' }}</pre></details>

@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\knowledge-huopao\review_agent\cli.py", line 330, in <module>
+    main()
+  File "D:\knowledge-huopao\review_agent\cli.py", line 325, in main
+    result = commands[args.command](args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\cli.py", line 175, in command_audit
+    return run_review_batch(repository, args.run_id, config,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\batch.py", line 255, in run_review_batch
+    publish()
+  File "D:\knowledge-huopao\review_agent\batch.py", line 161, in publish
+    os.replace(temp, path)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\review_jobs\\review_huopaodandaoxue_agent_20261023_164212\\status.json.tmp' -> 'D:\\knowledge-huopao\\runs\\review_jobs\\review_huopaodandaoxue_agent_20261023_164212\\status.json'
