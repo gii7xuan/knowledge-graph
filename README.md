@@ -213,6 +213,10 @@ npm run build
 
 TTL/OWL 与旧项目 JSON 的导入、校验、不可变 release 和抽取版本绑定已提供。详见 [本体接入说明](docs/ontology_import.md)和[初始版本发布核对报告](docs/ontology_initial_release_audit_20261026.md)。串联入口、抽取器和工作台使用显式指定或已登记的当前 release；候选生成成功不代表版本已发布。
 
+## 文档来源与候选 v4
+
+默认抽取入口使用共享来源快照和 `extraction_candidate_v4`，保留完整限定、逐字引文及未匹配关系，不按事实提前合并不同来源。索引、提示和请求范围均保存摘要及审计记录。详见 [实现与验证说明](docs/source_candidate_v4_20261026.md)。历史抽取桥接需显式使用 `--legacy-extraction`。
+
 ## 回退
 
 回退时把配置模式切回 `shadow` 或 `assist_only`，并关闭 `routing.auto_accept_enabled` 和 `neo4j.auto_import_enabled`。保留 v3 SQLite、冻结快照和审计记录，不删除历史，也不要把旧 heuristic probability 接回自动入库。推荐上线顺序是 `offline_demo → shadow → 人工标注与校准 → 小范围 active`。

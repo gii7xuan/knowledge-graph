@@ -18,6 +18,14 @@ from .repository import NotFoundError, ReviewRepository, ValidationError
 from .model_settings import validator_settings, configured_planner, create_planner_client
 
 
+def public_candidate(candidate):
+    if candidate.get("fact_key_state") == "provisional":
+        return {**candidate, "fact_key": None}
+    if candidate.get("contract_version") != "extraction_candidate_v4":
+        return {**candidate, "semantics_status": "legacy_semantics_unverified"}
+    return candidate
+
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -161,7 +169,7 @@ class ReviewService:
                     audit = None
             except NotFoundError:
                 audit = None
-            summaries.append({**item, "latest_decision": decision,
+            summaries.append({**public_candidate(item), "latest_decision": decision,
                               "audit_summary": None if audit is None else {
                                   "audit_id": audit["audit_id"], "status": audit["status"],
                                   "calibrated_probability": audit["calibrated_probability"],
@@ -254,13 +262,20 @@ class ReviewService:
         document_path = manifest.get("document_path")
         status = "source_missing"
         if document_path and Path(document_path).exists():
-            document = json.loads(Path(document_path).read_text(encoding="utf-8"))
+            from document.hierarchy_index import load_document_index
+            document = load_document_index(document_path, manifest.get("source_index_hash"),
+                                           require_verified=candidate.get("contract_version") == "extraction_candidate_v4")
             verified = verify_evidence_bundle(make_evidence_bundle([selected], []), document, candidate)
             selected = (verified["items"] or verified["rejected_items"])[0]
             status = "exact" if selected["anchor_valid"] else selected["anchor_status"]
             chunk = next((item for item in document.get("chunks", [])
                           if item.get("chunk_id") == selected.get("chunk_id")), None)
             if chunk and selected["anchor_valid"]:
+                if document.get("schema_version") == "document_index_v3":
+                    from evidence.hierarchical_retriever import context_sentences
+                    context = context_sentences(document, selected, before, after)
+                    return {"evidence": selected, "context": context, "before": before, "after": after,
+                            "status": status, "audit_id": proposal["audit_id"], "round_id": proposal["round_id"]}
                 sentences = chunk.get("sentences") or []
                 start = selected.get("chunk_start") if selected.get("offset_basis") == "canonical_document" else selected["start"]
                 end = selected.get("chunk_end") if selected.get("offset_basis") == "canonical_document" else selected["end"]
@@ -274,7 +289,7 @@ class ReviewService:
 
     def candidate(self, candidate_id: str, revision: Optional[int] = None) -> Dict[str, Any]:
         candidate = self.repository.get_candidate(candidate_id) if revision is None else self.repository.get_revision(candidate_id, revision)
-        return {"candidate": candidate, "latest_decision": self.repository.latest_decision(candidate_id)}
+        return {"candidate": public_candidate(candidate), "latest_decision": self.repository.latest_decision(candidate_id)}
 
     def audit(self, candidate_id: str, audit_id: Optional[str] = None) -> Dict[str, Any]:
         return self.repository.get_audit(candidate_id, audit_id)

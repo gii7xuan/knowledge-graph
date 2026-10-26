@@ -8,6 +8,8 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from document.snapshot import read_snapshot
+from document.index_integrity import portable_index
 
 try:
     from document.hierarchy_index import (
@@ -21,7 +23,7 @@ except ImportError:
     from directory_guided_builder import build_module_index, clean_term
 
 
-SPLITTER_VERSION = "ontology_preprocess_v2"
+SPLITTER_VERSION = "ontology_preprocess_v3"
 
 
 def now_iso() -> str:
@@ -33,13 +35,7 @@ def sha256_text(text: str) -> str:
 
 
 def read_markdown(path: str | Path) -> str:
-    value = Path(path).read_text(encoding="utf-8")
-    value = value.replace("###HEADER#### ", "# ").replace("###HEADER####", "# ")
-    value = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", value)
-    value = re.sub(r"```[^\n]*\n|```", "", value)
-    value = re.sub(r"`([^`]+)`", r"\1", value)
-    value = re.sub(r"\n\s*\n\s*\n+", "\n\n", value)
-    return value.strip()
+    return read_snapshot(path)["canonical_text"]
 
 
 def normalize_heading_number(title: str) -> str:
@@ -74,8 +70,8 @@ def classify_chunk(chunk: dict[str, Any]) -> tuple[str, str]:
         return "exclude", "reference_or_index"
     if re.search(r"^(习题|思考题|练习题)$", title):
         return "review", "exercise_section"
-    if re.fullmatch(r"(?:[#*\s\dA-Za-z.．,，;；:：()（）+\-*/=<>_^{}\\$]+)", compact):
-        return "exclude", "formula_or_symbol_only"
+    if re.fullmatch(r"(?:[#*\s\dA-Za-z.．,，;；:：()（）+\-*/=<>_^{}\\$]+)", compact) and not re.search(r"[A-Za-z]{3,}", compact):
+        return "review", "formula_or_symbol_only"
     return "include", "body"
 
 
@@ -89,7 +85,8 @@ def preprocess_markdown(
     path = Path(markdown_path)
     if not path.exists():
         raise FileNotFoundError(f"找不到 Markdown 文件: {path}")
-    text = read_markdown(path)
+    snapshot = read_snapshot(path)
+    text = snapshot["canonical_text"]
     document_id = normalize_document_id(path.name)
     splitter_version = f"{SPLITTER_VERSION}_chunk{chunk_size}_overlap{chunk_overlap}"
     chunks = split_markdown_text(
@@ -98,6 +95,7 @@ def preprocess_markdown(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
         splitter_version=splitter_version,
+        snapshot=snapshot,
     )
 
     chunk_report = []
@@ -130,10 +128,8 @@ def preprocess_markdown(
         "all_chunks": chunks,
         "included_chunks": included,
         "module_index": module_index,
-        "document_index": {
-            "chunks": document_index["chunks"],
-            "children_by_section_id": document_index["children_by_section_id"],
-        },
+        "document_index": portable_index(document_index),
+        "source_snapshot": snapshot,
         "chunk_filter_report": {
             "generated_at": now_iso(),
             "splitter_version": splitter_version,

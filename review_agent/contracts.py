@@ -110,10 +110,12 @@ def normalize_fact_part(value: Any) -> str:
 def normalized_qualifiers(value: Optional[Mapping[str, Any]]) -> Dict[str, Any]:
     source = dict(value or {})
     result: Dict[str, Any] = {
-        "polarity": str(source.get("polarity") or "positive").strip().lower(),
+        "polarity": str(source.get("polarity") or "unknown").strip().lower(),
         "condition": source.get("condition"),
         "time_scope": source.get("time_scope"),
         "applicability": source.get("applicability"),
+        "modality": source.get("modality"),
+        "quantifier": source.get("quantifier"),
     }
     for key in sorted(source):
         if key not in result:
@@ -136,12 +138,23 @@ def canonical_triple(candidate_or_triple: Mapping[str, Any]) -> Dict[str, Any]:
         "datatype": triple.get("datatype"),
         "value": triple.get("value"),
         "unit": triple.get("unit"),
+        "language": triple.get("language"),
         "qualifiers": normalized_qualifiers(triple.get("qualifiers")),
+        "qualifier_status": dict(triple.get("qualifier_status") or {}),
     }
 
 
 def fact_key_for(candidate_or_triple: Mapping[str, Any], namespace: Optional[str] = None) -> str:
     """Compute semantic fact identity, including polarity and other qualifiers."""
+    if candidate_or_triple.get("contract_version") == "extraction_candidate_v4":
+        if candidate_or_triple.get("fact_key_state") != "canonical":
+            return f"provisional:{candidate_or_triple['candidate_id']}:{candidate_or_triple.get('revision', 1)}"
+        triple = candidate_or_triple["triple"]
+        payload = {"fact_identity_version": candidate_or_triple["fact_identity_version"],
+                   "namespace": namespace or candidate_or_triple.get("fact_namespace") or candidate_or_triple.get("domain", "default"),
+                   **{key: triple.get(key) for key in ("head_entity_id", "relation_id", "tail_kind", "tail_entity_id", "value", "datatype", "unit", "language")},
+                   "qualifiers": normalized_qualifiers(triple.get("qualifiers"))}
+        return sha256_json(payload)
     namespace = str(
         namespace or candidate_or_triple.get("fact_namespace")
         or candidate_or_triple.get("domain") or "default"
@@ -228,6 +241,7 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "ontology_version", "evidence_bundle_hash", "prompt_version",
             "rubric_version", "committee_version", "memory_snapshot_id",
             "memory_bundle_hash", "round_id", "response_contract_version", "evidence_bundle_version",
+            "contract_version", "source_index_hash", "ontology_release_id", "profile_hash",
         )
     }
     return sha256_json(fields)

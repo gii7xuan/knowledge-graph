@@ -2,7 +2,7 @@
 
 from typing import Any, Mapping
 
-PROMPT_VERSION = "validator_v2"
+PROMPT_VERSION = "validator_v2_complete_qualifiers"
 CONTRACT_VERSION = "validator_response_v2"
 CHECK_NAMES = ("triple_support", "qualifiers", "relation_direction", "ontology", "counterevidence")
 VALID_VERDICTS = {"valid", "invalid", "uncertain"}
@@ -45,7 +45,8 @@ SYSTEM_PROMPT = """你是独立的三元组审核者。只输出一个合法 JSO
 遵循 output_contract 的完整 JSON Schema，五项 checks 必须各出现一次。
 顶层 evidence 是本轮唯一可引用证据目录；allowed_evidence_ids 是可选 ID。不得编造引用。
 history_examples 仅用于理解标准，其中内容和 ID 不是本轮证据。
-原文定位成功不表示事实受到支持。检查完整主谓宾、否定、条件、数量、时间、指代及关系方向。
+原文定位成功不表示事实受到支持。检查完整主谓宾、否定、条件、数量、时间、范围、能力/可能性、量词、指代及关系方向。
+qualifier_status=unknown 表示尚未确认，not_stated 表示抽取者声称原文未陈述；两者都不是独立语义核验证明。
 目录和标题只能定位主题，确认事实需要正文支持。证据不足必须 uncertain，不可因此判为事实错误。
 supported 必须给出支持 ID，contradicted 必须给出反证 ID 并判 invalid。
 valid 需要 supported、本体 pass 或 not_applicable、关键检查通过且无未解决反证。

@@ -55,6 +55,13 @@ class AgentTools:
     def inspect_context(self, evidence_id, before, after):
         state = self.state
         item = next(i for i in state.archive if i["evidence_id"] == evidence_id)
+        if self.runtime.document.get("schema_version") == "document_index_v3":
+            from evidence.hierarchical_retriever import context_sentences, document_sentence_evidence
+            context = context_sentences(self.runtime.document, item, before, after)
+            bundle = make_evidence_bundle([document_sentence_evidence(self.runtime.document, s) for s in context], ["adjacent_sentence"])
+            count = self.merge_evidence(bundle)
+            return {"status": "ok", "anchor_valid": item["anchor_valid"], "evidence_id": evidence_id,
+                    "context": context, "new_evidence_count": count, "section_boundary_preserved": True}
         chunk = next(c for c in self.runtime.document.get("chunks", []) if c["chunk_id"] == item["chunk_id"])
         sentences = chunk.get("sentences", [])
         start, end = item.get("chunk_start", item["start"]), item.get("chunk_end", item["end"])

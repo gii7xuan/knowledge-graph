@@ -54,6 +54,29 @@ def _sentence_evidence(chunk, sentence, level, score=0.):
                      sentence_id=sentence.get("sentence_id"), score=score)
 
 
+def document_sentence_evidence(index, sentence, level="adjacent_sentence"):
+    start, end = sentence["document_start"], sentence["document_end"]
+    chunks = [chunk for chunk in index["chunks"] if chunk["section_id"] == sentence["section_id"]
+              and chunk["document_start"] < end and chunk["document_end"] > start]
+    owner = next((c for c in chunks if c["document_start"] <= start and end <= c["document_end"]), chunks[0])
+    identity = [index["document_id"], index["document_version"], "canonical_document", None, start, end]
+    import json
+    eid = hashlib.sha256(json.dumps(identity, ensure_ascii=False).encode("utf-8")).hexdigest()[:20]
+    return {"evidence_id": "ev_" + eid, "document_id": index["document_id"], "document_version": index["document_version"],
+            "chunk_id": owner["chunk_id"], "section_id": sentence["section_id"], "sentence_id": sentence["sentence_id"],
+            "quote": sentence["text"], "text": sentence["text"], "start": start, "end": end,
+            "chunk_start": start-owner["document_start"], "chunk_end": end-owner["document_start"],
+            "offset_basis": "canonical_document", "source_anchor_kind": "document_span",
+            "span_chunk_ids": [c["chunk_id"] for c in chunks], "retrieval_level": level,
+            "retrieval_score": LEVEL_SCORE.get(level, .5), "semantic_status": "unknown"}
+
+
+def context_sentences(index, item, before=1, after=1):
+    sentences = [s for s in index.get("sentences", []) if s["section_id"] == item["section_id"]]
+    covered = [n for n, s in enumerate(sentences) if s["document_start"] < item["end"] and s["document_end"] > item["start"]]
+    return sentences[max(0, covered[0]-before):covered[-1]+after+1] if covered else []
+
+
 def _rank(items, query=""):
     terms = [term for term in str(query).split() if len(term) > 1]
     return sorted(items, key=lambda item: (
@@ -75,6 +98,15 @@ def _limit(items, max_items, max_chars=None):
 
 
 def retrieve_initial(candidate: Dict[str, Any], document_snapshot: Dict[str, Any], *, max_items: int = 6) -> Dict[str, Any]:
+    if candidate.get("contract_version") == "extraction_candidate_v4" and document_snapshot.get("schema_version") == "document_index_v3":
+        from evidence.verification import verify_evidence_bundle
+        bundle = verify_evidence_bundle(make_evidence_bundle(candidate.get("evidence_items") or [], ["extraction_quotes"]), document_snapshot, candidate)
+        items = list(bundle["items"])
+        for anchor in bundle["items"]:
+            items.extend(document_sentence_evidence(document_snapshot, sentence)
+                         for sentence in context_sentences(document_snapshot, anchor))
+        combined = make_evidence_bundle(items, ["extraction_quotes", "adjacent_sentence"])
+        return make_evidence_bundle(combined["items"][:max_items], combined["searched_levels"])
     triple = candidate.get("triple") if isinstance(candidate.get("triple"), dict) else candidate
     chunks, by_id = _index(document_snapshot)
     source = by_id.get(candidate.get("source_chunk_id") or candidate.get("source_id"))
@@ -142,6 +174,19 @@ def retrieve_more(candidate: Dict[str, Any], document_snapshot: Dict[str, Any], 
         targets = [c for c in chunks if c.get("section_id") != section]
     triple = candidate.get("triple") if isinstance(candidate.get("triple"), dict) else candidate
     seen, found = set(seen_evidence_ids), []
+    if document_snapshot.get("schema_version") == "document_index_v3":
+        allowed = {c["chunk_id"] for c in targets}
+        for sentence in document_snapshot["sentences"]:
+            if not any(c["chunk_id"] in allowed and c["document_start"] < sentence["document_end"]
+                       and c["document_end"] > sentence["document_start"] for c in targets):
+                continue
+            score = lexical_relevance_score(sentence["text"], triple)
+            query_match = any(term in sentence["text"] for term in str(request.get("query") or "").split())
+            if scope == "current_chunk" or score > 0 or query_match:
+                item = document_sentence_evidence(document_snapshot, sentence, scope)
+                item["lexical_relevance_score"] = score
+                if item["evidence_id"] not in seen: found.append(item)
+        return make_evidence_bundle(_limit(_rank(found, request.get("query")), min(6, max(1, int(request.get("limit") or 4))), max_chars), [scope])
     for chunk in targets:
         for sentence in chunk.get("sentences") or []:
             score = lexical_relevance_score(sentence.get("text", ""), triple)

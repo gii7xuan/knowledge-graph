@@ -1,0 +1,33 @@
+{
+  "domain": "source_validation_fixture",
+  "classes": {
+    "Device": {
+      "label": "设备"
+    },
+    "Quantity": {
+      "label": "物理量"
+    }
+  },
+  "object_properties": {
+    "measures": {
+      "id": "measures",
+      "label": "测量",
+      "domain": [
+        "Device"
+      ],
+      "range": [
+        "Quantity"
+      ]
+    }
+  },
+  "data_properties": {
+    "period": {
+      "id": "period",
+      "label": "采样周期",
+      "domain": [
+        "Device"
+      ],
+      "datatype": "integer"
+    }
+  }
+}

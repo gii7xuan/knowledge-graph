@@ -450,6 +450,13 @@ onUnmounted(stopPolling);
               <div class="triple-node"><strong>{{ tripleFor(item).tail }}</strong><small>{{ tripleFor(item).tail_type || item.tail_type || 'Unknown' }}</small></div>
             </div>
             <div class="meta-line">校准概率 <strong>{{ calibratedLabel(item) }}</strong> · 旧机制分数 {{ item.confidence_display }} · 版本 {{ item.revision || 1 }} · 状态 {{ item.review_status || item.human_status || 'pending' }} · 来源 {{ item.source_id || item.source_chunk_id || '-' }}</div>
+            <div v-if="item.contract_version === 'extraction_candidate_v4'" class="quality-notes">
+              <div>完整限定：{{ JSON.stringify(tripleFor(item).qualifiers) }}</div>
+              <div>限定识别状态：{{ JSON.stringify(tripleFor(item).qualifier_status) }}</div>
+              <div>关系映射：{{ tripleFor(item).mapping_status }} · 身份：{{ item.fact_key_state === 'provisional' ? '待确认' : '已计算候选事实键，尚需审核' }}</div>
+              <div v-if="tripleFor(item).tail_kind === 'literal'">字面量：{{ tripleFor(item).value }} · {{ tripleFor(item).datatype }} · {{ tripleFor(item).unit || '无单位' }} · {{ tripleFor(item).language || '未声明语言' }}</div>
+              <div v-if="item.contract_issues?.length">待核对字段：{{ item.contract_issues.join('；') }}</div>
+            </div>
             <p v-if="item.corrected_relation" class="reason">原关系：{{ item.relation }}，建议关系：{{ item.corrected_relation }}</p>
             <p v-if="item.discard_reason || item.confidence_decision?.reason" class="reason">{{ item.discard_reason || item.confidence_decision?.reason }}</p>
             <details class="evidence-details" @toggle="onEvidenceToggle($event, item)">

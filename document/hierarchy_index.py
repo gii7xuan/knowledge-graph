@@ -11,10 +11,9 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 
 
-DEFAULT_SPLITTER_VERSION = "hierarchy_v2_chunk1000_overlap100"
+DEFAULT_SPLITTER_VERSION = "hierarchy_v3_chunk1000_overlap100"
 DEFAULT_CHUNK_SIZE = 1000
 DEFAULT_CHUNK_OVERLAP = 100
 SENTENCE_PATTERN = re.compile(r"[^。！？!?；;\n]+[。！？!?；;]?", re.MULTILINE)
@@ -57,37 +56,6 @@ def chunk_id_for(document_id: str, breadcrumb_path: str, content: str, order: in
     return f"chunk_{digest}"
 
 
-def sentence_spans(content: str, chunk_id: str) -> List[Dict[str, Any]]:
-    sentences: List[Dict[str, Any]] = []
-    for index, match in enumerate(SENTENCE_PATTERN.finditer(content)):
-        raw = match.group(0)
-        leading = len(raw) - len(raw.lstrip())
-        trailing = len(raw) - len(raw.rstrip())
-        start = match.start() + leading
-        end = match.end() - trailing
-        text = content[start:end]
-        if not text:
-            continue
-        sentences.append(
-            {
-                "sentence_id": f"{chunk_id}_s{index}",
-                "text": text,
-                "start": start,
-                "end": end,
-            }
-        )
-    if not sentences and content.strip():
-        fallback_start = len(content) - len(content.lstrip())
-        fallback_end = len(content.rstrip())
-        sentences.append(
-            {
-                "sentence_id": f"{chunk_id}_s0",
-                "text": content[fallback_start:fallback_end],
-                "start": fallback_start,
-                "end": fallback_end,
-            }
-        )
-    return sentences
 
 
 def parent_breadcrumb(breadcrumb_path: str) -> Optional[str]:
@@ -97,131 +65,9 @@ def parent_breadcrumb(breadcrumb_path: str) -> Optional[str]:
     return " > ".join(parts[:-1])
 
 
-def split_markdown_text(
-    text: str,
-    document_id: str = "document",
-    chunk_size: int = DEFAULT_CHUNK_SIZE,
-    chunk_overlap: int = DEFAULT_CHUNK_OVERLAP,
-    splitter_version: str = DEFAULT_SPLITTER_VERSION,
-) -> List[Dict[str, Any]]:
-    headers_to_split_on: List[Tuple[str, str]] = [
-        ("#", "Header-1"),
-        ("##", "Header-2"),
-        ("###", "Header-3"),
-        ("####", "Header-4"),
-        ("#####", "Header-5"),
-        ("######", "Header-6"),
-    ]
-    document_id = normalize_document_id(document_id)
-
-    markdown_splitter = MarkdownHeaderTextSplitter(
-        headers_to_split_on=headers_to_split_on,
-        strip_headers=False,
-    )
-    section_docs = markdown_splitter.split_text(text)
-
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        separators=["\n\n", "\n", "。", "！", "？", "；", "，", "、", ""],
-    )
-    final_docs = text_splitter.split_documents(section_docs)
-
-    canonical_text = str(text).replace("\r\n", "\n").replace("\r", "\n")
-    document_version = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
-
-    chunks: List[Dict[str, Any]] = []
-    node_occurrences: Dict[Tuple[Optional[str], str], int] = {}
-    active_parts: List[str] = []
-    active_nodes: List[Dict[str, Any]] = []
-    search_from = 0
-    for order, doc in enumerate(final_docs):
-        metadata = dict(doc.metadata or {})
-        breadcrumb_path = build_breadcrumb_path(metadata)
-        parts = [part.strip() for part in breadcrumb_path.split(">") if part.strip()]
-        common = 0
-        while common < len(parts) and common < len(active_parts) and parts[common] == active_parts[common]:
-            common += 1
-        active_parts = active_parts[:common]
-        active_nodes = active_nodes[:common]
-        for depth in range(common, len(parts)):
-            title = parts[depth]
-            parent_id = active_nodes[-1]["section_id"] if active_nodes else None
-            node_key = (parent_id, title)
-            occurrence = node_occurrences.get(node_key, -1) + 1
-            node_occurrences[node_key] = occurrence
-            path = " > ".join(parts[:depth + 1])
-            node = {
-                "section_id": section_id_for(document_id, path, f"{parent_id or 'root'}:{occurrence}"),
-                "breadcrumb_path": path, "parent_section_id": parent_id,
-                "section_occurrence": occurrence, "header_level": depth + 1,
-            }
-            active_parts.append(title)
-            active_nodes.append(node)
-        raw_content = doc.page_content
-        leading = len(raw_content) - len(raw_content.lstrip())
-        trailing = len(raw_content) - len(raw_content.rstrip())
-        content = raw_content[leading: len(raw_content) - trailing if trailing else len(raw_content)]
-        if not active_nodes:
-            active_nodes = [{
-                "section_id": section_id_for(document_id, "正文", "root:0"),
-                "breadcrumb_path": "正文", "parent_section_id": None,
-                "section_occurrence": 0, "header_level": 0,
-            }]
-            active_parts = ["正文"]
-        section_id = active_nodes[-1]["section_id"]
-        parent_section_id = active_nodes[-1]["parent_section_id"]
-        occurrence = active_nodes[-1]["section_occurrence"]
-        chunk_id = chunk_id_for(document_id, breadcrumb_path, content, order)
-        document_start = canonical_text.find(content, search_from)
-        if document_start < 0:
-            document_start = canonical_text.find(content)
-        document_end = document_start + len(content) if document_start >= 0 else None
-        if document_end is not None:
-            search_from = max(search_from, document_end - chunk_overlap)
-        sentences = sentence_spans(content, chunk_id)
-        for sentence in sentences:
-            sentence["chunk_start"] = sentence["start"]
-            sentence["chunk_end"] = sentence["end"]
-            sentence["document_start"] = (
-                document_start + sentence["start"] if document_start >= 0 else None
-            )
-            sentence["document_end"] = (
-                document_start + sentence["end"] if document_start >= 0 else None
-            )
-        chunks.append(
-            {
-                "document_id": document_id,
-                "document_version": document_version,
-                "chunk_id": chunk_id,
-                "section_id": section_id,
-                "parent_section_id": parent_section_id,
-                "breadcrumb_path": breadcrumb_path,
-                "header_level": header_level(metadata),
-                "chunk_order": order,
-                "prev_chunk_id": None,
-                "next_chunk_id": None,
-                "content": content,
-                "sentences": sentences,
-                "document_start": document_start if document_start >= 0 else None,
-                "document_end": document_end,
-                "offset_basis": "canonical_document" if document_start >= 0 else "chunk",
-                "section_occurrence": occurrence,
-                "section_ancestry": [dict(node) for node in active_nodes],
-                "metadata": metadata,
-                "splitter_version": splitter_version,
-            }
-        )
-
-    for index, chunk in enumerate(chunks):
-        if index > 0:
-            chunk["prev_chunk_id"] = chunks[index - 1]["chunk_id"]
-        if index + 1 < len(chunks):
-            chunk["next_chunk_id"] = chunks[index + 1]["chunk_id"]
-    return chunks
 
 
-def build_document_index(chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
+def _build_lookup_maps(chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
     by_chunk_id = {chunk["chunk_id"]: chunk for chunk in chunks}
     by_section_id: Dict[str, List[Dict[str, Any]]] = {}
     children_by_section_id: Dict[str, List[str]] = {}
@@ -317,23 +163,40 @@ def build_document_index(chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
 
-def persist_document_index(index: Dict[str, Any], output_path: Any) -> Path:
-    """Persist a portable index (lookup maps are reconstructed on load)."""
+
+
+
+
+def sentence_spans(content, chunk_id):
+    from .index_builder import sentence_ranges
+    return [{"sentence_id": f"{chunk_id}_s{ordinal}", "text": content[left:right], "start": left, "end": right}
+            for ordinal, (left, right) in enumerate(sentence_ranges(content))]
+
+
+def split_markdown_text(text, document_id="document", chunk_size=DEFAULT_CHUNK_SIZE,
+                        chunk_overlap=DEFAULT_CHUNK_OVERLAP, splitter_version=DEFAULT_SPLITTER_VERSION, *, snapshot=None):
+    from .index_builder import build_chunks
+    if splitter_version == DEFAULT_SPLITTER_VERSION:
+        splitter_version = f"hierarchy_v3_chunk{chunk_size}_overlap{chunk_overlap}"
+    return build_chunks(text, normalize_document_id(document_id), chunk_size, chunk_overlap, splitter_version, snapshot=snapshot)
+
+
+def build_document_index(chunks, *, snapshot=None):
+    from .index_integrity import finalize_index
+    return finalize_index(_build_lookup_maps(chunks), chunks, snapshot=snapshot)
+
+
+def persist_document_index(index, output_path):
+    from .index_integrity import portable_index, validate_document_index
+    if index.get("schema_version") == "document_index_v3":
+        validate_document_index(index)
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    payload = {
-        "schema_version": "document_index_v2",
-        "document_id": index.get("document_id"),
-        "document_version": index.get("document_version"),
-        "chunks": index.get("chunks", []),
-        "sections": index.get("sections", []),
-    }
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    temporary.replace(path)
+    path.write_text(json.dumps(portable_index(index), ensure_ascii=False, indent=2), encoding="utf-8")
     return path
 
 
-def load_document_index(path: Any) -> Dict[str, Any]:
-    payload = json.loads(Path(path).read_text(encoding="utf-8"))
-    return build_document_index(payload.get("chunks", []))
+def load_document_index(path, expected_hash=None, *, require_verified=False):
+    from .index_integrity import load_index_payload
+    return load_index_payload(json.loads(Path(path).read_text(encoding="utf-8")), expected_hash=expected_hash,
+                              require_verified=require_verified)

@@ -319,6 +319,8 @@ def parse_cli_args(argv=None):
     ontology_group = parser.add_mutually_exclusive_group()
     ontology_group.add_argument("--ontology", help="legacy ontology JSON path (no published release binding)")
     ontology_group.add_argument("--ontology-release", help="verified published release directory or manifest")
+    parser.add_argument("--legacy-extraction", action="store_true", help="explicitly use the historical v3 extraction bridge")
+    parser.add_argument("--max-chunks", type=int, help="limit model extraction scope and record all unrequested chunks")
     return parser.parse_args(argv)
 
 
@@ -1001,126 +1003,18 @@ other_entity: {other_entity}
 
 
 def is_example_or_calculation_paragraph(text):
-    """
-    检测段落是否为例题/计算段落（知识屏蔽）
-    只匹配标题或行首的例题特征，避免误伤“要求”“解决”等正文内容。
-
-    Args:
-        text: 待检测的段落文本
-
-    Returns:
-        bool: True 表示是例题/计算段落，需要屏蔽
-    """
-    # 只在行首或 Markdown 标题开头识别例题/计算标记。
-    # "求"、"解"必须接冒号，避免误匹配“要求”“解决”。
-    example_keywords = [
-        r'例\s*[0-9一二三四五六七八九十百]+(?:[：:、.\s]|$)',
-        r'例题(?:[：:、.\s]|$)',
-        r'习题\s*[0-9一二三四五六七八九十百]*(?:[：:、.\s]|$)',
-        r'练习\s*[0-9一二三四五六七八九十百]*(?:[：:、.\s]|$)',
-        r'计算题(?:[：:、.\s]|$)',
-        r'如图\s*[0-9一二三四五六七八九十百]+(?:[：:、.\s]|$)',
-        r'如图\s*所示(?:[：:、.\s]|$)',
-        r'已知(?:[：:、.\s]|$)',
-        r'假设(?:[：:、.\s]|$)',
-        r'求解(?:[：:]|\s*$)',
-        r'求\s*[：:]',
-        r'解\s*[：:]',
-        r'计算(?:[：:、.\s]|$)',
-        r'试算(?:[：:、.\s]|$)',
-        r'试求(?:[：:、.\s]|$)',
-        r'试分析(?:[：:、.\s]|$)',
-    ]
-
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
-        if not line:
-            continue
-        line = re.sub(r'^#{1,6}\s*', '', line)
-        for pattern in example_keywords:
-            if re.match(pattern, line):
-                return True
-
-    return False
+    """Legacy compatibility: explicit exercises only, never body hypotheses/captions."""
+    return any(re.match(r'^\s*(?:#{1,6}\s*)?(?:例题|习题|练习题|计算题)(?:[\s：:0-9一二三四五六七八九十]|$)', line)
+               for line in text.splitlines())
 
 
 def read_markdown():
-    """读取并预处理markdown文件"""
-    if not os.path.exists(MARKDOWN_FILE_PATH):
-        raise FileNotFoundError(f"找不到文件: {MARKDOWN_FILE_PATH}")
-
-    with open(MARKDOWN_FILE_PATH, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    # ====== 文本切分 ======
-    # 1. 把 MinerU 特有的 ###HEADER#### 替换为标准的 Markdown 一级或二级标题
-    # （这里统一替换为 # ，配合后面的切分器）
-    content = content.replace("###HEADER#### ", "# ")
-    content = content.replace("###HEADER####", "# ")
-
-
-    # 保留其他的基本清洗逻辑
-    content = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', content) # 移除链接
-    content = re.sub(r'^[\s]*[-\*\+]\s+', '', content, flags=re.MULTILINE) # 移除无序列表标记
-    content = re.sub(r'```[^\n]*\n', '', content)
-    content = re.sub(r'```', '', content)
-    content = re.sub(r'`([^`]+)`', r'\1', content)
-    content = re.sub(r'\n\s*\n\s*\n+', '\n\n', content)
-
-    return content.strip()
+    from document.snapshot import read_snapshot
+    return read_snapshot(MARKDOWN_FILE_PATH)['canonical_text']
 
 
 def split_markdown_text(text):
-    """
-    使用 LangChain 进行文本切分：
-    1. 首先使用 MarkdownHeaderTextSplitter 按标题层级切分（#、##、###）
-    2. 然后使用 RecursiveCharacterTextSplitter 进行二次切分（chunk_size=1000）
-    关键点：二次切分后的片段会自动继承父级的标题 Metadata
-    """
-    # 定义要切分的标题层级
-    headers_to_split_on = [
-        ("#", "Header-1"),
-        ("##", "Header-2"),
-        ("###", "Header-3"),
-    ]
-
-    # 第一步：使用 MarkdownHeaderTextSplitter 按标题切分
-    markdown_splitter = MarkdownHeaderTextSplitter(
-        headers_to_split_on=headers_to_split_on,
-        strip_headers=False  # 保留标题在内容中
-    )
-
-    doc_chunks = markdown_splitter.split_text(text)
-    print(f"   MarkdownHeaderTextSplitter 切分后得到 {len(doc_chunks)} 个文档片段")
-
-    # 第二步：使用 RecursiveCharacterTextSplitter 进行二次切分
-    # chunk_size=1000 确保内容不会过长
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=100,  # 保持一定重叠以保证上下文连续性
-        separators=["\n\n", "\n", "。", "！", "？", "，", "、", ""]
-    )
-
-    # 二次切分，Document 对象会自动继承 metadata
-    final_docs = text_splitter.split_documents(doc_chunks)
-    print(f"   RecursiveCharacterTextSplitter 二次切分后得到 {len(final_docs)} 个最终片段")
-
-    # 转换为字典列表，包含 breadcrumb_path 和 content
-    chunks = []
-    for doc in final_docs:
-        # 从 metadata 中提取所有层级标题
-        metadata = doc.metadata
-
-        # 构建面包屑路径
-        breadcrumb_path = build_breadcrumb_path(metadata)
-
-        chunks.append({
-            "breadcrumb_path": breadcrumb_path,
-            "content": doc.page_content,
-            "metadata": metadata
-        })
-
-    return chunks
+    return split_markdown_with_hierarchy(text)
 
 
 def build_breadcrumb_path(metadata):
@@ -1148,149 +1042,16 @@ def build_breadcrumb_path(metadata):
 
 
 def call_qwen_traditional(chunk, breadcrumb_path, retry_count=3, ontology=None, sub_schema=None):
-    """
-    GraphRAG
-    整合了火炮学知识图谱本体，强制使用本体定义的实体类型、关系类型和抽取规则。
-    """
-
-    # 从 ontology_data.py 动态加载本体信息
-    if ontology is None:
-        # 如果没有传入 ontology，则使用默认的 JSON 文件加载
-        ontology_info = get_ontology_text()
-    else:
-        ontology_info = get_ontology_text(ontology=ontology, sub_schema=sub_schema)
-
-    prompt = f"""
-Goal:
-You are an expert in Artillery Weapon Systems. Transform the following technical text into a semantic graph (a list of triples) based on the provided entity list.
-Your task is to identify precise engineering and physical relations between these entities.
-
-Attention:
-1. Accuracy over Quantity: Only extract triples that are explicitly supported by the technical text.
-2. Entity Integrity: Do not modify the names in the Entity List.
-3. Concise Relations: Use professional engineering terms for relations (e.g., "composed_of", "determines", "proportional_to", "increases", "constrains").
-4. Avoid Descriptive Objects: Do not use "factor of..." as an entity. Instead, use the action as a relation (e.g., instead of [A, is, factor of B], use [A, affects, B]).
-5. Evidence First: For each triple, provide the original surface relation and an exact evidence quote from the text. Do not provide confidence or thought fields.
-6. Bounded Output: Return at most 8 triples. When more facts are present, keep the 8 most explicit and technically important facts.
-
-Example (Artillery Domain):
-Text: "制退机产生制退阻力，制退阻力决定火炮后坐长度。"
-Semantic Graph:
-{{
-  "triplets": [
-    {{
-      "head": "制退机",
-      "surface_relation": "产生",
-      "tail": "制退阻力",
-      "evidence_quote": "制退机产生制退阻力"
-    }},
-    {{
-      "head": "制退阻力",
-      "surface_relation": "决定",
-      "tail": "火炮后坐长度",
-      "evidence_quote": "制退阻力决定火炮后坐长度"
-    }}
-  ]
-}}
-
-**你必须严格遵守本体定义的实体类型、关系类型和抽取规则。**
-{ontology_info}
-你必须**绝对遵守**以下铁律，任何违背将导致系统崩溃：
-
-### 铁律一：知识屏蔽 - 忽略例题与计算段落！
-- **规则**：你必须忽略所有例题、习题、具体的数值计算过程。
-- **屏蔽特征**：只有当标题或行首出现"例1"、"例题"、"习题"、"练习"、"计算题"、"已知："、"假设："、"求："、"解："、"求解："、"试算"等标记时，才将该片段视为例题/计算段落并跳过。
-- **避免误删**：正文中出现"要求"、"解决"、"求得"、"解算"等正常术语时，不得据此跳过该段落。
-- **理论边界**：仅提取通用的、教科书定义的理论知识。例题中的具体数值、特定计算过程、虚构情境均不得入库。
-- ❌ 错误：从例题"已知某炮弹的初速为800 m/s，试分析其射程。"中提取任何三元组。
-- ❌ 错误：从"如图12-3所示的炮架结构"中提取结构参数。
-- ✅ 正确：如果正文明确描述"初速是影响射程的关键因素"，则可以提取 {{"head": "初速", "surface_relation": "影响", "tail": "射程", "evidence_quote": "初速是影响射程的关键因素"}}。
-
-### 铁律二：去重三元组
-- **全局去重**：在整个文档范围内，完全相同的三元组只保留一条。
-- **输出前自行去重**，绝对禁止让重复三元组进入后续的 Neo4j 导入环节！
-
-【抽取前检查】
-在输出 JSON 前自行完成以下检查，但不要输出 thought 字段：
-1. **实体识别与分类**：识别文中提到的参数（如 $i_c$）、过程（如膛内压力）或模型。判断它们属于哪14类实体。
-2. **指代消解（Rule 1）**：检查文中是否有"该"、"其"、"此"或省略主语的情况。必须回溯并替换为具体的实体名词（如将"其"替换为"弹道系数"）。
-3. **符号转中文（Rule 9 - 新增）**：检查所有提取的实体，如果包含数学符号（如 v0, x, A, p），必须替换为对应的中文概念名称。
-4. **实体名称校验（Rule 9 - 新增）**：检查实体长度是否 ≤ 2 个字符，或是否为纯 LaTeX 符号。如果满足任一条件，必须将其合并到父级概念中或丢弃。
-5. **关系保真（核心步骤）**：
-   - 分析实体间的物理逻辑。
-   - surface_relation 尽量保留原文关系表达。
-   - 不要把所有关系强行改写成本体标准关系，标准 relation 由后置映射模块生成。
-6. **嵌套分解（Rule 2）**：如果遇到复合参数（如弹道系数 $C$），检查文中是否提到了它的组成部分，并拆解为多条"由...组成"关系。
----
-
-【待处理文本】
-{chunk}
-
-【输出格式要求】
-严格输出 JSON 对象，triplets 最多 8 条。如果无高价值结构化知识，返回 `{{"triplets": []}}`。
-
-必须使用且只能使用以下 JSON schema。不要输出 `triple` 数组字段，不要输出 `subject/predicate/object`，不要在 JSON 外添加任何文本。
-{{
-  "triplets": [
-    {{
-      "head": "string，非空名词或名词短语",
-      "surface_relation": "string，原文中的关系表达或最接近的短语",
-      "tail": "string，非空名词或名词短语",
-      "evidence_quote": "string，必须是待处理文本中的原文片段，不得改写",
-      "head_type_candidate": "string，可为空",
-      "tail_type_candidate": "string，可为空"
-    }}
-  ]
-}}
-
-输出示例：
-{{
-  "triplets": [
-    {{
-      "head": "空气密度",
-      "surface_relation": "成正比",
-      "tail": "空气阻力加速度",
-      "evidence_quote": "空气阻力加速度与空气密度成正比",
-      "head_type_candidate": "C_PhysicalParameter",
-      "tail_type_candidate": "C_PhysicalParameter"
-    }},
-    {{
-      "head": "初速",
-      "surface_relation": "决定",
-      "tail": "射程",
-      "evidence_quote": "初速决定射程",
-      "head_type_candidate": "C_PhysicalParameter",
-      "tail_type_candidate": "C_PhysicalParameter"
-    }}
-  ]
-}}
-"""
-    # ====== API 调用代码 ======
-    for i in range(retry_count):
-        try:
-            response = client.chat.completions.create(
-                model=MODEL,
-                messages=[
-                    {"role": "system", "content": "You are a GraphRAG extraction expert. Preserve the original surface relation from the source text, require exact evidence quotes, and output only JSON. Do not output thought or confidence fields."},
-                    {"role": "user", "content": prompt}
-                ],
-                response_format={'type': 'json_object'},
-                temperature=0.0,
-                max_tokens=int(os.environ.get("TRIPLET_MAX_TOKENS", "2048")),
-            )
-            content = response.choices[0].message.content
-            parsed = json.loads(content)
-            # 确保返回的是列表
-            result = parsed.get("triplets", [])
-            if not isinstance(result, list):
-                return []
-            return result
-        except Exception as e:
-            print(f"请求失败 (第{i+1}次重试): {e}")
-            import time
-            time.sleep(2)
-
-    return []
+    from document.hierarchy_index import split_markdown_text, build_document_index
+    from extract_triplets.pipeline_v4 import extract_source_scope, source_scope
+    chunks = split_markdown_text(chunk, document_id='compatibility_scope', chunk_size=max(1,len(chunk)+1), chunk_overlap=0)
+    if not chunks: return []
+    index = build_document_index(chunks)
+    result = []
+    for source in chunks:
+        response = extract_source_scope(source_scope(index, source), index=index, ontology=ontology or {}, llm_client=client, model=MODEL, settings={'request_attempts': retry_count})
+        result.extend(response['triplets'])
+    return result
 
 
 def clean_header(header):
@@ -1424,9 +1185,9 @@ def write_v2_outputs(candidates, accepted, review_queue, rejected):
             json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def write_v3_run(candidates, document_index, ontology):
+def write_v3_run(candidates, document_index, ontology, *, run_id=None, extraction_report=None):
     """Persist immutable run inputs and candidate revisions; JSON is only an export."""
-    run_id = os.environ.get("KG_RUN_ID") or (
+    run_id = run_id or os.environ.get("KG_RUN_ID") or (
         "run_" + datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_") + uuid4().hex[:8]
     )
     run_root = Path(project_root) / "runs" / "v3"
@@ -1450,10 +1211,8 @@ def write_v3_run(candidates, document_index, ontology):
     export_path = run_dir / "exports" / "candidates.json"
     for path in (document_path, ontology_path, config_path, export_path):
         path.parent.mkdir(parents=True, exist_ok=True)
-    document_path.write_text(json.dumps({
-        "document_id": document_id, "document_version": document_version,
-        "chunks": document_index.get("chunks", []), "sections": document_index.get("sections", []),
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    from document.hierarchy_index import persist_document_index
+    persist_document_index(document_index, document_path)
     ontology_path.write_text(json.dumps(ontology, ensure_ascii=False, indent=2), encoding="utf-8")
     release_binding = {}
     if release is not None:
@@ -1467,7 +1226,8 @@ def write_v3_run(candidates, document_index, ontology):
     def redact(value):
         if isinstance(value, dict):
             return {
-                key: ("<redacted>" if any(token in key.lower() for token in ("api_key", "password", "secret", "token"))
+                key: ("<redacted>" if (any(token in key.lower() for token in ("api_key", "password", "secret"))
+                                      or key.lower() in {"token", "access_token", "refresh_token", "authorization"})
                       else redact(item))
                 for key, item in value.items()
             }
@@ -1492,9 +1252,38 @@ def write_v3_run(candidates, document_index, ontology):
         "ontology_binding_status": "published_release" if release else "legacy_unreleased",
         **release_binding,
     }
-    repository.create_run(manifest)
+    if document_index.get("schema_version") == "document_index_v3":
+        source = document_index["source_snapshot"]
+        raw_path, canonical_path = document_path.with_suffix(".raw.md"), document_path.with_suffix(".canonical.md")
+        raw_path.write_bytes(source["raw_text"].encode("utf-8"))
+        canonical_path.write_bytes(source["canonical_text"].encode("utf-8"))
+        manifest.update({"source_index_hash": document_index["index_content_hash"],
+                         "structure_hash": document_index["structure_hash"], "raw_file_hash": source["raw_file_hash"],
+                         "normalizer_version": source["normalizer_version"], "source_snapshot_id": source["snapshot_id"],
+                         "offset_unit": source["offset_unit"], "span_convention": source["span_convention"],
+                         "raw_source_path": str(raw_path), "canonical_source_path": str(canonical_path)})
+    if extraction_report is not None:
+        report_path = run_dir / "extraction_report.json"
+        report_path.write_text(json.dumps({k: v for k, v in extraction_report.items() if k != "candidates"}, ensure_ascii=False, indent=2), encoding="utf-8")
+        from extract_triplets.pipeline_v4 import prompt_template
+        prompt_text, prompt_hash = prompt_template()
+        (run_dir / "extraction_prompt.txt").write_bytes(prompt_text.encode("utf-8"))
+        manifest.update(candidate_contract_version="extraction_candidate_v4", extraction_status=extraction_report["status"],
+                        extraction_report_path=str(report_path), extraction_prompt_hash=prompt_hash,
+                        extraction_candidate_count=len(candidates), extraction_model_calls=extraction_report["model_calls"])
+    v4_run = extraction_report is not None or any(item.get("contract_version") == "extraction_candidate_v4" for item in candidates)
+    if v4_run:
+        manifest["candidate_contract_version"] = "extraction_candidate_v4"
+    if not v4_run:
+        repository.create_run(manifest)
     exported = []
     for index, item in enumerate(candidates):
+        if item.get("contract_version") == "extraction_candidate_v4":
+            if (item.get("run_id") != run_id or item.get("source_index_hash") != document_index.get("index_content_hash")
+                    or item.get("ontology_version") != ontology_version):
+                raise ValueError("candidate v4 run/source/ontology binding mismatch")
+            exported.append(item)
+            continue
         candidate_id = candidate_id_for(run_id, document_id, str(item.get("source_id") or "unknown"), index)
         triple = {
             "head": item.get("head"), "surface_relation": item.get("surface_relation") or item.get("relation"),
@@ -1502,7 +1291,7 @@ def write_v3_run(candidates, document_index, ontology):
             "relation_label": item.get("relation"), "tail": item.get("tail"),
             "head_type": item.get("head_type"), "tail_type": item.get("tail_type"),
             "tail_kind": item.get("tail_kind", "entity"),
-            "qualifiers": item.get("qualifiers") or {"polarity": item.get("polarity", "positive"),
+            "qualifiers": item.get("qualifiers") or {"polarity": item.get("polarity", "unknown"),
                                                         "condition": item.get("condition")},
         }
         candidate = {
@@ -1519,8 +1308,11 @@ def write_v3_run(candidates, document_index, ontology):
             **release_binding,
         }
         candidate["fact_key"] = fact_key_for(candidate)
-        repository.add_candidate(candidate)
+        if not v4_run:
+            repository.add_candidate(candidate)
         exported.append(candidate)
+    if v4_run:
+        repository.register_v4_run(manifest, exported)
     export_path.write_text(json.dumps(exported, ensure_ascii=False, indent=2), encoding="utf-8")
     manifest_path = run_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -1530,6 +1322,9 @@ def write_v3_run(candidates, document_index, ontology):
 def main(argv=None):
     args = parse_cli_args(argv)
     configure_from_cli(args)
+    if not args.legacy_extraction:
+        from extract_triplets.pipeline_v4 import run_v4_extraction
+        return run_v4_extraction(args, sys.modules[__name__])
     # 打印配置信息
     print("=" * 60)
     print("火炮学知识图谱三元组提取配置")
@@ -1554,7 +1349,8 @@ def main(argv=None):
 
     print("2. 执行基于层级的统一切分...")
     document_id = normalize_document_id(os.path.basename(MARKDOWN_FILE_PATH))
-    chunks = split_markdown_with_hierarchy(text, document_id=document_id)
+    from document.snapshot import read_snapshot
+    chunks = split_markdown_with_hierarchy(text, document_id=document_id, snapshot=read_snapshot(MARKDOWN_FILE_PATH, document_id))
     document_index = build_document_index(chunks)
     print(f"   共切分为 {len(chunks)} 个逻辑片段。")
 
@@ -1688,4 +1484,4 @@ def main(argv=None):
     print(f"   high: {confidence_levels['high']}, medium_high: {confidence_levels['medium_high']}, medium_low: {confidence_levels['medium_low']}, low: {confidence_levels['low']}")
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

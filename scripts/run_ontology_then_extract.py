@@ -67,6 +67,7 @@ def parse_args(argv=None):
     parser.add_argument("--chain-id", required=True)
     parser.add_argument("--base-policy", choices=["strict", "draft"], default="draft")
     parser.add_argument("--ontology-release", help="已发布 release 目录或 release_manifest.json；提供时跳过候选构建")
+    parser.add_argument("--max-chunks", type=int, help="候选v4抽取的来源范围上限；未处理范围记录为不完整")
     return parser.parse_args(argv)
 
 
@@ -159,6 +160,8 @@ def main(argv=None) -> int:
             "--ontology-release",
             str(release.path),
         ]
+        if args.max_chunks is not None:
+            command.extend(["--max-chunks", str(args.max_chunks)])
         completed = subprocess.run(command, cwd=ROOT, env=os.environ.copy(), check=False)
         state["triplet_exit_code"] = completed.returncode
         state["finished_at"] = now_iso()

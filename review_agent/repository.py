@@ -23,6 +23,7 @@ MIGRATION_VERSION = 3
 EDITABLE_TRIPLE_FIELDS = {
     "head", "surface_relation", "relation_id", "relation_label", "tail",
     "head_type", "tail_type", "tail_kind", "datatype", "value", "unit", "qualifiers",
+    "language", "qualifier_status",
 }
 
 
@@ -428,6 +429,28 @@ class ReviewRepository:
 
     register_run = create_run
 
+    def register_v4_run(self, manifest, candidates):
+        """Publish one intake pool atomically; no successful partial candidate pool."""
+        now = utc_now()
+        payload = {"schema_version": "triple_review_v3", "mode": "shadow", "created_at": now, **dict(manifest)}
+        with self.transaction(immediate=True) as connection:
+            connection.execute("INSERT INTO runs(run_id,schema_version,mode,source_hash,ontology_hash,manifest_json,created_at) VALUES(?,?,?,?,?,?,?)",
+                               (payload["run_id"], payload["schema_version"], payload["mode"], payload.get("source_hash"),
+                                payload.get("ontology_hash"), _json(payload), payload["created_at"]))
+            for candidate in candidates:
+                if (candidate.get("contract_version") != "extraction_candidate_v4" or candidate.get("run_id") != payload["run_id"]
+                        or candidate.get("source_index_hash") != payload.get("source_index_hash")
+                        or candidate.get("ontology_version") != payload.get("ontology_hash")
+                        or candidate.get("document_version") != payload.get("source_hash")
+                        or candidate.get("fact_key") != fact_key_for(candidate)):
+                    raise ValidationError("candidate v4 pool binding mismatch")
+                connection.execute("INSERT INTO candidates(candidate_id,run_id,current_revision,row_version,human_status,import_status,created_at,updated_at) "
+                                   "VALUES(?,?,1,1,'pending','not_queued',?,?)", (candidate["candidate_id"], payload["run_id"], now, now))
+                connection.execute("INSERT INTO candidate_revisions(candidate_id,revision,document_id,document_version,ontology_version,source_chunk_id,section_id,fact_key,candidate_json,created_at) "
+                                   "VALUES(?,1,?,?,?,?,?,?,?,?)", (candidate["candidate_id"], candidate["document_id"], candidate["document_version"],
+                                   candidate["ontology_version"], candidate.get("source_chunk_id"), candidate.get("section_id"), candidate["fact_key"], _json(candidate), now))
+        return payload
+
     def get_run(self, run_id: str) -> Dict[str, Any]:
         with self.connect() as connection:
             row = connection.execute("SELECT manifest_json FROM runs WHERE run_id=?", (run_id,)).fetchone()
@@ -572,6 +595,9 @@ class ReviewRepository:
                 updated["triple"] = {**dict(source.get("triple") or {}), **dict(changes["triple"])}
             new_revision = old_revision + 1
             updated.update({"revision": new_revision, "supersedes_revision": old_revision})
+            if updated.get("contract_version") == "extraction_candidate_v4":
+                from extract_triplets.candidate_contract import refresh_revision
+                refresh_revision(updated)
             updated["fact_key"] = fact_key_for(updated)
             connection.execute(
                 """INSERT INTO candidate_revisions(candidate_id, revision, document_id,
@@ -852,6 +878,9 @@ class ReviewRepository:
                     raise ValidationError("modified triple requires a relation")
                 new_revision = revision + 1
                 new_candidate.update({"revision": new_revision, "supersedes_revision": revision})
+                if new_candidate.get("contract_version") == "extraction_candidate_v4":
+                    from extract_triplets.candidate_contract import refresh_revision
+                    refresh_revision(new_candidate)
                 new_candidate["fact_key"] = fact_key_for(new_candidate)
                 connection.execute(
                     """INSERT INTO candidate_revisions(candidate_id, revision, document_id,

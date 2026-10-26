@@ -107,7 +107,15 @@ class Neo4jImporter:
         return self.relation_types[relation_id]
 
     def _prepare(self, item: Mapping[str, Any]) -> Dict[str, Any]:
+        if item.get("contract_version") == "extraction_candidate_v4" and item.get("fact_key_state") != "canonical":
+            raise ValueError("provisional candidate v4 cannot enter Fact aggregation")
         triple = item.get("triple") if isinstance(item.get("triple"), Mapping) else item
+        if item.get("contract_version") == "extraction_candidate_v4":
+            qualifiers = triple.get("qualifiers") or {}
+            if (qualifiers.get("polarity") != "positive" or any(qualifiers.get(k) for k in ("condition", "time_scope", "applicability"))
+                    or qualifiers.get("modality") not in {None, "asserted"}
+                    or (triple.get("qualifier_status") or {}).get("quantifier") == "extracted"):
+                raise ValueError("qualified candidate v4 requires the full Fact projection adapter")
         head = str(triple.get("head") or "").strip()
         tail = str(triple.get("tail") or "").strip()
         relation_id = str(triple.get("relation_id") or "").strip()
@@ -118,8 +126,9 @@ class Neo4jImporter:
         decision = dict(item["latest_decision"])
         fact_key = str(item.get("fact_key") or fact_key_for(item))
         return {
-            "head": head, "tail": tail, "head_key": self.make_entity_key(head, str(item.get("domain") or "default")),
-            "tail_key": self.make_entity_key(tail, str(item.get("domain") or "default")),
+            "head": head, "tail": tail,
+            "head_key": triple.get("head_entity_id") if item.get("contract_version") == "extraction_candidate_v4" else self.make_entity_key(head, str(item.get("domain") or "default")),
+            "tail_key": triple.get("tail_entity_id") if item.get("contract_version") == "extraction_candidate_v4" else self.make_entity_key(tail, str(item.get("domain") or "default")),
             "relation_id": relation_id, "relation_type": self._relation_type(relation_id),
             "relation_label": triple.get("relation_label") or triple.get("surface_relation") or relation_id,
             "qualifiers_json": json.dumps(triple.get("qualifiers") or {}, ensure_ascii=False, sort_keys=True),

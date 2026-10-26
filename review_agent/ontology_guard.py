@@ -172,9 +172,10 @@ class OntologyGuard:
                     self.parents.setdefault(resolved, set()).add(item["id"])
 
     def resolve_relation(self, value: Any) -> Optional[str]:
-        if value in self.relations:
-            return str(value)
-        return self.alias_to_relation.get(normalize_name(value))
+        from schema.relation_registry import RelationRegistry
+        if not hasattr(self, "registry"):
+            self.registry = RelationRegistry(self.ontology)
+        return self.registry.resolve(value)["relation_id"]
 
     def is_subclass_or_same(self, class_ref: Any, allowed_ref: Any) -> Optional[bool]:
         class_id = self.class_index.get(normalize_name(class_ref))

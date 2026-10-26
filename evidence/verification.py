@@ -81,6 +81,9 @@ def make_evidence_bundle(items: Iterable[Mapping[str, Any]], searched_levels: It
 def verify_evidence_bundle(bundle: Mapping[str, Any], document_snapshot: Mapping[str, Any],
                            candidate: Mapping[str, Any]) -> Dict[str, Any]:
     """Only exact frozen-source anchors may enter a round's reference catalogue."""
+    if document_snapshot.get("schema_version") == "document_index_v3":
+        from document.index_integrity import validate_document_index
+        validate_document_index(document_snapshot, candidate.get("source_index_hash"))
     chunks = document_snapshot.get("by_chunk_id") or {
         item["chunk_id"]: item for item in document_snapshot.get("chunks", [])
     }
@@ -116,6 +119,23 @@ def verify_evidence_bundle(bundle: Mapping[str, Any], document_snapshot: Mapping
                                                for key, other in (("chunk_start", "start"), ("chunk_end", "end"))):
                     status = "document_chunk_offset_mismatch"
             elif basis == "canonical_document":
+                if item.get("source_anchor_kind") == "document_span" and document_snapshot.get("schema_version") == "document_index_v3":
+                    status = verify_anchor(item, document_snapshot["source_snapshot"]["canonical_text"])["status"]
+                    import json
+                    identity = [item["document_id"], item["document_version"], "canonical_document", None, item["start"], item["end"]]
+                    expected_id = "ev_" + hashlib.sha256(json.dumps(identity, ensure_ascii=False).encode("utf-8")).hexdigest()[:20]
+                    if status == "exact" and item["evidence_id"] != expected_id:
+                        status = "source_anchor_id_mismatch"
+                    section = document_snapshot["sections_by_id"].get(item["section_id"], {})
+                    if status == "exact" and not section.get("start", 0) <= item["start"] < item["end"] <= section.get("end", 0):
+                        status = "section_span_mismatch"
+                    expected_chunks = {c["chunk_id"] for c in document_snapshot["chunks"] if c["section_id"] == item["section_id"]
+                                       and c["document_start"] < item["end"] and c["document_end"] > item["start"]}
+                    if status == "exact" and (not expected_chunks or set(item.get("span_chunk_ids") or []) != expected_chunks):
+                        status = "document_span_chunks_mismatch"
+                    item.update(anchor_valid=status == "exact", anchor_status=status, semantic_status="unknown")
+                    (valid if item["anchor_valid"] else rejected).append(item)
+                    continue
                 block_start = chunk.get("document_start")
                 cs, ce = item.get("chunk_start"), item.get("chunk_end")
                 if (any(type(x) is not int for x in (block_start, cs, ce, item.get("start"), item.get("end")))

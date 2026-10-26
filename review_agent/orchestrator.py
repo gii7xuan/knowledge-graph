@@ -126,6 +126,7 @@ class ReviewOrchestrator:
             "canonical_triple": canonical_triple(candidate),
             "document_version": candidate["document_version"],
             "ontology_version": candidate["ontology_version"],
+            **{key: candidate.get(key) for key in ("contract_version", "source_index_hash", "ontology_release_id", "profile_hash")},
             "evidence_bundle_hash": bundle["evidence_hash"],
             "prompt_version": PROMPT_VERSION,
             "response_contract_version": CONTRACT_VERSION,

@@ -74,8 +74,8 @@ def validate_action(value):
             if len(json.dumps(item, ensure_ascii=False)) > 3000:
                 raise ActionError("revision draft too large")
             for field, content in item.items():
-                if field == "qualifiers":
-                    if not isinstance(content, dict) or set(content) - {"polarity", "condition", "time_scope", "applicability"}:
+                if field in {"qualifiers", "qualifier_status"}:
+                    if not isinstance(content, dict) or set(content) - {"polarity", "condition", "time_scope", "applicability", "modality", "quantifier"}:
                         raise ActionError("invalid qualifiers")
                     if any(v is not None and not _text(v, 600) for v in content.values()):
                         raise ActionError("qualifiers must be bounded strings")

@@ -23,14 +23,15 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
     triple = candidate.get("triple") or candidate
     safe_candidate = {key: candidate.get(key) for key in (
         "candidate_id", "revision", "document_id", "document_version", "ontology_version",
-        "source_chunk_id", "section_id",
+        "source_chunk_id", "section_id", "ontology_release_id", "profile_hash", "contract_version",
     )}
     safe_candidate["triple"] = {key: triple.get(key) for key in (
         "head", "head_type", "head_entity_id", "surface_relation", "relation_id", "relation_label",
-        "tail", "tail_type", "tail_kind", "tail_entity_id", "datatype", "value", "unit",
+        "tail", "tail_type", "tail_kind", "tail_entity_id", "datatype", "value", "unit", "language", "mapping_status",
     )}
     safe_candidate["triple"]["qualifiers"] = {key: (triple.get("qualifiers") or {}).get(key)
-                                                for key in ("polarity", "condition", "time_scope", "applicability")}
+                                                for key in ("polarity", "condition", "time_scope", "applicability", "modality", "quantifier")}
+    safe_candidate["triple"]["qualifier_status"] = dict(triple.get("qualifier_status") or {})
     evidence = proposal.get("evidence_bundle", {}).get("items", [])
     return {
         "proposal_digest": proposal["proposal_digest"],

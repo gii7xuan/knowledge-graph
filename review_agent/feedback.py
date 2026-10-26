@@ -57,8 +57,11 @@ class FeedbackService:
         action = str(request.get("action") or request.get("decision") or "")
         request["action"] = action
         request["labels"] = self._labels(request)
-        if action in {"accept", "accept_corrected"} and self.ontology_guard is not None:
+        if action in {"accept", "accept_corrected"}:
             candidate = self.repository.get_revision(request["candidate_id"], int(request["revision"]))
+            if candidate.get("contract_version") == "extraction_candidate_v4" and candidate.get("fact_key_state") != "canonical":
+                raise UnprocessableEntityError("candidate v4 identity/qualifiers remain provisional")
+        if action in {"accept", "accept_corrected"} and self.ontology_guard is not None:
             check = self.ontology_guard.check(candidate)
             if check.get("status") != "pass":
                 raise UnprocessableEntityError(
