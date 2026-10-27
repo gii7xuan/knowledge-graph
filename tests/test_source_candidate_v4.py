@@ -265,16 +265,12 @@ class SourceCandidateV4Tests(unittest.TestCase):
         self.assertEqual(len(result["candidates"]), 10)
 
     def test_qualified_candidate_is_not_flattened_by_the_legacy_graph_adapter(self):
-        from to_neo4j.save_to_neo4j import Neo4jImporter
-        importer = Neo4jImporter.__new__(Neo4jImporter)
-        importer.relation_types = {"R": "R"}
+        from to_neo4j.fact_projection import direct_edge_eligible
         candidate = self.candidate()
         candidate["latest_decision"] = {"decision_id": "d", "decision_version": 1}
-        plain = importer._prepare(candidate)
-        self.assertEqual(plain["head_key"], candidate["triple"]["head_entity_id"])
+        self.assertTrue(direct_edge_eligible(candidate["triple"]))
         candidate["triple"]["qualifiers"]["polarity"] = "negative"
-        with self.assertRaisesRegex(ValueError, "full Fact projection"):
-            importer._prepare(candidate)
+        self.assertFalse(direct_edge_eligible(candidate["triple"]))
 
     def test_revision_rebinds_local_identity_and_invalidates_semantic_key(self):
         candidate = self.candidate()

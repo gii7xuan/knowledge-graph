@@ -177,17 +177,17 @@ $env:NEO4J_PASSWORD="你的密码"
 python -m to_neo4j.save_to_neo4j --run-id <run_id> --apply
 ```
 
-导入器只信任当前 revision 对应的最新有效 v3 决定，并校验关系 ID 是否在冻结本体白名单中。事实、证据、决定和候选贡献在事务中写入；之后的拒绝会生成 retract 事件，只有当同一事实没有其他有效贡献时才将事实和直接边标为 inactive。
+自动、人工和导入共用严格准入：当前 v4 修订、有效决定、不可变本体与来源制品、完整限定、逐字证据及语义支持均需通过。旧决定标志不能授权入库。outbox 只触发当前状态对账，同一候选的旧贡献会停用，Fact 按全部有效贡献重算。
 
-下游 GraphRAG 必须只读取 active 事实。例如：
+定期运行 `--scan` 可补偿遗漏事件并重建派生视图。GraphRAG 使用完整 Fact 查询，返回限定、字面量、版本、贡献与带归因的证据判断：
 
-```cypher
-MATCH (h:Entity)-[r]->(t:Entity)
-WHERE r.active = true AND r.fact_key IS NOT NULL
-RETURN h, r, t
+```python
+from to_neo4j.query_facts import query_facts
+facts = query_facts(driver, entity_id="已确认的实体ID")
 ```
 
 不要把旧 `review_status`、`decision` 或 heuristic probability 当作入库凭证。
+详见 [统一准入与图谱同步说明](docs/admission_graph_sync_20261027.md)。否定、条件、时间、范围、能力和字面量保存在完整 Fact 中，只有无显式限定的肯定实体事实派生 `KG_FACT` 边。
 
 ## 离线演示与测试
 

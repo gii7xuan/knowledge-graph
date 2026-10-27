@@ -18,9 +18,11 @@ from uuid import uuid4
 
 from .contracts import canonical_json, fact_key_for, sha256_json
 from .lifecycle_repository import LifecycleRepository
+from ontology_review.repository import OntologyReviewRepository
+from .admission_repository import AdmissionRepository
 
 
-MIGRATION_VERSION = 4
+MIGRATION_VERSION = 6
 EDITABLE_TRIPLE_FIELDS = {
     "head", "surface_relation", "relation_id", "relation_label", "tail",
     "head_type", "tail_type", "tail_kind", "datatype", "value", "unit", "qualifiers",
@@ -71,7 +73,7 @@ class _ClosingConnection(sqlite3.Connection):
             self.close()
 
 
-class ReviewRepository(LifecycleRepository):
+class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionRepository):
     def __init__(self, database_path: Any = "runs/v3/review.sqlite3", *, busy_timeout_ms: int = 5000):
         self.database_path = Path(database_path)
         self.busy_timeout_ms = int(busy_timeout_ms)
@@ -314,6 +316,8 @@ class ReviewRepository(LifecycleRepository):
                 """
             )
             self.initialize_lifecycle(connection)
+            self.initialize_ontology_review(connection)
+            self.initialize_admission(connection)
             connection.execute(
                 "INSERT OR IGNORE INTO schema_migrations(migration_version, applied_at) VALUES (?, ?)",
                 (MIGRATION_VERSION, utc_now()),
@@ -608,6 +612,8 @@ class ReviewRepository(LifecycleRepository):
             if updated.get("contract_version") == "extraction_candidate_v4":
                 from extract_triplets.candidate_contract import refresh_revision
                 refresh_revision(updated)
+                from .admission import canonicalize_revision
+                updated = canonicalize_revision(self, updated)
             updated["fact_key"] = fact_key_for(updated)
             connection.execute(
                 """INSERT INTO candidate_revisions(candidate_id, revision, document_id,
@@ -626,6 +632,9 @@ class ReviewRepository(LifecycleRepository):
             if changed != 1:
                 raise ConflictError("candidate was concurrently changed")
             connection.execute("UPDATE ontology_extension_subscriptions SET status='revoked' WHERE candidate_id=? AND status='active'", (candidate_id,))
+            if self.has_graph_history(connection, candidate_id):
+                self.mark_graph_dirty(connection, candidate_id, "candidate_revision_changed")
+            connection.execute("UPDATE decisions SET active=0 WHERE candidate_id=? AND active=1", (candidate_id,))
         return self.get_candidate(candidate_id)
 
     def start_audit(self, candidate_id: str, revision: int, context: Mapping[str, Any]) -> str:
@@ -708,7 +717,7 @@ class ReviewRepository(LifecycleRepository):
         return attempt_id
 
     def commit_audit_if_current(
-        self, candidate_id: str, revision: int, audit_id: str, result: Mapping[str, Any]
+        self, candidate_id: str, revision: int, audit_id: str, result: Mapping[str, Any], *, prepared_admission=None
     ) -> bool:
         now = utc_now()
         with self.transaction(immediate=True) as connection:
@@ -729,27 +738,29 @@ class ReviewRepository(LifecycleRepository):
             if audit and audit["status"] != "running":
                 return False
             current = connection.execute(
-                "SELECT current_revision, import_status,row_version FROM candidates WHERE candidate_id=?", (candidate_id,)
+                "SELECT current_revision,import_status,row_version,human_status FROM candidates WHERE candidate_id=?", (candidate_id,)
             ).fetchone()
             is_current = current is not None and int(current["current_revision"]) == int(revision)
             if context.get("execution_row_version") is not None and (
                 current is None or current["row_version"] != context["execution_row_version"]):
                 connection.execute("UPDATE audit_runs SET status='interrupted',completed_at=? WHERE audit_id=? AND status='running'", (now, audit_id))
                 return False
+            if is_current and current["human_status"] == "pending" and result.get("decision") == "auto_accept":
+                prepared_admission = self.prepare_automatic_admission(candidate_id, revision, result)
             connection.execute(
                 """UPDATE audit_runs SET status='completed', features_json=?, calibrated_probability=?,
                    calibration_status=?, completed_at=? WHERE audit_id=?""",
                 (_json(result.get("features", {})), result.get("calibrated_probability"),
                  result.get("calibration_status", "unavailable"), now, audit_id),
             )
-            if not is_current:
+            if not is_current or current["human_status"] != "pending":
                 return False
             old = connection.execute(
                 """SELECT decision_id, decision_version, final_decision, revision FROM decisions
                    WHERE candidate_id=? AND active=1 ORDER BY decision_version DESC LIMIT 1""",
                 (candidate_id,),
             ).fetchone()
-            version = (int(old["decision_version"]) + 1) if old else 1
+            version = int(connection.execute("SELECT COALESCE(MAX(decision_version),0)+1 FROM decisions WHERE candidate_id=?", (candidate_id,)).fetchone()[0])
             decision_id = str(result.get("decision_id") or f"decision_{uuid4().hex}")
             if old:
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old["decision_id"],))
@@ -763,6 +774,7 @@ class ReviewRepository(LifecycleRepository):
                 **dict(result), "decision_id": decision_id, "candidate_id": candidate_id,
                 "revision": revision, "audit_id": audit_id, "decision_version": version,
                 "decision": route,
+                **({"admission_bundle_id": prepared_admission["bundle"]["bundle_id"]} if prepared_admission else {}),
             }
             connection.execute(
                 """INSERT INTO decisions(decision_id, candidate_id, revision, audit_id,
@@ -772,6 +784,7 @@ class ReviewRepository(LifecycleRepository):
                  _json(result.get("reason_codes", [])), _json(decision_payload),
                  old["decision_id"] if old else None, now),
             )
+            if prepared_admission: self.record_admission(connection, decision_id, prepared_admission)
             operation = None
             outbox_revision = revision
             waiting = result.get("workflow_state") in {"awaiting_ontology_review", "awaiting_ontology_release", "reaudit_required", "schema_unresolved"}
@@ -783,7 +796,7 @@ class ReviewRepository(LifecycleRepository):
                 current and current["import_status"] in {"pending", "imported", "failed"}
             ):
                 operation = "retract"
-                outbox_revision = int(old["revision"])
+                outbox_revision = int(old["revision"]) if old else revision
             if operation:
                 outbox_event_id = f"audit_outbox_{audit_id}"
                 outbox_payload = {
@@ -804,6 +817,8 @@ class ReviewRepository(LifecycleRepository):
             )
             connection.execute("UPDATE candidates SET workflow_state=?,pending_extension_id=? WHERE candidate_id=?",
                                (result.get("workflow_state", "manual_review"), result.get("pending_extension_id"), candidate_id))
+            if prepared_admission or self.has_graph_history(connection, candidate_id):
+                self.mark_graph_dirty(connection, candidate_id, "audit_authority_changed")
             if waiting and result.get("pending_extension_id"):
                 connection.execute("UPDATE ontology_extension_subscriptions SET expected_row_version=? WHERE extension_id=? AND candidate_id=? AND revision=? AND status='active'",
                                    (int(current["row_version"])+1, result["pending_extension_id"], candidate_id, revision))
@@ -812,6 +827,12 @@ class ReviewRepository(LifecycleRepository):
     def apply_human_feedback(self, request: Mapping[str, Any]) -> Dict[str, Any]:
         """Atomically record a human event, revision/decision, memory, and outbox item."""
         payload = dict(request)
+        with self.connect() as connection:
+            prior = connection.execute("SELECT request_hash,event_json FROM review_events WHERE idempotency_key=?", (str(payload.get("idempotency_key") or ""),)).fetchone()
+        if prior:
+            if prior["request_hash"] != sha256_json(payload): raise ConflictError("idempotency key already used for different content")
+            return _loads(prior["event_json"], {})
+        prepared_admission = self.prepare_human_admission(payload) if payload.get("action") in {"accept", "accept_corrected"} else None
         idempotency_key = str(payload.get("idempotency_key") or "").strip()
         if not idempotency_key:
             raise ValidationError("idempotency_key is required")
@@ -864,7 +885,8 @@ class ReviewRepository(LifecycleRepository):
             source = _loads(revision_row["candidate_json"], {})
             event_id = str(payload.get("event_id") or f"review_event_{uuid4().hex}")
             labels = dict(payload.get("labels") or {})
-            evidence_ids = list(payload.get("evidence_ids") or [])
+            evidence_ids = ([e["evidence_id"] for e in prepared_admission["bundle"]["evidence_bundle"]["items"]]
+                            if prepared_admission else list(payload.get("evidence_ids") or []))
             new_revision = revision
             new_candidate = None
 
@@ -905,6 +927,8 @@ class ReviewRepository(LifecycleRepository):
                 if new_candidate.get("contract_version") == "extraction_candidate_v4":
                     from extract_triplets.candidate_contract import refresh_revision
                     refresh_revision(new_candidate)
+                    from .admission import canonicalize_revision
+                    new_candidate = canonicalize_revision(self, new_candidate)
                 new_candidate["fact_key"] = fact_key_for(new_candidate)
                 connection.execute(
                     """INSERT INTO candidate_revisions(candidate_id, revision, document_id,
@@ -925,7 +949,7 @@ class ReviewRepository(LifecycleRepository):
             needs_retract = old_was_accepted or candidate["import_status"] in {
                 "pending", "imported", "failed",
             }
-            decision_version = int(old_decision["decision_version"]) + 1 if old_decision else 1
+            decision_version = int(connection.execute("SELECT COALESCE(MAX(decision_version),0)+1 FROM decisions WHERE candidate_id=?", (candidate_id,)).fetchone()[0])
             decision_id = f"decision_{uuid4().hex}"
             if old_decision:
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old_decision["decision_id"],))
@@ -945,6 +969,7 @@ class ReviewRepository(LifecycleRepository):
                 "reason_codes": reason_codes, "source": "human_confirmed",
                 "review_event_id": event_id,
                 "evidence_ids": evidence_ids, "labels": labels,
+                **({"human_bundle_id": prepared_admission["bundle"]["bundle_id"], "admission": prepared_admission["result"]} if prepared_admission else {}),
             }
             connection.execute(
                 """INSERT INTO decisions(decision_id, candidate_id, revision, audit_id,
@@ -954,6 +979,7 @@ class ReviewRepository(LifecycleRepository):
                  decision_version, final_decision, final_decision, _json(reason_codes),
                  _json(decision_payload), old_decision["decision_id"] if old_decision else None, now),
             )
+            if prepared_admission: self.record_admission(connection, decision_id, prepared_admission)
             event = {
                 "event_id": event_id, "candidate_id": candidate_id, "revision": revision,
                 "new_revision": new_revision if action == "modify" else None,
@@ -987,6 +1013,8 @@ class ReviewRepository(LifecycleRepository):
             connection.execute("UPDATE ontology_extension_subscriptions SET status='revoked' WHERE candidate_id=? AND status='active'", (candidate_id,))
             connection.execute("UPDATE candidates SET workflow_state=?,pending_extension_id=NULL WHERE candidate_id=?",
                                ("ready_for_review" if action == "modify" else "human_reviewed", candidate_id))
+            if prepared_admission or needs_retract or self.has_graph_history(connection, candidate_id):
+                self.mark_graph_dirty(connection, candidate_id, "human_" + action)
             label = labels.get("valid_for_kg")
             if label in (0, 1) and action in {"accept", "accept_corrected", "reject"}:
                 memory_version = int(connection.execute(
@@ -1230,9 +1258,11 @@ class ReviewRepository(LifecycleRepository):
         job_id = f"job_{uuid4().hex}"
         now = utc_now()
         with self.transaction(immediate=True) as connection:
-            existing = connection.execute("""SELECT job_id FROM jobs WHERE job_type='audit'
+            existing = connection.execute("""SELECT job_id FROM jobs WHERE job_type=?
                 AND payload_json=? AND status IN ('queued','running') AND cancel_requested=0
-                ORDER BY created_at,rowid LIMIT 1""", (_json(payload),)).fetchone() if job_type == "audit" else None
+                ORDER BY created_at,rowid LIMIT 1""", (job_type, _json(payload))).fetchone() if job_type in {"audit", "ontology_extension"} else None
+            if job_type == "ontology_extension" and not existing:
+                existing = connection.execute("SELECT job_id FROM jobs WHERE job_type='ontology_extension' AND json_extract(payload_json,'$.extension_id')=? AND status IN ('queued','running') AND cancel_requested=0 ORDER BY created_at,rowid LIMIT 1", (payload.get("extension_id"),)).fetchone()
             if existing:
                 job_id = existing["job_id"]
             else:

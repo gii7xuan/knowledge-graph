@@ -1,0 +1,52 @@
+FEE.FF
+======================================================================
+ERROR: test_t37_frozen_manifest_retains_missing_results_and_rejects_tampering (tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t37_frozen_manifest_retains_missing_results_and_rejects_tampering)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_acceptance_gaps.py", line 35, in test_t37_frozen_manifest_retains_missing_results_and_rejects_tampering
+    from evaluation.manifest import freeze_manifest, align_results, validate_manifest
+ModuleNotFoundError: No module named 'evaluation.manifest'
+
+======================================================================
+ERROR: test_t37_unlabeled_failed_and_timeout_rows_keep_population_denominator (tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t37_unlabeled_failed_and_timeout_rows_keep_population_denominator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_acceptance_gaps.py", line 27, in test_t37_unlabeled_failed_and_timeout_rows_keep_population_denominator
+    self.assertEqual(result['population_count'],5)
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'population_count'
+
+======================================================================
+FAIL: test_t36_tied_majority_is_unresolved_for_every_order (tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t36_tied_majority_is_unresolved_for_every_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_acceptance_gaps.py", line 16, in test_t36_tied_majority_is_unresolved_for_every_order
+    self.assertEqual(result['verdict'],'unresolved',result)
+AssertionError: 'valid' != 'unresolved'
+- valid
++ unresolved
+ : {'method': 'simple_majority', 'verdict': 'valid', 'counts': {'valid': 2, 'invalid': 2, 'uncertain': 1}}
+
+======================================================================
+FAIL: test_t18_operator_rejection_updates_subscribers_without_false_truth_label (tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t18_operator_rejection_updates_subscribers_without_false_truth_label)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_acceptance_gaps.py", line 84, in test_t18_operator_rejection_updates_subscribers_without_false_truth_label
+    self.assertEqual(candidate['workflow_state'],'schema_unresolved')
+AssertionError: 'awaiting_ontology_review' != 'schema_unresolved'
+- awaiting_ontology_review
++ schema_unresolved
+
+
+======================================================================
+FAIL: test_t19_indirect_historical_impact_creates_revision_and_reaudit (tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t19_indirect_historical_impact_creates_revision_and_reaudit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_acceptance_gaps.py", line 130, in test_t19_indirect_historical_impact_creates_revision_and_reaudit
+    self.assertIn(history['candidate_id'],[c['candidate_id'] for c in affected])
+AssertionError: 'cand_40a26f2ab0fafe8992f6' not found in ['cand_cc74d20453a7c746833c']
+
+----------------------------------------------------------------------
+Ran 6 tests in 8.634s
+
+FAILED (failures=3, errors=2)

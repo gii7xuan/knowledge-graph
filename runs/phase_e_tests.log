@@ -1,0 +1,273 @@
+.......sssssssssss.....................................................................................................E..EE..E.....F..............F..F.............................E..F.................................F.............E...E.....................................E........................
+======================================================================
+ERROR: test_auto_accept_decision_is_complete_and_queued_for_import (test_review_agent_v3.FeedbackTests.test_auto_accept_decision_is_complete_and_queued_for_import)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 63, in prepare_automatic_admission
+    proposal, votes = selected_proposal(self, candidate, decision)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\proposal_resolver.py", line 10, in selected_proposal
+    raise ValueError("decision has no authoritative selected proposal")
+ValueError: decision has no authoritative selected proposal
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_agent_v3.py", line 273, in test_auto_accept_decision_is_complete_and_queued_for_import
+    committed = self.repository.commit_audit_if_current("cand_test", 1, audit_id, {
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 723, in commit_audit_if_current
+    prepared_admission = self.prepare_automatic_admission(candidate_id, revision, result)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 84, in prepare_automatic_admission
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("automatic admission blocked: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: automatic admission blocked: decision has no authoritative selected proposal
+
+======================================================================
+ERROR: test_import_compensates_if_decision_changes_during_projection (test_review_agent_v3.FeedbackTests.test_import_compensates_if_decision_changes_during_projection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 33, in create_human_bundle
+    try: release, document = load_admission_artifacts(repository, candidate)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission.py", line 118, in load_admission_artifacts
+    if not path: raise ValueError("ontology release path missing")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: ontology release path missing
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_agent_v3.py", line 303, in test_import_compensates_if_decision_changes_during_projection
+    self.feedback.submit({
+  File "D:\knowledge-huopao\review_agent\feedback.py", line 71, in submit
+    event = self.repository.apply_human_feedback(request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 835, in apply_human_feedback
+    prepared_admission = self.prepare_human_admission(payload) if payload.get("action") in {"accept", "accept_corrected"} else None
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 44, in prepare_human_admission
+    bundle = self.admission_bundle(request["human_bundle_id"]) if request.get("human_bundle_id") else create_human_bundle(self, request)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 34, in create_human_bundle
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("verified release and canonical source required: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: verified release and canonical source required: ontology release path missing
+
+======================================================================
+ERROR: test_modify_after_accept_queues_a_current_retraction (test_review_agent_v3.FeedbackTests.test_modify_after_accept_queues_a_current_retraction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 33, in create_human_bundle
+    try: release, document = load_admission_artifacts(repository, candidate)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission.py", line 118, in load_admission_artifacts
+    if not path: raise ValueError("ontology release path missing")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: ontology release path missing
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_agent_v3.py", line 253, in test_modify_after_accept_queues_a_current_retraction
+    accepted = self.feedback.submit({
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\feedback.py", line 71, in submit
+    event = self.repository.apply_human_feedback(request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 835, in apply_human_feedback
+    prepared_admission = self.prepare_human_admission(payload) if payload.get("action") in {"accept", "accept_corrected"} else None
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 44, in prepare_human_admission
+    bundle = self.admission_bundle(request["human_bundle_id"]) if request.get("human_bundle_id") else create_human_bundle(self, request)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 34, in create_human_bundle
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("verified release and canonical source required: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: verified release and canonical source required: ontology release path missing
+
+======================================================================
+ERROR: test_outbox_can_be_scoped_to_one_run (test_review_agent_v3.FeedbackTests.test_outbox_can_be_scoped_to_one_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 33, in create_human_bundle
+    try: release, document = load_admission_artifacts(repository, candidate)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission.py", line 118, in load_admission_artifacts
+    if not path: raise ValueError("ontology release path missing")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: ontology release path missing
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_agent_v3.py", line 231, in test_outbox_can_be_scoped_to_one_run
+    self.feedback.submit({
+  File "D:\knowledge-huopao\review_agent\feedback.py", line 71, in submit
+    event = self.repository.apply_human_feedback(request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 835, in apply_human_feedback
+    prepared_admission = self.prepare_human_admission(payload) if payload.get("action") in {"accept", "accept_corrected"} else None
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 44, in prepare_human_admission
+    bundle = self.admission_bundle(request["human_bundle_id"]) if request.get("human_bundle_id") else create_human_bundle(self, request)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 34, in create_human_bundle
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("verified release and canonical source required: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: verified release and canonical source required: ontology release path missing
+
+======================================================================
+ERROR: test_late_result_cannot_commit_a_decision (test_review_execution.BatchExecutionTests.test_late_result_cannot_commit_a_decision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 63, in prepare_automatic_admission
+    proposal, votes = selected_proposal(self, candidate, decision)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\proposal_resolver.py", line 10, in selected_proposal
+    raise ValueError("decision has no authoritative selected proposal")
+ValueError: decision has no authoritative selected proposal
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 208, in test_late_result_cannot_commit_a_decision
+    self.assertFalse(self.repo.commit_audit_if_current("c0", 1, aid, {"decision": "auto_accept"}))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 723, in commit_audit_if_current
+    prepared_admission = self.prepare_automatic_admission(candidate_id, revision, result)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 84, in prepare_automatic_admission
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("automatic admission blocked: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: automatic admission blocked: decision has no authoritative selected proposal
+
+======================================================================
+ERROR: test_feedback_falls_back_to_displayed_decision_and_exports_snapshot (test_review_v2.AuditPersistenceTests.test_feedback_falls_back_to_displayed_decision_and_exports_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 33, in create_human_bundle
+    try: release, document = load_admission_artifacts(repository, candidate)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission.py", line 118, in load_admission_artifacts
+    if not path: raise ValueError("ontology release path missing")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: ontology release path missing
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_v2.py", line 200, in test_feedback_falls_back_to_displayed_decision_and_exports_snapshot
+    event = FeedbackService(self.repo).submit({"candidate_id": "c", "revision": 1,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\feedback.py", line 71, in submit
+    event = self.repository.apply_human_feedback(request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 835, in apply_human_feedback
+    prepared_admission = self.prepare_human_admission(payload) if payload.get("action") in {"accept", "accept_corrected"} else None
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 44, in prepare_human_admission
+    bundle = self.admission_bundle(request["human_bundle_id"]) if request.get("human_bundle_id") else create_human_bundle(self, request)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 34, in create_human_bundle
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("verified release and canonical source required: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: verified release and canonical source required: ontology release path missing
+
+======================================================================
+ERROR: test_old_unbound_label_is_not_attached_to_a_later_audit (test_review_v2.AuditPersistenceTests.test_old_unbound_label_is_not_attached_to_a_later_audit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 33, in create_human_bundle
+    try: release, document = load_admission_artifacts(repository, candidate)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission.py", line 118, in load_admission_artifacts
+    if not path: raise ValueError("ontology release path missing")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: ontology release path missing
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_v2.py", line 217, in test_old_unbound_label_is_not_attached_to_a_later_audit
+    FeedbackService(self.repo).submit({"candidate_id": "c", "revision": 1,
+  File "D:\knowledge-huopao\review_agent\feedback.py", line 71, in submit
+    event = self.repository.apply_human_feedback(request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 835, in apply_human_feedback
+    prepared_admission = self.prepare_human_admission(payload) if payload.get("action") in {"accept", "accept_corrected"} else None
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\admission_repository.py", line 44, in prepare_human_admission
+    bundle = self.admission_bundle(request["human_bundle_id"]) if request.get("human_bundle_id") else create_human_bundle(self, request)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\human_evidence.py", line 34, in create_human_bundle
+    except (ValueError, KeyError, OSError) as exc: raise UnprocessableEntityError("verified release and canonical source required: " + str(exc)) from exc
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.repository.UnprocessableEntityError: verified release and canonical source required: ontology release path missing
+
+======================================================================
+ERROR: test_qualified_candidate_is_not_flattened_by_the_legacy_graph_adapter (test_source_candidate_v4.SourceCandidateV4Tests.test_qualified_candidate_is_not_flattened_by_the_legacy_graph_adapter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_source_candidate_v4.py", line 273, in test_qualified_candidate_is_not_flattened_by_the_legacy_graph_adapter
+    plain = importer._prepare(candidate)
+            ^^^^^^^^^^^^^^^^^
+AttributeError: 'Neo4jImporter' object has no attribute '_prepare'
+
+======================================================================
+FAIL: test_only_matching_human_decision_is_importable (test_review_agent_v3.ImportGateTests.test_only_matching_human_decision_is_importable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_agent_v3.py", line 360, in test_only_matching_human_decision_is_importable
+    self.assertTrue(self.importer.is_importable(item))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_actual_react_rechecks_new_evidence_and_clears_only_insufficiency (test_review_enhancement_v4.EnhancedAgentTests.test_actual_react_rechecks_new_evidence_and_clears_only_insufficiency)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_enhancement_v4.py", line 201, in test_actual_react_rechecks_new_evidence_and_clears_only_insufficiency
+    self.assertEqual(result["decision"], "auto_accept")
+AssertionError: 'manual_review' != 'auto_accept'
+- manual_review
++ auto_accept
+
+
+======================================================================
+FAIL: test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round (test_review_enhancement_v4.EnhancedAgentTests.test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_enhancement_v4.py", line 238, in test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round
+    self.assertEqual(result["decision"], "auto_accept")
+AssertionError: 'manual_review' != 'auto_accept'
+- manual_review
++ auto_accept
+
+
+======================================================================
+FAIL: test_real_sdk_402_pauses_http_service_and_persists_audit (test_review_execution.BatchExecutionTests.test_real_sdk_402_pauses_http_service_and_persists_audit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 310, in test_real_sdk_402_pauses_http_service_and_persists_audit
+    self.assertEqual(result["status"], "paused", result)
+AssertionError: 'completed' != 'paused'
+- completed
++ paused
+ : {'execution_id': 'batch_8460ce52a85945ebb80a8b57e3d8a9e5', 'run_id': 'real', 'status': 'completed', 'started_at_epoch': 1793065519.809454, 'total': 1, 'selected': 1, 'skipped': 0, 'completed': 1, 'failed': 0, 'interrupted': 0, 'paused': False, 'cancelled': False, 'results': [{'audit_id': 'audit_ab0cf456a2b646929f4f8c3c272002cc', 'candidate_id': 'real-candidate', 'revision': 1, 'status': 'completed', 'result': {'audit_id': 'audit_ab0cf456a2b646929f4f8c3c272002cc', 'candidate_id': 'real-candidate', 'revision': 1, 'final_round_id': 1, 'consensus': {'committee_size': 4, 'required_votes': 3, 'valid_votes': 0, 'invalid_votes': 0, 'uncertain_votes': 0, 'error_votes': 1, 'missing_votes': 3, 'duplicate_attempts': 0, 'duplicate_model_votes': 0, 'invalid_attempts': 0, 'distinct_family_count': 0, 'valid_distinct_family_count': 0, 'invalid_distinct_family_count': 0, 'diversity_ready': False, 'result': 'unresolved', 'unresolved_counterevidence': False, 'unresolved_support_conflict': False, 'counter_evidence_ids': [], 'supporting_evidence_ids': [], 'source_support_consensus': {'result': 'unresolved', 'support_votes': 0, 'contradiction_votes': 0, 'support_voter_ids': [], 'committee_size': 4, 'required_votes': 3}, 'admission_consensus': {'result': 'unresolved'}, 'eligible_voter_ids': []}, 'calibrated_probability': None, 'calibration_status': 'unavailable', 'calibrator_version': 'untrained', 'policy_version': 'disabled_cold_start_v3', 'decision': 'manual_review', 'reason_codes': ['CONSENSUS_UNRESOLVED'], 'review_versions': {'prompt_version': 'triple_validator_v3', 'prompt_hash': '6e343b5b7733b43a64550599c3357b7c94b5f8309e656c868f7fb915fc012d0b', 'response_contract_hash': '35174f8600b49f20621edcfb298440cc14667e2c6241eaceadb007080a354eb6', 'committee_policy_hash': '2bb1b71ad41fa698ee56adec6532f7be2159d3ff006c3a96ed79b0555554267b', 'response_contract_version': 'validator_response_v3', 'evidence_bundle_version': 'evidence_bundle_v2', 'committee_version': 'committee_v1', 'configured_strategy': 'deterministic', 'executed_strategy': 'deterministic'}, 'features': {'quote_located': 1.0, 'evidence_missing': 0.0, 'unique_span_count': 3.0, 'source_group_count': 1.0, 'relation_known': 1.0, 'domain_pass': 1.0, 'range_pass': 1.0, 'type_unknown': 0.0, 'mapping_ambiguous': 0.0, 'supporting_vote_count': 0.0, 'contradicting_vote_count': 0.0, 'qualifier_issue': 0.0, 'direction_issue': 0.0, 'valid_vote_fraction': 0.0, 'invalid_vote_fraction': 0.0, 'uncertain_fraction': 0.0, 'error_fraction': 1.0, 'distinct_family_count': 0.0, 'disagreement': 0.0, 'unresolved_counterevidence': 0.0, 'retrieval_depth': 3.0, 'round_count': 1.0, 'historical_weighted_support': 0.0, 'reliability_available': 0.0}, 'feature_schema_version': 'review_features_v3', 'explanation': {'summary': '候选仍需人工核验；系统未把不确定性当作事实结论。', 'reason_codes': ['CONSENSUS_UNRESOLVED'], 'checks': [{'check': 'ontology', 'status': 'pass', 'constraint_ids': ['R_measures']}, {'check': 'quote_location', 'status': 'pass', 'evidence_ids': ['ev_e8b0e4cf470bbfe4ee37', 'ev_1ddc180602b823c21b2f', 'ev_f9accbba6a553bd030aa']}], 'supporting_evidence_ids': [], 'counter_evidence_ids': [], 'anchor_failures': [], 'source_support': [], 'response_errors': [{'voter_id': 'a', 'status': 'timeout', 'error': 'request exceeded hard deadline'}], 'open_questions': []}, 'budget': {'llm_calls': 1, 'tool_calls': 0}, 'configured_strategy': 'deterministic', 'executed_strategy': 'deterministic', 'stop_reason': 'committee_unresolved', 'workflow_state': 'manual_review', 'pending_extension_id': None, 'source_support_result': 'unresolved', 'schema_status': 'pass', 'schema_diagnostics': [], 'source_support_consensus': {'result': 'unresolved', 'support_votes': 0, 'contradiction_votes': 0, 'support_voter_ids': [], 'committee_size': 4, 'required_votes': 3}, 'admission_consensus': {'result': 'unresolved'}, 'selected_round_id': 1, 'selected_proposal_digest': '8d1b33eba3d73a031026bb647a46f55c730fe5f74828e36832797387f525400b', 'selected_evidence_hash': '41f1c5b8fc3f4c0d1e33140eb90032c84b78d476f748f17c3ef66f774b55442f', 'committee_version': 'committee_v1', 'ontology_release_id': None, 'profile_hash': None, 'ontology_version': '7f08145f40e003671df9869cd4f552df111de383a7097fe60288e6f99cf2e7c4', 'issue_history': [], 'evidence_exclusions': {}, 'admission_policy': {'mode': 'shadow', 'policy_version': 'disabled_cold_start_v3', 'policy_ready': False, 'calibrator_ready': False, 'accept_threshold': None, 'auto_accept_enabled': False}, 'committed': True}}], 'review_versions': {'prompt_version': 'triple_validator_v3', 'response_contract_version': 'validator_response_v3', 'prompt_hash': '6e343b5b7733b43a64550599c3357b7c94b5f8309e656c868f7fb915fc012d0b', 'response_contract_hash': '35174f8600b49f20621edcfb298440cc14667e2c6241eaceadb007080a354eb6', 'committee_policy_hash': '2bb1b71ad41fa698ee56adec6532f7be2159d3ff006c3a96ed79b0555554267b', 'evidence_bundle_version': 'evidence_bundle_v2', 'committee_version': 'committee_v1'}, 'progress_write_failures': 0, 'progress_file_stale': False, 'finished_at_epoch': 1793065530.6462183}
+
+======================================================================
+FAIL: test_ready_current_validation_can_route_only_through_system_policy (test_review_planner.PlannerRuntimeTests.test_ready_current_validation_can_route_only_through_system_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 148, in test_ready_current_validation_can_route_only_through_system_policy
+    self.assertEqual(result["decision"], "auto_accept")
+AssertionError: 'manual_review' != 'auto_accept'
+- manual_review
++ auto_accept
+
+
+----------------------------------------------------------------------
+Ran 298 tests in 232.249s
+
+FAILED (failures=5, errors=8, skipped=11)

@@ -7,7 +7,7 @@ from typing import Any, Dict, Mapping, Optional
 from .repository import ReviewRepository, UnprocessableEntityError, ValidationError
 
 
-NON_FACTUAL_REJECTIONS = {"DUPLICATE", "OUT_OF_SCOPE", "NOT_RELEVANT_TO_TASK"}
+NON_FACTUAL_REJECTIONS = {"DUPLICATE", "OUT_OF_SCOPE", "NOT_RELEVANT_TO_TASK", "SCHEMA_GAP", "SCHEMA_UNRESOLVED", "REJECT_FOR_SCHEMA", "SCHEMA_INCOMPATIBLE"}
 FACTUAL_REJECTIONS = {
     "FACT_INCORRECT", "NEGATION_IGNORED", "DIRECTION_MISMATCH", "CONDITION_MISSING",
     "RELATION_MISMATCH", "ENTITY_MISMATCH", "SOURCE_CONTRADICTS",
@@ -27,11 +27,12 @@ class FeedbackService:
             if submitted.get("valid_for_kg") not in (None, 1):
                 raise ValidationError("accept cannot carry a negative valid_for_kg label")
             submitted["valid_for_kg"] = 1
+            if submitted.get("source_support") not in {None, "supported"}: raise UnprocessableEntityError("accept requires human-confirmed source support")
             submitted.setdefault("source_support", "supported")
         elif action == "reject":
             if not reason:
                 raise ValidationError("reject requires a reason_code")
-            expected = None if reason in NON_FACTUAL_REJECTIONS else 0
+            expected = 0 if reason in FACTUAL_REJECTIONS else None
             if submitted.get("valid_for_kg") not in (None, expected):
                 raise ValidationError("reject label conflicts with reason_code")
             submitted["valid_for_kg"] = expected
@@ -57,16 +58,8 @@ class FeedbackService:
         action = str(request.get("action") or request.get("decision") or "")
         request["action"] = action
         request["labels"] = self._labels(request)
-        if action in {"accept", "accept_corrected"}:
-            candidate = self.repository.get_revision(request["candidate_id"], int(request["revision"]))
-            if candidate.get("contract_version") == "extraction_candidate_v4" and candidate.get("fact_key_state") != "canonical":
-                raise UnprocessableEntityError("candidate v4 identity/qualifiers remain provisional")
-        if action in {"accept", "accept_corrected"} and self.ontology_guard is not None:
-            check = self.ontology_guard.check(candidate)
-            if check.get("status") != "pass":
-                raise UnprocessableEntityError(
-                    "accepted candidate requires a passing deterministic ontology check"
-                )
+        # Repository resolves idempotency/CAS before the shared gate loads the
+        # actual immutable release. A caller-supplied guard cannot grant admission.
         event = self.repository.apply_human_feedback(request)
         return {"ok": True, "event": event, "candidate": self.repository.get_candidate(request["candidate_id"])}
 

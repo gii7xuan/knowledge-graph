@@ -1,0 +1,4743 @@
+{
+  "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+  "extension_id": "ext_306be8653075421a9579aac5737b4ed6",
+  "delta_revision": 1,
+  "status": "completed",
+  "context": {
+    "committee_members": [
+      {
+        "id": "a",
+        "model_family": "a",
+        "model_id": "ontology_model_a",
+        "model_identity": "ontology_model_a"
+      },
+      {
+        "id": "b",
+        "model_family": "b",
+        "model_id": "ontology_model_b",
+        "model_identity": "ontology_model_b"
+      },
+      {
+        "id": "c",
+        "model_family": "c",
+        "model_id": "ontology_model_c",
+        "model_identity": "ontology_model_c"
+      }
+    ],
+    "committee_policy": {
+      "committee_size": 3,
+      "minimum_distinct_families": 3,
+      "required_votes": 3
+    },
+    "mode": "shadow",
+    "options_hash": "171505aa343866772b4cdf31254cf8090bae7ea4fa47a179e38b9bf186873406",
+    "planner_family": "planner",
+    "planner_model": "ontology_planner",
+    "versions": {
+      "contract_hash": "72652416e6f4895fb59f2b83b0da1caa9b3d953a98b6ccf473be0ad785e87ea4",
+      "contract_version": "ontology_review_response_v1",
+      "planner_prompt_hash": "ca2fc6ac5cb8c022e94ffd5401bc8746f97d0e854d776bc79fdcf7003a685e06",
+      "planner_version": "ontology_extension_planner_v1",
+      "prompt_hash": "57d8c504d8a4b2433fdb0ec6f87e4248f412e77bcdde7fb6c2d189ba71cbc6d0",
+      "prompt_version": "ontology_extension_validator_v1",
+      "task_type": "ontology_extension"
+    }
+  },
+  "checkpoint": {
+    "budget": {
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 96,
+            "rebinds": 2,
+            "tokens": 240000,
+            "tool_calls": 64
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 18,
+            "rebinds": 0,
+            "tokens": 0,
+            "tool_calls": 12
+          }
+        }
+      ],
+      "case_call_reservations": [
+        "05af49272c28495ca441cbac27874836",
+        "b081949933734345a29b94ba2c719746",
+        "d9706089bac44ccd90be2f3863371102",
+        "35fdc3891d764b5f8918d34f71d56dcb",
+        "95bddbc83f154fdb857a50dc541bd36d",
+        "436e662ceb5a4f46a118f2d83488535d",
+        "4c7a44ffaa01460bbb86a4659338adaa",
+        "703434382cdc40b1929d602b11725aa8",
+        "536e612a8fe746cb8bc9e0eca37b962a",
+        "6142f33e0fb44b5fb53419b52980c1f4"
+      ],
+      "case_ids": [
+        "case_c76b05a9313d3a7e154952c5db02511d"
+      ],
+      "deadline_epoch": 1793013582.989247,
+      "max_planner_steps": 14,
+      "max_validation_rounds": 2,
+      "remaining_llm_calls": 28,
+      "remaining_seconds": 88.29699999999866,
+      "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+      "usage": {
+        "input_tokens": 0,
+        "llm_calls": 12,
+        "output_tokens": 0,
+        "planner_steps": 9,
+        "tool_calls": 9,
+        "unknown_token_requests": 12,
+        "validation_rounds": 1
+      }
+    },
+    "phase": "finished",
+    "state": {
+      "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+      "checks": {
+        "competency": {
+          "checks": [
+            {
+              "guard": {
+                "constraint_semantics": "allowed_any",
+                "domain_status": "pass",
+                "hard_failure": false,
+                "mapping_ambiguous": false,
+                "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                "range_status": "pass",
+                "reason_codes": [],
+                "relation": {
+                  "definition": "A device changes another device's operating state.",
+                  "description": "A device changes another device's operating state.",
+                  "domain": [
+                    "C"
+                  ],
+                  "id": "R_155b96508767cc37eb82",
+                  "kind": "object_property",
+                  "label": "regulates",
+                  "range": [
+                    "C"
+                  ]
+                },
+                "relation_id": "R_155b96508767cc37eb82",
+                "relation_known": true,
+                "status": "pass",
+                "type_unknown": false
+              },
+              "id": "trigger_cand_24916a6f43b3a5871a0d",
+              "status": "pass"
+            }
+          ],
+          "configured_questions": 0,
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "empty_instance_data_is_not_failure": true,
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "natural_language_questions_not_falsely_marked_executed": true,
+          "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+          "status": "pass"
+        },
+        "existing_schema": {
+          "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "items_scanned": 2,
+          "matches": [],
+          "query": "Missing regulation relation",
+          "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+          "scope": "full_base_release",
+          "search_is_not_gap_or_equivalence_proof": true,
+          "status": "pass"
+        },
+        "impact": {
+          "affected_candidates": [],
+          "candidate_rows_scanned": 1,
+          "changed_schema_ids": [
+            "R_155b96508767cc37eb82"
+          ],
+          "coverage": "all_current_candidates",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "historical_candidates_auto_accepted": false,
+          "manual_review_required": false,
+          "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+          "risk_category": "additive",
+          "status": "pass"
+        },
+        "reasoner": {
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "executed": false,
+          "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+          "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+          "status": "not_run"
+        },
+        "structure": {
+          "class_count": 1,
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "errors": [],
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "owl_reasoner_executed": false,
+          "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+          "relation_count": 2,
+          "status": "pass",
+          "warnings": []
+        }
+      },
+      "critical_issues": [],
+      "delta": {
+        "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+        "merged_schema": {
+          "application_profile": {
+            "auto_review_blocked": false,
+            "constraint_semantics": "allowed_any",
+            "profile_version": "project_json_v1",
+            "reasoner": "not_run"
+          },
+          "classes": {
+            "C": {
+              "definition": "A device is a modeled controllable unit.",
+              "id": "C",
+              "label": "device"
+            }
+          },
+          "domain": "fixture",
+          "object_properties": {
+            "R_155b96508767cc37eb82": {
+              "definition": "A device changes another device's operating state.",
+              "domain": [
+                "C"
+              ],
+              "id": "R_155b96508767cc37eb82",
+              "label": "regulates",
+              "range": [
+                "C"
+              ]
+            },
+            "R_old": {
+              "definition": "Connection between devices.",
+              "domain": [
+                "C"
+              ],
+              "id": "R_old",
+              "label": "connects",
+              "range": [
+                "C"
+              ]
+            }
+          }
+        },
+        "operations": [
+          {
+            "changes": {
+              "definition": "A device changes another device's operating state.",
+              "domain": [
+                "C"
+              ],
+              "label": "regulates",
+              "range": [
+                "C"
+              ]
+            },
+            "evidence_ids": [
+              "ev_311bda3ac7363c945541",
+              "ev_86fa4fe9369f7204302d"
+            ],
+            "kind": "add_object_property",
+            "target": "R_155b96508767cc37eb82"
+          }
+        ],
+        "risk_category": "additive"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 80,
+          "chunk_id": "chunk_6476979e42bf",
+          "chunk_start": 66,
+          "document_id": "doc",
+          "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+          "end": 80,
+          "evidence_id": "ev_311bda3ac7363c945541",
+          "offset_basis": "canonical_document",
+          "quote": "A regulates B.",
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "section_id": "section_ad405e975b89",
+          "semantic_status": "unknown",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6476979e42bf"
+          ],
+          "start": 66,
+          "text": "A regulates B."
+        },
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 65,
+          "chunk_id": "chunk_6476979e42bf",
+          "chunk_start": 0,
+          "document_id": "doc",
+          "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+          "end": 65,
+          "evidence_id": "ev_86fa4fe9369f7204302d",
+          "offset_basis": "canonical_document",
+          "quote": "Regulation is a device changing another device's operating state.",
+          "retrieval_level": "adjacent_sentence",
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "section_id": "section_ad405e975b89",
+          "semantic_status": "unknown",
+          "sentence_id": "sentence_d5888307d9fa725141d8",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6476979e42bf"
+          ],
+          "start": 0,
+          "text": "Regulation is a device changing another device's operating state."
+        }
+      ],
+      "fingerprints": {
+        "0e5d6cb12ca7c1419646cfd512eccb737c183b538a874fd2b95d3a4623698aef": 1,
+        "0fe510e1585ad33493aeb9597654434cd43dbd03fde63d801ae42d7c8f0f5bb5": 1,
+        "415bd38942a44b233d923c0c50111c7b3b6481769dbcd7622c2715a3b5fadb0b": 1,
+        "6f918a9feb1a5d0e5bb9b082a4c721ad1e0e63b9f42090c4e49cb2716419d1c9": 1,
+        "886d336a258eb3a678f90bb7e3a6f410de56d970a28cc684e8716c06cd7f1c51": 1,
+        "b7df0be3b790f5b56b9bfd1a71b5e67e0cc0e23b38b759c4936d932f8fed6cd7": 1,
+        "d0a5b5766c828fe53ba06e96812f564b3b7ec1fac0127693bd50ab12f8420578": 1,
+        "e7f32f8c2286eb7a0f744a296cb0e68460d2c960eb8e19d7278b9145e7b6291e": 1,
+        "fbb6b440519c098aebcf28bd43d995dde5fa4791d1275ab31372bd9ca4c337ca": 1
+      },
+      "full_schema_searched": true,
+      "history": [
+        {
+          "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "delta_hash": null,
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "items_scanned": 2,
+          "matches": [],
+          "query": "regulates regulation",
+          "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+          "scope": "full_base_release",
+          "search_is_not_gap_or_equivalence_proof": true,
+          "status": "pass",
+          "step_no": 1,
+          "tool": "search_existing_schema"
+        },
+        {
+          "items": [],
+          "semantic_status": "unknown",
+          "status": "empty",
+          "step_no": 2,
+          "tool": "retrieve_definition_evidence",
+          "trace": [
+            {
+              "candidate_id": "cand_24916a6f43b3a5871a0d",
+              "rejected": [],
+              "returned": 0,
+              "scope": "current_chunk"
+            }
+          ]
+        },
+        {
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "delta_revision": 1,
+          "operations": [
+            {
+              "changes": {
+                "definition": "A device changes another device's operating state.",
+                "domain": [
+                  "C"
+                ],
+                "label": "regulates",
+                "range": [
+                  "C"
+                ]
+              },
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541",
+                "ev_86fa4fe9369f7204302d"
+              ],
+              "kind": "add_object_property",
+              "target": "R_155b96508767cc37eb82"
+            }
+          ],
+          "risk_category": "additive",
+          "status": "draft",
+          "step_no": 3,
+          "tool": "propose_schema_delta"
+        },
+        {
+          "class_count": 1,
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "errors": [],
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "owl_reasoner_executed": false,
+          "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+          "relation_count": 2,
+          "status": "pass",
+          "step_no": 4,
+          "tool": "validate_schema_structure",
+          "warnings": []
+        },
+        {
+          "affected_candidates": [],
+          "candidate_rows_scanned": 1,
+          "changed_schema_ids": [
+            "R_155b96508767cc37eb82"
+          ],
+          "coverage": "all_current_candidates",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "historical_candidates_auto_accepted": false,
+          "manual_review_required": false,
+          "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+          "risk_category": "additive",
+          "status": "pass",
+          "step_no": 5,
+          "tool": "analyze_schema_impact"
+        },
+        {
+          "checks": [
+            {
+              "guard": {
+                "constraint_semantics": "allowed_any",
+                "domain_status": "pass",
+                "hard_failure": false,
+                "mapping_ambiguous": false,
+                "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                "range_status": "pass",
+                "reason_codes": [],
+                "relation": {
+                  "definition": "A device changes another device's operating state.",
+                  "description": "A device changes another device's operating state.",
+                  "domain": [
+                    "C"
+                  ],
+                  "id": "R_155b96508767cc37eb82",
+                  "kind": "object_property",
+                  "label": "regulates",
+                  "range": [
+                    "C"
+                  ]
+                },
+                "relation_id": "R_155b96508767cc37eb82",
+                "relation_known": true,
+                "status": "pass",
+                "type_unknown": false
+              },
+              "id": "trigger_cand_24916a6f43b3a5871a0d",
+              "status": "pass"
+            }
+          ],
+          "configured_questions": 0,
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "empty_instance_data_is_not_failure": true,
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "natural_language_questions_not_falsely_marked_executed": true,
+          "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+          "status": "pass",
+          "step_no": 6,
+          "tool": "run_competency_checks"
+        },
+        {
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "executed": false,
+          "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+          "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+          "status": "not_run",
+          "step_no": 7,
+          "tool": "run_reasoner_checks"
+        },
+        {
+          "status": "ok",
+          "step_no": 8,
+          "tool": "run_ontology_validation",
+          "validation": {
+            "consensus": {
+              "committee_size": 3,
+              "counter_evidence_ids": [],
+              "counts": {
+                "approve": 3,
+                "error": 0,
+                "reject": 0,
+                "revise": 0,
+                "uncertain": 0
+              },
+              "deterministic_checks_pass": true,
+              "eligible_voter_ids": [
+                "a",
+                "b",
+                "c"
+              ],
+              "missing": 0,
+              "required_votes": 3,
+              "result": "approve"
+            },
+            "key": "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4",
+            "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+            "round_id": 1
+          }
+        },
+        {
+          "final_decision_by": "server_policy",
+          "status": "finish_requested",
+          "step_no": 9,
+          "tool": "finish_extension_review"
+        }
+      ],
+      "prior_counter_evidence_ids": [],
+      "step_no": 9,
+      "stop_reason": "fixture investigation complete",
+      "task": {
+        "auto_publish_enabled": false,
+        "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+        "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+        "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+        "change_kind": "add_object_property",
+        "contract_version": "ontology_delta_v1",
+        "delta": {
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "merged_schema": {
+            "application_profile": {
+              "auto_review_blocked": false,
+              "constraint_semantics": "allowed_any",
+              "profile_version": "project_json_v1",
+              "reasoner": "not_run"
+            },
+            "classes": {
+              "C": {
+                "definition": "A device is a modeled controllable unit.",
+                "id": "C",
+                "label": "device"
+              }
+            },
+            "domain": "fixture",
+            "object_properties": {
+              "R_155b96508767cc37eb82": {
+                "definition": "A device changes another device's operating state.",
+                "domain": [
+                  "C"
+                ],
+                "id": "R_155b96508767cc37eb82",
+                "label": "regulates",
+                "range": [
+                  "C"
+                ]
+              },
+              "R_old": {
+                "definition": "Connection between devices.",
+                "domain": [
+                  "C"
+                ],
+                "id": "R_old",
+                "label": "connects",
+                "range": [
+                  "C"
+                ]
+              }
+            }
+          },
+          "operations": [
+            {
+              "changes": {
+                "definition": "A device changes another device's operating state.",
+                "domain": [
+                  "C"
+                ],
+                "label": "regulates",
+                "range": [
+                  "C"
+                ]
+              },
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541",
+                "ev_86fa4fe9369f7204302d"
+              ],
+              "kind": "add_object_property",
+              "target": "R_155b96508767cc37eb82"
+            }
+          ],
+          "risk_category": "additive"
+        },
+        "delta_revision": 1,
+        "description": "Missing regulation relation",
+        "evidence_ids": [
+          "ev_311bda3ac7363c945541"
+        ],
+        "existing_schema_search": {
+          "candidate_revision": 1,
+          "class_ids_checked": 1,
+          "endpoint_class_matches": {
+            "head": "C",
+            "tail": "C"
+          },
+          "endpoint_class_queries": {
+            "head": "C",
+            "tail": "C"
+          },
+          "matched_definitions": [],
+          "matched_ids": [],
+          "ontology_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+          "profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+          "query": "regulates",
+          "recall_is_not_mapping_confirmation": true,
+          "recall_suggestions": [],
+          "relation_ids_checked": 1,
+          "scope": "full_frozen_ontology",
+          "status": "needs_full_schema_lookup"
+        },
+        "extension_id": "ext_306be8653075421a9579aac5737b4ed6",
+        "latest_audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+        "ontology_review_executed": true,
+        "proposed_changes": {
+          "label": "regulates"
+        },
+        "review_evidence": [
+          {
+            "anchor_status": "exact",
+            "anchor_valid": true,
+            "chunk_end": 80,
+            "chunk_id": "chunk_6476979e42bf",
+            "chunk_start": 66,
+            "document_id": "doc",
+            "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+            "end": 80,
+            "evidence_id": "ev_311bda3ac7363c945541",
+            "offset_basis": "canonical_document",
+            "quote": "A regulates B.",
+            "retrieval_score": 0.88,
+            "retrieved_via_levels": [
+              "adjacent_sentence"
+            ],
+            "section_id": "section_ad405e975b89",
+            "semantic_status": "unknown",
+            "source_anchor_kind": "document_span",
+            "span_chunk_ids": [
+              "chunk_6476979e42bf"
+            ],
+            "start": 66,
+            "text": "A regulates B."
+          },
+          {
+            "anchor_status": "exact",
+            "anchor_valid": true,
+            "chunk_end": 65,
+            "chunk_id": "chunk_6476979e42bf",
+            "chunk_start": 0,
+            "document_id": "doc",
+            "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+            "end": 65,
+            "evidence_id": "ev_86fa4fe9369f7204302d",
+            "offset_basis": "canonical_document",
+            "quote": "Regulation is a device changing another device's operating state.",
+            "retrieval_level": "adjacent_sentence",
+            "retrieval_score": 0.88,
+            "retrieved_via_levels": [
+              "adjacent_sentence"
+            ],
+            "section_id": "section_ad405e975b89",
+            "semantic_status": "unknown",
+            "sentence_id": "sentence_d5888307d9fa725141d8",
+            "source_anchor_kind": "document_span",
+            "span_chunk_ids": [
+              "chunk_6476979e42bf"
+            ],
+            "start": 0,
+            "text": "Regulation is a device changing another device's operating state."
+          }
+        ],
+        "review_invalidated_by_human": false,
+        "review_recommendation": "approve",
+        "risk_category": "additive_draft",
+        "row_version": 3,
+        "selected_proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+        "status": "needs_human",
+        "subscriptions": [
+          {
+            "candidate_id": "cand_24916a6f43b3a5871a0d",
+            "expected_row_version": 3,
+            "extension_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "revision": 1,
+            "source_proposal_digest": "c8c7cfdcf9d5f92e0ebd721e2853dae905658ca5b64257cd36b3320aef907417",
+            "status": "active"
+          }
+        ],
+        "trigger_candidates": [
+          {
+            "audit_id": "audit_02eafa9d97574260871217f7288f535f",
+            "candidate_id": "cand_24916a6f43b3a5871a0d",
+            "evidence_hash": "29f471bc5d85729934af70efc16285c4d88e7dece042bbcb897e8ab8590251ca",
+            "evidence_ids": [
+              "ev_311bda3ac7363c945541"
+            ],
+            "proposed_changes": {
+              "label": "regulates"
+            },
+            "revision": 1,
+            "round_id": 1,
+            "source_proposal_digest": "c8c7cfdcf9d5f92e0ebd721e2853dae905658ca5b64257cd36b3320aef907417"
+          }
+        ],
+        "unresolved_counter_evidence_ids": []
+      },
+      "validation": {
+        "consensus": {
+          "committee_size": 3,
+          "counter_evidence_ids": [],
+          "counts": {
+            "approve": 3,
+            "error": 0,
+            "reject": 0,
+            "revise": 0,
+            "uncertain": 0
+          },
+          "deterministic_checks_pass": true,
+          "eligible_voter_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "missing": 0,
+          "required_votes": 3,
+          "result": "approve"
+        },
+        "key": "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4",
+        "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+        "round_id": 1
+      },
+      "validations": {
+        "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4": {
+          "consensus": {
+            "committee_size": 3,
+            "counter_evidence_ids": [],
+            "counts": {
+              "approve": 3,
+              "error": 0,
+              "reject": 0,
+              "revise": 0,
+              "uncertain": 0
+            },
+            "deterministic_checks_pass": true,
+            "eligible_voter_ids": [
+              "a",
+              "b",
+              "c"
+            ],
+            "missing": 0,
+            "required_votes": 3,
+            "result": "approve"
+          },
+          "key": "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4",
+          "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+          "round_id": 1
+        }
+      }
+    }
+  },
+  "result": {
+    "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+    "auto_publish_enabled": false,
+    "budget": {
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 96,
+            "rebinds": 2,
+            "tokens": 240000,
+            "tool_calls": 64
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 18,
+            "rebinds": 0,
+            "tokens": 0,
+            "tool_calls": 12
+          }
+        }
+      ],
+      "case_call_reservations": [
+        "05af49272c28495ca441cbac27874836",
+        "b081949933734345a29b94ba2c719746",
+        "d9706089bac44ccd90be2f3863371102",
+        "35fdc3891d764b5f8918d34f71d56dcb",
+        "95bddbc83f154fdb857a50dc541bd36d",
+        "436e662ceb5a4f46a118f2d83488535d",
+        "4c7a44ffaa01460bbb86a4659338adaa",
+        "703434382cdc40b1929d602b11725aa8",
+        "536e612a8fe746cb8bc9e0eca37b962a",
+        "6142f33e0fb44b5fb53419b52980c1f4"
+      ],
+      "case_ids": [
+        "case_c76b05a9313d3a7e154952c5db02511d"
+      ],
+      "deadline_epoch": 1793013582.989247,
+      "max_planner_steps": 14,
+      "max_validation_rounds": 2,
+      "remaining_llm_calls": 28,
+      "remaining_seconds": 88.32800000000134,
+      "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+      "usage": {
+        "input_tokens": 0,
+        "llm_calls": 12,
+        "output_tokens": 0,
+        "planner_steps": 9,
+        "tool_calls": 9,
+        "unknown_token_requests": 12,
+        "validation_rounds": 1
+      }
+    },
+    "counter_evidence_ids": [],
+    "delta_revision": 1,
+    "extension_id": "ext_306be8653075421a9579aac5737b4ed6",
+    "human_revision_satisfied": true,
+    "mode": "shadow",
+    "paused": false,
+    "recommendation": "approve",
+    "release_published": false,
+    "selected_proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+    "selected_round_id": 1,
+    "stop_reason": "fixture investigation complete",
+    "task_status": "needs_human",
+    "task_type": "ontology_extension"
+  },
+  "steps": [
+    {
+      "step_no": 1,
+      "role": "planner",
+      "action": {
+        "action": "search_existing_schema",
+        "arguments": {
+          "query": "regulates regulation"
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "af38a9ecfc227713115aa652193807cb568658572f6c57f97e9fbc764d35ede2",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 7,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 3
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 39,
+              "remaining_seconds": 89.96534156799316,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 1,
+                "output_tokens": 0,
+                "planner_steps": 1,
+                "tool_calls": 0,
+                "unknown_token_requests": 0,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {},
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {},
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 1,
+      "role": "tool",
+      "action": {
+        "action": "search_existing_schema",
+        "arguments": {
+          "query": "regulates regulation"
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "delta_hash": null,
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "items_scanned": 2,
+      "matches": [],
+      "query": "regulates regulation",
+      "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+      "scope": "full_base_release",
+      "search_is_not_gap_or_equivalence_proof": true,
+      "status": "pass"
+    },
+    {
+      "step_no": 2,
+      "role": "planner",
+      "action": {
+        "action": "retrieve_definition_evidence",
+        "arguments": {
+          "limit": 3,
+          "query": "regulation definition",
+          "scope": "current_chunk"
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "7948f92aadffd2e715b244a1f26bb200c54dd980bae497b43240d943b86ca57d",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 8,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 4
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 38,
+              "remaining_seconds": 89.78100000000268,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 2,
+                "output_tokens": 0,
+                "planner_steps": 2,
+                "tool_calls": 1,
+                "unknown_token_requests": 1,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {},
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 2,
+      "role": "tool",
+      "action": {
+        "action": "retrieve_definition_evidence",
+        "arguments": {
+          "limit": 3,
+          "query": "regulation definition",
+          "scope": "current_chunk"
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "items": [],
+      "semantic_status": "unknown",
+      "status": "empty",
+      "trace": [
+        {
+          "candidate_id": "cand_24916a6f43b3a5871a0d",
+          "rejected": [],
+          "returned": 0,
+          "scope": "current_chunk"
+        }
+      ]
+    },
+    {
+      "step_no": 3,
+      "role": "planner",
+      "action": {
+        "action": "propose_schema_delta",
+        "arguments": {
+          "operations": [
+            {
+              "changes": {
+                "definition": "A device changes another device's operating state.",
+                "domain": [
+                  "C"
+                ],
+                "label": "regulates",
+                "range": [
+                  "C"
+                ]
+              },
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541",
+                "ev_86fa4fe9369f7204302d"
+              ],
+              "kind": "add_object_property",
+              "target": null
+            }
+          ]
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "ad9181d7882aad69041bbad78029bf8f3d2efa043ad374a6178c28262d7200a1",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 9,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 5
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 37,
+              "remaining_seconds": 89.60900000000402,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 3,
+                "output_tokens": 0,
+                "planner_steps": 3,
+                "tool_calls": 2,
+                "unknown_token_requests": 2,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {},
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 3,
+      "role": "tool",
+      "action": {
+        "action": "propose_schema_delta",
+        "arguments": {
+          "operations": [
+            {
+              "changes": {
+                "definition": "A device changes another device's operating state.",
+                "domain": [
+                  "C"
+                ],
+                "label": "regulates",
+                "range": [
+                  "C"
+                ]
+              },
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541",
+                "ev_86fa4fe9369f7204302d"
+              ],
+              "kind": "add_object_property",
+              "target": null
+            }
+          ]
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "delta_revision": 1,
+      "operations": [
+        {
+          "changes": {
+            "definition": "A device changes another device's operating state.",
+            "domain": [
+              "C"
+            ],
+            "label": "regulates",
+            "range": [
+              "C"
+            ]
+          },
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541",
+            "ev_86fa4fe9369f7204302d"
+          ],
+          "kind": "add_object_property",
+          "target": "R_155b96508767cc37eb82"
+        }
+      ],
+      "risk_category": "additive",
+      "status": "draft"
+    },
+    {
+      "step_no": 4,
+      "role": "planner",
+      "action": {
+        "action": "validate_schema_structure",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "60e987a7203d362a86362f627786b2a2085e00a58c31db9ba79e37f5df95ea42",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 10,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 6
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102",
+                "35fdc3891d764b5f8918d34f71d56dcb"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 36,
+              "remaining_seconds": 89.42199999999866,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 4,
+                "output_tokens": 0,
+                "planner_steps": 4,
+                "tool_calls": 3,
+                "unknown_token_requests": 3,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "Missing regulation relation",
+                "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {
+              "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+              "operations": [
+                {
+                  "changes": {
+                    "definition": "A device changes another device's operating state.",
+                    "domain": [
+                      "C"
+                    ],
+                    "label": "regulates",
+                    "range": [
+                      "C"
+                    ]
+                  },
+                  "evidence_ids": [
+                    "ev_311bda3ac7363c945541",
+                    "ev_86fa4fe9369f7204302d"
+                  ],
+                  "kind": "add_object_property",
+                  "target": "R_155b96508767cc37eb82"
+                }
+              ],
+              "risk_category": "additive"
+            },
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "delta_revision": 1,
+                "operations": [
+                  {
+                    "changes": {
+                      "definition": "A device changes another device's operating state.",
+                      "domain": [
+                        "C"
+                      ],
+                      "label": "regulates",
+                      "range": [
+                        "C"
+                      ]
+                    },
+                    "evidence_ids": [
+                      "ev_311bda3ac7363c945541",
+                      "ev_86fa4fe9369f7204302d"
+                    ],
+                    "kind": "add_object_property",
+                    "target": "R_155b96508767cc37eb82"
+                  }
+                ],
+                "risk_category": "additive",
+                "status": "draft",
+                "step_no": 3,
+                "tool": "propose_schema_delta"
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 4,
+      "role": "tool",
+      "action": {
+        "action": "validate_schema_structure",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "class_count": 1,
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "errors": [],
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "owl_reasoner_executed": false,
+      "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+      "relation_count": 2,
+      "status": "pass",
+      "warnings": []
+    },
+    {
+      "step_no": 5,
+      "role": "planner",
+      "action": {
+        "action": "analyze_schema_impact",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "8f938197324deb8c74db92e8f8d65e29955d07a76be0500cb5de6a8288b93fb3",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 11,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 7
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102",
+                "35fdc3891d764b5f8918d34f71d56dcb",
+                "95bddbc83f154fdb857a50dc541bd36d"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 35,
+              "remaining_seconds": 89.26255774497986,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 5,
+                "output_tokens": 0,
+                "planner_steps": 5,
+                "tool_calls": 4,
+                "unknown_token_requests": 4,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "Missing regulation relation",
+                "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              },
+              "structure": {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "warnings": []
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {
+              "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+              "operations": [
+                {
+                  "changes": {
+                    "definition": "A device changes another device's operating state.",
+                    "domain": [
+                      "C"
+                    ],
+                    "label": "regulates",
+                    "range": [
+                      "C"
+                    ]
+                  },
+                  "evidence_ids": [
+                    "ev_311bda3ac7363c945541",
+                    "ev_86fa4fe9369f7204302d"
+                  ],
+                  "kind": "add_object_property",
+                  "target": "R_155b96508767cc37eb82"
+                }
+              ],
+              "risk_category": "additive"
+            },
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "delta_revision": 1,
+                "operations": [
+                  {
+                    "changes": {
+                      "definition": "A device changes another device's operating state.",
+                      "domain": [
+                        "C"
+                      ],
+                      "label": "regulates",
+                      "range": [
+                        "C"
+                      ]
+                    },
+                    "evidence_ids": [
+                      "ev_311bda3ac7363c945541",
+                      "ev_86fa4fe9369f7204302d"
+                    ],
+                    "kind": "add_object_property",
+                    "target": "R_155b96508767cc37eb82"
+                  }
+                ],
+                "risk_category": "additive",
+                "status": "draft",
+                "step_no": 3,
+                "tool": "propose_schema_delta"
+              },
+              {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "step_no": 4,
+                "tool": "validate_schema_structure",
+                "warnings": []
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 5,
+      "role": "tool",
+      "action": {
+        "action": "analyze_schema_impact",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "affected_candidates": [],
+      "candidate_rows_scanned": 1,
+      "changed_schema_ids": [
+        "R_155b96508767cc37eb82"
+      ],
+      "coverage": "all_current_candidates",
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "historical_candidates_auto_accepted": false,
+      "manual_review_required": false,
+      "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+      "risk_category": "additive",
+      "status": "pass"
+    },
+    {
+      "step_no": 6,
+      "role": "planner",
+      "action": {
+        "action": "run_competency_checks",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "35a5b410373bb350a585b48c231c2f14f2edcfffb435b2214fd44d63e26587d2",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 12,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 8
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102",
+                "35fdc3891d764b5f8918d34f71d56dcb",
+                "95bddbc83f154fdb857a50dc541bd36d",
+                "436e662ceb5a4f46a118f2d83488535d"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 34,
+              "remaining_seconds": 89.09300000000076,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 6,
+                "output_tokens": 0,
+                "planner_steps": 6,
+                "tool_calls": 5,
+                "unknown_token_requests": 5,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "Missing regulation relation",
+                "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              },
+              "impact": {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass"
+              },
+              "structure": {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "warnings": []
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {
+              "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+              "operations": [
+                {
+                  "changes": {
+                    "definition": "A device changes another device's operating state.",
+                    "domain": [
+                      "C"
+                    ],
+                    "label": "regulates",
+                    "range": [
+                      "C"
+                    ]
+                  },
+                  "evidence_ids": [
+                    "ev_311bda3ac7363c945541",
+                    "ev_86fa4fe9369f7204302d"
+                  ],
+                  "kind": "add_object_property",
+                  "target": "R_155b96508767cc37eb82"
+                }
+              ],
+              "risk_category": "additive"
+            },
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "delta_revision": 1,
+                "operations": [
+                  {
+                    "changes": {
+                      "definition": "A device changes another device's operating state.",
+                      "domain": [
+                        "C"
+                      ],
+                      "label": "regulates",
+                      "range": [
+                        "C"
+                      ]
+                    },
+                    "evidence_ids": [
+                      "ev_311bda3ac7363c945541",
+                      "ev_86fa4fe9369f7204302d"
+                    ],
+                    "kind": "add_object_property",
+                    "target": "R_155b96508767cc37eb82"
+                  }
+                ],
+                "risk_category": "additive",
+                "status": "draft",
+                "step_no": 3,
+                "tool": "propose_schema_delta"
+              },
+              {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "step_no": 4,
+                "tool": "validate_schema_structure",
+                "warnings": []
+              },
+              {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass",
+                "step_no": 5,
+                "tool": "analyze_schema_impact"
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 6,
+      "role": "tool",
+      "action": {
+        "action": "run_competency_checks",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "checks": [
+        {
+          "guard": {
+            "constraint_semantics": "allowed_any",
+            "domain_status": "pass",
+            "hard_failure": false,
+            "mapping_ambiguous": false,
+            "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+            "range_status": "pass",
+            "reason_codes": [],
+            "relation": {
+              "definition": "A device changes another device's operating state.",
+              "description": "A device changes another device's operating state.",
+              "domain": [
+                "C"
+              ],
+              "id": "R_155b96508767cc37eb82",
+              "kind": "object_property",
+              "label": "regulates",
+              "range": [
+                "C"
+              ]
+            },
+            "relation_id": "R_155b96508767cc37eb82",
+            "relation_known": true,
+            "status": "pass",
+            "type_unknown": false
+          },
+          "id": "trigger_cand_24916a6f43b3a5871a0d",
+          "status": "pass"
+        }
+      ],
+      "configured_questions": 0,
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "empty_instance_data_is_not_failure": true,
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "natural_language_questions_not_falsely_marked_executed": true,
+      "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+      "status": "pass"
+    },
+    {
+      "step_no": 7,
+      "role": "planner",
+      "action": {
+        "action": "run_reasoner_checks",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "ea75480df66dcb8674694f130d3837380dbd298425befab1603bc15ea74a1e46",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 13,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 9
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102",
+                "35fdc3891d764b5f8918d34f71d56dcb",
+                "95bddbc83f154fdb857a50dc541bd36d",
+                "436e662ceb5a4f46a118f2d83488535d",
+                "4c7a44ffaa01460bbb86a4659338adaa"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 33,
+              "remaining_seconds": 88.92199999999866,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 7,
+                "output_tokens": 0,
+                "planner_steps": 7,
+                "tool_calls": 6,
+                "unknown_token_requests": 6,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "competency": {
+                "checks": [
+                  {
+                    "guard": {
+                      "constraint_semantics": "allowed_any",
+                      "domain_status": "pass",
+                      "hard_failure": false,
+                      "mapping_ambiguous": false,
+                      "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                      "range_status": "pass",
+                      "reason_codes": [],
+                      "relation": {
+                        "definition": "A device changes another device's operating state.",
+                        "description": "A device changes another device's operating state.",
+                        "domain": [
+                          "C"
+                        ],
+                        "id": "R_155b96508767cc37eb82",
+                        "kind": "object_property",
+                        "label": "regulates",
+                        "range": [
+                          "C"
+                        ]
+                      },
+                      "relation_id": "R_155b96508767cc37eb82",
+                      "relation_known": true,
+                      "status": "pass",
+                      "type_unknown": false
+                    },
+                    "id": "trigger_cand_24916a6f43b3a5871a0d",
+                    "status": "pass"
+                  }
+                ],
+                "configured_questions": 0,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "empty_instance_data_is_not_failure": true,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "natural_language_questions_not_falsely_marked_executed": true,
+                "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+                "status": "pass"
+              },
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "Missing regulation relation",
+                "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              },
+              "impact": {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass"
+              },
+              "structure": {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "warnings": []
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {
+              "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+              "operations": [
+                {
+                  "changes": {
+                    "definition": "A device changes another device's operating state.",
+                    "domain": [
+                      "C"
+                    ],
+                    "label": "regulates",
+                    "range": [
+                      "C"
+                    ]
+                  },
+                  "evidence_ids": [
+                    "ev_311bda3ac7363c945541",
+                    "ev_86fa4fe9369f7204302d"
+                  ],
+                  "kind": "add_object_property",
+                  "target": "R_155b96508767cc37eb82"
+                }
+              ],
+              "risk_category": "additive"
+            },
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "delta_revision": 1,
+                "operations": [
+                  {
+                    "changes": {
+                      "definition": "A device changes another device's operating state.",
+                      "domain": [
+                        "C"
+                      ],
+                      "label": "regulates",
+                      "range": [
+                        "C"
+                      ]
+                    },
+                    "evidence_ids": [
+                      "ev_311bda3ac7363c945541",
+                      "ev_86fa4fe9369f7204302d"
+                    ],
+                    "kind": "add_object_property",
+                    "target": "R_155b96508767cc37eb82"
+                  }
+                ],
+                "risk_category": "additive",
+                "status": "draft",
+                "step_no": 3,
+                "tool": "propose_schema_delta"
+              },
+              {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "step_no": 4,
+                "tool": "validate_schema_structure",
+                "warnings": []
+              },
+              {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass",
+                "step_no": 5,
+                "tool": "analyze_schema_impact"
+              },
+              {
+                "checks": [
+                  {
+                    "guard": {
+                      "constraint_semantics": "allowed_any",
+                      "domain_status": "pass",
+                      "hard_failure": false,
+                      "mapping_ambiguous": false,
+                      "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                      "range_status": "pass",
+                      "reason_codes": [],
+                      "relation": {
+                        "definition": "A device changes another device's operating state.",
+                        "description": "A device changes another device's operating state.",
+                        "domain": [
+                          "C"
+                        ],
+                        "id": "R_155b96508767cc37eb82",
+                        "kind": "object_property",
+                        "label": "regulates",
+                        "range": [
+                          "C"
+                        ]
+                      },
+                      "relation_id": "R_155b96508767cc37eb82",
+                      "relation_known": true,
+                      "status": "pass",
+                      "type_unknown": false
+                    },
+                    "id": "trigger_cand_24916a6f43b3a5871a0d",
+                    "status": "pass"
+                  }
+                ],
+                "configured_questions": 0,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "empty_instance_data_is_not_failure": true,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "natural_language_questions_not_falsely_marked_executed": true,
+                "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+                "status": "pass",
+                "step_no": 6,
+                "tool": "run_competency_checks"
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 7,
+      "role": "tool",
+      "action": {
+        "action": "run_reasoner_checks",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "executed": false,
+      "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+      "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+      "status": "not_run"
+    },
+    {
+      "step_no": 8,
+      "role": "planner",
+      "action": {
+        "action": "run_ontology_validation",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "f8b7032b11bae29b8e665844fae770c749f876dd8b4e8d90d8dc600cc7bd27f6",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 14,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 10
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102",
+                "35fdc3891d764b5f8918d34f71d56dcb",
+                "95bddbc83f154fdb857a50dc541bd36d",
+                "436e662ceb5a4f46a118f2d83488535d",
+                "4c7a44ffaa01460bbb86a4659338adaa",
+                "703434382cdc40b1929d602b11725aa8"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 32,
+              "remaining_seconds": 88.76385188102722,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 8,
+                "output_tokens": 0,
+                "planner_steps": 8,
+                "tool_calls": 7,
+                "unknown_token_requests": 7,
+                "validation_rounds": 0
+              }
+            },
+            "check_records": {
+              "competency": {
+                "checks": [
+                  {
+                    "guard": {
+                      "constraint_semantics": "allowed_any",
+                      "domain_status": "pass",
+                      "hard_failure": false,
+                      "mapping_ambiguous": false,
+                      "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                      "range_status": "pass",
+                      "reason_codes": [],
+                      "relation": {
+                        "definition": "A device changes another device's operating state.",
+                        "description": "A device changes another device's operating state.",
+                        "domain": [
+                          "C"
+                        ],
+                        "id": "R_155b96508767cc37eb82",
+                        "kind": "object_property",
+                        "label": "regulates",
+                        "range": [
+                          "C"
+                        ]
+                      },
+                      "relation_id": "R_155b96508767cc37eb82",
+                      "relation_known": true,
+                      "status": "pass",
+                      "type_unknown": false
+                    },
+                    "id": "trigger_cand_24916a6f43b3a5871a0d",
+                    "status": "pass"
+                  }
+                ],
+                "configured_questions": 0,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "empty_instance_data_is_not_failure": true,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "natural_language_questions_not_falsely_marked_executed": true,
+                "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+                "status": "pass"
+              },
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "Missing regulation relation",
+                "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              },
+              "impact": {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass"
+              },
+              "reasoner": {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "executed": false,
+                "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+                "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+                "status": "not_run"
+              },
+              "structure": {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "warnings": []
+              }
+            },
+            "critical_issues": [],
+            "current_validation": null,
+            "delta": {
+              "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+              "operations": [
+                {
+                  "changes": {
+                    "definition": "A device changes another device's operating state.",
+                    "domain": [
+                      "C"
+                    ],
+                    "label": "regulates",
+                    "range": [
+                      "C"
+                    ]
+                  },
+                  "evidence_ids": [
+                    "ev_311bda3ac7363c945541",
+                    "ev_86fa4fe9369f7204302d"
+                  ],
+                  "kind": "add_object_property",
+                  "target": "R_155b96508767cc37eb82"
+                }
+              ],
+              "risk_category": "additive"
+            },
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "delta_revision": 1,
+                "operations": [
+                  {
+                    "changes": {
+                      "definition": "A device changes another device's operating state.",
+                      "domain": [
+                        "C"
+                      ],
+                      "label": "regulates",
+                      "range": [
+                        "C"
+                      ]
+                    },
+                    "evidence_ids": [
+                      "ev_311bda3ac7363c945541",
+                      "ev_86fa4fe9369f7204302d"
+                    ],
+                    "kind": "add_object_property",
+                    "target": "R_155b96508767cc37eb82"
+                  }
+                ],
+                "risk_category": "additive",
+                "status": "draft",
+                "step_no": 3,
+                "tool": "propose_schema_delta"
+              },
+              {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "step_no": 4,
+                "tool": "validate_schema_structure",
+                "warnings": []
+              },
+              {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass",
+                "step_no": 5,
+                "tool": "analyze_schema_impact"
+              },
+              {
+                "checks": [
+                  {
+                    "guard": {
+                      "constraint_semantics": "allowed_any",
+                      "domain_status": "pass",
+                      "hard_failure": false,
+                      "mapping_ambiguous": false,
+                      "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                      "range_status": "pass",
+                      "reason_codes": [],
+                      "relation": {
+                        "definition": "A device changes another device's operating state.",
+                        "description": "A device changes another device's operating state.",
+                        "domain": [
+                          "C"
+                        ],
+                        "id": "R_155b96508767cc37eb82",
+                        "kind": "object_property",
+                        "label": "regulates",
+                        "range": [
+                          "C"
+                        ]
+                      },
+                      "relation_id": "R_155b96508767cc37eb82",
+                      "relation_known": true,
+                      "status": "pass",
+                      "type_unknown": false
+                    },
+                    "id": "trigger_cand_24916a6f43b3a5871a0d",
+                    "status": "pass"
+                  }
+                ],
+                "configured_questions": 0,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "empty_instance_data_is_not_failure": true,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "natural_language_questions_not_falsely_marked_executed": true,
+                "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+                "status": "pass",
+                "step_no": 6,
+                "tool": "run_competency_checks"
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "executed": false,
+                "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+                "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+                "status": "not_run",
+                "step_no": 7,
+                "tool": "run_reasoner_checks"
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 8,
+      "role": "tool",
+      "action": {
+        "action": "run_ontology_validation",
+        "arguments": {},
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "status": "ok",
+      "validation": {
+        "consensus": {
+          "committee_size": 3,
+          "counter_evidence_ids": [],
+          "counts": {
+            "approve": 3,
+            "error": 0,
+            "reject": 0,
+            "revise": 0,
+            "uncertain": 0
+          },
+          "deterministic_checks_pass": true,
+          "eligible_voter_ids": [
+            "a",
+            "b",
+            "c"
+          ],
+          "missing": 0,
+          "required_votes": 3,
+          "result": "approve"
+        },
+        "key": "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4",
+        "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+        "round_id": 1
+      }
+    },
+    {
+      "step_no": 9,
+      "role": "planner",
+      "action": {
+        "action": "finish_extension_review",
+        "arguments": {
+          "stop_reason": "fixture investigation complete"
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "input_hash": "e0f505d9adbfa7e4fb2270a76be6c0707518ffeab236901e9e2f897c69bf7f1d",
+          "input_state": {
+            "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+            "available_tools": {
+              "analyze_schema_impact": {},
+              "finish_extension_review": {
+                "stop_reason": "string <=400"
+              },
+              "inspect_schema_neighborhood": {
+                "schema_id": "existing formal ID"
+              },
+              "propose_schema_delta": {
+                "operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"
+              },
+              "retrieve_definition_evidence": {
+                "limit": "integer 1..6",
+                "query": "string <=600",
+                "scope": "current_chunk/same_section/parent_section/other_section"
+              },
+              "run_competency_checks": {},
+              "run_ontology_validation": {},
+              "run_reasoner_checks": {},
+              "search_existing_schema": {
+                "query": "string <=600"
+              },
+              "validate_schema_structure": {}
+            },
+            "base": {
+              "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+              "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+              "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e"
+            },
+            "budget": {
+              "case_accounts": [
+                {
+                  "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+                  "limits": {
+                    "extension_requests": 1,
+                    "llm_calls": 96,
+                    "rebinds": 2,
+                    "tokens": 240000,
+                    "tool_calls": 64
+                  },
+                  "usage": {
+                    "extension_requests": 1,
+                    "llm_calls": 18,
+                    "rebinds": 0,
+                    "tokens": 0,
+                    "tool_calls": 11
+                  }
+                }
+              ],
+              "case_call_reservations": [
+                "05af49272c28495ca441cbac27874836",
+                "b081949933734345a29b94ba2c719746",
+                "d9706089bac44ccd90be2f3863371102",
+                "35fdc3891d764b5f8918d34f71d56dcb",
+                "95bddbc83f154fdb857a50dc541bd36d",
+                "436e662ceb5a4f46a118f2d83488535d",
+                "4c7a44ffaa01460bbb86a4659338adaa",
+                "703434382cdc40b1929d602b11725aa8",
+                "536e612a8fe746cb8bc9e0eca37b962a",
+                "6142f33e0fb44b5fb53419b52980c1f4"
+              ],
+              "case_ids": [
+                "case_c76b05a9313d3a7e154952c5db02511d"
+              ],
+              "deadline_epoch": 1793013582.989247,
+              "max_planner_steps": 14,
+              "max_validation_rounds": 2,
+              "remaining_llm_calls": 28,
+              "remaining_seconds": 88.46662521362305,
+              "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+              "usage": {
+                "input_tokens": 0,
+                "llm_calls": 12,
+                "output_tokens": 0,
+                "planner_steps": 9,
+                "tool_calls": 8,
+                "unknown_token_requests": 11,
+                "validation_rounds": 1
+              }
+            },
+            "check_records": {
+              "competency": {
+                "checks": [
+                  {
+                    "guard": {
+                      "constraint_semantics": "allowed_any",
+                      "domain_status": "pass",
+                      "hard_failure": false,
+                      "mapping_ambiguous": false,
+                      "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                      "range_status": "pass",
+                      "reason_codes": [],
+                      "relation": {
+                        "definition": "A device changes another device's operating state.",
+                        "description": "A device changes another device's operating state.",
+                        "domain": [
+                          "C"
+                        ],
+                        "id": "R_155b96508767cc37eb82",
+                        "kind": "object_property",
+                        "label": "regulates",
+                        "range": [
+                          "C"
+                        ]
+                      },
+                      "relation_id": "R_155b96508767cc37eb82",
+                      "relation_known": true,
+                      "status": "pass",
+                      "type_unknown": false
+                    },
+                    "id": "trigger_cand_24916a6f43b3a5871a0d",
+                    "status": "pass"
+                  }
+                ],
+                "configured_questions": 0,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "empty_instance_data_is_not_failure": true,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "natural_language_questions_not_falsely_marked_executed": true,
+                "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+                "status": "pass"
+              },
+              "existing_schema": {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "Missing regulation relation",
+                "record_id": "check_fdb48a614f4642089ec786ae767561abefcc361167fe75872416cc8d4d6cb680",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass"
+              },
+              "impact": {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass"
+              },
+              "reasoner": {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "executed": false,
+                "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+                "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+                "status": "not_run"
+              },
+              "structure": {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "warnings": []
+              }
+            },
+            "critical_issues": [],
+            "current_validation": {
+              "consensus": {
+                "committee_size": 3,
+                "counter_evidence_ids": [],
+                "counts": {
+                  "approve": 3,
+                  "error": 0,
+                  "reject": 0,
+                  "revise": 0,
+                  "uncertain": 0
+                },
+                "deterministic_checks_pass": true,
+                "eligible_voter_ids": [
+                  "a",
+                  "b",
+                  "c"
+                ],
+                "missing": 0,
+                "required_votes": 3,
+                "result": "approve"
+              },
+              "key": "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4",
+              "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+              "round_id": 1
+            },
+            "delta": {
+              "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+              "operations": [
+                {
+                  "changes": {
+                    "definition": "A device changes another device's operating state.",
+                    "domain": [
+                      "C"
+                    ],
+                    "label": "regulates",
+                    "range": [
+                      "C"
+                    ]
+                  },
+                  "evidence_ids": [
+                    "ev_311bda3ac7363c945541",
+                    "ev_86fa4fe9369f7204302d"
+                  ],
+                  "kind": "add_object_property",
+                  "target": "R_155b96508767cc37eb82"
+                }
+              ],
+              "risk_category": "additive"
+            },
+            "evidence_catalog": [
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 80,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 66,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 80,
+                "evidence_id": "ev_311bda3ac7363c945541",
+                "offset_basis": "canonical_document",
+                "quote": "A regulates B.",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 66,
+                "text": "A regulates B."
+              },
+              {
+                "anchor_status": "exact",
+                "anchor_valid": true,
+                "chunk_end": 65,
+                "chunk_id": "chunk_6476979e42bf",
+                "chunk_start": 0,
+                "document_id": "doc",
+                "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+                "end": 65,
+                "evidence_id": "ev_86fa4fe9369f7204302d",
+                "offset_basis": "canonical_document",
+                "quote": "Regulation is a device changing another device's operating state.",
+                "retrieval_level": "adjacent_sentence",
+                "retrieval_score": 0.88,
+                "retrieved_via_levels": [
+                  "adjacent_sentence"
+                ],
+                "section_id": "section_ad405e975b89",
+                "semantic_status": "unknown",
+                "sentence_id": "sentence_d5888307d9fa725141d8",
+                "source_anchor_kind": "document_span",
+                "span_chunk_ids": [
+                  "chunk_6476979e42bf"
+                ],
+                "start": 0,
+                "text": "Regulation is a device changing another device's operating state."
+              }
+            ],
+            "history": [
+              {
+                "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+                "delta_hash": null,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "items_scanned": 2,
+                "matches": [],
+                "query": "regulates regulation",
+                "record_id": "check_7653a1d1e8fe0ba3d8b1076f9f3428a52805aff1d63babafb86c41e96fd6e205",
+                "scope": "full_base_release",
+                "search_is_not_gap_or_equivalence_proof": true,
+                "status": "pass",
+                "step_no": 1,
+                "tool": "search_existing_schema"
+              },
+              {
+                "items": [],
+                "semantic_status": "unknown",
+                "status": "empty",
+                "step_no": 2,
+                "tool": "retrieve_definition_evidence",
+                "trace": [
+                  {
+                    "candidate_id": "cand_24916a6f43b3a5871a0d",
+                    "rejected": [],
+                    "returned": 0,
+                    "scope": "current_chunk"
+                  }
+                ]
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "delta_revision": 1,
+                "operations": [
+                  {
+                    "changes": {
+                      "definition": "A device changes another device's operating state.",
+                      "domain": [
+                        "C"
+                      ],
+                      "label": "regulates",
+                      "range": [
+                        "C"
+                      ]
+                    },
+                    "evidence_ids": [
+                      "ev_311bda3ac7363c945541",
+                      "ev_86fa4fe9369f7204302d"
+                    ],
+                    "kind": "add_object_property",
+                    "target": "R_155b96508767cc37eb82"
+                  }
+                ],
+                "risk_category": "additive",
+                "status": "draft",
+                "step_no": 3,
+                "tool": "propose_schema_delta"
+              },
+              {
+                "class_count": 1,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "errors": [],
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "owl_reasoner_executed": false,
+                "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+                "relation_count": 2,
+                "status": "pass",
+                "step_no": 4,
+                "tool": "validate_schema_structure",
+                "warnings": []
+              },
+              {
+                "affected_candidates": [],
+                "candidate_rows_scanned": 1,
+                "changed_schema_ids": [
+                  "R_155b96508767cc37eb82"
+                ],
+                "coverage": "all_current_candidates",
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "historical_candidates_auto_accepted": false,
+                "manual_review_required": false,
+                "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+                "risk_category": "additive",
+                "status": "pass",
+                "step_no": 5,
+                "tool": "analyze_schema_impact"
+              },
+              {
+                "checks": [
+                  {
+                    "guard": {
+                      "constraint_semantics": "allowed_any",
+                      "domain_status": "pass",
+                      "hard_failure": false,
+                      "mapping_ambiguous": false,
+                      "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                      "range_status": "pass",
+                      "reason_codes": [],
+                      "relation": {
+                        "definition": "A device changes another device's operating state.",
+                        "description": "A device changes another device's operating state.",
+                        "domain": [
+                          "C"
+                        ],
+                        "id": "R_155b96508767cc37eb82",
+                        "kind": "object_property",
+                        "label": "regulates",
+                        "range": [
+                          "C"
+                        ]
+                      },
+                      "relation_id": "R_155b96508767cc37eb82",
+                      "relation_known": true,
+                      "status": "pass",
+                      "type_unknown": false
+                    },
+                    "id": "trigger_cand_24916a6f43b3a5871a0d",
+                    "status": "pass"
+                  }
+                ],
+                "configured_questions": 0,
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "empty_instance_data_is_not_failure": true,
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "natural_language_questions_not_falsely_marked_executed": true,
+                "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+                "status": "pass",
+                "step_no": 6,
+                "tool": "run_competency_checks"
+              },
+              {
+                "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+                "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+                "executed": false,
+                "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+                "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+                "status": "not_run",
+                "step_no": 7,
+                "tool": "run_reasoner_checks"
+              },
+              {
+                "status": "ok",
+                "step_no": 8,
+                "tool": "run_ontology_validation",
+                "validation": {
+                  "consensus": {
+                    "committee_size": 3,
+                    "counter_evidence_ids": [],
+                    "counts": {
+                      "approve": 3,
+                      "error": 0,
+                      "reject": 0,
+                      "revise": 0,
+                      "uncertain": 0
+                    },
+                    "deterministic_checks_pass": true,
+                    "eligible_voter_ids": [
+                      "a",
+                      "b",
+                      "c"
+                    ],
+                    "missing": 0,
+                    "required_votes": 3,
+                    "result": "approve"
+                  },
+                  "key": "21a854d9871ed41595e1d813b179b2ef516f6deb0837b165616244907b5676a4",
+                  "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+                  "round_id": 1
+                }
+              }
+            ],
+            "object_revision": 1,
+            "request": {
+              "change_kind": "add_object_property",
+              "description": "Missing regulation relation",
+              "human_events": null,
+              "proposed_changes": {
+                "label": "regulates"
+              }
+            },
+            "source_content_is_untrusted_data": true,
+            "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+            "task_type": "ontology_extension"
+          },
+          "input_tokens": null,
+          "latency_ms": 0,
+          "output_tokens": null,
+          "response_status": "ok"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "step_no": 9,
+      "role": "tool",
+      "action": {
+        "action": "finish_extension_review",
+        "arguments": {
+          "stop_reason": "fixture investigation complete"
+        },
+        "rationale_summary": "MOCK planner following actual observations",
+        "target_issue": "fixture modeling investigation"
+      },
+      "final_decision_by": "server_policy",
+      "status": "finish_requested"
+    }
+  ],
+  "proposals": [
+    {
+      "application_profile": {
+        "auto_review_blocked": false,
+        "constraint_semantics": "allowed_any",
+        "profile_version": "project_json_v1",
+        "reasoner": "not_run"
+      },
+      "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+      "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+      "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+      "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "base_schema": {
+        "application_profile": {
+          "auto_review_blocked": false,
+          "constraint_semantics": "allowed_any",
+          "profile_version": "project_json_v1",
+          "reasoner": "not_run"
+        },
+        "classes": {
+          "C": {
+            "definition": "A device is a modeled controllable unit.",
+            "id": "C",
+            "label": "device"
+          }
+        },
+        "domain": "fixture",
+        "object_properties": {
+          "R_old": {
+            "definition": "Connection between devices.",
+            "domain": [
+              "C"
+            ],
+            "id": "R_old",
+            "label": "connects",
+            "range": [
+              "C"
+            ]
+          }
+        }
+      },
+      "check_records": {
+        "competency": {
+          "checks": [
+            {
+              "guard": {
+                "constraint_semantics": "allowed_any",
+                "domain_status": "pass",
+                "hard_failure": false,
+                "mapping_ambiguous": false,
+                "ontology_version": "cae34627ea45fa4d03c9becce451a8c85023ece80294cead71bb828d64e61546",
+                "range_status": "pass",
+                "reason_codes": [],
+                "relation": {
+                  "definition": "A device changes another device's operating state.",
+                  "description": "A device changes another device's operating state.",
+                  "domain": [
+                    "C"
+                  ],
+                  "id": "R_155b96508767cc37eb82",
+                  "kind": "object_property",
+                  "label": "regulates",
+                  "range": [
+                    "C"
+                  ]
+                },
+                "relation_id": "R_155b96508767cc37eb82",
+                "relation_known": true,
+                "status": "pass",
+                "type_unknown": false
+              },
+              "id": "trigger_cand_24916a6f43b3a5871a0d",
+              "status": "pass"
+            }
+          ],
+          "configured_questions": 0,
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "empty_instance_data_is_not_failure": true,
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "natural_language_questions_not_falsely_marked_executed": true,
+          "record_id": "check_dd83379a563769dccf11053fa632d1a33b41e47e67ecf814851114c85f62c679",
+          "status": "pass"
+        },
+        "existing_schema": {
+          "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "items_scanned": 2,
+          "record_id": "check_6ee0f6e14dc1f9bf575a8cc3e307365a8dc6c223339826e1e71eac509c44204c",
+          "scope": "full_base_release",
+          "search_is_not_gap_or_equivalence_proof": true,
+          "status": "pass"
+        },
+        "impact": {
+          "affected_candidates": [],
+          "candidate_rows_scanned": 1,
+          "changed_schema_ids": [
+            "R_155b96508767cc37eb82"
+          ],
+          "coverage": "all_current_candidates",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "historical_candidates_auto_accepted": false,
+          "manual_review_required": false,
+          "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+          "risk_category": "additive",
+          "status": "pass"
+        },
+        "reasoner": {
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "executed": false,
+          "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency.",
+          "record_id": "check_89ba6e45767b079f6f8ec19c3935613efe549f88bbca57474fcd892a263fffff",
+          "status": "not_run"
+        },
+        "structure": {
+          "class_count": 1,
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "errors": [],
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "owl_reasoner_executed": false,
+          "record_id": "check_57ee5ac3e328f8a4d4b94d04fa4cfc1b60f3ae090871767d8b706300b4d336ad",
+          "relation_count": 2,
+          "status": "pass",
+          "warnings": []
+        }
+      },
+      "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+      "committee_members": [
+        {
+          "id": "a",
+          "model_family": "a",
+          "model_id": "ontology_model_a",
+          "model_identity": "ontology_model_a"
+        },
+        {
+          "id": "b",
+          "model_family": "b",
+          "model_id": "ontology_model_b",
+          "model_identity": "ontology_model_b"
+        },
+        {
+          "id": "c",
+          "model_family": "c",
+          "model_id": "ontology_model_c",
+          "model_identity": "ontology_model_c"
+        }
+      ],
+      "committee_policy": {
+        "committee_size": 3,
+        "minimum_distinct_families": 3,
+        "required_votes": 3
+      },
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 80,
+          "chunk_id": "chunk_6476979e42bf",
+          "chunk_start": 66,
+          "document_id": "doc",
+          "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+          "end": 80,
+          "evidence_id": "ev_311bda3ac7363c945541",
+          "offset_basis": "canonical_document",
+          "quote": "A regulates B.",
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "section_id": "section_ad405e975b89",
+          "semantic_status": "unknown",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6476979e42bf"
+          ],
+          "start": 66,
+          "text": "A regulates B."
+        },
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 65,
+          "chunk_id": "chunk_6476979e42bf",
+          "chunk_start": 0,
+          "document_id": "doc",
+          "document_version": "1db1c735aab706f1a8b65ff745dcffc11161748ea78d9075438afd035077dc7c",
+          "end": 65,
+          "evidence_id": "ev_86fa4fe9369f7204302d",
+          "offset_basis": "canonical_document",
+          "quote": "Regulation is a device changing another device's operating state.",
+          "retrieval_level": "adjacent_sentence",
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "section_id": "section_ad405e975b89",
+          "semantic_status": "unknown",
+          "sentence_id": "sentence_d5888307d9fa725141d8",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6476979e42bf"
+          ],
+          "start": 0,
+          "text": "Regulation is a device changing another device's operating state."
+        }
+      ],
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "human_review_context": [],
+      "merged_schema": {
+        "application_profile": {
+          "auto_review_blocked": false,
+          "constraint_semantics": "allowed_any",
+          "profile_version": "project_json_v1",
+          "reasoner": "not_run"
+        },
+        "classes": {
+          "C": {
+            "definition": "A device is a modeled controllable unit.",
+            "id": "C",
+            "label": "device"
+          }
+        },
+        "domain": "fixture",
+        "object_properties": {
+          "R_155b96508767cc37eb82": {
+            "definition": "A device changes another device's operating state.",
+            "domain": [
+              "C"
+            ],
+            "id": "R_155b96508767cc37eb82",
+            "label": "regulates",
+            "range": [
+              "C"
+            ]
+          },
+          "R_old": {
+            "definition": "Connection between devices.",
+            "domain": [
+              "C"
+            ],
+            "id": "R_old",
+            "label": "connects",
+            "range": [
+              "C"
+            ]
+          }
+        }
+      },
+      "object_revision": 1,
+      "operations": [
+        {
+          "changes": {
+            "definition": "A device changes another device's operating state.",
+            "domain": [
+              "C"
+            ],
+            "label": "regulates",
+            "range": [
+              "C"
+            ]
+          },
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541",
+            "ev_86fa4fe9369f7204302d"
+          ],
+          "kind": "add_object_property",
+          "target": "R_155b96508767cc37eb82"
+        }
+      ],
+      "prior_counter_evidence_ids": [],
+      "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+      "reasoner_required": false,
+      "risk_category": "additive",
+      "round_id": 1,
+      "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+      "task_type": "ontology_extension",
+      "versions": {
+        "contract_hash": "72652416e6f4895fb59f2b83b0da1caa9b3d953a98b6ccf473be0ad785e87ea4",
+        "contract_version": "ontology_review_response_v1",
+        "planner_prompt_hash": "ca2fc6ac5cb8c022e94ffd5401bc8746f97d0e854d776bc79fdcf7003a685e06",
+        "planner_version": "ontology_extension_planner_v1",
+        "prompt_hash": "57d8c504d8a4b2433fdb0ec6f87e4248f412e77bcdde7fb6c2d189ba71cbc6d0",
+        "prompt_version": "ontology_extension_validator_v1",
+        "task_type": "ontology_extension"
+      }
+    }
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_no": 1,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+          "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+          "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+          "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+          "contract_version": "ontology_review_response_v1",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "impact_status": "pass",
+          "input_tokens": null,
+          "model_family": "a",
+          "model_id": "ontology_model_a",
+          "model_identity": "ontology_model_a",
+          "necessity": "confirmed_gap",
+          "object_revision": 1,
+          "output_tokens": null,
+          "prompt_version": "ontology_extension_validator_v1",
+          "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+          "reason_codes": [],
+          "requested_context": null,
+          "response_id": null,
+          "response_status": "ok",
+          "returned_model_id": null,
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+          "task_type": "ontology_extension",
+          "voter_id": "a"
+        }
+      ],
+      "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+      "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+      "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+      "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+      "contract_version": "ontology_review_response_v1",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "impact_status": "pass",
+      "input_tokens": null,
+      "model_family": "a",
+      "model_id": "ontology_model_a",
+      "model_identity": "ontology_model_a",
+      "necessity": "confirmed_gap",
+      "object_revision": 1,
+      "output_tokens": null,
+      "prompt_version": "ontology_extension_validator_v1",
+      "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+      "reason_codes": [],
+      "request_key": "76b2efb7378a076a24876fad594d16f858896c9d36d3d588318a92cff4d2f64e",
+      "requested_context": null,
+      "response_id": null,
+      "response_status": "ok",
+      "returned_model_id": null,
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_311bda3ac7363c945541"
+      ],
+      "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+      "task_type": "ontology_extension",
+      "voter_id": "a"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_no": 1,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+          "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+          "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+          "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+          "contract_version": "ontology_review_response_v1",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "impact_status": "pass",
+          "input_tokens": null,
+          "model_family": "b",
+          "model_id": "ontology_model_b",
+          "model_identity": "ontology_model_b",
+          "necessity": "confirmed_gap",
+          "object_revision": 1,
+          "output_tokens": null,
+          "prompt_version": "ontology_extension_validator_v1",
+          "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+          "reason_codes": [],
+          "requested_context": null,
+          "response_id": null,
+          "response_status": "ok",
+          "returned_model_id": null,
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+          "task_type": "ontology_extension",
+          "voter_id": "b"
+        }
+      ],
+      "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+      "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+      "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+      "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+      "contract_version": "ontology_review_response_v1",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "impact_status": "pass",
+      "input_tokens": null,
+      "model_family": "b",
+      "model_id": "ontology_model_b",
+      "model_identity": "ontology_model_b",
+      "necessity": "confirmed_gap",
+      "object_revision": 1,
+      "output_tokens": null,
+      "prompt_version": "ontology_extension_validator_v1",
+      "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+      "reason_codes": [],
+      "request_key": "a71941bce1d42f303d0d0cefebccfd3d1336ee121475c252f66ba465b4d85f83",
+      "requested_context": null,
+      "response_id": null,
+      "response_status": "ok",
+      "returned_model_id": null,
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_311bda3ac7363c945541"
+      ],
+      "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+      "task_type": "ontology_extension",
+      "voter_id": "b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_no": 1,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+          "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+          "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+          "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [
+                "ev_311bda3ac7363c945541"
+              ],
+              "note": "MOCK semantic result, not measured model quality",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+          "contract_version": "ontology_review_response_v1",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+          "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+          "impact_status": "pass",
+          "input_tokens": null,
+          "model_family": "c",
+          "model_id": "ontology_model_c",
+          "model_identity": "ontology_model_c",
+          "necessity": "confirmed_gap",
+          "object_revision": 1,
+          "output_tokens": null,
+          "prompt_version": "ontology_extension_validator_v1",
+          "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+          "reason_codes": [],
+          "requested_context": null,
+          "response_id": null,
+          "response_status": "ok",
+          "returned_model_id": null,
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+          "task_type": "ontology_extension",
+          "voter_id": "c"
+        }
+      ],
+      "audit_id": "ontology_audit_15f0f4f3c1194a649c7259d57c96154e",
+      "base_ontology_version": "c26612c2ff04bbaacaaf0a24472c3ebaf07de45ae2cfa5ca1a13b118b62f5437",
+      "base_profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+      "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [
+            "ev_311bda3ac7363c945541"
+          ],
+          "note": "MOCK semantic result, not measured model quality",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "0cb306e636b5e0a09f2aef16c666af391e0db0a7aab82ada20e05bf8bf199efb",
+      "contract_version": "ontology_review_response_v1",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+      "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+      "impact_status": "pass",
+      "input_tokens": null,
+      "model_family": "c",
+      "model_id": "ontology_model_c",
+      "model_identity": "ontology_model_c",
+      "necessity": "confirmed_gap",
+      "object_revision": 1,
+      "output_tokens": null,
+      "prompt_version": "ontology_extension_validator_v1",
+      "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+      "reason_codes": [],
+      "request_key": "878f90ed04c88d15fc93b27ed3cc22280fc3e00c442caa1d8d68e45e89d1116e",
+      "requested_context": null,
+      "response_id": null,
+      "response_status": "ok",
+      "returned_model_id": null,
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_311bda3ac7363c945541"
+      ],
+      "task_id": "ext_306be8653075421a9579aac5737b4ed6",
+      "task_type": "ontology_extension",
+      "voter_id": "c"
+    }
+  ]
+}

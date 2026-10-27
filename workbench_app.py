@@ -699,8 +699,12 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(ontology_overview())
             elif path == "/api/ontology/items":
                 self.send_json(ontology_items_page(parse_qs(urlparse(self.path).query)))
+            elif path == "/api/ontology/extensions":
+                from ontology_review.service import OntologyReviewService
+                self.send_json(OntologyReviewService(get_default_service()).list(query.get("status", [None])[0]))
             elif re.fullmatch(r"/api/ontology/extensions/[^/]+", path):
-                self.send_json(get_default_service().repository.extension_status(path.rsplit("/", 1)[-1]))
+                from ontology_review.service import OntologyReviewService
+                self.send_json(OntologyReviewService(get_default_service()).detail(path.rsplit("/", 1)[-1]))
             elif path == "/api/ontology/releases":
                 self.send_json(ontology_releases())
             elif path.startswith("/api/triplets/"):
@@ -746,6 +750,12 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(get_default_service().create_reaudit_job(
                     path.split("/")[-2], payload
                 ), 202)
+            elif re.fullmatch(r"/api/triplets/candidates/[^/]+/human-bundles", path):
+                from review_agent.human_evidence import create_human_bundle
+                payload = self.read_payload()
+                payload["candidate_id"] = path.split("/")[-2]
+                payload["reviewer"] = get_default_service().config.get("local_operator", "local_operator")
+                self.send_json(create_human_bundle(get_default_service().repository, payload), 201)
             elif path == "/api/triplets/decision":
                 payload = self.read_payload()
                 if payload.get("file"):
@@ -759,6 +769,15 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                     self.send_json(get_default_service().decide(payload))
             elif path.startswith("/api/triplets/"):
                 self.dispatch_legacy(triplets.ReviewHandler.do_POST, "/api/triplets")
+            elif re.fullmatch(r"/api/ontology/extensions/[^/]+/(review|publish|rebase|decision)", path):
+                from ontology_review.service import OntologyReviewService
+                service = OntologyReviewService(get_default_service())
+                extension_id, action = path.split("/")[-2:]
+                payload = self.read_payload()
+                if action == "review": self.send_json(service.create_job(extension_id, payload), 202)
+                elif action == "publish": self.send_json(service.publish(extension_id, payload), 201)
+                elif action == "rebase": self.send_json(service.publisher.rebase(extension_id, payload.get("expected_row_version"), payload.get("expected_base_release_id")))
+                else: self.send_json(service.decide(extension_id, payload))
             elif path == "/api/ontology/review-run":
                 self.send_json(run_ontology_review(self.read_payload()))
             elif path == "/api/ontology/import":

@@ -1,0 +1,66 @@
+{
+  "run_id": "demo_aad5fb0a2593",
+  "database_path": "runs\\review_validation\\admission_demo\\review.sqlite3",
+  "audits": [
+    {
+      "audit_id": "audit_a6e64dd3e3144bbc94bb126f8c1c8b05",
+      "candidate_id": "cand_e30c5631cb7fdb32f594",
+      "decision": "manual_review",
+      "consensus": "accept_consensus",
+      "reason_codes": [
+        "CALIBRATOR_NOT_READY"
+      ]
+    },
+    {
+      "audit_id": "audit_cb6eef931f2c4a358df33483a41adc71",
+      "candidate_id": "cand_3ac70726d9d64dc5f26f",
+      "decision": "manual_review",
+      "consensus": "reject_consensus",
+      "reason_codes": [
+        "CALIBRATOR_NOT_READY"
+      ]
+    },
+    {
+      "audit_id": "audit_139f268d9c434cfe8adeeaa23c711249",
+      "candidate_id": "cand_f3d89562aa2683af7688",
+      "decision": "manual_review",
+      "consensus": "unresolved",
+      "reason_codes": [
+        "CANDIDATE_IDENTITY_UNRESOLVED",
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "SCHEMA_GAP",
+        "EVIDENCE_GAP_UNRESOLVED"
+      ]
+    },
+    {
+      "audit_id": "audit_b878948c283c4d6fb4017e491de452db",
+      "candidate_id": "cand_99542165c9c8ed4b27c0",
+      "decision": "manual_review",
+      "consensus": "unresolved",
+      "reason_codes": [
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "UNRESOLVED_COUNTEREVIDENCE",
+        "UNRESOLVED_SUPPORT_CONFLICT",
+        "EVIDENCE_GAP_UNRESOLVED"
+      ]
+    },
+    {
+      "audit_id": "audit_05f8fc9aed1b4afa8e183f42775b378a",
+      "candidate_id": "cand_b04d3c786746ab0e84b9",
+      "decision": "manual_review",
+      "consensus": "reject_consensus",
+      "reason_codes": [
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "EVIDENCE_GAP_UNRESOLVED"
+      ]
+    }
+  ],
+  "checks": {
+    "correct_human_accept": true,
+    "negation_human_reject": true,
+    "schema_gap_manual": true,
+    "counterevidence_manual": true,
+    "modified_revision": true,
+    "idempotent_feedback": true
+  }
+}

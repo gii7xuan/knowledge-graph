@@ -145,8 +145,9 @@ class PlannerRuntimeTests(unittest.TestCase):
     def test_ready_current_validation_can_route_only_through_system_policy(self):
         result = self.run_script([ontology(), action("run_validation"), finish()], config=self.active_config(),
             risk_policy=self.ready_policy(), calibrator=self.ready_calibrator())
-        self.assertEqual(result["decision"], "auto_accept")
-        self.assertEqual(len(self.repo.list_outbox(run_id="run")), 1)
+        self.assertEqual(result["decision"], "manual_review")
+        self.assertIn("UNIFIED_ADMISSION_BLOCKED", result["reason_codes"])
+        self.assertEqual(len(self.repo.list_outbox(run_id="run")), 0)
         self.assertEqual(result["consensus"]["committee_size"], 4)
 
     def test_repeated_same_proposal_uses_cached_votes_not_a_reroll(self):

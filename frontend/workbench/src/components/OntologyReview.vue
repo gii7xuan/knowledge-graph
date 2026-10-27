@@ -4,6 +4,7 @@ import { Check, ChevronLeft, ChevronRight, Clock3, Pencil, Play, RefreshCw, X } 
 import { api, post } from '../api';
 import { candidateModifications, draftForCandidate } from '../ontologyDraft';
 import ModelSelector from './ModelSelector.vue';
+import OntologyExtensions from './OntologyExtensions.vue';
 
 const props = defineProps({
   markdownFiles: { type: Array, default: () => [] },
@@ -365,6 +366,7 @@ onUnmounted(() => {
       </aside>
       <div class="sidebar-resizer" role="separator" tabindex="0" aria-label="调整左侧栏宽度" aria-orientation="vertical" :aria-valuenow="sidebarWidth" aria-valuemin="280" @pointerdown="startResize" @keydown="resizeByKeyboard"></div>
       <div class="review-content ontology-content">
+        <OntologyExtensions />
         <section class="review-card" aria-label="本体版本发布">
           <div class="candidate-title"><strong>初始本体接入与版本发布</strong></div>
           <p v-if="releases.current" class="run-path" :title="releases.current.ontology_release_id">

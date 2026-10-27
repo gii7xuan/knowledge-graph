@@ -5,7 +5,7 @@ from uuid import uuid4
 
 from evidence.hierarchical_retriever import retrieve_initial
 from .action_policy import ActionPolicy
-from .agent_state import AgentBudget, AgentState, AgentStopped
+from .agent_state import AgentState, AgentStopped
 from .consensus import aggregate_votes
 from .contracts import EVIDENCE_BUNDLE_VERSION, FEATURE_SCHEMA_VERSION, sha256_json
 from .execution import AuditPaused
@@ -14,6 +14,8 @@ from .planner import LLMPlanner
 from .planner_contracts import ActionError
 from .tools import AgentTools
 from .validators import model_request_count
+from .case_budget import CaseBudget
+from .task_adapter import TripleTaskAdapter
 
 
 class AgentRuntime:
@@ -22,6 +24,7 @@ class AgentRuntime:
         self.planner_config = orchestrator.config.get("planner") or {}
         self.policy = ActionPolicy(self.planner_config)
         self.tools = AgentTools(self)
+        self.adapter = TripleTaskAdapter(self)
         self.initial_ids = set()
 
     def issue(self, code, description, critical=False):
@@ -78,7 +81,9 @@ class AgentRuntime:
             if self.repository.get_audit(candidate_id, audit_id)["status"] == "completed":
                 return "completed"
             self.state.context["job_id"] = supplied.get("job_id")
-            self.budget = AgentBudget(self.state.context["budget_config"], saved["budget"], supplied.get("execution_deadline_epoch"))
+            case_id = self.repository.ensure_case(candidate_id, self.orchestrator.config.get("case_budget"))
+            self.budget = CaseBudget(self.state.context["budget_config"], self.repository, [case_id], task_type="triple_review", task_id=candidate_id,
+                                    saved=saved["budget"], deadline_epoch=supplied.get("execution_deadline_epoch"))
             self.initial_ids = set(self.state.context.get("initial_evidence_ids", []))
             self.repository.resume_agent_audit(audit_id)
             self.repository.update_audit_context(audit_id, {"job_id": supplied.get("job_id")})
@@ -86,7 +91,9 @@ class AgentRuntime:
             self.state.stop_reason = ""
             return None
         budget_config = dict(self.orchestrator.config.get("budget") or {})
-        self.budget = AgentBudget(budget_config, deadline_epoch=supplied.get("execution_deadline_epoch"))
+        case_id = self.repository.ensure_case(candidate_id, self.orchestrator.config.get("case_budget"))
+        self.budget = CaseBudget(budget_config, self.repository, [case_id], task_type="triple_review", task_id=candidate_id,
+                                deadline_epoch=supplied.get("execution_deadline_epoch"))
         memory = ReviewMemory(self.repository)
         memory_version = int(supplied.get("memory_snapshot_id", memory.current_version()))
         triple = candidate.get("triple") or candidate
@@ -190,7 +197,7 @@ class AgentRuntime:
             checkpoint=(state.export(), budget.snapshot(), "tool_running"))
         try:
             fingerprint = self.policy.check(action, state)
-            outcome = self.tools.execute(name, action["arguments"])
+            outcome = self.adapter.execute_tool(action, state)
             outcome["action_fingerprint"] = fingerprint
             self.check_live()
         except ActionError as exc:

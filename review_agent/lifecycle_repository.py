@@ -16,11 +16,15 @@ class LifecycleRepository:
         source = sqlite3.connect(self.database_path.resolve().as_uri() + "?mode=ro", uri=True)
         try:
             columns = {row[1] for row in source.execute("PRAGMA table_info(candidates)")}
-            if not columns or "workflow_state" in columns:
+            if not columns:
                 return
+            has_agent = source.execute("SELECT 1 FROM sqlite_master WHERE name='ontology_audits'").fetchone()
+            has_admission = source.execute("SELECT 1 FROM sqlite_master WHERE name='graph_sync'").fetchone()
+            if "workflow_state" in columns and has_agent and has_admission: return
             folder = self.database_path.parent / "migration_backups"
             folder.mkdir(parents=True, exist_ok=True)
-            target = folder / (self.database_path.stem + ".pre_v4." + uuid4().hex + ".sqlite3")
+            version = "v6" if has_agent and "workflow_state" in columns else "v5" if "workflow_state" in columns else "v4"
+            target = folder / (self.database_path.stem + ".pre_" + version + "." + uuid4().hex + ".sqlite3")
             destination = sqlite3.connect(target)
             try: source.backup(destination)
             finally: destination.close()
@@ -77,7 +81,7 @@ class LifecycleRepository:
                 if trigger not in task.get("trigger_candidates", []):
                     task.setdefault("trigger_candidates", []).append(trigger)
                     task["evidence_ids"] = sorted(set(task.get("evidence_ids", [])) | set(evidence_ids))
-                    connection.execute("UPDATE ontology_extension_tasks SET task_json=? WHERE extension_id=?", (canonical_json(task), task["extension_id"]))
+                    connection.execute("UPDATE ontology_extension_tasks SET task_json=?,row_version=row_version+1 WHERE extension_id=?", (canonical_json(task), task["extension_id"]))
             else:
                 extension_id = "ext_" + uuid4().hex
                 task = {"extension_id": extension_id, "contract_version": "ontology_delta_v1", "delta_revision": 1,
@@ -88,9 +92,12 @@ class LifecycleRepository:
                         "trigger_candidates": [trigger],
                         "risk_category": "high_impact" if change_kind in {"revise_constraint", "revise_definition", "merge_terms"} else "additive_draft",
                         "ontology_review_executed": False}
-                connection.execute("INSERT INTO ontology_extension_tasks VALUES(?,?,?,?,?,?,?)", (extension_id, gap_key,
+                connection.execute("INSERT INTO ontology_extension_tasks(extension_id,gap_key,base_release_id,base_ontology_version,base_profile_hash,status,task_json) VALUES(?,?,?,?,?,?,?)", (extension_id, gap_key,
                     base["ontology_release_id"], base["ontology_version"], base["profile_hash"], "proposed", canonical_json(task)))
             extension_id = task["extension_id"]
+            case_id = self._ensure_case(connection, candidate["candidate_id"])
+            self._charge_cases(connection, [case_id], {"extension_requests": 1}, "extension_subscription:" + case_id + ":" + extension_id,
+                               "triple_review", candidate["candidate_id"])
             next_version = int(row["row_version"]) + 1
             connection.execute("INSERT INTO ontology_extension_subscriptions(extension_id,candidate_id,revision,expected_row_version,source_proposal_digest) VALUES(?,?,?,?,?) "
                                "ON CONFLICT(extension_id,candidate_id,revision) DO UPDATE SET expected_row_version=excluded.expected_row_version,source_proposal_digest=excluded.source_proposal_digest,status='active'",
@@ -99,6 +106,8 @@ class LifecycleRepository:
                      else "awaiting_ontology_release" if task["status"] == "approved" else "awaiting_ontology_review")
             connection.execute("UPDATE candidates SET workflow_state=?,pending_extension_id=?,row_version=? WHERE candidate_id=?",
                                (state, extension_id, next_version, candidate["candidate_id"]))
+            if self.has_graph_history(connection, candidate["candidate_id"]):
+                self.mark_graph_dirty(connection, candidate["candidate_id"], "awaiting_ontology_withdraws_old_admission")
         return {"task": task, "workflow_state": state, "row_version": next_version}
 
     def extension_status(self, extension_id, candidate_id=None):
@@ -109,4 +118,4 @@ class LifecycleRepository:
             subscriptions = connection.execute("SELECT * FROM ontology_extension_subscriptions WHERE extension_id=?", (extension_id,)).fetchall()
         if candidate_id and not any(s["candidate_id"] == candidate_id and s["status"] == "active" for s in subscriptions):
             raise NotFoundError("candidate is not subscribed to this extension")
-        return {**json.loads(row["task_json"]), "status": row["status"], "subscriptions": [dict(s) for s in subscriptions]}
+        return {**json.loads(row["task_json"]), "status": row["status"], "row_version": row["row_version"], "subscriptions": [dict(s) for s in subscriptions]}

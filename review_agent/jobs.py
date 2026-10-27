@@ -22,8 +22,8 @@ class JobRunner:
         self.pool = ThreadPoolExecutor(max_workers=max(1, int(max_workers)), thread_name_prefix="review-agent")
         self._lock = threading.Lock()
 
-    def submit(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        job = self.repository.create_job("audit", payload)
+    def submit(self, payload: Dict[str, Any], *, job_type="audit") -> Dict[str, Any]:
+        job = self.repository.create_job(job_type, payload)
         self.pool.submit(self.run_available_once)
         return job
 
@@ -35,7 +35,7 @@ class JobRunner:
             self.repository.complete_job(job["job_id"], {"cancelled": True}, cancelled=True)
             return self.repository.get_job(job["job_id"])
         try:
-            result = self.handler({**job["payload"], "_job_id": job["job_id"]})
+            result = self.handler({**job["payload"], "_job_id": job["job_id"], "_job_type": job["job_type"]})
         except Exception as exc:
             latest = self.repository.get_job(job["job_id"])
             self.repository.complete_job(
@@ -51,6 +51,9 @@ class JobRunner:
                 job["job_id"], result, cancelled=bool(latest.get("cancel_requested")),
                 paused=bool(result.get("paused")), failed=bool(result.get("failed")),
             )
+        with self.repository.connect() as connection:
+            queued = connection.execute("SELECT 1 FROM jobs WHERE status='queued' AND cancel_requested=0 AND job_type='ontology_extension' LIMIT 1").fetchone()
+        if queued: self.pool.submit(self.run_available_once)
         return self.repository.get_job(job["job_id"])
 
     def recover_expired(self) -> Optional[Dict[str, Any]]:

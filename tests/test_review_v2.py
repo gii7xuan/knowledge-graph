@@ -198,7 +198,7 @@ class AuditPersistenceTests(EvidenceTests):
         self.repo.commit_audit_if_current("c", 1, audit_id, {"features": {"quote_located": 1}, "decision": "manual_review"})
         current = self.repo.get_candidate("c")
         event = FeedbackService(self.repo).submit({"candidate_id": "c", "revision": 1,
-            "expected_row_version": current["row_version"], "idempotency_key": "accept", "action": "accept"})
+            "expected_row_version": current["row_version"], "idempotency_key": "reject", "action": "reject", "reason_code": "FACT_INCORRECT"})
         self.assertEqual(event["event"]["audit_id"], audit_id)
         row = self.repo.feedback_rows()[0]
         self.assertEqual(row["audit_id"], audit_id)
@@ -215,7 +215,7 @@ class AuditPersistenceTests(EvidenceTests):
     def test_old_unbound_label_is_not_attached_to_a_later_audit(self):
         current = self.repo.get_candidate("c")
         FeedbackService(self.repo).submit({"candidate_id": "c", "revision": 1,
-            "expected_row_version": current["row_version"], "idempotency_key": "before-audit", "action": "accept"})
+            "expected_row_version": current["row_version"], "idempotency_key": "before-audit", "action": "reject", "reason_code": "FACT_INCORRECT"})
         aid = self.repo.start_audit("c", 1, {"mode": "shadow"})
         self.repo.commit_audit_if_current("c", 1, aid, {"features": {"quote_located": 1}, "decision": "manual_review"})
         row = self.repo.feedback_rows()[0]

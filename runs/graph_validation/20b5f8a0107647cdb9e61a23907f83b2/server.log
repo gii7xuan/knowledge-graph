@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.IllegalArgumentException: Unrecognized setting. No declared setting with name: server.metrics.enabled. Cleanup the config or disable 'server.config.strict_validation.enabled' to continue.
+	at org.neo4j.configuration.Config.getActiveSettings(Config.java:763)
+	at org.neo4j.configuration.Config.<init>(Config.java:673)
+	at org.neo4j.configuration.Config$Builder.build(Config.java:359)
+	at org.neo4j.server.NeoBootstrapper.start(NeoBootstrapper.java:140)
+	at org.neo4j.server.NeoBootstrapper.start(NeoBootstrapper.java:105)
+	at org.neo4j.server.Neo4jCommunity.main(Neo4jCommunity.java:30)

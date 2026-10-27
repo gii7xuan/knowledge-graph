@@ -185,25 +185,39 @@ def command_demo(args: Any) -> Dict[str, Any]:
     repository = ReviewRepository(database)
     repository.initialize()
     run_id = "demo_" + uuid4().hex[:12]
-    index = _document_index("sensor_manual", fixture["document"])
-    snapshot = load_snapshot(fixture["ontology"])
+    from copy import deepcopy
+    from document.hierarchy_index import build_document_index, split_markdown_text, persist_document_index
+    from ontologyBuild.release_catalog import ReleaseCatalog
+    from ontologyBuild.providers.base import OntologyArtifact
+    from extract_triplets.candidate_contract import normalize_candidate
+    from extract_triplets.pipeline_v4 import source_scope
+    folder = database.parent / run_id
+    folder.mkdir(parents=True)
+    index = build_document_index(split_markdown_text(fixture["document"], "sensor_manual", 600, 20))
+    document_path = persist_document_index(index, folder / "document.json")
+    ontology = deepcopy(fixture["ontology"])
+    ontology["application_profile"] = {"profile_version":"project_json_v1", "constraint_semantics":"allowed_any", "auto_review_blocked":False}
+    release = ReleaseCatalog(folder / "releases").publish(OntologyArtifact(ontology, {"method":"offline_fixture"}, {},
+        {"errors":[],"unsupported_axioms":[]},ontology["application_profile"],source_json=deepcopy(ontology)),
+        approval={"status":"approved","approved_by":"offline_fixture_operator","reason":"Demo schema, not production publication"})
+    snapshot = load_snapshot(release.snapshot_path)
     repository.create_run({
         "run_id": run_id, "schema_version": "triple_review_v3", "mode": "offline_demo",
         "source_hash": index["document_version"], "ontology_hash": snapshot.ontology_version,
+        "document_path": str(document_path), "ontology_path":str(release.snapshot_path), "source_index_hash":index["index_content_hash"],
     })
     source_chunk_id = index["chunks"][0]["chunk_id"]
     candidates = []
     for ordinal, scenario in enumerate(fixture["scenarios"]):
-        candidate_id = candidate_id_for(run_id, "sensor_manual", source_chunk_id, ordinal)
-        candidate = {
-            "schema_version": "triple_review_v3", "run_id": run_id, "candidate_id": candidate_id,
-            "scenario": scenario["id"], "revision": 1, "document_id": "sensor_manual",
-            "document_version": index["document_version"], "source_chunk_id": source_chunk_id,
-            "section_id": index["chunks"][0]["section_id"], "ontology_version": snapshot.ontology_version,
-            "triple": scenario["triple"], "extraction_quote": scenario["quote"],
-            "extraction_model": "mock-extractor", "extraction_prompt_version": "demo_v1",
-        }
-        candidate["fact_key"] = fact_key_for(candidate, "demo")
+        qualifiers = {"polarity":"positive","condition":None,"time_scope":None,"applicability":None,"modality":"asserted","quantifier":None,**scenario["triple"]["qualifiers"]}
+        if scenario["id"] == "correct": qualifiers["modality"] = "can"
+        raw = {**scenario["triple"],"evidence_quotes":[scenario["quote"]],"qualifiers":qualifiers,
+            "qualifier_status":{k:"extracted" if v is not None else "not_stated" for k,v in qualifiers.items()}}
+        candidate = normalize_candidate(raw,index=index,scope=source_scope(index,index["chunks"][0]),ontology=release.ontology,
+            release_binding=release.binding(),run_id=run_id,ordinal=ordinal,prompt_hash="offline_fixture")
+        candidate["scenario"] = scenario["id"]
+        candidate["triple"].update({k:scenario["triple"].get(k) for k in ("head_type","tail_type")})
+        candidate["fact_key"] = fact_key_for(candidate)
         repository.add_candidate(candidate)
         candidates.append(candidate)
 
@@ -254,6 +268,7 @@ def command_demo(args: Any) -> Dict[str, Any]:
         "candidate_id": correct["candidate_id"], "revision": 1,
         "expected_row_version": correct["row_version"], "idempotency_key": f"demo-accept-{run_id}",
         "action": "accept", "reason_code": "HUMAN_CONFIRMED", "labels": {"valid_for_kg": 1},
+        "spans":[{"quote":fixture["scenarios"][0]["quote"],"role":"support","note":"Offline fixture operator confirms capability and explicit source statement."}],
     })
     wrong = repository.get_candidate(candidates[1]["candidate_id"])
     rejected = feedback.submit({
@@ -272,6 +287,7 @@ def command_demo(args: Any) -> Dict[str, Any]:
         "candidate_id": correct["candidate_id"], "revision": 1,
         "expected_row_version": correct["row_version"], "idempotency_key": f"demo-accept-{run_id}",
         "action": "accept", "reason_code": "HUMAN_CONFIRMED", "labels": {"valid_for_kg": 1},
+        "spans":[{"quote":fixture["scenarios"][0]["quote"],"role":"support","note":"Offline fixture operator confirms capability and explicit source statement."}],
     })
     return {
         "run_id": run_id, "database_path": str(database),

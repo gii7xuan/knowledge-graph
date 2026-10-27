@@ -41,7 +41,8 @@ def load_config(path: Optional[Any] = None) -> Dict[str, Any]:
     if not config_path.exists():
         return {"mode": "shadow", "database_path": "runs/v3/review.sqlite3", "validators": [],
                 "routing": {"auto_accept_enabled": False}}
-    return json.loads(config_path.read_text(encoding="utf-8"))
+    from .configuration import normalize_config
+    return normalize_config(json.loads(config_path.read_text(encoding="utf-8")))
 
 
 class ReviewService:
@@ -189,6 +190,9 @@ class ReviewService:
                                   "issue_history": audit["context"].get("issue_history", []), "issue_events": audit["issue_events"],
                                   "revision": audit["revision"], "versions": audit["context"],
                                   "final_round_id": displayed.get("round_id"),
+                                  "selected_round_id": displayed.get("round_id"),
+                                  "selected_proposal_digest": displayed.get("proposal_digest"),
+                                  "selected_evidence_hash": (displayed.get("evidence_bundle") or {}).get("evidence_hash"),
                                   "evidence_bundle": displayed.get("evidence_bundle", {}),
                                   "gaps": displayed.get("gaps", {}),
                                   "ontology_check": displayed.get("ontology_check", {}),
@@ -315,15 +319,7 @@ class ReviewService:
         candidate = self.repository.get_candidate(str(request.get("candidate_id") or ""))
         if request.get("run_id") and str(request["run_id"]) != candidate["run_id"]:
             raise ValidationError("candidate does not belong to the requested run")
-        manifest = self.repository.get_run(candidate["run_id"])
-        ontology_path = manifest.get("ontology_path") or self.config.get("ontology_path")
-        guard = None
-        if ontology_path:
-            path = Path(ontology_path)
-            if not path.is_absolute():
-                path = ROOT / path
-            guard = OntologyGuard(load_snapshot(path, candidate.get("ontology_version")))
-        return FeedbackService(self.repository, ontology_guard=guard).submit(request)
+        return FeedbackService(self.repository).submit(request)
 
     def create_audit_job(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
         run_id = str(payload.get("run_id") or "")
@@ -356,6 +352,9 @@ class ReviewService:
         return self.create_audit_job(request)
 
     def execute_audit_job(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
+        if payload.get("_job_type") == "ontology_extension":
+            from ontology_review.service import OntologyReviewService
+            return OntologyReviewService(self).execute(payload)
         from .batch import run_review_batch
 
         job_id = payload.get("_job_id")

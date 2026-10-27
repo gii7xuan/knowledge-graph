@@ -165,6 +165,11 @@ def fact_key_for(candidate_or_triple: Mapping[str, Any], namespace: Optional[str
                    "namespace": namespace or candidate_or_triple.get("fact_namespace") or candidate_or_triple.get("domain", "default"),
                    **{key: triple.get(key) for key in ("head_entity_id", "relation_id", "tail_kind", "tail_entity_id", "value", "datatype", "unit", "language")},
                    "qualifiers": normalized_qualifiers(triple.get("qualifiers"))}
+        if candidate_or_triple["fact_identity_version"] == "fact_identity_v2":
+            from schema.fact_identity import literal_identity
+            payload["relation_semantic_hash"] = triple.get("relation_semantic_hash")
+            if triple.get("tail_kind") == "literal":
+                payload.update(literal_identity(triple))
         return sha256_json(payload)
     namespace = str(
         namespace or candidate_or_triple.get("fact_namespace")
@@ -258,6 +263,7 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "contract_version", "source_index_hash", "ontology_release_id", "profile_hash",
             "committee_members", "agent_versions", "prompt_hash", "response_contract_hash",
             "candidate_review_hash", "ontology_check_hash",
+            "admission_policy_hash",
             "committee_policy_hash",
             "committee_policy",
         )

@@ -25,7 +25,8 @@ MATERIAL_GAP_CODES = {"CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISM
 
 
 class Budget:
-    def __init__(self, config: Mapping[str, Any]):
+    def __init__(self, config: Mapping[str, Any], shared=None):
+        self.shared = shared
         self.max_rounds = min(2, max(1, int(config.get("max_rounds", 2))))
         self.max_llm_calls = max(0, int(config.get("max_llm_calls_per_candidate", 12)))
         self.max_tool_calls = max(0, int(config.get("max_tool_calls", 6)))
@@ -35,20 +36,23 @@ class Budget:
         self.tool_calls = 0
 
     def expired(self) -> bool:
-        return time.monotonic() - self.started_at >= self.total_timeout_seconds
+        return time.monotonic() - self.started_at >= self.total_timeout_seconds or bool(self.shared and self.shared.exhausted())
 
     def allow_llm(self, count: int) -> bool:
         if self.expired() or self.llm_calls + count > self.max_llm_calls:
             return False
+        if self.shared and not self.shared.reserve_calls(count): return False
         self.llm_calls += count
         return True
 
     def refund_llm(self, count: int) -> None:
+        if self.shared: self.shared.refund_calls(count)
         self.llm_calls = max(0, self.llm_calls - max(0, int(count)))
 
     def allow_tool(self) -> bool:
         if self.expired() or self.tool_calls + 1 > self.max_tool_calls:
             return False
+        if self.shared and not self.shared.consume_tool(): return False
         self.tool_calls += 1
         return True
 
@@ -120,6 +124,12 @@ class ReviewOrchestrator:
             "model_family": v.get("model_family") or getattr(v["client"], "model_family", "")}
             for v in self.validators]
 
+    def admission_policy(self):
+        return {"mode": self.config.get("mode", "shadow"), "policy_version": self.risk_policy.version,
+                "policy_ready": self.risk_policy.ready, "calibrator_ready": bool(getattr(self.calibrator, "ready", False)),
+                "accept_threshold": self.risk_policy.policy.get("accept_threshold"),
+                "auto_accept_enabled": bool((self.config.get("routing") or {}).get("auto_accept_enabled") and self.risk_policy.policy.get("auto_accept_enabled"))}
+
     def _proposal(
         self, audit_id: str, candidate: Mapping[str, Any], guard: Mapping[str, Any],
         bundle: Mapping[str, Any], round_id: int, context: Mapping[str, Any],
@@ -128,6 +138,7 @@ class ReviewOrchestrator:
         seed = {
             "candidate_id": candidate["candidate_id"], "revision": candidate["revision"],
             "candidate_review_hash": sha256_json(candidate), "ontology_check_hash": sha256_json(guard),
+            "admission_policy_hash": sha256_json(context.get("admission_policy", {})),
             "canonical_triple": canonical_triple(candidate),
             "document_version": candidate["document_version"],
             "ontology_version": candidate["ontology_version"],
@@ -158,6 +169,7 @@ class ReviewOrchestrator:
         self, candidate_id: str, revision: int, document_snapshot: Mapping[str, Any],
         *, context: Optional[Mapping[str, Any]] = None,
     ) -> Dict[str, Any]:
+        context = {**dict(context or {}), "admission_policy": self.admission_policy()}
         planner = self.config.get("planner") or {}
         if planner.get("enabled") and planner.get("strategy") == "llm_react":
             from .runtime import AgentRuntime
@@ -207,7 +219,10 @@ class ReviewOrchestrator:
         guard = self.ontology_guard.check(candidate)
         budget_config = {**dict(self.config.get("budget") or {}),
                          "max_rounds": (self.config.get("consensus") or {}).get("max_rounds", 2)}
-        budget = Budget(budget_config)
+        from .case_budget import CaseBudget
+        case_id = self.repository.ensure_case(candidate_id, self.config.get("case_budget"))
+        budget = Budget(budget_config, CaseBudget({**budget_config, "max_llm_calls_per_candidate": budget_config.get("max_llm_calls_per_candidate", 12)},
+            self.repository, [case_id], task_type="triple_review", task_id=audit_id))
         max_evidence_items = max(0, int(budget_config.get("max_evidence_items", 12)))
         max_evidence_chars = max(0, int(budget_config.get("max_evidence_chars", 12_000)))
         bundle = bounded_evidence_bundle(
@@ -267,6 +282,8 @@ class ReviewOrchestrator:
                     raise
                 actual_calls = sum(model_request_count(vote) for vote in last_votes)
                 budget.refund_llm(reserved_calls - actual_calls)
+                for vote in last_votes:
+                    for attempt in vote.get("attempts", []): budget.shared.tokens(attempt)
             else:
                 last_votes = []
             preliminary = aggregate_votes(last_votes, self.committee, proposal_digest=proposal["proposal_digest"], proposal=proposal)
@@ -450,8 +467,18 @@ class ReviewOrchestrator:
             **{key: candidate.get(key) for key in ("ontology_release_id", "profile_hash", "ontology_version")},
             "issue_history": context.get("issue_history", []),
             "evidence_exclusions": context.get("evidence_exclusions", {}),
+            "admission_policy": context.get("admission_policy", {}),
         }
+        admission = None
+        if result["decision"] == "auto_accept":
+            from .repository import UnprocessableEntityError
+            try:
+                admission = self.repository.prepare_automatic_admission(candidate_id, revision, result)
+                result["admission"] = admission["result"]
+            except UnprocessableEntityError as exc:
+                result.update(decision="manual_review", workflow_state="manual_review", admission={"allowed": False, "error": str(exc)})
+                result["reason_codes"] = [*result["reason_codes"], "UNIFIED_ADMISSION_BLOCKED"]
         result["committed"] = self.repository.commit_audit_if_current(
-            candidate_id, revision, audit_id, result
+            candidate_id, revision, audit_id, result, prepared_admission=admission
         )
         return result

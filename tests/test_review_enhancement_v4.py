@@ -198,7 +198,8 @@ class EnhancedAgentTests(unittest.TestCase):
             v["client"] = MockLLMClient(respond, model_id=v["model_id"], model_family=v["model_family"])
         result = self.run_script(self.add_source_and_two_round_plan(), config=self.active_config(),
                                  risk_policy=self.ready_policy(), calibrator=self.ready_calibrator())
-        self.assertEqual(result["decision"], "auto_accept")
+        self.assertEqual(result["decision"], "manual_review")
+        self.assertIn("UNIFIED_ADMISSION_BLOCKED", result["reason_codes"])
         self.assertEqual(result["selected_round_id"], 2)
         issue = next(i for i in result["issue_history"] if i["code"] == "EVIDENCE_INSUFFICIENT")
         self.assertEqual(issue["status"], "resolved")
@@ -235,13 +236,14 @@ class EnhancedAgentTests(unittest.TestCase):
         self.validators[-1]["client"] = MockLLMClient(minority, model_id="model_d", model_family="d")
         result = self.run_script(self.add_source_and_two_round_plan(), config=self.active_config(),
                                  risk_policy=self.ready_policy(), calibrator=self.ready_calibrator())
-        self.assertEqual(result["decision"], "auto_accept")
+        self.assertEqual(result["decision"], "manual_review")
+        self.assertIn("UNIFIED_ADMISSION_BLOCKED", result["reason_codes"])
         self.assertEqual(result["selected_round_id"], 2)
         self.assertEqual(next(i for i in result["issue_history"] if i["code"] == "source_conflict")["status"], "resolved")
         from to_neo4j.save_to_neo4j import authoritative_item
         decision = self.repo.latest_decision("c")
         item = authoritative_item(self.repo, {"candidate_id": "c", "decision_id": decision["decision_id"], "decision_version": decision["decision_version"]})
-        self.assertEqual(item["evidence_items"][0]["semantic_status"], "supported")
+        self.assertIsNone(item)  # This legacy fixture has no immutable release/source admission.
         self.assertTrue(any(v["counter_evidence_ids"] for v in self.audit["votes"] if v["round_id"] == 1))
         displayed = ReviewService(self.repo, config=self.config).items("run")["items"][0]["audit_summary"]
         self.assertEqual(len(displayed["votes"]), 4)

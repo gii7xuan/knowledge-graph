@@ -61,7 +61,9 @@ def _candidate_worker(sender, payload):
         manifest = repository.get_run(payload["run_id"])
         document = load_document_index(manifest["document_path"], manifest.get("source_index_hash"),
                                        require_verified=manifest.get("candidate_contract_version") == "extraction_candidate_v4")
-        guard = OntologyGuard(load_snapshot(manifest["ontology_path"], manifest.get("ontology_hash")))
+        candidate = repository.get_revision(payload["candidate_id"], payload["revision"])
+        guard = OntologyGuard(load_snapshot(candidate.get("ontology_path") or manifest["ontology_path"],
+                                           candidate.get("ontology_version") or manifest.get("ontology_hash")))
         calibration = config.get("calibration") or {}
         root = Path(__file__).resolve().parents[1]
 

@@ -166,6 +166,10 @@ class AgentTools:
         state.workflow_state = result["workflow_state"]
         state.context["execution_row_version"] = result["row_version"]
         state.stop_reason = state.workflow_state
+        if (self.runtime.orchestrator.config.get("ontology_extension") or {}).get("enabled") and result["task"]["status"] == "proposed":
+            from uuid import uuid4
+            self.runtime.repository.create_job("ontology_extension", {"extension_id": state.pending_extension_id,
+                "audit_id": "ontology_audit_" + uuid4().hex})
         return {"status": "waiting", "extension_id": state.pending_extension_id,
                 "workflow_state": state.workflow_state, "release_published": False, "worker_wait_required": False}
 
@@ -173,11 +177,11 @@ class AgentTools:
         result = self.runtime.repository.extension_status(extension_id, self.state.candidate["candidate_id"])
         self.state.pending_extension_id = extension_id
         self.state.workflow_state = ("reaudit_required" if result["status"] == "published" else
-            "schema_unresolved" if result["status"] in {"rejected", "needs_human"} else
+            "schema_unresolved" if result["status"] in {"rejected", "needs_human", "needs_rebase"} else
             "awaiting_ontology_release" if result["status"] == "approved" else "awaiting_ontology_review")
         self.state.stop_reason = self.state.workflow_state
         return {"status": "ok", "task": result, "workflow_state": self.state.workflow_state,
-                "old_votes_reusable_for_new_release": False, "automatic_rebind_implemented": False}
+                "old_votes_reusable_for_new_release": False, "automatic_rebind_implemented": True}
 
     def lookup_review_memory(self, relation_id, issue_type, limit):
         state = self.state

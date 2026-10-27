@@ -1,0 +1,115 @@
+{
+  "extension_id": "ext_306be8653075421a9579aac5737b4ed6",
+  "expected_row_version": 3,
+  "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+  "proposal_digest": "f08093520978091aa6f171152094ed316f8b4711de00646e6153394d3b9204ec",
+  "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+  "profile_hash": "49e617558fb171e81030dff14421235517053618f0e13e58d9d77d490a6bc407",
+  "mapping_report_hash": "e5c95aad0a4463a984553c98bf54c1ce94a8b83eeb89fa9747fdb5a48bc704c0",
+  "requires_difference_confirmation": false,
+  "risk_category": "additive",
+  "operations": [
+    {
+      "changes": {
+        "definition": "A device changes another device's operating state.",
+        "domain": [
+          "C"
+        ],
+        "label": "regulates",
+        "range": [
+          "C"
+        ]
+      },
+      "evidence_ids": [
+        "ev_311bda3ac7363c945541",
+        "ev_86fa4fe9369f7204302d"
+      ],
+      "kind": "add_object_property",
+      "target": "R_155b96508767cc37eb82"
+    }
+  ],
+  "impact": {
+    "affected_candidates": [],
+    "candidate_rows_scanned": 1,
+    "changed_schema_ids": [
+      "R_155b96508767cc37eb82"
+    ],
+    "coverage": "all_current_candidates",
+    "delta_hash": "a1bbba72ada66e34810db16a43abce3b18cff8429cc900187d919ac4f4bc9303",
+    "evidence_hash": "a2a02e568e5c714509015e3def250292e49958ba922cc144f4f2d3bfdb1209af",
+    "historical_candidates_auto_accepted": false,
+    "manual_review_required": false,
+    "record_id": "check_256e432e77e9aeeb4bfcdc0d70489d599a6f2349b18508d84ec124c07c23afde",
+    "risk_category": "additive",
+    "status": "pass"
+  },
+  "before": {
+    "application_profile": {
+      "auto_review_blocked": false,
+      "constraint_semantics": "allowed_any",
+      "profile_version": "project_json_v1",
+      "reasoner": "not_run"
+    },
+    "classes": {
+      "C": {
+        "definition": "A device is a modeled controllable unit.",
+        "id": "C",
+        "label": "device"
+      }
+    },
+    "domain": "fixture",
+    "object_properties": {
+      "R_old": {
+        "definition": "Connection between devices.",
+        "domain": [
+          "C"
+        ],
+        "id": "R_old",
+        "label": "connects",
+        "range": [
+          "C"
+        ]
+      }
+    }
+  },
+  "after": {
+    "application_profile": {
+      "auto_review_blocked": false,
+      "constraint_semantics": "allowed_any",
+      "profile_version": "project_json_v1",
+      "reasoner": "not_run"
+    },
+    "classes": {
+      "C": {
+        "definition": "A device is a modeled controllable unit.",
+        "id": "C",
+        "label": "device"
+      }
+    },
+    "domain": "fixture",
+    "object_properties": {
+      "R_155b96508767cc37eb82": {
+        "definition": "A device changes another device's operating state.",
+        "domain": [
+          "C"
+        ],
+        "id": "R_155b96508767cc37eb82",
+        "label": "regulates",
+        "range": [
+          "C"
+        ]
+      },
+      "R_old": {
+        "definition": "Connection between devices.",
+        "domain": [
+          "C"
+        ],
+        "id": "R_old",
+        "label": "connects",
+        "range": [
+          "C"
+        ]
+      }
+    }
+  }
+}

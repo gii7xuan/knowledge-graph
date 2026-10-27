@@ -142,6 +142,9 @@ def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id,
             and qualifiers["polarity"] in {"positive", "negative"}):
         candidate["fact_key_state"] = "canonical"
     from review_agent.contracts import fact_key_for
+    from schema.fact_identity import relation_semantic_hash
+    candidate["fact_identity_version"] = "fact_identity_v2"
+    candidate["triple"]["relation_semantic_hash"] = relation_semantic_hash(ontology, mapping["relation_id"])
     candidate["fact_key"] = fact_key_for(candidate)
     return candidate
 

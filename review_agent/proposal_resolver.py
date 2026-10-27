@@ -14,6 +14,10 @@ def selected_proposal(repository, candidate, decision):
     proposal = next((p for p in audit["rounds"] if p["round_id"] == round_id), None)
     if not proposal or proposal["proposal_digest"] != decision["selected_proposal_digest"]:
         raise ValueError("selected proposal missing or digest mismatch")
+    with repository.connect() as connection:
+        stored = connection.execute("SELECT proposal_digest,evidence_hash FROM proposals WHERE audit_id=? AND round_id=?", (audit_id, round_id)).fetchone()
+    if not stored or stored["proposal_digest"] != proposal["proposal_digest"] or stored["evidence_hash"] != proposal["evidence_bundle"]["evidence_hash"]:
+        raise ValueError("selected proposal storage binding mismatch")
     if proposal_digest(proposal) != proposal["proposal_digest"]:
         raise ValueError("frozen proposal content digest mismatch")
     bundle = proposal["evidence_bundle"]

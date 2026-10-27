@@ -134,6 +134,11 @@ async function loadAll() {
         original_relation_id: triple.relation_id || '',
         tail: triple.tail || '',
         tail_type: triple.tail_type || '',
+        tail_kind: triple.tail_kind || 'entity', value: triple.value ?? '', datatype: triple.datatype || '', unit: triple.unit || null, language: triple.language || null,
+        qualifiers: { ...triple.qualifiers }, qualifier_status: { ...triple.qualifier_status },
+        evidence_mode: item.audit_summary?.status === 'completed' ? 'proposal' : 'source',
+        selections: Object.fromEntries((item.audit_summary?.evidence_bundle?.items || []).map(ev => [ev.evidence_id, { selected: false, role: 'context', note: '', resolutions: '' }])),
+        spans: [{ quote: '', occurrence: 1, role: 'support', note: '' }],
         triple_correct: null,
         evidence_support: 'insufficient',
         relation_mapping_correct: null,
@@ -188,7 +193,12 @@ async function decide(item, decision) {
               : (draft.relation_id || null)
           ),
           tail: draft.tail,
-          tail_type: draft.tail_type || null
+          tail_type: draft.tail_type || null,
+          ...(item.contract_version === 'extraction_candidate_v4' ? {
+            tail_kind: draft.tail_kind, value: draft.value, datatype: draft.datatype || null, unit: draft.unit || null, language: draft.language || null,
+            qualifiers: Object.fromEntries(Object.entries(draft.qualifiers).map(([key, value]) => [key, value === '' ? null : value])),
+            qualifier_status: draft.qualifier_status
+          } : {})
         } : {
           head: draft.head,
           relation: draft.relation,
@@ -200,7 +210,7 @@ async function decide(item, decision) {
       accept: 'HUMAN_CONFIRMED', reject: 'FACT_INCORRECT',
       modify: 'REVISION_REQUIRED', defer: 'EVIDENCE_INSUFFICIENT'
     }[decision]);
-    const factualReject = !['DUPLICATE', 'OUT_OF_SCOPE', 'NOT_RELEVANT_TO_TASK'].includes(reasonCode);
+    const factualReject = ['FACT_INCORRECT', 'NEGATION_IGNORED', 'DIRECTION_MISMATCH', 'CONDITION_MISSING', 'RELATION_MISMATCH', 'ENTITY_MISMATCH', 'SOURCE_CONTRADICTS'].includes(reasonCode);
     const labels = decision === 'accept'
       ? { valid_for_kg: 1, source_support: 'supported', relation_mapping_correct: draft.relation_mapping_correct }
       : decision === 'reject'
@@ -218,6 +228,22 @@ async function decide(item, decision) {
       file: file.value,
       review_id: item.review_id
     };
+    if (isV3.value && decision === 'accept') {
+      const selected = Object.entries(draft.selections).filter(([, s]) => s.selected);
+      const bundleRequest = draft.evidence_mode === 'proposal' ? {
+        audit_id: item.audit_summary?.audit_id,
+        selected_round_id: item.audit_summary?.selected_round_id,
+        selected_proposal_digest: item.audit_summary?.selected_proposal_digest,
+        selected_evidence_hash: item.audit_summary?.selected_evidence_hash,
+        evidence_ids: selected.map(([eid]) => eid),
+        evidence_assessments: selected.map(([eid, s]) => ({ evidence_id: eid, role: s.role, note: s.note, resolution_evidence_ids: s.resolutions.split(/[,，\s]+/).filter(Boolean) }))
+      } : { spans: draft.spans };
+      const bundle = await post(`/api/triplets/candidates/${encodeURIComponent(item.candidate_id)}/human-bundles`, {
+        revision: item.revision, expected_row_version: item.row_version, ...bundleRequest
+      });
+      base.human_bundle_id = bundle.bundle_id;
+      base.audit_id = draft.evidence_mode === 'proposal' ? item.audit_summary?.audit_id : null;
+    }
     await post('/api/triplets/decision', {
       ...base,
       decision,
@@ -342,6 +368,10 @@ function calibratedLabel(item) {
 
 function votes(item) {
   return item.audit_summary?.votes || item.validator_votes || [];
+}
+
+function counterVoters(item, evidenceId) {
+  return votes(item).filter(v => v.response_status === 'ok' && (v.counter_evidence_ids || []).includes(evidenceId)).map(v => v.voter_id).join('、');
 }
 
 function idFor(item) {
@@ -540,6 +570,46 @@ onUnmounted(stopPolling);
                 <label>证据支持<select v-model="drafts[idFor(item)].evidence_support"><option value="insufficient">证据不足</option><option value="supported">完整支持</option><option value="contradicted">明确反驳</option></select></label>
                 <label>关系映射<select v-model="drafts[idFor(item)].relation_mapping_correct"><option :value="null">未判断</option><option :value="1">正确</option><option :value="0">错误</option></select></label>
               </div>
+              <details v-if="item.contract_version === 'extraction_candidate_v4'">
+                <summary>修改完整限定与字面量（保存为新修订后重新审核）</summary>
+                <div class="edit-grid">
+                  <label v-for="key in ['polarity','condition','time_scope','applicability','modality','quantifier']" :key="key">{{ key }}
+                    <input v-model="drafts[idFor(item)].qualifiers[key]" />
+                    <select v-model="drafts[idFor(item)].qualifier_status[key]"><option value="extracted">原文明示</option><option value="not_stated">原文未述</option><option value="unknown">待确认</option></select>
+                  </label>
+                  <label>对象类型<select v-model="drafts[idFor(item)].tail_kind"><option value="entity">实体</option><option value="literal">字面量</option></select></label>
+                  <template v-if="drafts[idFor(item)].tail_kind === 'literal'">
+                    <label>值<input v-model="drafts[idFor(item)].value" /></label><label>数据类型<input v-model="drafts[idFor(item)].datatype" /></label>
+                    <label>单位<input v-model="drafts[idFor(item)].unit" /></label><label>语言<input v-model="drafts[idFor(item)].language" /></label>
+                  </template>
+                </div>
+              </details>
+              <details v-if="isV3">
+                <summary>接纳所依据的原文证据与人工判断</summary>
+                <p>选择支持证据并填写判断依据。模型提出的反证也需保留并填写解决依据；表达不完整时请先修改。</p>
+                <select v-model="drafts[idFor(item)].evidence_mode"><option v-if="item.audit_summary?.status === 'completed'" value="proposal">当前审核提案的证据</option><option value="source">从规范原文选择引文</option></select>
+                <template v-if="drafts[idFor(item)].evidence_mode === 'proposal'">
+                  <div v-for="ev in item.audit_summary?.evidence_bundle?.items || []" :key="ev.evidence_id">
+                    <label><input v-model="drafts[idFor(item)].selections[ev.evidence_id].selected" type="checkbox" />{{ ev.evidence_id }}：{{ ev.quote }}</label>
+                    <strong v-if="counterVoters(item, ev.evidence_id)">反证引用：{{ counterVoters(item, ev.evidence_id) }}；需保留并说明处置依据。</strong>
+                    <template v-if="drafts[idFor(item)].selections[ev.evidence_id].selected">
+                      <select v-model="drafts[idFor(item)].selections[ev.evidence_id].role"><option value="support">支持</option><option value="counter">反驳</option><option value="context">上下文</option><option value="irrelevant">无关</option></select>
+                      <input v-model="drafts[idFor(item)].selections[ev.evidence_id].note" placeholder="原文如何支持或限定当前事实" />
+                      <input v-model="drafts[idFor(item)].selections[ev.evidence_id].resolutions" placeholder="解决反证所引用的支持证据 ID，逗号分隔" />
+                    </template>
+                  </div>
+                </template>
+                <template v-else>
+                  <div v-for="(span, n) in drafts[idFor(item)].spans" :key="n">
+                    <textarea v-model="span.quote" placeholder="粘贴规范原文中的完整引文，服务器将核对位置" />
+                    <label>第几次出现<input v-model.number="span.occurrence" type="number" min="1" /></label>
+                    <select v-model="span.role"><option value="support">支持</option><option value="counter">反驳</option><option value="context">上下文</option><option value="irrelevant">无关</option></select>
+                    <input v-model="span.note" placeholder="依据与适用范围说明" />
+                    <button @click="drafts[idFor(item)].spans.splice(n, 1)">移除</button>
+                  </div>
+                  <button @click="drafts[idFor(item)].spans.push({quote:'',occurrence:1,role:'context',note:''})">添加引文</button>
+                </template>
+              </details>
               <label>原因
                 <select v-model="drafts[idFor(item)].reason_code">
                   <option value="">按动作使用默认原因</option>

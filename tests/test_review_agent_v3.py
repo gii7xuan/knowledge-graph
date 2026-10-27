@@ -136,6 +136,14 @@ class ColdStartTests(unittest.TestCase):
 
 
 class FeedbackTests(unittest.TestCase):
+    def verified_fixture(self):
+        import shutil
+        from tests.test_admission_graph_sync import AdmissionFixture
+        folder = self.database_path.parent / uuid4().hex
+        fixture = AdmissionFixture(folder)
+        self.addCleanup(shutil.rmtree, folder)
+        return fixture
+
     def setUp(self):
         self.database_path = Path(__file__).resolve().parents[1] / "runs" / "_test_review_agent" / f"{uuid4().hex}.sqlite3"
         self.repository = ReviewRepository(self.database_path)
@@ -223,19 +231,14 @@ class FeedbackTests(unittest.TestCase):
             })
 
     def test_outbox_can_be_scoped_to_one_run(self):
-        self.repository.create_run({"run_id": "run_other", "schema_version": "triple_review_v3",
-                                    "mode": "shadow", "source_hash": "doc_hash", "ontology_hash": "onto_hash"})
-        self.repository.add_candidate(candidate("run_other", "cand_other"))
-        for candidate_id in ("cand_test", "cand_other"):
-            current = self.repository.get_candidate(candidate_id)
-            self.feedback.submit({
-                "candidate_id": candidate_id, "revision": 1,
-                "expected_row_version": current["row_version"],
-                "idempotency_key": f"accept-{candidate_id}", "action": "accept",
-                "reason_code": "HUMAN_CONFIRMED", "labels": {"valid_for_kg": 1},
-            })
-        scoped = self.repository.list_outbox(run_id="run_other")
-        self.assertEqual([item["candidate_id"] for item in scoped], ["cand_other"])
+        f = self.verified_fixture()
+        first = f.candidate()
+        manifest = f.repo.get_run('run'); manifest['run_id'] = 'run_other'; f.repo.create_run(manifest)
+        other = f.candidate(1)
+        with f.repo.transaction(immediate=True) as conn:
+            conn.execute("UPDATE candidates SET run_id='run_other' WHERE candidate_id=?",(other['candidate_id'],))
+        f.accept(first['candidate_id']); f.accept(other['candidate_id'])
+        self.assertEqual([e['candidate_id'] for e in f.repo.list_outbox(run_id='run_other')],[other['candidate_id']])
 
     def test_relation_filter_is_applied_before_pagination_and_count(self):
         other = candidate(candidate_id="cand_other_relation")
@@ -249,20 +252,10 @@ class FeedbackTests(unittest.TestCase):
         self.assertEqual(self.repository.count_candidates("run_test", relation_id="R_measures"), 1)
 
     def test_modify_after_accept_queues_a_current_retraction(self):
-        current = self.repository.get_candidate("cand_test")
-        accepted = self.feedback.submit({
-            "candidate_id": "cand_test", "revision": 1,
-            "expected_row_version": current["row_version"], "idempotency_key": "accept-first",
-            "action": "accept", "reason_code": "HUMAN_CONFIRMED",
-            "labels": {"valid_for_kg": 1},
-        })
-        self.feedback.submit({
-            "candidate_id": "cand_test", "revision": 1,
-            "expected_row_version": accepted["candidate"]["row_version"], "idempotency_key": "modify-after",
-            "action": "modify", "reason_code": "REVISION_REQUIRED", "labels": {},
-            "modifications": {"triple": {"tail": "温度"}},
-        })
-        events = self.repository.list_outbox(run_id="run_test")
+        f = self.verified_fixture(); c = f.candidate()
+        f.accept(c['candidate_id'])
+        f.feedback.submit(f.request(c['candidate_id'],'modify',modifications={'tail':'C'}))
+        events = f.repo.list_outbox(run_id="run")
         self.assertEqual([item["operation"] for item in events], ["upsert", "retract"])
         self.assertEqual(events[-1]["revision"], 1)
 
@@ -270,26 +263,15 @@ class FeedbackTests(unittest.TestCase):
         audit_id = self.repository.start_audit(
             "cand_test", 1, {"mode": "active", "feature_schema_version": "review_features_v3"},
         )
-        committed = self.repository.commit_audit_if_current("cand_test", 1, audit_id, {
+        with self.assertRaises(UnprocessableEntityError): self.repository.commit_audit_if_current("cand_test", 1, audit_id, {
             "audit_id": audit_id, "candidate_id": "cand_test", "revision": 1,
             "decision": "auto_accept", "reason_codes": [],
             "consensus": {"result": "accept_consensus"},
             "calibrated_probability": 0.99, "calibration_status": "ok",
             "calibrator_version": "cal_v1", "policy_version": "policy_v1", "features": {},
         })
-        self.assertTrue(committed)
-        decision = self.repository.latest_decision("cand_test")
-        self.assertEqual(decision["decision_version"], 1)
-        self.assertEqual(decision["audit_id"], audit_id)
-        item = {**self.repository.get_candidate("cand_test"),
-                "latest_decision": {**decision, "active": True}}
-        importer = Neo4jImporter.__new__(Neo4jImporter)
-        self.assertTrue(importer.is_importable(item))
-        outbox = self.repository.list_outbox(run_id="run_test")
-        self.assertEqual(len(outbox), 1)
-        self.assertEqual(outbox[0]["operation"], "upsert")
-        self.repository.mark_outbox(outbox[0]["event_id"], "completed")
-        self.assertEqual(self.repository.get_candidate("cand_test")["import_status"], "imported")
+        self.assertIsNone(self.repository.latest_decision("cand_test"))
+        self.assertEqual(self.repository.list_outbox(run_id="run_test"), [])
 
     def test_queued_job_cancellation_is_terminal(self):
         job = self.repository.create_job("audit", {"run_id": "run_test"})
@@ -299,47 +281,21 @@ class FeedbackTests(unittest.TestCase):
         self.assertIsNone(self.repository.claim_job("test-worker"))
 
     def test_import_compensates_if_decision_changes_during_projection(self):
-        current = self.repository.get_candidate("cand_test")
-        self.feedback.submit({
-            "candidate_id": "cand_test", "revision": 1,
-            "expected_row_version": current["row_version"], "idempotency_key": "accept-race",
-            "action": "accept", "reason_code": "HUMAN_CONFIRMED",
-            "labels": {"valid_for_kg": 1},
-        })
-        feedback = self.feedback
-        repository = self.repository
-
-        class FakeSession:
-            def __enter__(self):
-                return self
-
-            def __exit__(self, *_):
-                return False
+        f = self.verified_fixture(); c = f.candidate(); cid = c['candidate_id']
+        f.accept(cid)
 
         class RacingImporter:
             def __init__(self):
-                self.driver = self
                 self.retracted = False
-
-            def session(self):
-                return FakeSession()
-
-            def import_triplet(self, _session, _item):
-                latest = repository.get_candidate("cand_test")
-                feedback.submit({
-                    "candidate_id": "cand_test", "revision": 1,
-                    "expected_row_version": latest["row_version"], "idempotency_key": "reject-race",
-                    "action": "reject", "reason_code": "FACT_INCORRECT",
-                    "labels": {"valid_for_kg": 0},
-                })
-                return True
-
-            def retract(self, _session, **_kwargs):
-                self.retracted = True
+            def reconcile(self, state):
+                if state['desired']:
+                    f.feedback.submit(f.request(cid,'reject',reason_code='FACT_INCORRECT'))
+                else: self.retracted = True
+                return {'status':'applied','version':state['projection_version']}
 
         importer = RacingImporter()
-        result = apply_outbox(repository, importer, run_id="run_test")
-        self.assertEqual(result["stale"], 1)
+        result = apply_outbox(f.repo, importer, run_id="run")
+        self.assertEqual(result["completed"], 1,result)
         self.assertTrue(importer.retracted)
 
 
@@ -357,7 +313,7 @@ class ImportGateTests(unittest.TestCase):
             "decision": "human_accept", "source": "human_confirmed", "review_event_id": "e1",
             "active": True,
         }
-        self.assertTrue(self.importer.is_importable(item))
+        self.assertFalse(self.importer.is_importable(item))
         item["revision"] = 2
         self.assertFalse(self.importer.is_importable(item))
 
