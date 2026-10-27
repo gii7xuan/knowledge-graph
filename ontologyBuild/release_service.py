@@ -41,6 +41,17 @@ def validation_report(artifact: OntologyArtifact):
         if not artifact.application_profile.get("auto_review_blocked"):
             errors.append({"code": "UNSUPPORTED_AXIOMS_NOT_BLOCKED"})
     external = artifact.validation_report.get("external_validation") or {}
+    if artifact.method_manifest.get('rdf_parse_version') not in (None,'lexical_turtle_v1'):
+        errors.append({'code':'UNSUPPORTED_RDF_PARSE_VERSION'})
+    if artifact.method_manifest.get('owl_patch_hash') and artifact.owl_patch is None:
+        errors.append({'code':'MISSING_OWL_PATCH_PROOF'})
+    if artifact.source_ttl is not None:
+        from .rdf_artifact import validate_owl_view, validate_patch_bindings
+        try:
+            validate_owl_view(artifact.source_ttl,artifact.project_schema,artifact.application_profile,artifact.iri_id_map,artifact.mapping_report,base_iri=artifact.method_manifest.get('source_base_iri'),preserve_lexical=artifact.method_manifest.get('rdf_parse_version')=='lexical_turtle_v1')
+            if artifact.owl_patch is not None: validate_patch_bindings(artifact.owl_patch,artifact.source_ttl,artifact.iri_id_map,artifact.method_manifest)
+        except (ValueError,KeyError,TypeError) as exc: errors.append({'code':'OWL_SOURCE_VIEW_MISMATCH','detail':str(exc)})
+    elif artifact.owl_patch is not None: errors.append({'code':'OWL_PATCH_WITHOUT_SOURCE'})
     if external.get("status") in {"failed", "fail", "invalid"} or external.get("valid") is False:
         errors.append({"code": "EXTERNAL_VALIDATION_FAILED"})
     return {**deepcopy(artifact.validation_report), "project_validation": {**report, "errors": errors,
@@ -65,6 +76,7 @@ def artifact_files(artifact: OntologyArtifact, approval):
     }
     if artifact.source_json is not None:
         documents["source_ontology.json"] = artifact.source_json
+    if artifact.owl_patch is not None: documents['owl_patch.json']=artifact.owl_patch
     files = {name: canonical_bytes(value) + b"\n" for name, value in documents.items()}
     if artifact.source_json_text is not None:
         files["source_ontology.json"] = artifact.source_json_text.encode("utf-8")
@@ -173,6 +185,7 @@ def load_release(path: str | Path) -> OntologyRelease:
 
     ontology, profile = read("ontology_snapshot.json"), read("application_profile.json")
     method = read("method_manifest.json")
+    if method.get('rdf_parse_version') not in (None,'lexical_turtle_v1'): raise ValueError('unsupported RDF parse version')
     source_file = "ontology.ttl" if "ontology.ttl" in artifacts else "source_ontology.json"
     if method.get("source_sha256") and hashlib.sha256((root / source_file).read_bytes()).hexdigest() != method["source_sha256"]:
         raise ValueError("source provenance hash mismatch")
@@ -182,6 +195,13 @@ def load_release(path: str | Path) -> OntologyRelease:
         raise ValueError("ontology application profile mismatch")
     approval = read("approval.json")
     mapping = read("mapping_report.json")
+    if source_file=='ontology.ttl':
+        from .rdf_artifact import validate_owl_view, validate_patch_bindings
+        source=(root/source_file).read_text(encoding='utf-8')
+        validate_owl_view(source,ontology,profile,read('iri_id_map.json'),mapping,base_iri=method.get('source_base_iri'),preserve_lexical=method.get('rdf_parse_version')=='lexical_turtle_v1')
+        if 'owl_patch.json' in artifacts or method.get('owl_patch_hash'):
+            if 'owl_patch.json' not in artifacts: raise ValueError('missing OWL patch artifact')
+            validate_patch_bindings(read('owl_patch.json'),source,read('iri_id_map.json'),method)
     if profile.get("requires_difference_confirmation"):
         if (approval.get("confirmed_profile_hash") != digest(profile)
                 or approval.get("confirmed_mapping_report_hash") != digest(mapping)):

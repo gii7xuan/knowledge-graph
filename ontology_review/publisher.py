@@ -51,11 +51,30 @@ class OntologyPublisher:
         rebuilt = apply_delta(base, ops, {e["evidence_id"] for e in proposal["evidence"]})
         if rebuilt["merged_schema"] != proposal["merged_schema"] or rebuilt["delta_hash"] != proposal["delta_hash"]:
             raise ValueError("ontology materialized diff mismatch")
+        if rebuilt.get('owl_patch')!=proposal.get('source_patch'): raise ValueError('reviewed OWL source patch/compiler binding mismatch')
         return task, proposal, base
 
     def artifact(self, proposal, base):
         if "ontology.ttl" in base.manifest["artifacts"]:
-            raise ValueError("OWL source release needs a preserving OWL delta publisher; refusing to replace full source axioms with project JSON")
+            from .owl_delta import compile_owl_delta
+            compiled=compile_owl_delta(base,proposal['operations'])
+            if compiled['project_schema']!=proposal['merged_schema'] or compiled['patch']!=proposal.get('source_patch'):
+                raise ValueError('OWL source patch differs from the exact reviewed materialization')
+            patch=compiled['patch']
+            mapping={**compiled['mapping_report'],'format':'turtle_extension','base_release_id':proposal['base_release_id'],
+                     'delta_hash':proposal['delta_hash'],'owl_patch_hash':patch['patch_hash']}
+            return OntologyArtifact(project_schema=compiled['project_schema'],application_profile=compiled['application_profile'],
+                mapping_report=mapping,iri_id_map=compiled['iri_id_map'],source_ttl=compiled['source_ttl'],owl_patch=patch,
+                method_manifest={'method':'ontology_extension_agent_owl_v1','base_release_id':proposal['base_release_id'],
+                    'base_source_sha256':patch['base_source_sha256'],'delta_hash':proposal['delta_hash'],
+                    'selected_proposal_digest':proposal['proposal_digest'],'source_format':'turtle','rdf_parse_version':'lexical_turtle_v1',
+                    'source_sha256':patch['source_sha256'],'source_graph_hash':patch['graph_hash'],'owl_patch_hash':patch['patch_hash'],
+                    'compiler_version':patch['compiler_version'],'compiler_hash':patch['compiler_hash']},
+                validation_report={'domain_semantic_review':{'status':'independent_model_approval','audit_id':proposal['audit_id'],'proposal_digest':proposal['proposal_digest']},
+                    'competency_checks':proposal['check_records']['competency'],'reasoner_checks':proposal['check_records'].get('reasoner',{'status':'not_run'}),
+                    'owl_source_integrity':{'status':'pass','source_graph_hash':patch['graph_hash'],'owl_patch_hash':patch['patch_hash'],'owl_consistency_claimed':False}},
+                requirements=json.loads((base.path/'requirements.json').read_text(encoding='utf-8')),
+                competency_questions=json.loads((base.path/'competency_questions.json').read_text(encoding='utf-8')))
         schema, profile = proposal["merged_schema"], base.application_profile
         mapping = json.loads((base.path / "mapping_report.json").read_text(encoding="utf-8"))
         mapping.update(format="project_json_extension", base_release_id=proposal["base_release_id"], delta_hash=proposal["delta_hash"], errors=[])
@@ -77,7 +96,8 @@ class OntologyPublisher:
                 "proposal_digest": proposal["proposal_digest"], "delta_hash": proposal["delta_hash"], "profile_hash": digest(artifact.application_profile),
                 "mapping_report_hash": digest(artifact.mapping_report), "requires_difference_confirmation": bool(artifact.application_profile.get("requires_difference_confirmation")),
                 "risk_category": proposal["risk_category"], "operations": proposal["operations"], "impact": proposal["check_records"]["impact"],
-                "before": base.ontology, "after": proposal["merged_schema"]}
+                "before": base.ontology, "after": proposal["merged_schema"],
+                **({'source_format':'turtle','source_patch':proposal['source_patch']} if proposal.get('source_patch') else {})}
 
     def rebase(self, extension_id, expected_row_version, expected_base_release_id):
         task = self.repository.extension_status(extension_id)
@@ -112,6 +132,7 @@ class OntologyPublisher:
             raise ConflictError("publication request must bind exact base and reviewed proposal")
         if proposal["risk_category"] == "high_impact" and not request.get("confirm_high_impact"): raise ValueError("high-impact diff and affected candidates require operator confirmation")
         artifact = self.artifact(proposal, base)
+        if automatic and artifact.application_profile.get('auto_review_blocked'): raise ValueError('compiled OWL application profile blocks automatic publication')
         approval = {"status": "approved", "approved_by": request["approved_by"], "reason": request["reason"],
                     "ontology_version": digest(artifact.project_schema), "ontology_audit_id": proposal["audit_id"],
                     "ontology_proposal_digest": proposal["proposal_digest"], "delta_hash": proposal["delta_hash"]}

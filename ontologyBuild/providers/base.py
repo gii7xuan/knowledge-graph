@@ -29,6 +29,7 @@ class OntologyArtifact:
     source_json_text: str | None = None
     requirements: Any = field(default_factory=list)
     competency_questions: Any = field(default_factory=list)
+    owl_patch: dict[str, Any] | None = None
 
 
 class OntologyProvider(Protocol):

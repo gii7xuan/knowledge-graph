@@ -11,14 +11,15 @@ import hashlib
 from typing import Any
 
 
-def convert_turtle(source: str) -> dict[str, Any]:
+def convert_turtle(source: str, *, iri_id_map=None, base_iri=None,preserve_lexical=True) -> dict[str, Any]:
     try:
         from rdflib import Graph, Literal, RDF, RDFS, OWL, URIRef, XSD, SKOS
         from rdflib.compare import to_canonical_graph
     except ImportError as exc:
         raise RuntimeError("Turtle import requires ontologyBuild/requirements-import.txt") from exc
 
-    graph = to_canonical_graph(Graph().parse(data=source, format="turtle"))
+    from .rdf_graph import parse_turtle
+    graph = to_canonical_graph(parse_turtle(source,base_iri=base_iri,preserve_lexical=preserve_lexical))
     class_nodes = set(graph.subjects(RDF.type, OWL.Class)) | set(graph.subjects(RDF.type, RDFS.Class))
     objects = set(graph.subjects(RDF.type, OWL.ObjectProperty))
     data = set(graph.subjects(RDF.type, OWL.DatatypeProperty))
@@ -29,13 +30,18 @@ def convert_turtle(source: str) -> dict[str, Any]:
         if prop in objects:
             class_nodes.update(node for node in graph.objects(prop, RDFS.range) if isinstance(node, URIRef))
     class_nodes = {node for node in class_nodes if isinstance(node, URIRef) and not str(node).startswith(str(XSD))}
+    overrides = dict(iri_id_map or {})
+    if (any(not isinstance(k, str) or not isinstance(v, str) or not v for k,v in overrides.items())
+            or len(set(overrides.values())) != len(overrides)):
+        raise ValueError('IRI/project ID bindings must be unique strings')
     mapping = {}
     for prefix, nodes in (("C", class_nodes), ("R", objects), ("D", data)):
         for node in sorted(nodes, key=str):
             # Punning is retained in RDF, but cannot be silently flattened to one project ID.
             if str(node) in mapping:
                 raise ValueError(f"IRI used for multiple entity kinds: {node}")
-            identity = prefix + "_" + hashlib.sha256(str(node).encode("utf-8")).hexdigest()[:20]
+            identity = overrides.get(str(node), prefix + "_" + hashlib.sha256(str(node).encode("utf-8")).hexdigest()[:20])
+            if not identity.startswith(prefix + '_'): raise ValueError('IRI binding changes entity kind')
             if identity in mapping.values():
                 raise ValueError("IRI/project ID hash collision")
             mapping[str(node)] = identity
@@ -136,6 +142,18 @@ def convert_turtle(source: str) -> dict[str, Any]:
     }
     schema = {"schema_format": "owl_application_v1", "classes": classes, **props,
               "application_profile": profile}
+    # Compiler-owned retirement annotations keep approved merge redirects
+    # recoverable from the OWL source, independently of a cached JSON view.
+    retired_predicate = URIRef('urn:kg-ontology:retiredSchemaId')
+    retired = {}
+    if (retired_predicate, RDF.type, OWL.AnnotationProperty) in graph:
+        for node, value in graph.subject_objects(retired_predicate):
+            if str(node) not in mapping or not isinstance(value, Literal): raise ValueError('invalid retired identity annotation')
+            old, current = str(value), mapping[str(node)]
+            if old in mapping.values() or old.split('_',1)[0] != current.split('_',1)[0] or (old in retired and retired[old] != current):
+                raise ValueError('ambiguous or active retired identity')
+            retired[old] = current
+    if retired: schema['retired_schema_ids'] = dict(sorted(retired.items()))
     return {"project_schema": schema, "iri_id_map": mapping, "application_profile": profile,
             "mapping_report": {"format": "turtle", "errors": [], "unsupported_axioms": issues,
                                "example_assertion_count": instance_count,

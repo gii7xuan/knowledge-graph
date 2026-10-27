@@ -45,7 +45,9 @@ def validate_admission(candidate, decision, ontology_release, source_snapshot, e
     if decision.get("active") is False: reasons.append("DECISION_NOT_CURRENT")
     for key, release_key in (("ontology_release_id", "release_id"), ("ontology_version", "ontology_version"), ("profile_hash", "profile_hash")):
         if not candidate.get(key) or candidate.get(key) != ontology_release.manifest.get(release_key): reasons.append("ONTOLOGY_RELEASE_BINDING_MISMATCH")
-    if candidate.get("workflow_state") in {"awaiting_ontology_review", "awaiting_ontology_release", "schema_unresolved", "reaudit_required", "revision_required"}:
+    blocked_states={"awaiting_ontology_review", "awaiting_ontology_release", "schema_unresolved", "revision_required"}
+    if not (mode=='human' and decision.get('decision')=='human_accept'): blocked_states.add('reaudit_required')
+    if candidate.get("workflow_state") in blocked_states:
         reasons.append("CANDIDATE_WORKFLOW_NOT_ADMITTED")
     triple = candidate.get("triple") or {}
     qualifiers, statuses = triple.get("qualifiers") or {}, triple.get("qualifier_status") or {}

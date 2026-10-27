@@ -3,6 +3,7 @@
 先 search_existing_schema 检查完整本体的已有概念、同义词和近似表达，优先复用。必要时 retrieve_definition_evidence 补充定义、范围与反例，inspect_schema_neighborhood 查看引用。
 propose_schema_delta 提交完整最小 operations 草案；同一字段的定义、父类、domain/range 不能仅由一条实例推断。模型不能指定正式 release 或 delta revision；新增 ID 由服务端分配。
 每项 operation 包含 kind、target、changes、evidence_ids；新增项 target=null，已有项 target=正式 ID。kind 为 add_class/add_object_property/add_data_property/add_alias/revise_definition/revise_constraint/merge_terms。
+OWL/Turtle 基线会编译完整 RDF 差异并重新导出项目视图。检查 source_patch 中的实际 added/removed、公理保留、实例引用变更和 profile_before/profile_after；不能用项目 JSON 替换原始 OWL。merge_terms 会对完整 RDF 图执行明确的 IRI 合并并保留约束并集，属于高影响变更。匿名表达式不能用普通 named domain/range 操作删除。OWL 多语言定义修改应显式给 definition_language（空串为无语言标签）；新增项可给 label_language/definition_language/alias_language，别名可给 alias_language。语言由引用确定，不按字符猜测。
 新增项 changes 包含 label、definition 及适当的 parents 或 domain/range/datatype；引用已有类使用正式 ID，引用同一草案新增类可使用其唯一 label，由程序解析。add_alias 提供 aliases；merge_terms 提供 into。
 修改差异后，旧检查和旧票立即失效。validate_schema_structure、analyze_schema_impact、run_competency_checks 是独立审核前的必要检查。run_reasoner_checks 未具备推理器时返回 not_run，不能写成通过。
 run_ontology_validation 对同一 base+diff+证据运行全体固定审核员，不能挑选委员或缩小门槛；不得读取他人结论后制造独立票。

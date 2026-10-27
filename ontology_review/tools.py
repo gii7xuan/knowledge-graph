@@ -57,7 +57,26 @@ class OntologyTools:
         result = {"status": "pass", "scope": "full_base_release", "base_release_id": self.state["task"]["base_release_id"],
                   "query": query, "items_scanned": len(items), "matches": sorted(matches, key=lambda i: -i["recall_score"])[:16],
                   "search_is_not_gap_or_equivalence_proof": True}
+        graph=self.owl_graph()
+        if graph is not None:
+            from ontologyBuild.rdf_artifact import graph_hash,statement
+            raw_matches=[]
+            for triple in graph:
+                score=max((SequenceMatcher(None,term,normalize_name(str(value))).ratio() for term in terms for value in triple),default=0)
+                if score>=.45: raw_matches.append({'statement':statement(triple),'recall_score':score})
+            result.update(rdf_statements_scanned=len(graph),rdf_graph_hash=graph_hash(graph),
+                rdf_matches=sorted(raw_matches,key=lambda row:(-row['recall_score'],row['statement']))[:16],
+                rdf_search_scope='complete_source_including_unmapped_axioms_and_annotations')
         return self.check_record("existing_schema", result)
+
+    def owl_graph(self,merged=False):
+        if 'ontology.ttl' not in self.runtime.base.manifest['artifacts']: return None
+        from ontologyBuild.rdf_graph import parse_turtle
+        from rdflib.compare import to_canonical_graph
+        delta=self.state.get('delta') or {}
+        source=delta['owl_patch']['merged_rdf'] if merged and delta.get('owl_patch') else (self.runtime.base.path/'ontology.ttl').read_text(encoding='utf-8')
+        method=json.loads((self.runtime.base.path/'method_manifest.json').read_text(encoding='utf-8'))
+        return to_canonical_graph(parse_turtle(source,base_iri=method.get('source_base_iri')))
 
     def retrieve_definition_evidence(self, query, scope, limit):
         new, seen = [], {e["evidence_id"] for e in self.state["evidence"]}
@@ -80,8 +99,26 @@ class OntologyTools:
         schema = (self.state.get("delta") or {}).get("merged_schema") or self.runtime.base.ontology
         items = catalog(schema)
         if schema_id not in items: raise ValueError("schema ID does not exist")
-        related = [i for i in items.values() if schema_id in [i.get("parent"), *(i.get("domain") or []), *(i.get("range") or []), *(i.get("subclasses") or [])]]
-        return {"status": "ok", "item": items[schema_id], "incoming_references": related}
+        related = [i for i in items.values() if schema_id in [i.get("parent"), *(i.get("parents") or []), *(i.get("domain") or []), *(i.get("range") or []), *(i.get("subclasses") or [])]]
+        result={"status": "ok", "item": items[schema_id], "incoming_references": related}
+        graph=self.owl_graph(merged=True)
+        if graph is not None:
+            from rdflib import URIRef,BNode
+            from ontologyBuild.rdf_artifact import statement
+            frontier={URIRef(items[schema_id]['iri'])}; seen=set(); triples=set()
+            while frontier:
+                current=frontier-seen
+                if not current: break
+                seen.update(current); frontier=set()
+                for triple in graph:
+                    if any(term in current for term in triple):
+                        triples.add(triple); frontier.update(term for term in triple if isinstance(term,BNode) and term not in seen)
+            lines=sorted(statement(triple) for triple in triples)
+            text='\n'.join(lines)
+            result.update(rdf_neighborhood=text if len(text)<=100000 else None,rdf_statement_count=len(lines),
+                rdf_context_truncated=len(text)>100000,rdf_scope='all_references_and_connected_anonymous_axioms',
+                complete_rdf_in_independent_proposal=bool((self.state.get('delta') or {}).get('owl_patch')))
+        return result
 
     def propose_schema_delta(self, operations):
         if not self.state["full_schema_searched"]: raise ValueError("search complete base schema before drafting")
@@ -97,7 +134,12 @@ class OntologyTools:
 
     def validate_schema_structure(self):
         delta = self.require_delta()
-        return self.check_record("structure", check_structure(delta["merged_schema"], self.runtime.base.application_profile, self.runtime.base.ontology))
+        expected_profile=delta['merged_schema']['application_profile'] if delta.get('owl_patch') else self.runtime.base.application_profile
+        result=check_structure(delta["merged_schema"], expected_profile, self.runtime.base.ontology)
+        if delta.get('owl_patch'):
+            result.update(owl_patch_hash=delta['owl_patch']['patch_hash'],owl_source_sha256=delta['owl_patch']['source_sha256'],
+                profile_derivation='reimported_complete_owl_source',unexecuted_axiom_count=expected_profile['unsupported_axiom_count'])
+        return self.check_record("structure",result)
 
     def require_delta(self):
         if not self.state.get("delta"): raise ValueError("draft complete ontology delta first")
@@ -113,9 +155,16 @@ class OntologyTools:
                 "reason": "No configured OWL reasoner adapter. Project structure checks do not establish OWL consistency."})
         if not isinstance(command, list) or any(not isinstance(p, str) or not p for p in command): raise ValueError("reasoner command must be a trusted configuration argv list")
         binding = {"base_release_id": self.state["task"]["base_release_id"], "delta_hash": delta["delta_hash"],
-                   "ontology_version": sha256_json(delta["merged_schema"]), "profile_hash": self.state["task"]["base_profile_hash"]}
+                   "ontology_version": sha256_json(delta["merged_schema"]), "profile_hash": sha256_json(delta['merged_schema']['application_profile'])}
+        extra={}
+        if delta.get('owl_patch'):
+            from .owl_delta import compile_owl_delta
+            compiled=compile_owl_delta(self.runtime.base,delta['operations'])
+            if compiled['patch']!=delta['owl_patch']: raise ValueError('OWL reasoner input differs from reviewed source patch')
+            binding.update(owl_patch_hash=compiled['patch']['patch_hash'],source_sha256=compiled['patch']['source_sha256'],source_graph_hash=compiled['patch']['graph_hash'])
+            extra['ontology_ttl']=compiled['source_ttl']
         try:
-            completed = subprocess.run(command, input=json.dumps({**binding, "ontology": delta["merged_schema"]}, ensure_ascii=False),
+            completed = subprocess.run(command, input=json.dumps({**binding, **extra, "ontology": delta["merged_schema"]}, ensure_ascii=False),
                 capture_output=True, text=True, encoding="utf-8", shell=False,
                 creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
                 timeout=min(float(settings.get("timeout_seconds", 30)), self.runtime.budget.remaining_seconds()))

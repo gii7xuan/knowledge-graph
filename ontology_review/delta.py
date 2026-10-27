@@ -35,6 +35,8 @@ def put(schema, bucket_name, item):
 
 def apply_delta(base, operations, allowed_evidence_ids):
     if not isinstance(operations, list) or not 1 <= len(operations) <= 16: raise ValueError("1..16 complete operations required")
+    owl_source='ontology.ttl' in base.manifest.get('artifacts',{})
+    annotation_fields={'label_language','definition_language','alias_language'} if owl_source else set()
     schema, normalized, allocated = deepcopy(base.ontology), [], {}
     for op in operations:
         if not isinstance(op, dict) or set(op) != {"kind", "target", "changes", "evidence_ids"} or not isinstance(op.get("kind"), str) or op.get("kind") not in KINDS:
@@ -45,7 +47,7 @@ def apply_delta(base, operations, allowed_evidence_ids):
             raise ValueError("every operation requires current source/modeling evidence")
         changes, kind = deepcopy(op["changes"]), op["kind"]
         if kind.startswith("add_") and kind != "add_alias":
-            if op["target"] is not None or set(changes) - {"label", "definition", "parent", "parents", "domain", "range", "datatype", "datatypes", "aliases"}:
+            if op["target"] is not None or set(changes) - ({"label", "definition", "parent", "parents", "domain", "range", "datatype", "datatypes", "aliases"}|annotation_fields):
                 raise ValueError("new IDs are allocated by server; unsupported modeling field")
             if not all(isinstance(changes.get(k), str) and changes[k].strip() for k in ("label", "definition")):
                 raise ValueError("new schema items require label and definition")
@@ -55,6 +57,9 @@ def apply_delta(base, operations, allowed_evidence_ids):
                 raise ValueError("existing label/alias requires reuse or explicit review")
             prefix = {"add_class": "C_", "add_object_property": "R_", "add_data_property": "D_"}[kind]
             identity = prefix + sha256_json([base.manifest["release_id"], kind, label])[:20]
+            if owl_source:
+                from ontologyBuild.iri_identity import owl_extension_identity
+                identity,_=owl_extension_identity(base.manifest['release_id'],kind,label)
             allocated[label] = identity
             normalized.append({**deepcopy(op), "target": identity})
         else:
@@ -68,6 +73,7 @@ def apply_delta(base, operations, allowed_evidence_ids):
         if op["kind"] == "add_class": classes[normalize_name(op["changes"]["label"])] = op["target"]
     for op in normalized:
         kind, target, changes = op["kind"], op["target"], deepcopy(op["changes"])
+        if kind not in {'add_class','add_object_property','add_data_property'} and target not in catalog(schema): raise ValueError('operation target was retired earlier in this delta')
         for key in ("domain", "range", "parents", "aliases", "datatypes"):
             if key in changes and (not isinstance(changes[key], list) or any(not isinstance(v, str) or not v.strip() for v in changes[key])):
                 raise ValueError("modeling lists require nonempty strings")
@@ -82,17 +88,17 @@ def apply_delta(base, operations, allowed_evidence_ids):
             allowed = {"add_class": {"label", "definition", "parent", "parents", "aliases"},
                        "add_object_property": {"label", "definition", "domain", "range", "aliases"},
                        "add_data_property": {"label", "definition", "domain", "datatype", "datatypes", "aliases"}}[kind]
-            if set(changes) - allowed: raise ValueError("unsupported field for schema item kind")
+            if set(changes) - (allowed|annotation_fields): raise ValueError("unsupported field for schema item kind")
             if kind == "add_object_property" and (not changes.get("domain") or not changes.get("range")): raise ValueError("property endpoints must be modeled, not guessed as empty")
             if kind == "add_data_property" and (not changes.get("domain") or not (changes.get("datatypes") or changes.get("datatype"))): raise ValueError("data property requires modeled domain/datatype")
             put(schema, {"add_class": "classes", "add_object_property": "object_properties", "add_data_property": "datatype_properties"}[kind], {"id": target, **changes})
         elif kind == "merge_terms":
             into = changes.get("into")
             items = catalog(schema)
-            if set(changes) != {"into"} or into not in items or into == target or items[into]["schema_kind"] != items[target]["schema_kind"]:
+            if set(changes) != {"into"} or not isinstance(into,str) or into not in items or into == target or items[into]["schema_kind"] != items[target]["schema_kind"]:
                 raise ValueError("merge requires a distinct existing item of the same kind")
             for _, _, identity, item in list(records(schema)):
-                for field in ("domain", "range", "subclasses"):
+                for field in ("domain", "range", "subclasses", "parents"):
                     if field in item: item[field] = [into if v == target else v for v in item[field]]
                 if item.get("parent") == target: item["parent"] = into
                 if identity == into: item["aliases"] = list(dict.fromkeys([*item.get("aliases", []), items[target].get("label", target)]))
@@ -104,16 +110,26 @@ def apply_delta(base, operations, allowed_evidence_ids):
         else:
             target_kind = catalog(schema)[target]["schema_kind"]
             constraints = {"class": {"parent", "parents"}, "object_property": {"domain", "range"}, "data_property": {"domain", "datatypes", "datatype"}}[target_kind]
-            allowed = {"add_alias": {"aliases"}, "revise_definition": {"definition"}, "revise_constraint": constraints}[kind]
+            allowed = {"add_alias": {"aliases"}|({'alias_language'} if owl_source else set()),
+                       "revise_definition": {"definition"}|({'definition_language'} if owl_source else set()), "revise_constraint": constraints}[kind]
             if set(changes) - allowed: raise ValueError("operation modifies unapproved fields")
             if kind == "revise_definition" and (not isinstance(changes.get("definition"), str) or not changes["definition"].strip()): raise ValueError("nonempty definition required")
             for _, _, identity, item in records(schema):
                 if identity == target:
                     if kind == "add_alias": item["aliases"] = list(dict.fromkeys([*item.get("aliases", []), *changes.get("aliases", [])]))
-                    else: item.update(changes)
+                    else:
+                        item.update(changes)
+                        if target_kind=='class' and kind=='revise_constraint':
+                            if 'parents' in changes: item['parent']=changes['parents'][0] if changes['parents'] else None
+                            elif 'parent' in changes: item['parents']=[changes['parent']] if changes['parent'] else []
         op["changes"] = changes
-    return {"operations": normalized, "merged_schema": schema, "delta_hash": sha256_json(normalized),
+    result={"operations": normalized, "merged_schema": schema, "delta_hash": sha256_json(normalized),
             "risk_category": "high_impact" if any(o["kind"] in {"merge_terms", "revise_constraint", "revise_definition"} for o in normalized) else "additive"}
+    if owl_source:
+        from .owl_delta import compile_owl_delta
+        compiled=compile_owl_delta(base,normalized)
+        result.update(merged_schema=compiled['project_schema'],owl_patch=compiled['patch'])
+    return result
 
 
 def check_structure(schema, base_profile, base_schema=None):

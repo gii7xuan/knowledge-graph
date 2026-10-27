@@ -133,7 +133,9 @@ class OntologyImportTests(unittest.TestCase):
 
     def test_change_creates_a_new_release_and_keeps_old_release(self):
         first = self.publish()
-        self.artifact.project_schema["classes"][self.ids[EX + "Sensor"]]["description"] = "A revised definition"
+        source=self.root/'revised.ttl'
+        source.write_text(self.artifact.source_ttl+'\nex:Sensor rdfs:comment "A revised definition" .\n',encoding='utf-8')
+        self.artifact=NeonImportProvider().build_or_import(OntologyImportRequest(source))
         second = self.publish()
         self.assertNotEqual(first.path, second.path)
         self.assertNotEqual(first.manifest["ontology_version"], second.manifest["ontology_version"])

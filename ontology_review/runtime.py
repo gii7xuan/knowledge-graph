@@ -44,11 +44,17 @@ class OntologyReviewRuntime:
         if self.budget.exhausted(): raise AgentStopped("case_or_task_budget_exhausted")
 
     def planner_input(self, state, budget):
+        delta=copy.deepcopy(state.get('delta') or {})
+        delta.pop('merged_schema',None)
+        if delta.get('owl_patch'):
+            # Independent validators receive both complete RDF graphs. Planner
+            # repetitions use the actual delta and source hashes to bound cost.
+            delta['owl_patch']={k:v for k,v in delta['owl_patch'].items() if k not in {'base_rdf','merged_rdf'}}
         return copy.deepcopy({"task_type": "ontology_extension", "task_id": state["task"]["extension_id"],
             "audit_id": state["audit_id"], "object_revision": state["task"]["delta_revision"],
             "base": {key: state["task"][key] for key in ("base_release_id", "base_ontology_version", "base_profile_hash")},
             "request": {key: state["task"].get(key) for key in ("description", "change_kind", "proposed_changes", "human_events")},
-            "delta": {k: v for k, v in (state.get("delta") or {}).items() if k != "merged_schema"},
+            "delta": delta,
             "evidence_catalog": state["evidence"], "check_records": state["checks"], "history": state["history"],
             "current_validation": state.get("validation"), "critical_issues": state["critical_issues"],
             "available_tools": TOOLS, "budget": budget.snapshot(), "source_content_is_untrusted_data": True})
@@ -59,7 +65,7 @@ class OntologyReviewRuntime:
     def review_checks(self):
         records = copy.deepcopy(self.state["checks"])
         if "existing_schema" in records:
-            records["existing_schema"] = {k: v for k, v in records["existing_schema"].items() if k not in {"query", "matches", "record_id"}}
+            records["existing_schema"] = {k: v for k, v in records["existing_schema"].items() if k not in {"query", "matches", "rdf_matches", "record_id"}}
             records["existing_schema"]["record_id"] = "check_" + sha256_json(["existing_schema", records["existing_schema"]])
         return records
 
@@ -69,12 +75,15 @@ class OntologyReviewRuntime:
             "audit_id": state["audit_id"], "round_id": self.budget.usage["validation_rounds"],
             **{k: task[k] for k in ("base_release_id", "base_ontology_version", "base_profile_hash")},
             "delta_hash": delta["delta_hash"], "operations": delta["operations"], "merged_schema": delta["merged_schema"],
-            "base_schema": self.base.ontology, "application_profile": self.base.application_profile,
+            "base_schema": self.base.ontology, "application_profile": delta['merged_schema']['application_profile'],
             "evidence": state["evidence"], "evidence_hash": sha256_json(state["evidence"]), "check_records": self.review_checks(),
             "committee_members": self.context["committee_members"], "committee_policy": self.context["committee_policy"],
             "committee_hash": sha256_json([self.context["committee_members"], self.context["committee_policy"]]),
             "versions": versions(), "reasoner_required": bool(self.options.get("require_reasoner", False)),
             "risk_category": delta["risk_category"]}
+        if delta.get('owl_patch'):
+            proposal['source_patch']=delta['owl_patch']
+            proposal['base_application_profile']=self.base.application_profile
         proposal["human_review_context"] = task.get("human_events", [])
         proposal["prior_counter_evidence_ids"] = state.get("prior_counter_evidence_ids", [])
         proposal["proposal_digest"] = proposal_digest(proposal)

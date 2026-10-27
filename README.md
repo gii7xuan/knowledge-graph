@@ -213,6 +213,14 @@ npm run build
 
 TTL/OWL 与旧项目 JSON 的导入、校验、不可变 release 和抽取版本绑定已提供。详见 [本体接入说明](docs/ontology_import.md)和[初始版本发布核对报告](docs/ontology_initial_release_audit_20261026.md)。串联入口、抽取器和工作台使用显式指定或已登记的当前 release；候选生成成功不代表版本已发布。
 
+OWL 扩展发布已接通同一本体审核流程：对完整 RDF 来源执行七类受限操作，独立审核绑定变更前后来源、声明增删和应用范围；批准后生成新的 `ontology.ttl`、`owl_patch.json` 与派生项目视图，候选创建新修订并重新审核。匿名公理、注释、多语言和类型字面量保留，未执行公理仍阻止自动准入。实现边界与验证见 [OWL 扩展发布说明](docs/owl_extension_publication_20261027.md)。
+
+```powershell
+python -m scripts.validate_owl_extension_publication --neo4j-home D:/ProgramData/neo4j-community-2025.11.2
+```
+
+该命令仅在独立夹具和隔离 Neo4j 中演练，模型使用 Mock，不改动生产 release。
+
 ## 文档来源与候选 v4
 
 默认抽取入口使用共享来源快照和 `extraction_candidate_v4`，保留完整限定、逐字引文及未匹配关系，不按事实提前合并不同来源。索引、提示和请求范围均保存摘要及审计记录。详见 [实现与验证说明](docs/source_candidate_v4_20261026.md)。历史抽取桥接需显式使用 `--legacy-extraction`。
@@ -220,3 +228,22 @@ TTL/OWL 与旧项目 JSON 的导入、校验、不可变 release 和抽取版本
 ## 回退
 
 回退时把配置模式切回 `shadow` 或 `assist_only`，并关闭 `routing.auto_accept_enabled` 和 `neo4j.auto_import_enabled`。保留 v3 SQLite、冻结快照和审计记录，不删除历史，也不要把旧 heuristic probability 接回自动入库。推荐上线顺序是 `offline_demo → shadow → 人工标注与校准 → 小范围 active`。
+
+## T01～T40 验收
+
+逐项代码、测试和实际执行结果见 [40 项验收核对与补漏](docs/acceptance_t01_t40_20261027.md)。验收入口在独立 Neo4j 数据目录和随机回环端口执行图状态检查，不连接生产图谱；每项必须有实际通过的测试，缺失或跳过不算通过。
+
+```powershell
+python -m scripts.validate_acceptance_t01_t40 --neo4j-home D:/ProgramData/neo4j-community-2025.11.2
+```
+
+可用 `--plan-file` 记录方案文件摘要，`--output` 指定新的报告目录。运行需要 Java、Neo4j 与 `to_neo4j/requirements.txt` 中的驱动。本体审核契约现为 `ontology_review_response_v2`；涉及通用约束的批准必须明确引用定义、分类或范围依据，旧契约的票不能继续发布。
+
+T37 增加候选全集冻结与缺失保留。先冻结分母，再运行实验；准确性只在人工标注子集计算，覆盖率和失败率使用冻结全集。结果以 `candidate_id` 和 `revision` 绑定，修订真值单独保存。
+
+```powershell
+python -m evaluation.manifest --database runs/v3/review.sqlite3 --run-id <run_id> --output runs/evaluation/population.json
+python -m evaluation.evaluate_review --input predictions.json --manifest runs/evaluation/population.json --labels labels.json --output runs/evaluation/report.json
+```
+
+这部分补齐工程验收所需的分母与缺失处理；完整实验分组、领域标注和真实模型质量评价仍属于阶段 F。

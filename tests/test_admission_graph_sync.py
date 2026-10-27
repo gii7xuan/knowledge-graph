@@ -26,30 +26,32 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class AdmissionFixture:
-    def __init__(self, folder):
+    def __init__(self, folder, *, text=None):
         self.folder = folder
         folder.mkdir(parents=True)
         self.repo = ReviewRepository(folder / 'review.sqlite3')
         self.repo.initialize()
         self.schema = {'domain': 'fixture', 'classes': {'C': {'id':'C','label':'device','definition':'A controllable device.'}},
-            'object_properties': {'R': {'id':'R','label':'connects','definition':'A connection.','domain':['C'],'range':['C']}},
+            'object_properties': {'R': {'id':'R','label':'connects','aliases':['linked'],'definition':'A connection.','domain':['C'],'range':['C']}},
             'datatype_properties': {'D': {'id':'D','label':'mass','definition':'Mass measurement.','domain':['C'],'datatype':'decimal'}},
             'application_profile': {'profile_version':'project_json_v1','constraint_semantics':'allowed_any','auto_review_blocked':False}}
         artifact = OntologyArtifact(copy.deepcopy(self.schema), {'method':'fixture'}, {}, {'errors':[], 'unsupported_axioms':[]},
             copy.deepcopy(self.schema['application_profile']), source_json=copy.deepcopy(self.schema))
         self.release = ReleaseCatalog(folder / 'releases').publish(artifact, approval={'status':'approved','approved_by':'fixture','reason':'test'})
-        self.index = build_document_index(split_markdown_text('A connects B. A does not connect B. If enabled, A can connect B. A has mass 1.00 kg.', folder.name, 600, 20))
+        self.index = build_document_index(split_markdown_text(text or 'A connects B. A does not connect B. If enabled, A can connect B. A has mass 1.00 kg. Connection from A to B is present. During setup, a connection exists from A to B. For mode X, there is a connection from A to B. A is connected to B in all modes. An A to B connection may occur.', folder.name, 600, 20))
         path = persist_document_index(self.index, folder / 'document.json')
         self.repo.create_run({'run_id':'run','mode':'shadow','document_path':str(path),'source_index_hash':self.index['index_content_hash'],
             'ontology_path':str(self.release.snapshot_path),'ontology_hash':self.release.manifest['ontology_version'],'candidate_contract_version':'extraction_candidate_v4'})
         self.feedback = FeedbackService(self.repo)
 
-    def candidate(self, ordinal=0, *, qualifiers=None, literal=False):
+    def candidate(self, ordinal=0, *, qualifiers=None, literal=False, surface_relation=None, evidence_quote=None):
         q = {'polarity':'positive','condition':None,'time_scope':None,'applicability':None,'modality':'asserted','quantifier':None}
         q.update(qualifiers or {})
         raw = {'head':'A','tail':'B','surface_relation':'mass' if literal else 'connects','evidence_quotes':['A has mass 1.00 kg.' if literal else 'A connects B.'],
                'qualifiers':q,'qualifier_status':{k:'not_stated' if v is None else 'extracted' for k,v in q.items()}}
         if literal: raw.update(tail_kind='literal',tail='1.00',value='1.00',datatype='decimal',unit='kg')
+        if surface_relation is not None: raw['surface_relation']=surface_relation
+        if evidence_quote is not None: raw['evidence_quotes']=[evidence_quote]
         c = normalize_candidate(raw, index=self.index, scope=source_scope(self.index,self.index['chunks'][0]),ontology=self.release.ontology,
             release_binding=self.release.binding(),run_id='run',ordinal=ordinal,prompt_hash='fixture')
         c['triple'].update(head_type='C',tail_type=None if literal else 'C')
@@ -203,6 +205,88 @@ class RealGraphTests(AdmissionTests):
     def facts(self):
         rows = query_facts(self.graph.driver)
         return [r for r in rows if any(c['candidate_id'] in self.f.repo.graph_pending_candidates(scan=True) for c in r['contributions'])]
+
+    def test_t25_v4_auto_admission_imports_only_current_round_assessments(self):
+        from tests.test_acceptance_gaps import ready_triple_runner
+        from tests.test_review_planner import valid_response,action,finish
+        from review_agent.llm_clients import MockLLMClient
+        f=AdmissionFixture(self.folder/'round25',text='# Operation\nAt idle, A is disconnected from B. When enabled, A connects to B.\n\n# Constraint definition\nA connects to B only while enabled.')
+        candidate=f.candidate(qualifiers={'condition':'enabled'},evidence_quote='When enabled, A connects to B.')
+        def supported(payload):
+            result=valid_response(payload)
+            for check in result['checks']: check['evidence_ids']=payload['allowed_evidence_ids']
+            return result
+        voters=[{'id':v,'model_id':'round_'+v,'model_family':v,'client':MockLLMClient(supported,model_id='round_'+v,model_family=v)} for v in 'abc']
+        voters[-1]['client']=MockLLMClient(lambda p:valid_response(p,invalid=True) if len(voters[-1]['client'].calls)==1 else supported(p),model_id='round_c',model_family='c')
+        plan=[action('inspect_ontology',relation_id='R',issue='Inspect actual schema'),action('run_validation'),
+            action('search_evidence',scope='other_section',query='only while enabled',purpose='check_qualifiers',limit=2),action('run_validation'),finish()]
+        result=ready_triple_runner(f,voters,config={'planner':{'enabled':True,'strategy':'llm_react','model':'mock_planner','family':'planner'}},
+            planner=MockLLMClient(plan)).audit_candidate(candidate['candidate_id'],1,f.index)
+        self.assertEqual(result['selected_round_id'],2,result)
+        self.assertEqual(result['decision'],'auto_accept',result)
+        audit=f.repo.get_audit(candidate['candidate_id'],result['audit_id'])
+        self.assertTrue(any(v['counter_evidence_ids'] for v in audit['votes'] if v['round_id']==1))
+        self.assertEqual(apply_outbox(f.repo,self.graph)['failed'],0)
+        facts=query_facts(self.graph.driver,entity_id=candidate['triple']['head_entity_id'])
+        self.assertEqual(len(facts),1)
+        self.assertTrue(all(a['assessment']['round_id']==2 and a['assessment']['role']=='support' for a in facts[0]['assessments']))
+
+    def test_t19_schema_impact_withdraws_previously_projected_history(self):
+        from tests.test_acceptance_gaps import AcceptanceOntologyTests
+        case=AcceptanceOntologyTests(); self.addCleanup(case.doCleanups)
+        def project(h,history):
+            self.graph.reconcile(h.repo.current_admitted_contributions(history['candidate_id']))
+        case.before_publication=project
+        case.test_t19_indirect_historical_impact_creates_revision_and_reaudit()
+        h,history,publication,_=case.impact_result
+        result=apply_outbox(h.repo,self.graph)
+        self.assertEqual(result['failed'],0,result)
+        with self.graph.driver.session() as session:
+            row=session.run('MATCH(f:Fact {fact_key:$key}) RETURN f.active AS active,f.contributor_count AS n',key=history['fact_key']).single()
+            self.assertFalse(row['active']); self.assertEqual(row['n'],0)
+            self.assertEqual(session.run('MATCH(:Entity)-[r:KG_FACT]->(:Entity) WHERE r.fact_key=$key RETURN count(r) AS n',key=history['fact_key']).single()['n'],0)
+
+    def test_t04_label_alias_and_id_share_one_imported_fact(self):
+        alias=self.f.candidate(1,surface_relation='linked')
+        self.assertEqual(alias['triple']['relation_id'],'R')
+        self.assertEqual(alias['fact_key'],self.c['fact_key'])
+        self.f.accept(self.cid); self.f.accept(alias['candidate_id'])
+        result=apply_outbox(self.f.repo,self.graph)
+        self.assertEqual(result['failed'],0,result)
+        facts=self.facts()
+        self.assertEqual(len(facts),1)
+        self.assertEqual(facts[0]['fact']['relation_id'],'R')
+
+    def test_t07_distinct_source_spans_preserved_in_one_fact(self):
+        quote='Connection from A to B is present.'
+        other=self.f.candidate(1,evidence_quote=quote)
+        self.assertEqual(self.c['fact_key'],other['fact_key'])
+        self.f.accept(self.cid); self.f.accept(other['candidate_id'],quote)
+        result=apply_outbox(self.f.repo,self.graph)
+        self.assertEqual(result['failed'],0,result)
+        facts=self.facts()
+        self.assertEqual(len(facts),1)
+        self.assertEqual(facts[0]['fact']['source_anchor_count'],2)
+        self.assertEqual(facts[0]['fact']['contributor_count'],2)
+        self.assertEqual({a['anchor']['quote'] for a in facts[0]['assessments']},{'A connects B.',quote})
+
+    def test_t34_time_scope_applicability_quantifier_and_possibility_remain_full_facts(self):
+        specimens=[({'time_scope':'during setup'},'During setup, a connection exists from A to B.'),
+                   ({'applicability':'mode X'},'For mode X, there is a connection from A to B.'),
+                   ({'quantifier':'all modes'},'A is connected to B in all modes.'),
+                   ({'modality':'may'},'An A to B connection may occur.')]
+        keys=[]
+        for n,(qualifiers,quote) in enumerate(specimens,1):
+            candidate=self.f.candidate(n,qualifiers=qualifiers,evidence_quote=quote)
+            self.f.accept(candidate['candidate_id'],quote); keys.append(candidate['fact_key'])
+        result=apply_outbox(self.f.repo,self.graph)
+        self.assertEqual(result['failed'],0,result)
+        facts=self.facts(); self.assertEqual(len(facts),4)
+        self.assertEqual({r['fact']['fact_key'] for r in facts},set(keys))
+        for qualifiers,_ in specimens:
+            self.assertTrue(any(all(r['fact']['qualifiers'][k]==v for k,v in qualifiers.items()) for r in facts))
+        with self.graph.driver.session() as session:
+            self.assertEqual(session.run('MATCH(:Entity)-[r:KG_FACT]->(:Entity) WHERE r.fact_key IN $keys RETURN count(r) AS n',keys=keys).single()['n'],0)
 
     def test_graph_duplicate_reorder_and_old_worker(self):
         self.f.accept(self.cid)

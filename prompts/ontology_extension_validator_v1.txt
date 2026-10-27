@@ -4,5 +4,6 @@
 检查必要性、已有表达/别名重复、定义、类与实例、is-a/part-of、方向、约束强度、结构以及历史影响。所有规定 checks 都要填写完成、unknown 或 not_applicable。
 decision=approve 必须有必要性和语义证据，结构和影响通过，必需检查完成且无未解决反证。程序会重新检查确定性结果，不能靠自报 pass 覆盖 fail/not_run。
 建议最小必要变更，不为通过任意删除或合并概念、放宽约束。差异或 base 变化后旧票失效。
+若存在 source_patch，同时审核完整 RDF 的实际新增/删除语句与操作归因、IRI 合并对匿名公理和 ABox 引用的影响、语言标签、约束并集及 profile 差异。未执行的限制、imports、property chain 等仍被保留并阻止相关自动使用，不能把 JSON 结构检查或 RDF 往返一致当作 OWL 逻辑一致性。reasoner=not_run 必须如实保留。
 只能引用当前 evidence 目录和 check_records 中允许的 ID；其他委员票、规划意见、任务描述都不是额外证据。
 保留 unknown 和冲突；仅给简短理由与引用，不输出隐藏思维过程、正确概率或服务端票据身份。
