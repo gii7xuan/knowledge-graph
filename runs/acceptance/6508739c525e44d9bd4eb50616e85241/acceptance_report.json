@@ -1,0 +1,1733 @@
+{
+  "started_at": "2026-10-27T08:28:51.273077+00:00",
+  "scope": "plan T01--T40 engineering acceptance",
+  "real_model_calls": 0,
+  "model_accuracy_evaluated": false,
+  "cases": [
+    {
+      "id": "T01",
+      "scenario": "初始本体仅生成候选，未发布",
+      "expected": "构建成功不冒充发布，不使用旧本体继续抽取",
+      "tests": [
+        "tests.test_ontology_import.OntologyImportTests.test_import_alone_has_no_release_and_tools_are_not_claimed_run",
+        "tests.test_ontology_import.OntologyImportTests.test_successful_legacy_generation_never_extracts_with_an_old_ontology"
+      ],
+      "code": [
+        "ontologyBuild/release_service.py",
+        "scripts/run_ontology_then_extract.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_import.OntologyImportTests.test_import_alone_has_no_release_and_tools_are_not_claimed_run",
+          "status": "passed",
+          "duration_seconds": 0.031,
+          "source": {
+            "path": "tests/test_ontology_import.py",
+            "line": 93,
+            "sha256": "3d2d98f48cad8db1802aba4dcb18f0c69a70c9d028e4e6c0764809034d50260e"
+          }
+        },
+        {
+          "id": "tests.test_ontology_import.OntologyImportTests.test_successful_legacy_generation_never_extracts_with_an_old_ontology",
+          "status": "passed",
+          "duration_seconds": 0.031,
+          "source": {
+            "path": "tests/test_ontology_import.py",
+            "line": 206,
+            "sha256": "3d2d98f48cad8db1802aba4dcb18f0c69a70c9d028e4e6c0764809034d50260e"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontologyBuild/release_service.py": "e68e688d2afe774fb421740a07ff12ec1936e27ad3a77f823f52db86cd7580a7",
+        "scripts/run_ontology_then_extract.py": "d39c9c1774fd036320ea4781f8759b70be4e7136e5c5f29036b698623ebf5fa1"
+      }
+    },
+    {
+      "id": "T02",
+      "scenario": "OWL domain 与 allowed_any 不同",
+      "expected": "合取语义显式处理，未执行公理阻止自动使用",
+      "tests": [
+        "tests.test_ontology_import.OntologyImportTests.test_multiple_domains_are_conjunctive_and_all_parents_survive",
+        "tests.test_ontology_import.OntologyImportTests.test_unexecuted_restriction_is_preserved_and_blocks_auto_review",
+        "tests.test_owl_extension_publication.OwlDeltaTests.test_additive_patch_preserves_anonymous_axioms_annotations_imports_and_literal_terms",
+        "tests.test_owl_extension_publication.OwlDeltaTests.test_named_constraint_revisions_keep_anonymous_restrictions_and_all_semantics"
+      ],
+      "code": [
+        "ontologyBuild/owl_to_project_schema.py",
+        "review_agent/ontology_guard.py",
+        "ontology_review/owl_delta.py",
+        "ontologyBuild/rdf_graph.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_import.OntologyImportTests.test_multiple_domains_are_conjunctive_and_all_parents_survive",
+          "status": "passed",
+          "duration_seconds": 0.016,
+          "source": {
+            "path": "tests/test_ontology_import.py",
+            "line": 45,
+            "sha256": "3d2d98f48cad8db1802aba4dcb18f0c69a70c9d028e4e6c0764809034d50260e"
+          }
+        },
+        {
+          "id": "tests.test_ontology_import.OntologyImportTests.test_unexecuted_restriction_is_preserved_and_blocks_auto_review",
+          "status": "passed",
+          "duration_seconds": 0.016,
+          "source": {
+            "path": "tests/test_ontology_import.py",
+            "line": 69,
+            "sha256": "3d2d98f48cad8db1802aba4dcb18f0c69a70c9d028e4e6c0764809034d50260e"
+          }
+        },
+        {
+          "id": "tests.test_owl_extension_publication.OwlDeltaTests.test_additive_patch_preserves_anonymous_axioms_annotations_imports_and_literal_terms",
+          "status": "passed",
+          "duration_seconds": 0.312,
+          "source": {
+            "path": "tests/test_owl_extension_publication.py",
+            "line": 77,
+            "sha256": "1a8275f0781765827c17643c18f54e1b8485c712a5d14a9a40fd52dba835e263"
+          }
+        },
+        {
+          "id": "tests.test_owl_extension_publication.OwlDeltaTests.test_named_constraint_revisions_keep_anonymous_restrictions_and_all_semantics",
+          "status": "passed",
+          "duration_seconds": 0.25,
+          "source": {
+            "path": "tests/test_owl_extension_publication.py",
+            "line": 119,
+            "sha256": "1a8275f0781765827c17643c18f54e1b8485c712a5d14a9a40fd52dba835e263"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontologyBuild/owl_to_project_schema.py": "94aaa2627460beb90d6d6b98b05de90e6b9f21e781671429041016aae2699da5",
+        "review_agent/ontology_guard.py": "e8a189acf30979fdc6cf9f494721e6120e3a2c9047440c30ca03068382bf4ab7",
+        "ontology_review/owl_delta.py": "79f5f284a3c81c6dcf31152f42cd4443dc993398416f26dd5c1d1c508a7ac611",
+        "ontologyBuild/rdf_graph.py": "4d8686bac56d408db2caf9b384377352c960e85350d18b825db35b5da79a85e4"
+      }
+    },
+    {
+      "id": "T03",
+      "scenario": "数据属性 range 为 XSD",
+      "expected": "保留数据类型并校验词法，不创建悬空类",
+      "tests": [
+        "tests.test_ontology_import.OntologyImportTests.test_xsd_range_is_a_datatype_and_lexical_values_are_checked",
+        "tests.test_owl_extension_publication.OwlDeltaTests.test_add_class_data_property_and_alias_round_trip_with_original_ids"
+      ],
+      "code": [
+        "ontologyBuild/owl_to_project_schema.py",
+        "review_agent/ontology_guard.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_import.OntologyImportTests.test_xsd_range_is_a_datatype_and_lexical_values_are_checked",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_ontology_import.py",
+            "line": 53,
+            "sha256": "3d2d98f48cad8db1802aba4dcb18f0c69a70c9d028e4e6c0764809034d50260e"
+          }
+        },
+        {
+          "id": "tests.test_owl_extension_publication.OwlDeltaTests.test_add_class_data_property_and_alias_round_trip_with_original_ids",
+          "status": "passed",
+          "duration_seconds": 0.313,
+          "source": {
+            "path": "tests/test_owl_extension_publication.py",
+            "line": 97,
+            "sha256": "1a8275f0781765827c17643c18f54e1b8485c712a5d14a9a40fd52dba835e263"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontologyBuild/owl_to_project_schema.py": "94aaa2627460beb90d6d6b98b05de90e6b9f21e781671429041016aae2699da5",
+        "review_agent/ontology_guard.py": "e8a189acf30979fdc6cf9f494721e6120e3a2c9047440c30ca03068382bf4ab7"
+      }
+    },
+    {
+      "id": "T04",
+      "scenario": "label 与标准关系 ID",
+      "expected": "批准别名、label 和 ID 映射后同身份，并实际入图",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_t04_label_alias_and_id_share_one_imported_fact"
+      ],
+      "code": [
+        "schema/relation_registry.py",
+        "to_neo4j/fact_projection.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_t04_label_alias_and_id_share_one_imported_fact",
+          "status": "passed",
+          "duration_seconds": 6.156,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 249,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "schema/relation_registry.py": "33c037fdf7c5ba726b0e948a2f57eb9b458c99f6ffe839e17590a229dbb6640b",
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235"
+      }
+    },
+    {
+      "id": "T05",
+      "scenario": "相同头尾，不同条件/极性/模态",
+      "expected": "完整限定决定独立事实键",
+      "tests": [
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_qualifiers_and_typed_literal_identity_are_not_collapsed"
+      ],
+      "code": [
+        "review_agent/contracts.py",
+        "schema/fact_identity.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_qualifiers_and_typed_literal_identity_are_not_collapsed",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 168,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/contracts.py": "2e32062762282f6c37d0f305a4d22b073d1301420d3bd419a8607d7a617990c9",
+        "schema/fact_identity.py": "ce6973276ed7867ab84046a12588b6848f54242de3584c9a1fc392575811053e"
+      }
+    },
+    {
+      "id": "T06",
+      "scenario": "漏填极性",
+      "expected": "保持 unknown，不默认 positive",
+      "tests": [
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_missing_polarity_and_status_remain_unknown"
+      ],
+      "code": [
+        "extract_triplets/candidate_contract.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_missing_polarity_and_status_remain_unknown",
+          "status": "passed",
+          "duration_seconds": 0.015,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 149,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "extract_triplets/candidate_contract.py": "32465f4646ef0ccfa55b48bcd976a45d3cff0491088fc4925f8f80050f87c3a9"
+      }
+    },
+    {
+      "id": "T07",
+      "scenario": "两来源抽出同一事实",
+      "expected": "保留独立候选及证据锚点，审核后聚合一个 Fact",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_t07_distinct_source_spans_preserved_in_one_fact"
+      ],
+      "code": [
+        "extract_triplets/candidate_contract.py",
+        "to_neo4j/fact_projection.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_t07_distinct_source_spans_preserved_in_one_fact",
+          "status": "passed",
+          "duration_seconds": 0.922,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 260,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "extract_triplets/candidate_contract.py": "32465f4646ef0ccfa55b48bcd976a45d3cff0491088fc4925f8f80050f87c3a9",
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235"
+      }
+    },
+    {
+      "id": "T08",
+      "scenario": "子本体没有，完整本体已有",
+      "expected": "查询完整本体并映射，阻止重复扩展",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_nullable_full_lookup_finds_existing_mapping_and_blocks_duplicate"
+      ],
+      "code": [
+        "review_agent/tools.py",
+        "schema/relation_registry.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_nullable_full_lookup_finds_existing_mapping_and_blocks_duplicate",
+          "status": "passed",
+          "duration_seconds": 1.578,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 165,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/tools.py": "0e1fc465b6e274d166be586407c464e18451d209595d2e3a201c6302df5058d4",
+        "schema/relation_registry.py": "33c037fdf7c5ba726b0e948a2f57eb9b458c99f6ffe839e17590a229dbb6640b"
+      }
+    },
+    {
+      "id": "T09",
+      "scenario": "原文支持，本体缺失",
+      "expected": "原文共识成立并进入扩展等待",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_source_supported_schema_gap_creates_waiting_task_without_outbox"
+      ],
+      "code": [
+        "review_agent/consensus.py",
+        "review_agent/lifecycle_repository.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_source_supported_schema_gap_creates_waiting_task_without_outbox",
+          "status": "passed",
+          "duration_seconds": 1.141,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 124,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/consensus.py": "595c850a25ad1152b58916e47287f82de9bc468d895f00e2e7bbb76689219a8e",
+        "review_agent/lifecycle_repository.py": "7aa22060ae1b1e19e558c8d62864038dd2fe3fb4839936dd819bd7254f575ea9"
+      }
+    },
+    {
+      "id": "T10",
+      "scenario": "三元组 uncertain 仅因 Schema 缺口",
+      "expected": "保留来源支持，不判事实假",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_source_supported_schema_gap_creates_waiting_task_without_outbox",
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_schema_only_failure_cannot_claim_source_rejection"
+      ],
+      "code": [
+        "review_agent/response_contract.py",
+        "review_agent/consensus.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_source_supported_schema_gap_creates_waiting_task_without_outbox",
+          "status": "passed",
+          "duration_seconds": 1.141,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 124,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        },
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_schema_only_failure_cannot_claim_source_rejection",
+          "status": "passed",
+          "duration_seconds": 0.078,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 385,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/response_contract.py": "1bc06606a8c28d8f7533f18f41fd9a0b7e73c8d3c00ac74070714c095f0f5457",
+        "review_agent/consensus.py": "595c850a25ad1152b58916e47287f82de9bc468d895f00e2e7bbb76689219a8e"
+      }
+    },
+    {
+      "id": "T11",
+      "scenario": "原文不足",
+      "expected": "缺少独立来源支持不能创建扩展请求",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t11_insufficient_source_cannot_trigger_schema_expansion"
+      ],
+      "code": [
+        "review_agent/tools.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t11_insufficient_source_cannot_trigger_schema_expansion",
+          "status": "passed",
+          "duration_seconds": 1.297,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 141,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/tools.py": "0e1fc465b6e274d166be586407c464e18451d209595d2e3a201c6302df5058d4"
+      }
+    },
+    {
+      "id": "T12",
+      "scenario": "原文支持，怀疑既有约束错误",
+      "expected": "保留 guard 原失败并进入约束复核",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_constraint_review_retains_guard_failure_and_never_approves_ontology"
+      ],
+      "code": [
+        "review_agent/ontology_guard.py",
+        "review_agent/tools.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_constraint_review_retains_guard_failure_and_never_approves_ontology",
+          "status": "passed",
+          "duration_seconds": 1.156,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 260,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/ontology_guard.py": "e8a189acf30979fdc6cf9f494721e6120e3a2c9047440c30ca03068382bf4ab7",
+        "review_agent/tools.py": "0e1fc465b6e274d166be586407c464e18451d209595d2e3a201c6302df5058d4"
+      }
+    },
+    {
+      "id": "T13",
+      "scenario": "一实例泛化为通用约束",
+      "expected": "必须引用定义/分类/范围依据，实例证据不能批准",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t13_instance_only_cannot_approve_general_constraints",
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t13_definition_grounding_is_required_and_can_pass"
+      ],
+      "code": [
+        "ontology_review/contracts.py",
+        "ontology_review/validators.py",
+        "prompts/ontology_extension_validator_v1.txt"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t13_instance_only_cannot_approve_general_constraints",
+          "status": "passed",
+          "duration_seconds": 3.641,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 198,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        },
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t13_definition_grounding_is_required_and_can_pass",
+          "status": "passed",
+          "duration_seconds": 3.453,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 212,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/contracts.py": "36c77a58fe15414b8a05ca6dd104c5b2cc4f96b3833970d21192ff484d275455",
+        "ontology_review/validators.py": "999459290e0ecccb455c5f5dcd0906f3f7f4ca34aa76593d4dd8cc41dd3f4f97",
+        "prompts/ontology_extension_validator_v1.txt": "e516cae7a062b89df134877348042474604dd3ee7c595e3154f3ccb72fcf7d0f"
+      }
+    },
+    {
+      "id": "T14",
+      "scenario": "同一扩展由多个候选触发",
+      "expected": "去重扩展任务，保留独立订阅及成本",
+      "tests": [
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_shared_task_has_two_subscriptions_and_charges_both_cases"
+      ],
+      "code": [
+        "review_agent/lifecycle_repository.py",
+        "review_agent/case_budget.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_shared_task_has_two_subscriptions_and_charges_both_cases",
+          "status": "passed",
+          "duration_seconds": 6.016,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 275,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/lifecycle_repository.py": "7aa22060ae1b1e19e558c8d62864038dd2fe3fb4839936dd819bd7254f575ea9",
+        "review_agent/case_budget.py": "97e33aa2f69acdfa9e61f203ced68ecd68dbab6658d7888aa027f8f65b1a9d79"
+      }
+    },
+    {
+      "id": "T15",
+      "scenario": "两个提案都基于 V1，先后发布",
+      "expected": "旧 base CAS 失败，必须 rebase 和重新审核",
+      "tests": [
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_release_head_race_requires_rebase_and_fresh_review",
+        "tests.test_ontology_release.OntologyReleaseTests.test_independent_processes_cannot_both_publish_against_the_same_base"
+      ],
+      "code": [
+        "ontologyBuild/release_catalog.py",
+        "ontology_review/publisher.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_release_head_race_requires_rebase_and_fresh_review",
+          "status": "passed",
+          "duration_seconds": 6.359,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 221,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_ontology_release.OntologyReleaseTests.test_independent_processes_cannot_both_publish_against_the_same_base",
+          "status": "passed",
+          "duration_seconds": 0.469,
+          "source": {
+            "path": "tests/test_ontology_release.py",
+            "line": 77,
+            "sha256": "37d6d0fa509a8ee1bd9afee25765ab627f2b0dce42c5d556b2be36fca106cf20"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontologyBuild/release_catalog.py": "e590c4f9f37a70ae7a581f0efe0a4999debcedf18c4c014b454587171ad4bd59",
+        "ontology_review/publisher.py": "579591a6e4194a8ed17a8f8c372117bb2d52c9d7b72db934ce54737fa587cc40"
+      }
+    },
+    {
+      "id": "T16",
+      "scenario": "delta 变化沿用旧票",
+      "expected": "摘要和差异修订不匹配，拒绝发布",
+      "tests": [
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_new_delta_invalidates_old_round_and_stale_approval",
+        "tests.test_owl_extension_publication.OwlDeltaTests.test_complete_rdf_context_and_blank_node_delta_replay_are_verified",
+        "tests.test_owl_extension_publication.OwlPublicationFlowTests.test_edited_source_patch_or_view_cannot_use_previous_ontology_votes"
+      ],
+      "code": [
+        "ontology_review/contracts.py",
+        "ontology_review/publisher.py",
+        "ontologyBuild/rdf_artifact.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_new_delta_invalidates_old_round_and_stale_approval",
+          "status": "passed",
+          "duration_seconds": 3.64,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 192,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_owl_extension_publication.OwlDeltaTests.test_complete_rdf_context_and_blank_node_delta_replay_are_verified",
+          "status": "passed",
+          "duration_seconds": 0.407,
+          "source": {
+            "path": "tests/test_owl_extension_publication.py",
+            "line": 170,
+            "sha256": "1a8275f0781765827c17643c18f54e1b8485c712a5d14a9a40fd52dba835e263"
+          }
+        },
+        {
+          "id": "tests.test_owl_extension_publication.OwlPublicationFlowTests.test_edited_source_patch_or_view_cannot_use_previous_ontology_votes",
+          "status": "passed",
+          "duration_seconds": 3.922,
+          "source": {
+            "path": "tests/test_owl_extension_publication.py",
+            "line": 296,
+            "sha256": "1a8275f0781765827c17643c18f54e1b8485c712a5d14a9a40fd52dba835e263"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/contracts.py": "36c77a58fe15414b8a05ca6dd104c5b2cc4f96b3833970d21192ff484d275455",
+        "ontology_review/publisher.py": "579591a6e4194a8ed17a8f8c372117bb2d52c9d7b72db934ce54737fa587cc40",
+        "ontologyBuild/rdf_artifact.py": "d6cf533d142f116a2082ae59c0cef9c59e196c08160612ac6948eb3d38e6c466"
+      }
+    },
+    {
+      "id": "T17",
+      "scenario": "发布重复通知与候选已变更",
+      "expected": "幂等唤醒，不复用旧票、不重启过期订阅",
+      "tests": [
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_publication_is_idempotent_and_never_rebinds_twice",
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_rebound_candidate_uses_new_proposal_and_never_old_votes",
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_revocation_between_release_commit_and_wakeup_keeps_human_change",
+        "tests.test_owl_extension_publication.OwlGraphFlowTests.test_only_admitted_owl_candidate_reaches_graph_and_abox_stays_in_source"
+      ],
+      "code": [
+        "ontology_review/publisher.py",
+        "review_agent/repository.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_publication_is_idempotent_and_never_rebinds_twice",
+          "status": "passed",
+          "duration_seconds": 4.187,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 183,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_rebound_candidate_uses_new_proposal_and_never_old_votes",
+          "status": "passed",
+          "duration_seconds": 5.063,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 317,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_revocation_between_release_commit_and_wakeup_keeps_human_change",
+          "status": "passed",
+          "duration_seconds": 3.984,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 528,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_owl_extension_publication.OwlGraphFlowTests.test_only_admitted_owl_candidate_reaches_graph_and_abox_stays_in_source",
+          "status": "passed",
+          "duration_seconds": 7.297,
+          "source": {
+            "path": "tests/test_owl_extension_publication.py",
+            "line": 306,
+            "sha256": "1a8275f0781765827c17643c18f54e1b8485c712a5d14a9a40fd52dba835e263"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/publisher.py": "579591a6e4194a8ed17a8f8c372117bb2d52c9d7b72db934ce54737fa587cc40",
+        "review_agent/repository.py": "1f3d16d2d86192550eec4fe4ade40c9f46ebe2506f9d6b78a9676d3c5366f035"
+      }
+    },
+    {
+      "id": "T18",
+      "scenario": "扩展被人工拒绝",
+      "expected": "候选进入 schema_unresolved，来源支持和真值标签保留",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t18_operator_rejection_updates_subscribers_without_false_truth_label"
+      ],
+      "code": [
+        "ontology_review/repository.py",
+        "ontology_review/service.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t18_operator_rejection_updates_subscribers_without_false_truth_label",
+          "status": "passed",
+          "duration_seconds": 1.39,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 185,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/repository.py": "699f7cb9af6c9ee7bbd4662035c59b855b32982d6a57e771b6b48bea39a15851",
+        "ontology_review/service.py": "f2f99d9562502bf5a98db7b586e2aa04195d0381ec345b803874a03c1befc106"
+      }
+    },
+    {
+      "id": "T19",
+      "scenario": "domain/range 或祖先语义变化影响历史候选",
+      "expected": "列出传递影响，创建新修订和重审，撤回旧图贡献",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_t19_schema_impact_withdraws_previously_projected_history",
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t19_domain_range_change_reaudits_previously_accepted_history",
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t19_indirect_historical_impact_creates_revision_and_reaudit"
+      ],
+      "code": [
+        "ontology_review/impact.py",
+        "ontology_review/publisher.py",
+        "to_neo4j/reconciler.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_t19_schema_impact_withdraws_previously_projected_history",
+          "status": "passed",
+          "duration_seconds": 4.75,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 234,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t19_domain_range_change_reaudits_previously_accepted_history",
+          "status": "passed",
+          "duration_seconds": 4.204,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 273,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        },
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t19_indirect_historical_impact_creates_revision_and_reaudit",
+          "status": "passed",
+          "duration_seconds": 4.046,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 229,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/impact.py": "2fb80fe6f8e521faf64700a24b15e3bb41ea9fea6c43834373e7b0506092cb5b",
+        "ontology_review/publisher.py": "579591a6e4194a8ed17a8f8c372117bb2d52c9d7b72db934ce54737fa587cc40",
+        "to_neo4j/reconciler.py": "186caa3f20bdb680af03e3e59ebc5a07c7e4b798ccca7881cdab3ea88c4e6298"
+      }
+    },
+    {
+      "id": "T20",
+      "scenario": "人工提交空、假、跨候选和过期证据",
+      "expected": "无正式贡献；非法证据 422，并发版本冲突 409",
+      "tests": [
+        "tests.test_admission_graph_sync.AdmissionTests.test_nonempty_exact_human_evidence_required",
+        "tests.test_admission_graph_sync.AdmissionTests.test_bundle_stale_and_foreign",
+        "tests.test_admission_graph_sync.AdmissionTests.test_http_evidence_errors_and_conflicts"
+      ],
+      "code": [
+        "review_agent/human_evidence.py",
+        "review_agent/admission.py",
+        "workbench_app.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.AdmissionTests.test_nonempty_exact_human_evidence_required",
+          "status": "passed",
+          "duration_seconds": 0.407,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 78,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.AdmissionTests.test_bundle_stale_and_foreign",
+          "status": "passed",
+          "duration_seconds": 0.328,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 93,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.AdmissionTests.test_http_evidence_errors_and_conflicts",
+          "status": "passed",
+          "duration_seconds": 0.922,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 164,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/human_evidence.py": "dfb7be0f8e48fa51434ccb9867db5658232a54dfde8e33a0345b10afd3052881",
+        "review_agent/admission.py": "d861ffa8af0410d0d294319a997a7814d56b408151858c08b5a3db3d51f89813",
+        "workbench_app.py": "ff04db143c2c8ebfdb675b4953bb334115653e7e6fee44a39894dd8b1efdc283"
+      }
+    },
+    {
+      "id": "T21",
+      "scenario": "人工选择合法新原文",
+      "expected": "服务端从规范全文核验，绑定新人工证据包后允许裁决",
+      "tests": [
+        "tests.test_admission_graph_sync.AdmissionTests.test_bound_acceptance_and_idempotency",
+        "tests.test_admission_graph_sync.AdmissionTests.test_http_evidence_errors_and_conflicts",
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t21_human_can_review_rebound_revision_with_new_bound_source_bundle"
+      ],
+      "code": [
+        "review_agent/human_evidence.py",
+        "review_agent/admission_repository.py",
+        "review_agent/admission.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.AdmissionTests.test_bound_acceptance_and_idempotency",
+          "status": "passed",
+          "duration_seconds": 0.359,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 85,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.AdmissionTests.test_http_evidence_errors_and_conflicts",
+          "status": "passed",
+          "duration_seconds": 0.922,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 164,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t21_human_can_review_rebound_revision_with_new_bound_source_bundle",
+          "status": "passed",
+          "duration_seconds": 4.031,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 90,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/human_evidence.py": "dfb7be0f8e48fa51434ccb9867db5658232a54dfde8e33a0345b10afd3052881",
+        "review_agent/admission_repository.py": "d4e6e2ba273af2306afc5b9df1b7469fd52d0f6ee351d585832c5fb6a3423065",
+        "review_agent/admission.py": "d861ffa8af0410d0d294319a997a7814d56b408151858c08b5a3db3d51f89813"
+      }
+    },
+    {
+      "id": "T22",
+      "scenario": "正确候选首轮缺上下文",
+      "expected": "真实补证和复核后解除证据不足",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_actual_react_rechecks_new_evidence_and_clears_only_insufficiency"
+      ],
+      "code": [
+        "review_agent/issue_ledger.py",
+        "review_agent/runtime.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_actual_react_rechecks_new_evidence_and_clears_only_insufficiency",
+          "status": "passed",
+          "duration_seconds": 2.344,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 190,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/issue_ledger.py": "bd201cb8df68cbbf066bcfb88b43d8266cd5cc798c7cd22a5c58918b804de73e",
+        "review_agent/runtime.py": "f246a3905a8537e01d86908383a803d8c1396dcf26c85a408a7e0113551c49d0"
+      }
+    },
+    {
+      "id": "T23",
+      "scenario": "候选本身漏条件",
+      "expected": "旧表达不能靠补证通过，须新修订",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_condition_error_cannot_be_washed_away_by_new_support",
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_new_audit_does_not_erase_a_revision_bound_condition_issue"
+      ],
+      "code": [
+        "review_agent/issue_ledger.py",
+        "review_agent/action_policy.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_condition_error_cannot_be_washed_away_by_new_support",
+          "status": "passed",
+          "duration_seconds": 1.734,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 209,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        },
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_new_audit_does_not_erase_a_revision_bound_condition_issue",
+          "status": "passed",
+          "duration_seconds": 2.219,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 321,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/issue_ledger.py": "bd201cb8df68cbbf066bcfb88b43d8266cd5cc798c7cd22a5c58918b804de73e",
+        "review_agent/action_policy.py": "70e4b1b04274a8e27aa4b27d3f3139b403d22ef049f35cc9f99d46b1541647f9"
+      }
+    },
+    {
+      "id": "T24",
+      "scenario": "规划器声称反证已解决",
+      "expected": "文本声明和同一证据不能清除义务",
+      "tests": [
+        "tests.test_review_enhancement_v4.IssueLifecycleTests.test_same_evidence_and_planner_text_cannot_resolve",
+        "tests.test_review_enhancement_v4.IssueLifecycleTests.test_all_protected_references_must_be_independently_rechecked"
+      ],
+      "code": [
+        "review_agent/issue_ledger.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.IssueLifecycleTests.test_same_evidence_and_planner_text_cannot_resolve",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 49,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        },
+        {
+          "id": "tests.test_review_enhancement_v4.IssueLifecycleTests.test_all_protected_references_must_be_independently_rechecked",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 59,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/issue_ledger.py": "bd201cb8df68cbbf066bcfb88b43d8266cd5cc798c7cd22a5c58918b804de73e"
+      }
+    },
+    {
+      "id": "T25",
+      "scenario": "首轮反证，次轮支持",
+      "expected": "精确选定轮次和提案，拒绝内容篡改和历史混票",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round",
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_exact_selection_detects_changed_evidence_and_ignores_other_rounds",
+        "tests.test_admission_graph_sync.RealGraphTests.test_t25_v4_auto_admission_imports_only_current_round_assessments"
+      ],
+      "code": [
+        "review_agent/proposal_resolver.py",
+        "review_agent/consensus.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round",
+          "status": "passed",
+          "duration_seconds": 1.875,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 226,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        },
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_exact_selection_detects_changed_evidence_and_ignores_other_rounds",
+          "status": "passed",
+          "duration_seconds": 1.094,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 345,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_t25_v4_auto_admission_imports_only_current_round_assessments",
+          "status": "passed",
+          "duration_seconds": 2.969,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 209,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/proposal_resolver.py": "1ebaaf78d5d245d2af15fdb7c8dbb763627df724f20bfb4685ef499b8cf93ca9",
+        "review_agent/consensus.py": "595c850a25ad1152b58916e47287f82de9bc468d895f00e2e7bbb76689219a8e"
+      }
+    },
+    {
+      "id": "T26",
+      "scenario": "三席一超时、两 valid",
+      "expected": "固定三席分母，不能形成正式共识",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t26_three_seats_one_timeout_do_not_form_triple_consensus"
+      ],
+      "code": [
+        "review_agent/consensus.py",
+        "review_agent/validators.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t26_three_seats_one_timeout_do_not_form_triple_consensus",
+          "status": "passed",
+          "duration_seconds": 0.328,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 167,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/consensus.py": "595c850a25ad1152b58916e47287f82de9bc468d895f00e2e7bbb76689219a8e",
+        "review_agent/validators.py": "cd25d211e4923188ba04933fc9699e7d9b3fc24b52ba46111ffd59d74e15675d"
+      }
+    },
+    {
+      "id": "T27",
+      "scenario": "同一模型不同别名",
+      "expected": "实际身份去重，不增加独立票",
+      "tests": [
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_reported_same_actual_model_does_not_get_distinct_seats",
+        "tests.test_review_enhancement_v4.EnhancedAgentTests.test_duplicate_model_aliases_do_not_form_independent_source_consensus"
+      ],
+      "code": [
+        "review_agent/consensus.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_reported_same_actual_model_does_not_get_distinct_seats",
+          "status": "passed",
+          "duration_seconds": 1.031,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 290,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        },
+        {
+          "id": "tests.test_review_enhancement_v4.EnhancedAgentTests.test_duplicate_model_aliases_do_not_form_independent_source_consensus",
+          "status": "passed",
+          "duration_seconds": 1.156,
+          "source": {
+            "path": "tests/test_review_enhancement_v4.py",
+            "line": 367,
+            "sha256": "c323c3f9e33350b44fa60e9b44bec788710a741cdc27e9b406e6a5f885be2376"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/consensus.py": "595c850a25ad1152b58916e47287f82de9bc468d895f00e2e7bbb76689219a8e"
+      }
+    },
+    {
+      "id": "T28",
+      "scenario": "三元组票用于本体发布",
+      "expected": "拒绝跨任务、契约和版本票据重放",
+      "tests": [
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_triple_ticket_cannot_be_used_as_ontology_approval"
+      ],
+      "code": [
+        "ontology_review/validators.py",
+        "ontology_review/contracts.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_triple_ticket_cannot_be_used_as_ontology_approval",
+          "status": "passed",
+          "duration_seconds": 3.907,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 266,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/validators.py": "999459290e0ecccb455c5f5dcd0906f3f7f4ca34aa76593d4dd8cc41dd3f4f97",
+        "ontology_review/contracts.py": "36c77a58fe15414b8a05ca6dd104c5b2cc4f96b3833970d21192ff484d275455"
+      }
+    },
+    {
+      "id": "T29",
+      "scenario": "同名标题、英文多句、跨块条件",
+      "expected": "章节位置、句界、上下文保持正确",
+      "tests": [
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_identical_repeated_headings_have_distinct_positions",
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_english_decimal_abbreviation_and_fenced_heading_boundaries",
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_context_crosses_chunk_boundaries_without_crossing_sections"
+      ],
+      "code": [
+        "document/hierarchy_index.py",
+        "document/snapshot.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_identical_repeated_headings_have_distinct_positions",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 87,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        },
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_english_decimal_abbreviation_and_fenced_heading_boundaries",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 96,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        },
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_context_crosses_chunk_boundaries_without_crossing_sections",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 118,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "document/hierarchy_index.py": "1a6c1f5a748e6cb0fb52d4bb41cfe9ec987c44f9765d747fbfa6259b85213304",
+        "document/snapshot.py": "a7de7066a513b9faa70388262f66aecc508d08965e016be2cf070dc3d54f50c3"
+      }
+    },
+    {
+      "id": "T30",
+      "scenario": "保留版本号，篡改正文或偏移",
+      "expected": "摘要与结构验证失败",
+      "tests": [
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_tampering_text_offsets_or_structure_fails_without_version_change"
+      ],
+      "code": [
+        "document/index_integrity.py",
+        "evidence/verification.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_tampering_text_offsets_or_structure_fails_without_version_change",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 129,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "document/index_integrity.py": "ef817f844211c6b595c487d2e04c4e84471298004c52244ad967051da28e81a7",
+        "evidence/verification.py": "f9fd8cb52dc6a0c1f445fbdaabb739ce60a78e78e93aea9264f728707b957614"
+      }
+    },
+    {
+      "id": "T31",
+      "scenario": "revision1 入库→修改2→快速再通过2",
+      "expected": "停用旧贡献，清理旧 Fact，只有新修订有效",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_changed_fact_retires_old_fact_even_with_stale_retract"
+      ],
+      "code": [
+        "review_agent/admission_repository.py",
+        "to_neo4j/fact_projection.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_changed_fact_retires_old_fact_even_with_stale_retract",
+          "status": "passed",
+          "duration_seconds": 0.938,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 306,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/admission_repository.py": "d4e6e2ba273af2306afc5b9df1b7469fd52d0f6ee351d585832c5fb6a3423065",
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235"
+      }
+    },
+    {
+      "id": "T32",
+      "scenario": "两候选支持同 Fact，撤回一条",
+      "expected": "另一贡献仍有效",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_shared_fact_withdrawal_and_concurrency"
+      ],
+      "code": [
+        "to_neo4j/fact_projection.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_shared_fact_withdrawal_and_concurrency",
+          "status": "passed",
+          "duration_seconds": 1.156,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 330,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235"
+      }
+    },
+    {
+      "id": "T33",
+      "scenario": "outbox 乱序/重复/提交后崩溃",
+      "expected": "幂等收敛，旧 worker 不能回退新版本",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_duplicate_reorder_and_old_worker",
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_atomic_rollback_and_crash_retry",
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_periodic_repair_without_outbox_and_anchor_dedup"
+      ],
+      "code": [
+        "to_neo4j/reconciler.py",
+        "to_neo4j/fact_projection.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_duplicate_reorder_and_old_worker",
+          "status": "passed",
+          "duration_seconds": 0.906,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 291,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_atomic_rollback_and_crash_retry",
+          "status": "passed",
+          "duration_seconds": 1.047,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 359,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_periodic_repair_without_outbox_and_anchor_dedup",
+          "status": "passed",
+          "duration_seconds": 1.188,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 386,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "to_neo4j/reconciler.py": "186caa3f20bdb680af03e3e59ebc5a07c7e4b798ccca7881cdab3ea88c4e6298",
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235"
+      }
+    },
+    {
+      "id": "T34",
+      "scenario": "否定、条件、能力与其他限定入图",
+      "expected": "完整 Fact 和 typed literal，不产生无条件肯定边",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_qualified_literal_and_query",
+        "tests.test_admission_graph_sync.RealGraphTests.test_t34_time_scope_applicability_quantifier_and_possibility_remain_full_facts"
+      ],
+      "code": [
+        "to_neo4j/fact_projection.py",
+        "to_neo4j/query_facts.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_qualified_literal_and_query",
+          "status": "passed",
+          "duration_seconds": 1.343,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 343,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        },
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_t34_time_scope_applicability_quantifier_and_possibility_remain_full_facts",
+          "status": "passed",
+          "duration_seconds": 1.766,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 273,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235",
+        "to_neo4j/query_facts.py": "d4f811db2c076c1b48ab890cc4d128d864b7752fdb986d8b9ed2f50b3cd771fa"
+      }
+    },
+    {
+      "id": "T35",
+      "scenario": "多候选并发更新同 Fact",
+      "expected": "按锁顺序更新和重算全部有效贡献",
+      "tests": [
+        "tests.test_admission_graph_sync.RealGraphTests.test_graph_shared_fact_withdrawal_and_concurrency"
+      ],
+      "code": [
+        "to_neo4j/fact_projection.py"
+      ],
+      "requires_real_neo4j": true,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_admission_graph_sync.RealGraphTests.test_graph_shared_fact_withdrawal_and_concurrency",
+          "status": "passed",
+          "duration_seconds": 1.156,
+          "source": {
+            "path": "tests/test_admission_graph_sync.py",
+            "line": 330,
+            "sha256": "6818ae3e2a27b9efab56229c60d3b83a71bbf03f66756a54d509909ddf8f027b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "to_neo4j/fact_projection.py": "484dc0b44596c8c73300473b5264fc2894bfaeb7405b00ba3ab11a7696b1f235"
+      }
+    },
+    {
+      "id": "T36",
+      "scenario": "简单多数 2 valid、2 invalid、1 uncertain",
+      "expected": "任何输入排列均 unresolved",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t36_tied_majority_is_unresolved_for_every_order"
+      ],
+      "code": [
+        "evaluation/adapters/baselines.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t36_tied_majority_is_unresolved_for_every_order",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 25,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "evaluation/adapters/baselines.py": "8601fc7ed8a2c9fd0ea08e56505443783dbef025eb8577eb73e111af544990e8"
+      }
+    },
+    {
+      "id": "T37",
+      "scenario": "超时、失败、标签缺失",
+      "expected": "冻结全集保留缺失结果，覆盖率用全集、准确性用标注子集",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t37_unlabeled_failed_and_timeout_rows_keep_population_denominator",
+        "tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t37_frozen_manifest_retains_missing_results_and_rejects_tampering",
+        "tests.test_phase_f_completion.MemoryScopeTests.test_train_scope_excludes_held_out_cases_before_top_k_and_snapshot",
+        "tests.test_phase_f_completion.MemoryScopeTests.test_checkpoint_preserves_scope_and_refuses_expansion",
+        "tests.test_phase_f_completion.AnnotationTests.test_partial_dimensions_survive_defer_and_readonly_export",
+        "tests.test_phase_f_completion.AnnotationTests.test_modify_keeps_old_and_new_revision_annotations_separate",
+        "tests.test_phase_f_completion.ResearchMetricTests.test_exact_fact_identity_retains_negation_conditions_and_deduplicates_sources",
+        "tests.test_phase_f_completion.ResearchMetricTests.test_revision_truth_not_inherited_and_gold_binding_is_mandatory",
+        "tests.test_phase_f_completion.ExperimentTests.test_all_methods_fixed_dynamic_and_ablation_use_one_frozen_pool"
+      ],
+      "code": [
+        "evaluation/manifest.py",
+        "evaluation/evaluate_review.py",
+        "review_agent/memory_scope.py",
+        "review_agent/memory.py",
+        "evaluation/annotations.py",
+        "evaluation/experiment.py",
+        "evaluation/metrics.py",
+        "evaluation/fact_matching.py",
+        "evaluation/evaluate_experiment.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t37_unlabeled_failed_and_timeout_rows_keep_population_denominator",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 33,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        },
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceEvaluationTests.test_t37_frozen_manifest_retains_missing_results_and_rejects_tampering",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 48,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.MemoryScopeTests.test_train_scope_excludes_held_out_cases_before_top_k_and_snapshot",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 35,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.MemoryScopeTests.test_checkpoint_preserves_scope_and_refuses_expansion",
+          "status": "passed",
+          "duration_seconds": 1.625,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 56,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.AnnotationTests.test_partial_dimensions_survive_defer_and_readonly_export",
+          "status": "passed",
+          "duration_seconds": 1.281,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 118,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.AnnotationTests.test_modify_keeps_old_and_new_revision_annotations_separate",
+          "status": "passed",
+          "duration_seconds": 1.469,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 105,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.ResearchMetricTests.test_exact_fact_identity_retains_negation_conditions_and_deduplicates_sources",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 146,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.ResearchMetricTests.test_revision_truth_not_inherited_and_gold_binding_is_mandatory",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 157,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        },
+        {
+          "id": "tests.test_phase_f_completion.ExperimentTests.test_all_methods_fixed_dynamic_and_ablation_use_one_frozen_pool",
+          "status": "passed",
+          "duration_seconds": 30.344,
+          "source": {
+            "path": "tests/test_phase_f_completion.py",
+            "line": 201,
+            "sha256": "4aa87938857a15da4420b49a081e114f8189593a0c87d7128dc2c0d99b10e1a0"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "evaluation/manifest.py": "0f739a15d1740e4ecf3bbe3a9585d0f8b333f0652be8b98e3dca2b86f4f8fd41",
+        "evaluation/evaluate_review.py": "c6303438b3efb36d8ed0d9b079a77f3ee4327203cfe39ae690faa437b4730a0d",
+        "review_agent/memory_scope.py": "9e38e7d457a2c8dcf997549948bd4f9beeee87b8f4e6eb4dbd8b2660e38dfcbf",
+        "review_agent/memory.py": "323e761f2d6fc85a3b7e53c4a02a083e3cf1fb0f5b25347551f5e45826df4153",
+        "evaluation/annotations.py": "068e30061f033e79b304e759f73f8c775d52c7f08eeef65e85e6bc97d0e56d8e",
+        "evaluation/experiment.py": "8b22345b6302df8831117f07a0d7b078006d38076f4cf6685a9512bfd5a506f9",
+        "evaluation/metrics.py": "a3bd0093f674f8993a651c73dbfa828528b7ab606894acb937b79e583daf7ed5",
+        "evaluation/fact_matching.py": "5ba1847b23b75d7292814b240098b2d839d163e009c6fe89213c9326ae4527be",
+        "evaluation/evaluate_experiment.py": "f7e6919c7284ddc9160927103709f942890058e3f93bd4b0701c859d8a01384c"
+      }
+    },
+    {
+      "id": "T38",
+      "scenario": "shadow 建议通过或批准扩展",
+      "expected": "不自动正式入库或发布",
+      "tests": [
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_real_planner_tools_and_fixed_independent_committee_in_shadow",
+        "tests.test_ontology_extension_agent.OntologyExtensionTests.test_automatic_publication_is_blocked_in_shadow",
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t38_shadow_triple_with_ready_policy_and_consensus_creates_no_contribution"
+      ],
+      "code": [
+        "ontology_review/runtime.py",
+        "ontology_review/publisher.py",
+        "review_agent/admission.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_real_planner_tools_and_fixed_independent_committee_in_shadow",
+          "status": "passed",
+          "duration_seconds": 3.859,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 134,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_ontology_extension_agent.OntologyExtensionTests.test_automatic_publication_is_blocked_in_shadow",
+          "status": "passed",
+          "duration_seconds": 3.906,
+          "source": {
+            "path": "tests/test_ontology_extension_agent.py",
+            "line": 312,
+            "sha256": "7116e12c50e10a3ce96aa6e8493a4caa1c01f8595d8874c0fbfcb3fb2414d0de"
+          }
+        },
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t38_shadow_triple_with_ready_policy_and_consensus_creates_no_contribution",
+          "status": "passed",
+          "duration_seconds": 0.36,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 106,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "ontology_review/runtime.py": "e9de77f03466434d051a7ca68d49f962bb370ab95b12e1ce758fd3f21a05dd7d",
+        "ontology_review/publisher.py": "579591a6e4194a8ed17a8f8c372117bb2d52c9d7b72db934ce54737fa587cc40",
+        "review_agent/admission.py": "d861ffa8af0410d0d294319a997a7814d56b408151858c08b5a3db3d51f89813"
+      }
+    },
+    {
+      "id": "T39",
+      "scenario": "扩展—重审反复触发",
+      "expected": "同一 case 总预算跨 Agent 与新 revision 保留，耗尽受控停止",
+      "tests": [
+        "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t39_published_revision_preserves_case_budget_and_stops_next_loop"
+      ],
+      "code": [
+        "review_agent/case_budget.py",
+        "ontology_review/repository.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_acceptance_gaps.AcceptanceOntologyTests.test_t39_published_revision_preserves_case_budget_and_stops_next_loop",
+          "status": "passed",
+          "duration_seconds": 4.172,
+          "source": {
+            "path": "tests/test_acceptance_gaps.py",
+            "line": 120,
+            "sha256": "9c0cb4c95817a65340f661fbf0c880da7eecc8feb71f13b48bb9b0168f42fa5b"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "review_agent/case_budget.py": "97e33aa2f69acdfa9e61f203ced68ecd68dbab6658d7888aa027f8f65b1a9d79",
+        "ontology_review/repository.py": "699f7cb9af6c9ee7bbd4662035c59b855b32982d6a57e771b6b48bea39a15851"
+      }
+    },
+    {
+      "id": "T40",
+      "scenario": "合法初速/射程与正文假设句",
+      "expected": "不因短词或假设二字删除",
+      "tests": [
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_short_terms_and_symbols_are_not_deleted_or_forced_to_chinese",
+        "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_body_hypotheses_and_captions_are_requested_instead_of_filtered"
+      ],
+      "code": [
+        "extract_triplets/extrct.py",
+        "extract_triplets/pipeline_v4.py"
+      ],
+      "requires_real_neo4j": false,
+      "status": "passed",
+      "test_results": [
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_short_terms_and_symbols_are_not_deleted_or_forced_to_chinese",
+          "status": "passed",
+          "duration_seconds": 0.0,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 184,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        },
+        {
+          "id": "tests.test_source_candidate_v4.SourceCandidateV4Tests.test_body_hypotheses_and_captions_are_requested_instead_of_filtered",
+          "status": "passed",
+          "duration_seconds": 1.171,
+          "source": {
+            "path": "tests/test_source_candidate_v4.py",
+            "line": 193,
+            "sha256": "4f7557e72f42c7e149df3706c79237f082640a64584ff4029af9461d75326f36"
+          }
+        }
+      ],
+      "implementation_sha256": {
+        "extract_triplets/extrct.py": "fc72585223d4fd87edaa1056f0fb4895bd9566d20c809adbeacc65c16d17d6a8",
+        "extract_triplets/pipeline_v4.py": "289b4d9d248cb16fbdcf129194316b8b6670d6b0d3d94f4332f636e6e02b5c75"
+      }
+    }
+  ],
+  "test_count": 77,
+  "plan_file": {
+    "path": "D:\\xwechat_files\\wxid_px3it4jr5rt722_8f88\\msg\\file\\2026-10\\kg_quality_implementation_plan_20261025.md",
+    "sha256": "07027411a6ede5c601eebfd97b5931d49226f70bd80d0a58ee72c2085efe1567"
+  },
+  "neo4j": {
+    "uri": "bolt://127.0.0.1:50320",
+    "pid": 25288,
+    "data_directory": "D:\\knowledge-huopao\\runs\\acceptance\\6508739c525e44d9bd4eb50616e85241\\neo4j\\data",
+    "production_connection": false,
+    "server": "Neo4j/2025.11.2",
+    "server_stopped": true
+  },
+  "production_before": {
+    "available": true,
+    "database_logical_sha256": "8ea70462dd9dec5bb0c54763f7f945c7f815b5135543ec2500884677f6cd3799",
+    "row_counts": {
+      "agent_checkpoints": 613,
+      "agent_tool_calls": 2330,
+      "audit_runs": 1610,
+      "candidate_revisions": 2645,
+      "candidates": 2645,
+      "decisions": 1603,
+      "import_outbox": 0,
+      "jobs": 0,
+      "memory_cases": 0,
+      "migration_items": 0,
+      "planner_steps": 2400,
+      "proposals": 1669,
+      "review_events": 0,
+      "runs": 2,
+      "schema_migrations": 2,
+      "validation_requests": 693,
+      "validator_attempts": 6111,
+      "validator_votes": 5031
+    },
+    "release_id": "release_d0a02b846433380cb05473219174df431d53e483c13d5cc0281c9dac02528d71",
+    "original_ontology_sha256": "fe94b15a6f36719cb4b55e223559f3189e6529cd99fd1bca4029d0b2c43de9d8"
+  },
+  "production_after": {
+    "available": true,
+    "database_logical_sha256": "8ea70462dd9dec5bb0c54763f7f945c7f815b5135543ec2500884677f6cd3799",
+    "row_counts": {
+      "agent_checkpoints": 613,
+      "agent_tool_calls": 2330,
+      "audit_runs": 1610,
+      "candidate_revisions": 2645,
+      "candidates": 2645,
+      "decisions": 1603,
+      "import_outbox": 0,
+      "jobs": 0,
+      "memory_cases": 0,
+      "migration_items": 0,
+      "planner_steps": 2400,
+      "proposals": 1669,
+      "review_events": 0,
+      "runs": 2,
+      "schema_migrations": 2,
+      "validation_requests": 693,
+      "validator_attempts": 6111,
+      "validator_votes": 5031
+    },
+    "release_id": "release_d0a02b846433380cb05473219174df431d53e483c13d5cc0281c9dac02528d71",
+    "original_ontology_sha256": "fe94b15a6f36719cb4b55e223559f3189e6529cd99fd1bca4029d0b2c43de9d8"
+  },
+  "production_unchanged": true,
+  "passed": 40,
+  "not_passed": 0,
+  "success": true
+}

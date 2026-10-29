@@ -1,0 +1,102 @@
+{
+  "id": "majority",
+  "method": "majority",
+  "ontology_mode": "fixed",
+  "ablations": [],
+  "population_hash": "4631957a9cc86a19d2439de60682ccc30dea0834e880f49a4219c1401dec336b",
+  "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+  "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+  "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+  "seeded_training_cases": 0,
+  "limits": {
+    "llm_calls": 80,
+    "tokens": 120000,
+    "tool_calls": 48,
+    "extension_requests": 1,
+    "rebinds": 2,
+    "seconds": 240
+  },
+  "runtime_seconds": 0.5780000000086147,
+  "completed": 1,
+  "failed": 0,
+  "status_counts": {
+    "completed": 1
+  },
+  "usage": {
+    "total": {
+      "calls": 3,
+      "retries": 0,
+      "known_input_tokens": 6,
+      "known_output_tokens": 9,
+      "unknown_token_requests": 0,
+      "known_latency_ms": 0,
+      "outcome_unknown_requests": 0,
+      "known_cost": 0.0,
+      "cost": null,
+      "unknown_cost_requests": 3
+    },
+    "by_role": {
+      "triple_validator": {
+        "calls": 3,
+        "retries": 0,
+        "known_input_tokens": 6,
+        "known_output_tokens": 9,
+        "unknown_token_requests": 0,
+        "known_latency_ms": 0,
+        "outcome_unknown_requests": 0,
+        "known_cost": 0.0,
+        "cost": null,
+        "unknown_cost_requests": 3
+      }
+    },
+    "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+    "price_source": "explicit user-supplied rates",
+    "currency": "user_configured"
+  },
+  "formal_admission_count": 0,
+  "case_accounts": [
+    {
+      "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 80,
+        "rebinds": 2,
+        "tokens": 120000,
+        "tool_calls": 48
+      },
+      "usage": {
+        "extension_requests": 0,
+        "llm_calls": 3,
+        "rebinds": 0,
+        "tokens": 15,
+        "tool_calls": 2
+      }
+    }
+  ],
+  "model_pool": [
+    {
+      "id": "a",
+      "model_id": "model_a",
+      "family": "a",
+      "identity": "model_a"
+    },
+    {
+      "id": "b",
+      "model_id": "model_b",
+      "family": "b",
+      "identity": "model_b"
+    },
+    {
+      "id": "c",
+      "model_id": "model_c",
+      "family": "c",
+      "identity": "model_c"
+    }
+  ],
+  "unhandled_jobs": 0,
+  "artifact_sha256": {
+    "predictions.json": "da1d227abb0901d464391ff6ae2fd29e13b65446dbfd0dff11d8970320f483e3",
+    "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "requests.json": "098f16d6bc5c39abf6eae3e1a4ec052f3e2560742a046f49238a04ab5f4e009b"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "version": "controlled_review_experiment_v1",
+  "spec": {
+    "split": {
+      "train_document_ids": [],
+      "test_document_ids": [
+        "doc"
+      ]
+    },
+    "limits": {
+      "llm_calls": 80,
+      "tool_calls": 48
+    },
+    "groups": [
+      {
+        "id": "rules",
+        "method": "rules",
+        "ontology_mode": "fixed"
+      },
+      {
+        "id": "single",
+        "method": "single",
+        "ontology_mode": "fixed"
+      },
+      {
+        "id": "majority",
+        "method": "majority",
+        "ontology_mode": "fixed"
+      },
+      {
+        "id": "fixed_workflow",
+        "method": "fixed_workflow",
+        "ontology_mode": "fixed"
+      },
+      {
+        "id": "agent",
+        "method": "agent",
+        "ontology_mode": "fixed"
+      },
+      {
+        "id": "dynamic",
+        "method": "agent",
+        "ontology_mode": "dynamic"
+      },
+      {
+        "id": "without_extension",
+        "method": "agent",
+        "ontology_mode": "dynamic",
+        "ablations": [
+          "no_extension"
+        ]
+      },
+      {
+        "id": "no_targeted_retrieval",
+        "method": "agent",
+        "ontology_mode": "dynamic",
+        "ablations": [
+          "no_targeted_retrieval"
+        ]
+      },
+      {
+        "id": "no_issue_resolution",
+        "method": "agent",
+        "ontology_mode": "dynamic",
+        "ablations": [
+          "no_issue_resolution"
+        ]
+      },
+      {
+        "id": "no_counterevidence_resolution",
+        "method": "agent",
+        "ontology_mode": "dynamic",
+        "ablations": [
+          "no_counterevidence_resolution"
+        ]
+      }
+    ]
+  },
+  "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+  "base_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+  "memory_scope": {
+    "version": "review_memory_scope_v1",
+    "mode": "restricted",
+    "allowed_document_ids": [],
+    "excluded_document_ids": [
+      "doc"
+    ]
+  },
+  "config_hash": "4d2c52cd4ba521fb2135b60fa521072e29e49a41b11acba7bbeb1e46932318ae",
+  "source_sha256": {
+    "document/__init__.py": "231e28de734b293f96fae9f282218f333a96a7bca414955df507669be8aa37b4",
+    "document/hierarchy_index.py": "1a6c1f5a748e6cb0fb52d4bb41cfe9ec987c44f9765d747fbfa6259b85213304",
+    "document/index_builder.py": "811907cb5d5c24cc90f15fc9bc805e0d88ed7d511b756b0eca2a88551bc95893",
+    "document/index_integrity.py": "ef817f844211c6b595c487d2e04c4e84471298004c52244ad967051da28e81a7",
+    "document/snapshot.py": "a7de7066a513b9faa70388262f66aecc508d08965e016be2cf070dc3d54f50c3",
+    "evaluation/adapters/__init__.py": "1f4e89ae9a0d7e5baf9ef3c07eb75e676c55398d96950a34749345a0216dacdb",
+    "evaluation/adapters/baselines.py": "8601fc7ed8a2c9fd0ea08e56505443783dbef025eb8577eb73e111af544990e8",
+    "evaluation/annotations.py": "068e30061f033e79b304e759f73f8c775d52c7f08eeef65e85e6bc97d0e56d8e",
+    "evaluation/candidate_intake.py": "4d621e6248ebe4ac526adf0aa8042502f3fe3d7283cdd84da7e3305411e5d070",
+    "evaluation/evaluate_calibration.py": "42d3297a399695288eafdb8e647217625cf669d746111adb32444902e3d4c337",
+    "evaluation/evaluate_experiment.py": "f7e6919c7284ddc9160927103709f942890058e3f93bd4b0701c859d8a01384c",
+    "evaluation/evaluate_review.py": "c6303438b3efb36d8ed0d9b079a77f3ee4327203cfe39ae690faa437b4730a0d",
+    "evaluation/experiment.py": "a20cee26da21d8c63a3e66e9cba02e6164c6d02bce381690468cd62f1e38b7de",
+    "evaluation/fact_matching.py": "5ba1847b23b75d7292814b240098b2d839d163e009c6fe89213c9326ae4527be",
+    "evaluation/manifest.py": "0f739a15d1740e4ecf3bbe3a9585d0f8b333f0652be8b98e3dca2b86f4f8fd41",
+    "evaluation/metrics.py": "a3bd0093f674f8993a651c73dbfa828528b7ab606894acb937b79e583daf7ed5",
+    "evaluation/request_meter.py": "a4ff2fa4a83607da32a03e993e7da8563284c66e42ad59bcfd8feb58642ccd63",
+    "evidence/__init__.py": "ae696e0df78d778f67ba84d06f59edbb074d9b06ab7f3f17d76a315c7c03b064",
+    "evidence/Armour and Artillery_evidence.md": "ea2a73a83ef4490f200dd29b9f1f659448ad1db4e449f0ca90c34e8d2acac2b8",
+    "evidence/Ballistics_evidence.md": "4b9212ce6a8e0ae10737678ec138246efe3ca9bd8b6866d85cecd0a8f827bab6",
+    "evidence/hierarchical_retriever.py": "7df15edd508d53f7ba50cc30c8fda31f7ca339bbe40124b03af72b7dbaf90727",
+    "evidence/huopaodandaoxue_evidence.md": "1957d8c4a9e58634ff22b3bca3a4e564f0ef0d1dfd6179dbfaa15df7e91a79a9",
+    "evidence/huopaogouzaoyuyuanli_evidence.md": "fb769a2c7a7e1c4e7cf39afc61aae09399e9f920da429b52abac10eb30ba28ec",
+    "evidence/huopaoshejililun_evidence.md": "847bce87f5147761a09afc7a6c9dc2aceccb0298f85875e335c5b3b184b5ca3f",
+    "evidence/huopaoyuzidongwuqidonglixue_evidence.md": "d12700cd7918136e777e2b30f5c546defe8225302f4ccdb261b410036af7c8ca",
+    "evidence/span_locator.py": "6d9fa5824f72597e54a8cb08bf61fe3357ccf83f3445db4084b5ce2cf041c27d",
+    "evidence/verification.py": "f9fd8cb52dc6a0c1f445fbdaabb739ce60a78e78e93aea9264f728707b957614",
+    "evidence/xiandaihuopaozidongjishejililun_evidence.md": "93b117f77299ba7592ab8798a309292f62d084df2aedb5320637003246ca89b9",
+    "evidence/火炮弹道学_钱林方_evidence.md": "df5a0443d5349f411669f7107a0685d3375c226575a622d3ad7604a162aaf653",
+    "ontology_review/__init__.py": "dbe1a1beec2b434a6206b6df6453eb56c4c07d654c3f74d4db03a24790f05c89",
+    "ontology_review/__main__.py": "ebf13b32b0fca9587dd971eba1b4109b199848f4a381e9e0dc79c368fc9857ce",
+    "ontology_review/contracts.py": "36c77a58fe15414b8a05ca6dd104c5b2cc4f96b3833970d21192ff484d275455",
+    "ontology_review/delta.py": "14c25039c222f06e96ff948a2b0a101e93d5dee13dafc1695fbaf1d85d7bcd00",
+    "ontology_review/evidence.py": "b55f4b3d708e4bba44b0d3c1c1ffb465ca2f3fefefca1a669a6b5afd67923428",
+    "ontology_review/impact.py": "2fb80fe6f8e521faf64700a24b15e3bb41ea9fea6c43834373e7b0506092cb5b",
+    "ontology_review/owl_delta.py": "79f5f284a3c81c6dcf31152f42cd4443dc993398416f26dd5c1d1c508a7ac611",
+    "ontology_review/publisher.py": "579591a6e4194a8ed17a8f8c372117bb2d52c9d7b72db934ce54737fa587cc40",
+    "ontology_review/repository.py": "699f7cb9af6c9ee7bbd4662035c59b855b32982d6a57e771b6b48bea39a15851",
+    "ontology_review/runtime.py": "e9de77f03466434d051a7ca68d49f962bb370ab95b12e1ce758fd3f21a05dd7d",
+    "ontology_review/service.py": "f2f99d9562502bf5a98db7b586e2aa04195d0381ec345b803874a03c1befc106",
+    "ontology_review/tools.py": "5cd04a8998926cc80630e004ee058e0d1e92b65c1411925ffa1823c2630e088f",
+    "ontology_review/validators.py": "999459290e0ecccb455c5f5dcd0906f3f7f4ca34aa76593d4dd8cc41dd3f4f97",
+    "ontologyBuild/application_profile.py": "1ba0042a4d81da1d33025c959b0ff40713e69bdc8ff562b4dd5a069618ad7c91",
+    "ontologyBuild/base_ontology_audit.py": "f407a67e60fae617c598da70eb977ce8c95e51646fd5a2ef2ef86024cfd36896",
+    "ontologyBuild/business_validate.py": "5b590f5df87dc41a4f09896fe433e91570fffd743bc0cc789db08a40f73ec164",
+    "ontologyBuild/candidate_quality.py": "89a5a5c15d6b384cc8fe869e2e3b8cf5710b39d185127d4c183387f1d7672de3",
+    "ontologyBuild/candidate_validator.py": "76234c31483589992602f01ca7f69363fdd9ffb8a1016bf9af2a0016b87dfa90",
+    "ontologyBuild/config.py": "996fd19669e9def233f1759a5ac08043d6affac2fd25dd3d4da41b8ebff04ca0",
+    "ontologyBuild/consistency_checker.py": "0e810583281fb98ec6bf3e48be2583f81354ffcffc0daa96aef7e11f48d200c2",
+    "ontologyBuild/context_builder.py": "ea158ae017503066388dc9ebab134b988b1625f7cdd44d272dfa5873144e79e7",
+    "ontologyBuild/directory_guided_builder.py": "99d2e446d3e31e6f963b72596b084ec55a59c23a2bd7ea473f5ed3bee7067f8c",
+    "ontologyBuild/document_preprocessor.py": "be7121b06ad03c1d6c4968853f0ccfba923ff2fdd0ed2e754763ed860a5b598f",
+    "ontologyBuild/domain_range_inferencer.py": "2d7be387ac020399082faf8c5139f7ef9c265cd6f0aa7359a328406d3282e0a7",
+    "ontologyBuild/evidence_validator.py": "e116fba260222d64476b50721e22ecc37337aa420bfff5b9fe16ec84f866e9ca",
+    "ontologyBuild/import_service.py": "532c55503af69156cd3937f325d38acc263e5ff4ea835014dbf0051709cfc9e0",
+    "ontologyBuild/iri_identity.py": "cb20481c57f6b1d75b18f87392564734b6af194d5c2a022f157ee86d53f3dc5d",
+    "ontologyBuild/ontology_adapter.py": "de641727a08d674b2b2bfecefb001298327c5b38f9e503c85422db4bd8aafff8",
+    "ontologyBuild/ontology_candidate.py": "c34720df2d8dad939b2753e78d46ec0a099833fb76b1f5f90a7577887a847e98",
+    "ontologyBuild/ontology_candidate_schema.py": "97009232b5c6cc736dba730951dfa6bd2ef14655cab30a832e6718d074ec06cd",
+    "ontologyBuild/ontology_matcher.py": "92545c9dae7c6f0f7e1dc5ebc3038bd631d2252ec8de3b4839ca5779a1646901",
+    "ontologyBuild/ontology_normalizer.py": "c37b74f90c59d2a1319aa68c0a49c25428ba3011fa7948d04ecabb3b661037bc",
+    "ontologyBuild/owl_to_project_schema.py": "94aaa2627460beb90d6d6b98b05de90e6b9f21e781671429041016aae2699da5",
+    "ontologyBuild/pipeline.py": "ec33f4f849cf281907e3233d541e508cd02f9d9b006690a9be7ac7c3725801dd",
+    "ontologyBuild/providers/__init__.py": "095a8dd4e78399e0bf580e655962740fe817ae90eead2d0d6dd780b83211ac42",
+    "ontologyBuild/providers/base.py": "ae88280a1f7ad3ef2af592ed117c1b75ea2cf5d14291410c3284cbab7b7645ca",
+    "ontologyBuild/providers/legacy.py": "e5d9cf5aca13c4eb313bd7c328769cee078b203b24ff7b4bc23876fe380db429",
+    "ontologyBuild/providers/neon_import.py": "ff28f0873765b23efa2cc57d246432060c751a4f90d654b255f4a21b1b49bd6f",
+    "ontologyBuild/rdf_artifact.py": "d6cf533d142f116a2082ae59c0cef9c59e196c08160612ac6948eb3d38e6c466",
+    "ontologyBuild/rdf_graph.py": "4d8686bac56d408db2caf9b384377352c960e85350d18b825db35b5da79a85e4",
+    "ontologyBuild/relation_endpoint_statistics.py": "1ffd5cdfa33cd68530fcd8407ddb700dccc5bc2c58bb35ec7e6067b0d2be4f81",
+    "ontologyBuild/release_catalog.py": "e590c4f9f37a70ae7a581f0efe0a4999debcedf18c4c014b454587171ad4bd59",
+    "ontologyBuild/release_service.py": "e68e688d2afe774fb421740a07ff12ec1936e27ad3a77f823f52db86cd7580a7",
+    "ontologyBuild/requirements-import.txt": "bc751face67e462852b03cb8acf45daebf273d218cc1674edb2db2ac33c964b3",
+    "ontologyBuild/review_module.py": "61c4cb86314a5874ffdf852f6d9a81e542de59be273369f4cc385f0c70ecd95c",
+    "ontologyBuild/semantic_validator.py": "17cea4304b49c443e006769bdd7ef12b7efa8ee8711437d6bfddad4b26a35423",
+    "ontologyBuild/本体构建方案.md": "f7b26dca87d9b6f5d5f882a8365ebc94b06e81a3ce9c974683d4a6e9bde40e67",
+    "prompts/extraction_v4.txt": "1460314bf78c85e27efeeb3d4403d1a0397e233fda9d64bf856c248ef4966692",
+    "prompts/ontology_extension_planner_v1.txt": "7a056e389dfe19b1b05c8509dd2081be3493c3a9e5805f7f9f8a939ca886fbf9",
+    "prompts/ontology_extension_validator_v1.txt": "e516cae7a062b89df134877348042474604dd3ee7c595e3154f3ccb72fcf7d0f",
+    "prompts/review_agent/evidence_summary_v1.md": "8809a62d457c6bc39aea24d263ed7e733db6e0a234957969dc5f57595f06022a",
+    "prompts/review_agent/planner_v1.md": "d3afc6343505cfd4dca3b0b84df2f46b1307f354f4ed8de37dfd63c5270c0032",
+    "prompts/review_agent/validator_v1.md": "79a17c20e6e04fe4e3f4f414894b8fb39ddf2e9bb2f5fdaf04fc014beee3beba",
+    "prompts/triple_planner_v2.txt": "aa3d59f25836213fa0b6ea3dc22d5f19870fb2374799da7168deca501fa0235f",
+    "prompts/triple_validator_v3.txt": "6e343b5b7733b43a64550599c3357b7c94b5f8309e656c868f7fb915fc012d0b",
+    "review_agent/__init__.py": "a91971a28c035971ad7714f07ec70bb8fcb9fc7a5b786b4383e25df30cf25f12",
+    "review_agent/action_policy.py": "70e4b1b04274a8e27aa4b27d3f3139b403d22ef049f35cc9f99d46b1541647f9",
+    "review_agent/admission.py": "d861ffa8af0410d0d294319a997a7814d56b408151858c08b5a3db3d51f89813",
+    "review_agent/admission_repository.py": "d4e6e2ba273af2306afc5b9df1b7469fd52d0f6ee351d585832c5fb6a3423065",
+    "review_agent/agent_state.py": "7eaf32577b9e615df7146245f7f55946c7cbcc559bbcdf70d4194e5702c12585",
+    "review_agent/batch.py": "0d829348a2edc29a69a51dcfdfdf34cae27b226a9bd7a45b565e8877de1e497b",
+    "review_agent/case_budget.py": "97e33aa2f69acdfa9e61f203ced68ecd68dbab6658d7888aa027f8f65b1a9d79",
+    "review_agent/cli.py": "59065a1937b75bc418fe454835d081fe431be5cc3ee31d53c8898cf368e12c4b",
+    "review_agent/configuration.py": "e1a9943c91211fd45fe4cb9e745c91463628d103380238eb37cddfef5e6cd3b5",
+    "review_agent/consensus.py": "595c850a25ad1152b58916e47287f82de9bc468d895f00e2e7bbb76689219a8e",
+    "review_agent/contracts.py": "2e32062762282f6c37d0f305a4d22b073d1301420d3bd419a8607d7a617990c9",
+    "review_agent/execution.py": "eeebe73ba34f388b0a94637738110195ef5d7c207d7269ca2f37c2f8530fbf03",
+    "review_agent/explanation.py": "3580d3551e297daa741529a0672b99fa1a492e49dcd8a0dfdc9b9af7baded444",
+    "review_agent/feedback.py": "f6732ff77153ee4bae132397196547faf5ec31b620d25fffcceb927a5e803ec6",
+    "review_agent/human_evidence.py": "dfb7be0f8e48fa51434ccb9867db5658232a54dfde8e33a0345b10afd3052881",
+    "review_agent/issue_ledger.py": "bd201cb8df68cbbf066bcfb88b43d8266cd5cc798c7cd22a5c58918b804de73e",
+    "review_agent/jobs.py": "8f9132bd776ccabf5ddf821d8fbbd4b6bf32caf3a4cda5d84934dcc81da744c7",
+    "review_agent/labels.py": "e2b8c3d39ea235378dba41a82bdf22fa0b2ef1c8c6daf0933cef455ceb2cd7ef",
+    "review_agent/lifecycle_repository.py": "7aa22060ae1b1e19e558c8d62864038dd2fe3fb4839936dd819bd7254f575ea9",
+    "review_agent/llm_clients.py": "34409e2d178bad804173aa996fdc0460030a3972f3787544660f37b4edcb3fd4",
+    "review_agent/memory.py": "323e761f2d6fc85a3b7e53c4a02a083e3cf1fb0f5b25347551f5e45826df4153",
+    "review_agent/memory_scope.py": "9e38e7d457a2c8dcf997549948bd4f9beeee87b8f4e6eb4dbd8b2660e38dfcbf",
+    "review_agent/model_settings.py": "a50605819edd459c56f8218566a06faa08c0376d20534fe371beb78f4824731a",
+    "review_agent/ontology_guard.py": "e8a189acf30979fdc6cf9f494721e6120e3a2c9047440c30ca03068382bf4ab7",
+    "review_agent/orchestrator.py": "806e8699145bcfe9d57e4b3d170a565a3b430dfd68f3f42e2253876e519f8b5a",
+    "review_agent/planner.py": "39811482f2c93981433d9d4d28ee07ca99199be9a2f8503fc593947e2a7cab76",
+    "review_agent/planner_contracts.py": "4583ba9017db92715a924a92ec645b5a98d6182788883ac69868cca13f872a7a",
+    "review_agent/progress.py": "9e7ea36160163a91b2b5314ee77c11670a557ba633fc145a28c930dc8d9e5a4b",
+    "review_agent/proposal_resolver.py": "1ebaaf78d5d245d2af15fdb7c8dbb763627df724f20bfb4685ef499b8cf93ca9",
+    "review_agent/repository.py": "1f3d16d2d86192550eec4fe4ade40c9f46ebe2506f9d6b78a9676d3c5366f035",
+    "review_agent/request_cache.py": "6b86f48bb8506ab12d02beb31b67ab7d93c2ea9d6815744af05bf154015a97b6",
+    "review_agent/response_contract.py": "1bc06606a8c28d8f7533f18f41fd9a0b7e73c8d3c00ac74070714c095f0f5457",
+    "review_agent/runtime.py": "f246a3905a8537e01d86908383a803d8c1396dcf26c85a408a7e0113551c49d0",
+    "review_agent/service.py": "fbb9db10fd391151f97ff0a1067a7824fe7b9f7c7d2934efe76abdd3a144b423",
+    "review_agent/task_adapter.py": "e71135309b4c5c1a35f21946eb3f40a42ad60dfe579e9fe044565f921467586a",
+    "review_agent/tools.py": "0e1fc465b6e274d166be586407c464e18451d209595d2e3a201c6302df5058d4",
+    "review_agent/validators.py": "cd25d211e4923188ba04933fc9699e7d9b3fc24b52ba46111ffd59d74e15675d",
+    "schema/__init__.py": "fd81e0eb2487035b177b6b4d0c3382d9a0d61b0303a84706296fab34b52f76c6",
+    "schema/entity_registry.py": "2f7fde22afba9e2ded13a513f62e406e73809ee242f6603fad90c3de4ed988ac",
+    "schema/fact_identity.py": "ce6973276ed7867ab84046a12588b6848f54242de3584c9a1fc392575811053e",
+    "schema/relation_registry.py": "33c037fdf7c5ba726b0e948a2f57eb9b458c99f6ffe839e17590a229dbb6640b",
+    "schema/subontology_retriever.py": "347d54513d523ae94987ae8a3d8c51aac40e71eac88c0ffe24837cf4c0c8dd2a"
+  },
+  "model_pool": [],
+  "production_graph_connected": false,
+  "actual_admission_enabled": false,
+  "test_text_policy": "unlabeled test text may be read; no held-out truth is provided to models"
+}

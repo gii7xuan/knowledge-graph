@@ -1,0 +1,139 @@
+{
+  "id": "no_targeted_retrieval",
+  "method": "agent",
+  "ontology_mode": "dynamic",
+  "ablations": [
+    "no_targeted_retrieval"
+  ],
+  "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+  "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+  "final_release_id": "release_664e1be84df810abf24264473eeba9d53144e0d5d348b13692b2c8d754d72a6f",
+  "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+  "seeded_training_cases": 0,
+  "limits": {
+    "llm_calls": 80,
+    "tokens": 120000,
+    "tool_calls": 48,
+    "extension_requests": 1,
+    "rebinds": 2,
+    "seconds": 240
+  },
+  "runtime_seconds": 9.406000000002678,
+  "completed": 1,
+  "failed": 0,
+  "status_counts": {
+    "completed": 1
+  },
+  "usage": {
+    "total": {
+      "calls": 24,
+      "retries": 0,
+      "known_input_tokens": 48,
+      "known_output_tokens": 72,
+      "unknown_token_requests": 0,
+      "known_latency_ms": 0,
+      "outcome_unknown_requests": 0,
+      "known_cost": 0.0,
+      "cost": null,
+      "unknown_cost_requests": 24
+    },
+    "by_role": {
+      "triple_planner": {
+        "calls": 6,
+        "retries": 0,
+        "known_input_tokens": 12,
+        "known_output_tokens": 18,
+        "unknown_token_requests": 0,
+        "known_latency_ms": 0,
+        "outcome_unknown_requests": 0,
+        "known_cost": 0.0,
+        "cost": null,
+        "unknown_cost_requests": 6
+      },
+      "triple_validator": {
+        "calls": 6,
+        "retries": 0,
+        "known_input_tokens": 12,
+        "known_output_tokens": 18,
+        "unknown_token_requests": 0,
+        "known_latency_ms": 0,
+        "outcome_unknown_requests": 0,
+        "known_cost": 0.0,
+        "cost": null,
+        "unknown_cost_requests": 6
+      },
+      "ontology_planner": {
+        "calls": 9,
+        "retries": 0,
+        "known_input_tokens": 18,
+        "known_output_tokens": 27,
+        "unknown_token_requests": 0,
+        "known_latency_ms": 0,
+        "outcome_unknown_requests": 0,
+        "known_cost": 0.0,
+        "cost": null,
+        "unknown_cost_requests": 9
+      },
+      "ontology_validator": {
+        "calls": 3,
+        "retries": 0,
+        "known_input_tokens": 6,
+        "known_output_tokens": 9,
+        "unknown_token_requests": 0,
+        "known_latency_ms": 0,
+        "outcome_unknown_requests": 0,
+        "known_cost": 0.0,
+        "cost": null,
+        "unknown_cost_requests": 3
+      }
+    },
+    "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+    "price_source": "explicit user-supplied rates",
+    "currency": "user_configured"
+  },
+  "formal_admission_count": 0,
+  "case_accounts": [
+    {
+      "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 80,
+        "rebinds": 2,
+        "tokens": 120000,
+        "tool_calls": 48
+      },
+      "usage": {
+        "extension_requests": 1,
+        "llm_calls": 24,
+        "rebinds": 1,
+        "tokens": 120,
+        "tool_calls": 15
+      }
+    }
+  ],
+  "model_pool": [
+    {
+      "id": "a",
+      "model_id": "model_a",
+      "family": "a",
+      "identity": "model_a"
+    },
+    {
+      "id": "b",
+      "model_id": "model_b",
+      "family": "b",
+      "identity": "model_b"
+    },
+    {
+      "id": "c",
+      "model_id": "model_c",
+      "family": "c",
+      "identity": "model_c"
+    }
+  ],
+  "artifact_sha256": {
+    "predictions.json": "427c97feafcc165507b476d35230ebbda49790e43071dc42f412e9a01ad5e83b",
+    "extensions.json": "be0f94491e3be2d821ba083ec5b02c0958cc229f40e47a2798644f9acb5444f5",
+    "requests.json": "f90d0b5440905e395192c357f7ce53a26d8f71f205f8404762f243b54d5cf705"
+  }
+}

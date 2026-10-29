@@ -1,0 +1,100 @@
+{
+  "run_id": "20261027_chapter1_recovery",
+  "status": "succeeded",
+  "started_at": "2026-10-27T09:35:31+00:00",
+  "finished_at": "2026-10-27T13:26:39+00:00",
+  "markdown_path": "D:\\knowledge-huopao\\runs\\ontology_chapter1_inputs\\火炮弹道学_钱林方_第一章.md",
+  "config": {
+    "extraction_engine": "llm",
+    "review_mode": "manual",
+    "auto_accept_new": false,
+    "corpus_role": "build",
+    "timeout_seconds": 90,
+    "max_retries": 1,
+    "context_max_chars": 1500,
+    "chunk_size": 5000,
+    "chunk_overlap": 180,
+    "max_output_tokens": 3072,
+    "adaptive_retry_chunk_size": 400,
+    "adaptive_retry_chunk_overlap": 40,
+    "base_policy": "draft",
+    "enable_shacl": false,
+    "enable_owl": false,
+    "model": "Qwen",
+    "api_key_configured": true,
+    "base_url_configured": true,
+    "tls_verify": false,
+    "max_chunks": null
+  },
+  "outputs": {
+    "run_dir": "D:\\knowledge-huopao\\runs\\ontology\\20261027_chapter1_recovery"
+  },
+  "stage_status": {
+    "base_audit": "passed",
+    "document_preprocess": "passed",
+    "context_build": "passed",
+    "candidate_extraction": "succeeded",
+    "candidate_validation": "partial",
+    "normalization": "passed",
+    "review_queue": "passed"
+  },
+  "errors": [],
+  "base_origin": "empty_run_scoped_bootstrap",
+  "published_base_used": false,
+  "input_snapshot": {
+    "markdown": {
+      "path": "D:\\knowledge-huopao\\runs\\ontology_chapter1_inputs\\火炮弹道学_钱林方_第一章.md",
+      "sha256": "95502ea5dbdc7166ea6035e94770b692dea033fe0883120dce8281d573bb64f2"
+    },
+    "ontology": {
+      "path": "D:\\knowledge-huopao\\runs\\ontology\\20261027_173531_405f6f75\\bootstrap_base.json",
+      "sha256": "d560032bca02706e23b930a7b60c751d7b6b5de6a958f4089b8b27c55ea27b8a"
+    }
+  },
+  "context_summary": {
+    "ontology_version": "sha256:d560032bca02706e23b930a7b60c751d7b6b5de6a958f4089b8b27c55ea27b8a",
+    "class_count": 0,
+    "object_property_count": 0,
+    "datatype_property_count": 0,
+    "constraint_count": 0,
+    "max_chars": 1500
+  },
+  "extraction_stats": {
+    "total_chunks": 44,
+    "successful_chunks": 44,
+    "failed_chunks": 0,
+    "legal_empty_chunks": 7
+  },
+  "candidate_counts": {
+    "candidate_classes": 189,
+    "candidate_object_properties": 90,
+    "candidate_datatype_properties": 0,
+    "candidate_constraints": 52,
+    "ontology_mapping": 0,
+    "uncertain_candidates": 115
+  },
+  "parent_pipeline_run_id": "20261027_173531_405f6f75",
+  "extraction_recovery": {
+    "retried_chunks": [
+      "chunk_1cfff0920937",
+      "chunk_87da7da6c9ea",
+      "chunk_74466bad8c64",
+      "chunk_329c680cbc08",
+      "chunk_2705524663c6",
+      "chunk_3d9f5bb8bc89"
+    ],
+    "recovered_chunks": 6,
+    "journal": "D:\\knowledge-huopao\\runs\\ontology_chapter1_inputs\\recovery_model_requests.jsonl",
+    "prompt_sha256": "cd293c766585f5f723d32172ea921154ca61712ccd0465a6f9203ecf6647a2f7",
+    "model": "Qwen",
+    "tls_verify": false
+  },
+  "source_generation_methods": {
+    "qwen_successful_chunks": 43,
+    "assistant_concept_supplement_chunks": 1,
+    "assistant_chunk_ids": [
+      "chunk_87da7da6c9ea"
+    ],
+    "scope": "concept names only for assistant supplement; no inferred definitions or relations"
+  }
+}

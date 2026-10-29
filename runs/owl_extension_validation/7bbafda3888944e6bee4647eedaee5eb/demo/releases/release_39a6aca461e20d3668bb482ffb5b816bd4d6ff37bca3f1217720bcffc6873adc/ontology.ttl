@@ -1,0 +1,13 @@
+@prefix ex: <https://example.org/owl-extension/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+ex:Device a owl:Class; rdfs:label "device"@en, "设备"@zh; skos:altLabel "C";
+ skos:definition "A controllable device."@en,"可控设备。"@zh; rdfs:comment "Keep provenance comment."@en .
+ex:Peer a owl:Class; rdfs:label "peer device"@en; skos:definition "A peer controllable device."@en .
+ex:Child a owl:Class; rdfs:label "child device"@en; rdfs:subClassOf ex:Device .
+ex:connects a owl:ObjectProperty; rdfs:label "connects"@en; skos:definition "Connection between devices."@en; rdfs:domain ex:Device; rdfs:range ex:Device .
+ex:links a owl:ObjectProperty; rdfs:label "links"@en; skos:definition "A second connection label."@en; rdfs:domain ex:Device; rdfs:range ex:Device .
+ex:count a owl:DatatypeProperty; rdfs:label "count"@en; skos:definition "A device count."@en; rdfs:domain ex:Device; rdfs:range xsd:integer .
+ex:example a ex:Peer; ex:count "001"^^xsd:integer; ex:links ex:other .

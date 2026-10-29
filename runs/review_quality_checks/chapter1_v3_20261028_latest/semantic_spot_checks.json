@@ -1,0 +1,846 @@
+[
+  {
+    "candidate_id": "cand_036a0237af4a944afc6c",
+    "triple": {
+      "datatype": null,
+      "head": "质心运动微分方程组",
+      "head_entity_id": "local_3b56034a8436021335820146becc1e9f33150d6d7c34f845f53691c2f3666333",
+      "head_type": "C_5d265e9d9a9bd7644687",
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "extracted",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": "以时间 t 为自变量",
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "表示于",
+      "tail": "直角坐标系",
+      "tail_entity_id": "local_c36a1d88639f5d16190873f3609413079565358d94e8f48d59fe68d603310e5f",
+      "tail_kind": "entity",
+      "tail_type": "C_d7f09946ffab58f94585",
+      "unit": null,
+      "value": null
+    },
+    "workflow": "awaiting_ontology_review",
+    "source_consensus": "supported",
+    "evidence": [
+      {
+        "evidence_id": "ev_d3881374cbaadc02f6a3",
+        "quote": "最后就可以整理出直角坐标表示的质心运动微分方程组："
+      },
+      {
+        "evidence_id": "ev_6df3827a6457c5802f26",
+        "quote": "则  $\\frac{\\mathrm{d}v_y}{\\mathrm{d}t} = -C\\Pi (y)\\frac{\\tau_{0\\mathrm{N}}}{\\tau} F(v)\\sin \\theta -g$  (1-60)"
+      },
+      {
+        "evidence_id": "ev_86faa5ba3adac8b2c0e2",
+        "quote": "$$"
+      },
+      {
+        "evidence_id": "ev_e9e6e333f262ca027d21",
+        "quote": "$$"
+      },
+      {
+        "evidence_id": "ev_878762bf445aa2269d49",
+        "quote": "\\left\\{ \\begin{array}{l} \\frac {\\mathrm {d} v _ {x}}{\\mathrm {d} t} = - C H (y) F (v) \\cos \\theta = - C I I (y) F (v) \\cos \\theta \\tau_ {0 \\mathrm {N}} / \\tau \\\\ \\frac {\\mathrm {d} v _ {y}}{\\mathrm {d} t} = - C H (y) F (v) \\sin \\theta - g = - C I I (y) F (v) \\sin \\theta \\tau_ {0 \\mathrm {N}} / \\tau - g \\\\ \\frac {\\mathrm {d} x}{\\mathrm {d} t} = v _ {x} \\\\ \\frac {\\mathrm {d} y}{\\mathrm {d} t} = v _ {y} \\\\ v = \\sqrt {v _ {x} ^ {2} + v _ {y} ^ {2}} \\\\ \\theta = \\arctan v _ {y} / v _ {x} \\end{array} \\right."
+      }
+    ],
+    "votes": [
+      {
+        "model_id": "Qwen",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3",
+              "ev_878762bf445aa2269d49"
+            ],
+            "note": "原文明确提到“直角坐标表示的质心运动微分方程组”，且后续给出了具体的方程组内容，支持了“质心运动微分方程组”在“直角坐标系”中的表示。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3"
+            ],
+            "note": "原文中“以时间 t 为自变量”的限定条件在方程组中体现（dv/dt, dx/dt, dy/dt），与候选项中的applicability一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3"
+            ],
+            "note": "关系“表示于”方向正确，即“质心运动微分方程组”被表示于“直角坐标系”。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，relation_known为false，存在SCHEMA_GAP，无法确认关系和类型是否完全符合本体约束。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证，所有提供的证据均支持或作为上下文存在。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "Gemma",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3"
+            ],
+            "note": "原文明确提到“直角坐标表示的质心运动微分方程组”，支持主谓宾关系。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_878762bf445aa2269d49"
+            ],
+            "note": "方程组中的导数均对时间 t 求导，支持适用范围“以时间 t 为自变量”。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3"
+            ],
+            "note": "方向正确：方程组被表示于坐标系中。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系“表示于”在本体中缺失，存在SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "deepseek-flash",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3",
+              "ev_878762bf445aa2269d49"
+            ],
+            "note": "原句明确称“直角坐标表示的质心运动微分方程组”，随后给出由直角坐标分量构成的方程组，支持该主谓宾关系。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_878762bf445aa2269d49"
+            ],
+            "note": "方程组以时间t为自变量（出现d/dt），为肯定断言；条件、时间范围、量词未在原句出现，与not_stated一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_d3881374cbaadc02f6a3"
+            ],
+            "note": "“直角坐标表示”可还原为方程组以直角坐标系表示，方向为方程组→表示于→坐标系，未见反向或范围错置。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系“表示于”未在本体映射中确认，域/范围及类型约束未解决，存在SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "给定证据中无明确反驳该表示关系的材料；未发现相反表述。",
+            "status": "pass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate_id": "cand_05c2bf196c34fd2d1656",
+    "triple": {
+      "datatype": null,
+      "head": "空气密度函数",
+      "head_entity_id": "local_425a7f3f24d70dcb25c6166125d17bb8e416558895e2b19ea3b70c53bfd8446f",
+      "head_type": "C_e0f77606c291cca8d429",
+      "language": "zh",
+      "mapping_status": "mapped",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": "R_fe176660a681f17dc9db",
+      "relation_label": "反映",
+      "relation_semantic_hash": "690e622b047e24041bfe4debe6717beab8a6b674f17c06b7a40c2a890eb8900e",
+      "surface_relation": "反映",
+      "tail": "大气对弹丸飞行的影响",
+      "tail_entity_id": "local_bf8241ce541060b3d683e9baf5e3a95103bf18140705bc571e39c801972a3a7b",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "workflow": "revision_required",
+    "source_consensus": "supported",
+    "evidence": [
+      {
+        "evidence_id": "ev_b06a4bb4addd7ff8a319",
+        "quote": "式中第二个组合已在前面讨论过，它反映了大气对弹丸飞行的影响，是空气密度函数。"
+      },
+      {
+        "evidence_id": "ev_715bdbcbadf005130244",
+        "quote": "$$"
+      },
+      {
+        "evidence_id": "ev_48841068e324f7d85599",
+        "quote": "$$"
+      },
+      {
+        "evidence_id": "ev_8972d2f479af0140ad7a",
+        "quote": "C = \\frac {i d ^ {2}}{m} \\times 1 0 ^ {3} \\tag {1-38}"
+      },
+      {
+        "evidence_id": "ev_314dd5b4ac85eea01491",
+        "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}}"
+      }
+    ],
+    "votes": [
+      {
+        "model_id": "Qwen",
+        "source_support": "supported",
+        "schema_status": "fail",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "原文“它反映了大气对弹丸飞行的影响，是空气密度函数”支持“空气密度函数”反映“大气对弹丸飞行的影响”。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "原文为肯定陈述，无额外条件、时间或量词限制，与候选限定一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "原文主语“它”指代空气密度函数，谓语“反映”宾语为大气影响，方向一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查失败：头实体类型不满足关系域约束，且尾实体类型未知。",
+            "status": "fail"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反驳证据。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "Gemma",
+        "source_support": "supported",
+        "schema_status": "fail",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "原文明确指出空气密度函数反映了大气对弹丸飞行的影响。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "无特殊限定词。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "方向正确：空气密度函数 -> 反映 -> 大气对弹丸飞行的影响。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "域约束失败且尾实体类型未知。",
+            "status": "fail"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "deepseek-flash",
+        "source_support": "supported",
+        "schema_status": "fail",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION",
+          "ENTITY_MISMATCH"
+        ],
+        "suggested_revision": {
+          "action": "remap_or_defer",
+          "keep_evidence_ids": [
+            "ev_b06a4bb4addd7ff8a319"
+          ],
+          "note": "原文支持该三元组，但当前关系域约束失败且尾实体类型未知；建议复核头尾实体类型与关系映射后再发布。"
+        },
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "原文直接说明“它”反映了大气对弹丸飞行的影响，并随后指出“它”是空气密度函数，主谓宾可成立。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "原文为肯定断言，无否定、条件、时间、量词或适用范围修饰未被保留的问题。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_b06a4bb4addd7ff8a319"
+            ],
+            "note": "“它”作主语、“影响”作宾语，方向与候选“空气密度函数反映大气对弹丸飞行的影响”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系R_fe176660a681f17dc9db要求domain C_53d15a0ecfc3dc8ecd93，但head type C_e0f77606c291cca8d429不满足；tail type为空导致range_status=unknown，硬约束失败。",
+            "status": "fail"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "允许证据中未见反驳该句语义的表述，未发现可靠反证。",
+            "status": "pass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate_id": "cand_07364ae53742e434e3d0",
+    "triple": {
+      "datatype": null,
+      "head": "$c$",
+      "head_entity_id": "local_9c62ef5bf873a9a5a9f05e63d80224c42095e0a56abaae72194b239b83f4e6a2",
+      "head_type": null,
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "unknown",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "unknown",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "是",
+      "tail": "声速",
+      "tail_entity_id": "local_005d42d4a203c043d1e1134af4b9926d84e1b69613754b47953c5363ab937fe0",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "workflow": "manual_review",
+    "source_consensus": "unresolved",
+    "evidence": [
+      {
+        "evidence_id": "ev_eace97008a1917d1206e",
+        "quote": "$c$  是声速"
+      },
+      {
+        "evidence_id": "ev_96b4dcfafa637ae61fc5",
+        "quote": "空气阻力系数  $C_{x0}$  的下标  $x$  表示作用力的方向（与  $R_{x}$  的下标意义相同），0表示攻角  $\\delta = 0^{\\circ}$  。"
+      },
+      {
+        "evidence_id": "ev_c0e90b81c90185ea5e1f",
+        "quote": "$C_{x0}(v / c)$  的量纲为1，它是马赫数  $Ma = v / c$  的函数，式中  $v$  是弹丸相对于空气的速度，  $c$  是声速。"
+      },
+      {
+        "evidence_id": "ev_da6bfe8202b32dd2da32",
+        "quote": "当攻角  $\\delta \\neq 0^{\\circ}$  时，空气阻力系数  $C_{x}(v / c, \\delta)$  将既是  $Ma$  又是  $\\delta$  的函数。"
+      },
+      {
+        "evidence_id": "ev_3b7f7d23438fd0e699dc",
+        "quote": "其比例系数就是空气阻力系数  $C_{x0}$  。"
+      },
+      {
+        "evidence_id": "ev_742f1c0a11b507129532",
+        "quote": "但一般保证飞行稳定的弹丸的攻角通常都很小，可以近似看成  $\\delta = 0^{\\circ}$  。"
+      }
+    ],
+    "votes": [
+      {
+        "model_id": "Qwen",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_eace97008a1917d1206e",
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "原文直接说明“$c$ 是声速”，且上下文确认 $c$ 为声速符号，主谓宾完整且语义一致。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_eace97008a1917d1206e",
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "原文为直接定义，无否定、条件、时间或数量限制，qualifiers 中 polarity=unknown 与 not_stated 状态符合原文无额外限定。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_eace97008a1917d1206e",
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "关系“是”方向为 $c$ 指向“声速”，与原文“$c$ 是声速”一致，无方向反转。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "ontology_check 状态为 unknown，relation_known=false，存在 SCHEMA_GAP，无法确认本体约束是否满足。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_96b4dcfafa637ae61fc5",
+              "ev_da6bfe8202b32dd2da32",
+              "ev_3b7f7d23438fd0e699dc",
+              "ev_742f1c0a11b507129532"
+            ],
+            "note": "其余证据均为空气阻力系数相关上下文，未提供与“$c$ 是声速”相矛盾的信息，无反证。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "Gemma",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "原文明确指出“c 是声速”。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "定义简单，无特殊限定条件。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "方向正确，c 为主语，声速为宾语。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查显示存在 SCHEMA_GAP，关系未定义。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "deepseek-flash",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": {
+          "action": "defer",
+          "note": "源文支持，但需本体为变量 $c$ 与声速之间提供定义/表示关系及实体类型后再批准。"
+        },
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_eace97008a1917d1206e",
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "原文直接陈述“$c$ 是声速”，主谓宾完整且被支持。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_eace97008a1917d1206e",
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "独立核验为肯定定义直述；无条件、时间、量词或适用范围限定，未见否定。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_c0e90b81c90185ea5e1f"
+            ],
+            "note": "$c$ 是被定义符号，声速为其所指对象，方向一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "relation_id、head_type、tail_type 均为空，relation_known=false，ontology_check 报 SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_c0e90b81c90185ea5e1f",
+              "ev_da6bfe8202b32dd2da32"
+            ],
+            "note": "核查直接句及相邻条件句，未发现反驳“$c$ 是声速”的材料。",
+            "status": "pass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate_id": "cand_43809d045ba9207db5ee",
+    "triple": {
+      "datatype": null,
+      "head": "落角",
+      "head_entity_id": "local_0c8379c8648bf751e66037614448fa27d68805af240ef6e9559d1483d3811e2c",
+      "head_type": null,
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "extracted",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": "在射程一定的情况下，落角越小",
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "使...增大",
+      "tail": "ΔX",
+      "tail_entity_id": "local_e358a088eb50b6d318dfa2e276f510fbad7934d7ad958a606cc3ea4852c2aea1",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "workflow": "revision_required",
+    "source_consensus": "unresolved",
+    "evidence": [
+      {
+        "evidence_id": "ev_abf138680e0f9c54082a",
+        "quote": "随着射角的增大，射程是增大的，但落角也增大，前者使  $\\Delta X$  增大，后者使  $\\Delta X$  减小。"
+      },
+      {
+        "evidence_id": "ev_1a67942db445ca29add6",
+        "quote": "<table><tr><td rowspan=\"2\">炮弹</td><td rowspan=\"2\">射程</td><td colspan=\"4\">射角/(°)</td></tr><tr><td>5</td><td>15</td><td>30</td><td>45</td></tr><tr><td rowspan=\"3\">炮弹Ⅱ</td><td>X1/m</td><td>8 979.9</td><td>15 796.0</td><td>21 378.4</td><td>24 129.0</td></tr><tr><td>X2/m</td><td>9 023.7</td><td>15 830.0</td><td>21 409.7</td><td>24 154.2</td></tr><tr><td>ΔX/m</td><td>43.8</td><td>34</td><td>31.3</td><td>25.2</td></tr></table>"
+      },
+      {
+        "evidence_id": "ev_21de0e2a073161c2f485",
+        "quote": "在射程一定的情况下，落角越小，则曲面与平面之差所造成的  $\\Delta X$  越大。"
+      },
+      {
+        "evidence_id": "ev_c5457aec037a1c5639bc",
+        "quote": "一个是落角。"
+      },
+      {
+        "evidence_id": "ev_c9ab2e7280bc5834c122",
+        "quote": "$\\Delta X$  的大小取决于两个方面：一个是射程；"
+      },
+      {
+        "evidence_id": "ev_35ce65d3d2ee4a32dffd",
+        "quote": "射程越大，则地表面与平面的差别越大；"
+      }
+    ],
+    "votes": [
+      {
+        "model_id": "Qwen",
+        "source_support": "supported",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": null,
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "原文“在射程一定的情况下，落角越小，则曲面与平面之差所造成的 ΔX 越大”直接支持“落角”与“ΔX”之间的反向关系，即落角减小导致ΔX增大，与候选关系“使...增大”在语义上等价。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "候选中的条件“在射程一定的情况下，落角越小”与原文完全一致，极性“positive”和模态“asserted”也符合原文陈述。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "原文表明落角越小，ΔX越大，即落角对ΔX有负向影响。候选关系“使...增大”在“落角越小”的条件下成立，方向正确。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，relation_known为false，存在SCHEMA_GAP，无法确认关系“使...增大”在本体中的定义及头尾实体类型约束。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_abf138680e0f9c54082a"
+            ],
+            "note": "证据ev_abf138680e0f9c54082a提到“落角也增大，后者使 ΔX 减小”，这与候选关系在“落角增大”时ΔX减小的情况一致，不构成反证，反而从另一角度支持了落角与ΔX的反向关系。",
+            "status": "pass"
+          }
+        ]
+      },
+      {
+        "model_id": "Gemma",
+        "source_support": null,
+        "schema_status": null,
+        "schema_issue": null,
+        "reason_codes": null,
+        "suggested_revision": null,
+        "checks": null
+      },
+      {
+        "model_id": "deepseek-flash",
+        "source_support": "contradicted",
+        "schema_status": "unknown",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SOURCE_CONTRADICTS",
+          "DIRECTION_MISMATCH",
+          "SCHEMA_GAP"
+        ],
+        "suggested_revision": {
+          "head": "落角",
+          "note": "或改写为“落角越小→ΔX越大”，保持与原文反向关系一致。",
+          "qualifiers": {
+            "applicability": null,
+            "condition": "在射程一定的情况下，落角越大",
+            "modality": "asserted",
+            "polarity": "positive",
+            "quantifier": null,
+            "time_scope": null
+          },
+          "relation": "使...减小",
+          "tail": "ΔX"
+        },
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_abf138680e0f9c54082a",
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "原文为负向关系：落角增大使ΔX减小（“后者使ΔX减小”），且“落角越小，则……ΔX越大”；候选断言“落角使ΔX增大”方向相反。",
+            "status": "fail"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "条件“在射程一定的情况下，落角越小”与原文一致，肯定与断言语气均保留；但该条件本身含负向语义，与关系标签不兼容。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_abf138680e0f9c54082a",
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "头实体“落角”与尾实体“ΔX”为反向单调关系（落角增大→ΔX减小），而候选关系“使...增大”表达正向因果。",
+            "status": "fail"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系未在本体中定义（relation_known=false，SCHEMA_GAP），域/值域未知，无法完成类型约束校验。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_abf138680e0f9c54082a",
+              "ev_21de0e2a073161c2f485"
+            ],
+            "note": "已核查两条反证：ev_abf138680e0f9c54082a 明确“落角也增大……后者使ΔX减小”；ev_21de0e2a073161c2f485 明确“落角越小，ΔX越大”，均直接覆盖候选方向，非片段外推。",
+            "status": "fail"
+          }
+        ]
+      }
+    ]
+  }
+]

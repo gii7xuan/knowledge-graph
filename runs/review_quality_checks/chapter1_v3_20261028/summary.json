@@ -1,0 +1,95 @@
+{
+  "checked_at_beijing": "2026-10-28T18:33:20+08:00",
+  "job": "D:\\knowledge-huopao\\runs\\review_jobs\\chapter1_20261028_planner_v3",
+  "execution_id": "batch_a4bf7d35cd4144c28b452908fe85b90e",
+  "snapshot": "D:\\knowledge-huopao\\runs\\review_quality_checks\\chapter1_v3_20261028\\snapshot_20261028_103320.sqlite3",
+  "completed_audits_checked": 18,
+  "audit_statuses": {
+    "completed": 18,
+    "running": 1
+  },
+  "counts": {
+    "completion": {
+      "independent_review_incomplete": 5,
+      "independent_review_completed": 13
+    },
+    "strategies": {
+      "llm_react": 18
+    },
+    "stop_reasons": {
+      "token_budget_exhausted": 3,
+      "no_information_gain": 6,
+      "awaiting_ontology_review": 3,
+      "本体准入失败且无扩展权限，来源支持已确认但无法通过本体约束": 1,
+      "独立验证未达共识且本体准入未通过，需人工处理": 1,
+      "independent validation consensus reached": 1,
+      "本体准入未通过且独立验证未形成共识，需人工处理": 2,
+      "独立委员会对来源支持一致为 supported，但本体准入因 SCHEMA_GAP 未决，需人工处理本体扩展": 1
+    },
+    "decisions": {
+      "manual_review": 18
+    },
+    "workflows": {
+      "revision_required": 5,
+      "awaiting_ontology_review": 3,
+      "manual_review": 7,
+      "schema_unresolved": 3
+    },
+    "vote_statuses": {
+      "ok": 51,
+      "invalid_contract": 1,
+      "timeout": 5
+    },
+    "model_votes": {
+      "Qwen": 19,
+      "Gemma": 19,
+      "deepseek-flash": 19
+    },
+    "source_consensus": {
+      "unresolved": 8,
+      "supported": 10
+    },
+    "schema_status": {
+      "unknown": 16,
+      "fail": 1,
+      "pass": 1
+    },
+    "planner_errors": {},
+    "invalid_tools": {
+      "('request_ontology_extension', 'existing/ambiguous schema or unconfirmed gap must be remapped/reviewed, not duplicated')": 6,
+      "('request_ontology_extension', 'repeated action without information gain')": 3,
+      "('run_validation', 'repeated action without information gain')": 3,
+      "('request_ontology_extension', 'class extension requires an unrepresented, source-supported endpoint class from full lookup')": 2
+    },
+    "tools": {
+      "inspect_ontology": 18,
+      "run_validation": 27,
+      "request_ontology_extension": 14,
+      "finish_review": 6,
+      "search_evidence": 4,
+      "inspect_context": 1
+    },
+    "tool_statuses": {
+      "ok": 42,
+      "cached": 5,
+      "invalid_action": 14,
+      "waiting": 3,
+      "finish_requested": 6
+    }
+  },
+  "violations": [],
+  "violation_count": 0,
+  "without_any_vote": 0,
+  "without_ontology_check": 0,
+  "independent_review_complete": 13,
+  "independent_review_incomplete": 5,
+  "progress_at_start": {
+    "completed": 18,
+    "independent_review_completed": 13,
+    "review_incomplete": 5,
+    "failed": 0,
+    "remaining": 299
+  },
+  "database_modified_by_inspection": false,
+  "additional_model_calls": 0
+}

@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-28T09:52:22+00:00",
+  "candidate_count": 2,
+  "skipped_waiting_or_healthy": 1,
+  "valid_current_proposal_votes": 6,
+  "distinct_model_families": 3,
+  "invalid_tool_calls": 0,
+  "invalid_planner_attempts": 0,
+  "ontology_before_validation": true,
+  "validation_before_finish_or_extension": true,
+  "frozen_vote_bindings_verified": true,
+  "review_completion_distinguished_from_execution": true,
+  "independent_review_completed": 2,
+  "cases": [
+    {
+      "candidate_id": "cand_7619a3990068828ab44a",
+      "audit_id": "audit_1d554bcccaba494eb756e68a890766aa",
+      "review_completion_status": "independent_review_completed",
+      "tools": [
+        {
+          "tool": "inspect_ontology",
+          "status": "ok"
+        },
+        {
+          "tool": "run_validation",
+          "status": "ok"
+        },
+        {
+          "tool": "finish_review",
+          "status": "finish_requested"
+        }
+      ],
+      "committee_models": [
+        "Qwen",
+        "Gemma",
+        "deepseek-flash"
+      ],
+      "valid_votes": 3,
+      "source_support": "unresolved",
+      "workflow_state": "manual_review",
+      "decision": "manual_review",
+      "stop_reason": "已完成本体检查与独立验证，证据支持充分，无未决问题",
+      "invalid_planner_attempts": 0,
+      "budget": {
+        "llm_calls": 7,
+        "tool_calls": 3,
+        "planner_steps": 3,
+        "validation_rounds": 1,
+        "input_tokens": 37451,
+        "output_tokens": 8061,
+        "unknown_token_requests": 0,
+        "deadline_epoch": 1793181064.1348512
+      }
+    },
+    {
+      "candidate_id": "cand_0327302655245f377c35",
+      "audit_id": "audit_3d9a27b32641499297c94f240790fa40",
+      "review_completion_status": "independent_review_completed",
+      "tools": [
+        {
+          "tool": "inspect_ontology",
+          "status": "ok"
+        },
+        {
+          "tool": "run_validation",
+          "status": "ok"
+        },
+        {
+          "tool": "request_ontology_extension",
+          "status": "waiting"
+        }
+      ],
+      "committee_models": [
+        "Qwen",
+        "Gemma",
+        "deepseek-flash"
+      ],
+      "valid_votes": 3,
+      "source_support": "supported",
+      "workflow_state": "awaiting_ontology_review",
+      "decision": "manual_review",
+      "stop_reason": "awaiting_ontology_review",
+      "invalid_planner_attempts": 0,
+      "budget": {
+        "llm_calls": 7,
+        "tool_calls": 3,
+        "planner_steps": 3,
+        "validation_rounds": 1,
+        "input_tokens": 42220,
+        "output_tokens": 7210,
+        "unknown_token_requests": 0,
+        "deadline_epoch": 1793181135.0363152
+      }
+    }
+  ]
+}

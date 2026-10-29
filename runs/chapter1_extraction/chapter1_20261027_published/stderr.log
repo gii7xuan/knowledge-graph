@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\runs\run_chapter1_extraction.py", line 163, in <module>
+    if __name__=='__main__': raise SystemExit(main())
+                                              ^^^^^^
+  File "D:\knowledge-huopao\runs\run_chapter1_extraction.py", line 160, in main
+    return run(job)
+           ^^^^^^^^
+  File "D:\knowledge-huopao\runs\run_chapter1_extraction.py", line 134, in run
+    exit_code=extraction.run_v4_extraction(bridge.parse_cli_args(args),bridge)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\extract_triplets\pipeline_v4.py", line 206, in run_v4_extraction
+    result = extract_candidates(index, release.ontology, release.binding(), llm_client=bridge.client,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\extract_triplets\pipeline_v4.py", line 166, in extract_candidates
+    outcomes.append(visit(scope))
+                    ^^^^^^^^^^^^
+  File "D:\knowledge-huopao\extract_triplets\pipeline_v4.py", line 111, in visit
+    response = extract_source_scope(scope, index=index, ontology=ontology, llm_client=llm_client, model=model, settings=bounded)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\runs\run_chapter1_extraction.py", line 128, in traced
+    return original_extract(scope,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\extract_triplets\pipeline_v4.py", line 60, in extract_source_scope
+    if observer: observer("started", record)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\runs\run_chapter1_extraction.py", line 122, in observe
+    write(job/'status.json',state)
+  File "D:\knowledge-huopao\runs\run_chapter1_extraction.py", line 21, in write
+    os.replace(temporary,path)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\chapter1_extraction\\chapter1_20261027_published\\status.json.tmp' -> 'D:\\knowledge-huopao\\runs\\chapter1_extraction\\chapter1_20261027_published\\status.json'

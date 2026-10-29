@@ -1,0 +1,396 @@
+[
+  {
+    "name": "含有",
+    "normalized_name": "含有",
+    "definition_candidate": "湿空气含有水蒸气",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": "湿空气",
+    "range_candidate": "水蒸气",
+    "evidence": [
+      {
+        "chunk_id": "chunk_003432ad860f",
+        "text": "实际空气常是含有水蒸气的湿空气"
+      }
+    ],
+    "confidence": 0.8,
+    "reason": "原文明确指出湿空气含有水蒸气，构成包含关系。",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_1e2960d71799",
+      "module_name": "通用火炮知识子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "1. 空气的状态方程与虚温",
+      "section_id": "section_096450b1124b",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_096450b1124b",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_3039dad6f101",
+    "normalization": {
+      "duplicate_role": "canonical"
+    },
+    "normalization_issues": [
+      {
+        "rule": "domain_is_new_candidate",
+        "severity": "review",
+        "message": "domain 是本轮候选类，不能未经审核写入正式约束。"
+      },
+      {
+        "rule": "range_not_found",
+        "severity": "review",
+        "message": "range 不在基础本体或本轮候选类中。"
+      },
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true,
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only"
+  },
+  {
+    "name": "随高度分布",
+    "normalized_name": "随高度分布",
+    "definition_candidate": "气象条件随高度分布的标准定律",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": "气象条件",
+    "range_candidate": null,
+    "evidence": [
+      {
+        "chunk_id": "chunk_cc8c5aaee4db",
+        "text": "气象条件随高度分布的标准定律"
+      }
+    ],
+    "confidence": 0.65,
+    "reason": "原文标题中表达气象条件随高度分布的关系，但 range 不明确",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_1e2960d71799",
+      "module_name": "通用火炮知识子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "2. 标准气象条件",
+      "section_id": "section_c20fd9a95a78",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_c20fd9a95a78",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_c893508b4c30",
+    "normalization": {
+      "duplicate_role": "canonical"
+    },
+    "normalization_issues": [
+      {
+        "rule": "domain_is_new_candidate",
+        "severity": "review",
+        "message": "domain 是本轮候选类，不能未经审核写入正式约束。"
+      },
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true,
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only"
+  },
+  {
+    "name": "具有部件",
+    "normalized_name": "具有部件",
+    "definition_candidate": "弹道系数由表示弹丸形状的量、表示尺寸大小的量及表示惯性的量等组成。",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": "弹道系数",
+    "range_candidate": null,
+    "evidence": [
+      {
+        "chunk_id": "chunk_857ef0bc4247",
+        "text": "它由表示弹丸形状的量  $i$  、表示尺寸大小的量  $d$  及表示惯性的量  $m$  等组成"
+      }
+    ],
+    "confidence": 0.75,
+    "reason": "原文描述了弹道系数的组成成分，但具体成分（如表示弹丸形状的量）未作为独立类别明确命名，因此range_candidate设为null。",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_1e2960d71799",
+      "module_name": "通用火炮知识子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "2. 弹道系数",
+      "section_id": "section_8966d27064a0",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_8966d27064a0",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_bdd73d1e024e",
+    "normalization": {
+      "duplicate_role": "canonical",
+      "relation_canonicalized_to": "具有部件"
+    },
+    "normalization_issues": [
+      {
+        "rule": "domain_is_new_candidate",
+        "severity": "review",
+        "message": "domain 是本轮候选类，不能未经审核写入正式约束。"
+      },
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true,
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only"
+  },
+  {
+    "name": "以...为自变量",
+    "normalized_name": "以...为自变量",
+    "definition_candidate": "描述微分方程组中自变量的选择",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": "弹丸质心运动微分方程组",
+    "range_candidate": null,
+    "evidence": [
+      {
+        "chunk_id": "chunk_76b38ef5c3d1",
+        "text": "前面是以时间  $t$  为自变量所写出的用于分析弹丸运动规律的微分方程组。"
+      }
+    ],
+    "confidence": 0.65,
+    "reason": "原文多次提到以不同变量为自变量，但该关系较为具体，可能不适合直接作为通用对象属性。",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_1e2960d71799",
+      "module_name": "通用火炮知识子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "3. 其他自变量的弹丸质心运动微分方程组",
+      "section_id": "section_77ce7ee15058",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_77ce7ee15058",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_b663f18fa8ef",
+    "normalization": {
+      "duplicate_role": "canonical"
+    },
+    "normalization_issues": [
+      {
+        "rule": "domain_is_new_candidate",
+        "severity": "review",
+        "message": "domain 是本轮候选类，不能未经审核写入正式约束。"
+      },
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true,
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only"
+  },
+  {
+    "name": "由...确定",
+    "normalized_name": "由...确定",
+    "definition_candidate": "表示一个概念由某些参量完全确定",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": "空气弹道",
+    "range_candidate": null,
+    "evidence": [
+      {
+        "chunk_id": "chunk_1c5a552b6fb9",
+        "text": "空气弹道由  $C$  、  $v_{0}$  、  $\\theta_0$  三个参量完全确定"
+      }
+    ],
+    "confidence": 0.65,
+    "reason": "原文表达空气弹道由三个参量确定，但关系名称较为特殊，且range不确定",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_1e2960d71799",
+      "module_name": "通用火炮知识子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "4. 空气弹道由  $C$  、  $v_{0}$  、  $\\theta_0$  三个参量完全确定",
+      "section_id": "section_276109bc91dd",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_276109bc91dd",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_b381ce301df9",
+    "normalization": {
+      "duplicate_role": "canonical"
+    },
+    "normalization_issues": [
+      {
+        "rule": "domain_is_new_candidate",
+        "severity": "review",
+        "message": "domain 是本轮候选类，不能未经审核写入正式约束。"
+      },
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true,
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only"
+  },
+  {
+    "name": "具有部件",
+    "normalized_name": "具有部件",
+    "definition_candidate": "表示非标准条件所包含的具体因素。",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": "非标准条件",
+    "range_candidate": null,
+    "evidence": [
+      {
+        "chunk_id": "chunk_459f231a34c8",
+        "text": "非标准条件包括考虑地球曲率及重力加速度变化、气压、气温和纵、横风的变化。"
+      }
+    ],
+    "confidence": 0.8,
+    "reason": "原文明确表达了非标准条件与具体因素之间的包含关系。",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_45b89814a97e",
+      "module_name": "外弹道子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "1.3 非标准条件下质点弹道的基本方程",
+      "section_id": "section_b71bba3031e3",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_b71bba3031e3",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_35602ecc3322",
+    "normalization": {
+      "duplicate_role": "canonical",
+      "relation_canonicalized_to": "具有部件"
+    },
+    "normalization_issues": [
+      {
+        "rule": "domain_is_new_candidate",
+        "severity": "review",
+        "message": "domain 是本轮候选类，不能未经审核写入正式约束。"
+      },
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true,
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only"
+  },
+  {
+    "name": "偏转",
+    "normalized_name": "偏转",
+    "definition_candidate": "一个速度矢量相对于另一个速度矢量偏转了一个角度",
+    "status": "new_candidate",
+    "matched_existing_property": null,
+    "domain_candidate": null,
+    "range_candidate": null,
+    "evidence": [
+      {
+        "chunk_id": "chunk_561db3317157",
+        "text": "$v_{0\\mathrm{r}}$  相对于  $v_{0}$  向左（面向射击方向）偏转了一个角度"
+      }
+    ],
+    "confidence": 0.65,
+    "reason": "原文明确指出速度矢量之间的偏转关系，但 domain 和 range 不确定，因此置信度较低。",
+    "validation_status": "passed",
+    "format_passed": true,
+    "evidence_passed": true,
+    "business_passed": true,
+    "semantic_support_status": "not_run",
+    "validation_issues": [],
+    "source_module": {
+      "ontology_name": "火炮领域本体",
+      "module_id": "module_1e2960d71799",
+      "module_name": "通用火炮知识子本体",
+      "directory_role": "module_partition",
+      "note": "目录树仅用于划分子本体模块，不自动生成 subClassOf 关系。",
+      "breadcrumb_path": "（1）横风对弹道的影响",
+      "section_id": "section_9fb9562ff572",
+      "parent_section_id": null
+    },
+    "source_section_id": "section_9fb9562ff572",
+    "source_document_id": "火炮弹道学_钱林方_第一章",
+    "candidate_revision": 1,
+    "run_id": "20261027_173531_405f6f75",
+    "candidate_id": "candidate_object_properties_c2e822407d30",
+    "normalization": {
+      "duplicate_role": "canonical"
+    },
+    "corpus_role": "build",
+    "formal_write_policy": "candidate_only",
+    "normalization_issues": [
+      {
+        "rule": "experiment_data_leakage_guard",
+        "severity": "review",
+        "message": "该候选来自非训练写入模式，只允许用于主题定位或进入人工审核队列，不自动加入基础本体。"
+      }
+    ],
+    "need_review": true
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "scope": "read-only plan-to-code audit; no business-code edits",
+  "acceptance": {
+    "passed": 40,
+    "test_count": 70,
+    "bound_source_file_count": 47,
+    "changed_bound_files": []
+  },
+  "regression": {
+    "success": true,
+    "tests": 342,
+    "duration_seconds": 292.7,
+    "skipped_real_neo4j_tests": 23
+  },
+  "memory_scope_fixture": {
+    "parameters": [
+      "self",
+      "relation_id",
+      "issue_type",
+      "domain",
+      "snapshot_id",
+      "exclude_candidate_id",
+      "max_positive",
+      "max_negative"
+    ],
+    "retrieved_document_ids": [
+      "held_out_doc",
+      "train_doc"
+    ],
+    "scope_filter_present": false,
+    "fixture_only": true
+  },
+  "implemented_review_metric_keys": [
+    "accepted_precision",
+    "auto_accept_coverage",
+    "auto_accept_precision",
+    "brier",
+    "coverage_denominator",
+    "defer_rate",
+    "invalid_probability_count",
+    "labeled_auto_accept_count",
+    "labeled_count",
+    "manifest_hash",
+    "manual_review_rate",
+    "missing_prediction_count",
+    "missing_probability_count",
+    "population_count",
+    "probability_sample_count",
+    "routes",
+    "status_counts",
+    "system_error_rate",
+    "unlabeled_auto_accept_count",
+    "unlabeled_count",
+    "valid_candidate_recall"
+  ],
+  "annotation_ui_fields": {
+    "source_support": true,
+    "schema_valid": false,
+    "task_relevance": false,
+    "valid_for_kg": true
+  },
+  "production_unchanged_since_acceptance": true,
+  "legacy_metric_fixture": {
+    "fixture_only": true,
+    "polarities": [
+      "positive",
+      "negative"
+    ],
+    "distinct_semantic_fact_keys": 2,
+    "expected_duplicate_rate": 0.0,
+    "legacy_duplicate_rate": 0.5
+  }
+}

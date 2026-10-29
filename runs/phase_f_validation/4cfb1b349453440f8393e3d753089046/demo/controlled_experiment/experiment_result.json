@@ -1,0 +1,1181 @@
+{
+  "version": "controlled_review_experiment_v1",
+  "groups": [
+    {
+      "id": "rules",
+      "method": "rules",
+      "ontology_mode": "fixed",
+      "ablations": [],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 0.46899999999732245,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 0,
+          "retries": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": 0.0,
+          "unknown_cost_requests": 0
+        },
+        "by_role": {},
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 0,
+            "llm_calls": 0,
+            "rebinds": 0,
+            "tokens": 0,
+            "tool_calls": 2
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "ca8071454c95dd4c65b09f5bc1f9f35959f19064ec69bebc3babe0fa59314f3d",
+        "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "requests.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    {
+      "id": "single",
+      "method": "single",
+      "ontology_mode": "fixed",
+      "ablations": [],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 0.6880000000091968,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 1,
+          "retries": 0,
+          "known_input_tokens": 2,
+          "known_output_tokens": 3,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 1
+        },
+        "by_role": {
+          "triple_validator": {
+            "calls": 1,
+            "retries": 0,
+            "known_input_tokens": 2,
+            "known_output_tokens": 3,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 1
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 0,
+            "llm_calls": 1,
+            "rebinds": 0,
+            "tokens": 5,
+            "tool_calls": 2
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "3ab5027ca2178920d105db6ee7647209f40397252dc79ca3f2721c1d1682db0f",
+        "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "requests.json": "45090f91decc265ee763a4b42d7274a7207317d3a90c46cbdd6d75cd84754634"
+      }
+    },
+    {
+      "id": "majority",
+      "method": "majority",
+      "ontology_mode": "fixed",
+      "ablations": [],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 0.7810000000026776,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 3,
+          "retries": 0,
+          "known_input_tokens": 6,
+          "known_output_tokens": 9,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 3
+        },
+        "by_role": {
+          "triple_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 0,
+            "llm_calls": 3,
+            "rebinds": 0,
+            "tokens": 15,
+            "tool_calls": 2
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "d469711071e93aa8d2db1516a88c04f9e649ea617a0b7927de1a89f99d115ec0",
+        "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "requests.json": "fdc08e2c2734ebf2810424732e7c7461c72ed54e095962a7696a2d5c49addd80"
+      }
+    },
+    {
+      "id": "fixed_workflow",
+      "method": "fixed_workflow",
+      "ontology_mode": "fixed",
+      "ablations": [],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 0.8280000000086147,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 3,
+          "retries": 0,
+          "known_input_tokens": 6,
+          "known_output_tokens": 9,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 3
+        },
+        "by_role": {
+          "triple_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 0,
+            "llm_calls": 3,
+            "rebinds": 0,
+            "tokens": 15,
+            "tool_calls": 0
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "518a8f3c7a360c209552b5e0899371b459b0f1758ec27f3eda7e82830cbffaeb",
+        "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "requests.json": "975b8e88144c516a9346dd9fd3fefcbe7320f74ef4caeee670c47b779b3eafae"
+      }
+    },
+    {
+      "id": "agent",
+      "method": "agent",
+      "ontology_mode": "fixed",
+      "ablations": [],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 2.4210000000020955,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 6,
+          "retries": 0,
+          "known_input_tokens": 12,
+          "known_output_tokens": 18,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 6
+        },
+        "by_role": {
+          "triple_planner": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          },
+          "triple_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 0,
+            "llm_calls": 6,
+            "rebinds": 0,
+            "tokens": 30,
+            "tool_calls": 3
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "a61f4e12f3523e4e70adeceeab896fd379235b7cf4f8d2909b128fb2db432499",
+        "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "requests.json": "938c88929186f96db7772969129da125b22533390efbc2972f4864ba6f570189"
+      }
+    },
+    {
+      "id": "dynamic",
+      "method": "agent",
+      "ontology_mode": "dynamic",
+      "ablations": [],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_aeac421cde27e232a7f120dcee08896424ebb519068288b40ed7db9ee2764a69",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 8.875,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 24,
+          "retries": 0,
+          "known_input_tokens": 48,
+          "known_output_tokens": 72,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 24
+        },
+        "by_role": {
+          "triple_planner": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "triple_validator": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "ontology_planner": {
+            "calls": 9,
+            "retries": 0,
+            "known_input_tokens": 18,
+            "known_output_tokens": 27,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 9
+          },
+          "ontology_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 24,
+            "rebinds": 1,
+            "tokens": 120,
+            "tool_calls": 15
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "104d5f4a225de0cd65d03a55116e0e486cb17cec08978061c2c9b350604708de",
+        "extensions.json": "7692e89f72b386086f2c7f32fc02310fe575247a578d8fa8c984de7ae5f6117f",
+        "requests.json": "d1d4d1981fca307cd90a12e8c6f2d3ad5f629dfddd1f74a3dd6fc79492c4cba7"
+      }
+    },
+    {
+      "id": "without_extension",
+      "method": "agent",
+      "ontology_mode": "dynamic",
+      "ablations": [
+        "no_extension"
+      ],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 2.438000000009197,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 6,
+          "retries": 0,
+          "known_input_tokens": 12,
+          "known_output_tokens": 18,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 6
+        },
+        "by_role": {
+          "triple_planner": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          },
+          "triple_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 0,
+            "llm_calls": 6,
+            "rebinds": 0,
+            "tokens": 30,
+            "tool_calls": 3
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "708817f3a298bd2c3115d2a31fa7dc53c312513fb4a7e2f4bdf404bd30515765",
+        "extensions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "requests.json": "9402a884b1399cd4fd90faf725b2f1201de65927ac019f9a3b0448e554807a27"
+      }
+    },
+    {
+      "id": "no_targeted_retrieval",
+      "method": "agent",
+      "ontology_mode": "dynamic",
+      "ablations": [
+        "no_targeted_retrieval"
+      ],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_664e1be84df810abf24264473eeba9d53144e0d5d348b13692b2c8d754d72a6f",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 9.406000000002678,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 24,
+          "retries": 0,
+          "known_input_tokens": 48,
+          "known_output_tokens": 72,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 24
+        },
+        "by_role": {
+          "triple_planner": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "triple_validator": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "ontology_planner": {
+            "calls": 9,
+            "retries": 0,
+            "known_input_tokens": 18,
+            "known_output_tokens": 27,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 9
+          },
+          "ontology_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 24,
+            "rebinds": 1,
+            "tokens": 120,
+            "tool_calls": 15
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "427c97feafcc165507b476d35230ebbda49790e43071dc42f412e9a01ad5e83b",
+        "extensions.json": "be0f94491e3be2d821ba083ec5b02c0958cc229f40e47a2798644f9acb5444f5",
+        "requests.json": "f90d0b5440905e395192c357f7ce53a26d8f71f205f8404762f243b54d5cf705"
+      }
+    },
+    {
+      "id": "no_issue_resolution",
+      "method": "agent",
+      "ontology_mode": "dynamic",
+      "ablations": [
+        "no_issue_resolution"
+      ],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_9af4936eaad47aa8d531fec651d7076cba94baa1da554d0a3901f9266dbb9e41",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 9.422000000005937,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 24,
+          "retries": 0,
+          "known_input_tokens": 48,
+          "known_output_tokens": 72,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 24
+        },
+        "by_role": {
+          "triple_planner": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "triple_validator": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "ontology_planner": {
+            "calls": 9,
+            "retries": 0,
+            "known_input_tokens": 18,
+            "known_output_tokens": 27,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 9
+          },
+          "ontology_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 24,
+            "rebinds": 1,
+            "tokens": 120,
+            "tool_calls": 15
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "d7086b554a5def15134f7d687c5ee14ddc6799f2ec8f522f848b3669965fd5c3",
+        "extensions.json": "daff8faf8422c7b9b8898a9f77616b7962f8d9ae95f924723455d222f2a050ad",
+        "requests.json": "34d9a3b3b092b40c45718da617b59e24e23edfe2be09f3f3038c5c4f68abc6e1"
+      }
+    },
+    {
+      "id": "no_counterevidence_resolution",
+      "method": "agent",
+      "ontology_mode": "dynamic",
+      "ablations": [
+        "no_counterevidence_resolution"
+      ],
+      "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+      "initial_release_id": "release_2eecf885460d077ca241c5f1025323a5e0c1ebaf1d41d2738546491e1e6f681e",
+      "final_release_id": "release_2f950e873e6c50caeb599688a5d4b07faa94feb20beda18a3aa3eb17694321c0",
+      "memory_scope_hash": "c19cf27bc99b23e0abfb0383ed66e32135fb98beb178cdf54c7e904ef5dbb51e",
+      "seeded_training_cases": 0,
+      "limits": {
+        "llm_calls": 80,
+        "tokens": 120000,
+        "tool_calls": 48,
+        "extension_requests": 1,
+        "rebinds": 2,
+        "seconds": 240
+      },
+      "runtime_seconds": 9.718999999997322,
+      "completed": 1,
+      "failed": 0,
+      "status_counts": {
+        "completed": 1
+      },
+      "usage": {
+        "total": {
+          "calls": 24,
+          "retries": 0,
+          "known_input_tokens": 48,
+          "known_output_tokens": 72,
+          "unknown_token_requests": 0,
+          "known_latency_ms": 0,
+          "outcome_unknown_requests": 0,
+          "known_cost": 0.0,
+          "cost": null,
+          "unknown_cost_requests": 24
+        },
+        "by_role": {
+          "triple_planner": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "triple_validator": {
+            "calls": 6,
+            "retries": 0,
+            "known_input_tokens": 12,
+            "known_output_tokens": 18,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 6
+          },
+          "ontology_planner": {
+            "calls": 9,
+            "retries": 0,
+            "known_input_tokens": 18,
+            "known_output_tokens": 27,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 9
+          },
+          "ontology_validator": {
+            "calls": 3,
+            "retries": 0,
+            "known_input_tokens": 6,
+            "known_output_tokens": 9,
+            "unknown_token_requests": 0,
+            "known_latency_ms": 0,
+            "outcome_unknown_requests": 0,
+            "known_cost": 0.0,
+            "cost": null,
+            "unknown_cost_requests": 3
+          }
+        },
+        "shared_request_accounting": "one physical request counted once; case charges remain in SQLite",
+        "price_source": "explicit user-supplied rates",
+        "currency": "user_configured"
+      },
+      "formal_admission_count": 0,
+      "case_accounts": [
+        {
+          "case_id": "case_c76b05a9313d3a7e154952c5db02511d",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 80,
+            "rebinds": 2,
+            "tokens": 120000,
+            "tool_calls": 48
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 24,
+            "rebinds": 1,
+            "tokens": 120,
+            "tool_calls": 15
+          }
+        }
+      ],
+      "model_pool": [
+        {
+          "id": "a",
+          "model_id": "model_a",
+          "family": "a",
+          "identity": "model_a"
+        },
+        {
+          "id": "b",
+          "model_id": "model_b",
+          "family": "b",
+          "identity": "model_b"
+        },
+        {
+          "id": "c",
+          "model_id": "model_c",
+          "family": "c",
+          "identity": "model_c"
+        }
+      ],
+      "artifact_sha256": {
+        "predictions.json": "a3509b42b74c1935ca5c99e32e6e56e6cc4e7648ff858d575cab4667487d2b21",
+        "extensions.json": "653c2ba857319ec451bda01dcee0f2e4a167ec1a908ea79ac59b292a8ec16fd9",
+        "requests.json": "da6a651bb53c755161821e782149d7702f47ced60ca84ecd1df3c17fb7bea4a7"
+      }
+    }
+  ],
+  "population_hash": "bcc489563b091b80aea0eba3f03a96f337aea88bdc76814f8fa15b409f4910b1",
+  "truth_labels_used_during_execution": false,
+  "quality_evaluated": false
+}

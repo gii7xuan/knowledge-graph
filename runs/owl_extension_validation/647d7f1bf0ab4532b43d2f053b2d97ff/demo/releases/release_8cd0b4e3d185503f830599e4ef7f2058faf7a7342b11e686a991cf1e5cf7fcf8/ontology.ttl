@@ -1,0 +1,36 @@
+<https://example.org/owl-extension/Child> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/owl-extension/Child> <http://www.w3.org/2000/01/rdf-schema#label> "child device"@en .
+<https://example.org/owl-extension/Child> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/owl-extension/Device> .
+<https://example.org/owl-extension/Device> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/owl-extension/Device> <http://www.w3.org/2000/01/rdf-schema#comment> "Keep provenance comment."@en .
+<https://example.org/owl-extension/Device> <http://www.w3.org/2000/01/rdf-schema#label> "device"@en .
+<https://example.org/owl-extension/Device> <http://www.w3.org/2000/01/rdf-schema#label> "设备"@zh .
+<https://example.org/owl-extension/Device> <http://www.w3.org/2004/02/skos/core#altLabel> "C" .
+<https://example.org/owl-extension/Device> <http://www.w3.org/2004/02/skos/core#definition> "A controllable device."@en .
+<https://example.org/owl-extension/Device> <http://www.w3.org/2004/02/skos/core#definition> "可控设备。"@zh .
+<https://example.org/owl-extension/Peer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/owl-extension/Peer> <http://www.w3.org/2000/01/rdf-schema#label> "peer device"@en .
+<https://example.org/owl-extension/Peer> <http://www.w3.org/2004/02/skos/core#definition> "A peer controllable device."@en .
+<https://example.org/owl-extension/connects> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/owl-extension/connects> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/owl-extension/Device> .
+<https://example.org/owl-extension/connects> <http://www.w3.org/2000/01/rdf-schema#label> "connects"@en .
+<https://example.org/owl-extension/connects> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/owl-extension/Device> .
+<https://example.org/owl-extension/connects> <http://www.w3.org/2004/02/skos/core#definition> "Connection between devices."@en .
+<https://example.org/owl-extension/count> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/owl-extension/count> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/owl-extension/Device> .
+<https://example.org/owl-extension/count> <http://www.w3.org/2000/01/rdf-schema#label> "count"@en .
+<https://example.org/owl-extension/count> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/owl-extension/count> <http://www.w3.org/2004/02/skos/core#definition> "A device count."@en .
+<https://example.org/owl-extension/example> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/owl-extension/Peer> .
+<https://example.org/owl-extension/example> <https://example.org/owl-extension/count> "001"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/owl-extension/example> <https://example.org/owl-extension/links> <https://example.org/owl-extension/other> .
+<https://example.org/owl-extension/links> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/owl-extension/links> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/owl-extension/Device> .
+<https://example.org/owl-extension/links> <http://www.w3.org/2000/01/rdf-schema#label> "links"@en .
+<https://example.org/owl-extension/links> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/owl-extension/Device> .
+<https://example.org/owl-extension/links> <http://www.w3.org/2004/02/skos/core#definition> "A second connection label."@en .
+<urn:kg-ontology:extension:add_object_property:5ce0440c847b857fa84347d9383084e26fb3bf1140eff200004fe1a22c032f6d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<urn:kg-ontology:extension:add_object_property:5ce0440c847b857fa84347d9383084e26fb3bf1140eff200004fe1a22c032f6d> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/owl-extension/Device> .
+<urn:kg-ontology:extension:add_object_property:5ce0440c847b857fa84347d9383084e26fb3bf1140eff200004fe1a22c032f6d> <http://www.w3.org/2000/01/rdf-schema#label> "regulates" .
+<urn:kg-ontology:extension:add_object_property:5ce0440c847b857fa84347d9383084e26fb3bf1140eff200004fe1a22c032f6d> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/owl-extension/Device> .
+<urn:kg-ontology:extension:add_object_property:5ce0440c847b857fa84347d9383084e26fb3bf1140eff200004fe1a22c032f6d> <http://www.w3.org/2004/02/skos/core#definition> "A device changes another device's operating state." .
