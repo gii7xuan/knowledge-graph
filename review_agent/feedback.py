@@ -22,13 +22,16 @@ class FeedbackService:
     def _labels(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
         action = str(payload.get("action") or "")
         reason = str(payload.get("reason_code") or "")
-        submitted = dict(payload.get("labels") or {})
+        from .labels import validate_labels
+        submitted = validate_labels(payload.get('labels') if payload.get('labels') is not None else {})
         if action in {"accept", "accept_corrected"}:
             if submitted.get("valid_for_kg") not in (None, 1):
                 raise ValidationError("accept cannot carry a negative valid_for_kg label")
             submitted["valid_for_kg"] = 1
             if submitted.get("source_support") not in {None, "supported"}: raise UnprocessableEntityError("accept requires human-confirmed source support")
             submitted.setdefault("source_support", "supported")
+            if submitted.get('schema_valid')==0 or submitted.get('task_relevance')==0:
+                raise UnprocessableEntityError('accept conflicts with the submitted schema/task annotation')
         elif action == "reject":
             if not reason:
                 raise ValidationError("reject requires a reason_code")
@@ -41,7 +44,6 @@ class FeedbackService:
         elif action == "defer":
             if submitted.get("valid_for_kg") is not None:
                 raise ValidationError("defer must not create a truth label")
-            submitted = {key: None for key in submitted}
             submitted["valid_for_kg"] = None
         elif action == "modify":
             original_label = 0 if reason in FACTUAL_REJECTIONS else None

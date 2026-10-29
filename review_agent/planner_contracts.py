@@ -4,9 +4,9 @@ from .response_contract import CONTEXT_SCOPES
 from pathlib import Path
 import hashlib
 
-PLANNER_CONTRACT_VERSION = "planner_action_v2"
-PLANNER_PROMPT_VERSION = "triple_planner_v2"
-AGENT_STRATEGY_VERSION = "bounded_react_v2"
+PLANNER_CONTRACT_VERSION = "planner_action_v3"
+PLANNER_PROMPT_VERSION = "triple_planner_v3"
+AGENT_STRATEGY_VERSION = "bounded_react_v3"
 PURPOSES = ("check_qualifiers", "find_counterevidence", "find_definition", "resolve_reference", "check_support")
 TOOL_SCHEMAS = {
     "inspect_context": {"evidence_id": "current evidence ID", "before": "integer 0..5", "after": "integer 0..5"},
@@ -21,7 +21,7 @@ TOOL_SCHEMAS = {
                                    "description": "nonempty string <=800", "proposed_changes": "bounded draft object", "evidence_ids": "current evidence IDs"},
     "get_ontology_extension_status": {"extension_id": "subscribed task ID"},
 }
-SYSTEM_PROMPT = (Path(__file__).resolve().parents[1] / "prompts" / "triple_planner_v2.txt").read_text(encoding="utf-8")
+SYSTEM_PROMPT = (Path(__file__).resolve().parents[1] / "prompts" / "triple_planner_v3.txt").read_text(encoding="utf-8")
 PLANNER_PROMPT_HASH = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()
 
 
@@ -90,3 +90,40 @@ def validate_action(value):
                        nonempty=key in {"query", "evidence_id", "stop_reason", "reason", "description", "extension_id"}):
             raise ActionError(f"invalid {key}")
     return value
+
+
+def argument_schemas():
+    """The model sees the same required/optional fields enforced by validate_action."""
+    def text(limit=400,nullable=False,nonempty=False):
+        return {"type":["string","null"] if nullable else "string","maxLength":limit,
+                **({"minLength":1} if nonempty else {})}
+    def array(limit): return {"type":"array","maxItems":limit,"items":text(nonempty=True)}
+    def obj(properties,optional=()):
+        return {"type":"object","properties":properties,"required":[k for k in properties if k not in optional],"additionalProperties":False}
+    from .repository import EDITABLE_TRIPLE_FIELDS
+    qualifiers=obj({k:text(600,nullable=True) for k in ("polarity","condition","time_scope","applicability","modality","quantifier")},
+                   optional=("polarity","condition","time_scope","applicability","modality","quantifier"))
+    changes=obj({k:qualifiers if k in {"qualifiers","qualifier_status"} else text(600,nullable=True) for k in sorted(EDITABLE_TRIPLE_FIELDS)},
+                optional=EDITABLE_TRIPLE_FIELDS)
+    changes["minProperties"]=1
+    return {
+        "inspect_context":obj({"evidence_id":text(nonempty=True),"before":{"type":"integer","minimum":0,"maximum":5},"after":{"type":"integer","minimum":0,"maximum":5}}),
+        "search_evidence":obj({"scope":{"type":"string","enum":list(CONTEXT_SCOPES)},"query":text(600,nonempty=True),"purpose":{"type":"string","enum":list(PURPOSES)},"limit":{"type":"integer","minimum":1,"maximum":6}}),
+        "inspect_ontology":obj({"relation_id":text(200,nullable=True),"issue":text(),"endpoint_types":obj({"head":text(200,nullable=True),"tail":text(200,nullable=True)},optional=("head","tail")),"surface_relation":text(),"query":text(600)},optional=("endpoint_types","surface_relation","query")),
+        "lookup_review_memory":obj({"relation_id":text(200),"issue_type":text(200),"limit":{"type":"integer","minimum":1,"maximum":3}}),
+        "run_validation":obj({}),
+        "propose_revision":obj({"changes":changes,"evidence_ids":array(24),"reason":text(nonempty=True)}),
+        "finish_review":obj({"stop_reason":text(200,nonempty=True),"unresolved_issues":array(10),"evidence_ids":array(24)}),
+        "request_ontology_extension":obj({"change_kind":{"type":"string","enum":["add_class","add_object_property","add_data_property","add_alias","revise_definition","revise_constraint","merge_terms"]},"description":text(800,nonempty=True),"proposed_changes":{"type":"object","minProperties":1},"evidence_ids":array(24)}),
+        "get_ontology_extension_status":obj({"extension_id":text(nonempty=True)}),
+    }
+
+
+def response_schema(tools):
+    names=sorted(tools)
+    return {"type":"object","additionalProperties":False,
+        "required":["action","arguments","target_issue","rationale_summary"],
+        "properties":{"action":{"type":"string","enum":names},"arguments":{"type":"object"},
+            "target_issue":{"type":"string","maxLength":400},"rationale_summary":{"type":"string","maxLength":600}},
+        "$defs":tools,
+        "oneOf":[{"properties":{"action":{"const":name},"arguments":{"$ref":"#/$defs/"+name}}} for name in names]}

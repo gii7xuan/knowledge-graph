@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 from pathlib import Path
+from .fact_matching import identity_summary
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,9 +20,10 @@ def probability(item):
     if value is None:
         return None
     try:
-        return max(0.0, min(1.0, float(value)))
+        p=float(value)
+        return p if math.isfinite(p) and 0<=p<=1 else None
     except (TypeError, ValueError):
-        return 0.0
+        return None
 
 
 def ece(rows, bins=10):
@@ -67,15 +69,8 @@ def coverage_at_precision(rows, target_precision):
 
 
 def duplicate_rate(rows):
-    keys = [
-        (
-            "".join(str(item.get("head", "")).split()).casefold(),
-            item.get("relation", ""),
-            "".join(str(item.get("tail", "")).split()).casefold(),
-        )
-        for item in rows
-    ]
-    return 0.0 if not keys else 1.0 - len(set(keys)) / len(keys)
+    from .fact_matching import identity_summary
+    return identity_summary(rows)['duplicate_rate']
 
 
 def main():
@@ -99,6 +94,7 @@ def main():
         "brier": brier(probability_rows),
         "coverage_at_target_precision": coverage_at_precision(probability_rows, args.target_precision),
         "duplicate_rate": duplicate_rate(rows),
+        'fact_identity':identity_summary(rows),
     }
     print(json.dumps(metrics, ensure_ascii=False, indent=2))
 

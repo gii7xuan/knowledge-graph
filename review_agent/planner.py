@@ -59,7 +59,9 @@ class LLMPlanner:
                        "input_state": payload, "input_hash": sha256_json(payload)}
             action = None
             if response is not None:
-                attempt.update(input_tokens=response.input_tokens, output_tokens=response.output_tokens)
+                attempt.update(input_tokens=response.input_tokens, output_tokens=response.output_tokens,
+                    raw_response=response.content,returned_model_id=getattr(response,'returned_model_id',None),
+                    response_id=getattr(response,'response_id',None))
                 try:
                     action = self.action_validator(_parse_content(response.content))
                     attempt["response_status"] = "ok"
@@ -75,7 +77,10 @@ class LLMPlanner:
             attempts.append(attempt)
             if action is not None:
                 return {"action": action, "status": "ok", "attempts": attempts}
-            feedback = {"error": attempt.get("error"), "instruction": "仅修正动作契约，不得编造工具观察。"}
+            feedback = {"error": attempt.get("error"),
+                "instruction": "严格按 output_schema 返回四个顶层键，仅选 available_tools；证据 ID 逐字选择 valid_evidence_ids，不得编造观察。",
+                "valid_evidence_ids":payload.get('valid_evidence_ids',[]),
+                "blocked_tools":payload.get('blocked_tools',{}),"required_obligations":payload.get('required_obligations',[])}
             if attempt.get("retryable") is False:
                 break
         return {"action": None, "status": "failed", "attempts": attempts,

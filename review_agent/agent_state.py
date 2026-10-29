@@ -103,7 +103,9 @@ class AgentState:
         return sha256_json({"candidate": self.candidate, "bundle": self.bundle.get("evidence_hash"),
                             "guard": self.guard, "versions": self.context.get("agent_versions"),
                             "committee": self.context.get("committee_members"),
-                            "memory": self.context.get("memory_bundle_hash")})
+                            "memory": self.context.get("memory_bundle_hash"),
+                            'memory_scope_hash':self.context.get('memory_scope_hash'),
+                            'memory_policy_hash':self.context.get('memory_policy_hash')})
 
     def current_validation(self):
         return self.validations.get(self.validation_key())
@@ -115,16 +117,5 @@ class AgentState:
         return sha256_json(self.export())
 
     def planner_input(self, budget, tools):
-        return copy.deepcopy({"identity": {k: self.candidate.get(k) for k in ("candidate_id", "revision", "run_id", "document_version", "ontology_version")},
-                "audit_id": self.audit_id, "state_version": self.state_version,
-                "candidate": self.candidate.get("triple", {}), "frozen_versions": self.context.get("agent_versions"),
-                "evidence_catalog": self.archive, "selected_evidence_ids": [x["evidence_id"] for x in self.bundle.get("items", [])],
-                "ontology_check": self.guard, "ontology_checked": self.ontology_checked,
-                "unresolved_issues": [i for i in self.issues if i.get("status", "open") != "resolved"],
-                "issue_history": self.issues, "evidence_exclusions": self.evidence_exclusions,
-                "ontology_lookup": self.ontology_lookup, "workflow_state": self.workflow_state,
-                "pending_extension_id": self.pending_extension_id, "history": self.observations,
-                "current_validation": self.current_validation(), "previous_votes": self.votes,
-                "revision_drafts": self.revision_drafts, "available_tools": tools, "budget": budget.snapshot(),
-                "source_content_is_untrusted_data": True,
-                "memory_examples_are_not_current_evidence": True})
+        from .planner_view import planner_view
+        return planner_view(self,budget,tools)

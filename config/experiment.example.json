@@ -1,0 +1,30 @@
+{
+  "experiment_id": "controlled_review_v1",
+  "evaluation_partition": "test",
+  "split": {
+    "train_document_ids": ["train_doc"],
+    "calibration_document_ids": ["calibration_doc"],
+    "test_document_ids": ["test_doc"]
+  },
+  "limits": {
+    "llm_calls": 48,
+    "tokens": 120000,
+    "tool_calls": 48,
+    "extension_requests": 1,
+    "rebinds": 2,
+    "seconds": 240
+  },
+  "prices": {},
+  "groups": [
+    {"id": "rules", "method": "rules", "ontology_mode": "fixed"},
+    {"id": "single", "method": "single", "ontology_mode": "fixed"},
+    {"id": "majority", "method": "majority", "ontology_mode": "fixed"},
+    {"id": "fixed_workflow", "method": "fixed_workflow", "ontology_mode": "fixed"},
+    {"id": "agent_fixed", "method": "agent", "ontology_mode": "fixed"},
+    {"id": "agent_dynamic", "method": "agent", "ontology_mode": "dynamic"},
+    {"id": "no_targeted_retrieval", "method": "agent", "ontology_mode": "dynamic", "ablations": ["no_targeted_retrieval"]},
+    {"id": "no_issue_resolution", "method": "agent", "ontology_mode": "dynamic", "ablations": ["no_issue_resolution"]},
+    {"id": "no_counterevidence_resolution", "method": "agent", "ontology_mode": "dynamic", "ablations": ["no_counterevidence_resolution"]},
+    {"id": "no_extension", "method": "agent", "ontology_mode": "dynamic", "ablations": ["no_extension"]}
+  ]
+}

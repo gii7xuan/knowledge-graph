@@ -246,4 +246,12 @@ python -m evaluation.manifest --database runs/v3/review.sqlite3 --run-id <run_id
 python -m evaluation.evaluate_review --input predictions.json --manifest runs/evaluation/population.json --labels labels.json --output runs/evaluation/report.json
 ```
 
-这部分补齐工程验收所需的分母与缺失处理；完整实验分组、领域标注和真实模型质量评价仍属于阶段 F。
+阶段 F 的记忆范围隔离、多维标注导出、规范事实匹配、受控实验分组及指标汇总代码已补齐，见[阶段 F 代码与使用说明](docs/phase_f_completion_20261027.md)。真实领域标注和真实模型质量实验需要另行执行，不能由工程验收推定。
+
+实验示例配置为 `config/experiment.example.json`。`evaluation.experiment` 在独立数据库和本体目录中运行规则、单模型、多数、固定工作流、固定/动态本体 Agent 及消融，使用同一冻结候选池和 case 预算；执行入口不读取测试真值，`evaluation.evaluate_experiment` 在结束后独立读取标签。`evaluation.annotations` 可生成空白标注模板或只读导出已有人工事件，保留部分标注与修订历史。正式贡献与实验建议分别保存，实验运行器不连接生产 Neo4j。
+
+```powershell
+python -m scripts.validate_phase_f
+```
+
+该验证保存十组 Mock 实验及发布—新修订重审制品，不调用真实模型。

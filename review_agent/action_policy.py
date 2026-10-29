@@ -1,7 +1,7 @@
 """Permissions and minimum obligations remain outside the planner's authority."""
 
 from .contracts import sha256_json
-from .planner_contracts import ActionError, TOOL_SCHEMAS, validate_action
+from .planner_contracts import ActionError, TOOL_SCHEMAS, validate_action, argument_schemas
 
 
 class ActionPolicy:
@@ -12,12 +12,58 @@ class ActionPolicy:
             raise ValueError("planner whitelist contains unregistered tools")
 
     def definitions(self):
-        return {k: v for k, v in TOOL_SCHEMAS.items() if k in self.allowed}
+        return {k: v for k, v in argument_schemas().items() if k in self.allowed}
+
+    @staticmethod
+    def blocked_tools(state):
+        available={i['evidence_id'] for i in state.archive if i.get('anchor_valid') is True}
+        validation=state.current_validation()
+        blocked={}
+        if not available: blocked['inspect_context']='no verified evidence ID; search_evidence first'
+        if not state.ontology_checked:
+            blocked['run_validation']='inspect_ontology must check the full frozen ontology first'
+            blocked['finish_review']='inspect_ontology must run before finishing'
+        elif not state.bundle.get('items'):
+            blocked['run_validation']='no verified evidence; use search_evidence'
+            if not state.searched_scopes:
+                blocked['finish_review']='search_evidence before handing off an evidence-less candidate'
+        elif validation is None:
+            blocked['finish_review']='current independent validation is required; call run_validation'
+        if not validation or validation['consensus'].get('source_support_consensus',{}).get('result')!='supported':
+            blocked['request_ontology_extension']='run_validation must establish current independent source-support consensus supported'
+        elif state.ontology_lookup.get('scope')!='full_frozen_ontology':
+            blocked['request_ontology_extension']='inspect_ontology must search the full frozen ontology'
+        elif not ({v.get('schema_issue') for v in validation.get('votes',[])
+                   if v.get('voter_id') in validation['consensus'].get('eligible_voter_ids',[])}
+                  & {'not_covered','incompatible','suspected_schema_error'}):
+            blocked['request_ontology_extension']='independent reviewers have not diagnosed a schema gap or schema error'
+        if not state.pending_extension_id:
+            blocked['get_ontology_extension_status']='no subscribed ontology extension task'
+        return blocked
+
+    def validate_request(self, action, state):
+        validate_action(action)
+        if action['action'] not in self.allowed: raise ActionError('tool not permitted by execution policy')
+        args=action['arguments']
+        available={x['evidence_id'] for x in state.archive if x.get('anchor_valid') is True}
+        cited=args.get('evidence_ids',[])+([args['evidence_id']] if 'evidence_id' in args else [])
+        if set(cited)-available:
+            raise ActionError('evidence reference is outside current verified source; select exact valid_evidence_ids')
+        reason=self.blocked_tools(state).get(action['action'])
+        if reason: raise ActionError(reason)
+        if action['action']=='get_ontology_extension_status' and args['extension_id']!=state.pending_extension_id:
+            raise ActionError('extension_id differs from the subscribed task')
+        if action['action']=='request_ontology_extension':
+            validation=state.current_validation()
+            eligible=set(validation['consensus'].get('eligible_voter_ids',[]))
+            supported={eid for vote in validation.get('votes',[]) if vote.get('voter_id') in eligible
+                       for eid in vote.get('supporting_evidence_ids',[])}
+            if not args['evidence_ids'] or not set(args['evidence_ids'])<=supported:
+                raise ActionError('extension evidence_ids must select current source_supported_evidence_ids')
+        return action
 
     def check(self, action, state):
-        validate_action(action)
-        if action["action"] not in self.allowed:
-            raise ActionError("tool not permitted by execution policy")
+        self.validate_request(action,state)
         args = action["arguments"]
         available = {x["evidence_id"] for x in state.archive if x.get("anchor_valid") is True}
         cited = args.get("evidence_ids", []) + ([args["evidence_id"]] if "evidence_id" in args else [])

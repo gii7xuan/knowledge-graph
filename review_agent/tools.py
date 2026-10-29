@@ -188,11 +188,14 @@ class AgentTools:
         result = ReviewMemory(self.runtime.repository).lookup(relation_id=relation_id or None,
             issue_type=issue_type or None, snapshot_id=state.context.get("memory_snapshot_id", 0),
             exclude_candidate_id=state.candidate["candidate_id"], domain=state.candidate.get("domain"),
+            scope=state.context['memory_scope'],
             max_positive=limit, max_negative=limit)
         return {"status": "ok", "examples": result, "citable_as_current_evidence": False}
 
     def run_validation(self):
         runtime, state, budget = self.runtime, self.state, self.runtime.budget
+        if not state.ontology_checked:
+            return {"status":"blocked","error":"inspect_ontology is required before independent validation"}
         key = state.validation_key()
         if key in state.validations:
             return {"status": "cached", "validation": state.validations[key], "model_calls": 0}
@@ -282,6 +285,8 @@ class AgentTools:
         return {"status": "draft_only", "draft": draft, "candidate_unchanged": True}
 
     def finish_review(self, stop_reason, unresolved_issues, evidence_ids):
+        self.runtime.policy.validate_request({'action':'finish_review','arguments':{'stop_reason':stop_reason,
+            'unresolved_issues':unresolved_issues,'evidence_ids':evidence_ids},'target_issue':'finish','rationale_summary':'finish'},self.state)
         for issue in unresolved_issues:
             self.runtime.issue("planner_reported", issue, critical=True)
         self.state.stop_reason = stop_reason

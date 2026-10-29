@@ -19,7 +19,7 @@ def load_dataset(path):
 
 def training_versions(rows):
     fields = REVIEW_VERSION_FIELDS
-    fields += tuple(key for key in ("prompt_hash", "response_contract_hash", "committee_policy_hash", "planner_prompt_hash")
+    fields += tuple(key for key in ("prompt_hash", "response_contract_hash", "committee_policy_hash", "planner_prompt_hash", "memory_scope_hash", "memory_policy_hash")
                     if any(key in (row.get("review_versions") or {}) for row in rows))
     if any((row.get("review_versions") or {}).get("planner_contract_version") for row in rows):
         fields += AGENT_VERSION_FIELDS

@@ -28,6 +28,7 @@ def configured_members(config):
 
 
 def versions_for(config):
+    from .memory_scope import resolve_scope,scope_hash
     versions = {"prompt_version": PROMPT_VERSION, "response_contract_version": CONTRACT_VERSION,
             "prompt_hash": PROMPT_HASH,
             "response_contract_hash": sha256_json(RESPONSE_SCHEMA),
@@ -35,11 +36,15 @@ def versions_for(config):
                 for key, default in (("committee_size", 4), ("required_votes", 3), ("minimum_distinct_families", 3))}),
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
             "committee_version": (config.get("consensus") or {}).get("version", "committee_v1")}
+    versions['memory_policy_hash']=sha256_json({'scope_hash':scope_hash(resolve_scope(config)),
+        'max_positive_cases':(config.get('memory') or {}).get('max_positive_cases',3),
+        'max_negative_cases':(config.get('memory') or {}).get('max_negative_cases',3)})
     planner = config.get("planner") or {}
     if planner.get("enabled") and planner.get("strategy") == "llm_react":
-        from .planner_contracts import PLANNER_CONTRACT_VERSION, PLANNER_PROMPT_VERSION, AGENT_STRATEGY_VERSION, PLANNER_PROMPT_HASH
+        from .planner_contracts import PLANNER_CONTRACT_VERSION, PLANNER_PROMPT_VERSION, AGENT_STRATEGY_VERSION, PLANNER_PROMPT_HASH, argument_schemas
         settings = configured_planner(config)
         versions.update(planner_contract_version=PLANNER_CONTRACT_VERSION, planner_prompt_version=PLANNER_PROMPT_VERSION,
+            planner_contract_hash=sha256_json(argument_schemas()),
             planner_prompt_hash=PLANNER_PROMPT_HASH,
             planner_strategy_version=AGENT_STRATEGY_VERSION, planner_model_id=settings["model"],
             planner_model_family=settings["family"], configured_strategy="llm_react")
@@ -149,6 +154,7 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
     state = {"execution_id": execution_id, "run_id": run_id, "status": "running",
              "started_at_epoch": time.time(), "total": len(candidates), "selected": len(pending),
              "skipped": skipped, "completed": 0, "failed": 0, "interrupted": 0,
+             "independent_review_completed":0,"review_incomplete":0,
              "paused": False, "cancelled": False, "results": [], "review_versions": versions,
              "progress_write_failures": 0, "progress_file_stale": False}
     ctx = multiprocessing.get_context("spawn")
@@ -198,6 +204,10 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
                                  "revision": payload["revision"], **outcome})
         if status == "completed":
             state["completed"] += 1
+            if (outcome.get('result') or {}).get('independent_review_completed'):
+                state['independent_review_completed']+=1
+            else:
+                state['review_incomplete']+=1
         elif status == "interrupted":
             state["interrupted"] += 1
         elif status != "paused":

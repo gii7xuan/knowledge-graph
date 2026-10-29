@@ -156,6 +156,8 @@ class ReviewOrchestrator:
             "committee_members": self.committee_members(),
             "memory_snapshot_id": context.get("memory_snapshot_id", 0),
             "memory_bundle_hash": context.get("memory_bundle_hash"), "round_id": round_id,
+            'memory_scope_hash':context.get('memory_scope_hash'),
+            'memory_policy_hash':context.get('memory_policy_hash'),
             **({"agent_versions": context["agent_versions"]} if context.get("agent_versions") else {}),
         }
         return {
@@ -200,6 +202,11 @@ class ReviewOrchestrator:
             "committee_members": self.committee_members(),
         }
         candidate = self.repository.get_revision(candidate_id, revision)
+        from .batch import versions_for
+        context['memory_policy_hash']=versions_for(self.config)['memory_policy_hash']
+        from .memory_scope import resolve_scope,scope_hash
+        memory_scope=resolve_scope(self.config,context)
+        context.update(memory_scope=memory_scope,memory_scope_hash=scope_hash(memory_scope))
         memory_config = dict(self.config.get("memory") or {})
         if memory_config.get("enabled", True):
             memory = ReviewMemory(self.repository)
@@ -208,6 +215,7 @@ class ReviewOrchestrator:
             memory_bundle = memory.lookup(
                 relation_id=triple.get("relation_id"), domain=candidate.get("domain"),
                 snapshot_id=snapshot_id, exclude_candidate_id=candidate_id,
+                scope=memory_scope,
                 max_positive=int(memory_config.get("max_positive_cases", 3)),
                 max_negative=int(memory_config.get("max_negative_cases", 3)),
             )
@@ -393,6 +401,15 @@ class ReviewOrchestrator:
                 unresolved_support_conflict=bool(gaps.get("unresolved_support_conflict")),
                 admission_blocked=any(gaps.get(key) for key in ("critical_issues_unresolved", "protected_evidence_omitted",
                     "unreviewed_discovered_evidence", "validation_missing", "version_stale", "ontology_not_checked", "identity_unresolved")))
+        independently_reviewed=bool(selected and not gaps.get('ontology_not_checked')
+            and set(consensus.get('eligible_voter_ids',[]))==set(self.committee.voter_ids)
+            and consensus.get('distinct_family_count',0)>=self.committee.minimum_distinct_families)
+        completion=('independent_review_completed' if independently_reviewed else
+            'independent_review_incomplete' if selected else
+            'manual_handoff_no_evidence' if context.get('review_completion_status')=='manual_handoff_no_evidence' and not bundle.get('items') else
+            'not_independently_reviewed')
+        context.update(review_completion_status=completion,independent_review_completed=independently_reviewed)
+        self.repository.update_audit_context(audit_id,{'review_completion_status':completion,'independent_review_completed':independently_reviewed})
         features = TripleFeatureExtractor().extract_v3(
             candidate, guard, bundle, last_votes, consensus,
             round_count=final_round,
@@ -403,7 +420,7 @@ class ReviewOrchestrator:
             "prompt_version": PROMPT_VERSION,
             "response_contract_version": CONTRACT_VERSION,
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
-            **{key: context.get(key) for key in ("prompt_hash", "response_contract_hash", "committee_policy_hash")},
+            **{key: context.get(key) for key in ("prompt_hash", "response_contract_hash", "committee_policy_hash", "memory_scope_hash", "memory_policy_hash")},
             **{key: context[key] for key in context if key.startswith("planner_") or key in {"executed_strategy", "configured_strategy"}},
         })
         route = self.risk_policy.route_v3(
@@ -441,13 +458,15 @@ class ReviewOrchestrator:
             else: workflow = "manual_review"
         result = {
             "audit_id": audit_id, "candidate_id": candidate_id, "revision": revision,
+            "review_completion_status":context.get('review_completion_status','legacy_unclassified'),
+            "independent_review_completed":bool(context.get('independent_review_completed',False)),
             "final_round_id": final_round, "consensus": consensus,
             "calibrated_probability": calibration.probability,
             "calibration_status": calibration.status, "calibrator_version": calibration.model_version,
             "policy_version": self.risk_policy.version,
             "decision": route["decision"], "reason_codes": route.get("reason_codes", []),
             "review_versions": {field: context[field] for field in (
-                "prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
+                "prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "memory_scope_hash", "memory_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
                 "planner_prompt_version", "planner_prompt_hash", "planner_contract_version", "planner_strategy_version", "planner_model_id",
                 "planner_model_family", "configured_strategy", "executed_strategy") if field in context},
             "features": features, "feature_schema_version": FEATURE_SCHEMA_VERSION,

@@ -80,15 +80,39 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
 
     def connect(self) -> sqlite3.Connection:
         self.database_path.parent.mkdir(parents=True, exist_ok=True)
-        connection = sqlite3.connect(
-            str(self.database_path), timeout=self.busy_timeout_ms / 1000, isolation_level=None,
-            factory=_ClosingConnection,
-        )
-        connection.row_factory = sqlite3.Row
-        connection.execute("PRAGMA foreign_keys=ON")
-        connection.execute(f"PRAGMA busy_timeout={self.busy_timeout_ms}")
-        connection.execute("PRAGMA journal_mode=WAL")
-        return connection
+        for attempt in range(4):
+            connection = None
+            try:
+                connection = sqlite3.connect(
+                    str(self.database_path), timeout=self.busy_timeout_ms / 1000, isolation_level=None,
+                    factory=_ClosingConnection,
+                )
+                connection.row_factory = sqlite3.Row
+                connection.execute("PRAGMA foreign_keys=ON")
+                connection.execute(f"PRAGMA busy_timeout={self.busy_timeout_ms}")
+                # WAL mode persists in the database. Reissuing a mode change on
+                # every read connection can race with concurrent Windows users.
+                mode = connection.execute("PRAGMA journal_mode").fetchone()[0]
+                if str(mode).lower() != "wal":
+                    connection.execute("PRAGMA journal_mode=WAL")
+                return connection
+            except sqlite3.OperationalError as exc:
+                if connection is not None:
+                    connection.close()
+                code = getattr(exc, "sqlite_errorcode", None)
+                transient = code is not None and (code & 0xff) in {
+                    sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED, sqlite3.SQLITE_IOERR,
+                }
+                if not transient or attempt == 3:
+                    exc.add_note(f"SQLite connection setup: {getattr(exc, 'sqlite_errorname', 'unknown')} ({code})")
+                    raise
+                # Retry only connection setup, before any business transaction.
+                # Closing the failed handle also releases Windows WAL resources.
+                time.sleep(.05 * 2 ** attempt)
+            except BaseException:
+                if connection is not None:
+                    connection.close()
+                raise
 
     @contextmanager
     def transaction(self, *, immediate: bool = False) -> Iterator[sqlite3.Connection]:
@@ -1149,8 +1173,17 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             checkpoint = connection.execute("SELECT phase,checkpoint_json FROM agent_checkpoints WHERE audit_id=?",
                                             (audit["audit_id"],)).fetchone()
         votes = {_loads(row["vote_json"], {}).get("voter_id"): _loads(row["vote_json"], {}) for row in rows}
+        context = _loads(audit['context_json'],{})
+        if context.get('planner_contract_version')=='planner_action_v3' and context.get('review_completion_status') not in {
+                'independent_review_completed','manual_handoff_no_evidence'}:
+            return False
         if not votes and checkpoint and checkpoint["phase"] == "finished":
             context = _loads(audit["context_json"], {})
+            if context.get('planner_contract_version')=='planner_action_v3':
+                state = _loads(checkpoint['checkpoint_json'],{}).get('state',{})
+                return bool(context.get('review_completion_status')=='manual_handoff_no_evidence'
+                    and context.get('committee_members')==members and state.get('ontology_checked')
+                    and state.get('searched_scopes') and not state.get('bundle',{}).get('items'))
             state = _loads(checkpoint["checkpoint_json"], {}).get("state", {})
             last = (state.get("observations") or [{}])[-1]
             # An intentional human handoff is completed work, not a failed committee
@@ -1162,7 +1195,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                    votes[m["id"]].get("model_id") == m["model_id"] and
                    votes[m["id"]].get("model_family") == m["model_family"] for m in members)
 
-    def feedback_rows(self) -> List[Dict[str, Any]]:
+    def feedback_rows(self, *, include_partial=False) -> List[Dict[str, Any]]:
         with self.connect() as connection:
             rows = connection.execute(
                 """SELECT e.event_json, r.candidate_json, a.features_json, a.context_json,
@@ -1170,26 +1203,34 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                    FROM review_events e
                    JOIN candidate_revisions r ON r.candidate_id=e.candidate_id AND r.revision=e.revision
                    LEFT JOIN audit_runs a ON a.audit_id=e.audit_id
-                   WHERE e.active=1 ORDER BY e.created_at"""
+                   WHERE e.active=1 ORDER BY e.created_at,e.rowid"""
             ).fetchall()
         result = []
         for row in rows:
             event = _loads(row["event_json"], {})
             label = (event.get("labels") or {}).get("valid_for_kg")
-            if label not in (0, 1):
+            if type(label) is not int or label not in (0, 1):
+                if not include_partial: continue
+                label=None
+            if include_partial and not any(value is not None for value in (event.get('labels') or {}).values()):
                 continue
+            candidate=_loads(row['candidate_json'],{})
             result.append({
                 "event_id": event["event_id"], "candidate_id": event["candidate_id"],
                 "revision": event["revision"], "candidate": _loads(row["candidate_json"], {}),
-                "features": _loads(row["features_json"], {}), "label": int(label),
+                "features": _loads(row["features_json"], {}), "label": label,
                 "labels": event.get("labels", {}), "reason_code": event.get("reason_code"),
+                **{k:(event.get('labels') or {}).get(k) for k in ('source_support','schema_valid','task_relevance','valid_for_kg')},
+                **{k:candidate.get(k) for k in ('run_id','document_version','source_index_hash','ontology_release_id','ontology_version','profile_hash','fact_key','fact_key_state','fact_identity_version')},
+                'candidate_content_hash':sha256_json(candidate),'evidence_ids':event.get('evidence_ids',[]),
+                'new_revision':event.get('new_revision'),'reviewer':event.get('reviewer'),'action':event.get('action'),
                 "label_source": "human_confirmed",
                 "document_id": _loads(row["candidate_json"], {}).get("document_id"),
                 "audit_id": event.get("audit_id"),
                 "audit_snapshot_status": "bound" if event.get("audit_id") and row["audit_status"] == "completed" else "missing",
                 "feature_schema_version": row["feature_schema_version"],
                 "review_versions": {key: value for key, value in _loads(row["context_json"], {}).items()
-                    if key in ("prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
+                    if key in ("prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "memory_scope_hash", "memory_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
                         "planner_prompt_hash",
                         "planner_prompt_version", "planner_contract_version", "planner_strategy_version", "planner_model_id",
                         "planner_model_family", "configured_strategy", "executed_strategy")},

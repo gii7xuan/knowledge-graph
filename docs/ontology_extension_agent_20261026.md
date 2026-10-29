@@ -90,7 +90,7 @@ CLI：`python -m ontology_review list`；`show/review/preview` 配合 `--extensi
 
 ## 执行边界
 
-- 当前正式差异发布器面向已接入的项目 JSON profile，即现用 V1 的来源格式。对于保留完整 OWL/TTL 来源的 bundle，可调查和审核其项目视图，但发布器会拒绝用 JSON 替换原始 OWL 公理；需要完整且保留公理的 OWL 合并发布适配器。本轮没有伪造该能力。
+- 2026-10-26 的发布器仅支持项目 JSON profile。2026-10-27 已补齐保留完整 RDF 来源的 OWL 扩展发布适配器，详见 [OWL 扩展发布说明](owl_extension_publication_20261027.md)；本报告其余测试数字为当日历史结果。
 - 未配置推理器时不提供 OWL 一致性结论；不支持自动执行的自然语言 CQ 保持 unknown。高影响操作始终需要明确人工核对，默认 shadow 不自动发布。
 - 全部闭环数据和模型回复为验证夹具，不是准确率实验；真实三席服务的在线健康和领域质量尚未测量。
 - 本轮接通版本与审核流，不实现阶段 E 的完整 Fact/Contribution/Neo4j 并发对账，也不把本体批准视作事实接纳。

@@ -531,6 +531,8 @@ class ReviewHandler(BaseHTTPRequestHandler):
             "source_support": annotation.get("source_support", annotation.get("evidence_support")),
             "relation_mapping_correct": annotation.get("relation_mapping_correct"),
             "schema_compatible": annotation.get("schema_compatible"),
+            'schema_valid':annotation.get('schema_valid'),'task_relevance':annotation.get('task_relevance'),
+            'ontology_gap':annotation.get('ontology_gap'),
         }
         modifications = payload.get("modifications") or None
         if decision == "modify" and modifications:

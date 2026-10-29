@@ -10,6 +10,7 @@ from .consensus import aggregate_votes
 from .contracts import EVIDENCE_BUNDLE_VERSION, FEATURE_SCHEMA_VERSION, sha256_json
 from .execution import AuditPaused
 from .memory import ReviewMemory
+from .memory_scope import resolve_scope, scope_hash
 from .planner import LLMPlanner
 from .planner_contracts import ActionError
 from .tools import AgentTools
@@ -75,6 +76,9 @@ class AgentRuntime:
         saved = self.repository.get_agent_checkpoint(audit_id)
         if saved:
             self.state = AgentState(**saved["state"])
+            memory_scope=resolve_scope(self.orchestrator.config,supplied,pinned=self.state.context.get('memory_scope'))
+            if self.state.context.get('memory_scope_hash')!=scope_hash(memory_scope):
+                raise ValueError('checkpoint memory scope changed; fresh audit required')
             if (self.state.candidate != candidate or any(self.state.context.get(k) != v for k, v in versions.items())
                     or self.state.context.get("committee_members") != self.orchestrator.committee_members()):
                 raise ValueError("checkpoint candidate or planner/committee version mismatch")
@@ -95,16 +99,18 @@ class AgentRuntime:
         self.budget = CaseBudget(budget_config, self.repository, [case_id], task_type="triple_review", task_id=candidate_id,
                                 deadline_epoch=supplied.get("execution_deadline_epoch"))
         memory = ReviewMemory(self.repository)
+        memory_scope=resolve_scope(self.orchestrator.config,supplied)
         memory_version = int(supplied.get("memory_snapshot_id", memory.current_version()))
         triple = candidate.get("triple") or candidate
         examples = memory.lookup(relation_id=triple.get("relation_id"), domain=candidate.get("domain"),
-            snapshot_id=memory_version, exclude_candidate_id=candidate_id) if (self.orchestrator.config.get("memory") or {}).get("enabled", True) else {}
+            snapshot_id=memory_version, exclude_candidate_id=candidate_id,scope=memory_scope) if (self.orchestrator.config.get("memory") or {}).get("enabled", True) else {}
         ctx = {**supplied, **versions, "audit_id": audit_id,
             "mode": self.orchestrator.config.get("mode", "shadow"), "feature_schema_version": FEATURE_SCHEMA_VERSION,
             "configured_strategy": "llm_react", "executed_strategy": "llm_react",
             "orchestrator_kind": "bounded_agent_runtime", "agent_versions": versions,
             "committee_members": self.orchestrator.committee_members(),
             "budget_config": budget_config, "memory_snapshot_id": memory_version,
+            'memory_scope':memory_scope,'memory_scope_hash':scope_hash(memory_scope),
             "review_memory": examples, "memory_bundle_hash": sha256_json(examples),
             "execution_deadline_epoch": self.budget.deadline_epoch}
         ctx["execution_row_version"] = self.repository.get_candidate(candidate_id)["row_version"]
@@ -226,7 +232,8 @@ class AgentRuntime:
         state, budget = self.state, self.budget
         planner = LLMPlanner(self.orchestrator.planner_client,
             max_retries=int(budget.config.get("max_retries_per_request", 1)),
-            max_output_tokens=int(self.planner_config.get("max_output_tokens", 1024))) if self.orchestrator.planner_client else None
+            max_output_tokens=int(self.planner_config.get("max_output_tokens", 1024)),
+            action_validator=lambda action:self.policy.validate_request(action,state)) if self.orchestrator.planner_client else None
         invalid_steps = 0
         try:
             while not state.stop_reason:
@@ -290,6 +297,16 @@ class AgentRuntime:
             current = state.current_validation()
             votes = current["votes"] if current else []
             consensus = current["consensus"] if current else aggregate_votes([], self.orchestrator.committee)
+            eligible=set(consensus.get('eligible_voter_ids',[]))
+            complete=bool(current and state.ontology_checked and
+                eligible=={m['id'] for m in state.context['committee_members']} and
+                consensus.get('distinct_family_count',0)>=self.orchestrator.committee.minimum_distinct_families)
+            completion=('independent_review_completed' if complete else
+                'independent_review_incomplete' if current else
+                'manual_handoff_no_evidence' if state.ontology_checked and not state.bundle.get('items') and state.searched_scopes else
+                'not_independently_reviewed')
+            state.context.update(review_completion_status=completion,independent_review_completed=complete)
+            self.repository.update_audit_context(state.audit_id,{'review_completion_status':completion,'independent_review_completed':complete})
             result = self.orchestrator._finalize(state.candidate, state.context, state.audit_id, state.guard,
                 state.bundle, votes, consensus, gaps, current["round_id"] if current else 0,
                 {**budget.usage, "deadline_epoch": budget.deadline_epoch})

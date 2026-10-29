@@ -91,3 +91,15 @@ CASES[15]['tests'].extend([W+'.test_complete_rdf_context_and_blank_node_delta_re
 CASES[15]['code'].append('ontologyBuild/rdf_artifact.py')
 CASES[16]['tests'].append('tests.test_owl_extension_publication.OwlGraphFlowTests.test_only_admitted_owl_candidate_reaches_graph_and_abox_stays_in_source')
 CASES[16]['requires_real_neo4j']=True
+
+# Evaluation and memory-scope requirements supplement the original acceptance.
+F='tests.test_phase_f_completion.'
+CASES[36]['tests'].extend([F+'MemoryScopeTests.test_train_scope_excludes_held_out_cases_before_top_k_and_snapshot',
+    F+'MemoryScopeTests.test_checkpoint_preserves_scope_and_refuses_expansion',
+    F+'AnnotationTests.test_partial_dimensions_survive_defer_and_readonly_export',
+    F+'AnnotationTests.test_modify_keeps_old_and_new_revision_annotations_separate',
+    F+'ResearchMetricTests.test_exact_fact_identity_retains_negation_conditions_and_deduplicates_sources',
+    F+'ResearchMetricTests.test_revision_truth_not_inherited_and_gold_binding_is_mandatory',
+    F+'ExperimentTests.test_all_methods_fixed_dynamic_and_ablation_use_one_frozen_pool'])
+CASES[36]['code'].extend(['review_agent/memory_scope.py','review_agent/memory.py','evaluation/annotations.py',
+    'evaluation/experiment.py','evaluation/metrics.py','evaluation/fact_matching.py','evaluation/evaluate_experiment.py'])

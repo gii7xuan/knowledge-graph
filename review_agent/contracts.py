@@ -259,7 +259,7 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "candidate_id", "revision", "canonical_triple", "document_version",
             "ontology_version", "evidence_bundle_hash", "prompt_version",
             "rubric_version", "committee_version", "memory_snapshot_id",
-            "memory_bundle_hash", "round_id", "response_contract_version", "evidence_bundle_version",
+            "memory_bundle_hash", "memory_scope_hash", "memory_policy_hash", "round_id", "response_contract_version", "evidence_bundle_version",
             "contract_version", "source_index_hash", "ontology_release_id", "profile_hash",
             "committee_members", "agent_versions", "prompt_hash", "response_contract_hash",
             "candidate_review_hash", "ontology_check_hash",

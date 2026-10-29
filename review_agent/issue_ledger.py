@@ -54,6 +54,10 @@ class IssueLedger:
         return issue
 
     def resolve(self, issue, proposal, rule, evidence_ids):
+        policy=getattr(self.state,'context',{}).get('experimental_policy',{})
+        if policy.get('no_issue_resolution') or (policy.get('no_counterevidence_resolution') and issue['code'] in {'source_conflict','counterevidence'}):
+            self.event(issue,'resolution_disabled_by_experiment',proposal['proposal_digest'],rule=rule)
+            return
         issue.update(status="resolved", resolved_in_proposal=proposal["proposal_digest"],
                      resolution_rule=rule, resolution_evidence_ids=sorted(set(evidence_ids)))
         self.event(issue, "resolved", proposal["proposal_digest"], rule=rule, evidence_ids=issue["resolution_evidence_ids"])

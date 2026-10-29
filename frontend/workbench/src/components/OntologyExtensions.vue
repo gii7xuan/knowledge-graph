@@ -1,9 +1,10 @@
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue';
 import { api, post } from '../api';
 
 const tasks = ref([]);
 const selected = ref(null);
+const owlPatch = computed(() => selected.value?.publication_preview?.source_patch || selected.value?.delta?.owl_patch);
 const busy = ref(false);
 const error = ref('');
 const reason = ref('');
@@ -85,6 +86,13 @@ onUnmounted(() => clearInterval(timer));
       <button :disabled="busy || !enabled || ['publishing', 'published', 'needs_rebase'].includes(selected.status)" @click="act('review')">启动 / 继续本体调查</button>
       <button v-if="selected.status === 'needs_rebase'" :disabled="busy" @click="act('rebase')">更新到当前基线，旧批准失效</button>
       <details v-if="selected.delta"><summary>完整差异与生成后的本体</summary><pre class="evidence-text">{{ JSON.stringify(selected.delta, null, 2) }}</pre></details>
+      <div v-if="owlPatch" class="notice">
+        <p>OWL 来源扩展：新增 {{ owlPatch.added?.length || 0 }} 条、移除 {{ owlPatch.removed?.length || 0 }} 条 RDF 声明。发布完整 Turtle 新版本，旧版本保留。</p>
+        <p v-if="owlPatch.profile_after?.auto_review_blocked">含未执行的 OWL 公理，当前应用范围阻止自动准入。结构检查通过不代表 OWL 一致性通过。</p>
+        <details><summary>OWL 声明增删及逐项操作</summary><pre class="evidence-text">{{ JSON.stringify({ added: owlPatch.added, removed: owlPatch.removed, operations: owlPatch.operations }, null, 2) }}</pre></details>
+        <details><summary>审核绑定的完整 OWL 来源：变更前</summary><pre class="evidence-text">{{ owlPatch.base_rdf }}</pre></details>
+        <details><summary>审核绑定的完整 OWL 来源：变更后</summary><pre class="evidence-text">{{ owlPatch.merged_rdf }}</pre></details>
+      </div>
       <details v-for="audit in selected.audits || []" :key="audit.audit_id">
         <summary>{{ audit.audit_id }} · {{ audit.status }} · 建议 {{ audit.result?.recommendation || '调查中' }}</summary>
         <p>采用轮次 {{ audit.result?.selected_round_id || '无' }} · 停止原因 {{ audit.result?.stop_reason || '执行中' }}</p>

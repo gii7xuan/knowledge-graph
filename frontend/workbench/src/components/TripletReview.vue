@@ -140,8 +140,9 @@ async function loadAll() {
         selections: Object.fromEntries((item.audit_summary?.evidence_bundle?.items || []).map(ev => [ev.evidence_id, { selected: false, role: 'context', note: '', resolutions: '' }])),
         spans: [{ quote: '', occurrence: 1, role: 'support', note: '' }],
         triple_correct: null,
-        evidence_support: 'insufficient',
+        evidence_support: 'unknown',
         relation_mapping_correct: null,
+        schema_valid: null, task_relevance: null, ontology_gap: null,
         reason_code: '',
         comment: '',
         activeStartedAt: Date.now()
@@ -211,13 +212,14 @@ async function decide(item, decision) {
       modify: 'REVISION_REQUIRED', defer: 'EVIDENCE_INSUFFICIENT'
     }[decision]);
     const factualReject = ['FACT_INCORRECT', 'NEGATION_IGNORED', 'DIRECTION_MISMATCH', 'CONDITION_MISSING', 'RELATION_MISMATCH', 'ENTITY_MISMATCH', 'SOURCE_CONTRADICTS'].includes(reasonCode);
-    const labels = decision === 'accept'
+    const labels = { ...(decision === 'accept'
       ? { valid_for_kg: 1, source_support: 'supported', relation_mapping_correct: draft.relation_mapping_correct }
       : decision === 'reject'
         ? { valid_for_kg: factualReject ? 0 : null, source_support: draft.evidence_support, relation_mapping_correct: draft.relation_mapping_correct }
         : decision === 'modify'
-          ? { valid_for_kg: null, source_support: null, relation_mapping_correct: null }
-          : { valid_for_kg: null, source_support: null, relation_mapping_correct: null };
+          ? { valid_for_kg: null, source_support: draft.evidence_support, relation_mapping_correct: draft.relation_mapping_correct }
+          : { valid_for_kg: null, source_support: draft.evidence_support, relation_mapping_correct: draft.relation_mapping_correct }),
+      schema_valid: draft.schema_valid, task_relevance: draft.task_relevance, ontology_gap: draft.ontology_gap };
     const base = isV3.value ? {
       run_id: runId.value,
       candidate_id: item.candidate_id,
@@ -567,8 +569,11 @@ onUnmounted(stopPolling);
               </div>
               <div class="edit-grid">
                 <label>三元组正确性<select v-model="drafts[idFor(item)].triple_correct"><option :value="null">未判断</option><option :value="1">正确</option><option :value="0">错误</option></select></label>
-                <label>证据支持<select v-model="drafts[idFor(item)].evidence_support"><option value="insufficient">证据不足</option><option value="supported">完整支持</option><option value="contradicted">明确反驳</option></select></label>
+                <label>证据支持<select v-model="drafts[idFor(item)].evidence_support"><option value="unknown">未判断</option><option value="insufficient">证据不足</option><option value="supported">完整支持</option><option value="contradicted">明确反驳</option></select></label>
                 <label>关系映射<select v-model="drafts[idFor(item)].relation_mapping_correct"><option :value="null">未判断</option><option :value="1">正确</option><option :value="0">错误</option></select></label>
+                <label>本体兼容性<select v-model="drafts[idFor(item)].schema_valid"><option :value="null">未判断</option><option :value="1">兼容</option><option :value="0">不兼容</option></select></label>
+                <label>任务相关性<select v-model="drafts[idFor(item)].task_relevance"><option :value="null">未判断</option><option :value="1">相关</option><option :value="0">不相关</option></select></label>
+                <label>本体覆盖缺口<select v-model="drafts[idFor(item)].ontology_gap"><option :value="null">未判断</option><option :value="1">有缺口</option><option :value="0">无缺口</option></select></label>
               </div>
               <details v-if="item.contract_version === 'extraction_candidate_v4'">
                 <summary>修改完整限定与字面量（保存为新修订后重新审核）</summary>

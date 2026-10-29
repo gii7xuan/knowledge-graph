@@ -7,13 +7,15 @@ from collections import Counter
 from pathlib import Path
 
 
-def evaluate(rows, *, manifest=None, labels=None):
+def evaluate(rows, *, manifest=None, labels=None,revision_labels=None,gold_facts=None,extension_records=None,extension_labels=None,requests=None,prices=None):
     if manifest is not None:
         from .manifest import align_results
         rows = align_results(manifest,rows,labels)
     else:
         if labels is not None: raise ValueError('separate labels require a frozen manifest')
         if any(not isinstance(row,dict) for row in rows): raise ValueError('evaluation rows must be objects')
+    from .metrics import current_truth,research_metrics,usage_metrics
+    rows=current_truth(rows,revision_labels)
     labeled = [item for item in rows if type(item.get('label')) is int and item['label'] in (0,1)]
     accepted = [item for item in labeled if item.get("decision") in {"auto_accept", "human_accept"}]
     auto = [item for item in rows if item.get("decision") == "auto_accept"]
@@ -49,6 +51,8 @@ def evaluate(rows, *, manifest=None, labels=None):
         "status_counts":Counter('missing' if item.get('prediction_missing') else item.get('status') or item.get('response_status') or 'unspecified' for item in rows),
         "probability_sample_count": len(probability_rows), "brier": brier(probability_rows),
         "routes": Counter(item.get("decision", "missing") for item in rows),
+        'research':research_metrics(rows,gold_facts=gold_facts,extension_records=extension_records,extension_labels=extension_labels),
+        'usage':usage_metrics(requests,prices) if requests is not None else None,
     }
 
 

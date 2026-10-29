@@ -181,6 +181,8 @@ class ReviewService:
             summaries.append({**public_candidate(item), "latest_decision": decision,
                               "audit_summary": None if audit is None else {
                                   "audit_id": audit["audit_id"], "status": audit["status"],
+                                  'review_completion_status':audit['context'].get('review_completion_status','legacy_unclassified'),
+                                  'independent_review_completed':bool(audit['context'].get('independent_review_completed',False)),
                                   "calibrated_probability": audit["calibrated_probability"],
                                   "calibration_status": audit["calibration_status"],
                                   "rounds": len(audit["rounds"]), "votes": displayed_votes,
@@ -232,6 +234,9 @@ class ReviewService:
                    WHERE c.run_id=? GROUP BY relation ORDER BY count DESC, relation""",
                 (run_id,),
             ).fetchall()
+            completion_rows=connection.execute("""SELECT COALESCE(json_extract(a.context_json,'$.review_completion_status'),'unclassified') AS completion,COUNT(*) AS count
+                FROM candidates c LEFT JOIN decisions d ON d.decision_id=c.latest_decision_id
+                LEFT JOIN audit_runs a ON a.audit_id=d.audit_id WHERE c.run_id=? GROUP BY completion""",(run_id,)).fetchall()
         human = Counter()
         imports = Counter()
         for row in rows:
@@ -243,6 +248,7 @@ class ReviewService:
             "import_status": imports,
             "workflow_states": {row["workflow_state"]: row["count"] for row in workflows},
             "routes": {row["final_decision"]: row["count"] for row in routes},
+            'review_completion':{row['completion']:row['count'] for row in completion_rows},
             "total": sum(row["count"] for row in rows),
             "pending": human.get("pending", 0), "accepted": human.get("accepted", 0),
             "rejected": human.get("rejected", 0), "deferred": human.get("deferred", 0),

@@ -215,19 +215,20 @@ def create_run_dir(run_id: str) -> Path:
     return run_dir
 
 
-def snapshot_inputs(run_dir: Path, markdown_path: Path) -> dict[str, Any]:
+def snapshot_inputs(run_dir: Path, markdown_path: Path, ontology_path=None) -> dict[str, Any]:
+    ontology_path=Path(ontology_path) if ontology_path is not None else BASE_ONTOLOGY_PATH
     snapshot = {
         "markdown": {
             "path": str(markdown_path),
             "sha256": sha256_file(markdown_path),
         },
         "ontology": {
-            "path": str(BASE_ONTOLOGY_PATH),
-            "sha256": sha256_file(BASE_ONTOLOGY_PATH) if BASE_ONTOLOGY_PATH.exists() else "",
+            "path": str(ontology_path),
+            "sha256": sha256_file(ontology_path) if ontology_path.exists() else "",
         },
     }
-    if BASE_ONTOLOGY_PATH.exists():
-        shutil.copy2(BASE_ONTOLOGY_PATH, run_dir / "ontology_snapshot.json")
+    if ontology_path.exists():
+        shutil.copy2(ontology_path, run_dir / "ontology_snapshot.json")
     return snapshot
 
 
@@ -369,6 +370,7 @@ def run_ontology_pipeline(
     llm_client=None,
     progress_callback=None,
     write_compatibility: bool = True,
+    base_ontology_path=None,
 ) -> dict[str, Any]:
     config = config or OntologyPipelineConfig.from_env()
     markdown_path = Path(markdown_path).resolve()
@@ -391,8 +393,16 @@ def run_ontology_pipeline(
     write_json(run_dir / "manifest.json", manifest)
 
     try:
-        manifest["input_snapshot"] = snapshot_inputs(run_dir, markdown_path)
-        audit = audit_ontology(BASE_ONTOLOGY_PATH)
+        base_path=Path(base_ontology_path).resolve() if base_ontology_path is not None else BASE_ONTOLOGY_PATH
+        if not base_path.exists() and config.base_policy=='draft':
+            # A cleared installation can generate an initial draft. The empty
+            # seed is run-scoped and is never registered as a published ontology.
+            base_path=run_dir/'bootstrap_base.json'
+            write_json(base_path,{'domain':'document_ontology_draft','classes':{},'object_properties':{},'data_properties':{}})
+            manifest['base_origin']='empty_run_scoped_bootstrap'
+            manifest['published_base_used']=False
+        manifest["input_snapshot"] = snapshot_inputs(run_dir, markdown_path,base_path)
+        audit = audit_ontology(base_path)
         write_json(run_dir / "base_audit.json", audit)
         manifest["stage_status"]["base_audit"] = "passed" if audit["passed"] else "failed"
         if config.base_policy == "strict" and not audit["passed"]:
@@ -410,10 +420,10 @@ def run_ontology_pipeline(
         if not chunks:
             raise RuntimeError("文档过滤后没有可抽取正文片段")
 
-        ontology = load_ontology(BASE_ONTOLOGY_PATH)
+        ontology = load_ontology(base_path)
         context_builder = OntologyContextBuilder(
             ontology,
-            ontology_path=BASE_ONTOLOGY_PATH,
+            ontology_path=base_path,
             max_chars=config.context_max_chars,
             document_id=preprocess["document_id"],
         )
@@ -440,7 +450,7 @@ def run_ontology_pipeline(
         if extraction_status == "failed":
             raise RuntimeError("所有文档片段抽取失败，已保留失败清单")
 
-        validation = validate_candidate_batch(raw_candidates, chunks, ontology_path=BASE_ONTOLOGY_PATH)
+        validation = validate_candidate_batch(raw_candidates, chunks, ontology_path=base_path)
         write_validation_artifacts(validation, run_dir)
         manifest["stage_status"]["candidate_validation"] = "passed" if validation["passed"] else "partial"
 

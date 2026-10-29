@@ -20,6 +20,12 @@ def selected_proposal(repository, candidate, decision):
         raise ValueError("selected proposal storage binding mismatch")
     if proposal_digest(proposal) != proposal["proposal_digest"]:
         raise ValueError("frozen proposal content digest mismatch")
+    if proposal.get('memory_scope_hash'):
+        from .memory_scope import scope_hash
+        memory=proposal.get('review_memory') or {}
+        if (sha256_json(memory)!=proposal.get('memory_bundle_hash')
+                or (memory and scope_hash(memory.get('scope'))!=proposal['memory_scope_hash'])):
+            raise ValueError('selected memory content/scope binding mismatch')
     bundle = proposal["evidence_bundle"]
     if (sha256_json({k: v for k, v in bundle.items() if k != "evidence_hash"}) != bundle["evidence_hash"]
             or sha256_json(proposal["candidate"]) != proposal.get("candidate_review_hash")

@@ -15,6 +15,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class OntologyPipelineTests(unittest.TestCase):
+    def test_empty_installation_bootstraps_only_a_run_scoped_draft(self):
+        import tempfile
+        with tempfile.TemporaryDirectory(dir=ROOT/'runs') as directory:
+            folder=Path(directory);missing=folder/'no_published_ontology.json'
+            config=OntologyPipelineConfig.from_env({'ONTOLOGY_EXTRACTION_ENGINE':'mock','ONTOLOGY_MODEL':'mock-model','ONTOLOGY_BASE_POLICY':'draft'})
+            with patch.object(pipeline,'RUNS_DIR',folder/'ontology_runs'),patch.object(pipeline,'CURRENT_POINTER_PATH',folder/'current.json'):
+                manifest=pipeline.run_ontology_pipeline(ROOT/'tests/fixtures/ontology_sample.md',config,base_ontology_path=missing,write_compatibility=False)
+            self.assertFalse(missing.exists())
+            self.assertFalse(manifest['published_base_used'])
+            self.assertEqual(manifest['base_origin'],'empty_run_scoped_bootstrap')
+            self.assertEqual(manifest['extraction_stats']['failed_chunks'],0)
+            self.assertTrue(Path(manifest['input_snapshot']['ontology']['path']).is_file())
+
     def test_mock_pipeline_keeps_current_business_json_untouched(self):
         sample = ROOT / "tests" / "fixtures" / "ontology_sample.md"
         legacy_path = pipeline.LEGACY_CANDIDATES_PATH

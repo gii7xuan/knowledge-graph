@@ -124,13 +124,14 @@ class PlannerRuntimeTests(unittest.TestCase):
         self.assertIn("ONTOLOGY_CHECK_REQUIRED", result["reason_codes"])
         self.assertEqual(sum(len(c.calls) for c in self.clients), 0)
 
-    def test_intentional_human_handoff_is_reusable_completed_work(self):
+    def test_early_finish_without_independent_review_is_not_reusable(self):
         from review_agent.batch import versions_for
         result = self.run_script([ontology(), finish()])
         members = [{**{k: v[k] for k in ("id", "model_id", "model_family")}, "model_identity": v["model_id"].casefold()} for v in self.validators]
         versions = versions_for(self.config)
         self.assertEqual(result["decision"], "manual_review")
-        self.assertTrue(self.repo.has_healthy_audit("c", 1, versions, members))
+        self.assertFalse(self.repo.has_healthy_audit("c", 1, versions, members))
+        self.assertEqual(result['review_completion_status'],'not_independently_reviewed')
         self.assertFalse(self.repo.has_healthy_audit("c", 1, {**versions, "prompt_version": "changed"}, members))
         changed = [*members[:-1], {**members[-1], "model_id": "different-model"}]
         self.assertFalse(self.repo.has_healthy_audit("c", 1, versions, changed))
@@ -236,7 +237,8 @@ class PlannerRuntimeTests(unittest.TestCase):
 
     def test_unknown_evidence_id_is_an_observation_not_a_crash(self):
         self.run_script([action("inspect_context", evidence_id="memory_or_fake_id", before=1, after=1), finish()])
-        self.assertEqual(self.audit["tool_calls"][0]["status"], "invalid_action")
+        self.assertFalse(any(t['tool']=='inspect_context' for t in self.audit['tool_calls']))
+        self.assertEqual(self.audit['planner_steps'][0]['attempts'][0]['response_status'],'invalid_action')
         self.assertIn("outside", self.planner.calls[1]["history"][-1]["error"])
 
     def test_repeated_empty_actions_stop_under_budget(self):
@@ -350,6 +352,60 @@ class PlannerRuntimeTests(unittest.TestCase):
                     {**finish(), "votes": ["valid"]}):
             with self.subTest(bad=bad), self.assertRaises(ActionError):
                 validate_action(bad)
+
+    def test_real_evidence_enum_and_exact_output_contract_are_sent(self):
+        def plan(payload):
+            self.assertEqual(set(payload['output_schema']['required']),{'action','arguments','target_issue','rationale_summary'})
+            ids=payload['valid_evidence_ids']
+            self.assertTrue(ids)
+            self.assertNotIn('current',ids)
+            self.assertEqual(payload['output_schema']['$defs']['inspect_context']['properties']['evidence_id']['enum'],ids)
+            if not payload['ontology_checked']:
+                self.assertNotIn('finish_review',payload['available_tools'])
+                self.assertNotIn('run_validation',payload['available_tools'])
+                return ontology()
+            if not payload['current_validation']:
+                self.assertNotIn('request_ontology_extension',payload['available_tools'])
+                self.assertEqual(payload['output_schema']['$defs']['run_validation']['properties'],{})
+                return action('run_validation')
+            return finish()
+        result=self.run_script(plan)
+        self.assertTrue(result['independent_review_completed'])
+        self.assertEqual(result['review_completion_status'],'independent_review_completed')
+        self.assertEqual(len(self.audit['votes']),4)
+        from review_agent.service import ReviewService
+        service=ReviewService(self.repo,config=self.config)
+        projected=service.items('run')['items'][0]['audit_summary']
+        self.assertTrue(projected['independent_review_completed'])
+        self.assertEqual(projected['review_completion_status'],'independent_review_completed')
+        self.assertEqual(service.summary('run')['review_completion']['independent_review_completed'],1)
+
+    def test_premature_finish_is_corrected_before_any_finish_tool_runs(self):
+        result=self.run_script([ontology(),finish(),action('run_validation'),finish()])
+        self.assertEqual([t['tool'] for t in self.audit['tool_calls']],['inspect_ontology','run_validation','finish_review'])
+        self.assertEqual(len(self.audit['votes']),4)
+        self.assertTrue(result['independent_review_completed'])
+        self.assertIn('run_validation',self.audit['planner_steps'][1]['attempts'][0]['error'])
+
+    def test_validation_requires_real_ontology_observation(self):
+        result=self.run_script([action('run_validation'),ontology(),action('run_validation'),finish()])
+        self.assertEqual([t['tool'] for t in self.audit['tool_calls']],['inspect_ontology','run_validation','finish_review'])
+        self.assertTrue(result['independent_review_completed'])
+
+    def test_invalid_placeholder_is_corrected_with_actual_ids(self):
+        config=copy.deepcopy(self.config)
+        config['budget']['max_retries_per_request']=1
+        def plan(payload):
+            if not payload['ontology_checked']:
+                if 'correction_feedback' not in payload:
+                    return action('inspect_context',evidence_id='current',before=1,after=1)
+                self.assertEqual(payload['correction_feedback']['valid_evidence_ids'],payload['valid_evidence_ids'])
+                return ontology()
+            return action('run_validation') if not payload['current_validation'] else finish()
+        result=self.run_script(plan,config=config)
+        self.assertTrue(result['independent_review_completed'])
+        self.assertFalse(any(t['tool']=='inspect_context' for t in self.audit['tool_calls']))
+        self.assertIn('raw_response',self.audit['planner_steps'][0]['attempts'][0])
 
 
 if __name__ == "__main__":
