@@ -98,6 +98,7 @@ class AgentState:
     ontology_lookup: dict = field(default_factory=dict)
     workflow_state: str = "ready_for_review"
     pending_extension_id: str = ""
+    validation_recovery: dict = field(default_factory=dict)
 
     def validation_key(self):
         return sha256_json({"candidate": self.candidate, "bundle": self.bundle.get("evidence_hash"),

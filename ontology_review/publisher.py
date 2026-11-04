@@ -15,7 +15,7 @@ from .contracts import proposal_digest, versions
 from .delta import apply_delta, catalog
 from .evidence import load_sources
 from .tools import OntologyTools, remap
-from .validators import consensus
+from .validators import consensus,competency_pass
 
 
 def current_release_id(root):
@@ -45,7 +45,11 @@ class OntologyPublisher:
                 or task.get("delta", {}).get("delta_hash") != proposal["delta_hash"] or sha256_json(proposal["evidence"]) != proposal["evidence_hash"]):
             raise ConflictError("ontology base/diff/evidence changed after review")
         votes = [v for v in audit["votes"] if v["round_id"] == proposal["round_id"]]
-        if consensus(votes, proposal)["result"] != "approve": raise ValueError("independent ontology approval quorum not satisfied")
+        from .semantic_competency import verified_result
+        semantic=verified_result(self.repository,self.root,proposal)
+        from .clarification import effective_votes
+        votes,_=effective_votes(self.repository,self.root,proposal,votes)
+        if consensus(votes, proposal,semantic_competency=semantic)["result"] != "approve": raise ValueError("independent ontology approval quorum not satisfied")
         base = load_release(self.root / task["base_release_id"])
         ops = [{**o, "target": None if o["kind"] in {"add_class", "add_object_property", "add_data_property"} else o["target"]} for o in proposal["operations"]]
         rebuilt = apply_delta(base, ops, {e["evidence_id"] for e in proposal["evidence"]})
@@ -133,6 +137,14 @@ class OntologyPublisher:
         if proposal["risk_category"] == "high_impact" and not request.get("confirm_high_impact"): raise ValueError("high-impact diff and affected candidates require operator confirmation")
         artifact = self.artifact(proposal, base)
         if automatic and artifact.application_profile.get('auto_review_blocked'): raise ValueError('compiled OWL application profile blocks automatic publication')
+        from .semantic_competency import verified_result
+        semantic=verified_result(self.repository,self.root,proposal)
+        if semantic:
+            artifact.validation_report['semantic_competency_review']=semantic
+        from .clarification import effective_votes
+        original=[v for v in self.repository.ontology_audit(proposal['audit_id'])['votes'] if v['round_id']==proposal['round_id']]
+        _,clarifications=effective_votes(self.repository,self.root,proposal,original)
+        if clarifications:artifact.validation_report['original_reviewer_clarifications']=clarifications
         approval = {"status": "approved", "approved_by": request["approved_by"], "reason": request["reason"],
                     "ontology_version": digest(artifact.project_schema), "ontology_audit_id": proposal["audit_id"],
                     "ontology_proposal_digest": proposal["proposal_digest"], "delta_hash": proposal["delta_hash"]}
@@ -155,7 +167,8 @@ class OntologyPublisher:
             tools = OntologyTools(proxy)
             for name, method in (("structure", tools.validate_schema_structure), ("impact", tools.analyze_schema_impact), ("competency", tools.run_competency_checks)):
                 check = method()
-                if check["status"] != "pass" or check["record_id"] != proposal["check_records"][name]["record_id"]:
+                passed=check['status']=='pass' or name=='competency' and competency_pass(proposal,semantic)
+                if not passed or check["record_id"] != proposal["check_records"][name]["record_id"]:
                     raise ConflictError("publication checks or affected candidates changed; investigate and review again")
             intent = {"approval": approval, "expected_base_release_id": task["base_release_id"], "request_row_version": task["row_version"]}
             with self.repository.transaction(immediate=True) as connection:

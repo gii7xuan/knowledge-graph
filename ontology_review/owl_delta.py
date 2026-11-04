@@ -12,12 +12,14 @@ from ontologyBuild.rdf_graph import parse_turtle
 from ontologyBuild.iri_identity import owl_extension_identity
 from ontologyBuild.release_service import load_release
 from review_agent.contracts import sha256_json
+from schema.datatypes import canonical_datatype
 
 VERSION='preserving_owl_delta_v1'
 _ROOT=Path(__file__).resolve().parents[1]
 COMPILER_SOURCES={name:hashlib.sha256((_ROOT/name).read_bytes()).hexdigest() for name in (
     'ontology_review/owl_delta.py','ontology_review/delta.py','ontologyBuild/rdf_graph.py',
-    'ontologyBuild/rdf_artifact.py','ontologyBuild/owl_to_project_schema.py','ontologyBuild/iri_identity.py')}
+    'ontologyBuild/rdf_artifact.py','ontologyBuild/owl_to_project_schema.py','ontologyBuild/iri_identity.py',
+    'schema/datatypes.py')}
 COMPILER_HASH=sha256_json(COMPILER_SOURCES)
 RETIRED_ID=URIRef('urn:kg-ontology:retiredSchemaId')
 RETIRED_IRI=URIRef('urn:kg-ontology:retiredIRI')
@@ -37,6 +39,7 @@ def _language(value):
 
 def _datatype(value):
     if not isinstance(value,str): raise ValueError('OWL datatype must be a string')
+    value=canonical_datatype(value)
     if value in XSD_NAMES: return URIRef(str(XSD)+value)
     if ':' not in value: raise ValueError('OWL datatype must be a supported alias or absolute IRI')
     result=URIRef(value); result.n3(); return result

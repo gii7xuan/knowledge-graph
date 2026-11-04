@@ -65,15 +65,21 @@ def _document_index(document_id: str, text: str) -> Dict[str, Any]:
 def _configured_validators(config: Dict[str, Any]) -> List[Dict[str, Any]]:
     validators = []
     for slot in config.get("validators") or []:
-        settings = validator_settings(slot)
+        default_timeout=float((config.get('budget') or {}).get('per_call_timeout_seconds',45))
+        settings = validator_settings({'request_timeout_seconds':default_timeout,**slot})
+        if settings['request_timeout_seconds']<=0 or settings['http_timeout_seconds']<=0 or settings['max_output_tokens']<1:
+            raise ValueError('validator timing and output limits must be positive')
         model, family, key, url = (settings[name] for name in ("model", "family", "api_key", "base_url"))
         if not all((model, family, key, url)):
             continue
         validators.append({
             "id": slot["id"], "model_id": model, "model_family": family,
             "model_identity": settings["model_identity"],
+            **{k:settings[k] for k in ('request_timeout_seconds','http_timeout_seconds','max_output_tokens')},
             "client": OpenAICompatibleClient(api_key=key, base_url=url, model_id=model, model_family=family,
-                                             timeout_seconds=float((config.get("budget") or {}).get("per_call_timeout_seconds", 45)),
+                                             timeout_seconds=settings['http_timeout_seconds'],
+                                             thinking_mode=settings['thinking_mode'],
+                                             stream_responses=settings['stream_responses'],
                                              verify_ssl=settings["verify_ssl"]),
         })
     return validators
@@ -163,6 +169,9 @@ def command_audit(args: Any) -> Dict[str, Any]:
     status_file = getattr(args, "status_file", None) or str(
         ROOT / "runs" / "review_jobs" / ("audit_" + uuid4().hex[:12]) / "status.json")
     previous = None
+    from .recovery_service import seed_service_pauses
+    seed_service_pauses(repository,_configured_validators(config))
+    if getattr(args,'validator_contract',None): config['validator_contract_version']=args.validator_contract
 
     def progress(state):
         nonlocal previous
@@ -173,10 +182,88 @@ def command_audit(args: Any) -> Dict[str, Any]:
             previous = key
 
     print(f"[review] status_file={status_file}", flush=True)
-    return run_review_batch(repository, args.run_id, config,
-        candidate_ids=getattr(args, "candidate_id", None),
-        force=bool(getattr(args, "force", False)), limit=getattr(args, "limit", None),
-        status_file=status_file, on_progress=progress)
+    runner=None
+    if (config.get('ontology_extension') or {}).get('enabled') and not getattr(args,'no_consumer',False):
+        from .jobs import JobRunner
+        service=ReviewService(repository,config=config)
+        runner=JobRunner(repository,service.execute_audit_job,max_workers=1)
+        service.job_runner=runner
+        runner.start()
+    try:
+        result=run_review_batch(repository, args.run_id, config,
+            candidate_ids=getattr(args, "candidate_id", None),
+            force=bool(getattr(args, "force", False)), limit=getattr(args, "limit", None),
+            status_file=status_file, on_progress=progress)
+        return {**result,'queue_consumer_started':runner is not None,
+                'queue_worker_command':'python -m review_agent.cli worker'}
+    finally:
+        if runner: runner.shutdown()
+
+
+def command_worker(args):
+    from .jobs import JobRunner
+    config=load_config(args.config)
+    repository=ReviewRepository(_database(args,config));repository.initialize()
+    from .recovery_service import seed_service_pauses
+    seed_service_pauses(repository,_configured_validators(config))
+    service=ReviewService(repository,config=config)
+    runner=JobRunner(repository,service.execute_audit_job,max_workers=1,job_types=args.job_type)
+    service.job_runner=runner
+    try:
+        if args.once: return runner.run_available_once() or {'status':'idle_or_service_paused'}
+        runner.serve()
+    except KeyboardInterrupt:
+        return {'status':'worker_stopped'}
+    finally: runner.shutdown()
+
+
+def command_probe_services(args):
+    from .recovery_service import probe_services
+    config=load_config(args.config)
+    repository=ReviewRepository(_database(args,config));repository.initialize()
+    return probe_services(repository,_configured_validators(config))
+
+
+def command_recover_audit(args):
+    from .recovery_service import recover_frozen_audit,seed_service_pauses
+    config=load_config(args.config)
+    repository=ReviewRepository(_database(args,config));repository.initialize()
+    seed_service_pauses(repository,_configured_validators(config))
+    candidate=repository.get_candidate(args.candidate_id)
+    manifest=repository.get_run(candidate['run_id'])
+    guard=OntologyGuard(load_snapshot(candidate.get('ontology_path') or manifest['ontology_path']))
+    orchestrator=ReviewOrchestrator(repository,guard,_configured_validators(config),config=config)
+    return recover_frozen_audit(repository,orchestrator,args.candidate_id,args.audit_id,reason=args.reason,
+        extra_calls=args.extra_calls,extra_tokens=args.extra_tokens,extra_seconds=args.extra_seconds)
+
+
+def command_revise_candidate(args):
+    from .recovery_service import seed_service_pauses
+    from .request_execution import service_key
+    from .model_settings import create_planner_client
+    from document.hierarchy_index import load_document_index
+    config=load_config(args.config)
+    repository=ReviewRepository(_database(args,config));repository.initialize()
+    voters=_configured_validators(config)
+    seed_service_pauses(repository,voters)
+    if any(repository.service_pause(service_key(v)) for v in voters):
+        return {'status':'service_paused','no_work_started':True}
+    candidate=repository.get_candidate(args.candidate_id)
+    manifest=repository.get_run(candidate['run_id'])
+    document=load_document_index(manifest['document_path'],candidate.get('source_index_hash'),require_verified=True)
+    guard=OntologyGuard(load_snapshot(candidate.get('ontology_path') or manifest['ontology_path']))
+    orchestrator=ReviewOrchestrator(repository,guard,voters,config=config,planner_client=create_planner_client(config))
+    return orchestrator.audit_candidate(candidate['candidate_id'],candidate['revision'],document,
+                                         context={'revision_only':True,'revision_investigation_reason':args.reason})
+
+
+def command_resume_jobs(args):
+    config=load_config(args.config)
+    repository=ReviewRepository(_database(args,config));repository.initialize()
+    with repository.connect() as c:
+        rows=c.execute("SELECT job_id FROM jobs WHERE status='paused' AND job_type=? AND cancel_requested=0",(args.job_type,)).fetchall()
+    return {'resumed':[repository.resume_job(r[0],args.reason)['job_id'] for r in rows],
+            'worker_must_be_started_explicitly':True,'existing_costs_preserved':True}
 
 
 def command_demo(args: Any) -> Dict[str, Any]:
@@ -320,6 +407,20 @@ def main() -> None:
     audit.add_argument("--limit", type=int, help="maximum candidates after healthy checkpoints are skipped")
     audit.add_argument("--force", action="store_true", help="also re-audit healthy completed revisions")
     audit.add_argument("--status-file", help="atomic live progress JSON")
+    audit.add_argument('--no-consumer',action='store_true',help='run triple batch only; use separate worker command for durable queue')
+    audit.add_argument('--validator-contract',choices=['validator_response_v3','validator_response_v4'])
+    worker_parser=sub.add_parser('worker')
+    worker_parser.add_argument('--job-type',action='append',choices=['audit','ontology_extension'])
+    worker_parser.add_argument('--once',action='store_true')
+    sub.add_parser('probe-services',help='explicit same-model availability probe without document content')
+    recovery=sub.add_parser('recover-audit',help='recover original frozen failed slots; keep valid votes and unknown requests')
+    recovery.add_argument('--candidate-id',required=True);recovery.add_argument('--audit-id',required=True)
+    recovery.add_argument('--reason',required=True);recovery.add_argument('--extra-calls',required=True,type=int)
+    recovery.add_argument('--extra-tokens',required=True,type=int);recovery.add_argument('--extra-seconds',required=True,type=float)
+    revision=sub.add_parser('revise-candidate',help='investigate a reviewed expression without rerolling its original committee')
+    revision.add_argument('--candidate-id',required=True);revision.add_argument('--reason',required=True)
+    resume=sub.add_parser('resume-jobs',help='explicitly requeue paused work after same-model service probes')
+    resume.add_argument('--job-type',choices=['audit','ontology_extension'],required=True);resume.add_argument('--reason',required=True)
     export = sub.add_parser("export")
     export.add_argument("--run-id", required=True)
     export.add_argument("--output")
@@ -339,6 +440,9 @@ def main() -> None:
         "init-db": command_init, "audit": command_audit, "export": command_export,
         "build-feedback-dataset": command_feedback_dataset, "build-memory": command_build_memory,
         "update-reliability": command_reliability, "demo": command_demo,
+        'worker':command_worker,
+        'probe-services':command_probe_services,'recover-audit':command_recover_audit,
+        'revise-candidate':command_revise_candidate,'resume-jobs':command_resume_jobs,
     }
     result = commands[args.command](args)
     print(json.dumps(result, ensure_ascii=False, indent=2))

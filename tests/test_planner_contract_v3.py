@@ -28,7 +28,7 @@ class PlannerContractV3Tests(unittest.TestCase):
             ActionPolicy({}).validate_request(action('inspect_context',evidence_id='memory_fake',before=1,after=1),state)
 
     def test_source_support_consensus_is_required_before_schema_extension(self):
-        state=self.state();state.ontology_checked=True;state.ontology_lookup={'scope':'full_frozen_ontology'}
+        state=self.state();state.ontology_checked=True;state.ontology_lookup={'scope':'full_frozen_ontology','candidate_revision':1}
         policy=ActionPolicy({})
         request=action('request_ontology_extension',change_kind='add_object_property',description='source-supported missing relation',
             proposed_changes={'label':'relation'},evidence_ids=['ev_real'])
@@ -39,7 +39,7 @@ class PlannerContractV3Tests(unittest.TestCase):
         self.assertIn('request_ontology_extension',state.planner_input(AgentBudget({}),policy.definitions())['available_tools'])
 
     def test_extension_cannot_cite_valid_but_not_independently_supported_evidence(self):
-        state=self.state();state.ontology_checked=True;state.ontology_lookup={'scope':'full_frozen_ontology'}
+        state=self.state();state.ontology_checked=True;state.ontology_lookup={'scope':'full_frozen_ontology','candidate_revision':1}
         state.archive.append({'evidence_id':'ev_other','quote':'another verified quote','anchor_valid':True})
         state.validations[state.validation_key()]={'consensus':{'source_support_consensus':{'result':'supported'},'eligible_voter_ids':['v']},
             'votes':[{'voter_id':'v','schema_issue':'not_covered','supporting_evidence_ids':['ev_real']}]}

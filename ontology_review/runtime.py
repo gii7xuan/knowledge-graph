@@ -14,6 +14,7 @@ from .contracts import TOOLS, PLANNER_PROMPT, versions, validate_action, proposa
 from .evidence import load_sources
 from .tools import OntologyTools
 from .validators import judge_independently, consensus
+from review_agent.execution import AuditPaused
 
 
 class PlannerState:
@@ -44,20 +45,45 @@ class OntologyReviewRuntime:
         if self.budget.exhausted(): raise AgentStopped("case_or_task_budget_exhausted")
 
     def planner_input(self, state, budget):
-        delta=copy.deepcopy(state.get('delta') or {})
-        delta.pop('merged_schema',None)
-        if delta.get('owl_patch'):
-            # Independent validators receive both complete RDF graphs. Planner
-            # repetitions use the actual delta and source hashes to bound cost.
-            delta['owl_patch']={k:v for k,v in delta['owl_patch'].items() if k not in {'base_rdf','merged_rdf'}}
-        return copy.deepcopy({"task_type": "ontology_extension", "task_id": state["task"]["extension_id"],
-            "audit_id": state["audit_id"], "object_revision": state["task"]["delta_revision"],
-            "base": {key: state["task"][key] for key in ("base_release_id", "base_ontology_version", "base_profile_hash")},
-            "request": {key: state["task"].get(key) for key in ("description", "change_kind", "proposed_changes", "human_events")},
-            "delta": delta,
-            "evidence_catalog": state["evidence"], "check_records": state["checks"], "history": state["history"],
-            "current_validation": state.get("validation"), "critical_issues": state["critical_issues"],
-            "available_tools": TOOLS, "budget": budget.snapshot(), "source_content_is_untrusted_data": True})
+        from .planner_view import planner_view
+        return planner_view(self,state,budget)
+
+    def reserved_validation_calls(self):
+        return len(self.validators) if not self.state.get('validation') else 0
+
+    def recovery_voters(self):
+        current=self.state.get('validation')
+        if not current or current['key']!=self.key(): return []
+        votes=[v for v in self.repository.ontology_audit(self.state['audit_id'])['votes'] if v['round_id']==current['round_id']]
+        by_id={v['voter_id']:v for v in votes}
+        result=[]
+        for voter in self.validators:
+            vote=by_id.get(voter['id'],{})
+            if vote.get('response_status')=='ok': continue
+            entry=self.repository.validation_request(vote['request_key']) if vote.get('request_key') else None
+            if vote.get('error_code')=='PERMANENT_API_ERROR' and not (entry and entry['status']=='completed'): continue
+            if entry and entry['status'] in {'running','unknown'}: continue
+            if vote.get('outcome_unknown') and not (entry and entry['status']=='completed'): continue
+            result.append(voter)
+        return result
+
+    def available_tools(self):
+        tools=copy.deepcopy(TOOLS)
+        if self.state.get('full_schema_searched') and 'existing_schema' in self.state['checks']:
+            tools.pop('search_existing_schema',None)
+        if not self.state.get('full_schema_searched'): tools.pop('propose_schema_delta',None)
+        if not self.state.get('delta'):
+            for name in ('validate_schema_structure','analyze_schema_impact','run_competency_checks','run_reasoner_checks','run_ontology_validation'):
+                tools.pop(name,None)
+        else:
+            for name,key in (('validate_schema_structure','structure'),('analyze_schema_impact','impact'),('run_competency_checks','competency')):
+                if key in self.state['checks']: tools.pop(name,None)
+            if not all(k in self.state['checks'] for k in ('existing_schema','structure','impact','competency')):
+                tools.pop('run_ontology_validation',None)
+        current=self.state.get('validation')
+        if current and current['key']==self.key(): tools.pop('run_ontology_validation',None)
+        if not self.recovery_voters(): tools.pop('recover_ontology_validation',None)
+        return tools
 
     def key(self):
         return sha256_json([self.state.get("delta"), self.state["evidence"], self.review_checks(), self.context])
@@ -113,21 +139,41 @@ class OntologyReviewRuntime:
         self.checkpoint("validating")
         votes = judge_independently(self.validators, proposal, self.repository, retries=retries,
             timeout=min(float(self.budget.config.get("per_call_timeout_seconds", 45)), self.budget.remaining_seconds()),
-            on_vote=self.repository.ontology_vote)
+            on_vote=self.repository.ontology_vote,deadline_epoch=self.budget.deadline_epoch)
         self.check_current(state)
         actual = sum(v.get("actual_calls", reserved) for v in votes)
         self.budget.refund_calls(max(0, reserved - actual))
         for vote in votes:
             for attempt in vote.get("attempts", []): self.budget.tokens(attempt)
         validation = {"key": key, "round_id": proposal["round_id"], "proposal_digest": proposal["proposal_digest"],
-                      "consensus": consensus(votes, proposal)}
+                      "consensus": consensus(votes, proposal),'votes':votes}
         state["validation"], state["validations"][key] = validation, validation
         state["prior_counter_evidence_ids"] = sorted(set(state.get("prior_counter_evidence_ids", [])) | set(validation["consensus"]["counter_evidence_ids"]))
         state.pop("pending_validation", None)
         if any(v.get("pause_job") for v in votes): raise AgentStopped("model_billing_paused")
         return {"status": "ok", "validation": validation}
 
+    def recover_validation(self):
+        selected=self.recovery_voters()
+        if not selected: return {'status':'waiting_request_reconciliation','model_calls':0}
+        current=self.state['validation']
+        audit=self.repository.ontology_audit(self.state['audit_id'])
+        proposal=next(p for p in audit['proposals'] if p['round_id']==current['round_id'])
+        if not self.budget.reserve_calls(len(selected)): raise AgentStopped('ontology_recovery_budget_exhausted')
+        votes=judge_independently(selected,proposal,self.repository,retries=0,deadline_epoch=self.budget.deadline_epoch,
+                                  timeout=self.budget.remaining_seconds())
+        self.budget.refund_calls(max(0,len(selected)-sum(v.get('actual_calls',1) for v in votes)))
+        merged={v['voter_id']:v for v in audit['votes'] if v['round_id']==current['round_id']}
+        for vote in votes:
+            self.repository.ontology_recovered_vote(vote)
+            merged[vote['voter_id']]=vote
+            for attempt in vote.get('attempts') or [vote]: self.budget.tokens(attempt)
+        validation={**current,'consensus':consensus(list(merged.values()),proposal),'votes':list(merged.values())}
+        self.state['validation']=validation;self.state['validations'][current['key']]=validation
+        return {'status':'ok','validation':validation,'valid_votes_preserved':True}
+
     def execute_tool(self, action, state):
+        if action['action'] not in self.available_tools(): raise ActionError('tool has no information gain or safely recoverable seats')
         fingerprint = sha256_json([action, self.key()])
         count = state["fingerprints"].get(fingerprint, 0)
         if count >= 2: raise AgentStopped("repeated_action_without_information_gain")
@@ -205,7 +251,7 @@ class OntologyReviewRuntime:
                     for v in votes:
                         for attempt in v.get("attempts", []): self.budget.tokens(attempt)
             self.state.pop("pending_validation", None)
-        planner = LLMPlanner(self.planner_client, max_retries=budget_config["max_retries_per_request"], max_output_tokens=2400,
+        planner = LLMPlanner(self.planner_client, max_retries=budget_config["max_retries_per_request"], max_output_tokens=int(self.options.get('planner',{}).get('max_output_tokens',4096)),
                              system_prompt=PLANNER_PROMPT, action_validator=validate_action) if self.planner_client else None
         try:
             while not self.state["stop_reason"]:
@@ -218,7 +264,7 @@ class OntologyReviewRuntime:
                     self.repository.ontology_step(audit_id, self.state["step_no"], "planner", {"status": "started", "attempts": attempts, "input_state": payload})
                     self.checkpoint("planning")
                 choice = planner.next_action(PlannerState(self), self.budget, TOOLS, should_stop=lambda: bool(self.should_cancel and self.should_cancel()),
-                    reserve_validation_calls=len(members) if not self.state.get("validation") else 0, on_request=started)
+                    reserve_validation_calls=self.reserved_validation_calls(), on_request=started)
                 self.repository.ontology_step(audit_id, self.state["step_no"], "planner", choice)
                 self.check_current(self.state)
                 if not choice["action"]:
@@ -231,9 +277,16 @@ class OntologyReviewRuntime:
                 try: observation = self.execute_tool(action, self.state)
                 except (ActionError, ValueError) as exc: observation = {"status": "invalid_action", "error": str(exc)}
                 self.check_current(self.state)
-                self.state["history"].append({"step_no": self.state["step_no"], "tool": action["action"], **observation})
+                self.state["history"].append({"step_no": self.state["step_no"], "tool": action["action"], 'arguments':copy.deepcopy(action['arguments']), **observation})
                 self.repository.ontology_step(audit_id, self.state["step_no"], "tool", {"action": action, **observation})
                 self.checkpoint()
+        except AuditPaused as exc:
+            self.state['stop_reason']='model_billing_paused'
+            self.checkpoint('validating' if self.state.get('pending_validation') else 'paused')
+            with self.repository.transaction(immediate=True) as connection:
+                connection.execute("UPDATE ontology_audits SET status='paused' WHERE audit_id=?",(audit_id,))
+            return {'paused':True,'recommendation':'needs_human','task_status':task['status'],'audit_id':audit_id,
+                    'reason_code':exc.vote.get('error_code'),'stop_reason':'model_billing_paused','release_published':False}
         except AgentStopped as exc:
             self.state["stop_reason"] = str(exc)
             self.state["critical_issues"].append(str(exc))

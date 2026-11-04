@@ -9,7 +9,7 @@ from review_agent.contracts import candidate_id_for
 CONTRACT_VERSION = "extraction_candidate_v4"
 QUALIFIER_FIELDS = ("polarity", "condition", "time_scope", "applicability", "modality", "quantifier")
 STATUS_VALUES = {"extracted", "not_stated", "unknown"}
-MODALITIES = {"asserted", "can", "may", "must", "usually", "possible", "necessary", "unknown"}
+MODALITIES = {"asserted", "assumed", "can", "may", "must", "usually", "possible", "necessary", "unknown"}
 
 ITEM_PROPERTIES = {
     "head": {"type": "string", "minLength": 1}, "surface_relation": {"type": "string", "minLength": 1},

@@ -20,8 +20,21 @@ class OntologyReviewRepository:
             "CREATE TABLE IF NOT EXISTS ontology_steps(audit_id TEXT NOT NULL REFERENCES ontology_audits(audit_id),step_no INTEGER NOT NULL,role TEXT NOT NULL,record_json TEXT NOT NULL,PRIMARY KEY(audit_id,step_no,role))",
             "CREATE TABLE IF NOT EXISTS ontology_proposals(audit_id TEXT NOT NULL REFERENCES ontology_audits(audit_id),round_id INTEGER NOT NULL,proposal_digest TEXT NOT NULL,proposal_json TEXT NOT NULL,PRIMARY KEY(audit_id,round_id))",
             "CREATE TABLE IF NOT EXISTS ontology_votes(audit_id TEXT NOT NULL,round_id INTEGER NOT NULL,voter_id TEXT NOT NULL,vote_json TEXT NOT NULL,PRIMARY KEY(audit_id,round_id,voter_id),FOREIGN KEY(audit_id,round_id) REFERENCES ontology_proposals(audit_id,round_id))",
+            'CREATE TABLE IF NOT EXISTS ontology_vote_recoveries(event_id TEXT PRIMARY KEY,audit_id TEXT NOT NULL,round_id INTEGER NOT NULL,voter_id TEXT NOT NULL,previous_vote_json TEXT NOT NULL,recovered_vote_json TEXT NOT NULL)',
             "CREATE TABLE IF NOT EXISTS ontology_publish_outbox(extension_id TEXT PRIMARY KEY,proposal_digest TEXT NOT NULL,status TEXT NOT NULL,payload_json TEXT NOT NULL,result_json TEXT)",
         ): connection.execute(statement)
+
+    def ontology_recovered_vote(self,vote):
+        from review_agent.repository import ConflictError
+        with self.transaction(immediate=True) as c:
+            old=c.execute('SELECT vote_json FROM ontology_votes WHERE audit_id=? AND round_id=? AND voter_id=?',
+                          (vote['audit_id'],vote['round_id'],vote['voter_id'])).fetchone()
+            if old and json.loads(old[0]).get('response_status')=='ok': raise ConflictError('valid ontology vote is immutable')
+            if old:
+                c.execute('INSERT INTO ontology_vote_recoveries VALUES(?,?,?,?,?,?)',
+                          (uuid4().hex,vote['audit_id'],vote['round_id'],vote['voter_id'],old[0],canonical_json(vote)))
+            c.execute('INSERT INTO ontology_votes VALUES(?,?,?,?) ON CONFLICT(audit_id,round_id,voter_id) DO UPDATE SET vote_json=excluded.vote_json',
+                      (vote['audit_id'],vote['round_id'],vote['voter_id'],canonical_json(vote)))
 
     def _ensure_case(self, connection, candidate_id, limits=None):
         case_id = "case_" + sha256_json(candidate_id)[:32]

@@ -155,7 +155,7 @@ class PlannerRuntimeTests(unittest.TestCase):
         result = self.run_script([ontology(), action("run_validation"), action("run_validation"), finish()])
         self.assertEqual(sum(len(c.calls) for c in self.clients), 4)
         self.assertEqual(result["budget"]["validation_rounds"], 1)
-        self.assertEqual(self.audit["tool_calls"][2]["status"], "cached")
+        self.assertEqual(sum(t['tool']=='run_validation' for t in self.audit['tool_calls']),1)
 
     def test_new_audit_retries_only_failed_model_and_refunds_cached_reservations(self):
         def recover(payload):
@@ -274,7 +274,8 @@ class PlannerRuntimeTests(unittest.TestCase):
         self.run_script(plan)
         self.assertEqual(self.repo.get_candidate("c")["revision"], 1)
         self.assertEqual(self.repo.get_candidate("c")["triple"]["tail"], "温度")
-        self.assertTrue(self.audit["context"]["revision_drafts"][0]["requires_human_confirmation"])
+        self.assertTrue(self.audit["context"]["revision_drafts"][0]['requires_independent_revision_review'])
+        self.assertEqual(self.audit['context']['revision_drafts'][0]['status'],'proposed')
 
     def test_cancellation_after_model_return_never_commits_a_decision(self):
         cancelled = [False]

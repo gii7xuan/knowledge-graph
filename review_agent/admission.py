@@ -136,11 +136,15 @@ def validate_admission(candidate, decision, ontology_release, source_snapshot, e
 
 def load_admission_artifacts(repository, candidate):
     manifest = repository.get_run(candidate["run_id"])
-    path = candidate.get("ontology_path") or manifest.get("ontology_path")
+    path = (candidate.get('ontology_release_path') or manifest.get('ontology_release_path')
+            or candidate.get("ontology_path") or manifest.get("ontology_path"))
     if not path: raise ValueError("ontology release path missing")
     path = Path(path)
     if not path.is_absolute(): path = ROOT / path
     release = load_release(path.parent if path.is_file() else path)
+    for candidate_key,release_key in (('ontology_release_id','release_id'),('ontology_version','ontology_version'),('profile_hash','profile_hash')):
+        if (candidate.get('contract_version')=='extraction_candidate_v4' or candidate.get(candidate_key)) and candidate.get(candidate_key)!=release.manifest.get(release_key):
+            raise ValueError('ontology release binding mismatch: '+candidate_key)
     document = load_document_index(manifest["document_path"], candidate.get("source_index_hash"), require_verified=True)
     return release, document
 
@@ -149,20 +153,27 @@ def canonicalize_revision(repository, candidate):
     """Compute identity before freezing a new revision; this grants no admission."""
     if candidate.get("contract_version") != "extraction_candidate_v4": return candidate
     candidate = deepcopy(candidate)
+    candidate["fact_key_state"] = "provisional"
     try:
         release, document = load_admission_artifacts(repository, candidate)
         triple = candidate["triple"]
         registry = RelationRegistry(release.ontology)
-        resolved = registry.resolve(triple.get("relation_id") or "")
-        if not resolved["relation_id"]: resolved = registry.resolve(triple.get("surface_relation") or "")
-        triple.update(relation_id=resolved["relation_id"], mapping_status=resolved["status"])
-        from schema.fact_identity import relation_semantic_hash
-        candidate["fact_identity_version"] = "fact_identity_v2"
-        triple["relation_semantic_hash"] = relation_semantic_hash(release.ontology, resolved["relation_id"])
         guard = OntologyGuard(load_snapshot(release.ontology))
         from ontologyBuild.ontology_adapter import normalize_name
         for field in ("head_type", "tail_type"):
             if triple.get(field): triple[field] = guard.class_index.get(normalize_name(triple[field]))
+        resolved = registry.resolve(triple.get("relation_id") or "")
+        if not resolved["relation_id"]:
+            proposed = registry.resolve(triple.get("surface_relation") or "")
+            if proposed['relation_id']:
+                probe=deepcopy(candidate);probe['triple']['relation_id']=proposed['relation_id']
+                resolved=(proposed if guard.check(probe).get('status')=='pass' else
+                    {'relation_id':None,'status':'needs_full_schema_lookup'})
+            else:resolved=proposed
+        triple.update(relation_id=resolved["relation_id"], mapping_status=resolved["status"])
+        from schema.fact_identity import relation_semantic_hash
+        candidate["fact_identity_version"] = "fact_identity_v2"
+        triple["relation_semantic_hash"] = relation_semantic_hash(release.ontology, resolved["relation_id"])
         for endpoint in ("head", "tail"):
             triple[endpoint + "_entity_id"] = local_entity_id(candidate["document_id"], candidate["document_version"], triple[endpoint]) if endpoint == "head" or triple.get("tail_kind") == "entity" else None
         statuses = triple.get("qualifier_status") or {}

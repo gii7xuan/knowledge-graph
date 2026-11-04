@@ -64,6 +64,16 @@ class LifecycleRepository:
         triple = candidate["triple"]
         gap_key = sha256_json([base, change_kind, " ".join(str(triple.get("surface_relation") or triple.get("relation_id") or "").split()).casefold(),
                                triple.get("head_type"), triple.get("tail_type")])
+        legacy_gap_key=gap_key
+        def target_identity(changes):
+            from ontologyBuild.ontology_adapter import normalize_name
+            if change_kind=='add_class': return ['class',normalize_name(changes.get('label') or changes.get('name'))]
+            if change_kind=='add_alias': return ['alias',changes.get('term_id') or changes.get('target_id'),normalize_name(changes.get('alias'))]
+            if change_kind=='merge_terms': return ['merge',sorted(changes.get('term_ids') or [])]
+            if change_kind in {'revise_definition','revise_constraint'}: return ['revision',changes]
+            return None
+        identity=target_identity(proposed_changes)
+        if identity is not None: gap_key=sha256_json([legacy_gap_key,identity])
         trigger = {"candidate_id": candidate["candidate_id"], "revision": candidate["revision"],
                    "audit_id": proposal["audit_id"], "round_id": proposal["round_id"],
                    "source_proposal_digest": proposal["proposal_digest"], "evidence_hash": proposal["evidence_bundle"]["evidence_hash"],
@@ -75,6 +85,10 @@ class LifecycleRepository:
             if row["pending_extension_id"]:
                 raise ConflictError("candidate already has an extension subscription; inspect that task instead")
             stored = connection.execute("SELECT * FROM ontology_extension_tasks WHERE gap_key=?", (gap_key,)).fetchone()
+            if not stored and gap_key!=legacy_gap_key:
+                legacy=connection.execute('SELECT * FROM ontology_extension_tasks WHERE gap_key=?',(legacy_gap_key,)).fetchone()
+                if legacy and target_identity(json.loads(legacy['task_json']).get('proposed_changes',{}))==identity:
+                    stored=legacy
             if stored:
                 task = json.loads(stored["task_json"])
                 task["status"] = stored["status"]
@@ -108,6 +122,9 @@ class LifecycleRepository:
                                (state, extension_id, next_version, candidate["candidate_id"]))
             if self.has_graph_history(connection, candidate["candidate_id"]):
                 self.mark_graph_dirty(connection, candidate["candidate_id"], "awaiting_ontology_withdraws_old_admission")
+            if task['status']=='proposed':
+                self.enqueue_job_in_transaction(connection,'ontology_extension',{'extension_id':extension_id,
+                    'audit_id':'ontology_audit_'+uuid4().hex})
         return {"task": task, "workflow_state": state, "row_version": next_version}
 
     def extension_status(self, extension_id, candidate_id=None):
@@ -118,4 +135,19 @@ class LifecycleRepository:
             subscriptions = connection.execute("SELECT * FROM ontology_extension_subscriptions WHERE extension_id=?", (extension_id,)).fetchall()
         if candidate_id and not any(s["candidate_id"] == candidate_id and s["status"] == "active" for s in subscriptions):
             raise NotFoundError("candidate is not subscribed to this extension")
-        return {**json.loads(row["task_json"]), "status": row["status"], "row_version": row["row_version"], "subscriptions": [dict(s) for s in subscriptions]}
+        with self.connect() as connection:
+            jobs=connection.execute("SELECT job_id,status,progress_json,lease_expires_at FROM jobs WHERE job_type='ontology_extension' AND json_extract(payload_json,'$.extension_id')=? ORDER BY created_at DESC LIMIT 5",(extension_id,)).fetchall()
+        return {**json.loads(row["task_json"]), "status": row["status"], "row_version": row["row_version"], "subscriptions": [dict(s) for s in subscriptions],
+                'queue_jobs':[{**dict(j),'progress':json.loads(j['progress_json'])} for j in jobs],
+                'execution_status':jobs[0]['status'] if jobs else 'no_consumer_job',
+                'publication_status':'awaiting_release' if row['status']=='approved' else row['status']}
+
+    def repair_extension_jobs(self):
+        repaired=[]
+        with self.transaction(immediate=True) as connection:
+            for row in connection.execute("SELECT extension_id FROM ontology_extension_tasks WHERE status='proposed'").fetchall():
+                existing=connection.execute("SELECT 1 FROM jobs WHERE job_type='ontology_extension' AND json_extract(payload_json,'$.extension_id')=? LIMIT 1",(row[0],)).fetchone()
+                if existing: continue
+                repaired.append(self.enqueue_job_in_transaction(connection,'ontology_extension',
+                    {'extension_id':row[0],'audit_id':'ontology_audit_'+uuid4().hex}))
+        return repaired

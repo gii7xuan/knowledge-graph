@@ -62,7 +62,7 @@ def aggregate_votes(
             expected = {"task_type": "triple_review", "task_id": candidate["candidate_id"],
                         "source_snapshot_hash": candidate.get("source_snapshot_id"),
                         "object_revision": candidate["revision"], "audit_id": proposal["audit_id"],
-                        "round_id": proposal["round_id"], "response_contract_version": CONTRACT_VERSION,
+                        "round_id": proposal["round_id"], "response_contract_version": proposal.get('response_contract_version',CONTRACT_VERSION),
                         "evidence_hash": proposal["evidence_bundle"]["evidence_hash"],
                         **{key: proposal.get(key) for key in ("source_index_hash", "document_version", "ontology_version",
                                 "ontology_release_id", "profile_hash", "committee_version", "committee_policy_hash", "prompt_version")}}
@@ -77,7 +77,8 @@ def aggregate_votes(
             if vote.get("response_status") == "ok":
                 from .response_contract import RESPONSE_SCHEMA, validate_response
                 from evidence.verification import verify_vote_references
-                if (validate_response({k: vote[k] for k in RESPONSE_SCHEMA["properties"] if k in vote})
+                from .validator_contracts import validate_vote
+                if (validate_vote(vote,proposal.get('response_contract_version'))
                         or verify_vote_references(vote, proposal["evidence_bundle"]["items"]).get("response_status") != "ok"):
                     invalid_attempts += 1
                     continue
@@ -202,6 +203,9 @@ def aggregate_votes(
             "committee_size": len(committee.voter_ids), "required_votes": committee.required_votes},
             admission_consensus={"result": "accept_consensus" if admission_ready else "unresolved"},
             eligible_voter_ids=[v["voter_id"] for v in eligible])
+        from .revision_patch import expression_diagnostics
+        result_payload.update(expression_diagnostics(proposal['candidate']))
+        result_payload['raw_source_support_votes']=[{'voter_id':v['voter_id'],'source_support':v.get('source_support')} for v in eligible]
         result_payload["result"] = ("accept_consensus" if admission_ready else "reject_consensus" if source_result == "contradicted"
                                     and not unresolved_support_conflict else "unresolved")
     return result_payload

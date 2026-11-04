@@ -5,11 +5,11 @@ from review_agent.planner_contracts import ActionError
 
 TASK_TYPE = "ontology_extension"
 CONTRACT_VERSION = "ontology_review_response_v2"
-PLANNER_VERSION = "ontology_extension_planner_v1"
-PROMPT_VERSION = "ontology_extension_validator_v1"
+PLANNER_VERSION = "ontology_extension_planner_v4"
+PROMPT_VERSION = "ontology_extension_validator_v2_constraint_scope_v1"
 ROOT = Path(__file__).resolve().parents[1]
-PLANNER_PROMPT = (ROOT / "prompts/ontology_extension_planner_v1.txt").read_text(encoding="utf-8")
-VALIDATOR_PROMPT = (ROOT / "prompts/ontology_extension_validator_v1.txt").read_text(encoding="utf-8")
+PLANNER_PROMPT = (ROOT / "prompts/ontology_extension_planner_v2.txt").read_text(encoding="utf-8")
+VALIDATOR_PROMPT = (ROOT / "prompts/ontology_extension_validator_v2.txt").read_text(encoding="utf-8")
 CHECKS = ("necessity", "reuse", "definition", "hierarchy_direction", "constraint_strength", "structure", "impact")
 EVIDENCE_SCOPES = {"definition", "classification", "scope_rule", "mixed", "instance_only", "unknown"}
 KINDS = {"add_class", "add_object_property", "add_data_property", "add_alias", "revise_definition", "revise_constraint", "merge_terms"}
@@ -20,6 +20,7 @@ TOOLS = {
     "propose_schema_delta": {"operations": "1..16 complete operation objects: kind,target,changes,evidence_ids"},
     "validate_schema_structure": {}, "run_reasoner_checks": {}, "analyze_schema_impact": {}, "run_competency_checks": {},
     "run_ontology_validation": {}, "finish_extension_review": {"stop_reason": "string <=400"},
+    'recover_ontology_validation':{},
 }
 RESPONSE_SCHEMA = {"type": "object", "additionalProperties": False,
     "required": ["decision", "necessity", "semantic_status", "structure_status", "impact_status", "supporting_evidence_ids", "counter_evidence_ids", "checks", "reason_codes", "suggested_changes", "requested_context"],
@@ -94,6 +95,7 @@ def validate_action(value):
 
 def versions():
     return {"task_type": TASK_TYPE, "contract_version": CONTRACT_VERSION, "planner_version": PLANNER_VERSION,
+            'payload_version':'ontology_validator_payload_v2',
             "prompt_version": PROMPT_VERSION, "planner_prompt_hash": sha256_json(PLANNER_PROMPT),
             "prompt_hash": sha256_json(VALIDATOR_PROMPT), "contract_hash": sha256_json(RESPONSE_SCHEMA)}
 
@@ -105,6 +107,7 @@ def proposal_digest(proposal):
 def vote_binding(voter, proposal):
     return {**{k: proposal[k] for k in ("task_type", "task_id", "object_revision", "audit_id", "round_id", "proposal_digest",
             "base_release_id", "base_ontology_version", "base_profile_hash", "delta_hash", "evidence_hash", "committee_hash")},
-            "contract_version": CONTRACT_VERSION, "prompt_version": PROMPT_VERSION,
+            "contract_version": proposal.get('versions',{}).get('contract_version',CONTRACT_VERSION),
+            "prompt_version": proposal.get('versions',{}).get('prompt_version',PROMPT_VERSION),
             "voter_id": voter["id"], "model_id": voter["model_id"], "model_family": voter["model_family"],
             "model_identity": str(voter.get("model_identity") or voter["model_id"]).strip().casefold()}

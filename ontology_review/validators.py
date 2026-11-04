@@ -33,68 +33,82 @@ def response_errors(value, proposal):
     return errors
 
 
-def judge(voter, proposal, repository, *, retries, timeout):
-    binding = vote_binding(voter, proposal)
-    client = voter["client"]
-    semantic = {k: v for k, v in proposal.items() if k not in {"audit_id", "round_id", "proposal_digest"}}
-    cache_inputs = {k: v for k, v in semantic.items() if k not in {"prior_counter_evidence_ids", "human_review_context"}}
-    key = sha256_json(["ontology_validation_single_flight_v1", cache_inputs, binding["model_identity"],
-                      binding["model_id"], binding["model_family"], str(getattr(client, "base_url", "")),
-                      sha256_json(getattr(client, "api_key", "")), VALIDATOR_PROMPT, RESPONSE_SCHEMA])
-    owner = uuid4().hex
-    cached = repository.claim_validation_request(key, owner)
-    if cached["status"] != "claimed":
-        original = cached.get("vote") or {}
-        if cached["status"] == "completed" and not response_errors({k: original[k] for k in RESPONSE_SCHEMA["required"] if k in original}, proposal):
-            return {**copy.deepcopy(original), **binding, "cached": True, "actual_calls": 0, "attempts": [], "input_tokens": 0, "output_tokens": 0,
-                    "cache_source": {k: original.get(k) for k in ("audit_id", "round_id", "proposal_digest", "voter_id")}}
-        return {**binding, "response_status": "api_error", "actual_calls": 0, "attempts": [], "error": "same frozen ontology request is in flight or outcome unknown", "cached": True}
-    attempts, feedback = [], None
-    payload = {**semantic, "proposal_digest": proposal["proposal_digest"], "output_contract": RESPONSE_SCHEMA,
-               "allowed_evidence_ids": [e["evidence_id"] for e in proposal["evidence"]]}
-    for number in range(retries + 1):
-        response, error = bounded_json(client, {**payload, **({"correction_feedback": feedback} if feedback else {})}, timeout,
-                                      system_prompt=VALIDATOR_PROMPT, max_tokens=4096)
-        vote = {**binding, "response_status": "api_error", "attempt_no": number + 1}
-        if response is None:
-            from review_agent.execution import api_error_fields
-            timed_out = isinstance(error, TimeoutError) or "timeout" in type(error).__name__.lower()
-            vote.update(response_status="timeout" if timed_out else "api_error", error=str(error), **api_error_fields(error))
-            if timed_out: vote.update(retryable=False, outcome_unknown=True)
-        else:
-            vote.update(input_tokens=response.input_tokens, output_tokens=response.output_tokens,
-                        returned_model_id=response.returned_model_id, response_id=response.response_id)
-            try:
-                raw = _parse_content(response.content)
-                errors = response_errors(raw, proposal)
-                if errors: vote.update(response_status="invalid_contract", error="; ".join(errors), raw_response=raw)
-                else: vote.update(raw, response_status="ok")
-            except (ValueError, TypeError, KeyError) as exc:
-                vote.update(response_status="invalid_contract", error=str(exc), raw_response=response.content)
-        attempts.append(copy.deepcopy(vote))
-        if vote["response_status"] == "ok" or vote.get("retryable") is False or vote.get("pause_job"): break
-        feedback = {"error": vote.get("error"), "instruction": "Only repair contract/references/service error for this same immutable proposal."}
-    result = {**vote, "attempts": attempts, "actual_calls": len(attempts), "request_key": key}
-    repository.finish_validation_request(key, owner, result)
-    return result
+def judge_once(voter, proposal, feedback=None):
+    from review_agent.execution import api_error_fields
+    vote=vote_binding(voter,proposal)
+    from .review_payload import validator_payload
+    semantic=validator_payload(proposal,delivery_version=voter.get('ontology_delivery_version'))
+    payload={**semantic,'output_contract':RESPONSE_SCHEMA,
+        'allowed_evidence_ids':[e['evidence_id'] for e in proposal['evidence']],
+        **({'correction_feedback':feedback} if feedback else {})}
+    try:
+        response=voter['client'].complete_json(payload,system_prompt=prompt_for(proposal),
+            max_tokens=int(voter.get('max_output_tokens',4096)),timeout_seconds=voter.get('http_timeout_seconds'))
+        raw=_parse_content(response.content)
+        errors=response_errors(raw,proposal)
+        vote.update(raw if not errors else {'error':'; '.join(errors),'raw_response':raw},
+            response_status='invalid_contract' if errors else 'ok',input_tokens=response.input_tokens,
+            output_tokens=response.output_tokens,returned_model_id=response.returned_model_id,
+            response_id=response.response_id,latency_ms=response.latency_ms,
+            finish_reason=getattr(response,'finish_reason',None),reasoning_tokens=getattr(response,'reasoning_tokens',None))
+    except Exception as exc:
+        timed_out=isinstance(exc,TimeoutError) or 'timeout' in type(exc).__name__.lower()
+        vote.update(response_status='timeout' if timed_out else 'api_error',error=str(exc),**api_error_fields(exc))
+        if timed_out: vote.update(retryable=False,outcome_unknown=True)
+    return vote
 
 
-def judge_independently(voters, proposal, repository, *, retries=0, timeout=45, on_vote=None):
+def prompt_for(proposal):
+    if proposal.get('versions',{}).get('prompt_version')=='ontology_extension_validator_v1':
+        from .contracts import ROOT
+        return (ROOT/'prompts/ontology_extension_validator_v1.txt').read_text(encoding='utf-8')
+    if proposal.get('versions',{}).get('prompt_version')=='ontology_extension_validator_v2':
+        from .contracts import ROOT
+        prompt=(ROOT/'prompts/ontology_extension_validator_v2_legacy.txt').read_text(encoding='utf-8')
+        if proposal.get('versions',{}).get('prompt_hash') and sha256_json(prompt)!=proposal['versions']['prompt_hash']:
+            raise ValueError('frozen ontology prompt hash mismatch')
+        return prompt
+    return VALIDATOR_PROMPT
+
+
+def judge(voter, proposal, repository, *, retries, timeout,deadline_epoch=None):
+    from review_agent.request_execution import judge_typed
+    return judge_typed(voter,proposal,repository,task_type='ontology_review',binding=vote_binding(voter,proposal),
+        invoke=lambda feedback:judge_once(voter,proposal,feedback),
+        validate_cached=lambda vote:response_errors({k:vote[k] for k in RESPONSE_SCHEMA['required'] if k in vote},proposal),
+        prompt_hash=sha256_json([prompt_for(proposal),RESPONSE_SCHEMA]),retries=retries,timeout=timeout,deadline_epoch=deadline_epoch)
+
+
+def judge_independently(voters, proposal, repository, *, retries=0, timeout=45, on_vote=None,deadline_epoch=None):
     results = {}
     pool = ThreadPoolExecutor(max_workers=max(1, len(voters)))
     try:
-        futures = {pool.submit(judge, voter, proposal, repository, retries=retries, timeout=timeout): voter for voter in voters}
+        futures = {pool.submit(judge, voter, proposal, repository, retries=retries, timeout=timeout,deadline_epoch=deadline_epoch): voter for voter in voters}
         for future in as_completed(futures):
             voter = futures[future]
             try: vote = future.result()
             except Exception as exc: vote = {**vote_binding(voter, proposal), "response_status": "api_error", "error": str(exc), "actual_calls": retries + 1, "attempts": []}
             results[voter["id"]] = vote
             if on_vote: on_vote(vote)
+            if vote.get('pause_job'):
+                from review_agent.execution import AuditPaused
+                raise AuditPaused(vote)
     finally: pool.shutdown(wait=False, cancel_futures=True)
     return [results[v["id"]] for v in voters]
 
 
-def consensus(votes, proposal):
+def competency_pass(proposal,semantic_competency=None):
+    check=proposal['check_records'].get('competency',{})
+    if check.get('status')=='pass':return True
+    proof=semantic_competency or {}
+    if (check.get('status')!='unknown' or proof.get('status')!='pass' or
+            proof.get('parent_proposal_digest')!=proposal['proposal_digest'] or not proof.get('request_hash')):return False
+    questions=set(proof.get('question_ids',[]))
+    return bool(check.get('checks')) and all(item.get('status')=='pass' or
+        item.get('status')=='unknown' and item.get('id') in questions for item in check['checks'])
+
+
+def consensus(votes, proposal, *, semantic_competency=None):
     policy = proposal["committee_policy"]
     members = {m["id"]: m for m in proposal["committee_members"]}
     seen_voters, seen_models, families = set(), set(), {"approve": set(), "reject": set()}
@@ -115,7 +129,7 @@ def consensus(votes, proposal):
         if vote["decision"] in families: families[vote["decision"]].add(vote["model_family"])
         counter.update(vote["counter_evidence_ids"])
     checks = proposal["check_records"]
-    gates = all(checks.get(k, {}).get("status") == "pass" for k in ("structure", "impact", "competency"))
+    gates = all(checks.get(k, {}).get("status") == "pass" for k in ("structure", "impact")) and competency_pass(proposal,semantic_competency)
     gates = gates and checks.get("existing_schema", {}).get("status") == "pass"
     if proposal.get("reasoner_required"): gates = gates and checks.get("reasoner", {}).get("status") == "pass"
     approved = (counts["approve"] >= policy["required_votes"] and len(families["approve"]) >= policy["minimum_distinct_families"] and not counter and gates)

@@ -78,11 +78,13 @@ onUnmounted(() => clearInterval(timer));
     <div v-for="task in tasks" :key="task.extension_id" class="detail-line">
       <button @click="inspect(task)">{{ task.description || task.extension_id }}</button>
       · {{ labels[task.status] || task.status }} · 修订 {{ task.delta_revision }}
+      <span> · 队列 {{ task.execution_status || '尚无执行记录' }} · 发布 {{ task.publication_status || task.status }}</span>
       <span v-if="jobs[task.extension_id]"> · 执行 {{ jobs[task.extension_id].status }}</span>
     </div>
     <div v-if="selected">
       <p class="run-path">{{ selected.extension_id }} · {{ labels[selected.status] || selected.status }} · base {{ selected.base_release_id }}</p>
       <p>触发来源 {{ selected.trigger_candidates?.length || 0 }} · {{ selected.ontology_review_executed ? '已有独立本体审核记录' : '尚未执行本体审核' }}</p>
+      <p v-for="queued in selected.queue_jobs || []" :key="queued.job_id">队列：{{ queued.status }} · {{ queued.progress?.reason_code || queued.progress?.error || '' }}</p>
       <button :disabled="busy || !enabled || ['publishing', 'published', 'needs_rebase'].includes(selected.status)" @click="act('review')">启动 / 继续本体调查</button>
       <button v-if="selected.status === 'needs_rebase'" :disabled="busy" @click="act('rebase')">更新到当前基线，旧批准失效</button>
       <details v-if="selected.delta"><summary>完整差异与生成后的本体</summary><pre class="evidence-text">{{ JSON.stringify(selected.delta, null, 2) }}</pre></details>

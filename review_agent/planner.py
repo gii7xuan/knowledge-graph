@@ -52,7 +52,7 @@ class LLMPlanner:
                 on_request(payload, attempts)
             began = time.monotonic()
             response, error = bounded_json(self.client, payload,
-                min(float(budget.config.get("per_call_timeout_seconds", 45)), budget.remaining_seconds()),
+                min(float(budget.config.get('planner_timeout_seconds',budget.config.get("per_call_timeout_seconds", 45))), budget.remaining_seconds()),
                 should_stop=should_stop, max_tokens=self.max_output_tokens, system_prompt=self.system_prompt)
             attempt = {"attempt_no": len(attempts) + 1,
                        "latency_ms": int((time.monotonic() - began) * 1000),
@@ -61,7 +61,8 @@ class LLMPlanner:
             if response is not None:
                 attempt.update(input_tokens=response.input_tokens, output_tokens=response.output_tokens,
                     raw_response=response.content,returned_model_id=getattr(response,'returned_model_id',None),
-                    response_id=getattr(response,'response_id',None))
+                    response_id=getattr(response,'response_id',None),
+                    finish_reason=getattr(response,'finish_reason',None),reasoning_tokens=getattr(response,'reasoning_tokens',None))
                 try:
                     action = self.action_validator(_parse_content(response.content))
                     attempt["response_status"] = "ok"
@@ -80,6 +81,7 @@ class LLMPlanner:
             feedback = {"error": attempt.get("error"),
                 "instruction": "严格按 output_schema 返回四个顶层键，仅选 available_tools；证据 ID 逐字选择 valid_evidence_ids，不得编造观察。",
                 "valid_evidence_ids":payload.get('valid_evidence_ids',[]),
+                'output_schema':payload.get('output_schema'),
                 "blocked_tools":payload.get('blocked_tools',{}),"required_obligations":payload.get('required_obligations',[])}
             if attempt.get("retryable") is False:
                 break

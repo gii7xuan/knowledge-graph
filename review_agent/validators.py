@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import re
 import time
 import queue
@@ -33,6 +34,8 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
                                                 for key in ("polarity", "condition", "time_scope", "applicability", "modality", "quantifier")}
     safe_candidate["triple"]["qualifier_status"] = dict(triple.get("qualifier_status") or {})
     evidence = proposal.get("evidence_bundle", {}).get("items", [])
+    from .validator_contracts import contract_for
+    contract=contract_for(proposal.get('response_contract_version'))
     return {
         "task_type": "triple_review", "task_id": candidate.get("candidate_id"), "object_revision": candidate.get("revision"),
         "proposal_digest": proposal["proposal_digest"],
@@ -46,8 +49,8 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
             "完整主谓宾是否被原文支持", "否定、条件、数量、时间和指代是否保留",
             "关系语义及方向是否一致", "类型和本体约束是否满足", "是否存在反证",
         ],
-        "response_contract_version": CONTRACT_VERSION,
-        "output_contract": RESPONSE_SCHEMA,
+        "response_contract_version": contract.CONTRACT_VERSION,
+        "output_contract": contract.RESPONSE_SCHEMA,
         "reason_codes": list(REASON_CODES),
     }
 
@@ -80,7 +83,7 @@ def vote_binding(voter, proposal):
         **{key: proposal.get(key) for key in ("source_index_hash", "document_version", "ontology_version",
                                             "ontology_release_id", "profile_hash", "committee_version", "committee_policy_hash", "prompt_version")},
         "evidence_hash": (proposal.get("evidence_bundle") or {}).get("evidence_hash"),
-        "response_contract_version": CONTRACT_VERSION,
+        "response_contract_version": proposal.get('response_contract_version',CONTRACT_VERSION),
     }
 
 
@@ -94,11 +97,15 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
     client = voter["client"]
     base = vote_binding(voter, proposal)
     started = time.monotonic()
+    response=None
     try:
+        from .validator_contracts import contract_for, prompt_for
+        contract=contract_for(proposal.get('response_contract_version'))
         payload = validator_payload(proposal)
         if feedback:
             payload["correction_feedback"] = feedback
-        response = client.complete_json(payload, system_prompt=SYSTEM_PROMPT)
+        response = client.complete_json(payload, system_prompt=prompt_for(proposal),
+            max_tokens=voter.get('max_output_tokens',4096),timeout_seconds=voter.get('http_timeout_seconds'))
         parsed = _parse_content(response.content)
     except TimeoutError as exc:
         return {**base, "response_status": "timeout", "verdict": None, "error": str(exc),
@@ -106,6 +113,10 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 "latency_ms": int((time.monotonic() - started) * 1000)}
     except json.JSONDecodeError as exc:
         return {**base, "response_status": "invalid_json", "verdict": None, "error": str(exc),
+                'raw_response':getattr(response,'content',None),'response_id':getattr(response,'response_id',None),
+                'returned_model_id':getattr(response,'returned_model_id',None),
+                'input_tokens':getattr(response,'input_tokens',None),'output_tokens':getattr(response,'output_tokens',None),
+                'finish_reason':getattr(response,'finish_reason',None),'reasoning_tokens':getattr(response,'reasoning_tokens',None),
                 "latency_ms": int((time.monotonic() - started) * 1000)}
     except ValueError as exc:
         return {**base, "response_status": "invalid_contract", "verdict": None, "error": str(exc),
@@ -117,13 +128,18 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 **({"retryable": False, "outcome_unknown": True} if status == "timeout" else {}),
                 "latency_ms": int((time.monotonic() - started) * 1000)}
 
-    errors = validate_response(parsed)
+    errors = contract.validate_response(parsed)
     if errors:
         return {**base, "response_status": "invalid_contract", "verdict": None,
                 "error": "; ".join(errors), "validation_errors": errors,
                 "raw_response": response.content, "latency_ms": getattr(response, "latency_ms", None),
+                'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
                 "input_tokens": getattr(response, "input_tokens", None),
                 "output_tokens": getattr(response, "output_tokens", None)}
+    if hasattr(contract,'normalize'):
+        raw_assessment=parsed['schema_assessment']
+        parsed=contract.normalize(parsed)
+        parsed['schema_assessment']=raw_assessment
     parsed.update(base)
     parsed["response_status"] = "ok"
     parsed.setdefault("reason_codes", [])
@@ -135,6 +151,8 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
     parsed["output_tokens"] = getattr(response, "output_tokens", None)
     parsed["returned_model_id"] = getattr(response, "returned_model_id", None)
     parsed["response_id"] = getattr(response, "response_id", None)
+    parsed['finish_reason']=getattr(response,'finish_reason',None)
+    parsed['reasoning_tokens']=getattr(response,'reasoning_tokens',None)
     parsed["model_version_verification"] = "reported" if parsed["returned_model_id"] else "unavailable"
     if proposal.get("ontology_check", {}).get("status") == "fail" and parsed["schema_status"] != "fail":
         parsed["ontology_disagreement"] = True
@@ -146,27 +164,47 @@ def judge_validator(
     voter: Mapping[str, Any], proposal: Mapping[str, Any], *, max_retries: int = 0,
     per_call_timeout_seconds: float = 45.0,
     repository=None,
+    deadline_epoch=None, _request_owner=None, _request_key=None,
+    _initial_feedback=None,
 ) -> Dict[str, Any]:
-    if repository is not None:
+    if repository is not None and _request_owner is None:
         from .request_cache import cached_validation
         return cached_validation(repository, voter, proposal,
-            lambda: judge_validator(voter, proposal, max_retries=max_retries,
-                                    per_call_timeout_seconds=per_call_timeout_seconds),
-            per_call_timeout_seconds * (max(0, int(max_retries)) + 1))
+            lambda owner,key: judge_validator(voter, proposal, max_retries=max_retries,
+                per_call_timeout_seconds=per_call_timeout_seconds,repository=repository,
+                deadline_epoch=deadline_epoch,_request_owner=owner,_request_key=key,
+                _initial_feedback=_initial_feedback),
+            min(per_call_timeout_seconds * (max(0, int(max_retries)) + 1),
+                max(0.,deadline_epoch-time.time()) if deadline_epoch else float('inf')))
     attempts = []
-    final: Dict[str, Any] = {}
+    final: Dict[str, Any] = {**vote_binding(voter,proposal),'response_status':'api_error','error_code':'DEADLINE_EXHAUSTED','actual_calls':0}
     retryable = {"timeout", "api_error", "invalid_json", "invalid_contract", "invalid_reference"}
-    feedback = None
+    feedback = copy.deepcopy(_initial_feedback)
     for attempt_no in range(1, max(0, int(max_retries)) + 2):
-        final = _bounded_attempt(voter, proposal, feedback, per_call_timeout_seconds)
+        timeout=min(float(voter.get('request_timeout_seconds',per_call_timeout_seconds)),
+                    max(0.,deadline_epoch-time.time()) if deadline_epoch else float('inf'))
+        if timeout<=0: break
+        if deadline_epoch:
+            voter={**voter,'http_timeout_seconds':min(float(voter.get('http_timeout_seconds',getattr(voter['client'],'timeout_seconds',timeout))),
+                                                    max(.001,deadline_epoch-time.time()))}
+        if repository is not None:
+            from .request_execution import durable_attempt
+            final=durable_attempt(repository,_request_key,_request_owner,vote_binding(voter,proposal),voter,
+                proposal,feedback,timeout,lambda:_judge_validator_once(voter,proposal,feedback))
+        else:
+            final = _bounded_attempt(voter, proposal, feedback, timeout)
         attempts.append({**final, "attempt_no": attempt_no})
         if final.get("response_status") not in retryable or final.get("retryable") is False:
             break
         feedback = {"response_status": final.get("response_status"), "error": final.get("error"),
+                    'raw_response_ref':final.get('attempt_id'),
+                    'field_constraints':{'ontology_state':'schema_status must equal checks.ontology.status in v3; v4 uses schema_assessment only',
+                        'schema_failure':'fail requires CONSTRAINT_VIOLATION and cannot use not_covered'},
                     "validation_errors": final.get("validation_errors", []),
                     "invalid_evidence_ids": final.get("invalid_evidence_ids", []),
                     "instruction": "修复上述错误，依据同一 evidence 目录重新输出完整 JSON；不得猜测或替换 ID。"}
-    return {**final, "attempt_no": len(attempts), "attempts": attempts, "actual_calls": len(attempts)}
+    return {**final, "attempt_no": len(attempts), "attempts": attempts,
+            "actual_calls":sum(0 if a.get('actual_calls')==0 else 1 for a in attempts)}
 
 
 def _bounded_attempt(voter, proposal, feedback, timeout_seconds):
@@ -206,6 +244,7 @@ def judge_independently(
     per_call_timeout_seconds: float = 45.0,
     on_vote=None,
     repository=None,
+    deadline_epoch=None,
 ) -> List[Dict[str, Any]]:
     voters = list(voters)
     if not voters:
@@ -216,7 +255,7 @@ def judge_independently(
         futures = {
             pool.submit(judge_validator, voter, proposal, max_retries=max_retries,
                         per_call_timeout_seconds=per_call_timeout_seconds,
-                        repository=repository): str(voter["id"])
+                        repository=repository,deadline_epoch=deadline_epoch): str(voter["id"])
             for voter in voters
         }
         for future in as_completed(futures):

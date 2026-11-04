@@ -507,6 +507,8 @@ onUnmounted(stopPolling);
               <div v-if="rawConfidence(item).evidence_info" class="detail-line">{{ rawConfidence(item).evidence_info }}</div>
               <div v-if="isV3" class="detail-line">冻结本体检查：{{ item.audit_summary?.ontology_check?.status || '未审核' }} · {{ (item.audit_summary?.ontology_check?.reason_codes || []).join('；') }}</div>
               <div v-if="isV3" class="detail-line">流程：{{ workflowLabels[item.workflow_state] || item.workflow_state }} · 原文共识：{{ item.audit_summary?.source_support_consensus?.result || '未形成' }} · 准入共识：{{ item.audit_summary?.admission_consensus?.result || '未形成' }}</div>
+              <div v-if="isV3 && item.expression_complete === false" class="notice">候选表达待补齐：{{ (item.blocking_fields || []).join('、') }}。委员对原文的支持意见仍需经过完整表达核验。</div>
+              <div v-for="failure in item.audit_summary?.request_failures || []" :key="failure.voter_id" class="detail-line">{{ failure.model_id }}：{{ failure.outcome_unknown ? '原请求结果待核实，暂停重发' : '技术失败席位待恢复' }} · {{ failure.error_code || failure.error }}</div>
               <div v-if="item.pending_extension_id" class="detail-line">
                 <button @click="showExtension(item.pending_extension_id)">查看本体扩展请求 {{ item.pending_extension_id }}</button>
                 <p>等待本体处理；当前原文审核票不能用于新本体版本的准入。</p>
@@ -552,9 +554,10 @@ onUnmounted(stopPolling);
                   </li>
                 </ol>
                 <div v-for="issue in item.audit_summary.unresolved_issues || []" :key="`${issue.code}:${issue.description}`">待解决：{{ issue.description }}</div>
-                <div v-for="(draft, n) in item.audit_summary.revision_drafts || []" :key="`draft-${n}`">模型修订建议（待人工确认，不覆盖候选）：{{ JSON.stringify(draft.changes) }}</div>
+                <div v-for="(draft, n) in item.audit_summary.revision_drafts || []" :key="draft.draft_id || `draft-${n}`">修订草案：{{ draft.status || '历史人工草案' }} · {{ JSON.stringify(draft.changes) }} · 新版本需重新审核</div>
                 <div>系统最终决定：{{ item.latest_decision?.decision || '尚未提交' }} · 停止原因 {{ item.audit_summary.stop_reason || '调查中' }}</div>
-                <div v-if="item.audit_summary.agent_budget">实际模型调用 {{ item.audit_summary.agent_budget.usage?.llm_calls }} · 工具调用 {{ item.audit_summary.agent_budget.usage?.tool_calls }}</div>
+                <div v-if="item.audit_summary.agent_budget">模型调用预算计数（含未决预留）{{ item.audit_summary.agent_budget.usage?.llm_calls }} · 工具调用 {{ item.audit_summary.agent_budget.usage?.tool_calls }}</div>
+                <details v-if="item.audit_summary.request_attempts?.length"><summary>请求执行与用量</summary><p v-for="attempt in item.audit_summary.request_attempts" :key="attempt.attempt_id">{{ attempt.model_id }} · {{ attempt.state }} · 输入 {{ attempt.input_tokens ?? '待核实' }} / 输出 {{ attempt.output_tokens ?? '待核实' }} token</p></details>
               </details>
               <div v-if="openEvidence.has(idFor(item))" class="markdown-evidence" v-html="renderedEvidence[idFor(item)] || '正在排版证据...' "></div>
             </details>

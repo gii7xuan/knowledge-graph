@@ -1,0 +1,280 @@
+{
+  "checked_at_beijing": "2026-11-03T10:31:10.828287+08:00",
+  "source_workbook": "D:\\knowledge-huopao\\outputs\\dev30_20261031\\第一章30条开发样本_人工填写.xlsx",
+  "source_workbook_sha256": "99fa28fb1efc37ccbe1e1193bd0f3fae01e2a473a054cdcb0e86bf250da63e9e",
+  "sample_count": 30,
+  "core_labels_filled": 240,
+  "core_labels_expected": 240,
+  "missing_core_labels": [],
+  "invalid_labels": [],
+  "optional_reviewer_blank_count": 30,
+  "optional_review_date_blank_count": 30,
+  "counts": {
+    "来源支持": {
+      "支持": 26,
+      "证据不足": 1,
+      "反驳": 3
+    },
+    "限定完整": {
+      "是": 25,
+      "否": 2,
+      "不适用": 3
+    },
+    "关系方向正确": {
+      "是": 28,
+      "否": 1,
+      "不适用": 1
+    },
+    "关系映射正确": {
+      "否": 2,
+      "是": 27,
+      "不适用": 1
+    },
+    "本体兼容": {
+      "是": 30
+    },
+    "任务相关": {
+      "是": 30
+    },
+    "本体覆盖缺口": {
+      "无": 30
+    },
+    "事实表述正确": {
+      "是": 25,
+      "否": 5
+    }
+  },
+  "structural_issues": [],
+  "frozen_candidate_display_changes": [],
+  "frozen_evidence_changes": [],
+  "frozen_binding_changes": [],
+  "live_candidate_version_changes": [],
+  "frozen_ontology_reference_changes": [],
+  "raw_machine_source_vs_human": [
+    {
+      "machine": "supported",
+      "human": "反驳",
+      "n": 3
+    },
+    {
+      "machine": "supported",
+      "human": "支持",
+      "n": 16
+    },
+    {
+      "machine": "supported",
+      "human": "证据不足",
+      "n": 1
+    },
+    {
+      "machine": "unresolved",
+      "human": "支持",
+      "n": 10
+    }
+  ],
+  "raw_machine_guard_vs_human_compatibility": [
+    {
+      "machine": "fail",
+      "human": "是",
+      "n": 2
+    },
+    {
+      "machine": "pass",
+      "human": "是",
+      "n": 11
+    },
+    {
+      "machine": "unknown",
+      "human": "是",
+      "n": 17
+    }
+  ],
+  "strata": {
+    "分歧或依据待补充": {
+      "n": 10,
+      "source_support_counts": {
+        "支持": 10
+      },
+      "fact_correct_counts": {
+        "是": 9,
+        "否": 1
+      }
+    },
+    "来源支持且本体检查通过": {
+      "n": 10,
+      "source_support_counts": {
+        "证据不足": 1,
+        "支持": 7,
+        "反驳": 2
+      },
+      "fact_correct_counts": {
+        "是": 8,
+        "否": 2
+      }
+    },
+    "来源支持但本体待处理": {
+      "n": 10,
+      "source_support_counts": {
+        "支持": 9,
+        "反驳": 1
+      },
+      "fact_correct_counts": {
+        "是": 8,
+        "否": 2
+      }
+    }
+  },
+  "clarification_issues": [
+    {
+      "sample_id": "DEV-002",
+      "workbook_row": 7,
+      "code": "fact_scope_source",
+      "description": "来源支持未标为支持，但事实表述正确为是；需明确来源判断与事实判断的范围。"
+    },
+    {
+      "sample_id": "DEV-004",
+      "workbook_row": 9,
+      "code": "fact_scope_qualifiers",
+      "description": "限定完整为否、事实表述正确为是；需确认总判断针对原候选还是修订后的表述。"
+    },
+    {
+      "sample_id": "DEV-004",
+      "workbook_row": 9,
+      "code": "authoring_quote_locator_defect",
+      "description": "原主表直接引文仅为公式分隔符，属于样本展示问题。完整核验证据已保留，不据此判人工或模型错误。"
+    },
+    {
+      "sample_id": "DEV-011",
+      "workbook_row": 16,
+      "code": "authoring_quote_locator_defect",
+      "description": "原主表直接引文仅为公式分隔符，属于样本展示问题。完整核验证据已保留，不据此判人工或模型错误。"
+    },
+    {
+      "sample_id": "DEV-012",
+      "workbook_row": 17,
+      "code": "authoring_quote_locator_defect",
+      "description": "原主表直接引文仅为公式分隔符，属于样本展示问题。完整核验证据已保留，不据此判人工或模型错误。"
+    },
+    {
+      "sample_id": "DEV-014",
+      "workbook_row": 19,
+      "code": "authoring_quote_locator_defect",
+      "description": "原主表直接引文仅为公式分隔符，属于样本展示问题。完整核验证据已保留，不据此判人工或模型错误。"
+    },
+    {
+      "sample_id": "DEV-017",
+      "workbook_row": 22,
+      "code": "fact_scope_direction",
+      "description": "关系方向正确为否、事实表述正确为是，且有修改建议；需确认总判断的对象。"
+    },
+    {
+      "sample_id": "DEV-025",
+      "workbook_row": 30,
+      "code": "authoring_quote_locator_defect",
+      "description": "原主表直接引文仅为公式分隔符，属于样本展示问题。完整核验证据已保留，不据此判人工或模型错误。"
+    },
+    {
+      "sample_id": "DEV-028",
+      "workbook_row": 33,
+      "code": "negative_overall_reason",
+      "description": "来源与其他分项均为肯定，但事实表述正确为否；需补充判否原因或任务范围口径。"
+    },
+    {
+      "sample_id": "DEV-029",
+      "workbook_row": 34,
+      "code": "negative_overall_reason",
+      "description": "来源与其他分项均为肯定，但事实表述正确为否；需补充判否原因或任务范围口径。"
+    }
+  ],
+  "mapping_marked_yes_without_formal_relation_id": [
+    "DEV-003",
+    "DEV-005",
+    "DEV-006",
+    "DEV-009",
+    "DEV-010",
+    "DEV-011",
+    "DEV-012",
+    "DEV-016",
+    "DEV-018",
+    "DEV-021",
+    "DEV-023",
+    "DEV-026",
+    "DEV-027",
+    "DEV-029",
+    "DEV-030"
+  ],
+  "raw_seat_source_vs_human": {
+    "Qwen": [
+      {
+        "model_source_support": "supported",
+        "human_source_support": "反驳",
+        "n": 3
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "支持",
+        "n": 26
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "证据不足",
+        "n": 1
+      }
+    ],
+    "Gemma": [
+      {
+        "model_source_support": "contradicted",
+        "human_source_support": "支持",
+        "n": 1
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "反驳",
+        "n": 3
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "支持",
+        "n": 25
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "证据不足",
+        "n": 1
+      }
+    ],
+    "deepseek-flash": [
+      {
+        "model_source_support": "contradicted",
+        "human_source_support": "支持",
+        "n": 1
+      },
+      {
+        "model_source_support": "insufficient",
+        "human_source_support": "支持",
+        "n": 1
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "反驳",
+        "n": 3
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "支持",
+        "n": 24
+      },
+      {
+        "model_source_support": "supported",
+        "human_source_support": "证据不足",
+        "n": 1
+      }
+    ]
+  },
+  "annotation_scope_confirmed": false,
+  "formal_evaluation_metrics_finalized": false,
+  "production_database_written": false,
+  "source_workbook_modified": false,
+  "model_calls": 0,
+  "sampling_is_population_representative": false
+}

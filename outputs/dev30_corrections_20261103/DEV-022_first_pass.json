@@ -1,0 +1,442 @@
+{
+  "approved_voter_ids": [
+    "judge_c"
+  ],
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "minimum_distinct_families": 3,
+    "required_votes": 3
+  },
+  "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+  "draft_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+  "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+  "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+  "status": "review_incomplete",
+  "task_type": "candidate_revision_review",
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_f6a1c341ad1e4a2b89f8aa6f3a6f59ab",
+      "attempts": [
+        {
+          "attempt_id": "attempt_f6a1c341ad1e4a2b89f8aa6f3a6f59ab",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "reject",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+          "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2"
+              ],
+              "field": "head",
+              "note": "The source text explicitly states '将矢量方程（1-56）在直角坐标上投影', making '矢量方程（1-56）' the correct subject of the projection action.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2",
+                "ev_3c257acf77bccb69eb66"
+              ],
+              "field": "head_type",
+              "note": "The ontology does not contain a specific class for '矢量方程' (vector equation). The previous head_type 'C_5d265e9d9a9bd7644687' (弹丸质心运动微分方程组) is incorrect as it refers to the result of the projection, not the vector equation itself. Setting it to null is appropriate given the ontology gap.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2"
+              ],
+              "field": "relation_id",
+              "note": "The property 'R_5da207e3fa51409de7b9' (投影于) has a domain constraint of 'C_5d265e9d9a9bd7644687' (弹丸质心运动微分方程组). Since the head is now '矢量方程（1-56）' which does not match this domain, the relation_id cannot be validly applied. Setting it to null is correct to avoid an invalid mapping.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The statement is a direct affirmative assertion ('即可写出'), supporting a 'positive' polarity.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The polarity is explicitly extracted from the affirmative nature of the source text, not a default value.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 15682,
+          "late_response": false,
+          "latency_ms": 29672,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 961,
+          "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+          "provider_started_at": 1793719295.0670958,
+          "queue_time_ms": 302,
+          "rationale_summary": "The revision correctly identifies '矢量方程（1-56）' as the head based on the source text '将矢量方程（1-56）在直角坐标上投影'. However, the revision must be rejected because it sets 'relation_id' to null while retaining 'relation_label' as '投影于'. This creates an inconsistent state where a surface relation exists without a formal ontology mapping. More critically, the ontology property 'R_5da207e3fa51409de7b9' has a strict domain of 'C_5d265e9d9a9bd7644687'. By changing the head to '矢量方程（1-56）' (which has no ontology class), the formal relation cannot be applied. While setting relation_id to null is logically consistent with the domain constraint violation, the candidate should either (1) retain the original head if the formal relation is required, or (2) explicitly mark the relation as unmapped/invalid rather than leaving a dangling surface_relation. The current state is internally inconsistent for a knowledge graph candidate that requires formal mappings. Additionally, the 'head_type' being null while 'tail_type' is set creates an asymmetric typing that may violate schema expectations. The revision is technically correct in its source grounding but fails in ontology consistency.",
+          "reasoning_tokens": null,
+          "request_key": "dc9f668d31b59418f4267dcee38b062236755d6a53c92b712a6883c63098fb5e",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-9724bdcc6b6f695e",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "task_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "reject",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+      "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2"
+          ],
+          "field": "head",
+          "note": "The source text explicitly states '将矢量方程（1-56）在直角坐标上投影', making '矢量方程（1-56）' the correct subject of the projection action.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "field": "head_type",
+          "note": "The ontology does not contain a specific class for '矢量方程' (vector equation). The previous head_type 'C_5d265e9d9a9bd7644687' (弹丸质心运动微分方程组) is incorrect as it refers to the result of the projection, not the vector equation itself. Setting it to null is appropriate given the ontology gap.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2"
+          ],
+          "field": "relation_id",
+          "note": "The property 'R_5da207e3fa51409de7b9' (投影于) has a domain constraint of 'C_5d265e9d9a9bd7644687' (弹丸质心运动微分方程组). Since the head is now '矢量方程（1-56）' which does not match this domain, the relation_id cannot be validly applied. Setting it to null is correct to avoid an invalid mapping.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The statement is a direct affirmative assertion ('即可写出'), supporting a 'positive' polarity.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The polarity is explicitly extracted from the affirmative nature of the source text, not a default value.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 15682,
+      "late_response": false,
+      "latency_ms": 29672,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 961,
+      "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+      "provider_started_at": 1793719295.0670958,
+      "queue_time_ms": 302,
+      "rationale_summary": "The revision correctly identifies '矢量方程（1-56）' as the head based on the source text '将矢量方程（1-56）在直角坐标上投影'. However, the revision must be rejected because it sets 'relation_id' to null while retaining 'relation_label' as '投影于'. This creates an inconsistent state where a surface relation exists without a formal ontology mapping. More critically, the ontology property 'R_5da207e3fa51409de7b9' has a strict domain of 'C_5d265e9d9a9bd7644687'. By changing the head to '矢量方程（1-56）' (which has no ontology class), the formal relation cannot be applied. While setting relation_id to null is logically consistent with the domain constraint violation, the candidate should either (1) retain the original head if the formal relation is required, or (2) explicitly mark the relation as unmapped/invalid rather than leaving a dangling surface_relation. The current state is internally inconsistent for a knowledge graph candidate that requires formal mappings. Additionally, the 'head_type' being null while 'tail_type' is set creates an asymmetric typing that may violate schema expectations. The revision is technically correct in its source grounding but fails in ontology consistency.",
+      "reasoning_tokens": null,
+      "request_key": "dc9f668d31b59418f4267dcee38b062236755d6a53c92b712a6883c63098fb5e",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-9724bdcc6b6f695e",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_e6de37594d24ed42f3b2",
+        "ev_3c257acf77bccb69eb66"
+      ],
+      "task_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_efd34a27ccd24f4389fd26fe2800e2c1",
+      "attempts": [
+        {
+          "attempt_id": "attempt_efd34a27ccd24f4389fd26fe2800e2c1",
+          "attempt_no": 1,
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+          "error": "approval requires grounded field reviews; all historical material evidence must be assessed",
+          "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+          "finish_reason": "stop",
+          "input_tokens": 16320,
+          "late_response": false,
+          "latency_ms": 42281,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1671,
+          "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+          "provider_started_at": 1793719295.0670958,
+          "queue_time_ms": 312,
+          "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"head\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"note\": \"The source text explicitly states '将矢量方程（1-56）在直角坐标上投影', identifying the vector equation as the object being projected.\"}, {\"field\": \"head_type\", \"status\": \"supported\", \"evidence_ids\": [], \"note\": \"The previous head type was for the differential equation group; since the head is now the vector equation and no corresponding class exists in the ontology, null is correct.\"}, {\"field\": \"relation_id\", \"status\": \"supported\", \"evidence_ids\": [], \"note\": \"The previous relation ID was constrained to the domain of the differential equation group; since the head has changed, the ID is no longer applicable.\"}, {\"field\": \"qualifiers.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"note\": \"The statement is a positive assertion of a process.\"}, {\"field\": \"qualifier_status.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"note\": \"Polarity is explicitly extracted from the affirmative phrasing of the source text.\"}], \"supporting_evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"counter_evidence_ids\": [], \"counterevidence_reviewed_ids\": [], \"rationale_summary\": \"The revision correctly identifies '矢量方程（1-56）' as the subject of the projection, correcting the previous error where the result of the projection was used as the subject. It appropriately removes the head_type and relation_id that were tied to the incorrect subject. The polarity is correctly updated to positive based on the affirmative nature of the source text.\"}",
+          "reasoning_tokens": 1228,
+          "request_key": "e760c119048c9a3059d5fbd4eaeb5f023758dcece766c778a83106e06b698273",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-a3999d6e9025e7d8",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Gemma",
+          "task_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b"
+        }
+      ],
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+      "error": "approval requires grounded field reviews; all historical material evidence must be assessed",
+      "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+      "finish_reason": "stop",
+      "input_tokens": 16320,
+      "late_response": false,
+      "latency_ms": 42281,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1671,
+      "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+      "provider_started_at": 1793719295.0670958,
+      "queue_time_ms": 312,
+      "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"head\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"note\": \"The source text explicitly states '将矢量方程（1-56）在直角坐标上投影', identifying the vector equation as the object being projected.\"}, {\"field\": \"head_type\", \"status\": \"supported\", \"evidence_ids\": [], \"note\": \"The previous head type was for the differential equation group; since the head is now the vector equation and no corresponding class exists in the ontology, null is correct.\"}, {\"field\": \"relation_id\", \"status\": \"supported\", \"evidence_ids\": [], \"note\": \"The previous relation ID was constrained to the domain of the differential equation group; since the head has changed, the ID is no longer applicable.\"}, {\"field\": \"qualifiers.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"note\": \"The statement is a positive assertion of a process.\"}, {\"field\": \"qualifier_status.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"note\": \"Polarity is explicitly extracted from the affirmative phrasing of the source text.\"}], \"supporting_evidence_ids\": [\"ev_e6de37594d24ed42f3b2\"], \"counter_evidence_ids\": [], \"counterevidence_reviewed_ids\": [], \"rationale_summary\": \"The revision correctly identifies '矢量方程（1-56）' as the subject of the projection, correcting the previous error where the result of the projection was used as the subject. It appropriately removes the head_type and relation_id that were tied to the incorrect subject. The polarity is correctly updated to positive based on the affirmative nature of the source text.\"}",
+      "reasoning_tokens": 1228,
+      "request_key": "e760c119048c9a3059d5fbd4eaeb5f023758dcece766c778a83106e06b698273",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-a3999d6e9025e7d8",
+      "response_status": "invalid_contract",
+      "returned_model_id": "Gemma",
+      "task_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_c66bfa3e1107424a84a7b2e224a3474d",
+      "attempts": [
+        {
+          "attempt_id": "attempt_c66bfa3e1107424a84a7b2e224a3474d",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_3c257acf77bccb69eb66",
+            "ev_64a0803630bedab49c55",
+            "ev_e6de37594d24ed42f3b2"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+          "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2",
+                "ev_3c257acf77bccb69eb66"
+              ],
+              "field": "head",
+              "note": "原文明确：将矢量方程（1-56）在直角坐标上投影，即可写出直角坐标系的弹丸质心运动微分方程组。投影动作的主语是矢量方程（1-56），微分方程组是投影结果，故将头实体改为矢量方程（1-56）有原文依据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2",
+                "ev_3c257acf77bccb69eb66"
+              ],
+              "field": "head_type",
+              "note": "原头类型C_5d265e9d9a9bd7644687（弹丸质心运动微分方程组）与修正后的头实体矢量方程（1-56）不符；本体中无矢量方程对应类，清除该类型映射是合理的，保留为null而非猜测。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2",
+                "ev_3c257acf77bccb69eb66"
+              ],
+              "field": "relation_id",
+              "note": "R_5da207e3fa51409de7b9的domain为C_5d265e9d9a9bd7644687（微分方程组），与修正后的头实体矢量方程不符，清除该正式映射有依据；表面关系“投影于”仍保留。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2",
+                "ev_3c257acf77bccb69eb66"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原文“将矢量方程（1-56）在直角坐标上投影……即可写出……”为肯定陈述，positive极性有原文直接支持，非默认补值。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e6de37594d24ed42f3b2",
+                "ev_3c257acf77bccb69eb66"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性已由原文显式核验，状态由unknown改为extracted合理。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 13654,
+          "late_response": false,
+          "latency_ms": 6422,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 765,
+          "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+          "provider_started_at": 1793719295.0354242,
+          "queue_time_ms": 301,
+          "rationale_summary": "修订将头实体由“弹丸质心运动微分方程组”改为“矢量方程（1-56）”，与原文“将矢量方程（1-56）在直角坐标上投影……即可写出……微分方程组”一致，微分方程组是投影结果而非投影对象。原头类型与relation_id的domain均指向微分方程组，与修正后头实体不符，清除正式映射并保留表面关系“投影于”合理。极性positive由原文肯定陈述直接支持。条件“在前述基本假设条件下”及尾项直角坐标系均保留。所有变更字段均有原文依据，未发现反证。",
+          "reasoning_tokens": null,
+          "request_key": "a39d6fe18cddc782fbe9229cfc2c485e609bb0befb460a3fa978da9173c96bb0",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "983ea943-daba-4032-aa91-f7fd55538303",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "task_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_3c257acf77bccb69eb66",
+        "ev_64a0803630bedab49c55",
+        "ev_e6de37594d24ed42f3b2"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e51f8bff3280402d2f1f820ea265d669db88aba657c2de22c146fb0870077d4d",
+      "evidence_hash": "7c2a1fa538b9322f30a82e3eebb90cddc3b03003ff58cdd02bdecfd440a220d3",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "field": "head",
+          "note": "原文明确：将矢量方程（1-56）在直角坐标上投影，即可写出直角坐标系的弹丸质心运动微分方程组。投影动作的主语是矢量方程（1-56），微分方程组是投影结果，故将头实体改为矢量方程（1-56）有原文依据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "field": "head_type",
+          "note": "原头类型C_5d265e9d9a9bd7644687（弹丸质心运动微分方程组）与修正后的头实体矢量方程（1-56）不符；本体中无矢量方程对应类，清除该类型映射是合理的，保留为null而非猜测。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "field": "relation_id",
+          "note": "R_5da207e3fa51409de7b9的domain为C_5d265e9d9a9bd7644687（微分方程组），与修正后的头实体矢量方程不符，清除该正式映射有依据；表面关系“投影于”仍保留。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原文“将矢量方程（1-56）在直角坐标上投影……即可写出……”为肯定陈述，positive极性有原文直接支持，非默认补值。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e6de37594d24ed42f3b2",
+            "ev_3c257acf77bccb69eb66"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性已由原文显式核验，状态由unknown改为extracted合理。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 13654,
+      "late_response": false,
+      "latency_ms": 6422,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 765,
+      "proposal_digest": "ac7a3ef4dd7ac1dfa7291a6ad1aee0b97385a6ad0f0c44ec7bbebcce125f1026",
+      "provider_started_at": 1793719295.0354242,
+      "queue_time_ms": 301,
+      "rationale_summary": "修订将头实体由“弹丸质心运动微分方程组”改为“矢量方程（1-56）”，与原文“将矢量方程（1-56）在直角坐标上投影……即可写出……微分方程组”一致，微分方程组是投影结果而非投影对象。原头类型与relation_id的domain均指向微分方程组，与修正后头实体不符，清除正式映射并保留表面关系“投影于”合理。极性positive由原文肯定陈述直接支持。条件“在前述基本假设条件下”及尾项直角坐标系均保留。所有变更字段均有原文依据，未发现反证。",
+      "reasoning_tokens": null,
+      "request_key": "a39d6fe18cddc782fbe9229cfc2c485e609bb0befb460a3fa978da9173c96bb0",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "983ea943-daba-4032-aa91-f7fd55538303",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_e6de37594d24ed42f3b2",
+        "ev_3c257acf77bccb69eb66"
+      ],
+      "task_id": "draft_e22dd80f54104e38a5d4f8df4c75388e",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ]
+}

@@ -19,11 +19,23 @@ from .model_settings import validator_settings, configured_planner, create_plann
 
 
 def public_candidate(candidate):
+    from .revision_patch import expression_diagnostics
+    candidate={**candidate,**expression_diagnostics(candidate)}
     if candidate.get("fact_key_state") == "provisional":
         return {**candidate, "fact_key": None}
     if candidate.get("contract_version") != "extraction_candidate_v4":
         return {**candidate, "semantics_status": "legacy_semantics_unverified"}
     return candidate
+
+
+def request_summaries(repository,votes):
+    rows=[]
+    for key in dict.fromkeys(v.get('request_key') for v in votes if v.get('request_key')):
+        for attempt in repository.request_history(key):
+            result=attempt.get('result',{})
+            rows.append({**{k:attempt.get(k) for k in ('attempt_id','request_key','state','started_at','deadline_at','response_received_at','provider_request_id','usage_state')},
+                         **{k:result.get(k) for k in ('model_id','input_tokens','output_tokens','latency_ms','queue_time_ms','error_code')}})
+    return rows
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -209,6 +221,11 @@ class ReviewService:
                                   "unresolved_issues": audit["context"].get("unresolved_issues", []),
                                   "agent_budget": audit["context"].get("agent_budget"),
                                   "revision_drafts": audit["context"].get("revision_drafts", []),
+                                  'expression_complete':public_candidate(item)['expression_complete'],
+                                  'blocking_fields':public_candidate(item)['blocking_fields'],
+                                  'raw_source_support_votes':[{k:v.get(k) for k in ('voter_id','model_id','source_support','response_status')} for v in displayed_votes],
+                                  'request_failures':[{k:v.get(k) for k in ('voter_id','model_id','error_code','error','outcome_unknown','request_key','attempt_id')} for v in displayed_votes if v.get('response_status')!='ok'],
+                                  'request_attempts':request_summaries(self.repository,displayed_votes),
                               }})
         return {"items": summaries, "total": total, "page": page, "page_size": page_size}
 
@@ -364,12 +381,13 @@ class ReviewService:
         from .batch import run_review_batch
 
         job_id = payload.get("_job_id")
+        fence={'owner':payload.get('_job_owner'),'lease_token':payload.get('_job_lease_token')}
         effective_config = {**self.config, "mode": payload.get("mode") or self.config.get("mode", "shadow")}
         return run_review_batch(self.repository, str(payload.get("run_id") or ""), effective_config,
-            job_id=job_id,
+            job_id=job_id,job_binding={'job_id':job_id,**fence} if job_id else None,
             candidate_ids=payload.get("candidate_ids"), force=bool(payload.get("force", False)),
             limit=payload.get("limit"), status_file=payload.get("status_file"),
-            on_progress=(lambda progress: self.repository.heartbeat_job(str(job_id), progress)) if job_id else None,
+            on_progress=(lambda progress: self.repository.heartbeat_job(str(job_id), progress,**fence)) if job_id else None,
             should_cancel=(lambda: bool(self.repository.get_job(str(job_id)).get("cancel_requested"))) if job_id else None)
 
     def create_planner_client(self):
@@ -419,11 +437,16 @@ def get_default_service() -> ReviewService:
             database_path = ROOT / database_path
         repository = ReviewRepository(database_path)
         repository.initialize()
+        from .recovery_service import seed_service_pauses
+        from .cli import _configured_validators
+        seed_service_pauses(repository,_configured_validators(config))
         service = ReviewService(repository, config=config)
         service.job_runner = JobRunner(
             repository, service.execute_audit_job,
             max_workers=int((config.get("budget") or {}).get("max_parallel_candidates", 2)),
             lease_seconds=int((config.get("budget") or {}).get("total_timeout_seconds", 180)) + 30,
         )
+        if (config.get('ontology_extension') or {}).get('enabled'):
+            service.job_runner.start()
         _default_service = service
     return _default_service

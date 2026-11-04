@@ -9,16 +9,20 @@ from .response_contract import RESPONSE_SCHEMA, SYSTEM_PROMPT, validate_response
 from evidence.verification import verify_vote_references
 
 
-def validation_request_key(voter, proposal):
+def validation_request_key(voter, proposal, *, legacy_generation=False):
     from .validators import validator_payload, vote_binding
 
     payload = validator_payload(proposal)
+    from .validator_contracts import contract_for, prompt_for
+    contract=contract_for(proposal.get('response_contract_version'))
     payload.pop("proposal_digest", None)  # Transport binding, never the semantic cache identity.
     client = voter["client"]
     binding = vote_binding(voter, proposal)
     frozen = {k: proposal.get(k) for k in (
         "prompt_version", "prompt_hash", "response_contract_version", "response_contract_hash", "evidence_bundle_version", "rubric_version",
         "committee_version", "committee_policy_hash", "committee_members", "candidate_review_hash", "ontology_check_hash", "evidence_bundle_hash", "memory_snapshot_id", "memory_bundle_hash", "memory_scope_hash", "memory_policy_hash", "agent_versions")}
+    if not legacy_generation and proposal.get('validator_generation') is not None:
+        frozen['validator_generation']=proposal['validator_generation']
     return sha256_json({"version": "validation_single_flight_v2", "role": "validator", "task_type": "triple_review",
         "object_revision": proposal["candidate"]["revision"], "model_identity": binding["model_identity"],
         "namespace": proposal.get("request_cache_namespace", "default"),
@@ -26,8 +30,9 @@ def validation_request_key(voter, proposal):
         "client_kind": type(client).__module__ + "." + type(client).__qualname__,
         "base_url": str(getattr(client, "base_url", "")).rstrip("/"),
         "credential_fingerprint": sha256_json(getattr(client, "api_key", "")),
-        "generation": {"temperature": 0.0, "response_format": "json_object"},
-        "system_prompt": SYSTEM_PROMPT, "frozen": frozen, "payload": payload})
+        "generation": {"temperature": 0.0, "response_format": "json_object",**({} if legacy_generation else {'max_output_tokens':int(voter.get('max_output_tokens',4096))}),
+            **({'thinking_mode':client.thinking_mode} if getattr(client,'thinking_mode',None) else {})},
+        "system_prompt": prompt_for(proposal), "frozen": frozen, "payload": payload})
 
 
 def cached_validation(repository, voter, proposal, invoke, wait_seconds):
@@ -37,11 +42,18 @@ def cached_validation(repository, voter, proposal, invoke, wait_seconds):
     binding = vote_binding(voter, proposal)
     began = time.monotonic()
     owner = uuid4().hex
-    entry = repository.claim_validation_request(key, owner)
+    from .request_identity import semantic_request_key
+    semantic=semantic_request_key('triple_review',voter,proposal)
+    entry = repository.claim_validation_request(key, owner,semantic_key=semantic)
+    if entry.get('blocking_request_key'):
+        return {**binding,'response_status':'api_error','verdict':None,'error_code':'RELATED_REQUEST_OUTCOME_UNKNOWN',
+            'outcome_unknown':True,'retryable':False,'actual_calls':0,'attempts':[], 'request_key':key,
+            'blocking_request_key':entry['blocking_request_key'],
+            'error':'equivalent frozen request has unknown outcome; parameter changes cannot authorize resend'}
     if entry["status"] == "claimed":
         # A process killed before this commit leaves 'running' fenced.  We must not
         # infer zero cost or automatically resend a request with an unknown result.
-        vote = {**invoke(), "request_key": key}
+        vote = {**invoke(owner,key), "request_key": key}
         repository.finish_validation_request(key, owner, vote)
         return vote
     while entry["status"] == "running" and time.monotonic() - began < wait_seconds:
@@ -55,7 +67,8 @@ def cached_validation(repository, voter, proposal, invoke, wait_seconds):
             cache_wait_ms=int((time.monotonic() - began) * 1000),
             cache_source={k: original.get(k) for k in ("audit_id", "round_id", "voter_id", "proposal_digest")})
         if entry["status"] == "completed":
-            errors = validate_response({k: vote[k] for k in RESPONSE_SCHEMA["properties"] if k in vote})
+            from .validator_contracts import validate_vote
+            errors = validate_vote(vote,proposal.get('response_contract_version'))
             if errors:
                 return {**binding, "response_status": "invalid_contract", "verdict": None,
                     "error_code": "INVALID_CACHED_VOTE", "validation_errors": errors,

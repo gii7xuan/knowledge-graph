@@ -117,7 +117,7 @@ class BatchExecutionTests(unittest.TestCase):
         self.assertEqual(max(len(s["active"]) for s in states), 2)
         self.assertFalse(any(p.name == "review-candidate" for p in multiprocessing.active_children()))
 
-    def test_healthy_checkpoints_skip_and_broken_completed_votes_retry(self):
+    def test_healthy_checkpoints_skip_and_incomplete_votes_require_targeted_recovery(self):
         first = self.run_batch(candidate_ids=["c0"])
         self.assertEqual(first["completed"], 1)
         resumed = self.run_batch(candidate_ids=["c0"])
@@ -125,9 +125,19 @@ class BatchExecutionTests(unittest.TestCase):
         self.assertEqual(resumed["selected"], 0)
         broken = {**self.config, "test_mode": "api_error"}
         self.run_batch(broken, candidate_ids=["c1"])
-        repaired = self.run_batch(candidate_ids=["c1"])
-        self.assertEqual(repaired["completed"], 1)
-        self.assertEqual(repaired["skipped"], 0)
+        original = self.repo.get_audit("c1")
+        with self.repo.connect() as connection:
+            count = connection.execute("SELECT COUNT(*) FROM audit_runs").fetchone()[0]
+        deferred = self.run_batch(candidate_ids=["c1"])
+        self.assertEqual(deferred["completed"], 0)
+        self.assertEqual(deferred["skipped"], 1)
+        self.assertEqual(deferred["selected"], 0)
+        self.assertEqual(deferred["contract_upgrade_deferred"], [{"candidate_id": "c1",
+            "audit_id": original["audit_id"], "reason": "recover_original_failed_or_unknown_slots",
+            "preserved_contract": original["context"]["response_contract_version"]}])
+        self.assertEqual(self.repo.get_audit("c1"), original)
+        with self.repo.connect() as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM audit_runs").fetchone()[0], count)
 
     def test_persistently_locked_status_file_does_not_interrupt_review(self):
         states = []

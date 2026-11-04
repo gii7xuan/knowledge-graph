@@ -154,12 +154,15 @@ class ReviewOrchestrator:
             "committee_policy": {"committee_size": len(self.committee.voter_ids), "required_votes": self.committee.required_votes,
                                  "minimum_distinct_families": self.committee.minimum_distinct_families},
             "committee_members": self.committee_members(),
+            'validator_generation':[{'voter_id':v['id'],'max_output_tokens':v.get('max_output_tokens',4096)} for v in self.validators],
             "memory_snapshot_id": context.get("memory_snapshot_id", 0),
             "memory_bundle_hash": context.get("memory_bundle_hash"), "round_id": round_id,
             'memory_scope_hash':context.get('memory_scope_hash'),
             'memory_policy_hash':context.get('memory_policy_hash'),
             **({"agent_versions": context["agent_versions"]} if context.get("agent_versions") else {}),
         }
+        from .validator_contracts import versions_for
+        seed.update(versions_for(self.config))
         return {
             **seed, "audit_id": audit_id, "proposal_digest": proposal_digest(seed),
             "candidate": dict(candidate), "ontology_check": dict(guard),
@@ -202,6 +205,8 @@ class ReviewOrchestrator:
             "committee_members": self.committee_members(),
         }
         candidate = self.repository.get_revision(candidate_id, revision)
+        from .validator_contracts import versions_for as validator_versions
+        context.update(validator_versions(self.config))
         from .batch import versions_for
         context['memory_policy_hash']=versions_for(self.config)['memory_policy_hash']
         from .memory_scope import resolve_scope,scope_hash
@@ -417,8 +422,8 @@ class ReviewOrchestrator:
         )
         calibration = self.calibrator.predict_if_compatible(features, {
             "domain": candidate.get("domain"), "committee_version": self.committee.version,
-            "prompt_version": PROMPT_VERSION,
-            "response_contract_version": CONTRACT_VERSION,
+            "prompt_version": context.get('prompt_version',PROMPT_VERSION),
+            "response_contract_version": context.get('response_contract_version',CONTRACT_VERSION),
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
             **{key: context.get(key) for key in ("prompt_hash", "response_contract_hash", "committee_policy_hash", "memory_scope_hash", "memory_policy_hash")},
             **{key: context[key] for key in context if key.startswith("planner_") or key in {"executed_strategy", "configured_strategy"}},

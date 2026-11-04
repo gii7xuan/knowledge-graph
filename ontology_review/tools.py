@@ -36,11 +36,17 @@ class OntologyTools:
     def state(self): return self.runtime.state
 
     def check_record(self, name, result):
+        previous=self.state['checks'].get(name)
         result = {**result, "delta_hash": (self.state.get("delta") or {}).get("delta_hash"),
                   "evidence_hash": sha256_json(self.state["evidence"])}
         result["record_id"] = "check_" + sha256_json([name, result])
         self.state["checks"][name] = result
-        self.state["validation"] = None
+        def semantic(record):
+            if name=='existing_schema':
+                return {k:v for k,v in (record or {}).items() if k not in {'query','matches','rdf_matches','record_id'}}
+            return record
+        if semantic(previous)!=semantic(result):
+            self.state["validation"] = None
         return result
 
     def search_existing_schema(self, query):
@@ -186,13 +192,25 @@ class OntologyTools:
             "historical_candidates_auto_accepted": False, "manual_review_required": delta["risk_category"] == "high_impact"})
 
     def run_competency_checks(self):
-        schema = self.require_delta()["merged_schema"]
+        delta = self.require_delta()
+        schema = delta["merged_schema"]
         guard = OntologyGuard(load_snapshot(schema))
         results = []
         for candidate_id, candidate in self.runtime.candidates.items():
+            lexical = self.lexical_competency(candidate, delta, change_kind=self.state['task'].get('change_kind'))
+            if lexical is not None:
+                results.append({"id": "trigger_" + candidate_id, **lexical})
+                continue
             check = guard.check(remap(candidate, schema))
             passed = check.get("domain_status") == check.get("range_status") == "pass" and not check.get("hard_failure")
-            results.append({"id": "trigger_" + candidate_id, "status": "pass" if passed else "fail", "guard": check})
+            failed = check.get('status') == 'fail' or check.get('hard_failure') or any(check.get(side) == 'fail' for side in ('domain_status','range_status'))
+            result = {"id": "trigger_" + candidate_id, "status": "pass" if passed else "fail" if failed else "unknown", "guard": check}
+            result.update(check_scope='executable_named_constraints_only',
+                application_profile_semantics_status='unknown' if 'UNSUPPORTED_APPLICATION_PROFILE' in check.get('reason_codes',[]) else 'pass',
+                full_owl_consistency_claimed=False)
+            if failed and any(len(check.get('relation',{}).get(side) or []) > 1 and check.get('relation',{}).get(side+'_semantics') == 'all' for side in ('domain','range')):
+                result['diagnostic'] = 'MULTIPLE_NAMED_OWL_CONSTRAINTS_ARE_CONJUNCTION_NOT_ALTERNATIVES'
+            results.append(result)
         questions = json.loads((self.runtime.base.path / "competency_questions.json").read_text(encoding="utf-8"))
         if not isinstance(questions, list): questions = [questions] if questions else []
         for number, question in enumerate(questions):
@@ -206,9 +224,40 @@ class OntologyTools:
             results.append(result)
         status = "fail" if any(r["status"] == "fail" for r in results) else "unknown" if any(r["status"] == "unknown" for r in results) else "pass" if results else "unknown"
         return self.check_record("competency", {"status": status, "checks": results, "configured_questions": len(questions),
+            "competency_check_version": "ontology_competency_v2",
             "empty_instance_data_is_not_failure": True, "natural_language_questions_not_falsely_marked_executed": True})
 
+    @staticmethod
+    def lexical_competency(candidate, delta, *, change_kind=None):
+        """Test an alias claim as a lexical axiom, never as binary fact admission."""
+        if change_kind != 'add_alias':
+            return None
+        operations = delta.get('operations') or []
+        if not operations or any(op['kind'] not in {'add_alias','add_class'} for op in operations):
+            return None
+        alias_ops = [op for op in operations if op['changes'].get('aliases')]
+        if not alias_ops:
+            return None
+        items = catalog(delta['merged_schema'])
+        triple = candidate['triple']
+        head, tail = (normalize_name(triple.get(side)) for side in ('head','tail'))
+        matches = []
+        for op in alias_ops:
+            item = items.get(op['target'], {})
+            names = {normalize_name(v) for v in [item.get('id'),item.get('label'),*(item.get('aliases') or [])] if v}
+            new_aliases = {normalize_name(v) for v in op['changes']['aliases']}
+            if head in names and tail in names and ({head,tail} & new_aliases):
+                owners = {identity for identity, term in items.items() if any(normalize_name(v) in new_aliases for v in [term.get('label'),*(term.get('aliases') or [])] if v)}
+                if owners == {op['target']}:
+                    matches.append(op['target'])
+        return {'status': 'pass' if len(set(matches)) == 1 else 'fail',
+                'check_type': 'lexical_alias_binding', 'matched_target_ids': sorted(set(matches)),
+                'reason_code': 'ALIAS_BINDING_CONFIRMED' if len(set(matches)) == 1 else 'ALIAS_TARGET_MISMATCH_OR_AMBIGUITY',
+                'binary_fact_admission_checked': False,
+                'semantic_alias_approval_still_required': True}
+
     def run_ontology_validation(self): return self.runtime.run_validation()
+    def recover_ontology_validation(self): return self.runtime.recover_validation()
 
     def finish_extension_review(self, stop_reason):
         self.state["stop_reason"] = stop_reason

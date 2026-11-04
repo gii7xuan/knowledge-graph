@@ -51,7 +51,13 @@ class AgentTools:
                     "run_validation": self.run_validation, "propose_revision": self.propose_revision,
                     "finish_review": self.finish_review, "request_ontology_extension": self.request_ontology_extension,
                     "get_ontology_extension_status": self.get_ontology_extension_status}
+        registry['recover_validation']=self.recover_validation
+        registry.update(review_revision=self.review_revision,apply_reviewed_revision=self.apply_reviewed_revision)
         return registry[name](**args)
+
+    def recover_validation(self):
+        from .validation_recovery import recover_validation
+        return recover_validation(self.runtime)
 
     def inspect_context(self, evidence_id, before, after):
         state = self.state
@@ -106,7 +112,9 @@ class AgentTools:
         matched = {candidate_lookup["relation_id"]} if candidate_lookup["relation_id"] else set(candidate_lookup.get("matched_ids", []))
         for result in searches:
             matched.update([result["relation_id"]] if result["relation_id"] else result.get("matched_ids", []))
-        class_queries = {name: (endpoint_types or {}).get(name) or triple.get(name + "_type") for name in ("head", "tail")}
+        hints = self.state.candidate.get('extraction_hints') or {}
+        class_queries = {name: (endpoint_types or {}).get(name) or triple.get(name + "_type")
+                         or hints.get(name + '_type_candidate') for name in ("head", "tail")}
         class_matches = {name: guard.class_index.get(normalize_name(value)) for name, value in class_queries.items() if value}
         terms = {normalize_name(value) for value in (query, surface_relation, triple.get("surface_relation")) if value}
         recall = [{"id": identity, "label": item.get("label"), "kind": item.get("property_kind"), "confirmed_mapping": False}
@@ -131,29 +139,8 @@ class AgentTools:
         from .planner_contracts import ActionError
         state = self.state
         validation = state.current_validation()
-        if not validation or validation["consensus"].get("source_support_consensus", {}).get("result") != "supported":
-            raise ActionError("ontology extension requires current independent source-support consensus")
-        if state.ontology_lookup.get("scope") != "full_frozen_ontology":
-            raise ActionError("full frozen schema lookup is required before extension")
-        current_issue = {vote.get("schema_issue") for vote in validation["votes"] if vote.get("voter_id") in validation["consensus"].get("eligible_voter_ids", [])}
-        if change_kind in {"revise_constraint", "revise_definition", "merge_terms"}:
-            if not current_issue & {"suspected_schema_error", "incompatible"}:
-                raise ActionError("constraint revision requires an independent schema diagnostic")
-        elif change_kind == "add_class":
-            from ontologyBuild.ontology_adapter import normalize_name
-            label = proposed_changes.get("label") or proposed_changes.get("name")
-            queried = state.ontology_lookup.get("endpoint_class_queries", {})
-            missing = {normalize_name(value) for name, value in queried.items() if value
-                       and not state.ontology_lookup.get("endpoint_class_matches", {}).get(name)}
-            if (current_issue != {"not_covered"} or not label or normalize_name(label) not in missing
-                    or self.runtime.orchestrator.ontology_guard.class_index.get(normalize_name(label))):
-                raise ActionError("class extension requires an unrepresented, source-supported endpoint class from full lookup")
-        elif state.guard.get("relation_known") or state.ontology_lookup.get("matched_ids") or current_issue != {"not_covered"}:
-            raise ActionError("existing/ambiguous schema or unconfirmed gap must be remapped/reviewed, not duplicated")
-        from .issue_ledger import IssueLedger
-        if any(i["code"] in {"source_conflict", "CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISMATCH", "revision_proposed"}
-               for i in IssueLedger(state).unresolved()):
-            raise ActionError("unresolved source/candidate issue cannot be repaired by ontology extension")
+        from .extension_eligibility import validate_extension
+        validate_extension(state, change_kind, proposed_changes)
         proposal = self.runtime.repository.get_audit(state.candidate["candidate_id"], state.audit_id)["rounds"]
         proposal = next(p for p in proposal if p["round_id"] == validation["round_id"])
         supporting = {eid for vote in validation["votes"] for eid in vote.get("supporting_evidence_ids", [])}
@@ -166,10 +153,6 @@ class AgentTools:
         state.workflow_state = result["workflow_state"]
         state.context["execution_row_version"] = result["row_version"]
         state.stop_reason = state.workflow_state
-        if (self.runtime.orchestrator.config.get("ontology_extension") or {}).get("enabled") and result["task"]["status"] == "proposed":
-            from uuid import uuid4
-            self.runtime.repository.create_job("ontology_extension", {"extension_id": state.pending_extension_id,
-                "audit_id": "ontology_audit_" + uuid4().hex})
         return {"status": "waiting", "extension_id": state.pending_extension_id,
                 "workflow_state": state.workflow_state, "release_published": False, "worker_wait_required": False}
 
@@ -232,7 +215,7 @@ class AgentTools:
             votes = judge_independently(voters, proposal,
                 max_workers=int(budget.config.get("max_parallel_validators", 4)), max_retries=retries,
                 per_call_timeout_seconds=min(float(budget.config.get("per_call_timeout_seconds", 45)), budget.remaining_seconds()),
-                on_vote=record_vote, repository=runtime.repository)
+                on_vote=record_vote, repository=runtime.repository,deadline_epoch=budget.deadline_epoch)
         except AuditPaused:
             for vote in returned:
                 for attempt in vote.get("attempts") or [vote]:
@@ -278,11 +261,29 @@ class AgentTools:
         return {"status": "ok", "validation": validation, "independent_committee": True}
 
     def propose_revision(self, changes, evidence_ids, reason):
-        draft = {"changes": changes, "evidence_ids": evidence_ids, "reason": reason,
-                 "source_revision": self.state.candidate["revision"], "requires_human_confirmation": True}
+        from .revision_service import RevisionService
+        draft=RevisionService(self.runtime.repository).propose(self.state.candidate,
+            self.state.context['execution_row_version'],changes,evidence_ids,reason,self.state.bundle,
+            self.runtime.document,protected_ids=self.state.protected_ids,source_audit_id=self.state.audit_id)
         self.state.revision_drafts.append(draft)
-        self.runtime.issue("revision_proposed", "修改草案待人工确认；当前候选与旧票未被修改", critical=True)
-        return {"status": "draft_only", "draft": draft, "candidate_unchanged": True}
+        self.runtime.issue("revision_proposed", "修订草案需独立审核及新版本复核", critical=True)
+        return {"status": "draft_proposed", "draft": draft, "candidate_unchanged": True}
+
+    def review_revision(self,draft_id):
+        from .revision_service import RevisionService
+        result=RevisionService(self.runtime.repository).review(draft_id,self.runtime.orchestrator.validators,
+            self.runtime.orchestrator.committee,self.runtime.budget)
+        for draft in self.state.revision_drafts:
+            if draft['draft_id']==draft_id: draft['status']=result['status']
+        return result
+
+    def apply_reviewed_revision(self,draft_id,draft_hash):
+        from .revision_service import RevisionService
+        result=RevisionService(self.runtime.repository).apply(draft_id,draft_hash)
+        self.state.stop_reason='revision_submitted_for_reaudit'
+        self.state.workflow_state='reaudit_required'
+        self.state.context['applied_revision']=result
+        return result
 
     def finish_review(self, stop_reason, unresolved_issues, evidence_ids):
         self.runtime.policy.validate_request({'action':'finish_review','arguments':{'stop_reason':stop_reason,

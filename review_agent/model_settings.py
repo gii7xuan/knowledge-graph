@@ -42,6 +42,10 @@ def validator_settings(slot, *, root=ROOT):
     verify_ssl = slot.get("verify_ssl") if base_url.rstrip("/") == source_url.rstrip("/") else None
     if verify_ssl is not None and not isinstance(verify_ssl, bool):
         raise ValueError(f"{slot['id']}: verify_ssl must be boolean")
+    if slot.get('thinking_mode') not in {None,'enabled','disabled'}:
+        raise ValueError(f"{slot['id']}: invalid thinking_mode")
+    if not isinstance(slot.get('stream_responses',False),bool):
+        raise ValueError(f"{slot['id']}: stream_responses must be boolean")
     return {
         "id": slot["id"],
         "model": env("model") or str(slot.get("model") or "").strip(),
@@ -50,12 +54,17 @@ def validator_settings(slot, *, root=ROOT):
         "api_key": key or str(connection.get("api_key") or "").strip(),
         "base_url": base_url,
         "verify_ssl": verify_ssl,
+        'request_timeout_seconds':float(slot.get('request_timeout_seconds',45)),
+        'http_timeout_seconds':float(slot.get('http_timeout_seconds',slot.get('request_timeout_seconds',45))),
+        'max_output_tokens':int(slot.get('max_output_tokens',4096)),
+        'thinking_mode':slot.get('thinking_mode'),
+        'stream_responses':bool(slot.get('stream_responses',False)),
     }
 
 
 def configured_planner(config):
     """Same explicit connection resolution, separate role and model identity."""
-    slot = {"id": "planner", **(config.get("planner") or {})}
+    slot = {"id": "planner", 'request_timeout_seconds':(config.get('budget') or {}).get('per_call_timeout_seconds',45), **(config.get("planner") or {})}
     return validator_settings(slot)
 
 
@@ -68,4 +77,4 @@ def create_planner_client(config):
         return None
     return OpenAICompatibleClient(api_key=settings["api_key"], base_url=settings["base_url"],
         model_id=settings["model"], model_family=settings["family"], verify_ssl=settings["verify_ssl"],
-        timeout_seconds=float((config.get("budget") or {}).get("per_call_timeout_seconds", 45)))
+        timeout_seconds=settings['http_timeout_seconds'], thinking_mode=settings['thinking_mode'],stream_responses=settings['stream_responses'])

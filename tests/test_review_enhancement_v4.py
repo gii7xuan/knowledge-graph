@@ -172,7 +172,7 @@ class EnhancedAgentTests(unittest.TestCase):
         result = self.runner(self.extension_plan).audit_candidate("gap", 1, self.index)
         audit = self.repo.get_audit("gap", result["audit_id"])
         self.assertIn("R_measures", audit["agent_state"]["state"]["ontology_lookup"]["matched_ids"])
-        self.assertTrue(any(c["status"] == "invalid_action" for c in audit["tool_calls"]))
+        self.assertFalse(any(c.get('tool')=='request_ontology_extension' and c['status']=='waiting' for c in audit['tool_calls']))
         self.assertIsNone(result["pending_extension_id"])
 
     def valid_audit(self):
@@ -273,7 +273,7 @@ class EnhancedAgentTests(unittest.TestCase):
             if not payload["history"]: return ontology()
             if not payload["current_validation"]: return action("run_validation")
             return action("request_ontology_extension", change_kind="revise_constraint", description="复核属性种类与端点约束",
-                          proposed_changes={"review_relation_id": "R_measures"}, evidence_ids=payload["selected_evidence_ids"][:1])
+                          proposed_changes={"term_id": "R_measures",'datatype':'integer'}, evidence_ids=payload["selected_evidence_ids"][:1])
         result = self.runner(plan).audit_candidate("constraint", 1, self.index)
         self.assertEqual(result["schema_status"], "fail")
         self.assertEqual(result["source_support_result"], "supported")

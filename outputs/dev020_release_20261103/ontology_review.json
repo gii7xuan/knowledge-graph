@@ -1,0 +1,751 @@
+{
+  "result": {
+    "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+    "budget": {
+      "case_accounts": [
+        {
+          "case_id": "case_fd4fde295d9a21b2f5febd5108743a58",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 96,
+            "rebinds": 2,
+            "tokens": 701569,
+            "tool_calls": 64
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 24,
+            "rebinds": 0,
+            "tokens": 592378,
+            "tool_calls": 12
+          }
+        }
+      ],
+      "case_call_reservations": [
+        "e80ef777114c4d389285619cb0a96752"
+      ],
+      "case_ids": [
+        "case_fd4fde295d9a21b2f5febd5108743a58"
+      ],
+      "deadline_epoch": 1793689172.203982,
+      "max_planner_steps": 6,
+      "max_validation_rounds": 2,
+      "remaining_llm_calls": 0,
+      "remaining_seconds": 305.14100000000326,
+      "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+      "usage": {
+        "input_tokens": 186402,
+        "llm_calls": 3,
+        "output_tokens": 4407,
+        "planner_steps": 0,
+        "tool_calls": 0,
+        "unknown_token_requests": 0,
+        "validation_rounds": 0
+      }
+    },
+    "consensus": {
+      "result": "unresolved",
+      "counts": {
+        "approve": 0,
+        "revise": 2,
+        "reject": 1,
+        "uncertain": 0,
+        "error": 0
+      },
+      "committee_size": 3,
+      "required_votes": 3,
+      "missing": 0,
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "counter_evidence_ids": [],
+      "deterministic_checks_pass": false
+    },
+    "deferred_unknown_model_ids": [],
+    "delta_revision": 1,
+    "extension_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+    "independent_review_completed": true,
+    "mode": "shadow",
+    "recommendation": "needs_human",
+    "release_published": false,
+    "selected_proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+    "selected_round_id": 1,
+    "semantic_competency": {
+      "status": "unknown",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "passed_voter_ids": [
+        "judge_b"
+      ],
+      "executed": true,
+      "question_ids": [
+        "chapter1_source_coverage"
+      ],
+      "request_hash": "b61efdf68e27ef9836d4b689f9bf43725bcc7737ae9c93497d75455076dbb3f3",
+      "parent_proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+      "original_ontology_votes_reused": false
+    },
+    "stop_reason": "dev020_known_formats_corrected_substantive_votes_preserved",
+    "task_status": "needs_human",
+    "task_type": "ontology_extension"
+  },
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_f4feafb787794e7ea44c93e53e72856e",
+      "attempts": [
+        {
+          "attempt_id": "attempt_f4feafb787794e7ea44c93e53e72856e",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "unknown",
+              "note": "The cited source discusses neglecting rotation and studying projectile center-of-mass motion as a point trajectory. It does not state that a projectile has a describable feature/attribute represented by a string literal, nor does it require a generic data property. The proposed property is not shown to be a missing term necessary for the source content.",
+              "status": "unknown"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "No existing data property with the same label or semantics is visible in the base index, but the base RDF is not fully searchable here for all annotations; cannot confirm whether an existing property suffices or whether the new property duplicates an unindexed annotation. No counter-evidence of duplication is available.",
+              "status": "unknown"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "definition",
+              "note": "The skos:definition '表示某实体具有某项可描述的特征或属性，尾端为字面值描述。' is a planner-generated generic description, not a quotation or paraphrase from the provided source evidence. The source evidence does not define a 'feature' property for projectiles. A definition check for a new data property must be supported by source text; it is not.",
+              "status": "fail"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "The change adds a data property, not a class hierarchy. No is-a or part-of direction is introduced or modified.",
+              "status": "not_applicable"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "instance_only",
+              "note": "The data property has domain C_85d7c2e6732f8a304f88 (弹丸) and range xsd:string. The source evidence does not establish that all projectiles have a string-valued feature, nor does it justify a universal domain constraint on 弹丸. The domain is an application constraint under the profile, but its strength (required_all) is not supported by the cited source. The evidence only supports studying center-of-mass motion under simplifying assumptions, not a generic feature attribute for every projectile.",
+              "status": "fail"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "The source patch adds exactly five triples for a new DatatypeProperty with type, domain, label, range, and definition. Triple count increases from 882 to 887. No removals. No anonymous axiom rewrites. The merged graph hash is verified. Structure is consistent with the declared additive change.",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "The impact record shows risk_category additive, no affected candidates, no manual review required, and the changed schema ID is only the new data property. No existing schema items are modified or removed. Historical candidates are not auto-accepted. Impact is limited to the new property.",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "revise",
+          "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+          "evidence_hash": "35559503318d733a5924433b99876b0e1b3bf2b48c6e0c8d91331fd61d576074",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 64428,
+          "late_response": false,
+          "latency_ms": 29671,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "necessity": "unknown",
+          "object_revision": 1,
+          "output_tokens": 1081,
+          "prompt_version": "ontology_extension_validator_v2",
+          "proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+          "provider_started_at": 1793689513.20301,
+          "queue_time_ms": 415,
+          "reason_codes": [
+            "evidence_does_not_support_generic_data_property",
+            "domain_scope_not_supported_by_source",
+            "definition_is_planner_generated_not_source_text"
+          ],
+          "reasoning_tokens": null,
+          "request_key": "defe8d523567d96db69b3b8fa58e6c8a6124af62506a994033da9f0d096da809",
+          "requested_context": {
+            "limit": 3,
+            "query": "Source text that explicitly states a projectile has a describable feature or attribute that should be represented as a string literal, and the scope of that feature (which class or context it applies to).",
+            "scope": "same_section"
+          },
+          "response_id": "chatcmpl-9e9d491b72465e2b",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "round_id": 1,
+          "semantic_status": "unknown",
+          "structure_status": "pass",
+          "suggested_changes": {
+            "reason": "The proposed data property '具有特征' with domain 弹丸 and range xsd:string is not supported by the provided source evidence. The source discusses simplifying projectile motion to center-of-mass point trajectory, not a generic string-valued feature attribute. If a feature property is genuinely needed, it must be grounded in specific source text that identifies the feature and its scope, and the domain should be narrowed to the specific class or context where the feature is asserted, not universally to all projectiles. Alternatively, if the intent is to capture the simplifying assumption (neglecting rotation), that should be modeled as an annotation or a specific property with source-backed definition, not a generic data property.",
+            "remove_or_revise": [
+              "D_07d08749937238cbe5f3"
+            ]
+          },
+          "supporting_evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "task_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_a"
+        }
+      ],
+      "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "unknown",
+          "note": "The cited source discusses neglecting rotation and studying projectile center-of-mass motion as a point trajectory. It does not state that a projectile has a describable feature/attribute represented by a string literal, nor does it require a generic data property. The proposed property is not shown to be a missing term necessary for the source content.",
+          "status": "unknown"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "No existing data property with the same label or semantics is visible in the base index, but the base RDF is not fully searchable here for all annotations; cannot confirm whether an existing property suffices or whether the new property duplicates an unindexed annotation. No counter-evidence of duplication is available.",
+          "status": "unknown"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "definition",
+          "note": "The skos:definition '表示某实体具有某项可描述的特征或属性，尾端为字面值描述。' is a planner-generated generic description, not a quotation or paraphrase from the provided source evidence. The source evidence does not define a 'feature' property for projectiles. A definition check for a new data property must be supported by source text; it is not.",
+          "status": "fail"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "The change adds a data property, not a class hierarchy. No is-a or part-of direction is introduced or modified.",
+          "status": "not_applicable"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "instance_only",
+          "note": "The data property has domain C_85d7c2e6732f8a304f88 (弹丸) and range xsd:string. The source evidence does not establish that all projectiles have a string-valued feature, nor does it justify a universal domain constraint on 弹丸. The domain is an application constraint under the profile, but its strength (required_all) is not supported by the cited source. The evidence only supports studying center-of-mass motion under simplifying assumptions, not a generic feature attribute for every projectile.",
+          "status": "fail"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "The source patch adds exactly five triples for a new DatatypeProperty with type, domain, label, range, and definition. Triple count increases from 882 to 887. No removals. No anonymous axiom rewrites. The merged graph hash is verified. Structure is consistent with the declared additive change.",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "The impact record shows risk_category additive, no affected candidates, no manual review required, and the changed schema ID is only the new data property. No existing schema items are modified or removed. Historical candidates are not auto-accepted. Impact is limited to the new property.",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "revise",
+      "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+      "evidence_hash": "35559503318d733a5924433b99876b0e1b3bf2b48c6e0c8d91331fd61d576074",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 64428,
+      "late_response": false,
+      "latency_ms": 29671,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "necessity": "unknown",
+      "object_revision": 1,
+      "output_tokens": 1081,
+      "prompt_version": "ontology_extension_validator_v2",
+      "proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+      "provider_started_at": 1793689513.20301,
+      "queue_time_ms": 415,
+      "reason_codes": [
+        "evidence_does_not_support_generic_data_property",
+        "domain_scope_not_supported_by_source",
+        "definition_is_planner_generated_not_source_text"
+      ],
+      "reasoning_tokens": null,
+      "request_key": "defe8d523567d96db69b3b8fa58e6c8a6124af62506a994033da9f0d096da809",
+      "requested_context": {
+        "limit": 3,
+        "query": "Source text that explicitly states a projectile has a describable feature or attribute that should be represented as a string literal, and the scope of that feature (which class or context it applies to).",
+        "scope": "same_section"
+      },
+      "response_id": "chatcmpl-9e9d491b72465e2b",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "round_id": 1,
+      "semantic_status": "unknown",
+      "structure_status": "pass",
+      "suggested_changes": {
+        "reason": "The proposed data property '具有特征' with domain 弹丸 and range xsd:string is not supported by the provided source evidence. The source discusses simplifying projectile motion to center-of-mass point trajectory, not a generic string-valued feature attribute. If a feature property is genuinely needed, it must be grounded in specific source text that identifies the feature and its scope, and the domain should be narrowed to the specific class or context where the feature is asserted, not universally to all projectiles. Alternatively, if the intent is to capture the simplifying assumption (neglecting rotation), that should be modeled as an annotation or a specific property with source-backed definition, not a generic data property.",
+        "remove_or_revise": [
+          "D_07d08749937238cbe5f3"
+        ]
+      },
+      "supporting_evidence_ids": [
+        "ev_8573465d7fe0f75cec4d",
+        "ev_836c0c487e2849299583"
+      ],
+      "task_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_a"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_84887de58e864c9ea7da8be7859478bd",
+      "attempts": [
+        {
+          "attempt_id": "attempt_84887de58e864c9ea7da8be7859478bd",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [],
+              "note": "The provided evidence describes specific physical attributes of projectiles (e.g., nutation angle), not a requirement for a generic 'has feature' string property.",
+              "status": "fail"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [],
+              "note": "No existing property found that serves this purpose.",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [],
+              "note": "The definition is a generic description of a property's function rather than a domain-specific definition for ballistics.",
+              "status": "fail"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [],
+              "note": "This is a data property.",
+              "status": "not_applicable"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "The range is a generic string, which provides no semantic value or constraint for the domain.",
+              "status": "fail"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "note": "Adding a single data property is structurally sound.",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [],
+              "note": "No negative impact on the existing ontology structure.",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "reject",
+          "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+          "evidence_hash": "35559503318d733a5924433b99876b0e1b3bf2b48c6e0c8d91331fd61d576074",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 66006,
+          "late_response": false,
+          "latency_ms": 113608,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "necessity": "not_needed",
+          "object_revision": 1,
+          "output_tokens": 2859,
+          "prompt_version": "ontology_extension_validator_v2",
+          "proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+          "provider_started_at": 1793688752.6140692,
+          "queue_time_ms": 325,
+          "reason_codes": [
+            "GENERIC_PROPERTY",
+            "EVIDENCE_MISMATCH"
+          ],
+          "reasoning_tokens": 2306,
+          "request_key": "df7f1af64d0c2bdccebb68e66e557841a5a6ce5c3e3b42841854f8d496475410",
+          "requested_context": null,
+          "response_id": "chatcmpl-ae87577c6529a2c4",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "round_id": 1,
+          "semantic_status": "fail",
+          "structure_status": "pass",
+          "suggested_changes": {
+            "recommendation": "Instead of a generic 'has feature' property, model specific attributes mentioned in the evidence (e.g., 'nutation angle' or 'angle of attack') as distinct properties with appropriate ranges."
+          },
+          "supporting_evidence_ids": [],
+          "task_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_b"
+        }
+      ],
+      "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [],
+          "note": "The provided evidence describes specific physical attributes of projectiles (e.g., nutation angle), not a requirement for a generic 'has feature' string property.",
+          "status": "fail"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [],
+          "note": "No existing property found that serves this purpose.",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [],
+          "note": "The definition is a generic description of a property's function rather than a domain-specific definition for ballistics.",
+          "status": "fail"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [],
+          "note": "This is a data property.",
+          "status": "not_applicable"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "The range is a generic string, which provides no semantic value or constraint for the domain.",
+          "status": "fail"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "note": "Adding a single data property is structurally sound.",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [],
+          "note": "No negative impact on the existing ontology structure.",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "reject",
+      "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+      "evidence_hash": "35559503318d733a5924433b99876b0e1b3bf2b48c6e0c8d91331fd61d576074",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 66006,
+      "late_response": false,
+      "latency_ms": 113608,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "necessity": "not_needed",
+      "object_revision": 1,
+      "output_tokens": 2859,
+      "prompt_version": "ontology_extension_validator_v2",
+      "proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+      "provider_started_at": 1793688752.6140692,
+      "queue_time_ms": 325,
+      "reason_codes": [
+        "GENERIC_PROPERTY",
+        "EVIDENCE_MISMATCH"
+      ],
+      "reasoning_tokens": 2306,
+      "request_key": "df7f1af64d0c2bdccebb68e66e557841a5a6ce5c3e3b42841854f8d496475410",
+      "requested_context": null,
+      "response_id": "chatcmpl-ae87577c6529a2c4",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "round_id": 1,
+      "semantic_status": "fail",
+      "structure_status": "pass",
+      "suggested_changes": {
+        "recommendation": "Instead of a generic 'has feature' property, model specific attributes mentioned in the evidence (e.g., 'nutation angle' or 'angle of attack') as distinct properties with appropriate ranges."
+      },
+      "supporting_evidence_ids": [],
+      "task_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_25962a3f9e854a37a606d1dab4c081d3",
+      "attempts": [
+        {
+          "attempt_id": "attempt_25962a3f9e854a37a606d1dab4c081d3",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "note": "原文只说明弹丸章动角/攻角很小、可暂不考虑绕质心运动，并未提出需要新增一个通用“具有特征”数据属性；现有 82 个对象属性已覆盖大量描述性关系，新增属性的必要性未被原文证明。",
+              "status": "unknown"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [],
+              "note": "base_schema 中已存在大量“具有/具有部件/具有方向/具有特征类”关系（如 R_b374d309647377365f38 具有、R_d393a0bbd7aa038d140f 具有、R_ae22a57588ea3f168c9b 具有方向），新增通用“具有特征”与既有表达重叠，未说明为何不能复用或细化既有属性。",
+              "status": "fail"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_8573465d7fe0f75cec4d"
+              ],
+              "note": "新增 skos:definition“表示某实体具有某项可描述的特征或属性，尾端为字面值描述”是规划器自拟的通用元描述，所引原文只讨论章动角/攻角很小及质心运动简化，未定义该属性，也未给出其字面值语义。",
+              "status": "fail"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [],
+              "note": "本次为新增数据属性，无 subClassOf/父子层级方向变更。",
+              "status": "not_applicable"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "definition",
+              "note": "新增 rdfs:domain 弹丸、rdfs:range xsd:string，在 required_all 语义下成为所有弹丸实例的强制约束；原文仅讨论章动角/攻角很小这一具体情形，未支持“所有弹丸都必须具有字符串特征”的通用 domain 约束，约束强度明显超出原文依据。",
+              "status": "fail"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "note": "结构检查通过：新增 5 条三元组，合并后 887 条，类 189、关系 82，无错误或未执行公理；匿名公理与语言标签保留，reasoner=not_run 如实保留。",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [],
+              "note": "影响检查通过：变更为 additive，仅新增 D_07d08749937238cbe5f3，无删除、无 IRI 合并、无 ABox 引用改写，历史候选未被自动接受。",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "revise",
+          "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+          "evidence_hash": "35559503318d733a5924433b99876b0e1b3bf2b48c6e0c8d91331fd61d576074",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 56669,
+          "late_response": false,
+          "latency_ms": 8295,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "necessity": "unknown",
+          "object_revision": 1,
+          "output_tokens": 890,
+          "prompt_version": "ontology_extension_validator_v2",
+          "proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+          "provider_started_at": 1793689513.2230074,
+          "queue_time_ms": 421,
+          "reason_codes": [
+            "necessity_not_established",
+            "definition_not_grounded_in_source",
+            "domain_scope_overbroad",
+            "generic_property_duplicates_existing_relations"
+          ],
+          "reasoning_tokens": null,
+          "request_key": "4b953fa4201e1749f01d915db12bef5cf0c0212b0a9d53282f3846ce5ffc1b2b",
+          "requested_context": null,
+          "response_id": "2b952b7f-372c-4c6f-8194-fd9d4472c528",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "round_id": 1,
+          "semantic_status": "unknown",
+          "structure_status": "pass",
+          "suggested_changes": {
+            "action": "revise_or_drop",
+            "recommendation": "删除该通用“具有特征”数据属性，或改为复用/细化既有“具有”类对象属性；若确需新增，须提供原文对具体特征字面值及其适用范围的直接定义证据，并将 domain 收窄到原文明确讨论的弹丸/章动角情形，避免全类强制约束。",
+            "target": "D_07d08749937238cbe5f3"
+          },
+          "supporting_evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "task_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_c"
+        }
+      ],
+      "audit_id": "ontology_audit_6b465888ddcc4e23964b7888426aceae",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "note": "原文只说明弹丸章动角/攻角很小、可暂不考虑绕质心运动，并未提出需要新增一个通用“具有特征”数据属性；现有 82 个对象属性已覆盖大量描述性关系，新增属性的必要性未被原文证明。",
+          "status": "unknown"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [],
+          "note": "base_schema 中已存在大量“具有/具有部件/具有方向/具有特征类”关系（如 R_b374d309647377365f38 具有、R_d393a0bbd7aa038d140f 具有、R_ae22a57588ea3f168c9b 具有方向），新增通用“具有特征”与既有表达重叠，未说明为何不能复用或细化既有属性。",
+          "status": "fail"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_8573465d7fe0f75cec4d"
+          ],
+          "note": "新增 skos:definition“表示某实体具有某项可描述的特征或属性，尾端为字面值描述”是规划器自拟的通用元描述，所引原文只讨论章动角/攻角很小及质心运动简化，未定义该属性，也未给出其字面值语义。",
+          "status": "fail"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [],
+          "note": "本次为新增数据属性，无 subClassOf/父子层级方向变更。",
+          "status": "not_applicable"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "definition",
+          "note": "新增 rdfs:domain 弹丸、rdfs:range xsd:string，在 required_all 语义下成为所有弹丸实例的强制约束；原文仅讨论章动角/攻角很小这一具体情形，未支持“所有弹丸都必须具有字符串特征”的通用 domain 约束，约束强度明显超出原文依据。",
+          "status": "fail"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "note": "结构检查通过：新增 5 条三元组，合并后 887 条，类 189、关系 82，无错误或未执行公理；匿名公理与语言标签保留，reasoner=not_run 如实保留。",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [],
+          "note": "影响检查通过：变更为 additive，仅新增 D_07d08749937238cbe5f3，无删除、无 IRI 合并、无 ABox 引用改写，历史候选未被自动接受。",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "revise",
+      "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+      "evidence_hash": "35559503318d733a5924433b99876b0e1b3bf2b48c6e0c8d91331fd61d576074",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 56669,
+      "late_response": false,
+      "latency_ms": 8295,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "necessity": "unknown",
+      "object_revision": 1,
+      "output_tokens": 890,
+      "prompt_version": "ontology_extension_validator_v2",
+      "proposal_digest": "296205817596c7d9389fbb1c9fb36aa34b0131413b1aad775d7eaddeaa7c64d8",
+      "provider_started_at": 1793689513.2230074,
+      "queue_time_ms": 421,
+      "reason_codes": [
+        "necessity_not_established",
+        "definition_not_grounded_in_source",
+        "domain_scope_overbroad",
+        "generic_property_duplicates_existing_relations"
+      ],
+      "reasoning_tokens": null,
+      "request_key": "4b953fa4201e1749f01d915db12bef5cf0c0212b0a9d53282f3846ce5ffc1b2b",
+      "requested_context": null,
+      "response_id": "2b952b7f-372c-4c6f-8194-fd9d4472c528",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "round_id": 1,
+      "semantic_status": "unknown",
+      "structure_status": "pass",
+      "suggested_changes": {
+        "action": "revise_or_drop",
+        "recommendation": "删除该通用“具有特征”数据属性，或改为复用/细化既有“具有”类对象属性；若确需新增，须提供原文对具体特征字面值及其适用范围的直接定义证据，并将 domain 收窄到原文明确讨论的弹丸/章动角情形，避免全类强制约束。",
+        "target": "D_07d08749937238cbe5f3"
+      },
+      "supporting_evidence_ids": [
+        "ev_8573465d7fe0f75cec4d",
+        "ev_836c0c487e2849299583"
+      ],
+      "task_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_c"
+    }
+  ]
+}

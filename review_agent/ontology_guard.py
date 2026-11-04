@@ -211,16 +211,13 @@ class OntologyGuard:
 
     @staticmethod
     def _datatype_status(triple, relation):
+        from schema.datatypes import canonical_datatype
         expected = relation.get("datatypes") or ([relation["datatype"]] if relation.get("datatype") else [])
         if len(expected) != 1:
             return "unknown"
         xsd = "http://www.w3.org/2001/XMLSchema#"
-        aliases = {"string", "boolean", "integer", "int", "long", "short", "byte", "nonNegativeInteger",
-                   "positiveInteger", "decimal", "double", "float", "date", "dateTime", "anyURI"}
-        wanted = expected[0]
-        wanted = xsd + wanted if wanted in aliases else wanted
-        actual = triple.get("datatype")
-        actual = xsd + actual if actual in aliases else actual
+        wanted = canonical_datatype(expected[0])
+        actual = canonical_datatype(triple.get("datatype"))
         if not actual:
             return "unknown"
         if actual != wanted:

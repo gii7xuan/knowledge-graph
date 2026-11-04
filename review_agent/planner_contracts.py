@@ -4,9 +4,9 @@ from .response_contract import CONTEXT_SCOPES
 from pathlib import Path
 import hashlib
 
-PLANNER_CONTRACT_VERSION = "planner_action_v3"
-PLANNER_PROMPT_VERSION = "triple_planner_v3"
-AGENT_STRATEGY_VERSION = "bounded_react_v3"
+PLANNER_CONTRACT_VERSION = "planner_action_v4"
+PLANNER_PROMPT_VERSION = "triple_planner_v4"
+AGENT_STRATEGY_VERSION = "bounded_react_v4"
 PURPOSES = ("check_qualifiers", "find_counterevidence", "find_definition", "resolve_reference", "check_support")
 TOOL_SCHEMAS = {
     "inspect_context": {"evidence_id": "current evidence ID", "before": "integer 0..5", "after": "integer 0..5"},
@@ -15,13 +15,16 @@ TOOL_SCHEMAS = {
                          "surface_relation": "optional string <=400", "query": "optional string <=600"},
     "lookup_review_memory": {"relation_id": "string <=200", "issue_type": "string <=200", "limit": "integer 1..3"},
     "run_validation": {},
+    'recover_validation':{},
+    'review_revision':{'draft_id':'current proposed draft ID'},
+    'apply_reviewed_revision':{'draft_id':'current approved draft ID','draft_hash':'exact approved draft hash'},
     "propose_revision": {"changes": "nonempty object containing triple fields only", "evidence_ids": "current evidence IDs", "reason": "string <=400"},
     "finish_review": {"stop_reason": "nonempty string <=200", "unresolved_issues": "array of strings <=400, max 10", "evidence_ids": "current evidence IDs"},
     "request_ontology_extension": {"change_kind": "add_class/add_object_property/add_data_property/add_alias/revise_definition/revise_constraint/merge_terms",
                                    "description": "nonempty string <=800", "proposed_changes": "bounded draft object", "evidence_ids": "current evidence IDs"},
     "get_ontology_extension_status": {"extension_id": "subscribed task ID"},
 }
-SYSTEM_PROMPT = (Path(__file__).resolve().parents[1] / "prompts" / "triple_planner_v3.txt").read_text(encoding="utf-8")
+SYSTEM_PROMPT = (Path(__file__).resolve().parents[1] / "prompts" / "triple_planner_v4.txt").read_text(encoding="utf-8")
 PLANNER_PROMPT_HASH = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()
 
 
@@ -84,6 +87,16 @@ def validate_action(value):
                         raise ActionError("invalid qualifiers")
                     if any(v is not None and not _text(v, 600) for v in content.values()):
                         raise ActionError("qualifiers must be bounded strings")
+                    from extract_triplets.candidate_contract import STATUS_VALUES, MODALITIES
+                    if field=='qualifier_status' and any(v not in STATUS_VALUES for v in content.values()):
+                        raise ActionError('invalid qualifier status enum')
+                    if field=='qualifiers' and ('polarity' in content and content['polarity'] not in {'positive','negative','unknown'} or
+                        'modality' in content and content['modality'] is not None and content['modality'] not in MODALITIES):
+                        raise ActionError('invalid polarity/modality enum')
+                elif field=='value':
+                    import math
+                    if not (content is None or isinstance(content,(str,bool,int,float))) or isinstance(content,float) and not math.isfinite(content):
+                        raise ActionError('value must be a finite scalar')
                 elif content is not None and not _text(content, 600):
                     raise ActionError("revision fields must be bounded strings")
         elif not _text(item, 800 if key == "description" else 600 if key == "query" else 400,
@@ -106,12 +119,20 @@ def argument_schemas():
     changes=obj({k:qualifiers if k in {"qualifiers","qualifier_status"} else text(600,nullable=True) for k in sorted(EDITABLE_TRIPLE_FIELDS)},
                 optional=EDITABLE_TRIPLE_FIELDS)
     changes["minProperties"]=1
+    from extract_triplets.candidate_contract import STATUS_VALUES,MODALITIES,QUALIFIER_FIELDS
+    changes['properties']['qualifier_status']=obj({k:{'enum':sorted(STATUS_VALUES)} for k in QUALIFIER_FIELDS},optional=QUALIFIER_FIELDS)
+    changes['properties']['qualifiers']['properties']['polarity']={'enum':['positive','negative','unknown']}
+    changes['properties']['qualifiers']['properties']['modality']={'enum':[None,*sorted(MODALITIES)]}
+    changes['properties']['value']={'type':['string','number','boolean','null']}
     return {
         "inspect_context":obj({"evidence_id":text(nonempty=True),"before":{"type":"integer","minimum":0,"maximum":5},"after":{"type":"integer","minimum":0,"maximum":5}}),
         "search_evidence":obj({"scope":{"type":"string","enum":list(CONTEXT_SCOPES)},"query":text(600,nonempty=True),"purpose":{"type":"string","enum":list(PURPOSES)},"limit":{"type":"integer","minimum":1,"maximum":6}}),
         "inspect_ontology":obj({"relation_id":text(200,nullable=True),"issue":text(),"endpoint_types":obj({"head":text(200,nullable=True),"tail":text(200,nullable=True)},optional=("head","tail")),"surface_relation":text(),"query":text(600)},optional=("endpoint_types","surface_relation","query")),
         "lookup_review_memory":obj({"relation_id":text(200),"issue_type":text(200),"limit":{"type":"integer","minimum":1,"maximum":3}}),
         "run_validation":obj({}),
+        'recover_validation':obj({}),
+        'review_revision':obj({'draft_id':text(nonempty=True)}),
+        'apply_reviewed_revision':obj({'draft_id':text(nonempty=True),'draft_hash':text(nonempty=True)}),
         "propose_revision":obj({"changes":changes,"evidence_ids":array(24),"reason":text(nonempty=True)}),
         "finish_review":obj({"stop_reason":text(200,nonempty=True),"unresolved_issues":array(10),"evidence_ids":array(24)}),
         "request_ontology_extension":obj({"change_kind":{"type":"string","enum":["add_class","add_object_property","add_data_property","add_alias","revise_definition","revise_constraint","merge_terms"]},"description":text(800,nonempty=True),"proposed_changes":{"type":"object","minProperties":1},"evidence_ids":array(24)}),

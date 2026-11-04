@@ -117,6 +117,8 @@ class AgentRuntime:
         self.state = AgentState(candidate=candidate, context=ctx, audit_id=audit_id)
         from .issue_ledger import IssueLedger
         IssueLedger(self.state).inherit(self.repository)
+        prior=self.repository.previous_revision_audit(candidate_id,revision,audit_id)
+        if prior: self.state.votes=prior.get('votes',[])
         self.state.consensus = aggregate_votes([], self.orchestrator.committee)
         self.repository.start_audit(candidate_id, revision, ctx)
         initial = retrieve_initial(candidate, self.document, max_items=6)
@@ -205,7 +207,7 @@ class AgentRuntime:
             fingerprint = self.policy.check(action, state)
             outcome = self.adapter.execute_tool(action, state)
             outcome["action_fingerprint"] = fingerprint
-            self.check_live()
+            if name!='apply_reviewed_revision': self.check_live()
         except ActionError as exc:
             outcome = {"status": "invalid_action", "error": str(exc)}
             if "repeated" in str(exc):
@@ -259,6 +261,12 @@ class AgentRuntime:
                     self.checkpoint()
                     continue
                 else:
+                    from .validation_recovery import recovery_plan
+                    state.validation_recovery=recovery_plan(state,self.repository)
+                    from .revision_service import RevisionService
+                    for draft in state.revision_drafts:
+                        if draft.get('status')=='review_incomplete':
+                            draft['review_recovery_available']=RevisionService(self.repository).recovery_available(draft['draft_id'])
                     budget.usage["planner_steps"] += 1
                     before_version, before_hash = state.state_version, state.digest()
                     self.checkpoint("planning")
@@ -286,6 +294,14 @@ class AgentRuntime:
                 self.repository.record_planner_step(state.audit_id, state.step_no, state.state_version, state.digest(), record,
                     checkpoint=(state.export(), budget.snapshot(), "planned"))
                 self.execute(action)
+            if state.stop_reason=='revision_submitted_for_reaudit':
+                self.repository.update_audit_context(state.audit_id,{'revision_drafts':state.revision_drafts,
+                    'applied_revision':state.context['applied_revision'],'issue_history':state.issues,
+                    'review_completion_status':'superseded_for_reaudit','independent_review_completed':False,
+                    'agent_budget':budget.snapshot()})
+                self.repository.finish_incomplete_audit(state.audit_id,'superseded',state.context['applied_revision'])
+                self.checkpoint('revision_submitted_for_reaudit')
+                return {'audit_id':state.audit_id,'committed':False,**state.context['applied_revision']}
             self.check_live()
             gaps = {**self.policy.final_gaps(state), "stop_reason": state.stop_reason}
             state.context.update(executed_strategy=state.executed_strategy, agent_stop_reason=state.stop_reason,
@@ -299,7 +315,7 @@ class AgentRuntime:
             consensus = current["consensus"] if current else aggregate_votes([], self.orchestrator.committee)
             eligible=set(consensus.get('eligible_voter_ids',[]))
             complete=bool(current and state.ontology_checked and
-                eligible=={m['id'] for m in state.context['committee_members']} and
+                eligible==set(self.orchestrator.committee.voter_ids) and
                 consensus.get('distinct_family_count',0)>=self.orchestrator.committee.minimum_distinct_families)
             completion=('independent_review_completed' if complete else
                 'independent_review_incomplete' if current else

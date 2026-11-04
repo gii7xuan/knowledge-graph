@@ -53,7 +53,8 @@ class CaseBudget(AgentBudget):
         super().tokens(attempt)
         if not attempt.get("cached"):
             total = sum(max(0, attempt.get(k) or 0) for k in ("input_tokens", "output_tokens"))
-            if total: self.charge({"tokens": total}, "tokens:" + sha256_json([self.task_type, self.task_id, attempt]))
+            if total: self.charge({"tokens": total}, 'request_tokens:'+attempt['attempt_id'] if attempt.get('attempt_id') else
+                                 "tokens:" + sha256_json([self.task_type, self.task_id, attempt]))
 
     def snapshot(self):
         return {**super().snapshot(), "case_ids": self.case_ids, "case_call_reservations": self.reservations,

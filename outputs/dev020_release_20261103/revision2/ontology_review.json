@@ -1,0 +1,762 @@
+{
+  "result": {
+    "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+    "budget": {
+      "case_accounts": [
+        {
+          "case_id": "case_fd4fde295d9a21b2f5febd5108743a58",
+          "limits": {
+            "extension_requests": 2,
+            "llm_calls": 108,
+            "rebinds": 2,
+            "tokens": 2242378,
+            "tool_calls": 76
+          },
+          "usage": {
+            "extension_requests": 2,
+            "llm_calls": 51,
+            "rebinds": 0,
+            "tokens": 1338605,
+            "tool_calls": 22
+          }
+        }
+      ],
+      "case_call_reservations": [
+        "96cacd06a1e3417aa84b343e174d4245"
+      ],
+      "case_ids": [
+        "case_fd4fde295d9a21b2f5febd5108743a58"
+      ],
+      "deadline_epoch": 1793693040.9050066,
+      "max_planner_steps": 6,
+      "max_validation_rounds": 2,
+      "remaining_llm_calls": 0,
+      "remaining_seconds": 304.28100000001723,
+      "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+      "usage": {
+        "input_tokens": 193820,
+        "llm_calls": 3,
+        "output_tokens": 4563,
+        "planner_steps": 0,
+        "tool_calls": 0,
+        "unknown_token_requests": 0,
+        "validation_rounds": 0
+      }
+    },
+    "consensus": {
+      "result": "unresolved",
+      "counts": {
+        "approve": 3,
+        "revise": 0,
+        "reject": 0,
+        "uncertain": 0,
+        "error": 0
+      },
+      "committee_size": 3,
+      "required_votes": 3,
+      "missing": 0,
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "counter_evidence_ids": [],
+      "deterministic_checks_pass": false
+    },
+    "deferred_unknown_model_ids": [],
+    "delta_revision": 1,
+    "extension_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+    "independent_review_completed": true,
+    "mode": "shadow",
+    "recommendation": "needs_human",
+    "release_published": false,
+    "selected_proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+    "selected_round_id": 1,
+    "semantic_competency": null,
+    "stop_reason": "dev020_known_formats_corrected_substantive_votes_preserved",
+    "task_status": "needs_human",
+    "task_type": "ontology_extension"
+  },
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_f92729279ee04c98bbc1bdda3a9b5e79",
+      "attempts": [
+        {
+          "attempt_id": "attempt_f92729279ee04c98bbc1bdda3a9b5e79",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "definition",
+              "note": "原文明确给出“对于能保证飞行稳定的弹丸，其章动角（或攻角）总是很小”的定性描述，且未提供数值阈值；现有 schema 中无对应数据属性，新增 D_a079d1c81afc34191ffc 用于承载该定性大小是必要且最小化的。",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_8573465d7fe0f75cec4d"
+              ],
+              "evidence_scope": "definition",
+              "note": "base_schema 中已有“章动角”“攻角”类，但无表达“定性大小”的数据属性；新增属性不与现有类/属性重复，也未将定性文字改写为数值。",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "definition",
+              "note": "新增数据属性定义明确保留“飞行状态、适用条件及量词随具体断言保留；不规定所有弹丸都有该属性，也不把‘很小’改写为角度数值或阈值”，与原文语义一致。",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "本次变更未新增或修改任何 rdfs:subClassOf 关系，仅新增数据属性并修订一个对象属性的 range 与定义，不涉及层级方向。",
+              "status": "not_applicable"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_e718a53ea0622e4c2716"
+              ],
+              "evidence_scope": "scope_rule",
+              "note": "R_2a66075367666d54e7e7 的 range 由“弹丸”修订为“动能”，与原文“沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能”一致；domain 仍为“空气”，符合“空气消耗弹丸动能”的方向。新增数据属性 domain 为“弹丸”，range 为 xsd:string，仅约束已使用该属性的断言两端，不引入存在性强制。",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "source_patch 的 added/removed 与 normalized_operations 一致；merged_rdf 完整保留 base 并应用补丁，三元组数 882→888，无匿名公理意外改写，语言标签保持 @zh，profile 未变，reasoner=not_run 如实保留。",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [
+                "ev_e718a53ea0622e4c2716"
+              ],
+              "evidence_scope": "scope_rule",
+              "note": "变更仅影响 D_a079d1c81afc34191ffc 与 R_2a66075367666d54e7e7 两个 schema 项；impact 记录显示 affected_candidates 为空，无历史候选被自动接受，manual_review_required=true 已如实标记，无未解决反证。",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "64b76737ffc311a6e63ccfc089719a21099774e3580d11e354de5a2001fd6492",
+          "evidence_hash": "18d66fa78e3ca74077737cb77d345172c3334634d86771f9c62f4f70e649db87",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 66638,
+          "late_response": false,
+          "latency_ms": 55829,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "necessity": "confirmed_gap",
+          "object_revision": 1,
+          "output_tokens": 968,
+          "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+          "proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+          "provider_started_at": 1793692621.4273677,
+          "queue_time_ms": 432,
+          "reason_codes": [
+            "no_counter_evidence",
+            "source_patch_matches_operations",
+            "constraint_scope_preserved"
+          ],
+          "reasoning_tokens": null,
+          "request_key": "8b6cbac970e53cdc833db6d49f8090b38f9197b48c8fedce0dae1b54f19fb800",
+          "requested_context": null,
+          "response_id": "chatcmpl-9aec8555dd01302e",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583",
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "task_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_a"
+        }
+      ],
+      "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "definition",
+          "note": "原文明确给出“对于能保证飞行稳定的弹丸，其章动角（或攻角）总是很小”的定性描述，且未提供数值阈值；现有 schema 中无对应数据属性，新增 D_a079d1c81afc34191ffc 用于承载该定性大小是必要且最小化的。",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d"
+          ],
+          "evidence_scope": "definition",
+          "note": "base_schema 中已有“章动角”“攻角”类，但无表达“定性大小”的数据属性；新增属性不与现有类/属性重复，也未将定性文字改写为数值。",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "definition",
+          "note": "新增数据属性定义明确保留“飞行状态、适用条件及量词随具体断言保留；不规定所有弹丸都有该属性，也不把‘很小’改写为角度数值或阈值”，与原文语义一致。",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "本次变更未新增或修改任何 rdfs:subClassOf 关系，仅新增数据属性并修订一个对象属性的 range 与定义，不涉及层级方向。",
+          "status": "not_applicable"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "evidence_scope": "scope_rule",
+          "note": "R_2a66075367666d54e7e7 的 range 由“弹丸”修订为“动能”，与原文“沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能”一致；domain 仍为“空气”，符合“空气消耗弹丸动能”的方向。新增数据属性 domain 为“弹丸”，range 为 xsd:string，仅约束已使用该属性的断言两端，不引入存在性强制。",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "source_patch 的 added/removed 与 normalized_operations 一致；merged_rdf 完整保留 base 并应用补丁，三元组数 882→888，无匿名公理意外改写，语言标签保持 @zh，profile 未变，reasoner=not_run 如实保留。",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "evidence_scope": "scope_rule",
+          "note": "变更仅影响 D_a079d1c81afc34191ffc 与 R_2a66075367666d54e7e7 两个 schema 项；impact 记录显示 affected_candidates 为空，无历史候选被自动接受，manual_review_required=true 已如实标记，无未解决反证。",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "64b76737ffc311a6e63ccfc089719a21099774e3580d11e354de5a2001fd6492",
+      "evidence_hash": "18d66fa78e3ca74077737cb77d345172c3334634d86771f9c62f4f70e649db87",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 66638,
+      "late_response": false,
+      "latency_ms": 55829,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "necessity": "confirmed_gap",
+      "object_revision": 1,
+      "output_tokens": 968,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+      "provider_started_at": 1793692621.4273677,
+      "queue_time_ms": 432,
+      "reason_codes": [
+        "no_counter_evidence",
+        "source_patch_matches_operations",
+        "constraint_scope_preserved"
+      ],
+      "reasoning_tokens": null,
+      "request_key": "8b6cbac970e53cdc833db6d49f8090b38f9197b48c8fedce0dae1b54f19fb800",
+      "requested_context": null,
+      "response_id": "chatcmpl-9aec8555dd01302e",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_e9a494c49acda0dae429",
+        "ev_8573465d7fe0f75cec4d",
+        "ev_836c0c487e2849299583",
+        "ev_e718a53ea0622e4c2716"
+      ],
+      "task_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_a"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_a1ad3f464abf460a9840c85a44d499b2",
+      "attempts": [
+        {
+          "attempt_id": "attempt_a1ad3f464abf460a9840c85a44d499b2",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_e718a53ea0622e4c2716"
+              ],
+              "note": "新增数据属性用于记录原文中对章动角/攻角的定性描述；修正原属性 R_2a66075367666d54e7e7 的范围，使其符合原文中‘消耗动能’而非‘消耗弹丸’的语义。",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [],
+              "note": "无现有属性可替代对章动角定性描述的记录；R_2a66075367666d54e7e7 为现有属性修正。",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_e718a53ea0622e4c2716"
+              ],
+              "note": "新增属性定义准确捕捉定性描述需求；修正属性定义准确反映了空气带动导致动能消耗的物理过程。",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [],
+              "note": "不涉及类层级变更。",
+              "status": "not_applicable"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_e718a53ea0622e4c2716"
+              ],
+              "evidence_scope": "definition",
+              "note": "D_a079d1c81afc34191ffc 的 domain(弹丸) 和 range(string) 符合定性描述需求；R_2a66075367666d54e7e7 的 range 修正为‘动能’符合原文语义。",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "note": "属性新增与修正未引入逻辑冲突或结构冗余。",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [],
+              "note": "修正范围对现有实例影响较小，且提升了语义准确性。",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "64b76737ffc311a6e63ccfc089719a21099774e3580d11e354de5a2001fd6492",
+          "evidence_hash": "18d66fa78e3ca74077737cb77d345172c3334634d86771f9c62f4f70e649db87",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 68742,
+          "late_response": false,
+          "latency_ms": 114108,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "necessity": "confirmed_gap",
+          "object_revision": 1,
+          "output_tokens": 2690,
+          "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+          "proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+          "provider_started_at": 1793692621.4097757,
+          "queue_time_ms": 412,
+          "reason_codes": [],
+          "reasoning_tokens": 1817,
+          "request_key": "8742a6817e8a8d77df9488cdf68ec0a8aafb069a078eac08b8b72bd738d0d6fb",
+          "requested_context": null,
+          "response_id": "chatcmpl-950928f76456a0e9",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583",
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "task_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_b"
+        }
+      ],
+      "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "note": "新增数据属性用于记录原文中对章动角/攻角的定性描述；修正原属性 R_2a66075367666d54e7e7 的范围，使其符合原文中‘消耗动能’而非‘消耗弹丸’的语义。",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [],
+          "note": "无现有属性可替代对章动角定性描述的记录；R_2a66075367666d54e7e7 为现有属性修正。",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "note": "新增属性定义准确捕捉定性描述需求；修正属性定义准确反映了空气带动导致动能消耗的物理过程。",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [],
+          "note": "不涉及类层级变更。",
+          "status": "not_applicable"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "evidence_scope": "definition",
+          "note": "D_a079d1c81afc34191ffc 的 domain(弹丸) 和 range(string) 符合定性描述需求；R_2a66075367666d54e7e7 的 range 修正为‘动能’符合原文语义。",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "note": "属性新增与修正未引入逻辑冲突或结构冗余。",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [],
+          "note": "修正范围对现有实例影响较小，且提升了语义准确性。",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "64b76737ffc311a6e63ccfc089719a21099774e3580d11e354de5a2001fd6492",
+      "evidence_hash": "18d66fa78e3ca74077737cb77d345172c3334634d86771f9c62f4f70e649db87",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 68742,
+      "late_response": false,
+      "latency_ms": 114108,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "necessity": "confirmed_gap",
+      "object_revision": 1,
+      "output_tokens": 2690,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+      "provider_started_at": 1793692621.4097757,
+      "queue_time_ms": 412,
+      "reason_codes": [],
+      "reasoning_tokens": 1817,
+      "request_key": "8742a6817e8a8d77df9488cdf68ec0a8aafb069a078eac08b8b72bd738d0d6fb",
+      "requested_context": null,
+      "response_id": "chatcmpl-950928f76456a0e9",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_e9a494c49acda0dae429",
+        "ev_8573465d7fe0f75cec4d",
+        "ev_836c0c487e2849299583",
+        "ev_e718a53ea0622e4c2716"
+      ],
+      "task_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_5f70bae5e1414417a9707756d63a2340",
+      "attempts": [
+        {
+          "attempt_id": "attempt_5f70bae5e1414417a9707756d63a2340",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_8573465d7fe0f75cec4d"
+              ],
+              "evidence_scope": "definition",
+              "note": "原文明确以“章动角（或攻角）总是很小”描述弹丸飞行状态，现有索引无对应定性数据属性，新增 D_a079d1c81afc34191ffc 填补真实缺口；定义明确不规定所有弹丸都有该属性、不把“很小”数值化。",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429"
+              ],
+              "evidence_scope": "definition",
+              "note": "base_schema 中无“章动角或攻角的定性大小”同类数据属性，C_77bb7262318d73ff8968（章动角）与 C_611ef2c4e499a2911c54（攻角）为类而非属性，不构成重复表达。",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_e9a494c49acda0dae429",
+                "ev_8573465d7fe0f75cec4d",
+                "ev_836c0c487e2849299583"
+              ],
+              "evidence_scope": "definition",
+              "note": "定义保留飞行状态、适用条件与量词，未将“很小”改写为角度数值或阈值；R_2a66075367666d54e7e7 新定义与 ev_e718a53ea0622e4c2716 中“边界层不断形成、空气被带动、消耗弹丸动能、使弹丸减速”一致。",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [],
+              "note": "本次变更不新增或调整类层级、is-a/part-of 方向，仅新增数据属性并修订属性 range 与定义。",
+              "status": "not_applicable"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_e718a53ea0622e4c2716"
+              ],
+              "evidence_scope": "scope_rule",
+              "note": "R_2a66075367666d54e7e7 的 range 由 C_85d7c2e6732f8a304f88（弹丸）改为 C_a7877ae0fe8183f8b986（动能），与原文“消耗着弹丸的动能”一致；domain 仍为空气，属已声明端点约束，不推断全体实例必须出边。",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "structure 记录 status=pass，errors 为空，unexecuted_axiom_count=0；新增 6 条三元组、删除 1 条 range 三元组，合并后 888 条，匿名公理与语言标签保留，reasoner=not_run 如实保留。",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "impact 记录 status=pass，changed_schema_ids 为 D_a079d1c81afc34191ffc 与 R_2a66075367666d54e7e7，dependent_schema_ids 一致，affected_candidates 为空，无历史候选被自动接受，risk_category=high_impact 已标记人工复核。",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "64b76737ffc311a6e63ccfc089719a21099774e3580d11e354de5a2001fd6492",
+          "evidence_hash": "18d66fa78e3ca74077737cb77d345172c3334634d86771f9c62f4f70e649db87",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 58440,
+          "late_response": false,
+          "latency_ms": 10000,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "necessity": "confirmed_gap",
+          "object_revision": 1,
+          "output_tokens": 905,
+          "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+          "proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+          "provider_started_at": 1793692621.4751031,
+          "queue_time_ms": 476,
+          "reason_codes": [
+            "new_qualitative_data_property_grounded_in_source",
+            "range_correction_grounded_in_source",
+            "definition_revision_grounded_in_source",
+            "no_removed_ids_no_anonymous_axiom_impact"
+          ],
+          "reasoning_tokens": null,
+          "request_key": "a34ea537afcb2f782e3f2266d5891fd7ef75b93406f6be893dd39a5fcb34df39",
+          "requested_context": null,
+          "response_id": "dcc12074-b531-4b8f-a58e-b75fad6c6258",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583",
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "task_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_c"
+        }
+      ],
+      "audit_id": "ontology_audit_2f5e17354ceb474c922e65bb3bf90970",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d"
+          ],
+          "evidence_scope": "definition",
+          "note": "原文明确以“章动角（或攻角）总是很小”描述弹丸飞行状态，现有索引无对应定性数据属性，新增 D_a079d1c81afc34191ffc 填补真实缺口；定义明确不规定所有弹丸都有该属性、不把“很小”数值化。",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429"
+          ],
+          "evidence_scope": "definition",
+          "note": "base_schema 中无“章动角或攻角的定性大小”同类数据属性，C_77bb7262318d73ff8968（章动角）与 C_611ef2c4e499a2911c54（攻角）为类而非属性，不构成重复表达。",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d",
+            "ev_836c0c487e2849299583"
+          ],
+          "evidence_scope": "definition",
+          "note": "定义保留飞行状态、适用条件与量词，未将“很小”改写为角度数值或阈值；R_2a66075367666d54e7e7 新定义与 ev_e718a53ea0622e4c2716 中“边界层不断形成、空气被带动、消耗弹丸动能、使弹丸减速”一致。",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [],
+          "note": "本次变更不新增或调整类层级、is-a/part-of 方向，仅新增数据属性并修订属性 range 与定义。",
+          "status": "not_applicable"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_e718a53ea0622e4c2716"
+          ],
+          "evidence_scope": "scope_rule",
+          "note": "R_2a66075367666d54e7e7 的 range 由 C_85d7c2e6732f8a304f88（弹丸）改为 C_a7877ae0fe8183f8b986（动能），与原文“消耗着弹丸的动能”一致；domain 仍为空气，属已声明端点约束，不推断全体实例必须出边。",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "structure 记录 status=pass，errors 为空，unexecuted_axiom_count=0；新增 6 条三元组、删除 1 条 range 三元组，合并后 888 条，匿名公理与语言标签保留，reasoner=not_run 如实保留。",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "impact 记录 status=pass，changed_schema_ids 为 D_a079d1c81afc34191ffc 与 R_2a66075367666d54e7e7，dependent_schema_ids 一致，affected_candidates 为空，无历史候选被自动接受，risk_category=high_impact 已标记人工复核。",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "64b76737ffc311a6e63ccfc089719a21099774e3580d11e354de5a2001fd6492",
+      "evidence_hash": "18d66fa78e3ca74077737cb77d345172c3334634d86771f9c62f4f70e649db87",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 58440,
+      "late_response": false,
+      "latency_ms": 10000,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "necessity": "confirmed_gap",
+      "object_revision": 1,
+      "output_tokens": 905,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "2ea546fe5beffe3eed1a05614bdb1072e1e9f642c5156dbbcb5c907c19b6a2f3",
+      "provider_started_at": 1793692621.4751031,
+      "queue_time_ms": 476,
+      "reason_codes": [
+        "new_qualitative_data_property_grounded_in_source",
+        "range_correction_grounded_in_source",
+        "definition_revision_grounded_in_source",
+        "no_removed_ids_no_anonymous_axiom_impact"
+      ],
+      "reasoning_tokens": null,
+      "request_key": "a34ea537afcb2f782e3f2266d5891fd7ef75b93406f6be893dd39a5fcb34df39",
+      "requested_context": null,
+      "response_id": "dcc12074-b531-4b8f-a58e-b75fad6c6258",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_e9a494c49acda0dae429",
+        "ev_8573465d7fe0f75cec4d",
+        "ev_836c0c487e2849299583",
+        "ev_e718a53ea0622e4c2716"
+      ],
+      "task_id": "ext_23b1e819cc714e989bc6d7cd26303a4d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_c"
+    }
+  ]
+}

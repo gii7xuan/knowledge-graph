@@ -48,12 +48,14 @@ def versions_for(config):
             planner_prompt_hash=PLANNER_PROMPT_HASH,
             planner_strategy_version=AGENT_STRATEGY_VERSION, planner_model_id=settings["model"],
             planner_model_family=settings["family"], configured_strategy="llm_react")
-    return versions
+    from .validator_contracts import versions_for as validator_versions
+    return {**versions,**validator_versions(config)}
 
 
 def _candidate_worker(sender, payload):
     """Everything able to block is owned by this disposable process."""
     repository = ReviewRepository(payload["database"])
+    repository.job_lease_binding=payload.get('job_binding')
     try:
         from confidence.calibrator import TripleCalibrator, load_calibrator
         from confidence.risk_policy import RiskPolicy, load_policy
@@ -120,9 +122,18 @@ def _stop_process(process):
 
 def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=False,
                      limit=None, status_file=None, on_progress=None, should_cancel=None,
-                     _worker_target=None, job_id=None):
+                     _worker_target=None, job_id=None, job_binding=None):
     """Resume healthy completed revisions, bound concurrency, pause globally on 402."""
     repository.get_run(run_id)
+    from .cli import _configured_validators
+    from .recovery_service import seed_service_pauses
+    from .request_execution import service_key
+    configured=_configured_validators(config)
+    seed_service_pauses(repository,configured)
+    paused=[v['model_id'] for v in configured if repository.service_pause(service_key(v))]
+    if paused:
+        return {'status':'paused','paused':True,'reason_code':'SERVICE_AVAILABILITY_CHECK_REQUIRED',
+                'paused_models':paused,'no_work_started':True,'previous_progress_preserved':True}
     members = configured_members(config)
     if _worker_target is None and not members:
         raise ValueError("no configured review models")
@@ -131,13 +142,25 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
     if any(c["run_id"] != run_id for c in candidates):
         raise ValueError("candidate does not belong to the audit run")
     versions = versions_for(config)
-    pending, skipped = [], 0
+    pending, skipped, upgrade_deferred = [], 0, []
     for candidate in candidates:
         if candidate.get("workflow_state") in {"awaiting_ontology_review", "awaiting_ontology_release"}:
             skipped += 1
         elif not force and repository.has_healthy_audit(candidate["candidate_id"], candidate["revision"], versions, members):
             skipped += 1
         else:
+            prior=repository.previous_revision_audit(candidate['candidate_id'],candidate['revision'],'') if not force else None
+            old_version=(prior or {}).get('context',{}).get('response_contract_version')
+            if prior and prior['revision']==candidate['revision'] and old_version and old_version!=versions['response_contract_version']:
+                skipped+=1
+                upgrade_deferred.append({'candidate_id':candidate['candidate_id'],'audit_id':prior['audit_id'],
+                    'reason':'frozen_contract_recovery_or_reviewed_revision_required','preserved_contract':old_version})
+                continue
+            if prior and prior['revision']==candidate['revision'] and prior.get('rounds') and not prior['context'].get('independent_review_completed'):
+                skipped+=1
+                upgrade_deferred.append({'candidate_id':candidate['candidate_id'],'audit_id':prior['audit_id'],
+                    'reason':'recover_original_failed_or_unknown_slots','preserved_contract':old_version})
+                continue
             pending.append(candidate)
     if limit is not None:
         if int(limit) < 1:
@@ -154,9 +177,11 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
     state = {"execution_id": execution_id, "run_id": run_id, "status": "running",
              "started_at_epoch": time.time(), "total": len(candidates), "selected": len(pending),
              "skipped": skipped, "completed": 0, "failed": 0, "interrupted": 0,
+             'revised':0,
              "independent_review_completed":0,"review_incomplete":0,
              "paused": False, "cancelled": False, "results": [], "review_versions": versions,
              "progress_write_failures": 0, "progress_file_stale": False}
+    state['contract_upgrade_deferred']=upgrade_deferred
     ctx = multiprocessing.get_context("spawn")
     active, index = {}, 0
     last_progress, last_published = None, 0.0
@@ -197,7 +222,7 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
         _stop_process(worker["process"])
         connection.close()
         status = outcome.get("status", "failed")
-        if status != "completed":
+        if status not in {"completed",'superseded'}:
             repository.finish_incomplete_audit(payload["audit_id"],
                 status if status in {"timeout", "paused", "interrupted"} else "failed", outcome)
         state["results"].append({"audit_id": payload["audit_id"], "candidate_id": payload["candidate_id"],
@@ -208,6 +233,8 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
                 state['independent_review_completed']+=1
             else:
                 state['review_incomplete']+=1
+        elif status=='superseded':
+            state['revised']+=1
         elif status == "interrupted":
             state["interrupted"] += 1
         elif status != "paused":
@@ -236,7 +263,7 @@ def run_review_batch(repository, run_id, config, *, candidate_ids=None, force=Fa
                     "candidate_id": candidate["candidate_id"], "revision": candidate["revision"],
                     "audit_id": "audit_" + uuid4().hex, "config": dict(config),
                     "execution_id": execution_id, "memory_snapshot_id": memory,
-                    "deadline_epoch": time.time() + timeout}
+                    "deadline_epoch": time.time() + timeout,'job_binding':job_binding}
                 payload["job_id"] = job_id
                 payload["request_cache_namespace"] = execution_id if force else "default"
                 if not force and (config.get("planner") or {}).get("strategy") == "llm_react":

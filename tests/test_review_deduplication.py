@@ -73,7 +73,7 @@ class ValidationDeduplicationTests(unittest.TestCase):
             lambda p: p.update(committee_version="new-committee"),
             lambda p: p.update(committee_members=[{"id": "new-member"}]),
             lambda p: p.update(prompt_version="new-prompt"),
-            lambda p: p.update(response_contract_version="new-contract"),
+            lambda p: p.update(response_contract_hash="new-contract-hash"),
             lambda p: p.update(memory_snapshot_id=2),
             lambda p: p.update(review_memory={"new": "case"}),
             lambda p: p.update(request_cache_namespace="explicit-force-run"),
@@ -111,14 +111,17 @@ class ValidationDeduplicationTests(unittest.TestCase):
             return response()
         self.client._callable = slow
         try:
-            timed_out = self.judge(max_retries=3, per_call_timeout_seconds=.03)
+            timed_out = self.judge(max_retries=3, per_call_timeout_seconds=.2)
             self.assertEqual(timed_out["response_status"], "timeout")
             self.assertFalse(timed_out["retryable"])
             self.assertEqual(len(self.client.calls), 1)
             release.set()
             self.assertTrue(finished.wait(3))
+            for _ in range(100):
+                if self.repo.validation_request(timed_out['request_key'])['status']=='completed': break
+                __import__('time').sleep(.01)
             suppressed = self.judge({**proposal(), "audit_id": "after-timeout"}, per_call_timeout_seconds=.03)
-            self.assertEqual(suppressed["error_code"], "DUPLICATE_REQUEST_SUPPRESSED")
+            self.assertEqual(suppressed['response_status'],'ok')
             self.assertEqual(model_request_count(suppressed), 0)
             self.assertEqual(len(self.client.calls), 1)
         finally:
@@ -148,6 +151,9 @@ class ValidationDeduplicationTests(unittest.TestCase):
         self.client._queue = [RuntimeError("Error code: 402 - Insufficient Balance"), response()]
         self.assertEqual(self.judge(max_retries=3)["http_status"], 402)
         self.assertEqual(len(self.client.calls), 1)
+        from review_agent.request_execution import service_key
+        key=service_key(self.voter)
+        self.repo.resume_model_service(key,{'service_key':key,'response_status':'ok','response_id':'fixture_probe'})
         self.assertEqual(self.judge()["response_status"], "ok")
         self.assertEqual(len(self.client.calls), 2)
         self.assertTrue(self.judge()["cached"])
@@ -173,9 +179,9 @@ class ValidationDeduplicationTests(unittest.TestCase):
         first = jobs[0]
         again = self.repo.create_job("audit", {"run_id": "run", "candidate_ids": ["a", "b"]})
         self.assertEqual(first["job_id"], again["job_id"])
-        self.repo.claim_job("worker")
+        claimed=self.repo.claim_job("worker")
         self.assertEqual(self.repo.create_job("audit", payload)["job_id"], first["job_id"])
-        self.repo.complete_job(first["job_id"], {})
+        self.repo.complete_job(first["job_id"], {},owner='worker',lease_token=claimed['lease_token'])
         self.assertNotEqual(self.repo.create_job("audit", payload)["job_id"], first["job_id"])
 
 

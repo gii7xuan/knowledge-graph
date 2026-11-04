@@ -21,11 +21,12 @@ def effective_config(config):
     return result
 
 
-def worker(sender, database, release_root, config, extension_id, audit_id):
+def worker(sender, database, release_root, config, extension_id, audit_id, job_binding=None):
     try:
         from review_agent.cli import _configured_validators
         from .runtime import OntologyReviewRuntime
         repository = ReviewRepository(database)
+        repository.job_lease_binding=job_binding
         runtime = OntologyReviewRuntime(repository, Path(release_root), _configured_validators(config),
                                         create_planner_client(effective_config(config)), config)
         result = runtime.run(extension_id, audit_id)
@@ -52,7 +53,7 @@ class OntologyReviewService:
         self.publisher = OntologyPublisher(self.repository, self.root, self.config)
 
     def list(self, status=None):
-        return {"items": self.repository.extensions(status), "current_release_id": current_release_id(self.root),
+        return {"items": [self.repository.extension_status(t['extension_id']) for t in self.repository.extensions(status)], "current_release_id": current_release_id(self.root),
                 "enabled": bool((self.config.get("ontology_extension") or {}).get("enabled")),
                 "auto_publish_enabled": bool((self.config.get("ontology_extension") or {}).get("auto_publish_enabled"))}
 
@@ -89,7 +90,9 @@ class OntologyReviewService:
         extension_id, audit_id = payload["extension_id"], payload["audit_id"]
         context = multiprocessing.get_context("spawn")
         receiver, sender = context.Pipe(duplex=False)
-        process = context.Process(target=_worker_target or worker, args=(sender, str(self.repository.database_path.resolve()), str(self.root), self.config, extension_id, audit_id))
+        fence={'job_id':payload.get('_job_id'),'owner':payload.get('_job_owner'),'lease_token':payload.get('_job_lease_token')}
+        args=(sender,str(self.repository.database_path.resolve()),str(self.root),self.config,extension_id,audit_id)
+        process = context.Process(target=_worker_target or worker, args=args if _worker_target else (*args,fence if fence['job_id'] else None))
         process.start(); sender.close()
         deadline = time.monotonic() + float(((self.config.get("ontology_extension") or {}).get("budget") or {}).get("total_timeout_seconds", 360))
         last_heartbeat, message = 0., None
@@ -107,7 +110,7 @@ class OntologyReviewService:
                     except EOFError: break
                     break
                 if job_id and time.monotonic() - last_heartbeat > 2:
-                    self.repository.heartbeat_job(job_id, {"task_type": "ontology_extension", "extension_id": extension_id, "audit_id": audit_id})
+                    self.repository.heartbeat_job(job_id, {"task_type": "ontology_extension", "extension_id": extension_id, "audit_id": audit_id},owner=fence['owner'],lease_token=fence['lease_token'])
                     last_heartbeat = time.monotonic()
             if message and "result" in message:
                 result = message["result"]

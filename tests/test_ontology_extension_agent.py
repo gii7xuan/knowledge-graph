@@ -100,7 +100,7 @@ class OntologyExtensionTests(unittest.TestCase):
         def plan(payload):
             if not payload["ontology_checked"]: return action("inspect_ontology", relation_id=None, surface_relation="regulates", issue="full ontology lookup")
             if not payload["current_validation"]: return action("run_validation")
-            return action("request_ontology_extension", change_kind="add_object_property", description="Missing regulation relation", proposed_changes={"label": "regulates"}, evidence_ids=payload["selected_evidence_ids"][:1])
+            return action("request_ontology_extension", change_kind="add_object_property", description="Missing regulation relation", proposed_changes={"label": "regulates"}, evidence_ids=payload["source_supported_evidence_ids"][:1])
         result = ReviewOrchestrator(self.repo, OntologyGuard(load_snapshot(self.base.snapshot_path)), self.source_voters,
             config=self.config, planner_client=MockLLMClient(plan)).audit_candidate(candidate["candidate_id"], 1, self.index)
         self.assertEqual(result["workflow_state"], "awaiting_ontology_review", result)
@@ -470,6 +470,9 @@ class OntologyExtensionTests(unittest.TestCase):
         result = self.review()
         self.assertTrue(result["paused"])
         self.voters[0]["client"] = MockLLMClient(ontology_vote)
+        from review_agent.request_execution import service_key
+        key=service_key(self.voters[0])
+        self.repo.resume_model_service(key,{'service_key':key,'response_status':'ok','response_id':'fixture_balance_probe'})
         second = self.review()
         self.assertEqual(second["recommendation"], "approve")
         self.assertEqual([len(v["client"].calls) for v in self.voters], [1, 1, 1])

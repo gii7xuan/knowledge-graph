@@ -19,6 +19,14 @@ class ActionPolicy:
         available={i['evidence_id'] for i in state.archive if i.get('anchor_valid') is True}
         validation=state.current_validation()
         blocked={}
+        if validation is not None:
+            blocked['run_validation']='current frozen input already validated; consume results, revise, search or recover failed seats'
+        if not state.validation_recovery.get('recoverable_voter_ids'):
+            blocked['recover_validation']='no safely recoverable failed seats; unknown requests require reconciliation'
+        if not any(d.get('status')=='proposed' or d.get('status')=='review_incomplete' and d.get('review_recovery_available') for d in state.revision_drafts):
+            blocked['review_revision']='no current proposed revision draft'
+        if not any(d.get('status')=='approved' for d in state.revision_drafts):
+            blocked['apply_reviewed_revision']='no independently approved revision draft'
         if not available: blocked['inspect_context']='no verified evidence ID; search_evidence first'
         if not state.ontology_checked:
             blocked['run_validation']='inspect_ontology must check the full frozen ontology first'
@@ -29,14 +37,13 @@ class ActionPolicy:
                 blocked['finish_review']='search_evidence before handing off an evidence-less candidate'
         elif validation is None:
             blocked['finish_review']='current independent validation is required; call run_validation'
-        if not validation or validation['consensus'].get('source_support_consensus',{}).get('result')!='supported':
-            blocked['request_ontology_extension']='run_validation must establish current independent source-support consensus supported'
-        elif state.ontology_lookup.get('scope')!='full_frozen_ontology':
-            blocked['request_ontology_extension']='inspect_ontology must search the full frozen ontology'
-        elif not ({v.get('schema_issue') for v in validation.get('votes',[])
-                   if v.get('voter_id') in validation['consensus'].get('eligible_voter_ids',[])}
-                  & {'not_covered','incompatible','suspected_schema_error'}):
-            blocked['request_ontology_extension']='independent reviewers have not diagnosed a schema gap or schema error'
+        if state.context.get('revision_only'):
+            blocked['run_validation']='revision investigation uses historical observations; new revision gets final independent review'
+            if state.ontology_checked: blocked.pop('finish_review',None)
+        from .extension_eligibility import extension_eligibility
+        eligibility=extension_eligibility(state)
+        if not eligibility['allowed_change_kinds']:
+            blocked['request_ontology_extension']='; '.join(sorted(set(eligibility['blocked_change_kinds'].values())))
         if not state.pending_extension_id:
             blocked['get_ontology_extension_status']='no subscribed ontology extension task'
         return blocked
@@ -53,7 +60,15 @@ class ActionPolicy:
         if reason: raise ActionError(reason)
         if action['action']=='get_ontology_extension_status' and args['extension_id']!=state.pending_extension_id:
             raise ActionError('extension_id differs from the subscribed task')
+        if action['action'] in {'review_revision','apply_reviewed_revision'}:
+            draft=next((d for d in state.revision_drafts if d['draft_id']==args['draft_id']),None)
+            if not draft or draft.get('base_revision')!=state.candidate['revision']:
+                raise ActionError('draft does not belong to the current candidate revision')
+            if action['action']=='apply_reviewed_revision' and args['draft_hash']!=draft['draft_hash']:
+                raise ActionError('draft_hash differs from approved draft')
         if action['action']=='request_ontology_extension':
+            from .extension_eligibility import validate_extension
+            validate_extension(state,args['change_kind'],args['proposed_changes'])
             validation=state.current_validation()
             eligible=set(validation['consensus'].get('eligible_voter_ids',[]))
             supported={eid for vote in validation.get('votes',[]) if vote.get('voter_id') in eligible

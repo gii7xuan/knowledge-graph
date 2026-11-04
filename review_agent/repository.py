@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import time
 import sqlite3
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional
@@ -20,9 +20,10 @@ from .contracts import canonical_json, fact_key_for, sha256_json
 from .lifecycle_repository import LifecycleRepository
 from ontology_review.repository import OntologyReviewRepository
 from .admission_repository import AdmissionRepository
+from .request_repository import RequestRepository
 
 
-MIGRATION_VERSION = 6
+MIGRATION_VERSION = 8
 EDITABLE_TRIPLE_FIELDS = {
     "head", "surface_relation", "relation_id", "relation_label", "tail",
     "head_type", "tail_type", "tail_kind", "datatype", "value", "unit", "qualifiers",
@@ -73,7 +74,7 @@ class _ClosingConnection(sqlite3.Connection):
             self.close()
 
 
-class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionRepository):
+class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionRepository, RequestRepository):
     def __init__(self, database_path: Any = "runs/v3/review.sqlite3", *, busy_timeout_ms: int = 5000):
         self.database_path = Path(database_path)
         self.busy_timeout_ms = int(busy_timeout_ms)
@@ -119,6 +120,8 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
         connection = self.connect()
         try:
             connection.execute("BEGIN IMMEDIATE" if immediate else "BEGIN")
+            if getattr(self,'job_lease_binding',None):
+                self.assert_job_lease(connection,**self.job_lease_binding)
             yield connection
             connection.commit()
         except Exception:
@@ -342,6 +345,9 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             self.initialize_lifecycle(connection)
             self.initialize_ontology_review(connection)
             self.initialize_admission(connection)
+            self.initialize_requests(connection)
+            from .revision_service import initialize_revisions
+            initialize_revisions(connection)
             connection.execute(
                 "INSERT OR IGNORE INTO schema_migrations(migration_version, applied_at) VALUES (?, ?)",
                 (MIGRATION_VERSION, utc_now()),
@@ -349,9 +355,14 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
 
     init_db = initialize
 
-    def claim_validation_request(self, request_key, owner):
+    def claim_validation_request(self, request_key, owner, *, semantic_key=None):
         """Only a known failed request may be retried; unknown/in-flight work stays fenced."""
         with self.transaction(immediate=True) as connection:
+            if semantic_key:
+                blocked=connection.execute("SELECT r.request_key FROM validation_requests r JOIN validation_request_families f ON f.request_key=r.request_key WHERE f.semantic_key=? AND r.request_key<>? AND r.status IN ('running','unknown') LIMIT 1",(semantic_key,request_key)).fetchone()
+                if blocked:
+                    return {'status':'unknown','vote':{},'blocking_request_key':blocked[0]}
+                connection.execute('INSERT OR IGNORE INTO validation_request_families VALUES(?,?)',(request_key,semantic_key))
             row = connection.execute("SELECT * FROM validation_requests WHERE request_key=?", (request_key,)).fetchone()
             if row is None or row["status"] == "failed":
                 connection.execute("""INSERT INTO validation_requests VALUES(?,?,'running',NULL,?)
@@ -370,10 +381,12 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             "unknown" if vote.get("outcome_unknown") else "failed")
         with self.transaction(immediate=True) as connection:
             changed = connection.execute("""UPDATE validation_requests SET status=?,vote_json=?,updated_at=?
-                WHERE request_key=? AND owner=? AND status='running'""",
+                WHERE request_key=? AND owner=? AND status IN ('running','unknown')""",
                 (status, _json(vote), utc_now(), request_key, owner)).rowcount
             if changed != 1:
-                raise ConflictError("validation request reservation is no longer owned")
+                current=connection.execute('SELECT owner,status FROM validation_requests WHERE request_key=?',(request_key,)).fetchone()
+                if not current or current['owner']!=owner or current['status'] not in {'completed','failed'}:
+                    raise ConflictError("validation request reservation is no longer owned")
 
     def update_audit_context(self, audit_id, updates):
         with self.transaction(immediate=True) as connection:
@@ -609,14 +622,14 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
         return int(row[0])
 
     def revise_candidate(
-        self, candidate_id: str, expected_row_version: int, changes: Mapping[str, Any]
+        self, candidate_id: str, expected_row_version: int, changes: Mapping[str, Any], *, _connection=None, _revision_provenance=None
     ) -> Dict[str, Any]:
         if set(changes) - {"triple"} or not isinstance(changes.get("triple"), Mapping):
             raise ValidationError("candidate revisions may only change triple fields")
         if set(changes["triple"]) - EDITABLE_TRIPLE_FIELDS:
             raise ValidationError("modifications contain protected or unknown triple fields")
         now = utc_now()
-        with self.transaction(immediate=True) as connection:
+        with (self.transaction(immediate=True) if _connection is None else nullcontext(_connection)) as connection:
             row = connection.execute("SELECT * FROM candidates WHERE candidate_id=?", (candidate_id,)).fetchone()
             if row is None:
                 raise NotFoundError(f"candidate not found: {candidate_id}")
@@ -629,10 +642,12 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             ).fetchone()
             source = _loads(source_row["candidate_json"], {})
             updated = dict(source)
-            if isinstance(changes.get("triple"), Mapping):
-                updated["triple"] = {**dict(source.get("triple") or {}), **dict(changes["triple"])}
+            from .revision_patch import merge_triple_patch
+            updated["triple"] = merge_triple_patch(source.get("triple") or {}, dict(changes["triple"]),
+                strict=source.get("contract_version") == "extraction_candidate_v4")
             new_revision = old_revision + 1
             updated.update({"revision": new_revision, "supersedes_revision": old_revision})
+            if _revision_provenance: updated['revision_provenance']=_revision_provenance
             if updated.get("contract_version") == "extraction_candidate_v4":
                 from extract_triplets.candidate_contract import refresh_revision
                 refresh_revision(updated)
@@ -659,7 +674,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             if self.has_graph_history(connection, candidate_id):
                 self.mark_graph_dirty(connection, candidate_id, "candidate_revision_changed")
             connection.execute("UPDATE decisions SET active=0 WHERE candidate_id=? AND active=1", (candidate_id,))
-        return self.get_candidate(candidate_id)
+        return self.get_candidate(candidate_id) if _connection is None else {**updated,'row_version':expected_row_version+1}
 
     def start_audit(self, candidate_id: str, revision: int, context: Mapping[str, Any]) -> str:
         audit_id = str(context.get("audit_id") or f"audit_{uuid4().hex}")
@@ -719,13 +734,14 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
 
     def finish_incomplete_audit(self, audit_id: str, status: str, detail: Mapping[str, Any]) -> None:
         """Close a killed/paused audit without creating a semantic decision."""
-        if status not in {"paused", "timeout", "interrupted", "failed"}:
+        if status not in {"paused", "timeout", "interrupted", "failed",'superseded'}:
             raise ValidationError("invalid incomplete audit status")
         with self.transaction(immediate=True) as connection:
             row = connection.execute("SELECT context_json FROM audit_runs WHERE audit_id=? AND status='running'",
                                      (audit_id,)).fetchone()
             if row:
-                context = {**_loads(row["context_json"], {}), "execution_failure": dict(detail)}
+                context = {**_loads(row["context_json"], {}),
+                           'revision_transition' if status=='superseded' else 'execution_failure':dict(detail)}
                 connection.execute("UPDATE audit_runs SET status=?,context_json=?,completed_at=? WHERE audit_id=? AND status='running'",
                                    (status, _json(context), utc_now(), audit_id))
 
@@ -790,7 +806,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old["decision_id"],))
             route = str(result.get("decision") or result.get("route") or "manual_review")
             from .response_contract import CONTRACT_VERSION
-            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") == CONTRACT_VERSION:
+            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4'}:
                 from .proposal_resolver import selected_proposal
                 candidate = self.get_revision(candidate_id, revision)
                 selected_proposal(self, candidate, result)
@@ -1174,12 +1190,12 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                                             (audit["audit_id"],)).fetchone()
         votes = {_loads(row["vote_json"], {}).get("voter_id"): _loads(row["vote_json"], {}) for row in rows}
         context = _loads(audit['context_json'],{})
-        if context.get('planner_contract_version')=='planner_action_v3' and context.get('review_completion_status') not in {
+        if context.get('planner_contract_version') in {'planner_action_v3','planner_action_v4'} and context.get('review_completion_status') not in {
                 'independent_review_completed','manual_handoff_no_evidence'}:
             return False
         if not votes and checkpoint and checkpoint["phase"] == "finished":
             context = _loads(audit["context_json"], {})
-            if context.get('planner_contract_version')=='planner_action_v3':
+            if context.get('planner_contract_version') in {'planner_action_v3','planner_action_v4'}:
                 state = _loads(checkpoint['checkpoint_json'],{}).get('state',{})
                 return bool(context.get('review_completion_status')=='manual_handoff_no_evidence'
                     and context.get('committee_members')==members and state.get('ontology_checked')
@@ -1239,7 +1255,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
 
     def previous_revision_audit(self, candidate_id, revision, exclude_audit_id):
         with self.connect() as connection:
-            row = connection.execute("SELECT audit_id FROM audit_runs WHERE candidate_id=? AND revision=? AND audit_id<>? AND status IN ('completed','paused','interrupted') ORDER BY created_at DESC,rowid DESC LIMIT 1",
+            row = connection.execute("SELECT audit_id FROM audit_runs WHERE candidate_id=? AND revision<=? AND audit_id<>? AND status IN ('completed','paused','interrupted','superseded','timeout','failed') ORDER BY revision DESC,created_at DESC,rowid DESC LIMIT 1",
                                      (candidate_id, revision, exclude_audit_id)).fetchone()
         return self.get_audit(candidate_id, row[0]) if row else None
 
@@ -1296,23 +1312,28 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
         payload = dict(payload)
         if job_type == "audit" and payload.get("candidate_ids"):
             payload["candidate_ids"] = sorted(set(payload["candidate_ids"]))
-        job_id = f"job_{uuid4().hex}"
-        now = utc_now()
         with self.transaction(immediate=True) as connection:
-            existing = connection.execute("""SELECT job_id FROM jobs WHERE job_type=?
-                AND payload_json=? AND status IN ('queued','running') AND cancel_requested=0
-                ORDER BY created_at,rowid LIMIT 1""", (job_type, _json(payload))).fetchone() if job_type in {"audit", "ontology_extension"} else None
-            if job_type == "ontology_extension" and not existing:
-                existing = connection.execute("SELECT job_id FROM jobs WHERE job_type='ontology_extension' AND json_extract(payload_json,'$.extension_id')=? AND status IN ('queued','running') AND cancel_requested=0 ORDER BY created_at,rowid LIMIT 1", (payload.get("extension_id"),)).fetchone()
-            if existing:
-                job_id = existing["job_id"]
-            else:
-                connection.execute(
-                    """INSERT INTO jobs(job_id, job_type, status, payload_json, progress_json,
-                       created_at, updated_at) VALUES (?, ?, 'queued', ?, '{}', ?, ?)""",
-                    (job_id, job_type, _json(payload), now, now),
-                )
+            job_id=self.enqueue_job_in_transaction(connection,job_type,payload)
         return self.get_job(job_id)
+
+    def enqueue_job_in_transaction(self, connection, job_type, payload):
+        """Used by extension subscriptions and revision apply in their own transaction."""
+        job_id='job_'+uuid4().hex
+        now=utc_now()
+        existing = connection.execute("""SELECT job_id FROM jobs WHERE job_type=?
+            AND payload_json=? AND status IN ('queued','running','paused') AND cancel_requested=0
+            ORDER BY created_at,rowid LIMIT 1""", (job_type, _json(payload))).fetchone() if job_type in {"audit", "ontology_extension"} else None
+        if job_type == "ontology_extension" and not existing:
+            existing = connection.execute("SELECT job_id FROM jobs WHERE job_type='ontology_extension' AND json_extract(payload_json,'$.extension_id')=? AND status IN ('queued','running','paused') AND cancel_requested=0 ORDER BY created_at,rowid LIMIT 1", (payload.get("extension_id"),)).fetchone()
+        if existing:
+            job_id = existing["job_id"]
+        else:
+            connection.execute(
+                """INSERT INTO jobs(job_id, job_type, status, payload_json, progress_json,
+                   created_at, updated_at) VALUES (?, ?, 'queued', ?, '{}', ?, ?)""",
+                (job_id, job_type, _json(payload), now, now),
+            )
+        return job_id
 
     def get_job(self, job_id: str) -> Dict[str, Any]:
         with self.connect() as connection:
@@ -1334,29 +1355,38 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 raise NotFoundError(f"job not found: {job_id}")
         return self.get_job(job_id)
 
-    def claim_job(self, owner: str, *, lease_seconds: int = 60) -> Optional[Dict[str, Any]]:
+    def claim_job(self, owner: str, *, lease_seconds: int = 60, job_types=None) -> Optional[Dict[str, Any]]:
         now = utc_now()
         expires = (datetime.now(timezone.utc) + timedelta(seconds=lease_seconds)).isoformat(
             timespec="seconds"
         ).replace("+00:00", "Z")
         with self.transaction(immediate=True) as connection:
+            if connection.execute("SELECT 1 FROM service_pauses WHERE status='paused' LIMIT 1").fetchone(): return None
+            kinds=tuple(job_types or ('audit','ontology_extension'))
+            if not kinds or set(kinds)-{'audit','ontology_extension'}: raise ValidationError('unsupported job type filter')
             row = connection.execute(
                 """SELECT job_id FROM jobs WHERE cancel_requested=0 AND
                    (status='queued' OR (status='running' AND lease_expires_at < ?))
-                   ORDER BY created_at LIMIT 1""", (now,),
+                   AND job_type IN ("""+','.join('?' for _ in kinds)+") ORDER BY created_at LIMIT 1", (now,*kinds),
             ).fetchone()
             if row is None:
                 return None
             connection.execute(
-                "UPDATE jobs SET status='running', lease_owner=?, lease_expires_at=?, updated_at=? WHERE job_id=?",
-                (owner, expires, now, row["job_id"]),
+                "UPDATE jobs SET status='running', lease_owner=?, lease_token=?, lease_expires_at=?, updated_at=? WHERE job_id=?",
+                (owner, uuid4().hex, expires, now, row["job_id"]),
             )
             job_id = row["job_id"]
         return self.get_job(job_id)
 
-    def heartbeat_job(self, job_id: str, progress: Mapping[str, Any], lease_seconds: int = 210) -> None:
+    def assert_job_lease(self, connection, job_id, owner, lease_token):
+        row=connection.execute('SELECT * FROM jobs WHERE job_id=?',(job_id,)).fetchone()
+        if not row or row['status']!='running' or row['cancel_requested'] or row['lease_owner']!=owner or row['lease_token']!=lease_token or row['lease_expires_at']<=utc_now():
+            raise ConflictError('job lease is no longer owned')
+
+    def heartbeat_job(self, job_id: str, progress: Mapping[str, Any], lease_seconds: int = 210, *, owner=None, lease_token=None) -> None:
         expires = (datetime.now(timezone.utc) + timedelta(seconds=lease_seconds)).isoformat(timespec="seconds").replace("+00:00", "Z")
         with self.transaction(immediate=True) as connection:
+            self.assert_job_lease(connection,job_id,owner,lease_token)
             connection.execute("""UPDATE jobs SET progress_json=?,lease_expires_at=?,updated_at=?
                 WHERE job_id=? AND status='running' AND cancel_requested=0""",
                 (_json(progress), expires, utc_now(), job_id))
@@ -1364,8 +1394,10 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
     def complete_job(
         self, job_id: str, progress: Mapping[str, Any], *, failed: bool = False,
         cancelled: bool = False, paused: bool = False,
+        owner=None, lease_token=None,
     ) -> None:
         with self.transaction(immediate=True) as connection:
+            self.assert_job_lease(connection,job_id,owner,lease_token)
             connection.execute(
                 """UPDATE jobs SET status=?, progress_json=?, lease_owner=NULL,
                    lease_expires_at=NULL, updated_at=? WHERE job_id=?""",

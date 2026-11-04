@@ -18,6 +18,8 @@ class LLMResponse:
     cached: bool = False
     returned_model_id: Optional[str] = None
     response_id: Optional[str] = None
+    finish_reason: Optional[str] = None
+    reasoning_tokens: Optional[int] = None
 
 
 class MockLLMClient:
@@ -54,6 +56,8 @@ class OpenAICompatibleClient:
         self, *, api_key: str, base_url: str, model_id: str, model_family: str,
         timeout_seconds: float = 45.0,
         verify_ssl: Optional[bool] = None,
+        thinking_mode: Optional[str] = None,
+        stream_responses: bool = False,
     ):
         self.api_key = api_key
         self.base_url = base_url
@@ -61,6 +65,11 @@ class OpenAICompatibleClient:
         self.model_family = model_family
         self.timeout_seconds = timeout_seconds
         self.verify_ssl = verify_ssl
+        if thinking_mode not in {None, 'enabled', 'disabled'}:
+            raise ValueError('thinking_mode must be enabled, disabled or unset')
+        self.thinking_mode = thinking_mode
+        if not isinstance(stream_responses,bool): raise ValueError('stream_responses must be boolean')
+        self.stream_responses = stream_responses
         self._client = None
 
     def _get_client(self):
@@ -91,8 +100,30 @@ class OpenAICompatibleClient:
             ],
             response_format={"type": "json_object"},
             temperature=float(kwargs.get("temperature", 0.0)),
+            **({'extra_body':{'thinking':{'type':self.thinking_mode}}} if self.thinking_mode else {}),
+            **({'stream':True,'stream_options':{'include_usage':True}} if self.stream_responses else {}),
+            **({'timeout':float(kwargs['timeout_seconds'])} if kwargs.get('timeout_seconds') else {}),
             **({"max_tokens": int(kwargs["max_tokens"])} if kwargs.get("max_tokens") else {}),
         )
+        if self.stream_responses:
+            parts=[];usage=None;finish=None;response_id=None;model=None
+            try:
+                for chunk in response:
+                    usage=getattr(chunk,'usage',None) or usage
+                    response_id=getattr(chunk,'id',None) or response_id
+                    model=getattr(chunk,'model',None) or model
+                    for choice in getattr(chunk,'choices',[]) or []:
+                        content=getattr(getattr(choice,'delta',None),'content',None)
+                        if content: parts.append(content)
+                        finish=getattr(choice,'finish_reason',None) or finish
+            finally:
+                close=getattr(response,'close',None)
+                if close: close()
+            if finish is None: raise ConnectionError('stream ended without a terminal completion; provider outcome unknown')
+            return LLMResponse(''.join(parts),latency_ms=int((time.monotonic()-started)*1000),
+                input_tokens=getattr(usage,'prompt_tokens',None),output_tokens=getattr(usage,'completion_tokens',None),
+                returned_model_id=model,response_id=response_id,finish_reason=finish,
+                reasoning_tokens=getattr(getattr(usage,'completion_tokens_details',None),'reasoning_tokens',None))
         usage = getattr(response, "usage", None)
         return LLMResponse(
             response.choices[0].message.content,
@@ -100,4 +131,6 @@ class OpenAICompatibleClient:
             input_tokens=getattr(usage, "prompt_tokens", None),
             output_tokens=getattr(usage, "completion_tokens", None),
             returned_model_id=getattr(response, "model", None), response_id=getattr(response, "id", None),
+            finish_reason=getattr(response.choices[0], 'finish_reason', None),
+            reasoning_tokens=getattr(getattr(usage, 'completion_tokens_details', None), 'reasoning_tokens', None),
         )

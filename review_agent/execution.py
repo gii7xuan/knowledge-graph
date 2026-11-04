@@ -17,11 +17,12 @@ def api_error_fields(error):
         match = re.search(r"(?:Error code:|HTTP)\s*(\d{3})\b", str(error), re.IGNORECASE)
         status = int(match.group(1)) if match else None
     permanent = status in {400, 401, 402, 403, 404, 405, 413, 422}
-    transport_unknown = status is None and any(part in type(error).__name__.lower() for part in (
+    gateway_unknown=status in {408,504}
+    transport_unknown = gateway_unknown or status is None and any(part in type(error).__name__.lower() for part in (
         "timeout", "connection", "protocol", "readerror", "writeerror"))
     return {"http_status": status, "retryable": not (permanent or transport_unknown),
             "pause_job": status == 402,
             **({"outcome_unknown": True} if transport_unknown else {}),
             "error_code": "INSUFFICIENT_BALANCE" if status == 402 else
-                          "UNKNOWN_REQUEST_OUTCOME" if transport_unknown else
+            "GATEWAY_REQUEST_OUTCOME_UNKNOWN" if gateway_unknown else "UNKNOWN_REQUEST_OUTCOME" if transport_unknown else
                           "PERMANENT_API_ERROR" if permanent else "TRANSIENT_API_ERROR"}
