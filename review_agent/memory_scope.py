@@ -59,14 +59,14 @@ def scope_allows(scope,candidate):
 def scope_from_split(split):
     if not isinstance(split,dict): raise ValueError('split must be an object')
     sets=[]
-    for key in ('train_document_ids','calibration_document_ids','test_document_ids'):
+    for key in ('train_document_ids','calibration_document_ids','test_document_ids','development_document_ids'):
         values=split.get(key,[])
         if not isinstance(values,list) or any(not isinstance(x,str) or not x for x in values): raise ValueError('invalid split document IDs')
         sets.append(set(values))
-    train,calibration,test=sets
-    if train&calibration or train&test or calibration&test: raise ValueError('document partitions overlap')
+    train,calibration,test,development=sets
+    if any(a&b for i,a in enumerate(sets) for b in sets[:i]): raise ValueError('document partitions overlap')
     return normalize_scope({'mode':'restricted','allowed_document_ids':sorted(train),
-        'excluded_document_ids':sorted(calibration|test)})
+        'excluded_document_ids':sorted(calibration|test|development)})
 
 
 def scope_hash(scope): return sha256_json(normalize_scope(scope))

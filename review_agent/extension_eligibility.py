@@ -13,6 +13,11 @@ def extension_eligibility(state):
     votes = [v for v in validation.get('votes', []) if v.get('voter_id') in eligible]
     issues = {v.get('schema_issue') for v in votes}
     blockers = []
+    if consensus.get('expression_status') not in (None,'faithful'):
+        blockers.append('faithful candidate expression required before extension')
+    from .scope_policy import DEFAULT_POLICY
+    if consensus.get('scope_confirmed') and consensus.get('knowledge_scope') in DEFAULT_POLICY['excluded_scopes']:
+        blockers.append('knowledge scope is excluded from the main graph')
     if consensus.get('source_support_consensus', {}).get('result') != 'supported':
         blockers.append('current independent source-support consensus required')
     if (lookup.get('scope') != 'full_frozen_ontology' or
@@ -25,6 +30,8 @@ def extension_eligibility(state):
     if state.pending_extension_id:
         blockers.append('candidate already subscribed to an extension')
     triple = state.candidate.get('triple',{})
+    if triple.get('tail_kind','entity') not in {'entity','literal'}:
+        blockers.append('event/proposition requires an explicit modeling revision before ontology extension')
     matches = lookup.get('matched_ids', [])
     missing = {side: name for side, name in lookup.get('endpoint_class_queries', {}).items()
                if name and not lookup.get('endpoint_class_matches', {}).get(side)}

@@ -40,8 +40,10 @@ def bounded_hint(value, remaining=1800, depth=0):
 def summarize_vote(vote):
     result={k:copy.deepcopy(vote.get(k)) for k in ('audit_id','round_id','proposal_digest','response_contract_version','voter_id','model_id','model_family','response_status','verdict',
         'source_support','schema_status','schema_issue','reason_codes','supporting_evidence_ids','counter_evidence_ids')}
-    result['checks']=[{k:bounded_hint(c.get(k),240) for k in ('check','status','evidence_ids','note')}
-                      for c in vote.get('checks',[])[:8]]
+    result['checks']=[{k:bounded_hint(c.get(k),240) for k in ('check','status','evidence_ids','issue_code','note')}
+                      for c in vote.get('checks',[])[:10]]
+    for key in ('expression_status','knowledge_scope','mapping','counterevidence_reviewed_ids','primary_evidence_ids'):
+        if key in vote: result[key]=bounded_hint(vote[key])
     for key in ('suggested_revision','requested_context','schema_change_hint'):
         result[key]=bounded_hint(vote.get(key))
     result['failure']={k:bounded_hint(vote.get(k),300) for k in ('error_code','error','retryable','outcome_unknown','request_key','attempt_id','validation_errors')}
@@ -99,7 +101,7 @@ def planner_view(state,budget,tools):
         if item.get('anchor_valid') is not True: continue
         row={k:copy.deepcopy(item[k]) for k in ('evidence_id','anchor_valid','anchor_status','source_anchor_kind',
             'document_id','document_version','section_id','chunk_id','start','end','offset_basis',
-            'retrieval_level','review_obligation') if k in item}
+            'retrieval_level','review_obligation','block_type','substantive','requires_image','linked_evidence_ids','scope_id') if k in item}
         quote=str(item.get('quote') or '')
         if len(quote)<=remaining:
             row['quote']=quote;remaining-=len(quote)

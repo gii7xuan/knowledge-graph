@@ -33,6 +33,8 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
     safe_candidate["triple"]["qualifiers"] = {key: (triple.get("qualifiers") or {}).get(key)
                                                 for key in ("polarity", "condition", "time_scope", "applicability", "modality", "quantifier")}
     safe_candidate["triple"]["qualifier_status"] = dict(triple.get("qualifier_status") or {})
+    if proposal.get('response_contract_version') == 'validator_response_v5':
+        safe_candidate['triple']['semantic_context'] = copy.deepcopy(triple.get('semantic_context') or {})
     evidence = proposal.get("evidence_bundle", {}).get("items", [])
     from .validator_contracts import contract_for
     contract=contract_for(proposal.get('response_contract_version'))
@@ -41,6 +43,8 @@ def validator_payload(proposal: Mapping[str, Any]) -> Dict[str, Any]:
         "proposal_digest": proposal["proposal_digest"],
         "candidate": safe_candidate,
         "ontology_check": proposal.get("ontology_check", {}),
+        **({'ontology_catalog':proposal['ontology_catalog'], 'ontology_catalog_hash':proposal['ontology_catalog_hash']}
+           if proposal.get('response_contract_version')=='validator_response_v5' and 'ontology_catalog' in proposal else {}),
         "evidence": evidence,
         "allowed_evidence_ids": [item["evidence_id"] for item in evidence],
         "history_examples": {"purpose": "审核标准示例，禁止引用其中证据 ID",
@@ -129,6 +133,9 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 "latency_ms": int((time.monotonic() - started) * 1000)}
 
     errors = contract.validate_response(parsed)
+    if not errors:
+        from .validator_contracts import proposal_errors
+        errors += proposal_errors(parsed,proposal)
     if errors:
         return {**base, "response_status": "invalid_contract", "verdict": None,
                 "error": "; ".join(errors), "validation_errors": errors,

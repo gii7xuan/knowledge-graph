@@ -101,6 +101,14 @@ def create_human_bundle(repository, request):
             raise UnprocessableEntityError("counterevidence requires an explicit scope resolution and supporting references")
     assessments = [{**a, "reviewer": request.get("reviewer", "local_operator"), "task_type": "human_triple_review",
                     "candidate_id": candidate["candidate_id"], "revision": candidate["revision"], **binding} for a in assessments]
+    scope_review=request.get('scope_review')
+    if scope_review is not None:
+        from .annotation_contract import DIMENSIONS
+        if (not isinstance(scope_review,dict) or scope_review.get('knowledge_scope') not in DIMENSIONS['knowledge_scope'] or
+                scope_review.get('expression_status') not in DIMENSIONS['expression_status'] or
+                not isinstance(scope_review.get('note'),str) or not scope_review['note'].strip()):
+            raise UnprocessableEntityError('scope review requires knowledge_scope/expression_status/source-based note')
+        assessments=[{**a,**{k:scope_review[k] for k in ('knowledge_scope','expression_status')},'scope_note':scope_review['note']} for a in assessments]
     bundle = {"bundle_id": "human_" + uuid4().hex, "kind": "human", "candidate_id": candidate["candidate_id"],
         "revision": candidate["revision"], "input_row_version": candidate["row_version"], "candidate_hash": sha256_json(repository.get_revision(candidate["candidate_id"], candidate["revision"])),
         "ontology_release_id": candidate.get("ontology_release_id"), "profile_hash": candidate.get("profile_hash"),

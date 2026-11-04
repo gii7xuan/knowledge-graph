@@ -1,0 +1,13 @@
+======================================================================
+FAIL: test_shared_admission_checks_scope_from_bound_assessments_even_without_route_flag (tests.test_dev_semantic_revision.V5IntegrationTests.test_shared_admission_checks_scope_from_bound_assessments_even_without_route_flag)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_dev_semantic_revision.py", line 289, in test_shared_admission_checks_scope_from_bound_assessments_even_without_route_flag
+    self.assertFalse(result.allowed);self.assertIn('EXCLUDED_BY_SCOPE',result.reason_codes)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'EXCLUDED_BY_SCOPE' not found in ['CANDIDATE_IDENTITY_PROVISIONAL', 'CANDIDATE_OR_ASSESSMENT_FIELDS_INVALID']
+
+----------------------------------------------------------------------
+Ran 28 tests in 50.948s
+
+FAILED (failures=1)

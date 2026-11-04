@@ -165,11 +165,14 @@ def fact_key_for(candidate_or_triple: Mapping[str, Any], namespace: Optional[str
                    "namespace": namespace or candidate_or_triple.get("fact_namespace") or candidate_or_triple.get("domain", "default"),
                    **{key: triple.get(key) for key in ("head_entity_id", "relation_id", "tail_kind", "tail_entity_id", "value", "datatype", "unit", "language")},
                    "qualifiers": normalized_qualifiers(triple.get("qualifiers"))}
-        if candidate_or_triple["fact_identity_version"] == "fact_identity_v2":
+        if candidate_or_triple["fact_identity_version"] in {"fact_identity_v2", "fact_identity_v3"}:
             from schema.fact_identity import literal_identity
             payload["relation_semantic_hash"] = triple.get("relation_semantic_hash")
             if triple.get("tail_kind") == "literal":
                 payload.update(literal_identity(triple))
+        if candidate_or_triple['fact_identity_version']=='fact_identity_v3':
+            from extract_triplets.semantic_context import identity_scope
+            payload['semantic_scope'] = identity_scope(triple.get('semantic_context') or {})
         return sha256_json(payload)
     namespace = str(
         namespace or candidate_or_triple.get("fact_namespace")
@@ -268,4 +271,6 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "committee_policy",
         )
     }
+    if payload.get('response_contract_version')=='validator_response_v5':
+        fields['ontology_catalog_hash']=payload.get('ontology_catalog_hash')
     return sha256_json(fields)

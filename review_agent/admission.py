@@ -45,7 +45,9 @@ def validate_admission(candidate, decision, ontology_release, source_snapshot, e
     if decision.get("active") is False: reasons.append("DECISION_NOT_CURRENT")
     for key, release_key in (("ontology_release_id", "release_id"), ("ontology_version", "ontology_version"), ("profile_hash", "profile_hash")):
         if not candidate.get(key) or candidate.get(key) != ontology_release.manifest.get(release_key): reasons.append("ONTOLOGY_RELEASE_BINDING_MISMATCH")
-    blocked_states={"awaiting_ontology_review", "awaiting_ontology_release", "schema_unresolved", "revision_required"}
+    blocked_states={"awaiting_ontology_review", "awaiting_ontology_release", "schema_unresolved", "revision_required",'excluded_by_scope','mapping_review','scope_review'}
+    if (decision.get('scope_policy_decision') or {}).get('excluded_from_main_graph'):
+        reasons.append('EXCLUDED_BY_SCOPE')
     if not (mode=='human' and decision.get('decision')=='human_accept'): blocked_states.add('reaudit_required')
     if candidate.get("workflow_state") in blocked_states:
         reasons.append("CANDIDATE_WORKFLOW_NOT_ADMITTED")
@@ -76,7 +78,7 @@ def validate_admission(candidate, decision, ontology_release, source_snapshot, e
     relation = RelationRegistry(ontology_release.ontology).resolve(triple.get("relation_id") or "")
     if not relation["relation_id"] or relation["relation_id"] != triple.get("relation_id"): reasons.append("STANDARD_RELATION_ID_REQUIRED")
     from schema.fact_identity import relation_semantic_hash
-    if candidate.get("fact_identity_version") != "fact_identity_v2" or triple.get("relation_semantic_hash") != relation_semantic_hash(ontology_release.ontology, triple.get("relation_id")):
+    if candidate.get("fact_identity_version") not in {"fact_identity_v2","fact_identity_v3"} or triple.get("relation_semantic_hash") != relation_semantic_hash(ontology_release.ontology, triple.get("relation_id")):
         reasons.append("RELATION_SEMANTIC_IDENTITY_UNVERIFIED")
     if triple.get("tail_kind") not in {"entity", "literal"}: reasons.append("TAIL_KIND_UNSUPPORTED")
     from ontologyBuild.ontology_adapter import iter_classes
@@ -106,6 +108,19 @@ def validate_admission(candidate, decision, ontology_release, source_snapshot, e
     if any(a.get("role") not in {"support", "counter", "context", "irrelevant"} for a in assessments): reasons.append("ASSESSMENT_ROLE_INVALID")
     supports = {a["evidence_id"] for a in assessments if a.get("role") == "support"}
     if not supports: reasons.append("SOURCE_SEMANTIC_SUPPORT_MISSING")
+    from evidence.units import can_support
+    if any(i['evidence_id'] in supports and not can_support(i) for i in verified.get('items',[])):
+        reasons.append('NON_SUBSTANTIVE_SOURCE_CANNOT_SUPPORT_FACT')
+    scoped = bool(triple.get('semantic_context')) or any(a.get('knowledge_scope') for a in assessments)
+    if scoped:
+        from .scope_policy import DEFAULT_POLICY
+        policy=(decision.get('admission_policy') or {}).get('scope_policy') or DEFAULT_POLICY
+        scopes={a.get('knowledge_scope') for a in assessments if a.get('role')=='support'}
+        expressions={a.get('expression_status') for a in assessments if a.get('role')=='support'}
+        if not scopes or None in scopes or 'unresolved' in scopes or len(scopes)!=1:
+            reasons.append('KNOWLEDGE_SCOPE_CONFIRMATION_REQUIRED')
+        if scopes & set(policy.get('excluded_scopes',[])): reasons.append('EXCLUDED_BY_SCOPE')
+        if expressions!={'faithful'}: reasons.append('FAITHFUL_EXPRESSION_CONFIRMATION_REQUIRED')
     if any(a.get("role") == "counter" for a in assessments): reasons.append("UNRESOLVED_COUNTEREVIDENCE")
     final = decision.get("decision")
     if final == "auto_accept":
@@ -163,7 +178,7 @@ def canonicalize_revision(repository, candidate):
         for field in ("head_type", "tail_type"):
             if triple.get(field): triple[field] = guard.class_index.get(normalize_name(triple[field]))
         resolved = registry.resolve(triple.get("relation_id") or "")
-        if not resolved["relation_id"]:
+        if not resolved["relation_id"] and not triple.get('semantic_context'):
             proposed = registry.resolve(triple.get("surface_relation") or "")
             if proposed['relation_id']:
                 probe=deepcopy(candidate);probe['triple']['relation_id']=proposed['relation_id']
@@ -172,7 +187,7 @@ def canonicalize_revision(repository, candidate):
             else:resolved=proposed
         triple.update(relation_id=resolved["relation_id"], mapping_status=resolved["status"])
         from schema.fact_identity import relation_semantic_hash
-        candidate["fact_identity_version"] = "fact_identity_v2"
+        candidate["fact_identity_version"] = "fact_identity_v3" if triple.get('semantic_context') else "fact_identity_v2"
         triple["relation_semantic_hash"] = relation_semantic_hash(release.ontology, resolved["relation_id"])
         for endpoint in ("head", "tail"):
             triple[endpoint + "_entity_id"] = local_entity_id(candidate["document_id"], candidate["document_version"], triple[endpoint]) if endpoint == "head" or triple.get("tail_kind") == "entity" else None

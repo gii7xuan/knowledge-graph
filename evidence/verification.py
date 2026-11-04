@@ -68,7 +68,7 @@ def make_evidence_bundle(items: Iterable[Mapping[str, Any]], searched_levels: It
         (item.get("document_id"), item.get("document_version")) for item in unique if item.get("document_id")
     }
     payload = {
-        "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
+        "evidence_bundle_version": "evidence_bundle_v3" if any(x.get('evidence_unit_version') for x in unique) else EVIDENCE_BUNDLE_VERSION,
         "items": unique,
         "searched_levels": list(dict.fromkeys(searched_levels)),
         "retrieved_unique_span_count": len(unique),
@@ -159,21 +159,31 @@ def verify_evidence_bundle(bundle: Mapping[str, Any], document_snapshot: Mapping
 
 def verify_vote_references(vote: Mapping[str, Any], evidence_items: Iterable[Mapping[str, Any]]) -> Dict[str, Any]:
     result = dict(vote)
+    evidence_items = list(evidence_items)
     available = {str(item.get("evidence_id")) for item in evidence_items if item.get("evidence_id")}
     referenced = set(result.get("supporting_evidence_ids") or []) | set(result.get("counter_evidence_ids") or [])
+    referenced.update(result.get('counterevidence_reviewed_ids') or [])
+    referenced.update(result.get('primary_evidence_ids') or [])
     referenced.update(a.get("evidence_id") for a in result.get("evidence_assessments") or [] if isinstance(a, Mapping))
     for check in result.get("checks") or []:
         if isinstance(check, Mapping):
             referenced.update(check.get("evidence_ids") or [])
     missing = sorted(reference for reference in referenced if reference not in available)
-    if missing:
+    invalid_support = set()
+    if result.get('response_contract_version') == 'validator_response_v5':
+        from .units import can_support
+        nonsupport = {x['evidence_id'] for x in evidence_items if not can_support(x)}
+        invalid_support = nonsupport & (set(result.get('supporting_evidence_ids') or []) | set(result.get('primary_evidence_ids') or []))
+    if missing or invalid_support:
         result.update({
             "response_status": "invalid_reference", "verdict": None,
             "invalid_evidence_ids": missing,
+            **({'non_substantive_support_ids':sorted(invalid_support)} if invalid_support else {}),
         })
         reasons = list(result.get("reason_codes") or [])
         if "INVALID_EVIDENCE_REFERENCE" not in reasons:
             reasons.append("INVALID_EVIDENCE_REFERENCE")
         result["reason_codes"] = reasons
-        result["error"] = "references not present in this round: " + ", ".join(missing)
+        result["error"] = (('references not present in this round: '+', '.join(missing)) if missing else '') + (
+            '; cannot independently support a fact (format marker/image URL): '+', '.join(sorted(invalid_support)) if invalid_support else '')
     return result

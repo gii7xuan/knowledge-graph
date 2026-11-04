@@ -221,7 +221,21 @@ class SourceCandidateV4Tests(unittest.TestCase):
         first, second = result["candidates"]
         self.assertNotEqual(first["candidate_id"], second["candidate_id"])
         self.assertNotEqual(first["evidence_items"][0]["start"], second["evidence_items"][0]["start"])
-        self.assertEqual(first["fact_key"], second["fact_key"])
+        # Extraction recall alone cannot verify a formal relation or generalize
+        # the two chapter scopes. Both sources survive as provisional candidates.
+        self.assertEqual(first['fact_key_state'],'provisional')
+        self.assertEqual(second['fact_key_state'],'provisional')
+        self.assertNotEqual(first['fact_key'],second['fact_key'])
+        # After an explicit mapping and general-scope confirmation, identity may
+        # deduplicate the fact without deleting either source contribution.
+        from schema.fact_identity import relation_semantic_hash
+        confirmed=[]
+        for original in (first,second):
+            c=copy.deepcopy(original);c['fact_key_state']='canonical'
+            c['triple'].update(relation_id='R',relation_semantic_hash=relation_semantic_hash(ONTOLOGY,'R'))
+            c['triple']['semantic_context']['knowledge_scope']='general'
+            confirmed.append(fact_key_for(c))
+        self.assertEqual(*confirmed)
 
     def test_truncation_is_recovered_with_subscopes_and_all_calls_are_recorded(self):
         index = self.index("A relates B. C relates D.")

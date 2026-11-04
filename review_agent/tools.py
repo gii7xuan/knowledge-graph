@@ -22,6 +22,9 @@ class AgentTools:
     def merge_evidence(self, bundle):
         state, runtime = self.state, self.runtime
         verified = verify_evidence_bundle(bundle, runtime.document, state.candidate)
+        if runtime.orchestrator.config.get('validator_contract_version') == 'validator_response_v5':
+            from evidence.units import enrich_bundle
+            verified = enrich_bundle(verified, runtime.document, state.candidate)
         previous = {x["evidence_id"] for x in state.archive}
         all_items = make_evidence_bundle([*state.archive, *verified["items"]], state.searched_scopes)["items"]
         state.archive = all_items
@@ -29,7 +32,10 @@ class AgentTools:
         # Deterministic, stable selection. Original quote and discovered conflicts
         # are protected; every discovered item remains in the archive/checkpoint.
         initial_ids = runtime.initial_ids
+        use_units=runtime.orchestrator.config.get('validator_contract_version')=='validator_response_v5'
         ordered = sorted(enumerate(all_items), key=lambda pair: (
+            -1 if use_units and pair[1]["evidence_id"] in state.protected_ids else
+            3 if use_units and pair[1].get('substantive') is False else
             0 if pair[1]["evidence_id"] in initial_ids else
             1 if pair[1]["evidence_id"] in state.protected_ids else 2, pair[0]))
         from .orchestrator import bounded_evidence_bundle
@@ -127,6 +133,12 @@ class AgentTools:
             "matched_definitions": [registry.properties[identity] for identity in sorted(matched)],
             "recall_suggestions": recall[:12], "recall_is_not_mapping_confirmation": True,
             "class_ids_checked": len(guard.classes), "relation_ids_checked": len(guard.relations)}
+        self.state.ontology_lookup['semantic_mapping'] = registry.lookup(
+            triple.get('relation_id') or triple.get('surface_relation') or '',
+            head_type=triple.get('head_type'),tail_type=triple.get('tail_type'),tail_kind=triple.get('tail_kind','entity'),guard=guard)
+        self.state.ontology_lookup['reference_catalog_counts'] = registry.reference_catalog()['counts']
+        if self.runtime.orchestrator.config.get('validator_contract_version')=='validator_response_v5':
+            self.state.ontology_lookup['full_reference_catalog'] = registry.reference_catalog()
         if self.state.guard.get("status") != "pass":
             self.runtime.issue("ontology_gap", "冻结本体检查未通过", critical=True)
         return {"status": "ok", "relation_id": relation_id, "definition": definition,

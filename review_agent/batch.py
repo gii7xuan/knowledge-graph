@@ -49,6 +49,9 @@ def versions_for(config):
             planner_strategy_version=AGENT_STRATEGY_VERSION, planner_model_id=settings["model"],
             planner_model_family=settings["family"], configured_strategy="llm_react")
     from .validator_contracts import versions_for as validator_versions
+    if config.get('validator_contract_version')=='validator_response_v5':
+        from .scope_policy import DEFAULT_POLICY
+        versions['scope_policy_hash']=sha256_json(config.get('scope_policy') or DEFAULT_POLICY)
     return {**versions,**validator_versions(config)}
 
 

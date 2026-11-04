@@ -24,6 +24,8 @@ class FeedbackService:
         reason = str(payload.get("reason_code") or "")
         from .labels import validate_labels
         submitted = validate_labels(payload.get('labels') if payload.get('labels') is not None else {})
+        if action in {'accept','accept_corrected'} and submitted.get('adjudication_status')=='pending':
+            raise UnprocessableEntityError('pending adjudication cannot grant admission')
         if action in {"accept", "accept_corrected"}:
             if submitted.get("valid_for_kg") not in (None, 1):
                 raise ValidationError("accept cannot carry a negative valid_for_kg label")
@@ -39,7 +41,7 @@ class FeedbackService:
             if submitted.get("valid_for_kg") not in (None, expected):
                 raise ValidationError("reject label conflicts with reason_code")
             submitted["valid_for_kg"] = expected
-            if expected == 0 and reason in FACTUAL_REJECTIONS:
+            if expected == 0 and reason == 'SOURCE_CONTRADICTS':
                 submitted.setdefault("source_support", "contradicted")
         elif action == "defer":
             if submitted.get("valid_for_kg") is not None:

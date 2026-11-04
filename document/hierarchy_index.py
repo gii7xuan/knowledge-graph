@@ -16,6 +16,12 @@ from typing import Any, Dict, List, Optional, Tuple
 DEFAULT_SPLITTER_VERSION = "hierarchy_v3_chunk1000_overlap100"
 DEFAULT_CHUNK_SIZE = 1000
 DEFAULT_CHUNK_OVERLAP = 100
+
+
+def source_block_units(index):
+    """Exact block view over a frozen source; does not mutate legacy indexes."""
+    from evidence.units import source_blocks
+    return source_blocks(index)
 SENTENCE_PATTERN = re.compile(r"[^。！？!?；;\n]+[。！？!?；;]?", re.MULTILINE)
 
 

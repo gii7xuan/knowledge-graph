@@ -161,13 +161,17 @@ def recover_frozen_audit(repository,orchestrator,candidate_id,audit_id,*,reason,
             feedback=None
             if old.get('response_status') in {'invalid_contract','invalid_json','invalid_reference'} and not old.get('outcome_unknown'):
                 version=proposal.get('response_contract_version')
-                if version=='validator_response_v4':
+                if version in {'validator_response_v4','validator_response_v5'}:
                     from .validator_contracts import contract_for
                     schema=contract_for(version).RESPONSE_SCHEMA['properties']['schema_assessment']['properties']
                     constraints={'schema_assessment':'Return schema_assessment as the single schema assessment; do not output schema_status, schema_issue or checks.ontology.',
                         'schema_status_allowed':schema['status']['enum'],'schema_issue_allowed':schema['issue']['enum'],
                         'checks':'Exactly triple_support, qualifiers, relation_direction and counterevidence.',
                         'coverage':'not_covered is an issue, not a status. Missing coverage is unknown; an actual constraint violation remains fail. Do not change a substantive judgment merely to satisfy shape.'}
+                    if version=='validator_response_v5':
+                        from .response_contract_v5 import CHECK_NAMES
+                        constraints['checks']='Exactly '+', '.join(CHECK_NAMES)+', with evidence_ids and issue_code.'
+                        constraints['roles']='Material counterevidence differs from inspected-but-dismissed counterexamples; preserve substantive votes.'
                 else:
                     constraints={'ontology_state':'For frozen v3, checks.ontology.status must agree with schema_status; unknown schema coverage is not a failed constraint. Preserve the frozen response contract.',
                         'schema_failure':'A constraint violation is distinct from a not-covered relation.'}

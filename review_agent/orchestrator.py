@@ -97,6 +97,7 @@ class ReviewOrchestrator:
         self.calibrator = calibrator or TripleCalibrator()
         self.risk_policy = risk_policy or RiskPolicy()
         self.config = dict(config or {})
+        self.ontology_guard.require_explicit_mapping = self.config.get('validator_contract_version')=='validator_response_v5'
         self.planner_client = planner_client
         self.should_cancel = should_cancel
         consensus_config = dict(self.config.get("consensus") or {})
@@ -125,10 +126,12 @@ class ReviewOrchestrator:
             for v in self.validators]
 
     def admission_policy(self):
+        from .scope_policy import DEFAULT_POLICY
         return {"mode": self.config.get("mode", "shadow"), "policy_version": self.risk_policy.version,
                 "policy_ready": self.risk_policy.ready, "calibrator_ready": bool(getattr(self.calibrator, "ready", False)),
                 "accept_threshold": self.risk_policy.policy.get("accept_threshold"),
-                "auto_accept_enabled": bool((self.config.get("routing") or {}).get("auto_accept_enabled") and self.risk_policy.policy.get("auto_accept_enabled"))}
+                "auto_accept_enabled": bool((self.config.get("routing") or {}).get("auto_accept_enabled") and self.risk_policy.policy.get("auto_accept_enabled")),
+                **({'scope_policy':self.config.get('scope_policy') or DEFAULT_POLICY} if self.config.get('validator_contract_version')=='validator_response_v5' else {})}
 
     def _proposal(
         self, audit_id: str, candidate: Mapping[str, Any], guard: Mapping[str, Any],
@@ -163,11 +166,18 @@ class ReviewOrchestrator:
         }
         from .validator_contracts import versions_for
         seed.update(versions_for(self.config))
+        catalog = None
+        if seed['response_contract_version']=='validator_response_v5':
+            from schema.relation_registry import RelationRegistry
+            catalog={**RelationRegistry(self.ontology_guard.ontology).reference_catalog(),
+                     'classes':list(self.ontology_guard.classes.values())}
+            seed['ontology_catalog_hash']=sha256_json(catalog)
         return {
             **seed, "audit_id": audit_id, "proposal_digest": proposal_digest(seed),
             "candidate": dict(candidate), "ontology_check": dict(guard),
             "evidence_bundle": dict(bundle), "review_memory": context.get("review_memory", {}),
             "request_cache_namespace": context.get("request_cache_namespace", "default"),
+            **({'ontology_catalog':catalog} if catalog is not None else {}),
         }
 
     def audit_candidate(
@@ -246,6 +256,11 @@ class ReviewOrchestrator:
             max_items=max_evidence_items, max_chars=max_evidence_chars,
         )
         last_votes: List[Dict[str, Any]] = []
+        if self.config.get('validator_contract_version')=='validator_response_v5':
+            from evidence.units import enrich_bundle
+            expanded=enrich_bundle(bundle,document_snapshot,candidate)
+            expanded['items'].sort(key=lambda x:x.get('substantive') is False)
+            bundle=bounded_evidence_bundle(expanded,max_items=max_evidence_items,max_chars=max_evidence_chars)
         consensus: Dict[str, Any] = aggregate_votes([], self.committee)
         gaps: Dict[str, Any] = {"need_more_evidence": False}
         from .agent_state import AgentState
@@ -461,6 +476,20 @@ class ReviewOrchestrator:
             elif source_result == "contradicted" or route["decision"] in {"auto_accept", "auto_reject"}:
                 workflow = "review_completed"
             else: workflow = "manual_review"
+        scope_decision = None
+        if selected and selected.get('response_contract_version')=='validator_response_v5':
+            from .scope_policy import scope_route
+            scope_decision = scope_route(consensus.get('core_source_support_result',source_result),
+                consensus.get('expression_status','unresolved'), consensus.get('mapping_status','ambiguous'),
+                consensus.get('knowledge_scope','unresolved'), policy=self.config.get('scope_policy'),
+                scope_confirmed=consensus.get('scope_confirmed',False))
+            waiting_for_extension=bool(context.get('pending_extension_id')) and workflow in {'awaiting_ontology_review','awaiting_ontology_release','reaudit_required'}
+            if scope_decision['workflow_state'] in {'excluded_by_scope','revision_required','mapping_review','scope_review'} and not (
+                    waiting_for_extension and scope_decision['workflow_state']=='mapping_review'):
+                workflow=scope_decision['workflow_state']
+                route={'decision':'manual_review','reason_codes':[*route.get('reason_codes',[]),
+                    'EXCLUDED_BY_SCOPE' if workflow=='excluded_by_scope' else workflow.upper()]}
+            explanation=explain_from_verified_records(candidate,guard,bundle,last_votes,route)
         result = {
             "audit_id": audit_id, "candidate_id": candidate_id, "revision": revision,
             "review_completion_status":context.get('review_completion_status','legacy_unclassified'),
@@ -492,6 +521,7 @@ class ReviewOrchestrator:
             "issue_history": context.get("issue_history", []),
             "evidence_exclusions": context.get("evidence_exclusions", {}),
             "admission_policy": context.get("admission_policy", {}),
+            **({'scope_policy_decision':scope_decision} if scope_decision else {}),
         }
         admission = None
         if result["decision"] == "auto_accept":

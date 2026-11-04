@@ -33,7 +33,9 @@ def export_annotations(database,manifest=None):
             labels=validate_labels(event.get('labels') or {})
             row={**{k:candidate.get(k) for k in ('candidate_id','revision','run_id','document_id','document_version','source_index_hash','ontology_release_id','ontology_version','profile_hash','fact_key','fact_key_state','fact_identity_version')},
                 **{k:labels.get(k) for k in ('source_support','schema_valid','task_relevance','valid_for_kg','ontology_gap')},
-                'label':labels.get('valid_for_kg'),'candidate_content_hash':content_hash,'event_id':event['event_id'],
+                'label':labels.get('valid_for_kg') if labels.get('adjudication_status')!='pending' else None,
+                'adjudication_status':labels.get('adjudication_status','legacy_explicit_feedback'),
+                'candidate_content_hash':content_hash,'event_id':event['event_id'],
                 'label_source':'human_confirmed','reviewer':event.get('reviewer'),'evidence_ids':event.get('evidence_ids',[]),
                 'revision_truth':{'candidate_id':identity[0],'revision':identity[1],'valid_for_kg':labels.get('valid_for_kg')},
                 'new_revision':event.get('new_revision')}
@@ -46,6 +48,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--database');parser.add_argument('--manifest');parser.add_argument('--output',required=True)
     parser.add_argument('--template',action='store_true')
+    from review_agent.annotation_contract import DIMENSIONS
+    parser.add_argument('--dimension',choices=sorted(DIMENSIONS),help='Export resolved multidimensional gold for this single target')
     args=parser.parse_args()
     manifest=json.loads(Path(args.manifest).read_text(encoding='utf-8')) if args.manifest else None
     if args.template:
@@ -53,7 +57,16 @@ def main():
         result=annotation_template(manifest)
     else:
         if not args.database: parser.error('export requires --database')
-        result=export_annotations(args.database,manifest)
+        if args.dimension:
+            from .review_samples import ReadOnlyRepository
+            from review_agent.annotation_store import export_training
+            rows=export_training(ReadOnlyRepository(args.database),args.dimension)
+            if manifest is not None:
+                allowed={(r['candidate_id'],r['revision'],r['candidate_content_hash']) for r in manifest['candidates']}
+                rows=[r for r in rows if (r['binding']['candidate_id'],r['binding']['revision'],r['binding']['candidate_content_hash']) in allowed]
+            result={'annotations':rows,'dimension':args.dimension,'selection_policy':'resolved_human_adjudication_only',
+                    'manifest_hash':manifest.get('manifest_hash') if manifest else None}
+        else: result=export_annotations(args.database,manifest)
     path=Path(args.output);path.parent.mkdir(parents=True,exist_ok=True)
     with path.open('x',encoding='utf-8') as out: json.dump(result,out,ensure_ascii=False,indent=2)
     print(json.dumps({'output':str(path),'annotation_count':len(result['annotations']),'history_count':len(result.get('history',[]))}))

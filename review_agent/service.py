@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
 from .feedback import FeedbackService
+from .evidence_view import evidence_view
 from .jobs import JobRunner
 from .llm_clients import OpenAICompatibleClient
 from .memory import ReviewMemory
@@ -208,6 +209,9 @@ class ReviewService:
                                   "selected_proposal_digest": displayed.get("proposal_digest"),
                                   "selected_evidence_hash": (displayed.get("evidence_bundle") or {}).get("evidence_hash"),
                                   "evidence_bundle": displayed.get("evidence_bundle", {}),
+                                  "evidence_view": evidence_view(
+                                      displayed.get('evidence_bundle', {}), displayed_votes,
+                                      authoritative=selected is not None and (decision or {}).get('source_support_result')=='supported'),
                                   "gaps": displayed.get("gaps", {}),
                                   "ontology_check": displayed.get("ontology_check", {}),
                                   "planner_steps": [{k: v for k, v in step.items() if k != "attempts"}
@@ -343,6 +347,23 @@ class ReviewService:
         if request.get("run_id") and str(request["run_id"]) != candidate["run_id"]:
             raise ValidationError("candidate does not belong to the requested run")
         return FeedbackService(self.repository).submit(request)
+
+    def import_annotation(self, payload):
+        from .annotation_store import save_annotation
+        candidate=self.repository.get_revision(str(payload.get('candidate_id') or ''),int(payload.get('revision') or 0))
+        audit=self.repository.get_audit(candidate['candidate_id'],str(payload.get('audit_id') or ''))
+        proposal=next((p for p in audit['rounds'] if p.get('proposal_digest')==payload.get('proposal_digest') and
+            p.get('evidence_bundle',{}).get('evidence_hash')==payload.get('evidence_hash')),None)
+        if proposal is None: raise ValidationError('annotation requires exact frozen proposal and evidence package')
+        try:
+            from .admission import load_admission_artifacts
+            release,_=load_admission_artifacts(self.repository,candidate)
+            adjudication=dict(payload.get('adjudication') or {})
+            adjudication['observed_supporting_evidence_ids']=sorted({eid for v in audit['votes']
+                if v.get('proposal_digest')==proposal['proposal_digest'] and v.get('response_status')=='ok'
+                for eid in v.get('supporting_evidence_ids',[])})
+            return save_annotation(self.repository,payload.get('raw_annotation') or {},candidate,proposal,adjudication,release.ontology)
+        except ValueError as exc: raise ValidationError(str(exc)) from exc
 
     def create_audit_job(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
         run_id = str(payload.get("run_id") or "")

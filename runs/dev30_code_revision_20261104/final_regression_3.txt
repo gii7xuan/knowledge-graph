@@ -1,0 +1,24 @@
+======================================================================
+FAIL: test_different_sources_keep_candidates_but_can_share_a_fact_key (tests.test_source_candidate_v4.SourceCandidateV4Tests.test_different_sources_keep_candidates_but_can_share_a_fact_key)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_source_candidate_v4.py", line 224, in test_different_sources_keep_candidates_but_can_share_a_fact_key
+    self.assertEqual(first["fact_key"], second["fact_key"])
+AssertionError: 'provisional:cand_87bcbd1aea252e47cbe5:1' != 'provisional:cand_e4c8c70219323e9c9fe0:1'
+- provisional:cand_87bcbd1aea252e47cbe5:1
++ provisional:cand_e4c8c70219323e9c9fe0:1
+
+
+----------------------------------------------------------------------
+Ran 147 tests in 276.834s
+
+FAILED (failures=1)
+{
+  "status": "imported_pending_approval",
+  "draft_path": "D:\\knowledge-huopao\\runs\\_test_ontology_import\\5a26159ed2b9418293bdc25ae93a85f3\\draft",
+  "valid": true,
+  "auto_review_allowed": true,
+  "ontology_version": "95189d1440dd6bac864a7736494428c23d48d23f4b221dba351050616b45df93",
+  "release_id": null
+}
+{"run_id": "source_fixture", "candidate_count": 1, "extraction_status": "completed_for_selected_policy", "model_calls": 1}

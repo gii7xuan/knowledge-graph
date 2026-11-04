@@ -26,10 +26,22 @@ RESPONSE_SCHEMA={'type':'object','additionalProperties':False,'required':['decis
         'rationale_summary':{'type':'string'}}}
 
 
+def revision_prompt(proposal):
+    if proposal.get('semantic_review_version')!='full_expression_v2': return PROMPT
+    return PROMPT + '''\nReview the COMPLETE before/after statement, including unchanged fields and semantic_context.
+Entity scope and original mentions must remain traceable; predicate substitution does not imply endpoint inversion.
+Do not approve a generic association/feature that drops the original specific property, condition or object scope.
+Check each qualifier attachment and conjunction branch; approximation/degree/discourse are not automatically quantities.
+Event/proposition tails need their own modeling, never inferred from text length. Local scope must not become universal.
+Unknown polarity requires affirmative source evidence to revise, not simply absence of negation.
+Explain any lost meaning in field_reviews and reject/uncertain even if a short human suggestion proposed the edit.'''
+
+
 def revision_expression(candidate):
     from .contracts import canonical_triple,normalize_fact_part
     return {**canonical_triple(candidate),**{field:candidate['triple'].get(field) for field in ('head_type','tail_type')},
-        'surface_relation':normalize_fact_part(candidate['triple'].get('surface_relation'))}
+        'surface_relation':normalize_fact_part(candidate['triple'].get('surface_relation')),
+        **({'semantic_context':deepcopy(candidate['triple']['semantic_context'])} if 'semantic_context' in candidate['triple'] else {})}
 
 
 def mapping_review_context(repository,before,after):
@@ -132,7 +144,7 @@ def judge_revision_once(voter, proposal, feedback=None):
     vote=binding(voter,proposal)
     try:
         response=voter['client'].complete_json({**proposal,'output_contract':RESPONSE_SCHEMA,
-            **({'correction_feedback':feedback} if feedback else {})},system_prompt=PROMPT,
+            **({'correction_feedback':feedback} if feedback else {})},system_prompt=revision_prompt(proposal),
             max_tokens=int(voter.get('max_output_tokens',4096)))
         raw=_parse_content(response.content)
         errors=response_errors(raw,proposal)
@@ -202,6 +214,7 @@ class RevisionService:
         if not fields or revision_expression(candidate)==revision_expression(updated):raise ValidationError('revision requires a substantive expression or mapping change')
         ontology_context=mapping_review_context(self.repository,candidate,updated)
         draft={'draft_id':'draft_'+uuid4().hex,'contract_version':VERSION,'candidate_id':candidate['candidate_id'],
+            'semantic_review_version':'full_expression_v2',
             'requires_independent_revision_review':True,'requires_human_confirmation':False,
             'base_revision':candidate['revision'],'expected_row_version':expected_row_version,'changes':deepcopy(changes),
             'before':deepcopy(candidate),'after':updated,'reason':reason,'changed_fields':fields,
@@ -246,7 +259,7 @@ class RevisionService:
             return judge_typed(voter,proposal,self.repository,task_type='candidate_revision_review',
                 binding=binding(voter,proposal),invoke=lambda feedback:judge_revision_once(voter,proposal,feedback),
                 validate_cached=lambda vote:response_errors({k:vote[k] for k in RESPONSE_SCHEMA['required'] if k in vote},proposal),
-                prompt_hash=sha256_json([VERSION,PROMPT,RESPONSE_SCHEMA]),timeout=budget.remaining_seconds(),
+                prompt_hash=sha256_json([VERSION,revision_prompt(proposal),RESPONSE_SCHEMA]),timeout=budget.remaining_seconds(),
                 deadline_epoch=budget.deadline_epoch)
         with ThreadPoolExecutor(max_workers=max(1,len(selected))) as pool:
             results=list(pool.map(run,selected))

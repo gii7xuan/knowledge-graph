@@ -28,6 +28,7 @@ EDITABLE_TRIPLE_FIELDS = {
     "head", "surface_relation", "relation_id", "relation_label", "tail",
     "head_type", "tail_type", "tail_kind", "datatype", "value", "unit", "qualifiers",
     "language", "qualifier_status",
+    "semantic_context",
 }
 
 
@@ -806,7 +807,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old["decision_id"],))
             route = str(result.get("decision") or result.get("route") or "manual_review")
             from .response_contract import CONTRACT_VERSION
-            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4'}:
+            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4','validator_response_v5'}:
                 from .proposal_resolver import selected_proposal
                 candidate = self.get_revision(candidate_id, revision)
                 selected_proposal(self, candidate, result)
@@ -1011,6 +1012,12 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 "evidence_ids": evidence_ids, "labels": labels,
                 **({"human_bundle_id": prepared_admission["bundle"]["bundle_id"], "admission": prepared_admission["result"]} if prepared_admission else {}),
             }
+            scope_excluded = action=='reject' and payload.get('reason_code') in {'OUT_OF_SCOPE','NOT_RELEVANT_TO_TASK'}
+            if scope_excluded:
+                previous=_loads(old_decision['decision_json'],{}) if old_decision and old_decision['revision']==revision else {}
+                decision_payload.update(workflow_state='excluded_by_scope',
+                    source_support_result=labels.get('source_support') or previous.get('source_support_result','unresolved'),
+                    scope_policy_decision={'excluded_from_main_graph':True,'preserve_source_record':True,'authority':'human_scope_decision'})
             connection.execute(
                 """INSERT INTO decisions(decision_id, candidate_id, revision, audit_id,
                    decision_version, route, final_decision, reason_codes_json, decision_json,
@@ -1052,11 +1059,11 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
 
             connection.execute("UPDATE ontology_extension_subscriptions SET status='revoked' WHERE candidate_id=? AND status='active'", (candidate_id,))
             connection.execute("UPDATE candidates SET workflow_state=?,pending_extension_id=NULL WHERE candidate_id=?",
-                               ("ready_for_review" if action == "modify" else "human_reviewed", candidate_id))
+                               ("ready_for_review" if action == "modify" else 'excluded_by_scope' if scope_excluded else "human_reviewed", candidate_id))
             if prepared_admission or needs_retract or self.has_graph_history(connection, candidate_id):
                 self.mark_graph_dirty(connection, candidate_id, "human_" + action)
             label = labels.get("valid_for_kg")
-            if label in (0, 1) and action in {"accept", "accept_corrected", "reject"}:
+            if label in (0, 1) and labels.get('adjudication_status')!='pending' and action in {"accept", "accept_corrected", "reject"}:
                 memory_version = int(connection.execute(
                     "SELECT COALESCE(MAX(memory_version), 0) + 1 FROM memory_cases"
                 ).fetchone()[0])
@@ -1224,6 +1231,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
         result = []
         for row in rows:
             event = _loads(row["event_json"], {})
+            if not include_partial and (event.get('labels') or {}).get('adjudication_status')=='pending': continue
             label = (event.get("labels") or {}).get("valid_for_kg")
             if type(label) is not int or label not in (0, 1):
                 if not include_partial: continue
@@ -1355,7 +1363,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 raise NotFoundError(f"job not found: {job_id}")
         return self.get_job(job_id)
 
-    def claim_job(self, owner: str, *, lease_seconds: int = 60, job_types=None) -> Optional[Dict[str, Any]]:
+    def claim_job(self, owner: str, *, lease_seconds: int = 60, job_types=None, job_id=None) -> Optional[Dict[str, Any]]:
         now = utc_now()
         expires = (datetime.now(timezone.utc) + timedelta(seconds=lease_seconds)).isoformat(
             timespec="seconds"
@@ -1367,7 +1375,8 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             row = connection.execute(
                 """SELECT job_id FROM jobs WHERE cancel_requested=0 AND
                    (status='queued' OR (status='running' AND lease_expires_at < ?))
-                   AND job_type IN ("""+','.join('?' for _ in kinds)+") ORDER BY created_at LIMIT 1", (now,*kinds),
+                   AND job_type IN ("""+','.join('?' for _ in kinds)+")"+
+                   (' AND job_id=?' if job_id else '')+" ORDER BY created_at LIMIT 1", (now,*kinds,*([job_id] if job_id else [])),
             ).fetchone()
             if row is None:
                 return None

@@ -77,8 +77,8 @@ def aggregate_votes(
             if vote.get("response_status") == "ok":
                 from .response_contract import RESPONSE_SCHEMA, validate_response
                 from evidence.verification import verify_vote_references
-                from .validator_contracts import validate_vote
-                if (validate_vote(vote,proposal.get('response_contract_version'))
+                from .validator_contracts import validate_vote,proposal_errors
+                if (validate_vote(vote,proposal.get('response_contract_version')) or proposal_errors(vote,proposal)
                         or verify_vote_references(vote, proposal["evidence_bundle"]["items"]).get("response_status") != "ok"):
                     invalid_attempts += 1
                     continue
@@ -165,7 +165,10 @@ def aggregate_votes(
         expression_complete = (proposal["candidate"].get("contract_version") != "extraction_candidate_v4" or
             (triple.get("qualifiers", {}).get("polarity") in {"positive", "negative"}
              and not any(value == "unknown" for value in triple.get("qualifier_status", {}).values())))
-        evidence_ids = {item["evidence_id"] for item in proposal["evidence_bundle"]["items"] if item.get("anchor_valid") is True}
+        from evidence.units import can_support
+        is_v5 = proposal.get('response_contract_version')=='validator_response_v5'
+        evidence_ids = {item["evidence_id"] for item in proposal["evidence_bundle"]["items"]
+                        if item.get("anchor_valid") is True and (not is_v5 or can_support(item))}
         used_models = set()
         eligible = []
         for voter_id in committee.voter_ids:
@@ -179,9 +182,12 @@ def aggregate_votes(
             eligible.append(vote)
             checks = {c["check"]: c for c in vote.get("checks", [])}
             cited = set(vote.get("supporting_evidence_ids") or [])
+            from .response_contract_v5 import SOURCE_CHECKS
+            required_checks = SOURCE_CHECKS if is_v5 else ('triple_support','qualifiers','relation_direction')
             source_ready = all(checks.get(name, {}).get("status") in {"pass", "not_applicable"}
                 and bool(set(checks.get(name, {}).get("evidence_ids") or []) & evidence_ids)
-                for name in ("triple_support", "qualifiers", "relation_direction"))
+                for name in required_checks)
+            if is_v5: source_ready = source_ready and vote.get('expression_status')=='faithful'
             source_ready = source_ready and checks.get("counterevidence", {}).get("status") in {"pass", "not_applicable"}
             if vote.get("source_support") == "supported" and source_ready and expression_complete and cited and cited <= evidence_ids:
                 source_votes.append(voter_id)
@@ -206,6 +212,21 @@ def aggregate_votes(
         from .revision_patch import expression_diagnostics
         result_payload.update(expression_diagnostics(proposal['candidate']))
         result_payload['raw_source_support_votes']=[{'voter_id':v['voter_id'],'source_support':v.get('source_support')} for v in eligible]
+        if is_v5:
+            expressions={v.get('expression_status') for v in eligible}
+            scopes={v.get('knowledge_scope') for v in eligible}
+            mappings={v.get('mapping',{}).get('status') for v in eligible}
+            all_seats=len(eligible)==len(committee.voter_ids)
+            result_payload['expression_status']=('needs_revision' if 'needs_revision' in expressions or not expression_complete else
+                'faithful' if all_seats and expressions=={'faithful'} else 'unresolved')
+            result_payload['knowledge_scope']=next(iter(scopes)) if all_seats and len(scopes)==1 else 'unresolved'
+            result_payload['scope_confirmed']=all_seats and len(scopes)==1 and scopes!={'unresolved'} and all(
+                any(c.get('check')=='knowledge_scope' and c.get('status') in {'pass','not_applicable'} and c.get('evidence_ids')
+                    for c in v.get('checks',[])) for v in eligible)
+            result_payload['mapping_status']=next(iter(mappings)) if all_seats and len(mappings)==1 else 'ambiguous'
+            result_payload['core_source_support_result']=('supported' if all_seats and
+                all(v.get('source_support')=='supported' and next((c.get('status') for c in v.get('checks',[]) if c.get('check')=='triple_support'),None)=='pass' for v in eligible)
+                else source_result)
         result_payload["result"] = ("accept_consensus" if admission_ready else "reject_consensus" if source_result == "contradicted"
                                     and not unresolved_support_conflict else "unresolved")
     return result_payload

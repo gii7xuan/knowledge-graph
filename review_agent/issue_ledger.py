@@ -3,7 +3,7 @@
 from .contracts import sha256_json
 import copy
 
-REVISION_ISSUES = {"CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISMATCH", "revision_proposed"}
+REVISION_ISSUES = {"CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISMATCH", "ENTITY_MISMATCH", "RELATION_MISMATCH", "revision_proposed"}
 SOURCE_ISSUES = {"EVIDENCE_INSUFFICIENT", "source_conflict", "counterevidence", "unverified_source"}
 
 
@@ -125,6 +125,13 @@ class IssueLedger:
             self.open("source_conflict", "存在需要独立复核适用范围的反证", True, proposal=digest,
                       evidence_ids=counter_ids | {eid for v in valid for eid in v.get("supporting_evidence_ids", [])}, evidence_hash=evidence_hash)
         for vote in valid:
+            if proposal.get('response_contract_version')=='validator_response_v5':
+                for check in vote.get('checks',[]):
+                    if check.get('status')=='fail' and check.get('check') in {'entity_reference','relation_semantics','qualifiers','relation_direction'}:
+                        code={'entity_reference':'ENTITY_MISMATCH','relation_semantics':'RELATION_MISMATCH',
+                              'qualifiers':'QUALIFIER_MISMATCH','relation_direction':'DIRECTION_MISMATCH'}[check['check']]
+                        self.open(code,check.get('note') or '表达须修订',True,proposal=digest,
+                            evidence_ids=check.get('evidence_ids') or [],evidence_hash=evidence_hash)
             for code in set(vote.get("reason_codes", [])) & (REVISION_ISSUES | {"EVIDENCE_INSUFFICIENT"}):
                 self.open(code, "当前候选存在来源、限定或方向义务", True, proposal=digest,
                           evidence_ids=vote.get("counter_evidence_ids") or vote.get("supporting_evidence_ids") or [], evidence_hash=evidence_hash)

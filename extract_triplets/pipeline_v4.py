@@ -14,7 +14,7 @@ from document.index_integrity import validate_document_index
 from schema.subontology_retriever import SubOntologyRetriever
 from .candidate_contract import RESPONSE_SCHEMA, normalize_candidate
 
-PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "extraction_v4.txt"
+PROMPT_PATH = Path(__file__).resolve().parents[1] / "prompts" / "extraction_v5.txt"
 
 
 def prompt_template():
@@ -116,7 +116,7 @@ def extract_candidates(index, ontology, release_binding, *, llm_client, model, r
         for raw in response["triplets"]:
             try:
                 candidate = normalize_candidate(raw, index=index, scope=scope, ontology=ontology,
-                    release_binding=release_binding, run_id=run_id, ordinal=len(candidates), prompt_hash=response["prompt_hash"])
+                    release_binding=release_binding, run_id=run_id, ordinal=len(candidates), prompt_hash=response["prompt_hash"],require_semantic_context=True)
             except (ValueError, TypeError, KeyError) as exc:
                 rejected_outputs.append({"scope": scope, "raw": raw, "error": str(exc)})
                 malformed = True

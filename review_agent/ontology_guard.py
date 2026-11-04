@@ -209,6 +209,17 @@ class OntologyGuard:
             return "unknown"
         return "fail"
 
+    def hierarchy_path(self, actual, allowed):
+        start = self.class_index.get(normalize_name(actual)); target = self.class_index.get(normalize_name(allowed))
+        queue = [[start]] if start and target else []
+        seen = set()
+        while queue:
+            path = queue.pop(0)
+            if path[-1]==target: return path
+            if path[-1] in seen: continue
+            seen.add(path[-1]); queue.extend(path+[p] for p in sorted(self.parents.get(path[-1],[])))
+        return []
+
     @staticmethod
     def _datatype_status(triple, relation):
         from schema.datatypes import canonical_datatype
@@ -271,6 +282,14 @@ class OntologyGuard:
         triple = candidate.get("triple") if isinstance(candidate.get("triple"), Mapping) else candidate
         requested_relation_id = triple.get("relation_id")
         surface = triple.get("surface_relation") or triple.get("relation")
+        if getattr(self,'require_explicit_mapping',False) and requested_relation_id not in self.relations:
+            from schema.relation_registry import RelationRegistry
+            recalled = RelationRegistry(self.ontology).resolve(surface or '')
+            return {'status':'unknown','relation_known':bool(recalled.get('relation_id') or recalled.get('matched_ids')),
+                'relation_id':None,'mapping_status':'ambiguous' if recalled['status']=='ambiguous' else 'unassigned',
+                'mapping_candidates':sorted(set(recalled.get('matched_ids',[]))|({recalled['relation_id']} if recalled.get('relation_id') else set())),
+                'reason_codes':['FORMAL_MAPPING_UNASSIGNED'],'domain_status':'unknown','range_status':'unknown',
+                'type_unknown':True,'hard_failure':False,'ontology_version':self.snapshot.ontology_version}
         relation_id = (
             str(requested_relation_id) if requested_relation_id in self.relations
             else self.resolve_relation(requested_relation_id or surface)
@@ -296,7 +315,7 @@ class OntologyGuard:
         kind_failure = (
             relation.get("kind") == "datatype_property" and tail_kind != "literal"
         ) or (
-            relation.get("kind") == "object_property" and tail_kind == "literal"
+            relation.get("kind") == "object_property" and tail_kind != "entity"
         )
         reason_codes: List[str] = []
         if domain_status == "fail":
@@ -319,6 +338,11 @@ class OntologyGuard:
                 status = "unknown"
         return {
             "status": status, "relation_known": True, "relation_id": relation_id,
+            'mapping_status':'constraint_conflict' if hard_failure else 'matched' if requested_relation_id==relation_id else 'unassigned',
+            'requested_head_type':head_type,'requested_tail_type':tail_type,
+            'allowed_domain':relation.get('domain',[]),'allowed_range':relation.get('range',[]),
+            'hierarchy_paths':{'head':{str(x):self.hierarchy_path(head_type,x) for x in relation.get('domain',[])},
+                'tail':{str(x):self.hierarchy_path(tail_type,x) for x in relation.get('range',[])} if relation['kind']=='object_property' else {}},
             "relation": relation, "domain_status": domain_status, "range_status": range_status,
             "type_unknown": type_unknown, "mapping_ambiguous": False,
             "hard_failure": hard_failure, "reason_codes": reason_codes,

@@ -2,7 +2,7 @@
 import re
 from review_agent.contracts import fact_key_for,normalized_qualifiers
 
-VERSIONS={'fact_identity_v1','fact_identity_v2'}
+VERSIONS={'fact_identity_v1','fact_identity_v2','fact_identity_v3'}
 ACCEPTED={'auto_accept','human_accept','accept'}
 
 
@@ -19,7 +19,7 @@ def semantic_key(row):
                 or not triple.get('relation_id') or qualifiers['polarity'] not in {'positive','negative'}
                 or not qualifiers['modality'] or any(v=='unknown' for v in (triple.get('qualifier_status') or {}).values())): return None
         if triple.get('tail_kind')=='entity' and not triple.get('tail_entity_id'): return None
-        if candidate['fact_identity_version']=='fact_identity_v2' and not triple.get('relation_semantic_hash'): return None
+        if candidate['fact_identity_version'] in {'fact_identity_v2','fact_identity_v3'} and not triple.get('relation_semantic_hash'): return None
         if fact_key_for(candidate)!=declared: raise ValueError('semantic fact key differs from the bound candidate')
     # Compact records are accepted only with an explicit canonical state and
     # identity version; frozen manifests bind these to the source candidate.

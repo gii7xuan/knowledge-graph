@@ -460,6 +460,8 @@ class ReviewHandler(BaseHTTPRequestHandler):
                 self.send_json(get_default_service().create_reaudit_job(
                     parsed.path.split("/")[-2], payload
                 ), 202)
+            elif parsed.path == '/api/annotations':
+                self.send_json(get_default_service().import_annotation(self.read_payload()),201)
             elif parsed.path == "/api/decision":
                 payload = self.read_payload()
                 if payload.get("file"):

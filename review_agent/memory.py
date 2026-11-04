@@ -53,6 +53,7 @@ class ReviewMemory:
             for row in rows:
                 if len(positive)>=max_positive and len(negative)>=max_negative: break
                 case = json.loads(row["case_json"])
+                if (case.get('labels') or {}).get('adjudication_status')=='pending': continue
                 candidate=case.get('candidate') or {}
                 if not scope_allows(scope,candidate) or (exclude_candidate_id and candidate.get('candidate_id')==exclude_candidate_id): continue
                 case.update({"case_id": row["case_id"], "memory_version": row["memory_version"]})

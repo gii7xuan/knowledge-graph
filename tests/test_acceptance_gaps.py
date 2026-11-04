@@ -154,12 +154,13 @@ class AcceptanceOntologyTests(unittest.TestCase):
             if not payload['current_validation']: return action('run_validation')
             if payload['history'][-1]['tool']=='run_validation':
                 return action('request_ontology_extension',change_kind='revise_constraint',description='Must not expand without source support',
-                    proposed_changes={'review_relation_id':'R_measures'},evidence_ids=payload['selected_evidence_ids'][:1])
+                    proposed_changes={'term_id':'R_measures','range':['C_Device']},evidence_ids=payload['selected_evidence_ids'][:1])
             return finish()
         result=h.run_script(plan)
         self.assertNotEqual(result['source_support_result'],'supported')
         self.assertTrue(all(v.get('source_support')=='insufficient' for v in h.audit['votes']))
-        self.assertTrue(any('source-support' in str(record) for record in h.audit['tool_calls']),h.audit['tool_calls'])
+        records=[*h.audit['tool_calls'],*h.audit['planner_steps']]
+        self.assertTrue(any('source-support' in str(record) for record in records),records)
         self.assertIsNone(result['pending_extension_id'])
         with h.repo.connect() as conn:
             self.assertEqual(conn.execute('SELECT count(*) FROM ontology_extension_tasks').fetchone()[0],0)

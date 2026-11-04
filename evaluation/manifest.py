@@ -71,6 +71,8 @@ def align_results(manifest,results,labels=None):
             row.update({k:v for k,v in annotations.get(identity,{}).items() if k in
                 {'label','source_support','schema_valid','task_relevance','valid_for_kg','evidence_ids','revision_truth','ontology_gap','evidence_labels'}})
             if row.get('label') is None: row['label']=row.get('valid_for_kg')
+            if annotations.get(identity,{}).get('adjudication_status')=='pending':
+                row['label']=None;row['valid_for_kg']=None
         rows.append(row)
     return rows
 

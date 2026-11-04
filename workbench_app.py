@@ -756,6 +756,8 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 payload["candidate_id"] = path.split("/")[-2]
                 payload["reviewer"] = get_default_service().config.get("local_operator", "local_operator")
                 self.send_json(create_human_bundle(get_default_service().repository, payload), 201)
+            elif path == '/api/triplets/annotations':
+                self.send_json(get_default_service().import_annotation(self.read_payload()),201)
             elif path == "/api/triplets/decision":
                 payload = self.read_payload()
                 if payload.get("file"):

@@ -2,7 +2,7 @@
 from .repository import UnprocessableEntityError
 
 BINARY_DIMENSIONS=('valid_for_kg','schema_valid','task_relevance','ontology_gap','relation_mapping_correct','triple_correct','schema_compatible')
-SOURCE_VALUES={'supported','contradicted','insufficient','unknown',None}
+SOURCE_VALUES={'supported','contradicted','insufficient','unknown','unresolved',None}
 
 
 def validate_labels(labels):
@@ -15,4 +15,6 @@ def validate_labels(labels):
         value=labels.get(field)
         if value is not None and (not isinstance(value,str) or value not in SOURCE_VALUES):
             raise UnprocessableEntityError(field+' has an invalid value')
+    if labels.get('adjudication_status') not in {None,'pending','resolved'}:
+        raise UnprocessableEntityError('invalid adjudication_status')
     return dict(labels)

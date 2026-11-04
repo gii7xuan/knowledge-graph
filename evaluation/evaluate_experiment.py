@@ -14,7 +14,10 @@ def evaluate_experiment(directory,labels,*,revision_labels=None,gold_facts=None,
     execution=read('experiment_result.json')
     if execution['population_hash']!=manifest['manifest_hash']: raise ValueError('experiment population binding mismatch')
     report={'population_hash':manifest['manifest_hash'],'groups':[],
-        'quality_claim':'metrics apply only to supplied independent annotations; missing truth remains unknown'}
+        'evaluation_partition':execution.get('evaluation_partition','legacy_unspecified'),
+        'quality_claim':('development regression only; not an independent-test/generalization estimate'
+                         if execution.get('evaluation_partition')=='development' else
+                         'metrics apply only to supplied independent annotations; missing truth remains unknown')}
     if isinstance(labels,dict): labels=labels['annotations']
     population={(r['candidate_id'],r['revision']):r for r in manifest['candidates']}
     for label in labels:

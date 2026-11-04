@@ -18,6 +18,23 @@ def merge_triple_patch(original, patch, *, strict=False):
             if name == 'qualifiers' and any(v is not None and not isinstance(v, str) for v in value.values()):
                 raise ValidationError('qualifier values must be strings or null')
             updated[name] = {**deepcopy(updated.get(name) or {}), **deepcopy(value)}
+        elif name == 'semantic_context':
+            from extract_triplets.semantic_context import validate_context
+            prior = original.get('semantic_context') or {}
+            if not isinstance(value,dict): raise ValidationError('semantic_context must be an object')
+            context = {**deepcopy(prior),**deepcopy(value)}
+            for nested in ('entity_mentions','relation_meaning'):
+                if nested in value and isinstance(value[nested],dict):
+                    context[nested] = {**deepcopy(prior.get(nested) or {}),**deepcopy(value[nested])}
+            if 'entity_mentions' in value and isinstance(value['entity_mentions'],dict):
+                for side,mention in value['entity_mentions'].items():
+                    if isinstance(mention,dict): context['entity_mentions'][side]={**deepcopy((prior.get('entity_mentions') or {}).get(side) or {}),**deepcopy(mention)}
+            context = validate_context(context)
+            # Original mentions are provenance, not an editable normalization.
+            context['origin_mentions'] = deepcopy(prior.get('origin_mentions') or prior.get('entity_mentions') or
+                {side:{'entity_surface':original[side],'canonical_entity':original[side],'referent_scope':None}
+                 for side in ('head','tail') if isinstance(original.get(side),str)})
+            updated[name] = context
         elif name == 'value':
             if not (value is None or isinstance(value, (str, bool, int, float))) or (
                     isinstance(value, float) and not math.isfinite(value)):
@@ -45,7 +62,7 @@ def merge_triple_patch(original, patch, *, strict=False):
                 raise ValidationError('extracted qualifier requires an explicit value: ' + field)
             if status == 'not_stated' and value not in (None, '', 'unspecified'):
                 raise ValidationError('not_stated qualifier must not assert a value: ' + field)
-        if updated.get('tail_kind', 'entity') not in {'entity', 'literal'}:
+        if updated.get('tail_kind', 'entity') not in {'entity', 'literal', 'event', 'proposition'}:
             raise ValidationError('invalid tail_kind')
         if updated.get('tail_kind') == 'literal' and (not updated.get('datatype') or updated.get('value') is None):
             raise ValidationError('typed literal requires datatype and value')

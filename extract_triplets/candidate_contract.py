@@ -16,7 +16,7 @@ ITEM_PROPERTIES = {
     "tail": {"type": "string", "minLength": 1},
     **{key: {"type": ["string", "null"]} for key in ("head_type_candidate", "tail_type_candidate", "relation_id_candidate")},
     "schema_hint": {"type": "string", "enum": ["matched_local_schema", "needs_full_schema_lookup", "unknown"]},
-    "tail_kind": {"enum": ["entity", "literal"]}, "value": {"type": ["string", "number", "boolean", "null"]},
+    "tail_kind": {"enum": ["entity", "literal", "event", "proposition"]}, "value": {"type": ["string", "number", "boolean", "null"]},
     **{key: {"type": ["string", "null"]} for key in ("datatype", "unit", "language")},
     "qualifiers": {"type": "object", "additionalProperties": False,
                    "properties": {key: {"type": ["string", "null"]} for key in QUALIFIER_FIELDS}, "required": list(QUALIFIER_FIELDS)},
@@ -24,6 +24,8 @@ ITEM_PROPERTIES = {
                          "properties": {key: {"enum": sorted(STATUS_VALUES)} for key in QUALIFIER_FIELDS}, "required": list(QUALIFIER_FIELDS)},
     "evidence_quotes": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
 }
+from .semantic_context import SCHEMA as SEMANTIC_SCHEMA
+ITEM_PROPERTIES['semantic_context'] = deepcopy(SEMANTIC_SCHEMA)
 RESPONSE_SCHEMA = {"type": "object", "additionalProperties": False,
                    "properties": {"triplets": {"type": "array", "items": {"type": "object", "properties": ITEM_PROPERTIES,
                        "required": ["head", "surface_relation", "tail", "qualifiers", "qualifier_status", "evidence_quotes"],
@@ -93,12 +95,18 @@ def quote_anchors(quotes, scope, index):
     return anchors, issues
 
 
-def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id, ordinal, prompt_hash):
+def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id, ordinal, prompt_hash, require_semantic_context=False):
+    if not isinstance(raw,dict): raise ValueError('candidate must be an object')
+    raw=deepcopy(raw)
+    if require_semantic_context and raw.get('semantic_context') is None:
+        raw['semantic_context']={'entity_mentions':{side:{'entity_surface':raw.get(side),'canonical_entity':raw.get(side),
+            'referent_scope':None} for side in ('head','tail')},'relation_meaning':{'semantic_equivalence':'unresolved','note':'not supplied'},
+            'qualifier_attachments':[],'knowledge_scope':'unresolved'}
     if not isinstance(raw, dict) or not all(isinstance(raw.get(k), str) and raw[k].strip()
                                            for k in ("head", "surface_relation", "tail")):
         raise ValueError("candidate requires nonempty head, surface_relation and tail")
     qualifiers, states, issues = normalize_qualifiers(raw)
-    if raw.get("tail_kind", "entity") not in {"entity", "literal"}:
+    if raw.get("tail_kind", "entity") not in {"entity", "literal", "event", "proposition"}:
         issues.append("INVALID_TAIL_KIND")
     if raw.get("tail_kind") == "literal" and (not raw.get("datatype") or raw.get("value") is None):
         issues.append("INCOMPLETE_TYPED_LITERAL")
@@ -119,10 +127,17 @@ def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id,
               "mapping_status": mapping["status"], "head_type": None, "tail_type": None,
               **{key: raw.get(key) for key in ("value", "datatype", "unit", "language")},
               "tail_kind": raw.get("tail_kind", "entity"), "qualifiers": qualifiers, "qualifier_status": states}
+    if raw.get('semantic_context') is not None:
+        from .semantic_context import attach_context
+        triple['semantic_context'] = attach_context(raw['semantic_context'],anchors,scope)
+        # A recalled label is not a semantically verified mapping.
+        mapping = {'relation_id':None,'status':'unassigned'}
+        triple.update(relation_id=None,relation_label=None,mapping_status='unassigned')
     from ontologyBuild.ontology_adapter import class_reference_index, normalize_name
     class_index = class_reference_index(ontology)
     for endpoint in ("head", "tail"):
         triple[endpoint + "_type"] = class_index.get(normalize_name(raw.get(endpoint + "_type_candidate")))
+    if triple['tail_kind']!='entity': triple['tail_type']=None
     candidate = {"schema_version": CONTRACT_VERSION, "contract_version": CONTRACT_VERSION,
                  "candidate_id": identity, "revision": 1, "run_id": run_id, "source_ordinal": ordinal,
                  "document_id": index["document_id"], "document_version": index["document_version"],
@@ -132,7 +147,7 @@ def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id,
                  "source_scope": deepcopy(scope), "triple": triple, "evidence_items": anchors,
                  "extraction_quote": quotes[0] if quotes else None, "evidence_quotes": quotes,
                  "extraction_hints": {key: raw.get(key) for key in ("relation_id_candidate", "head_type_candidate", "tail_type_candidate", "schema_hint")},
-                 "contract_issues": issues, "extraction_prompt_version": "extraction_v4",
+                 "contract_issues": issues, "extraction_prompt_version": "extraction_v5_semantic_scope_v1",
                  "extraction_contract_hash": json_hash(RESPONSE_SCHEMA),
                  "extraction_prompt_hash": prompt_hash, "fact_identity_version": "source_local_fact_v1",
                  "fact_key_state": "provisional", **release_binding}
@@ -143,7 +158,7 @@ def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id,
         candidate["fact_key_state"] = "canonical"
     from review_agent.contracts import fact_key_for
     from schema.fact_identity import relation_semantic_hash
-    candidate["fact_identity_version"] = "fact_identity_v2"
+    candidate["fact_identity_version"] = "fact_identity_v3" if triple.get('semantic_context') else "fact_identity_v2"
     candidate["triple"]["relation_semantic_hash"] = relation_semantic_hash(ontology, mapping["relation_id"])
     candidate["fact_key"] = fact_key_for(candidate)
     return candidate

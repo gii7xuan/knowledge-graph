@@ -25,7 +25,15 @@ const maxConfidence = ref('');
 const includeDone = ref(false);
 const workflow = ref('');
 const extensionDetails = reactive({});
-const workflowLabels = { ready_for_review: '待审核', manual_review: '待人工审核', revision_required: '需修改候选', schema_unresolved: '本体问题待处理', awaiting_ontology_review: '等待本体审核', awaiting_ontology_release: '等待本体发布', reaudit_required: '需按新版本重审', review_completed: '审核完成', human_reviewed: '人工已处理' };
+const annotationFields = {
+  source_support: { label: '来源支持', options: { supported: '支持', contradicted: '反驳', insufficient: '证据不足', unresolved: '未解决' } },
+  expression_status: { label: '表达完整性', options: { faithful: '完整忠实', needs_revision: '需要修订', unresolved: '未解决' } },
+  mapping_status: { label: '正式关系映射', options: { correct: '正确', incorrect: '错误', unassigned: '尚未分配', ambiguous: '有歧义', unresolved: '未解决' } },
+  schema_coverage: { label: '本体覆盖', options: { covered: '已有正式覆盖', not_covered: '确认缺口', unresolved: '待查证' } },
+  knowledge_scope: { label: '知识范围', options: { general: '一般知识', conditional: '条件性知识', local_definition: '局部符号约定', example: '示例', derivation: '推导步骤', unresolved: '待确认' } },
+  admission_preference: { label: '收录意见', options: { include: '收录', revise: '修订后再审', exclude: '排除', unresolved: '未决定' } }
+};
+const workflowLabels = { ready_for_review: '待审核', manual_review: '待人工审核', revision_required: '需修改候选', schema_unresolved: '本体问题待处理', awaiting_ontology_review: '等待本体审核', awaiting_ontology_release: '等待本体发布', reaudit_required: '需按新版本重审', review_completed: '审核完成', human_reviewed: '人工已处理', mapping_review: '待核验正式映射', excluded_by_scope: '按知识范围排除', scope_review: '待确认知识范围' };
 async function showExtension(id) {
   try { extensionDetails[id] = await api('/api/ontology/extensions/' + encodeURIComponent(id)); }
   catch (cause) { error.value = cause.message; }
@@ -136,6 +144,7 @@ async function loadAll() {
         tail_type: triple.tail_type || '',
         tail_kind: triple.tail_kind || 'entity', value: triple.value ?? '', datatype: triple.datatype || '', unit: triple.unit || null, language: triple.language || null,
         qualifiers: { ...triple.qualifiers }, qualifier_status: { ...triple.qualifier_status },
+        semantic_context_json: triple.semantic_context ? JSON.stringify(triple.semantic_context, null, 2) : '',
         evidence_mode: item.audit_summary?.status === 'completed' ? 'proposal' : 'source',
         selections: Object.fromEntries((item.audit_summary?.evidence_bundle?.items || []).map(ev => [ev.evidence_id, { selected: false, role: 'context', note: '', resolutions: '' }])),
         spans: [{ quote: '', occurrence: 1, role: 'support', note: '' }],
@@ -145,6 +154,10 @@ async function loadAll() {
         schema_valid: null, task_relevance: null, ontology_gap: null,
         reason_code: '',
         comment: '',
+        annotation: { source_support: 'unresolved', expression_status: 'unresolved', mapping_status: 'unresolved',
+          schema_coverage: 'unresolved', knowledge_scope: 'unresolved', admission_preference: 'unresolved' },
+        annotation_note: '', annotation_reviewer: '', annotation_resolved: false, full_bundle_reviewed: false,
+        annotation_proof: '', annotation_resolved_codes: '', annotation_saw_models: null,
         activeStartedAt: Date.now()
       };
     }
@@ -198,7 +211,8 @@ async function decide(item, decision) {
           ...(item.contract_version === 'extraction_candidate_v4' ? {
             tail_kind: draft.tail_kind, value: draft.value, datatype: draft.datatype || null, unit: draft.unit || null, language: draft.language || null,
             qualifiers: Object.fromEntries(Object.entries(draft.qualifiers).map(([key, value]) => [key, value === '' ? null : value])),
-            qualifier_status: draft.qualifier_status
+            qualifier_status: draft.qualifier_status,
+            ...(draft.semantic_context_json ? { semantic_context: JSON.parse(draft.semantic_context_json) } : {})
           } : {})
         } : {
           head: draft.head,
@@ -241,7 +255,9 @@ async function decide(item, decision) {
         evidence_assessments: selected.map(([eid, s]) => ({ evidence_id: eid, role: s.role, note: s.note, resolution_evidence_ids: s.resolutions.split(/[,，\s]+/).filter(Boolean) }))
       } : { spans: draft.spans };
       const bundle = await post(`/api/triplets/candidates/${encodeURIComponent(item.candidate_id)}/human-bundles`, {
-        revision: item.revision, expected_row_version: item.row_version, ...bundleRequest
+        revision: item.revision, expected_row_version: item.row_version, ...bundleRequest,
+        ...(tripleFor(item).semantic_context ? { scope_review: { knowledge_scope: draft.annotation.knowledge_scope,
+          expression_status: draft.annotation.expression_status, note: draft.annotation_note } } : {})
       });
       base.human_bundle_id = bundle.bundle_id;
       base.audit_id = draft.evidence_mode === 'proposal' ? item.audit_summary?.audit_id : null;
@@ -331,13 +347,11 @@ async function onEvidenceToggle(event, item) {
     if (openEvidence.has(id)) {
       if (isV3.value && item.audit_summary?.evidence_bundle) {
         const audit = item.audit_summary;
-        const contexts = await Promise.all((audit.evidence_bundle.items || []).map(ev => api(
-          '/api/triplets/evidence/' + encodeURIComponent(ev.evidence_id) + '/context?' +
-          new URLSearchParams({ audit_id: audit.audit_id, round_id: audit.final_round_id })
-        )));
-        renderedEvidence[id] = markdown.render(contexts.map(result =>
-          '锚点状态：' + result.status + '\n\n' + result.context.map(s => s.text).join('\n')
-        ).join('\n\n---\n\n') || '本轮没有可核验的原文证据。');
+        const frozenItems = audit.evidence_bundle.items || [];
+        renderedEvidence[id] = markdown.render(frozenItems.length ? '冻结审核包：' + audit.evidence_bundle.evidence_hash + '\n\n' +
+          frozenItems.map(ev =>
+            ev.evidence_id + ' · ' + (ev.anchor_valid ? '定位已核验' : '定位未核验') + '\n\n' + ev.quote
+          ).join('\n\n---\n\n') : '本轮没有可核验的原文证据。');
       } else {
         renderedEvidence[id] = markdown.render(item.evidence_chunk || item.extraction_quote || '未找到对应 source_id 的原文');
       }
@@ -355,8 +369,32 @@ function rawConfidence(item) {
 }
 
 function bestEvidence(item) {
-  if (isV3.value) return item.audit_summary?.evidence_bundle?.items?.[0] || {};
+  if (isV3.value) return item.audit_summary?.evidence_view?.primary_evidence || {};
   return item.confidence_detail?.evidence_result?.best_evidence || {};
+}
+
+async function saveAnnotation(item) {
+  const draft = drafts[idFor(item)]; const audit = item.audit_summary;
+  const selections = Object.entries(draft.selections || {}).filter(([,v]) => v.selected);
+  try {
+    const result = await post('/api/triplets/annotations', {
+      candidate_id: item.candidate_id, revision: item.revision, audit_id: audit.audit_id,
+      proposal_digest: audit.selected_proposal_digest, evidence_hash: audit.selected_evidence_hash,
+      raw_annotation: { labels: { source_support: draft.evidence_support, triple_correct: draft.triple_correct,
+        relation_mapping_correct: draft.relation_mapping_correct, schema_valid: draft.schema_valid }, comment: draft.comment },
+      adjudication: { adjudicated_label: draft.annotation, adjudication_status: draft.annotation_resolved ? 'resolved' : 'pending',
+        ...(draft.annotation_proof ? JSON.parse(draft.annotation_proof) : {}),
+        resolved_issue_codes: draft.annotation_resolved_codes.split(',').map(v => v.trim()).filter(Boolean),
+        semantic_error: draft.annotation.source_support === 'contradicted' ? draft.annotation_note : null,
+        adjudicated_by: 'human', reviewer: draft.annotation_reviewer, annotated_at: new Date().toISOString(),
+        saw_model_conclusions: draft.annotation_saw_models, full_bundle_expanded: openEvidence.has(idFor(item)),
+        full_bundle_reviewed: draft.full_bundle_reviewed, note: draft.annotation_note,
+        supporting_evidence_ids: selections.filter(([,v]) => v.role === 'support').map(([k]) => k),
+        counter_evidence_ids: selections.filter(([,v]) => v.role === 'counter').map(([k]) => k) }
+    });
+    error.value = result.adjudication_status === 'resolved' ? '多维标注已保存。' :
+      '标注已作为待仲裁记录保存：' + result.reason_codes.join('、');
+  } catch (cause) { error.value = cause.message; }
 }
 
 function validation(item) {
@@ -516,7 +554,15 @@ onUnmounted(stopPolling);
               </div>
               <details v-if="item.audit_summary?.issue_history?.length"><summary>问题处理记录</summary><p v-for="issue in item.audit_summary.issue_history" :key="issue.issue_id">{{ issue.code }}：{{ issue.status === 'resolved' ? '已解决' : (issue.requires_revision ? '需新修订' : '未解决') }} · {{ issue.description }} <span v-if="issue.resolution_rule">· {{ issue.resolution_rule }}</span></p></details>
               <div v-else class="detail-line">domain/range：{{ validation(item).passed === false ? (validation(item).errors || []).join('；') : '通过' }}</div>
-              <div v-if="item.evidence || bestEvidence(item).text" class="detail-line">证据片段：{{ item.evidence || bestEvidence(item).text }}</div>
+              <div v-if="isV3" class="detail-line">主证据：{{ bestEvidence(item).quote ? '委员提名的完整支持组合' : '待核验主证据，请查看下方正文和冻结审核包' }}
+                <div v-for="ev in item.audit_summary?.evidence_view?.primary_evidence_items || []" :key="'primary-' + ev.evidence_id">{{ ev.evidence_id }}：{{ ev.quote }}</div>
+                <div v-if="!bestEvidence(item).quote">正文片段（支持状态见审核记录）：
+                  <div v-for="ev in item.audit_summary?.evidence_view?.body_fragments || []" :key="'body-' + ev.evidence_id">{{ ev.evidence_id }}：{{ ev.quote }}</div>
+                </div>
+                <div>完整审核包 {{ item.audit_summary?.selected_evidence_hash || '尚无' }} · {{ openEvidence.has(idFor(item)) ? '已展开' : '未展开' }}</div>
+                <div v-for="ev in item.audit_summary?.evidence_view?.counter_evidence || []" :key="'counter-' + ev.evidence_id">反证 {{ ev.evidence_id }}：{{ ev.quote }}</div>
+              </div>
+              <div v-else-if="item.evidence || bestEvidence(item).text" class="detail-line">证据片段：{{ item.evidence || bestEvidence(item).text }}</div>
               <div v-if="bestEvidence(item).level" class="detail-line">证据层级：{{ bestEvidence(item).level }} · 位置 {{ bestEvidence(item).start }}-{{ bestEvidence(item).end }}</div>
               <div class="detail-line">引用定位：{{ bestEvidence(item).semantic_status === 'unknown' ? '已定位，语义待审核' : (bestEvidence(item).semantic_status || '未知') }}</div>
               <div v-if="votes(item).length" class="detail-line">
@@ -537,6 +583,21 @@ onUnmounted(stopPolling);
                   排除证据 {{ ev.evidence_id }}：{{ ev.anchor_status }}
                 </div>
               </div>
+              <details v-if="isV3 && item.audit_summary?.selected_proposal_digest">
+                <summary>多维人工标注（独立保存）</summary>
+                <label v-for="(field, key) in annotationFields" :key="key">
+                  {{ field.label }} <select v-model="drafts[idFor(item)].annotation[key]"><option v-for="(label, value) in field.options" :key="value" :value="value">{{ label }}</option></select>
+                </label>
+                <input v-model="drafts[idFor(item)].annotation_reviewer" placeholder="标注人" />
+                <textarea v-model="drafts[idFor(item)].annotation_note" placeholder="仲裁依据或具体语义问题；证据在下方按角色勾选" />
+                <textarea v-model="drafts[idFor(item)].annotation_proof" placeholder="正式映射或本体覆盖依据 JSON：mapping_evidence、coverage_evidence、expected_revision" />
+                <label v-if="drafts[idFor(item)].semantic_context_json">候选修订的实体指称与限定范围<textarea v-model="drafts[idFor(item)].semantic_context_json" /></label>
+                <input v-model="drafts[idFor(item)].annotation_resolved_codes" placeholder="已解释的问题码（英文逗号分隔）" />
+                <label>是否看过模型结论<select v-model="drafts[idFor(item)].annotation_saw_models"><option :value="null">未记录</option><option :value="false">未看过（盲标）</option><option :value="true">看过（辅助复核）</option></select></label>
+                <label><input type="checkbox" v-model="drafts[idFor(item)].full_bundle_reviewed" />已核对完整冻结审核包</label>
+                <label><input type="checkbox" v-model="drafts[idFor(item)].annotation_resolved" />提交为已仲裁（缺依据仍保留待复核）</label>
+                <button @click="saveAnnotation(item)">保存标注</button>
+              </details>
               <details v-if="isV3 && item.audit_summary?.planner_steps?.length" class="agent-timeline">
                 <summary>Agent 调查过程（已保存记录）</summary>
                 <p>配置策略 {{ item.audit_summary.configured_strategy }} → 实际策略 {{ item.audit_summary.executed_strategy }}</p>

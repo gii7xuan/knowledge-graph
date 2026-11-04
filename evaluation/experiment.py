@@ -121,7 +121,7 @@ def baseline(repository,candidate,document,release,config,voters,method):
     return {'audit_id':audit_id,'predicted_decision':prediction,'baseline_result':result,'evidence_anchors':bundle['items']}
 
 
-def run_experiment(spec,candidates,documents,base_release,output,config,*,services_factory=None,memory_cases=None,manifest=None):
+def run_experiment(spec,candidates,documents,base_release,output,config,*,services_factory=None,memory_cases=None,manifest=None,development_candidates=None):
     """No truth labels are accepted by this execution API. Evaluation is separate."""
     from review_agent.configuration import normalize_config
     config=normalize_config(config)
@@ -141,9 +141,19 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
         if group.get('ablations') and group['method']!='agent': raise ValueError('ablations apply to the full agent')
     if any(set(c)&{'label','labels','gold','truth','revision_truth','annotation'} for c in candidates): raise ValueError('experiment candidates must be label-blind')
     partition=spec.get('evaluation_partition','test')
-    if partition not in {'test','calibration','train'}: raise ValueError('unknown evaluation partition')
+    if partition not in {'test','calibration','train','development'}: raise ValueError('unknown evaluation partition')
     permitted=set(spec['split'].get(partition+'_document_ids',[]))
     if any(c.get('document_id') not in permitted for c in candidates): raise ValueError('candidate outside the declared evaluation partition')
+    from .split_integrity import verify_split
+    training=[case['candidate'] for case in memory_cases or [] if case.get('candidate') and scope_allows(scope,case['candidate'])]
+    role={'test':'independent_test','train':'training','calibration':'calibration','development':'development'}[partition]
+    assigned={};all_rows=[]
+    for rows,assigned_role in ((training,'training'),(development_candidates or [],'development'),(candidates,role)):
+        for c in rows:
+            identity=(c['candidate_id'],c['revision'])
+            if identity in assigned and assigned[identity]!=assigned_role: raise ValueError('candidate revision crosses experiment partitions')
+            assigned[identity]=assigned_role;all_rows.append(c)
+    split_check=verify_split(all_rows,assigned)
     base=load_release(base_release)
     for candidate in candidates:
         if candidate.get('contract_version')!='extraction_candidate_v4': raise ValueError('controlled experiments require v4 source candidates')
@@ -164,6 +174,7 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
     paths=[p for directory in ('evaluation','review_agent','ontology_review','schema','document','evidence','ontologyBuild','prompts') for p in (root/directory).rglob('*')
         if p.is_file() and p.suffix in {'.py','.txt','.md'} and '__pycache__' not in p.parts]
     save(output/'experiment_manifest.json',{'version':'controlled_review_experiment_v1','spec':spec,'population_hash':manifest['manifest_hash'],
+        'evaluation_partition':partition,'split_integrity':split_check,'development_reference_checked':development_candidates is not None,
         'base_release_id':base.manifest['release_id'],'memory_scope':scope,'config_hash':sha256_json(config),
         'source_sha256':{p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)},
         'model_pool':[{k:s.get(k) for k in ('id','model','family','model_identity')} for s in config.get('validators',[])],
@@ -273,8 +284,11 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
                     if result.get('audit_id') and result.get('revision')==repository.get_candidate(cid)['revision']:
                         audits.append(repository.get_audit(cid,result['audit_id']))
             if audits:
+                owner='isolated_experiment:'+group['id']
+                claimed=repository.claim_job(owner,job_id=job['job_id'])
+                if claimed is None: continue
                 repository.complete_job(job['job_id'],{'execution':'synchronous_isolated_experiment','audit_ids':[a['audit_id'] for a in audits]},
-                    failed=any(a['status']!='completed' for a in audits))
+                    failed=any(a['status']!='completed' for a in audits),owner=owner,lease_token=claimed['lease_token'])
         predictions=[]
         for original in candidates:
             cid=original['candidate_id'];current=repository.get_revision(cid);result=results.get(cid,{})
@@ -312,6 +326,7 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
         summary['artifact_sha256']={name:hashlib.sha256((folder/name).read_bytes()).hexdigest() for name in ('predictions.json','extensions.json','requests.json')}
         save(folder/'summary.json',summary);summaries.append(summary)
     report={'version':'controlled_review_experiment_v1','groups':summaries,'population_hash':manifest['manifest_hash'],
+        'evaluation_partition':partition,
         'truth_labels_used_during_execution':False,'quality_evaluated':False}
     save(output/'experiment_result.json',report)
     return report
@@ -322,12 +337,14 @@ def main():
     parser.add_argument('--spec',required=True);parser.add_argument('--candidates',required=True);parser.add_argument('--documents',required=True)
     parser.add_argument('--initial-release',required=True);parser.add_argument('--config',required=True);parser.add_argument('--output',required=True)
     parser.add_argument('--manifest');parser.add_argument('--training-memory')
+    parser.add_argument('--development-candidates',help='Frozen development candidates used to detect test leakage')
     args=parser.parse_args()
     def read(path): return json.loads(Path(path).read_text(encoding='utf-8'))
     from document.hierarchy_index import load_document_index
     documents=[load_document_index(p,require_verified=True) for p in read(args.documents)]
     result=run_experiment(read(args.spec),read(args.candidates),documents,args.initial_release,args.output,read(args.config),
-        manifest=read(args.manifest) if args.manifest else None,memory_cases=read(args.training_memory) if args.training_memory else None)
+        manifest=read(args.manifest) if args.manifest else None,memory_cases=read(args.training_memory) if args.training_memory else None,
+        development_candidates=read(args.development_candidates) if args.development_candidates else None)
     print(json.dumps({'output':args.output,'groups':len(result['groups']),'quality_evaluated':False}))
 
 
