@@ -1,0 +1,801 @@
+{
+  "ontology_planner_failure_attempt_errors": {
+    "planner request exceeded hard deadline": 64,
+    "expected action/arguments/target_issue/rationale_summary": 4
+  },
+  "failure_examples": [
+    {
+      "audit_id": "ontology_audit_607684d938dd4c639ca9a44e4f55b580",
+      "stop_reason": "ontology_planner_failed",
+      "planner_errors": [
+        {
+          "error": "planner request exceeded hard deadline",
+          "error_code": "UNKNOWN_REQUEST_OUTCOME",
+          "response_status": "timeout",
+          "status": null,
+          "validation_errors": null
+        }
+      ]
+    },
+    {
+      "audit_id": "ontology_audit_af61e01270f442b98d81f0e72a03508c",
+      "stop_reason": "case_token_budget_exhausted",
+      "planner_errors": [
+        {
+          "error": "expected action/arguments/target_issue/rationale_summary",
+          "error_code": null,
+          "response_status": "invalid_action",
+          "status": null,
+          "validation_errors": null
+        }
+      ]
+    },
+    {
+      "audit_id": "ontology_audit_191156202c534f11815f0229b40f5783",
+      "stop_reason": "case_or_task_budget_exhausted",
+      "planner_errors": [
+        {
+          "error": "expected action/arguments/target_issue/rationale_summary",
+          "error_code": null,
+          "response_status": "invalid_action",
+          "status": null,
+          "validation_errors": null
+        },
+        {
+          "error": null,
+          "error_code": null,
+          "response_status": "ok",
+          "status": null,
+          "validation_errors": null
+        }
+      ]
+    },
+    {
+      "audit_id": "ontology_audit_974cf87dc80246188754a71fb255ca26",
+      "stop_reason": "repeated_action_without_information_gain",
+      "planner_errors": [
+        {
+          "error": "expected action/arguments/target_issue/rationale_summary",
+          "error_code": null,
+          "response_status": "invalid_action",
+          "status": null,
+          "validation_errors": null
+        },
+        {
+          "error": null,
+          "error_code": null,
+          "response_status": "ok",
+          "status": null,
+          "validation_errors": null
+        }
+      ]
+    }
+  ],
+  "invalid_json_attempt_count": 32,
+  "invalid_json_all_hit_4096_output_cap": false,
+  "invalid_json_empty_raw_count": 25,
+  "candidate_examples": [
+    {
+      "candidate_id": "cand_f45c0a50eb80e3e23f1c",
+      "independent_completed": false,
+      "triple": {
+        "datatype": null,
+        "head": "重力加速度变化",
+        "head_entity_id": "local_86b819cb121bf1e67c316ff1b8cfb955bac244ec54bb58924a62a2e6449ea4dc",
+        "head_type": "C_4686ebe73588266b7f35",
+        "language": null,
+        "mapping_status": "ambiguous",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "extracted",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": "考虑重力加速度随高度变化和地面曲率时",
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "影响",
+        "tail": "射程",
+        "tail_entity_id": "local_faaa64e72126fcf3a9809a8ee1812d220574cb753c294e9f09e2bca13fd9fac4",
+        "tail_kind": "entity",
+        "tail_type": "C_5c072ee8bc4ede36b807",
+        "unit": null,
+        "value": null
+      },
+      "decision": "manual_review",
+      "stop_reason": "token_budget_exhausted",
+      "source_support_result": "unresolved",
+      "reason_codes": [
+        "CANDIDATE_IDENTITY_UNRESOLVED",
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "RELATION_MAPPING_AMBIGUOUS"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_b7c983cd23be47cde70b",
+          "text": "表1-4列出了考虑重力加速度随高度变化和地面曲率时两种弹丸在不同射角下射程的变化。",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_a09aa897c3de5f7d785c",
+          "text": "积分的初始条件为  $t = 0$  时，  $x = y = 0$  ，  $v_{x} = v_{0}\\cos \\theta_{0}$  ，  $v_{y} = v_{0}\\sin \\theta_{0}$  。",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_7f279c3c2665a6ab9dc2",
+          "text": "表中  $X_{1}$  是不考虑以上影响时的射程，  $X_{2}$  是考虑以上影响时的射程，  $\\Delta X$  是两者之差，炮弹I口径为  $122\\mathrm{mm}$ ，  $v_{0} = 515\\mathrm{m / s}$ ，  $C = 0.82$ ；",
+          "sentence_ids": null
+        }
+      ],
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "timeout",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "caller wait deadline reached; original request may complete later"
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "invalid_json",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_f4876022d0c83d291ac3",
+      "independent_completed": false,
+      "triple": {
+        "datatype": null,
+        "head": "弹道系数",
+        "head_entity_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+        "head_type": "C_53d15a0ecfc3dc8ecd93",
+        "language": "zh",
+        "mapping_status": "mapped",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": "R_37918d1714e9945397f3",
+        "relation_label": "表示",
+        "relation_semantic_hash": "47821b21ef5caad4153817dd698e7aca9455aff77a2b5dfab0d450dd338d5814",
+        "surface_relation": "表示",
+        "tail": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分",
+        "tail_entity_id": "local_855bfe8c8f7d6be8f6761a41d5d1a3adca986b441da8eb211e84f15032627c30",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      },
+      "decision": "manual_review",
+      "stop_reason": "token_budget_exhausted",
+      "source_support_result": "unresolved",
+      "reason_codes": [
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "DOMAIN_CONSTRAINT_FAILED",
+        "ENTITY_TYPE_UNKNOWN"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_c15baaaa1767cf8bcdc6",
+          "text": "式中第一个组合表示弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分，此部分称作弹道系数  $C$ 。",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_8779afefb4c83f0449e8",
+          "text": "$$",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_23c91abd41de08a5eef0",
+          "text": "$$",
+          "sentence_ids": null
+        }
+      ],
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "fail",
+          "schema_issue": "candidate_mapping_error",
+          "requested_context": null,
+          "suggested_revision": {
+            "changes": [
+              {
+                "current": "C_53d15a0ecfc3dc8ecd93",
+                "field": "head_type",
+                "reason": "本体约束要求关系“表示”的域为 C_e4f3000a2284a7d0fa12，当前 head_type 不满足域约束。",
+                "suggested": "C_e4f3000a2284a7d0fa12"
+              },
+              {
+                "current": null,
+                "field": "tail_type",
+                "reason": "本体约束要求关系“表示”的域为 C_125e9268788e296b6e64，当前 tail_type 为 null，需补充类型以满足约束。",
+                "suggested": "C_125e9268788e296b6e64"
+              }
+            ],
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "field_reasons": {
+              "head_type": "本体约束要求关系“表示”的域为 C_e4f3000a2284a7d0fa12，当前 head_type 不满足域约束。",
+              "tail_type": "本体约束要求关系“表示”的域为 C_125e9268788e296b6e64，当前 tail_type 为 null，需补充类型以满足约束。"
+            }
+          },
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "timeout",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "caller wait deadline reached; original request may complete later"
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "invalid_json",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_f494f7d74d1ea95b4dcf",
+      "independent_completed": false,
+      "triple": {
+        "datatype": null,
+        "head": "空气阻力",
+        "head_entity_id": "local_8f818c85fa7dce06fe18bdd27d0b5079f0934162ab072e57a531d7035a8e3ce1",
+        "head_type": "C_3d1e92e945b2c3dbbd16",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "大小与...有关",
+        "tail": "相对速度",
+        "tail_entity_id": "local_be27f15a9cd3a152ecd820dbca3e59b275da070d2dbbfcef8b2394fd25fd1882",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      },
+      "decision": "manual_review",
+      "stop_reason": "judge_b 请求超时且结果未知，无法恢复；当前独立验证未达共识，本体存在缺口，无合法且有信息增益的动作。",
+      "source_support_result": "unresolved",
+      "reason_codes": [
+        "CANDIDATE_IDENTITY_UNRESOLVED",
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "SCHEMA_GAP"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_e3f71d3663513336801d",
+          "text": "空气阻力的大小与  $\\pmb{v}_{\\mathrm{r}}$  有关。",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_70b1c690b30481265110",
+          "text": "图1-17 地面直角坐标系",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_79f485f57d3a6fc1108f",
+          "text": "由于空气阻力加速度与速度矢量共线，所以空气阻力加速度在3个坐标轴上的投影应该与相对速度的投影成比例，即",
+          "sentence_ids": null
+        }
+      ],
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "timeout",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "caller wait deadline reached; original request may complete later"
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_f49be860eb0a19e40563",
+      "independent_completed": false,
+      "triple": {
+        "datatype": null,
+        "head": "动参考系内的射程",
+        "head_entity_id": "local_777d30319d4ed9bdcfefed1e4df8e17380bcd05621224f1ae13286ad70e476f6",
+        "head_type": null,
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "extracted",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": "用 v_{0r} 、 \\theta_{0r} 和 C 查弹道表",
+          "modality": "can",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "由参数决定",
+        "tail": "C, v_{0r}, \\theta_{0r}",
+        "tail_entity_id": "local_6cbb03ec6b680d800cc40a9581b10b78c958507b9c933a4423646103e4f5244e",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      },
+      "decision": "manual_review",
+      "stop_reason": "judge_b 请求结果未知且不可安全恢复，无法形成完整独立验证共识；本体存在 SCHEMA_GAP，且扩展请求需当前独立来源支持共识，当前不满足。",
+      "source_support_result": "unresolved",
+      "reason_codes": [
+        "CANDIDATE_IDENTITY_UNRESOLVED",
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "SCHEMA_GAP",
+        "EVIDENCE_GAP_UNRESOLVED"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_3b63f6b9c289ff44e33b",
+          "text": "所以用  $v_{0\\mathrm{r}}$  、  $\\theta_{0\\mathrm{r}}$  和  $C$  查弹道表即可直接求出动参考系内的射程  $X_{\\mathrm{r}}(C,v_{0\\mathrm{r}},\\theta_{0\\mathrm{r}})$",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_b992f58a76b2d31b617f",
+          "text": "$$",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_efbbb0cad7b03e2db95d",
+          "text": "根据本章基本假设，弹轴与相对速度矢量重合，且考虑在动参考系内无风，所以用  $v_{0\\mathrm{r}}$  、  $\\theta_{0\\mathrm{r}}$  和  $C$  查弹道表即可直接求出动参考系内的射程  $X_{\\mathrm{r}}(C,v_{0\\mathrm{r}},\\theta_{0\\mathrm{r}})$  和飞行时间  $T$  ，再由运动叠加原理即可求出地面坐标系内的射程  $X_{W}$  （参看图1-20（b））。",
+          "sentence_ids": null
+        }
+      ],
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": {
+            "limit": 3,
+            "query": "动参考系内射程 Xr 与 C、v0r、theta0r 的函数关系及适用条件（如基本假设、无风、弹轴与相对速度矢量重合）",
+            "scope": "same_section"
+          },
+          "suggested_revision": {
+            "changes": [
+              {
+                "field": "triple.head",
+                "value": "动参考系内的射程 Xr(C,v0r,theta0r)"
+              },
+              {
+                "field": "triple.tail",
+                "value": "C, v0r, theta0r"
+              },
+              {
+                "field": "qualifiers.condition",
+                "value": "在弹轴与相对速度矢量重合且动参考系内无风的基本假设下，用 v0r、theta0r 和 C 查弹道表"
+              }
+            ],
+            "evidence_ids": [
+              "ev_3b63f6b9c289ff44e33b",
+              "ev_efbbb0cad7b03e2db95d"
+            ],
+            "rationale": "将射程显式写为 Xr(C,v0r,theta0r) 更贴近原文函数表达；补充基本假设条件可保留原文限定，避免过度泛化。"
+          },
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "timeout",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "caller wait deadline reached; original request may complete later"
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_f582a2e2e182fb2e7736",
+      "independent_completed": true,
+      "triple": {
+        "datatype": null,
+        "head": "非标准条件",
+        "head_entity_id": "local_71ae7c2b07127f3f349f19b8159e0f6836c92a6e66978c532fc0405f99851157",
+        "head_type": "C_3c7e2a753add83b3e6f0",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "相对于",
+        "tail": "标准条件",
+        "tail_entity_id": "local_e9bb75a0400c509f8fc3b825ada297e3db0af8afafba98f33984ecfbf5420a65",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      },
+      "decision": "manual_review",
+      "stop_reason": "awaiting_ontology_review",
+      "source_support_result": "supported",
+      "reason_codes": [
+        "CANDIDATE_IDENTITY_UNRESOLVED",
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "SCHEMA_GAP"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_5c5538865377419a20d9",
+          "text": "非标准条件是相对于标准条件来说的。",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_c3fced6c617fff600f5d",
+          "text": "# 1.3 非标准条件下质点弹道的基本方程",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_10e3fd09bb95acab1555",
+          "text": "非标准条件包括考虑地球曲率及重力加速度变化、气压、气温和纵、横风的变化。",
+          "sentence_ids": null
+        }
+      ],
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": {
+            "action": "defer_schema_mapping",
+            "changes": [],
+            "evidence_ids": [
+              "ev_5c5538865377419a20d9"
+            ],
+            "field_reasons": {
+              "head": "原文使用同一术语“非标准条件”，无需修改。",
+              "qualifiers": "原文为肯定断言；条件、时间、适用范围、数量均未声明，保持现状。",
+              "relation": "“相对于”在给定本体中无已知关系映射，属本体未覆盖；不应因本体缺口改动原文事实表述。",
+              "tail": "原文使用同一术语“标准条件”，无需修改。"
+            }
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_f66a7ded77764ef9880c",
+      "independent_completed": false,
+      "triple": {
+        "datatype": null,
+        "head": "射程",
+        "head_entity_id": "local_faaa64e72126fcf3a9809a8ee1812d220574cb753c294e9f09e2bca13fd9fac4",
+        "head_type": "C_5c072ee8bc4ede36b807",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "extracted",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": "射程越大",
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "使...增大",
+        "tail": "ΔX",
+        "tail_entity_id": "local_e358a088eb50b6d318dfa2e276f510fbad7934d7ad958a606cc3ea4852c2aea1",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      },
+      "decision": "manual_review",
+      "stop_reason": "token_budget_exhausted",
+      "source_support_result": "unresolved",
+      "reason_codes": [
+        "CANDIDATE_IDENTITY_UNRESOLVED",
+        "CRITICAL_ISSUES_UNRESOLVED",
+        "SCHEMA_GAP",
+        "EVIDENCE_GAP_UNRESOLVED"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_4c1ca79920c483c96f39",
+          "text": "射程越大，则地表面与平面的差别越大",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_c5457aec037a1c5639bc",
+          "text": "一个是落角。",
+          "sentence_ids": null
+        },
+        {
+          "evidence_id": "ev_35ce65d3d2ee4a32dffd",
+          "text": "射程越大，则地表面与平面的差别越大；",
+          "sentence_ids": null
+        }
+      ],
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": {
+            "limit": 3,
+            "query": "ΔX 与地表面与平面的差别的关系",
+            "scope": "same_section"
+          },
+          "suggested_revision": {
+            "changes": [
+              {
+                "field": "tail",
+                "reason": "原文直接表述为“地表面与平面的差别”，ΔX 是其数学表示，需确认等价性。",
+                "value": "地表面与平面的差别"
+              },
+              {
+                "field": "qualifiers.condition",
+                "reason": "原文中 ΔX 的增大同时依赖于射程和落角两个条件。",
+                "value": "射程越大且落角越小"
+              }
+            ],
+            "evidence_ids": [
+              "ev_4c1ca79920c483c96f39",
+              "ev_35ce65d3d2ee4a32dffd",
+              "ev_21de0e2a073161c2f485"
+            ]
+          },
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "source_support": "supported",
+          "schema_status": "unknown",
+          "schema_issue": "not_covered",
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "invalid_json",
+          "source_support": null,
+          "schema_status": null,
+          "schema_issue": null,
+          "requested_context": null,
+          "suggested_revision": null,
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        }
+      ]
+    }
+  ],
+  "drafts": [
+    {
+      "candidate_id": "cand_f9a86d764470a851cd8a",
+      "draft_id": "draft_b59655b2f9da49c39053c47ce0c88ec1",
+      "status": "review_incomplete",
+      "changed_fields": [
+        "head_type",
+        "tail_type"
+      ],
+      "approved_voter_ids": [
+        "judge_a",
+        "judge_b"
+      ]
+    },
+    {
+      "candidate_id": "cand_fa077f9f4d1e0a98ef2a",
+      "draft_id": "draft_3bcb38875ddb42e294442a57213f4bb6",
+      "status": "approved",
+      "changed_fields": [
+        "head_type",
+        "tail_type"
+      ],
+      "approved_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ]
+    },
+    {
+      "candidate_id": "cand_fa4ca022ad7ecc17af77",
+      "draft_id": "draft_56ee7ed4659e418784cfe18a2840964b",
+      "status": "proposed",
+      "changed_fields": [
+        "head",
+        "tail"
+      ],
+      "approved_voter_ids": null
+    },
+    {
+      "candidate_id": "cand_fb44c343f2c2b226ef2b",
+      "draft_id": "draft_8143aae6e6524e7390105b35180f9d86",
+      "status": "proposed",
+      "changed_fields": [
+        "head",
+        "tail"
+      ],
+      "approved_voter_ids": null
+    },
+    {
+      "candidate_id": "cand_fcd525b7a47d9236d3ba",
+      "draft_id": "draft_57fa6484934a49cb8b2425c3e5a2ba68",
+      "status": "proposed",
+      "changed_fields": [
+        "head",
+        "qualifier_status.applicability",
+        "qualifier_status.condition",
+        "qualifier_status.modality",
+        "qualifier_status.polarity",
+        "qualifier_status.quantifier",
+        "qualifier_status.time_scope",
+        "qualifiers.applicability",
+        "qualifiers.condition",
+        "qualifiers.modality",
+        "qualifiers.polarity",
+        "qualifiers.quantifier",
+        "qualifiers.time_scope"
+      ],
+      "approved_voter_ids": null
+    }
+  ]
+}

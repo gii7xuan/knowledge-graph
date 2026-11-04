@@ -1,0 +1,1507 @@
+{
+  "status": "completed",
+  "selected": 4,
+  "processed": 4,
+  "results": [
+    {
+      "status": "approved",
+      "draft_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+      "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+      "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+      "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+      "approved_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "votes": [
+        {
+          "attempt_id": "attempt_70f3d2b91f294788bb8ee0840fea7066",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+          "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The condition '弹轴与相对速度矢量重合且风速为常量' is explicitly stated in the source text as assumptions made during the derivation of equations (1-98) and (1-99). The text says: '在推导式（1-98）、式（1-99）时，除了假设弹轴与相对速度矢量重合及风速为常量外，别的未做任何近似处理'. This directly supports the extracted condition.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "The status 'extracted' is appropriate because the condition is explicitly stated in the source text, not inferred or assumed. The source clearly lists these as assumptions used in the derivation.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 9015,
+          "late_response": false,
+          "latency_ms": 26250,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 2,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 488,
+          "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+          "provider_started_at": 1793674493.1362638,
+          "queue_time_ms": 290,
+          "rationale_summary": "The revision adds a condition '弹轴与相对速度矢量重合且风速为常量' to the fact about crosswind causing lateral deviation. This condition is explicitly stated in the source text (ev_2da58bed687331724f6d) as assumptions made during the derivation of equations (1-98) and (1-99). The text clearly states: '在推导式（1-98）、式（1-99）时，除了假设弹轴与相对速度矢量重合及风速为常量外，别的未做任何近似处理'. This directly supports the extracted condition. The revision correctly identifies these as conditions under which the stated relationship holds, rather than universal conditions. No counterevidence was found in the verification scope.",
+          "reasoning_tokens": null,
+          "request_key": "81f783345850df6bc4d022fd3c2f85f78545acbe84179b738c78561718cee9fc",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-ba3f721386bbdca7",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_2da58bed687331724f6d"
+          ],
+          "task_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempts": [
+            {
+              "attempt_id": "attempt_70f3d2b91f294788bb8ee0840fea7066",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+              "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_2da58bed687331724f6d"
+                  ],
+                  "field": "qualifiers.condition",
+                  "note": "The condition '弹轴与相对速度矢量重合且风速为常量' is explicitly stated in the source text as assumptions made during the derivation of equations (1-98) and (1-99). The text says: '在推导式（1-98）、式（1-99）时，除了假设弹轴与相对速度矢量重合及风速为常量外，别的未做任何近似处理'. This directly supports the extracted condition.",
+                  "status": "supported"
+                },
+                {
+                  "evidence_ids": [
+                    "ev_2da58bed687331724f6d"
+                  ],
+                  "field": "qualifier_status.condition",
+                  "note": "The status 'extracted' is appropriate because the condition is explicitly stated in the source text, not inferred or assumed. The source clearly lists these as assumptions used in the derivation.",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 9015,
+              "late_response": false,
+              "latency_ms": 26250,
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "object_revision": 2,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 488,
+              "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+              "provider_started_at": 1793674493.1362638,
+              "queue_time_ms": 290,
+              "rationale_summary": "The revision adds a condition '弹轴与相对速度矢量重合且风速为常量' to the fact about crosswind causing lateral deviation. This condition is explicitly stated in the source text (ev_2da58bed687331724f6d) as assumptions made during the derivation of equations (1-98) and (1-99). The text clearly states: '在推导式（1-98）、式（1-99）时，除了假设弹轴与相对速度矢量重合及风速为常量外，别的未做任何近似处理'. This directly supports the extracted condition. The revision correctly identifies these as conditions under which the stated relationship holds, rather than universal conditions. No counterevidence was found in the verification scope.",
+              "reasoning_tokens": null,
+              "request_key": "81f783345850df6bc4d022fd3c2f85f78545acbe84179b738c78561718cee9fc",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-ba3f721386bbdca7",
+              "response_status": "ok",
+              "returned_model_id": "Qwen",
+              "supporting_evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "task_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_a",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_090cc4bb174d463ba27d9a375cd0d6fa",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+          "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The text explicitly states that in the derivation of the formulas for crosswind-induced deflection (Eq 1-98 and 1-99), the assumptions made were that the projectile axis coincides with the relative velocity vector and the wind speed is constant.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "The condition was extracted from the text.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 9486,
+          "late_response": false,
+          "latency_ms": 34375,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 2,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 979,
+          "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+          "provider_started_at": 1793674493.1311114,
+          "queue_time_ms": 279,
+          "rationale_summary": "The revision adds a condition to the triple stating that the projectile axis coincides with the relative velocity vector and the wind speed is constant. This is directly supported by the text in evidence item ev_2da58bed687331724f6d, which specifies these assumptions were used in the derivation of the crosswind-induced deflection formulas.",
+          "reasoning_tokens": 685,
+          "request_key": "f15d19eb41a1ab1b69e61c4cdd7dd13ee9bd78aaf54ebbdf097e1340ef8d5ca7",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-a6540772f04bb7a8",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_2da58bed687331724f6d"
+          ],
+          "task_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempts": [
+            {
+              "attempt_id": "attempt_090cc4bb174d463ba27d9a375cd0d6fa",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+              "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_2da58bed687331724f6d"
+                  ],
+                  "field": "qualifiers.condition",
+                  "note": "The text explicitly states that in the derivation of the formulas for crosswind-induced deflection (Eq 1-98 and 1-99), the assumptions made were that the projectile axis coincides with the relative velocity vector and the wind speed is constant.",
+                  "status": "supported"
+                },
+                {
+                  "evidence_ids": [
+                    "ev_2da58bed687331724f6d"
+                  ],
+                  "field": "qualifier_status.condition",
+                  "note": "The condition was extracted from the text.",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 9486,
+              "late_response": false,
+              "latency_ms": 34375,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 2,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 979,
+              "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+              "provider_started_at": 1793674493.1311114,
+              "queue_time_ms": 279,
+              "rationale_summary": "The revision adds a condition to the triple stating that the projectile axis coincides with the relative velocity vector and the wind speed is constant. This is directly supported by the text in evidence item ev_2da58bed687331724f6d, which specifies these assumptions were used in the derivation of the crosswind-induced deflection formulas.",
+              "reasoning_tokens": 685,
+              "request_key": "f15d19eb41a1ab1b69e61c4cdd7dd13ee9bd78aaf54ebbdf097e1340ef8d5ca7",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-a6540772f04bb7a8",
+              "response_status": "ok",
+              "returned_model_id": "Gemma",
+              "supporting_evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "task_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_b",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_a423b0bfe0d54152b246a080273fc812",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+          "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "field": "qualifiers.condition",
+              "note": "原文明确：'在推导式（1-98）、式（1-99）时，除了假设弹轴与相对速度矢量重合及风速为常量外，别的未做任何近似处理'。新增条件'弹轴与相对速度矢量重合且风速为常量'与原文推导假设一致，且限定于该推导事实，未泛化为普遍条件。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_2da58bed687331724f6d"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "条件由 not_stated 改为 extracted，有原文直接依据，状态变更合理。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7567,
+          "late_response": false,
+          "latency_ms": 14344,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 2,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 334,
+          "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+          "provider_started_at": 1793674493.1465428,
+          "queue_time_ms": 294,
+          "rationale_summary": "变更仅涉及 condition 字段，新增条件'弹轴与相对速度矢量重合且风速为常量'在原文式(1-98)(1-99)推导说明中有直接依据，且提案明确限定于该推导事实，未泛化、未删除其他限制、未改变极性/模态/量词。无相反证据。批准。",
+          "reasoning_tokens": null,
+          "request_key": "b90456e95b855633ca8698c5b9ed2d7166a940093fc50e92ca4906ad4232c126",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "89800e3a-5ffe-40ab-9591-73f46cecb02c",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_2da58bed687331724f6d",
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912"
+          ],
+          "task_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c",
+          "attempts": [
+            {
+              "attempt_id": "attempt_a423b0bfe0d54152b246a080273fc812",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "451bbc9e1bf61e8516ad57f96ba6b9d7ab9ab511c10348a70e30fa4296b39ff1",
+              "evidence_hash": "a1c7c0a70160aaeb88fb40ef009f16f06735d3c8d165d7272d2e944815409f68",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_2da58bed687331724f6d"
+                  ],
+                  "field": "qualifiers.condition",
+                  "note": "原文明确：'在推导式（1-98）、式（1-99）时，除了假设弹轴与相对速度矢量重合及风速为常量外，别的未做任何近似处理'。新增条件'弹轴与相对速度矢量重合且风速为常量'与原文推导假设一致，且限定于该推导事实，未泛化为普遍条件。",
+                  "status": "supported"
+                },
+                {
+                  "evidence_ids": [
+                    "ev_2da58bed687331724f6d"
+                  ],
+                  "field": "qualifier_status.condition",
+                  "note": "条件由 not_stated 改为 extracted，有原文直接依据，状态变更合理。",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 7567,
+              "late_response": false,
+              "latency_ms": 14344,
+              "model_family": "deepseek",
+              "model_id": "deepseek-flash",
+              "model_identity": "deepseek-flash",
+              "object_revision": 2,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 334,
+              "proposal_digest": "2bdfc0d31b7b32c5edace9ae386286cfa8704b163884fda5834cdcc00e34dbf5",
+              "provider_started_at": 1793674493.1465428,
+              "queue_time_ms": 294,
+              "rationale_summary": "变更仅涉及 condition 字段，新增条件'弹轴与相对速度矢量重合且风速为常量'在原文式(1-98)(1-99)推导说明中有直接依据，且提案明确限定于该推导事实，未泛化、未删除其他限制、未改变极性/模态/量词。无相反证据。批准。",
+              "reasoning_tokens": null,
+              "request_key": "b90456e95b855633ca8698c5b9ed2d7166a940093fc50e92ca4906ad4232c126",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "89800e3a-5ffe-40ab-9591-73f46cecb02c",
+              "response_status": "ok",
+              "returned_model_id": "deepseek-flash",
+              "supporting_evidence_ids": [
+                "ev_2da58bed687331724f6d",
+                "ev_49cebfb2fa94214e55e4",
+                "ev_916c5c438459f294e912"
+              ],
+              "task_id": "draft_17a2b6b229d745f0b4af0d63c4c6abcb",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_c",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        }
+      ],
+      "task_type": "candidate_revision_review",
+      "committee_members": [
+        {
+          "id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "model_identity": "qwen"
+        },
+        {
+          "id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "model_identity": "gemma"
+        },
+        {
+          "id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "model_identity": "deepseek-flash"
+        }
+      ],
+      "committee_policy": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "minimum_distinct_families": 3
+      },
+      "sample_id": "DEV-004",
+      "budget": {
+        "usage": {
+          "llm_calls": 3,
+          "tool_calls": 0,
+          "planner_steps": 0,
+          "validation_rounds": 0,
+          "input_tokens": 26068,
+          "output_tokens": 1801,
+          "unknown_token_requests": 0
+        },
+        "deadline_epoch": 1793674912.7305496,
+        "remaining_seconds": 385.07643818855286,
+        "remaining_llm_calls": 0,
+        "max_planner_steps": 6,
+        "max_validation_rounds": 2,
+        "case_ids": [
+          "case_3563beacb92e92b9b0cfefedc9a9a366"
+        ],
+        "case_call_reservations": [
+          "60c9b04c5fba451bb8009c5d885328d4"
+        ],
+        "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+        "case_accounts": [
+          {
+            "case_id": "case_3563beacb92e92b9b0cfefedc9a9a366",
+            "limits": {
+              "extension_requests": 1,
+              "llm_calls": 96,
+              "rebinds": 2,
+              "tokens": 240000,
+              "tool_calls": 64
+            },
+            "usage": {
+              "extension_requests": 0,
+              "llm_calls": 3,
+              "rebinds": 0,
+              "tokens": 27869,
+              "tool_calls": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "review_incomplete",
+      "draft_id": "draft_13df272e7a214901affa365b7df79083",
+      "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+      "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+      "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+      "approved_voter_ids": [
+        "judge_a",
+        "judge_b"
+      ],
+      "votes": [
+        {
+          "attempt_id": "attempt_0c7cc8d8d31541b3bb4b8cbc3cadd058",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+          "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_3bd41fc4a41b76edea73",
+                "ev_171e0d4473814e741d1a",
+                "ev_91c17b69ff3b7aba9fbf"
+              ],
+              "field": "tail",
+              "note": "The change from '表面粗糙度' to '弹丸表面粗糙度' is directly supported by the source text '摩擦阻力与弹丸表面的粗糙度有关'. The revision correctly specifies the entity as '弹丸表面粗糙度' (projectile surface roughness) rather than the generic '表面粗糙度' (surface roughness), which aligns with the explicit mention of '弹丸表面' in the evidence. The tail_type C_5bba847d376770ddbe0b is preserved as appropriate for this entity type. No conditions, polarity, or modality changes are introduced, and the relation '与...有关' remains unchanged.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6588,
+          "late_response": false,
+          "latency_ms": 15282,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 519,
+          "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+          "provider_started_at": 1793674528.0197663,
+          "queue_time_ms": 255,
+          "rationale_summary": "The revision correctly refines the tail entity from '表面粗糙度' to '弹丸表面粗糙度' based on the explicit source text '摩擦阻力与弹丸表面的粗糙度有关'. This change is a precise entity specification that is fully grounded in the evidence without introducing unsupported conditions, polarity shifts, or modality changes. The adjacent evidence about subsonic/sonic conditions (ev_793ab0bef1934086a00d) correctly does not impose conditions on the general relationship, as the revision appropriately maintains the general '与...有关' relation without adding scope restrictions. All other fields remain unchanged and consistent with the source.",
+          "reasoning_tokens": null,
+          "request_key": "8f582edd183fca0403cc3bb1cbb520bd919ca1df459226623c0ac7fb6c48069a",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-87eb7839c2621d4d",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_3bd41fc4a41b76edea73",
+            "ev_171e0d4473814e741d1a",
+            "ev_91c17b69ff3b7aba9fbf"
+          ],
+          "task_id": "draft_13df272e7a214901affa365b7df79083",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempts": [
+            {
+              "attempt_id": "attempt_0c7cc8d8d31541b3bb4b8cbc3cadd058",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+              "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_3bd41fc4a41b76edea73",
+                    "ev_171e0d4473814e741d1a",
+                    "ev_91c17b69ff3b7aba9fbf"
+                  ],
+                  "field": "tail",
+                  "note": "The change from '表面粗糙度' to '弹丸表面粗糙度' is directly supported by the source text '摩擦阻力与弹丸表面的粗糙度有关'. The revision correctly specifies the entity as '弹丸表面粗糙度' (projectile surface roughness) rather than the generic '表面粗糙度' (surface roughness), which aligns with the explicit mention of '弹丸表面' in the evidence. The tail_type C_5bba847d376770ddbe0b is preserved as appropriate for this entity type. No conditions, polarity, or modality changes are introduced, and the relation '与...有关' remains unchanged.",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 6588,
+              "late_response": false,
+              "latency_ms": 15282,
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 519,
+              "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+              "provider_started_at": 1793674528.0197663,
+              "queue_time_ms": 255,
+              "rationale_summary": "The revision correctly refines the tail entity from '表面粗糙度' to '弹丸表面粗糙度' based on the explicit source text '摩擦阻力与弹丸表面的粗糙度有关'. This change is a precise entity specification that is fully grounded in the evidence without introducing unsupported conditions, polarity shifts, or modality changes. The adjacent evidence about subsonic/sonic conditions (ev_793ab0bef1934086a00d) correctly does not impose conditions on the general relationship, as the revision appropriately maintains the general '与...有关' relation without adding scope restrictions. All other fields remain unchanged and consistent with the source.",
+              "reasoning_tokens": null,
+              "request_key": "8f582edd183fca0403cc3bb1cbb520bd919ca1df459226623c0ac7fb6c48069a",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-87eb7839c2621d4d",
+              "response_status": "ok",
+              "returned_model_id": "Qwen",
+              "supporting_evidence_ids": [
+                "ev_3bd41fc4a41b76edea73",
+                "ev_171e0d4473814e741d1a",
+                "ev_91c17b69ff3b7aba9fbf"
+              ],
+              "task_id": "draft_13df272e7a214901affa365b7df79083",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_a",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_a7f518a72b4946c4965556157fade678",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+          "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_91c17b69ff3b7aba9fbf",
+                "ev_171e0d4473814e741d1a",
+                "ev_3bd41fc4a41b76edea73"
+              ],
+              "field": "tail",
+              "note": "The tail was updated from '表面粗糙度' to '弹丸表面粗糙度' to accurately reflect the source text '弹丸表面的粗糙度'.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6942,
+          "late_response": false,
+          "latency_ms": 21594,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 908,
+          "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+          "provider_started_at": 1793674528.0062864,
+          "queue_time_ms": 273,
+          "rationale_summary": "The revision updates the tail entity to '弹丸表面粗糙度', which is a more precise extraction from the source text '摩擦阻力与弹丸表面的粗糙度有关' compared to the previous '表面粗糙度'.",
+          "reasoning_tokens": 628,
+          "request_key": "7b90109074f48f93d890e642777dcf6f91b21834823fa618ac3eb5714b64f8b0",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-99881d9d5588697f",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_3bd41fc4a41b76edea73"
+          ],
+          "task_id": "draft_13df272e7a214901affa365b7df79083",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempts": [
+            {
+              "attempt_id": "attempt_a7f518a72b4946c4965556157fade678",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+              "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_91c17b69ff3b7aba9fbf",
+                    "ev_171e0d4473814e741d1a",
+                    "ev_3bd41fc4a41b76edea73"
+                  ],
+                  "field": "tail",
+                  "note": "The tail was updated from '表面粗糙度' to '弹丸表面粗糙度' to accurately reflect the source text '弹丸表面的粗糙度'.",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 6942,
+              "late_response": false,
+              "latency_ms": 21594,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 908,
+              "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+              "provider_started_at": 1793674528.0062864,
+              "queue_time_ms": 273,
+              "rationale_summary": "The revision updates the tail entity to '弹丸表面粗糙度', which is a more precise extraction from the source text '摩擦阻力与弹丸表面的粗糙度有关' compared to the previous '表面粗糙度'.",
+              "reasoning_tokens": 628,
+              "request_key": "7b90109074f48f93d890e642777dcf6f91b21834823fa618ac3eb5714b64f8b0",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-99881d9d5588697f",
+              "response_status": "ok",
+              "returned_model_id": "Gemma",
+              "supporting_evidence_ids": [
+                "ev_91c17b69ff3b7aba9fbf",
+                "ev_171e0d4473814e741d1a",
+                "ev_3bd41fc4a41b76edea73"
+              ],
+              "task_id": "draft_13df272e7a214901affa365b7df79083",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_b",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_1ed5a4add5e84cc5a6f4eed071ba42f9",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+          "error": "approval requires support and no unresolved counterevidence",
+          "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+          "finish_reason": "stop",
+          "input_tokens": 5623,
+          "late_response": false,
+          "latency_ms": 4000,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 319,
+          "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+          "provider_started_at": 1793674527.9979997,
+          "queue_time_ms": 264,
+          "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"tail\", \"status\": \"supported\", \"evidence_ids\": [\"ev_91c17b69ff3b7aba9fbf\", \"ev_171e0d4473814e741d1a\", \"ev_3bd41fc4a41b76edea73\"], \"note\": \"原文明确表述“摩擦阻力与弹丸表面的粗糙度有关”，将宾语由“表面粗糙度”改为“弹丸表面粗糙度”是对原文措辞的忠实细化，未改变关系方向或极性。\"}], \"supporting_evidence_ids\": [\"ev_91c17b69ff3b7aba9fbf\", \"ev_171e0d4473814e741d1a\", \"ev_3bd41fc4a41b76edea73\"], \"counter_evidence_ids\": [\"ev_793ab0bef1934086a00d\"], \"counterevidence_reviewed_ids\": [\"ev_793ab0bef1934086a00d\"], \"rationale_summary\": \"唯一变更字段为 tail，原文直接支持“弹丸表面的粗糙度”这一表述，修改后更贴合原文且未引入额外条件。相邻句 ev_793ab0bef1934086a00d 中的亚声速/超声速占比仅修饰阻力占比，未被强加为一般相关关系的条件，故不构成反证。极性、模态与限定条件均保持不变，批准。\"}",
+          "reasoning_tokens": null,
+          "request_key": "b7e02388df3c95c5c06d40cb0fd58dacc5b525503eea8cea0127b9b806df1ff8",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "270199b4-faf6-4970-848b-7363484e0eed",
+          "response_status": "invalid_contract",
+          "returned_model_id": "deepseek-flash",
+          "task_id": "draft_13df272e7a214901affa365b7df79083",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c",
+          "attempts": [
+            {
+              "attempt_id": "attempt_1ed5a4add5e84cc5a6f4eed071ba42f9",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "abac08f0818527c51a44a2d1fa58040e0c92f12fa4a480f33c336de7e593f82f",
+              "error": "approval requires support and no unresolved counterevidence",
+              "evidence_hash": "e908074226fec8849e684e90dec32b35d8a4c0f06368c5927fdcf8af54a89593",
+              "finish_reason": "stop",
+              "input_tokens": 5623,
+              "late_response": false,
+              "latency_ms": 4000,
+              "model_family": "deepseek",
+              "model_id": "deepseek-flash",
+              "model_identity": "deepseek-flash",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 319,
+              "proposal_digest": "4b574ef06973fb3f4795d07ab42247b7c5f7e9103527743caf29ec8d21c91ac0",
+              "provider_started_at": 1793674527.9979997,
+              "queue_time_ms": 264,
+              "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"tail\", \"status\": \"supported\", \"evidence_ids\": [\"ev_91c17b69ff3b7aba9fbf\", \"ev_171e0d4473814e741d1a\", \"ev_3bd41fc4a41b76edea73\"], \"note\": \"原文明确表述“摩擦阻力与弹丸表面的粗糙度有关”，将宾语由“表面粗糙度”改为“弹丸表面粗糙度”是对原文措辞的忠实细化，未改变关系方向或极性。\"}], \"supporting_evidence_ids\": [\"ev_91c17b69ff3b7aba9fbf\", \"ev_171e0d4473814e741d1a\", \"ev_3bd41fc4a41b76edea73\"], \"counter_evidence_ids\": [\"ev_793ab0bef1934086a00d\"], \"counterevidence_reviewed_ids\": [\"ev_793ab0bef1934086a00d\"], \"rationale_summary\": \"唯一变更字段为 tail，原文直接支持“弹丸表面的粗糙度”这一表述，修改后更贴合原文且未引入额外条件。相邻句 ev_793ab0bef1934086a00d 中的亚声速/超声速占比仅修饰阻力占比，未被强加为一般相关关系的条件，故不构成反证。极性、模态与限定条件均保持不变，批准。\"}",
+              "reasoning_tokens": null,
+              "request_key": "b7e02388df3c95c5c06d40cb0fd58dacc5b525503eea8cea0127b9b806df1ff8",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "270199b4-faf6-4970-848b-7363484e0eed",
+              "response_status": "invalid_contract",
+              "returned_model_id": "deepseek-flash",
+              "task_id": "draft_13df272e7a214901affa365b7df79083",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_c",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        }
+      ],
+      "task_type": "candidate_revision_review",
+      "committee_members": [
+        {
+          "id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "model_identity": "qwen"
+        },
+        {
+          "id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "model_identity": "gemma"
+        },
+        {
+          "id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "model_identity": "deepseek-flash"
+        }
+      ],
+      "committee_policy": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "minimum_distinct_families": 3
+      },
+      "sample_id": "DEV-013",
+      "budget": {
+        "usage": {
+          "llm_calls": 3,
+          "tool_calls": 0,
+          "planner_steps": 0,
+          "validation_rounds": 0,
+          "input_tokens": 19153,
+          "output_tokens": 1746,
+          "unknown_token_requests": 0
+        },
+        "deadline_epoch": 1793674947.6794243,
+        "remaining_seconds": 397.91762351989746,
+        "remaining_llm_calls": 0,
+        "max_planner_steps": 6,
+        "max_validation_rounds": 2,
+        "case_ids": [
+          "case_61c2dfebd15ecdc70013f568f0b6b79d"
+        ],
+        "case_call_reservations": [
+          "fa78dd8d902e48b3bb6b16cd08290e11"
+        ],
+        "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+        "case_accounts": [
+          {
+            "case_id": "case_61c2dfebd15ecdc70013f568f0b6b79d",
+            "limits": {
+              "extension_requests": 1,
+              "llm_calls": 96,
+              "rebinds": 2,
+              "tokens": 240000,
+              "tool_calls": 64
+            },
+            "usage": {
+              "extension_requests": 0,
+              "llm_calls": 3,
+              "rebinds": 0,
+              "tokens": 20899,
+              "tool_calls": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "approved",
+      "draft_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+      "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+      "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+      "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+      "approved_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "votes": [
+        {
+          "attempt_id": "attempt_e1d1907ba61b41bea56a7d6863b8c8b2",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+          "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_8e935597215dd3133bf3",
+                "ev_c3774a70bceb0819698c"
+              ],
+              "field": "surface_relation",
+              "note": "The source text explicitly states that wind-induced range deviation and direction deviation are collectively called wind deviation (风偏). The change from '具有部件' (has part) to '由...组成' (composed of) is a more accurate representation of the compositional relationship described in the text. The text describes 风偏 as being composed of two types of deviations (range and direction), which aligns with a 'composed of' relationship rather than a simple 'has part' relationship. The evidence supports that 风偏 is a collective term for these deviations, making '由...组成' a faithful representation of the source material.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6455,
+          "late_response": false,
+          "latency_ms": 14625,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 434,
+          "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+          "provider_started_at": 1793674550.0998847,
+          "queue_time_ms": 256,
+          "rationale_summary": "The revision changes the surface_relation from '具有部件' to '由...组成' based on the source text '风引起的射程偏差和方向偏差统称为风偏'. This change is well-grounded because the text explicitly describes 风偏 as a collective term (统称) for wind-induced range deviation and direction deviation, which semantically aligns with a compositional relationship ('composed of') rather than a mere part-whole relationship ('has part'). The evidence bundle provides clear support for this interpretation, and no counterevidence was found in the frozen verification scope. The revision accurately captures the semantic relationship described in the source material.",
+          "reasoning_tokens": null,
+          "request_key": "49889ad6a2061f29e4e2e5fcb0938c3d5fac8b517071c28d77357edf2729fb15",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-8cf7a137bbdaf46b",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_8e935597215dd3133bf3",
+            "ev_c3774a70bceb0819698c"
+          ],
+          "task_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempts": [
+            {
+              "attempt_id": "attempt_e1d1907ba61b41bea56a7d6863b8c8b2",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+              "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_8e935597215dd3133bf3",
+                    "ev_c3774a70bceb0819698c"
+                  ],
+                  "field": "surface_relation",
+                  "note": "The source text explicitly states that wind-induced range deviation and direction deviation are collectively called wind deviation (风偏). The change from '具有部件' (has part) to '由...组成' (composed of) is a more accurate representation of the compositional relationship described in the text. The text describes 风偏 as being composed of two types of deviations (range and direction), which aligns with a 'composed of' relationship rather than a simple 'has part' relationship. The evidence supports that 风偏 is a collective term for these deviations, making '由...组成' a faithful representation of the source material.",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 6455,
+              "late_response": false,
+              "latency_ms": 14625,
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 434,
+              "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+              "provider_started_at": 1793674550.0998847,
+              "queue_time_ms": 256,
+              "rationale_summary": "The revision changes the surface_relation from '具有部件' to '由...组成' based on the source text '风引起的射程偏差和方向偏差统称为风偏'. This change is well-grounded because the text explicitly describes 风偏 as a collective term (统称) for wind-induced range deviation and direction deviation, which semantically aligns with a compositional relationship ('composed of') rather than a mere part-whole relationship ('has part'). The evidence bundle provides clear support for this interpretation, and no counterevidence was found in the frozen verification scope. The revision accurately captures the semantic relationship described in the source material.",
+              "reasoning_tokens": null,
+              "request_key": "49889ad6a2061f29e4e2e5fcb0938c3d5fac8b517071c28d77357edf2729fb15",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-8cf7a137bbdaf46b",
+              "response_status": "ok",
+              "returned_model_id": "Qwen",
+              "supporting_evidence_ids": [
+                "ev_8e935597215dd3133bf3",
+                "ev_c3774a70bceb0819698c"
+              ],
+              "task_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_a",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_937694b852924cbdb90e91c156984c15",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+          "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_8e935597215dd3133bf3"
+              ],
+              "field": "surface_relation",
+              "note": "The source text states that range deviation and direction deviation caused by wind are 'collectively called' (统称为) wind deviation, which supports the relation 'composed of' (由...组成).",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6797,
+          "late_response": false,
+          "latency_ms": 18452,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 747,
+          "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+          "provider_started_at": 1793674550.1084023,
+          "queue_time_ms": 265,
+          "rationale_summary": "The revision updates the surface relation from 'has part' to 'composed of', which more accurately reflects the source text's use of 'collectively called' (统称为) to define 'wind deviation' as the sum of 'range deviation' and 'direction deviation' caused by wind.",
+          "reasoning_tokens": 534,
+          "request_key": "4d9e0a254f1746f89caa69d7648970e3ccf56df3ff8f5d30957eaa9792748255",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-b604511f0b138e06",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_8e935597215dd3133bf3"
+          ],
+          "task_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempts": [
+            {
+              "attempt_id": "attempt_937694b852924cbdb90e91c156984c15",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+              "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_8e935597215dd3133bf3"
+                  ],
+                  "field": "surface_relation",
+                  "note": "The source text states that range deviation and direction deviation caused by wind are 'collectively called' (统称为) wind deviation, which supports the relation 'composed of' (由...组成).",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 6797,
+              "late_response": false,
+              "latency_ms": 18452,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 747,
+              "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+              "provider_started_at": 1793674550.1084023,
+              "queue_time_ms": 265,
+              "rationale_summary": "The revision updates the surface relation from 'has part' to 'composed of', which more accurately reflects the source text's use of 'collectively called' (统称为) to define 'wind deviation' as the sum of 'range deviation' and 'direction deviation' caused by wind.",
+              "reasoning_tokens": 534,
+              "request_key": "4d9e0a254f1746f89caa69d7648970e3ccf56df3ff8f5d30957eaa9792748255",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-b604511f0b138e06",
+              "response_status": "ok",
+              "returned_model_id": "Gemma",
+              "supporting_evidence_ids": [
+                "ev_8e935597215dd3133bf3"
+              ],
+              "task_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_b",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_474d5e02397a495d98f071ee7503c6cf",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+          "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_8e935597215dd3133bf3",
+                "ev_c3774a70bceb0819698c"
+              ],
+              "field": "surface_relation",
+              "note": "原文“风引起的射程偏差和方向偏差统称为风偏”表明射程偏差是风偏的组成项之一，改为“由...组成”忠实于原文；二元表达不断言仅由射程偏差组成，方向偏差作为另一组成项在语境中保留。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 5574,
+          "late_response": false,
+          "latency_ms": 3563,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 244,
+          "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+          "provider_started_at": 1793674550.137789,
+          "queue_time_ms": 264,
+          "rationale_summary": "唯一变更字段 surface_relation 由“具有部件”改为“由...组成”，与原文“统称为”所表达的组成/归类语义一致，且未删除“风引起”条件，未改变极性、模态或量词。无先前反证需评估，批准。",
+          "reasoning_tokens": null,
+          "request_key": "296f11de71ed77000c97523dacedd08245ba81f482ab33d44d42fd70c0919f12",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "8656b936-2c64-4e50-8e51-0d9e443284aa",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_8e935597215dd3133bf3",
+            "ev_c3774a70bceb0819698c"
+          ],
+          "task_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c",
+          "attempts": [
+            {
+              "attempt_id": "attempt_474d5e02397a495d98f071ee7503c6cf",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "150e23ed1f998a1c32fbe3604119e2a06f5ff58d0866ca81671b3829bc7151b8",
+              "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_8e935597215dd3133bf3",
+                    "ev_c3774a70bceb0819698c"
+                  ],
+                  "field": "surface_relation",
+                  "note": "原文“风引起的射程偏差和方向偏差统称为风偏”表明射程偏差是风偏的组成项之一，改为“由...组成”忠实于原文；二元表达不断言仅由射程偏差组成，方向偏差作为另一组成项在语境中保留。",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 5574,
+              "late_response": false,
+              "latency_ms": 3563,
+              "model_family": "deepseek",
+              "model_id": "deepseek-flash",
+              "model_identity": "deepseek-flash",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 244,
+              "proposal_digest": "887dc853935713e6c321eb562c964cf0a691dff33f64aa4b20b4acd6ee59ce65",
+              "provider_started_at": 1793674550.137789,
+              "queue_time_ms": 264,
+              "rationale_summary": "唯一变更字段 surface_relation 由“具有部件”改为“由...组成”，与原文“统称为”所表达的组成/归类语义一致，且未删除“风引起”条件，未改变极性、模态或量词。无先前反证需评估，批准。",
+              "reasoning_tokens": null,
+              "request_key": "296f11de71ed77000c97523dacedd08245ba81f482ab33d44d42fd70c0919f12",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "8656b936-2c64-4e50-8e51-0d9e443284aa",
+              "response_status": "ok",
+              "returned_model_id": "deepseek-flash",
+              "supporting_evidence_ids": [
+                "ev_8e935597215dd3133bf3",
+                "ev_c3774a70bceb0819698c"
+              ],
+              "task_id": "draft_849d3e84710a4c9da460939d0a26d29c",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_c",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        }
+      ],
+      "task_type": "candidate_revision_review",
+      "committee_members": [
+        {
+          "id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "model_identity": "qwen"
+        },
+        {
+          "id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "model_identity": "gemma"
+        },
+        {
+          "id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "model_identity": "deepseek-flash"
+        }
+      ],
+      "committee_policy": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "minimum_distinct_families": 3
+      },
+      "sample_id": "DEV-017",
+      "budget": {
+        "usage": {
+          "llm_calls": 3,
+          "tool_calls": 0,
+          "planner_steps": 0,
+          "validation_rounds": 0,
+          "input_tokens": 18826,
+          "output_tokens": 1425,
+          "unknown_token_requests": 0
+        },
+        "deadline_epoch": 1793674969.7879055,
+        "remaining_seconds": 401.0679838657379,
+        "remaining_llm_calls": 0,
+        "max_planner_steps": 6,
+        "max_validation_rounds": 2,
+        "case_ids": [
+          "case_23198c658e6c39a42b9a9f3ebaa8ccc8"
+        ],
+        "case_call_reservations": [
+          "95173c7330074429a8b7a3cd8524c800"
+        ],
+        "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+        "case_accounts": [
+          {
+            "case_id": "case_23198c658e6c39a42b9a9f3ebaa8ccc8",
+            "limits": {
+              "extension_requests": 1,
+              "llm_calls": 96,
+              "rebinds": 2,
+              "tokens": 240000,
+              "tool_calls": 64
+            },
+            "usage": {
+              "extension_requests": 0,
+              "llm_calls": 3,
+              "rebinds": 0,
+              "tokens": 20251,
+              "tool_calls": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "review_incomplete",
+      "draft_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+      "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+      "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+      "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+      "approved_voter_ids": [
+        "judge_c"
+      ],
+      "votes": [
+        {
+          "attempt_id": "attempt_af6a3684dee944eb95530a8dfa824d85",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+          "error": "all historical material evidence must be assessed",
+          "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+          "finish_reason": "stop",
+          "input_tokens": 8364,
+          "late_response": false,
+          "latency_ms": 20641,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 2,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 666,
+          "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+          "provider_started_at": 1793674569.0845392,
+          "queue_time_ms": 263,
+          "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": [\n    {\n      \"field\": \"surface_relation\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\"],\n      \"note\": \"The change from '其章动角（或攻角）总是' to '具有特征' is a semantic normalization that accurately captures the relationship between the head (projectiles capable of stable flight) and the tail (small nutation angle/angle of attack). The source text '其章动角（或攻角）总是很小' directly supports this characteristic relationship.\"\n    },\n    {\n      \"field\": \"tail\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\"],\n      \"note\": \"The tail is changed from '很小' to '章动角（或攻角）很小'. This is a correction that restores the complete predicate phrase from the source text. The original extraction incorrectly split the sentence, leaving '章动角（或攻角）总是' in the relation and only '很小' in the tail. The revised tail correctly captures the full attribute being described.\"\n    },\n    {\n      \"field\": \"value\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\"],\n      \"note\": \"The value is changed from '很小' to '章动角（或攻角）很小', consistent with the tail correction. This ensures the literal value accurately reflects the complete statement from the source document.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\", \"ev_8573465d7fe0f75cec4d\"],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [],\n  \"rationale_summary\": \"The revision correctly fixes an incomplete extraction by properly assigning the full predicate '章动角（或攻角）很小' to both the tail and value fields, and normalizing the surface relation to '具有特征'. All three changed fields are directly grounded in the source text '实际上，对于能保证飞行稳定的弹丸，其章动角（或攻角）总是很小'. The condition '对于能保证飞行稳定的弹丸' and quantifier '总是' are preserved in the qualifiers, maintaining the original meaning. No counterevidence was found in the verification scope.\"\n}",
+          "reasoning_tokens": null,
+          "request_key": "6614f5359e07107f97b0c93a4d3f58439103373e9bf10730603b6f0b0bdd5aa0",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-994e27bb483847bc",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Qwen",
+          "task_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempts": [
+            {
+              "attempt_id": "attempt_af6a3684dee944eb95530a8dfa824d85",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+              "error": "all historical material evidence must be assessed",
+              "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+              "finish_reason": "stop",
+              "input_tokens": 8364,
+              "late_response": false,
+              "latency_ms": 20641,
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "object_revision": 2,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 666,
+              "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+              "provider_started_at": 1793674569.0845392,
+              "queue_time_ms": 263,
+              "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": [\n    {\n      \"field\": \"surface_relation\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\"],\n      \"note\": \"The change from '其章动角（或攻角）总是' to '具有特征' is a semantic normalization that accurately captures the relationship between the head (projectiles capable of stable flight) and the tail (small nutation angle/angle of attack). The source text '其章动角（或攻角）总是很小' directly supports this characteristic relationship.\"\n    },\n    {\n      \"field\": \"tail\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\"],\n      \"note\": \"The tail is changed from '很小' to '章动角（或攻角）很小'. This is a correction that restores the complete predicate phrase from the source text. The original extraction incorrectly split the sentence, leaving '章动角（或攻角）总是' in the relation and only '很小' in the tail. The revised tail correctly captures the full attribute being described.\"\n    },\n    {\n      \"field\": \"value\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\"],\n      \"note\": \"The value is changed from '很小' to '章动角（或攻角）很小', consistent with the tail correction. This ensures the literal value accurately reflects the complete statement from the source document.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [\"ev_836c0c487e2849299583\", \"ev_e9a494c49acda0dae429\", \"ev_8573465d7fe0f75cec4d\"],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [],\n  \"rationale_summary\": \"The revision correctly fixes an incomplete extraction by properly assigning the full predicate '章动角（或攻角）很小' to both the tail and value fields, and normalizing the surface relation to '具有特征'. All three changed fields are directly grounded in the source text '实际上，对于能保证飞行稳定的弹丸，其章动角（或攻角）总是很小'. The condition '对于能保证飞行稳定的弹丸' and quantifier '总是' are preserved in the qualifiers, maintaining the original meaning. No counterevidence was found in the verification scope.\"\n}",
+              "reasoning_tokens": null,
+              "request_key": "6614f5359e07107f97b0c93a4d3f58439103373e9bf10730603b6f0b0bdd5aa0",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-994e27bb483847bc",
+              "response_status": "invalid_contract",
+              "returned_model_id": "Qwen",
+              "task_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_a",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_2bc88ce5f65d471d905f5f184f6dc0cb",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+          "error": "all historical material evidence must be assessed",
+          "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+          "finish_reason": "stop",
+          "input_tokens": 8852,
+          "late_response": false,
+          "latency_ms": 28657,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 2,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1238,
+          "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+          "provider_started_at": 1793674569.0769224,
+          "queue_time_ms": 257,
+          "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"surface_relation\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"note\": \"The change to '具有特征' (has characteristic) is a semantic abstraction of the relationship described in the source text.\"}, {\"field\": \"tail\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"note\": \"The tail now correctly captures the full attribute '章动角（或攻角）很小' from the source text.\"}, {\"field\": \"value\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"note\": \"The value is consistent with the tail and grounded in the source text.\"}], \"supporting_evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"counter_evidence_ids\": [], \"counterevidence_reviewed_ids\": [], \"rationale_summary\": \"The revision corrects a fragmented extraction from the previous version. It moves the attribute '章动角（或攻角）很小' from the surface relation to the tail and value fields, while using a generic '具有特征' (has characteristic) as the surface relation. The quantifier '总是' and the condition '对于能保证飞行稳定的弹丸' are correctly preserved in the qualifiers. The resulting triple accurately reflects the meaning of the source text: '对于能保证飞行稳定的弹丸，其章动角（或攻角）总是很小'.\"}",
+          "reasoning_tokens": 866,
+          "request_key": "8dfc8ae1513dc614080df553e510ad4aefaf19683f03aff4731acce55ab435e7",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-b90400b970091ef5",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Gemma",
+          "task_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempts": [
+            {
+              "attempt_id": "attempt_2bc88ce5f65d471d905f5f184f6dc0cb",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+              "error": "all historical material evidence must be assessed",
+              "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+              "finish_reason": "stop",
+              "input_tokens": 8852,
+              "late_response": false,
+              "latency_ms": 28657,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 2,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 1238,
+              "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+              "provider_started_at": 1793674569.0769224,
+              "queue_time_ms": 257,
+              "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"surface_relation\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"note\": \"The change to '具有特征' (has characteristic) is a semantic abstraction of the relationship described in the source text.\"}, {\"field\": \"tail\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"note\": \"The tail now correctly captures the full attribute '章动角（或攻角）很小' from the source text.\"}, {\"field\": \"value\", \"status\": \"supported\", \"evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"note\": \"The value is consistent with the tail and grounded in the source text.\"}], \"supporting_evidence_ids\": [\"ev_e9a494c49acda0dae429\"], \"counter_evidence_ids\": [], \"counterevidence_reviewed_ids\": [], \"rationale_summary\": \"The revision corrects a fragmented extraction from the previous version. It moves the attribute '章动角（或攻角）很小' from the surface relation to the tail and value fields, while using a generic '具有特征' (has characteristic) as the surface relation. The quantifier '总是' and the condition '对于能保证飞行稳定的弹丸' are correctly preserved in the qualifiers. The resulting triple accurately reflects the meaning of the source text: '对于能保证飞行稳定的弹丸，其章动角（或攻角）总是很小'.\"}",
+              "reasoning_tokens": 866,
+              "request_key": "8dfc8ae1513dc614080df553e510ad4aefaf19683f03aff4731acce55ab435e7",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-b90400b970091ef5",
+              "response_status": "invalid_contract",
+              "returned_model_id": "Gemma",
+              "task_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_b",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        },
+        {
+          "attempt_id": "attempt_71dd03f3f2634660a67377edf4079e27",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_8573465d7fe0f75cec4d",
+            "ev_e9a494c49acda0dae429"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+          "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_836c0c487e2849299583",
+                "ev_e9a494c49acda0dae429"
+              ],
+              "field": "surface_relation",
+              "note": "原文“其章动角（或攻角）总是很小”表达的是弹丸具有“章动角很小”这一特征，改为“具有特征”是合理的表层关系归一，未改变极性、条件或量词。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_836c0c487e2849299583",
+                "ev_e9a494c49acda0dae429"
+              ],
+              "field": "tail",
+              "note": "宾语“章动角（或攻角）很小”直接对应原文“其章动角（或攻角）总是很小”，量词“总是”保留在 qualifiers 中，未丢失。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_836c0c487e2849299583",
+                "ev_e9a494c49acda0dae429"
+              ],
+              "field": "value",
+              "note": "字符串值与宾语一致，为“章动角（或攻角）很小”，与原文语义相符。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7279,
+          "late_response": false,
+          "latency_ms": 4359,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 2,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 472,
+          "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+          "provider_started_at": 1793674569.1195524,
+          "queue_time_ms": 254,
+          "rationale_summary": "修订仅将不完整的表层关系“其章动角（或攻角）总是”与宾语“很小”合并为“具有特征 / 章动角（或攻角）很小”，条件“对于能保证飞行稳定的弹丸”、量词“总是”、肯定极性及字面量类型均保留。原文证据直接支持该表述，未发现被删除的条件或反向证据，故批准。",
+          "reasoning_tokens": null,
+          "request_key": "7506775f7ff0e84414970f8db22cb04cc28140fcb4622229574826d22dd345d5",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "d49a3958-c5e8-4387-9dee-efe5f19b72af",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_836c0c487e2849299583",
+            "ev_e9a494c49acda0dae429",
+            "ev_8573465d7fe0f75cec4d"
+          ],
+          "task_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c",
+          "attempts": [
+            {
+              "attempt_id": "attempt_71dd03f3f2634660a67377edf4079e27",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [
+                "ev_8573465d7fe0f75cec4d",
+                "ev_e9a494c49acda0dae429"
+              ],
+              "decision": "approve",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "f57efb00243221350f54e74cbf1c9fa59343750b48cf7bab2ad9e55dd53e5cce",
+              "evidence_hash": "88657a4deac59ae4ed780fd1ebb9557aa9b95c9e65b38269b72442dfde8b3c99",
+              "field_reviews": [
+                {
+                  "evidence_ids": [
+                    "ev_836c0c487e2849299583",
+                    "ev_e9a494c49acda0dae429"
+                  ],
+                  "field": "surface_relation",
+                  "note": "原文“其章动角（或攻角）总是很小”表达的是弹丸具有“章动角很小”这一特征，改为“具有特征”是合理的表层关系归一，未改变极性、条件或量词。",
+                  "status": "supported"
+                },
+                {
+                  "evidence_ids": [
+                    "ev_836c0c487e2849299583",
+                    "ev_e9a494c49acda0dae429"
+                  ],
+                  "field": "tail",
+                  "note": "宾语“章动角（或攻角）很小”直接对应原文“其章动角（或攻角）总是很小”，量词“总是”保留在 qualifiers 中，未丢失。",
+                  "status": "supported"
+                },
+                {
+                  "evidence_ids": [
+                    "ev_836c0c487e2849299583",
+                    "ev_e9a494c49acda0dae429"
+                  ],
+                  "field": "value",
+                  "note": "字符串值与宾语一致，为“章动角（或攻角）很小”，与原文语义相符。",
+                  "status": "supported"
+                }
+              ],
+              "finish_reason": "stop",
+              "input_tokens": 7279,
+              "late_response": false,
+              "latency_ms": 4359,
+              "model_family": "deepseek",
+              "model_id": "deepseek-flash",
+              "model_identity": "deepseek-flash",
+              "object_revision": 2,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 472,
+              "proposal_digest": "23deda981336980c6197ea080ed690080777567ee47c0c6d1a2645ec1b053626",
+              "provider_started_at": 1793674569.1195524,
+              "queue_time_ms": 254,
+              "rationale_summary": "修订仅将不完整的表层关系“其章动角（或攻角）总是”与宾语“很小”合并为“具有特征 / 章动角（或攻角）很小”，条件“对于能保证飞行稳定的弹丸”、量词“总是”、肯定极性及字面量类型均保留。原文证据直接支持该表述，未发现被删除的条件或反向证据，故批准。",
+              "reasoning_tokens": null,
+              "request_key": "7506775f7ff0e84414970f8db22cb04cc28140fcb4622229574826d22dd345d5",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "d49a3958-c5e8-4387-9dee-efe5f19b72af",
+              "response_status": "ok",
+              "returned_model_id": "deepseek-flash",
+              "supporting_evidence_ids": [
+                "ev_836c0c487e2849299583",
+                "ev_e9a494c49acda0dae429",
+                "ev_8573465d7fe0f75cec4d"
+              ],
+              "task_id": "draft_3c3f6c1234ff476d9739d35250fa975a",
+              "task_type": "candidate_revision_review",
+              "voter_id": "judge_c",
+              "attempt_no": 1
+            }
+          ],
+          "actual_calls": 1
+        }
+      ],
+      "task_type": "candidate_revision_review",
+      "committee_members": [
+        {
+          "id": "judge_a",
+          "model_id": "Qwen",
+          "model_family": "qwen",
+          "model_identity": "qwen"
+        },
+        {
+          "id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "model_identity": "gemma"
+        },
+        {
+          "id": "judge_c",
+          "model_id": "deepseek-flash",
+          "model_family": "deepseek",
+          "model_identity": "deepseek-flash"
+        }
+      ],
+      "committee_policy": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "minimum_distinct_families": 3
+      },
+      "sample_id": "DEV-020",
+      "budget": {
+        "usage": {
+          "llm_calls": 3,
+          "tool_calls": 0,
+          "planner_steps": 0,
+          "validation_rounds": 0,
+          "input_tokens": 24495,
+          "output_tokens": 2376,
+          "unknown_token_requests": 0
+        },
+        "deadline_epoch": 1793674988.7531848,
+        "remaining_seconds": 390.875,
+        "remaining_llm_calls": 0,
+        "max_planner_steps": 6,
+        "max_validation_rounds": 2,
+        "case_ids": [
+          "case_fd4fde295d9a21b2f5febd5108743a58"
+        ],
+        "case_call_reservations": [
+          "24e61e6fa5984535913f772be0256f6d"
+        ],
+        "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+        "case_accounts": [
+          {
+            "case_id": "case_fd4fde295d9a21b2f5febd5108743a58",
+            "limits": {
+              "extension_requests": 1,
+              "llm_calls": 96,
+              "rebinds": 2,
+              "tokens": 240000,
+              "tool_calls": 64
+            },
+            "usage": {
+              "extension_requests": 0,
+              "llm_calls": 3,
+              "rebinds": 0,
+              "tokens": 26871,
+              "tool_calls": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "production_applied": false,
+  "human_gold_used": false,
+  "targets_hash": "f4d8b7fd2b89415e6955af1f0e30a431b4aacf9213591c4c3f71de8b133f7a21",
+  "input_integrity": {
+    "checked_candidates": 30,
+    "workbook_sha256": "99fa28fb1efc37ccbe1e1193bd0f3fae01e2a473a054cdcb0e86bf250da63e9e",
+    "production_candidates_changed": false,
+    "human_labels_written": false
+  }
+}

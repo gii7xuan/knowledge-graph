@@ -1,0 +1,551 @@
+{
+  "status": "needs_human",
+  "draft_id": "draft_ebed3996b3944f62893c293b7ea82638",
+  "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+  "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+  "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+  "approved_voter_ids": [
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_5b466a25722e4c4eb228bfab688a0f58",
+      "attempts": [
+        {
+          "attempt_id": "attempt_5b466a25722e4c4eb228bfab688a0f58",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "reject",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+          "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457",
+                "ev_2f28bfed003541ab96d5",
+                "ev_d0aefd173dd6805454d4"
+              ],
+              "field": "head",
+              "note": "The candidate changes the head from '高射炮' to '高射火炮外弹道射表'. The primary evidence (ev_41fab59235dbcad2f457) states '上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。' The subject of '编制' (compiled) is the tables (弹道表/射表), not the guns (炮). However, the specific term '高射火炮外弹道射表' is not explicitly stated in the provided evidence. The adjacent evidence (ev_d0aefd173dd6805454d4) mentions '对于高射火炮，可用数值计算编制...的外弹道射表', which supports the existence of such a table for high-altitude guns, but the primary sentence in ev_41fab59235dbcad2f457 lists '高射炮' (high-altitude guns) as one of the items. The revision conflates the gun type with the table name. While the semantic intent (that the table is compiled based on the law) is correct, the specific head entity '高射火炮外弹道射表' is a constructed term not directly present in the primary evidence span. The original head '高射炮' was also semantically incorrect as the subject of '编制依据' (compilation basis) should be the table, but the revision introduces a specific table name that is not explicitly in the primary evidence. Given the strict requirement for source grounding, the specific head '高射火炮外弹道射表' is not directly stated in the primary evidence ev_41fab59235dbcad2f457, which only says '高射炮'. The adjacent evidence supports the concept but the primary evidence for the '编制依据' relation is ev_41fab59235dbcad2f457. The revision is an over-interpretation of the specific entity name.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457",
+                "ev_2f28bfed003541ab96d5",
+                "ev_d0aefd173dd6805454d4"
+              ],
+              "field": "head_type",
+              "note": "The head_type is changed to 'C_f459437ed9067a73ce23' (外弹道射表). While the ontology defines this class, the primary evidence ev_41fab59235dbcad2f457 does not explicitly label the subject as '外弹道射表' in the context of the high-altitude gun item. It lists '高射炮'. The adjacent evidence ev_d0aefd173dd6805454d4 does mention '外弹道射表' for '高射火炮', but the primary evidence for the specific claim '我国均是以43年阻力定律为依据编制的' refers to '上述高射炮...'. The mapping to the specific class '外弹道射表' for the head is an inference from adjacent context, not directly stated in the primary evidence span for this specific relation.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The polarity 'positive' is supported by the affirmative statement '均是以...为依据编制的' (are all compiled based on...).",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "The applicability '我国，文中上述高射火炮外弹道射表' is partially supported. '我国' is explicitly stated. '文中上述' is supported by '上述'. However, the specific term '高射火炮外弹道射表' is not in the primary evidence, as noted in the head review. The applicability scope is correct in intent but relies on the unsupported head term.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The status 'extracted' is appropriate as the polarity is explicitly stated in the text.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 14440,
+          "late_response": false,
+          "latency_ms": 39625,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1439,
+          "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+          "provider_started_at": 1793378422.9870558,
+          "queue_time_ms": 420,
+          "rationale_summary": "The revision correctly identifies that the subject of '编制' (compilation) is the table, not the gun, and correctly sets the polarity to positive. However, it changes the head to '高射火炮外弹道射表', a specific term not explicitly present in the primary evidence (ev_41fab59235dbcad2f457), which only lists '高射炮'. While adjacent evidence (ev_d0aefd173dd6805454d4) supports the existence of such a table, the primary evidence for the '编制依据' relation does not explicitly name the table as '高射火炮外弹道射表'. The revision is an over-interpretation that constructs a specific entity name not directly grounded in the primary evidence span. The original head '高射炮' was semantically incorrect as the subject, but the revision's specific head is not source-grounded in the primary evidence. Therefore, the revision is rejected due to lack of direct source grounding for the specific head entity and type.",
+          "reasoning_tokens": null,
+          "request_key": "a6cfa534a750c9431d458992db89c19d8d7e67e966ee9efed832eeb2e7ed3af3",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-85d9fe74454d47ee",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "task_id": "draft_ebed3996b3944f62893c293b7ea82638",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "reject",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+      "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_2f28bfed003541ab96d5",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "field": "head",
+          "note": "The candidate changes the head from '高射炮' to '高射火炮外弹道射表'. The primary evidence (ev_41fab59235dbcad2f457) states '上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。' The subject of '编制' (compiled) is the tables (弹道表/射表), not the guns (炮). However, the specific term '高射火炮外弹道射表' is not explicitly stated in the provided evidence. The adjacent evidence (ev_d0aefd173dd6805454d4) mentions '对于高射火炮，可用数值计算编制...的外弹道射表', which supports the existence of such a table for high-altitude guns, but the primary sentence in ev_41fab59235dbcad2f457 lists '高射炮' (high-altitude guns) as one of the items. The revision conflates the gun type with the table name. While the semantic intent (that the table is compiled based on the law) is correct, the specific head entity '高射火炮外弹道射表' is a constructed term not directly present in the primary evidence span. The original head '高射炮' was also semantically incorrect as the subject of '编制依据' (compilation basis) should be the table, but the revision introduces a specific table name that is not explicitly in the primary evidence. Given the strict requirement for source grounding, the specific head '高射火炮外弹道射表' is not directly stated in the primary evidence ev_41fab59235dbcad2f457, which only says '高射炮'. The adjacent evidence supports the concept but the primary evidence for the '编制依据' relation is ev_41fab59235dbcad2f457. The revision is an over-interpretation of the specific entity name.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_2f28bfed003541ab96d5",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "field": "head_type",
+          "note": "The head_type is changed to 'C_f459437ed9067a73ce23' (外弹道射表). While the ontology defines this class, the primary evidence ev_41fab59235dbcad2f457 does not explicitly label the subject as '外弹道射表' in the context of the high-altitude gun item. It lists '高射炮'. The adjacent evidence ev_d0aefd173dd6805454d4 does mention '外弹道射表' for '高射火炮', but the primary evidence for the specific claim '我国均是以43年阻力定律为依据编制的' refers to '上述高射炮...'. The mapping to the specific class '外弹道射表' for the head is an inference from adjacent context, not directly stated in the primary evidence span for this specific relation.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The polarity 'positive' is supported by the affirmative statement '均是以...为依据编制的' (are all compiled based on...).",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "The applicability '我国，文中上述高射火炮外弹道射表' is partially supported. '我国' is explicitly stated. '文中上述' is supported by '上述'. However, the specific term '高射火炮外弹道射表' is not in the primary evidence, as noted in the head review. The applicability scope is correct in intent but relies on the unsupported head term.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The status 'extracted' is appropriate as the polarity is explicitly stated in the text.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 14440,
+      "late_response": false,
+      "latency_ms": 39625,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1439,
+      "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+      "provider_started_at": 1793378422.9870558,
+      "queue_time_ms": 420,
+      "rationale_summary": "The revision correctly identifies that the subject of '编制' (compilation) is the table, not the gun, and correctly sets the polarity to positive. However, it changes the head to '高射火炮外弹道射表', a specific term not explicitly present in the primary evidence (ev_41fab59235dbcad2f457), which only lists '高射炮'. While adjacent evidence (ev_d0aefd173dd6805454d4) supports the existence of such a table, the primary evidence for the '编制依据' relation does not explicitly name the table as '高射火炮外弹道射表'. The revision is an over-interpretation that constructs a specific entity name not directly grounded in the primary evidence span. The original head '高射炮' was semantically incorrect as the subject, but the revision's specific head is not source-grounded in the primary evidence. Therefore, the revision is rejected due to lack of direct source grounding for the specific head entity and type.",
+      "reasoning_tokens": null,
+      "request_key": "a6cfa534a750c9431d458992db89c19d8d7e67e966ee9efed832eeb2e7ed3af3",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-85d9fe74454d47ee",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_41fab59235dbcad2f457",
+        "ev_d0aefd173dd6805454d4"
+      ],
+      "task_id": "draft_ebed3996b3944f62893c293b7ea82638",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "attempt_id": "attempt_41a8473b94e1405b9b152bd3126d2635",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_41fab59235dbcad2f457"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+      "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "field": "head",
+          "note": "The source text in ev_41fab59235dbcad2f457 refers to '上述高射炮...表' (the above anti-aircraft gun... table), and ev_d0aefd173dd6805454d4 explicitly mentions the compilation of an '外弹道射表' (external ballistic firing table) for '高射火炮' (anti-aircraft artillery). Thus, the head is correctly updated to '高射火炮外弹道射表'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "field": "head_type",
+          "note": "The head is a firing table, which maps to the ontology class C_f459437ed9067a73ce23 (外弹道射表).",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "The text explicitly mentions '我国' (our country) and '上述' (above), supporting the applicability qualifier.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The statement is a positive assertion that the tables were compiled based on the law.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The polarity is explicitly extracted from the source text.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 15472,
+      "late_response": false,
+      "latency_ms": 48281,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 2414,
+      "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+      "provider_started_at": 1793379262.2369616,
+      "queue_time_ms": 291,
+      "rationale_summary": "The revision correctly identifies that the object being compiled based on the '43 resistance law' is the firing table for anti-aircraft artillery, not the artillery piece itself. This is supported by the combination of ev_41fab59235dbcad2f457 (which mentions the 'above... table') and ev_d0aefd173dd6805454d4 (which defines the table for anti-aircraft artillery). The applicability and polarity are directly grounded in the source text.",
+      "reasoning_tokens": 1735,
+      "request_key": "16c49913ceb2395b815c4805cccdbe12db7e89c13c94be289758a6c50f946a75",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-bfd67ae5d03846e8",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_41fab59235dbcad2f457",
+        "ev_d0aefd173dd6805454d4"
+      ],
+      "task_id": "draft_ebed3996b3944f62893c293b7ea82638",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_41a8473b94e1405b9b152bd3126d2635",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+          "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457",
+                "ev_d0aefd173dd6805454d4"
+              ],
+              "field": "head",
+              "note": "The source text in ev_41fab59235dbcad2f457 refers to '上述高射炮...表' (the above anti-aircraft gun... table), and ev_d0aefd173dd6805454d4 explicitly mentions the compilation of an '外弹道射表' (external ballistic firing table) for '高射火炮' (anti-aircraft artillery). Thus, the head is correctly updated to '高射火炮外弹道射表'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457",
+                "ev_d0aefd173dd6805454d4"
+              ],
+              "field": "head_type",
+              "note": "The head is a firing table, which maps to the ontology class C_f459437ed9067a73ce23 (外弹道射表).",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "The text explicitly mentions '我国' (our country) and '上述' (above), supporting the applicability qualifier.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The statement is a positive assertion that the tables were compiled based on the law.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The polarity is explicitly extracted from the source text.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 15472,
+          "late_response": false,
+          "latency_ms": 48281,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 2414,
+          "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+          "provider_started_at": 1793379262.2369616,
+          "queue_time_ms": 291,
+          "rationale_summary": "The revision correctly identifies that the object being compiled based on the '43 resistance law' is the firing table for anti-aircraft artillery, not the artillery piece itself. This is supported by the combination of ev_41fab59235dbcad2f457 (which mentions the 'above... table') and ev_d0aefd173dd6805454d4 (which defines the table for anti-aircraft artillery). The applicability and polarity are directly grounded in the source text.",
+          "reasoning_tokens": 1735,
+          "request_key": "16c49913ceb2395b815c4805cccdbe12db7e89c13c94be289758a6c50f946a75",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-bfd67ae5d03846e8",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "task_id": "draft_ebed3996b3944f62893c293b7ea82638",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_618d3b71b4ca49da8c16734c16e71392",
+      "attempts": [
+        {
+          "attempt_id": "attempt_618d3b71b4ca49da8c16734c16e71392",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_2f28bfed003541ab96d5",
+            "ev_d0aefd173dd6805454d4",
+            "ev_36b787204f191cfd7e4c"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+          "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457",
+                "ev_d0aefd173dd6805454d4"
+              ],
+              "field": "head",
+              "note": "原文明确“上述高射炮、地面火炮和低伸弹道表……是以43年阻力定律为依据编制的”，编制主体是射表而非火炮；前文亦述“对于高射火炮，可用数值计算编制……外弹道射表”。将 head 由“高射炮”改为“高射火炮外弹道射表”有原文与类定义支持。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457",
+                "ev_d0aefd173dd6805454d4"
+              ],
+              "field": "head_type",
+              "note": "C_f459437ed9067a73ce23（外弹道射表）定义与原文“外弹道射表”表述一致，head 类型映射有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原文为肯定陈述“均是以43年阻力定律为依据编制的”，positive 极性有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "原文含“我国”与“上述”范围限定，applicability 保留“我国，文中上述高射火炮外弹道射表”忠实于原文。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_41fab59235dbcad2f457"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性由 unknown 改为 extracted 有原文肯定句支撑。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 12963,
+          "late_response": false,
+          "latency_ms": 6280,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 662,
+          "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+          "provider_started_at": 1793378470.7527657,
+          "queue_time_ms": 322,
+          "rationale_summary": "修订将编制主体由“高射炮”纠正为“高射火炮外弹道射表”，与原文“上述高射炮、地面火炮和低伸弹道表……是以43年阻力定律为依据编制的”及前文“编制……外弹道射表”一致；head_type 映射到外弹道射表类有定义支撑；极性由 unknown 改为 positive 有肯定句支撑；applicability 保留“我国/上述”范围。已逐条评估全部受保护与历史材料证据，未发现矛盾证据。",
+          "reasoning_tokens": null,
+          "request_key": "ee288817f5dd99e36e245f26b18aaf6c710e2b05b3c8bbdca53aa3fcf4592b88",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "e821f38a-ffff-44e4-aa9b-c697b576bb1f",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4",
+            "ev_2f28bfed003541ab96d5"
+          ],
+          "task_id": "draft_ebed3996b3944f62893c293b7ea82638",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_41fab59235dbcad2f457",
+        "ev_2f28bfed003541ab96d5",
+        "ev_d0aefd173dd6805454d4",
+        "ev_36b787204f191cfd7e4c"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "ca61c362c360d01cdae244f2979d709104067f5136a9f0f79ca7f75e8a8ddc29",
+      "evidence_hash": "8f6ad5d076567a922429f22b8a002a82030f579fc36253b0454d8dc858980282",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "field": "head",
+          "note": "原文明确“上述高射炮、地面火炮和低伸弹道表……是以43年阻力定律为依据编制的”，编制主体是射表而非火炮；前文亦述“对于高射火炮，可用数值计算编制……外弹道射表”。将 head 由“高射炮”改为“高射火炮外弹道射表”有原文与类定义支持。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457",
+            "ev_d0aefd173dd6805454d4"
+          ],
+          "field": "head_type",
+          "note": "C_f459437ed9067a73ce23（外弹道射表）定义与原文“外弹道射表”表述一致，head 类型映射有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原文为肯定陈述“均是以43年阻力定律为依据编制的”，positive 极性有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "原文含“我国”与“上述”范围限定，applicability 保留“我国，文中上述高射火炮外弹道射表”忠实于原文。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_41fab59235dbcad2f457"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性由 unknown 改为 extracted 有原文肯定句支撑。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 12963,
+      "late_response": false,
+      "latency_ms": 6280,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 662,
+      "proposal_digest": "7a83e7da9737a6916c9963b59c0d218804a19017c79c29a2f06ee855a306ca4d",
+      "provider_started_at": 1793378470.7527657,
+      "queue_time_ms": 322,
+      "rationale_summary": "修订将编制主体由“高射炮”纠正为“高射火炮外弹道射表”，与原文“上述高射炮、地面火炮和低伸弹道表……是以43年阻力定律为依据编制的”及前文“编制……外弹道射表”一致；head_type 映射到外弹道射表类有定义支撑；极性由 unknown 改为 positive 有肯定句支撑；applicability 保留“我国/上述”范围。已逐条评估全部受保护与历史材料证据，未发现矛盾证据。",
+      "reasoning_tokens": null,
+      "request_key": "ee288817f5dd99e36e245f26b18aaf6c710e2b05b3c8bbdca53aa3fcf4592b88",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "e821f38a-ffff-44e4-aa9b-c697b576bb1f",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_41fab59235dbcad2f457",
+        "ev_d0aefd173dd6805454d4",
+        "ev_2f28bfed003541ab96d5"
+      ],
+      "task_id": "draft_ebed3996b3944f62893c293b7ea82638",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

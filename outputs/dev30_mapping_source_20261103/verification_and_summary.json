@@ -1,0 +1,254 @@
+{
+  "verified_at_beijing": "2026-11-03T14:34:24.705190+08:00",
+  "results": [
+    {
+      "sample_id": "DEV-004",
+      "candidate_id": "cand_4d903306be730770f49b",
+      "revision": 3,
+      "candidate_content_hash": "09c0e3dcd17b52e4d6c43c266131834c336368be8462cd7d7fa4f75989dff434",
+      "source_support": "supported",
+      "independent_source_votes": 3,
+      "source_audit_id": "audit_8fc57a4ced124945a675cfdc0bf985a8",
+      "source_proposal_digest": "7acba89c3eb2a84d79e4a30616fd4e9b24a2972b5288e67343a888fd54b19def",
+      "source_evidence_hash": "4bd062110270a38b0e119b0d6c76cfb88c2ae44186c818a0f05ea8ae0386fb5c",
+      "ontology_guard": "pass",
+      "workflow_state": "manual_review",
+      "pending_extension_id": null,
+      "development_applied": true
+    },
+    {
+      "sample_id": "DEV-013",
+      "candidate_id": "cand_a79f2100df7c5c252829",
+      "revision": 2,
+      "candidate_content_hash": "124efca91f466798c7c8b14839c3c7e90ad08b9ee16f4eda883ba69ad38206f4",
+      "source_support": "supported",
+      "independent_source_votes": 3,
+      "source_audit_id": "audit_134c7b81dae54da1999f4b92bb90ed56",
+      "source_proposal_digest": "5e851431fbbd85445f932922b0cbe19d3717051eaae3d9e778bc0daa7fceb988",
+      "source_evidence_hash": "09442b0df35d5d9460a837ae8e32da9584ada2b7daf5a8b412285a836bcc921b",
+      "ontology_guard": "pass",
+      "workflow_state": "manual_review",
+      "pending_extension_id": null,
+      "development_applied": true
+    },
+    {
+      "sample_id": "DEV-017",
+      "status": "resolved_reuse_existing_definition",
+      "development_applied": false,
+      "candidate_id": "cand_63e1e9f14fcf7bcef63a",
+      "mapping_votes": [
+        {
+          "voter_id": "judge_a",
+          "decision": "reject",
+          "response_status": "ok"
+        },
+        {
+          "voter_id": "judge_b",
+          "decision": "approve",
+          "response_status": "ok"
+        },
+        {
+          "voter_id": "judge_c",
+          "decision": "approve",
+          "response_status": "ok"
+        }
+      ],
+      "original_negative_vote": {
+        "attempt_id": "attempt_458201caecb04b9784707c00df67972a",
+        "counter_evidence_ids": [
+          "ev_c3774a70bceb0819698c",
+          "ev_8e935597215dd3133bf3"
+        ],
+        "counterevidence_reviewed_ids": [
+          "ev_c3774a70bceb0819698c",
+          "ev_8e935597215dd3133bf3"
+        ],
+        "decision": "reject",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "draft_hash": "95f296790cdce4f03999572245915563138604c97fed4d7ab9c5d42d52ba899a",
+        "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+        "field_reviews": [
+          {
+            "evidence_ids": [
+              "ev_c3774a70bceb0819698c",
+              "ev_8e935597215dd3133bf3"
+            ],
+            "field": "surface_relation",
+            "note": "The source text states '风引起的射程偏差和方向偏差统称为风偏' (Wind-induced range deviation and direction deviation are collectively called wind deviation). This is a definition/collective naming relationship, not a part-whole composition relationship. The surface relation '由...组成' (composed of) is not explicitly stated in the source text. The source uses '统称为' (collectively called), which indicates a naming/definition relationship, not a compositional one.",
+            "status": "not_stated_in_scope"
+          },
+          {
+            "evidence_ids": [
+              "ev_c3774a70bceb0819698c",
+              "ev_8e935597215dd3133bf3"
+            ],
+            "field": "relation_id",
+            "note": "The relation R_f99e5a41297d701d83ca is labeled '具有部件' (has part) with domain 风偏 (wind deviation) and range 射程偏差 (range deviation). However, the source text does not state that 风偏 'has parts' of 射程偏差. The source states that 风偏 is the collective name for wind-induced range deviation and direction deviation. This is a definitional relationship, not a part-whole relationship. The mapping to '具有部件' is semantically incorrect based on the source evidence.",
+            "status": "not_stated_in_scope"
+          }
+        ],
+        "finish_reason": "stop",
+        "input_tokens": 14223,
+        "late_response": false,
+        "latency_ms": 23342,
+        "model_family": "qwen",
+        "model_id": "Qwen",
+        "model_identity": "qwen",
+        "object_revision": 1,
+        "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "output_tokens": 743,
+        "proposal_digest": "b469a7bf4542d1568ae28fe4934e782ed4ee0bde9dbf3459f0fd3e041e196b8e",
+        "provider_started_at": 1793682230.8030708,
+        "queue_time_ms": 298,
+        "rationale_summary": "The revision changes surface_relation from '具有部件' to '由...组成' and adds relation_id R_f99e5a41297d701d83ca (which is labeled '具有部件'). However, the source text '风引起的射程偏差和方向偏差统称为风偏' uses '统称为' (collectively called), which indicates a definition/naming relationship, not a part-whole composition relationship. The source does not state that 风偏 is 'composed of' or 'has parts' of 射程偏差. The semantic relationship in the source is that 风偏 is the collective term for wind-induced range deviation and direction deviation, which is fundamentally different from a part-whole relationship. The proposed mapping to '具有部件' (has part) is not grounded in the source evidence and represents a semantic misinterpretation of the definitional statement.",
+        "reasoning_tokens": null,
+        "request_key": "9185d30762e480ac857ccb4c59b3fb5d469d4ca057397bc6175843872c88cc30",
+        "response_contract_version": "candidate_revision_review_v1",
+        "response_id": "chatcmpl-a765e9588313ee06",
+        "response_status": "ok",
+        "returned_model_id": "Qwen",
+        "supporting_evidence_ids": [],
+        "task_id": "draft_819c5c53ac23478a901ea63283e6aa78",
+        "task_type": "candidate_revision_review",
+        "voter_id": "judge_a",
+        "attempts": [
+          {
+            "attempt_id": "attempt_458201caecb04b9784707c00df67972a",
+            "counter_evidence_ids": [
+              "ev_c3774a70bceb0819698c",
+              "ev_8e935597215dd3133bf3"
+            ],
+            "counterevidence_reviewed_ids": [
+              "ev_c3774a70bceb0819698c",
+              "ev_8e935597215dd3133bf3"
+            ],
+            "decision": "reject",
+            "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+            "draft_hash": "95f296790cdce4f03999572245915563138604c97fed4d7ab9c5d42d52ba899a",
+            "evidence_hash": "84f5c8369a2e09adeda1314b94391cf96a77298bd184c8053fc7f648a7b90d47",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_c3774a70bceb0819698c",
+                  "ev_8e935597215dd3133bf3"
+                ],
+                "field": "surface_relation",
+                "note": "The source text states '风引起的射程偏差和方向偏差统称为风偏' (Wind-induced range deviation and direction deviation are collectively called wind deviation). This is a definition/collective naming relationship, not a part-whole composition relationship. The surface relation '由...组成' (composed of) is not explicitly stated in the source text. The source uses '统称为' (collectively called), which indicates a naming/definition relationship, not a compositional one.",
+                "status": "not_stated_in_scope"
+              },
+              {
+                "evidence_ids": [
+                  "ev_c3774a70bceb0819698c",
+                  "ev_8e935597215dd3133bf3"
+                ],
+                "field": "relation_id",
+                "note": "The relation R_f99e5a41297d701d83ca is labeled '具有部件' (has part) with domain 风偏 (wind deviation) and range 射程偏差 (range deviation). However, the source text does not state that 风偏 'has parts' of 射程偏差. The source states that 风偏 is the collective name for wind-induced range deviation and direction deviation. This is a definitional relationship, not a part-whole relationship. The mapping to '具有部件' is semantically incorrect based on the source evidence.",
+                "status": "not_stated_in_scope"
+              }
+            ],
+            "finish_reason": "stop",
+            "input_tokens": 14223,
+            "late_response": false,
+            "latency_ms": 23342,
+            "model_family": "qwen",
+            "model_id": "Qwen",
+            "model_identity": "qwen",
+            "object_revision": 1,
+            "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "output_tokens": 743,
+            "proposal_digest": "b469a7bf4542d1568ae28fe4934e782ed4ee0bde9dbf3459f0fd3e041e196b8e",
+            "provider_started_at": 1793682230.8030708,
+            "queue_time_ms": 298,
+            "rationale_summary": "The revision changes surface_relation from '具有部件' to '由...组成' and adds relation_id R_f99e5a41297d701d83ca (which is labeled '具有部件'). However, the source text '风引起的射程偏差和方向偏差统称为风偏' uses '统称为' (collectively called), which indicates a definition/naming relationship, not a part-whole composition relationship. The source does not state that 风偏 is 'composed of' or 'has parts' of 射程偏差. The semantic relationship in the source is that 风偏 is the collective term for wind-induced range deviation and direction deviation, which is fundamentally different from a part-whole relationship. The proposed mapping to '具有部件' (has part) is not grounded in the source evidence and represents a semantic misinterpretation of the definitional statement.",
+            "reasoning_tokens": null,
+            "request_key": "9185d30762e480ac857ccb4c59b3fb5d469d4ca057397bc6175843872c88cc30",
+            "response_contract_version": "candidate_revision_review_v1",
+            "response_id": "chatcmpl-a765e9588313ee06",
+            "response_status": "ok",
+            "returned_model_id": "Qwen",
+            "supporting_evidence_ids": [],
+            "task_id": "draft_819c5c53ac23478a901ea63283e6aa78",
+            "task_type": "candidate_revision_review",
+            "voter_id": "judge_a",
+            "attempt_no": 1
+          }
+        ],
+        "actual_calls": 1
+      },
+      "resolution_hash": "cf356b1f1df37571c6d7be92b88040f5c28ab3692d696204b0ecd51c2b44319a",
+      "definition_binding": {
+        "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+        "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+        "class_id": "C_8dcbead39b715b819261",
+        "class_iri": "urn:kg:chapter1:class:ecdb4a446b669c5e322b2176",
+        "class_label": "风偏",
+        "predicate_iri": "http://www.w3.org/2004/02/skos/core#definition",
+        "definition": "风引起的射程偏差和方向偏差的统称。",
+        "language": "zh",
+        "datatype": null
+      },
+      "generate_new_fact_candidate": false,
+      "original_mapping_disagreement_preserved": true
+    },
+    {
+      "sample_id": "DEV-020",
+      "candidate_id": "cand_52159eb442b708f4e860",
+      "revision": 3,
+      "candidate_content_hash": "ee7be66f38abdec87ca40973c73f47f6656878d50c59ccfc66c90c9d2aa5cc98",
+      "source_support": "supported",
+      "independent_source_votes": 3,
+      "source_audit_id": "audit_845cb31d57404f5f81856b79dd208ec5",
+      "source_proposal_digest": "20ebf7d61e6a5bab297e8e344948c0a6a9d0202d251d10384cfccbf0b97d9fa8",
+      "source_evidence_hash": "3bd70a4347fbb4089a3ca18b9ca1b68cd6f0dcb7a0056592d44dabdf9640bebe",
+      "ontology_guard": "unknown",
+      "workflow_state": "schema_unresolved",
+      "pending_extension_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+      "development_applied": true
+    }
+  ],
+  "development_applied_count": 3,
+  "fresh_source_supported_count": 3,
+  "fresh_source_valid_votes": 9,
+  "ontology_preparation": {
+    "extension_id": "ext_16c7db3c60544e8d92a3a70c40e2a358",
+    "delta_hash": "d355b37c54431e7346b0f5b50b744142d52dc56e421fdef00bc1c9602f58de4a",
+    "structure": "pass",
+    "impact": "pass",
+    "local_competency": "unknown",
+    "independent_ontology_votes": 0,
+    "release_published": false,
+    "rdf_before": 882,
+    "rdf_after": 887,
+    "old_candidate_guard_changes": 0,
+    "old_candidates_scanned": 320,
+    "planner_usage": {
+      "llm_calls": 2,
+      "tool_calls": 5,
+      "planner_steps": 2,
+      "validation_rounds": 0,
+      "input_tokens": 28560,
+      "output_tokens": 331,
+      "unknown_token_requests": 0
+    }
+  },
+  "new_journaled_request_attempts": 17,
+  "new_request_states": {
+    "completed": 15,
+    "failed": 2
+  },
+  "new_unknown_requests": 0,
+  "production_applied": false,
+  "production_human_status_counts": {
+    "pending": 320
+  },
+  "formal_release_unchanged": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "previous_pilot_revisions_unchanged": true,
+  "source_workbook_and_live_candidate_integrity": {
+    "checked_candidates": 30,
+    "workbook_sha256": "99fa28fb1efc37ccbe1e1193bd0f3fae01e2a473a054cdcb0e86bf250da63e9e",
+    "production_candidates_changed": false,
+    "human_labels_written": false
+  },
+  "model_approval_is_not_human_accuracy": true
+}

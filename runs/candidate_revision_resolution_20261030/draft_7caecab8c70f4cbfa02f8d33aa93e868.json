@@ -1,0 +1,466 @@
+{
+  "status": "approved",
+  "draft_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+  "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+  "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+  "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "attempt_id": "attempt_533be9dd094145ec9524b24490168e53",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+      "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail",
+          "note": "The candidate tail '摩擦阻力、涡流阻力及超声速时所特有的波动阻力' is a verbatim extraction from the evidence quote '空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。' This correctly captures the full list of components mentioned in the source, replacing the previous incomplete single-item tail '涡流阻力'. The phrase '超声速时所特有的' is correctly retained as a modifier for '波动阻力' within the tail string, preserving the source's specific condition for that component without incorrectly applying it globally.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail_type",
+          "note": "The change from 'C_9ca2918a695c60178dcc' (涡流阻力) to null is appropriate. The previous type was specific to a single component (涡流阻力), which is no longer accurate since the tail now represents a composite list of three distinct components (摩擦阻力, 涡流阻力, 波动阻力). Assigning a single class ID to a heterogeneous list is incorrect. Setting it to null correctly reflects that the tail is a composite entity without a single unified type in the provided ontology context, avoiding an unsupported mapping.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The change from 'unknown' to 'positive' is grounded in the evidence. The source sentence '空气阻力主要由...所组成' is a declarative, affirmative statement asserting the composition of air resistance. There are no negation markers or conditional doubts in the quote. Therefore, the polarity is correctly identified as positive.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The change from 'unknown' to 'extracted' is consistent with the update to qualifiers.polarity. Since the polarity 'positive' is directly and explicitly derived from the affirmative structure of the source sentence, the status 'extracted' accurately reflects that this value was obtained from the text rather than being inferred or left unknown.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 13036,
+      "late_response": false,
+      "latency_ms": 24921,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 794,
+      "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+      "provider_started_at": 1793378796.158549,
+      "queue_time_ms": 370,
+      "rationale_summary": "The revision correctly updates the tail to include the full list of components (摩擦阻力, 涡流阻力, 波动阻力) as stated in the source, fixing the previous incomplete extraction. It appropriately clears the tail_type to null because the tail is now a composite list that does not map to a single ontology class. The polarity is correctly set to positive based on the affirmative declarative nature of the source sentence, and the status is updated to extracted to reflect this direct derivation. All changes are fully grounded in the provided evidence.",
+      "reasoning_tokens": null,
+      "request_key": "7eb5729b254c3857b868da2f0ea882510929c2eeb40e2ebc9b99729cb49465db",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-b5d3fe530ffeaabd",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_34a9e63d42e4c425b893"
+      ],
+      "task_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_533be9dd094145ec9524b24490168e53",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+          "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail",
+              "note": "The candidate tail '摩擦阻力、涡流阻力及超声速时所特有的波动阻力' is a verbatim extraction from the evidence quote '空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。' This correctly captures the full list of components mentioned in the source, replacing the previous incomplete single-item tail '涡流阻力'. The phrase '超声速时所特有的' is correctly retained as a modifier for '波动阻力' within the tail string, preserving the source's specific condition for that component without incorrectly applying it globally.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail_type",
+              "note": "The change from 'C_9ca2918a695c60178dcc' (涡流阻力) to null is appropriate. The previous type was specific to a single component (涡流阻力), which is no longer accurate since the tail now represents a composite list of three distinct components (摩擦阻力, 涡流阻力, 波动阻力). Assigning a single class ID to a heterogeneous list is incorrect. Setting it to null correctly reflects that the tail is a composite entity without a single unified type in the provided ontology context, avoiding an unsupported mapping.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The change from 'unknown' to 'positive' is grounded in the evidence. The source sentence '空气阻力主要由...所组成' is a declarative, affirmative statement asserting the composition of air resistance. There are no negation markers or conditional doubts in the quote. Therefore, the polarity is correctly identified as positive.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The change from 'unknown' to 'extracted' is consistent with the update to qualifiers.polarity. Since the polarity 'positive' is directly and explicitly derived from the affirmative structure of the source sentence, the status 'extracted' accurately reflects that this value was obtained from the text rather than being inferred or left unknown.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 13036,
+          "late_response": false,
+          "latency_ms": 24921,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 794,
+          "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+          "provider_started_at": 1793378796.158549,
+          "queue_time_ms": 370,
+          "rationale_summary": "The revision correctly updates the tail to include the full list of components (摩擦阻力, 涡流阻力, 波动阻力) as stated in the source, fixing the previous incomplete extraction. It appropriately clears the tail_type to null because the tail is now a composite list that does not map to a single ontology class. The polarity is correctly set to positive based on the affirmative declarative nature of the source sentence, and the status is updated to extracted to reflect this direct derivation. All changes are fully grounded in the provided evidence.",
+          "reasoning_tokens": null,
+          "request_key": "7eb5729b254c3857b868da2f0ea882510929c2eeb40e2ebc9b99729cb49465db",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-b5d3fe530ffeaabd",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "task_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "attempt_id": "attempt_d1b5b240159b4c84a5734a84abf4ab19",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+      "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail",
+          "note": "The tail is expanded to include all three components of air resistance mentioned in the source: friction resistance, eddy resistance, and wave resistance characteristic of supersonic speeds.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail_type",
+          "note": "The tail type is set to null because the tail is now a list of multiple entities, making a single class ID inappropriate.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The sentence is a positive assertion of composition, so polarity is positive.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "Polarity was successfully extracted from the source text.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 13604,
+      "late_response": false,
+      "latency_ms": 29640,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1116,
+      "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+      "provider_started_at": 1793378796.192125,
+      "queue_time_ms": 347,
+      "rationale_summary": "The revision correctly updates the tail to encompass all components of air resistance listed in the source text, removes the now-incorrect single tail type, and correctly identifies the polarity as positive.",
+      "reasoning_tokens": 739,
+      "request_key": "36a8f1e729b0fd91c37744b65b8d5e65bbaf26b2bb2a01a263a8f09e91b7734a",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-80d5cbf42e0dce63",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_34a9e63d42e4c425b893"
+      ],
+      "task_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_d1b5b240159b4c84a5734a84abf4ab19",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+          "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail",
+              "note": "The tail is expanded to include all three components of air resistance mentioned in the source: friction resistance, eddy resistance, and wave resistance characteristic of supersonic speeds.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail_type",
+              "note": "The tail type is set to null because the tail is now a list of multiple entities, making a single class ID inappropriate.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The sentence is a positive assertion of composition, so polarity is positive.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "Polarity was successfully extracted from the source text.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 13604,
+          "late_response": false,
+          "latency_ms": 29640,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1116,
+          "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+          "provider_started_at": 1793378796.192125,
+          "queue_time_ms": 347,
+          "rationale_summary": "The revision correctly updates the tail to encompass all components of air resistance listed in the source text, removes the now-incorrect single tail type, and correctly identifies the polarity as positive.",
+          "reasoning_tokens": 739,
+          "request_key": "36a8f1e729b0fd91c37744b65b8d5e65bbaf26b2bb2a01a263a8f09e91b7734a",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-80d5cbf42e0dce63",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "task_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "attempt_id": "attempt_0f35a6cbd461405997f55aacfa38aa34",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+      "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail",
+          "note": "原句明确列出三项组成：摩擦阻力、涡流阻力及超声速时所特有的波动阻力，修订后的尾实体完整覆盖三项，未遗漏或添加。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail_type",
+          "note": "原尾项为单一涡流阻力类型，现为三项组合列表，无法映射到单一本体类，置为 null 合理；本体中涡流阻力仅为其中一项，不能代表整个列表。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原句为肯定陈述“由……组成”，极性应为 positive，修订将 unknown 改为 positive 有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性已由证据确定，状态由 unknown 改为 extracted 一致。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 11343,
+      "late_response": false,
+      "latency_ms": 5593,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 435,
+      "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+      "provider_started_at": 1793378796.1347117,
+      "queue_time_ms": 346,
+      "rationale_summary": "修订将单一“涡流阻力”尾项替换为原句完整的三项组成列表，保留“主要”量词，并将“超声速时所特有”限定仅修饰波动阻力，未误作全局条件。极性由 unknown 改为 positive 与原句肯定陈述一致。尾类型置 null 因组合列表无法映射单一本体类，属合理处理。所有变更字段均有冻结证据支持，无被删除的条件或未评估的反证。",
+      "reasoning_tokens": null,
+      "request_key": "881d959fb51fd697b8ebe4bdd16f1761ce4326f455b6f880efd5b6c841d0dd97",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "60888e4a-536e-4071-863b-171925c0b95a",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_34a9e63d42e4c425b893"
+      ],
+      "task_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "attempt_id": "attempt_0f35a6cbd461405997f55aacfa38aa34",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "1767a1f08e5374182074eec6e6193dd77b1f1b4911631b916c09f934b78b0e46",
+          "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail",
+              "note": "原句明确列出三项组成：摩擦阻力、涡流阻力及超声速时所特有的波动阻力，修订后的尾实体完整覆盖三项，未遗漏或添加。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail_type",
+              "note": "原尾项为单一涡流阻力类型，现为三项组合列表，无法映射到单一本体类，置为 null 合理；本体中涡流阻力仅为其中一项，不能代表整个列表。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原句为肯定陈述“由……组成”，极性应为 positive，修订将 unknown 改为 positive 有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性已由证据确定，状态由 unknown 改为 extracted 一致。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 11343,
+          "late_response": false,
+          "latency_ms": 5593,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 435,
+          "proposal_digest": "d56ce1335879ae444fdf5c50269531be2568482f1f0d8bdb98f9afe397e29dc0",
+          "provider_started_at": 1793378796.1347117,
+          "queue_time_ms": 346,
+          "rationale_summary": "修订将单一“涡流阻力”尾项替换为原句完整的三项组成列表，保留“主要”量词，并将“超声速时所特有”限定仅修饰波动阻力，未误作全局条件。极性由 unknown 改为 positive 与原句肯定陈述一致。尾类型置 null 因组合列表无法映射单一本体类，属合理处理。所有变更字段均有冻结证据支持，无被删除的条件或未评估的反证。",
+          "reasoning_tokens": null,
+          "request_key": "881d959fb51fd697b8ebe4bdd16f1761ce4326f455b6f880efd5b6c841d0dd97",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "60888e4a-536e-4071-863b-171925c0b95a",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "task_id": "draft_7caecab8c70f4cbfa02f8d33aa93e868",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

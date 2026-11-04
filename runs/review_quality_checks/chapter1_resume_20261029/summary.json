@@ -1,0 +1,221 @@
+{
+  "checked_at_utc": "2026-10-29T13:07:23.890567+00:00",
+  "baseline": "D:\\knowledge-huopao\\runs\\review_recovery_20261029\\before_apply_20261029_101209_833304.sqlite3",
+  "snapshot": "D:\\knowledge-huopao\\runs\\review_quality_checks\\chapter1_resume_20261029\\snapshot_20261029_130719_163147.sqlite3",
+  "before": {
+    "total": 320,
+    "independent_completed": 210,
+    "completion_rate": 0.6562,
+    "audit_status": {
+      "completed": 298,
+      "failed": 1,
+      "paused": 1,
+      "not_audited": 20
+    },
+    "workflow_state": {
+      "revision_required": 45,
+      "awaiting_ontology_review": 126,
+      "manual_review": 108,
+      "schema_unresolved": 20,
+      "ready_for_review": 21
+    },
+    "decision": {
+      "manual_review": 299,
+      "None": 21
+    },
+    "source_support_result": {
+      "unresolved": 144,
+      "supported": 155,
+      "None": 21
+    }
+  },
+  "after": {
+    "total": 320,
+    "independent_completed": 222,
+    "completion_rate": 0.6937,
+    "audit_status": {
+      "completed": 319,
+      "failed": 1
+    },
+    "workflow_state": {
+      "revision_required": 52,
+      "schema_unresolved": 146,
+      "manual_review": 113,
+      "awaiting_ontology_review": 9
+    },
+    "decision": {
+      "manual_review": 320
+    },
+    "source_support_result": {
+      "supported": 166,
+      "unresolved": 154
+    }
+  },
+  "fresh": {
+    "selected": 20,
+    "completed": 20,
+    "failed": 0,
+    "independent_review_completed": 8,
+    "review_incomplete": 12,
+    "revised": 0,
+    "skipped": 1
+  },
+  "fresh_selected_vote_statuses": {
+    "ok": 44,
+    "timeout": 8,
+    "invalid_json": 8
+  },
+  "fresh_model_statuses": {
+    "Qwen": {
+      "ok": 20
+    },
+    "Gemma": {
+      "timeout": 8,
+      "ok": 12
+    },
+    "deepseek-flash": {
+      "invalid_json": 8,
+      "ok": 12
+    }
+  },
+  "fresh_reason_codes": {
+    "CANDIDATE_IDENTITY_UNRESOLVED": 16,
+    "CRITICAL_ISSUES_UNRESOLVED": 20,
+    "RELATION_MAPPING_AMBIGUOUS": 1,
+    "DOMAIN_CONSTRAINT_FAILED": 2,
+    "ENTITY_TYPE_UNKNOWN": 4,
+    "SCHEMA_GAP": 15,
+    "EVIDENCE_GAP_UNRESOLVED": 4,
+    "RANGE_CONSTRAINT_FAILED": 1
+  },
+  "fresh_stop_reasons": {
+    "token_budget_exhausted": 12,
+    "judge_b 请求超时且结果未知，无法恢复；当前独立验证未达共识，本体存在缺口，无合法且有信息增益的动作。": 1,
+    "judge_b 请求结果未知且不可安全恢复，无法形成完整独立验证共识；本体存在 SCHEMA_GAP，且扩展请求需当前独立来源支持共识，当前不满足。": 1,
+    "awaiting_ontology_review": 6
+  },
+  "fresh_tool_statuses": [
+    {
+      "tool": "inspect_ontology",
+      "status": "ok",
+      "count": 20
+    },
+    {
+      "tool": "run_validation",
+      "status": "ok",
+      "count": 20
+    },
+    {
+      "tool": "recover_validation",
+      "status": "ok",
+      "count": 11
+    },
+    {
+      "tool": "finish_review",
+      "status": "finish_requested",
+      "count": 2
+    },
+    {
+      "tool": "request_ontology_extension",
+      "status": "waiting",
+      "count": 6
+    },
+    {
+      "tool": "search_evidence",
+      "status": "ok",
+      "count": 1
+    },
+    {
+      "tool": "propose_revision",
+      "status": "draft_proposed",
+      "count": 5
+    },
+    {
+      "tool": "review_revision",
+      "status": "review_incomplete",
+      "count": 1
+    },
+    {
+      "tool": "review_revision",
+      "status": "approved",
+      "count": 1
+    },
+    {
+      "tool": "propose_revision",
+      "status": "tool_error",
+      "count": 1
+    }
+  ],
+  "recovery": {
+    "candidates": 12,
+    "newly_completed": 4,
+    "valid_old_votes_checked": 20,
+    "valid_old_votes_unchanged": true
+  },
+  "requests_since_batch_start": {
+    "triple_review": {
+      "completed": 49,
+      "failed": 37,
+      "unknown": 9
+    },
+    "candidate_revision_review": {
+      "completed": 5,
+      "failed": 1
+    }
+  },
+  "ontology": {
+    "audits": 100,
+    "statuses": {
+      "completed": 100
+    },
+    "recommendations": {
+      "needs_human": 100
+    },
+    "stop_reasons": {
+      "ontology_planner_failed": 66,
+      "case_token_budget_exhausted": 3,
+      "case_or_task_budget_exhausted": 27,
+      "repeated_action_without_information_gain": 4
+    },
+    "with_proposals": 0,
+    "votes": 0,
+    "jobs": [
+      {
+        "job_type": "ontology_extension",
+        "status": "completed",
+        "count": 100
+      },
+      {
+        "job_type": "ontology_extension",
+        "status": "failed",
+        "count": 3
+      }
+    ],
+    "task_statuses": [
+      {
+        "status": "needs_human",
+        "count": 100
+      },
+      {
+        "status": "proposed",
+        "count": 1
+      }
+    ]
+  },
+  "revision_drafts": [
+    {
+      "status": "approved",
+      "count": 1
+    },
+    {
+      "status": "proposed",
+      "count": 3
+    },
+    {
+      "status": "review_incomplete",
+      "count": 1
+    }
+  ],
+  "external_model_calls_for_assessment": 0,
+  "production_database_modified": false
+}

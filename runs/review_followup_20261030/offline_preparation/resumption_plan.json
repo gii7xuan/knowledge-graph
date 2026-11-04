@@ -1,0 +1,2470 @@
+{
+  "external_model_calls": 0,
+  "production_database_modified": false,
+  "automatic_dispatch": false,
+  "automatic_publication": false,
+  "tasks": 102,
+  "lanes": {
+    "source_verified_requires_schema_investigation": 92,
+    "existing_delta_requires_context": 3,
+    "existing_delta_requires_revision": 7
+  },
+  "existing_delta_checks": {
+    "structure": {
+      "pass": 9,
+      "fail": 1
+    },
+    "impact": {
+      "pass": 10
+    },
+    "competency": {
+      "unknown": 3,
+      "fail": 7
+    }
+  },
+  "unknown_request_count": 3,
+  "tasks_with_valid_objections": 2,
+  "tasks_with_budget_attention": 3,
+  "model_dispatch_preconditions": [
+    "same_model_service_available_for_long_context",
+    "original_request_outcomes_reconciled_when_unknown",
+    "current_source_and_delta_bindings",
+    "sufficient_task_and_case_budget_without_usage_reset"
+  ],
+  "items": [
+    {
+      "extension_id": "ext_03f6894fb15d4a369da1205c4018c959",
+      "task_row_version": 10,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "c7145b8f1794161486cac35b6cd7bad596e52e2204050cba766d87fd538eb945",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_03f6894fb15d4a369da1205c4018c959.json"
+    },
+    {
+      "extension_id": "ext_04108c1d421d40bda6da98e2cf1418c1",
+      "task_row_version": 1,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "db8a3b07e83ccbaa643b4eb378a1eba2b98ffe3562f369c049d8df96a1e09526",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_04108c1d421d40bda6da98e2cf1418c1.json"
+    },
+    {
+      "extension_id": "ext_05b93d2eaa3c4134a199e02948ddc105",
+      "task_row_version": 5,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b8a60781ce93621b375cfcfe00430cc86d85b29c668425b1c30dd46368d6896a",
+      "lane": "existing_delta_requires_context",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "unknown"
+      },
+      "existing_valid_votes": [
+        {
+          "voter_id": "judge_a",
+          "round_id": 1,
+          "response_status": "ok",
+          "decision": "revise",
+          "outcome_unknown": null,
+          "error_code": null,
+          "reason_codes": [
+            "requested_context_invalid"
+          ],
+          "suggested_changes": null,
+          "counter_evidence_ids": [],
+          "request_key": "0dab5acd373bef6099cf93d4975d644d474a5b28ac576392a6873427ed087009"
+        },
+        {
+          "voter_id": "judge_c",
+          "round_id": 1,
+          "response_status": "ok",
+          "decision": "approve",
+          "outcome_unknown": null,
+          "error_code": null,
+          "reason_codes": [
+            "gap_confirmed_by_source",
+            "no_equivalent_property",
+            "additive_low_risk"
+          ],
+          "suggested_changes": null,
+          "counter_evidence_ids": [],
+          "request_key": "accb20c3a0c7e10e4e152b08d4fca5ec93878aa64ea7f894b3e3f5b24d185449"
+        }
+      ],
+      "unknown_request_keys_do_not_resend": [
+        "730b81a817b1db77f0eefcff388412f516512a7e644dfb291864e8f315fe4aba"
+      ],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "resolve_unknown_competency_checks_with_verifiable_context",
+        "address_existing_independent_objections_without_overwriting_votes",
+        "reconcile_original_unknown_requests_before_any_equivalent_retry",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_05b93d2eaa3c4134a199e02948ddc105.json"
+    },
+    {
+      "extension_id": "ext_06cf3260d7d5425fbb34eb8847b7be49",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "bffb41209e56cf39e2a4c13e1809f65472888919a558bf9496cc791b4689ce37",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_06cf3260d7d5425fbb34eb8847b7be49.json"
+    },
+    {
+      "extension_id": "ext_0813e33a152048bc87c8fb055e1b0507",
+      "task_row_version": 5,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "14d2d6a00e3b17cae4df9a7b0950dcfe9c1640b9a9c3529418e808866887b053",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [
+        {
+          "voter_id": "judge_c",
+          "round_id": 1,
+          "response_status": "ok",
+          "decision": "reject",
+          "outcome_unknown": null,
+          "error_code": null,
+          "reason_codes": [
+            "DESCRIPTION_NOT_RELATION",
+            "DUPLICATE_OF_EXISTING_DEFINITION",
+            "UNSUPPORTED_DOMAIN_RANGE_CONSTRAINT",
+            "LABEL_IS_SENTENCE_FRAGMENT"
+          ],
+          "suggested_changes": {
+            "action": "drop_operation",
+            "note": "删除该新增对象属性；平流层大气状态已由既有类定义表达，无需新增关系。若确需表达大气运动状态，应作为类注解而非 domain/range 约束。",
+            "target": "R_ff87ce38f0b57ed3c0e8"
+          },
+          "counter_evidence_ids": [
+            "ev_8abbec1dad96559171c2"
+          ],
+          "request_key": "51bac832550565b38b7b395e27098d06c7df4532f543d90e941007b84639ea40"
+        }
+      ],
+      "unknown_request_keys_do_not_resend": [
+        "5129822c4e748f32e0cfb5b4529079214096bad6b736ee0ddf62268f00d1391b",
+        "b3092d2563317746d1642cb296b04a4a331762448499965aa962db843fea87ec"
+      ],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "address_existing_independent_objections_without_overwriting_votes",
+        "reconcile_original_unknown_requests_before_any_equivalent_retry",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_0813e33a152048bc87c8fb055e1b0507.json"
+    },
+    {
+      "extension_id": "ext_08a7a7f0577440a6bfd2eac1a1d45df2",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "d46f2fedeef0f7606e0c5e29d30fa8f78bb18c03ef63ca08321c0e5cc6e2307b",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_08a7a7f0577440a6bfd2eac1a1d45df2.json"
+    },
+    {
+      "extension_id": "ext_0debae0687b04b2c959fcf9c95750a8d",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "f455d5e96b339e942b806f1a6cae14c2e4f4fea3e67f8e0bcc9679042802a7e6",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_0debae0687b04b2c959fcf9c95750a8d.json"
+    },
+    {
+      "extension_id": "ext_112f255829e542399e5d6bcbdb6d97d7",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "205a69b7eb020740885fbf2055977f684f39af6b536e956aadb59749114631ca",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_112f255829e542399e5d6bcbdb6d97d7.json"
+    },
+    {
+      "extension_id": "ext_133131bb0bc84a7880bc375d8c56cd4e",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "06efee809f9c35e67fa7bb886ad94f4b6bc8b2d1dee43226e73fa4ac403d49f0",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_133131bb0bc84a7880bc375d8c56cd4e.json"
+    },
+    {
+      "extension_id": "ext_14575bcc100442249fb532bd5677914f",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "c78a1beda87d96a24c6c62fb5017ca0ee1f6b24b68393efe96f2b4b7b0149c8d",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_14575bcc100442249fb532bd5677914f.json"
+    },
+    {
+      "extension_id": "ext_1cfbbb0340ae45c98cf023a350a0a502",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "f361e39c8157f0d815e35f6f9af9438f00a6cdccc517db19ebd3f1e877a76886",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_1cfbbb0340ae45c98cf023a350a0a502.json"
+    },
+    {
+      "extension_id": "ext_1e8c115afa174f4383fb62aa45e80bf0",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "6f00786ed430cfbfc011ba9f0bd5447791c25b4eed6e2283177a5f53519f6f81",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_1e8c115afa174f4383fb62aa45e80bf0.json"
+    },
+    {
+      "extension_id": "ext_1f64f037bc0e483f8a456899080a5d83",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "29a018384f3907bc0e71ed53e3633f3bede56f2f0aaa830c2ebf1f65440f2e25",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [
+        {
+          "case_id": "case_bb12aa8ad70f4d655de86eb871cc5fdf",
+          "exhausted_dimensions": [
+            "tokens"
+          ]
+        }
+      ],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "check_remaining_budget_and_authorize_an_additive_grant_if_needed_preserving_usage",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_1f64f037bc0e483f8a456899080a5d83.json"
+    },
+    {
+      "extension_id": "ext_2481ca08c8784d97a21d273376db4c5b",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "74efc7fadd6c2d992a16789595812ea6aec6f88787a0de724357fccb804fbb0b",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2481ca08c8784d97a21d273376db4c5b.json"
+    },
+    {
+      "extension_id": "ext_2692739ff38f43448e86159278ecbafc",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "44ab2c51abc4aff09060f4051cdb3a5b1a11a64470731e1ba3d3b2f7f8e3f003",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2692739ff38f43448e86159278ecbafc.json"
+    },
+    {
+      "extension_id": "ext_26d11791e6d042bb8dcae0be887b5519",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "8c7d8b69963b0914d5b96f9af245809cad10530a7e9ddfc2006c81e96cf7770c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_26d11791e6d042bb8dcae0be887b5519.json"
+    },
+    {
+      "extension_id": "ext_27e800142e0a4306b040758c5bcff97a",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "6c878ca644d1ed7bafd6080c3274a88063e019550cd6133bd3b05761f473894b",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_27e800142e0a4306b040758c5bcff97a.json"
+    },
+    {
+      "extension_id": "ext_2d7490d88ee34183811538ff947ae0ef",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b1b72ae890559780a2333c83a784f232acbd480d87d1a1aac77d13700efcfe3c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2d7490d88ee34183811538ff947ae0ef.json"
+    },
+    {
+      "extension_id": "ext_2dd0eb0275714c6c9ac89f4d58fa6c8b",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "f28a528b906891ccfd7861aa1f771080d4e980825771aa0fe318c47a95e13c6c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2dd0eb0275714c6c9ac89f4d58fa6c8b.json"
+    },
+    {
+      "extension_id": "ext_2dd4869ee14f4bceaf7ec4d4781186cf",
+      "task_row_version": 4,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "ede1ede8b40060066e08fc06a9da4d08c7082ea88578d5db35c579584c65dd72",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2dd4869ee14f4bceaf7ec4d4781186cf.json"
+    },
+    {
+      "extension_id": "ext_2e12391777d14f10b5718b815860331a",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "9a7f864b4ff236465c544a929965c31ac2d1bbd27b620f397ae54e38bde6ec55",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2e12391777d14f10b5718b815860331a.json"
+    },
+    {
+      "extension_id": "ext_2e44bafdc71c4a558efcb028e39b1ce6",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "6b57ea0f6181147c38563c45994c9a91e912533e292a7cd927df96da0c988199",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_2e44bafdc71c4a558efcb028e39b1ce6.json"
+    },
+    {
+      "extension_id": "ext_34ce344851574673820a78e039041dc6",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "fa368be7a94f017e4d7bc198d67399bf04d4f96be87560f068a57df8db92d49c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_34ce344851574673820a78e039041dc6.json"
+    },
+    {
+      "extension_id": "ext_366535744c5f471887ae2179fd776c6c",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "942778ca7617d5e641a4d72464dfc92ead172994aab452cd197c3811faeabf14",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_366535744c5f471887ae2179fd776c6c.json"
+    },
+    {
+      "extension_id": "ext_383608fae92b4f179300308bd9174fbb",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "1c20588945bc9aae85f1218a4dab50819fff020bd983a90589aa0ad7c158b280",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_383608fae92b4f179300308bd9174fbb.json"
+    },
+    {
+      "extension_id": "ext_3947a40d0b0a4719865b21bfd7dde807",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "045f7ecc8228e64110ca2745d68484fcab761b7d012180015be586e07ade7b1c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_3947a40d0b0a4719865b21bfd7dde807.json"
+    },
+    {
+      "extension_id": "ext_3a7e71cc55a347c8a28cdb346b7b0e46",
+      "task_row_version": 6,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b18e534a1c3ce4ae0024ceff2cf632f9254d705fc902a838a2b8491940733da2",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_3a7e71cc55a347c8a28cdb346b7b0e46.json"
+    },
+    {
+      "extension_id": "ext_3b4a93e6e57049c19f399682bac4e6a0",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "2d5b50fe788814a1e49d863ead72701bedf625d75e13c98f6a40c60a40da454d",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_3b4a93e6e57049c19f399682bac4e6a0.json"
+    },
+    {
+      "extension_id": "ext_3c2b811792e843df8e2a2a80133d5de7",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "3244e6f2637343105aba31061112683786c514b05d670b28b0f5747d77bb1cc3",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_3c2b811792e843df8e2a2a80133d5de7.json"
+    },
+    {
+      "extension_id": "ext_3e7549fc23054ec5b03b783a72a169e2",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "1802067a3f4059a4aa3fa45c5861b0ab8d986c0ee99c5d023e3c8f596581a966",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_3e7549fc23054ec5b03b783a72a169e2.json"
+    },
+    {
+      "extension_id": "ext_3f570b13d0cd45b8ba6bf62594e01cbc",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "3a3b7cafcdf048f0c8ba97b60aedb5b351bf2dd002d2fa7693de3051a78a4192",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_3f570b13d0cd45b8ba6bf62594e01cbc.json"
+    },
+    {
+      "extension_id": "ext_4227c3cacc1d4f8c93221a36a7331cca",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "617599263a19517eed1fc9b4820d3c733350e453c588b5b9827d5dc8a17a3c6f",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_4227c3cacc1d4f8c93221a36a7331cca.json"
+    },
+    {
+      "extension_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+      "lane": "existing_delta_requires_context",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "unknown"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "resolve_unknown_competency_checks_with_verifiable_context",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_4272d42b83144e8c8da86d3530f76019.json"
+    },
+    {
+      "extension_id": "ext_46d49ffd6cab4be5bca7194ae58fad3e",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "3b271ba3156a55d3920372b8755c9d030b04da2604b724b99ce134e0f86377ea",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_46d49ffd6cab4be5bca7194ae58fad3e.json"
+    },
+    {
+      "extension_id": "ext_478fca2b24cf44dd9d8b19f42b681690",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "43e9eb90403f50840ef938fa14550928b2ebcc17784c3cce8d007e7fa9207143",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_478fca2b24cf44dd9d8b19f42b681690.json"
+    },
+    {
+      "extension_id": "ext_47b2102b6ba646a1a4f40587e83c0561",
+      "task_row_version": 5,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "e682a598f1a6141dda2113a7f39fa5e079ca725c266327ffd796df5813920df8",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "fail",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_47b2102b6ba646a1a4f40587e83c0561.json"
+    },
+    {
+      "extension_id": "ext_4821cf69d18e4b8fbd312c9dda1593d6",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "d1fc95d3a97db791177d5131eac746f7c8b48f004f4e8d57ea30f3c3a9ef56d1",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_4821cf69d18e4b8fbd312c9dda1593d6.json"
+    },
+    {
+      "extension_id": "ext_4a9a96a9450145e596202e196fd0c124",
+      "task_row_version": 5,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "07cc305307849cf5eaf699dc79e11e9b47ef08b226a99d19a0e294fe7848f31d",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_4a9a96a9450145e596202e196fd0c124.json"
+    },
+    {
+      "extension_id": "ext_4b0b021053da484c970e81ff01f00005",
+      "task_row_version": 4,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "1daeb66ce75f9a585a9736bd29ab7756fcdefa7df24ae19d47b9f9f682fd1a27",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_4b0b021053da484c970e81ff01f00005.json"
+    },
+    {
+      "extension_id": "ext_4f8093fd496146e882bd5e2902e92240",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "53486a80ab14bc7e37c4af81058daebae77e9feebac18ea166451e5242d24d77",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_4f8093fd496146e882bd5e2902e92240.json"
+    },
+    {
+      "extension_id": "ext_5087eeecd0db482db34678a6cee74009",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "ad5a3ec8dd2cdcf6167729595f8968c5127dd88dd262e5f1bdfad4fa7a70d6b5",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_5087eeecd0db482db34678a6cee74009.json"
+    },
+    {
+      "extension_id": "ext_576152e0a5cb4b40ad1bf976dce05e9d",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "2900323b2922e2b4b2361a370ffa2d21344d5a3014b18562c21018db3fc31735",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [
+        {
+          "case_id": "case_6aef726f6fc86cf1e9583a6811eb7077",
+          "exhausted_dimensions": [
+            "tokens"
+          ]
+        }
+      ],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "check_remaining_budget_and_authorize_an_additive_grant_if_needed_preserving_usage",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_576152e0a5cb4b40ad1bf976dce05e9d.json"
+    },
+    {
+      "extension_id": "ext_5b2988767535453b8f46073d0d877ef8",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "899e8a3c094b7b896a715229403ddfe5e9cc61481dbe13457ea1436172901d31",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_5b2988767535453b8f46073d0d877ef8.json"
+    },
+    {
+      "extension_id": "ext_5b2b83ee7d124376b40cc0d78fe0dfc0",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "01790c6bd1431331b7f58dd438aa77aba3304219ca4d4df8bae9cbaf15c61370",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_5b2b83ee7d124376b40cc0d78fe0dfc0.json"
+    },
+    {
+      "extension_id": "ext_5c30e9a4047342cc896278e9a00f2f12",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "0c76e2bc0f073451423a25e5a7eced6781eb78e8daa74951ab0dd00c25a4b4d5",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_5c30e9a4047342cc896278e9a00f2f12.json"
+    },
+    {
+      "extension_id": "ext_609f81cfa5ee4ee885183edb5657a080",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "3f2e748850c7a6519ef16605b9a0dcc3b262acea3fb4c658491fd1b4a6f4e2a5",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_609f81cfa5ee4ee885183edb5657a080.json"
+    },
+    {
+      "extension_id": "ext_63ba3e33f7b94182b60c5309344ac40f",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "3080096952839e0cd2da01767ccc005345d9448d2b3e053cde5f7eda7e274b4d",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_63ba3e33f7b94182b60c5309344ac40f.json"
+    },
+    {
+      "extension_id": "ext_686010c980864b299c1f2b4edc31e897",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "523a762695eb60db3b58870869729357aaa13a928f0bb88a1a7328ee209603b2",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_686010c980864b299c1f2b4edc31e897.json"
+    },
+    {
+      "extension_id": "ext_6a42c4692d2a4b22b12d37ae0d63db21",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "458071a43bc298638da46f5824d6250bda09cd4e18b37068bff964f2220555b2",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_6a42c4692d2a4b22b12d37ae0d63db21.json"
+    },
+    {
+      "extension_id": "ext_6ce3e8f494e94305a4260ef187a60de6",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "4ce614a0fc5385ff98d55edc8bffa76e3606a02ff54bd90abe32162129b145d1",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_6ce3e8f494e94305a4260ef187a60de6.json"
+    },
+    {
+      "extension_id": "ext_6db8dd6be1654a72a79559c193431676",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "0c4d3bc843cae0175071af290b2a4e60f27940dc3758b62b8405d4797c04d240",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_6db8dd6be1654a72a79559c193431676.json"
+    },
+    {
+      "extension_id": "ext_720a7feb35d341f68a86afc2671146a1",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "53a8f3eeb9082ac75c4b335133a89a746e4577a6bbacfff6ebc710dd75b6e440",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_720a7feb35d341f68a86afc2671146a1.json"
+    },
+    {
+      "extension_id": "ext_7459b183757d4676b3ddec1623b0e2eb",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "c6ecd61b15fa1bdcefb2527523eb896a741b6dbeeac6d547e9043cfdedc74491",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_7459b183757d4676b3ddec1623b0e2eb.json"
+    },
+    {
+      "extension_id": "ext_76116c9dcecc49e4a8f77bab900b5aac",
+      "task_row_version": 4,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "5836e62939ce68b6e49bf3e695b56b8e642e3250456b9cca51e65d496b15256c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_76116c9dcecc49e4a8f77bab900b5aac.json"
+    },
+    {
+      "extension_id": "ext_7872fdcfe9e846bdacf964633545495c",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "f100066506a4faea7bc94f3bbff8f08355aa33d18320281ea3e6b3c4746f1efb",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_7872fdcfe9e846bdacf964633545495c.json"
+    },
+    {
+      "extension_id": "ext_7c844bc9e5c7450db9c27ac4f6ad206a",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "681314652dd632d8fc4589a1b92e8a7215df640d7fe5fe46f1aec21e7472746d",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_7c844bc9e5c7450db9c27ac4f6ad206a.json"
+    },
+    {
+      "extension_id": "ext_7d3421ccfa794111b1413cde35af9a32",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "aec2076a207ea2c44c783452247df9f937f565ce1ff304f3a3113e763d7b9135",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_7d3421ccfa794111b1413cde35af9a32.json"
+    },
+    {
+      "extension_id": "ext_86cb98a62c5f4e24a475124eb5a50b05",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "3ba89ab8a3fbaf4bf2ec86c111573027c005c01cd9baa4d876d03e4d7adbb63d",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_86cb98a62c5f4e24a475124eb5a50b05.json"
+    },
+    {
+      "extension_id": "ext_87521ddd0a784fb1982b64648d6d9751",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "a794c1a7862d01cb46e51c6419f66f9c8af32ec9bd194f9adf30d6731b957c2b",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_87521ddd0a784fb1982b64648d6d9751.json"
+    },
+    {
+      "extension_id": "ext_8bf8ad4c6cd14b709a6b69012580cbc4",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "be7d51bfd409bdf838c3bf232d0fb46a4c6de0d07432871cf6f65bbec85f7915",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_8bf8ad4c6cd14b709a6b69012580cbc4.json"
+    },
+    {
+      "extension_id": "ext_8f88156969fa46dda6124c9ebb2b8ae3",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "5953d6d0bcbad1a535c83ed15364d7e1d6e6a8d5d4e7ea6fcb058720433dffb8",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_8f88156969fa46dda6124c9ebb2b8ae3.json"
+    },
+    {
+      "extension_id": "ext_94a76f5a476c436387ea3473f57aa47f",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "c8e95083eafeba37764d3ddccb3b41b08e8534eefe99710eb509afbe1accbe08",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_94a76f5a476c436387ea3473f57aa47f.json"
+    },
+    {
+      "extension_id": "ext_97334f696986460e979c7c0d94a91810",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b10a09ca8e05e4ba659599971d06da49a58016c7842d774291b4ea89d99ce70a",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_97334f696986460e979c7c0d94a91810.json"
+    },
+    {
+      "extension_id": "ext_976f101773c647948365d2d4f604d525",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b1d6ca77a8bffbeb198291303be189e1a974e878f46d7cf7c6d4af7845a3c7e3",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_976f101773c647948365d2d4f604d525.json"
+    },
+    {
+      "extension_id": "ext_99015453c2e8499cb9c9c2bcc677ea04",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "fcf0fb40f7097fb38e6c5461c1e8cc438c45295c5f705b87b8e7a3bebca15934",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_99015453c2e8499cb9c9c2bcc677ea04.json"
+    },
+    {
+      "extension_id": "ext_99e41fa0ba724530b2b71da7e796cf39",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "c358fd1dbf26f2b79cca6323e7e4ee1be6d3c57b4de8f60e3870024149a83c26",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_99e41fa0ba724530b2b71da7e796cf39.json"
+    },
+    {
+      "extension_id": "ext_9ac4a987f2e2416da0bef5fd51d85586",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "ff83983a6b4b2d5d8a3c756686c3906662f7a0bfa5a6cd915cb371aa64c1ef72",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_9ac4a987f2e2416da0bef5fd51d85586.json"
+    },
+    {
+      "extension_id": "ext_9f094004df40475687efe8cde63cfc92",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "d2ea392acc0cefb7199a1a2bc9a6705d82fa2125112663a9c8893ebdeed654a7",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_9f094004df40475687efe8cde63cfc92.json"
+    },
+    {
+      "extension_id": "ext_a36bee2beff745259262a423ac1d4b1e",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "9b8ee4ddf632761c20cadfd2341ff9f4f2a8e285005dea9f5fbfb0ca8144aa50",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_a36bee2beff745259262a423ac1d4b1e.json"
+    },
+    {
+      "extension_id": "ext_a4c7a4cf8659452291d40828fdbef1c1",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "798d67110ca2f7a1eafe7ea12a2977c4304b8e47094e8583c0e785d921fc61f9",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_a4c7a4cf8659452291d40828fdbef1c1.json"
+    },
+    {
+      "extension_id": "ext_a62415ddd4604d77a5aa20ee4781a37d",
+      "task_row_version": 4,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "2d3887aec99e9f1d5b28bb3ea13a39ee85b69ff71606a660fdaa1261284814da",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_a62415ddd4604d77a5aa20ee4781a37d.json"
+    },
+    {
+      "extension_id": "ext_a87c8b574c4644f4942a127c331eabee",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "a794c1a7862d01cb46e51c6419f66f9c8af32ec9bd194f9adf30d6731b957c2b",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_a87c8b574c4644f4942a127c331eabee.json"
+    },
+    {
+      "extension_id": "ext_a98155b35bee449d93fe58fe6bea48ef",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "a794c1a7862d01cb46e51c6419f66f9c8af32ec9bd194f9adf30d6731b957c2b",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_a98155b35bee449d93fe58fe6bea48ef.json"
+    },
+    {
+      "extension_id": "ext_ad9fe0a45e31413bbc606a898832babd",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "5584c7d3d5520ea50114adc37fe3c47d726207f393c159c989ab683c237bbf29",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_ad9fe0a45e31413bbc606a898832babd.json"
+    },
+    {
+      "extension_id": "ext_b1bebec4da934f698489d155fb0a7c10",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "fa1fddbadda19df84504a82e59b1b62c07968f268aa3c7bfa34ac9bc84e4d4c7",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_b1bebec4da934f698489d155fb0a7c10.json"
+    },
+    {
+      "extension_id": "ext_b26aaf6daa564c059501c54d2fb93321",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "51a40edb139183e6599e795e4f0df729a7c344e7b69494b45b0eb1493cf9c9b1",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_b26aaf6daa564c059501c54d2fb93321.json"
+    },
+    {
+      "extension_id": "ext_b88747d0100141bab0dfd591ff56184c",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b1f8f9b70da46000c77a5311ae7f485bb543fc42f11a9a7eec8aca10a25da8e8",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_b88747d0100141bab0dfd591ff56184c.json"
+    },
+    {
+      "extension_id": "ext_bf463538a2cf470f94b6f3eeae380bc2",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b6be42b11576a64351b85b9a3c8d8bb9dddd61ef83b6eb955e3211cbd25e4d07",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_bf463538a2cf470f94b6f3eeae380bc2.json"
+    },
+    {
+      "extension_id": "ext_c2cfb30b2a7840a3bbec840f1b2f4111",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "4b22b52fbdba7a564d432bf9cbdea9a16dd028303e5d3867eeb0a00b23e15897",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_c2cfb30b2a7840a3bbec840f1b2f4111.json"
+    },
+    {
+      "extension_id": "ext_c5af868aebc345f2869048f1d48013fb",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "f6b9cf412f9914ff6c2bf3c5cd4dc07efa967ed55f536d02c2200eda25c52255",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_c5af868aebc345f2869048f1d48013fb.json"
+    },
+    {
+      "extension_id": "ext_c725f22c6080451db10ab3eacf31a488",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "18cc37afacf21919057327a73d7dcd2a5288015c98105d998161a9b5d3d55d36",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_c725f22c6080451db10ab3eacf31a488.json"
+    },
+    {
+      "extension_id": "ext_cba1162e07274073a3faac82499da639",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "b1cfa4069ab4ae0f173af54aca6c9f6963380cf5a606a5344e2ce31f8a5a222a",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_cba1162e07274073a3faac82499da639.json"
+    },
+    {
+      "extension_id": "ext_cf632e2c5bf74c27b37f10d85ee1125a",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "ed42d599e004a2ab10fa9e1058df71884ad0f29c88ab33ae14bacd17b7302f78",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_cf632e2c5bf74c27b37f10d85ee1125a.json"
+    },
+    {
+      "extension_id": "ext_da6ddb7f3eeb40db9c3a0b314301e71d",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "368afc017aa822b0e2582b421c4112e78dd3944613669df7b723b30f595b1cdc",
+      "lane": "existing_delta_requires_context",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "unknown"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "resolve_unknown_competency_checks_with_verifiable_context",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_da6ddb7f3eeb40db9c3a0b314301e71d.json"
+    },
+    {
+      "extension_id": "ext_dd058244f8954ea38b96eeaeac476391",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "cb8df4bffdebe9d3a0033743e5ada3e86f3a27bd98d34564c6f34e9d08ee9b3c",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_dd058244f8954ea38b96eeaeac476391.json"
+    },
+    {
+      "extension_id": "ext_ddf407c46ab84455876fc424d70bf7f9",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "d735845ee4267e55dc4626d69a32abd98247fb2c972ff46dfdfe33c06ac3b0bb",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_ddf407c46ab84455876fc424d70bf7f9.json"
+    },
+    {
+      "extension_id": "ext_e0aadb1d9aab4f1f893b7b938db42891",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "18cc37afacf21919057327a73d7dcd2a5288015c98105d998161a9b5d3d55d36",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_e0aadb1d9aab4f1f893b7b938db42891.json"
+    },
+    {
+      "extension_id": "ext_e26c055ad46e4c5f83cc8f559a4d93f5",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "7f08df606fa7bc1e3bf1ae6b468a270f8f218adec9a0c517c9421af268f76e84",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_e26c055ad46e4c5f83cc8f559a4d93f5.json"
+    },
+    {
+      "extension_id": "ext_e888b10da4244641b205cda68ec8d9b7",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "d8ac2edf7be94503b7e5e11795ed2c046dba256f008ee400e07087037a5bc9e7",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_e888b10da4244641b205cda68ec8d9b7.json"
+    },
+    {
+      "extension_id": "ext_ec45752ef7864eb79268093ecd80673e",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "d21d9a00ec02904fc5c9f6b8bc7ac442378248018b8029672b4164f5d3d227b9",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_ec45752ef7864eb79268093ecd80673e.json"
+    },
+    {
+      "extension_id": "ext_eff57912db554f5f827060776ea83629",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "24668a03d2095cdd4efd1b53236bf840f1111cf61ead4f4b35f0a20d03e112e0",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_eff57912db554f5f827060776ea83629.json"
+    },
+    {
+      "extension_id": "ext_f15e6bb1d14848d0813275df121549f9",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "1f8efe5f4f9ea89a0c1f70cc44f28419c307f72abd45f5e35baede796705d598",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f15e6bb1d14848d0813275df121549f9.json"
+    },
+    {
+      "extension_id": "ext_f29bde10e8e94899a7d0b9d0978345d0",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "99a8b73689ad1435a7448855785e2f5cbaeb54e92a58a05de0907a58fcf3c76a",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [
+        {
+          "case_id": "case_51b3a3ce025fb27ed9c3fcd0f1ee0640",
+          "exhausted_dimensions": [
+            "tokens"
+          ]
+        }
+      ],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "check_remaining_budget_and_authorize_an_additive_grant_if_needed_preserving_usage",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f29bde10e8e94899a7d0b9d0978345d0.json"
+    },
+    {
+      "extension_id": "ext_f441d2a1c22f437aacef41c5b9bf85cc",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "67dd8fbdae122c986ae511f11d4c90b8154be90995c03a033c8d07a49ad34e89",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f441d2a1c22f437aacef41c5b9bf85cc.json"
+    },
+    {
+      "extension_id": "ext_f5b77a75f3114292ba730c20e194be42",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "db97eeccc21e493bdc6addeb8d863f69dac14869f71964083ef2d706e87e47d9",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f5b77a75f3114292ba730c20e194be42.json"
+    },
+    {
+      "extension_id": "ext_f5e5cd5de33b4738b8f0faa656c71f7c",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "84150fb94d4ad0bb553c2ddb2cb091ab0c848bc3a9c7be337d16e28a7296bfbf",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f5e5cd5de33b4738b8f0faa656c71f7c.json"
+    },
+    {
+      "extension_id": "ext_f616f0d00f3a4a0c9a59de33209d1f6f",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "84a4410fa88dca836921973398930618faf0f6412e78b7c59dbd06367d7eb83e",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f616f0d00f3a4a0c9a59de33209d1f6f.json"
+    },
+    {
+      "extension_id": "ext_f8250201d3804938b11300255e81cf2a",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "245f0021f706cc6a5cf0fbac38776c47a9249bd99fb66ceeecd52cf20c63ec02",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f8250201d3804938b11300255e81cf2a.json"
+    },
+    {
+      "extension_id": "ext_f9b004e2df2c4613aa4d060302238889",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "6b164559aa2a0edc2de529f608aa9174e2d98a2b9bc96bc36dd22b3fc69e2cf4",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_f9b004e2df2c4613aa4d060302238889.json"
+    },
+    {
+      "extension_id": "ext_fc6bf031ef144426bf4e3724a80b06c7",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "80bd8807087c7bd4925e17ca0933f32129ce58c81549eec0fc837c575eef63fd",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_fc6bf031ef144426bf4e3724a80b06c7.json"
+    },
+    {
+      "extension_id": "ext_fe869ecc47154105abbb1248131709ac",
+      "task_row_version": 2,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "68029d59f5b4f11b8c5315d8b3f02cb70c47f42c208d2ad309883d4764fa9b2a",
+      "lane": "source_verified_requires_schema_investigation",
+      "offline_checks": {
+        "structure": null,
+        "impact": null,
+        "competency": null
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "perform_full_RDF_lookup_and_draft_a_minimal_source_supported_delta",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_fe869ecc47154105abbb1248131709ac.json"
+    },
+    {
+      "extension_id": "ext_ffed3aeb1f66462fac7eb1d5d80f30e1",
+      "task_row_version": 3,
+      "delta_revision": 1,
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "evidence_hash": "422043aab84cc4db1d515e28aba64a42a9b65948b3d16fb338834e2152be51ff",
+      "lane": "existing_delta_requires_revision",
+      "offline_checks": {
+        "structure": "pass",
+        "impact": "pass",
+        "competency": "fail"
+      },
+      "existing_valid_votes": [],
+      "unknown_request_keys_do_not_resend": [],
+      "budget_accounts_needing_attention": [],
+      "next_steps": [
+        "repair_the_existing_delta_and_repeat_failed_checks",
+        "recheck_current_CAS_and_source_hashes_at_execution_time",
+        "complete_structure_impact_and_competency_checks",
+        "obtain_all_original_three_model_independent_reviews_on_the_frozen_delta"
+      ],
+      "dossier": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\offline_preparation\\ext_ffed3aeb1f66462fac7eb1d5d80f30e1.json"
+    }
+  ]
+}

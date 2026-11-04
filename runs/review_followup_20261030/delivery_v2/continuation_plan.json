@@ -1,0 +1,1234 @@
+{
+  "backup": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\before_v8_20261029_164723_866366.sqlite3",
+  "dry_database": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\migration_dry_20261029_164723_866366.sqlite3",
+  "migration_version": 8,
+  "existing_rows_preserved": true,
+  "idempotent": true,
+  "eligible_tasks": 101,
+  "task_kinds": {
+    "add_object_property": 88,
+    "revise_constraint": 5,
+    "add_data_property": 7,
+    "add_alias": 1
+  },
+  "pilot": [
+    {
+      "extension_id": "ext_06cf3260d7d5425fbb34eb8847b7be49",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性“指示”（或语义等价的指示/反映关系），用于表达“弹形系数”对“弹形优劣”的指示关系。当前完整冻结本体检查显示该关系未覆盖（SCHEMA_GAP），且独立委员会已就原文支持达成共识（supported），但准入共识未决。",
+      "subscriber_ids": [
+        "cand_727bc9ca16655aa0126f"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_0813e33a152048bc87c8fb055e1b0507",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为平流层与水平移动之间建立可映射的本体关系，解决当前冻结本体中缺失该关系的问题。",
+      "subscriber_ids": [
+        "cand_981b9f44641aeb3b3894"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_08a7a7f0577440a6bfd2eac1a1d45df2",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“阻力加速度矢量”与“使弹丸速度减小的量”之间建立可映射的本体关系，以解决当前 SCHEMA_GAP 问题。",
+      "subscriber_ids": [
+        "cand_e63faf09e48076cab970"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "extension_id": "ext_112f255829e542399e5d6bcbdb6d97d7",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组 ΔX 受重力加速度变化影响很小 增加对象属性，表达某量受某因素影响的程度。当前冻结本体未覆盖该关系，且独立委员会已对原文支持达成共识。",
+      "subscriber_ids": [
+        "cand_d05530b04b684cfd6e48"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_133131bb0bc84a7880bc375d8c56cd4e",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选关系“随高度变化规律”在完整冻结本体中未覆盖，但三名独立审核员均确认原文支持该三元组。需新增对象属性以表达气温随高度变化规律这一关系，使候选可被本体准入。",
+      "subscriber_ids": [
+        "cand_4681b8ad926688376bfa"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_14575bcc100442249fb532bd5677914f",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“气压函数”与表达式“p / p_ON”之间新增定义关系，以支持当前候选三元组进入本体。",
+      "subscriber_ids": [
+        "cand_8ee622bc1fdde6f5a887"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_1cfbbb0340ae45c98cf023a350a0a502",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性“与...成正比”（或等价的比例关系），用于表达“弹道系数”与“空气阻力加速度”之间的正比关系。当前完整本体检查未找到该关系，且独立委员会已就原文支持达成共识（supported），但准入共识因本体缺失而 unresolved。",
+      "subscriber_ids": [
+        "cand_643d9f78409650c308c0"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_1e8c115afa174f4383fb62aa45e80bf0",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“重力加速度矢量 可视为 常数”补充本体准入：在给定射高/射程范围内，将“可视为”映射为近似/视为关系，并允许 head_type C_cf22ec523db237003250 指向“常数”类或等价概念。",
+      "subscriber_ids": [
+        "cand_c0f4aaed85c469d0afd6"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_1f64f037bc0e483f8a456899080a5d83",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "revise_constraint",
+      "description": "关系 R_398398ebed85b2bb150f（基于）的 domain 和 range 约束与当前候选端点类型不匹配。候选 head 类型 C_c0a64680fbea018498b2 和 tail 类型 C_a5a6163ec108872e3ea9 不在关系定义的 domain C_0db798544ad999e5723f 和 range C_5e4221823f8f0033f661 中。需要扩展或修正约束以允许该关系用于当前候选的端点类型。",
+      "subscriber_ids": [
+        "cand_41f23ac3c964f6e73964"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_token_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_2481ca08c8784d97a21d273376db4c5b",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体中未覆盖“弹丸表面黏附空气层”这一物理关系。原文证据明确支持“弹丸在空气中运动时，其表面必黏附着一薄层空气”，且三位独立审核员均确认来源支持。为满足本体准入要求，需新增对象属性以表达该黏附关系。",
+      "subscriber_ids": [
+        "cand_9b931a32e1eb9549b209"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_2692739ff38f43448e86159278ecbafc",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“空气阻力 是 空气对弹丸的力的作用”在原文中由 ev_cb0125513eea6f4e3d1d 明确支持，且三位独立审核员均确认 source_support=supported。但完整冻结本体检查显示 relation_known=false、domain/range unknown，存在 SCHEMA_GAP。需新增对象属性以表达“空气阻力”与“空气对弹丸的力的作用”之间的定义/等同关系，使该三元组可被本体准入。",
+      "subscriber_ids": [
+        "cand_113a67a953d4f5c67d71"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_26d11791e6d042bb8dcae0be887b5519",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选关系“由...组成”在完整冻结本体中未找到可准入关系，且当前独立委员会已对原文支持形成 supported 共识。需新增对象属性以表达弹道系数由表示弹丸形状的量 i、表示尺寸大小的量 d 及表示惯性的量 m 等组成。",
+      "subscriber_ids": [
+        "cand_aceeadbb08a97bd55f10"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_27e800142e0a4306b040758c5bcff97a",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "Add an object property to represent the definitional relation 'is' (是) between a term and its definition. The source evidence explicitly states '平行于射击平面的风速分量称为纵风' (The wind speed component parallel to the firing plane is called longitudinal wind), which supports a definitional relationship. The current frozen ontology lacks this relation, causing a SCHEMA_GAP. This extension will allow the triple to be properly mapped and validated.",
+      "subscriber_ids": [
+        "cand_ff620a094c8a389c4131"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_2dd0eb0275714c6c9ac89f4d58fa6c8b",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“迎面阻力”与“弹丸质心”之间增加“通过”关系，以支持在章动角忽略且弹丸轴对称条件下，迎面阻力通过质心的结论。",
+      "subscriber_ids": [
+        "cand_5664b9379fb420e293ba"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_2e12391777d14f10b5718b815860331a",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“非标准条件”与“横风的变化”之间建立“包括”关系，以支持候选三元组 cand_359941aa2b704d28660d 的本体准入。",
+      "subscriber_ids": [
+        "cand_359941aa2b704d28660d"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_2e44bafdc71c4a558efcb028e39b1ce6",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体中未覆盖“空气阻力是弹丸在空气中飞行的主要影响来源”这一关系。原文证据 ev_dd769e3cf7d40a1d5adf 明确支持该表述，且三位审核员均确认来源支持。建议新增对象属性以表达“主要影响来源”关系，端点类型分别为 C_3d1e92e945b2c3dbbd16（空气阻力）和 C_85d7c2e6732f8a304f88（弹丸在空气中飞行）。",
+      "subscriber_ids": [
+        "cand_d619da66aed45952aaba"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_34ce344851574673820a78e039041dc6",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“升弧段水平距离 大于 降弧段水平距离”新增对象属性 greater_than，用于表达两个水平距离实体之间的大小比较关系。当前冻结本体未覆盖该关系，且独立委员会已对原文支持达成共识。",
+      "subscriber_ids": [
+        "cand_5edaf34efb6666488c3f"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_366535744c5f471887ae2179fd776c6c",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组 C_{x0N} 是 所选用的阻力定律 申请新增对象属性，以解决冻结本体中关系未知导致的准入未决问题。",
+      "subscriber_ids": [
+        "cand_e572359d9b78efc82d3a"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_383608fae92b4f179300308bd9174fbb",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组表达“我国炮兵用标准气象条件”与“国际上通用的标准”之间“基本一致”的关系。当前冻结本体未覆盖该关系，且端点类型未完全匹配。独立委员会已确认原文支持该关系，但本体准入未通过。需扩展本体以支持该关系。",
+      "subscriber_ids": [
+        "cand_7643b4bd5b5fdd4dfad6"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_3947a40d0b0a4719865b21bfd7dde807",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“地面直角坐标系”与“直角坐标系”之间补充可映射的本体关系，以解决当前 SCHEMA_GAP 导致的准入未决问题。",
+      "subscriber_ids": [
+        "cand_6ab89868720561db0a83"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_3b4a93e6e57049c19f399682bac4e6a0",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“弹丸质心速度 可用自然坐标系分析”在原文中有明确支持，但冻结本体中未定义该关系。需新增对象属性以表达“某物理量可用某坐标系/方法分析”的语义，以解决本体缺口。",
+      "subscriber_ids": [
+        "cand_89b35c83c2c972a50a06"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_3c2b811792e843df8e2a2a80133d5de7",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“弹丸的运动 简化为 弹丸质心的运动”在原文中有明确支持，但冻结本体中未定义“简化为”关系，且 head_type 为 null，tail_type 为 C_87a27abd212bc2fb9da8。需要扩展本体以支持该关系。",
+      "subscriber_ids": [
+        "cand_0a543718c286c012ce18"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_3e7549fc23054ec5b03b783a72a169e2",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "revise_constraint",
+      "description": "关系 R_029d377fdd30415aa4e3 的 domain 约束为 C_5d0b94cd0cd9ae0220e9，但候选头实体类型为 C_cf22ec523db237003250，导致 DOMAIN_CONSTRAINT_FAILED。原文证据明确支持“重力加速度随高度变化”这一关系，且三位审核员均确认来源支持。需扩展该关系的 domain 以包含 C_cf22ec523db237003250，或确认 C_cf22ec523db237003250 是否为 C_5d0b94cd0cd9ae0220e9 的子类。",
+      "subscriber_ids": [
+        "cand_7a32be303171e06738b6"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_3f570b13d0cd45b8ba6bf62594e01cbc",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组使用 surface_relation=形成原因，tail 为 literal 描述弹尾波形成机制。冻结本体检查未找到可映射关系，且独立委员会已就原文支持达成共识（supported），但本体准入未决。需请求扩展本体以添加“形成原因”对象属性，使该候选可被正式映射和准入。",
+      "subscriber_ids": [
+        "cand_5937f1135fbbb62687d8"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_4227c3cacc1d4f8c93221a36a7331cca",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“弹丸在空气中的运动 是 复杂的刚体的一般运动”在原文中有明确支持，但冻结本体中未定义该关系。需新增对象属性以支持该语义关系。",
+      "subscriber_ids": [
+        "cand_617291d7f0074ae89b30"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "repeated_action_without_information_gain"
+    },
+    {
+      "extension_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "新增对象属性，用于表达横风通过改变空气阻力方向影响弹道的关系。当前冻结本体中未覆盖该关系，且独立审核已确认原文支持。",
+      "subscriber_ids": [
+        "cand_cc7f508e0ee31b09d27d"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_46d49ffd6cab4be5bca7194ae58fad3e",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“气象条件 随时间和高度变化 时间和高度”在原文中有明确支持，但冻结本体中不存在对应关系。需新增对象属性以表达“随...变化”这一动态依赖关系，并允许头端点为气象条件类、尾端点为时间/高度类。",
+      "subscriber_ids": [
+        "cand_938c740db367c46705db"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_478fca2b24cf44dd9d8b19f42b681690",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选关系“共线反向于”在完整冻结本体中未找到可映射关系，且端点类型约束未知。三位独立审核员均确认原文支持该关系，但本体准入未解决。需新增对象属性以表达向量方向共线反向关系，端点类型分别为 C_7271d61c285fb9d01a20 和 C_741907931b549e11e6ec。",
+      "subscriber_ids": [
+        "cand_d1a0fa531cde115ae71e"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_4821cf69d18e4b8fbd312c9dda1593d6",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_data_property",
+      "description": "为绝热指数增加对空气取值为1.40的数据属性，以支持当前提案的本体准入。",
+      "subscriber_ids": [
+        "cand_bc1979304fc939c12351"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_5087eeecd0db482db34678a6cee74009",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组“空气阻力矢量 与弹轴重合 弹轴”新增对象属性，表达在“弹轴时刻与相对速度矢量重合”的假设下，空气阻力矢量仍与弹轴重合的几何/方向关系。该关系在冻结本体中未覆盖（SCHEMA_GAP），但原文支持已由独立委员会一致确认。",
+      "subscriber_ids": [
+        "cand_b51473c2bf50bb133e5c"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_576152e0a5cb4b40ad1bf976dce05e9d",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "revise_constraint",
+      "description": "关系 R_fbc54f6800679e25d95d（考虑）的 range 当前限定为 C_aef809afb1c169b7ed7f，但候选尾实体“重力加速度变化”的类型 C_4686ebe73588266b7f35 不在该 range 内，导致 RANGE_CONSTRAINT_FAILED。原文证据明确支持“弹丸运动方程考虑重力加速度变化”这一语义，且独立委员会已达成 source_support_consensus=supported。建议扩展该关系的 range 以包含 C_4686ebe73588266b7f35，使本体准入检查通过。",
+      "subscriber_ids": [
+        "cand_80014601e0d73edb2d55"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_token_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_5c30e9a4047342cc896278e9a00f2f12",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“落角增大导致ΔX减小”这一因果/影响关系申请新增对象属性。当前冻结本体未覆盖该关系，且独立委员会已就原文支持达成共识（supported），满足扩展请求前置条件。",
+      "subscriber_ids": [
+        "cand_98b45e667ad557783e9e"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_609f81cfa5ee4ee885183edb5657a080",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“章动角 使 空气阻力作用中心不通过弹丸质心”在原文中有明确支持，但冻结本体中未定义该关系。需新增对象属性以表达“章动角导致空气阻力作用中心不通过弹丸质心”的因果关系。",
+      "subscriber_ids": [
+        "cand_4943a7b87c9e434a2d3a"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_63ba3e33f7b94182b60c5309344ac40f",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "当前候选三元组“重力加速度矢量 方向垂直于 地平面”在冻结本体中无对应关系，且端点类型未完全映射。三位独立审核员均确认原文支持该方向关系，但本体准入未决。需新增对象属性以表达“方向垂直于”关系，并明确其域为重力加速度矢量类（C_cf22ec523db237003250），值域为地平面类。",
+      "subscriber_ids": [
+        "cand_51499ac178ffadea2b81"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_686010c980864b299c1f2b4edc31e897",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组“ΔX 主要由地面曲率造成”申请新增对象属性，以表达“主要由...造成”的因果关系。当前冻结本体检查未通过（SCHEMA_GAP），且独立委员会已就原文支持达成共识（supported），但本体准入未决（unresolved）。",
+      "subscriber_ids": [
+        "cand_d7fc4d230a029bc54bb2"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_6a42c4692d2a4b22b12d37ae0d63db21",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“切线方向 定义为 弹丸质心速度矢量的方向”在原文中有明确支持，但冻结本体中未覆盖 surface_relation=定义为 及端点类型 C_4f1eebacebf2a7f644b6 到 C_741907931b549e11e6ec 的映射。需新增对象属性以支持该定义关系。",
+      "subscriber_ids": [
+        "cand_7398ec0324c5a4d5a73d"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_6ce3e8f494e94305a4260ef187a60de6",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“符号表示为”关系建立本体映射，以支持“相对湿度”与“Φ”之间的符号表示关系。",
+      "subscriber_ids": [
+        "cand_646a22127707358c9630"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_6db8dd6be1654a72a79559c193431676",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组“弹丸的刚体一般运动 简化成 在其发射面内的质点平面运动”新增对象属性，用于表达在给定假设下一种运动模型被简化为另一种运动模型的关系。当前冻结本体未覆盖该关系，且独立委员会已对原文支持形成 supported 共识。",
+      "subscriber_ids": [
+        "cand_ea1aba4379a210c7a126"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_720a7feb35d341f68a86afc2671146a1",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选关系“随地点变化”在完整冻结本体中未找到可准入关系，且三位审核员一致确认原文支持该关系，但本体准入未决。需请求新增对象属性以表达气象条件随地点变化的关系。",
+      "subscriber_ids": [
+        "cand_d3e23bf9beb28aeec9c9"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_7459b183757d4676b3ddec1623b0e2eb",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“质心运动微分方程组”与“直角坐标系”之间新增对象属性“表示于”，用于表达方程组在指定坐标系中的表示关系。当前冻结本体未覆盖该关系，且独立委员会已对原文支持达成共识。",
+      "subscriber_ids": [
+        "cand_036a0237af4a944afc6c"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_7872fdcfe9e846bdacf964633545495c",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体中未覆盖“由运动叠加原理求出”这一关系，且端点类型未知。当前独立委员会已对原文支持达成共识（supported），且已完成完整冻结本体查询。建议新增对象属性以表达“某量由某原理/方法求出”的语义，以支持当前候选三元组的准入。",
+      "subscriber_ids": [
+        "cand_9169f60a6572ee2667d7"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_7c844bc9e5c7450db9c27ac4f6ad206a",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“地面直角坐标系”与“i, j, k”之间增加“具有单位矢量”关系，以解决当前本体中缺失该关系的准入问题。",
+      "subscriber_ids": [
+        "cand_875c1ef934305106ed1f"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_7d3421ccfa794111b1413cde35af9a32",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“横风”与“垂直于射击平面的风速分量”之间建立可准入的关系类型，以解决当前本体中缺失该关系定义的问题。",
+      "subscriber_ids": [
+        "cand_d19c1a90a0c4a5cd9f27"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_86cb98a62c5f4e24a475124eb5a50b05",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性“假设为”（assumed_as），用于表达在外弹道计算等特定条件下，将“地表面”视为“平面”的简化假设关系。该关系需限定于外弹道计算场景，且极性为正向、模态为断言。",
+      "subscriber_ids": [
+        "cand_6fb0f715822bea7e19ff"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_8bf8ad4c6cd14b709a6b69012580cbc4",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性“重合于”（coincides_with），用于表达“弹轴”与“相对速度矢量”在特定假设下的方向重合关系。当前本体未覆盖该关系，导致准入检查失败。",
+      "subscriber_ids": [
+        "cand_85df30c4c7bc1096a529"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_8f88156969fa46dda6124c9ebb2b8ae3",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“超声速弹丸头部设计得比较尖”与“目的：减小波动阻力”之间建立关系准入。原文证据明确支持该目的关系，但冻结本体中未覆盖该关系，需扩展本体以支持该三元组。",
+      "subscriber_ids": [
+        "cand_420b54f8a626ecee0734"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_94a76f5a476c436387ea3473f57aa47f",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“弹丸”与“质点”之间增加可承载“可当作/可视为/可研究为”的本体关系，以解决当前 SCHEMA_GAP 导致的准入未决问题。",
+      "subscriber_ids": [
+        "cand_edab045ff69d933aacd3"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_97334f696986460e979c7c0d94a91810",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组表达“空气阻力加速度由弹道系数 C、密度函数 H(y)、阻力函数 F(v) 三者的连乘积构成”。当前冻结本体未覆盖该关系，且端点类型映射不完整。三位独立审核员均确认原文支持该表述，但本体准入状态为 unresolved。需新增对象属性以支持该关系，并明确其定义与约束。",
+      "subscriber_ids": [
+        "cand_873c65d2740105df7de5"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_976f101773c647948365d2d4f604d525",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组中“相对弹道上任意点的 $z$ 坐标”与“相对位移”之间的“即”关系在冻结本体中未覆盖（SCHEMA_GAP）。独立委员会已对原文支持达成共识（3/3 supported），且已完成 full_frozen_ontology 查询。请求新增对象属性以表达该等价/同义关系，使本体能够容纳该三元组。",
+      "subscriber_ids": [
+        "cand_464384df125d664fef3a"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_99015453c2e8499cb9c9c2bcc677ea04",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性“包含”（或语义等价的 part-of/contains 关系），用于表达“相对弹道”与“任意点”之间的组成/包含关系。当前完整本体检查显示该关系未覆盖（SCHEMA_GAP），且独立委员会已就原文支持达成共识（supported），满足扩展请求前置条件。",
+      "subscriber_ids": [
+        "cand_9bb6208a65cf1ca61d66"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_9ac4a987f2e2416da0bef5fd51d85586",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体全量检查未找到“相对于”关系，且当前独立验证中三位委员均确认来源支持，但本体准入因 SCHEMA_GAP 未决。请求新增对象属性，将“非标准条件”相对于“标准条件”的比较关系纳入本体，不修改已验证的三元组事实。",
+      "subscriber_ids": [
+        "cand_f582a2e2e182fb2e7736"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_9f094004df40475687efe8cde63cfc92",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“经验公式”与“适用范围是”关系建立本体支持，解决 ontology_gap 未决问题。",
+      "subscriber_ids": [
+        "cand_26be63ce9d8524a793bb"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "repeated_action_without_information_gain"
+    },
+    {
+      "extension_id": "ext_a36bee2beff745259262a423ac1d4b1e",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组 K(v) 作为 阻力函数 在冻结本体中无匹配关系，但三个独立审核员均确认原文支持该表述。需新增对象属性以表达函数符号作为阻力函数的命名/角色关系。",
+      "subscriber_ids": [
+        "cand_66ca98c0e94aa41168b2"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_a87c8b574c4644f4942a127c331eabee",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“非标准条件”与“纵风的变化”之间建立“包括”关系，以解决本体缺失问题。",
+      "subscriber_ids": [
+        "cand_a62d5041ed6cf6949006"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_a98155b35bee449d93fe58fe6bea48ef",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“非标准条件”与“气温的变化”之间建立“包括”关系，以支持候选三元组 cand_2132608cbbc354332e41 的本体准入。",
+      "subscriber_ids": [
+        "cand_2132608cbbc354332e41"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_ad9fe0a45e31413bbc606a898832babd",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_data_property",
+      "description": "为头类型 C_9f97ac1085065f8fcd9b 增加数据属性，用于表达“具有自由度数量”这一事实。原文 ev_c1a2f4e1063deeb4f3e2 明确说明“弹丸在空气中的运动是复杂的刚体的一般运动，它有6个自由度”，且三位独立委员均确认来源支持，但冻结本体中无可映射的关系，导致 relation_id 为空、本体检查未通过。该扩展仅新增数据属性，不改变原文事实，不新增类或对象属性，符合 allowed_change_kinds。",
+      "subscriber_ids": [
+        "cand_fce0eb1a64cee347d389"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_b1bebec4da934f698489d155fb0a7c10",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体未覆盖“射程偏差 定义为 非标准与标准条件下的射程之差”这一关系。当前候选的独立来源支持共识已达成（3/3 supported），且已完成 full_frozen_ontology 查询（189 类、81 关系均未匹配）。需新增对象属性以表达该定义关系，使候选可通过本体准入。",
+      "subscriber_ids": [
+        "cand_62f48e83849d8053422a"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_b26aaf6daa564c059501c54d2fb93321",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "当前候选三元组“弹丸质量系数 存在于 弹丸设计理论”在完整冻结本体中未找到对应关系，且本体检查状态为 unknown/SCHEMA_GAP。独立委员会已对来源支持达成共识（supported），但本体准入未解决。需请求扩展本体，增加“存在于”或语义等价的对象属性，以支持该三元组的准入。",
+      "subscriber_ids": [
+        "cand_4426af75bf4453ac8deb"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_b88747d0100141bab0dfd591ff56184c",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体中未覆盖“弹道系数随直径增大而减小”的关系。当前提案已获独立来源支持共识（3/3 supported），且已完成 full_frozen_ontology 查询（SCHEMA_GAP）。建议新增对象属性以表达该单调递减关系，端点为弹道系数与直径。",
+      "subscriber_ids": [
+        "cand_8fc7327b7de5d5e7107e"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_bf463538a2cf470f94b6f3eeae380bc2",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“平流层”与“同温层”之间“又称”关系申请本体扩展，以解决当前冻结本体中关系准入状态未知的问题。",
+      "subscriber_ids": [
+        "cand_e42e738f820d261af2f3"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_c2cfb30b2a7840a3bbec840f1b2f4111",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为术语“退电”增加定义关系，使其能够表达“退电 定义为 当炸弹落地时飞机与炸弹的水平距离（设飞机匀速直线飞行）”。当前冻结本体中不存在兼容的“定义为”关系及端点类型，导致本体准入无法通过。",
+      "subscriber_ids": [
+        "cand_e3e1551e28b1ad04eafa"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_c5af868aebc345f2869048f1d48013fb",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "当前候选表达“科氏惯性力在射程较小的情况下对弹丸在空气中飞行的影响可被忽略”。独立委员会已一致确认原文支持（source_support_consensus=supported，3/3），但完整冻结本体检查显示该关系未被覆盖（SCHEMA_GAP，admission_consensus=unresolved）。需新增对象属性以表达“某物理因素在特定条件下对某过程的影响可被忽略”这一语义，使候选满足本体准入。",
+      "subscriber_ids": [
+        "cand_d6a477b0d4fd2419f296"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_c725f22c6080451db10ab3eacf31a488",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为冻结本体补充对象属性，表达“受力主体受到某力作用”的关系。候选三元组“弹丸 受到...作用 空气阻力”已由三名独立委员一致确认来源支持（source_support_consensus=supported，3/3），且证据 ev_d9d8b2cdb7abcf2d62c9 明确记载“弹丸在空气中飞行，作用于弹丸上的力主要有重力、空气阻力和科氏惯性力”。全量冻结本体检查（class_ids_checked=189, relation_ids_checked=81）未找到可映射关系，ontology_check 状态为 unknown/SCHEMA_GAP，admission_consensus 为 unresolved。端点类型 C_85d7c2e6732f8a304f88（弹丸）与 C_3d1e92e945b2c3dbbd16（空气阻力）已在本体中匹配，故仅需新增对象属性以完成准入。",
+      "subscriber_ids": [
+        "cand_fd8ed39e4ccce2a4479b"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_cba1162e07274073a3faac82499da639",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“气压函数 导出自 大气平衡条件”在原文中有明确支持，但完整冻结本体检查显示关系“导出自”未覆盖，端点类型准入未知。需新增对象属性以表达“某函数/模型/公式由某条件或方程导出”的语义，并允许 head 类型 C_4ef4f7b873e6bd4f46f1 与 tail 实体“大气平衡条件”作为端点。",
+      "subscriber_ids": [
+        "cand_8257307204d5b912ffd1"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "repeated_action_without_information_gain"
+    },
+    {
+      "extension_id": "ext_da6ddb7f3eeb40db9c3a0b314301e71d",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“降弧比升弧陡”新增对象属性，表达在弹道等高度处降弧相对于升弧更陡的比较关系。端点类型分别为 C_29a267036b238911b72c 与 C_e2ae699555cdf609563b，条件限定为“在弹道等高度处”。",
+      "subscriber_ids": [
+        "cand_4992400347d94dfbbc00"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_dd058244f8954ea38b96eeaeac476391",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性，用于表达“弹道”在横风条件下“是空间曲线”的类别归属/空间形态关系。当前完整本体检查显示该关系未被覆盖（SCHEMA_GAP），且独立委员会已对原文支持形成 supported 共识，但准入共识因本体缺失而 unresolved。",
+      "subscriber_ids": [
+        "cand_88ddc5ff9e2d99af23dc"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_ddf407c46ab84455876fc424d70bf7f9",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组表达“火炮的弹道只能根据标准的气象条件进行弹道计算和编制射表”。独立委员会已对原文支持形成 supported 共识，且完整冻结本体检查显示该关系未被覆盖（SCHEMA_GAP）。需新增对象属性以表达“弹道计算/编制射表所依据的气象条件”这一关系，使候选可被本体准入。",
+      "subscriber_ids": [
+        "cand_858d7eeb62601e9de8d0"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_e0aadb1d9aab4f1f893b7b938db42891",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组“弹丸 受到...作用 重力”补充本体关系准入。当前完整冻结本体检查显示 SCHEMA_GAP，且独立委员会已就原文支持达成共识（source_support_consensus=supported），但准入共识未决。需新增或明确“受到...作用”（或等价的“受...力作用”）对象属性，以支持弹丸在空气中飞行条件下受重力作用的表达。",
+      "subscriber_ids": [
+        "cand_af2d3f81dc0977a594d5"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_e26c055ad46e4c5f83cc8f559a4d93f5",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“质点弹道 是 一个三自由度的运动问题”在完整冻结本体中未找到可准入的关系或类型组合，但三位独立审核员均确认原文支持该表述。需请求扩展本体，增加“是”关系对当前头尾类型组合的准入，或补充相应类型定义，以解决本体缺口。",
+      "subscriber_ids": [
+        "cand_366157bcebe366ede0a3"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_e888b10da4244641b205cda68ec8d9b7",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“波动阻力”与“弹头部的形状”之间新增对象属性，表达“大小主要取决于”这一关系，以解决当前本体中缺失该关系导致的准入问题。",
+      "subscriber_ids": [
+        "cand_8a98f177a69d7883ac38"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_ec45752ef7864eb79268093ecd80673e",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“摩擦阻力主要由大气的黏性造成”补充关系准入：在冻结本体中新增或确认“主要由...造成”对应的对象属性，使摩擦阻力（C_75505394a779d58e7cb3）与大气的黏性之间可被本体支持。",
+      "subscriber_ids": [
+        "cand_261ddb15812406cc8f99"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_eff57912db554f5f827060776ea83629",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_data_property",
+      "description": "候选三元组将“质点弹道的基本方程的描述方法与解法”与“多种多样的”以“是”连接，需检查完整冻结本体中是否存在可承载该属性/状态关系及端点类型，避免把未匹配直接当作事实错误",
+      "subscriber_ids": [
+        "cand_cdab7bc077b9a81a8bc7"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f15e6bb1d14848d0813275df121549f9",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“空气阻力加速度 决定 空气阻力对弹丸运动的影响”已由三名独立审核员一致确认原文支持，且完整冻结本体检查显示关系“决定”及端点类型均未被覆盖（SCHEMA_GAP）。需新增对象属性以表达该物理量对弹丸运动影响的决定关系，使候选可被本体准入。",
+      "subscriber_ids": [
+        "cand_836bc974760bfd586bdf"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f29bde10e8e94899a7d0b9d0978345d0",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“假想速度”与“外弹道”之间新增对象属性“引入于”，用于表达某概念或量在特定学科领域或理论框架中被引入或定义的关系。",
+      "subscriber_ids": [
+        "cand_0327302655245f377c35"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_token_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_f5b77a75f3114292ba730c20e194be42",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“离心惯性力”与“重力”之间“已在...中加以考虑”的关系新增本体对象属性，以解决当前冻结本体中缺失该关系定义的问题。",
+      "subscriber_ids": [
+        "cand_bd92a222b2304a205234"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f5e5cd5de33b4738b8f0faa656c71f7c",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“空气阻力加速度”与“速度矢量”之间新增对象属性“与...共线”（collinear_with），用于表达两个矢量方向共线的物理关系。当前冻结本体未覆盖该关系，导致准入共识 unresolved。",
+      "subscriber_ids": [
+        "cand_ae1e965630f70320eb3c"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f616f0d00f3a4a0c9a59de33209d1f6f",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“阻力加速度矢量”与“阻力加速度”之间补充“习惯上称为”这一命名/别称关系，以解决当前冻结本体中关系缺失（SCHEMA_GAP）的问题。",
+      "subscriber_ids": [
+        "cand_e68ad7b5bce80c6e73d8"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f8250201d3804938b11300255e81cf2a",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组使用 surface_relation='是指'，head_type=C_a6697abb882905053b1b，tail_type=null。冻结本体检查显示 SCHEMA_GAP，无匹配 relation_id。三位审核员均确认 source_support=supported，但 admission_consensus=unresolved。需请求本体扩展以添加该关系或映射到现有关系。",
+      "subscriber_ids": [
+        "cand_5cbcc278c58e1df3a0e7"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f9b004e2df2c4613aa4d060302238889",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "新增对象属性“通过改变空气密度来影响”，用于表达气压对弹道的影响机制。当前冻结本体未覆盖该关系，但独立委员会已就原文支持达成共识（3/3 supported），且已完成 full_frozen_ontology 查询。",
+      "subscriber_ids": [
+        "cand_22b9bb5d743bc11d392d"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_fe869ecc47154105abbb1248131709ac",
+      "row_version": 2,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“极限速度 出现于 弹道系数大而速度小的物体”在完整冻结本体中未找到可映射关系，端点类型亦未准入。原文证据明确支持该现象在特定条件下出现，需新增对象属性以表达“极限速度出现于某类物体”的语义。",
+      "subscriber_ids": [
+        "cand_27498364cdfe1e4202f8"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_ffed3aeb1f66462fac7eb1d5d80f30e1",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "revise_constraint",
+      "description": "关系 R_3c75dd89923bc714630d（取决于）的 range 约束当前为 C_f0037f9e5d770063017b，但候选三元组的 tail 类型 C_5c072ee8bc4ede36b807（射程）不在允许范围内，导致本体检查失败。原文证据明确支持“ΔX的大小取决于射程”这一语义关系，且独立委员会已达成 source_support_consensus=supported。需扩展 range 约束以包含 C_5c072ee8bc4ede36b807，使该关系在冻结本体中合法。",
+      "subscriber_ids": [
+        "cand_72888cdc296af3d7378d"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_03f6894fb15d4a369da1205c4018c959",
+      "row_version": 9,
+      "status": "proposed",
+      "change_kind": "add_object_property",
+      "description": "候选三元组表达 v_{\\tau} 是当地声速为 c_{0N} 时与弹丸实际马赫数 Ma 相同的弹丸假想速度。原文支持已获独立共识，但完整冻结本体检查显示关系“是”及端点类型未被覆盖，存在 SCHEMA_GAP。需新增对象属性以表达该定义关系，使候选可被本体准入。",
+      "subscriber_ids": [
+        "cand_0baadf139e5676b6d683",
+        "cand_4d55977c3cd37eb9fbf9",
+        "cand_5d5187524397b97c2973",
+        "cand_60033a63e1302635cdf2",
+        "cand_8b5b287fb672726cc1f9",
+        "cand_9ed3b5cd3f19e73a1044",
+        "cand_b691f0f00ff868377166",
+        "cand_fcb3d60387f035959488",
+        "cand_ffc061c67d4dfc1133bb"
+      ],
+      "material_count": 0,
+      "last_stop_reason": null
+    },
+    {
+      "extension_id": "ext_0debae0687b04b2c959fcf9c95750a8d",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "revise_constraint",
+      "description": "关系 R_5cfeb014dc68c80c2f5c（得到）的 range 约束为 C_e0f77606c291cca8d429，但候选三元组的 tail_type 为 C_8612eaecaeff24215686，导致 RANGE_CONSTRAINT_FAILED。原文证据 ev_3ac495284f0e81c6c629 明确支持“状态方程 得到 标准分布”的语义，且三位审核员均确认 source_support=supported。需扩展该关系的 range 以包含 C_8612eaecaeff24215686，使本体准入通过。",
+      "subscriber_ids": [
+        "cand_9db29caf216348b857f8",
+        "cand_b28f3b15ed7add96984b"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_2d7490d88ee34183811538ff947ae0ef",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体未覆盖“相对弹道”与“在动参考系内所观察的弹道”之间的定义关系。当前独立委员会已对原文支持形成 supported 共识，且已完成 full_frozen_ontology 查询，确认存在 SCHEMA_GAP。建议新增对象属性以表达该定义关系，使候选三元组可通过本体准入。",
+      "subscriber_ids": [
+        "cand_246c91d4690f21b26e96",
+        "cand_d3ebddf9ed57994600cc"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_2dd4869ee14f4bceaf7ec4d4781186cf",
+      "row_version": 4,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "冻结本体中未覆盖“定义为”关系及“空气阻力加速度”概念。当前独立委员会已对原文支持形成 supported 共识，且已完成 full_frozen_ontology 查询。请求新增对象属性以支持该定义关系，使候选三元组可通过本体准入。",
+      "subscriber_ids": [
+        "cand_4d1a7e34eb72b7453524",
+        "cand_80203059658b6e21d8df",
+        "cand_d0d5515fa4f1358ffdfd"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_3a7e71cc55a347c8a28cdb346b7b0e46",
+      "row_version": 6,
+      "status": "needs_human",
+      "change_kind": "add_data_property",
+      "description": "为“大口径高初速的火炮”增加“弹道系数小”这一数据属性，以支持原文中关于火炮弹道特性的描述。",
+      "subscriber_ids": [
+        "cand_38f47004f338ae82b01e",
+        "cand_79c9484526d77cefe30f",
+        "cand_9dbb9d23405b6561b4e2",
+        "cand_c3d437bf581f35e24fca",
+        "cand_d352fb53b6629b9162af"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_4b0b021053da484c970e81ff01f00005",
+      "row_version": 4,
+      "status": "needs_human",
+      "change_kind": "add_data_property",
+      "description": "为实体类型 C_c1dc2344033e9fa4ba30（枪弹）增加数据属性“口径小”，以支持三元组“枪弹-具有属性-口径小”的本体准入。原文证据明确支持该属性，且当前冻结本体未覆盖该关系。",
+      "subscriber_ids": [
+        "cand_55a0df452d78c84f0b11",
+        "cand_95161f1fee2b1c2ed15c",
+        "cand_bfa49c3b374c277a980e"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "repeated_action_without_information_gain"
+    },
+    {
+      "extension_id": "ext_4f8093fd496146e882bd5e2902e92240",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "在冻结本体中新增对象属性“与...存在夹角”，用于表达两个射击面（相对射击面 x'Oy 与绝对射击面 xOy）之间的几何夹角关系。当前本体检查显示该关系未被覆盖（SCHEMA_GAP），且独立委员会已就原文支持达成共识（supported），满足本体扩展请求的前置条件。",
+      "subscriber_ids": [
+        "cand_6b16ecde8acfe15f7e5b",
+        "cand_6feca2d8beea261be50c"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_5b2988767535453b8f46073d0d877ef8",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组 F(v) 含有 阻力定律 在冻结本体中无对应关系，且端点类型未完全映射。三位独立审核员均确认原文支持该关系，但本体准入未决。需新增对象属性以支持该语义关系。",
+      "subscriber_ids": [
+        "cand_7b11906879b9b55a9829",
+        "cand_caac0fdc40f0dfb8905f"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_5b2b83ee7d124376b40cc0d78fe0dfc0",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "科氏加速度与地球自转角速度矢量和弹丸速度乘积的2倍之间的本体关系未定义，需要扩展本体以支持该关系。",
+      "subscriber_ids": [
+        "cand_813a54c1d388dcc5a8ff",
+        "cand_cf3bdb95ad48e0ba2721"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_76116c9dcecc49e4a8f77bab900b5aac",
+      "row_version": 4,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组 R 为 地球半径 增加本体支持。原文证据明确说明 R 为地球半径，但当前冻结本体中不存在对应关系，导致准入共识未决。建议新增对象属性以支持该语义关系。",
+      "subscriber_ids": [
+        "cand_7933da0e0ba22af6f94b",
+        "cand_b009ad9806ef96ba4ac1",
+        "cand_b21646e1833295a8069e"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_87521ddd0a784fb1982b64648d6d9751",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“非标准条件”与“气压的变化”之间建立“包括”关系，以解决本体缺失问题。",
+      "subscriber_ids": [
+        "cand_75778a70f0247cfe2eaa",
+        "cand_cc6533e37dab22d34378"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "case_or_task_budget_exhausted"
+    },
+    {
+      "extension_id": "ext_99e41fa0ba724530b2b71da7e796cf39",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“6个自由度”与“3个描述弹丸质心的平动运动”之间建立“包括”关系，以解决本体缺失问题。",
+      "subscriber_ids": [
+        "cand_3b659997f85ad5efa8b3",
+        "cand_ca3c8cd177bd04c80304"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_a4c7a4cf8659452291d40828fdbef1c1",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选关系“是...的函数”新增对象属性，用于表达函数依赖关系。当前冻结本体中未覆盖该关系，且独立委员会已确认原文支持。",
+      "subscriber_ids": [
+        "cand_23bc5b3b41b9260c52d4",
+        "cand_5c5ea2a053c872ab1ed2"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_a62415ddd4604d77a5aa20ee4781a37d",
+      "row_version": 4,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "候选三元组“章动角 使 气流对弹丸的作用轴不对称”在原文中有明确支持，但冻结本体中不存在对应关系类型。需新增对象属性以表达“某物理量/状态导致某力学效应”的因果关系，以解决 ontology_gap 问题。",
+      "subscriber_ids": [
+        "cand_3688c3a73e9ea1376ac2",
+        "cand_a243678a27207f1c7c08",
+        "cand_ee449817abb494f11b92"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_cf632e2c5bf74c27b37f10d85ee1125a",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_data_property",
+      "description": "为实体“空气”增加数据属性“密度”，以支持候选三元组“空气 具有属性 一定的密度”。原文证据明确说明空气具有一定的密度，且该属性在冻结本体中未覆盖，需扩展本体以完成准入。",
+      "subscriber_ids": [
+        "cand_13adbb2c2c5e41e099e5",
+        "cand_2105646f674fa03b99ec"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_f441d2a1c22f437aacef41c5b9bf85cc",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为候选三元组 c_{0N} 是 声速的地面标准值 申请新增对象属性，以解决当前冻结本体中关系缺失（SCHEMA_GAP）问题。该关系在原文中明确表述，且三位独立审核员均确认来源支持（source_support_consensus=supported），但本体准入未通过（admission_consensus=unresolved）。",
+      "subscriber_ids": [
+        "cand_a5177ecbb801a2ef63ad",
+        "cand_ad3651442692f8e861aa"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    },
+    {
+      "extension_id": "ext_fc6bf031ef144426bf4e3724a80b06c7",
+      "row_version": 3,
+      "status": "needs_human",
+      "change_kind": "add_object_property",
+      "description": "为“分离波”与“斜激波”之间由原文支持的组成关系新增对象属性，以解决当前冻结本体中关系未覆盖的准入缺口。",
+      "subscriber_ids": [
+        "cand_52903bccfd4026046696",
+        "cand_6826c4459416ca368774"
+      ],
+      "material_count": 0,
+      "last_stop_reason": "ontology_planner_failed"
+    }
+  ],
+  "model_calls": 0,
+  "production_database_modified": false,
+  "config_sha256": "a532c4e2077c4f72a45dff84e12ccaeaab12904172b7ecc7b98e2e33eff3b13f",
+  "previous_pilot_preserved": [
+    "ext_05b93d2eaa3c4134a199e02948ddc105",
+    "ext_47b2102b6ba646a1a4f40587e83c0561",
+    "ext_4a9a96a9450145e596202e196fd0c124"
+  ],
+  "delivery_version": "ontology_validator_payload_v2"
+}

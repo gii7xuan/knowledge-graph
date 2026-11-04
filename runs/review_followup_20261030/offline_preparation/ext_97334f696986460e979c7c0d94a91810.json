@@ -1,0 +1,160 @@
+{
+  "extension_id": "ext_97334f696986460e979c7c0d94a91810",
+  "task_row_version": 2,
+  "delta_revision": 1,
+  "change_kind": "add_object_property",
+  "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "model_calls": 0,
+  "blockers": [],
+  "warnings": [],
+  "description": "候选三元组表达“空气阻力加速度由弹道系数 C、密度函数 H(y)、阻力函数 F(v) 三者的连乘积构成”。当前冻结本体未覆盖该关系，且端点类型映射不完整。三位独立审核员均确认原文支持该表述，但本体准入状态为 unresolved。需新增对象属性以支持该关系，并明确其定义与约束。",
+  "evidence_count": 2,
+  "evidence_hash": "b10a09ca8e05e4ba659599971d06da49a58016c7842d774291b4ea89d99ce70a",
+  "verified_evidence": [
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 581,
+      "chunk_id": "chunk_57cec8b1cede",
+      "chunk_start": 491,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 19294,
+      "evidence_id": "ev_a45c2dc8de96babdf36c",
+      "offset_basis": "canonical_document",
+      "quote": "空气阻力加速度是表示弹丸特征的弹道系数  $C$  、表示空气特征的密度函数  $H(y)$  和表示弹丸相对于空气的运动速度对运动影响的阻力函数  $F(v)$  三者的连乘积。",
+      "retrieval_score": 0.88,
+      "retrieved_via_levels": [
+        "adjacent_sentence"
+      ],
+      "section_id": "section_45e3b3342db3",
+      "semantic_status": "unknown",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_57cec8b1cede"
+      ],
+      "start": 19204,
+      "text": "空气阻力加速度是表示弹丸特征的弹道系数  $C$  、表示空气特征的密度函数  $H(y)$  和表示弹丸相对于空气的运动速度对运动影响的阻力函数  $F(v)$  三者的连乘积。"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 489,
+      "chunk_id": "chunk_57cec8b1cede",
+      "chunk_start": 487,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 19202,
+      "evidence_id": "ev_dc18b1477226d5e43e45",
+      "offset_basis": "canonical_document",
+      "quote": "$$",
+      "retrieval_level": "adjacent_sentence",
+      "retrieval_score": 0.88,
+      "retrieved_via_levels": [
+        "adjacent_sentence"
+      ],
+      "section_id": "section_45e3b3342db3",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_0bce9ebe362c5e5a575f",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_57cec8b1cede"
+      ],
+      "start": 19200,
+      "text": "$$"
+    }
+  ],
+  "current_candidates": [
+    {
+      "candidate_id": "cand_873c65d2740105df7de5",
+      "revision": 1,
+      "row_version": 4,
+      "triple": {
+        "datatype": null,
+        "head": "空气阻力加速度",
+        "head_entity_id": "local_e0eb43d10480d64740d8ac5ccec082941625721a7d19e6c82d0f6fd29f764265",
+        "head_type": "C_3936ec331d3ad51ff9c3",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "extracted",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": "三者",
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "由...连乘积构成",
+        "tail": "弹道系数 C、密度函数 H(y)、阻力函数 F(v)",
+        "tail_entity_id": "local_89dc225ba6e6e2edde58b330f94a290ecd26eaf78433cba657a0739d288c16fa",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      }
+    }
+  ],
+  "source_consensus": [
+    {
+      "candidate_id": "cand_873c65d2740105df7de5",
+      "revision": 1,
+      "audit_id": "audit_c467c0b0415f4beca12bef619f2444cd",
+      "proposal_digest": "94ba860d733414605d0f82a23e9eca3817fce4b61e25cbfdbdc7afe5e9f93bf5",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "source_result": "supported"
+    }
+  ],
+  "existing_term_recall": {
+    "catalog_items_scanned": 270,
+    "exact_matches": [],
+    "scope": "complete_formal_identity_catalog_exact_name_recall",
+    "semantic_equivalence_or_gap_confirmed": false,
+    "full_rdf_semantic_lookup_still_required": true
+  },
+  "offline_delta_checks": {
+    "status": "not_run_no_delta"
+  },
+  "case_accounts": [
+    {
+      "case_id": "case_2d7efa054277ab4fb4e139b9d9b79fb5",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 96,
+        "rebinds": 2,
+        "tokens": 240000,
+        "tool_calls": 64
+      },
+      "usage": {
+        "extension_requests": 1,
+        "llm_calls": 36,
+        "rebinds": 0,
+        "tokens": 184250,
+        "tool_calls": 17
+      }
+    }
+  ],
+  "prior_reviews": [
+    {
+      "audit_id": "ontology_audit_ea74b434d0d6486bbaa3433d69155ebb",
+      "stop_reason": "case_or_task_budget_exhausted",
+      "proposal_digests": [],
+      "votes": []
+    }
+  ],
+  "preparation_status": "source_verified_awaiting_model_investigation"
+}

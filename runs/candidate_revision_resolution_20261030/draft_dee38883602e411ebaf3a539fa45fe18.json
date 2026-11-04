@@ -1,0 +1,654 @@
+{
+  "status": "approved",
+  "draft_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+  "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+  "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+  "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_e850f13eff34428481edcd179466538e",
+      "attempts": [
+        {
+          "attempt_id": "attempt_e850f13eff34428481edcd179466538e",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+          "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "tail",
+              "note": "The revised tail '摩擦阻力系数 Cxf、涡阻系数 Cxb、波阻系数 Cxw 的和' accurately reflects the complete enumeration of the three components as stated in the source text. The previous tail '涡阻系数' was an incomplete fragment. The evidence explicitly lists all three components (friction, vortex, and wave drag coefficients) as the sum that the air resistance coefficient is divided into.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The source text uses the affirmative construction '可将...分开，成为...的和' (can be separated into the sum of...), which is a positive assertion of a decomposition relationship. Changing polarity from 'unknown' to 'positive' is grounded in the explicit affirmative statement in the evidence.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.modality",
+              "note": "The source text uses the modal verb '可' (can/may), indicating a possibility or capability of decomposition rather than a strict assertion. Changing modality from 'asserted' to 'can' correctly captures the modal nuance present in the original text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The source text explicitly enumerates three distinct components (friction, vortex, and wave drag coefficients) that sum to the total air resistance coefficient. The quantifier '三项之和' (sum of three items) accurately reflects this explicit enumeration in the evidence.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The status change from 'unknown' to 'extracted' is appropriate because the polarity is explicitly derivable from the affirmative construction in the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.modality",
+              "note": "The status change from 'not_stated' to 'extracted' is appropriate because the modal verb '可' is explicitly present in the source text, making the modality extractable.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "The status change from 'not_stated' to 'extracted' is appropriate because the three components are explicitly enumerated in the source text, making the quantifier extractable.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7808,
+          "late_response": false,
+          "latency_ms": 32046,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1236,
+          "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+          "provider_started_at": 1793354244.6062887,
+          "queue_time_ms": 358,
+          "rationale_summary": "The revision correctly addresses the incompleteness of the previous tail by expanding it to include all three components (friction, vortex, and wave drag coefficients) as explicitly stated in the source text. The changes to polarity, modality, and quantifier are all directly grounded in the linguistic features of the source text: the affirmative construction supports positive polarity, the modal verb '可' supports 'can' modality, and the explicit enumeration of three components supports the '三项之和' quantifier. All status changes from 'unknown'/'not_stated' to 'extracted' are justified by the explicit presence of these features in the evidence. No counterevidence was found in the verification scope.",
+          "reasoning_tokens": null,
+          "request_key": "cabe4c7179eb158f2ed3bec0abb18ac713ac29db1370b0ccd90091c346d0cb57",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-97d068c1973ec376",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "task_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+      "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "tail",
+          "note": "The revised tail '摩擦阻力系数 Cxf、涡阻系数 Cxb、波阻系数 Cxw 的和' accurately reflects the complete enumeration of the three components as stated in the source text. The previous tail '涡阻系数' was an incomplete fragment. The evidence explicitly lists all three components (friction, vortex, and wave drag coefficients) as the sum that the air resistance coefficient is divided into.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The source text uses the affirmative construction '可将...分开，成为...的和' (can be separated into the sum of...), which is a positive assertion of a decomposition relationship. Changing polarity from 'unknown' to 'positive' is grounded in the explicit affirmative statement in the evidence.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.modality",
+          "note": "The source text uses the modal verb '可' (can/may), indicating a possibility or capability of decomposition rather than a strict assertion. Changing modality from 'asserted' to 'can' correctly captures the modal nuance present in the original text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The source text explicitly enumerates three distinct components (friction, vortex, and wave drag coefficients) that sum to the total air resistance coefficient. The quantifier '三项之和' (sum of three items) accurately reflects this explicit enumeration in the evidence.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The status change from 'unknown' to 'extracted' is appropriate because the polarity is explicitly derivable from the affirmative construction in the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.modality",
+          "note": "The status change from 'not_stated' to 'extracted' is appropriate because the modal verb '可' is explicitly present in the source text, making the modality extractable.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "The status change from 'not_stated' to 'extracted' is appropriate because the three components are explicitly enumerated in the source text, making the quantifier extractable.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7808,
+      "late_response": false,
+      "latency_ms": 32046,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1236,
+      "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+      "provider_started_at": 1793354244.6062887,
+      "queue_time_ms": 358,
+      "rationale_summary": "The revision correctly addresses the incompleteness of the previous tail by expanding it to include all three components (friction, vortex, and wave drag coefficients) as explicitly stated in the source text. The changes to polarity, modality, and quantifier are all directly grounded in the linguistic features of the source text: the affirmative construction supports positive polarity, the modal verb '可' supports 'can' modality, and the explicit enumeration of three components supports the '三项之和' quantifier. All status changes from 'unknown'/'not_stated' to 'extracted' are justified by the explicit presence of these features in the evidence. No counterevidence was found in the verification scope.",
+      "reasoning_tokens": null,
+      "request_key": "cabe4c7179eb158f2ed3bec0abb18ac713ac29db1370b0ccd90091c346d0cb57",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-97d068c1973ec376",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_1e2d9a3b5ae59338992d",
+        "ev_e1cfb2635d4854b6e4e6"
+      ],
+      "task_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "attempt_id": "attempt_7251101b06734d02a856e66ce08b374d",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+      "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "tail",
+          "note": "The tail is expanded to include the full list of coefficients and the fact that it is a sum, matching the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The statement is a positive assertion of possibility.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifiers.modality",
+          "note": "The source text uses '可将' (can be), which supports the modality 'can'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The source text specifies the sum of three specific coefficients.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "Polarity is now explicitly extracted as positive.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifier_status.modality",
+          "note": "Modality is correctly identified as extracted.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "Quantifier is now explicitly extracted as the sum of three items.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 8698,
+      "late_response": false,
+      "latency_ms": 45593,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 2387,
+      "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+      "provider_started_at": 1793354281.6418047,
+      "queue_time_ms": 1220,
+      "rationale_summary": "The revision accurately reflects the source text by expanding the tail to include all three components of the air drag coefficient as a sum and updating the modality to 'can' and the quantifier to 'sum of three items' based on the phrase '可将空气阻力系数分开，成为摩擦阻力系数 $C_{xf}$ 、涡阻系数 $C_{xb}$ 、波阻系数 $C_{xw}$ 的和'.",
+      "reasoning_tokens": 1754,
+      "request_key": "c47567a247ad56e8f8bfc7b5b23041fe2ebae7dbe34562784eebe12390753dc3",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-957415e40ad4e40e",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_1e2d9a3b5ae59338992d",
+        "ev_e1cfb2635d4854b6e4e6"
+      ],
+      "task_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_7251101b06734d02a856e66ce08b374d",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+          "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "tail",
+              "note": "The tail is expanded to include the full list of coefficients and the fact that it is a sum, matching the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The statement is a positive assertion of possibility.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifiers.modality",
+              "note": "The source text uses '可将' (can be), which supports the modality 'can'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The source text specifies the sum of three specific coefficients.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "Polarity is now explicitly extracted as positive.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifier_status.modality",
+              "note": "Modality is correctly identified as extracted.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "Quantifier is now explicitly extracted as the sum of three items.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 8698,
+          "late_response": false,
+          "latency_ms": 45593,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 2387,
+          "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+          "provider_started_at": 1793354281.6418047,
+          "queue_time_ms": 1220,
+          "rationale_summary": "The revision accurately reflects the source text by expanding the tail to include all three components of the air drag coefficient as a sum and updating the modality to 'can' and the quantifier to 'sum of three items' based on the phrase '可将空气阻力系数分开，成为摩擦阻力系数 $C_{xf}$ 、涡阻系数 $C_{xb}$ 、波阻系数 $C_{xw}$ 的和'.",
+          "reasoning_tokens": 1754,
+          "request_key": "c47567a247ad56e8f8bfc7b5b23041fe2ebae7dbe34562784eebe12390753dc3",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-957415e40ad4e40e",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "task_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_9c98bc1dbdee4f8496ad267575f40c2a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_9c98bc1dbdee4f8496ad267575f40c2a",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+          "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6",
+                "ev_c8e38c4a6caca4a44395"
+              ],
+              "field": "tail",
+              "note": "原文明确将空气阻力系数分为摩擦阻力系数 Cxf、涡阻系数 Cxb、波阻系数 Cxw 三项之和，公式(1-31)亦印证三项相加，尾项补全为整体三项之和有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原文为肯定陈述“可将空气阻力系数分开，成为……的和”，positive 极性有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.modality",
+              "note": "原文使用“可将……分开”，can 情态与原文措辞一致。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6",
+                "ev_c8e38c4a6caca4a44395"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "原文列举三项并称“的和”，公式为三项相加，quantifier“三项之和”有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性已由原文肯定陈述确定，状态 extracted 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.modality",
+              "note": "情态由“可将”明确表达，状态 extracted 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6",
+                "ev_c8e38c4a6caca4a44395"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "数量由三项列举及求和公式明确，状态 extracted 合理。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6790,
+          "late_response": false,
+          "latency_ms": 6125,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 803,
+          "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+          "provider_started_at": 1793354244.5712755,
+          "queue_time_ms": 323,
+          "rationale_summary": "修订将尾项由单项“涡阻系数”补全为原文整体三项之和，并据原文“可将……分开，成为……的和”确定 positive 极性、can 情态与“三项之和”数量；公式(1-31)三项相加进一步印证。所有变更字段均有冻结证据支持，未删除条件或引入无据映射，故批准。",
+          "reasoning_tokens": null,
+          "request_key": "16f5ca1d01b044ee21302fe7c3e48597598873ca9bd984f7264b2cfac79342ff",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "661f94a6-64a5-47ff-858c-4a2aea9baf90",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6",
+            "ev_c8e38c4a6caca4a44395"
+          ],
+          "task_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e03280f4c61c367e6b32b355756c449057bc67ea0970b897d9729801597141fc",
+      "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6",
+            "ev_c8e38c4a6caca4a44395"
+          ],
+          "field": "tail",
+          "note": "原文明确将空气阻力系数分为摩擦阻力系数 Cxf、涡阻系数 Cxb、波阻系数 Cxw 三项之和，公式(1-31)亦印证三项相加，尾项补全为整体三项之和有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原文为肯定陈述“可将空气阻力系数分开，成为……的和”，positive 极性有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.modality",
+          "note": "原文使用“可将……分开”，can 情态与原文措辞一致。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6",
+            "ev_c8e38c4a6caca4a44395"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "原文列举三项并称“的和”，公式为三项相加，quantifier“三项之和”有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性已由原文肯定陈述确定，状态 extracted 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.modality",
+          "note": "情态由“可将”明确表达，状态 extracted 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6",
+            "ev_c8e38c4a6caca4a44395"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "数量由三项列举及求和公式明确，状态 extracted 合理。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 6790,
+      "late_response": false,
+      "latency_ms": 6125,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 803,
+      "proposal_digest": "9fae019a422bf66ba1269a7d250dc84a227fc3e41da7c1aa24ab7b72a2d86efe",
+      "provider_started_at": 1793354244.5712755,
+      "queue_time_ms": 323,
+      "rationale_summary": "修订将尾项由单项“涡阻系数”补全为原文整体三项之和，并据原文“可将……分开，成为……的和”确定 positive 极性、can 情态与“三项之和”数量；公式(1-31)三项相加进一步印证。所有变更字段均有冻结证据支持，未删除条件或引入无据映射，故批准。",
+      "reasoning_tokens": null,
+      "request_key": "16f5ca1d01b044ee21302fe7c3e48597598873ca9bd984f7264b2cfac79342ff",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "661f94a6-64a5-47ff-858c-4a2aea9baf90",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_1e2d9a3b5ae59338992d",
+        "ev_e1cfb2635d4854b6e4e6",
+        "ev_c8e38c4a6caca4a44395"
+      ],
+      "task_id": "draft_dee38883602e411ebaf3a539fa45fe18",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

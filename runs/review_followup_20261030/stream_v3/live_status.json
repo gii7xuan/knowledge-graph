@@ -1,0 +1,149 @@
+{
+  "checked_at_epoch": 1793296523.9533575,
+  "controller": {
+    "status": "running",
+    "phase": "ontology_pilot",
+    "pid": 42076,
+    "started_at_epoch": 1793296374.1636462,
+    "pilot_selected": 3,
+    "pilot_results": [
+      {
+        "job_id": "job_28197d4f0e884f3f9a6eccf103a88ed1",
+        "extension_id": "ext_0813e33a152048bc87c8fb055e1b0507",
+        "audit_id": "ontology_audit_f77c909aa00b404794df7aa91ec6da10",
+        "job_status": "completed",
+        "recommendation": "needs_human",
+        "stop_reason": "当前差异的 competency 检查失败，且委员会存在有效 reject 票（judge_c），理由包括描述非关系、与现有定义重复、domain/range 约束无依据、标签为句子片段。现有证据仅支持平流层气温恒定、无上下对流、只有水平移动这一事实描述，不足以支撑将“大气只有水平移动”建模为平流层到大气的对象属性。由于存在真实分歧与结构/语义问题，且无进一步合法调查动作可消除有效反对，应转人工处理，不得伪造批准。",
+        "error": null,
+        "proposals": 1,
+        "votes": 3,
+        "valid_votes": 1
+      }
+    ],
+    "remaining_results": [],
+    "case_budget_grants": [
+      {
+        "grant_id": "case_grant_14ec4ba378bd4c668d5bbf8254604d79",
+        "candidate_id": "cand_981b9f44641aeb3b3894",
+        "additions": {
+          "tokens": 44401
+        }
+      },
+      {
+        "grant_id": "case_grant_cf49e05cce6c4bd4bb1b25d496294480",
+        "candidate_id": "cand_3973747a80a7539f34d2",
+        "additions": {
+          "tokens": 222448
+        }
+      },
+      {
+        "grant_id": "case_grant_53da667c22734c319a5b07e883f5df28",
+        "candidate_id": "cand_858e10a70cd83e0522d0",
+        "additions": {
+          "tokens": 290648
+        }
+      }
+    ],
+    "updated_at_epoch": 1793296498.9867098,
+    "revision": {
+      "status": "needs_human",
+      "existing_valid_opposition_preserved": true,
+      "review_record": "D:\\knowledge-huopao\\runs\\review_followup_20261030\\revision_review.json"
+    },
+    "active_stage": "running next ontology pilot"
+  },
+  "jobs": [
+    {
+      "job_type": "ontology_extension",
+      "status": "completed",
+      "count": 6
+    }
+  ],
+  "ontology_audits": [
+    {
+      "status": "completed",
+      "count": 6
+    }
+  ],
+  "requests": [
+    {
+      "state": "unknown",
+      "task_type": "ontology_review",
+      "model_id": "Qwen",
+      "response_status": "api_error",
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+      "output_tokens": null,
+      "reasoning_tokens": null,
+      "finish_reason": null,
+      "generation": {
+        "max_output_tokens": 8192
+      },
+      "age_seconds": 109.6
+    },
+    {
+      "state": "failed",
+      "task_type": "ontology_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "error": "reference outside frozen ontology proposal",
+      "output_tokens": 852,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192,
+        "thinking_mode": "disabled"
+      },
+      "age_seconds": 109.6
+    },
+    {
+      "state": "unknown",
+      "task_type": "ontology_review",
+      "model_id": "Gemma",
+      "response_status": "api_error",
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+      "output_tokens": null,
+      "reasoning_tokens": null,
+      "finish_reason": null,
+      "generation": {
+        "max_output_tokens": 8192,
+        "stream_responses": true
+      },
+      "age_seconds": 109.5
+    },
+    {
+      "state": "failed",
+      "task_type": "ontology_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "error": "support/counter overlap",
+      "output_tokens": 770,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192,
+        "thinking_mode": "disabled"
+      },
+      "age_seconds": 100.3
+    },
+    {
+      "state": "completed",
+      "task_type": "ontology_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "error": "",
+      "output_tokens": 766,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192,
+        "thinking_mode": "disabled"
+      },
+      "age_seconds": 42.5
+    }
+  ]
+}

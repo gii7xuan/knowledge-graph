@@ -1,0 +1,223 @@
+[
+  {
+    "extension_id": "ext_0813e33a152048bc87c8fb055e1b0507",
+    "expected_row_version": 5,
+    "action": "withdraw",
+    "reason": "采纳有效反对票：撤回将描述性句子构造成对象属性的操作；原文描述已由既有类定义承载。保留原来源支持，不将本体建模否定解释为原文否定。",
+    "evidence_ids": [
+      "ev_4fb1ff8c10c4deb2ccc4",
+      "ev_6421b2bac4d654e6eb53",
+      "ev_8abbec1dad96559171c2"
+    ],
+    "resolution": {
+      "disposition": "reuse_existing_definition",
+      "independent_approval": false,
+      "reuse_schema_ids": [
+        "C_1693c5316c4746c54db6",
+        "C_4b4d774d036e0987e61b"
+      ],
+      "candidate_representation_review_required": true,
+      "objection_disposition": "invalid_operation_withdrawn"
+    },
+    "review_references": [
+      {
+        "audit_id": "ontology_audit_f77c909aa00b404794df7aa91ec6da10",
+        "round_id": 1,
+        "voter_id": "judge_c"
+      }
+    ],
+    "repair_key": "draft-checks-20261030:ext_0813e33a152048bc87c8fb055e1b0507",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_47b2102b6ba646a1a4f40587e83c0561",
+    "expected_row_version": 5,
+    "action": "withdraw",
+    "reason": "撤回重复承载既有类定义的数据属性；当前候选是定义性文字，不能为使实例关系映射通过而新增专用“定义”谓词。另行修复通用 xsd 前缀处理。",
+    "evidence_ids": [
+      "ev_0cfba6985c52b79d48d6"
+    ],
+    "resolution": {
+      "disposition": "reuse_existing_definition",
+      "independent_approval": false,
+      "reuse_schema_ids": [
+        "C_b01fa0de9c5da123ef25"
+      ],
+      "candidate_representation_review_required": true
+    },
+    "review_references": [],
+    "repair_key": "draft-checks-20261030:ext_47b2102b6ba646a1a4f40587e83c0561",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_3e7549fc23054ec5b03b783a72a169e2",
+    "expected_row_version": 3,
+    "action": "withdraw",
+    "reason": "撤回将新 domain 类追加到 OWL 多重 domain 数组的草案：当前语义是交集，不是允许任一类；不能通过删旧约束或伪造父类使其通过。",
+    "evidence_ids": [
+      "ev_ec63970c504b3921d0f1"
+    ],
+    "resolution": {
+      "disposition": "explicit_alternative_constraint_modeling_required",
+      "independent_approval": false,
+      "reviewed_constraint_field": "domain",
+      "requires_definition_and_scope_review": true,
+      "union_execution_not_supported_by_current_profile": true
+    },
+    "review_references": [],
+    "repair_key": "draft-checks-20261030:ext_3e7549fc23054ec5b03b783a72a169e2",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_576152e0a5cb4b40ad1bf976dce05e9d",
+    "expected_row_version": 3,
+    "action": "withdraw",
+    "reason": "撤回将新 range 类追加到 OWL 多重 range 数组的草案：当前语义是交集，不会扩大允许范围；需明确重建约束或关系后再做影响分析。",
+    "evidence_ids": [
+      "ev_0bf7c25eecac64be57ae",
+      "ev_7f279c3c2665a6ab9dc2",
+      "ev_b7c983cd23be47cde70b"
+    ],
+    "resolution": {
+      "disposition": "explicit_alternative_constraint_modeling_required",
+      "independent_approval": false,
+      "reviewed_constraint_field": "range",
+      "requires_definition_and_scope_review": true,
+      "union_execution_not_supported_by_current_profile": true
+    },
+    "review_references": [],
+    "repair_key": "draft-checks-20261030:ext_576152e0a5cb4b40ad1bf976dce05e9d",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_ffed3aeb1f66462fac7eb1d5d80f30e1",
+    "expected_row_version": 3,
+    "action": "withdraw",
+    "reason": "撤回以多重 range 表示备选类型的草案，同时保留候选端点缺类型的问题；当前 OWL profile 不支持把交集暗中解释为并集。",
+    "evidence_ids": [
+      "ev_1a67942db445ca29add6",
+      "ev_21de0e2a073161c2f485",
+      "ev_35ce65d3d2ee4a32dffd",
+      "ev_61040f17871a38a0d21a",
+      "ev_abf138680e0f9c54082a",
+      "ev_c9ab2e7280bc5834c122"
+    ],
+    "resolution": {
+      "disposition": "explicit_alternative_constraint_modeling_required",
+      "independent_approval": false,
+      "reviewed_constraint_field": "range",
+      "requires_definition_and_scope_review": true,
+      "candidate_endpoint_classification_required": true,
+      "union_execution_not_supported_by_current_profile": true
+    },
+    "review_references": [],
+    "repair_key": "draft-checks-20261030:ext_ffed3aeb1f66462fac7eb1d5d80f30e1",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_4a9a96a9450145e596202e196fd0c124",
+    "expected_row_version": 5,
+    "action": "replace",
+    "reason": "原别名错误地挂到另一个速度术语。完整目录未包含原文所指术语，改为最小的新类草案及原文别名，不猜父类；全局别名适用范围仍需原委员会审核。",
+    "evidence_ids": [
+      "ev_80eed916cc14019b7f83",
+      "ev_f71ecdb981eec97016a3"
+    ],
+    "operations": [
+      {
+        "kind": "add_class",
+        "target": null,
+        "changes": {
+          "label": "风速",
+          "definition": "原文记作 W 的风的速度，在该参考系叙述中称为牵连速度。",
+          "aliases": [
+            "牵连速度"
+          ],
+          "label_language": "zh",
+          "definition_language": "zh",
+          "alias_language": "zh"
+        },
+        "evidence_ids": [
+          "ev_80eed916cc14019b7f83",
+          "ev_f71ecdb981eec97016a3"
+        ]
+      }
+    ],
+    "resolution": {
+      "disposition": "correct_alias_owner_with_minimal_new_class",
+      "previous_target_id": "C_964a7098910f66e77d91",
+      "contextual_alias_scope_requires_independent_review": true,
+      "independent_approval": false
+    },
+    "repair_key": "draft-checks-20261030:ext_4a9a96a9450145e596202e196fd0c124",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_f9b004e2df2c4613aa4d060302238889",
+    "expected_row_version": 3,
+    "action": "replace",
+    "reason": "修正草案中错误引用的 domain 正式 ID，指向原文明确命名且已存在的类。候选本身缺失的 head_type 保持 unknown，不能由属性 domain 反推填入。",
+    "evidence_ids": [
+      "ev_8ba1516728928d67755c",
+      "ev_d3b3a402017eef9761f9"
+    ],
+    "operations": [
+      {
+        "changes": {
+          "definition": "气压通过改变空气密度对弹道产生的影响机制",
+          "definition_language": "zh",
+          "domain": [
+            "C_4f620706279a1779b20b"
+          ],
+          "label": "通过改变空气密度来影响",
+          "label_language": "zh",
+          "range": [
+            "C_70780e1e31a41f0ff86a"
+          ]
+        },
+        "evidence_ids": [
+          "ev_8ba1516728928d67755c",
+          "ev_d3b3a402017eef9761f9"
+        ],
+        "kind": "add_object_property",
+        "target": null
+      }
+    ],
+    "resolution": {
+      "disposition": "correct_exact_named_endpoint_id",
+      "candidate_endpoint_classification_required": true,
+      "reuse_schema_ids": [
+        "C_4f620706279a1779b20b"
+      ],
+      "independent_approval": false
+    },
+    "repair_key": "draft-checks-20261030:ext_f9b004e2df2c4613aa4d060302238889",
+    "actor": "codex_local_draft_repair"
+  },
+  {
+    "extension_id": "ext_05b93d2eaa3c4134a199e02948ddc105",
+    "expected_row_version": 5,
+    "action": "annotate",
+    "reason": "保留原有效 revise 票。其逐项检查均为 pass/not_applicable，但 requested_context 和 suggested_changes 均为空，只有 requested_context_invalid 原因；缺少可执行建议，不能擅自解释为批准或通过无关改动重投。",
+    "evidence_ids": [
+      "ev_4ca8b0a5dbe39a97b7ba",
+      "ev_d3fcfbd280c2a324b411"
+    ],
+    "review_references": [
+      {
+        "audit_id": "ontology_audit_51aa65a3e4af4a4b9cea53818e723d0a",
+        "round_id": 1,
+        "voter_id": "judge_a"
+      }
+    ],
+    "resolution": {
+      "disposition": "reviewer_clarification_required",
+      "resolved": false,
+      "requested_clarification": "请原审核员给出具体修改点或合法的 query/scope/limit 上下文请求。",
+      "original_frozen_delta_and_valid_votes_preserved": true,
+      "independent_approval": false
+    },
+    "repair_key": "draft-checks-20261030:ext_05b93d2eaa3c4134a199e02948ddc105",
+    "actor": "codex_local_draft_repair"
+  }
+]

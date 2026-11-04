@@ -1,0 +1,671 @@
+{
+  "status": "needs_human",
+  "draft_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+  "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+  "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+  "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+  "approved_voter_ids": [
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_6594fcd7511d4708bd19d354bbbede71",
+      "attempts": [
+        {
+          "attempt_id": "attempt_6594fcd7511d4708bd19d354bbbede71",
+          "attempt_no": 1,
+          "counter_evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a",
+            "ev_624e935b5c0133495f1f",
+            "ev_351ce28a63a0a2be1f2e",
+            "ev_7be9120ea888ec950dbe"
+          ],
+          "counterevidence_reviewed_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a",
+            "ev_624e935b5c0133495f1f",
+            "ev_351ce28a63a0a2be1f2e",
+            "ev_7be9120ea888ec950dbe"
+          ],
+          "decision": "reject",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+          "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "surface_relation",
+              "note": "The source text explicitly states '弹丸速度始终减小' (projectile velocity always decreases). The proposed change to '变化趋势' (change trend) is an abstraction not directly stated in the source text. The source uses the specific verb '减小' (decrease), not a general 'trend' concept.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "tail",
+              "note": "The source text states '弹丸速度始终减小' where '减小' is the predicate/verb, not the object. The proposed tail '减小' treats the verb as a literal value, which misrepresents the grammatical structure. The original tail '弹丸速度' (projectile velocity) was more accurate as the subject being described.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "tail_kind",
+              "note": "Changing tail_kind from 'entity' to 'literal' is not supported by the source text. The source describes a property of '弹丸速度' (projectile velocity), which is an entity/concept, not a literal string value.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "tail_type",
+              "note": "Setting tail_type to null is not grounded in the source text. The source clearly identifies '弹丸速度' as the subject entity being described.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "datatype",
+              "note": "Setting datatype to 'string' is not explicitly stated in the source text. The source text is a mathematical/physical statement about velocity change, not a data type specification.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "value",
+              "note": "Setting value to '减小' is not supported by the source text as a data value. The source uses '减小' as a verb/predicate describing the behavior of velocity, not as a literal value to be stored.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "relation_id",
+              "note": "Setting relation_id to null removes the previously mapped relation 'R_bacd990da3482215545f'. The source text supports a 'decrease' relationship, and removing the relation ID without replacement is not grounded in the source text.",
+              "status": "not_stated_in_scope"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7305,
+          "late_response": false,
+          "latency_ms": 34875,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1309,
+          "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+          "provider_started_at": 1793351458.4339993,
+          "queue_time_ms": 365,
+          "rationale_summary": "The proposed revision fundamentally misrepresents the source text. The original text '因此，在弹道升弧上，dv/dt < 0，弹丸速度始终减小' (Therefore, on the ascending arc of the trajectory, dv/dt < 0, projectile velocity always decreases) is a clear statement about the behavior of projectile velocity. The proposed changes: (1) change surface_relation from '减小' to '变化趋势' which is an unsupported abstraction; (2) change tail from '弹丸速度' to '减小' which misidentifies the verb as the object; (3) change tail_kind from 'entity' to 'literal' which is not supported; (4) set datatype to 'string' which is not stated in the source; (5) set value to '减小' which treats a verb as a data value; (6) remove relation_id which was previously mapped. The source text clearly supports the original structure where '弹丸速度' is the subject and '减小' is the predicate describing its behavior. The revision's rationale mentions 'removing head=tail self-referential binary decrease' but the original was not self-referential - it correctly identified the subject (projectile velocity) and its property (decreasing). The evidence bundle confirms the source text supports the original interpretation, not the proposed revision.",
+          "reasoning_tokens": null,
+          "request_key": "980c3f2a5b110e548b753e23f973fbaae134e162a84e06c01d16771bf1982b80",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-a0b96f9442ba4391",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [],
+          "task_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [
+        "ev_fe9672c3d073ee3f43ed",
+        "ev_56f4387b1ee8bda3865a",
+        "ev_624e935b5c0133495f1f",
+        "ev_351ce28a63a0a2be1f2e",
+        "ev_7be9120ea888ec950dbe"
+      ],
+      "counterevidence_reviewed_ids": [
+        "ev_fe9672c3d073ee3f43ed",
+        "ev_56f4387b1ee8bda3865a",
+        "ev_624e935b5c0133495f1f",
+        "ev_351ce28a63a0a2be1f2e",
+        "ev_7be9120ea888ec950dbe"
+      ],
+      "decision": "reject",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+      "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "surface_relation",
+          "note": "The source text explicitly states '弹丸速度始终减小' (projectile velocity always decreases). The proposed change to '变化趋势' (change trend) is an abstraction not directly stated in the source text. The source uses the specific verb '减小' (decrease), not a general 'trend' concept.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "tail",
+          "note": "The source text states '弹丸速度始终减小' where '减小' is the predicate/verb, not the object. The proposed tail '减小' treats the verb as a literal value, which misrepresents the grammatical structure. The original tail '弹丸速度' (projectile velocity) was more accurate as the subject being described.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "tail_kind",
+          "note": "Changing tail_kind from 'entity' to 'literal' is not supported by the source text. The source describes a property of '弹丸速度' (projectile velocity), which is an entity/concept, not a literal string value.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "tail_type",
+          "note": "Setting tail_type to null is not grounded in the source text. The source clearly identifies '弹丸速度' as the subject entity being described.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "datatype",
+          "note": "Setting datatype to 'string' is not explicitly stated in the source text. The source text is a mathematical/physical statement about velocity change, not a data type specification.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "value",
+          "note": "Setting value to '减小' is not supported by the source text as a data value. The source uses '减小' as a verb/predicate describing the behavior of velocity, not as a literal value to be stored.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "relation_id",
+          "note": "Setting relation_id to null removes the previously mapped relation 'R_bacd990da3482215545f'. The source text supports a 'decrease' relationship, and removing the relation ID without replacement is not grounded in the source text.",
+          "status": "not_stated_in_scope"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7305,
+      "late_response": false,
+      "latency_ms": 34875,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1309,
+      "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+      "provider_started_at": 1793351458.4339993,
+      "queue_time_ms": 365,
+      "rationale_summary": "The proposed revision fundamentally misrepresents the source text. The original text '因此，在弹道升弧上，dv/dt < 0，弹丸速度始终减小' (Therefore, on the ascending arc of the trajectory, dv/dt < 0, projectile velocity always decreases) is a clear statement about the behavior of projectile velocity. The proposed changes: (1) change surface_relation from '减小' to '变化趋势' which is an unsupported abstraction; (2) change tail from '弹丸速度' to '减小' which misidentifies the verb as the object; (3) change tail_kind from 'entity' to 'literal' which is not supported; (4) set datatype to 'string' which is not stated in the source; (5) set value to '减小' which treats a verb as a data value; (6) remove relation_id which was previously mapped. The source text clearly supports the original structure where '弹丸速度' is the subject and '减小' is the predicate describing its behavior. The revision's rationale mentions 'removing head=tail self-referential binary decrease' but the original was not self-referential - it correctly identified the subject (projectile velocity) and its property (decreasing). The evidence bundle confirms the source text supports the original interpretation, not the proposed revision.",
+      "reasoning_tokens": null,
+      "request_key": "980c3f2a5b110e548b753e23f973fbaae134e162a84e06c01d16771bf1982b80",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-a0b96f9442ba4391",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [],
+      "task_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "attempt_id": "attempt_800dc5e2524143cab339340e8883faab",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_351ce28a63a0a2be1f2e",
+        "ev_56f4387b1ee8bda3865a",
+        "ev_624e935b5c0133495f1f",
+        "ev_7be9120ea888ec950dbe",
+        "ev_fe9672c3d073ee3f43ed"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+      "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "surface_relation",
+          "note": "The change to '变化趋势' (trend of change) correctly describes the nature of the statement '弹丸速度始终减小' (projectile velocity always decreases).",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "tail",
+          "note": "The tail is changed from the entity '弹丸速度' to the literal '减小', which is the actual value of the trend.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "tail_kind",
+          "note": "Changed to 'literal' as '减小' is now treated as a value.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "tail_type",
+          "note": "Remains null, which is correct for a literal tail.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "datatype",
+          "note": "Set to 'string' to match the literal value '减小'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "value",
+          "note": "The value '减小' is explicitly stated in the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "field": "relation_id",
+          "note": "The previous relation ID was for a binary relation '减小'. Since the structure has been changed to a property-value pair, the ID is removed.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 8097,
+      "late_response": false,
+      "latency_ms": 78296,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 2599,
+      "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+      "provider_started_at": 1793352854.507499,
+      "queue_time_ms": 282,
+      "rationale_summary": "The revision corrects a logical error in the original triple where '减小' (decrease) was modeled as a binary relation between '弹丸速度' and itself. The revised version correctly models this as a property of the projectile velocity (Surface Relation: '变化趋势', Value: '减小'). The condition '在弹道的升弧上' and the quantifier '始终' are correctly preserved from the source text.",
+      "reasoning_tokens": 1687,
+      "request_key": "83d586a116540041b13f8609c8d938967044dc28b52fd662348cb4260a638200",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-93274e5347e70103",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_fe9672c3d073ee3f43ed",
+        "ev_56f4387b1ee8bda3865a"
+      ],
+      "task_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_800dc5e2524143cab339340e8883faab",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_351ce28a63a0a2be1f2e",
+            "ev_56f4387b1ee8bda3865a",
+            "ev_624e935b5c0133495f1f",
+            "ev_7be9120ea888ec950dbe",
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+          "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "surface_relation",
+              "note": "The change to '变化趋势' (trend of change) correctly describes the nature of the statement '弹丸速度始终减小' (projectile velocity always decreases).",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "tail",
+              "note": "The tail is changed from the entity '弹丸速度' to the literal '减小', which is the actual value of the trend.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "tail_kind",
+              "note": "Changed to 'literal' as '减小' is now treated as a value.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "tail_type",
+              "note": "Remains null, which is correct for a literal tail.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "datatype",
+              "note": "Set to 'string' to match the literal value '减小'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "value",
+              "note": "The value '减小' is explicitly stated in the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed"
+              ],
+              "field": "relation_id",
+              "note": "The previous relation ID was for a binary relation '减小'. Since the structure has been changed to a property-value pair, the ID is removed.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 8097,
+          "late_response": false,
+          "latency_ms": 78296,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 2599,
+          "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+          "provider_started_at": 1793352854.507499,
+          "queue_time_ms": 282,
+          "rationale_summary": "The revision corrects a logical error in the original triple where '减小' (decrease) was modeled as a binary relation between '弹丸速度' and itself. The revised version correctly models this as a property of the projectile velocity (Surface Relation: '变化趋势', Value: '减小'). The condition '在弹道的升弧上' and the quantifier '始终' are correctly preserved from the source text.",
+          "reasoning_tokens": 1687,
+          "request_key": "83d586a116540041b13f8609c8d938967044dc28b52fd662348cb4260a638200",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-93274e5347e70103",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "task_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_7dffc9ff795542a2b5af854851f7cc11",
+      "attempts": [
+        {
+          "attempt_id": "attempt_7dffc9ff795542a2b5af854851f7cc11",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_351ce28a63a0a2be1f2e",
+            "ev_56f4387b1ee8bda3865a",
+            "ev_624e935b5c0133495f1f",
+            "ev_7be9120ea888ec950dbe",
+            "ev_fe9672c3d073ee3f43ed"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+          "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "surface_relation",
+              "note": "原文“弹丸速度始终减小”表达的是变化趋势，将 surface_relation 改为“变化趋势”有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "tail",
+              "note": "“减小”是原文对速度变化方向的描述，作为字面 tail 有据，且消除了 head=tail 自指。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "tail_kind",
+              "note": "“减小”为字面值而非实体，tail_kind=literal 有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "tail_type",
+              "note": "字面趋势值无实体类型，tail_type 为空与证据一致。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "datatype",
+              "note": "字面值“减小”为字符串，datatype=string 有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "value",
+              "note": "value=“减小”直接对应原文“弹丸速度始终减小”。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_fe9672c3d073ee3f43ed",
+                "ev_56f4387b1ee8bda3865a"
+              ],
+              "field": "relation_id",
+              "note": "移除自指二元关系后 relation_id 置空，符合“关系需另经本体审核”的说明；本体缺口不构成拒绝理由。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6538,
+          "late_response": false,
+          "latency_ms": 6531,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 869,
+          "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+          "provider_started_at": 1793351499.2507312,
+          "queue_time_ms": 336,
+          "rationale_summary": "修订将原文不及物变化陈述“弹丸速度始终减小”表示为趋势字面值，保留条件“在弹道的升弧上”、量词“始终”、肯定极性及断言模态，未删除任何限制。已逐项评估全部受保护证据：ev_351ce28a63a0a2be1f2e 给出升弧条件，ev_56f4387b1ee8bda3865a 与 ev_fe9672c3d073ee3f43ed 支持 dv/dt<0 及速度减小，ev_624e935b5c0133495f1f 与 ev_7be9120ea888ec950dbe 涉及顶点及降弧，不与该升弧陈述矛盾。所有变更字段均有证据支撑，relation_id 置空属本体映射待审，不构成拒绝理由。",
+          "reasoning_tokens": null,
+          "request_key": "ec831db4e2d666420545c9deecc7cc156ecd6388fb62e74ee82e362c2af56630",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "52c837ea-db3b-411a-9c52-34004c77473e",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "task_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_351ce28a63a0a2be1f2e",
+        "ev_56f4387b1ee8bda3865a",
+        "ev_624e935b5c0133495f1f",
+        "ev_7be9120ea888ec950dbe",
+        "ev_fe9672c3d073ee3f43ed"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "30acf08889afb8f919fc4e73b04eb72fcb1d651eb77a9f793b2fe7dd23f9125a",
+      "evidence_hash": "747ba1bd71ca3a9e58d95f21665c456c887f59af80acf571cdbf87eef06de409",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "surface_relation",
+          "note": "原文“弹丸速度始终减小”表达的是变化趋势，将 surface_relation 改为“变化趋势”有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "tail",
+          "note": "“减小”是原文对速度变化方向的描述，作为字面 tail 有据，且消除了 head=tail 自指。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "tail_kind",
+          "note": "“减小”为字面值而非实体，tail_kind=literal 有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "tail_type",
+          "note": "字面趋势值无实体类型，tail_type 为空与证据一致。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "datatype",
+          "note": "字面值“减小”为字符串，datatype=string 有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "value",
+          "note": "value=“减小”直接对应原文“弹丸速度始终减小”。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_fe9672c3d073ee3f43ed",
+            "ev_56f4387b1ee8bda3865a"
+          ],
+          "field": "relation_id",
+          "note": "移除自指二元关系后 relation_id 置空，符合“关系需另经本体审核”的说明；本体缺口不构成拒绝理由。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 6538,
+      "late_response": false,
+      "latency_ms": 6531,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 869,
+      "proposal_digest": "4ab73b974884691b445befe69df5ca1b10a2efed40acc401663d4ff240b4513a",
+      "provider_started_at": 1793351499.2507312,
+      "queue_time_ms": 336,
+      "rationale_summary": "修订将原文不及物变化陈述“弹丸速度始终减小”表示为趋势字面值，保留条件“在弹道的升弧上”、量词“始终”、肯定极性及断言模态，未删除任何限制。已逐项评估全部受保护证据：ev_351ce28a63a0a2be1f2e 给出升弧条件，ev_56f4387b1ee8bda3865a 与 ev_fe9672c3d073ee3f43ed 支持 dv/dt<0 及速度减小，ev_624e935b5c0133495f1f 与 ev_7be9120ea888ec950dbe 涉及顶点及降弧，不与该升弧陈述矛盾。所有变更字段均有证据支撑，relation_id 置空属本体映射待审，不构成拒绝理由。",
+      "reasoning_tokens": null,
+      "request_key": "ec831db4e2d666420545c9deecc7cc156ecd6388fb62e74ee82e362c2af56630",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "52c837ea-db3b-411a-9c52-34004c77473e",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_fe9672c3d073ee3f43ed",
+        "ev_56f4387b1ee8bda3865a"
+      ],
+      "task_id": "draft_8254de75047c48c19ecda39161dcdbb5",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

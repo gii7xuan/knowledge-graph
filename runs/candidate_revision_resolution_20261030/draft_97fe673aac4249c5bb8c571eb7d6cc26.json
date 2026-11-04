@@ -1,0 +1,326 @@
+{
+  "status": "approved",
+  "draft_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+  "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+  "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+  "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "attempt_id": "attempt_9863778cc92d4f4bb99cf05088994a1a",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_c15baaaa1767cf8bcdc6"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+      "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "field": "relation_id",
+          "note": "The revision correctly reverts the relation_id to null. The source evidence explicitly states that the ballistic coefficient (弹道系数) represents the part of the projectile's own characteristics affecting its motion. The ontology context confirms that the property R_37918d1714e9945397f3 (表示) has a domain of '空气阻力函数' (Air Resistance Function) and a range of '弹丸运动' (Projectile Motion). Since the head entity is '弹道系数' (Ballistic Coefficient), which does not match the domain of the property, the previous mapping was incompatible. Reverting to null and marking the mapping status as 'needs_full_schema_lookup' is the correct operation to preserve the source-grounded expression without forcing an unsupported mapping.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 14003,
+      "late_response": false,
+      "latency_ms": 13594,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 505,
+      "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+      "provider_started_at": 1793379005.091327,
+      "queue_time_ms": 336,
+      "rationale_summary": "The revision is approved because it correctly identifies and removes an incompatible ontology mapping. The source text defines the ballistic coefficient (弹道系数) as representing the influence of the projectile's own characteristics (shape, size, mass) on its motion. The ontology property '表示' (R_37918d1714e9945397f3) is defined with a domain of '空气阻力函数' (Air Resistance Function), which is a different concept (representing the influence of relative velocity). Mapping the ballistic coefficient to this property was an error. The revision correctly reverts the relation_id to null, preserving the source text's meaning and the original head_type, while flagging the mapping for further schema lookup. This aligns with the principle that domain/range constraints are not evidence of source entity typing, and missing/ambiguous typing must remain uncertain.",
+      "reasoning_tokens": null,
+      "request_key": "cd211adccbb47ca9dd4f2997ec4c6fc3dac24817e1887af9b8b1df547a0b86b9",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-a7ad7dd6066a0b53",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_c15baaaa1767cf8bcdc6"
+      ],
+      "task_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_9863778cc92d4f4bb99cf05088994a1a",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+          "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_c15baaaa1767cf8bcdc6"
+              ],
+              "field": "relation_id",
+              "note": "The revision correctly reverts the relation_id to null. The source evidence explicitly states that the ballistic coefficient (弹道系数) represents the part of the projectile's own characteristics affecting its motion. The ontology context confirms that the property R_37918d1714e9945397f3 (表示) has a domain of '空气阻力函数' (Air Resistance Function) and a range of '弹丸运动' (Projectile Motion). Since the head entity is '弹道系数' (Ballistic Coefficient), which does not match the domain of the property, the previous mapping was incompatible. Reverting to null and marking the mapping status as 'needs_full_schema_lookup' is the correct operation to preserve the source-grounded expression without forcing an unsupported mapping.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 14003,
+          "late_response": false,
+          "latency_ms": 13594,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 505,
+          "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+          "provider_started_at": 1793379005.091327,
+          "queue_time_ms": 336,
+          "rationale_summary": "The revision is approved because it correctly identifies and removes an incompatible ontology mapping. The source text defines the ballistic coefficient (弹道系数) as representing the influence of the projectile's own characteristics (shape, size, mass) on its motion. The ontology property '表示' (R_37918d1714e9945397f3) is defined with a domain of '空气阻力函数' (Air Resistance Function), which is a different concept (representing the influence of relative velocity). Mapping the ballistic coefficient to this property was an error. The revision correctly reverts the relation_id to null, preserving the source text's meaning and the original head_type, while flagging the mapping for further schema lookup. This aligns with the principle that domain/range constraints are not evidence of source entity typing, and missing/ambiguous typing must remain uncertain.",
+          "reasoning_tokens": null,
+          "request_key": "cd211adccbb47ca9dd4f2997ec4c6fc3dac24817e1887af9b8b1df547a0b86b9",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-a7ad7dd6066a0b53",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "task_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_8d17fc1f51f042abb3f6fc305497daff",
+      "attempts": [
+        {
+          "attempt_id": "attempt_8d17fc1f51f042abb3f6fc305497daff",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+          "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_c15baaaa1767cf8bcdc6"
+              ],
+              "field": "relation_id",
+              "note": "The previous relation_id (R_37918d1714e9945397f3) has a domain restricted to '空气阻力函数' (Air Drag Function), whereas the head of this triple is '弹道系数' (Ballistic Coefficient). Removing the incorrect mapping and setting it to needs_full_schema_lookup is correct to avoid a domain violation.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 14141,
+          "late_response": false,
+          "latency_ms": 37734,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1541,
+          "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+          "provider_started_at": 1793378966.792585,
+          "queue_time_ms": 350,
+          "rationale_summary": "The revision removes an incorrect relation_id mapping. The ontology defines R_37918d1714e9945397f3 as having a domain of '空气阻力函数', but the head entity here is '弹道系数'. Since the head entity does not match the required domain, the mapping was invalid. The removal of the ID and the change in mapping_status to 'needs_full_schema_lookup' are appropriate.",
+          "reasoning_tokens": 1252,
+          "request_key": "535c99596a6291622bb7da9a53f3c8fbdedd2b7716fecac538afea67b194e95a",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-805a7253717d361d",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "task_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+      "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "field": "relation_id",
+          "note": "The previous relation_id (R_37918d1714e9945397f3) has a domain restricted to '空气阻力函数' (Air Drag Function), whereas the head of this triple is '弹道系数' (Ballistic Coefficient). Removing the incorrect mapping and setting it to needs_full_schema_lookup is correct to avoid a domain violation.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 14141,
+      "late_response": false,
+      "latency_ms": 37734,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1541,
+      "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+      "provider_started_at": 1793378966.792585,
+      "queue_time_ms": 350,
+      "rationale_summary": "The revision removes an incorrect relation_id mapping. The ontology defines R_37918d1714e9945397f3 as having a domain of '空气阻力函数', but the head entity here is '弹道系数'. Since the head entity does not match the required domain, the mapping was invalid. The removal of the ID and the change in mapping_status to 'needs_full_schema_lookup' are appropriate.",
+      "reasoning_tokens": 1252,
+      "request_key": "535c99596a6291622bb7da9a53f3c8fbdedd2b7716fecac538afea67b194e95a",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-805a7253717d361d",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_c15baaaa1767cf8bcdc6"
+      ],
+      "task_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_ebd16930ac254ea3b34e52d0b5a3dc48",
+      "attempts": [
+        {
+          "attempt_id": "attempt_ebd16930ac254ea3b34e52d0b5a3dc48",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+          "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_c15baaaa1767cf8bcdc6"
+              ],
+              "field": "relation_id",
+              "note": "撤回 R_37918d1714e9945397f3 是有依据的：该属性的 domain 为空气阻力函数（C_e4f3000a2284a7d0fa12），而源文本中的 head 是弹道系数（C_53d15a0ecfc3dc8ecd93），因此该映射不相容。将 relation_id 置为 null 并保留原文关系“表示”及所有限定符，是正确且保守的处理；mapping_status 变为 needs_full_schema_lookup 与撤回一致。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 11874,
+          "late_response": false,
+          "latency_ms": 5156,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 342,
+          "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+          "provider_started_at": 1793378966.817008,
+          "queue_time_ms": 351,
+          "rationale_summary": "唯一变更字段为 relation_id，由已确认的 R_37918d1714e9945397f3 撤回为 null。源句明确将“弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分”称作弹道系数 C，head 为弹道系数，而该属性的 domain 限定为空气阻力函数，二者不相容，故撤回映射有据。原文关系“表示”、极性 positive、模态 asserted 及所有 not_stated 限定符均保持不变，未删除条件或引入猜测极性。本体缺口不构成拒绝理由，批准该撤回。",
+          "reasoning_tokens": null,
+          "request_key": "796990d6f41bb180784ed362cf0324143a24ae55dde5b8c0ca76168b6627dd97",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "14bf55c7-350f-4f5f-a4bb-0dc76db04e67",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "task_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "cb4700a0f7f886fec9c9de5b6321cec7094e09e63d2fb4a0414bf84ebf63bf79",
+      "evidence_hash": "72efa0f555ec23264e8ba3fb4d5e545f1845f133fb47682091273f421ea5ed6b",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "field": "relation_id",
+          "note": "撤回 R_37918d1714e9945397f3 是有依据的：该属性的 domain 为空气阻力函数（C_e4f3000a2284a7d0fa12），而源文本中的 head 是弹道系数（C_53d15a0ecfc3dc8ecd93），因此该映射不相容。将 relation_id 置为 null 并保留原文关系“表示”及所有限定符，是正确且保守的处理；mapping_status 变为 needs_full_schema_lookup 与撤回一致。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 11874,
+      "late_response": false,
+      "latency_ms": 5156,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 342,
+      "proposal_digest": "9fc8c4c0232df9abe9d40c197800c179f794cf6f552fd54561c1afbdccc140eb",
+      "provider_started_at": 1793378966.817008,
+      "queue_time_ms": 351,
+      "rationale_summary": "唯一变更字段为 relation_id，由已确认的 R_37918d1714e9945397f3 撤回为 null。源句明确将“弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分”称作弹道系数 C，head 为弹道系数，而该属性的 domain 限定为空气阻力函数，二者不相容，故撤回映射有据。原文关系“表示”、极性 positive、模态 asserted 及所有 not_stated 限定符均保持不变，未删除条件或引入猜测极性。本体缺口不构成拒绝理由，批准该撤回。",
+      "reasoning_tokens": null,
+      "request_key": "796990d6f41bb180784ed362cf0324143a24ae55dde5b8c0ca76168b6627dd97",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "14bf55c7-350f-4f5f-a4bb-0dc76db04e67",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_c15baaaa1767cf8bcdc6"
+      ],
+      "task_id": "draft_97fe673aac4249c5bb8c571eb7d6cc26",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

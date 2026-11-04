@@ -1,0 +1,649 @@
+{
+  "status": "needs_human",
+  "draft_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+  "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+  "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+  "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+  "approved_voter_ids": [
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_a08cc7c17a97493ba89c1be3d2e0a16e",
+      "attempts": [
+        {
+          "attempt_id": "attempt_a08cc7c17a97493ba89c1be3d2e0a16e",
+          "attempt_no": 1,
+          "counter_evidence_ids": [
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "counterevidence_reviewed_ids": [
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "decision": "reject",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+          "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "head",
+              "note": "The change from '空气阻力' to '弹丸的空气阻力' is directly supported by the primary evidence quote '式（1-30）说明弹丸的空气阻力与弹丸的横截面积、弹丸的动能及空气密度成正比。' which explicitly specifies the subject as '弹丸的空气阻力'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The change from 'unknown' to 'positive' is supported. The statement '说明...成正比' (indicates... is proportional to) is an affirmative assertion of a relationship, which constitutes a positive polarity.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d",
+                "ev_3b7f7d23438fd0e699dc",
+                "ev_96b4dcfafa637ae61fc5"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "The proposed applicability '攻角 δ=0° 的弹丸' is not directly stated in the primary evidence for the proportionality relationship. While ev_96b4dcfafa637ae61fc5 states that the subscript '0' in the drag coefficient C_x0 indicates an angle of attack δ=0°, it does not explicitly state that the proportionality relationship in equation (1-30) is *only* applicable to projectiles with δ=0°. The primary evidence ev_e4b2e909823e320b540d makes a general statement about the proportionality without specifying the angle of attack condition. Therefore, restricting the applicability to '攻角 δ=0° 的弹丸' is an inference that goes beyond the explicit statement in the verified evidence scope.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The change from null to '式（1-30）所述横截面积、动能及空气密度的联合正比关系' is supported. The primary evidence explicitly states that the air resistance is proportional to the cross-sectional area, kinetic energy, and air density *jointly* (implied by the list structure '与...、...及...成正比'). This condition accurately captures the multi-factor nature of the relationship described in the source.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The change from 'unknown' to 'extracted' is consistent with the change in qualifiers.polarity to 'positive', which is supported by the evidence.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d",
+                "ev_3b7f7d23438fd0e699dc",
+                "ev_96b4dcfafa637ae61fc5"
+              ],
+              "field": "qualifier_status.applicability",
+              "note": "The change from 'not_stated' to 'extracted' is not supported because the specific applicability condition '攻角 δ=0° 的弹丸' is not explicitly stated in the evidence for the proportionality relationship. The evidence for the angle of attack condition (ev_96b4dcfafa637ae61fc5) is about the definition of the drag coefficient's subscript, not a direct restriction on the proportionality statement itself.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "The change from 'not_stated' to 'extracted' is supported by the primary evidence which explicitly describes the joint proportionality condition.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7401,
+          "late_response": false,
+          "latency_ms": 34688,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1365,
+          "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+          "provider_started_at": 1793353691.7623074,
+          "queue_time_ms": 340,
+          "rationale_summary": "The revision is rejected because the change to 'qualifiers.applicability' and 'qualifier_status.applicability' is not fully grounded in the verified evidence. While the changes to 'head', 'qualifiers.polarity', and 'qualifiers.condition' are well-supported by the primary evidence, the specific applicability restriction to '攻角 δ=0° 的弹丸' is an inference. The evidence ev_96b4dcfafa637ae61fc5 explains the meaning of the subscript in the drag coefficient C_x0 but does not explicitly state that the proportionality relationship in equation (1-30) is restricted to projectiles with an angle of attack of 0°. The primary evidence ev_e4b2e909823e320b540d states the proportionality without this specific condition. Therefore, marking the applicability as 'extracted' with this specific value is not justified within the frozen verification scope.",
+          "reasoning_tokens": null,
+          "request_key": "22695fec828ad5fb04a5414ed4ebb329dbd055dfe0ac24a6ee6e74952ae58c4d",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-90c3862585940eb0",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "task_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [
+        "ev_96b4dcfafa637ae61fc5"
+      ],
+      "counterevidence_reviewed_ids": [
+        "ev_96b4dcfafa637ae61fc5"
+      ],
+      "decision": "reject",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+      "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "head",
+          "note": "The change from '空气阻力' to '弹丸的空气阻力' is directly supported by the primary evidence quote '式（1-30）说明弹丸的空气阻力与弹丸的横截面积、弹丸的动能及空气密度成正比。' which explicitly specifies the subject as '弹丸的空气阻力'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The change from 'unknown' to 'positive' is supported. The statement '说明...成正比' (indicates... is proportional to) is an affirmative assertion of a relationship, which constitutes a positive polarity.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d",
+            "ev_3b7f7d23438fd0e699dc",
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "The proposed applicability '攻角 δ=0° 的弹丸' is not directly stated in the primary evidence for the proportionality relationship. While ev_96b4dcfafa637ae61fc5 states that the subscript '0' in the drag coefficient C_x0 indicates an angle of attack δ=0°, it does not explicitly state that the proportionality relationship in equation (1-30) is *only* applicable to projectiles with δ=0°. The primary evidence ev_e4b2e909823e320b540d makes a general statement about the proportionality without specifying the angle of attack condition. Therefore, restricting the applicability to '攻角 δ=0° 的弹丸' is an inference that goes beyond the explicit statement in the verified evidence scope.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.condition",
+          "note": "The change from null to '式（1-30）所述横截面积、动能及空气密度的联合正比关系' is supported. The primary evidence explicitly states that the air resistance is proportional to the cross-sectional area, kinetic energy, and air density *jointly* (implied by the list structure '与...、...及...成正比'). This condition accurately captures the multi-factor nature of the relationship described in the source.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The change from 'unknown' to 'extracted' is consistent with the change in qualifiers.polarity to 'positive', which is supported by the evidence.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d",
+            "ev_3b7f7d23438fd0e699dc",
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "field": "qualifier_status.applicability",
+          "note": "The change from 'not_stated' to 'extracted' is not supported because the specific applicability condition '攻角 δ=0° 的弹丸' is not explicitly stated in the evidence for the proportionality relationship. The evidence for the angle of attack condition (ev_96b4dcfafa637ae61fc5) is about the definition of the drag coefficient's subscript, not a direct restriction on the proportionality statement itself.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "The change from 'not_stated' to 'extracted' is supported by the primary evidence which explicitly describes the joint proportionality condition.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7401,
+      "late_response": false,
+      "latency_ms": 34688,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1365,
+      "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+      "provider_started_at": 1793353691.7623074,
+      "queue_time_ms": 340,
+      "rationale_summary": "The revision is rejected because the change to 'qualifiers.applicability' and 'qualifier_status.applicability' is not fully grounded in the verified evidence. While the changes to 'head', 'qualifiers.polarity', and 'qualifiers.condition' are well-supported by the primary evidence, the specific applicability restriction to '攻角 δ=0° 的弹丸' is an inference. The evidence ev_96b4dcfafa637ae61fc5 explains the meaning of the subscript in the drag coefficient C_x0 but does not explicitly state that the proportionality relationship in equation (1-30) is restricted to projectiles with an angle of attack of 0°. The primary evidence ev_e4b2e909823e320b540d states the proportionality without this specific condition. Therefore, marking the applicability as 'extracted' with this specific value is not justified within the frozen verification scope.",
+      "reasoning_tokens": null,
+      "request_key": "22695fec828ad5fb04a5414ed4ebb329dbd055dfe0ac24a6ee6e74952ae58c4d",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-90c3862585940eb0",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_e4b2e909823e320b540d"
+      ],
+      "task_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "attempt_id": "attempt_2d788342d98c46c7ae9a336f4592bba5",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_e4b2e909823e320b540d",
+        "ev_96b4dcfafa637ae61fc5",
+        "ev_3b7f7d23438fd0e699dc",
+        "ev_ada05bba41d53aa0ad16",
+        "ev_f66bea66a5c74335c5bf"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+      "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "head",
+          "note": "The source text explicitly mentions '弹丸的空气阻力' (air resistance of the projectile).",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "field": "qualifier_status.applicability",
+          "note": "The applicability is grounded in the definition of the coefficient C_x0 mentioned in the context.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "The condition describes the joint proportionality stated in the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The polarity is positive as indicated by '成正比' (proportional to).",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "Evidence ev_96b4dcfafa637ae61fc5 states that the subscript 0 in C_x0 indicates an angle of attack δ = 0°.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.condition",
+          "note": "The source text specifies that the air resistance is proportional to the cross-sectional area, kinetic energy, and air density.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The term '成正比' (proportional to) indicates a positive polarity.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 8262,
+      "late_response": false,
+      "latency_ms": 48813,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 2572,
+      "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+      "provider_started_at": 1793353989.7453609,
+      "queue_time_ms": 304,
+      "rationale_summary": "The revision accurately reflects the source text by specifying the head as '弹丸的空气阻力', identifying the positive polarity of the proportionality, and adding the necessary applicability (angle of attack δ=0°) and joint condition (proportionality to area, kinetic energy, and density) derived from the provided evidence.",
+      "reasoning_tokens": 1632,
+      "request_key": "0c03913b9bd56f8ca350f99e23a160f989d4592115087cb83ed9e2b10e9bf744",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-b64b3be6af1233da",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_e4b2e909823e320b540d",
+        "ev_96b4dcfafa637ae61fc5",
+        "ev_3b7f7d23438fd0e699dc"
+      ],
+      "task_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_2d788342d98c46c7ae9a336f4592bba5",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_e4b2e909823e320b540d",
+            "ev_96b4dcfafa637ae61fc5",
+            "ev_3b7f7d23438fd0e699dc",
+            "ev_ada05bba41d53aa0ad16",
+            "ev_f66bea66a5c74335c5bf"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+          "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "head",
+              "note": "The source text explicitly mentions '弹丸的空气阻力' (air resistance of the projectile).",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_96b4dcfafa637ae61fc5"
+              ],
+              "field": "qualifier_status.applicability",
+              "note": "The applicability is grounded in the definition of the coefficient C_x0 mentioned in the context.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "The condition describes the joint proportionality stated in the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The polarity is positive as indicated by '成正比' (proportional to).",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_96b4dcfafa637ae61fc5"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "Evidence ev_96b4dcfafa637ae61fc5 states that the subscript 0 in C_x0 indicates an angle of attack δ = 0°.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The source text specifies that the air resistance is proportional to the cross-sectional area, kinetic energy, and air density.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The term '成正比' (proportional to) indicates a positive polarity.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 8262,
+          "late_response": false,
+          "latency_ms": 48813,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 2572,
+          "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+          "provider_started_at": 1793353989.7453609,
+          "queue_time_ms": 304,
+          "rationale_summary": "The revision accurately reflects the source text by specifying the head as '弹丸的空气阻力', identifying the positive polarity of the proportionality, and adding the necessary applicability (angle of attack δ=0°) and joint condition (proportionality to area, kinetic energy, and density) derived from the provided evidence.",
+          "reasoning_tokens": 1632,
+          "request_key": "0c03913b9bd56f8ca350f99e23a160f989d4592115087cb83ed9e2b10e9bf744",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-b64b3be6af1233da",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_e4b2e909823e320b540d",
+            "ev_96b4dcfafa637ae61fc5",
+            "ev_3b7f7d23438fd0e699dc"
+          ],
+          "task_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_2e1f89ec73754a76874d37a55fe8e727",
+      "attempts": [
+        {
+          "attempt_id": "attempt_2e1f89ec73754a76874d37a55fe8e727",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+          "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "head",
+              "note": "原文明确主语为“弹丸的空气阻力”，将 head 从“空气阻力”改为“弹丸的空气阻力”有直接引文支撑。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原文“成正比”为肯定断言，polarity=positive 有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性由原文“成正比”直接提取，状态 extracted 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_96b4dcfafa637ae61fc5",
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "ev_96b4dcfafa637ae61fc5 说明下标 0 表示攻角 δ=0°，与式(1-30)的阻力系数语境一致，适用条件“攻角 δ=0° 的弹丸”有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_96b4dcfafa637ae61fc5"
+              ],
+              "field": "qualifier_status.applicability",
+              "note": "适用条件可从原文提取，状态 extracted 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifiers.condition",
+              "note": "原文明确阻力与横截面积、动能及空气密度三者联合成正比，条件限定为式(1-30)所述联合正比关系有据，避免将单项断言为无条件独立规律。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_e4b2e909823e320b540d"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "条件限定由原文直接提取，状态 extracted 合理。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6751,
+          "late_response": false,
+          "latency_ms": 5218,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 681,
+          "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+          "provider_started_at": 1793353727.0897658,
+          "queue_time_ms": 350,
+          "rationale_summary": "修订将 head 补全为原文主语“弹丸的空气阻力”，补回肯定极性、攻角 δ=0° 的适用条件及式(1-30)所述横截面积、动能、空气密度联合正比的条件限定，均有冻结证据直接支撑。受保护证据 ev_e4b2e909823e320b540d 已独立评估，未发现与之矛盾的反证；其余相邻证据（ev_96b4dcfafa637ae61fc5 等）与修订一致。所有变更字段均有据，批准。",
+          "reasoning_tokens": null,
+          "request_key": "5010a410725b295106dfe3c93b778d2b4b7fe0f4d2e143781cad443b0fcca77a",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "2a13d0e2-4f3d-497f-a241-46f548091cfb",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_e4b2e909823e320b540d",
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "task_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_e4b2e909823e320b540d"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "3f7949ca1e2ec5234beda788ec9b2dce752454af4517102a88044d4166008384",
+      "evidence_hash": "eb31c991016b4d554fa5a959e57200821c44dfc4df0c71045df3e7d2143d4717",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "head",
+          "note": "原文明确主语为“弹丸的空气阻力”，将 head 从“空气阻力”改为“弹丸的空气阻力”有直接引文支撑。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原文“成正比”为肯定断言，polarity=positive 有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性由原文“成正比”直接提取，状态 extracted 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_96b4dcfafa637ae61fc5",
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "ev_96b4dcfafa637ae61fc5 说明下标 0 表示攻角 δ=0°，与式(1-30)的阻力系数语境一致，适用条件“攻角 δ=0° 的弹丸”有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_96b4dcfafa637ae61fc5"
+          ],
+          "field": "qualifier_status.applicability",
+          "note": "适用条件可从原文提取，状态 extracted 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifiers.condition",
+          "note": "原文明确阻力与横截面积、动能及空气密度三者联合成正比，条件限定为式(1-30)所述联合正比关系有据，避免将单项断言为无条件独立规律。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_e4b2e909823e320b540d"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "条件限定由原文直接提取，状态 extracted 合理。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 6751,
+      "late_response": false,
+      "latency_ms": 5218,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 681,
+      "proposal_digest": "63792f33cc2bf7dd22e0ecb00a09c5ab2764e66a44a0d226f4474862738365ab",
+      "provider_started_at": 1793353727.0897658,
+      "queue_time_ms": 350,
+      "rationale_summary": "修订将 head 补全为原文主语“弹丸的空气阻力”，补回肯定极性、攻角 δ=0° 的适用条件及式(1-30)所述横截面积、动能、空气密度联合正比的条件限定，均有冻结证据直接支撑。受保护证据 ev_e4b2e909823e320b540d 已独立评估，未发现与之矛盾的反证；其余相邻证据（ev_96b4dcfafa637ae61fc5 等）与修订一致。所有变更字段均有据，批准。",
+      "reasoning_tokens": null,
+      "request_key": "5010a410725b295106dfe3c93b778d2b4b7fe0f4d2e143781cad443b0fcca77a",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "2a13d0e2-4f3d-497f-a241-46f548091cfb",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_e4b2e909823e320b540d",
+        "ev_96b4dcfafa637ae61fc5"
+      ],
+      "task_id": "draft_59befd3bda5a4e1dbc8680778f6c637d",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

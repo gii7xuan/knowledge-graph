@@ -1,0 +1,117 @@
+......................F...E....F..E.....F.......F..................F...........F.....F......F............
+======================================================================
+ERROR: test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes (tests.test_review_planner.PlannerRuntimeTests.test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 277, in test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes
+    self.assertTrue(self.audit["context"]["revision_drafts"][0]["requires_human_confirmation"])
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'requires_human_confirmation'
+
+======================================================================
+ERROR: test_source_support_consensus_is_required_before_schema_extension (tests.test_planner_contract_v3.PlannerContractV3Tests.test_source_support_consensus_is_required_before_schema_extension)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_planner_contract_v3.py", line 38, in test_source_support_consensus_is_required_before_schema_extension
+    self.assertEqual(policy.validate_request(request,state),request)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\action_policy.py", line 57, in validate_request
+    if reason: raise ActionError(reason)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+review_agent.planner_contracts.ActionError: current full frozen ontology lookup required
+
+======================================================================
+FAIL: test_repeated_same_proposal_uses_cached_votes_not_a_reroll (tests.test_review_planner.PlannerRuntimeTests.test_repeated_same_proposal_uses_cached_votes_not_a_reroll)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 158, in test_repeated_same_proposal_uses_cached_votes_not_a_reroll
+    self.assertEqual(self.audit["tool_calls"][2]["status"], "cached")
+AssertionError: 'finish_requested' != 'cached'
+- finish_requested
++ cached
+
+
+======================================================================
+FAIL: test_extension_cannot_cite_valid_but_not_independently_supported_evidence (tests.test_planner_contract_v3.PlannerContractV3Tests.test_extension_cannot_cite_valid_but_not_independently_supported_evidence)
+----------------------------------------------------------------------
+review_agent.planner_contracts.ActionError: current full frozen ontology lookup required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_planner_contract_v3.py", line 49, in test_extension_cannot_cite_valid_but_not_independently_supported_evidence
+    with self.assertRaisesRegex(ActionError,'source_supported_evidence_ids'): policy.validate_request(request,state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "source_supported_evidence_ids" does not match "current full frozen ontology lookup required"
+
+======================================================================
+FAIL: test_constraint_review_retains_guard_failure_and_never_approves_ontology (tests.test_review_enhancement_v4.EnhancedAgentTests.test_constraint_review_retains_guard_failure_and_never_approves_ontology)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_enhancement_v4.py", line 280, in test_constraint_review_retains_guard_failure_and_never_approves_ontology
+    self.assertEqual(result["workflow_state"], "awaiting_ontology_review")
+AssertionError: 'schema_unresolved' != 'awaiting_ontology_review'
+- schema_unresolved
++ awaiting_ontology_review
+
+
+======================================================================
+FAIL: test_nullable_full_lookup_finds_existing_mapping_and_blocks_duplicate (tests.test_review_enhancement_v4.EnhancedAgentTests.test_nullable_full_lookup_finds_existing_mapping_and_blocks_duplicate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_enhancement_v4.py", line 175, in test_nullable_full_lookup_finds_existing_mapping_and_blocks_duplicate
+    self.assertTrue(any(c["status"] == "invalid_action" for c in audit["tool_calls"]))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_billing_pause_is_visible_and_retries_only_the_failed_model (tests.test_ontology_extension_agent.OntologyExtensionTests.test_billing_pause_is_visible_and_retries_only_the_failed_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 474, in test_billing_pause_is_visible_and_retries_only_the_failed_model
+    self.assertEqual(second["recommendation"], "approve")
+AssertionError: 'needs_human' != 'approve'
+- needs_human
++ approve
+
+
+======================================================================
+FAIL: test_human_revision_invalidates_old_approval_and_requires_new_votes (tests.test_ontology_extension_agent.OntologyExtensionTests.test_human_revision_invalidates_old_approval_and_requires_new_votes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 367, in test_human_revision_invalidates_old_approval_and_requires_new_votes
+    self.assertEqual([len(v["client"].calls) for v in self.voters], [1, 1, 1])
+AssertionError: Lists differ: [2, 2, 2] != [1, 1, 1]
+
+First differing element 0:
+2
+1
+
+- [2, 2, 2]
++ [1, 1, 1]
+
+======================================================================
+FAIL: test_old_counter_cannot_be_cleared_by_repeating_the_same_diff (tests.test_ontology_extension_agent.OntologyExtensionTests.test_old_counter_cannot_be_cleared_by_repeating_the_same_diff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 514, in test_old_counter_cannot_be_cleared_by_repeating_the_same_diff
+    self.assertEqual(same["recommendation"], "needs_human")
+AssertionError: 'approve' != 'needs_human'
+- approve
++ needs_human
+
+
+======================================================================
+FAIL: test_real_sdk_and_killable_worker_use_separate_ontology_contract (tests.test_ontology_extension_agent.OntologyExtensionTests.test_real_sdk_and_killable_worker_use_separate_ontology_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 598, in test_real_sdk_and_killable_worker_use_separate_ontology_contract
+    self.assertEqual(result.get("recommendation"), "approve", result)
+AssertionError: 'needs_human' != 'approve'
+- needs_human
++ approve
+ : {'task_type': 'ontology_extension', 'extension_id': 'ext_c076bbd2e1de4724b98d65d052188605', 'audit_id': 'sdk_ontology', 'delta_revision': 1, 'recommendation': 'needs_human', 'task_status': 'needs_human', 'selected_round_id': None, 'selected_proposal_digest': None, 'stop_reason': 'ontology_planner_failed', 'budget': {'usage': {'llm_calls': 1, 'tool_calls': 0, 'planner_steps': 1, 'validation_rounds': 0, 'input_tokens': 0, 'output_tokens': 0, 'unknown_token_requests': 1}, 'deadline_epoch': 1793259509.927959, 'remaining_seconds': 79.84399999998277, 'remaining_llm_calls': 39, 'max_planner_steps': 14, 'max_validation_rounds': 2, 'case_ids': ['case_c76b05a9313d3a7e154952c5db02511d'], 'case_call_reservations': ['d6b12f9aa5224e0f9b2e10b9e6390ce0'], 'shared_cost_policy': 'full_cost_charged_to_each_subscribed_case', 'case_accounts': [{'case_id': 'case_c76b05a9313d3a7e154952c5db02511d', 'limits': {'extension_requests': 1, 'llm_calls': 96, 'rebinds': 2, 'tokens': 240000, 'tool_calls': 64}, 'usage': {'extension_requests': 1, 'llm_calls': 7, 'rebinds': 0, 'tokens': 0, 'tool_calls': 3}}]}, 'release_published': False, 'mode': 'shadow', 'human_revision_satisfied': True, 'auto_publish_enabled': False, 'paused': False, 'counter_evidence_ids': []}
+
+----------------------------------------------------------------------
+Ran 105 tests in 253.050s
+
+FAILED (failures=8, errors=2)

@@ -1,0 +1,103 @@
+{
+  "created_at": "2026-11-03T13:10:25.752187+08:00",
+  "sample_id": "DEV-020",
+  "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "base_candidate_hash": "ee7be66f38abdec87ca40973c73f47f6656878d50c59ccfc66c90c9d2aa5cc98",
+  "full_schema_terms_scanned": 270,
+  "base_data_property_count": 0,
+  "structure": {
+    "status": "pass",
+    "errors": [],
+    "warnings": [],
+    "class_count": 189,
+    "relation_count": 82,
+    "owl_reasoner_executed": false
+  },
+  "impact": {
+    "status": "pass",
+    "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+    "candidate_rows_scanned": 320,
+    "changed_schema_ids": [
+      "D_07d08749937238cbe5f3"
+    ],
+    "dependent_schema_ids": [
+      "D_07d08749937238cbe5f3"
+    ],
+    "affected_candidates": []
+  },
+  "all_current_candidate_guard_regression": {
+    "scanned": 320,
+    "existing_formal_mapping_behavior_changes": 0,
+    "surface_only_lookup_changes": [],
+    "comparison": "constraint decisions; ontology version metadata intentionally differs"
+  },
+  "trigger_probe": {
+    "status": "pass",
+    "guard": {
+      "status": "pass",
+      "relation_known": true,
+      "relation_id": "D_07d08749937238cbe5f3",
+      "relation": {
+        "id": "D_07d08749937238cbe5f3",
+        "label": "具有特征",
+        "name": "具有特征",
+        "field": "D_07d08749937238cbe5f3",
+        "datatype": "http://www.w3.org/2001/XMLSchema#string",
+        "domain": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "iri": "urn:kg-ontology:extension:add_data_property:0f45be71caa141bb1cb184e0a888f15e1298c475a64bc7fe07d6b03b7a5d9704",
+        "aliases": [],
+        "labels": [
+          {
+            "value": "具有特征",
+            "language": "zh"
+          }
+        ],
+        "definitions": [
+          {
+            "value": "关联弹丸与其在明确适用条件下的定性特征描述。",
+            "language": "zh"
+          }
+        ],
+        "domain_semantics": "all",
+        "domain_expressions": [
+          "<urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a>"
+        ],
+        "range_expressions": [
+          "<http://www.w3.org/2001/XMLSchema#string>"
+        ],
+        "datatypes": [
+          "http://www.w3.org/2001/XMLSchema#string"
+        ],
+        "kind": "datatype_property"
+      },
+      "domain_status": "pass",
+      "range_status": "pass",
+      "type_unknown": false,
+      "mapping_ambiguous": false,
+      "hard_failure": false,
+      "reason_codes": [],
+      "constraint_semantics": "required_all",
+      "ontology_version": "684abc3be18c55903424341a35f664a667b6661d19f46f22af2aef769b77e5cc"
+    },
+    "meaning": "Only a local probe against an unpublished draft schema; not a formal binding or admission."
+  },
+  "rdf": {
+    "before_triple_count": 882,
+    "after_triple_count": 887,
+    "preserved_triple_count": 882,
+    "patch_hash": "f4aa8f04ea4e40dd7e2876f0bca5bf6ebdda61e47a840681f768f38e6618df01",
+    "source_sha256": "6bb098a986ae149c5e964c7de874acdf893871b041624b51fbf88d7265aac075"
+  },
+  "semantic_competency_review_completed": false,
+  "independent_ontology_review_completed": false,
+  "release_published": false,
+  "production_applied": false,
+  "remaining": [
+    "正式三席本体独立审核",
+    "语义能力问题审核及发布门槛",
+    "发布后按新本体版本重新绑定并复审候选"
+  ],
+  "literal_language_note": "沿用候选string值和独立language元数据；本草案不改变候选语言或文字值。"
+}

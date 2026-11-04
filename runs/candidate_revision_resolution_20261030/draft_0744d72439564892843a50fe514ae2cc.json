@@ -1,0 +1,340 @@
+{
+  "status": "approved",
+  "draft_id": "draft_0744d72439564892843a50fe514ae2cc",
+  "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+  "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+  "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "attempt_id": "attempt_b9304a6adfdb4ab7ad42aa876784c8dc",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_197b526479fee7b852fe",
+        "ev_a45c2dc8de96babdf36c"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+      "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "field": "relation_id",
+          "note": "The revision correctly reverts the relation_id to null because the previously mapped relation R_37918d1714e9945397f3 has a domain constraint of '空气阻力函数' (Air Resistance Function), which is incompatible with the head entity '弹道系数 C' (Ballistic Coefficient C). The source evidence explicitly states that the ballistic coefficient C represents projectile characteristics, not air resistance function characteristics. Therefore, removing the incompatible mapping is grounded in the source text and ontology constraints.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 13892,
+      "late_response": false,
+      "latency_ms": 12296,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 446,
+      "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+      "provider_started_at": 1793378902.277057,
+      "queue_time_ms": 301,
+      "rationale_summary": "The revision is approved because it correctly identifies and removes an incompatible ontology mapping. The source evidence clearly defines the ballistic coefficient C as representing projectile characteristics, while the mapped relation R_37918d1714e9945397f3 requires the head entity to be an air resistance function. Reverting the relation_id to null preserves the source-grounded surface relation '表示' (represents) while acknowledging the ontology gap, which is the correct handling for this extraction candidate.",
+      "reasoning_tokens": null,
+      "request_key": "51e1817433c7a05c64d296b86b851835a547af0db859c4d7fb84f738b845d16a",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-8d2e396d80794616",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_197b526479fee7b852fe",
+        "ev_a45c2dc8de96babdf36c"
+      ],
+      "task_id": "draft_0744d72439564892843a50fe514ae2cc",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_b9304a6adfdb4ab7ad42aa876784c8dc",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+          "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_197b526479fee7b852fe",
+                "ev_a45c2dc8de96babdf36c"
+              ],
+              "field": "relation_id",
+              "note": "The revision correctly reverts the relation_id to null because the previously mapped relation R_37918d1714e9945397f3 has a domain constraint of '空气阻力函数' (Air Resistance Function), which is incompatible with the head entity '弹道系数 C' (Ballistic Coefficient C). The source evidence explicitly states that the ballistic coefficient C represents projectile characteristics, not air resistance function characteristics. Therefore, removing the incompatible mapping is grounded in the source text and ontology constraints.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 13892,
+          "late_response": false,
+          "latency_ms": 12296,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 446,
+          "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+          "provider_started_at": 1793378902.277057,
+          "queue_time_ms": 301,
+          "rationale_summary": "The revision is approved because it correctly identifies and removes an incompatible ontology mapping. The source evidence clearly defines the ballistic coefficient C as representing projectile characteristics, while the mapped relation R_37918d1714e9945397f3 requires the head entity to be an air resistance function. Reverting the relation_id to null preserves the source-grounded surface relation '表示' (represents) while acknowledging the ontology gap, which is the correct handling for this extraction candidate.",
+          "reasoning_tokens": null,
+          "request_key": "51e1817433c7a05c64d296b86b851835a547af0db859c4d7fb84f738b845d16a",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-8d2e396d80794616",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "task_id": "draft_0744d72439564892843a50fe514ae2cc",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_ba74b991d995475c8efac81a08567f99",
+      "attempts": [
+        {
+          "attempt_id": "attempt_ba74b991d995475c8efac81a08567f99",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+          "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_197b526479fee7b852fe",
+                "ev_a45c2dc8de96babdf36c"
+              ],
+              "field": "relation_id",
+              "note": "The previous relation_id R_37918d1714e9945397f3 has a domain of '空气阻力函数' (Air Drag Function) and a range of '弹丸运动' (Projectile Motion). The head of this triple is '弹道系数' (Ballistic Coefficient) and the tail is '弹丸特征' (Projectile Characteristics), which are incompatible with the domain and range of that specific relation ID. Removing the incorrect mapping is correct.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 14014,
+          "late_response": false,
+          "latency_ms": 34860,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1395,
+          "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+          "provider_started_at": 1793378866.8611197,
+          "queue_time_ms": 470,
+          "rationale_summary": "The revision correctly removes the relation_id R_37918d1714e9945397f3 because the head and tail entities of the triple do not match the domain and range constraints of that relation in the ontology. The surface triple (弹道系数 C, 表示, 弹丸特征) remains fully supported by the source text.",
+          "reasoning_tokens": 1062,
+          "request_key": "0d195a272f925be499626ed50695c20b10f3cb49edbfa237682d737c0eeb5223",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-8c1cc14035ea4278",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "task_id": "draft_0744d72439564892843a50fe514ae2cc",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+      "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "field": "relation_id",
+          "note": "The previous relation_id R_37918d1714e9945397f3 has a domain of '空气阻力函数' (Air Drag Function) and a range of '弹丸运动' (Projectile Motion). The head of this triple is '弹道系数' (Ballistic Coefficient) and the tail is '弹丸特征' (Projectile Characteristics), which are incompatible with the domain and range of that specific relation ID. Removing the incorrect mapping is correct.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 14014,
+      "late_response": false,
+      "latency_ms": 34860,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1395,
+      "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+      "provider_started_at": 1793378866.8611197,
+      "queue_time_ms": 470,
+      "rationale_summary": "The revision correctly removes the relation_id R_37918d1714e9945397f3 because the head and tail entities of the triple do not match the domain and range constraints of that relation in the ontology. The surface triple (弹道系数 C, 表示, 弹丸特征) remains fully supported by the source text.",
+      "reasoning_tokens": 1062,
+      "request_key": "0d195a272f925be499626ed50695c20b10f3cb49edbfa237682d737c0eeb5223",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-8c1cc14035ea4278",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_197b526479fee7b852fe",
+        "ev_a45c2dc8de96babdf36c"
+      ],
+      "task_id": "draft_0744d72439564892843a50fe514ae2cc",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_3bfeb2a4a7c3420f945bf90d00bf6b2e",
+      "attempts": [
+        {
+          "attempt_id": "attempt_3bfeb2a4a7c3420f945bf90d00bf6b2e",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+          "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_197b526479fee7b852fe",
+                "ev_a45c2dc8de96babdf36c"
+              ],
+              "field": "relation_id",
+              "note": "The source sentence states that the ballistic coefficient C 'represents' (表示) the projectile characteristics. The prior confirmed relation R_37918d1714e9945397f3 has domain 空气阻力函数 (air resistance function) and range 弹丸运动 (projectile motion), which is incompatible with the source triple (head 弹道系数 C, tail 弹丸特征). Withdrawing the incompatible mapping to null (needs_full_schema_lookup) is grounded; the surface relation '表示' and all qualifiers (polarity positive, modality asserted, others not_stated) are preserved unchanged. No new relation is asserted.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 11761,
+          "late_response": false,
+          "latency_ms": 4983,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 370,
+          "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+          "provider_started_at": 1793378866.8670228,
+          "queue_time_ms": 476,
+          "rationale_summary": "The only changed field is relation_id, set from R_37918d1714e9945397f3 to null. The frozen evidence confirms the source triple is 弹道系数 C —表示→ 弹丸特征, while the published property's domain is 空气阻力函数 and range is 弹丸运动, so the prior mapping was incompatible. Retracting it to needs_full_schema_lookup preserves the surface relation and all qualifiers without asserting a guessed mapping or deleting conditions. No counterevidence exists in scope; the change is grounded and approved.",
+          "reasoning_tokens": null,
+          "request_key": "f08ab093c1a5db1f9dd056ad28a31ece89fc43e1fc34349e4c704c952bd06f83",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "5d1ae9ba-bc58-46b9-a382-61d05b6e54fe",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "task_id": "draft_0744d72439564892843a50fe514ae2cc",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "139d9549f2f9ee7176da6967f35d56fd2afb6f66c7f14b51f6fddf7a5a5fc07d",
+      "evidence_hash": "201a86139f7c331613ddd3360212b4ffbd985db3ebde62230b2a6209b3c02c91",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "field": "relation_id",
+          "note": "The source sentence states that the ballistic coefficient C 'represents' (表示) the projectile characteristics. The prior confirmed relation R_37918d1714e9945397f3 has domain 空气阻力函数 (air resistance function) and range 弹丸运动 (projectile motion), which is incompatible with the source triple (head 弹道系数 C, tail 弹丸特征). Withdrawing the incompatible mapping to null (needs_full_schema_lookup) is grounded; the surface relation '表示' and all qualifiers (polarity positive, modality asserted, others not_stated) are preserved unchanged. No new relation is asserted.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 11761,
+      "late_response": false,
+      "latency_ms": 4983,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 370,
+      "proposal_digest": "b24966eb9210cd8ffb05d3962e411715f44ea46da85fa7f279ad4f9096318624",
+      "provider_started_at": 1793378866.8670228,
+      "queue_time_ms": 476,
+      "rationale_summary": "The only changed field is relation_id, set from R_37918d1714e9945397f3 to null. The frozen evidence confirms the source triple is 弹道系数 C —表示→ 弹丸特征, while the published property's domain is 空气阻力函数 and range is 弹丸运动, so the prior mapping was incompatible. Retracting it to needs_full_schema_lookup preserves the surface relation and all qualifiers without asserting a guessed mapping or deleting conditions. No counterevidence exists in scope; the change is grounded and approved.",
+      "reasoning_tokens": null,
+      "request_key": "f08ab093c1a5db1f9dd056ad28a31ece89fc43e1fc34349e4c704c952bd06f83",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "5d1ae9ba-bc58-46b9-a382-61d05b6e54fe",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_197b526479fee7b852fe",
+        "ev_a45c2dc8de96babdf36c"
+      ],
+      "task_id": "draft_0744d72439564892843a50fe514ae2cc",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

@@ -1,0 +1,752 @@
+{
+  "extension_id": "ext_ffed3aeb1f66462fac7eb1d5d80f30e1",
+  "task_row_version": 3,
+  "delta_revision": 1,
+  "change_kind": "revise_constraint",
+  "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "model_calls": 0,
+  "blockers": [],
+  "warnings": [
+    "existing_delta_is_not_independently_approved"
+  ],
+  "description": "关系 R_3c75dd89923bc714630d（取决于）的 range 约束当前为 C_f0037f9e5d770063017b，但候选三元组的 tail 类型 C_5c072ee8bc4ede36b807（射程）不在允许范围内，导致本体检查失败。原文证据明确支持“ΔX的大小取决于射程”这一语义关系，且独立委员会已达成 source_support_consensus=supported。需扩展 range 约束以包含 C_5c072ee8bc4ede36b807，使该关系在冻结本体中合法。",
+  "evidence_count": 6,
+  "evidence_hash": "422043aab84cc4db1d515e28aba64a42a9b65948b3d16fb338834e2152be51ff",
+  "verified_evidence": [
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 288,
+      "chunk_id": "chunk_4e1ec08e40cc",
+      "chunk_start": 259,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 40895,
+      "evidence_id": "ev_c9ab2e7280bc5834c122",
+      "lexical_relevance_score": 0.6000000000000001,
+      "offset_basis": "canonical_document",
+      "query_purpose": "check_support",
+      "quote": "$\\Delta X$  的大小取决于两个方面：一个是射程；",
+      "retrieval_level": "current_chunk",
+      "retrieval_score": 0.78,
+      "retrieved_via_levels": [
+        "current_chunk"
+      ],
+      "review_obligation": true,
+      "section_id": "section_99419d139055",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_3988d57d6631c4dd4857",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_4e1ec08e40cc"
+      ],
+      "start": 40866,
+      "text": "$\\Delta X$  的大小取决于两个方面：一个是射程；"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 506,
+      "chunk_id": "chunk_8f47349e835a",
+      "chunk_start": 83,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 40687,
+      "evidence_id": "ev_1a67942db445ca29add6",
+      "lexical_relevance_score": 0.4,
+      "offset_basis": "canonical_document",
+      "query_purpose": "check_support",
+      "quote": "<table><tr><td rowspan=\"2\">炮弹</td><td rowspan=\"2\">射程</td><td colspan=\"4\">射角/(°)</td></tr><tr><td>5</td><td>15</td><td>30</td><td>45</td></tr><tr><td rowspan=\"3\">炮弹Ⅱ</td><td>X1/m</td><td>8 979.9</td><td>15 796.0</td><td>21 378.4</td><td>24 129.0</td></tr><tr><td>X2/m</td><td>9 023.7</td><td>15 830.0</td><td>21 409.7</td><td>24 154.2</td></tr><tr><td>ΔX/m</td><td>43.8</td><td>34</td><td>31.3</td><td>25.2</td></tr></table>",
+      "retrieval_level": "current_chunk",
+      "retrieval_score": 0.78,
+      "retrieved_via_levels": [
+        "current_chunk"
+      ],
+      "review_obligation": true,
+      "section_id": "section_99419d139055",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_5c9b0b1d163917e08d50",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_8f47349e835a",
+        "chunk_4e1ec08e40cc"
+      ],
+      "start": 40264,
+      "text": "<table><tr><td rowspan=\"2\">炮弹</td><td rowspan=\"2\">射程</td><td colspan=\"4\">射角/(°)</td></tr><tr><td>5</td><td>15</td><td>30</td><td>45</td></tr><tr><td rowspan=\"3\">炮弹Ⅱ</td><td>X1/m</td><td>8 979.9</td><td>15 796.0</td><td>21 378.4</td><td>24 129.0</td></tr><tr><td>X2/m</td><td>9 023.7</td><td>15 830.0</td><td>21 409.7</td><td>24 154.2</td></tr><tr><td>ΔX/m</td><td>43.8</td><td>34</td><td>31.3</td><td>25.2</td></tr></table>"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 312,
+      "chunk_id": "chunk_4e1ec08e40cc",
+      "chunk_start": 294,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 40919,
+      "evidence_id": "ev_35ce65d3d2ee4a32dffd",
+      "lexical_relevance_score": 0.4,
+      "offset_basis": "canonical_document",
+      "query_purpose": "check_support",
+      "quote": "射程越大，则地表面与平面的差别越大；",
+      "retrieval_level": "current_chunk",
+      "retrieval_score": 0.78,
+      "retrieved_via_levels": [
+        "current_chunk"
+      ],
+      "review_obligation": true,
+      "section_id": "section_99419d139055",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_095ffd2741bcd2ca6b7b",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_4e1ec08e40cc"
+      ],
+      "start": 40901,
+      "text": "射程越大，则地表面与平面的差别越大；"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 356,
+      "chunk_id": "chunk_4e1ec08e40cc",
+      "chunk_start": 312,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 40963,
+      "evidence_id": "ev_21de0e2a073161c2f485",
+      "lexical_relevance_score": 0.4,
+      "offset_basis": "canonical_document",
+      "query_purpose": "check_support",
+      "quote": "在射程一定的情况下，落角越小，则曲面与平面之差所造成的  $\\Delta X$  越大。",
+      "retrieval_level": "current_chunk",
+      "retrieval_score": 0.78,
+      "retrieved_via_levels": [
+        "current_chunk"
+      ],
+      "review_obligation": true,
+      "section_id": "section_99419d139055",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_bf64c66f83370a44bd87",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_4e1ec08e40cc"
+      ],
+      "start": 40919,
+      "text": "在射程一定的情况下，落角越小，则曲面与平面之差所造成的  $\\Delta X$  越大。"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 418,
+      "chunk_id": "chunk_4e1ec08e40cc",
+      "chunk_start": 356,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 41025,
+      "evidence_id": "ev_abf138680e0f9c54082a",
+      "lexical_relevance_score": 0.4,
+      "offset_basis": "canonical_document",
+      "query_purpose": "check_support",
+      "quote": "随着射角的增大，射程是增大的，但落角也增大，前者使  $\\Delta X$  增大，后者使  $\\Delta X$  减小。",
+      "retrieval_level": "current_chunk",
+      "retrieval_score": 0.78,
+      "retrieved_via_levels": [
+        "current_chunk"
+      ],
+      "review_obligation": true,
+      "section_id": "section_99419d139055",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_723c573dbff373795992",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_4e1ec08e40cc"
+      ],
+      "start": 40963,
+      "text": "随着射角的增大，射程是增大的，但落角也增大，前者使  $\\Delta X$  增大，后者使  $\\Delta X$  减小。"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 528,
+      "chunk_id": "chunk_4e1ec08e40cc",
+      "chunk_start": 418,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 41135,
+      "evidence_id": "ev_61040f17871a38a0d21a",
+      "lexical_relevance_score": 0.4,
+      "offset_basis": "canonical_document",
+      "query_purpose": "check_support",
+      "quote": "二者综合的结果，炮弹I在  $15^{\\circ}$  射角时  $\\Delta X$  出现最大值，炮弹Ⅱ由于初速大，小射角时射程已很大，故  $5^{\\circ}$  射角时  $\\Delta X$  即出现最大值。",
+      "retrieval_level": "current_chunk",
+      "retrieval_score": 0.78,
+      "retrieved_via_levels": [
+        "current_chunk"
+      ],
+      "review_obligation": true,
+      "section_id": "section_99419d139055",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_82123e4766e3bd8fc7d4",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_4e1ec08e40cc"
+      ],
+      "start": 41025,
+      "text": "二者综合的结果，炮弹I在  $15^{\\circ}$  射角时  $\\Delta X$  出现最大值，炮弹Ⅱ由于初速大，小射角时射程已很大，故  $5^{\\circ}$  射角时  $\\Delta X$  即出现最大值。"
+    }
+  ],
+  "current_candidates": [
+    {
+      "candidate_id": "cand_72888cdc296af3d7378d",
+      "revision": 1,
+      "row_version": 4,
+      "triple": {
+        "datatype": null,
+        "head": "ΔX的大小",
+        "head_entity_id": "local_5352eb0bc6f135eb270d4b75ce282ab75e0e850f448342cf76b982c68a8bc154",
+        "head_type": null,
+        "language": "zh",
+        "mapping_status": "mapped",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": "R_3c75dd89923bc714630d",
+        "relation_label": "取决于",
+        "relation_semantic_hash": "25bf618cd5e058db9eed647bc3166fd7bd6248b6497db7812946b15a1340b50d",
+        "surface_relation": "取决于",
+        "tail": "射程",
+        "tail_entity_id": "local_faaa64e72126fcf3a9809a8ee1812d220574cb753c294e9f09e2bca13fd9fac4",
+        "tail_kind": "entity",
+        "tail_type": "C_5c072ee8bc4ede36b807",
+        "unit": null,
+        "value": null
+      }
+    }
+  ],
+  "source_consensus": [
+    {
+      "candidate_id": "cand_72888cdc296af3d7378d",
+      "revision": 1,
+      "audit_id": "audit_e339dc047dc8409d900ab1019636d812",
+      "proposal_digest": "da4b802b4989aa1b7e1d7373f3a3a263a620283ab09b6f1a072b1fc2563d4e8c",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "source_result": "supported"
+    }
+  ],
+  "existing_term_recall": {
+    "catalog_items_scanned": 270,
+    "exact_matches": [
+      {
+        "id": "R_3c75dd89923bc714630d",
+        "label": "取决于",
+        "description": "",
+        "domain": [
+          "C_52c1a1e08cb0ee536af8"
+        ],
+        "range": [
+          "C_f0037f9e5d770063017b"
+        ],
+        "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+        "aliases": [],
+        "labels": [
+          {
+            "language": "zh",
+            "value": "取决于"
+          }
+        ],
+        "definitions": [],
+        "domain_semantics": "all",
+        "range_semantics": "all",
+        "domain_expressions": [
+          "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+        ],
+        "range_expressions": [
+          "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+        ],
+        "schema_kind": "object_property"
+      }
+    ],
+    "scope": "complete_formal_identity_catalog_exact_name_recall",
+    "semantic_equivalence_or_gap_confirmed": false,
+    "full_rdf_semantic_lookup_still_required": true
+  },
+  "existing_delta": {
+    "delta_hash": "77e75c48803f828fb73f24f02e677b24f64f6864ab2befe5df2c85ec09bde386",
+    "operations": [
+      {
+        "changes": {
+          "range": [
+            "C_f0037f9e5d770063017b",
+            "C_5c072ee8bc4ede36b807"
+          ]
+        },
+        "evidence_ids": [
+          "ev_c9ab2e7280bc5834c122",
+          "ev_1a67942db445ca29add6",
+          "ev_35ce65d3d2ee4a32dffd",
+          "ev_21de0e2a073161c2f485",
+          "ev_abf138680e0f9c54082a",
+          "ev_61040f17871a38a0d21a"
+        ],
+        "kind": "revise_constraint",
+        "target": "R_3c75dd89923bc714630d"
+      }
+    ],
+    "risk_category": "high_impact"
+  },
+  "offline_delta_checks": {
+    "structure": {
+      "status": "pass",
+      "errors": [],
+      "warnings": [],
+      "class_count": 189,
+      "relation_count": 81,
+      "owl_reasoner_executed": false,
+      "owl_patch_hash": "c86d7b25822688ba6a5bbaf6200fcfb4743a79a6c420e2130f67f40965a3370a",
+      "owl_source_sha256": "ec9701109aa1e5f0cef01db340dc53ea8f82833ece975b5f01d3eac1567b3f84",
+      "profile_derivation": "reimported_complete_owl_source",
+      "unexecuted_axiom_count": 0,
+      "delta_hash": "77e75c48803f828fb73f24f02e677b24f64f6864ab2befe5df2c85ec09bde386",
+      "evidence_hash": "422043aab84cc4db1d515e28aba64a42a9b65948b3d16fb338834e2152be51ff",
+      "record_id": "check_d60ed7f461296bc07d2602a8be27e802e389ec7388935c8a3a60272e6e7af371"
+    },
+    "impact": {
+      "status": "pass",
+      "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+      "candidate_rows_scanned": 320,
+      "changed_schema_ids": [
+        "R_3c75dd89923bc714630d"
+      ],
+      "dependent_schema_ids": [
+        "R_3c75dd89923bc714630d"
+      ],
+      "affected_candidates": [
+        {
+          "candidate_id": "cand_61604ad46905c5a15c90",
+          "revision": 1,
+          "row_version": 4,
+          "human_status": "pending",
+          "candidate_content_hash": "9cc461a173a0bae9895c75fab590caa91b5363376c6cc86618f58b7664fe311f",
+          "dependency_ids": [
+            "R_3c75dd89923bc714630d"
+          ],
+          "old_guard": {
+            "status": "unknown",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "unknown",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": false,
+            "reason_codes": [
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2"
+          },
+          "new_guard": {
+            "status": "unknown",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_5c072ee8bc4ede36b807",
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:5262a412adb87f6333d4e778>",
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "unknown",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": false,
+            "reason_codes": [
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "cf8409f202923ecd999548b3e32da7cd06b0668bd87553d6657b022192784531"
+          },
+          "required_action": "new_revision_and_reaudit",
+          "old_admission_reused": false
+        },
+        {
+          "candidate_id": "cand_72888cdc296af3d7378d",
+          "revision": 1,
+          "row_version": 4,
+          "human_status": "pending",
+          "candidate_content_hash": "93261a4779d88611492002cd59d307005032d6c7102e7e77e51cd2bfe97dc479",
+          "dependency_ids": [
+            "R_3c75dd89923bc714630d"
+          ],
+          "old_guard": {
+            "status": "fail",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "fail",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": true,
+            "reason_codes": [
+              "RANGE_CONSTRAINT_FAILED",
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2"
+          },
+          "new_guard": {
+            "status": "fail",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_5c072ee8bc4ede36b807",
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:5262a412adb87f6333d4e778>",
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "fail",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": true,
+            "reason_codes": [
+              "RANGE_CONSTRAINT_FAILED",
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "cf8409f202923ecd999548b3e32da7cd06b0668bd87553d6657b022192784531"
+          },
+          "required_action": "new_revision_and_reaudit",
+          "old_admission_reused": false
+        },
+        {
+          "candidate_id": "cand_86593a03f779444a2b51",
+          "revision": 1,
+          "row_version": 4,
+          "human_status": "pending",
+          "candidate_content_hash": "1bb715bb67abce224e974805649e40ebb20a7a6f1b3aa892f1f95da33c62f2a0",
+          "dependency_ids": [
+            "R_3c75dd89923bc714630d"
+          ],
+          "old_guard": {
+            "status": "unknown",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "unknown",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": false,
+            "reason_codes": [
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2"
+          },
+          "new_guard": {
+            "status": "unknown",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_5c072ee8bc4ede36b807",
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:5262a412adb87f6333d4e778>",
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "unknown",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": false,
+            "reason_codes": [
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "cf8409f202923ecd999548b3e32da7cd06b0668bd87553d6657b022192784531"
+          },
+          "required_action": "new_revision_and_reaudit",
+          "old_admission_reused": false
+        }
+      ],
+      "risk_category": "high_impact",
+      "historical_candidates_auto_accepted": false,
+      "manual_review_required": true,
+      "delta_hash": "77e75c48803f828fb73f24f02e677b24f64f6864ab2befe5df2c85ec09bde386",
+      "evidence_hash": "422043aab84cc4db1d515e28aba64a42a9b65948b3d16fb338834e2152be51ff",
+      "record_id": "check_0450ab833b9dabd79604f520df4711718e6941df4269e1cc430b524e3b7321d9"
+    },
+    "competency": {
+      "status": "fail",
+      "checks": [
+        {
+          "id": "trigger_cand_72888cdc296af3d7378d",
+          "status": "fail",
+          "guard": {
+            "status": "fail",
+            "relation_known": true,
+            "relation_id": "R_3c75dd89923bc714630d",
+            "relation": {
+              "id": "R_3c75dd89923bc714630d",
+              "label": "取决于",
+              "description": "",
+              "domain": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "range": [
+                "C_5c072ee8bc4ede36b807",
+                "C_f0037f9e5d770063017b"
+              ],
+              "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+              "aliases": [],
+              "labels": [
+                {
+                  "language": "zh",
+                  "value": "取决于"
+                }
+              ],
+              "definitions": [],
+              "domain_semantics": "all",
+              "range_semantics": "all",
+              "domain_expressions": [
+                "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+              ],
+              "range_expressions": [
+                "<urn:kg:chapter1:class:5262a412adb87f6333d4e778>",
+                "<urn:kg:chapter1:class:93b0bf502f9ea68be7a5f0e6>"
+              ],
+              "kind": "object_property"
+            },
+            "domain_status": "unknown",
+            "range_status": "fail",
+            "type_unknown": true,
+            "mapping_ambiguous": false,
+            "hard_failure": true,
+            "reason_codes": [
+              "RANGE_CONSTRAINT_FAILED",
+              "ENTITY_TYPE_UNKNOWN"
+            ],
+            "constraint_semantics": "required_all",
+            "ontology_version": "cf8409f202923ecd999548b3e32da7cd06b0668bd87553d6657b022192784531"
+          }
+        },
+        {
+          "id": "chapter1_source_coverage",
+          "status": "unknown"
+        }
+      ],
+      "configured_questions": 1,
+      "empty_instance_data_is_not_failure": true,
+      "natural_language_questions_not_falsely_marked_executed": true,
+      "delta_hash": "77e75c48803f828fb73f24f02e677b24f64f6864ab2befe5df2c85ec09bde386",
+      "evidence_hash": "422043aab84cc4db1d515e28aba64a42a9b65948b3d16fb338834e2152be51ff",
+      "record_id": "check_cff10fc6681a595f9aa4d784cc25660a06423f44a7a2e97e06756930ab714952"
+    }
+  },
+  "case_accounts": [
+    {
+      "case_id": "case_26405e35e77c9cfc2a64ed79c8c79160",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 96,
+        "rebinds": 2,
+        "tokens": 240000,
+        "tool_calls": 64
+      },
+      "usage": {
+        "extension_requests": 1,
+        "llm_calls": 22,
+        "rebinds": 0,
+        "tokens": 180282,
+        "tool_calls": 10
+      }
+    }
+  ],
+  "prior_reviews": [
+    {
+      "audit_id": "ontology_audit_2c7ac5219a6b46a19bbee3193baec7b9",
+      "stop_reason": "case_or_task_budget_exhausted",
+      "proposal_digests": [],
+      "votes": []
+    }
+  ],
+  "preparation_status": "source_verified_awaiting_model_investigation"
+}

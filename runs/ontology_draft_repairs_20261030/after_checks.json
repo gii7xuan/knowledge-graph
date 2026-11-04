@@ -1,0 +1,609 @@
+[
+  {
+    "extension_id": "ext_05b93d2eaa3c4134a199e02948ddc105",
+    "task_row_version": 6,
+    "delta_revision": 1,
+    "has_active_delta": true,
+    "resolution": {
+      "disposition": "reviewer_clarification_required",
+      "independent_approval": false,
+      "original_frozen_delta_and_valid_votes_preserved": true,
+      "requested_clarification": "请原审核员给出具体修改点或合法的 query/scope/limit 上下文请求。",
+      "resolved": false
+    },
+    "checks": {
+      "structure": {
+        "status": "pass",
+        "errors": [],
+        "warnings": [],
+        "class_count": 189,
+        "relation_count": 82,
+        "owl_reasoner_executed": false,
+        "owl_patch_hash": "79d54e0e2e253d9e66ab2aa6b1d1c4c0c14546dfb7ab936d2c767b4e9be55955",
+        "owl_source_sha256": "a0be8518c674363fa2724fee5845591cb64b8df791fee32488fba1531b140645",
+        "profile_derivation": "reimported_complete_owl_source",
+        "unexecuted_axiom_count": 0,
+        "delta_hash": "aa64fa54e86f1ea818be18352203971e34f7dac5fc93b242fea70819b6d693a4",
+        "evidence_hash": "b8a60781ce93621b375cfcfe00430cc86d85b29c668425b1c30dd46368d6896a",
+        "record_id": "check_f5b456ab02d35a770158c536e1393bd824cf515e7b64b773b95eb0ddd21e7df4"
+      },
+      "impact": {
+        "status": "pass",
+        "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+        "candidate_rows_scanned": 320,
+        "changed_schema_ids": [
+          "R_7c322e1d78ee7f252065"
+        ],
+        "dependent_schema_ids": [
+          "R_7c322e1d78ee7f252065"
+        ],
+        "affected_candidates": [],
+        "risk_category": "additive",
+        "historical_candidates_auto_accepted": false,
+        "manual_review_required": false,
+        "delta_hash": "aa64fa54e86f1ea818be18352203971e34f7dac5fc93b242fea70819b6d693a4",
+        "evidence_hash": "b8a60781ce93621b375cfcfe00430cc86d85b29c668425b1c30dd46368d6896a",
+        "record_id": "check_bbeae83d2c25daa106f3ed1e23f4668b642ba33fc7f87c7d830e673e96bea3d3"
+      },
+      "competency": {
+        "status": "unknown",
+        "checks": [
+          {
+            "id": "trigger_cand_3a358e2351e49805e3d5",
+            "status": "pass",
+            "guard": {
+              "status": "pass",
+              "relation_known": true,
+              "relation_id": "R_7c322e1d78ee7f252065",
+              "relation": {
+                "id": "R_7c322e1d78ee7f252065",
+                "label": "飞行于",
+                "description": "表示弹丸在飞行过程中所处的介质环境，如枪弹在稠密的大气层中飞行。",
+                "domain": [
+                  "C_c1dc2344033e9fa4ba30"
+                ],
+                "range": [
+                  "C_c5a3ac2010896be1ff9d"
+                ],
+                "iri": "urn:kg-ontology:extension:add_object_property:9b2095bfdb6ef15dff270b535143093b79494cd2879d1a7001dc5f5de727a20d",
+                "aliases": [],
+                "labels": [
+                  {
+                    "language": null,
+                    "value": "飞行于"
+                  }
+                ],
+                "definitions": [
+                  {
+                    "language": null,
+                    "value": "表示弹丸在飞行过程中所处的介质环境，如枪弹在稠密的大气层中飞行。"
+                  }
+                ],
+                "domain_semantics": "all",
+                "range_semantics": "all",
+                "domain_expressions": [
+                  "<urn:kg:chapter1:class:1dbaaaa6484ca6172144ec5c>"
+                ],
+                "range_expressions": [
+                  "<urn:kg:chapter1:class:8610daa85c85b752f3da4ae1>"
+                ],
+                "kind": "object_property"
+              },
+              "domain_status": "pass",
+              "range_status": "pass",
+              "type_unknown": false,
+              "mapping_ambiguous": false,
+              "hard_failure": false,
+              "reason_codes": [],
+              "constraint_semantics": "required_all",
+              "ontology_version": "f9f6d91c58b37ba92fcacbac63d80c43828dc31623fdb6c5a30b7072a784ab4c"
+            },
+            "check_scope": "executable_named_constraints_only",
+            "application_profile_semantics_status": "pass",
+            "full_owl_consistency_claimed": false
+          },
+          {
+            "id": "chapter1_source_coverage",
+            "status": "unknown"
+          }
+        ],
+        "configured_questions": 1,
+        "competency_check_version": "ontology_competency_v2",
+        "empty_instance_data_is_not_failure": true,
+        "natural_language_questions_not_falsely_marked_executed": true,
+        "delta_hash": "aa64fa54e86f1ea818be18352203971e34f7dac5fc93b242fea70819b6d693a4",
+        "evidence_hash": "b8a60781ce93621b375cfcfe00430cc86d85b29c668425b1c30dd46368d6896a",
+        "record_id": "check_7aed5c4aa4117562c067985a4bd33669c878856308bea48781fafd394de60e34"
+      }
+    }
+  },
+  {
+    "extension_id": "ext_0813e33a152048bc87c8fb055e1b0507",
+    "task_row_version": 6,
+    "delta_revision": 2,
+    "has_active_delta": false,
+    "resolution": {
+      "candidate_representation_review_required": true,
+      "disposition": "reuse_existing_definition",
+      "independent_approval": false,
+      "objection_disposition": "invalid_operation_withdrawn",
+      "reuse_schema_ids": [
+        "C_1693c5316c4746c54db6",
+        "C_4b4d774d036e0987e61b"
+      ]
+    }
+  },
+  {
+    "extension_id": "ext_3e7549fc23054ec5b03b783a72a169e2",
+    "task_row_version": 4,
+    "delta_revision": 2,
+    "has_active_delta": false,
+    "resolution": {
+      "disposition": "explicit_alternative_constraint_modeling_required",
+      "independent_approval": false,
+      "requires_definition_and_scope_review": true,
+      "reviewed_constraint_field": "domain",
+      "union_execution_not_supported_by_current_profile": true
+    }
+  },
+  {
+    "extension_id": "ext_4272d42b83144e8c8da86d3530f76019",
+    "task_row_version": 3,
+    "delta_revision": 1,
+    "has_active_delta": true,
+    "resolution": null,
+    "checks": {
+      "structure": {
+        "status": "pass",
+        "errors": [],
+        "warnings": [],
+        "class_count": 189,
+        "relation_count": 82,
+        "owl_reasoner_executed": false,
+        "owl_patch_hash": "3c084b4e2631cbd44ee4d519d7f0f292ed72bf0741dccf538ca83be71b36814d",
+        "owl_source_sha256": "9827847eaf3022094c7c4a38477a470b5faaed697e81e85c08649f857277a96c",
+        "profile_derivation": "reimported_complete_owl_source",
+        "unexecuted_axiom_count": 0,
+        "delta_hash": "e43b484031c5598217287b7664e614f71bfc2539bedd21f117666e3656cab5da",
+        "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+        "record_id": "check_4da3d9b06f437fd3f7a78e7ad4a184a5fa6dc3c4ab9766139737c617bcea3c70"
+      },
+      "impact": {
+        "status": "pass",
+        "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+        "candidate_rows_scanned": 320,
+        "changed_schema_ids": [
+          "R_8a23bb16885cc372b764"
+        ],
+        "dependent_schema_ids": [
+          "R_8a23bb16885cc372b764"
+        ],
+        "affected_candidates": [],
+        "risk_category": "additive",
+        "historical_candidates_auto_accepted": false,
+        "manual_review_required": false,
+        "delta_hash": "e43b484031c5598217287b7664e614f71bfc2539bedd21f117666e3656cab5da",
+        "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+        "record_id": "check_b20c82b292098f1eaf132598c969df17abf51001697e8ae40147c51f25eae568"
+      },
+      "competency": {
+        "status": "unknown",
+        "checks": [
+          {
+            "id": "trigger_cand_cc7f508e0ee31b09d27d",
+            "status": "pass",
+            "guard": {
+              "status": "pass",
+              "relation_known": true,
+              "relation_id": "R_8a23bb16885cc372b764",
+              "relation": {
+                "id": "R_8a23bb16885cc372b764",
+                "label": "通过改变空气阻力的方向来影响",
+                "description": "横风通过改变空气阻力的方向来影响弹道。",
+                "domain": [
+                  "C_a902e72f8e9d12ecd166"
+                ],
+                "range": [
+                  "C_70780e1e31a41f0ff86a"
+                ],
+                "iri": "urn:kg-ontology:extension:add_object_property:e4215c548fee8d5d4eb4c3550b2d7215cc7dd5790a163a2d059b2c12a5fbb0a4",
+                "aliases": [],
+                "labels": [
+                  {
+                    "language": null,
+                    "value": "通过改变空气阻力的方向来影响"
+                  }
+                ],
+                "definitions": [
+                  {
+                    "language": null,
+                    "value": "横风通过改变空气阻力的方向来影响弹道。"
+                  }
+                ],
+                "domain_semantics": "all",
+                "range_semantics": "all",
+                "domain_expressions": [
+                  "<urn:kg:chapter1:class:58cba30533b55f2bbe96f958>"
+                ],
+                "range_expressions": [
+                  "<urn:kg:chapter1:class:f7799e469b1034028cacd4a7>"
+                ],
+                "kind": "object_property"
+              },
+              "domain_status": "pass",
+              "range_status": "pass",
+              "type_unknown": false,
+              "mapping_ambiguous": false,
+              "hard_failure": false,
+              "reason_codes": [],
+              "constraint_semantics": "required_all",
+              "ontology_version": "ac9a3c403e92eebefa1522de28085cad4e6f192b47d7d6f5096d35ae64cf6498"
+            },
+            "check_scope": "executable_named_constraints_only",
+            "application_profile_semantics_status": "pass",
+            "full_owl_consistency_claimed": false
+          },
+          {
+            "id": "chapter1_source_coverage",
+            "status": "unknown"
+          }
+        ],
+        "configured_questions": 1,
+        "competency_check_version": "ontology_competency_v2",
+        "empty_instance_data_is_not_failure": true,
+        "natural_language_questions_not_falsely_marked_executed": true,
+        "delta_hash": "e43b484031c5598217287b7664e614f71bfc2539bedd21f117666e3656cab5da",
+        "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+        "record_id": "check_190456abd17dab08ccc8094211090ef902cc0d8f8d5fa9d52cc136456a7f9416"
+      }
+    }
+  },
+  {
+    "extension_id": "ext_47b2102b6ba646a1a4f40587e83c0561",
+    "task_row_version": 6,
+    "delta_revision": 2,
+    "has_active_delta": false,
+    "resolution": {
+      "candidate_representation_review_required": true,
+      "disposition": "reuse_existing_definition",
+      "independent_approval": false,
+      "reuse_schema_ids": [
+        "C_b01fa0de9c5da123ef25"
+      ]
+    }
+  },
+  {
+    "extension_id": "ext_4a9a96a9450145e596202e196fd0c124",
+    "task_row_version": 6,
+    "delta_revision": 2,
+    "has_active_delta": true,
+    "resolution": {
+      "contextual_alias_scope_requires_independent_review": true,
+      "disposition": "correct_alias_owner_with_minimal_new_class",
+      "independent_approval": false,
+      "previous_target_id": "C_964a7098910f66e77d91"
+    },
+    "checks": {
+      "structure": {
+        "status": "pass",
+        "errors": [],
+        "warnings": [],
+        "class_count": 190,
+        "relation_count": 81,
+        "owl_reasoner_executed": false,
+        "owl_patch_hash": "157dd59d09b67bd518069ebdd756d5b227fe208da08b924c77c45d1766215d05",
+        "owl_source_sha256": "a49913649d91f4eff74a1c04e950aa209920271ea12ff2a4a0dc85097475db34",
+        "profile_derivation": "reimported_complete_owl_source",
+        "unexecuted_axiom_count": 0,
+        "delta_hash": "5d87ec4f89638ec5e97d0978a6fe69a7acd7d420a0640b47539c16829de97bc9",
+        "evidence_hash": "07cc305307849cf5eaf699dc79e11e9b47ef08b226a99d19a0e294fe7848f31d",
+        "record_id": "check_8c17732015cfe7fb047410de5cffeea5cb97941b31d648fc19ddc37a4328d246"
+      },
+      "impact": {
+        "status": "pass",
+        "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+        "candidate_rows_scanned": 320,
+        "changed_schema_ids": [
+          "C_00cbb65c216a0ee73e63"
+        ],
+        "dependent_schema_ids": [
+          "C_00cbb65c216a0ee73e63"
+        ],
+        "affected_candidates": [],
+        "risk_category": "additive",
+        "historical_candidates_auto_accepted": false,
+        "manual_review_required": false,
+        "delta_hash": "5d87ec4f89638ec5e97d0978a6fe69a7acd7d420a0640b47539c16829de97bc9",
+        "evidence_hash": "07cc305307849cf5eaf699dc79e11e9b47ef08b226a99d19a0e294fe7848f31d",
+        "record_id": "check_5531f9707c397119c2d571fa1746f1814f5a7e0205ea3bb941e83a98550e73a5"
+      },
+      "competency": {
+        "status": "unknown",
+        "checks": [
+          {
+            "id": "trigger_cand_3973747a80a7539f34d2",
+            "status": "pass",
+            "check_type": "lexical_alias_binding",
+            "matched_target_ids": [
+              "C_00cbb65c216a0ee73e63"
+            ],
+            "reason_code": "ALIAS_BINDING_CONFIRMED",
+            "binary_fact_admission_checked": false,
+            "semantic_alias_approval_still_required": true
+          },
+          {
+            "id": "chapter1_source_coverage",
+            "status": "unknown"
+          }
+        ],
+        "configured_questions": 1,
+        "competency_check_version": "ontology_competency_v2",
+        "empty_instance_data_is_not_failure": true,
+        "natural_language_questions_not_falsely_marked_executed": true,
+        "delta_hash": "5d87ec4f89638ec5e97d0978a6fe69a7acd7d420a0640b47539c16829de97bc9",
+        "evidence_hash": "07cc305307849cf5eaf699dc79e11e9b47ef08b226a99d19a0e294fe7848f31d",
+        "record_id": "check_32bea9afd4e25f95818e3e9925fbfedd7effb5c5edfd26ebb8921287e97be455"
+      }
+    }
+  },
+  {
+    "extension_id": "ext_576152e0a5cb4b40ad1bf976dce05e9d",
+    "task_row_version": 4,
+    "delta_revision": 2,
+    "has_active_delta": false,
+    "resolution": {
+      "disposition": "explicit_alternative_constraint_modeling_required",
+      "independent_approval": false,
+      "requires_definition_and_scope_review": true,
+      "reviewed_constraint_field": "range",
+      "union_execution_not_supported_by_current_profile": true
+    }
+  },
+  {
+    "extension_id": "ext_da6ddb7f3eeb40db9c3a0b314301e71d",
+    "task_row_version": 3,
+    "delta_revision": 1,
+    "has_active_delta": true,
+    "resolution": null,
+    "checks": {
+      "structure": {
+        "status": "pass",
+        "errors": [],
+        "warnings": [],
+        "class_count": 189,
+        "relation_count": 82,
+        "owl_reasoner_executed": false,
+        "owl_patch_hash": "9834dd65d03a330be89e2464bd4e88768122a9dc7faf3ae82f5362404c6e1df6",
+        "owl_source_sha256": "0b8eda2606ed9fa6100605baecd65f8f284c5a312e53c3176cedbba1ea43bd1c",
+        "profile_derivation": "reimported_complete_owl_source",
+        "unexecuted_axiom_count": 0,
+        "delta_hash": "bbc013119b6a572b29e5d3585f3ccd3ec364d59fbbe97cb49158707f33adf5ab",
+        "evidence_hash": "368afc017aa822b0e2582b421c4112e78dd3944613669df7b723b30f595b1cdc",
+        "record_id": "check_ddce5df8c2ad2226181186d1c87654bd780bda869866aed990ca7124d3282854"
+      },
+      "impact": {
+        "status": "pass",
+        "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+        "candidate_rows_scanned": 320,
+        "changed_schema_ids": [
+          "R_5825049f58b375c1dd98"
+        ],
+        "dependent_schema_ids": [
+          "R_5825049f58b375c1dd98"
+        ],
+        "affected_candidates": [],
+        "risk_category": "additive",
+        "historical_candidates_auto_accepted": false,
+        "manual_review_required": false,
+        "delta_hash": "bbc013119b6a572b29e5d3585f3ccd3ec364d59fbbe97cb49158707f33adf5ab",
+        "evidence_hash": "368afc017aa822b0e2582b421c4112e78dd3944613669df7b723b30f595b1cdc",
+        "record_id": "check_2d10979a335c800d3ba75eb3dad72bf5ab2258e03582d74b38630aad979ee92e"
+      },
+      "competency": {
+        "status": "unknown",
+        "checks": [
+          {
+            "id": "trigger_cand_4992400347d94dfbbc00",
+            "status": "pass",
+            "guard": {
+              "status": "pass",
+              "relation_known": true,
+              "relation_id": "R_5825049f58b375c1dd98",
+              "relation": {
+                "id": "R_5825049f58b375c1dd98",
+                "label": "比升弧陡",
+                "description": "在弹道等高度处，降弧相对于升弧更陡的比较关系",
+                "domain": [
+                  "C_29a267036b238911b72c"
+                ],
+                "range": [
+                  "C_e2ae699555cdf609563b"
+                ],
+                "iri": "urn:kg-ontology:extension:add_object_property:16f555ecdb85754f31c0cf90d0ab1811ba4d1e58cbfcde51b7741cac42656f3f",
+                "aliases": [],
+                "labels": [
+                  {
+                    "language": "zh",
+                    "value": "比升弧陡"
+                  }
+                ],
+                "definitions": [
+                  {
+                    "language": "zh",
+                    "value": "在弹道等高度处，降弧相对于升弧更陡的比较关系"
+                  }
+                ],
+                "domain_semantics": "all",
+                "range_semantics": "all",
+                "domain_expressions": [
+                  "<urn:kg:chapter1:class:15e8792c2bdf9eb2638cd65e>"
+                ],
+                "range_expressions": [
+                  "<urn:kg:chapter1:class:acb40cfb9baf8fe6f9b479a5>"
+                ],
+                "kind": "object_property"
+              },
+              "domain_status": "pass",
+              "range_status": "pass",
+              "type_unknown": false,
+              "mapping_ambiguous": false,
+              "hard_failure": false,
+              "reason_codes": [],
+              "constraint_semantics": "required_all",
+              "ontology_version": "2478e337df364e1492a5d52b7a867b083c728ba22fd8e3830263a42349afa844"
+            },
+            "check_scope": "executable_named_constraints_only",
+            "application_profile_semantics_status": "pass",
+            "full_owl_consistency_claimed": false
+          },
+          {
+            "id": "chapter1_source_coverage",
+            "status": "unknown"
+          }
+        ],
+        "configured_questions": 1,
+        "competency_check_version": "ontology_competency_v2",
+        "empty_instance_data_is_not_failure": true,
+        "natural_language_questions_not_falsely_marked_executed": true,
+        "delta_hash": "bbc013119b6a572b29e5d3585f3ccd3ec364d59fbbe97cb49158707f33adf5ab",
+        "evidence_hash": "368afc017aa822b0e2582b421c4112e78dd3944613669df7b723b30f595b1cdc",
+        "record_id": "check_7fb7367104bcefa9df64a9484ebbc63b87f28042c0b3d66ecfc928dfbfbcc95e"
+      }
+    }
+  },
+  {
+    "extension_id": "ext_f9b004e2df2c4613aa4d060302238889",
+    "task_row_version": 4,
+    "delta_revision": 2,
+    "has_active_delta": true,
+    "resolution": {
+      "candidate_endpoint_classification_required": true,
+      "disposition": "correct_exact_named_endpoint_id",
+      "independent_approval": false,
+      "reuse_schema_ids": [
+        "C_4f620706279a1779b20b"
+      ]
+    },
+    "checks": {
+      "structure": {
+        "status": "pass",
+        "errors": [],
+        "warnings": [],
+        "class_count": 189,
+        "relation_count": 82,
+        "owl_reasoner_executed": false,
+        "owl_patch_hash": "fb9d5a9cfa21000dd1de5d90060efe39ee60a82ff412e481f31b1bec6194c71e",
+        "owl_source_sha256": "2a45a4ee0a2db6ce555b6251c67285a46eabef1e0d2642a5c21b594391cfe80a",
+        "profile_derivation": "reimported_complete_owl_source",
+        "unexecuted_axiom_count": 0,
+        "delta_hash": "f8e4bb66478875dbbe026728cfbcbf692fc474a48afb0022e0def1d2b1c8e4d8",
+        "evidence_hash": "6b164559aa2a0edc2de529f608aa9174e2d98a2b9bc96bc36dd22b3fc69e2cf4",
+        "record_id": "check_087f7888a31bb5dfe166aeb375483e84137c646cd334c27a802a00bb1b702432"
+      },
+      "impact": {
+        "status": "pass",
+        "coverage": "all_current_candidates_with_transitive_schema_dependencies",
+        "candidate_rows_scanned": 320,
+        "changed_schema_ids": [
+          "R_46c5273dbc2063469ab1"
+        ],
+        "dependent_schema_ids": [
+          "R_46c5273dbc2063469ab1"
+        ],
+        "affected_candidates": [],
+        "risk_category": "additive",
+        "historical_candidates_auto_accepted": false,
+        "manual_review_required": false,
+        "delta_hash": "f8e4bb66478875dbbe026728cfbcbf692fc474a48afb0022e0def1d2b1c8e4d8",
+        "evidence_hash": "6b164559aa2a0edc2de529f608aa9174e2d98a2b9bc96bc36dd22b3fc69e2cf4",
+        "record_id": "check_fa9f4db25b768e345037c3acdff93594ce635f58210a5dd4a4e71d1c85888ea9"
+      },
+      "competency": {
+        "status": "unknown",
+        "checks": [
+          {
+            "id": "trigger_cand_22b9bb5d743bc11d392d",
+            "status": "unknown",
+            "guard": {
+              "status": "unknown",
+              "relation_known": true,
+              "relation_id": "R_46c5273dbc2063469ab1",
+              "relation": {
+                "id": "R_46c5273dbc2063469ab1",
+                "label": "通过改变空气密度来影响",
+                "description": "气压通过改变空气密度对弹道产生的影响机制",
+                "domain": [
+                  "C_4f620706279a1779b20b"
+                ],
+                "range": [
+                  "C_70780e1e31a41f0ff86a"
+                ],
+                "iri": "urn:kg-ontology:extension:add_object_property:f8b79b6153223fd0fc3cc0adf5ae7aac45e8ff4e0b7518dc51bb204d82661dfd",
+                "aliases": [],
+                "labels": [
+                  {
+                    "language": "zh",
+                    "value": "通过改变空气密度来影响"
+                  }
+                ],
+                "definitions": [
+                  {
+                    "language": "zh",
+                    "value": "气压通过改变空气密度对弹道产生的影响机制"
+                  }
+                ],
+                "domain_semantics": "all",
+                "range_semantics": "all",
+                "domain_expressions": [
+                  "<urn:kg:chapter1:class:bc006debec35a21d9c9d90fb>"
+                ],
+                "range_expressions": [
+                  "<urn:kg:chapter1:class:f7799e469b1034028cacd4a7>"
+                ],
+                "kind": "object_property"
+              },
+              "domain_status": "unknown",
+              "range_status": "pass",
+              "type_unknown": true,
+              "mapping_ambiguous": false,
+              "hard_failure": false,
+              "reason_codes": [
+                "ENTITY_TYPE_UNKNOWN"
+              ],
+              "constraint_semantics": "required_all",
+              "ontology_version": "78a2d04f6f978b90ea18a59999dfe9d142c084a1768b49b1086b063b378b1158"
+            },
+            "check_scope": "executable_named_constraints_only",
+            "application_profile_semantics_status": "pass",
+            "full_owl_consistency_claimed": false
+          },
+          {
+            "id": "chapter1_source_coverage",
+            "status": "unknown"
+          }
+        ],
+        "configured_questions": 1,
+        "competency_check_version": "ontology_competency_v2",
+        "empty_instance_data_is_not_failure": true,
+        "natural_language_questions_not_falsely_marked_executed": true,
+        "delta_hash": "f8e4bb66478875dbbe026728cfbcbf692fc474a48afb0022e0def1d2b1c8e4d8",
+        "evidence_hash": "6b164559aa2a0edc2de529f608aa9174e2d98a2b9bc96bc36dd22b3fc69e2cf4",
+        "record_id": "check_d67d16ebc60bad7331e759ae51756f388fe3e6804a7fdf2185ed05edb6d60ebc"
+      }
+    }
+  },
+  {
+    "extension_id": "ext_ffed3aeb1f66462fac7eb1d5d80f30e1",
+    "task_row_version": 4,
+    "delta_revision": 2,
+    "has_active_delta": false,
+    "resolution": {
+      "candidate_endpoint_classification_required": true,
+      "disposition": "explicit_alternative_constraint_modeling_required",
+      "independent_approval": false,
+      "requires_definition_and_scope_review": true,
+      "reviewed_constraint_field": "range",
+      "union_execution_not_supported_by_current_profile": true
+    }
+  }
+]

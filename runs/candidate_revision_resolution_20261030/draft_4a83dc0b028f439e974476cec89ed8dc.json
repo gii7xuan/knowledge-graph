@@ -1,0 +1,670 @@
+{
+  "status": "approved",
+  "draft_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+  "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+  "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+  "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "attempt_id": "attempt_68ca15d4f14a4b528b28990da9d5b1ea",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_34a9e63d42e4c425b893",
+        "ev_83dd1de85aa14cfd142e"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+      "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail",
+          "note": "The source sentence explicitly lists three components: friction drag, vortex drag, and wave drag (specific to supersonic speeds). The revision correctly expands the tail to include all three components as stated in the evidence.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail_type",
+          "note": "The previous tail_type was C_52c1a1e08cb0ee536af8 (wave drag), which only applied to one of the three components. Since the tail now includes multiple distinct types of drag, a single type mapping is no longer appropriate. Setting it to null is correct as the evidence does not support a single unified type for the entire list.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The source sentence is a positive assertion stating what air resistance is composed of. The polarity is correctly identified as positive.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.condition",
+          "note": "The condition 'supersonic' (超声速时) applies specifically to wave drag, not to the entire composition of air resistance. The evidence does not state a global condition for all three components, so setting the global condition to null/not_stated is correct.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "The phrase 'specific to' (所特有) applies to wave drag in supersonic conditions, not as a global applicability qualifier for the entire list. The evidence does not support a global applicability qualifier, so setting it to null/not_stated is correct.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The polarity status is correctly marked as extracted, as the source sentence clearly provides a positive assertion.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "The condition status is correctly marked as not_stated, as the evidence does not provide a global condition for the entire composition.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.applicability",
+          "note": "The applicability status is correctly marked as not_stated, as the evidence does not provide a global applicability qualifier for the entire composition.",
+          "status": "not_stated_in_scope"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 13658,
+      "late_response": false,
+      "latency_ms": 25453,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1028,
+      "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+      "provider_started_at": 1793378653.9980476,
+      "queue_time_ms": 302,
+      "rationale_summary": "The revision correctly expands the tail to include all three components of air resistance as stated in the source sentence. The previous single-component tail and type mapping were incorrect. The condition and applicability qualifiers that were previously applied globally are correctly removed as they only apply to wave drag specifically. The polarity is correctly identified as positive. All changes are grounded in the provided evidence.",
+      "reasoning_tokens": null,
+      "request_key": "2b0621193b45015ef8f1e136fb0eb00b01f65b51202e5e86fcdbf03cb2a65d82",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-b42393366fa87d04",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_34a9e63d42e4c425b893"
+      ],
+      "task_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_68ca15d4f14a4b528b28990da9d5b1ea",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_34a9e63d42e4c425b893",
+            "ev_83dd1de85aa14cfd142e"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+          "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail",
+              "note": "The source sentence explicitly lists three components: friction drag, vortex drag, and wave drag (specific to supersonic speeds). The revision correctly expands the tail to include all three components as stated in the evidence.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail_type",
+              "note": "The previous tail_type was C_52c1a1e08cb0ee536af8 (wave drag), which only applied to one of the three components. Since the tail now includes multiple distinct types of drag, a single type mapping is no longer appropriate. Setting it to null is correct as the evidence does not support a single unified type for the entire list.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The source sentence is a positive assertion stating what air resistance is composed of. The polarity is correctly identified as positive.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The condition 'supersonic' (超声速时) applies specifically to wave drag, not to the entire composition of air resistance. The evidence does not state a global condition for all three components, so setting the global condition to null/not_stated is correct.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "The phrase 'specific to' (所特有) applies to wave drag in supersonic conditions, not as a global applicability qualifier for the entire list. The evidence does not support a global applicability qualifier, so setting it to null/not_stated is correct.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The polarity status is correctly marked as extracted, as the source sentence clearly provides a positive assertion.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "The condition status is correctly marked as not_stated, as the evidence does not provide a global condition for the entire composition.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.applicability",
+              "note": "The applicability status is correctly marked as not_stated, as the evidence does not provide a global applicability qualifier for the entire composition.",
+              "status": "not_stated_in_scope"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 13658,
+          "late_response": false,
+          "latency_ms": 25453,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1028,
+          "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+          "provider_started_at": 1793378653.9980476,
+          "queue_time_ms": 302,
+          "rationale_summary": "The revision correctly expands the tail to include all three components of air resistance as stated in the source sentence. The previous single-component tail and type mapping were incorrect. The condition and applicability qualifiers that were previously applied globally are correctly removed as they only apply to wave drag specifically. The polarity is correctly identified as positive. All changes are grounded in the provided evidence.",
+          "reasoning_tokens": null,
+          "request_key": "2b0621193b45015ef8f1e136fb0eb00b01f65b51202e5e86fcdbf03cb2a65d82",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-b42393366fa87d04",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "task_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_e83e91a3bbee4111a88f7abd1076d54c",
+      "attempts": [
+        {
+          "attempt_id": "attempt_e83e91a3bbee4111a88f7abd1076d54c",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+          "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail",
+              "note": "The tail now correctly includes all three components of air resistance mentioned in the source text: friction drag, vortex drag, and wave drag characteristic of supersonic speeds.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail_type",
+              "note": "The tail type is removed because the tail is now a list of multiple entities, making a single class ID inappropriate.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The statement is affirmative, supporting a positive polarity.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The condition 'supersonic speeds' only applies to wave drag, not the entire composition of air resistance. It has been correctly moved into the tail string and removed from the global qualifiers.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "Similar to the condition, 'characteristic of' only applies to wave drag and is now correctly part of the tail string.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "Polarity is explicitly extracted as positive.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "Condition is no longer a global qualifier.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.applicability",
+              "note": "Applicability is no longer a global qualifier.",
+              "status": "not_stated_in_scope"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 13734,
+          "late_response": false,
+          "latency_ms": 36953,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1510,
+          "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+          "provider_started_at": 1793378616.4440384,
+          "queue_time_ms": 360,
+          "rationale_summary": "The revision correctly expands the tail to include all three components of air resistance (friction, vortex, and wave drag) as stated in the source text. It correctly moves the specific condition ('supersonic speeds') and applicability ('characteristic of') from the global qualifiers to the tail string, as these only modify 'wave drag'. The removal of the single tail type is appropriate for a composite tail, and the polarity is correctly set to positive.",
+          "reasoning_tokens": 790,
+          "request_key": "db5e27d7e5b96316b72d46c2dcec4fab9f21e3812261b87fea684bef882d7c49",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-9bb94447ae122e40",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "task_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+      "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail",
+          "note": "The tail now correctly includes all three components of air resistance mentioned in the source text: friction drag, vortex drag, and wave drag characteristic of supersonic speeds.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail_type",
+          "note": "The tail type is removed because the tail is now a list of multiple entities, making a single class ID inappropriate.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The statement is affirmative, supporting a positive polarity.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.condition",
+          "note": "The condition 'supersonic speeds' only applies to wave drag, not the entire composition of air resistance. It has been correctly moved into the tail string and removed from the global qualifiers.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "Similar to the condition, 'characteristic of' only applies to wave drag and is now correctly part of the tail string.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "Polarity is explicitly extracted as positive.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "Condition is no longer a global qualifier.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.applicability",
+          "note": "Applicability is no longer a global qualifier.",
+          "status": "not_stated_in_scope"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 13734,
+      "late_response": false,
+      "latency_ms": 36953,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1510,
+      "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+      "provider_started_at": 1793378616.4440384,
+      "queue_time_ms": 360,
+      "rationale_summary": "The revision correctly expands the tail to include all three components of air resistance (friction, vortex, and wave drag) as stated in the source text. It correctly moves the specific condition ('supersonic speeds') and applicability ('characteristic of') from the global qualifiers to the tail string, as these only modify 'wave drag'. The removal of the single tail type is appropriate for a composite tail, and the polarity is correctly set to positive.",
+      "reasoning_tokens": 790,
+      "request_key": "db5e27d7e5b96316b72d46c2dcec4fab9f21e3812261b87fea684bef882d7c49",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-9bb94447ae122e40",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_34a9e63d42e4c425b893"
+      ],
+      "task_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b"
+    },
+    {
+      "attempt_id": "attempt_a50cab5c04954ed89c6f26422b56bb77",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_34a9e63d42e4c425b893",
+        "ev_83dd1de85aa14cfd142e"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+      "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail",
+          "note": "原句明确列出三项：摩擦阻力、涡流阻力及超声速时所特有的波动阻力，故完整列表作为尾实体有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "tail_type",
+          "note": "尾项为三项阻力组成的复合列表，并非单一“波动阻力”类；清除单一类型映射是合理的，因为原类型仅覆盖列表中的一项。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原句为肯定陈述“由……组成”，极性为正，有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.condition",
+          "note": "“超声速时”仅修饰波动阻力这一项，并非整个组成关系的全局条件；在核验范围内未述全局条件。",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifiers.applicability",
+          "note": "“所特有”仅限定波动阻力，不适用于全部组成项；核验范围内未述全局适用性。",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性已提取为肯定，与原文一致。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "全局条件在冻结证据范围内未述；超声速限制保留在尾项内。",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "field": "qualifier_status.applicability",
+          "note": "全局适用性在冻结证据范围内未述；所特有保留在尾项内。",
+          "status": "not_stated_in_scope"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 11986,
+      "late_response": false,
+      "latency_ms": 6062,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 710,
+      "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+      "provider_started_at": 1793378654.019839,
+      "queue_time_ms": 298,
+      "rationale_summary": "修订将单项“波动阻力”替换为原句完整三项组成列表，保留“主要”量词与肯定极性；“超声速时所特有”完整保留在尾项中且仅修饰波动阻力，未被误作全局条件。清除仅覆盖单项的尾类型映射有据。全局条件与适用性在冻结核验范围内未述，属限定词缺失而非删除限制。相邻句证据亦已评估，无矛盾。",
+      "reasoning_tokens": null,
+      "request_key": "ff7bc64a40c95b82cb6499d70f5349ed9689d7b1222b2771f8c3771e052fc0c9",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "808bae44-d5c7-4ebb-9502-07a04198db02",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_34a9e63d42e4c425b893"
+      ],
+      "task_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "attempt_id": "attempt_a50cab5c04954ed89c6f26422b56bb77",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_34a9e63d42e4c425b893",
+            "ev_83dd1de85aa14cfd142e"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "719863a0808ea5d2c52c3f6e889e5af8682f196e33ac9fe006a115c75a2aefd0",
+          "evidence_hash": "00a3e0e147179d689789ddcddd3ad621c76335649a650ca3eced5a74120b9db0",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail",
+              "note": "原句明确列出三项：摩擦阻力、涡流阻力及超声速时所特有的波动阻力，故完整列表作为尾实体有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "tail_type",
+              "note": "尾项为三项阻力组成的复合列表，并非单一“波动阻力”类；清除单一类型映射是合理的，因为原类型仅覆盖列表中的一项。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原句为肯定陈述“由……组成”，极性为正，有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.condition",
+              "note": "“超声速时”仅修饰波动阻力这一项，并非整个组成关系的全局条件；在核验范围内未述全局条件。",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifiers.applicability",
+              "note": "“所特有”仅限定波动阻力，不适用于全部组成项；核验范围内未述全局适用性。",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性已提取为肯定，与原文一致。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "全局条件在冻结证据范围内未述；超声速限制保留在尾项内。",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_34a9e63d42e4c425b893"
+              ],
+              "field": "qualifier_status.applicability",
+              "note": "全局适用性在冻结证据范围内未述；所特有保留在尾项内。",
+              "status": "not_stated_in_scope"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 11986,
+          "late_response": false,
+          "latency_ms": 6062,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 710,
+          "proposal_digest": "17e1d759da998ca51d6ee9993b17e2a057d78385e61753cd5b3acfe9624f7c4a",
+          "provider_started_at": 1793378654.019839,
+          "queue_time_ms": 298,
+          "rationale_summary": "修订将单项“波动阻力”替换为原句完整三项组成列表，保留“主要”量词与肯定极性；“超声速时所特有”完整保留在尾项中且仅修饰波动阻力，未被误作全局条件。清除仅覆盖单项的尾类型映射有据。全局条件与适用性在冻结核验范围内未述，属限定词缺失而非删除限制。相邻句证据亦已评估，无矛盾。",
+          "reasoning_tokens": null,
+          "request_key": "ff7bc64a40c95b82cb6499d70f5349ed9689d7b1222b2771f8c3771e052fc0c9",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "808bae44-d5c7-4ebb-9502-07a04198db02",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_34a9e63d42e4c425b893"
+          ],
+          "task_id": "draft_4a83dc0b028f439e974476cec89ed8dc",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

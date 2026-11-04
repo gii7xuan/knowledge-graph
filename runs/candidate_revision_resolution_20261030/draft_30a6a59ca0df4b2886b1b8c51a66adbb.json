@@ -1,0 +1,550 @@
+{
+  "status": "approved",
+  "draft_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+  "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+  "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+  "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "attempt_id": "attempt_3d66e23bf6194fd89e01b17cca7cc665",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_08f60c6e12aed0824a2d",
+        "ev_11a57f8de6aee7d8e34b",
+        "ev_79b39cf32cda18d1daeb",
+        "ev_a7dd5cd0fa7eb5d89c6d",
+        "ev_abb40c2987434043da1a"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+      "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "surface_relation",
+          "note": "The source text states '气压随高度分布规律差异很小' (the variation of pressure with altitude is very small). The surface relation '差异程度' (degree of difference) accurately captures the semantic relationship between the head '气压随高度分布规律' and the tail '很小'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "tail",
+          "note": "The source text explicitly states '差异很小' (difference is very small). The tail '很小' correctly extracts the degree/extent of the difference.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "tail_kind",
+          "note": "The tail '很小' is a literal value representing the degree of difference, not an entity. Therefore, 'literal' is the correct tail_kind.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "datatype",
+          "note": "The value '很小' is a string representation of a qualitative degree. 'string' is the appropriate datatype.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "value",
+          "note": "The source text explicitly states '差异很小' (difference is very small). The value '很小' correctly captures the stated degree.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 6843,
+      "late_response": false,
+      "latency_ms": 20030,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 802,
+      "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+      "provider_started_at": 1793351581.203123,
+      "queue_time_ms": 343,
+      "rationale_summary": "The revision correctly restructures the triple to represent the comparison conclusion as a literal attribute. The source text '按大气平衡条件导出的气压函数，除地面气压值随地点、时间变化较大外，气压随高度分布规律差异很小' clearly states that the variation of pressure with altitude is very small, with the exception of ground pressure values. The head '气压随高度分布规律' (pressure-altitude distribution pattern) is correctly linked to the tail '很小' (very small) via the surface relation '差异程度' (degree of difference). The exception clause '除地面气压值随地点、时间变化较大外' is appropriately retained in the condition qualifier. All protected evidence items have been assessed and none contradict the revision. The datatype 'string' and tail_kind 'literal' are appropriate for the qualitative value '很小'.",
+      "reasoning_tokens": null,
+      "request_key": "bc06b005958cab3ad7bb4062d2f42049121278e789341215b5d70572ae0bb5e5",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-bc41f945b8a6ce67",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_abb40c2987434043da1a"
+      ],
+      "task_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_3d66e23bf6194fd89e01b17cca7cc665",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_08f60c6e12aed0824a2d",
+            "ev_11a57f8de6aee7d8e34b",
+            "ev_79b39cf32cda18d1daeb",
+            "ev_a7dd5cd0fa7eb5d89c6d",
+            "ev_abb40c2987434043da1a"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+          "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "surface_relation",
+              "note": "The source text states '气压随高度分布规律差异很小' (the variation of pressure with altitude is very small). The surface relation '差异程度' (degree of difference) accurately captures the semantic relationship between the head '气压随高度分布规律' and the tail '很小'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "tail",
+              "note": "The source text explicitly states '差异很小' (difference is very small). The tail '很小' correctly extracts the degree/extent of the difference.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "tail_kind",
+              "note": "The tail '很小' is a literal value representing the degree of difference, not an entity. Therefore, 'literal' is the correct tail_kind.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "datatype",
+              "note": "The value '很小' is a string representation of a qualitative degree. 'string' is the appropriate datatype.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "value",
+              "note": "The source text explicitly states '差异很小' (difference is very small). The value '很小' correctly captures the stated degree.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6843,
+          "late_response": false,
+          "latency_ms": 20030,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 802,
+          "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+          "provider_started_at": 1793351581.203123,
+          "queue_time_ms": 343,
+          "rationale_summary": "The revision correctly restructures the triple to represent the comparison conclusion as a literal attribute. The source text '按大气平衡条件导出的气压函数，除地面气压值随地点、时间变化较大外，气压随高度分布规律差异很小' clearly states that the variation of pressure with altitude is very small, with the exception of ground pressure values. The head '气压随高度分布规律' (pressure-altitude distribution pattern) is correctly linked to the tail '很小' (very small) via the surface relation '差异程度' (degree of difference). The exception clause '除地面气压值随地点、时间变化较大外' is appropriately retained in the condition qualifier. All protected evidence items have been assessed and none contradict the revision. The datatype 'string' and tail_kind 'literal' are appropriate for the qualitative value '很小'.",
+          "reasoning_tokens": null,
+          "request_key": "bc06b005958cab3ad7bb4062d2f42049121278e789341215b5d70572ae0bb5e5",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-bc41f945b8a6ce67",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "task_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "attempt_id": "attempt_b82e822fff3d4de9a7ccefd7cd132615",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_08f60c6e12aed0824a2d",
+        "ev_11a57f8de6aee7d8e34b",
+        "ev_79b39cf32cda18d1daeb",
+        "ev_a7dd5cd0fa7eb5d89c6d",
+        "ev_abb40c2987434043da1a"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+      "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "surface_relation",
+          "note": "The source text states '差异很小' (difference is very small), which supports the relation '差异程度' (degree of difference).",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "tail",
+          "note": "The source text states '差异很小', so the tail value is '很小'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "tail_kind",
+          "note": "The tail '很小' is a literal description, not a distinct entity.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "datatype",
+          "note": "The value '很小' is a string.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "value",
+          "note": "The value '很小' is explicitly stated in the source text.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7241,
+      "late_response": false,
+      "latency_ms": 33875,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1763,
+      "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+      "provider_started_at": 1793351581.1700141,
+      "queue_time_ms": 339,
+      "rationale_summary": "The revision correctly identifies that the 'exception' clause ('除地面气压值随地点、时间变化较大外') is a condition of the statement rather than the object of the relation. It correctly moves this clause to the condition qualifier and sets the tail to the literal value '很小' (very small), which describes the '差异程度' (degree of difference) of the '气压随高度分布规律' (distribution law of pressure with height). This is fully supported by the provided evidence.",
+      "reasoning_tokens": 1186,
+      "request_key": "5b0c21aae4fb83cafce01601d94bf40a24a46e8e7abb283660092250f28fd092",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-b9860511a431a8c3",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_abb40c2987434043da1a"
+      ],
+      "task_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_b82e822fff3d4de9a7ccefd7cd132615",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_08f60c6e12aed0824a2d",
+            "ev_11a57f8de6aee7d8e34b",
+            "ev_79b39cf32cda18d1daeb",
+            "ev_a7dd5cd0fa7eb5d89c6d",
+            "ev_abb40c2987434043da1a"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+          "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "surface_relation",
+              "note": "The source text states '差异很小' (difference is very small), which supports the relation '差异程度' (degree of difference).",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "tail",
+              "note": "The source text states '差异很小', so the tail value is '很小'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "tail_kind",
+              "note": "The tail '很小' is a literal description, not a distinct entity.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "datatype",
+              "note": "The value '很小' is a string.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "value",
+              "note": "The value '很小' is explicitly stated in the source text.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7241,
+          "late_response": false,
+          "latency_ms": 33875,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1763,
+          "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+          "provider_started_at": 1793351581.1700141,
+          "queue_time_ms": 339,
+          "rationale_summary": "The revision correctly identifies that the 'exception' clause ('除地面气压值随地点、时间变化较大外') is a condition of the statement rather than the object of the relation. It correctly moves this clause to the condition qualifier and sets the tail to the literal value '很小' (very small), which describes the '差异程度' (degree of difference) of the '气压随高度分布规律' (distribution law of pressure with height). This is fully supported by the provided evidence.",
+          "reasoning_tokens": 1186,
+          "request_key": "5b0c21aae4fb83cafce01601d94bf40a24a46e8e7abb283660092250f28fd092",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-b9860511a431a8c3",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "task_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_beac63fbaf71456e8c36a2c860720fac",
+      "attempts": [
+        {
+          "attempt_id": "attempt_beac63fbaf71456e8c36a2c860720fac",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_08f60c6e12aed0824a2d",
+            "ev_11a57f8de6aee7d8e34b",
+            "ev_79b39cf32cda18d1daeb",
+            "ev_a7dd5cd0fa7eb5d89c6d",
+            "ev_abb40c2987434043da1a"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+          "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "surface_relation",
+              "note": "原文“气压随高度分布规律差异很小”直接支持关系“差异程度”。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "tail",
+              "note": "“很小”是原文对差异程度的字面表述。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "tail_kind",
+              "note": "“很小”为程度字面值，非实体，故 tail_kind=literal 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "datatype",
+              "note": "字面值“很小”为字符串，datatype=string 一致。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_abb40c2987434043da1a"
+              ],
+              "field": "value",
+              "note": "value 与 tail 同为“很小”，与原文一致。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 5747,
+          "late_response": false,
+          "latency_ms": 5188,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 513,
+          "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+          "provider_started_at": 1793351553.3861053,
+          "queue_time_ms": 423,
+          "rationale_summary": "修订将比较结论“差异很小”表示为字面属性，surface_relation=差异程度、tail/value=很小、tail_kind=literal、datatype=string 均由原文“气压随高度分布规律差异很小”直接支持。例外句“除地面气压值随地点、时间变化较大外”保留在 condition 限定中，未被删除或改变极性；modality=asserted、polarity=positive 与原文陈述一致。已审阅全部受保护证据，未发现与修订相冲突的反证。",
+          "reasoning_tokens": null,
+          "request_key": "8fd3c4f00274fb2c3bd35f1bb6e756ef229abbed8b835e312d478724b4933b95",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "f6344fb3-4866-4586-91db-e2d204881843",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "task_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_08f60c6e12aed0824a2d",
+        "ev_11a57f8de6aee7d8e34b",
+        "ev_79b39cf32cda18d1daeb",
+        "ev_a7dd5cd0fa7eb5d89c6d",
+        "ev_abb40c2987434043da1a"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "27767d373e791980a141e9776779fa649046c35214517a0994492526a1b2f848",
+      "evidence_hash": "b2f67e8110966b5e927b515e2d1522edd60ac5c8e1ba19e2c7cd050f70f98f79",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "surface_relation",
+          "note": "原文“气压随高度分布规律差异很小”直接支持关系“差异程度”。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "tail",
+          "note": "“很小”是原文对差异程度的字面表述。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "tail_kind",
+          "note": "“很小”为程度字面值，非实体，故 tail_kind=literal 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "datatype",
+          "note": "字面值“很小”为字符串，datatype=string 一致。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_abb40c2987434043da1a"
+          ],
+          "field": "value",
+          "note": "value 与 tail 同为“很小”，与原文一致。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 5747,
+      "late_response": false,
+      "latency_ms": 5188,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 513,
+      "proposal_digest": "1156b65060589526fc2253675dbadd579af38cbc7a4424c4dd767b25e66d6e4e",
+      "provider_started_at": 1793351553.3861053,
+      "queue_time_ms": 423,
+      "rationale_summary": "修订将比较结论“差异很小”表示为字面属性，surface_relation=差异程度、tail/value=很小、tail_kind=literal、datatype=string 均由原文“气压随高度分布规律差异很小”直接支持。例外句“除地面气压值随地点、时间变化较大外”保留在 condition 限定中，未被删除或改变极性；modality=asserted、polarity=positive 与原文陈述一致。已审阅全部受保护证据，未发现与修订相冲突的反证。",
+      "reasoning_tokens": null,
+      "request_key": "8fd3c4f00274fb2c3bd35f1bb6e756ef229abbed8b835e312d478724b4933b95",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "f6344fb3-4866-4586-91db-e2d204881843",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_abb40c2987434043da1a"
+      ],
+      "task_id": "draft_30a6a59ca0df4b2886b1b8c51a66adbb",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

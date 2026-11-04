@@ -1,0 +1,557 @@
+{
+  "status": "review_incomplete",
+  "draft_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+  "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+  "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+  "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+  "approved_voter_ids": [
+    "judge_a",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_19ea9f7cf01d4c7985c4a5245816b6f7",
+      "attempts": [
+        {
+          "attempt_id": "attempt_19ea9f7cf01d4c7985c4a5245816b6f7",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+          "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "head",
+              "note": "The evidence explicitly states '由两个形状相近的弹丸所测出的两条 Cx0-Ma 曲线', identifying the curves as the entities being compared. The revision correctly sets the head to '一条 Cx0-Ma 曲线' (one of the two curves), which is a valid representation of the subject in the similarity relation.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "tail",
+              "note": "The evidence states '它们有一定的相似性' (they have a certain similarity), where 'they' refers to the two curves. The revision correctly sets the tail to '另一条 Cx0-Ma 曲线' (the other Cx0-Ma curve), accurately capturing the second entity in the similarity relation.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifiers.condition",
+              "note": "The condition '由两个形状相近的弹丸所测出' (measured by two projectiles with similar shapes) is directly supported by the evidence text '由两个形状相近的弹丸所测出的两条 Cx0-Ma 曲线'. This is a valid restriction on the curves being compared.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The evidence states '它们有一定的相似性' (they have a certain similarity), which is a positive assertion of similarity. The revision correctly sets polarity to 'positive'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The evidence states '一定的相似性' (a certain similarity), which is a quantifier indicating the degree of similarity. The revision correctly sets quantifier to '一定的相似性'.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "The condition is explicitly stated in the evidence, so the status 'extracted' is appropriate.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The polarity is explicitly stated in the evidence as positive (similarity exists), so the status 'extracted' is appropriate.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "The quantifier '一定的相似性' is explicitly stated in the evidence, so the status 'extracted' is appropriate.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7975,
+          "late_response": false,
+          "latency_ms": 32203,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1216,
+          "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+          "provider_started_at": 1793351281.0540078,
+          "queue_time_ms": 328,
+          "rationale_summary": "The revision correctly identifies the two Cx0-Ma curves as the entities in the similarity relation, correcting the previous misalignment where '空气阻力系数' (air resistance coefficient) and '形状相近的弹丸' (projectiles with similar shapes) were incorrectly used as head and tail. The evidence explicitly states that the two curves measured by two projectiles with similar shapes have a certain similarity, which directly supports the revised head, tail, and qualifiers. All protected evidence items have been assessed and support the revision.",
+          "reasoning_tokens": null,
+          "request_key": "03cdc76c3039c74de490ebf5337d24961ce56a7a6cf3b08a23b516885845e686",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-97bc0fa6a88417a6",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "task_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_b050eb5e49bfdf8b2dd3",
+        "ev_c2d7613b65a637d2c9e7"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+      "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "head",
+          "note": "The evidence explicitly states '由两个形状相近的弹丸所测出的两条 Cx0-Ma 曲线', identifying the curves as the entities being compared. The revision correctly sets the head to '一条 Cx0-Ma 曲线' (one of the two curves), which is a valid representation of the subject in the similarity relation.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "tail",
+          "note": "The evidence states '它们有一定的相似性' (they have a certain similarity), where 'they' refers to the two curves. The revision correctly sets the tail to '另一条 Cx0-Ma 曲线' (the other Cx0-Ma curve), accurately capturing the second entity in the similarity relation.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifiers.condition",
+          "note": "The condition '由两个形状相近的弹丸所测出' (measured by two projectiles with similar shapes) is directly supported by the evidence text '由两个形状相近的弹丸所测出的两条 Cx0-Ma 曲线'. This is a valid restriction on the curves being compared.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The evidence states '它们有一定的相似性' (they have a certain similarity), which is a positive assertion of similarity. The revision correctly sets polarity to 'positive'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The evidence states '一定的相似性' (a certain similarity), which is a quantifier indicating the degree of similarity. The revision correctly sets quantifier to '一定的相似性'.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "The condition is explicitly stated in the evidence, so the status 'extracted' is appropriate.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The polarity is explicitly stated in the evidence as positive (similarity exists), so the status 'extracted' is appropriate.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "The quantifier '一定的相似性' is explicitly stated in the evidence, so the status 'extracted' is appropriate.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7975,
+      "late_response": false,
+      "latency_ms": 32203,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1216,
+      "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+      "provider_started_at": 1793351281.0540078,
+      "queue_time_ms": 328,
+      "rationale_summary": "The revision correctly identifies the two Cx0-Ma curves as the entities in the similarity relation, correcting the previous misalignment where '空气阻力系数' (air resistance coefficient) and '形状相近的弹丸' (projectiles with similar shapes) were incorrectly used as head and tail. The evidence explicitly states that the two curves measured by two projectiles with similar shapes have a certain similarity, which directly supports the revised head, tail, and qualifiers. All protected evidence items have been assessed and support the revision.",
+      "reasoning_tokens": null,
+      "request_key": "03cdc76c3039c74de490ebf5337d24961ce56a7a6cf3b08a23b516885845e686",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-97bc0fa6a88417a6",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_b050eb5e49bfdf8b2dd3",
+        "ev_c2d7613b65a637d2c9e7"
+      ],
+      "task_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "attempt_id": "attempt_4dfe17a0dbc244018548e382a9d2ba18",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+      "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+      "http_status": 504,
+      "late_response": false,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "outcome_unknown": true,
+      "pause_job": false,
+      "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+      "provider_started_at": 1793352791.8948362,
+      "queue_time_ms": 326,
+      "request_key": "21ec8c7fd409e71a96c8b7e964a5b60cdd215cc3fe7912acc464e0474dc436bf",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_status": "api_error",
+      "retryable": false,
+      "task_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_4dfe17a0dbc244018548e382a9d2ba18",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+          "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+          "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+          "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+          "http_status": 504,
+          "late_response": false,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "outcome_unknown": true,
+          "pause_job": false,
+          "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+          "provider_started_at": 1793352791.8948362,
+          "queue_time_ms": 326,
+          "request_key": "21ec8c7fd409e71a96c8b7e964a5b60cdd215cc3fe7912acc464e0474dc436bf",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_status": "api_error",
+          "retryable": false,
+          "task_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_7a7651eef1bf432d83db734e3ed7da28",
+      "attempts": [
+        {
+          "attempt_id": "attempt_7a7651eef1bf432d83db734e3ed7da28",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+          "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "head",
+              "note": "原文“两条 Cx0-Ma 曲线……它们有一定的相似性”，相似性主体是曲线，head 改为“一条 Cx0-Ma 曲线”有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "tail",
+              "note": "“它们”指两条曲线，tail 改为“另一条 Cx0-Ma 曲线”符合原文论元结构。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifiers.condition",
+              "note": "“由两个形状相近的弹丸所测出”直接来自原文，保留形状相近限制。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原文断言“有一定的相似性”，为肯定极性。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "“一定的相似性”对应原文“一定的相似性”，量词有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifier_status.condition",
+              "note": "条件在原文中明确出现，状态 extracted 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性由原文断言直接支持，状态 extracted 合理。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_b050eb5e49bfdf8b2dd3",
+                "ev_c2d7613b65a637d2c9e7"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "量词在原文中明确出现，状态 extracted 合理。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7092,
+          "late_response": false,
+          "latency_ms": 5422,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 792,
+          "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+          "provider_started_at": 1793351281.0899482,
+          "queue_time_ms": 311,
+          "rationale_summary": "修订将相似性两端纠正为两条 Cx0-Ma 曲线，符合原文“两条曲线……它们有一定的相似性”的论元结构；条件、极性、量词均直接取自原文，保留“形状相近”“一定”限制。已评估全部受保护证据，未发现矛盾材料。",
+          "reasoning_tokens": null,
+          "request_key": "213fd105f37eb769546d19e3b8718d9f4864b0f24afbaed29ab536fe980ea64c",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "ba4cfdb2-ce27-4e97-808b-5d9b52103786",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "task_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_b050eb5e49bfdf8b2dd3",
+        "ev_c2d7613b65a637d2c9e7"
+      ],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "e33ca85bde792111924a4dc70517a1c81c1c15d9fa9f3bef4b608d343c42475e",
+      "evidence_hash": "d146a50e33ea0c8734b7208d73452d84a12de00f193e40e07de77e93f6abfd05",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "head",
+          "note": "原文“两条 Cx0-Ma 曲线……它们有一定的相似性”，相似性主体是曲线，head 改为“一条 Cx0-Ma 曲线”有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "tail",
+          "note": "“它们”指两条曲线，tail 改为“另一条 Cx0-Ma 曲线”符合原文论元结构。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifiers.condition",
+          "note": "“由两个形状相近的弹丸所测出”直接来自原文，保留形状相近限制。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原文断言“有一定的相似性”，为肯定极性。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "“一定的相似性”对应原文“一定的相似性”，量词有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifier_status.condition",
+          "note": "条件在原文中明确出现，状态 extracted 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性由原文断言直接支持，状态 extracted 合理。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_b050eb5e49bfdf8b2dd3",
+            "ev_c2d7613b65a637d2c9e7"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "量词在原文中明确出现，状态 extracted 合理。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7092,
+      "late_response": false,
+      "latency_ms": 5422,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 792,
+      "proposal_digest": "1e0b0a8d7ba14695bbf09fdf2357f21f37a675b7833e46248581581b78b512a3",
+      "provider_started_at": 1793351281.0899482,
+      "queue_time_ms": 311,
+      "rationale_summary": "修订将相似性两端纠正为两条 Cx0-Ma 曲线，符合原文“两条曲线……它们有一定的相似性”的论元结构；条件、极性、量词均直接取自原文，保留“形状相近”“一定”限制。已评估全部受保护证据，未发现矛盾材料。",
+      "reasoning_tokens": null,
+      "request_key": "213fd105f37eb769546d19e3b8718d9f4864b0f24afbaed29ab536fe980ea64c",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "ba4cfdb2-ce27-4e97-808b-5d9b52103786",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_b050eb5e49bfdf8b2dd3",
+        "ev_c2d7613b65a637d2c9e7"
+      ],
+      "task_id": "draft_7ecd8c329d634ac6bb21826edf318b70",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

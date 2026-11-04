@@ -1,0 +1,37 @@
+....E.F..E.......
+======================================================================
+ERROR: test_duplicate_active_job_submissions_share_one_job (tests.test_review_deduplication.ValidationDeduplicationTests.test_duplicate_active_job_submissions_share_one_job)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 178, in test_duplicate_active_job_submissions_share_one_job
+    self.repo.complete_job(first["job_id"], {})
+  File "D:\knowledge-huopao\review_agent\repository.py", line 1396, in complete_job
+    self.assert_job_lease(connection,job_id,owner,lease_token)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 1380, in assert_job_lease
+    raise ConflictError('job lease is no longer owned')
+review_agent.repository.ConflictError: job lease is no longer owned
+
+======================================================================
+ERROR: test_timeout_never_starts_a_retry_even_after_late_response (tests.test_review_deduplication.ValidationDeduplicationTests.test_timeout_never_starts_a_retry_even_after_late_response)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 121, in test_timeout_never_starts_a_retry_even_after_late_response
+    self.assertEqual(suppressed["error_code"], "DUPLICATE_REQUEST_SUPPRESSED")
+                     ~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'error_code'
+
+======================================================================
+FAIL: test_known_failed_request_can_be_retried_on_a_later_job (tests.test_review_deduplication.ValidationDeduplicationTests.test_known_failed_request_can_be_retried_on_a_later_job)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 151, in test_known_failed_request_can_be_retried_on_a_later_job
+    self.assertEqual(self.judge()["response_status"], "ok")
+AssertionError: 'api_error' != 'ok'
+- api_error
++ ok
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 47.966s
+
+FAILED (failures=1, errors=2)

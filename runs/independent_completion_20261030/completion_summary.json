@@ -1,0 +1,349 @@
+{
+  "checked_at_utc": "2026-10-30T07:53:16.364001+00:00",
+  "snapshot": "D:\\knowledge-huopao\\runs\\independent_completion_20261030\\after_20261030_075312_544201.sqlite3",
+  "run_id": "run_chapter1_20261028_resume1",
+  "candidates": {
+    "total": 320,
+    "independent_completed": 231
+  },
+  "initial_completed": 223,
+  "newly_completed": 8,
+  "remaining_incomplete": 89,
+  "remaining_actions": {
+    "already_completed": 231,
+    "unknown_request_reconciliation": 89
+  },
+  "workflow_states": {
+    "schema_unresolved": 148,
+    "revision_required": 50,
+    "manual_review": 111,
+    "awaiting_ontology_review": 11
+  },
+  "source_support": {
+    "supported": 170,
+    "unresolved": 150
+  },
+  "triple_work_finished": true,
+  "ontology_review": {
+    "status": "pilot_blocked",
+    "processed": 1,
+    "selected": 4,
+    "results": [
+      {
+        "extension_id": "ext_4a9a96a9450145e596202e196fd0c124",
+        "audit_id": "ontology_audit_344b4fe812c34022a14e99b6b237e7e5",
+        "independent_review_completed": false,
+        "independent_valid_seats": 2,
+        "recommendation": "needs_human",
+        "selected_proposal_digest": "c798d24983e62df962bf7635be92cca69db8d5c60892eaca3c25a7a8bf20e131",
+        "stop_reason": "operator_prepared_delta_independent_review_completed_or_held",
+        "seats": [
+          {
+            "voter_id": "judge_a",
+            "response_status": "ok",
+            "decision": "approve",
+            "error_code": null,
+            "outcome_unknown": null
+          },
+          {
+            "voter_id": "judge_b",
+            "response_status": "api_error",
+            "decision": null,
+            "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+            "outcome_unknown": true
+          },
+          {
+            "voter_id": "judge_c",
+            "response_status": "ok",
+            "decision": "approve",
+            "error_code": null,
+            "outcome_unknown": null
+          }
+        ]
+      }
+    ],
+    "remaining_not_dispatched_after_pilot": 3
+  },
+  "preservation": {
+    "valid_triple_votes": {
+      "checked": 918,
+      "unchanged": true
+    },
+    "valid_ontology_votes": {
+      "checked": 3,
+      "unchanged": true
+    },
+    "frozen_triple_proposals": {
+      "checked": 346,
+      "unchanged": true
+    },
+    "frozen_ontology_proposals": {
+      "checked": 2,
+      "unchanged": true
+    },
+    "candidate_revisions": {
+      "checked": 322,
+      "unchanged": true
+    }
+  },
+  "review_request_attempts": 25,
+  "attempt_states": {
+    "completed": 16,
+    "failed": 8,
+    "unknown": 1
+  },
+  "attempt_response_statuses": {
+    "ok": 16,
+    "invalid_contract": 3,
+    "invalid_json": 5,
+    "api_error": 1
+  },
+  "requests": [
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 5261,
+      "output_tokens": 2323
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 5017,
+      "output_tokens": 878
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 4591,
+      "output_tokens": 849
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "input_tokens": 4417,
+      "output_tokens": 1802
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3673,
+      "output_tokens": 681
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "input_tokens": 5025,
+      "output_tokens": 2003
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "input_tokens": 3579,
+      "output_tokens": 1807
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_json",
+      "error_code": null,
+      "input_tokens": 3503,
+      "output_tokens": 4096
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_json",
+      "error_code": null,
+      "input_tokens": 3529,
+      "output_tokens": 4096
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_json",
+      "error_code": null,
+      "input_tokens": 3539,
+      "output_tokens": 4096
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_json",
+      "error_code": null,
+      "input_tokens": 3584,
+      "output_tokens": 4096
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 4711,
+      "output_tokens": 3478
+    },
+    {
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_json",
+      "error_code": null,
+      "input_tokens": 3604,
+      "output_tokens": 4095
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3517,
+      "output_tokens": 3960
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 4603,
+      "output_tokens": 1945
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 5212,
+      "output_tokens": 2841
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3764,
+      "output_tokens": 1796
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3544,
+      "output_tokens": 740
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3570,
+      "output_tokens": 808
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3583,
+      "output_tokens": 726
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3625,
+      "output_tokens": 637
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 3645,
+      "output_tokens": 567
+    },
+    {
+      "state": "completed",
+      "task_type": "ontology_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 77838,
+      "output_tokens": 503
+    },
+    {
+      "state": "completed",
+      "task_type": "ontology_review",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "error_code": null,
+      "input_tokens": 88344,
+      "output_tokens": 611
+    },
+    {
+      "state": "unknown",
+      "task_type": "ontology_review",
+      "model_id": "Gemma",
+      "response_status": "api_error",
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "input_tokens": null,
+      "output_tokens": null
+    }
+  ],
+  "separate_availability_probes": 3,
+  "incremental_tests": {
+    "tests_run": 32,
+    "passed": 32,
+    "failed": 0,
+    "errors": 0,
+    "modules": [
+      "tests.test_recovery_contract_feedback",
+      "tests.test_review_deduplication",
+      "tests.test_review_execution"
+    ],
+    "reported_elapsed_seconds": 35.904,
+    "external_model_calls": 0,
+    "source_hashes_after_test": {
+      "review_agent/validators.py": "ac42305242fe1d41586965473dcbaf34b34fa1978bce455798e61adc9c67d4e9",
+      "review_agent/recovery_service.py": "ad0c2925b3f73484684be69d0bc4c99cf7d556b6a6e47b6c787592e69a883158",
+      "tests/test_recovery_contract_feedback.py": "b63e6dc3c8eaa958967e0c99585ef98aa463a3634812e1803f864440136619db"
+    }
+  },
+  "ontology_published": false,
+  "neo4j_import_started": false
+}

@@ -1,0 +1,160 @@
+{
+  "extension_id": "ext_b88747d0100141bab0dfd591ff56184c",
+  "task_row_version": 2,
+  "delta_revision": 1,
+  "change_kind": "add_object_property",
+  "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "model_calls": 0,
+  "blockers": [],
+  "warnings": [],
+  "description": "冻结本体中未覆盖“弹道系数随直径增大而减小”的关系。当前提案已获独立来源支持共识（3/3 supported），且已完成 full_frozen_ontology 查询（SCHEMA_GAP）。建议新增对象属性以表达该单调递减关系，端点为弹道系数与直径。",
+  "evidence_count": 2,
+  "evidence_hash": "b1f8f9b70da46000c77a5311ae7f485bb543fc42f11a9a7eec8aca10a25da8e8",
+  "verified_evidence": [
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 346,
+      "chunk_id": "chunk_2bc37cea304e",
+      "chunk_start": 299,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 20104,
+      "evidence_id": "ev_b1c777e4775dd2c77467",
+      "offset_basis": "canonical_document",
+      "quote": "这也再一次说明了在弹形相同的条件下，直径  $d$  越大，弹道系数  $C$  越小的道理。",
+      "retrieval_score": 0.88,
+      "retrieved_via_levels": [
+        "adjacent_sentence"
+      ],
+      "section_id": "section_8966d27064a0",
+      "semantic_status": "unknown",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_2bc37cea304e"
+      ],
+      "start": 20057,
+      "text": "这也再一次说明了在弹形相同的条件下，直径  $d$  越大，弹道系数  $C$  越小的道理。"
+    },
+    {
+      "anchor_status": "exact",
+      "anchor_valid": true,
+      "chunk_end": 297,
+      "chunk_id": "chunk_2bc37cea304e",
+      "chunk_start": 295,
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "end": 20055,
+      "evidence_id": "ev_5f4126adbad321a0a2bc",
+      "offset_basis": "canonical_document",
+      "quote": "$$",
+      "retrieval_level": "adjacent_sentence",
+      "retrieval_score": 0.88,
+      "retrieved_via_levels": [
+        "adjacent_sentence"
+      ],
+      "section_id": "section_8966d27064a0",
+      "semantic_status": "unknown",
+      "sentence_id": "sentence_478af7be86e03db5cc32",
+      "source_anchor_kind": "document_span",
+      "span_chunk_ids": [
+        "chunk_2bc37cea304e"
+      ],
+      "start": 20053,
+      "text": "$$"
+    }
+  ],
+  "current_candidates": [
+    {
+      "candidate_id": "cand_8fc7327b7de5d5e7107e",
+      "revision": 1,
+      "row_version": 3,
+      "triple": {
+        "datatype": null,
+        "head": "弹道系数",
+        "head_entity_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+        "head_type": null,
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "extracted",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": "弹形相同",
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "随...增大而减小",
+        "tail": "直径",
+        "tail_entity_id": "local_e90c9ce1e8abf708c29b1d69d7249e26516f1f5ba40548f48d18e97793637f7f",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      }
+    }
+  ],
+  "source_consensus": [
+    {
+      "candidate_id": "cand_8fc7327b7de5d5e7107e",
+      "revision": 1,
+      "audit_id": "audit_f9f0ac339ab94596a3d60f6e44692221",
+      "proposal_digest": "af16bbcf171e023a63415d346bb58f7a669aeca3ab136c90ba4f5b067bdc7764",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "source_result": "supported"
+    }
+  ],
+  "existing_term_recall": {
+    "catalog_items_scanned": 270,
+    "exact_matches": [],
+    "scope": "complete_formal_identity_catalog_exact_name_recall",
+    "semantic_equivalence_or_gap_confirmed": false,
+    "full_rdf_semantic_lookup_still_required": true
+  },
+  "offline_delta_checks": {
+    "status": "not_run_no_delta"
+  },
+  "case_accounts": [
+    {
+      "case_id": "case_6d65298977bf2dbbc0068a5411d78997",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 96,
+        "rebinds": 2,
+        "tokens": 240000,
+        "tool_calls": 64
+      },
+      "usage": {
+        "extension_requests": 1,
+        "llm_calls": 7,
+        "rebinds": 0,
+        "tokens": 32428,
+        "tool_calls": 3
+      }
+    }
+  ],
+  "prior_reviews": [
+    {
+      "audit_id": "ontology_audit_7a2b6235113745b496b5cf99312caf31",
+      "stop_reason": "ontology_planner_failed",
+      "proposal_digests": [],
+      "votes": []
+    }
+  ],
+  "preparation_status": "source_verified_awaiting_model_investigation"
+}

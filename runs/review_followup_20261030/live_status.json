@@ -1,0 +1,169 @@
+{
+  "checked_at_epoch": 1793294052.970835,
+  "controller": {
+    "status": "running",
+    "phase": "ontology_pilot",
+    "pid": 24212,
+    "started_at_epoch": 1793293959.0228164,
+    "pilot_selected": 3,
+    "pilot_results": [],
+    "remaining_results": [],
+    "case_budget_grants": [
+      {
+        "grant_id": "case_grant_d42aa0b4b1174b768c45e527edf606a1",
+        "candidate_id": "cand_3a358e2351e49805e3d5",
+        "additions": {
+          "tokens": 260425
+        }
+      },
+      {
+        "grant_id": "case_grant_2c271a75fec344a1a6298495a4154a38",
+        "candidate_id": "cand_858e10a70cd83e0522d0",
+        "additions": {
+          "tokens": 249043
+        }
+      },
+      {
+        "grant_id": "case_grant_c68a9801eee444b79e2958e4de96683e",
+        "candidate_id": "cand_3973747a80a7539f34d2",
+        "additions": {
+          "tokens": 157879
+        }
+      }
+    ],
+    "updated_at_epoch": 1793293992.1271808,
+    "revision": {
+      "status": "needs_human",
+      "draft_id": "draft_5be1b8b4e813464eaeaca7577c1fd5d6"
+    },
+    "active_stage": "running next ontology pilot"
+  },
+  "jobs": [
+    {
+      "job_type": "ontology_extension",
+      "status": "queued",
+      "count": 2
+    },
+    {
+      "job_type": "ontology_extension",
+      "status": "running",
+      "count": 1
+    }
+  ],
+  "ontology_audits": [
+    {
+      "status": "running",
+      "count": 1
+    }
+  ],
+  "requests": [
+    {
+      "state": "completed",
+      "task_type": "candidate_revision_review",
+      "model_id": "Gemma",
+      "response_status": "ok",
+      "error_code": null,
+      "error": "",
+      "output_tokens": 1451,
+      "reasoning_tokens": 1152,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192
+      },
+      "age_seconds": 93.6
+    },
+    {
+      "state": "completed",
+      "task_type": "candidate_revision_review",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "error_code": null,
+      "error": "",
+      "output_tokens": 720,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192
+      },
+      "age_seconds": 93.6
+    },
+    {
+      "state": "completed",
+      "task_type": "candidate_revision_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "error": "",
+      "output_tokens": 355,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192,
+        "thinking_mode": "disabled"
+      },
+      "age_seconds": 93.6
+    },
+    {
+      "state": "failed",
+      "task_type": "ontology_review",
+      "model_id": "Gemma",
+      "response_status": "api_error",
+      "error_code": "PERMANENT_API_ERROR",
+      "error": "Error code: 400 - {'error': {'message': \"This model's maximum context length is 262144 tokens. However, you requested 8192 output tokens and your prompt contains at least 253953 input tokens, for a total of at least 262145 tokens. Please reduce the length of the input prompt or the number of request",
+      "output_tokens": null,
+      "reasoning_tokens": null,
+      "finish_reason": null,
+      "generation": {
+        "max_output_tokens": 8192
+      },
+      "age_seconds": 20.7
+    },
+    {
+      "state": "failed",
+      "task_type": "ontology_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "error": "semantic check requires source/modeling evidence",
+      "output_tokens": 560,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192,
+        "thinking_mode": "disabled"
+      },
+      "age_seconds": 20.7
+    },
+    {
+      "state": "running",
+      "task_type": "ontology_review",
+      "model_id": "Qwen",
+      "response_status": null,
+      "error_code": null,
+      "error": "",
+      "output_tokens": null,
+      "reasoning_tokens": null,
+      "finish_reason": null,
+      "generation": {
+        "max_output_tokens": 8192
+      },
+      "age_seconds": 20.7
+    },
+    {
+      "state": "completed",
+      "task_type": "ontology_review",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "error_code": null,
+      "error": "",
+      "output_tokens": 680,
+      "reasoning_tokens": null,
+      "finish_reason": "stop",
+      "generation": {
+        "max_output_tokens": 8192,
+        "thinking_mode": "disabled"
+      },
+      "age_seconds": 10.1
+    }
+  ]
+}

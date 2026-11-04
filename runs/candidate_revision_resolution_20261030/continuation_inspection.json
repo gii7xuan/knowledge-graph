@@ -1,0 +1,3606 @@
+[
+  {
+    "candidate_id": "cand_466b9468afe0efc3434c",
+    "revision": 1,
+    "row_version": 3,
+    "triple": {
+      "datatype": null,
+      "head": "外弹道中所用的气温",
+      "head_entity_id": "local_9d9406f56ba6ccc3142de5596f47dc13819862c0825e8e493e88818040395ec6",
+      "head_type": null,
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "extracted",
+        "condition": "extracted",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "extracted"
+      },
+      "qualifiers": {
+        "applicability": "外弹道中",
+        "condition": "除特别指明外",
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": "今后"
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "均为",
+      "tail": "虚温",
+      "tail_entity_id": "local_028ac64054fedff7c8e95f9b9a4a353a9f2e528f5760f45beb3448f0de76d7e9",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "source_support": "supported",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203",
+              "ev_35ab5e98538f2389bf38"
+            ],
+            "note": "原文“外弹道中所用的气温均为 $\\tau$”与“$\\tau$ 称为虚温”共同支持“外弹道中所用的气温”为“虚温”的语义。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203"
+            ],
+            "note": "条件“除特别指明外”、时间“今后”、适用范围“外弹道中”均已在候选中保留，与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203"
+            ],
+            "note": "关系“均为”方向正确，表示“外弹道中所用的气温”等同于“虚温”。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，存在SCHEMA_GAP，无法确认关系和类型是否被本体覆盖。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证，所有证据均支持或提供上下文。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203",
+              "ev_35ab5e98538f2389bf38"
+            ],
+            "note": "原文明确指出外弹道中所用的气温均为τ，且τ称为虚温。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203"
+            ],
+            "note": "时间范围（今后）、条件（除特别指明外）和适用范围（外弹道中）均与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203"
+            ],
+            "note": "主谓宾方向正确。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系和实体类型未在本体中定义，存在SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203",
+              "ev_35ab5e98538f2389bf38"
+            ],
+            "note": "ev_0beaf8dd9de212bcc203 states exterior-ballistics air temperature is τ; ev_35ab5e98538f2389bf38 identifies τ as virtual temperature, jointly supporting the triple.",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203"
+            ],
+            "note": "ev_0beaf8dd9de212bcc203 preserves positive polarity, condition 除特别指明外, future time 今后, and applicability 外弹道中; universal 均 is carried by surface relation 均为.",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203",
+              "ev_35ab5e98538f2389bf38"
+            ],
+            "note": "Direction matches head -> predicate: exterior-ballistics air temperature is τ, and τ is virtual temperature; no inversion.",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "Relation 均为 is not known in current ontology; domain/range/type constraints unresolved, so schema gap remains.",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_0beaf8dd9de212bcc203",
+              "ev_defa302a30a10621fb23",
+              "ev_35ab5e98538f2389bf38"
+            ],
+            "note": "All allowed evidence checked; ev_defa302a30a10621fb23 is contextual use of τ and does not contradict the triple.",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 295,
+        "chunk_id": "chunk_138dd3bb9aed",
+        "chunk_start": 263,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 2194,
+        "evidence_id": "ev_0beaf8dd9de212bcc203",
+        "offset_basis": "canonical_document",
+        "quote": "今后，除特别指明外，外弹道中所用的气温均为  $\\tau$  。",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_096450b1124b",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_138dd3bb9aed"
+        ],
+        "start": 2162,
+        "text": "今后，除特别指明外，外弹道中所用的气温均为  $\\tau$  。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 263,
+        "chunk_id": "chunk_138dd3bb9aed",
+        "chunk_start": 172,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 2162,
+        "evidence_id": "ev_defa302a30a10621fb23",
+        "offset_basis": "canonical_document",
+        "quote": "引入  $\\tau$  以后，就可以用干空气的  $R = 287~\\mathrm{J / (kg*K)}$  ，利用式（1-10）给出的状态方程来计算湿空气的  $\\rho$  。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_096450b1124b",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_12cb589f8924746958c1",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_138dd3bb9aed"
+        ],
+        "start": 2071,
+        "text": "引入  $\\tau$  以后，就可以用干空气的  $R = 287~\\mathrm{J / (kg*K)}$  ，利用式（1-10）给出的状态方程来计算湿空气的  $\\rho$  。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 172,
+        "chunk_id": "chunk_138dd3bb9aed",
+        "chunk_start": 122,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 2071,
+        "evidence_id": "ev_35ab5e98538f2389bf38",
+        "offset_basis": "canonical_document",
+        "quote": "$\\tau$  称为虚温，可以将  $\\tau$  理解为与湿空气具有相同压力和密度时干空气的温度。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_096450b1124b",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_4f821bf9c0e0fc838295",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_138dd3bb9aed"
+        ],
+        "start": 2021,
+        "text": "$\\tau$  称为虚温，可以将  $\\tau$  理解为与湿空气具有相同压力和密度时干空气的温度。"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_c0f73fb07469b204dbf7",
+    "revision": 1,
+    "row_version": 2,
+    "triple": {
+      "datatype": null,
+      "head": "高射炮",
+      "head_entity_id": "local_8121719fd60d6f8af80b59194b1c6b518d5483c5dde70c37781ac5fcdc52ab0c",
+      "head_type": "C_3435baf6d201eea60563",
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "extracted",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "unknown",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": "我国",
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "unknown",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "编制依据",
+      "tail": "43年阻力定律",
+      "tail_entity_id": "local_710cb6ab647ef4e71ef804a789a11a2d64eefda4ecc6b259ae6fbe6657c6ad60",
+      "tail_kind": "entity",
+      "tail_type": "C_c3cbd1a7d97f113e38cb",
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "原文“上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的”明确支持高射炮以43年阻力定律为编制依据。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "原文“我国”对应applicability，且“均是”表示肯定，无否定或条件限制。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "原文“以...为依据编制”表明高射炮（head）的编制依据是43年阻力定律（tail），方向一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，relation_known为false，存在SCHEMA_GAP，无法确认本体约束是否满足。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_2f28bfed003541ab96d5"
+            ],
+            "note": "提供的反证证据为相邻句子，未对当前三元组构成反驳，仅作为上下文。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "原文明确指出高射炮（表）是以43年阻力定律为依据编制的。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "适用范围“我国”在原文中明确提及。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "关系方向正确：高射炮 -> 编制依据 -> 43年阻力定律。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系“编制依据”在当前本体中未定义，存在SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP",
+          "QUALIFIER_MISMATCH"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "原文明确‘高射炮...我国均是以43年阻力定律为依据编制的’，核心主谓宾可得到支持；但‘高射炮’按上下文可能省略了弹道表，需要保留该指代风险。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "applicability=我国、modality=asserted有原文支持；但原文为肯定句且含‘均/上述’范围，候选polarity=unknown且quantifier未载明，限定条件不完整。",
+            "status": "fail"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_41fab59235dbcad2f457"
+            ],
+            "note": "原文方向为高射炮（相关弹道表）以43年阻力定律为依据编制，与头->依据的方向一致；关系标签本体尚未解析。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "relation_known=false、type_unknown=true，mapping_status=needs_full_schema_lookup，存在SCHEMA_GAP，当前本体不能判pass。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_2f28bfed003541ab96d5"
+            ],
+            "note": "已核查给定证据，未发现明确反证；相邻句只说明可编制相关弹道表，不构成否定。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": {
+          "note": "建议核实head是否应明确为‘高射炮弹道表’等相关弹道表，并按原文保留‘上述/均’范围。",
+          "qualifiers": {
+            "applicability": "我国",
+            "polarity": "positive",
+            "quantifier": "上述高射炮、地面火炮和低伸弹道表均"
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 286,
+        "chunk_id": "chunk_d7ea812c42eb",
+        "chunk_start": 250,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 36012,
+        "evidence_id": "ev_41fab59235dbcad2f457",
+        "offset_basis": "canonical_document",
+        "quote": "上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_276109bc91dd",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_d7ea812c42eb"
+        ],
+        "start": 35976,
+        "text": "上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 250,
+        "chunk_id": "chunk_d7ea812c42eb",
+        "chunk_start": 214,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 35976,
+        "evidence_id": "ev_2f28bfed003541ab96d5",
+        "offset_basis": "canonical_document",
+        "quote": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_276109bc91dd",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_b6e26edb329fbf3d80b0",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_d7ea812c42eb"
+        ],
+        "start": 35940,
+        "text": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_087e253eb4e4af8bcf40",
+    "revision": 1,
+    "row_version": 3,
+    "triple": {
+      "datatype": null,
+      "head": "弹轴",
+      "head_entity_id": "local_214e7fc11f7e8a01e7202b7b04868e09733b53396db46bd34cd2fd7df20bd4e8",
+      "head_type": null,
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "extracted",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "extracted",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": "本章在建立运动方程时",
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": "时刻",
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "与相对（空气的）速度矢量重合",
+      "tail": "相对（空气的）速度矢量",
+      "tail_entity_id": "local_c7144ca2a99abdba60de71db2893618c8827562924af35c1f7fa12d29c2e0d6a",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_96b3496662a7edae2028",
+              "ev_53b28a16d7e392acb48c"
+            ],
+            "note": "原文明确陈述“弹轴时刻与相对（空气的）速度矢量重合”，支持主谓宾及关系语义。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_96b3496662a7edae2028",
+              "ev_53b28a16d7e392acb48c"
+            ],
+            "note": "条件“本章在建立运动方程时”和量词“时刻”均被原文支持，极性为肯定，模态为断言。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_96b3496662a7edae2028",
+              "ev_53b28a16d7e392acb48c"
+            ],
+            "note": "关系方向为“弹轴”与“相对（空气的）速度矢量”重合，与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，存在SCHEMA_GAP，关系及类型未确认。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证，其他证据为上下文或无关。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": null,
+        "schema_issue": null,
+        "reason_codes": null,
+        "checks": null,
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "QUALIFIER_MISMATCH",
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_96b3496662a7edae2028",
+              "ev_53b28a16d7e392acb48c"
+            ],
+            "note": "原文直接出现“弹轴……与相对（空气的）速度矢量重合”，主谓宾及方向一致，但原文置于“假定”之下。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_96b3496662a7edae2028",
+              "ev_d5e1a34e433c5a4ea637"
+            ],
+            "note": "候选modality=asserted，原文为“假定”，属于假设而非断言；条件“本章在建立运动方程时”已保留。",
+            "status": "fail"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_96b3496662a7edae2028"
+            ],
+            "note": "关系方向为弹轴指向相对（空气的）速度矢量，与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "relation_known=false且relation_id为空，现有本体未覆盖该关系，无法通过当前本体约束。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "allowed evidence中未见反驳该假设关系的内容；相邻风速及三自由度句不构成反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": {
+          "condition": "本章在建立运动方程时",
+          "modality": "assumed",
+          "relation_text": "假定弹轴与相对（空气的）速度矢量重合"
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 185,
+        "chunk_id": "chunk_0150a2dfaf0c",
+        "chunk_start": 154,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 42427,
+        "evidence_id": "ev_96b3496662a7edae2028",
+        "offset_basis": "canonical_document",
+        "quote": "本章在建立运动方程时，假定弹轴时刻与相对（空气的）速度矢量重合",
+        "retrieval_score": 0.0,
+        "retrieved_via_levels": [],
+        "section_id": "section_3985f5cc2cde",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0150a2dfaf0c"
+        ],
+        "start": 42396,
+        "text": "本章在建立运动方程时，假定弹轴时刻与相对（空气的）速度矢量重合"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 152,
+        "chunk_id": "chunk_0150a2dfaf0c",
+        "chunk_start": 103,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 42394,
+        "evidence_id": "ev_473bfa110e81e18f68fa",
+        "offset_basis": "canonical_document",
+        "quote": "垂直于射击平面的风速分量称为横风，从左向右（面向射击方向观察）为正，用  $W_{z}$  表示。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_3985f5cc2cde",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_1b5cb7196edd86c006b5",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0150a2dfaf0c"
+        ],
+        "start": 42345,
+        "text": "垂直于射击平面的风速分量称为横风，从左向右（面向射击方向观察）为正，用  $W_{z}$  表示。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 217,
+        "chunk_id": "chunk_0150a2dfaf0c",
+        "chunk_start": 154,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 42459,
+        "evidence_id": "ev_53b28a16d7e392acb48c",
+        "offset_basis": "canonical_document",
+        "quote": "本章在建立运动方程时，假定弹轴时刻与相对（空气的）速度矢量重合，在此假设下空气阻力矢量仍与弹轴重合，因而弹丸仍可当作质点研究。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_3985f5cc2cde",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_6394f4f316ee5dee365d",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0150a2dfaf0c"
+        ],
+        "start": 42396,
+        "text": "本章在建立运动方程时，假定弹轴时刻与相对（空气的）速度矢量重合，在此假设下空气阻力矢量仍与弹轴重合，因而弹丸仍可当作质点研究。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 239,
+        "chunk_id": "chunk_0150a2dfaf0c",
+        "chunk_start": 217,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 42481,
+        "evidence_id": "ev_d5e1a34e433c5a4ea637",
+        "offset_basis": "canonical_document",
+        "quote": "这一假设是非标准条件下质点弹道学的基本假设。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_3985f5cc2cde",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_2f24033d8b8e81e64475",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0150a2dfaf0c"
+        ],
+        "start": 42459,
+        "text": "这一假设是非标准条件下质点弹道学的基本假设。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 103,
+        "chunk_id": "chunk_0150a2dfaf0c",
+        "chunk_start": 53,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 42345,
+        "evidence_id": "ev_ec20388e9229d157394a",
+        "offset_basis": "canonical_document",
+        "quote": "风速可以分解为纵风和横风，平行于射击平面的风速分量称为纵风，顺风为正，用  $W_{x}$  表示；",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_3985f5cc2cde",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_a49a0ac4c6fa38401bb8",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0150a2dfaf0c"
+        ],
+        "start": 42295,
+        "text": "风速可以分解为纵风和横风，平行于射击平面的风速分量称为纵风，顺风为正，用  $W_{x}$  表示；"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 289,
+        "chunk_id": "chunk_0150a2dfaf0c",
+        "chunk_start": 241,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 42531,
+        "evidence_id": "ev_77353c11b9412a338e12",
+        "offset_basis": "canonical_document",
+        "quote": "在考虑横风的情况下，弹道不再是平面曲线，而是一条空间曲线，此时所建立的运动方程称为三自由度方程。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_3985f5cc2cde",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_6304a683085e1c1a107e",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0150a2dfaf0c"
+        ],
+        "start": 42483,
+        "text": "在考虑横风的情况下，弹道不再是平面曲线，而是一条空间曲线，此时所建立的运动方程称为三自由度方程。"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_4a0747767cfb9020ae71",
+    "revision": 1,
+    "row_version": 3,
+    "triple": {
+      "datatype": null,
+      "head": "空气阻力",
+      "head_entity_id": "local_8f818c85fa7dce06fe18bdd27d0b5079f0934162ab072e57a531d7035a8e3ce1",
+      "head_type": "C_3d1e92e945b2c3dbbd16",
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "extracted",
+        "condition": "extracted",
+        "modality": "extracted",
+        "polarity": "unknown",
+        "quantifier": "extracted",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": "所特有",
+        "condition": "超声速时",
+        "modality": "asserted",
+        "polarity": "unknown",
+        "quantifier": "主要",
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "由...组成",
+      "tail": "波动阻力",
+      "tail_entity_id": "local_938426353f5778a82fbc12bec64c57c25a59cdc0abf89b597a7bb1380b2a8fd2",
+      "tail_kind": "entity",
+      "tail_type": "C_52c1a1e08cb0ee536af8",
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文“空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成”明确支持空气阻力由波动阻力组成。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "条件“超声速时”、适用范围“所特有”、量词“主要”均与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "关系方向为空气阻力由波动阻力组成，与原文“由...组成”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，存在SCHEMA_GAP，关系ID和类型未知，无法确认本体约束是否满足。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_83dd1de85aa14cfd142e"
+            ],
+            "note": "相邻句子仅说明空气阻力基本原理，未提供反驳证据。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文明确指出空气阻力由摩擦阻力、涡流阻力及波动阻力组成。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "量词“主要”、条件“超声速时”及适用范围“所特有”均在原文中得到支持。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "方向正确，空气阻力包含波动阻力。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系“由...组成”在当前本体中未定义，存在SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文明确称空气阻力主要由摩擦阻力、涡流阻力及波动阻力组成，支持头为整体、尾为组成部分。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "条件“超声速时”和“所特有”直接修饰波动阻力；“主要”对应组成关系；原文无否定，时间范围未述。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "“由...组成”方向为空气阻力→波动阻力，与原文整体到成分一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查显示关系未确认、类型未知，属SCHEMA_GAP，不能判定当前本体通过。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "允许证据中无反证；相邻句为背景说明，不构成反驳。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 102,
+        "chunk_id": "chunk_dbfea746de47",
+        "chunk_start": 69,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 8369,
+        "evidence_id": "ev_34a9e63d42e4c425b893",
+        "offset_basis": "canonical_document",
+        "quote": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_60e71fec4472",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_dbfea746de47"
+        ],
+        "start": 8336,
+        "text": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 69,
+        "chunk_id": "chunk_dbfea746de47",
+        "chunk_start": 16,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 8336,
+        "evidence_id": "ev_83dd1de85aa14cfd142e",
+        "offset_basis": "canonical_document",
+        "quote": "此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_60e71fec4472",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_fccdb73e804ec106a319",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_dbfea746de47"
+        ],
+        "start": 8283,
+        "text": "此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_ccda7f5e8cf2b462ccab",
+    "revision": 1,
+    "row_version": 2,
+    "triple": {
+      "datatype": null,
+      "head": "空气阻力",
+      "head_entity_id": "local_8f818c85fa7dce06fe18bdd27d0b5079f0934162ab072e57a531d7035a8e3ce1",
+      "head_type": "C_3d1e92e945b2c3dbbd16",
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "unknown",
+        "quantifier": "extracted",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "unknown",
+        "quantifier": "主要",
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "由...组成",
+      "tail": "摩擦阻力",
+      "tail_entity_id": "local_f3955beda6ddb5fb71718f228fc0cd3b590a632726df2442beec2037aaf9bdaa",
+      "tail_kind": "entity",
+      "tail_type": "C_75505394a779d58e7cb3",
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文“空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成”明确支持“空气阻力”由“摩擦阻力”等组成的语义。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文中的“主要”与候选中的quantifier“主要”一致，未出现否定或条件冲突。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "关系方向为“空气阻力”由“摩擦阻力”组成，与原文“空气阻力主要由...组成”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，relation_id为null，存在SCHEMA_GAP，无法确认本体约束是否满足。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_83dd1de85aa14cfd142e"
+            ],
+            "note": "提供的反证证据为上下文说明，未对候选三元组构成反驳。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文明确指出空气阻力由摩擦阻力等组成。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "量词“主要”在原文中得到支持。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "方向正确：空气阻力 -> 由...组成 -> 摩擦阻力。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系“由...组成”在当前本体中缺失（SCHEMA_GAP）。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文明确说空气阻力主要由摩擦阻力等组成，支持“空气阻力—由…组成—摩擦阻力”的组成关系；并列其他成分不否定摩擦阻力是组成项。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文为肯定陈述，含“主要”量词；无否定、条件或时间限定需保留。并列项省略未引入排除性断言。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "方向为整体“空气阻力”由部分“摩擦阻力”组成，与候选 head→tail 一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "relation_id 缺失且 relation_known=false，当前本体无法确认“由…组成”的关系约束及域/值域。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893",
+              "ev_83dd1de85aa14cfd142e"
+            ],
+            "note": "未提供反证；已见证据均为支持或背景说明，未见否定或矛盾。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 102,
+        "chunk_id": "chunk_dbfea746de47",
+        "chunk_start": 69,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 8369,
+        "evidence_id": "ev_34a9e63d42e4c425b893",
+        "offset_basis": "canonical_document",
+        "quote": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_60e71fec4472",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_dbfea746de47"
+        ],
+        "start": 8336,
+        "text": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 69,
+        "chunk_id": "chunk_dbfea746de47",
+        "chunk_start": 16,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 8336,
+        "evidence_id": "ev_83dd1de85aa14cfd142e",
+        "offset_basis": "canonical_document",
+        "quote": "此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_60e71fec4472",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_fccdb73e804ec106a319",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_dbfea746de47"
+        ],
+        "start": 8283,
+        "text": "此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_d05f258f70eb3dfe2220",
+    "revision": 1,
+    "row_version": 2,
+    "triple": {
+      "datatype": null,
+      "head": "空气阻力",
+      "head_entity_id": "local_8f818c85fa7dce06fe18bdd27d0b5079f0934162ab072e57a531d7035a8e3ce1",
+      "head_type": "C_3d1e92e945b2c3dbbd16",
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "unknown",
+        "quantifier": "extracted",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "unknown",
+        "quantifier": "主要",
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "由...组成",
+      "tail": "涡流阻力",
+      "tail_entity_id": "local_6392dedee12e687305f647dbcf93a0cb6ece4b790daa90786244f2c823a30b64",
+      "tail_kind": "entity",
+      "tail_type": "C_9ca2918a695c60178dcc",
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文“空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成”明确支持空气阻力由涡流阻力组成。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文中的“主要”与候选中的quantifier“主要”一致，未引入额外条件或时间范围。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "关系方向为空气阻力由涡流阻力组成，与原文语义一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，存在SCHEMA_GAP，无法确认关系和类型约束是否满足。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原文明确指出空气阻力主要由摩擦阻力、涡流阻力及波动阻力组成。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "量词'主要'已正确提取。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "方向正确：空气阻力 -> 由...组成 -> 涡流阻力。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系id缺失且本体检查状态为SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "原句明确说空气阻力主要由摩擦阻力、涡流阻力及波动阻力组成；涡流阻力是所列组成部分之一，主谓宾与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "量词“主要”在原文保留；原句为肯定陈述，无额外条件或时间限定；候选polarity=unknown属未填完，未与原文冲突。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893"
+            ],
+            "note": "“A由B组成”的方向为整体→组成部分；head=空气阻力，tail=涡流阻力，方向未倒置。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系未在本体解析：relation_known=false，relation_id=null，存在SCHEMA_GAP；不能判定本体通过。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_34a9e63d42e4c425b893",
+              "ev_83dd1de85aa14cfd142e"
+            ],
+            "note": "已核查允许证据；ev_34支持，ev_83仅为上下文，未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": {
+          "note": "在本体确认“组成”关系前不宜定稿；若保留该关系，建议将polarity补为positive并保留量词“主要”。",
+          "triple": {
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "主要"
+            }
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 102,
+        "chunk_id": "chunk_dbfea746de47",
+        "chunk_start": 69,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 8369,
+        "evidence_id": "ev_34a9e63d42e4c425b893",
+        "offset_basis": "canonical_document",
+        "quote": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_60e71fec4472",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_dbfea746de47"
+        ],
+        "start": 8336,
+        "text": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 69,
+        "chunk_id": "chunk_dbfea746de47",
+        "chunk_start": 16,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 8336,
+        "evidence_id": "ev_83dd1de85aa14cfd142e",
+        "offset_basis": "canonical_document",
+        "quote": "此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_60e71fec4472",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_fccdb73e804ec106a319",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_dbfea746de47"
+        ],
+        "start": 8283,
+        "text": "此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_f9a86d764470a851cd8a",
+    "revision": 1,
+    "row_version": 2,
+    "triple": {
+      "datatype": null,
+      "head": "弹道系数 C",
+      "head_entity_id": "local_804cf8fc189adfc8b0239b71db86aa1dd0966e110a1a5b804fe66a9f8d905c09",
+      "head_type": "C_53d15a0ecfc3dc8ecd93",
+      "language": "zh",
+      "mapping_status": "mapped",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": "R_37918d1714e9945397f3",
+      "relation_label": "表示",
+      "relation_semantic_hash": "47821b21ef5caad4153817dd698e7aca9455aff77a2b5dfab0d450dd338d5814",
+      "surface_relation": "表示",
+      "tail": "弹丸特征",
+      "tail_entity_id": "local_ad3c5088f7432127ccee18346ec11cd61320bb8fb135a18efff65ce09ce8e9a1",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "原文“表示弹丸特征的弹道系数 $C$”及“空气阻力加速度是表示弹丸特征的弹道系数 $C$...”明确支持弹道系数C表示弹丸特征。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "原文为肯定陈述，无特殊条件、时间、数量或模态限定，与候选三元组的positive/asserted一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "原文“表示弹丸特征的弹道系数”表明弹道系数C是表示弹丸特征的，方向为C表示弹丸特征，与候选一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "未发现反驳证据。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "本体检查显示domain_status为fail，head_type C_53d15a0ecfc3dc8ecd93不满足关系R_37918d1714e9945397f3的domain约束C_e4f3000a2284a7d0fa12。",
+            "status": "fail"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "current": "C_53d15a0ecfc3dc8ecd93",
+              "field": "head_type",
+              "reason": "本体约束要求关系R_37918d1714e9945397f3的domain为C_e4f3000a2284a7d0fa12，当前head_type不匹配。",
+              "suggested": "C_e4f3000a2284a7d0fa12"
+            }
+          ],
+          "evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ]
+        }
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": null,
+        "schema_issue": null,
+        "reason_codes": null,
+        "checks": null,
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION",
+          "ENTITY_MISMATCH"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "原文“表示弹丸特征的弹道系数 C”直接支持“弹道系数 C 表示 弹丸特征”，主谓宾语义完整。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "原文为肯定断言，无条件、时间、数量或适用性限定；候选极性 positive、模态 asserted，未遗漏限定。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "“表示弹丸特征的弹道系数 C”中弹道系数 C 为表示主体、弹丸特征为被表示对象，方向与候选一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "给定证据中无否定、条件反转或相反表述，未发现反证。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_197b526479fee7b852fe",
+              "ev_a45c2dc8de96babdf36c"
+            ],
+            "note": "原文支持“弹道系数 C 表示 弹丸特征”的事实关系，但本体校验显示关系域约束失败且尾类型未知：候选头类型 C_53d15a0ecfc3dc8ecd93 不满足域类 C_e4f3000a2284a7d0fa12，尾类型为 null。应修订实体类型映射；不得据此否认原文关系或称为缺失关系。",
+            "status": "fail"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "field": "head_type",
+              "from": "C_53d15a0ecfc3dc8ecd93",
+              "reason": "本体关系域要求 C_e4f3000a2284a7d0fa12，候选头类型与之不符；将弹道系数 C 映射到该域类。",
+              "to": "C_e4f3000a2284a7d0fa12"
+            },
+            {
+              "field": "tail_type",
+              "from": null,
+              "reason": "本体关系值域为 C_125e9268788e296b6e64，候选尾类型未知；将弹丸特征映射到该值域类。",
+              "to": "C_125e9268788e296b6e64"
+            }
+          ],
+          "evidence_ids": [
+            "ev_197b526479fee7b852fe",
+            "ev_a45c2dc8de96babdf36c"
+          ],
+          "field_reasons": {
+            "applicability": "原文无适用性限定，保留 null/not_stated。",
+            "condition": "原文无条件从句，保留 null/not_stated。",
+            "modality": "原文为定义性断言，保留 asserted。",
+            "polarity": "原文为肯定表述，保留 positive。",
+            "quantifier": "原文无数量限定，保留 null/not_stated。",
+            "time_scope": "原文无时间限定，保留 null/not_stated。"
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 517,
+        "chunk_id": "chunk_57cec8b1cede",
+        "chunk_start": 499,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 19230,
+        "evidence_id": "ev_197b526479fee7b852fe",
+        "offset_basis": "canonical_document",
+        "quote": "表示弹丸特征的弹道系数  $C$  ",
+        "retrieved_via_levels": [],
+        "section_id": "section_45e3b3342db3",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_57cec8b1cede"
+        ],
+        "start": 19212,
+        "text": "表示弹丸特征的弹道系数  $C$  "
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 489,
+        "chunk_id": "chunk_57cec8b1cede",
+        "chunk_start": 487,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 19202,
+        "evidence_id": "ev_dc18b1477226d5e43e45",
+        "offset_basis": "canonical_document",
+        "quote": "$$",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_45e3b3342db3",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_0bce9ebe362c5e5a575f",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_57cec8b1cede"
+        ],
+        "start": 19200,
+        "text": "$$"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 581,
+        "chunk_id": "chunk_57cec8b1cede",
+        "chunk_start": 491,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 19294,
+        "evidence_id": "ev_a45c2dc8de96babdf36c",
+        "offset_basis": "canonical_document",
+        "quote": "空气阻力加速度是表示弹丸特征的弹道系数  $C$  、表示空气特征的密度函数  $H(y)$  和表示弹丸相对于空气的运动速度对运动影响的阻力函数  $F(v)$  三者的连乘积。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_45e3b3342db3",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_5f0bb946686f483bfc46",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_57cec8b1cede"
+        ],
+        "start": 19204,
+        "text": "空气阻力加速度是表示弹丸特征的弹道系数  $C$  、表示空气特征的密度函数  $H(y)$  和表示弹丸相对于空气的运动速度对运动影响的阻力函数  $F(v)$  三者的连乘积。"
+      }
+    ],
+    "drafts": [
+      {
+        "draft_id": "draft_b59655b2f9da49c39053c47ce0c88ec1",
+        "status": "stale",
+        "changes": {
+          "head_type": "C_e4f3000a2284a7d0fa12",
+          "tail_type": "C_125e9268788e296b6e64"
+        },
+        "votes": [
+          {
+            "voter_id": "judge_a",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision correctly updates head_type and tail_type to match the frozen ontology's domain and range for relation R_37918d1714e9945397f3. The source evidence explicitly supports the semantic relationship '弹道系数 C 表示 弹丸特征', and the proposed types are consistent with both the textual evidence and the ontology constraints. No counterevidence was found within the verification scope.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "head_type",
+                "note": "The evidence explicitly identifies '弹道系数 C' as the head entity. The proposed head_type C_e4f3000a2284a7d0fa12 aligns with the frozen ontology's domain for relation R_37918d1714e9945397f3, and the source text directly supports this classification.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "tail_type",
+                "note": "The evidence explicitly identifies '弹丸特征' as the tail entity. The proposed tail_type C_125e9268788e296b6e64 aligns with the frozen ontology's range for relation R_37918d1714e9945397f3, and the source text directly supports this classification.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision updates the head_type and tail_type to align with the ontology's domain and range constraints for the relation '表示' (R_37918d1714e9945397f3). The source text '表示弹丸特征的弹道系数 C' explicitly supports the triple that the ballistic coefficient C represents projectile characteristics.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "head_type",
+                "note": "The text identifies '弹道系数 C' as the entity that '表示' (represents) '弹丸特征'. The revision updates the head_type to C_e4f3000a2284a7d0fa12, which is the required domain for relation R_37918d1714e9945397f3.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "tail_type",
+                "note": "The text identifies '弹丸特征' as the object being represented. The revision updates the tail_type to C_125e9268788e296b6e64, which is the required range for relation R_37918d1714e9945397f3.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "response_status": "api_error",
+            "decision": null,
+            "rationale_summary": null,
+            "field_reviews": null
+          }
+        ]
+      },
+      {
+        "draft_id": "draft_e22a2eef42694761a744baeb43e73986",
+        "status": "needs_human",
+        "changes": {
+          "head_type": "C_e4f3000a2284a7d0fa12",
+          "tail_type": "C_125e9268788e296b6e64"
+        },
+        "votes": [
+          {
+            "voter_id": "judge_a",
+            "response_status": "ok",
+            "decision": "reject",
+            "rationale_summary": "The proposed revision changes head_type from 'C_53d15a0ecfc3dc8ecd93' to 'C_e4f3000a2284a7d0fa12' and tail_type from null to 'C_125e9268788e296b6e64'. The frozen evidence scope contains textual descriptions of the ballistic coefficient C representing projectile characteristics and its role in the air resistance acceleration formula, but does not contain explicit ontology type identifiers or classification labels that ground these specific ontology class mappings. The evidence supports the semantic relationship (ballistic coefficient C represents projectile characteristics) but does not provide the specific ontology type assignments proposed in the revision. Since the changed fields are ontology mapping decisions not grounded in the provided textual evidence, the revision is rejected.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "head_type",
+                "note": "The evidence text '表示弹丸特征的弹道系数 $C$' and the adjacent sentence '空气阻力加速度是表示弹丸特征的弹道系数 $C$、表示空气特征的密度函数 $H(y)$ 和表示弹丸相对于空气的运动速度对运动影响的阻力函数 $F(v)$ 三者的连乘积。' describe the semantic role of the ballistic coefficient C (representing projectile characteristics) but do not provide an explicit ontology type identifier or classification label that maps to the specific ontology class 'C_e4f3000a2284a7d0fa12'. The change from 'C_53d15a0ecfc3dc8ecd93' to 'C_e4f3000a2284a7d0fa12' is an ontology mapping decision not grounded in the provided textual evidence.",
+                "status": "not_stated_in_scope"
+              },
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "tail_type",
+                "note": "The evidence text '表示弹丸特征的弹道系数 $C$' and the adjacent sentence describe '弹丸特征' (projectile characteristics) as the semantic referent of the ballistic coefficient C, but do not provide an explicit ontology type identifier or classification label that maps to the specific ontology class 'C_125e9268788e296b6e64'. The change from null to 'C_125e9268788e296b6e64' is an ontology mapping decision not grounded in the provided textual evidence.",
+                "status": "not_stated_in_scope"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision updates the head and tail types for the triple '弹道系数 C 表示 弹丸特征'. This relationship is explicitly stated in the provided evidence: '表示弹丸特征的弹道系数 $C$'. The type updates are consistent with the entities identified in the text.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "head_type",
+                "note": "The head '弹道系数 C' is explicitly mentioned in the text as representing projectile characteristics.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "tail_type",
+                "note": "The tail '弹丸特征' is explicitly mentioned as the characteristic represented by the ballistic coefficient C.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision only changes head_type and tail_type. The frozen evidence explicitly states that 弹道系数 C represents 弹丸特征, supporting both type assignments. No polarity, condition, quantifier, modality, or direction changes were made, and no counterevidence was found in scope.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "head_type",
+                "note": "Evidence states 弹道系数 C represents 弹丸特征, so C is a coefficient/quantity characterizing the projectile; the revised head type is consistent with the source-grounded expression.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_197b526479fee7b852fe",
+                  "ev_a45c2dc8de96babdf36c"
+                ],
+                "field": "tail_type",
+                "note": "弹丸特征 is the projectile characteristic being represented; assigning it a characteristic/feature type is grounded in the quoted sentence.",
+                "status": "supported"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate_id": "cand_f4876022d0c83d291ac3",
+    "revision": 1,
+    "row_version": 3,
+    "triple": {
+      "datatype": null,
+      "head": "弹道系数",
+      "head_entity_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+      "head_type": "C_53d15a0ecfc3dc8ecd93",
+      "language": "zh",
+      "mapping_status": "mapped",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": "R_37918d1714e9945397f3",
+      "relation_label": "表示",
+      "relation_semantic_hash": "47821b21ef5caad4153817dd698e7aca9455aff77a2b5dfab0d450dd338d5814",
+      "surface_relation": "表示",
+      "tail": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分",
+      "tail_entity_id": "local_855bfe8c8f7d6be8f6761a41d5d1a3adca986b441da8eb211e84f15032627c30",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "原文“式中第一个组合表示弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分，此部分称作弹道系数 $C$”明确支持“弹道系数”表示“弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分”。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "原文为定义性陈述，极性为肯定，模态为断言，无额外条件、时间范围、适用性或数量限定，与候选限定一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "原文“第一个组合表示...此部分称作弹道系数”表明“弹道系数”是表示该部分的名称，方向为“弹道系数”表示“弹丸本身的特征...部分”，与候选一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "未发现反驳证据。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "本体约束要求关系“表示”的域为 C_e4f3000a2284a7d0fa12，当前 head_type 不满足域约束；本体约束要求关系“表示”的域为 C_125e9268788e296b6e64，当前 tail_type 为 null，需补充类型以满足约束。",
+            "status": "fail"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "current": "C_53d15a0ecfc3dc8ecd93",
+              "field": "head_type",
+              "reason": "本体约束要求关系“表示”的域为 C_e4f3000a2284a7d0fa12，当前 head_type 不满足域约束。",
+              "suggested": "C_e4f3000a2284a7d0fa12"
+            },
+            {
+              "current": null,
+              "field": "tail_type",
+              "reason": "本体约束要求关系“表示”的域为 C_125e9268788e296b6e64，当前 tail_type 为 null，需补充类型以满足约束。",
+              "suggested": "C_125e9268788e296b6e64"
+            }
+          ],
+          "evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "field_reasons": {
+            "head_type": "本体约束要求关系“表示”的域为 C_e4f3000a2284a7d0fa12，当前 head_type 不满足域约束。",
+            "tail_type": "本体约束要求关系“表示”的域为 C_125e9268788e296b6e64，当前 tail_type 为 null，需补充类型以满足约束。"
+          }
+        }
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": null,
+        "schema_issue": null,
+        "reason_codes": null,
+        "checks": null,
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "CONSTRAINT_VIOLATION",
+          "ENTITY_TYPE_UNKNOWN",
+          "ONTOLOGY_DISAGREEMENT"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "原文明确“此部分称作弹道系数”，即弹道系数表示该组合部分，主谓宾方向与候选一致。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "原文为肯定断言句，无否定、条件、时间、数量或适用性限定；候选 polarity=positive、modality=asserted 与原文一致，其余限定未陈述。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "“称作”表明弹道系数指代该组合部分，头为弹道系数、尾为该部分，方向正确。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "未发现原文反驳候选；相邻证据仅为公式定界符，无相反陈述。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_c15baaaa1767cf8bcdc6"
+            ],
+            "note": "原文支持该三元组，但本体检查显示 domain 约束失败且尾实体类型未知；关系“表示”的 domain 为 C_e4f3000a2284a7d0fa12、range 为 C_125e9268788e296b6e64，候选头类型 C_53d15a0ecfc3dc8ecd93 不满足 domain，尾类型为 null。属于已有关系但映射含混，需修订实体类型映射，不能据此判事实错误。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "current": "C_53d15a0ecfc3dc8ecd93",
+              "field": "head_type",
+              "reason": "关系“表示”的 domain 要求 C_e4f3000a2284a7d0fa12，当前头类型不满足 domain 约束。",
+              "suggested": "C_e4f3000a2284a7d0fa12"
+            },
+            {
+              "current": null,
+              "field": "tail_type",
+              "reason": "关系“表示”的 range 要求 C_125e9268788e296b6e64，当前尾类型未知，需映射到该 range 类。",
+              "suggested": "C_125e9268788e296b6e64"
+            }
+          ],
+          "evidence_ids": [
+            "ev_c15baaaa1767cf8bcdc6"
+          ],
+          "field_reasons": {
+            "applicability": "原文无适用性限定，保留 not_stated。",
+            "condition": "原文无条件句，保留 not_stated。",
+            "modality": "原文为断言“称作”，保留 asserted。",
+            "polarity": "原文为肯定断言，保留 positive。",
+            "quantifier": "原文无数量限定，保留 not_stated。",
+            "time_scope": "原文无时间限定，保留 not_stated。"
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 369,
+        "chunk_id": "chunk_00bd7372cd25",
+        "chunk_start": 314,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 18572,
+        "evidence_id": "ev_c15baaaa1767cf8bcdc6",
+        "offset_basis": "canonical_document",
+        "quote": "式中第一个组合表示弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分，此部分称作弹道系数  $C$ 。",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_45e3b3342db3",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_00bd7372cd25"
+        ],
+        "start": 18517,
+        "text": "式中第一个组合表示弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分，此部分称作弹道系数  $C$ 。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 312,
+        "chunk_id": "chunk_00bd7372cd25",
+        "chunk_start": 310,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 18515,
+        "evidence_id": "ev_8779afefb4c83f0449e8",
+        "offset_basis": "canonical_document",
+        "quote": "$$",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_45e3b3342db3",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_d54be1cd83c271735a8b",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_00bd7372cd25"
+        ],
+        "start": 18513,
+        "text": "$$"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 373,
+        "chunk_id": "chunk_00bd7372cd25",
+        "chunk_start": 371,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 18576,
+        "evidence_id": "ev_23c91abd41de08a5eef0",
+        "offset_basis": "canonical_document",
+        "quote": "$$",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_45e3b3342db3",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_bcf64ef929a68d4458a8",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_00bd7372cd25"
+        ],
+        "start": 18574,
+        "text": "$$"
+      }
+    ],
+    "drafts": []
+  },
+  {
+    "candidate_id": "cand_8cf5f9e9984ea5fed5f9",
+    "revision": 2,
+    "row_version": 7,
+    "triple": {
+      "datatype": null,
+      "head": "弹带处",
+      "head_entity_id": "local_3dbca3a1610ab7037c53e86a9feb4ba6b8555e5ae514b16d8a9bdad0a48a7438",
+      "head_type": null,
+      "language": "zh",
+      "mapping_status": "revision_requires_revalidation",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "产生",
+      "tail": "弹带波",
+      "tail_entity_id": "local_c8628532f6d851d31465b49b4ba20305d4a29d03e336b8b91e46c9f75926ce36",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "source_support": "supported",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "原文明确陈述“弹带处产生的弹带波”，支持“弹带处”产生“弹带波”的三元组。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "原文为肯定陈述，无额外条件、时间或数量限定，与候选的 polarity=positive, modality=asserted 一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "方向为“弹带处”产生“弹带波”，与原文“弹带处产生的弹带波”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "未发现反驳该三元组的证据。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "本体未覆盖“产生”关系或相关实体类型，导致映射含混。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "原文明确提到“弹带处产生的弹带波”，支持该三元组。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2"
+            ],
+            "note": "极性为肯定，模态为断言，无其他限定条件。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2"
+            ],
+            "note": "方向正确：弹带处（产生）-> 弹带波。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2"
+            ],
+            "note": "关系“产生”在本体中未定义或映射状态未知（relation_known: false），导致无法验证本体约束。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "SCHEMA_GAP",
+          "RELATION_MISMATCH"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "原文明确表述“弹带处产生的弹带波”，支持“弹带处—产生—弹带波”这一主谓宾结构。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2"
+            ],
+            "note": "原文为肯定陈述句，无否定、条件、时间、数量或模态限定；候选的 polarity=positive、modality=asserted 与原文一致，其余限定字段为 not_stated 合理。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2"
+            ],
+            "note": "“弹带处”为产生方，“弹带波”为被产生方，方向与原文“弹带处产生的弹带波”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_fcb5968b00ade4ff51ec",
+              "ev_5e9f0a2e850932dfc6f7"
+            ],
+            "note": "相邻句讨论激波产生机理及弹尾波成因，未反驳弹带处产生弹带波；无真实反证。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_74b05b997b3417afdec2",
+              "ev_7c7fc8d95523e905fea1"
+            ],
+            "note": "原文支持该三元组，但本体 relation_id 为空、relation_known=false 且映射含混（RELATION_MAPPING_AMBIGUOUS），属已有关系映射含混而非缺失关系；建议补充“产生”类关系映射后重新校验。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "field": "relation_id",
+              "from": null,
+              "reason": "原文关系语义为“产生”，但本体中 relation_id 为空且映射含混（RELATION_MAPPING_AMBIGUOUS），需明确可执行的关系映射。",
+              "to": "需本体补充或映射“产生/生成”类因果关系"
+            }
+          ],
+          "evidence_ids": [
+            "ev_74b05b997b3417afdec2",
+            "ev_7c7fc8d95523e905fea1"
+          ],
+          "field_reasons": {
+            "applicability": "原文无适用性限定，保留 not_stated。",
+            "condition": "原文无条件限定，保留 not_stated。",
+            "modality": "原文为断言式陈述，保留 asserted。",
+            "polarity": "原文为肯定陈述，保留 positive。",
+            "quantifier": "原文无数量限定，保留 not_stated。",
+            "relation_id": "原文“弹带处产生的弹带波”表达产生关系，但本体未提供已知关系或明确映射，属本体覆盖/映射缺口，非事实错误。",
+            "time_scope": "原文无时间限定，保留 not_stated。"
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 310,
+        "chunk_id": "chunk_6962c25d195e",
+        "chunk_start": 272,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 10372,
+        "evidence_id": "ev_74b05b997b3417afdec2",
+        "offset_basis": "canonical_document",
+        "quote": "除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。",
+        "retrieval_score": 0.0,
+        "retrieved_via_levels": [],
+        "section_id": "section_410c6925d6cf",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_6962c25d195e"
+        ],
+        "start": 10334,
+        "text": "除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 264,
+        "chunk_id": "chunk_6962c25d195e",
+        "chunk_start": 223,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 10326,
+        "evidence_id": "ev_fcb5968b00ade4ff51ec",
+        "offset_basis": "canonical_document",
+        "quote": "在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_410c6925d6cf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_868f1e688f6033b312ff",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_6962c25d195e"
+        ],
+        "start": 10285,
+        "text": "在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 310,
+        "chunk_id": "chunk_6962c25d195e",
+        "chunk_start": 264,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 10372,
+        "evidence_id": "ev_7c7fc8d95523e905fea1",
+        "offset_basis": "canonical_document",
+        "quote": "由图1-6可见，除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_410c6925d6cf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_3d323b8329a5861cebe0",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_6962c25d195e"
+        ],
+        "start": 10326,
+        "text": "由图1-6可见，除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 374,
+        "chunk_id": "chunk_6962c25d195e",
+        "chunk_start": 310,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 10436,
+        "evidence_id": "ev_5e9f0a2e850932dfc6f7",
+        "offset_basis": "canonical_document",
+        "quote": "弹尾波形成的原因是：流线进入弹尾部的低压区时向内转折，后因距弹尾较远处压力加大又向外转折，形成气流绕内钝角转折，因而形成了激波。",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_410c6925d6cf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_81fb5a30afef2afe93de",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_6962c25d195e"
+        ],
+        "start": 10372,
+        "text": "弹尾波形成的原因是：流线进入弹尾部的低压区时向内转折，后因距弹尾较远处压力加大又向外转折，形成气流绕内钝角转折，因而形成了激波。"
+      }
+    ],
+    "drafts": [
+      {
+        "draft_id": "draft_ca33446826ae4572b795dc1f10541628",
+        "status": "applied",
+        "changes": {
+          "qualifier_status": {
+            "polarity": "extracted"
+          },
+          "qualifiers": {
+            "polarity": "positive"
+          }
+        },
+        "votes": [
+          {
+            "voter_id": "judge_a",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision changes the polarity from 'unknown' to 'positive' and the status to 'extracted'. The source text '除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波' is an affirmative statement confirming the existence of the band wave at the band location. Therefore, the positive polarity is fully grounded in the provided evidence.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_74b05b997b3417afdec2",
+                  "ev_7c7fc8d95523e905fea1"
+                ],
+                "field": "qualifiers.polarity",
+                "note": "The source text explicitly states the existence of the band wave generated at the band location, which is a positive assertion.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_74b05b997b3417afdec2",
+                  "ev_7c7fc8d95523e905fea1"
+                ],
+                "field": "qualifier_status.polarity",
+                "note": "The polarity is directly extracted from the affirmative statement in the source text.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision updates the polarity of the relation '产生' (produces) from 'unknown' to 'positive'. The evidence '弹带处产生的弹带波' clearly supports this positive assertion.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_74b05b997b3417afdec2",
+                  "ev_7c7fc8d95523e905fea1"
+                ],
+                "field": "qualifiers.polarity",
+                "note": "The source text explicitly states '弹带处产生的弹带波' (driving band wave produced at the driving band), which is a positive assertion.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_74b05b997b3417afdec2",
+                  "ev_7c7fc8d95523e905fea1"
+                ],
+                "field": "qualifier_status.polarity",
+                "note": "The polarity is directly extracted from the source text.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "修订仅将极性从 unknown 改为 positive/extracted，原文“弹带处产生的弹带波”为肯定断言，支持该极性；其余限定（条件、量词、时间范围、适用性）保持 not_stated，未删除任何限制，无相反证据。",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_74b05b997b3417afdec2",
+                  "ev_7c7fc8d95523e905fea1"
+                ],
+                "field": "qualifiers.polarity",
+                "note": "原文“还有弹带处产生的弹带波”为肯定陈述，弹带处产生弹带波，极性为 positive 有据。",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_74b05b997b3417afdec2",
+                  "ev_7c7fc8d95523e905fea1"
+                ],
+                "field": "qualifier_status.polarity",
+                "note": "极性由 unknown 改为 extracted，因原文明确肯定表述，状态标注与证据一致。",
+                "status": "supported"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate_id": "cand_5b459021eb0a3fe91145",
+    "revision": 2,
+    "row_version": 5,
+    "triple": {
+      "datatype": null,
+      "head": "状态方程",
+      "head_entity_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+      "head_type": "C_eaa767de9c851cd73be7",
+      "language": "zh",
+      "mapping_status": "revision_requires_revalidation",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "not_stated",
+        "modality": "extracted",
+        "polarity": "extracted",
+        "quantifier": "extracted",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": null,
+        "modality": "asserted",
+        "polarity": "positive",
+        "quantifier": "分别",
+        "time_scope": null
+      },
+      "relation_id": "R_5cfeb014dc68c80c2f5c",
+      "relation_label": "得到",
+      "relation_semantic_hash": "5c48ad0ba9c35fc1a788cf3bf732b1219f30dccd65f3f2779494c6271bcdb341",
+      "surface_relation": "得到",
+      "tail": "空气密度函数的标准定律 H(y)",
+      "tail_entity_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+      "tail_kind": "entity",
+      "tail_type": null,
+      "unit": null,
+      "value": null
+    },
+    "source_support": "supported",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP",
+          "EVIDENCE_INSUFFICIENT"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "原文“最后再根据状态方程，即可分别得到空气密度函数的标准定律 H(y)”支持“状态方程—得到—空气密度函数的标准定律 H(y)”这一主谓宾结构。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "“即可”支持肯定极性与断言模态；“分别”作为数量/分配限定与原文一致；未见条件、时间或适用范围限定，候选未添加额外限定。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "方向为“状态方程”作为依据/来源，“得到”“空气密度函数的标准定律 H(y)”，与原文“根据状态方程……得到……”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "当前允许证据中未发现反驳该关系或极性的内容；其余证据为公式或排版片段，不构成反证。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "本体检查显示关系 R_5cfeb014dc68c80c2f5c 的 range 为 C_e0f77606c291cca8d429，而候选 tail_type 为 null，range_status=unknown，reason_codes 含 ENTITY_TYPE_UNKNOWN。原文支持该三元组，但本体未覆盖 tail 的类型，需补充或确认 tail 类型映射。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "field": "tail",
+              "from": "空气密度函数的标准定律 H(y)",
+              "reason": "保留原文对象；可考虑将 tail 规范化为“标准定律 H(y)”并保留“空气密度函数”作为限定，但当前表述已被原文支持。",
+              "to": "空气密度函数的标准定律 H(y)"
+            },
+            {
+              "field": "qualifiers.quantifier",
+              "from": "分别",
+              "reason": "原文“分别得到”支持该限定，保留。",
+              "to": "分别"
+            }
+          ],
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629"
+          ],
+          "field_reasons": {
+            "qualifiers.quantifier": "“分别”对应原文“分别得到”，保留。",
+            "tail": "原文直接给出“空气密度函数的标准定律 H(y)”，无需修改。"
+          }
+        }
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "原文明确指出“根据状态方程，即可分别得到空气密度函数的标准定律 H(y)”，支持该三元组。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "极性、模态以及量词“分别”均与原文一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "关系方向正确，由状态方程推导出标准定律。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "尾实体“空气密度函数的标准定律 H(y)”在本体中未定义类型（tail_type 为 null），导致无法验证其是否符合关系“得到”的值域约束 C_e0f77606c291cca8d429。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "candidate_mapping_error",
+        "reason_codes": [
+          "SCHEMA_GAP",
+          "ENTITY_MISMATCH"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "原文明确“根据状态方程，即可分别得到空气密度函数的标准定律 H(y) 和标准分布 H_s(y)”，支持“状态方程—得到—空气密度函数的标准定律 H(y)”这一主谓宾，且“分别”对应 quantifier。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "极性为肯定、模态为 asserted、量词“分别”均与原文一致；条件、时间、适用性原文未述，保留 not_stated 合理。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "“根据状态方程……得到……”方向为状态方程→结果，与候选 head→tail 一致。",
+            "status": "pass"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629",
+              "ev_bcc35ff4d1e37f138b4c"
+            ],
+            "note": "未发现否定或反向表述；ev_bcc35ff4d1e37f138b4c 仅给出 H(y) 的定义式，不构成反证。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "note": "关系 R_5cfeb014dc68c80c2f5c 已知且 domain 通过，但 tail_type 为空导致 range 无法核验（ENTITY_TYPE_UNKNOWN）。原文支持该三元组，问题在于候选映射未给出 tail 类型，建议将 tail 映射到 range 类 C_e0f77606c291cca8d429 后重新校验。",
+            "status": "unknown"
+          }
+        ],
+        "suggested_revision": {
+          "changes": [
+            {
+              "field": "tail_type",
+              "from": null,
+              "reason": "关系 range 要求 C_e0f77606c291cca8d429，但候选 tail_type 为空，需补全类型映射以通过本体约束。",
+              "to": "C_e0f77606c291cca8d429"
+            }
+          ],
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629"
+          ],
+          "field_reasons": {
+            "tail_type": "本体 range 为 C_e0f77606c291cca8d429，候选 tail_type 为 null，导致 ENTITY_TYPE_UNKNOWN；原文支持该实体存在，仅类型映射缺失。"
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 571,
+        "chunk_id": "chunk_97a3e8b593ba",
+        "chunk_start": 508,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 7464,
+        "evidence_id": "ev_3ac495284f0e81c6c629",
+        "lexical_relevance_score": 1.0,
+        "offset_basis": "canonical_document",
+        "query_purpose": "check_support",
+        "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$",
+        "retrieval_level": "current_chunk",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "current_chunk"
+        ],
+        "review_obligation": true,
+        "section_id": "section_bfc24259ccaf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_8d0bc07ac50a41916a1b",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_97a3e8b593ba",
+          "chunk_0f555554b535"
+        ],
+        "start": 7401,
+        "text": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 503,
+        "chunk_id": "chunk_97a3e8b593ba",
+        "chunk_start": 475,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 7396,
+        "evidence_id": "ev_95c40b04093f9413b976",
+        "lexical_relevance_score": 0,
+        "offset_basis": "canonical_document",
+        "query_purpose": "check_support",
+        "quote": "3 ] \\\\ (1 - 2 7) \\end{array}",
+        "retrieval_level": "current_chunk",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "current_chunk"
+        ],
+        "review_obligation": false,
+        "section_id": "section_bfc24259ccaf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_0ecae582cd409e96c8cc",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_97a3e8b593ba",
+          "chunk_0f555554b535"
+        ],
+        "start": 7368,
+        "text": "3 ] \\\\ (1 - 2 7) \\end{array}"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 506,
+        "chunk_id": "chunk_97a3e8b593ba",
+        "chunk_start": 504,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 7399,
+        "evidence_id": "ev_ec10538a6b19b186ec10",
+        "lexical_relevance_score": 0,
+        "offset_basis": "canonical_document",
+        "query_purpose": "check_support",
+        "quote": "$$",
+        "retrieval_level": "current_chunk",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "current_chunk"
+        ],
+        "review_obligation": false,
+        "section_id": "section_bfc24259ccaf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_bec1bc6ef2ae97b9376e",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_97a3e8b593ba",
+          "chunk_0f555554b535"
+        ],
+        "start": 7397,
+        "text": "$$"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 575,
+        "chunk_id": "chunk_97a3e8b593ba",
+        "chunk_start": 573,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 7468,
+        "evidence_id": "ev_828d457877b1f198015e",
+        "offset_basis": "canonical_document",
+        "quote": "$$",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_bfc24259ccaf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_18d65664f2e4d0db9ce0",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_97a3e8b593ba",
+          "chunk_0f555554b535"
+        ],
+        "start": 7466,
+        "text": "$$"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 211,
+        "chunk_id": "chunk_0f555554b535",
+        "chunk_start": 81,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 7599,
+        "evidence_id": "ev_bcc35ff4d1e37f138b4c",
+        "offset_basis": "canonical_document",
+        "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_bfc24259ccaf",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_d15fc4149cc84c99d71b",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_0f555554b535"
+        ],
+        "start": 7469,
+        "text": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}"
+      }
+    ],
+    "drafts": [
+      {
+        "draft_id": "draft_7b6e8adabafe4fe082b52df4268097b5",
+        "status": "applied",
+        "changes": {
+          "qualifier_status": {
+            "quantifier": "extracted"
+          },
+          "qualifiers": {
+            "quantifier": "分别"
+          },
+          "tail": "空气密度函数的标准定律 H(y)",
+          "tail_type": null
+        },
+        "votes": [
+          {
+            "voter_id": "judge_a",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision correctly narrows the tail to the specific object '空气密度函数的标准定律 H(y)' as stated in the source, removes the unsupported tail_type, and correctly extracts the quantifier '分别' from the text. All changes are grounded in the provided evidence.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "tail",
+                "note": "The revised tail '空气密度函数的标准定律 H(y)' accurately reflects the specific object mentioned in the source text '得到空气密度函数的标准定律 $H(y)$'. This is a valid narrowing from the previous broader '空气密度函数'.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "tail_type",
+                "note": "Setting tail_type to null is appropriate because the specific object '空气密度函数的标准定律 H(y)' does not clearly map to the previous type 'C_e0f77606c291cca8d429' (which was likely for the broader '空气密度函数'). The reason correctly states not to use the original ontology range as a source for the new object type.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "qualifiers.quantifier",
+                "note": "The quantifier '分别' is explicitly present in the source text '即可分别得到', indicating that the results are obtained separately/respectively. This is a valid extraction.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "qualifier_status.quantifier",
+                "note": "The status 'extracted' is correct as the quantifier '分别' is directly extracted from the source text.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision correctly narrows the tail to one of the two specific items obtained ('空气密度函数的标准定律 H(y)') and adds the quantifier '分别' (respectively) which is explicitly present in the source text. The removal of the broad tail type is appropriate given the increased specificity of the entity.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "tail",
+                "note": "The tail is narrowed from the general 'air density function' to the specific 'standard law H(y) of the air density function' as stated in the source.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "tail_type",
+                "note": "The broad type is removed to avoid over-generalization for the more specific entity.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "qualifiers.quantifier",
+                "note": "The quantifier '分别' (respectively) is explicitly mentioned in the source text.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "qualifier_status.quantifier",
+                "note": "Updated to 'extracted' as the quantifier is now provided.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "修订将结果对象收窄为原文明确出现的“空气密度函数的标准定律 H(y)”，并保留“分别”并列量词，均有精确锚定证据支持；撤除无来源的对象类型为 null 合理。未发现被删除的条件或极性改动，原 contract_issues 属锚定问题而非语义反证，故批准。",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "tail",
+                "note": "原文明确写出“得到空气密度函数的标准定律 $H(y)$”，收窄后的 tail 与原文一致，且 H(y) 公式见 ev_bcc35ff4d1e37f138b4c。",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "tail_type",
+                "note": "撤除原宽泛对象类型为 null，理由是不以本体 range 作为新对象类型来源；原文未给出类型断言，置空可接受。",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "qualifiers.quantifier",
+                "note": "原文“即可分别得到……和……”中“分别”为并列分配量词，提取为 quantifier 有据。",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "field": "qualifier_status.quantifier",
+                "note": "量词状态由 not_stated 改为 extracted，与原文“分别”一致。",
+                "status": "supported"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate_id": "cand_2cd7690d60efe95c709f",
+    "revision": 1,
+    "row_version": 3,
+    "triple": {
+      "datatype": null,
+      "head": "质点弹道方程组",
+      "head_entity_id": "local_88b0c9483b6a4617065838bf88ccbc84a8c0740d865e64488def20b91315b023",
+      "head_type": "C_9d4fedbfbd85331bb4ea",
+      "language": "zh",
+      "mapping_status": "needs_full_schema_lookup",
+      "qualifier_status": {
+        "applicability": "not_stated",
+        "condition": "extracted",
+        "modality": "extracted",
+        "polarity": "unknown",
+        "quantifier": "not_stated",
+        "time_scope": "not_stated"
+      },
+      "qualifiers": {
+        "applicability": null,
+        "condition": "为了使问题简化，以便使基本方程能反映弹丸质心运动的主要规律",
+        "modality": "asserted",
+        "polarity": "unknown",
+        "quantifier": null,
+        "time_scope": null
+      },
+      "relation_id": null,
+      "relation_label": null,
+      "relation_semantic_hash": null,
+      "surface_relation": "建立依据",
+      "tail": "基本假设",
+      "tail_entity_id": "local_a1e2040007f62536c20f11affba539fcc3121f5ff6ae008724a3e7b325703d17",
+      "tail_kind": "entity",
+      "tail_type": "C_24d9f44b219469a35934",
+      "unit": null,
+      "value": null
+    },
+    "source_support": "unresolved",
+    "source_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_5c268a7204504407c9c5",
+              "ev_0e1b47909f453c31cc1a"
+            ],
+            "note": "原文标题“建立质点弹道方程组的基本假设”及后续“引入下列基本假设”明确支持“质点弹道方程组”与“基本假设”之间的建立依据关系。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_0e1b47909f453c31cc1a"
+            ],
+            "note": "条件“为了使问题简化，以便使基本方程能反映弹丸质心运动的主要规律”在原文中明确出现，且被正确提取为qualifier。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_5c268a7204504407c9c5"
+            ],
+            "note": "关系方向为“质点弹道方程组”基于“基本假设”建立，与原文“建立质点弹道方程组的基本假设”语义一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "本体检查状态为unknown，relation_id为null，存在SCHEMA_GAP，无法确认本体约束是否满足。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_5c268a7204504407c9c5"
+            ],
+            "note": "原文明确提到“建立质点弹道方程组的基本假设”，支持主谓宾结构。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_0e1b47909f453c31cc1a"
+            ],
+            "note": "条件限定词与原文“为了使问题简化，以便使基本方程能反映弹丸质心运动的主要规律”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_5c268a7204504407c9c5"
+            ],
+            "note": "方向正确，方程组的建立依据是基本假设。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "关系“建立依据”在当前本体中未定义，存在SCHEMA_GAP。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [],
+            "note": "未发现反证。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": null
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported",
+        "schema_issue": "not_covered",
+        "reason_codes": [
+          "SCHEMA_GAP"
+        ],
+        "checks": [
+          {
+            "check": "triple_support",
+            "evidence_ids": [
+              "ev_5c268a7204504407c9c5",
+              "ev_0e1b47909f453c31cc1a"
+            ],
+            "note": "ev_5c直接出现“建立质点弹道方程组的基本假设”，ev_0e说明为简化问题而引入基本假设；主谓宾和目的条件均有原文支持。",
+            "status": "pass"
+          },
+          {
+            "check": "qualifiers",
+            "evidence_ids": [
+              "ev_0e1b47909f453c31cc1a",
+              "ev_5c268a7204504407c9c5"
+            ],
+            "note": "条件与原文一致；原文为肯定断言，未出现数量、时间或适用范围限定。候选polarity=unknown可补为positive，但不改变已核验的肯定语义。",
+            "status": "pass"
+          },
+          {
+            "check": "relation_direction",
+            "evidence_ids": [
+              "ev_5c268a7204504407c9c5"
+            ],
+            "note": "“建立质点弹道方程组的基本假设”表明基本假设是建立方程组的依据；当前head→tail方向与“方程组的建立依据”一致。",
+            "status": "pass"
+          },
+          {
+            "check": "ontology",
+            "evidence_ids": [],
+            "note": "relation_id为空、relation_known=false、type_unknown=true，需完整本体查询，当前不能判定本体约束通过。",
+            "status": "unknown"
+          },
+          {
+            "check": "counterevidence",
+            "evidence_ids": [
+              "ev_0e1b47909f453c31cc1a",
+              "ev_5c268a7204504407c9c5",
+              "ev_b8074f4182f25a3bcc12"
+            ],
+            "note": "未提供反证；三条证据均未反驳该关系，ev_b仅为后续具体基本假设的上下文。",
+            "status": "pass"
+          }
+        ],
+        "suggested_revision": {
+          "qualifiers": {
+            "polarity": "positive"
+          }
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 60,
+        "chunk_id": "chunk_04cca5e7e195",
+        "chunk_start": 21,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 22558,
+        "evidence_id": "ev_0e1b47909f453c31cc1a",
+        "offset_basis": "canonical_document",
+        "quote": "为了使问题简化，以便使基本方程能反映弹丸质心运动的主要规律，引入下列基本假设：",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_7715358712b8",
+        "semantic_status": "unknown",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_04cca5e7e195"
+        ],
+        "start": 22519,
+        "text": "为了使问题简化，以便使基本方程能反映弹丸质心运动的主要规律，引入下列基本假设："
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 19,
+        "chunk_id": "chunk_04cca5e7e195",
+        "chunk_start": 5,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 22517,
+        "evidence_id": "ev_5c268a7204504407c9c5",
+        "offset_basis": "canonical_document",
+        "quote": "建立质点弹道方程组的基本假设",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_7715358712b8",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_7c8d823954f7775bce6c",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_04cca5e7e195"
+        ],
+        "start": 22503,
+        "text": "建立质点弹道方程组的基本假设"
+      },
+      {
+        "anchor_status": "exact",
+        "anchor_valid": true,
+        "chunk_end": 98,
+        "chunk_id": "chunk_04cca5e7e195",
+        "chunk_start": 62,
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "end": 22596,
+        "evidence_id": "ev_b8074f4182f25a3bcc12",
+        "offset_basis": "canonical_document",
+        "quote": "① 弹丸在全部飞行时间内攻角  $\\delta = 0^{\\circ}$",
+        "retrieval_level": "adjacent_sentence",
+        "retrieval_score": 0.88,
+        "retrieved_via_levels": [
+          "adjacent_sentence"
+        ],
+        "section_id": "section_7715358712b8",
+        "semantic_status": "unknown",
+        "sentence_id": "sentence_2105808265f3454fa90e",
+        "source_anchor_kind": "document_span",
+        "span_chunk_ids": [
+          "chunk_04cca5e7e195"
+        ],
+        "start": 22560,
+        "text": "① 弹丸在全部飞行时间内攻角  $\\delta = 0^{\\circ}$"
+      }
+    ],
+    "drafts": [
+      {
+        "draft_id": "draft_3d48307fcbac4c1d94ad01d47bb21bba",
+        "status": "needs_human",
+        "changes": {
+          "qualifier_status": {
+            "polarity": "extracted"
+          },
+          "qualifiers": {
+            "polarity": "positive"
+          }
+        },
+        "votes": [
+          {
+            "voter_id": "judge_a",
+            "response_status": "ok",
+            "decision": "reject",
+            "rationale_summary": "The proposed revision changes the polarity from 'unknown' to 'positive' and the status to 'extracted'. However, the provided evidence only states that basic assumptions are introduced to simplify the problem and reflect the main laws of motion. It does not explicitly state the polarity of the relationship between the equation group and the assumptions. The relationship is contextually implied, but the specific polarity is not directly extracted from the text. Therefore, the revision is not supported by the evidence within the specified scope.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_0e1b47909f453c31cc1a",
+                  "ev_5c268a7204504407c9c5"
+                ],
+                "field": "qualifiers.polarity",
+                "note": "The evidence states that basic assumptions are introduced to simplify the problem and reflect the main laws of projectile center-of-mass motion. It does not explicitly state the polarity of the relationship 'establishment basis' (建立依据) between the 'point mass trajectory equation group' (质点弹道方程组) and the 'basic assumptions' (基本假设). The relationship is implied by the context of introducing assumptions for the equations, but the specific polarity (positive/negative) of this relationship is not directly stated in the provided evidence. The change from 'unknown' to 'positive' is an inference, not a direct extraction.",
+                "status": "not_stated_in_scope"
+              },
+              {
+                "evidence_ids": [
+                  "ev_0e1b47909f453c31cc1a",
+                  "ev_5c268a7204504407c9c5"
+                ],
+                "field": "qualifier_status.polarity",
+                "note": "The status of the polarity field is changed to 'extracted', but the evidence does not explicitly extract a polarity value. The evidence supports the existence of the relationship and the condition, but not the specific polarity attribute. Therefore, marking it as 'extracted' is not supported by the direct evidence.",
+                "status": "not_stated_in_scope"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "The revision updates the polarity of the qualifier from 'unknown' to 'positive' and the status to 'extracted'. The evidence provided ('建立质点弹道方程组的基本假设' and '为了使问题简化...引入下列基本假设') clearly supports that the basic assumptions serve as the basis for establishing the particle ballistic equation system, making the polarity positive.",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_0e1b47909f453c31cc1a",
+                  "ev_5c268a7204504407c9c5"
+                ],
+                "field": "qualifiers.polarity",
+                "note": "The text explicitly states that basic assumptions are introduced to establish the particle ballistic equation system, confirming a positive polarity for the relationship.",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_0e1b47909f453c31cc1a",
+                  "ev_5c268a7204504407c9c5"
+                ],
+                "field": "qualifier_status.polarity",
+                "note": "The polarity is explicitly stated in the source text.",
+                "status": "supported"
+              }
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "response_status": "ok",
+            "decision": "approve",
+            "rationale_summary": "本次修订仅将极性由 unknown 改为 positive/extracted，未改动条件、模态、量词、时间范围或三元组映射。冻结证据中的肯定陈述“引入下列基本假设”及标题“建立质点弹道方程组的基本假设”直接支持肯定极性，未发现相反证据，故批准。",
+            "field_reviews": [
+              {
+                "evidence_ids": [
+                  "ev_0e1b47909f453c31cc1a",
+                  "ev_5c268a7204504407c9c5"
+                ],
+                "field": "qualifiers.polarity",
+                "note": "源文本以肯定陈述引入基本假设（“引入下列基本假设”），且标题“建立质点弹道方程组的基本假设”为肯定命名，支持 positive 极性。",
+                "status": "supported"
+              },
+              {
+                "evidence_ids": [
+                  "ev_0e1b47909f453c31cc1a",
+                  "ev_5c268a7204504407c9c5"
+                ],
+                "field": "qualifier_status.polarity",
+                "note": "极性由 unknown 改为 extracted，因冻结证据范围内存在明确的肯定陈述，可判定为已抽取。",
+                "status": "supported"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

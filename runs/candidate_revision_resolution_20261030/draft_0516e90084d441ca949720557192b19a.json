@@ -1,0 +1,701 @@
+{
+  "status": "needs_human",
+  "draft_id": "draft_0516e90084d441ca949720557192b19a",
+  "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+  "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+  "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+  "approved_voter_ids": [
+    "judge_b",
+    "judge_c"
+  ],
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_2c85c645f03444afb623307e8894e0c2",
+      "attempts": [
+        {
+          "attempt_id": "attempt_2c85c645f03444afb623307e8894e0c2",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "reject",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+          "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "surface_relation",
+              "note": "The source text states that the air resistance coefficient can be separated into the sum of friction, vortex, and wave resistance coefficients. The proposed surface_relation '包含分量' (contains component) is a semantic interpretation not explicitly stated in the source text. The source uses '分开，成为...的和' (separated into the sum of), which implies a decomposition or summation relationship, not a containment relationship. The original '分为' (divided into) is more faithful to the source text.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "relation_id",
+              "note": "The change from a specific relation_id to null is not grounded in the source text. The source text clearly describes a decomposition relationship, and removing the relation_id without evidence is unsupported.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The source text uses '可将' (can be), which indicates a positive polarity. The change from 'unknown' to 'positive' is supported by the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.modality",
+              "note": "The source text uses '可将' (can be), which indicates a modal 'can'. The change from 'asserted' to 'can' is supported by the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The proposed quantifier '三项之和中的一项' (one of the three items in the sum) is not explicitly stated in the source text. The source text states that the air resistance coefficient is the sum of three components, but does not specify that the tail entity (涡阻系数) is 'one of the three items in the sum' as a quantifier. This is an interpretation not grounded in the source text.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "The change from 'unknown' to 'extracted' is supported as the polarity is indeed extracted from the source text.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.modality",
+              "note": "The change from 'extracted' to 'extracted' is consistent (no change in status, but the value changed from 'asserted' to 'can').",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "The change from 'not_stated' to 'extracted' is not supported because the quantifier '三项之和中的一项' is not explicitly stated in the source text.",
+              "status": "not_stated_in_scope"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 7791,
+          "late_response": false,
+          "latency_ms": 34171,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1329,
+          "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+          "provider_started_at": 1793352203.8242748,
+          "queue_time_ms": 377,
+          "rationale_summary": "The revision contains several unsupported changes. The surface_relation '包含分量' is a semantic interpretation not explicitly stated in the source text, which uses '分开，成为...的和' (separated into the sum of). The relation_id change to null is unsupported. The quantifier '三项之和中的一项' is not explicitly stated in the source text. While the polarity and modality changes are supported, the overall revision contains too many unsupported changes to be approved.",
+          "reasoning_tokens": null,
+          "request_key": "36944e1eb7db7653a883526f7a397aab2ae5ef980877f46194edc14d32ee0fea",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-99718919e2ac81ef",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "task_id": "draft_0516e90084d441ca949720557192b19a",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_a"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "reject",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+      "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "surface_relation",
+          "note": "The source text states that the air resistance coefficient can be separated into the sum of friction, vortex, and wave resistance coefficients. The proposed surface_relation '包含分量' (contains component) is a semantic interpretation not explicitly stated in the source text. The source uses '分开，成为...的和' (separated into the sum of), which implies a decomposition or summation relationship, not a containment relationship. The original '分为' (divided into) is more faithful to the source text.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "relation_id",
+          "note": "The change from a specific relation_id to null is not grounded in the source text. The source text clearly describes a decomposition relationship, and removing the relation_id without evidence is unsupported.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The source text uses '可将' (can be), which indicates a positive polarity. The change from 'unknown' to 'positive' is supported by the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.modality",
+          "note": "The source text uses '可将' (can be), which indicates a modal 'can'. The change from 'asserted' to 'can' is supported by the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The proposed quantifier '三项之和中的一项' (one of the three items in the sum) is not explicitly stated in the source text. The source text states that the air resistance coefficient is the sum of three components, but does not specify that the tail entity (涡阻系数) is 'one of the three items in the sum' as a quantifier. This is an interpretation not grounded in the source text.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "The change from 'unknown' to 'extracted' is supported as the polarity is indeed extracted from the source text.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.modality",
+          "note": "The change from 'extracted' to 'extracted' is consistent (no change in status, but the value changed from 'asserted' to 'can').",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "The change from 'not_stated' to 'extracted' is not supported because the quantifier '三项之和中的一项' is not explicitly stated in the source text.",
+          "status": "not_stated_in_scope"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 7791,
+      "late_response": false,
+      "latency_ms": 34171,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1329,
+      "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+      "provider_started_at": 1793352203.8242748,
+      "queue_time_ms": 377,
+      "rationale_summary": "The revision contains several unsupported changes. The surface_relation '包含分量' is a semantic interpretation not explicitly stated in the source text, which uses '分开，成为...的和' (separated into the sum of). The relation_id change to null is unsupported. The quantifier '三项之和中的一项' is not explicitly stated in the source text. While the polarity and modality changes are supported, the overall revision contains too many unsupported changes to be approved.",
+      "reasoning_tokens": null,
+      "request_key": "36944e1eb7db7653a883526f7a397aab2ae5ef980877f46194edc14d32ee0fea",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-99718919e2ac81ef",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_1e2d9a3b5ae59338992d",
+        "ev_e1cfb2635d4854b6e4e6"
+      ],
+      "task_id": "draft_0516e90084d441ca949720557192b19a",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_a"
+    },
+    {
+      "attempt_id": "attempt_51532de0e211405f9b4cfe086b6a2af8",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+      "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6",
+            "ev_c8e38c4a6caca4a44395"
+          ],
+          "field": "surface_relation",
+          "note": "The source states the air drag coefficient is the sum of three components, making 'contains component' (包含分量) an accurate surface relation for the relationship between the total and one of its parts.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "relation_id",
+          "note": "The relation ID is removed, but the semantic relation '分为' is maintained.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "The statement is a positive assertion.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifiers.modality",
+          "note": "The source explicitly uses '可' (can), justifying the 'can' modality.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The source lists three specific coefficients (friction, wake, and wave drag) whose sum equals the air drag coefficient. Since the tail is only the wake drag coefficient, the quantifier 'one of the three items in the sum' is accurate.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "Updated to 'extracted' to match the polarity change.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifier_status.modality",
+          "note": "Updated to 'extracted' to match the modality change.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "Updated to 'extracted' to match the quantifier change.",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 8452,
+      "late_response": false,
+      "latency_ms": 35484,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 1835,
+      "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+      "provider_started_at": 1793352238.5438118,
+      "queue_time_ms": 315,
+      "rationale_summary": "The revision correctly updates the modality to 'can' based on the word '可' in the source. It accurately identifies that the wake drag coefficient is one of three components that sum to the air drag coefficient, justifying the quantifier '三项之和中的一项'. The change in surface relation to '包含分量' better reflects the additive nature of the components described in the text and the accompanying formula.",
+      "reasoning_tokens": 1049,
+      "request_key": "bba9685f2e354d38d08793d3fd8d846e18b1d25df5cabfe76e984a9b3fc6c05d",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-848fb84064c63314",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_1e2d9a3b5ae59338992d",
+        "ev_e1cfb2635d4854b6e4e6",
+        "ev_c8e38c4a6caca4a44395"
+      ],
+      "task_id": "draft_0516e90084d441ca949720557192b19a",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_51532de0e211405f9b4cfe086b6a2af8",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+          "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6",
+                "ev_c8e38c4a6caca4a44395"
+              ],
+              "field": "surface_relation",
+              "note": "The source states the air drag coefficient is the sum of three components, making 'contains component' (包含分量) an accurate surface relation for the relationship between the total and one of its parts.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "relation_id",
+              "note": "The relation ID is removed, but the semantic relation '分为' is maintained.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "The statement is a positive assertion.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifiers.modality",
+              "note": "The source explicitly uses '可' (can), justifying the 'can' modality.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The source lists three specific coefficients (friction, wake, and wave drag) whose sum equals the air drag coefficient. Since the tail is only the wake drag coefficient, the quantifier 'one of the three items in the sum' is accurate.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "Updated to 'extracted' to match the polarity change.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifier_status.modality",
+              "note": "Updated to 'extracted' to match the modality change.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "Updated to 'extracted' to match the quantifier change.",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 8452,
+          "late_response": false,
+          "latency_ms": 35484,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1835,
+          "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+          "provider_started_at": 1793352238.5438118,
+          "queue_time_ms": 315,
+          "rationale_summary": "The revision correctly updates the modality to 'can' based on the word '可' in the source. It accurately identifies that the wake drag coefficient is one of three components that sum to the air drag coefficient, justifying the quantifier '三项之和中的一项'. The change in surface relation to '包含分量' better reflects the additive nature of the components described in the text and the accompanying formula.",
+          "reasoning_tokens": 1049,
+          "request_key": "bba9685f2e354d38d08793d3fd8d846e18b1d25df5cabfe76e984a9b3fc6c05d",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-848fb84064c63314",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6",
+            "ev_c8e38c4a6caca4a44395"
+          ],
+          "task_id": "draft_0516e90084d441ca949720557192b19a",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_995e66e43acd48049aee9ec71d04797c",
+      "attempts": [
+        {
+          "attempt_id": "attempt_995e66e43acd48049aee9ec71d04797c",
+          "attempt_no": 1,
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [],
+          "decision": "approve",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+          "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "surface_relation",
+              "note": "原文明确空气阻力系数可分开为摩擦、涡阻、波阻三项之和，涡阻系数是其中一个分量，'包含分量'比'分为'更准确反映单项与整体的关系。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "relation_id",
+              "note": "relation_id 置空并标记 revision_requires_revalidation，符合关系标签变更后需重新映射的要求，未引入未支撑映射。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.polarity",
+              "note": "原文为肯定陈述（'可将...分开，成为...的和'），positive 有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.modality",
+              "note": "'可将'表达能力/可能性，can 有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "原文三项之和，涡阻系数为其中一项，'三项之和中的一项'有据，纠正了原草案将单项等同于整体的错误。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.polarity",
+              "note": "极性已从 unknown 更新为 extracted，与证据一致。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.modality",
+              "note": "模态状态更新为 extracted，有据。",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_1e2d9a3b5ae59338992d",
+                "ev_e1cfb2635d4854b6e4e6"
+              ],
+              "field": "qualifier_status.quantifier",
+              "note": "量词状态更新为 extracted，有据。",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "input_tokens": 6767,
+          "late_response": false,
+          "latency_ms": 6139,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 839,
+          "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+          "provider_started_at": 1793352203.836847,
+          "queue_time_ms": 387,
+          "rationale_summary": "修订将关系从'分为'改为'包含分量'，并将量词限定为'三项之和中的一项'，纠正了原草案把单项涡阻系数等同于整体空气阻力系数的错误。原文明确空气阻力系数为摩擦、涡阻、波阻三项之和，涡阻系数是其中一项分量，极性 positive、模态 can 均有原文'可将...分开，成为...的和'支撑。relation_id 置空并标记需重新验证，未引入未支撑映射。所有变更字段均有证据支撑，批准。",
+          "reasoning_tokens": null,
+          "request_key": "30938816e442af7adf160b3f868114c4d38efc26490d96977d881814e4004c90",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "94945f9a-a622-42ad-a609-e7510edcea4d",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "task_id": "draft_0516e90084d441ca949720557192b19a",
+          "task_type": "candidate_revision_review",
+          "voter_id": "judge_c"
+        }
+      ],
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "decision": "approve",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "draft_hash": "3368318e0fcb7e855a21c1be5b0ab508e3399947fa8b12e744f269d04481b29d",
+      "evidence_hash": "252f32b131aee86d08195df8251d8e036cdbf58733e3d0f24b47d0fdb6243dea",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "surface_relation",
+          "note": "原文明确空气阻力系数可分开为摩擦、涡阻、波阻三项之和，涡阻系数是其中一个分量，'包含分量'比'分为'更准确反映单项与整体的关系。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "relation_id",
+          "note": "relation_id 置空并标记 revision_requires_revalidation，符合关系标签变更后需重新映射的要求，未引入未支撑映射。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.polarity",
+          "note": "原文为肯定陈述（'可将...分开，成为...的和'），positive 有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.modality",
+          "note": "'可将'表达能力/可能性，can 有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "原文三项之和，涡阻系数为其中一项，'三项之和中的一项'有据，纠正了原草案将单项等同于整体的错误。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.polarity",
+          "note": "极性已从 unknown 更新为 extracted，与证据一致。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.modality",
+          "note": "模态状态更新为 extracted，有据。",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_1e2d9a3b5ae59338992d",
+            "ev_e1cfb2635d4854b6e4e6"
+          ],
+          "field": "qualifier_status.quantifier",
+          "note": "量词状态更新为 extracted，有据。",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "input_tokens": 6767,
+      "late_response": false,
+      "latency_ms": 6139,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "output_tokens": 839,
+      "proposal_digest": "943692bf251feafab60133377bc93f013aad6e1320e923631b019c07dd972a0c",
+      "provider_started_at": 1793352203.836847,
+      "queue_time_ms": 387,
+      "rationale_summary": "修订将关系从'分为'改为'包含分量'，并将量词限定为'三项之和中的一项'，纠正了原草案把单项涡阻系数等同于整体空气阻力系数的错误。原文明确空气阻力系数为摩擦、涡阻、波阻三项之和，涡阻系数是其中一项分量，极性 positive、模态 can 均有原文'可将...分开，成为...的和'支撑。relation_id 置空并标记需重新验证，未引入未支撑映射。所有变更字段均有证据支撑，批准。",
+      "reasoning_tokens": null,
+      "request_key": "30938816e442af7adf160b3f868114c4d38efc26490d96977d881814e4004c90",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "94945f9a-a622-42ad-a609-e7510edcea4d",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_1e2d9a3b5ae59338992d",
+        "ev_e1cfb2635d4854b6e4e6"
+      ],
+      "task_id": "draft_0516e90084d441ca949720557192b19a",
+      "task_type": "candidate_revision_review",
+      "voter_id": "judge_c"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3
+  }
+}

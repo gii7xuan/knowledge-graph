@@ -1,0 +1,276 @@
+{
+  "job_id": "job_da0f2bbba30249f890909f6bf369601d",
+  "job_type": "audit",
+  "status": "completed",
+  "payload_json": "{\"candidate_ids\":[\"cand_2865fb734cf8180f057f\"],\"force\":false,\"revision_draft_id\":\"draft_dda013df800a4381b69d298babc2e402\",\"run_id\":\"run_chapter1_20261028_resume1\"}",
+  "progress_json": "{\"cancelled\":false,\"completed\":1,\"contract_upgrade_deferred\":[],\"execution_id\":\"batch_16c90caa2d3942d3a56b93ca7021414f\",\"failed\":0,\"finished_at_epoch\":1793375293.13958,\"independent_review_completed\":1,\"interrupted\":0,\"paused\":false,\"progress_file_stale\":false,\"progress_write_failures\":0,\"results\":[{\"audit_id\":\"audit_cb5c4d50b4d348458e98d6ef248e2ad7\",\"candidate_id\":\"cand_2865fb734cf8180f057f\",\"result\":{\"admission_consensus\":{\"result\":\"unresolved\"},\"admission_policy\":{\"accept_threshold\":null,\"auto_accept_enabled\":false,\"calibrator_ready\":false,\"mode\":\"shadow\",\"policy_ready\":false,\"policy_version\":\"disabled_cold_start_v3\"},\"audit_id\":\"audit_cb5c4d50b4d348458e98d6ef248e2ad7\",\"budget\":{\"llm_calls\":3,\"tool_calls\":0},\"calibrated_probability\":null,\"calibration_status\":\"unavailable\",\"calibrator_version\":\"untrained\",\"candidate_id\":\"cand_2865fb734cf8180f057f\",\"committed\":true,\"committee_version\":\"committee_qwen_gemma_deepseek_v1\",\"configured_strategy\":\"deterministic\",\"consensus\":{\"admission_consensus\":{\"result\":\"unresolved\"},\"blocking_fields\":[],\"committee_size\":3,\"counter_evidence_ids\":[],\"distinct_family_count\":3,\"diversity_ready\":true,\"duplicate_attempts\":0,\"duplicate_model_votes\":0,\"eligible_voter_ids\":[\"judge_a\",\"judge_b\",\"judge_c\"],\"error_votes\":0,\"expression_complete\":true,\"invalid_attempts\":0,\"invalid_distinct_family_count\":0,\"invalid_votes\":0,\"missing_votes\":0,\"raw_source_support_votes\":[{\"source_support\":\"supported\",\"voter_id\":\"judge_a\"},{\"source_support\":\"supported\",\"voter_id\":\"judge_b\"},{\"source_support\":\"supported\",\"voter_id\":\"judge_c\"}],\"required_votes\":3,\"result\":\"unresolved\",\"source_support_consensus\":{\"committee_size\":3,\"contradiction_votes\":0,\"required_votes\":3,\"result\":\"supported\",\"support_voter_ids\":[\"judge_a\",\"judge_b\",\"judge_c\"],\"support_votes\":3},\"supporting_evidence_ids\":[],\"uncertain_votes\":3,\"unresolved_counterevidence\":false,\"unresolved_support_conflict\":false,\"valid_distinct_family_count\":0,\"valid_votes\":0},\"decision\":\"manual_review\",\"evidence_exclusions\":{},\"executed_strategy\":\"deterministic\",\"explanation\":{\"anchor_failures\":[],\"checks\":[{\"check\":\"ontology\",\"constraint_ids\":[],\"status\":\"unknown\"},{\"check\":\"quote_location\",\"evidence_ids\":[\"ev_b617bb0f27405e9df413\",\"ev_1bc8915a72bad9092f3e\",\"ev_fc6cfaa5d0bc1de2a021\"],\"status\":\"pass\"}],\"counter_evidence_ids\":[],\"open_questions\":[],\"reason_codes\":[\"CANDIDATE_IDENTITY_UNRESOLVED\",\"CRITICAL_ISSUES_UNRESOLVED\",\"SCHEMA_GAP\"],\"response_errors\":[],\"source_support\":[\"supported\",\"supported\",\"supported\"],\"summary\":\"候选仍需人工核验；系统未把不确定性当作事实结论。\",\"supporting_evidence_ids\":[\"ev_b617bb0f27405e9df413\"]},\"feature_schema_version\":\"review_features_v3\",\"features\":{\"contradicting_vote_count\":0.0,\"direction_issue\":0.0,\"disagreement\":0.0,\"distinct_family_count\":3.0,\"domain_pass\":0.0,\"error_fraction\":0.0,\"evidence_missing\":0.0,\"historical_weighted_support\":0.0,\"invalid_vote_fraction\":0.0,\"mapping_ambiguous\":0.0,\"qualifier_issue\":0.0,\"quote_located\":1.0,\"range_pass\":0.0,\"relation_known\":0.0,\"reliability_available\":0.0,\"retrieval_depth\":2.0,\"round_count\":1.0,\"source_group_count\":1.0,\"supporting_vote_count\":0.0,\"type_unknown\":1.0,\"uncertain_fraction\":1.0,\"unique_span_count\":3.0,\"unresolved_counterevidence\":0.0,\"valid_vote_fraction\":0.0},\"final_round_id\":1,\"independent_review_completed\":true,\"issue_history\":[{\"code\":\"ontology_gap\",\"critical\":true,\"description\":\"冻结本体检查未通过\",\"evidence_ids\":[],\"inherited_from_audit\":\"audit_5dae8ea6044847559240fdfa18128c89\",\"inherited_from_revision\":1,\"issue_id\":\"issue_6217362e9807cc73cd2ca1f8\",\"opened_evidence_hash\":null,\"opened_in_proposal\":null,\"opened_revision\":1,\"requires_revision\":false,\"resolution_evidence_ids\":[],\"resolution_rule\":null,\"resolved_in_proposal\":null,\"status\":\"open\"}],\"ontology_release_id\":\"release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb\",\"ontology_version\":\"2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2\",\"pending_extension_id\":null,\"policy_version\":\"disabled_cold_start_v3\",\"profile_hash\":\"5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865\",\"reason_codes\":[\"CANDIDATE_IDENTITY_UNRESOLVED\",\"CRITICAL_ISSUES_UNRESOLVED\",\"SCHEMA_GAP\"],\"review_completion_status\":\"independent_review_completed\",\"review_versions\":{\"committee_policy_hash\":\"04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636\",\"committee_version\":\"committee_qwen_gemma_deepseek_v1\",\"configured_strategy\":\"deterministic\",\"evidence_bundle_version\":\"evidence_bundle_v2\",\"executed_strategy\":\"deterministic\",\"memory_policy_hash\":\"57ed2499c79b64fdda010a212be8235b64c745410e087eb89d3986dd474d15b9\",\"memory_scope_hash\":\"817afc379f9c21ba3ff639e8bc1675c0433d54b8cfbadccdca63556fbfc0b038\",\"prompt_hash\":\"8bfd7b3ead9786ec6856a9e9f4048447d9687c74c851da156c644aacdb306e7e\",\"prompt_version\":\"triple_validator_v4\",\"response_contract_hash\":\"ff532a8eb0af010fae2a7afe98c45100de13c2ffa05645b9496d2f8ffd22bcf1\",\"response_contract_version\":\"validator_response_v4\"},\"revision\":2,\"schema_diagnostics\":[\"not_covered\"],\"schema_status\":\"unknown\",\"selected_evidence_hash\":\"4c910f43b1082062e51551a8e7eae42cd10a8c735747e02c8692f76366e026fe\",\"selected_proposal_digest\":\"dc22eaed58c2fff1096c449be8f061d99555b09675f00a3dafac146e13f3da25\",\"selected_round_id\":1,\"source_support_consensus\":{\"committee_size\":3,\"contradiction_votes\":0,\"required_votes\":3,\"result\":\"supported\",\"support_voter_ids\":[\"judge_a\",\"judge_b\",\"judge_c\"],\"support_votes\":3},\"source_support_result\":\"supported\",\"stop_reason\":\"committee_unresolved\",\"workflow_state\":\"schema_unresolved\"},\"revision\":2,\"status\":\"completed\"}],\"review_incomplete\":0,\"review_versions\":{\"committee_policy_hash\":\"04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636\",\"committee_version\":\"committee_qwen_gemma_deepseek_v1\",\"evidence_bundle_version\":\"evidence_bundle_v2\",\"memory_policy_hash\":\"57ed2499c79b64fdda010a212be8235b64c745410e087eb89d3986dd474d15b9\",\"prompt_hash\":\"8bfd7b3ead9786ec6856a9e9f4048447d9687c74c851da156c644aacdb306e7e\",\"prompt_version\":\"triple_validator_v4\",\"response_contract_hash\":\"ff532a8eb0af010fae2a7afe98c45100de13c2ffa05645b9496d2f8ffd22bcf1\",\"response_contract_version\":\"validator_response_v4\"},\"revised\":0,\"run_id\":\"run_chapter1_20261028_resume1\",\"selected\":1,\"skipped\":0,\"started_at_epoch\":1793375264.3271296,\"status\":\"completed\",\"total\":1}",
+  "lease_owner": null,
+  "lease_expires_at": null,
+  "cancel_requested": 0,
+  "created_at": "2026-10-30T15:47:43Z",
+  "updated_at": "2026-10-30T15:48:13Z",
+  "lease_token": "4307189a2b154239a157500f57933491",
+  "payload": {
+    "candidate_ids": [
+      "cand_2865fb734cf8180f057f"
+    ],
+    "force": false,
+    "revision_draft_id": "draft_dda013df800a4381b69d298babc2e402",
+    "run_id": "run_chapter1_20261028_resume1"
+  },
+  "progress": {
+    "cancelled": false,
+    "completed": 1,
+    "contract_upgrade_deferred": [],
+    "execution_id": "batch_16c90caa2d3942d3a56b93ca7021414f",
+    "failed": 0,
+    "finished_at_epoch": 1793375293.13958,
+    "independent_review_completed": 1,
+    "interrupted": 0,
+    "paused": false,
+    "progress_file_stale": false,
+    "progress_write_failures": 0,
+    "results": [
+      {
+        "audit_id": "audit_cb5c4d50b4d348458e98d6ef248e2ad7",
+        "candidate_id": "cand_2865fb734cf8180f057f",
+        "result": {
+          "admission_consensus": {
+            "result": "unresolved"
+          },
+          "admission_policy": {
+            "accept_threshold": null,
+            "auto_accept_enabled": false,
+            "calibrator_ready": false,
+            "mode": "shadow",
+            "policy_ready": false,
+            "policy_version": "disabled_cold_start_v3"
+          },
+          "audit_id": "audit_cb5c4d50b4d348458e98d6ef248e2ad7",
+          "budget": {
+            "llm_calls": 3,
+            "tool_calls": 0
+          },
+          "calibrated_probability": null,
+          "calibration_status": "unavailable",
+          "calibrator_version": "untrained",
+          "candidate_id": "cand_2865fb734cf8180f057f",
+          "committed": true,
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "configured_strategy": "deterministic",
+          "consensus": {
+            "admission_consensus": {
+              "result": "unresolved"
+            },
+            "blocking_fields": [],
+            "committee_size": 3,
+            "counter_evidence_ids": [],
+            "distinct_family_count": 3,
+            "diversity_ready": true,
+            "duplicate_attempts": 0,
+            "duplicate_model_votes": 0,
+            "eligible_voter_ids": [
+              "judge_a",
+              "judge_b",
+              "judge_c"
+            ],
+            "error_votes": 0,
+            "expression_complete": true,
+            "invalid_attempts": 0,
+            "invalid_distinct_family_count": 0,
+            "invalid_votes": 0,
+            "missing_votes": 0,
+            "raw_source_support_votes": [
+              {
+                "source_support": "supported",
+                "voter_id": "judge_a"
+              },
+              {
+                "source_support": "supported",
+                "voter_id": "judge_b"
+              },
+              {
+                "source_support": "supported",
+                "voter_id": "judge_c"
+              }
+            ],
+            "required_votes": 3,
+            "result": "unresolved",
+            "source_support_consensus": {
+              "committee_size": 3,
+              "contradiction_votes": 0,
+              "required_votes": 3,
+              "result": "supported",
+              "support_voter_ids": [
+                "judge_a",
+                "judge_b",
+                "judge_c"
+              ],
+              "support_votes": 3
+            },
+            "supporting_evidence_ids": [],
+            "uncertain_votes": 3,
+            "unresolved_counterevidence": false,
+            "unresolved_support_conflict": false,
+            "valid_distinct_family_count": 0,
+            "valid_votes": 0
+          },
+          "decision": "manual_review",
+          "evidence_exclusions": {},
+          "executed_strategy": "deterministic",
+          "explanation": {
+            "anchor_failures": [],
+            "checks": [
+              {
+                "check": "ontology",
+                "constraint_ids": [],
+                "status": "unknown"
+              },
+              {
+                "check": "quote_location",
+                "evidence_ids": [
+                  "ev_b617bb0f27405e9df413",
+                  "ev_1bc8915a72bad9092f3e",
+                  "ev_fc6cfaa5d0bc1de2a021"
+                ],
+                "status": "pass"
+              }
+            ],
+            "counter_evidence_ids": [],
+            "open_questions": [],
+            "reason_codes": [
+              "CANDIDATE_IDENTITY_UNRESOLVED",
+              "CRITICAL_ISSUES_UNRESOLVED",
+              "SCHEMA_GAP"
+            ],
+            "response_errors": [],
+            "source_support": [
+              "supported",
+              "supported",
+              "supported"
+            ],
+            "summary": "候选仍需人工核验；系统未把不确定性当作事实结论。",
+            "supporting_evidence_ids": [
+              "ev_b617bb0f27405e9df413"
+            ]
+          },
+          "feature_schema_version": "review_features_v3",
+          "features": {
+            "contradicting_vote_count": 0.0,
+            "direction_issue": 0.0,
+            "disagreement": 0.0,
+            "distinct_family_count": 3.0,
+            "domain_pass": 0.0,
+            "error_fraction": 0.0,
+            "evidence_missing": 0.0,
+            "historical_weighted_support": 0.0,
+            "invalid_vote_fraction": 0.0,
+            "mapping_ambiguous": 0.0,
+            "qualifier_issue": 0.0,
+            "quote_located": 1.0,
+            "range_pass": 0.0,
+            "relation_known": 0.0,
+            "reliability_available": 0.0,
+            "retrieval_depth": 2.0,
+            "round_count": 1.0,
+            "source_group_count": 1.0,
+            "supporting_vote_count": 0.0,
+            "type_unknown": 1.0,
+            "uncertain_fraction": 1.0,
+            "unique_span_count": 3.0,
+            "unresolved_counterevidence": 0.0,
+            "valid_vote_fraction": 0.0
+          },
+          "final_round_id": 1,
+          "independent_review_completed": true,
+          "issue_history": [
+            {
+              "code": "ontology_gap",
+              "critical": true,
+              "description": "冻结本体检查未通过",
+              "evidence_ids": [],
+              "inherited_from_audit": "audit_5dae8ea6044847559240fdfa18128c89",
+              "inherited_from_revision": 1,
+              "issue_id": "issue_6217362e9807cc73cd2ca1f8",
+              "opened_evidence_hash": null,
+              "opened_in_proposal": null,
+              "opened_revision": 1,
+              "requires_revision": false,
+              "resolution_evidence_ids": [],
+              "resolution_rule": null,
+              "resolved_in_proposal": null,
+              "status": "open"
+            }
+          ],
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "pending_extension_id": null,
+          "policy_version": "disabled_cold_start_v3",
+          "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "reason_codes": [
+            "CANDIDATE_IDENTITY_UNRESOLVED",
+            "CRITICAL_ISSUES_UNRESOLVED",
+            "SCHEMA_GAP"
+          ],
+          "review_completion_status": "independent_review_completed",
+          "review_versions": {
+            "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+            "committee_version": "committee_qwen_gemma_deepseek_v1",
+            "configured_strategy": "deterministic",
+            "evidence_bundle_version": "evidence_bundle_v2",
+            "executed_strategy": "deterministic",
+            "memory_policy_hash": "57ed2499c79b64fdda010a212be8235b64c745410e087eb89d3986dd474d15b9",
+            "memory_scope_hash": "817afc379f9c21ba3ff639e8bc1675c0433d54b8cfbadccdca63556fbfc0b038",
+            "prompt_hash": "8bfd7b3ead9786ec6856a9e9f4048447d9687c74c851da156c644aacdb306e7e",
+            "prompt_version": "triple_validator_v4",
+            "response_contract_hash": "ff532a8eb0af010fae2a7afe98c45100de13c2ffa05645b9496d2f8ffd22bcf1",
+            "response_contract_version": "validator_response_v4"
+          },
+          "revision": 2,
+          "schema_diagnostics": [
+            "not_covered"
+          ],
+          "schema_status": "unknown",
+          "selected_evidence_hash": "4c910f43b1082062e51551a8e7eae42cd10a8c735747e02c8692f76366e026fe",
+          "selected_proposal_digest": "dc22eaed58c2fff1096c449be8f061d99555b09675f00a3dafac146e13f3da25",
+          "selected_round_id": 1,
+          "source_support_consensus": {
+            "committee_size": 3,
+            "contradiction_votes": 0,
+            "required_votes": 3,
+            "result": "supported",
+            "support_voter_ids": [
+              "judge_a",
+              "judge_b",
+              "judge_c"
+            ],
+            "support_votes": 3
+          },
+          "source_support_result": "supported",
+          "stop_reason": "committee_unresolved",
+          "workflow_state": "schema_unresolved"
+        },
+        "revision": 2,
+        "status": "completed"
+      }
+    ],
+    "review_incomplete": 0,
+    "review_versions": {
+      "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+      "committee_version": "committee_qwen_gemma_deepseek_v1",
+      "evidence_bundle_version": "evidence_bundle_v2",
+      "memory_policy_hash": "57ed2499c79b64fdda010a212be8235b64c745410e087eb89d3986dd474d15b9",
+      "prompt_hash": "8bfd7b3ead9786ec6856a9e9f4048447d9687c74c851da156c644aacdb306e7e",
+      "prompt_version": "triple_validator_v4",
+      "response_contract_hash": "ff532a8eb0af010fae2a7afe98c45100de13c2ffa05645b9496d2f8ffd22bcf1",
+      "response_contract_version": "validator_response_v4"
+    },
+    "revised": 0,
+    "run_id": "run_chapter1_20261028_resume1",
+    "selected": 1,
+    "skipped": 0,
+    "started_at_epoch": 1793375264.3271296,
+    "status": "completed",
+    "total": 1
+  }
+}

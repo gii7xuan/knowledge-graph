@@ -1,0 +1,698 @@
+{
+  "result": {
+    "task_type": "ontology_extension",
+    "extension_id": "ext_4272d42b83144e8c8da86d3530f76019",
+    "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+    "delta_revision": 2,
+    "recommendation": "needs_human",
+    "task_status": "needs_human",
+    "selected_round_id": 1,
+    "selected_proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+    "stop_reason": "operator_prepared_delta_independent_review_completed_or_held",
+    "budget": {
+      "usage": {
+        "llm_calls": 3,
+        "tool_calls": 4,
+        "planner_steps": 0,
+        "validation_rounds": 1,
+        "input_tokens": 180612,
+        "output_tokens": 2838,
+        "unknown_token_requests": 0
+      },
+      "deadline_epoch": 1793418004.1214073,
+      "remaining_seconds": 373.7179999999935,
+      "remaining_llm_calls": 0,
+      "max_planner_steps": 14,
+      "max_validation_rounds": 2,
+      "case_ids": [
+        "case_28e45b987d9edd67c26d6610d362129c"
+      ],
+      "case_call_reservations": [
+        "61b022f88d224e8ab0871b131c1ea09b"
+      ],
+      "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+      "case_accounts": [
+        {
+          "case_id": "case_28e45b987d9edd67c26d6610d362129c",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 96,
+            "rebinds": 2,
+            "tokens": 984929,
+            "tool_calls": 64
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 37,
+            "rebinds": 0,
+            "tokens": 768379,
+            "tool_calls": 18
+          }
+        }
+      ]
+    },
+    "release_published": false,
+    "mode": "shadow",
+    "human_revision_satisfied": true,
+    "auto_publish_enabled": false,
+    "independent_review_completed": false,
+    "independent_valid_seats": 0,
+    "counter_evidence_ids": []
+  },
+  "votes": [
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_6570b8a6645341f581691298991047b7",
+      "attempts": [
+        {
+          "attempt_id": "attempt_6570b8a6645341f581691298991047b7",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "delta_hash": "330e04dcda9a0c9f1ca6bac7d8f32c8621b2c766f6ca68fa2d8f3e0c228263ca",
+          "error": "approve requires complete supported modeling checks, structure and impact",
+          "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+          "finish_reason": "stop",
+          "input_tokens": 62107,
+          "late_response": false,
+          "latency_ms": 28656,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 2,
+          "output_tokens": 489,
+          "prompt_version": "ontology_extension_validator_v2",
+          "proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+          "provider_started_at": 1793417525.2556853,
+          "queue_time_ms": 257,
+          "raw_response": {
+            "checks": [
+              {
+                "check": "necessity",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "evidence_scope": "definition",
+                "note": "既有属性 R_1654fcf38913d94cb712 已表达横风影响弹道，本次仅补充定义，不新增重复关系。",
+                "status": "pass"
+              },
+              {
+                "check": "reuse",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "evidence_scope": "definition",
+                "note": "复用既有横风-弹道影响属性，未新增专用属性或别名。",
+                "status": "pass"
+              },
+              {
+                "check": "definition",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "evidence_scope": "definition",
+                "note": "新增 skos:definition 与原文“横风是通过改变空气阻力的方向来影响弹道的”一致，语言标签为 zh。",
+                "status": "pass"
+              },
+              {
+                "check": "hierarchy_direction",
+                "evidence_ids": [],
+                "evidence_scope": "unknown",
+                "note": "未修改类层级、父类或 is-a/part-of 方向。",
+                "status": "not_applicable"
+              },
+              {
+                "check": "constraint_strength",
+                "evidence_ids": [],
+                "evidence_scope": "unknown",
+                "note": "未修改 domain/range、数据类型或全称约束；仅增加注解。",
+                "status": "not_applicable"
+              },
+              {
+                "check": "structure",
+                "evidence_ids": [],
+                "evidence_scope": "unknown",
+                "note": "source_patch 仅新增一条 skos:definition，三元组数 882 到 883，无删除，profile 未变。",
+                "status": "pass"
+              },
+              {
+                "check": "impact",
+                "evidence_ids": [],
+                "evidence_scope": "unknown",
+                "note": "影响记录显示仅 R_1654fcf38913d94cb712 的 guard 因定义更新需重新审核，无结构依赖破坏。",
+                "status": "pass"
+              }
+            ],
+            "counter_evidence_ids": [],
+            "decision": "approve",
+            "impact_status": "pass",
+            "necessity": "reuse_existing",
+            "reason_codes": [
+              "definition_supported_by_source",
+              "no_schema_constraint_change",
+              "minimal_annotation_only"
+            ],
+            "requested_context": null,
+            "semantic_status": "pass",
+            "structure_status": "pass",
+            "suggested_changes": null,
+            "supporting_evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ]
+          },
+          "reasoning_tokens": null,
+          "request_key": "b871b5cb3d147a503d3103c24998de3a0b2e3e43f1af42c35bbb898c1dc10c1a",
+          "response_id": "chatcmpl-b79f44aa8a918eca",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Qwen",
+          "round_id": 1,
+          "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_a"
+        }
+      ],
+      "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "delta_hash": "330e04dcda9a0c9f1ca6bac7d8f32c8621b2c766f6ca68fa2d8f3e0c228263ca",
+      "error": "approve requires complete supported modeling checks, structure and impact",
+      "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+      "finish_reason": "stop",
+      "input_tokens": 62107,
+      "late_response": false,
+      "latency_ms": 28656,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 2,
+      "output_tokens": 489,
+      "prompt_version": "ontology_extension_validator_v2",
+      "proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+      "provider_started_at": 1793417525.2556853,
+      "queue_time_ms": 257,
+      "raw_response": {
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "evidence_scope": "definition",
+            "note": "既有属性 R_1654fcf38913d94cb712 已表达横风影响弹道，本次仅补充定义，不新增重复关系。",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "evidence_scope": "definition",
+            "note": "复用既有横风-弹道影响属性，未新增专用属性或别名。",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "evidence_scope": "definition",
+            "note": "新增 skos:definition 与原文“横风是通过改变空气阻力的方向来影响弹道的”一致，语言标签为 zh。",
+            "status": "pass"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "未修改类层级、父类或 is-a/part-of 方向。",
+            "status": "not_applicable"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "未修改 domain/range、数据类型或全称约束；仅增加注解。",
+            "status": "not_applicable"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "source_patch 仅新增一条 skos:definition，三元组数 882 到 883，无删除，profile 未变。",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "影响记录显示仅 R_1654fcf38913d94cb712 的 guard 因定义更新需重新审核，无结构依赖破坏。",
+            "status": "pass"
+          }
+        ],
+        "counter_evidence_ids": [],
+        "decision": "approve",
+        "impact_status": "pass",
+        "necessity": "reuse_existing",
+        "reason_codes": [
+          "definition_supported_by_source",
+          "no_schema_constraint_change",
+          "minimal_annotation_only"
+        ],
+        "requested_context": null,
+        "semantic_status": "pass",
+        "structure_status": "pass",
+        "suggested_changes": null,
+        "supporting_evidence_ids": [
+          "ev_c8bc5b0bf7eca019fc99"
+        ]
+      },
+      "reasoning_tokens": null,
+      "request_key": "b871b5cb3d147a503d3103c24998de3a0b2e3e43f1af42c35bbb898c1dc10c1a",
+      "response_id": "chatcmpl-b79f44aa8a918eca",
+      "response_status": "invalid_contract",
+      "returned_model_id": "Qwen",
+      "round_id": 1,
+      "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_a"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_448b7d9592cb4bbab30783eb24c277db",
+      "attempts": [
+        {
+          "attempt_id": "attempt_448b7d9592cb4bbab30783eb24c277db",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "delta_hash": "330e04dcda9a0c9f1ca6bac7d8f32c8621b2c766f6ca68fa2d8f3e0c228263ca",
+          "error": "approve requires complete supported modeling checks, structure and impact",
+          "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+          "finish_reason": "stop",
+          "input_tokens": 63847,
+          "late_response": false,
+          "latency_ms": 68407,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 2,
+          "output_tokens": 1719,
+          "prompt_version": "ontology_extension_validator_v2",
+          "proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+          "provider_started_at": 1793417561.2921784,
+          "queue_time_ms": 249,
+          "raw_response": {
+            "checks": [
+              {
+                "check": "necessity",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "note": "The revision adds a specific mechanism description ('changing the direction of air resistance') from the source text to the existing property, improving semantic precision.",
+                "status": "pass"
+              },
+              {
+                "check": "reuse",
+                "evidence_ids": [],
+                "note": "The operation correctly targets the existing property R_1654fcf38913d94cb712 for a definition update rather than creating a duplicate.",
+                "status": "pass"
+              },
+              {
+                "check": "definition",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "note": "The new definition is directly supported by the quote: '横风是通过改变空气阻力的方向来影响弹道的。'",
+                "status": "pass"
+              },
+              {
+                "check": "hierarchy_direction",
+                "evidence_ids": [],
+                "note": "No changes to class or property hierarchy.",
+                "status": "not_applicable"
+              },
+              {
+                "check": "constraint_strength",
+                "evidence_ids": [],
+                "note": "No changes to domain or range constraints.",
+                "status": "not_applicable"
+              },
+              {
+                "check": "structure",
+                "evidence_ids": [],
+                "note": "The change is limited to adding a skos:definition annotation, which does not alter the OWL graph structure.",
+                "status": "pass"
+              },
+              {
+                "check": "impact",
+                "evidence_ids": [],
+                "note": "Adding a definition has no impact on the logical consistency or the entailments of the ontology.",
+                "status": "pass"
+              }
+            ],
+            "counter_evidence_ids": [],
+            "decision": "approve",
+            "impact_status": "pass",
+            "necessity": "reuse_existing",
+            "reason_codes": [],
+            "requested_context": null,
+            "semantic_status": "pass",
+            "structure_status": "pass",
+            "suggested_changes": null,
+            "supporting_evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ]
+          },
+          "reasoning_tokens": 1129,
+          "request_key": "f27ade7663476ada989822c3fa236eb8d2d96a431991de6943fe8335fd012261",
+          "response_id": "chatcmpl-b75139e412e1d482",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Gemma",
+          "round_id": 1,
+          "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_b"
+        }
+      ],
+      "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "delta_hash": "330e04dcda9a0c9f1ca6bac7d8f32c8621b2c766f6ca68fa2d8f3e0c228263ca",
+      "error": "approve requires complete supported modeling checks, structure and impact",
+      "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+      "finish_reason": "stop",
+      "input_tokens": 63847,
+      "late_response": false,
+      "latency_ms": 68407,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 2,
+      "output_tokens": 1719,
+      "prompt_version": "ontology_extension_validator_v2",
+      "proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+      "provider_started_at": 1793417561.2921784,
+      "queue_time_ms": 249,
+      "raw_response": {
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "note": "The revision adds a specific mechanism description ('changing the direction of air resistance') from the source text to the existing property, improving semantic precision.",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [],
+            "note": "The operation correctly targets the existing property R_1654fcf38913d94cb712 for a definition update rather than creating a duplicate.",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "note": "The new definition is directly supported by the quote: '横风是通过改变空气阻力的方向来影响弹道的。'",
+            "status": "pass"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [],
+            "note": "No changes to class or property hierarchy.",
+            "status": "not_applicable"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [],
+            "note": "No changes to domain or range constraints.",
+            "status": "not_applicable"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "note": "The change is limited to adding a skos:definition annotation, which does not alter the OWL graph structure.",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [],
+            "note": "Adding a definition has no impact on the logical consistency or the entailments of the ontology.",
+            "status": "pass"
+          }
+        ],
+        "counter_evidence_ids": [],
+        "decision": "approve",
+        "impact_status": "pass",
+        "necessity": "reuse_existing",
+        "reason_codes": [],
+        "requested_context": null,
+        "semantic_status": "pass",
+        "structure_status": "pass",
+        "suggested_changes": null,
+        "supporting_evidence_ids": [
+          "ev_c8bc5b0bf7eca019fc99"
+        ]
+      },
+      "reasoning_tokens": 1129,
+      "request_key": "f27ade7663476ada989822c3fa236eb8d2d96a431991de6943fe8335fd012261",
+      "response_id": "chatcmpl-b75139e412e1d482",
+      "response_status": "invalid_contract",
+      "returned_model_id": "Gemma",
+      "round_id": 1,
+      "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_d7d93972c3904a3cb2e9c662efbdf91b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_d7d93972c3904a3cb2e9c662efbdf91b",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "delta_hash": "330e04dcda9a0c9f1ca6bac7d8f32c8621b2c766f6ca68fa2d8f3e0c228263ca",
+          "error": "approve requires complete supported modeling checks, structure and impact",
+          "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+          "finish_reason": "stop",
+          "input_tokens": 54658,
+          "late_response": false,
+          "latency_ms": 5594,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 2,
+          "output_tokens": 630,
+          "prompt_version": "ontology_extension_validator_v2",
+          "proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+          "provider_started_at": 1793417554.8100684,
+          "queue_time_ms": 257,
+          "raw_response": {
+            "checks": [
+              {
+                "check": "necessity",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99",
+                  "ev_bdac56440d5e10db3db8"
+                ],
+                "note": "原文明确讨论风速/横风对弹道的影响，既有属性 R_1654fcf38913d94cb712（横风→弹道）已表达该关系，无需新增属性；本次仅补充定义说明，属复用既有表达。",
+                "status": "pass"
+              },
+              {
+                "check": "reuse",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "note": "修订目标为既有属性 R_1654fcf38913d94cb712，未新增重复属性或别名；机制短语写入定义而非同义别名，避免重复建模。",
+                "status": "pass"
+              },
+              {
+                "check": "definition",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "note": "新增 skos:definition 与原文“横风是通过改变空气阻力的方向来影响弹道的”一致，语言标签 zh 保留，未夸大约束。",
+                "status": "pass"
+              },
+              {
+                "check": "hierarchy_direction",
+                "evidence_ids": [],
+                "note": "本次仅修订属性定义注解，未改动类层级或 is-a/part-of 方向。",
+                "status": "not_applicable"
+              },
+              {
+                "check": "constraint_strength",
+                "evidence_ids": [],
+                "note": "未修改 domain/range 或数据类型约束；既有 domain=横风、range=弹道 保持不变，定义注解不构成全称约束。",
+                "status": "not_applicable"
+              },
+              {
+                "check": "structure",
+                "evidence_ids": [],
+                "note": "结构检查通过：类 189、关系 81，无错误；新增 1 条定义三元组，合并图 883 条，未执行 reasoner 已如实保留。",
+                "status": "pass"
+              },
+              {
+                "check": "impact",
+                "evidence_ids": [
+                  "ev_c8bc5b0bf7eca019fc99"
+                ],
+                "note": "影响检查通过：仅依赖 R_1654fcf38913d94cb712 的候选需重新审核，未自动接受历史候选；无匿名公理或 ABox 引用受影响。",
+                "status": "pass"
+              }
+            ],
+            "counter_evidence_ids": [],
+            "decision": "approve",
+            "impact_status": "pass",
+            "necessity": "reuse_existing",
+            "reason_codes": [
+              "definition_annotation_only",
+              "reuse_existing_property",
+              "reasoner_not_run"
+            ],
+            "requested_context": null,
+            "semantic_status": "pass",
+            "structure_status": "pass",
+            "suggested_changes": null,
+            "supporting_evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99",
+              "ev_bdac56440d5e10db3db8"
+            ]
+          },
+          "reasoning_tokens": null,
+          "request_key": "9418374edff5446bfce13165c2b7ca297c64953ef8a0f9e50df337ee9df606f5",
+          "response_id": "5931de17-feaa-41c0-a228-6b0e04ee4840",
+          "response_status": "invalid_contract",
+          "returned_model_id": "deepseek-flash",
+          "round_id": 1,
+          "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_c"
+        }
+      ],
+      "audit_id": "ontology_audit_c2825120297e414b9d8e64f942c14d3c",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "delta_hash": "330e04dcda9a0c9f1ca6bac7d8f32c8621b2c766f6ca68fa2d8f3e0c228263ca",
+      "error": "approve requires complete supported modeling checks, structure and impact",
+      "evidence_hash": "13829500d83aa48add1b84902d456c0ac0ac361f146c80722f817fa59c851bb2",
+      "finish_reason": "stop",
+      "input_tokens": 54658,
+      "late_response": false,
+      "latency_ms": 5594,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 2,
+      "output_tokens": 630,
+      "prompt_version": "ontology_extension_validator_v2",
+      "proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+      "provider_started_at": 1793417554.8100684,
+      "queue_time_ms": 257,
+      "raw_response": {
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99",
+              "ev_bdac56440d5e10db3db8"
+            ],
+            "note": "原文明确讨论风速/横风对弹道的影响，既有属性 R_1654fcf38913d94cb712（横风→弹道）已表达该关系，无需新增属性；本次仅补充定义说明，属复用既有表达。",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "note": "修订目标为既有属性 R_1654fcf38913d94cb712，未新增重复属性或别名；机制短语写入定义而非同义别名，避免重复建模。",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "note": "新增 skos:definition 与原文“横风是通过改变空气阻力的方向来影响弹道的”一致，语言标签 zh 保留，未夸大约束。",
+            "status": "pass"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [],
+            "note": "本次仅修订属性定义注解，未改动类层级或 is-a/part-of 方向。",
+            "status": "not_applicable"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [],
+            "note": "未修改 domain/range 或数据类型约束；既有 domain=横风、range=弹道 保持不变，定义注解不构成全称约束。",
+            "status": "not_applicable"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "note": "结构检查通过：类 189、关系 81，无错误；新增 1 条定义三元组，合并图 883 条，未执行 reasoner 已如实保留。",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [
+              "ev_c8bc5b0bf7eca019fc99"
+            ],
+            "note": "影响检查通过：仅依赖 R_1654fcf38913d94cb712 的候选需重新审核，未自动接受历史候选；无匿名公理或 ABox 引用受影响。",
+            "status": "pass"
+          }
+        ],
+        "counter_evidence_ids": [],
+        "decision": "approve",
+        "impact_status": "pass",
+        "necessity": "reuse_existing",
+        "reason_codes": [
+          "definition_annotation_only",
+          "reuse_existing_property",
+          "reasoner_not_run"
+        ],
+        "requested_context": null,
+        "semantic_status": "pass",
+        "structure_status": "pass",
+        "suggested_changes": null,
+        "supporting_evidence_ids": [
+          "ev_c8bc5b0bf7eca019fc99",
+          "ev_bdac56440d5e10db3db8"
+        ]
+      },
+      "reasoning_tokens": null,
+      "request_key": "9418374edff5446bfce13165c2b7ca297c64953ef8a0f9e50df337ee9df606f5",
+      "response_id": "5931de17-feaa-41c0-a228-6b0e04ee4840",
+      "response_status": "invalid_contract",
+      "returned_model_id": "deepseek-flash",
+      "round_id": 1,
+      "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_c"
+    }
+  ]
+}
