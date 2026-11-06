@@ -170,7 +170,7 @@ def verify_vote_references(vote: Mapping[str, Any], evidence_items: Iterable[Map
             referenced.update(check.get("evidence_ids") or [])
     missing = sorted(reference for reference in referenced if reference not in available)
     invalid_support = set()
-    if result.get('response_contract_version') == 'validator_response_v5':
+    if result.get('response_contract_version') in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2'}:
         from .units import can_support
         nonsupport = {x['evidence_id'] for x in evidence_items if not can_support(x)}
         invalid_support = nonsupport & (set(result.get('supporting_evidence_ids') or []) | set(result.get('primary_evidence_ids') or []))

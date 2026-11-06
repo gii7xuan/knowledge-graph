@@ -22,7 +22,7 @@ class AgentTools:
     def merge_evidence(self, bundle):
         state, runtime = self.state, self.runtime
         verified = verify_evidence_bundle(bundle, runtime.document, state.candidate)
-        if runtime.orchestrator.config.get('validator_contract_version') == 'validator_response_v5':
+        if runtime.orchestrator.config.get('validator_contract_version') in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
             from evidence.units import enrich_bundle
             verified = enrich_bundle(verified, runtime.document, state.candidate)
         previous = {x["evidence_id"] for x in state.archive}
@@ -32,7 +32,7 @@ class AgentTools:
         # Deterministic, stable selection. Original quote and discovered conflicts
         # are protected; every discovered item remains in the archive/checkpoint.
         initial_ids = runtime.initial_ids
-        use_units=runtime.orchestrator.config.get('validator_contract_version')=='validator_response_v5'
+        use_units=runtime.orchestrator.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
         ordered = sorted(enumerate(all_items), key=lambda pair: (
             -1 if use_units and pair[1]["evidence_id"] in state.protected_ids else
             3 if use_units and pair[1].get('substantive') is False else
@@ -137,7 +137,18 @@ class AgentTools:
             triple.get('relation_id') or triple.get('surface_relation') or '',
             head_type=triple.get('head_type'),tail_type=triple.get('tail_type'),tail_kind=triple.get('tail_kind','entity'),guard=guard)
         self.state.ontology_lookup['reference_catalog_counts'] = registry.reference_catalog()['counts']
-        if self.runtime.orchestrator.config.get('validator_contract_version')=='validator_response_v5':
+        if self.runtime.orchestrator.config.get('validator_contract_version')=='validator_response_v6_3':
+            from .ontology_context import select_context
+            previous=self.state.context.get('ontology_retrieval') or {}
+            retrieval={'retrieval_queries':sorted(set(previous.get('retrieval_queries',[])) |
+                       {str(x) for x in (relation_id,surface_relation,query) if x}),
+                       'retrieval_property_ids':sorted(set(previous.get('retrieval_property_ids',[])) | matched)}
+            selected=select_context(guard,self.state.candidate,self.state.bundle,
+                                    self.state.context['ontology_context_policy'],retrieval)
+            self.state.context['ontology_retrieval']=retrieval
+            self.state.ontology_lookup['retrieved_context']=selected
+            self.state.ontology_lookup['retrieved_context_hash']=sha256_json(selected)
+        elif self.runtime.orchestrator.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2'}:
             self.state.ontology_lookup['full_reference_catalog'] = registry.reference_catalog()
         if self.state.guard.get("status") != "pass":
             self.runtime.issue("ontology_gap", "冻结本体检查未通过", critical=True)
@@ -206,12 +217,13 @@ class AgentTools:
         retries = min(int(budget.config.get("max_retries_per_request", 1)),
                       max(0, (budget.remaining_calls() - baseline) // baseline))
         reserved = baseline * (1 + retries)
+        # Resolve and validate the bounded context before reserving model calls.
+        round_id = budget.usage['validation_rounds'] + 1
+        proposal = runtime.orchestrator._proposal(state.audit_id, state.candidate,
+            state.guard, state.bundle, round_id, state.context)
         if not budget.reserve_calls(reserved):
             return {"status": "budget_exhausted", "error": "cannot reserve full committee cost"}
         budget.usage["validation_rounds"] += 1
-        round_id = budget.usage["validation_rounds"]
-        proposal = runtime.orchestrator._proposal(state.audit_id, state.candidate,
-            state.guard, state.bundle, round_id, state.context)
         proposal["execution_reserved_calls"] = reserved
         state.current_validation_key = key
         runtime.repository.append_round(state.audit_id, proposal, [], {}, {"execution_status": "started", "validation_key": key})

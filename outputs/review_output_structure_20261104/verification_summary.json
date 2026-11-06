@@ -1,0 +1,148 @@
+{
+  "verified_at": "2026-11-04T10:24:08.310437+00:00",
+  "contract_versions": {
+    "response_contract_version": "validator_response_v6_1",
+    "response_contract_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+    "prompt_version": "triple_validator_v6_1_structured_output_v1",
+    "prompt_hash": "84e99ad591a084462d9bc4802456ad4749d4a0a936bab7092ccf3873ff171597",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "summary_policy_version": "review_dimensions_v1",
+    "summary_policy_hash": "82518369b248a3b14879ac2125845c5f55f9de2d15471b69082dcdcd2c972e54",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f"
+  },
+  "selected_profiles": [
+    {
+      "voter_id": "judge_a",
+      "protocol": "chat_completions",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "model": "Qwen",
+      "stream_responses": false,
+      "thinking_mode": null,
+      "version": "typed_review_output_v1",
+      "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "mode": "json_schema",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "template_hash": null,
+      "capability_record_hash": "7809177e4eed9b73b629bc5026ea5fabdce1e71c08a33d3098dcedab5fa51a57",
+      "verification": "strict_schema_observed"
+    },
+    {
+      "voter_id": "judge_b",
+      "protocol": "chat_completions",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "model": "Gemma",
+      "stream_responses": true,
+      "thinking_mode": null,
+      "version": "typed_review_output_v1",
+      "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "mode": "json_template",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "template_hash": "50230abdfeebc702a7bacc2a9f6b1c9415df342fa7843625cc48c1ce6f143416",
+      "capability_record_hash": "27af55e0838c68e6cc20b67d0213252630b6e8629cc717b001901de63d382ac3",
+      "verification": "schema_ignored"
+    },
+    {
+      "voter_id": "judge_c",
+      "protocol": "chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "stream_responses": false,
+      "thinking_mode": "disabled",
+      "version": "typed_review_output_v1",
+      "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "mode": "json_template",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "template_hash": "50230abdfeebc702a7bacc2a9f6b1c9415df342fa7843625cc48c1ce6f143416",
+      "capability_record_hash": "dd60f5cf03dd30d7c5cefe019e161dc8f2d53606f41d3cd7705a37cda4d62bf1",
+      "verification": "schema_rejected"
+    }
+  ],
+  "external_probe_requests": 7,
+  "document_content_sent": false,
+  "requests": [
+    {
+      "file": "smoke_judge_a.json",
+      "state": "response_received",
+      "model": "Qwen",
+      "http_status": null,
+      "input_tokens": 86,
+      "output_tokens": 33,
+      "latency_ms": 3000,
+      "response_id": "chatcmpl-b1d219e3c4e26244"
+    },
+    {
+      "file": "smoke_judge_b.json",
+      "state": "response_received",
+      "model": "Gemma",
+      "http_status": null,
+      "input_tokens": 49,
+      "output_tokens": 128,
+      "latency_ms": 4218,
+      "response_id": "chatcmpl-b642a40631fbea7b"
+    },
+    {
+      "file": "smoke_judge_c.json",
+      "state": "rejected",
+      "model": "deepseek-flash",
+      "http_status": 400,
+      "input_tokens": null,
+      "output_tokens": null,
+      "latency_ms": 2280,
+      "response_id": null
+    },
+    {
+      "file": "nonce_confirmation_judge_a.json",
+      "state": "response_received",
+      "model": "Qwen",
+      "http_status": null,
+      "input_tokens": 99,
+      "output_tokens": 29,
+      "latency_ms": 3063,
+      "response_id": "chatcmpl-b922696b030796a8"
+    },
+    {
+      "file": "actual_review_schema_judge_a.json",
+      "state": "response_received",
+      "model": "Qwen",
+      "http_status": null,
+      "input_tokens": 195,
+      "output_tokens": 319,
+      "latency_ms": 7202,
+      "response_id": "chatcmpl-bf5c9d736fe9e666"
+    },
+    {
+      "file": "fixed_template_fallback_judge_b.json",
+      "state": "response_received",
+      "model": "Gemma",
+      "http_status": null,
+      "input_tokens": 2151,
+      "output_tokens": 1372,
+      "latency_ms": 26094,
+      "response_id": "chatcmpl-804e88ead7c6b5b9"
+    },
+    {
+      "file": "fixed_template_fallback_judge_c.json",
+      "state": "response_received",
+      "model": "deepseek-flash",
+      "http_status": null,
+      "input_tokens": 2189,
+      "output_tokens": 317,
+      "latency_ms": 4046,
+      "response_id": "75ae29ae-d1c9-465d-b7a6-5fbd716c3323"
+    }
+  ],
+  "known_probe_usage": {
+    "input_tokens": 4769,
+    "output_tokens": 2198
+  },
+  "requests_without_usage": 1,
+  "offline_regression_tests": 160,
+  "offline_regression_passed": true,
+  "unknown_probes_retried": false,
+  "original_v51_settings_unchanged": true,
+  "production_30_candidate_hashes_unchanged": true,
+  "original_workbook_unchanged": true,
+  "historical_votes_rewritten": false,
+  "new_chapter_review_started": false
+}

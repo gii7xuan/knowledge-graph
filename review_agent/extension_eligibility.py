@@ -23,6 +23,10 @@ def extension_eligibility(state):
     if (lookup.get('scope') != 'full_frozen_ontology' or
             lookup.get('candidate_revision') != state.candidate['revision']):
         blockers.append('current full frozen ontology lookup required')
+    if state.context.get('response_contract_version')=='validator_response_v6_3' and 'not_covered' in issues:
+        # Preserve the opinions, but a recalled subset cannot certify global absence.
+        if not consensus.get('ontology_coverage_review',{}).get('global_gap_confirmable'):
+            blockers.append('retrieved ontology subset cannot confirm a global gap; further semantic lookup or manual review required')
     if any(i.get('status', 'open') != 'resolved' and i['code'] in {
         'source_conflict', 'counterevidence', 'CONDITION_MISSING', 'QUALIFIER_MISMATCH',
         'DIRECTION_MISMATCH', 'revision_proposed'} for i in state.issues):

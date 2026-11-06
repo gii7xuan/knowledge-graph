@@ -145,6 +145,9 @@ class ReviewService:
         )
         return {
             "mode": self.config.get("mode", "shadow"),
+            "validator_contract_version": self.config.get('validator_contract_version'),
+            "ontology_context_mode": ('dynamic_subset' if self.config.get('validator_contract_version')=='validator_response_v6_3'
+                                      else 'legacy_full_catalog'),
             "planner_strategy": (self.config.get("planner") or {}).get("strategy", "deterministic"),
             "configured_strategy": configured_strategy, "last_executed_strategy": latest_strategy,
             "planner_ready": planner_ready, "planner_model": planner_connection["model"],

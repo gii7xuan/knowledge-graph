@@ -12,7 +12,7 @@ from evidence.verification import verify_vote_references
 def validation_request_key(voter, proposal, *, legacy_generation=False):
     from .validators import validator_payload, vote_binding
 
-    payload = validator_payload(proposal)
+    payload = validator_payload(proposal,voter)
     from .validator_contracts import contract_for, prompt_for
     contract=contract_for(proposal.get('response_contract_version'))
     payload.pop("proposal_digest", None)  # Transport binding, never the semantic cache identity.
@@ -23,6 +23,17 @@ def validation_request_key(voter, proposal, *, legacy_generation=False):
         "committee_version", "committee_policy_hash", "committee_members", "candidate_review_hash", "ontology_check_hash", "evidence_bundle_hash", "memory_snapshot_id", "memory_bundle_hash", "memory_scope_hash", "memory_policy_hash", "agent_versions")}
     if not legacy_generation and proposal.get('validator_generation') is not None:
         frozen['validator_generation']=proposal['validator_generation']
+    if proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        frozen.update({k:proposal.get(k) for k in ('summary_policy_version','summary_policy_hash')})
+    wire_format='json_object'
+    if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        from .output_structure import response_format
+        wire_format=response_format(payload['output_structure'],contract.RESPONSE_SCHEMA)
+        frozen.update({k:proposal.get(k) for k in ('output_delivery_version','output_delivery_hash')})
+    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}:
+        frozen.update({k:proposal.get(k) for k in ('correction_policy_version','correction_policy_hash','correction_policy')})
+    if proposal.get('response_contract_version')=='validator_response_v6_3':
+        frozen.update({k:proposal.get(k) for k in ('ontology_context_hash','ontology_context_policy_hash')})
     return sha256_json({"version": "validation_single_flight_v2", "role": "validator", "task_type": "triple_review",
         "object_revision": proposal["candidate"]["revision"], "model_identity": binding["model_identity"],
         "namespace": proposal.get("request_cache_namespace", "default"),
@@ -30,7 +41,7 @@ def validation_request_key(voter, proposal, *, legacy_generation=False):
         "client_kind": type(client).__module__ + "." + type(client).__qualname__,
         "base_url": str(getattr(client, "base_url", "")).rstrip("/"),
         "credential_fingerprint": sha256_json(getattr(client, "api_key", "")),
-        "generation": {"temperature": 0.0, "response_format": "json_object",**({} if legacy_generation else {'max_output_tokens':int(voter.get('max_output_tokens',4096))}),
+        "generation": {"temperature": 0.0, "response_format": wire_format,**({} if legacy_generation else {'max_output_tokens':int(voter.get('max_output_tokens',4096))}),
             **({'thinking_mode':client.thinking_mode} if getattr(client,'thinking_mode',None) else {})},
         "system_prompt": prompt_for(proposal), "frozen": frozen, "payload": payload})
 

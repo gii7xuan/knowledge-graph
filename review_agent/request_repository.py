@@ -7,6 +7,8 @@ from .contracts import canonical_json
 
 class RequestRepository:
     def initialize_requests(self, connection):
+        from .correction_repository import initialize
+        initialize(connection)
         columns={r[1] for r in connection.execute('PRAGMA table_info(jobs)')}
         if 'lease_token' not in columns: connection.execute('ALTER TABLE jobs ADD COLUMN lease_token TEXT')
         for sql in (
@@ -70,6 +72,10 @@ class RequestRepository:
                        recovery_reason or ('known_failure_retry' if prior else None),canonical_json(metadata)))
             c.execute('INSERT INTO request_attempt_events VALUES(?,?,?,?,?)',
                       (uuid4().hex,attempt_id,'started',now,'{}'))
+            correction=(metadata.get('feedback') or {}).get('correction_id')
+            if correction:
+                from .correction_repository import started
+                started(c,correction,attempt_id)
         return attempt_id
 
     def finish_request_attempt(self, attempt_id, owner, vote, *, late=False):
@@ -83,6 +89,10 @@ class RequestRepository:
             if row['state'] in {'completed','failed','not_sent'}:
                 return False  # A waiting caller cannot replace a committed late result with timeout.
             metadata = json.loads(row['metadata_json'])
+            correction=(metadata.get('feedback') or {}).get('correction_id')
+            if correction:
+                from .correction_repository import finished
+                finished(c,correction,attempt_id,status,vote)
             bound = metadata.get('binding', {})
             if any(vote.get(k) != value for k,value in bound.items()):
                 raise ConflictError('late result differs from frozen attempt binding')

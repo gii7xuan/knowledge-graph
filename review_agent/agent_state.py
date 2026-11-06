@@ -101,7 +101,9 @@ class AgentState:
     validation_recovery: dict = field(default_factory=dict)
 
     def validation_key(self):
-        return sha256_json({"candidate": self.candidate, "bundle": self.bundle.get("evidence_hash"),
+        ontology = ({'ontology_retrieval': self.context.get('ontology_retrieval')}
+                    if self.context.get('response_contract_version') == 'validator_response_v6_3' else {})
+        return sha256_json({**ontology, "candidate": self.candidate, "bundle": self.bundle.get("evidence_hash"),
                             "guard": self.guard, "versions": self.context.get("agent_versions"),
                             "committee": self.context.get("committee_members"),
                             "memory": self.context.get("memory_bundle_hash"),

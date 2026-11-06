@@ -1,0 +1,57 @@
+{
+  "version": "review_output_capabilities_v1",
+  "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+  "synthetic_only": true,
+  "document_content_sent": false,
+  "entries": [
+    {
+      "base_url": "https://43.143.151.41:3000/v1",
+      "model": "Qwen",
+      "protocol": "chat_completions",
+      "stream_responses": false,
+      "thinking_mode": null,
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "strict_supported": true,
+      "verification": "strict_schema_observed",
+      "fallback_review_contract_passed": null,
+      "probe_files": [
+        "smoke_judge_a.json",
+        "nonce_confirmation_judge_a.json",
+        "actual_review_schema_judge_a.json"
+      ],
+      "verified_at": "2026-11-04T10:04:37.997072+00:00"
+    },
+    {
+      "base_url": "https://43.143.151.41:3000/v1",
+      "model": "Gemma",
+      "protocol": "chat_completions",
+      "stream_responses": true,
+      "thinking_mode": null,
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "strict_supported": false,
+      "verification": "schema_ignored",
+      "fallback_review_contract_passed": true,
+      "probe_files": [
+        "smoke_judge_b.json",
+        "fixed_template_fallback_judge_b.json"
+      ],
+      "verified_at": "2026-11-04T10:04:53.804123+00:00"
+    },
+    {
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "protocol": "chat_completions",
+      "stream_responses": false,
+      "thinking_mode": "disabled",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "strict_supported": false,
+      "verification": "schema_rejected",
+      "fallback_review_contract_passed": true,
+      "probe_files": [
+        "smoke_judge_c.json",
+        "fixed_template_fallback_judge_c.json"
+      ],
+      "verified_at": "2026-11-04T10:04:31.703673+00:00"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "version": "review_dimensions_v1",
+  "mapping_rules": {
+    "matched": [
+      "matched",
+      "pass",
+      "none",
+      "pass"
+    ],
+    "ambiguous": [
+      "ambiguous",
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "unassigned": [
+      "unassigned",
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "not_covered": [
+      "not_covered",
+      "unknown",
+      "not_covered",
+      "unknown"
+    ],
+    "constraint_conflict": [
+      "constraint_conflict",
+      "fail",
+      "incompatible",
+      "fail"
+    ],
+    "candidate_mapping_error": [
+      "unassigned",
+      "unknown",
+      "candidate_mapping_error",
+      "fail"
+    ],
+    "suspected_schema_error": [
+      "unassigned",
+      "unknown",
+      "suspected_schema_error",
+      "unknown"
+    ]
+  },
+  "expression_rules": {
+    "needs_revision": "source contradiction or failed entity/meaning/direction/qualifier check",
+    "faithful": "all six source/expression checks resolved",
+    "otherwise": "unresolved"
+  },
+  "verdict_rules": {
+    "invalid": "source contradiction with validated material counterevidence",
+    "valid": "supported, faithful, matched, schema pass, nine checks resolved, no material counterevidence",
+    "otherwise": "uncertain"
+  },
+  "evidence_collections": "derived from unique evidence role assessments",
+  "final_admission": "fixed independent quorum, program guard and project scope policy required"
+}

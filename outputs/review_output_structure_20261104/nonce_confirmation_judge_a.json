@@ -1,0 +1,45 @@
+{
+  "id": "judge_a",
+  "model": "Qwen",
+  "base_url": "https://43.143.151.41:3000/v1",
+  "stream_responses": false,
+  "thinking_mode": null,
+  "protocol": "chat_completions",
+  "stage": "nonce_confirmation",
+  "state": "response_received",
+  "mode": "json_schema",
+  "schema_hash": "6e99a3cb48648cfb431fb9c18de7c2b149da81e9b3a1163a5016ed2e2333ec18",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "probe_token"
+    ],
+    "properties": {
+      "probe_token": {
+        "type": "string",
+        "enum": [
+          "confirm_851eff5c3bd94f93"
+        ]
+      }
+    }
+  },
+  "payload": {
+    "instruction": "Return only {\"unconstrained\": true}; omit any other keys."
+  },
+  "started_at": "2026-11-04T10:04:27.698514+00:00",
+  "synthetic_only": true,
+  "document_content_sent": false,
+  "automatic_retry": false,
+  "shape_errors": [],
+  "semantic_errors": [],
+  "conforms": true,
+  "review_contract_passed": true,
+  "raw_response": "{\"probe_token\": \"confirm_851eff5c3bd94f93\"}",
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-b922696b030796a8",
+  "returned_model_id": "Qwen",
+  "input_tokens": 99,
+  "output_tokens": 29,
+  "latency_ms": 3063
+}

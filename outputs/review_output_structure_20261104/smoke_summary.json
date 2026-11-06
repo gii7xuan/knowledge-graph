@@ -1,0 +1,113 @@
+{
+  "records": [
+    {
+      "id": "judge_a",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "stream_responses": false,
+      "thinking_mode": null,
+      "protocol": "chat_completions",
+      "stage": "strict_nonce_smoke",
+      "state": "response_received",
+      "started_at": "2026-11-04T10:01:19.850024+00:00",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "probe_token"
+        ],
+        "properties": {
+          "probe_token": {
+            "type": "string",
+            "enum": [
+              "schema_e88c7e32721641bb"
+            ]
+          }
+        }
+      },
+      "synthetic_only": true,
+      "document_content_sent": false,
+      "automatic_retry": false,
+      "support": "conformance_observed",
+      "raw_response": "{\n\"probe_token\": \"schema_e88c7e32721641bb\"\n}",
+      "finish_reason": "stop",
+      "response_id": "chatcmpl-b1d219e3c4e26244",
+      "returned_model_id": "Qwen",
+      "input_tokens": 86,
+      "output_tokens": 33,
+      "latency_ms": 3000
+    },
+    {
+      "id": "judge_b",
+      "model": "Gemma",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "stream_responses": true,
+      "thinking_mode": null,
+      "protocol": "chat_completions",
+      "stage": "strict_nonce_smoke",
+      "state": "response_received",
+      "started_at": "2026-11-04T10:01:19.855445+00:00",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "probe_token"
+        ],
+        "properties": {
+          "probe_token": {
+            "type": "string",
+            "enum": [
+              "schema_5598fdfaaedf4498"
+            ]
+          }
+        }
+      },
+      "synthetic_only": true,
+      "document_content_sent": false,
+      "automatic_retry": false,
+      "support": "accepted_but_not_conformant",
+      "raw_response": "{\"probe_token\": \"schema_5598fdfaaedf",
+      "finish_reason": "length",
+      "response_id": "chatcmpl-b642a40631fbea7b",
+      "returned_model_id": "Gemma",
+      "input_tokens": 49,
+      "output_tokens": 128,
+      "latency_ms": 4218
+    },
+    {
+      "id": "judge_c",
+      "model": "deepseek-flash",
+      "base_url": "https://api.deepseek.com",
+      "stream_responses": false,
+      "thinking_mode": "disabled",
+      "protocol": "chat_completions",
+      "stage": "strict_nonce_smoke",
+      "state": "rejected",
+      "started_at": "2026-11-04T10:01:19.802565+00:00",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "probe_token"
+        ],
+        "properties": {
+          "probe_token": {
+            "type": "string",
+            "enum": [
+              "schema_0cb807b0f40d4ff2"
+            ]
+          }
+        }
+      },
+      "synthetic_only": true,
+      "document_content_sent": false,
+      "automatic_retry": false,
+      "http_status": 400,
+      "support": "unsupported",
+      "error_type": "BadRequestError",
+      "error": "Error code: 400 - {'error': {'message': 'This response_format type is unavailable now (request_id: bd7cd089-2ebd-4bce-9659-3edf30ea71b1)', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+      "latency_ms": 2280
+    }
+  ],
+  "document_content_sent": false
+}

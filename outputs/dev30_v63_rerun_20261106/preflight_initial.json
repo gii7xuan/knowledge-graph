@@ -1,0 +1,45 @@
+{
+  "status": "blocked",
+  "settings_hash": "e20d9ce80a62aed5cf9c79f46d4c4093a54381e92dc2d8f8bbfdc31a4415d2bc",
+  "finished_at_epoch": 1793927416.0443008,
+  "finished_at_beijing": "2026-11-06T09:10:16.044300+08:00",
+  "synthetic_only": true,
+  "automatic_retries": 0,
+  "items": [
+    {
+      "voter_id": "judge_a",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "response_id": "chatcmpl-9da6e46a66b7ae9d",
+      "returned_model_id": "Qwen",
+      "input_tokens": 162,
+      "output_tokens": 38,
+      "outcome_unknown": false,
+      "latency_ms": 5000
+    },
+    {
+      "voter_id": "judge_b",
+      "model_id": "Gemma",
+      "response_status": "failed",
+      "error_type": "JSONDecodeError",
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "http_status": null,
+      "retryable": true,
+      "pause_job": false,
+      "error_code": "TRANSIENT_API_ERROR",
+      "latency_ms": 5094
+    },
+    {
+      "voter_id": "judge_c",
+      "model_id": "deepseek-flash",
+      "response_status": "failed",
+      "error_type": "APIStatusError",
+      "error": "Error code: 402 - {'error': {'message': 'Insufficient Balance (request_id: a4b86e22-abe5-4cf1-a49e-293ec99ae7d5)', 'type': 'insufficient_balance_error', 'param': None, 'code': 'invalid_request_error'}}",
+      "http_status": 402,
+      "retryable": false,
+      "pause_job": true,
+      "error_code": "INSUFFICIENT_BALANCE",
+      "latency_ms": 4390
+    }
+  ]
+}

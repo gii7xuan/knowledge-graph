@@ -1,0 +1,271 @@
+{
+  "started_at_beijing": "2026-11-06T09:13:55.509559+08:00",
+  "settings": {
+    "output_profiles": [
+      {
+        "voter_id": "judge_a",
+        "protocol": "chat_completions",
+        "base_url": "https://43.143.151.41:3000/v1",
+        "model": "Qwen",
+        "stream_responses": false,
+        "thinking_mode": null,
+        "version": "typed_review_output_v1",
+        "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+        "mode": "json_schema",
+        "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+        "template_hash": null,
+        "capability_record_hash": "7809177e4eed9b73b629bc5026ea5fabdce1e71c08a33d3098dcedab5fa51a57",
+        "verification": "strict_schema_observed"
+      },
+      {
+        "voter_id": "judge_b",
+        "protocol": "chat_completions",
+        "base_url": "https://43.143.151.41:3000/v1",
+        "model": "Gemma",
+        "stream_responses": true,
+        "thinking_mode": null,
+        "version": "typed_review_output_v1",
+        "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+        "mode": "json_template",
+        "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+        "template_hash": "50230abdfeebc702a7bacc2a9f6b1c9415df342fa7843625cc48c1ce6f143416",
+        "capability_record_hash": "27af55e0838c68e6cc20b67d0213252630b6e8629cc717b001901de63d382ac3",
+        "verification": "schema_ignored"
+      },
+      {
+        "voter_id": "judge_c",
+        "protocol": "chat_completions",
+        "base_url": "https://api.deepseek.com",
+        "model": "deepseek-flash",
+        "stream_responses": false,
+        "thinking_mode": "disabled",
+        "version": "typed_review_output_v1",
+        "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+        "mode": "json_template",
+        "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+        "template_hash": "50230abdfeebc702a7bacc2a9f6b1c9415df342fa7843625cc48c1ce6f143416",
+        "capability_record_hash": "dd60f5cf03dd30d7c5cefe019e161dc8f2d53606f41d3cd7705a37cda4d62bf1",
+        "verification": "schema_rejected"
+      }
+    ],
+    "mode": "shadow",
+    "versions": {
+      "prompt_version": "triple_validator_v6_3_dynamic_ontology_v1",
+      "response_contract_version": "validator_response_v6_3",
+      "prompt_hash": "c36cfd6b1fbf5399166b5dd32711975bca675476fa20185789a0c1ba37ee170e",
+      "response_contract_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+      "evidence_bundle_version": "evidence_bundle_v3",
+      "committee_version": "committee_qwen_gemma_deepseek_v1",
+      "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+      "planner_contract_version": "planner_action_v4",
+      "planner_prompt_version": "triple_planner_v4",
+      "planner_contract_hash": "5e689f34478ed46d6a5e47215dea834d0128c238cbe84a0fce9b24f9dbcd859f",
+      "planner_prompt_hash": "512fe0a7a02e66123e6ae47ee4af04d4e13426baa2882fc819157aa83084395f",
+      "planner_strategy_version": "bounded_react_v4",
+      "planner_model_id": "Qwen",
+      "planner_model_family": "qwen",
+      "configured_strategy": "llm_react",
+      "scope_policy_hash": "73b04d56d09c0c11b51fa300abd6da9e6ca72b9e9e5ebc17fb14a829ebfcef88",
+      "summary_policy_version": "review_dimensions_v1",
+      "summary_policy_hash": "82518369b248a3b14879ac2125845c5f55f9de2d15471b69082dcdcd2c972e54",
+      "output_delivery_version": "typed_review_output_v1",
+      "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "correction_policy": {
+        "version": "targeted_review_repairs_v1",
+        "prompt_hash": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+        "limits": {
+          "max_corrections_per_seat": 1,
+          "max_calls_per_candidate_version": 3,
+          "max_input_bytes": 16000,
+          "max_output_tokens": 1536,
+          "max_reserved_tokens_per_candidate_version": 54000,
+          "timeout_seconds": 60,
+          "max_initial_attempts_per_seat": 2
+        },
+        "mode": "field_patches_only",
+        "existing_judgments": "immutable",
+        "valid_evidence_and_counter_roles": "immutable",
+        "unparseable_or_semantic_conflict": "manual_review",
+        "partial_ontology_cannot_confirm_gap": true
+      },
+      "correction_policy_version": "targeted_review_repairs_v1",
+      "correction_policy_hash": "f525d4f09cb5c94091654b3fdc0b74c731af11eda76272159bf315fccd72f705",
+      "ontology_context_policy": {
+        "version": "review_ontology_context_v1",
+        "limits": {
+          "top_k_properties": 8,
+          "max_properties": 24,
+          "max_classes": 64,
+          "max_chars": 32000
+        },
+        "selection": "exact_alias_then_lexical_and_types",
+        "required_matches": "complete_or_stop",
+        "absence_from_subset": "not_proof_of_gap"
+      },
+      "ontology_context_policy_version": "review_ontology_context_v1",
+      "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae"
+    },
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "consensus": {
+      "version": "committee_qwen_gemma_deepseek_v1",
+      "committee_size": 3,
+      "required_votes": 3,
+      "minimum_distinct_families": 3,
+      "weighted_quorum_enabled": false,
+      "max_rounds": 2
+    },
+    "budget": {
+      "max_planner_steps": 6,
+      "max_validation_rounds": 2,
+      "max_tool_calls": 8,
+      "max_llm_calls_per_candidate": 24,
+      "max_total_tokens": 360000,
+      "max_evidence_items": 12,
+      "max_evidence_chars": 12000,
+      "per_call_timeout_seconds": 45,
+      "total_timeout_seconds": 600,
+      "max_retries_per_request": 1,
+      "max_parallel_validators": 3,
+      "max_parallel_candidates": 2,
+      "planner_timeout_seconds": 120
+    },
+    "case_budget": {
+      "llm_calls": 96,
+      "tokens": 400000,
+      "tool_calls": 64,
+      "extension_requests": 1,
+      "rebinds": 2
+    },
+    "planner": {
+      "model": "Qwen",
+      "family": "qwen",
+      "model_identity": "qwen",
+      "request_timeout_seconds": 120.0,
+      "http_timeout_seconds": 120.0,
+      "max_output_tokens": 2048,
+      "verify_ssl": false,
+      "thinking_mode": null,
+      "stream_responses": false,
+      "base_url": "https://43.143.151.41:3000/v1",
+      "allowed_tools": [
+        "inspect_context",
+        "search_evidence",
+        "inspect_ontology",
+        "lookup_review_memory",
+        "run_validation",
+        "recover_validation",
+        "finish_review"
+      ]
+    },
+    "validators": [
+      {
+        "id": "judge_a",
+        "model": "Qwen",
+        "family": "qwen",
+        "model_identity": "qwen",
+        "request_timeout_seconds": 90.0,
+        "http_timeout_seconds": 90.0,
+        "max_output_tokens": 8192,
+        "verify_ssl": false,
+        "thinking_mode": null,
+        "stream_responses": false,
+        "base_url": "https://43.143.151.41:3000/v1"
+      },
+      {
+        "id": "judge_b",
+        "model": "Gemma",
+        "family": "gemma",
+        "model_identity": "gemma",
+        "request_timeout_seconds": 180.0,
+        "http_timeout_seconds": 170.0,
+        "max_output_tokens": 8192,
+        "verify_ssl": false,
+        "thinking_mode": null,
+        "stream_responses": true,
+        "base_url": "https://43.143.151.41:3000/v1"
+      },
+      {
+        "id": "judge_c",
+        "model": "deepseek-flash",
+        "family": "deepseek",
+        "model_identity": "deepseek-flash",
+        "request_timeout_seconds": 90.0,
+        "http_timeout_seconds": 90.0,
+        "max_output_tokens": 8192,
+        "verify_ssl": null,
+        "thinking_mode": "disabled",
+        "stream_responses": false,
+        "base_url": "https://api.deepseek.com"
+      }
+    ],
+    "scope_policy": {
+      "version": "knowledge_scope_v1",
+      "excluded_scopes": [
+        "local_definition",
+        "derivation",
+        "example"
+      ]
+    },
+    "human_labels_in_prompt": false,
+    "review_memory_enabled": false,
+    "candidate_revisions_automatically_applied": false,
+    "ontology_extension_execution_enabled": false,
+    "ontology_publication_enabled": false,
+    "graph_import_enabled": false
+  },
+  "candidate_ids": [
+    "cand_7643b4bd5b5fdd4dfad6",
+    "cand_5b459021eb0a3fe91145",
+    "cand_f4876022d0c83d291ac3",
+    "cand_4d903306be730770f49b",
+    "cand_b5ac87a42c7a1fa289d6",
+    "cand_de3414495fa05d4e6672",
+    "cand_1733237c3026d874c587",
+    "cand_cc7f508e0ee31b09d27d",
+    "cand_4992400347d94dfbbc00",
+    "cand_13adbb2c2c5e41e099e5",
+    "cand_f796e51209e35106f7c1",
+    "cand_fcd525b7a47d9236d3ba",
+    "cand_a79f2100df7c5c252829",
+    "cand_b188efe51c5bee059d16",
+    "cand_006761af7b46d4cb89f6",
+    "cand_ccda7f5e8cf2b462ccab",
+    "cand_63e1e9f14fcf7bcef63a",
+    "cand_3b412a707f4f4fa04a2a",
+    "cand_064a5e16f5359b74ef07",
+    "cand_52159eb442b708f4e860",
+    "cand_e701d8ef2859275576ea",
+    "cand_ca27ef4e78caeece9179",
+    "cand_c0f4aaed85c469d0afd6",
+    "cand_e6ace1981cf9b8b16200",
+    "cand_7619a3990068828ab44a",
+    "cand_f89f9bd12a09240375b7",
+    "cand_27498364cdfe1e4202f8",
+    "cand_808d8f2198c5723ef4cc",
+    "cand_31bd91d40eac020d152d",
+    "cand_4699137d543b768e4b3e"
+  ],
+  "parallel_candidates": 2,
+  "fresh_only": true,
+  "budget_note": "same audit/case token ceilings as prior fixed-sample experiment; V6.3 correction ceilings unchanged"
+}

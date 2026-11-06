@@ -109,6 +109,16 @@ label { display: grid; gap: 5px; min-width: 0; color: #63727a; font-size: 12px; 
 .list-toolbar input { width: min(360px, 48vw); }
 .empty-state { padding: 45px 16px; text-align: center; color: #697780; font-size: 13px; }
 .pagination { display: flex; align-items: center; justify-content: flex-end; gap: 7px; padding-top: 16px; color: #697780; font-size: 12px; }
+.acceptance-panel {margin:12px 0;padding:10px 12px;background:#f7fafb;border:1px solid #d7e2e5;border-radius:6px;overflow-wrap:anywhere}
+.acceptance-panel summary {color:#0c727c;cursor:pointer}
+.acceptance-panel p,.acceptance-hint {color:#586e78;font-size:12px;line-height:1.65}
+.acceptance-panel label {display:block;margin:9px 0}
+.acceptance-panel input[type=checkbox] {width:auto;margin-right:7px}
+.acceptance-panel select,.acceptance-panel input:not([type=checkbox]),.acceptance-panel textarea {max-width:100%;margin-top:5px}
+.acceptance-errors {margin:10px 0;padding:10px 12px;background:#fff0f1;color:#963346;border-radius:5px}
+.acceptance-errors ul {margin:7px 0;padding-left:20px}
+.acceptance-errors pre {white-space:pre-wrap;overflow-wrap:anywhere}
+.acceptance-scope {margin-top:14px;padding-top:12px;border-top:1px solid #dbe5e7}
 
 .run-panel { padding: 14px 20px; border-bottom: 1px solid #dce2e4; background: #eef4f4; flex-shrink: 0; max-height: 42vh; overflow: auto; }
 .run-fields { display: grid; grid-template-columns: minmax(240px, 1.6fr) minmax(150px, .8fr) minmax(260px, 1.4fr) auto; gap: 10px; align-items: end; }

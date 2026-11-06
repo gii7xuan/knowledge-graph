@@ -136,6 +136,13 @@ def durable_attempt(repository, key, owner, binding, voter, proposal, feedback, 
                   **({'ontology_delivery_version':voter['ontology_delivery_version']} if voter.get('ontology_delivery_version') else {}),
                   **({'stream_responses':True} if getattr(voter['client'],'stream_responses',False) else {}),
                   **({'thinking_mode':voter['client'].thinking_mode} if getattr(voter['client'],'thinking_mode',None) else {})}}
+    if task_type=='triple_review' and proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        generation=next((g for g in proposal.get('validator_generation',[]) if g.get('voter_id')==voter['id']),{})
+        metadata['generation']['output_transport']=copy.deepcopy(generation.get('output_transport'))
+    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'} and (feedback or {}).get('kind')=='field_patch':
+        metadata['generation']['max_output_tokens']=feedback['repair_plan']['policy']['limits']['max_output_tokens']
+        metadata['generation']['request_phase']='field_patch'
+        metadata['generation']['reserved_token_upper_bound']=feedback['reserved_token_upper_bound']
     attempt_id=repository.begin_request_attempt(key,owner,max(.001,timeout-(time.monotonic()-started)),metadata)
     if time.monotonic()-started>=timeout:
         result={**binding,'response_status':'api_error','error_code':'REQUEST_DEADLINE_EXHAUSTED',
@@ -151,7 +158,7 @@ def durable_attempt(repository, key, owner, binding, voter, proposal, feedback, 
             'voter':{k:voter[k] for k in ('id','model_id','model_family','model_identity','request_timeout_seconds','http_timeout_seconds','ontology_delivery_version') if k in voter},
             'client':{**{k:getattr(client,k) for k in ('api_key','base_url','model_id','model_family','timeout_seconds','verify_ssl')},
                       'timeout_seconds':voter.get('http_timeout_seconds',client.timeout_seconds)},
-            'max_output_tokens':voter.get('max_output_tokens',4096)}
+            'max_output_tokens':metadata['generation']['max_output_tokens']}
         descriptor['client']['thinking_mode']=getattr(client,'thinking_mode',None)
         descriptor['client']['stream_responses']=getattr(client,'stream_responses',False)
         try:

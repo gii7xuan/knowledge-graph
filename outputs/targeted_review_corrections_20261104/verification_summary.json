@@ -1,0 +1,125 @@
+{
+  "verified_at": "2026-11-04T13:11:49.167704+00:00",
+  "contract_versions": {
+    "response_contract_version": "validator_response_v6_2",
+    "response_contract_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+    "prompt_version": "triple_validator_v6_2_targeted_repairs_v1",
+    "prompt_hash": "b5c98eb4abbe9e3694085113e3ece19c88f659a7a5830906a108f56864bffde2",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "summary_policy_version": "review_dimensions_v1",
+    "summary_policy_hash": "82518369b248a3b14879ac2125845c5f55f9de2d15471b69082dcdcd2c972e54",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+    "correction_policy": {
+      "version": "targeted_review_repairs_v1",
+      "prompt_hash": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+      "limits": {
+        "max_corrections_per_seat": 1,
+        "max_calls_per_candidate_version": 3,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "max_reserved_tokens_per_candidate_version": 54000,
+        "timeout_seconds": 60,
+        "max_initial_attempts_per_seat": 2
+      },
+      "mode": "field_patches_only",
+      "existing_judgments": "immutable",
+      "valid_evidence_and_counter_roles": "immutable",
+      "unparseable_or_semantic_conflict": "manual_review",
+      "partial_ontology_cannot_confirm_gap": true
+    },
+    "correction_policy_version": "targeted_review_repairs_v1",
+    "correction_policy_hash": "f525d4f09cb5c94091654b3fdc0b74c731af11eda76272159bf315fccd72f705"
+  },
+  "profiles": [
+    {
+      "voter_id": "judge_a",
+      "protocol": "chat_completions",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "model": "Qwen",
+      "stream_responses": false,
+      "thinking_mode": null,
+      "version": "typed_review_output_v1",
+      "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "mode": "json_schema",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "template_hash": null,
+      "capability_record_hash": "7809177e4eed9b73b629bc5026ea5fabdce1e71c08a33d3098dcedab5fa51a57",
+      "verification": "strict_schema_observed"
+    },
+    {
+      "voter_id": "judge_b",
+      "protocol": "chat_completions",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "model": "Gemma",
+      "stream_responses": true,
+      "thinking_mode": null,
+      "version": "typed_review_output_v1",
+      "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "mode": "json_template",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "template_hash": "50230abdfeebc702a7bacc2a9f6b1c9415df342fa7843625cc48c1ce6f143416",
+      "capability_record_hash": "27af55e0838c68e6cc20b67d0213252630b6e8629cc717b001901de63d382ac3",
+      "verification": "schema_ignored"
+    },
+    {
+      "voter_id": "judge_c",
+      "protocol": "chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "stream_responses": false,
+      "thinking_mode": "disabled",
+      "version": "typed_review_output_v1",
+      "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+      "mode": "json_template",
+      "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+      "template_hash": "50230abdfeebc702a7bacc2a9f6b1c9415df342fa7843625cc48c1ce6f143416",
+      "capability_record_hash": "dd60f5cf03dd30d7c5cefe019e161dc8f2d53606f41d3cd7705a37cda4d62bf1",
+      "verification": "schema_rejected"
+    }
+  ],
+  "external_synthetic_requests": 3,
+  "document_content_sent": false,
+  "probes": [
+    {
+      "file": "probe_judge_a.json",
+      "model": "Qwen",
+      "state": "completed",
+      "negative_preserved": true,
+      "input_tokens": 1321,
+      "output_tokens": 55
+    },
+    {
+      "file": "probe_judge_b.json",
+      "model": "Gemma",
+      "state": "completed",
+      "negative_preserved": true,
+      "input_tokens": 1418,
+      "output_tokens": 583
+    },
+    {
+      "file": "probe_judge_c.json",
+      "model": "deepseek-flash",
+      "state": "completed",
+      "negative_preserved": true,
+      "input_tokens": 1351,
+      "output_tokens": 55
+    }
+  ],
+  "regression_logs": [
+    {
+      "log": "targeted_correction_full_20261104.txt",
+      "passed": 178
+    },
+    {
+      "log": "targeted_correction_final_guards_20261104.txt",
+      "passed": 21
+    }
+  ],
+  "unique_related_tests_passed": 180,
+  "original_v51_settings_unchanged": true,
+  "production_30_candidate_hashes_unchanged": true,
+  "original_workbook_unchanged": true,
+  "historical_votes_rewritten": false,
+  "new_chapter_review_started": false
+}

@@ -807,7 +807,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old["decision_id"],))
             route = str(result.get("decision") or result.get("route") or "manual_review")
             from .response_contract import CONTRACT_VERSION
-            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4','validator_response_v5'}:
+            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4','validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
                 from .proposal_resolver import selected_proposal
                 candidate = self.get_revision(candidate_id, revision)
                 selected_proposal(self, candidate, result)

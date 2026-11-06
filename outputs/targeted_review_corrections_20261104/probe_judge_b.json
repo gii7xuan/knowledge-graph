@@ -1,0 +1,664 @@
+{
+  "created_at": "2026-11-04T12:59:55.981640+00:00",
+  "model": "Gemma",
+  "voter_id": "judge_b",
+  "state": "completed",
+  "synthetic_only": true,
+  "document_content_sent": false,
+  "original_review_was_synthetic": true,
+  "maximum_provider_requests": 1,
+  "automatic_retry": false,
+  "original_response": {
+    "dimensions": {
+      "triple_support": {
+        "status": "insufficient",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      },
+      "entity_reference": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      },
+      "relation_semantics": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      },
+      "relation_direction": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      },
+      "qualifiers": {
+        "status": "fail",
+        "evidence_ids": [],
+        "note": "synthetic negative opinion must remain unchanged",
+        "issue_code": null
+      },
+      "evidence_sufficiency": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      },
+      "knowledge_scope": {
+        "status": "unresolved",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      },
+      "counterevidence": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": null
+      }
+    },
+    "evidence_assessments": [],
+    "primary_evidence_ids": [],
+    "counterevidence_reviewed_ids": [],
+    "requested_context": null,
+    "suggested_revision": null
+  },
+  "plan": {
+    "version": "targeted_review_repairs_v1",
+    "original_response_hash": "73fd89c6070c01dec2007f788f7e557d239a85a1569d7e619b3b1f0ddc57f655",
+    "proposal_digest": "synthetic_field_probe_judge_b",
+    "evidence_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "targets": [
+      {
+        "parts": [
+          "dimensions",
+          "mapping"
+        ],
+        "kind": "missing",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "evidence_ids",
+            "note",
+            "relation_id",
+            "competing_relation_ids"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "matched",
+                "ambiguous",
+                "unassigned",
+                "constraint_conflict",
+                "candidate_mapping_error",
+                "suspected_schema_error"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            },
+            "issue_code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "relation_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "competing_relation_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "key": "field_0",
+        "path": "/dimensions/mapping",
+        "actual_type": "missing"
+      }
+    ],
+    "policy": {
+      "version": "targeted_review_repairs_v1",
+      "prompt_hash": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+      "limits": {
+        "max_corrections_per_seat": 1,
+        "max_calls_per_candidate_version": 3,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "max_reserved_tokens_per_candidate_version": 54000,
+        "timeout_seconds": 60,
+        "max_initial_attempts_per_seat": 2
+      },
+      "mode": "field_patches_only",
+      "existing_judgments": "immutable",
+      "valid_evidence_and_counter_roles": "immutable",
+      "unparseable_or_semantic_conflict": "manual_review",
+      "partial_ontology_cannot_confirm_gap": true
+    },
+    "valid_reference_ids": [],
+    "plan_hash": "5c5d4ee72945ea7bdf970c9e2bdd8a36fa311224ec43130801c1c58be0405d78"
+  },
+  "response_status": "ok",
+  "original_negative_judgment_preserved": true,
+  "raw_correction_response": "{\"repairs\": {\"field_0\": {\"status\": \"unassigned\", \"evidence_ids\": [], \"note\": \"synthetic no source material\", \"issue_code\": null, \"relation_id\": null, \"competing_relation_ids\": []}}}",
+  "correction_result": {
+    "dimensions": {
+      "triple_support": {
+        "status": "insufficient",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "entity_reference": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "relation_semantics": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "relation_direction": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "qualifiers": {
+        "status": "fail",
+        "evidence_ids": [],
+        "note": "synthetic negative opinion must remain unchanged",
+        "issue_code": ""
+      },
+      "evidence_sufficiency": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "knowledge_scope": {
+        "status": "unresolved",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "counterevidence": {
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      "mapping": {
+        "status": "unassigned",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": "",
+        "relation_id": null,
+        "competing_relation_ids": []
+      }
+    },
+    "evidence_assessments": [],
+    "primary_evidence_ids": [],
+    "counterevidence_reviewed_ids": [],
+    "requested_context": null,
+    "suggested_revision": null,
+    "schema_change_hint": null,
+    "verdict": "uncertain",
+    "source_support": "insufficient",
+    "expression_status": "needs_revision",
+    "knowledge_scope": "unresolved",
+    "mapping_diagnosis": "unassigned",
+    "mapping": {
+      "status": "unassigned",
+      "relation_id": null,
+      "competing_relation_ids": [],
+      "note": "synthetic no source material"
+    },
+    "schema_status": "unknown",
+    "schema_issue": "unknown",
+    "schema_assessment": {
+      "status": "unknown",
+      "issue": "unknown",
+      "evidence_ids": [],
+      "note": "synthetic no source material"
+    },
+    "checks": [
+      {
+        "check": "triple_support",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "entity_reference",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "relation_semantics",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "relation_direction",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "qualifiers",
+        "status": "fail",
+        "evidence_ids": [],
+        "note": "synthetic negative opinion must remain unchanged",
+        "issue_code": ""
+      },
+      {
+        "check": "evidence_sufficiency",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "mapping",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "knowledge_scope",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "counterevidence",
+        "status": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material",
+        "issue_code": ""
+      },
+      {
+        "check": "ontology",
+        "status": "unknown",
+        "issue_code": "unknown",
+        "evidence_ids": [],
+        "note": "synthetic no source material"
+      }
+    ],
+    "reason_codes": [
+      "EVIDENCE_INSUFFICIENT",
+      "QUALIFIER_MISMATCH"
+    ],
+    "supporting_evidence_ids": [],
+    "counter_evidence_ids": [],
+    "summary_derivation": {
+      "version": "review_dimensions_v1",
+      "model_input_fields": [
+        "dimensions",
+        "evidence_assessments"
+      ],
+      "policy_hash": "82518369b248a3b14879ac2125845c5f55f9de2d15471b69082dcdcd2c972e54",
+      "final_admission_requires_frozen_committee_and_program_guards": true
+    },
+    "format_normalization": {
+      "version": "dimension_auxiliary_fields_v1",
+      "changes": [
+        {
+          "path": "/dimensions/triple_support/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/entity_reference/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/relation_semantics/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/relation_direction/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/qualifiers/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/evidence_sufficiency/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/knowledge_scope/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/counterevidence/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/dimensions/mapping/issue_code",
+          "operation": "replace",
+          "to": "",
+          "from": null
+        },
+        {
+          "path": "/schema_change_hint",
+          "operation": "add",
+          "to": null
+        }
+      ]
+    },
+    "raw_response": {
+      "dimensions": {
+        "triple_support": {
+          "status": "insufficient",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "entity_reference": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "relation_semantics": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "relation_direction": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "qualifiers": {
+          "status": "fail",
+          "evidence_ids": [],
+          "note": "synthetic negative opinion must remain unchanged",
+          "issue_code": null
+        },
+        "evidence_sufficiency": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "knowledge_scope": {
+          "status": "unresolved",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "counterevidence": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        }
+      },
+      "evidence_assessments": [],
+      "primary_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "requested_context": null,
+      "suggested_revision": null
+    },
+    "task_type": "triple_review",
+    "task_id": "synthetic_no_document",
+    "object_revision": 1,
+    "source_snapshot_hash": null,
+    "audit_id": "synthetic_field_probe",
+    "round_id": 1,
+    "proposal_digest": "synthetic_field_probe_judge_b",
+    "voter_id": "judge_b",
+    "model_id": "Gemma",
+    "model_family": "gemma",
+    "model_identity": "gemma",
+    "source_index_hash": null,
+    "document_version": null,
+    "ontology_version": null,
+    "ontology_release_id": null,
+    "profile_hash": null,
+    "committee_version": null,
+    "committee_policy_hash": null,
+    "prompt_version": "triple_validator_v6_2_targeted_repairs_v1",
+    "evidence_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "response_contract_version": "validator_response_v6_2",
+    "correction_policy_version": "targeted_review_repairs_v1",
+    "correction_policy_hash": "f525d4f09cb5c94091654b3fdc0b74c731af11eda76272159bf315fccd72f705",
+    "response_status": "ok",
+    "latency_ms": 13077,
+    "input_tokens": 1418,
+    "output_tokens": 583,
+    "returned_model_id": "Gemma",
+    "response_id": "chatcmpl-a64961fdf339e1d4",
+    "finish_reason": "stop",
+    "reasoning_tokens": 525,
+    "model_version_verification": "reported",
+    "corrected_response": {
+      "dimensions": {
+        "triple_support": {
+          "status": "insufficient",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "entity_reference": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "relation_semantics": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "relation_direction": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "qualifiers": {
+          "status": "fail",
+          "evidence_ids": [],
+          "note": "synthetic negative opinion must remain unchanged",
+          "issue_code": null
+        },
+        "evidence_sufficiency": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "knowledge_scope": {
+          "status": "unresolved",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "counterevidence": {
+          "status": "unknown",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null
+        },
+        "mapping": {
+          "status": "unassigned",
+          "evidence_ids": [],
+          "note": "synthetic no source material",
+          "issue_code": null,
+          "relation_id": null,
+          "competing_relation_ids": []
+        }
+      },
+      "evidence_assessments": [],
+      "primary_evidence_ids": [],
+      "counterevidence_reviewed_ids": [],
+      "requested_context": null,
+      "suggested_revision": null
+    },
+    "raw_correction_response": "{\"repairs\": {\"field_0\": {\"status\": \"unassigned\", \"evidence_ids\": [], \"note\": \"synthetic no source material\", \"issue_code\": null, \"relation_id\": null, \"competing_relation_ids\": []}}}",
+    "response_origin": "field_patch_merge",
+    "correction_trace": {
+      "plan": {
+        "version": "targeted_review_repairs_v1",
+        "original_response_hash": "73fd89c6070c01dec2007f788f7e557d239a85a1569d7e619b3b1f0ddc57f655",
+        "proposal_digest": "synthetic_field_probe_judge_b",
+        "evidence_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "targets": [
+          {
+            "parts": [
+              "dimensions",
+              "mapping"
+            ],
+            "kind": "missing",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "evidence_ids",
+                "note",
+                "relation_id",
+                "competing_relation_ids"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "matched",
+                    "ambiguous",
+                    "unassigned",
+                    "constraint_conflict",
+                    "candidate_mapping_error",
+                    "suspected_schema_error"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "issue_code": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "relation_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "competing_relation_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "key": "field_0",
+            "path": "/dimensions/mapping",
+            "actual_type": "missing"
+          }
+        ],
+        "policy": {
+          "version": "targeted_review_repairs_v1",
+          "prompt_hash": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+          "limits": {
+            "max_corrections_per_seat": 1,
+            "max_calls_per_candidate_version": 3,
+            "max_input_bytes": 16000,
+            "max_output_tokens": 1536,
+            "max_reserved_tokens_per_candidate_version": 54000,
+            "timeout_seconds": 60,
+            "max_initial_attempts_per_seat": 2
+          },
+          "mode": "field_patches_only",
+          "existing_judgments": "immutable",
+          "valid_evidence_and_counter_roles": "immutable",
+          "unparseable_or_semantic_conflict": "manual_review",
+          "partial_ontology_cannot_confirm_gap": true
+        },
+        "valid_reference_ids": [],
+        "plan_hash": "5c5d4ee72945ea7bdf970c9e2bdd8a36fa311224ec43130801c1c58be0405d78"
+      },
+      "patch": {
+        "repairs": {
+          "field_0": {
+            "status": "unassigned",
+            "evidence_ids": [],
+            "note": "synthetic no source material",
+            "issue_code": null,
+            "relation_id": null,
+            "competing_relation_ids": []
+          }
+        }
+      },
+      "original_attempt_id": "synthetic_fixture",
+      "correction_id": "synthetic_probe",
+      "protected_judgments_unchanged": true
+    }
+  },
+  "initial_review_requests_sent": 0,
+  "correction_requests_sent": 1
+}

@@ -1,17 +1,18 @@
 <script setup>
-import { computed, onActivated, onDeactivated, onUnmounted, reactive, ref, watch } from 'vue';
+import { computed, nextTick, onActivated, onDeactivated, onUnmounted, reactive, ref, watch } from 'vue';
 import { Check, ChevronLeft, ChevronRight, Clock3, Pencil, Play, RefreshCw, X } from 'lucide-vue-next';
 import MarkdownIt from 'markdown-it';
 import { api, post } from '../api';
 import ModelSelector from './ModelSelector.vue';
 import { agentTimeline } from '../reviewAgentTimeline';
+import { prepareAcceptance, acceptanceErrorMessage, requiresScopeReview } from '../manualAcceptance.js';
 
 const props = defineProps({
   markdownFiles: { type: Array, default: () => [] },
   modelConfigs: { type: Array, default: () => [] },
   selectedModelId: { type: String, default: 'default' }
 });
-const emit = defineEmits(['update:selectedModelId', 'model-created']);
+const emit = defineEmits(['update:selectedModelId', 'model-created', 'open-monitor']);
 const markdown = new MarkdownIt({ html: false, linkify: true, breaks: true });
 const openEvidence = reactive(new Set());
 const renderedEvidence = reactive({});
@@ -47,6 +48,10 @@ const drafts = reactive({});
 const loading = ref(false);
 const busyId = ref('');
 const error = ref('');
+const acceptanceOpen = reactive(new Set());
+const acceptanceIssues = reactive({});
+const acceptanceServerErrors = reactive({});
+const acceptancePanels = new Map();
 const extractionOpen = ref(false);
 const markdownPath = ref('');
 const outputStem = ref('');
@@ -132,6 +137,8 @@ async function loadAll() {
     for (const item of items.value) {
       const id = idFor(item);
       delete renderedEvidence[id];
+      delete acceptanceIssues[id];
+      delete acceptanceServerErrors[id];
       const triple = tripleFor(item);
       drafts[id] = {
         head: triple.head || '',
@@ -188,10 +195,49 @@ function changePage(next) {
   loadAll();
 }
 
+function setAcceptancePanel(item, element) {
+  const id = idFor(item);
+  if (element) acceptancePanels.set(id, element);
+  else acceptancePanels.delete(id);
+}
+
+function toggleAcceptance(item, event) {
+  const id = idFor(item);
+  if (event.target.open) acceptanceOpen.add(id);
+  else acceptanceOpen.delete(id);
+}
+
+function revalidateAcceptance(item) {
+  const id = idFor(item);
+  if (!acceptanceIssues[id]) return;
+  delete acceptanceServerErrors[id];
+  acceptanceIssues[id] = prepareAcceptance(item, drafts[id]).issues;
+}
+
+async function revealAcceptance(item, issues) {
+  const id = idFor(item);
+  acceptanceIssues[id] = issues;
+  acceptanceOpen.add(id);
+  await nextTick();
+  const panel = acceptancePanels.get(id);
+  panel?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  const controls = [...(panel?.querySelectorAll('[data-acceptance-control]') || [])];
+  const target = controls.find(control => control.dataset.acceptanceControl === issues[0]?.field) || controls[0];
+  target?.focus({ preventScroll: true });
+}
+
 async function decide(item, decision) {
   const id = idFor(item);
   const draft = drafts[id];
   if (!draft) return;
+  let acceptance;
+  if (isV3.value && decision === 'accept') {
+    error.value = '';
+    delete acceptanceServerErrors[id];
+    acceptance = prepareAcceptance(item, draft);
+    if (!acceptance.ok) { await revealAcceptance(item, acceptance.issues); return; }
+    delete acceptanceIssues[id];
+  }
   busyId.value = id;
   error.value = '';
   try {
@@ -245,19 +291,8 @@ async function decide(item, decision) {
       review_id: item.review_id
     };
     if (isV3.value && decision === 'accept') {
-      const selected = Object.entries(draft.selections).filter(([, s]) => s.selected);
-      const bundleRequest = draft.evidence_mode === 'proposal' ? {
-        audit_id: item.audit_summary?.audit_id,
-        selected_round_id: item.audit_summary?.selected_round_id,
-        selected_proposal_digest: item.audit_summary?.selected_proposal_digest,
-        selected_evidence_hash: item.audit_summary?.selected_evidence_hash,
-        evidence_ids: selected.map(([eid]) => eid),
-        evidence_assessments: selected.map(([eid, s]) => ({ evidence_id: eid, role: s.role, note: s.note, resolution_evidence_ids: s.resolutions.split(/[,，\s]+/).filter(Boolean) }))
-      } : { spans: draft.spans };
       const bundle = await post(`/api/triplets/candidates/${encodeURIComponent(item.candidate_id)}/human-bundles`, {
-        revision: item.revision, expected_row_version: item.row_version, ...bundleRequest,
-        ...(tripleFor(item).semantic_context ? { scope_review: { knowledge_scope: draft.annotation.knowledge_scope,
-          expression_status: draft.annotation.expression_status, note: draft.annotation_note } } : {})
+        revision: item.revision, expected_row_version: item.row_version, ...acceptance.bundleRequest
       });
       base.human_bundle_id = bundle.bundle_id;
       base.audit_id = draft.evidence_mode === 'proposal' ? item.audit_summary?.audit_id : null;
@@ -274,7 +309,10 @@ async function decide(item, decision) {
     });
     await loadAll();
   } catch (cause) {
-    error.value = cause.message;
+    if (isV3.value && decision === 'accept') {
+      acceptanceServerErrors[id] = cause.message;
+      await revealAcceptance(item, [{ field: 'server', message: acceptanceErrorMessage(cause) }]);
+    } else error.value = cause.message;
   } finally {
     busyId.value = '';
   }
@@ -569,10 +607,12 @@ onUnmounted(stopPolling);
                 模型意见：
                 <span v-for="vote in votes(item)" :key="`${vote.round_id}-${vote.voter_id}`">
                   {{ vote.voter_id }}={{ vote.response_status === 'ok' ? vote.verdict : vote.response_status }}
+                  <small v-if="vote.summary_derivation" :title="`由各维度意见按 ${vote.summary_derivation.version} 生成`">（程序汇总）</small>
                   {{ vote.error || '' }}
                 </span>
               </div>
               <div v-if="item.audit_summary" class="detail-line">
+                <button type="button" @click="emit('open-monitor', { candidate_id: item.candidate_id, audit_id: item.audit_summary.audit_id })">查看 Agent 审核监控</button>
                 本轮审核：{{ item.audit_summary.audit_id }} · 提示 {{ item.audit_summary.versions?.prompt_version || '历史版本' }}
                 · 契约 {{ item.audit_summary.versions?.response_contract_version || '未记录' }}
                 <div v-for="ev in item.audit_summary.evidence_bundle?.items || []" :key="ev.evidence_id">
@@ -653,31 +693,49 @@ onUnmounted(stopPolling);
                   </template>
                 </div>
               </details>
-              <details v-if="isV3">
-                <summary>接纳所依据的原文证据与人工判断</summary>
-                <p>选择支持证据并填写判断依据。模型提出的反证也需保留并填写解决依据；表达不完整时请先修改。</p>
-                <select v-model="drafts[idFor(item)].evidence_mode"><option v-if="item.audit_summary?.status === 'completed'" value="proposal">当前审核提案的证据</option><option value="source">从规范原文选择引文</option></select>
+              <details v-if="isV3" :ref="element => setAcceptancePanel(item, element)" class="acceptance-panel"
+                :open="acceptanceOpen.has(idFor(item))" @toggle="toggleAcceptance(item, $event)"
+                @input="revalidateAcceptance(item)" @change="revalidateAcceptance(item)">
+                <summary>通过所需的原文证据与人工判断</summary>
+                <div v-if="acceptanceIssues[idFor(item)]?.length" class="acceptance-errors" role="alert">
+                  <strong>通过前还需补齐：</strong>
+                  <ul><li v-for="(issue, index) in acceptanceIssues[idFor(item)]" :key="index">{{ issue.message }}</li></ul>
+                  <details v-if="acceptanceServerErrors[idFor(item)]"><summary>查看服务端校验详情</summary><pre>{{ acceptanceServerErrors[idFor(item)] }}</pre></details>
+                </div>
+                <p>至少选择一条支持证据，明确标为“支持”，并填写原文如何支持当前候选。反证也需保留并说明处置依据；需要修改表达时，请先保存修改并复审。</p>
+                <label>证据来源<select v-model="drafts[idFor(item)].evidence_mode" data-acceptance-control="mode"><option v-if="item.audit_summary?.status === 'completed'" value="proposal">当前审核提案的证据</option><option value="source">从规范原文选择引文</option></select></label>
                 <template v-if="drafts[idFor(item)].evidence_mode === 'proposal'">
+                  <p v-if="!item.audit_summary?.evidence_bundle?.items?.length">当前提案没有可选证据，请改用规范原文引文。</p>
                   <div v-for="ev in item.audit_summary?.evidence_bundle?.items || []" :key="ev.evidence_id">
-                    <label><input v-model="drafts[idFor(item)].selections[ev.evidence_id].selected" type="checkbox" />{{ ev.evidence_id }}：{{ ev.quote }}</label>
+                    <label><input v-model="drafts[idFor(item)].selections[ev.evidence_id].selected" type="checkbox" data-acceptance-control="evidence" />{{ ev.evidence_id }}：{{ ev.quote }}</label>
                     <strong v-if="counterVoters(item, ev.evidence_id)">反证引用：{{ counterVoters(item, ev.evidence_id) }}；需保留并说明处置依据。</strong>
                     <template v-if="drafts[idFor(item)].selections[ev.evidence_id].selected">
-                      <select v-model="drafts[idFor(item)].selections[ev.evidence_id].role"><option value="support">支持</option><option value="counter">反驳</option><option value="context">上下文</option><option value="irrelevant">无关</option></select>
-                      <input v-model="drafts[idFor(item)].selections[ev.evidence_id].note" placeholder="原文如何支持或限定当前事实" />
-                      <input v-model="drafts[idFor(item)].selections[ev.evidence_id].resolutions" placeholder="解决反证所引用的支持证据 ID，逗号分隔" />
+                      <select v-model="drafts[idFor(item)].selections[ev.evidence_id].role" :data-acceptance-control="'role:' + ev.evidence_id" :aria-label="ev.evidence_id + '的证据角色'"><option value="support">支持</option><option value="counter">反驳</option><option value="context">上下文</option><option value="irrelevant">无关</option></select>
+                      <input v-model="drafts[idFor(item)].selections[ev.evidence_id].note" :data-acceptance-control="'note:' + ev.evidence_id" placeholder="原文如何支持或限定当前事实（必填）" :aria-label="ev.evidence_id + '的判断依据'" />
+                      <input v-model="drafts[idFor(item)].selections[ev.evidence_id].resolutions" :data-acceptance-control="'resolution:' + ev.evidence_id" placeholder="解决反证所引用的支持证据 ID，逗号分隔" />
                     </template>
                   </div>
                 </template>
                 <template v-else>
                   <div v-for="(span, n) in drafts[idFor(item)].spans" :key="n">
-                    <textarea v-model="span.quote" placeholder="粘贴规范原文中的完整引文，服务器将核对位置" />
-                    <label>第几次出现<input v-model.number="span.occurrence" type="number" min="1" /></label>
-                    <select v-model="span.role"><option value="support">支持</option><option value="counter">反驳</option><option value="context">上下文</option><option value="irrelevant">无关</option></select>
-                    <input v-model="span.note" placeholder="依据与适用范围说明" />
+                    <textarea v-model="span.quote" :data-acceptance-control="'quote:' + n" placeholder="粘贴规范原文中的完整引文，服务器将核对位置" />
+                    <label>第几次出现<input v-model.number="span.occurrence" :data-acceptance-control="'occurrence:' + n" type="number" min="1" /></label>
+                    <select v-model="span.role" :data-acceptance-control="'span-role:' + n"><option value="support">支持</option><option value="counter">反驳</option><option value="context">上下文</option><option value="irrelevant">无关</option></select>
+                    <input v-model="span.note" :data-acceptance-control="'span-note:' + n" placeholder="依据与适用范围说明（必填）" />
                     <button @click="drafts[idFor(item)].spans.splice(n, 1)">移除</button>
                   </div>
                   <button @click="drafts[idFor(item)].spans.push({quote:'',occurrence:1,role:'context',note:''})">添加引文</button>
                 </template>
+                <div v-if="requiresScopeReview(item)" class="acceptance-scope">
+                  <strong>通过前的知识范围与表述确认</strong>
+                  <label>知识收录范围<select v-model="drafts[idFor(item)].annotation.knowledge_scope" data-acceptance-control="scope">
+                    <option v-for="(title, value) in annotationFields.knowledge_scope.options" :key="value" :value="value">{{ title }}</option>
+                  </select></label>
+                  <label>候选表述完整性<select v-model="drafts[idFor(item)].annotation.expression_status" data-acceptance-control="expression">
+                    <option v-for="(title, value) in annotationFields.expression_status.options" :key="value" :value="value">{{ title }}</option>
+                  </select></label>
+                  <textarea v-model="drafts[idFor(item)].annotation_note" data-acceptance-control="scope-note" placeholder="根据原文说明收录范围与表述完整性（必填）" />
+                </div>
               </details>
               <label>原因
                 <select v-model="drafts[idFor(item)].reason_code">
@@ -694,8 +752,10 @@ onUnmounted(stopPolling);
                 </select>
               </label>
               <textarea v-model="drafts[idFor(item)].comment" placeholder="审核备注" aria-label="审核备注"></textarea>
+              <p v-if="isV3" class="acceptance-hint">通过前需明确选择支持证据并填写判断依据；有内容修改时请先保存修改并复审。</p>
               <div class="decision-actions">
                 <button class="success" :disabled="!!busyId" @click="decide(item, 'accept')"><Check :size="16" />通过</button>
+                <button v-if="isV3" :disabled="!!busyId" @click="revealAcceptance(item, prepareAcceptance(item, drafts[idFor(item)]).issues)">填写通过依据</button>
                 <button class="primary" :disabled="!!busyId" @click="decide(item, 'modify')"><Pencil :size="16" />保存修改并复审</button>
                 <button class="danger" :disabled="!!busyId" @click="decide(item, 'reject')"><X :size="16" />拒绝</button>
                 <button :disabled="!!busyId" @click="decide(item, 'defer')"><Clock3 :size="16" />暂缓</button>

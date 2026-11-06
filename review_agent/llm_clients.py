@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import os
 import time
 from dataclasses import dataclass
@@ -92,13 +93,20 @@ class OpenAICompatibleClient:
 
     def complete_json(self, payload: Mapping[str, Any], *, system_prompt: str = "", **kwargs: Any) -> LLMResponse:
         started = time.monotonic()
+        output_format=copy.deepcopy(kwargs.get('response_format',{'type':'json_object'}))
+        if not isinstance(output_format,dict) or output_format.get('type') not in {'json_object','json_schema'}:
+            raise ValueError('unsupported JSON response format')
+        if output_format['type']=='json_schema':
+            spec=output_format.get('json_schema')
+            if not isinstance(spec,dict) or spec.get('strict') is not True or not isinstance(spec.get('schema'),dict) or not isinstance(spec.get('name'),str) or not spec['name']:
+                raise ValueError('JSON Schema output requires a named strict schema')
         response = self._get_client().chat.completions.create(
             model=self.model_id,
             messages=[
                 {"role": "system", "content": system_prompt + "\nReturn only a valid JSON object."},
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
             ],
-            response_format={"type": "json_object"},
+            response_format=output_format,
             temperature=float(kwargs.get("temperature", 0.0)),
             **({'extra_body':{'thinking':{'type':self.thinking_mode}}} if self.thinking_mode else {}),
             **({'stream':True,'stream_options':{'include_usage':True}} if self.stream_responses else {}),

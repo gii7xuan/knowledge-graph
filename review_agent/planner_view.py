@@ -44,9 +44,13 @@ def summarize_vote(vote):
                       for c in vote.get('checks',[])[:10]]
     for key in ('expression_status','knowledge_scope','mapping','counterevidence_reviewed_ids','primary_evidence_ids'):
         if key in vote: result[key]=bounded_hint(vote[key])
+    for key in ('mapping_diagnosis','summary_derivation','program_reason_codes'):
+        if key in vote:result[key]=bounded_hint(vote[key])
     for key in ('suggested_revision','requested_context','schema_change_hint'):
         result[key]=bounded_hint(vote.get(key))
     result['failure']={k:bounded_hint(vote.get(k),300) for k in ('error_code','error','retryable','outcome_unknown','request_key','attempt_id','validation_errors')}
+    for key in ('correction_terminal','correction_stop_reason','correction_available'):
+        if key in vote:result['failure'][key]=bounded_hint(vote[key],300)
     return result
 
 

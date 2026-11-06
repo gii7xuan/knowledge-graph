@@ -24,6 +24,7 @@ from review_agent.repository import (
     ValidationError,
 )
 from review_agent.service import ServiceUnavailableError, get_default_service
+from review_agent.monitor import ReviewMonitor, MonitorUnavailable
 from scripts.freeze_ontology import freeze_ontology
 from ontologyBuild.release_catalog import ReleaseCatalog, ReleaseConflictError, select_release
 from ontologyBuild.providers import OntologyImportRequest
@@ -622,7 +623,7 @@ def decide_ontology(payload):
 
 
 def frontend_file_for(request_path):
-    if request_path in {"/", "/ontology", "/triplet-extract", "/triplet-review"}:
+    if request_path in {"/", "/ontology", "/triplet-extract", "/triplet-review", "/review-monitor"}:
         path = FRONTEND_DIR / "index.html"
     elif request_path.startswith("/assets/"):
         path = FRONTEND_DIR / unquote(request_path).lstrip("/")
@@ -658,7 +659,9 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
         path = urlparse(self.path).path
         query = parse_qs(urlparse(self.path).query)
         try:
-            if path == "/api/triplets/runs":
+            if path.startswith("/api/review-monitor/"):
+                self.send_json(ReviewMonitor().get(path, query))
+            elif path == "/api/triplets/runs":
                 self.send_json(get_default_service().runs(
                     int(query.get("page", ["1"])[0]), int(query.get("page_size", ["20"])[0])
                 ))
@@ -731,6 +734,8 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
             self.send_json({"error": str(exc)}, 404)
         except (ConflictError, ReleaseConflictError) as exc:
             self.send_json({"error": str(exc), "reason_codes": ["VERSION_CONFLICT"]}, 409)
+        except MonitorUnavailable as exc:
+            self.send_json({"error": str(exc), "reason_codes": ["MONITOR_SOURCE_UNAVAILABLE"]}, 503)
         except ServiceUnavailableError as exc:
             self.send_json({"error": str(exc), "reason_codes": ["MODEL_MODE_UNAVAILABLE"]}, 503)
         except (ValueError, ValidationError, FileNotFoundError) as exc:

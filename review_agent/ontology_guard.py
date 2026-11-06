@@ -330,6 +330,11 @@ class OntologyGuard:
             reason_codes.append("ENTITY_TYPE_UNKNOWN")
         hard_failure = kind_failure or "fail" in {domain_status, range_status}
         status = "fail" if hard_failure else ("unknown" if type_unknown else "pass")
+        structural_status = status
+        definition_missing = not (relation.get('definition') or relation.get('description') or relation.get('definitions'))
+        if getattr(self,'require_relation_definition',False) and definition_missing:
+            reason_codes.append('RELATION_DEFINITION_UNAVAILABLE')
+            if status != 'fail': status = 'unknown'
         profile = self.ontology.get("application_profile") or {}
         if (profile.get("auto_review_blocked") or relation.get("auto_review_blocked")
                 or relation_id in profile.get("blocked_relation_ids", [])):
@@ -338,7 +343,10 @@ class OntologyGuard:
                 status = "unknown"
         return {
             "status": status, "relation_known": True, "relation_id": relation_id,
-            'mapping_status':'constraint_conflict' if hard_failure else 'matched' if requested_relation_id==relation_id else 'unassigned',
+            **({'structural_status':structural_status,'definition_available':not definition_missing}
+               if getattr(self,'require_relation_definition',False) else {}),
+            'mapping_status':'constraint_conflict' if hard_failure else 'matched' if requested_relation_id==relation_id
+                and not (getattr(self,'require_relation_definition',False) and status!='pass') else 'unassigned',
             'requested_head_type':head_type,'requested_tail_type':tail_type,
             'allowed_domain':relation.get('domain',[]),'allowed_range':relation.get('range',[]),
             'hierarchy_paths':{'head':{str(x):self.hierarchy_path(head_type,x) for x in relation.get('domain',[])},

@@ -1,0 +1,177 @@
+{
+  "updated_at_beijing": "2026-11-05T15:27:00.735244+08:00",
+  "requests": [
+    {
+      "name": "models",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": null,
+      "first_event_ms": null,
+      "first_content_ms": null,
+      "total_ms": 500,
+      "schema_conformant": null,
+      "review_contract_valid": null,
+      "contract_errors": null,
+      "outcome_unknown": false,
+      "usage": null
+    },
+    {
+      "name": "small_nonstream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 1125,
+      "first_event_ms": null,
+      "first_content_ms": null,
+      "total_ms": 1141,
+      "schema_conformant": true,
+      "review_contract_valid": null,
+      "contract_errors": null,
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 123,
+        "total_tokens": 151,
+        "completion_tokens": 28,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    },
+    {
+      "name": "small_stream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 406,
+      "first_event_ms": 406,
+      "first_content_ms": 406,
+      "total_ms": 1015,
+      "schema_conformant": true,
+      "review_contract_valid": null,
+      "contract_errors": null,
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 123,
+        "total_tokens": 151,
+        "completion_tokens": 28
+      }
+    },
+    {
+      "name": "large_short_nonstream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 27875,
+      "first_event_ms": null,
+      "first_content_ms": null,
+      "total_ms": 27875,
+      "schema_conformant": true,
+      "review_contract_valid": null,
+      "contract_errors": null,
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 61911,
+        "total_tokens": 61946,
+        "completion_tokens": 35,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    },
+    {
+      "name": "large_review_stream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 27266,
+      "first_event_ms": 27266,
+      "first_content_ms": 27266,
+      "total_ms": 47125,
+      "schema_conformant": true,
+      "review_contract_valid": false,
+      "contract_errors": [
+        "counterevidence: resolved source check requires verified evidence_ids"
+      ],
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 61969,
+        "total_tokens": 62790,
+        "completion_tokens": 821
+      }
+    },
+    {
+      "name": "large_review_nonstream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 46687,
+      "first_event_ms": null,
+      "first_content_ms": null,
+      "total_ms": 46687,
+      "schema_conformant": true,
+      "review_contract_valid": false,
+      "contract_errors": [
+        "counterevidence: resolved source check requires verified evidence_ids"
+      ],
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 61965,
+        "total_tokens": 62786,
+        "completion_tokens": 821,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    },
+    {
+      "name": "long_review_stream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 26797,
+      "first_event_ms": 26797,
+      "first_content_ms": 26797,
+      "total_ms": 61360,
+      "schema_conformant": true,
+      "review_contract_valid": true,
+      "contract_errors": [],
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 62017,
+        "total_tokens": 63444,
+        "completion_tokens": 1427
+      }
+    },
+    {
+      "name": "long_review_nonstream",
+      "state": "completed",
+      "http_status": 200,
+      "headers_ms": 57796,
+      "first_event_ms": null,
+      "first_content_ms": null,
+      "total_ms": 57796,
+      "schema_conformant": true,
+      "review_contract_valid": true,
+      "contract_errors": [],
+      "outcome_unknown": false,
+      "usage": {
+        "prompt_tokens": 62026,
+        "total_tokens": 63307,
+        "completion_tokens": 1281,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    }
+  ],
+  "generation_requests": 7,
+  "automatic_retries": 0,
+  "historical_requests_replayed": false,
+  "production_configuration_changed": false,
+  "review_database_written": false,
+  "textbook_content_sent": false,
+  "actual_ontology_sent": false,
+  "project_prompt_sent": false,
+  "http_200_generation_requests": 7,
+  "http_504_reproduced": false,
+  "json_schema_conformant_requests": 7,
+  "max_concurrency_observed": 1,
+  "known_input_tokens": 310134,
+  "known_output_tokens": 4441,
+  "business_contract_valid_long_output": true,
+  "limitations": [
+    "Synthetic data only; no real ontology or project prompt sent.",
+    "Sequential probes, not concurrent historical audit load.",
+    "No server-side Nginx configuration or upstream queue logs available."
+  ]
+}

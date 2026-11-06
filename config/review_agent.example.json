@@ -1,7 +1,10 @@
 {
   "schema_version": "review_config_v1",
   "mode": "shadow",
-  "validator_contract_version": "validator_response_v5",
+  "validator_contract_version": "validator_response_v6_3",
+  "response_correction": {"max_corrections_per_seat":1,"max_calls_per_candidate_version":3,"max_input_bytes":16000,"max_output_tokens":1536,"max_reserved_tokens_per_candidate_version":54000,"timeout_seconds":60,"max_initial_attempts_per_seat":2},
+  "ontology_context": {"top_k_properties":8,"max_properties":24,"max_classes":64,"max_chars":32000},
+  "output_structure": {"capabilities_path":"config/review_output_capabilities.json"},
   "scope_policy": {"version":"knowledge_scope_v1","excluded_scopes":["local_definition","derivation","example"]},
   "local_operator": "local_operator",
   "database_path": "runs/v3/review.sqlite3",
@@ -23,7 +26,7 @@
     "budget": {"max_planner_steps": 14, "max_tool_calls": 18, "max_validation_rounds": 2, "max_llm_calls_per_candidate": 40, "total_timeout_seconds": 360}},
   "case_budget": {"llm_calls": 96, "tokens": 240000, "tool_calls": 64, "extension_requests": 1, "rebinds": 2},
   "validators": [
-    {"id": "judge_a", "model_env": "KG_JUDGE_A_MODEL", "family_env": "KG_JUDGE_A_FAMILY", "api_key_env": "KG_JUDGE_A_API_KEY", "base_url_env": "KG_JUDGE_A_BASE_URL"},
+    {"id": "judge_a", "model_env": "KG_JUDGE_A_MODEL", "family_env": "KG_JUDGE_A_FAMILY", "api_key_env": "KG_JUDGE_A_API_KEY", "base_url_env": "KG_JUDGE_A_BASE_URL", "stream_responses": true},
     {"id": "judge_b", "model_env": "KG_JUDGE_B_MODEL", "family_env": "KG_JUDGE_B_FAMILY", "api_key_env": "KG_JUDGE_B_API_KEY", "base_url_env": "KG_JUDGE_B_BASE_URL"},
     {"id": "judge_c", "model_env": "KG_JUDGE_C_MODEL", "family_env": "KG_JUDGE_C_FAMILY", "api_key_env": "KG_JUDGE_C_API_KEY", "base_url_env": "KG_JUDGE_C_BASE_URL"}
   ],

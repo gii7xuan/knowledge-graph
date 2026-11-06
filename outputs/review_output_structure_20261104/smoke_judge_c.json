@@ -1,0 +1,34 @@
+{
+  "id": "judge_c",
+  "model": "deepseek-flash",
+  "base_url": "https://api.deepseek.com",
+  "stream_responses": false,
+  "thinking_mode": "disabled",
+  "protocol": "chat_completions",
+  "stage": "strict_nonce_smoke",
+  "state": "rejected",
+  "started_at": "2026-11-04T10:01:19.802565+00:00",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "probe_token"
+    ],
+    "properties": {
+      "probe_token": {
+        "type": "string",
+        "enum": [
+          "schema_0cb807b0f40d4ff2"
+        ]
+      }
+    }
+  },
+  "synthetic_only": true,
+  "document_content_sent": false,
+  "automatic_retry": false,
+  "http_status": 400,
+  "support": "unsupported",
+  "error_type": "BadRequestError",
+  "error": "Error code: 400 - {'error': {'message': 'This response_format type is unavailable now (request_id: bd7cd089-2ebd-4bce-9659-3edf30ea71b1)', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+  "latency_ms": 2280
+}

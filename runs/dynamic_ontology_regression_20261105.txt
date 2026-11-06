@@ -1,0 +1,2484 @@
+======================================================================
+ERROR: test_call_budget_preserves_full_committee_and_counts_planner_failures (tests.test_review_planner.PlannerRuntimeTests.test_call_budget_preserves_full_committee_and_counts_planner_failures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_call_budget_preserves_full_committee_and_counts_planner_failures (tests.test_review_planner.PlannerRuntimeTests.test_call_budget_preserves_full_committee_and_counts_planner_failures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpvhxl6mz7'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpvhxl6mz7'
+
+======================================================================
+ERROR: test_cancellation_after_model_return_never_commits_a_decision (tests.test_review_planner.PlannerRuntimeTests.test_cancellation_after_model_return_never_commits_a_decision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_cancellation_after_model_return_never_commits_a_decision (tests.test_review_planner.PlannerRuntimeTests.test_cancellation_after_model_return_never_commits_a_decision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpk_dispix'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpk_dispix'
+
+======================================================================
+ERROR: test_candidate_revision_change_never_publishes_obsolete_result (tests.test_review_planner.PlannerRuntimeTests.test_candidate_revision_change_never_publishes_obsolete_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_candidate_revision_change_never_publishes_obsolete_result (tests.test_review_planner.PlannerRuntimeTests.test_candidate_revision_change_never_publishes_obsolete_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpbjfzyj4y'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpbjfzyj4y'
+
+======================================================================
+ERROR: test_counterevidence_is_preserved_and_cannot_be_cleared_by_finish (tests.test_review_planner.PlannerRuntimeTests.test_counterevidence_is_preserved_and_cannot_be_cleared_by_finish)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_counterevidence_is_preserved_and_cannot_be_cleared_by_finish (tests.test_review_planner.PlannerRuntimeTests.test_counterevidence_is_preserved_and_cannot_be_cleared_by_finish)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpmr1tcqsj'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpmr1tcqsj'
+
+======================================================================
+ERROR: test_declared_deterministic_fallback_inherits_spent_budget (tests.test_review_planner.PlannerRuntimeTests.test_declared_deterministic_fallback_inherits_spent_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_declared_deterministic_fallback_inherits_spent_budget (tests.test_review_planner.PlannerRuntimeTests.test_declared_deterministic_fallback_inherits_spent_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpd7e5dyy0'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpd7e5dyy0'
+
+======================================================================
+ERROR: test_early_finish_without_independent_review_is_not_reusable (tests.test_review_planner.PlannerRuntimeTests.test_early_finish_without_independent_review_is_not_reusable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_early_finish_without_independent_review_is_not_reusable (tests.test_review_planner.PlannerRuntimeTests.test_early_finish_without_independent_review_is_not_reusable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpa5au_6qq'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpa5au_6qq'
+
+======================================================================
+ERROR: test_empty_search_observation_changes_next_scope (tests.test_review_planner.PlannerRuntimeTests.test_empty_search_observation_changes_next_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_empty_search_observation_changes_next_scope (tests.test_review_planner.PlannerRuntimeTests.test_empty_search_observation_changes_next_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpvghj91h4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpvghj91h4'
+
+======================================================================
+ERROR: test_finish_without_validation_cannot_auto_accept (tests.test_review_planner.PlannerRuntimeTests.test_finish_without_validation_cannot_auto_accept)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_finish_without_validation_cannot_auto_accept (tests.test_review_planner.PlannerRuntimeTests.test_finish_without_validation_cannot_auto_accept)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpdvwaminu'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpdvwaminu'
+
+======================================================================
+ERROR: test_illegal_tool_can_be_corrected_and_never_runs (tests.test_review_planner.PlannerRuntimeTests.test_illegal_tool_can_be_corrected_and_never_runs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_illegal_tool_can_be_corrected_and_never_runs (tests.test_review_planner.PlannerRuntimeTests.test_illegal_tool_can_be_corrected_and_never_runs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmprk93svg2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmprk93svg2'
+
+======================================================================
+ERROR: test_invalid_placeholder_is_corrected_with_actual_ids (tests.test_review_planner.PlannerRuntimeTests.test_invalid_placeholder_is_corrected_with_actual_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_invalid_placeholder_is_corrected_with_actual_ids (tests.test_review_planner.PlannerRuntimeTests.test_invalid_placeholder_is_corrected_with_actual_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpi_cttke_'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpi_cttke_'
+
+======================================================================
+ERROR: test_model_replans_after_real_observations_and_calls_whole_committee (tests.test_review_planner.PlannerRuntimeTests.test_model_replans_after_real_observations_and_calls_whole_committee)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_model_replans_after_real_observations_and_calls_whole_committee (tests.test_review_planner.PlannerRuntimeTests.test_model_replans_after_real_observations_and_calls_whole_committee)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpgalimeja'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpgalimeja'
+
+======================================================================
+ERROR: test_new_audit_retries_only_failed_model_and_refunds_cached_reservations (tests.test_review_planner.PlannerRuntimeTests.test_new_audit_retries_only_failed_model_and_refunds_cached_reservations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_new_audit_retries_only_failed_model_and_refunds_cached_reservations (tests.test_review_planner.PlannerRuntimeTests.test_new_audit_retries_only_failed_model_and_refunds_cached_reservations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpscmrz0eg'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpscmrz0eg'
+
+======================================================================
+ERROR: test_new_evidence_invalidates_old_votes_and_retains_archive (tests.test_review_planner.PlannerRuntimeTests.test_new_evidence_invalidates_old_votes_and_retains_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_new_evidence_invalidates_old_votes_and_retains_archive (tests.test_review_planner.PlannerRuntimeTests.test_new_evidence_invalidates_old_votes_and_retains_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpdl21tol3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpdl21tol3'
+
+======================================================================
+ERROR: test_new_evidence_still_revalidates_all_independent_models (tests.test_review_planner.PlannerRuntimeTests.test_new_evidence_still_revalidates_all_independent_models)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_new_evidence_still_revalidates_all_independent_models (tests.test_review_planner.PlannerRuntimeTests.test_new_evidence_still_revalidates_all_independent_models)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpmovm6nza'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpmovm6nza'
+
+======================================================================
+ERROR: test_no_planner_connection_is_explicit_manual_degradation (tests.test_review_planner.PlannerRuntimeTests.test_no_planner_connection_is_explicit_manual_degradation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_no_planner_connection_is_explicit_manual_degradation (tests.test_review_planner.PlannerRuntimeTests.test_no_planner_connection_is_explicit_manual_degradation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpbdpyf4g9'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpbdpyf4g9'
+
+======================================================================
+ERROR: test_planner_connection_failure_is_not_reusable_human_handoff (tests.test_review_planner.PlannerRuntimeTests.test_planner_connection_failure_is_not_reusable_human_handoff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_planner_connection_failure_is_not_reusable_human_handoff (tests.test_review_planner.PlannerRuntimeTests.test_planner_connection_failure_is_not_reusable_human_handoff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpom87a35c'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpom87a35c'
+
+======================================================================
+ERROR: test_planner_contract_rejects_overrides_and_bad_types (tests.test_review_planner.PlannerRuntimeTests.test_planner_contract_rejects_overrides_and_bad_types)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_planner_contract_rejects_overrides_and_bad_types (tests.test_review_planner.PlannerRuntimeTests.test_planner_contract_rejects_overrides_and_bad_types)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpb3g90em4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpb3g90em4'
+
+======================================================================
+ERROR: test_planner_timeout_is_not_automatically_retried (tests.test_review_planner.PlannerRuntimeTests.test_planner_timeout_is_not_automatically_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_planner_timeout_is_not_automatically_retried (tests.test_review_planner.PlannerRuntimeTests.test_planner_timeout_is_not_automatically_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpnli9tuzy'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpnli9tuzy'
+
+======================================================================
+ERROR: test_premature_finish_is_corrected_before_any_finish_tool_runs (tests.test_review_planner.PlannerRuntimeTests.test_premature_finish_is_corrected_before_any_finish_tool_runs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_premature_finish_is_corrected_before_any_finish_tool_runs (tests.test_review_planner.PlannerRuntimeTests.test_premature_finish_is_corrected_before_any_finish_tool_runs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp0mtbjgfi'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp0mtbjgfi'
+
+======================================================================
+ERROR: test_ready_current_validation_can_route_only_through_system_policy (tests.test_review_planner.PlannerRuntimeTests.test_ready_current_validation_can_route_only_through_system_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_ready_current_validation_can_route_only_through_system_policy (tests.test_review_planner.PlannerRuntimeTests.test_ready_current_validation_can_route_only_through_system_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_qzwiz8k'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_qzwiz8k'
+
+======================================================================
+ERROR: test_real_evidence_enum_and_exact_output_contract_are_sent (tests.test_review_planner.PlannerRuntimeTests.test_real_evidence_enum_and_exact_output_contract_are_sent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_real_evidence_enum_and_exact_output_contract_are_sent (tests.test_review_planner.PlannerRuntimeTests.test_real_evidence_enum_and_exact_output_contract_are_sent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp1_n8h63w'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp1_n8h63w'
+
+======================================================================
+ERROR: test_repeated_empty_actions_stop_under_budget (tests.test_review_planner.PlannerRuntimeTests.test_repeated_empty_actions_stop_under_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_repeated_empty_actions_stop_under_budget (tests.test_review_planner.PlannerRuntimeTests.test_repeated_empty_actions_stop_under_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmptlxswdwt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmptlxswdwt'
+
+======================================================================
+ERROR: test_repeated_same_proposal_uses_cached_votes_not_a_reroll (tests.test_review_planner.PlannerRuntimeTests.test_repeated_same_proposal_uses_cached_votes_not_a_reroll)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_repeated_same_proposal_uses_cached_votes_not_a_reroll (tests.test_review_planner.PlannerRuntimeTests.test_repeated_same_proposal_uses_cached_votes_not_a_reroll)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpo6s6mn3m'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpo6s6mn3m'
+
+======================================================================
+ERROR: test_resume_after_commit_does_not_repeat_model_calls_or_decision (tests.test_review_planner.PlannerRuntimeTests.test_resume_after_commit_does_not_repeat_model_calls_or_decision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_resume_after_commit_does_not_repeat_model_calls_or_decision (tests.test_review_planner.PlannerRuntimeTests.test_resume_after_commit_does_not_repeat_model_calls_or_decision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpcxunbzj9'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpcxunbzj9'
+
+======================================================================
+ERROR: test_resume_after_validation_crash_reuses_already_stored_valid_votes (tests.test_review_planner.PlannerRuntimeTests.test_resume_after_validation_crash_reuses_already_stored_valid_votes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_resume_after_validation_crash_reuses_already_stored_valid_votes (tests.test_review_planner.PlannerRuntimeTests.test_resume_after_validation_crash_reuses_already_stored_valid_votes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpycp8lkyu'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpycp8lkyu'
+
+======================================================================
+ERROR: test_resume_rejects_changed_model_even_if_committee_version_was_not_bumped (tests.test_review_planner.PlannerRuntimeTests.test_resume_rejects_changed_model_even_if_committee_version_was_not_bumped)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_resume_rejects_changed_model_even_if_committee_version_was_not_bumped (tests.test_review_planner.PlannerRuntimeTests.test_resume_rejects_changed_model_even_if_committee_version_was_not_bumped)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp7ov55qf7'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp7ov55qf7'
+
+======================================================================
+ERROR: test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes (tests.test_review_planner.PlannerRuntimeTests.test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes (tests.test_review_planner.PlannerRuntimeTests.test_revision_draft_does_not_mutate_candidate_or_reuse_revision_votes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpjkjq5sss'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpjkjq5sss'
+
+======================================================================
+ERROR: test_token_budget_counts_reported_usage_before_next_action (tests.test_review_planner.PlannerRuntimeTests.test_token_budget_counts_reported_usage_before_next_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_token_budget_counts_reported_usage_before_next_action (tests.test_review_planner.PlannerRuntimeTests.test_token_budget_counts_reported_usage_before_next_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_dxdx0ei'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_dxdx0ei'
+
+======================================================================
+ERROR: test_unknown_evidence_id_is_an_observation_not_a_crash (tests.test_review_planner.PlannerRuntimeTests.test_unknown_evidence_id_is_an_observation_not_a_crash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_unknown_evidence_id_is_an_observation_not_a_crash (tests.test_review_planner.PlannerRuntimeTests.test_unknown_evidence_id_is_an_observation_not_a_crash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_8l_1h3v'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_8l_1h3v'
+
+======================================================================
+ERROR: test_validation_requires_real_ontology_observation (tests.test_review_planner.PlannerRuntimeTests.test_validation_requires_real_ontology_observation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_validation_requires_real_ontology_observation (tests.test_review_planner.PlannerRuntimeTests.test_validation_requires_real_ontology_observation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpsu5virwn'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpsu5virwn'
+
+======================================================================
+ERROR: test_owned_worker_timeout_returns_and_marks_failure_without_hanging (tests.test_ontology_extension_agent.OntologyExtensionTests.test_owned_worker_timeout_returns_and_marks_failure_without_hanging)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 501, in test_owned_worker_timeout_returns_and_marks_failure_without_hanging
+    result = service.execute({"extension_id": self.extension_id, "audit_id": "blocked_fixture"}, _worker_target=blocked_ontology_worker)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\ontology_review\service.py", line 92, in execute
+    receiver, sender = context.Pipe(duplex=False)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+           ^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\multiprocessing\connection.py", line 575, in Pipe
+    h2 = _winapi.CreateFile(
+         ^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_real_sdk_and_killable_worker_use_separate_ontology_contract (tests.test_ontology_extension_agent.OntologyExtensionTests.test_real_sdk_and_killable_worker_use_separate_ontology_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 600, in test_real_sdk_and_killable_worker_use_separate_ontology_contract
+    result = service.execute({"extension_id": self.extension_id, "audit_id": "sdk_ontology"})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\ontology_review\service.py", line 92, in execute
+    receiver, sender = context.Pipe(duplex=False)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+           ^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\multiprocessing\connection.py", line 575, in Pipe
+    h2 = _winapi.CreateFile(
+         ^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_R02_late_result_commits_to_original_attempt_without_resend (tests.test_review_recovery_v4.RequestRecoveryTests.test_R02_late_result_commits_to_original_attempt_without_resend)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R02_late_result_commits_to_original_attempt_without_resend (tests.test_review_recovery_v4.RequestRecoveryTests.test_R02_late_result_commits_to_original_attempt_without_resend)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpwg5w48e2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpwg5w48e2'
+
+======================================================================
+ERROR: test_R03_unreconciled_unknown_remains_fenced (tests.test_review_recovery_v4.RequestRecoveryTests.test_R03_unreconciled_unknown_remains_fenced)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R03_unreconciled_unknown_remains_fenced (tests.test_review_recovery_v4.RequestRecoveryTests.test_R03_unreconciled_unknown_remains_fenced)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpz_850wuz'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpz_850wuz'
+
+======================================================================
+ERROR: test_R04_historical_result_cannot_become_new_revision_vote (tests.test_review_recovery_v4.RequestRecoveryTests.test_R04_historical_result_cannot_become_new_revision_vote)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R04_historical_result_cannot_become_new_revision_vote (tests.test_review_recovery_v4.RequestRecoveryTests.test_R04_historical_result_cannot_become_new_revision_vote)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpknyaa8td'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpknyaa8td'
+
+======================================================================
+ERROR: test_R18_old_lease_cannot_heartbeat_or_complete_after_reclaim (tests.test_review_recovery_v4.RequestRecoveryTests.test_R18_old_lease_cannot_heartbeat_or_complete_after_reclaim)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R18_old_lease_cannot_heartbeat_or_complete_after_reclaim (tests.test_review_recovery_v4.RequestRecoveryTests.test_R18_old_lease_cannot_heartbeat_or_complete_after_reclaim)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpdvdswomy'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpdvdswomy'
+
+======================================================================
+ERROR: test_R23_billing_pause_blocks_services_and_related_queue (tests.test_review_recovery_v4.RequestRecoveryTests.test_R23_billing_pause_blocks_services_and_related_queue)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R23_billing_pause_blocks_services_and_related_queue (tests.test_review_recovery_v4.RequestRecoveryTests.test_R23_billing_pause_blocks_services_and_related_queue)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp05tme72x'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp05tme72x'
+
+======================================================================
+ERROR: test_attempt_history_preserves_contract_correction (tests.test_review_recovery_v4.RequestRecoveryTests.test_attempt_history_preserves_contract_correction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_attempt_history_preserves_contract_correction (tests.test_review_recovery_v4.RequestRecoveryTests.test_attempt_history_preserves_contract_correction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmptyey46e6'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmptyey46e6'
+
+======================================================================
+ERROR: test_deadline_before_dispatch_is_known_not_sent_and_costs_no_call (tests.test_review_recovery_v4.RequestRecoveryTests.test_deadline_before_dispatch_is_known_not_sent_and_costs_no_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_deadline_before_dispatch_is_known_not_sent_and_costs_no_call (tests.test_review_recovery_v4.RequestRecoveryTests.test_deadline_before_dispatch_is_known_not_sent_and_costs_no_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_4_kd6we'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_4_kd6we'
+
+======================================================================
+ERROR: test_real_request_process_survives_candidate_process_exit (tests.test_review_recovery_v4.RequestRecoveryTests.test_real_request_process_survives_candidate_process_exit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_real_request_process_survives_candidate_process_exit (tests.test_review_recovery_v4.RequestRecoveryTests.test_real_request_process_survives_candidate_process_exit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_nn7tvm0'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp_nn7tvm0'
+
+======================================================================
+ERROR: test_shared_ontology_request_identity_blocks_equivalent_unknown_retry (tests.test_review_recovery_v4.RequestRecoveryTests.test_shared_ontology_request_identity_blocks_equivalent_unknown_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_shared_ontology_request_identity_blocks_equivalent_unknown_retry (tests.test_review_recovery_v4.RequestRecoveryTests.test_shared_ontology_request_identity_blocks_equivalent_unknown_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpzgm9vxf7'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpzgm9vxf7'
+
+======================================================================
+ERROR: test_unknown_request_cannot_escape_by_credentials_namespace_or_output_limit (tests.test_review_recovery_v4.RequestRecoveryTests.test_unknown_request_cannot_escape_by_credentials_namespace_or_output_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_unknown_request_cannot_escape_by_credentials_namespace_or_output_limit (tests.test_review_recovery_v4.RequestRecoveryTests.test_unknown_request_cannot_escape_by_credentials_namespace_or_output_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpwybl4g_p'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpwybl4g_p'
+
+======================================================================
+ERROR: test_R01_only_technical_failure_seat_is_recovered (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R01_only_technical_failure_seat_is_recovered)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R01_only_technical_failure_seat_is_recovered (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R01_only_technical_failure_seat_is_recovered)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp9q9fc696'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp9q9fc696'
+
+======================================================================
+ERROR: test_R05_same_frozen_result_hides_ordinary_validation (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R05_same_frozen_result_hides_ordinary_validation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R05_same_frozen_result_hides_ordinary_validation (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R05_same_frozen_result_hides_ordinary_validation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpqw6_kkcp'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpqw6_kkcp'
+
+======================================================================
+ERROR: test_R06_uncertain_and_opposing_valid_responses_are_immutable (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R06_uncertain_and_opposing_valid_responses_are_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R06_uncertain_and_opposing_valid_responses_are_immutable (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R06_uncertain_and_opposing_valid_responses_are_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpafy80e20'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpafy80e20'
+
+======================================================================
+ERROR: test_R22_unconfigured_seat_does_not_make_partial_review_healthy (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R22_unconfigured_seat_does_not_make_partial_review_healthy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R22_unconfigured_seat_does_not_make_partial_review_healthy (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R22_unconfigured_seat_does_not_make_partial_review_healthy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp3tcy8_2c'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp3tcy8_2c'
+
+======================================================================
+ERROR: test_R24_shadow_keeps_manual_admission_after_complete_review (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R24_shadow_keeps_manual_admission_after_complete_review)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_R24_shadow_keeps_manual_admission_after_complete_review (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_R24_shadow_keeps_manual_admission_after_complete_review)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpyy6l511j'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpyy6l511j'
+
+======================================================================
+ERROR: test_frozen_recovery_extends_authorized_deadline_without_resetting_usage (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_frozen_recovery_extends_authorized_deadline_without_resetting_usage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_frozen_recovery_extends_authorized_deadline_without_resetting_usage (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_frozen_recovery_extends_authorized_deadline_without_resetting_usage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp5er9op1w'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp5er9op1w'
+
+======================================================================
+ERROR: test_v4_wire_contract_uses_one_schema_status_and_preserves_consensus (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_v4_wire_contract_uses_one_schema_status_and_preserves_consensus)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 52, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 136, in initialize
+    with self.transaction(immediate=True) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 121, in transaction
+    connection = self.connect()
+                 ^^^^^^^^^^^^^^
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+                 ^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: unable to open database file
+SQLite connection setup: SQLITE_CANTOPEN (14)
+
+======================================================================
+ERROR: test_v4_wire_contract_uses_one_schema_status_and_preserves_consensus (tests.test_review_recovery_v4.RuntimeRecoveryTests.test_v4_wire_contract_uses_one_schema_status_and_preserves_consensus)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp1eitn9pl'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+                                        ^^^^^^^
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 906, in onexc
+    _resetperms(path)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\P-Pxuan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp1eitn9pl'
+
+----------------------------------------------------------------------
+Ran 137 tests in 217.597s
+
+FAILED (errors=96, skipped=22)

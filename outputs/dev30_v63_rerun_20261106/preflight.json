@@ -1,0 +1,57 @@
+{
+  "status": "ready",
+  "settings_hash": "e20d9ce80a62aed5cf9c79f46d4c4093a54381e92dc2d8f8bbfdc31a4415d2bc",
+  "finished_at_epoch": 1793927572.233013,
+  "finished_at_beijing": "2026-11-06T09:10:16.044300+08:00",
+  "synthetic_only": true,
+  "automatic_retries": 0,
+  "items": [
+    {
+      "voter_id": "judge_a",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "response_id": "chatcmpl-9da6e46a66b7ae9d",
+      "returned_model_id": "Qwen",
+      "input_tokens": 162,
+      "output_tokens": 38,
+      "outcome_unknown": false,
+      "latency_ms": 5000
+    },
+    {
+      "voter_id": "judge_b",
+      "model_id": "Gemma",
+      "response_id": "chatcmpl-a4078d37e77ba1be",
+      "returned_model_id": "Gemma",
+      "finish_reason": "stop",
+      "input_tokens": 130,
+      "output_tokens": 145,
+      "raw_response": "{\"ok\":true,\"probe_nonce\":\"da9db2c2f7684ee2be8ca40a1c117b96\"}",
+      "outcome_unknown": false,
+      "response_received": true,
+      "response_status": "ok",
+      "latency_ms": 4983,
+      "synthetic_only": true,
+      "max_output_tokens": 512,
+      "automatic_retries": 0,
+      "purpose": "diagnose prior short probe JSON parse error; not a review vote",
+      "checked_at_beijing": "2026-11-06T09:12:47.342711+08:00"
+    },
+    {
+      "voter_id": "judge_c",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "response_id": "4cf826ac-a328-4190-bcec-ed4162e41a4a",
+      "returned_model_id": "deepseek-flash",
+      "input_tokens": 122,
+      "output_tokens": 29,
+      "outcome_unknown": false,
+      "latency_ms": 3672,
+      "explicit_recharge_recheck": true,
+      "synthetic_only": true,
+      "automatic_retries": 0
+    }
+  ],
+  "supplemental_probe": "gemma_preflight_detail.json",
+  "supplemental_requests": 1,
+  "explicit_recharge_check": "deepseek_recharge_check.json"
+}

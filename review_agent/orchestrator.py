@@ -97,7 +97,8 @@ class ReviewOrchestrator:
         self.calibrator = calibrator or TripleCalibrator()
         self.risk_policy = risk_policy or RiskPolicy()
         self.config = dict(config or {})
-        self.ontology_guard.require_explicit_mapping = self.config.get('validator_contract_version')=='validator_response_v5'
+        self.ontology_guard.require_explicit_mapping = self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
+        self.ontology_guard.require_relation_definition = self.config.get('validator_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
         self.planner_client = planner_client
         self.should_cancel = should_cancel
         consensus_config = dict(self.config.get("consensus") or {})
@@ -131,7 +132,7 @@ class ReviewOrchestrator:
                 "policy_ready": self.risk_policy.ready, "calibrator_ready": bool(getattr(self.calibrator, "ready", False)),
                 "accept_threshold": self.risk_policy.policy.get("accept_threshold"),
                 "auto_accept_enabled": bool((self.config.get("routing") or {}).get("auto_accept_enabled") and self.risk_policy.policy.get("auto_accept_enabled")),
-                **({'scope_policy':self.config.get('scope_policy') or DEFAULT_POLICY} if self.config.get('validator_contract_version')=='validator_response_v5' else {})}
+                **({'scope_policy':self.config.get('scope_policy') or DEFAULT_POLICY} if self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'} else {})}
 
     def _proposal(
         self, audit_id: str, candidate: Mapping[str, Any], guard: Mapping[str, Any],
@@ -166,8 +167,21 @@ class ReviewOrchestrator:
         }
         from .validator_contracts import versions_for
         seed.update(versions_for(self.config))
+        if seed['response_contract_version'] in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+            from .validator_contracts import contract_for
+            from .output_structure import resolve_profile
+            schema=contract_for(seed['response_contract_version']).RESPONSE_SCHEMA
+            for generation,voter in zip(seed['validator_generation'],self.validators):
+                generation['output_transport']=resolve_profile(voter,self.config,schema)
         catalog = None
-        if seed['response_contract_version']=='validator_response_v5':
+        ontology_context = None
+        if seed['response_contract_version']=='validator_response_v6_3':
+            from .ontology_context import select_context
+            ontology_context=select_context(self.ontology_guard,candidate,bundle,seed['ontology_context_policy'],
+                                            context.get('ontology_retrieval'))
+            seed['ontology_context_hash']=sha256_json(ontology_context)
+            seed['ontology_catalog_hash']=ontology_context['source_catalog_hash']
+        elif seed['response_contract_version']in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2'}:
             from schema.relation_registry import RelationRegistry
             catalog={**RelationRegistry(self.ontology_guard.ontology).reference_catalog(),
                      'classes':list(self.ontology_guard.classes.values())}
@@ -178,6 +192,7 @@ class ReviewOrchestrator:
             "evidence_bundle": dict(bundle), "review_memory": context.get("review_memory", {}),
             "request_cache_namespace": context.get("request_cache_namespace", "default"),
             **({'ontology_catalog':catalog} if catalog is not None else {}),
+            **({'ontology_context':ontology_context} if ontology_context is not None else {}),
         }
 
     def audit_candidate(
@@ -256,7 +271,7 @@ class ReviewOrchestrator:
             max_items=max_evidence_items, max_chars=max_evidence_chars,
         )
         last_votes: List[Dict[str, Any]] = []
-        if self.config.get('validator_contract_version')=='validator_response_v5':
+        if self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
             from evidence.units import enrich_bundle
             expanded=enrich_bundle(bundle,document_snapshot,candidate)
             expanded['items'].sort(key=lambda x:x.get('substantive') is False)
@@ -477,10 +492,10 @@ class ReviewOrchestrator:
                 workflow = "review_completed"
             else: workflow = "manual_review"
         scope_decision = None
-        if selected and selected.get('response_contract_version')=='validator_response_v5':
+        if selected and selected.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
             from .scope_policy import scope_route
             scope_decision = scope_route(consensus.get('core_source_support_result',source_result),
-                consensus.get('expression_status','unresolved'), consensus.get('mapping_status','ambiguous'),
+                consensus.get('expression_status','unresolved'), consensus.get('effective_mapping_status',consensus.get('mapping_status','ambiguous')),
                 consensus.get('knowledge_scope','unresolved'), policy=self.config.get('scope_policy'),
                 scope_confirmed=consensus.get('scope_confirmed',False))
             waiting_for_extension=bool(context.get('pending_extension_id')) and workflow in {'awaiting_ontology_review','awaiting_ontology_release','reaudit_required'}
@@ -502,7 +517,7 @@ class ReviewOrchestrator:
             "review_versions": {field: context[field] for field in (
                 "prompt_version", "prompt_hash", "response_contract_hash", "committee_policy_hash", "memory_scope_hash", "memory_policy_hash", "response_contract_version", "evidence_bundle_version", "committee_version",
                 "planner_prompt_version", "planner_prompt_hash", "planner_contract_version", "planner_strategy_version", "planner_model_id",
-                "planner_model_family", "configured_strategy", "executed_strategy") if field in context},
+                "planner_model_family", "configured_strategy", "executed_strategy", "summary_policy_version", "summary_policy_hash", "output_delivery_version", "output_delivery_hash", "correction_policy_version", "correction_policy_hash") if field in context},
             "features": features, "feature_schema_version": FEATURE_SCHEMA_VERSION,
             "explanation": explanation, "budget": usage,
             "configured_strategy": context.get("configured_strategy", "deterministic"),

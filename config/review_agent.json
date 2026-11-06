@@ -84,7 +84,8 @@
       "base_url_env": "KG_JUDGE_A_BASE_URL",
       "max_output_tokens": 8192,
       "request_timeout_seconds": 90,
-      "http_timeout_seconds": 90
+      "http_timeout_seconds": 90,
+      "stream_responses": true
     },
     {
       "id": "judge_b",
@@ -163,6 +164,9 @@
     "auto_import_enabled": false,
     "require_current_decision": true
   },
-  "validator_contract_version": "validator_response_v5",
+  "validator_contract_version": "validator_response_v6_3",
+  "response_correction": {"max_corrections_per_seat":1,"max_calls_per_candidate_version":3,"max_input_bytes":16000,"max_output_tokens":1536,"max_reserved_tokens_per_candidate_version":54000,"timeout_seconds":60,"max_initial_attempts_per_seat":2},
+  "ontology_context": {"top_k_properties":8,"max_properties":24,"max_classes":64,"max_chars":32000},
+  "output_structure": {"capabilities_path":"config/review_output_capabilities.json"},
   "scope_policy": {"version":"knowledge_scope_v1","excluded_scopes":["local_definition","derivation","example"]}
 }

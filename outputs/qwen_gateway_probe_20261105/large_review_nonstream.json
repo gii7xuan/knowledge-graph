@@ -1,0 +1,51 @@
+{
+  "name": "large_review_nonstream",
+  "probe_id": "gateway_29c4df9e00c040c0ba585ba380f52a35",
+  "state": "completed",
+  "kind": "review",
+  "stream": false,
+  "large_input": true,
+  "endpoint": "https://43.143.151.41:3000/v1",
+  "model": "Qwen",
+  "started_at_beijing": "2026-11-05T15:09:15.668956+08:00",
+  "max_output_tokens": 8192,
+  "hard_timeout_seconds": 200,
+  "prompt_chars": 106923,
+  "schema_hash": "5a6fd271c03a2abf3a19904854076affa52e06380f5c6abad3c1349f9f36ec62",
+  "expected_token": null,
+  "automatic_retry": false,
+  "synthetic_candidate": true,
+  "textbook_content_sent": false,
+  "review_database_written": false,
+  "actual_ontology_sent": false,
+  "project_prompt_sent": false,
+  "outcome_unknown": false,
+  "request_bytes": 125827,
+  "request_hash": "79d2756a3a7b600179bf8d56f9a0f156ecbdf473b80a80cb9c0ca03b7b9d9ffd",
+  "http_status": 200,
+  "headers_ms": 46687,
+  "response_headers": {
+    "server": "nginx/1.24.0 (Ubuntu)",
+    "content-type": "application/json"
+  },
+  "first_body_ms": 46687,
+  "response_id": "chatcmpl-adeef4dbf032358c",
+  "returned_model_id": "Qwen",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 61965,
+    "total_tokens": 62786,
+    "completion_tokens": 821,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": null
+  },
+  "raw_response": "{\n  \"dimensions\": {\n    \"triple_support\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"证据直接陈述合成测试装置A包含合成部件B，与三元组一致。\",\n      \"issue_code\": null\n    },\n    \"entity_reference\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"头尾实体在证据中明确出现且指称一致。\",\n      \"issue_code\": null\n    },\n    \"relation_semantics\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"表面关系“包含”与证据语义一致。\",\n      \"issue_code\": null\n    },\n    \"relation_direction\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"方向为装置A包含部件B，与证据一致。\",\n      \"issue_code\": null\n    },\n    \"qualifiers\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"条件“在合成测试场景中”与证据一致，其余限定未声明。\",\n      \"issue_code\": null\n    },\n    \"evidence_sufficiency\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"单条实质性证据足以支持该合成三元组。\",\n      \"issue_code\": null\n    },\n    \"mapping\": {\n      \"status\": \"unassigned\",\n      \"evidence_ids\": [],\n      \"note\": \"目录中无与“包含”及该实体对匹配的已知关系，relation_id保持null。\",\n      \"issue_code\": null,\n      \"relation_id\": null,\n      \"competing_relation_ids\": []\n    },\n    \"knowledge_scope\": {\n      \"status\": \"conditional\",\n      \"evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n      \"note\": \"陈述限定在合成测试场景中，属于条件性知识。\",\n      \"issue_code\": null\n    },\n    \"counterevidence\": {\n      \"status\": \"not_applicable\",\n      \"evidence_ids\": [],\n      \"note\": \"无反证证据提供，且未发现冲突。\",\n      \"issue_code\": null\n    }\n  },\n  \"evidence_assessments\": [\n    {\n      \"evidence_id\": \"ev_gateway_35e50f1a4472706cbb01\",\n      \"role\": \"support\",\n      \"note\": \"直接支持三元组及条件限定。\"\n    }\n  ],\n  \"primary_evidence_ids\": [\"ev_gateway_35e50f1a4472706cbb01\"],\n  \"counterevidence_reviewed_ids\": [],\n  \"requested_context\": null,\n  \"suggested_revision\": null,\n  \"schema_change_hint\": null\n}",
+  "schema_conformant": true,
+  "contract_errors": [
+    "counterevidence: resolved source check requires verified evidence_ids"
+  ],
+  "total_ms": 46687,
+  "finished_at_beijing": "2026-11-05T15:10:03.116728+08:00",
+  "schema_errors": [],
+  "review_contract_valid": false
+}

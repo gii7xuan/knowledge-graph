@@ -125,7 +125,7 @@ class IssueLedger:
             self.open("source_conflict", "存在需要独立复核适用范围的反证", True, proposal=digest,
                       evidence_ids=counter_ids | {eid for v in valid for eid in v.get("supporting_evidence_ids", [])}, evidence_hash=evidence_hash)
         for vote in valid:
-            if proposal.get('response_contract_version')=='validator_response_v5':
+            if proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
                 for check in vote.get('checks',[]):
                     if check.get('status')=='fail' and check.get('check') in {'entity_reference','relation_semantics','qualifiers','relation_direction'}:
                         code={'entity_reference':'ENTITY_MISMATCH','relation_semantics':'RELATION_MISMATCH',

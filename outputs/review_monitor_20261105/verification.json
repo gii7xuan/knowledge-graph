@@ -1,0 +1,73 @@
+{
+  "verified_at": "2026-11-05T02:02:43.350747+00:00",
+  "current_experiment_counts": {
+    "total": 30,
+    "started": 26,
+    "processing_closed": 26,
+    "three_seats_ready": 1,
+    "review_completed": 1,
+    "running": 0,
+    "disagreements": 10
+  },
+  "experiment_paused": true,
+  "pause_reason": {
+    "reason_code": "INSUFFICIENT_BALANCE",
+    "model_id": "deepseek-flash",
+    "http_status": 402
+  },
+  "registered_sources": {
+    "default_source_id": "dev30-v62-20261105",
+    "items": [
+      {
+        "id": "dev30-v62-20261105",
+        "label": "30条开发样本 · V6.2 · 2026-11-05",
+        "kind": "experiment",
+        "read_only": true,
+        "available": true
+      },
+      {
+        "id": "production",
+        "label": "工作台生产记录",
+        "kind": "production",
+        "read_only": true,
+        "available": true
+      },
+      {
+        "id": "dev30-v51-20261104",
+        "label": "30条开发样本 · V5.1 · 历史对照",
+        "kind": "experiment",
+        "read_only": true,
+        "available": true
+      }
+    ]
+  },
+  "unique_backend_tests": 33,
+  "backend_logs": [
+    {
+      "log": "runs/review_monitor_backend_tests_20261105.txt",
+      "passed": 32
+    },
+    {
+      "log": "runs/review_monitor_final_backend_20261105.txt",
+      "passed": 14
+    }
+  ],
+  "frontend_tests_passed": 16,
+  "production_candidate_hashes_unchanged": true,
+  "human_workbook_unchanged": true,
+  "frozen_experiment_code_unchanged": true,
+  "monitor_triggers_model_requests": false,
+  "frontend_build_passed": true,
+  "dev_http_status": 200,
+  "static_http_status": 200,
+  "http_final_test_passed": true,
+  "browser_checks": {
+    "current_experiment": true,
+    "historical_batch_population": 29,
+    "source_switch_isolation": true,
+    "single_opinion_evidence": true,
+    "console_errors": 0,
+    "candidate_horizontal_overflow": false
+  },
+  "screenshot": "monitor-page.jpg"
+}

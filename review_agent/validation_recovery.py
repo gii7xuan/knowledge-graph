@@ -8,6 +8,9 @@ def recovery_plan(state, repository, *, allow_permanent_failure=False):
     if not validation: return {'recoverable_voter_ids':[], 'unknown_voter_ids':[]}
     votes={v['voter_id']:v for v in validation['votes']}
     recoverable,unknown=[],[]
+    blocked=[]
+    targeted=state.context.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}
+    policy=state.context.get('correction_policy') or {}
     for member in state.context.get('committee_members',[]):
         vote=votes.get(member['id'])
         if vote and vote.get('response_status')=='ok': continue
@@ -20,9 +23,17 @@ def recovery_plan(state, repository, *, allow_permanent_failure=False):
         elif vote and vote.get('outcome_unknown') and not (entry and entry['status']=='completed'):
             unknown.append(member['id'])
         else:
+            if targeted and not (entry and entry['status']=='completed'):
+                reason=vote.get('correction_stop_reason') if vote and vote.get('correction_terminal') else None
+                if not reason and vote and vote.get('response_status') in {'invalid_contract','invalid_json','invalid_reference'}:
+                    from .correction_repository import allowance
+                    reason=allowance(repository,vote.get('request_key'),state.candidate,policy) if policy else 'frozen correction policy unavailable'
+                if reason:
+                    blocked.append({'voter_id':member['id'],'reason':reason});continue
             recoverable.append(member['id'])
     return {'recoverable_voter_ids':recoverable,'unknown_voter_ids':unknown,
-            'valid_votes_immutable':True,'selection_by':'server_frozen_roster'}
+            'valid_votes_immutable':True,'selection_by':'server_frozen_roster',
+            **({'blocked_voters':blocked} if targeted else {})}
 
 
 def recover_validation(runtime):

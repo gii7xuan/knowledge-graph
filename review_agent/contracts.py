@@ -271,6 +271,15 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             "committee_policy",
         )
     }
-    if payload.get('response_contract_version')=='validator_response_v5':
+    if payload.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
         fields['ontology_catalog_hash']=payload.get('ontology_catalog_hash')
+    if payload.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        fields.update({k:payload.get(k) for k in ('summary_policy_version','summary_policy_hash')})
+    if payload.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        fields.update({k:payload.get(k) for k in ('output_delivery_version','output_delivery_hash','validator_generation')})
+    if payload.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}:
+        fields.update({k:payload.get(k) for k in ('correction_policy_version','correction_policy_hash','correction_policy')})
+    if payload.get('response_contract_version')=='validator_response_v6_3':
+        fields.update({k:payload.get(k) for k in ('ontology_context_hash','ontology_context_policy_version',
+                                                'ontology_context_policy_hash','ontology_context_policy')})
     return sha256_json(fields)

@@ -271,7 +271,7 @@ class V5IntegrationTests(unittest.TestCase):
         fixture=OntologyExtensionTests(methodName='runTest');fixture.setUp();self.addCleanup(fixture.doCleanups)
         self.fixture=fixture
 
-    def run_review(self,scope='general',expression='faithful'):
+    def run_review(self,scope='general',expression='faithful',version='validator_response_v5',nullable_codes=False):
         from review_agent.llm_clients import MockLLMClient
         from review_agent.orchestrator import ReviewOrchestrator
         f=self.fixture;c=copy.deepcopy(f.candidate);c['candidate_id']+='_new_contract';c['fact_key']=fact_key_for(c)
@@ -286,9 +286,12 @@ class V5IntegrationTests(unittest.TestCase):
                 'evidence_assessments':[{'evidence_id':eid,'role':'support','note':'direct statement'}]}
             if expression=='needs_revision':
                 next(x for x in raw['checks'] if x['check']=='entity_reference').update(status='fail',issue_code='ENTITY_MISMATCH')
+            if nullable_codes:
+                for check in raw['checks']: check['issue_code']=None
+                raw['schema_assessment']['issue_code']=None
             return raw
         voters=[{'id':v,'model_id':'isolated_'+v,'model_family':v,'client':MockLLMClient(vote,model_id='isolated_'+v,model_family=v)} for v in 'abc']
-        config={**f.config,'validator_contract_version':'validator_response_v5','planner':{'enabled':False,'strategy':'deterministic'},
+        config={**f.config,'validator_contract_version':version,'planner':{'enabled':False,'strategy':'deterministic'},
                 'ontology_extension':{'enabled':False},'consensus':{**f.config['consensus'],'max_rounds':1}}
         result=ReviewOrchestrator(f.repo,OntologyGuard(load_snapshot(f.base.ontology)),voters,config=config).audit_candidate(c['candidate_id'],1,f.index)
         return c,result,seen
@@ -328,6 +331,30 @@ class V5IntegrationTests(unittest.TestCase):
         self.assertEqual(result['decision'],'manual_review')
         self.assertTrue(result['scope_policy_decision']['excluded_from_main_graph'])
         self.assertEqual(self.fixture.repo.get_candidate(c['candidate_id'])['workflow_state'],'excluded_by_scope')
+
+    def test_v51_end_to_end_keeps_three_seats_and_mapping_route(self):
+        c,result,payloads=self.run_review(version='validator_response_v5_1')
+        self.assertEqual(result['source_support_result'],'supported')
+        self.assertTrue(result['independent_review_completed'])
+        self.assertEqual(result['workflow_state'],'mapping_review')
+        self.assertEqual(result['consensus']['effective_mapping_status'],'unassigned')
+        self.assertEqual(len(payloads),3)
+        self.assertEqual({p['response_contract_version'] for p in payloads},{'validator_response_v5_1'})
+
+    def test_v52_nullable_codes_keep_independent_review_and_revision_obligations(self):
+        c,result,payloads=self.run_review(version='validator_response_v5_2',nullable_codes=True,expression='needs_revision')
+        self.assertTrue(result['independent_review_completed'])
+        self.assertEqual(result['workflow_state'],'revision_required')
+        self.assertEqual(result['source_support_result'],'unresolved')
+        self.assertEqual(result['consensus']['core_source_support_result'],'supported')
+        self.assertEqual(len(payloads),3)
+        audit=self.fixture.repo.get_audit(c['candidate_id'],result['audit_id'])
+        self.assertEqual(len(audit['votes']),3)
+        for vote in audit['votes']:
+            self.assertEqual(vote['response_status'],'ok')
+            self.assertEqual(len(vote['format_normalization']['changes']),10)
+            self.assertIsNone(vote['raw_response']['checks'][0]['issue_code'])
+            self.assertEqual(next(x['status'] for x in vote['checks'] if x['check']=='entity_reference'),'fail')
 
     def test_core_supported_expression_fail_cannot_count_as_complete_support(self):
         _,result,_=self.run_review(expression='needs_revision')

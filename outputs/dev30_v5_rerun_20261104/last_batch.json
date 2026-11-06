@@ -1,0 +1,321 @@
+{
+  "execution_id": "batch_d4c2d0cba12042acb8a3d290fad32b3f",
+  "run_id": "run_chapter1_20261028_resume1",
+  "status": "completed",
+  "started_at_epoch": 1793780033.231183,
+  "total": 29,
+  "selected": 1,
+  "skipped": 0,
+  "completed": 1,
+  "failed": 0,
+  "interrupted": 0,
+  "revised": 0,
+  "independent_review_completed": 0,
+  "review_incomplete": 1,
+  "paused": false,
+  "cancelled": false,
+  "results": [
+    {
+      "audit_id": "audit_1ee3bc3fbd0544aca36b5e0dc3270bc6",
+      "candidate_id": "cand_5b459021eb0a3fe91145",
+      "revision": 3,
+      "status": "completed",
+      "result": {
+        "audit_id": "audit_1ee3bc3fbd0544aca36b5e0dc3270bc6",
+        "candidate_id": "cand_5b459021eb0a3fe91145",
+        "revision": 3,
+        "review_completion_status": "independent_review_incomplete",
+        "independent_review_completed": false,
+        "final_round_id": 1,
+        "consensus": {
+          "committee_size": 3,
+          "required_votes": 3,
+          "valid_votes": 0,
+          "invalid_votes": 0,
+          "uncertain_votes": 1,
+          "error_votes": 2,
+          "missing_votes": 0,
+          "duplicate_attempts": 0,
+          "duplicate_model_votes": 0,
+          "invalid_attempts": 0,
+          "distinct_family_count": 1,
+          "valid_distinct_family_count": 0,
+          "invalid_distinct_family_count": 0,
+          "diversity_ready": false,
+          "result": "unresolved",
+          "unresolved_counterevidence": false,
+          "unresolved_support_conflict": false,
+          "counter_evidence_ids": [],
+          "supporting_evidence_ids": [],
+          "source_support_consensus": {
+            "result": "unresolved",
+            "support_votes": 0,
+            "contradiction_votes": 0,
+            "support_voter_ids": [],
+            "committee_size": 3,
+            "required_votes": 3
+          },
+          "admission_consensus": {
+            "result": "unresolved"
+          },
+          "eligible_voter_ids": [
+            "judge_c"
+          ],
+          "expression_complete": true,
+          "blocking_fields": [],
+          "raw_source_support_votes": [
+            {
+              "voter_id": "judge_c",
+              "source_support": "supported"
+            }
+          ],
+          "expression_status": "needs_revision",
+          "knowledge_scope": "unresolved",
+          "scope_confirmed": false,
+          "mapping_status": "ambiguous",
+          "core_source_support_result": "unresolved"
+        },
+        "calibrated_probability": null,
+        "calibration_status": "unavailable",
+        "calibrator_version": "untrained",
+        "policy_version": "disabled_cold_start_v3",
+        "decision": "manual_review",
+        "reason_codes": [
+          "CRITICAL_ISSUES_UNRESOLVED",
+          "EVIDENCE_GAP_UNRESOLVED"
+        ],
+        "review_versions": {
+          "prompt_version": "triple_validator_v5_semantic_units_v1",
+          "prompt_hash": "1011625b93f5a4cd5226d5b9b296280a3f959bb88bd50dcff7aa567487d8a523",
+          "response_contract_hash": "1cc9db45659889e53ceebaac932a6b8498c6bdc27adefcf4a014cade2205a15b",
+          "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+          "memory_scope_hash": "1c173d17b34a47d2d96e982e0890691db39624d39f03210ea85190390c1536de",
+          "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+          "response_contract_version": "validator_response_v5",
+          "evidence_bundle_version": "evidence_bundle_v3",
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "planner_prompt_version": "triple_planner_v4",
+          "planner_prompt_hash": "512fe0a7a02e66123e6ae47ee4af04d4e13426baa2882fc819157aa83084395f",
+          "planner_contract_version": "planner_action_v4",
+          "planner_strategy_version": "bounded_react_v4",
+          "planner_model_id": "Qwen",
+          "planner_model_family": "qwen",
+          "configured_strategy": "llm_react",
+          "executed_strategy": "llm_react"
+        },
+        "features": {
+          "quote_located": 1.0,
+          "evidence_missing": 0.0,
+          "unique_span_count": 5.0,
+          "source_group_count": 1.0,
+          "relation_known": 1.0,
+          "domain_pass": 1.0,
+          "range_pass": 1.0,
+          "type_unknown": 0.0,
+          "mapping_ambiguous": 0.0,
+          "supporting_vote_count": 0.0,
+          "contradicting_vote_count": 0.0,
+          "qualifier_issue": 1.0,
+          "direction_issue": 0.0,
+          "valid_vote_fraction": 0.0,
+          "invalid_vote_fraction": 0.0,
+          "uncertain_fraction": 0.3333333333333333,
+          "error_fraction": 0.6666666666666666,
+          "distinct_family_count": 1.0,
+          "disagreement": 0.0,
+          "unresolved_counterevidence": 0.0,
+          "retrieval_depth": 0.0,
+          "round_count": 1.0,
+          "historical_weighted_support": 0.0,
+          "reliability_available": 0.0
+        },
+        "feature_schema_version": "review_features_v3",
+        "explanation": {
+          "summary": "候选仍需人工核验；系统未把不确定性当作事实结论。",
+          "reason_codes": [
+            "CRITICAL_ISSUES_UNRESOLVED",
+            "EVIDENCE_GAP_UNRESOLVED"
+          ],
+          "checks": [
+            {
+              "check": "ontology",
+              "status": "pass",
+              "constraint_ids": [
+                "R_5cfeb014dc68c80c2f5c"
+              ]
+            },
+            {
+              "check": "quote_location",
+              "status": "pass",
+              "evidence_ids": [
+                "ev_3ac495284f0e81c6c629",
+                "ev_95c40b04093f9413b976",
+                "ev_ec10538a6b19b186ec10"
+              ]
+            }
+          ],
+          "supporting_evidence_ids": [
+            "ev_3ac495284f0e81c6c629"
+          ],
+          "counter_evidence_ids": [],
+          "anchor_failures": [],
+          "source_support": [
+            "supported"
+          ],
+          "response_errors": [
+            {
+              "voter_id": "judge_a",
+              "status": "invalid_contract",
+              "error": "v5 missing or server-owned fields: ['mapping']"
+            },
+            {
+              "voter_id": "judge_b",
+              "status": "invalid_contract",
+              "error": "formal relation definition unavailable: keep mapping unresolved, not matched"
+            }
+          ],
+          "open_questions": []
+        },
+        "budget": {
+          "llm_calls": 9,
+          "tool_calls": 2,
+          "planner_steps": 3,
+          "validation_rounds": 1,
+          "input_tokens": 373745,
+          "output_tokens": 14677,
+          "unknown_token_requests": 0,
+          "deadline_epoch": 1793780633.2425199
+        },
+        "configured_strategy": "llm_react",
+        "executed_strategy": "llm_react",
+        "stop_reason": "token_budget_exhausted",
+        "workflow_state": "revision_required",
+        "pending_extension_id": null,
+        "source_support_result": "unresolved",
+        "schema_status": "pass",
+        "schema_diagnostics": [
+          "suspected_schema_error"
+        ],
+        "source_support_consensus": {
+          "result": "unresolved",
+          "support_votes": 0,
+          "contradiction_votes": 0,
+          "support_voter_ids": [],
+          "committee_size": 3,
+          "required_votes": 3
+        },
+        "admission_consensus": {
+          "result": "unresolved"
+        },
+        "selected_round_id": 1,
+        "selected_proposal_digest": "a3cf15fccedd673ab6ca7a0f5342aae7b5dd849c73c030b90e7778b23c1da16a",
+        "selected_evidence_hash": "085500b6492cc086ab5c0a0ce61cc96b80804a2672241681dd992db42a1445aa",
+        "committee_version": "committee_qwen_gemma_deepseek_v1",
+        "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+        "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+        "issue_history": [
+          {
+            "issue_id": "issue_8b78bbe8457d2a9af2e0cd8a",
+            "code": "QUALIFIER_MISMATCH",
+            "description": "原文“分别得到……标准定律 H(y) 和标准分布 H_s(y)”中的“分别”是并列分配副词，指向两个结果对象，并非对单一关系的量词修饰；候选将其记为 quantifier=分别，且未保留并列分支 H_s(y)，限定语义不完整。polarity=positive、modality=asserted 与原文一致；condition/time_scope/applicability 原文未述，not_stated 合理。",
+            "status": "open",
+            "critical": true,
+            "opened_in_proposal": "a3cf15fccedd673ab6ca7a0f5342aae7b5dd849c73c030b90e7778b23c1da16a",
+            "opened_evidence_hash": "085500b6492cc086ab5c0a0ce61cc96b80804a2672241681dd992db42a1445aa",
+            "opened_revision": 3,
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "resolution_evidence_ids": [],
+            "resolved_in_proposal": null,
+            "resolution_rule": null,
+            "requires_revision": true
+          },
+          {
+            "issue_id": "issue_781875bfbb0fe1b44a76396f",
+            "code": "EVIDENCE_INSUFFICIENT",
+            "description": "当前候选存在来源、限定或方向义务",
+            "status": "open",
+            "critical": true,
+            "opened_in_proposal": "a3cf15fccedd673ab6ca7a0f5342aae7b5dd849c73c030b90e7778b23c1da16a",
+            "opened_evidence_hash": "085500b6492cc086ab5c0a0ce61cc96b80804a2672241681dd992db42a1445aa",
+            "opened_revision": 3,
+            "evidence_ids": [
+              "ev_3ac495284f0e81c6c629"
+            ],
+            "resolution_evidence_ids": [],
+            "resolved_in_proposal": null,
+            "resolution_rule": null,
+            "requires_revision": false
+          },
+          {
+            "issue_id": "issue_86ff117fed1e844e35da25ba",
+            "code": "token_budget",
+            "description": "规划调用实际 token 已达到预算，工具不再执行",
+            "status": "open",
+            "critical": true,
+            "opened_in_proposal": null,
+            "opened_evidence_hash": null,
+            "opened_revision": 3,
+            "evidence_ids": [],
+            "resolution_evidence_ids": [],
+            "resolved_in_proposal": null,
+            "resolution_rule": null,
+            "requires_revision": false
+          }
+        ],
+        "evidence_exclusions": {},
+        "admission_policy": {
+          "mode": "shadow",
+          "policy_version": "disabled_cold_start_v3",
+          "policy_ready": false,
+          "calibrator_ready": false,
+          "accept_threshold": null,
+          "auto_accept_enabled": false,
+          "scope_policy": {
+            "version": "knowledge_scope_v1",
+            "excluded_scopes": [
+              "local_definition",
+              "derivation",
+              "example"
+            ]
+          }
+        },
+        "scope_policy_decision": {
+          "scope_policy_version": "knowledge_scope_v1",
+          "scope_policy_hash": "73b04d56d09c0c11b51fa300abd6da9e6ca72b9e9e5ebc17fb14a829ebfcef88",
+          "source_support": "unresolved",
+          "knowledge_scope": "unresolved",
+          "workflow_state": "evidence_review",
+          "preserve_source_record": true,
+          "excluded_from_main_graph": false
+        },
+        "committed": true
+      }
+    }
+  ],
+  "review_versions": {
+    "prompt_version": "triple_validator_v5_semantic_units_v1",
+    "response_contract_version": "validator_response_v5",
+    "prompt_hash": "1011625b93f5a4cd5226d5b9b296280a3f959bb88bd50dcff7aa567487d8a523",
+    "response_contract_hash": "1cc9db45659889e53ceebaac932a6b8498c6bdc27adefcf4a014cade2205a15b",
+    "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "committee_version": "committee_qwen_gemma_deepseek_v1",
+    "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+    "planner_contract_version": "planner_action_v4",
+    "planner_prompt_version": "triple_planner_v4",
+    "planner_contract_hash": "5e689f34478ed46d6a5e47215dea834d0128c238cbe84a0fce9b24f9dbcd859f",
+    "planner_prompt_hash": "512fe0a7a02e66123e6ae47ee4af04d4e13426baa2882fc819157aa83084395f",
+    "planner_strategy_version": "bounded_react_v4",
+    "planner_model_id": "Qwen",
+    "planner_model_family": "qwen",
+    "configured_strategy": "llm_react",
+    "scope_policy_hash": "73b04d56d09c0c11b51fa300abd6da9e6ca72b9e9e5ebc17fb14a829ebfcef88"
+  },
+  "progress_write_failures": 0,
+  "progress_file_stale": false,
+  "contract_upgrade_deferred": [],
+  "finished_at_epoch": 1793780288.8138077
+}
