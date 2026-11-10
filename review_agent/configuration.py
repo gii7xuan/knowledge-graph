@@ -31,4 +31,7 @@ def normalize_config(source):
         enabled = config["ontology_evolution"]["enabled"]
         if "enabled" in config["ontology_extension"] and config["ontology_extension"]["enabled"] != enabled: raise ValueError("conflicting ontology evolution and agent enablement")
         config["ontology_extension"]["enabled"] = enabled
+    if 'scope_policy' in config:
+        from .scope_policy import validate_policy
+        config['scope_policy']=validate_policy(config['scope_policy'])
     return config

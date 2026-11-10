@@ -13,7 +13,7 @@ def semantic_request_key(task_type,voter,proposal,prompt_hash=None):
         contract=contract_for(proposal.get('response_contract_version'))
         payload=validator_payload(proposal,voter)
         payload.pop('proposal_digest',None)
-        if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             payload.pop('output_structure',None);payload.pop('output_template',None)
         prompt_hash=sha256_json([prompt_for(proposal),contract.RESPONSE_SCHEMA])
     else:

@@ -1,0 +1,111 @@
+{
+  "config": {
+    "validator_contract_version": "validator_response_v8",
+    "scope_policy": {
+      "version": "knowledge_scope_v2",
+      "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+      "decision_authority": "program",
+      "excluded_scopes": [
+        "local_definition",
+        "derivation",
+        "example"
+      ],
+      "unresolved_action": "scope_review",
+      "categories": {
+        "general": {
+          "label": "一般知识",
+          "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+        },
+        "conditional": {
+          "label": "条件性知识",
+          "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+        },
+        "local_definition": {
+          "label": "局部定义或符号约定",
+          "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+        },
+        "derivation": {
+          "label": "推导步骤",
+          "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+        },
+        "example": {
+          "label": "教学示例",
+          "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+        },
+        "unresolved": {
+          "label": "类别待确认",
+          "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+        }
+      }
+    },
+    "planner_failure_policy": "bounded_minimum_v1"
+  },
+  "cases": [
+    {
+      "sample": "DEV-028",
+      "scope_policy": {
+        "excluded_scopes": [
+          "local_definition",
+          "derivation",
+          "example"
+        ],
+        "version": "knowledge_scope_v1"
+      },
+      "failure_handling": null,
+      "clarifications": [
+        {
+          "voter_id": "judge_c",
+          "status": "human_clarification_required",
+          "conflicts": [
+            "material counterevidence conflicts with counterevidence=pass",
+            "counterevidence_reviewed_ids overlaps material counterevidence"
+          ],
+          "original_response_hash": "a2e28a31112ed44ff739f95b6192446f7414fc0774879558fa0ea27de5a8de84",
+          "original_judgments_immutable": true,
+          "clarification": null,
+          "counts_as_vote": false
+        }
+      ],
+      "audit_id": "audit_0a033ac0e04f4e2db952af7cf408c20f",
+      "candidate_id": "cand_808d8f2198c5723ef4cc"
+    },
+    {
+      "sample": "DEV-029",
+      "scope_policy": {
+        "excluded_scopes": [
+          "local_definition",
+          "derivation",
+          "example"
+        ],
+        "version": "knowledge_scope_v1"
+      },
+      "failure_handling": null,
+      "clarifications": [],
+      "audit_id": "audit_b09c480043af4c5d899aa95708d297be",
+      "candidate_id": "cand_31bd91d40eac020d152d"
+    },
+    {
+      "sample": "DEV-030",
+      "scope_policy": {
+        "excluded_scopes": [
+          "local_definition",
+          "derivation",
+          "example"
+        ],
+        "version": "knowledge_scope_v1"
+      },
+      "failure_handling": {
+        "version": "historical_planner_failure",
+        "reason": "issue/rationale must be bounded strings",
+        "historical": true,
+        "minimum_steps": 0,
+        "independent_review_completed": false
+      },
+      "clarifications": [],
+      "audit_id": "audit_60eeacf4303f41bca535585921873c2e",
+      "candidate_id": "cand_4699137d543b768e4b3e"
+    }
+  ],
+  "historical_database_unchanged": true,
+  "model_requests": 0
+}

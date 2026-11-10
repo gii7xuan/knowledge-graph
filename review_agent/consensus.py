@@ -66,9 +66,9 @@ def aggregate_votes(
                         "evidence_hash": proposal["evidence_bundle"]["evidence_hash"],
                         **{key: proposal.get(key) for key in ("source_index_hash", "document_version", "ontology_version",
                                 "ontology_release_id", "profile_hash", "committee_version", "committee_policy_hash", "prompt_version")}}
-            if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}:
+            if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 expected.update({k:proposal.get(k) for k in ('correction_policy_version','correction_policy_hash')})
-            if proposal.get('response_contract_version')=='validator_response_v6_3':
+            if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 expected.update({k:proposal.get(k) for k in ('ontology_context_hash','ontology_context_policy_hash')})
             if any(vote.get(key) != value for key, value in expected.items()):
                 invalid_attempts += 1
@@ -120,7 +120,7 @@ def aggregate_votes(
         if family:
             families.add(family)
             verdict_families[verdict].add(family)
-        if proposal and proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if proposal and proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             material_counter_ids.update(vote.get('counter_evidence_ids') or [])
             if vote.get('source_support')=='supported': material_support_ids.update(vote.get('supporting_evidence_ids') or [])
         elif verdict == ValidatorVerdict.INVALID.value:
@@ -173,7 +173,7 @@ def aggregate_votes(
             (triple.get("qualifiers", {}).get("polarity") in {"positive", "negative"}
              and not any(value == "unknown" for value in triple.get("qualifier_status", {}).values())))
         from evidence.units import can_support
-        is_v5 = proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
+        is_v5 = proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
         evidence_ids = {item["evidence_id"] for item in proposal["evidence_bundle"]["items"]
                         if item.get("anchor_valid") is True and (not is_v5 or can_support(item))}
         used_models = set()
@@ -211,7 +211,7 @@ def aggregate_votes(
         admission_ready = (source_result == "supported" and counts["valid"] >= committee.required_votes and valid_diversity_ready
                            and proposal.get("ontology_check", {}).get("status") == "pass"
                            and not unresolved_counterevidence and not unresolved_support_conflict and not admission_blocked)
-        if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             admission_ready = admission_ready and all(v.get('mapping',{}).get('relation_id')==triple.get('relation_id') for v in eligible)
         result_payload.update(source_support_consensus={"result": source_result, "support_votes": len(source_votes),
             "contradiction_votes": len(contradiction_votes), "support_voter_ids": source_votes,
@@ -233,7 +233,7 @@ def aggregate_votes(
                 any(c.get('check')=='knowledge_scope' and c.get('status') in {'pass','not_applicable'} and c.get('evidence_ids')
                     for c in v.get('checks',[])) for v in eligible)
             result_payload['mapping_status']=next(iter(mappings)) if all_seats and len(mappings)==1 else 'ambiguous'
-            if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+            if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 guard=proposal.get('ontology_check',{})
                 assigned=triple.get('relation_id')
                 same_id=all(v.get('mapping',{}).get('relation_id')==assigned for v in eligible)
@@ -245,12 +245,38 @@ def aggregate_votes(
                 else source_result)
         result_payload["result"] = ("accept_consensus" if admission_ready else "reject_consensus" if source_result == "contradicted"
                                     and not unresolved_support_conflict else "unresolved")
-        if proposal.get('response_contract_version')=='validator_response_v6_3':
+        if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .ontology_context import frozen_context
             context=frozen_context(proposal)
             result_payload['ontology_coverage_review']={'context_hash':proposal['ontology_context_hash'],
                 'full_catalog_included':context['full_catalog_included'],
                 'global_gap_confirmable':context['full_catalog_included']}
+    if proposal is not None and proposal.get('response_contract_version') in {'validator_response_v7','validator_response_v8'}:
+        from .review_axes import aggregate_axes
+        axes = aggregate_axes(eligible, proposal, result_payload)
+        result_payload['review_axes'] = axes
+        result_payload['expression_status'] = {'standard': 'faithful', 'lossless_normalization': 'normalization_required',
+            'semantic_revision': 'needs_revision', 'unresolved': 'unresolved'}[axes['expression']['status']]
+        source = axes['source']['status']
+        result_payload['source_support_consensus']['result'] = source if source != 'insufficient' else 'unresolved'
+        result_payload['source_support_consensus']['support_voter_ids'] = [v['voter_id'] for v in eligible if v['review_axes']['source']['status'] == 'supported']
+        result_payload['source_support_consensus']['support_votes'] = len(result_payload['source_support_consensus']['support_voter_ids'])
+        result_payload['source_support_consensus']['contradiction_voter_ids'] = [v['voter_id'] for v in eligible if v['review_axes']['source']['status'] == 'contradicted']
+        result_payload['source_support_consensus']['contradiction_votes'] = len(result_payload['source_support_consensus']['contradiction_voter_ids'])
+        ready = (result_payload['admission_consensus']['result'] == 'accept_consensus' and
+                 axes['source']['status'] == 'supported' and axes['expression']['status'] == 'standard' and
+                 axes['mapping']['status'] == 'valid' and axes['scope']['status'] == 'include')
+        result_payload['admission_consensus']['result'] = 'accept_consensus' if ready else 'unresolved'
+        result_payload['result'] = ('accept_consensus' if ready else 'reject_consensus' if
+            axes['source']['status'] == 'contradicted' and all(v.get('source_support') == 'contradicted' for v in eligible) else 'unresolved')
+    if proposal is not None and 'dispute_policy' in proposal:
+        from .disputes import frozen,build_report
+        frozen(proposal)
+        report=build_report(proposal,list(unique.values()),result_payload.get('eligible_voter_ids',[]))
+        result_payload['dispute_report']=report
+        if any(d['status']=='open' for d in report['disputes']):
+            result_payload['result']='unresolved'
+            result_payload['admission_consensus']={'result':'unresolved'}
     return result_payload
 
 

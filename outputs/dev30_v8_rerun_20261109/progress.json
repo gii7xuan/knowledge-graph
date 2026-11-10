@@ -1,0 +1,205 @@
+{
+  "execution_id": "batch_64845e0c44a44ed49d7a73ad01a2535f",
+  "run_id": "run_chapter1_20261028_resume1",
+  "status": "completed",
+  "started_at_epoch": 1794206056.6081703,
+  "total": 30,
+  "selected": 30,
+  "skipped": 0,
+  "completed": 29,
+  "failed": 0,
+  "interrupted": 1,
+  "revised": 0,
+  "independent_review_completed": 2,
+  "review_incomplete": 27,
+  "paused": false,
+  "cancelled": false,
+  "review_versions": {
+    "prompt_version": "triple_validator_v8_field_rules_v1",
+    "response_contract_version": "validator_response_v8",
+    "prompt_hash": "9c51f543d042ecb069ce7ea38b59174f45180e746bc86c17a4fd550e839add83",
+    "response_contract_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+    "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "committee_version": "committee_qwen_gemma_deepseek_v1",
+    "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+    "planner_failure_policy_hash": "8cdcc1aece11e39696a127b0fd521973af903cd1d8869d264cd6e0f30c825ad0",
+    "planner_contract_version": "planner_action_v5_disputes",
+    "planner_prompt_version": "triple_planner_v4",
+    "planner_contract_hash": "420fc271915bc425a5f86055c188ab0f26dffb5257eef9cdeccf414bcab3ad69",
+    "planner_prompt_hash": "512fe0a7a02e66123e6ae47ee4af04d4e13426baa2882fc819157aa83084395f",
+    "planner_strategy_version": "bounded_react_v4",
+    "planner_model_id": "Qwen",
+    "planner_model_family": "qwen",
+    "configured_strategy": "llm_react",
+    "scope_policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+    "summary_policy_version": "review_field_rules_v1",
+    "summary_policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+    "correction_policy": {
+      "version": "targeted_review_repairs_v1",
+      "prompt_hash": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+      "limits": {
+        "max_corrections_per_seat": 1,
+        "max_calls_per_candidate_version": 3,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "max_reserved_tokens_per_candidate_version": 54000,
+        "timeout_seconds": 60,
+        "max_initial_attempts_per_seat": 2
+      },
+      "mode": "field_patches_only",
+      "existing_judgments": "immutable",
+      "valid_evidence_and_counter_roles": "immutable",
+      "unparseable_or_semantic_conflict": "manual_review",
+      "partial_ontology_cannot_confirm_gap": true,
+      "semantic_clarification": {
+        "version": "review_contradiction_clarification_v1",
+        "prompt_hash": "e098fb9084fba363d02768d7486482f007f23770a5d9ad023f68514c1220228b",
+        "schema_hash": "31f1c80a8815e1cc9df1312da2feda5ec68b181fd0ae39668021f9b8f3ce9c83",
+        "mode": "explanation_only",
+        "admission_authorized": false
+      }
+    },
+    "correction_policy_version": "targeted_review_repairs_v1",
+    "correction_policy_hash": "5d3205f095e49e2fbb4d1420d2a009e4d4105d5bb9cd2ac673e4751730571aa9",
+    "ontology_context_policy": {
+      "version": "review_ontology_context_v1",
+      "limits": {
+        "top_k_properties": 8,
+        "max_properties": 24,
+        "max_classes": 64,
+        "max_chars": 32000
+      },
+      "selection": "exact_alias_then_lexical_and_types",
+      "required_matches": "complete_or_stop",
+      "absence_from_subset": "not_proof_of_gap"
+    },
+    "ontology_context_policy_version": "review_ontology_context_v1",
+    "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+    "mapping_preflight_policy": {
+      "version": "mapping_preflight_v1",
+      "search_order": [
+        "review_subset",
+        "full_bound_release_and_aliases"
+      ],
+      "automatic_assignment": false,
+      "absence_from_recall_is_gap_proof": false,
+      "entity_identity": "document_local_with_explicit_types_and_source",
+      "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema."
+    },
+    "mapping_preflight_policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+    "field_spec": {
+      "version": "review_fields_v1",
+      "scope": "审核字段口径与派生规范化表达；原始候选与正式映射分别保留",
+      "fields": {
+        "frequency": "命题成立的频率，如常常、总是；保留原词、强度、条件和语义附着，不等同于数量或适用条件。",
+        "quantifier": "对象数量或量化范围，如至少三个、所有；分别表示对象之间的对应，不是数量。",
+        "applicability": "命题适用的对象、环境或范围；频率不写在此字段。",
+        "condition": "命题成立所需条件；迁移和去重不得删除或扩大条件范围。",
+        "modality": "结合完整语境判断断言、假设、能力、可能性和必要性；定义或等价表示中的可不能仅按单字判为can。",
+        "surface_relation": "关系表达本身；独立频率放入frequency，正式本体关系另行核验。",
+        "correspondence": "原文明确的对象配对；拆分前逐条核对，禁止按顺序猜测配对或生成笛卡尔积。"
+      },
+      "rules": [
+        {
+          "id": "PAIR-001",
+          "title": "对应关系与数量分开",
+          "checks": [
+            "qualifiers",
+            "entity_reference"
+          ],
+          "automatic": false,
+          "rule": "分别、respectively表示对应。先明确原文的对象与配对，必要时拆分；每条新事实均需独立原文支持，不凭词语出现直接推断配对。"
+        },
+        {
+          "id": "FREQ-001",
+          "title": "频率与适用范围分开",
+          "checks": [
+            "qualifiers"
+          ],
+          "automatic": true,
+          "rule": "旧applicability或quantifier中独立、完整的频率词可以原样迁入派生frequency。仅执行程序提供的有锚点计划，保留强度、条件与附着；混合短语、冲突频率和不明附着需语义审核。"
+        },
+        {
+          "id": "DUP-001",
+          "title": "重复频率只保留一份",
+          "checks": [
+            "qualifiers",
+            "relation_semantics"
+          ],
+          "automatic": true,
+          "rule": "仅清除surface_relation边界上与独立frequency完全相同且有原文锚点的重复词。频率仍独立保存，关系不得变空，不能用近义改写或改变条件。"
+        },
+        {
+          "id": "MOD-001",
+          "title": "结合语境判断模态",
+          "checks": [
+            "qualifiers",
+            "relation_semantics"
+          ],
+          "automatic": false,
+          "rule": "结合完整句子、公式及上下文区分定义、等价表示与能力或可能性。可表示为不自动等于can，也不自动改成asserted；材料不足则请求上下文。"
+        },
+        {
+          "id": "SPLIT-001",
+          "title": "复合实体拆分逐条举证",
+          "checks": [
+            "entity_reference",
+            "relation_semantics"
+          ],
+          "automatic": false,
+          "rule": "拆分前检查每条新事实及原配对、联合、集合语义。包含组成集合不等于包含各成员；不将集合关系自动分配到每个成员。"
+        },
+        {
+          "id": "MEANING-001",
+          "title": "实质语义修改重新审核",
+          "checks": [
+            "entity_reference",
+            "relation_semantics",
+            "relation_direction",
+            "qualifiers"
+          ],
+          "automatic": false,
+          "rule": "关系替换、指称变更、方向或极性修改、条件增删和限定强度改变都需要新版本及证据审核。字段位置本身不构成事实矛盾；必须说明丢失或改变的含义。"
+        }
+      ],
+      "deterministic_frequency_tokens": [
+        "常常",
+        "经常",
+        "通常",
+        "总是",
+        "始终",
+        "有时",
+        "偶尔",
+        "often",
+        "usually",
+        "always",
+        "sometimes",
+        "occasionally"
+      ],
+      "normalization_policy": "确定性结果是候选版本绑定的派生表达，不覆盖原始候选、不自动准入；模型仍核验来源、限定附着与完整语义。"
+    },
+    "field_spec_version": "review_fields_v1",
+    "field_spec_hash": "b6748addab4a5b37af8a6166eabc6e5b49b233ccbd77e0eb2eb4af50967393bd",
+    "dispute_policy": {
+      "version": "claim_disputes_v1",
+      "adjudication": "no_majority_override",
+      "max_rechecks_per_dispute": 1,
+      "scope": "one_frozen_claim_question",
+      "counter_role": "seek possible falsification, never mandatory opposition",
+      "counter_absence_is_positive_support": false,
+      "scoped_review_is_admission": false,
+      "model_rule": "Address each frozen claim target in the corresponding dimension, citing exact source evidence. Explain the specific expression, issue and effect on meaning; use expression_findings for field rules. Search for possible falsification without being required to oppose. No counterevidence found is not positive support. Preserve both observations independently. Do not settle a semantic disagreement by majority."
+    },
+    "dispute_policy_hash": "69d952653b5cfc0edbe5e93b9dd7bfd7ebcfdc8e9458719c4eb0c4e5561080c8"
+  },
+  "progress_write_failures": 0,
+  "progress_file_stale": false,
+  "contract_upgrade_deferred": [],
+  "finished_at_epoch": 1794209440.2838507,
+  "active": [],
+  "remaining": 0,
+  "updated_at_epoch": 1794209440.2838507
+}

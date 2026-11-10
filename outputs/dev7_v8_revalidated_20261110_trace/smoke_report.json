@@ -1,0 +1,4702 @@
+{
+  "mode": "fresh_source_regression_plus_offline_diagnostic_revalidation",
+  "cases": [
+    {
+      "sample_id": "DEV-006",
+      "audit_id": "audit_1f8e17a4b0e243bf8c815883d31227e8",
+      "candidate_id": "cand_de3414495fa05d4e6672",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "unresolved",
+            "observed_result": "supported",
+            "executed": true,
+            "seat_coverage_complete": false,
+            "judgment_complete": false,
+            "valid_seats": 2,
+            "required_seats": 3,
+            "missing_voter_ids": [
+              "judge_c"
+            ],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "source support requires a nominated positive evidence set"
+                ]
+              }
+            ]
+          },
+          "expression": {
+            "status": "standard",
+            "observed_result": "standard",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": "unassigned",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "include",
+            "observed_result": "general",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "b68dd27daa02a269d4c2b01e56e9ff7c20fc23b98db518a2d98e7bff2942e8e0",
+            "normalized_response_hash": "30739119067ce60862dc7415658695af848b7fb7e32001935926f122bfccd9ee",
+            "original_attempt_id": "attempt_7bed7e1e87c24fd7a8eb9818535e4554",
+            "attempt_id": "attempt_7bed7e1e87c24fd7a8eb9818535e4554",
+            "request_key": "1286b9d0753e8dbf74d21b04b616cc95a069ad8f8425fe8daaef148a0a5dc045",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "b597cefe3fb59d488dbbf274e47b5086cb43c5f211fe3b658af017a695143e75",
+            "normalized_response_hash": "b077c055b7e76bd3dab602123d4628207882274066c941151c52c9f4abc2abc5",
+            "original_attempt_id": "attempt_4a79253cd2fc4d449c13624a6e0a6b6e",
+            "attempt_id": "attempt_4a79253cd2fc4d449c13624a6e0a6b6e",
+            "request_key": "c4d755a3d11c53ffde7f779022e0d3dbd4d45d8e29c734964704761a302c7a1d",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "037bf29a54046878b1024ae23bd17074664c022e457f98f6e071fe95de2400b9",
+            "normalized_response_hash": "924f1202c070d5531a01e12f7548fa55752e165c969c898940fa112ae5f82720",
+            "original_attempt_id": "attempt_912b0408155d4509848bf9556c0b9c07",
+            "attempt_id": "attempt_912b0408155d4509848bf9556c0b9c07",
+            "request_key": "6ae281cd793f2c055812dca6b79beb80b846583524dcf67430285a0f4ec29122",
+            "cache_source": null,
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "source support requires a nominated positive evidence set",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ],
+            "axis_observations": {
+              "source": {
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "source support requires a nominated positive evidence set"
+                ]
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "completed",
+        "execution_reason": "deterministic_fallback_finished",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "4e1e411635dfb0cb0081962132448ab998a8ab5c334a14d68583577a0bdc7d6c",
+          "preflight_hash": "ba202a57f06bb41d87f00a3fe39870c54be0067fa1556369186f12e0f52bacbc",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_029d377fdd30415aa4e3",
+                "R_0e6aeaed149fdb07cfac",
+                "R_30bf49bc0f38645ff31c",
+                "R_92a43480096d210c6ba6",
+                "R_92ea9560d7f254ee1fe2",
+                "R_bacd990da3482215545f",
+                "R_dea5c49458b0cebab6ea"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 7,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 7,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_5d0b94cd0cd9ae0220e9"
+                  ],
+                  "id": "R_029d377fdd30415aa4e3",
+                  "label": "随高度变化",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_ca67f873a92ca5ca8713"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e56f1a44eef9d89bc3b6"
+                  ],
+                  "id": "R_0e6aeaed149fdb07cfac",
+                  "label": "形成",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_bbbc79ec97fb8f7085d4"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "id": "R_30bf49bc0f38645ff31c",
+                  "label": "形成",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_23b6984d594ee0674998"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "id": "R_92a43480096d210c6ba6",
+                  "label": "产生",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_e93d960291ef82ed2a2c"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e93d960291ef82ed2a2c"
+                  ],
+                  "id": "R_92ea9560d7f254ee1fe2",
+                  "label": "形成",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_52c1a1e08cb0ee536af8"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e56f1a44eef9d89bc3b6"
+                  ],
+                  "id": "R_bacd990da3482215545f",
+                  "label": "减小",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_52c1a1e08cb0ee536af8"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e56f1a44eef9d89bc3b6"
+                  ],
+                  "id": "R_dea5c49458b0cebab6ea",
+                  "label": "产生",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_bbbc79ec97fb8f7085d4"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "4332e992e57b49571b08e7cee385672f2128dcfce45eedc9448d01e03f151820"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "not_found",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_9ca2918a695c60178dcc",
+                  "candidate_id": "local_6392dedee12e687305f647dbcf93a0cb6ece4b790daa90786244f2c823a30b64",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_b9da151192c2b2f7471b",
+                    "ev_3fa93d4e0d6519345518"
+                  ],
+                  "surface": "涡流阻力",
+                  "type_candidate_ids": [
+                    "C_9ca2918a695c60178dcc"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_8727204b2c2b254457f1154a99ffe72a190b8456de6060f45d1840f161390f01",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc",
+                    "ev_3fa93d4e0d6519345518"
+                  ],
+                  "surface": "弯曲壁面边界层出现分离现象",
+                  "type_candidate_ids": []
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc",
+                    "ev_3fa93d4e0d6519345518"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "正式关系未分配；检索子集中无“类似于”对应属性，且尾实体类型未分配，不能仅凭相似谓词替换，保持未分配。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc"
+                  ],
+                  "issue_code": "",
+                  "note": "本体上下文中未提供‘类似于’关系的正式定义，且mapping_preflight指示judgment_ready为false，保持未分配状态。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "冻结本体子集中未检索到“类似于”关系，且尾实体类型未分配；正式映射保持未分配，不以相似谓词替代。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": "C_9ca2918a695c60178dcc",
+                "assigned_relation_id": null,
+                "assigned_tail_type": null,
+                "candidate_relation_ids": [
+                  "R_029d377fdd30415aa4e3",
+                  "R_0e6aeaed149fdb07cfac",
+                  "R_30bf49bc0f38645ff31c",
+                  "R_92a43480096d210c6ba6",
+                  "R_92ea9560d7f254ee1fe2",
+                  "R_bacd990da3482215545f",
+                  "R_dea5c49458b0cebab6ea"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_de3414495fa05d4e6672",
+                "head": "涡流阻力",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "unknown",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "unknown",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 1,
+                "surface_relation": "类似于",
+                "tail": "弯曲壁面边界层出现分离现象"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "not_found",
+              "result": "unknown",
+              "reason_codes": [
+                "FORMAL_MAPPING_UNASSIGNED"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_029d377fdd30415aa4e3",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_0e6aeaed149fdb07cfac",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_30bf49bc0f38645ff31c",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_92a43480096d210c6ba6",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_92ea9560d7f254ee1fe2",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_bacd990da3482215545f",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_dea5c49458b0cebab6ea",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "id": "tail",
+              "kind": "entity"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "manual_review",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "candidate_expression_incomplete",
+          "candidate_identity_unresolved",
+          "critical_issue_unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "source:unresolved"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    },
+    {
+      "sample_id": "DEV-008",
+      "audit_id": "audit_9c589c214f314ec286be20966b1fb32e",
+      "candidate_id": "cand_cc7f508e0ee31b09d27d",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "supported",
+            "observed_result": "supported",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "expression": {
+            "status": "standard",
+            "observed_result": "standard",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": "unassigned",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "include",
+            "observed_result": "general",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "29cb2fa18448b9967ea5cdbdb2afc506f0750b94f460c1b4158f2bd4c118b5cf",
+            "normalized_response_hash": "633a55b206f064301be0b3b42fa21a9f7cf9d4ef6cde96f9e47fd8b4feb9ac36",
+            "original_attempt_id": "attempt_658c4131b4164eb4a19c5a1d77f8baad",
+            "attempt_id": "attempt_658c4131b4164eb4a19c5a1d77f8baad",
+            "request_key": "e90661ff3de3424cd452813bfe9304e6daf49c90ed5afc8297e80ba50b58c1f8",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "ade0646f8fb0980b4d1f595cc17cf7043b92f9f0a0798737639b07bb2f6d826e",
+            "normalized_response_hash": "31f1cb02197a5f9db4788e93c743832af745f0abc16bb8cfc34aa34c11b4877f",
+            "original_attempt_id": "attempt_50b86ec853744f56bf12b2492fadf0c6",
+            "attempt_id": "attempt_50b86ec853744f56bf12b2492fadf0c6",
+            "request_key": "a4e2a45713a31545e98781623affe03830a0bcee68c21afffb63e17a5c99874b",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "ad70e9f682d5b24964b5ecfbbd998e384a675797f272a60b4531aa0b6902dd30",
+            "normalized_response_hash": "86a9156233e4531aec541fe3333b0d75190bc7389b154bfca6a79fd59f0e6e4e",
+            "original_attempt_id": "attempt_9b0798462a8c40769a085096d6f61c4f",
+            "attempt_id": "attempt_fd5902eb1b854fb289cdc58bb2af8d40",
+            "request_key": "b23fd064aae1a69fb92fed34e6d6d04870e66cc0d25b102ec0398aa57640dce2",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "completed",
+        "execution_reason": "deterministic_fallback_finished",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "81f6b8c6f2cf7f39d64e825e95cd9519fa2a2fd72ac18574462e8009e443b194",
+          "preflight_hash": "04ad72b6a5a771eb8feb4f1cd91a924b15cb77284d26ba2cd428a82c7f390636",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_1654fcf38913d94cb712"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 8,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 8,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_a902e72f8e9d12ecd166"
+                  ],
+                  "id": "R_1654fcf38913d94cb712",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_70780e1e31a41f0ff86a"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "5ea4bb97c4884ec7ac1654ca75c5c7338760b1f4fe9c61471e354f958c25f11f"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "completed",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_a902e72f8e9d12ecd166",
+                  "candidate_id": "local_9395595ccfa2b75ab57d5214174cec0e0c2b8ef2f610d1f6fb7e93d9acb03605",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_c8bc5b0bf7eca019fc99",
+                    "ev_3ba651232f21e5cb9753"
+                  ],
+                  "surface": "横风",
+                  "type_candidate_ids": [
+                    "C_a902e72f8e9d12ecd166"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_70780e1e31a41f0ff86a",
+                  "candidate_id": "local_6cae21a03fb023951e896602dc1315e11ecae0c89f5df7e9406fdf1083c65730",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_c8bc5b0bf7eca019fc99",
+                    "ev_bdac56440d5e10db3db8",
+                    "ev_9697584a209bd4466c38",
+                    "ev_3ba651232f21e5cb9753"
+                  ],
+                  "surface": "弹道",
+                  "type_candidate_ids": [
+                    "C_70780e1e31a41f0ff86a"
+                  ]
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_c8bc5b0bf7eca019fc99",
+                    "ev_3ba651232f21e5cb9753"
+                  ],
+                  "issue_code": "SCHEMA_GAP",
+                  "note": "关系 R_1654fcf38913d94cb712 在绑定版本中缺少定义，正式映射保持未分配。",
+                  "relation_id": "R_1654fcf38913d94cb712",
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_c8bc5b0bf7eca019fc99"
+                  ],
+                  "issue_code": "",
+                  "note": "虽然实体类型和关系ID在结构上匹配，但根据 mapping_preflight 提示，关系 R_1654fcf38913d94cb712 缺少正式定义，按策略将其状态设为 unassigned。",
+                  "relation_id": "R_1654fcf38913d94cb712",
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_c8bc5b0bf7eca019fc99"
+                  ],
+                  "issue_code": "RELATION_DEFINITION_UNAVAILABLE",
+                  "note": "R_1654fcf38913d94cb712 的正式定义在绑定版本中缺失，无法核验语义匹配；域/范围约束通过，但映射保持未分配。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": "C_a902e72f8e9d12ecd166",
+                "assigned_relation_id": "R_1654fcf38913d94cb712",
+                "assigned_tail_type": "C_70780e1e31a41f0ff86a",
+                "candidate_relation_ids": [
+                  "R_1654fcf38913d94cb712"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_cc7f508e0ee31b09d27d",
+                "head": "横风",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 2,
+                "surface_relation": "通过改变空气阻力的方向来影响",
+                "tail": "弹道"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "not_found",
+              "result": "unknown",
+              "reason_codes": [
+                "RELATION_DEFINITION_UNAVAILABLE"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_1654fcf38913d94cb712",
+              "kind": "relation"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "wait_mapping",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "critical_issue_unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "unresolved_claim_dispute"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    },
+    {
+      "sample_id": "DEV-016",
+      "audit_id": "audit_6b3dc2fcc51d4e7692e20903bc56dfc8",
+      "candidate_id": "cand_ccda7f5e8cf2b462ccab",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "unresolved",
+            "observed_result": "supported",
+            "executed": true,
+            "seat_coverage_complete": false,
+            "judgment_complete": false,
+            "valid_seats": 2,
+            "required_seats": 3,
+            "missing_voter_ids": [
+              "judge_b"
+            ],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "changed meaning requires a substantive semantic finding",
+                  "counterevidence: resolved source check requires verified evidence_ids",
+                  "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification",
+                  "missing reviewed source citations: counterevidence"
+                ]
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "expression": {
+            "status": "unresolved",
+            "observed_result": "standard",
+            "executed": true,
+            "seat_coverage_complete": false,
+            "judgment_complete": false,
+            "valid_seats": 2,
+            "required_seats": 3,
+            "missing_voter_ids": [
+              "judge_b"
+            ],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "changed meaning requires a substantive semantic finding"
+                ]
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": "unassigned",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "include",
+            "observed_result": "general",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "5374affe6709c7349a6d566259c3eeb5ea94e1c1b9ba8970b0312074616710b5",
+            "normalized_response_hash": "2661565cf3b1e22987eebe598dc99375c45f403ce4b65fc0ff7c4a66230f08bf",
+            "original_attempt_id": "attempt_f9cfe6b764c545de94568bcea2a3b071",
+            "attempt_id": "attempt_f9cfe6b764c545de94568bcea2a3b071",
+            "request_key": "8692e69ed6ed89187cff3b6fb083271ffcd48ef2128b466086b6f2dca0b67e8a",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": false,
+            "raw_response_hash": "2224a681f1ac5cc2965f7727275a924ab53baf4f10c6629b184bd61a448d4587",
+            "normalized_response_hash": "d20c78291dd4075a82b61b656f0d6d7a17da963e5f48cfc553f88568bac1c11b",
+            "original_attempt_id": "attempt_6df2e578ebe647a7ab3901667adc1ea6",
+            "attempt_id": "attempt_6df2e578ebe647a7ab3901667adc1ea6",
+            "request_key": "3391337ec774435f2e73214b3987b092410b60ee3785c5a0a6a689f8d3d5d0af",
+            "cache_source": null,
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence: resolved source check requires verified evidence_ids",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "changed meaning requires a substantive semantic finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence: resolved source check requires verified evidence_ids; changed meaning requires a substantive semantic finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "provenance",
+                "stage": "provenance",
+                "path": null,
+                "message": "missing reviewed source citations: counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ],
+            "axis_observations": {
+              "source": {
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "changed meaning requires a substantive semantic finding",
+                  "counterevidence: resolved source check requires verified evidence_ids",
+                  "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification",
+                  "missing reviewed source citations: counterevidence"
+                ]
+              },
+              "expression": {
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "changed meaning requires a substantive semantic finding"
+                ]
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "12bf007c62b31406118a9443f964be8fb602e07f43556a8a03a6fec2fbcb692c",
+            "normalized_response_hash": "0e4a362389a58ac828a03d40efe6a365b205116bf132c875d70279c607bb01a0",
+            "original_attempt_id": "attempt_4e56bfb8b3b4414bbcffb1c5d97f85ff",
+            "attempt_id": "attempt_3010d8a6136c426b9414256cd4c37b89",
+            "request_key": "f5137781269685cc89617c895b7b50c879b15c788ce9edd9ad90d5662e9e060c",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "partial_failure",
+        "execution_reason": "deterministic_fallback_finished",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "16cffb81bf2a02cdf0c61efb68c3ad373fea8770d5fff04943f7e05cebe3ef4e",
+          "preflight_hash": "831d37be38e83fe49de159b01e69476f0fa5e34b94842b4a63c3c1cba6fe6e98",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_0e6aeaed149fdb07cfac",
+                "R_2b18880939600d01a389",
+                "R_30bf49bc0f38645ff31c",
+                "R_92ea9560d7f254ee1fe2",
+                "R_9aa34c7a4f252989587e",
+                "R_bacd990da3482215545f",
+                "R_cee80a3f175ec841dd1f",
+                "R_e374f65af01706e956ec"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 8,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 8,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e56f1a44eef9d89bc3b6"
+                  ],
+                  "id": "R_0e6aeaed149fdb07cfac",
+                  "label": "形成",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_bbbc79ec97fb8f7085d4"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_02ca97ebf11ae1d3c3ad"
+                  ],
+                  "id": "R_2b18880939600d01a389",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "id": "R_30bf49bc0f38645ff31c",
+                  "label": "形成",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_23b6984d594ee0674998"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e93d960291ef82ed2a2c"
+                  ],
+                  "id": "R_92ea9560d7f254ee1fe2",
+                  "label": "形成",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_52c1a1e08cb0ee536af8"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_867a1ffca461f14a69e8"
+                  ],
+                  "id": "R_9aa34c7a4f252989587e",
+                  "label": "作用于",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_87a27abd212bc2fb9da8"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e56f1a44eef9d89bc3b6"
+                  ],
+                  "id": "R_bacd990da3482215545f",
+                  "label": "减小",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_52c1a1e08cb0ee536af8"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_87a27abd212bc2fb9da8"
+                  ],
+                  "id": "R_cee80a3f175ec841dd1f",
+                  "label": "作用于",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_dde99eb6d48b7a1d68fd"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ],
+                  "id": "R_e374f65af01706e956ec",
+                  "label": "作用于",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "74235e65b6aba80134fc616fe3a778686da0f024884052ba9eebbad3796bb570"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "not_found",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_3d1e92e945b2c3dbbd16",
+                  "candidate_id": "local_8f818c85fa7dce06fe18bdd27d0b5079f0934162ab072e57a531d7035a8e3ce1",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_34a9e63d42e4c425b893",
+                    "ev_83dd1de85aa14cfd142e",
+                    "ev_c9a7e4e6afdb83079ec1"
+                  ],
+                  "surface": "空气阻力",
+                  "type_candidate_ids": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_6f2cc95532225fc11f80040fa56db4d186b540d69f7b626b5110241ecd47a818",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_34a9e63d42e4c425b893",
+                    "ev_c9a7e4e6afdb83079ec1"
+                  ],
+                  "surface": "摩擦阻力、涡流阻力及超声速时所特有的波动阻力",
+                  "type_candidate_ids": []
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_34a9e63d42e4c425b893"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "正式关系未分配；检索子集中无“由...组成”对应属性，且尾端类型未分配，不能仅凭相似谓词或存在性推断映射。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "invalid_contract",
+                  "status": "unassigned",
+                  "evidence_ids": [
+                    "ev_34a9e63d42e4c425b893"
+                  ],
+                  "note": "The relation '由...组成' is not mapped to a formal property in the provided ontology subset, and the tail is a compound entity that cannot be mapped to a single class.",
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "relation_id": null,
+                  "competing_relation_ids": []
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_34a9e63d42e4c425b893"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "冻结本体上下文中无“由...组成”关系，检索到的属性定义缺失且域/范围不匹配；正式映射保持未分配，不因存在相似属性而选配。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": "C_3d1e92e945b2c3dbbd16",
+                "assigned_relation_id": null,
+                "assigned_tail_type": null,
+                "candidate_relation_ids": [
+                  "R_0e6aeaed149fdb07cfac",
+                  "R_2b18880939600d01a389",
+                  "R_30bf49bc0f38645ff31c",
+                  "R_92ea9560d7f254ee1fe2",
+                  "R_9aa34c7a4f252989587e",
+                  "R_bacd990da3482215545f",
+                  "R_cee80a3f175ec841dd1f",
+                  "R_e374f65af01706e956ec"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_ccda7f5e8cf2b462ccab",
+                "head": "空气阻力",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "extracted",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": "主要",
+                  "time_scope": null
+                },
+                "revision": 2,
+                "surface_relation": "由...组成",
+                "tail": "摩擦阻力、涡流阻力及超声速时所特有的波动阻力"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "not_found",
+              "result": "unknown",
+              "reason_codes": [
+                "FORMAL_MAPPING_UNASSIGNED"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_0e6aeaed149fdb07cfac",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_2b18880939600d01a389",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_30bf49bc0f38645ff31c",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_92ea9560d7f254ee1fe2",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_9aa34c7a4f252989587e",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_bacd990da3482215545f",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_cee80a3f175ec841dd1f",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_e374f65af01706e956ec",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "id": "tail",
+              "kind": "entity"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "manual_review",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "candidate_identity_unresolved",
+          "critical_issue_unresolved",
+          "expression:unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "required_committee_incomplete",
+          "source:unresolved"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [
+        {
+          "category": "provenance",
+          "stage": "provenance",
+          "path": null,
+          "message": "missing reviewed source citations: counterevidence",
+          "axes": [
+            "source"
+          ],
+          "expected": null,
+          "actual_type": null
+        }
+      ],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    },
+    {
+      "sample_id": "DEV-021",
+      "audit_id": "audit_ccd8fbd5a3ad4b81b9d7ec0851873897",
+      "candidate_id": "cand_e701d8ef2859275576ea",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "unresolved",
+            "observed_result": null,
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": true,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "contradicted"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "contradicted"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "expression": {
+            "status": "unresolved",
+            "observed_result": null,
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": true,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "semantic_revision",
+                  "findings": [
+                    {
+                      "check": "qualifiers",
+                      "evidence_ids": [
+                        "ev_5f04a1717f2ae5f320ad"
+                      ],
+                      "kind": "semantic_error",
+                      "meaning_effect": "changed",
+                      "normalization": null,
+                      "note": "原文‘可表示为’在定义公式的语境下应视为等价表示/定义，而非可能性模态 'can'。",
+                      "rule_id": "MOD-001",
+                      "suggested_change": "将 qualifiers.modality 从 'can' 修改为 null"
+                    }
+                  ]
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "semantic_revision",
+                  "findings": [
+                    {
+                      "check": "qualifiers",
+                      "kind": "semantic_error",
+                      "note": "原文“可表示为”加定义公式表达定义/等价表示，候选 modality=can 将其误读为能力或可能性，改变模态含义。",
+                      "evidence_ids": [
+                        "ev_5f04a1717f2ae5f320ad",
+                        "ev_815b810c15295d1c9e69"
+                      ],
+                      "normalization": null,
+                      "rule_id": "MOD-001",
+                      "meaning_effect": "changed",
+                      "suggested_change": "将 qualifiers.modality 由 can 改为 asserted，保留 polarity=positive 及其余限定字段。"
+                    }
+                  ]
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": "unassigned",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "include",
+            "observed_result": "general",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "aae168c66473ec2b75ac51d8a2199f2bc4bdac357572d52888ab27ff8bd40287",
+            "normalized_response_hash": "0e92febaa5a1312c71eb8c3123cd359c4281020b563f1201248f78bf7eaceaec",
+            "original_attempt_id": "attempt_1489b4c723ec4f1691be6638b1f86e2f",
+            "attempt_id": "attempt_1489b4c723ec4f1691be6638b1f86e2f",
+            "request_key": "316f01751e73d375dbd678950fd6cdbf08645e9f8675b536e41c865cfbc4ac18",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "d79d0fb875f9e99c7aad94e50ae5e52b2510417cc7c0d9e8165df32a5e8ce849",
+            "normalized_response_hash": "7d737cdacffdd102454cb51b0c4aba5a65e9d3cac7812c9d45eacde142fa8837",
+            "original_attempt_id": "attempt_fc7f03b33bec457a82d93f6b2093950b",
+            "attempt_id": "attempt_a3ccd71ae916402ea07b0c16f292eb67",
+            "request_key": "f5cd25093e7334683f0e7922438431214ccdfcd7cae53d66c8156d401f9e9e1a",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "contradicted"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "semantic_revision",
+                  "findings": [
+                    {
+                      "check": "qualifiers",
+                      "evidence_ids": [
+                        "ev_5f04a1717f2ae5f320ad"
+                      ],
+                      "kind": "semantic_error",
+                      "meaning_effect": "changed",
+                      "normalization": null,
+                      "note": "原文‘可表示为’在定义公式的语境下应视为等价表示/定义，而非可能性模态 'can'。",
+                      "rule_id": "MOD-001",
+                      "suggested_change": "将 qualifiers.modality 从 'can' 修改为 null"
+                    }
+                  ]
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "00d6b0b78ff727ff05e64e62707522db92622705609c09294983f3c51c92d5f2",
+            "normalized_response_hash": "98b2a59871cf5b29b33f847e8c95004a90f7a554c46d56619095df7ca0cfda80",
+            "original_attempt_id": "attempt_a8c3544edede4e6c88adb8c24c31ec5a",
+            "attempt_id": "attempt_a8c3544edede4e6c88adb8c24c31ec5a",
+            "request_key": "fdaedb00efbb5725af29fcc2e013a87d9d51d0fe513fa6a7f04a38983a73d9cc",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "contradicted"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "semantic_revision",
+                  "findings": [
+                    {
+                      "check": "qualifiers",
+                      "kind": "semantic_error",
+                      "note": "原文“可表示为”加定义公式表达定义/等价表示，候选 modality=can 将其误读为能力或可能性，改变模态含义。",
+                      "evidence_ids": [
+                        "ev_5f04a1717f2ae5f320ad",
+                        "ev_815b810c15295d1c9e69"
+                      ],
+                      "normalization": null,
+                      "rule_id": "MOD-001",
+                      "meaning_effect": "changed",
+                      "suggested_change": "将 qualifiers.modality 由 can 改为 asserted，保留 polarity=positive 及其余限定字段。"
+                    }
+                  ]
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "completed",
+        "execution_reason": "deterministic_fallback_finished",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "0342f8c1e36fa7b6a9ebe4544dab74ed838351f1d5646e0eedf34e620cb1300e",
+          "preflight_hash": "22107a6581e4e67662bd1e24a0c78da775f38ca0238963f0f7e34c64ea8b190f",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_029d377fdd30415aa4e3",
+                "R_0504da52903bd6259f7d",
+                "R_0a4563d5984464c2626f",
+                "R_37918d1714e9945397f3",
+                "R_3a4d4e6372b2170ec6a1",
+                "R_75fc128ee24174d4af9a",
+                "R_ae22a57588ea3f168c9b",
+                "R_fe176660a681f17dc9db"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 8,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 8,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_5d0b94cd0cd9ae0220e9"
+                  ],
+                  "id": "R_029d377fdd30415aa4e3",
+                  "label": "随高度变化",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_ca67f873a92ca5ca8713"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_70780e1e31a41f0ff86a"
+                  ],
+                  "id": "R_0504da52903bd6259f7d",
+                  "label": "具有部件",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_e2ae699555cdf609563b"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_70780e1e31a41f0ff86a"
+                  ],
+                  "id": "R_0a4563d5984464c2626f",
+                  "label": "具有部件",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_29a267036b238911b72c"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e4f3000a2284a7d0fa12"
+                  ],
+                  "id": "R_37918d1714e9945397f3",
+                  "label": "表示",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_125e9268788e296b6e64"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_2e93a01c7d86a22c0ffc"
+                  ],
+                  "id": "R_3a4d4e6372b2170ec6a1",
+                  "label": "具有部件",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_c9a8caf70874ae7c9f89"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "id": "R_75fc128ee24174d4af9a",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_53d15a0ecfc3dc8ecd93"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_b01fa0de9c5da123ef25"
+                  ],
+                  "id": "R_ae22a57588ea3f168c9b",
+                  "label": "具有方向",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_4f1eebacebf2a7f644b6"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_53d15a0ecfc3dc8ecd93"
+                  ],
+                  "id": "R_fe176660a681f17dc9db",
+                  "label": "反映",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "971347bcea651cf6c8dc8af597965d81b6b4a33c5f01e847f061f1361494eebc"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "completed",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_53d15a0ecfc3dc8ecd93",
+                  "candidate_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_5f04a1717f2ae5f320ad",
+                    "ev_68f9672a7671de32c917",
+                    "ev_b1c777e4775dd2c77467"
+                  ],
+                  "surface": "弹道系数",
+                  "type_candidate_ids": [
+                    "C_53d15a0ecfc3dc8ecd93"
+                  ]
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_5f04a1717f2ae5f320ad",
+                    "ev_fa8269096aa5c7db9eeb"
+                  ],
+                  "issue_code": "",
+                  "note": "源语义已支持，但正式关系映射未分配。检索子集中没有“定义”关系，且现有候选关系均缺少定义元数据，不能仅凭词面相似选择替代谓词。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [],
+                  "issue_code": "",
+                  "note": "根据 mapping_preflight，当前缺乏正式关系定义，保持 unassigned。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_5f04a1717f2ae5f320ad",
+                    "ev_815b810c15295d1c9e69"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "冻结本体上下文中无“定义”关系，检索到的属性均非定义关系且缺少定义元数据；正式映射保持未分配，不以相似谓词替代。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": "C_53d15a0ecfc3dc8ecd93",
+                "assigned_relation_id": null,
+                "assigned_tail_type": null,
+                "candidate_relation_ids": [
+                  "R_029d377fdd30415aa4e3",
+                  "R_0504da52903bd6259f7d",
+                  "R_0a4563d5984464c2626f",
+                  "R_37918d1714e9945397f3",
+                  "R_3a4d4e6372b2170ec6a1",
+                  "R_75fc128ee24174d4af9a",
+                  "R_ae22a57588ea3f168c9b",
+                  "R_fe176660a681f17dc9db"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_e701d8ef2859275576ea",
+                "head": "弹道系数",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": null,
+                  "modality": "can",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 3,
+                "surface_relation": "定义",
+                "tail": "弹形系数与弹丸质量系数及直径乘积的比值"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "not_found",
+              "result": "unknown",
+              "reason_codes": [
+                "FORMAL_MAPPING_UNASSIGNED"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_029d377fdd30415aa4e3",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_0504da52903bd6259f7d",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_0a4563d5984464c2626f",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_37918d1714e9945397f3",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_3a4d4e6372b2170ec6a1",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_75fc128ee24174d4af9a",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_ae22a57588ea3f168c9b",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_fe176660a681f17dc9db",
+              "kind": "relation"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "manual_review",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "candidate_identity_unresolved",
+          "critical_issue_unresolved",
+          "expression:unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "source:unresolved",
+          "unresolved_claim_dispute",
+          "unresolved_dimension_disagreement"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    },
+    {
+      "sample_id": "DEV-028",
+      "audit_id": "audit_0413bd605878450eb7258b03f5c604ba",
+      "candidate_id": "cand_808d8f2198c5723ef4cc",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "unresolved",
+            "observed_result": "supported",
+            "executed": true,
+            "seat_coverage_complete": false,
+            "judgment_complete": false,
+            "valid_seats": 2,
+            "required_seats": 3,
+            "missing_voter_ids": [
+              "judge_c"
+            ],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "source support requires a nominated positive evidence set"
+                ]
+              }
+            ]
+          },
+          "expression": {
+            "status": "standard",
+            "observed_result": "standard",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": null,
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": true,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "conflict"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "conflict"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "include",
+            "observed_result": "general",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "9cb9455b5e7bfac983f927b52a6ad8c0af92388bc3e1d9113f171550e687112c",
+            "normalized_response_hash": "032a90cde4797d3fc248a985aa4ee9c53e890c619f86cd017bd774cf02543601",
+            "original_attempt_id": "attempt_d593043d71714b3e9804d76c168d9d1b",
+            "attempt_id": "attempt_8edd016a49244c83aef3dc0d616c3e69",
+            "request_key": "2c70631db3128ae13d83501fb55a687e9114cf8ebac186e43d1991295997c8a0",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "conflict"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "2ec671818a3fc63fb512c75d036680016b4728112f6b1892b83531fa21437f13",
+            "normalized_response_hash": "23db9e36ba3374529f5080eaad980b23508b91b476f1c3feeb421bf57f4e46c3",
+            "original_attempt_id": "attempt_3371ccda5bfb4b6d9863c3279120abc8",
+            "attempt_id": "attempt_13f4c4635b734086ab9106d7507e87f1",
+            "request_key": "2665a7e617e22844ea18870002a291036e90251ca6475c1e38b3408283e1ea51",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "conflict"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "71abd31ac4242f5dac2a50c31247b625220dc118d05d837f01f60dd2cfe3746a",
+            "normalized_response_hash": "2fab49e2071c77086c3452effa261e03c6194274a91f4709f21cdad521409fca",
+            "original_attempt_id": "attempt_c321a439b8be4fa688d91d97c6ab2736",
+            "attempt_id": "attempt_c321a439b8be4fa688d91d97c6ab2736",
+            "request_key": "b3779d3a44e28ac40608a5ce071e38f33a7902084631c3f79628ae42804b0a7e",
+            "cache_source": null,
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "source support requires a nominated positive evidence set",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ],
+            "axis_observations": {
+              "source": {
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "source support requires a nominated positive evidence set"
+                ]
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "general"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "completed",
+        "execution_reason": "deterministic_fallback_finished",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "ea24e4496a1cea24d584c1082c0e078032d2e745f0741d56d7d783a1e7b89907",
+          "preflight_hash": "d2260466cc37a5030a7d449748f0ebbd6572d21dc64c073b887ad7afd40a3886",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_fbc54f6800679e25d95d"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 8,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [
+                  "R_fbc54f6800679e25d95d"
+                ],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 8,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e188552eb17f6e928e8a"
+                  ],
+                  "id": "R_fbc54f6800679e25d95d",
+                  "label": "考虑",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_aef809afb1c169b7ed7f"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "694d5fc627d6d2894804221d56cbfd39e9d9ad00f7cc9676979bb052b77793e2"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "completed",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_e188552eb17f6e928e8a",
+                  "candidate_id": "local_8d6d9cced5d5de841b229fdbb73f7d248bbc6d551c0bb41f67580e1ebf3afa36",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_590401a14e2eb25b2bde"
+                  ],
+                  "surface": "弹丸运动方程",
+                  "type_candidate_ids": [
+                    "C_e188552eb17f6e928e8a"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_a1bfa7db3298783a8f65",
+                  "candidate_id": "local_b3ba890401f252141c4cfcff30e497c801c829fc67beb4ff160d8378b588b900",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_8a4f30aa5bf75c29f3eb",
+                    "ev_9f15eb479267c1523bc4",
+                    "ev_82e270702ca31e77baf4",
+                    "ev_c7f5578d83fa8491f651"
+                  ],
+                  "surface": "地面曲率",
+                  "type_candidate_ids": [
+                    "C_a1bfa7db3298783a8f65"
+                  ]
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_590401a14e2eb25b2bde",
+                    "ev_7165805a7dd5be958b56"
+                  ],
+                  "issue_code": "CONSTRAINT_VIOLATION",
+                  "note": "关系 R_fbc54f6800679e25d95d 的 range 约束为 C_aef809afb1c169b7ed7f（科氏加速度），而候选 tail_type 为 C_a1bfa7db3298783a8f65（地面曲率），不满足本体约束。",
+                  "relation_id": "R_fbc54f6800679e25d95d",
+                  "status": "constraint_conflict"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_590401a14e2eb25b2bde"
+                  ],
+                  "issue_code": "CONSTRAINT_VIOLATION",
+                  "note": "关系 R_fbc54f6800679e25d95d 的本体定义中 range 仅限制为 C_aef809afb1c169b7ed7f (科氏加速度)，而本条目 tail 为 C_a1bfa7db3298783a8f65 (地面曲率)，导致范围约束冲突。",
+                  "relation_id": "R_fbc54f6800679e25d95d",
+                  "status": "constraint_conflict"
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_590401a14e2eb25b2bde",
+                    "ev_7165805a7dd5be958b56"
+                  ],
+                  "issue_code": "RELATION_DEFINITION_UNAVAILABLE",
+                  "note": "关系R_fbc54f6800679e25d95d在冻结版本中缺少定义，且其range为科氏加速度，与地面曲率类型冲突；映射预检judgment_ready为false，不能确认正式映射。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": "C_e188552eb17f6e928e8a",
+                "assigned_relation_id": "R_fbc54f6800679e25d95d",
+                "assigned_tail_type": "C_a1bfa7db3298783a8f65",
+                "candidate_relation_ids": [
+                  "R_fbc54f6800679e25d95d"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_808d8f2198c5723ef4cc",
+                "head": "弹丸运动方程",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 1,
+                "surface_relation": "考虑",
+                "tail": "地面曲率"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "failed",
+              "result": "fail",
+              "reason_codes": [
+                "RANGE_CONSTRAINT_FAILED",
+                "RELATION_DEFINITION_UNAVAILABLE"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_fbc54f6800679e25d95d",
+              "kind": "relation"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "manual_review",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "candidate_identity_unresolved",
+          "critical_issue_unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "gap:ontology_disagreement",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "source:unresolved",
+          "unresolved_claim_dispute",
+          "unresolved_dimension_disagreement"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    },
+    {
+      "sample_id": "DEV-029",
+      "audit_id": "audit_372b4d19cdf746a5b628e266afc4be05",
+      "candidate_id": "cand_31bd91d40eac020d152d",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "supported",
+            "observed_result": "supported",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "expression": {
+            "status": "standard",
+            "observed_result": "standard",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": "unassigned",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "exclude",
+            "observed_result": "local_definition",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "local_definition"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "local_definition"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "local_definition"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "5f9dad6dc222d7cf0278a5aff8f8b645ac4a1bf79f4690a10dfd6b15387ad428",
+            "normalized_response_hash": "8c36e345950bca32535b8248ba39263351b7220416a03b9ec714165cf25051b9",
+            "original_attempt_id": "attempt_caf6f8e2d76643b6849996f4aadd6ed4",
+            "attempt_id": "attempt_d4c3a9a096fd40c9a2db6763cb1dfe90",
+            "request_key": "d1b0e4033d6aa7fe2686cc80dd046fa7b5515d89081aaa3ccb5762e64c81b8c6",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "local_definition"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "45371dba4336a0b368e7f99e001f8a9331ed0bf24bfc26b9eb1e22ccaa1c59e3",
+            "normalized_response_hash": "bbdb9b1536283f1901f89a940a06fcd0ea5260d1be9f93e751a41f4e400b4686",
+            "original_attempt_id": "attempt_45c37dbe23f04093a3c55eb0684da293",
+            "attempt_id": "attempt_79261c4896f14f2888d500f1cac4a813",
+            "request_key": "1957520794a3a34a4a0e38dec781b90842fef1f4c2d18698b48b9f8850b2a936",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "local_definition"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "0bcbcbccf2cb67f3318b3d038361893a3664f0e84e7fa18891e379f4da83b5aa",
+            "normalized_response_hash": "cd5db7a2307d6c89127f36fd052406164a29472f0413d3996d8f03bed5c5f392",
+            "original_attempt_id": "attempt_fc5deb5124e24626b133bef861b672e7",
+            "attempt_id": "attempt_fc5deb5124e24626b133bef861b672e7",
+            "request_key": "6e1fbd07558c8abc49d14535f060dde44d413d2ef6e6d0eb1672cd641bbb7b3f",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "local_definition"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "completed",
+        "execution_reason": "来源支持已确认，但知识范围被程序判定为局部定义并排除；正式映射无唯一候选且本体扩展被禁止，无合法信息增益动作。",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "761cbc0dd5d69c3278e00f5303b8af195c42be895fecb9d4f22b783c627f36ab",
+          "preflight_hash": "e42a0cf396ed807868864411bdd9b0550c60b3a1356791e10fdda59cc2dc2476",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_1019d420d55d6c331f64",
+                "R_3c75dd89923bc714630d",
+                "R_ae22a57588ea3f168c9b"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 3,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 3,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_70804fa3ce2e209e9d9e"
+                  ],
+                  "id": "R_1019d420d55d6c331f64",
+                  "label": "夹角取决于",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_c5f91d8b53bb976eb043"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_52c1a1e08cb0ee536af8"
+                  ],
+                  "id": "R_3c75dd89923bc714630d",
+                  "label": "取决于",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_f0037f9e5d770063017b"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_b01fa0de9c5da123ef25"
+                  ],
+                  "id": "R_ae22a57588ea3f168c9b",
+                  "label": "具有方向",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_4f1eebacebf2a7f644b6"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "ee1739f27b9dba0973e4ea73310bb2ee3e6820c955c42384316cc427cf4ab7ec"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "not_found",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_20c9253fff460304659476edac3eacc91ff42c6f90e0d72bce07f3e0f1c18e9b",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous",
+                    "referent_source_context_unavailable"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [],
+                  "surface": "地面坐标系中的 x 轴",
+                  "type_candidate_ids": []
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_02562fe07f825cf6f130"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "本体中未找到与“与正北方向的夹角为”完全匹配的谓词，现有候选谓词（如“夹角取决于”、“取决于”、“具有方向”）语义不匹配，保持未分配。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [],
+                  "issue_code": "",
+                  "note": "在提供的本体子集中未找到匹配的正式关系。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_02562fe07f825cf6f130"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "本体检索未找到与“与正北方向的夹角为”匹配的关系；候选关系定义缺失且域范围不符，正式映射保持未分配。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": null,
+                "assigned_relation_id": null,
+                "assigned_tail_type": null,
+                "candidate_relation_ids": [
+                  "R_1019d420d55d6c331f64",
+                  "R_3c75dd89923bc714630d",
+                  "R_ae22a57588ea3f168c9b"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_31bd91d40eac020d152d",
+                "head": "地面坐标系中的 x 轴",
+                "qualifier_status": {
+                  "applicability": "extracted",
+                  "condition": "extracted",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": "地面坐标系",
+                  "condition": "顺时针旋转为正",
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 2,
+                "surface_relation": "与正北方向的夹角为",
+                "tail": "α"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "not_found",
+              "result": "unknown",
+              "reason_codes": [
+                "FORMAL_MAPPING_UNASSIGNED"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_1019d420d55d6c331f64",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_3c75dd89923bc714630d",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_ae22a57588ea3f168c9b",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous",
+                "referent_source_context_unavailable"
+              ],
+              "id": "head",
+              "kind": "entity"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "exclude",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "candidate_identity_unresolved",
+          "critical_issue_unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "scope:exclude"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    },
+    {
+      "sample_id": "DEV-030",
+      "audit_id": "audit_36ecf9db21804f728dbd190ba89023b6",
+      "candidate_id": "cand_4699137d543b768e4b3e",
+      "outcome": {
+        "version": "review_outcome_v3",
+        "dimension_results": {
+          "source": {
+            "status": "unresolved",
+            "observed_result": "supported",
+            "executed": true,
+            "seat_coverage_complete": false,
+            "judgment_complete": false,
+            "valid_seats": 2,
+            "required_seats": 3,
+            "missing_voter_ids": [
+              "judge_c"
+            ],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "source support requires a nominated positive evidence set"
+                ]
+              }
+            ]
+          },
+          "expression": {
+            "status": "standard",
+            "observed_result": "standard",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "observed_result": "unassigned",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": false,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              }
+            ]
+          },
+          "scope": {
+            "status": "include",
+            "observed_result": "conditional",
+            "executed": true,
+            "seat_coverage_complete": true,
+            "judgment_complete": true,
+            "valid_seats": 3,
+            "required_seats": 3,
+            "missing_voter_ids": [],
+            "has_conflict": false,
+            "observations": [
+              {
+                "voter_id": "judge_a",
+                "model_family": "qwen",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "conditional"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_b",
+                "model_family": "gemma",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "conditional"
+                },
+                "missing_reasons": []
+              },
+              {
+                "voter_id": "judge_c",
+                "model_family": "deepseek",
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "conditional"
+                },
+                "missing_reasons": []
+              }
+            ]
+          }
+        },
+        "vote_validation": {
+          "judge_a": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_a",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "bdd9479d26ab14336a12bf61d54d254b2e7d5a38114d260bfed44a392c3275eb",
+            "normalized_response_hash": "9063014a9f6e52700325b4073d1e793b1ba8d2b7a665a282a4a41e83303399f9",
+            "original_attempt_id": "attempt_c7a1748865044f188d052c83e02bae50",
+            "attempt_id": "attempt_c7a1748865044f188d052c83e02bae50",
+            "request_key": "8b7972608dee4c2b78881d3f2374f804a40628c417e320e129d5188dd6a65aeb",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "conditional"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_b": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_b",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "479dec17113e1187aef41056a12ef8076757db52f80cc7eac43426cf40700799",
+            "normalized_response_hash": "cb78c51cc8b0e46dfe7ea17cd72ed76cac7906d806c5282b1dba8f24fc3939c4",
+            "original_attempt_id": "attempt_eadfbdc43af44436b46eba0dd0d836d4",
+            "attempt_id": "attempt_5ca10307697f4859b7c2912d3f257006",
+            "request_key": "68e7ddd7b10c7fed3aba4f5965c0e964f3f3964fbf332d1d7ea0fb80183c5444",
+            "cache_source": null,
+            "errors": [],
+            "axis_observations": {
+              "source": {
+                "usable": true,
+                "opinion": {
+                  "status": "supported"
+                },
+                "missing_reasons": []
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "conditional"
+                },
+                "missing_reasons": []
+              }
+            }
+          },
+          "judge_c": {
+            "validation_version": "vote_validation_v3",
+            "voter_id": "judge_c",
+            "response_contract_version": "validator_response_v8",
+            "version_inference": null,
+            "global_trustworthy": true,
+            "whole_vote_eligible": true,
+            "raw_response_hash": "d643f358c58cba76876457f7e42321d8db9d95a07bdc66e728270f09a2134f27",
+            "normalized_response_hash": "40f34306b421b20e8aa0c94bb12ca47ff9aac057e8cdbc8142e5378eb746e4c2",
+            "original_attempt_id": "attempt_11ee33f73c0a4a5a9036c1d8350836a8",
+            "attempt_id": "attempt_11ee33f73c0a4a5a9036c1d8350836a8",
+            "request_key": "082847acc9c7298d1aff93ffce04a35b8ea44e90119e4698e0ff9d581dc4a014",
+            "cache_source": null,
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "source support requires a nominated positive evidence set",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ],
+            "axis_observations": {
+              "source": {
+                "usable": false,
+                "opinion": null,
+                "missing_reasons": [
+                  "source support requires a nominated positive evidence set"
+                ]
+              },
+              "expression": {
+                "usable": true,
+                "opinion": {
+                  "status": "standard",
+                  "findings": []
+                },
+                "missing_reasons": []
+              },
+              "mapping": {
+                "usable": true,
+                "opinion": {
+                  "status": "unassigned"
+                },
+                "missing_reasons": []
+              },
+              "scope": {
+                "usable": true,
+                "opinion": {
+                  "status": "unclear",
+                  "knowledge_scope": "conditional"
+                },
+                "missing_reasons": []
+              }
+            }
+          }
+        },
+        "duplicate_records_ignored": 0,
+        "whole_vote_eligible_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+        "execution_status": "completed",
+        "execution_reason": "来源支持已确认，但正式映射因本体关系定义缺失及端点类型未分配而保持未分配；无合法扩展或修订动作可消除该阻塞。",
+        "mapping_process": {
+          "version": "mapping_execution_trace_v1",
+          "proposal_digest": "ffc529a6b60a09b664c3c61b078e4a170a3dca413af04471fdcccac755aa3d29",
+          "preflight_hash": "7b2edb5439326ad978e08ee77e5b302b3066a618870c51007c24cd75f4c21b18",
+          "stages": [
+            {
+              "stage": "local_retrieval",
+              "status": "completed",
+              "recalled_ids": [
+                "R_69d8ebeb21191bb11194",
+                "R_fbc54f6800679e25d95d"
+              ],
+              "source": {
+                "metadata_complete": false,
+                "property_count": 2,
+                "stage": "review_subset"
+              }
+            },
+            {
+              "stage": "global_retrieval",
+              "status": "completed",
+              "source": {
+                "classes_scanned": 189,
+                "exact_match_ids": [],
+                "lexical_recall_is_semantic_confirmation": false,
+                "properties_scanned": 81,
+                "property_count": 2,
+                "stage": "full_bound_release_and_aliases"
+              },
+              "failure": null,
+              "recall_is_semantic_proof": false
+            },
+            {
+              "stage": "relation_definitions",
+              "status": "not_found",
+              "complete_ids": [],
+              "candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e627636b6ff165a0ade0"
+                  ],
+                  "id": "R_69d8ebeb21191bb11194",
+                  "label": "研究",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_80c1a9d862501a242bf2"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_e188552eb17f6e928e8a"
+                  ],
+                  "id": "R_fbc54f6800679e25d95d",
+                  "label": "考虑",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_aef809afb1c169b7ed7f"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_context_hash": "8cefe3b6284f997c14af06c42a1ac76c62aaf84e253da8052fad8cf58dd3053c"
+            },
+            {
+              "stage": "entity_identity",
+              "status": "not_found",
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_ac8eb8dcb8fb20ad7da21694aab14b035d024cbaa1bb5c639bc5c37c2d1de604",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_38a5938a45e4b88caddd",
+                    "ev_77353c11b9412a338e12"
+                  ],
+                  "surface": "三自由度方程",
+                  "type_candidate_ids": [
+                    "C_3f6a2ce01bbab66fac94"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_88bf1464f3b4aa40c29b7cbff58c773024dd3b3beb42c8609c84e36f2189d0d2",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_38a5938a45e4b88caddd",
+                    "ev_77353c11b9412a338e12",
+                    "ev_615a2a73e4c35cf98761"
+                  ],
+                  "surface": "运动方程",
+                  "type_candidate_ids": []
+                }
+              },
+              "candidate_ids_are_formal_entity_ids": false
+            },
+            {
+              "stage": "mapping_attempt",
+              "status": "completed",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_38a5938a45e4b88caddd",
+                    "ev_77353c11b9412a338e12"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "本体中未提供“是”或“称为”对应的正式关系，且头尾实体类型未分配，映射保持未分配状态，不强行匹配相似谓词。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_b",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "由于 mapping_preflight 提示 judgment_ready 为 false 且缺乏正式关系定义，保持 unassigned。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                {
+                  "voter_id": "judge_c",
+                  "response_status": "ok",
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_38a5938a45e4b88caddd",
+                    "ev_77353c11b9412a338e12"
+                  ],
+                  "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                  "note": "正式映射未分配；检索到的“研究”“考虑”属性定义缺失且域/范围不匹配，不能据此确认“是”的正式关系。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                }
+              ],
+              "formal_assignment": {
+                "assigned_head_type": null,
+                "assigned_relation_id": null,
+                "assigned_tail_type": null,
+                "candidate_relation_ids": [
+                  "R_69d8ebeb21191bb11194",
+                  "R_fbc54f6800679e25d95d"
+                ],
+                "semantic_approval": false
+              },
+              "original_expression": {
+                "candidate_id": "cand_4699137d543b768e4b3e",
+                "head": "三自由度方程",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "extracted",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": "在考虑横风的情况下",
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 1,
+                "surface_relation": "是",
+                "tail": "运动方程"
+              },
+              "semantic_equivalence_confirmed": false
+            },
+            {
+              "stage": "constraint_check",
+              "status": "not_found",
+              "result": "unknown",
+              "reason_codes": [
+                "FORMAL_MAPPING_UNASSIGNED"
+              ]
+            }
+          ],
+          "blocking_information": [
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_69d8ebeb21191bb11194",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_fbc54f6800679e25d95d",
+              "kind": "relation"
+            },
+            {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "id": "head",
+              "kind": "entity"
+            },
+            {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "id": "tail",
+              "kind": "entity"
+            }
+          ],
+          "global_gap_confirmed": false,
+          "mapping_accuracy": "requires_current_packet_human_annotation"
+        },
+        "review_completed": false,
+        "recommendation": "manual_review",
+        "action_taken": "none",
+        "blocking_reasons": [
+          "candidate_identity_unresolved",
+          "critical_issue_unresolved",
+          "formal_mapping_not_bound_to_candidate",
+          "mapping:context_incomplete",
+          "ontology_guard_not_passed",
+          "source:unresolved"
+        ],
+        "writes_authorized": false,
+        "derivation": "current_frozen_input_only"
+      },
+      "response_provenance_errors": [],
+      "runtime_error": null,
+      "systematic_version_or_binding_error": false,
+      "trace_defect_recurred": false
+    }
+  ],
+  "population": 7,
+  "new_committee_request_attempts": 0,
+  "planner_calls": 0,
+  "request_states": {
+    "completed": 20,
+    "failed": 10
+  },
+  "all_have_explainable_terminal_state": true,
+  "known_trace_defect_recurred": false,
+  "production_written": false,
+  "isolated_import_outbox": 0,
+  "isolated_revisions_applied": 0,
+  "engineering_gate_passed": true,
+  "quality_evaluable": false,
+  "human_labels": 0,
+  "expansion_rule": "explainable terminal states, no systematic runtime/version/trace defects; no unanimity requirement",
+  "source_experiment": "D:\\knowledge-huopao\\outputs\\dev7_v8_revalidated_20261109_1815",
+  "recorded_committee_request_attempts": 30,
+  "recorded_planner_calls": 22,
+  "new_model_calls": 0,
+  "changed_code_files": [
+    "review_agent/response_contract_v6_2.py",
+    "review_agent/review_observability.py"
+  ],
+  "diagnostic_changes": [
+    "rejected raw-only envelopes validate immutable merge without inventing a stored normalized view",
+    "schema/semantic failures remain ineligible; valid or partially stored views still require exact comparison"
+  ],
+  "core_request_contracts_and_execution_unchanged": true,
+  "response_provenance_validator_updated": true
+}

@@ -106,7 +106,8 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                     sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED, sqlite3.SQLITE_IOERR,
                 }
                 if not transient or attempt == 3:
-                    exc.add_note(f"SQLite connection setup: {getattr(exc, 'sqlite_errorname', 'unknown')} ({code})")
+                    if hasattr(exc,'add_note'):
+                        exc.add_note(f"SQLite connection setup: {getattr(exc, 'sqlite_errorname', 'unknown')} ({code})")
                     raise
                 # Retry only connection setup, before any business transaction.
                 # Closing the failed handle also releases Windows WAL resources.
@@ -349,6 +350,8 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             self.initialize_requests(connection)
             from .revision_service import initialize_revisions
             initialize_revisions(connection)
+            from .dispute_review import initialize
+            initialize(connection)
             connection.execute(
                 "INSERT OR IGNORE INTO schema_migrations(migration_version, applied_at) VALUES (?, ?)",
                 (MIGRATION_VERSION, utc_now()),
@@ -510,7 +513,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             ).fetchall()
         return [_loads(row["manifest_json"], {}) for row in rows]
 
-    def add_candidate(self, candidate: Mapping[str, Any]) -> Dict[str, Any]:
+    def add_candidate(self, candidate: Mapping[str, Any], *, _connection=None) -> Dict[str, Any]:
         payload = dict(candidate)
         required = ("candidate_id", "run_id", "document_id", "document_version", "ontology_version")
         missing = [key for key in required if not payload.get(key)]
@@ -521,7 +524,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
         payload.setdefault("schema_version", "triple_review_v3")
         payload.setdefault("fact_key", fact_key_for(payload, str(payload.get("domain") or "default")))
         now = utc_now()
-        with self.transaction(immediate=True) as connection:
+        with (self.transaction(immediate=True) if _connection is None else nullcontext(_connection)) as connection:
             connection.execute(
                 """INSERT INTO candidates(candidate_id, run_id, current_revision, row_version,
                    human_status, import_status, created_at, updated_at)
@@ -536,7 +539,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                  payload["ontology_version"], payload.get("source_chunk_id") or payload.get("source_id"),
                  payload.get("section_id"), payload["fact_key"], _json(payload), now),
             )
-        return self.get_candidate(payload["candidate_id"])
+        return self.get_candidate(payload["candidate_id"]) if _connection is None else {**payload,'row_version':1}
 
     upsert_candidate = add_candidate
 
@@ -655,6 +658,10 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 from .admission import canonicalize_revision
                 updated = canonicalize_revision(self, updated)
             updated["fact_key"] = fact_key_for(updated)
+            from .revision_loop import lineage
+            updated['revision_lineage']=lineage(source,updated)
+            if _revision_provenance and _revision_provenance.get('change_analysis'):
+                updated['revision_lineage']['analysis']=_revision_provenance['change_analysis']
             connection.execute(
                 """INSERT INTO candidate_revisions(candidate_id, revision, document_id,
                    document_version, ontology_version, source_chunk_id, section_id, fact_key,
@@ -743,6 +750,9 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             if row:
                 context = {**_loads(row["context_json"], {}),
                            'revision_transition' if status=='superseded' else 'execution_failure':dict(detail)}
+                context.update(execution_status='timed_out' if status=='timeout' else status,
+                    execution_reason=detail.get('reason_code') or status,
+                    review_completion_status='independent_review_incomplete',independent_review_completed=False)
                 connection.execute("UPDATE audit_runs SET status=?,context_json=?,completed_at=? WHERE audit_id=? AND status='running'",
                                    (status, _json(context), utc_now(), audit_id))
 
@@ -807,7 +817,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 connection.execute("UPDATE decisions SET active=0 WHERE decision_id=?", (old["decision_id"],))
             route = str(result.get("decision") or result.get("route") or "manual_review")
             from .response_contract import CONTRACT_VERSION
-            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4','validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+            if route in {"auto_accept", "auto_reject"} and result.get("review_versions", {}).get("response_contract_version") in {CONTRACT_VERSION,'validator_response_v4','validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 from .proposal_resolver import selected_proposal
                 candidate = self.get_revision(candidate_id, revision)
                 selected_proposal(self, candidate, result)
@@ -952,7 +962,9 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                     base_triple = dict(source.get("triple") or {
                         key: source.get(key) for key in ("head", "relation", "surface_relation", "tail")
                     })
-                    new_candidate["triple"] = {**base_triple, **dict(triple_changes)}
+                    from .revision_patch import merge_triple_patch
+                    new_candidate["triple"] = merge_triple_patch(base_triple,dict(triple_changes),
+                        strict=source.get('contract_version')=='extraction_candidate_v4')
                 revised_triple = new_candidate.get("triple") or {}
                 if not str(revised_triple.get("head") or "").strip() or not str(
                     revised_triple.get("tail") or ""
@@ -971,6 +983,8 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                     from .admission import canonicalize_revision
                     new_candidate = canonicalize_revision(self, new_candidate)
                 new_candidate["fact_key"] = fact_key_for(new_candidate)
+                from .revision_loop import lineage
+                new_candidate['revision_lineage']=lineage(source,new_candidate,operation='human_revision')
                 connection.execute(
                     """INSERT INTO candidate_revisions(candidate_id, revision, document_id,
                        document_version, ontology_version, source_chunk_id, section_id, fact_key,

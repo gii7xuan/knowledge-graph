@@ -22,9 +22,13 @@ def policy_for(config):
     for key,value in incoming.items():
         if type(value) is not int or value<0 or value>DEFAULT_LIMITS[key]:raise ValueError('correction limits may only tighten defaults: '+key)
         limits[key]=value
-    return {'version':POLICY_VERSION,'prompt_hash':PROMPT_HASH,'limits':limits,
+    policy={'version':POLICY_VERSION,'prompt_hash':PROMPT_HASH,'limits':limits,
         'mode':'field_patches_only','existing_judgments':'immutable','valid_evidence_and_counter_roles':'immutable',
         'unparseable_or_semantic_conflict':'manual_review','partial_ontology_cannot_confirm_gap':True}
+    if (config.get('semantic_clarification') or {}).get('enabled'):
+        from .semantic_clarification import policy as clarification_policy
+        policy['semantic_clarification']=clarification_policy()
+    return policy
 
 
 def pointer(parts):return '/'+ '/'.join(str(p).replace('~','~0').replace('/','~1') for p in parts)
@@ -73,6 +77,10 @@ def _conflicts(raw):
     counter={a['evidence_id'] for a in usable if a['role']=='counter'}
     seen=[a['evidence_id'] for a in usable]
     reasons=[]
+    for i,finding in enumerate(raw.get('expression_findings') or []):
+        if not isinstance(finding,dict):continue
+        if finding.get('meaning_effect')=='changed' and finding.get('kind')!='semantic_error':
+            reasons.append('expression_findings/'+str(i)+': changed meaning conflicts with non-semantic kind; requires semantic clarification')
     if len(seen)!=len(set(seen)):reasons.append('duplicate or conflicting evidence roles require semantic review')
     c=dims.get('counterevidence') or {}
     if isinstance(c,dict) and c.get('status')=='pass' and counter:reasons.append('material counterevidence conflicts with counterevidence=pass')
@@ -86,6 +94,10 @@ def make_plan(raw,proposal,policy):
     from .validator_contracts import contract_for
     contract=contract_for(proposal['response_contract_version'])
     if not isinstance(raw,dict):return None,['response is not reliably parseable as an object']
+    if proposal.get('response_contract_version') in {'validator_response_v7','validator_response_v8'}:
+        findings_schema = contract.RESPONSE_SCHEMA['properties']['expression_findings']
+        if schema_errors(raw.get('expression_findings'), findings_schema):
+            return None, ['representation findings are substantive judgments and cannot be filled by field correction']
     blocked=_conflicts(raw);issues=schema_issues(raw,contract.RESPONSE_SCHEMA)
     dims=raw.get('dimensions',{});evidence=proposal.get('evidence_bundle',{}).get('items',[])
     from .ontology_context import selectable_properties
@@ -134,6 +146,9 @@ def make_plan(raw,proposal,policy):
             if ids is not None and value not in ids:
                 targets.append({'parts':list(parts),'kind':'invalid_reference','schema':{'type':'string','enum':sorted(ids)}})
     walk_ids(raw)
+    if proposal.get('response_contract_version') in {'validator_response_v7','validator_response_v8'} and any(
+            t['parts'] and t['parts'][0] == 'expression_findings' for t in targets):
+        return None, ['representation findings cannot be rewritten by field correction']
     # Never permit a whole-object repair to replace an already returned dimension.
     by_path={}
     for target in sorted(targets,key=lambda t:(len(t['parts']),pointer(t['parts']))):
@@ -190,6 +205,8 @@ def apply_repairs(original,plan,patch):
         for i,entry in enumerate(roles):
             if isinstance(entry,dict) and 'role' in entry and (i>=len(changed) or changed[i].get('role')!=entry['role']):
                 raise ValueError('existing evidence role changed')
+    if original.get('expression_findings') != result.get('expression_findings'):
+        raise ValueError('existing representation findings changed')
     return result
 
 
@@ -211,7 +228,7 @@ def repair_payload(original,plan,proposal):
         payload['ontology_context']={'scope':'selected_frozen_properties_only','full_catalog_reviewed_in_this_call':False,
             'catalog_hash':proposal.get('ontology_catalog_hash'),'properties':deepcopy(selected),'program_check':proposal.get('ontology_check'),
             'constraint':'Partial lookup cannot justify not_covered. Preserve uncertainty when formal mapping cannot be established.'}
-        if proposal.get('response_contract_version')=='validator_response_v6_3':
+        if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .ontology_context import frozen_context
             context=frozen_context(proposal)
             # Reuse frozen definitions; no fresh retrieval or full-catalog resend.

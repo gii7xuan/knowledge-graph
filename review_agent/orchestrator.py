@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import time
+import copy
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from confidence.calibrator import TripleCalibrator
@@ -97,8 +98,8 @@ class ReviewOrchestrator:
         self.calibrator = calibrator or TripleCalibrator()
         self.risk_policy = risk_policy or RiskPolicy()
         self.config = dict(config or {})
-        self.ontology_guard.require_explicit_mapping = self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
-        self.ontology_guard.require_relation_definition = self.config.get('validator_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
+        self.ontology_guard.require_explicit_mapping = self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
+        self.ontology_guard.require_relation_definition = self.config.get('validator_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
         self.planner_client = planner_client
         self.should_cancel = should_cancel
         consensus_config = dict(self.config.get("consensus") or {})
@@ -132,7 +133,7 @@ class ReviewOrchestrator:
                 "policy_ready": self.risk_policy.ready, "calibrator_ready": bool(getattr(self.calibrator, "ready", False)),
                 "accept_threshold": self.risk_policy.policy.get("accept_threshold"),
                 "auto_accept_enabled": bool((self.config.get("routing") or {}).get("auto_accept_enabled") and self.risk_policy.policy.get("auto_accept_enabled")),
-                **({'scope_policy':self.config.get('scope_policy') or DEFAULT_POLICY} if self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'} else {})}
+                **({'scope_policy':self.config.get('scope_policy') or DEFAULT_POLICY} if self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} else {})}
 
     def _proposal(
         self, audit_id: str, candidate: Mapping[str, Any], guard: Mapping[str, Any],
@@ -167,7 +168,10 @@ class ReviewOrchestrator:
         }
         from .validator_contracts import versions_for
         seed.update(versions_for(self.config))
-        if seed['response_contract_version'] in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if seed['response_contract_version'] in {'validator_response_v7','validator_response_v8'}:
+            from .scope_policy import DEFAULT_POLICY
+            seed['review_scope_policy'] = copy.deepcopy((context.get('admission_policy') or {}).get('scope_policy') or self.config.get('scope_policy') or DEFAULT_POLICY)
+        if seed['response_contract_version'] in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .validator_contracts import contract_for
             from .output_structure import resolve_profile
             schema=contract_for(seed['response_contract_version']).RESPONSE_SCHEMA
@@ -175,10 +179,16 @@ class ReviewOrchestrator:
                 generation['output_transport']=resolve_profile(voter,self.config,schema)
         catalog = None
         ontology_context = None
-        if seed['response_contract_version']=='validator_response_v6_3':
+        mapping_preflight = None
+        if seed['response_contract_version']in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .ontology_context import select_context
             ontology_context=select_context(self.ontology_guard,candidate,bundle,seed['ontology_context_policy'],
                                             context.get('ontology_retrieval'))
+            if 'mapping_preflight_policy' in seed:
+                from .mapping_preflight import prepare
+                ontology_context, mapping_preflight = prepare(self.ontology_guard, candidate, bundle, ontology_context,
+                    seed['ontology_context_policy'], seed['mapping_preflight_policy'], context.get('ontology_retrieval'))
+                seed['mapping_preflight_hash'] = sha256_json(mapping_preflight)
             seed['ontology_context_hash']=sha256_json(ontology_context)
             seed['ontology_catalog_hash']=ontology_context['source_catalog_hash']
         elif seed['response_contract_version']in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2'}:
@@ -186,6 +196,16 @@ class ReviewOrchestrator:
             catalog={**RelationRegistry(self.ontology_guard.ontology).reference_catalog(),
                      'classes':list(self.ontology_guard.classes.values())}
             seed['ontology_catalog_hash']=sha256_json(catalog)
+        field_standardization = None
+        if seed['response_contract_version'] == 'validator_response_v8':
+            from .field_spec import prepare
+            field_standardization = prepare(candidate,bundle,seed['field_spec'])
+            seed['field_standardization_hash'] = sha256_json(field_standardization)
+        dispute_context=None
+        if 'dispute_policy' in seed:
+            from .disputes import request_context
+            dispute_context=request_context(candidate,seed['dispute_policy'])
+            seed['dispute_context_hash']=sha256_json(dispute_context)
         return {
             **seed, "audit_id": audit_id, "proposal_digest": proposal_digest(seed),
             "candidate": dict(candidate), "ontology_check": dict(guard),
@@ -193,9 +213,31 @@ class ReviewOrchestrator:
             "request_cache_namespace": context.get("request_cache_namespace", "default"),
             **({'ontology_catalog':catalog} if catalog is not None else {}),
             **({'ontology_context':ontology_context} if ontology_context is not None else {}),
+            **({'mapping_preflight':mapping_preflight} if mapping_preflight is not None else {}),
+            **({'field_standardization':field_standardization} if field_standardization is not None else {}),
+            **({'dispute_context':dispute_context} if dispute_context is not None else {}),
         }
 
     def audit_candidate(
+        self, candidate_id, revision, document_snapshot, *, context=None,
+    ):
+        """Persist a terminal failure for both deterministic and planner execution paths."""
+        from .repository import NotFoundError
+        from .review_observability import redact
+        try:previous=self.repository.get_audit(candidate_id).get('audit_id')
+        except NotFoundError:previous=None
+        try:
+            return self._audit_candidate(candidate_id,revision,document_snapshot,context=context)
+        except Exception as exc:
+            try:audit=self.repository.get_audit(candidate_id,(context or {}).get('audit_id'))
+            except NotFoundError:audit=None
+            if audit and audit['status']=='running' and (audit['audit_id']!=previous or (context or {}).get('audit_id')==audit['audit_id']):
+                self.repository.finish_incomplete_audit(audit['audit_id'],'paused' if isinstance(exc,AuditPaused) else 'failed',{
+                    'reason_code':'INSUFFICIENT_BALANCE' if isinstance(exc,AuditPaused) else 'RUNTIME_EXCEPTION','failed_stage':'audit_execution',
+                    'error_type':type(exc).__name__,'error':redact(str(exc)),'recoverable':False})
+            raise
+
+    def _audit_candidate(
         self, candidate_id: str, revision: int, document_snapshot: Mapping[str, Any],
         *, context: Optional[Mapping[str, Any]] = None,
     ) -> Dict[str, Any]:
@@ -271,7 +313,7 @@ class ReviewOrchestrator:
             max_items=max_evidence_items, max_chars=max_evidence_chars,
         )
         last_votes: List[Dict[str, Any]] = []
-        if self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from evidence.units import enrich_bundle
             expanded=enrich_bundle(bundle,document_snapshot,candidate)
             expanded['items'].sort(key=lambda x:x.get('substantive') is False)
@@ -492,11 +534,11 @@ class ReviewOrchestrator:
                 workflow = "review_completed"
             else: workflow = "manual_review"
         scope_decision = None
-        if selected and selected.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if selected and selected.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .scope_policy import scope_route
             scope_decision = scope_route(consensus.get('core_source_support_result',source_result),
                 consensus.get('expression_status','unresolved'), consensus.get('effective_mapping_status',consensus.get('mapping_status','ambiguous')),
-                consensus.get('knowledge_scope','unresolved'), policy=self.config.get('scope_policy'),
+                consensus.get('knowledge_scope','unresolved'), policy=(selected or {}).get('review_scope_policy') or (context.get('admission_policy') or {}).get('scope_policy') or self.config.get('scope_policy'),
                 scope_confirmed=consensus.get('scope_confirmed',False))
             waiting_for_extension=bool(context.get('pending_extension_id')) and workflow in {'awaiting_ontology_review','awaiting_ontology_release','reaudit_required'}
             if scope_decision['workflow_state'] in {'excluded_by_scope','revision_required','mapping_review','scope_review'} and not (
@@ -522,6 +564,7 @@ class ReviewOrchestrator:
             "explanation": explanation, "budget": usage,
             "configured_strategy": context.get("configured_strategy", "deterministic"),
             "executed_strategy": context.get("executed_strategy", "deterministic"),
+            **({'failure_handling':context['failure_handling']} if context.get('failure_handling') else {}),
             "stop_reason": gaps.get("stop_reason"),
             "workflow_state": workflow, "pending_extension_id": context.get("pending_extension_id") or None,
             "source_support_result": source_result, "schema_status": guard.get("status"),
@@ -539,6 +582,21 @@ class ReviewOrchestrator:
             **({'scope_policy_decision':scope_decision} if scope_decision else {}),
         }
         admission = None
+        if context.get('response_contract_version') in {'validator_response_v7','validator_response_v8'}:
+            from .review_axes import route_axes, VERSION
+            axes = consensus.get('review_axes') or {'version': VERSION, 'source': {'status': 'unresolved'},
+                'expression': {'status': 'unresolved'}, 'mapping': {'status': 'context_incomplete'}, 'scope': {'status': 'unclear'}}
+            axes_route = route_axes(axes, complete=result['independent_review_completed'] and
+                (context.get('failure_handling') or {}).get('minimum_review_status')!='incomplete')
+            result.update(review_axes=axes, pending_actions=axes_route['pending_actions'])
+            if not axes_route['ready_for_admission']:
+                result.update(decision='manual_review', workflow_state=axes_route['workflow_state'])
+                result['admission_consensus'] = {'result': 'unresolved'}
+                result['reason_codes'] = sorted(set(result['reason_codes']) | set(a.upper() for a in axes_route['pending_actions']))
+        if selected and selected.get('response_contract_version') in {'validator_response_v7','validator_response_v8'}:
+            from .review_observability import outcome
+            result['review_outcome']=outcome(selected,last_votes,self.committee,
+                context={**context,'final_gaps':gaps},decision=result,stop_reason=gaps.get('stop_reason'))
         if result["decision"] == "auto_accept":
             from .repository import UnprocessableEntityError
             try:

@@ -102,7 +102,7 @@ class AgentState:
 
     def validation_key(self):
         ontology = ({'ontology_retrieval': self.context.get('ontology_retrieval')}
-                    if self.context.get('response_contract_version') == 'validator_response_v6_3' else {})
+                    if self.context.get('response_contract_version') in {'validator_response_v6_3','validator_response_v7','validator_response_v8'} else {})
         return sha256_json({**ontology, "candidate": self.candidate, "bundle": self.bundle.get("evidence_hash"),
                             "guard": self.guard, "versions": self.context.get("agent_versions"),
                             "committee": self.context.get("committee_members"),

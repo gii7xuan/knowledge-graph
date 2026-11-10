@@ -17,6 +17,9 @@ from .ontology_guard import OntologyGuard, load_snapshot
 from .orchestrator import ReviewOrchestrator
 from .repository import NotFoundError, ReviewRepository, ValidationError
 from .model_settings import validator_settings, configured_planner, create_planner_client
+from .scope_policy import DEFAULT_POLICY, validate_policy
+from .semantic_clarification import pending as clarification_pending
+from .failure_policy import failure_display
 
 
 def public_candidate(candidate):
@@ -146,8 +149,15 @@ class ReviewService:
         return {
             "mode": self.config.get("mode", "shadow"),
             "validator_contract_version": self.config.get('validator_contract_version'),
-            "ontology_context_mode": ('dynamic_subset' if self.config.get('validator_contract_version')=='validator_response_v6_3'
+            "field_spec_version": ('review_fields_v1' if self.config.get('validator_contract_version') == 'validator_response_v8' else None),
+            "revision_loop_version": "revision_loop_v1",
+            "scope_policy": validate_policy(self.config.get('scope_policy') or DEFAULT_POLICY),
+            "planner_failure_policy": (self.config.get('planner') or {}).get('failure_policy'),
+            "dispute_review_enabled": bool(self.config.get('validator_contract_version')=='validator_response_v8' and (self.config.get('dispute_review') or {}).get('enabled')),
+            "ontology_context_mode": ('dynamic_subset' if self.config.get('validator_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}
                                       else 'legacy_full_catalog'),
+            "mapping_preflight_enabled": bool(self.config.get('validator_contract_version') in {'validator_response_v7','validator_response_v8'}
+                                              and (self.config.get('mapping_preflight') or {}).get('enabled')),
             "planner_strategy": (self.config.get("planner") or {}).get("strategy", "deterministic"),
             "configured_strategy": configured_strategy, "last_executed_strategy": latest_strategy,
             "planner_ready": planner_ready, "planner_model": planner_connection["model"],
@@ -194,6 +204,16 @@ class ReviewService:
             displayed = selected or ((audit or {}).get("rounds") or [{}])[-1]
             displayed_votes = [v for v in (audit or {}).get("votes", []) if v["round_id"] == displayed.get("round_id")
                                and v.get("proposal_digest") == displayed.get("proposal_digest")]
+            from .review_axes import display_axes
+            from .revision_loop import history
+            with self.repository.connect() as connection:revision_loop=history(connection,item['candidate_id'])
+            from .review_observability import outcome
+            from .consensus import Committee
+            members=displayed.get('committee_members') or []
+            thresholds=displayed.get('committee_policy') or {}
+            diagnostic=outcome(displayed,displayed_votes,Committee([m['id'] for m in members],
+                thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members))),
+                audit_status=audit['status'],context={**audit['context'],'final_gaps':displayed.get('gaps') or {}},decision=decision) if audit and members else None
             summaries.append({**public_candidate(item), "latest_decision": decision,
                               "audit_summary": None if audit is None else {
                                   "audit_id": audit["audit_id"], "status": audit["status"],
@@ -203,6 +223,17 @@ class ReviewService:
                                   "calibration_status": audit["calibration_status"],
                                   "rounds": len(audit["rounds"]), "votes": displayed_votes,
                                   "authoritative_selection": selected is not None,
+                                  "review_axes": display_axes(decision) if selected else {},
+                                  "review_outcome": diagnostic,
+                                  "pending_actions": (decision or {}).get('pending_actions', []) if selected else [],
+                                  "mapping_preflight": displayed.get('mapping_preflight'),
+                                  "field_spec": displayed.get('field_spec'),
+                                  "field_standardization": displayed.get('field_standardization'),
+                                  "revision_loop": revision_loop,
+                                  "scope_policy": displayed.get('review_scope_policy') or (audit['context'].get('admission_policy') or {}).get('scope_policy'),
+                                  "failure_handling": failure_display(audit['context']),
+                                  "semantic_clarifications": [note for v in displayed_votes if (note:=clarification_pending(v))],
+                                  "dispute_report": displayed.get('consensus',{}).get('dispute_report'),
                                   "source_support_consensus": ((decision or {}) if selected else displayed.get("consensus") or {}).get("source_support_consensus", {}),
                                   "admission_consensus": ((decision or {}) if selected else displayed.get("consensus") or {}).get("admission_consensus", {}),
                                   "issue_history": audit["context"].get("issue_history", []), "issue_events": audit["issue_events"],
@@ -269,6 +300,8 @@ class ReviewService:
         return {
             "run_id": run_id,
             "human_status": human,
+            "task_scope_policy": self.config.get('scope_policy'),
+            "planner_failure_policy": (self.config.get('planner') or {}).get('failure_policy'),
             "import_status": imports,
             "workflow_states": {row["workflow_state"]: row["count"] for row in workflows},
             "routes": {row["final_decision"]: row["count"] for row in routes},
@@ -399,6 +432,9 @@ class ReviewService:
         return self.create_audit_job(request)
 
     def execute_audit_job(self, payload: Mapping[str, Any]) -> Dict[str, Any]:
+        if payload.get('review_action'):
+            from .review_actions import execute
+            return execute(self,payload)
         if payload.get("_job_type") == "ontology_extension":
             from ontology_review.service import OntologyReviewService
             return OntologyReviewService(self).execute(payload)

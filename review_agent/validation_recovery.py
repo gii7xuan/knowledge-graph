@@ -9,7 +9,7 @@ def recovery_plan(state, repository, *, allow_permanent_failure=False):
     votes={v['voter_id']:v for v in validation['votes']}
     recoverable,unknown=[],[]
     blocked=[]
-    targeted=state.context.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}
+    targeted=state.context.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
     policy=state.context.get('correction_policy') or {}
     for member in state.context.get('committee_members',[]):
         vote=votes.get(member['id'])

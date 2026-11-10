@@ -23,7 +23,7 @@ class AgentRuntime:
     def __init__(self, orchestrator):
         self.orchestrator, self.repository = orchestrator, orchestrator.repository
         self.planner_config = orchestrator.config.get("planner") or {}
-        self.policy = ActionPolicy(self.planner_config)
+        self.policy = ActionPolicy({**self.planner_config,'enable_dispute_review':orchestrator.config.get('validator_contract_version')=='validator_response_v8' and bool((orchestrator.config.get('dispute_review') or {}).get('enabled'))})
         self.tools = AgentTools(self)
         self.adapter = TripleTaskAdapter(self)
         self.initial_ids = set()
@@ -169,8 +169,11 @@ class AgentRuntime:
     def fallback(self, reason):
         state = self.state
         state.context["fallback_reason"] = reason
-        if self.planner_config.get("fallback", "manual") == "deterministic":
+        if self.planner_config.get('failure_policy')=='bounded_minimum_v1' or self.planner_config.get("fallback", "manual") == "deterministic":
             state.executed_strategy = "deterministic_fallback"
+            state.context['failure_handling']={'version':'bounded_minimum_v1','reason':reason,
+                'format_retry_limit':1,'fallback':'ontology_then_source_then_independent_review',
+                'original_votes_immutable':True,'minimum_steps':state.context.get('minimum_review_steps',0)}
         else:
             state.executed_strategy = "manual_degraded"
             state.stop_reason = "planner_unavailable_or_invalid"
@@ -181,8 +184,13 @@ class AgentRuntime:
         relation = (state.candidate.get("triple") or {}).get("relation_id") or ""
         if not state.ontology_checked:
             name, args = "inspect_ontology", {"relation_id": relation, "issue": "规则降级核对冻结本体"}
-        elif not state.current_validation():
-            name, args = "run_validation", {}
+        elif not state.bundle.get('items') and not state.searched_scopes:
+            triple=state.candidate.get('triple') or {}
+            name,args='search_evidence',{'scope':'same_section','query':' '.join(str(triple.get(k) or '') for k in ('head','surface_relation','tail')).strip() or relation or '核对原文',
+                'purpose':'check_qualifiers','limit':6}
+        elif not state.current_validation() and not state.context.get('dispute_baseline'):
+            if state.bundle.get('items'): name, args = "run_validation", {}
+            else: name,args='finish_review',{'stop_reason':'minimum_review_no_verified_source','unresolved_issues':['缺少可核验原文，审核未完成'],'evidence_ids':[]}
         else:
             name, args = "finish_review", {"stop_reason": "deterministic_fallback_finished", "unresolved_issues": [], "evidence_ids": []}
         return {"action": name, "arguments": args, "target_issue": "规则降级", "rationale_summary": "使用剩余预算执行最低核查义务"}
@@ -233,7 +241,7 @@ class AgentRuntime:
             return {"audit_id": self.state.audit_id, "reused_completed": True, "committed": False}
         state, budget = self.state, self.budget
         planner = LLMPlanner(self.orchestrator.planner_client,
-            max_retries=int(budget.config.get("max_retries_per_request", 1)),
+            max_retries=1 if self.planner_config.get('failure_policy')=='bounded_minimum_v1' else int(budget.config.get("max_retries_per_request", 1)),
             max_output_tokens=int(self.planner_config.get("max_output_tokens", 1024)),
             action_validator=lambda action:self.policy.validate_request(action,state)) if self.orchestrator.planner_client else None
         invalid_steps = 0
@@ -249,11 +257,22 @@ class AgentRuntime:
                     continue
                 maximum = int(budget.config.get("max_planner_steps", 6))
                 if state.executed_strategy != "deterministic_fallback" and budget.usage["planner_steps"] >= maximum:
+                    if self.planner_config.get('failure_policy')=='bounded_minimum_v1':
+                        self.fallback('planner step budget exhausted; perform remaining minimum obligations')
+                        self.checkpoint()
+                        continue
                     state.stop_reason = "planner_step_budget_exhausted"
                     self.issue("planner_budget", "规划步数耗尽", critical=True)
                     break
                 state.step_no += 1
                 if state.executed_strategy == "deterministic_fallback":
+                    steps=state.context.get('minimum_review_steps',0)
+                    if steps>=4:
+                        state.stop_reason='minimum_review_incomplete'
+                        self.issue('minimum_review_incomplete','固定最小审核未满足关键义务，审核未完成',critical=True)
+                        break
+                    state.context['minimum_review_steps']=steps+1
+                    state.context.setdefault('failure_handling',{})['minimum_steps']=steps+1
                     action = self.deterministic_action()
                     record = {"status": "not_called_fallback", "action": action, "role": "system"}
                 elif planner is None:
@@ -287,7 +306,7 @@ class AgentRuntime:
                             raise AuditPaused({**fatal, "voter_id": "planner", "role": "planner"})
                         invalid_steps += 1
                         only_contract = result.get("attempts") and all(a["response_status"] == "invalid_action" for a in result["attempts"])
-                        if not only_contract or invalid_steps >= int(self.planner_config.get("max_invalid_steps", 2)):
+                        if self.planner_config.get('failure_policy')=='bounded_minimum_v1' or not only_contract or invalid_steps >= int(self.planner_config.get("max_invalid_steps", 2)):
                             self.fallback(result.get("error") or "planner failed")
                         continue
                 state.pending_action = action
@@ -322,7 +341,11 @@ class AgentRuntime:
                 'manual_handoff_no_evidence' if state.ontology_checked and not state.bundle.get('items') and state.searched_scopes else
                 'not_independently_reviewed')
             state.context.update(review_completion_status=completion,independent_review_completed=complete)
-            self.repository.update_audit_context(state.audit_id,{'review_completion_status':completion,'independent_review_completed':complete})
+            if state.context.get('failure_handling'):
+                from .failure_policy import minimum_status
+                state.context['failure_handling'].update(minimum_status(complete,state.guard,state.bundle,consensus))
+            self.repository.update_audit_context(state.audit_id,{'review_completion_status':completion,'independent_review_completed':complete,
+                **({'failure_handling':state.context['failure_handling']} if state.context.get('failure_handling') else {})})
             result = self.orchestrator._finalize(state.candidate, state.context, state.audit_id, state.guard,
                 state.bundle, votes, consensus, gaps, current["round_id"] if current else 0,
                 {**budget.usage, "deadline_epoch": budget.deadline_epoch})
@@ -344,7 +367,18 @@ class AgentRuntime:
             self.planner_interrupted(str(exc))
             self.checkpoint("stopped")
             self.repository.update_audit_context(state.audit_id, {"agent_budget": budget.snapshot(),
-                "executed_strategy": state.executed_strategy, "agent_stop_reason": str(exc)})
+                "executed_strategy": state.executed_strategy, "agent_stop_reason": str(exc),
+                'review_completion_status':'independent_review_incomplete','independent_review_completed':False})
             self.repository.finish_incomplete_audit(state.audit_id, "timeout" if str(exc) == "total_timeout" else "interrupted", {"reason_code": str(exc)})
             return {"audit_id": state.audit_id, "status": "timeout" if str(exc) == "total_timeout" else "interrupted",
-                    "committed": False, "stop_reason": str(exc), "budget": budget.usage}
+                    "committed": False, "stop_reason": str(exc), "budget": budget.usage,
+                    'review_completion_status':'independent_review_incomplete','independent_review_completed':False}
+        except Exception as exc:
+            from .review_observability import redact
+            detail={'reason_code':'RUNTIME_EXCEPTION','error':redact(str(exc)),
+                'failed_stage':(state.pending_action or {}).get('action') or 'finalization',
+                'error_type':type(exc).__name__,'recoverable':False}
+            self.repository.update_audit_context(state.audit_id,{'agent_budget':budget.snapshot(),
+                'issue_history':state.issues,'executed_strategy':state.executed_strategy})
+            self.repository.finish_incomplete_audit(state.audit_id,'failed',detail)
+            raise

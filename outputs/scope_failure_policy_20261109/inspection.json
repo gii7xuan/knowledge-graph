@@ -1,0 +1,319 @@
+{
+  "source_database_hash": "90b30aee12e641108e8ed9b5c71bd8152074a01bbe1218931e82e2045bc8b2a0",
+  "historical_database_unchanged": true,
+  "model_requests": 0,
+  "current_task_policy": {
+    "version": "knowledge_scope_v2",
+    "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+    "decision_authority": "program",
+    "excluded_scopes": [
+      "local_definition",
+      "derivation",
+      "example"
+    ],
+    "unresolved_action": "scope_review",
+    "categories": {
+      "general": {
+        "label": "一般知识",
+        "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+      },
+      "conditional": {
+        "label": "条件性知识",
+        "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+      },
+      "local_definition": {
+        "label": "局部定义或符号约定",
+        "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+      },
+      "derivation": {
+        "label": "推导步骤",
+        "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+      },
+      "example": {
+        "label": "教学示例",
+        "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+      },
+      "unresolved": {
+        "label": "类别待确认",
+        "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+      }
+    }
+  },
+  "cases": [
+    {
+      "sample_id": "DEV-028",
+      "candidate_id": "cand_808d8f2198c5723ef4cc",
+      "audit_id": "audit_0a033ac0e04f4e2db952af7cf408c20f",
+      "historical_workflow": "manual_review",
+      "frozen_policy": {
+        "excluded_scopes": [
+          "local_definition",
+          "derivation",
+          "example"
+        ],
+        "version": "knowledge_scope_v1"
+      },
+      "independent_review_completed": false,
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_7ab3a784eb2f1109f90f"
+            ],
+            "note": "弹丸运动方程考虑地面曲率是弹道学中的通用物理事实，非局部定义或示例。",
+            "issue_code": null
+          },
+          "clarification_required": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_b7c983cd23be47cde70b"
+            ],
+            "note": "该描述属于弹道学中的通用物理建模知识。",
+            "issue_code": null
+          },
+          "clarification_required": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "invalid_contract",
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_b7c983cd23be47cde70b",
+              "ev_8a4f30aa5bf75c29f3eb"
+            ],
+            "note": "原文讨论重力加速度随高度变化和地面曲率对射程的影响，属于弹道学通用知识表述，非局部符号定义或单次示例。",
+            "issue_code": null
+          },
+          "clarification_required": {
+            "voter_id": "judge_c",
+            "status": "human_clarification_required",
+            "conflicts": [
+              "material counterevidence conflicts with counterevidence=pass",
+              "counterevidence_reviewed_ids overlaps material counterevidence"
+            ],
+            "original_response_hash": "a2e28a31112ed44ff739f95b6192446f7414fc0774879558fa0ea27de5a8de84",
+            "original_judgments_immutable": true,
+            "clarification": null,
+            "counts_as_vote": false
+          },
+          "error": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles; dismissed counterexamples and unresolved material counterevidence have different roles"
+        }
+      ],
+      "planner_steps": [
+        {
+          "step_no": 1,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        },
+        {
+          "step_no": 2,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        },
+        {
+          "step_no": 3,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        },
+        {
+          "step_no": 4,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "DEV-029",
+      "candidate_id": "cand_31bd91d40eac020d152d",
+      "audit_id": "audit_b09c480043af4c5d899aa95708d297be",
+      "historical_workflow": "excluded_by_scope",
+      "frozen_policy": {
+        "excluded_scopes": [
+          "local_definition",
+          "derivation",
+          "example"
+        ],
+        "version": "knowledge_scope_v1"
+      },
+      "independent_review_completed": true,
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "knowledge_scope": {
+            "status": "local_definition",
+            "evidence_ids": [
+              "ev_02562fe07f825cf6f130",
+              "ev_3d02fa89d66eeca87390"
+            ],
+            "note": "该三元组属于局部符号约定，定义了特定坐标系中 x 轴与正北方向夹角 α 的含义及正方向，属于局部定义而非通用概念。",
+            "issue_code": null
+          },
+          "clarification_required": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "knowledge_scope": {
+            "status": "local_definition",
+            "evidence_ids": [
+              "ev_02562fe07f825cf6f130"
+            ],
+            "note": "该三元组定义了特定坐标系在当前上下文中的几何设置。",
+            "issue_code": null
+          },
+          "clarification_required": null,
+          "error": null
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "knowledge_scope": {
+            "status": "local_definition",
+            "evidence_ids": [
+              "ev_02562fe07f825cf6f130",
+              "ev_3d02fa89d66eeca87390"
+            ],
+            "note": "该表述是本章对地面坐标系x轴方向角α的局部符号定义，属于局部约定，非通用概念定义；是否入主图由项目政策决定。",
+            "issue_code": null
+          },
+          "clarification_required": null,
+          "error": null
+        }
+      ],
+      "planner_steps": [
+        {
+          "step_no": 1,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        },
+        {
+          "step_no": 2,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        },
+        {
+          "step_no": 3,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": "DEV-030",
+      "candidate_id": "cand_4699137d543b768e4b3e",
+      "audit_id": "audit_60eeacf4303f41bca535585921873c2e",
+      "historical_workflow": "manual_review",
+      "frozen_policy": {
+        "excluded_scopes": [
+          "local_definition",
+          "derivation",
+          "example"
+        ],
+        "version": "knowledge_scope_v1"
+      },
+      "independent_review_completed": false,
+      "votes": [],
+      "planner_steps": [
+        {
+          "step_no": 1,
+          "status": "ok",
+          "attempts": [
+            {
+              "response_status": "ok",
+              "finish_reason": "stop",
+              "error": null
+            }
+          ]
+        },
+        {
+          "step_no": 2,
+          "status": "failed",
+          "attempts": [
+            {
+              "response_status": "invalid_action",
+              "finish_reason": "stop",
+              "error": "issue/rationale must be bounded strings"
+            },
+            {
+              "response_status": "invalid_action",
+              "finish_reason": "stop",
+              "error": "issue/rationale must be bounded strings"
+            }
+          ]
+        },
+        {
+          "step_no": 3,
+          "status": "failed",
+          "attempts": [
+            {
+              "response_status": "invalid_action",
+              "finish_reason": "stop",
+              "error": "issue/rationale must be bounded strings"
+            },
+            {
+              "response_status": "invalid_action",
+              "finish_reason": "stop",
+              "error": "issue/rationale must be bounded strings"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "new_policy_reaudit_executed": false
+}

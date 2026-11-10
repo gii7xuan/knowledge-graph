@@ -1,4 +1,12 @@
 <script setup>
+import ReviewAxes from './ReviewAxes.vue';
+import ReviewOutcome from './ReviewOutcome.vue';
+import ReviewQuality from './ReviewQuality.vue';
+import ReviewTaskPolicy from './ReviewTaskPolicy.vue';
+import MappingPreflight from './MappingPreflight.vue';
+import FieldStandardization from './FieldStandardization.vue';
+import RevisionLoop from './RevisionLoop.vue';
+import DisputeReport from './DisputeReport.vue';
 import { computed, onActivated, onDeactivated, onUnmounted, ref, watch } from 'vue';
 import { RefreshCw } from 'lucide-vue-next';
 import { api } from '../api.js';
@@ -232,13 +240,15 @@ onUnmounted(() => { active = false; stop(); document.removeEventListener('visibi
       <div><span>运行中</span><strong>{{ summary.counts.running }}</strong></div>
       <div><span>已有意见分歧</span><strong>{{ summary.counts.disagreements }}</strong></div>
     </div>
+    <ReviewQuality :report="summary?.quality_report" />
     <div v-if="!summary && loading" class="empty-state">正在读取审核记录…</div>
     <div v-if="!summary && !loading && !error" class="empty-state">此数据源暂无审核批次。</div>
     <div v-if="summary" class="monitor-layout">
       <aside class="monitor-candidates">
         <label class="monitor-search">候选检索<input v-model="search" placeholder="样本ID、实体或关系" /></label>
         <label>状态筛选<select v-model="filter" aria-label="状态筛选"><option value="">全部候选</option><option value="running">运行中</option>
-          <option value="incomplete">审核未完成</option><option value="disagreement">已有分歧</option><option value="revision">需修订</option></select></label>
+          <option value="incomplete">审核未完成</option><option value="disagreement">已有分歧</option><option value="semantic">需语义修订</option><option value="legacy">旧版待区分修订</option>
+          <option value="normalization">待无损规范化</option><option value="evidence">证据不足</option><option value="mapping">等待映射</option><option value="scope">范围排除或待确认</option></select></label>
         <p class="monitor-muted">{{ filtered.length }} / {{ summary.counts.total }} 条</p>
         <button v-for="item in filtered" :key="item.candidate_id" type="button" class="monitor-candidate"
           :aria-pressed="candidateId === item.candidate_id" @click="chooseCandidate(item)">
@@ -275,6 +285,13 @@ onUnmounted(() => { active = false; stop(); document.removeEventListener('visibi
           </div>
           <section class="monitor-outcome">
             <div class="monitor-section-title"><h2>程序汇总</h2><strong>{{ finalOutcome.title }}</strong></div>
+            <ReviewAxes :axes="snapshot.review_axes || {}" :pending-actions="snapshot.decision?.pending_actions || []" />
+            <ReviewOutcome :result="snapshot.review_outcome" />
+            <ReviewTaskPolicy :policy="snapshot.scope_policy" :failure="snapshot.failure_handling" :clarifications="snapshot.semantic_clarifications || []" />
+            <MappingPreflight :report="snapshot.mapping_preflight" :evidence="snapshot.mapping_source_evidence || []" />
+            <FieldStandardization :spec="snapshot.field_spec" :report="snapshot.field_standardization" />
+            <RevisionLoop :loop="snapshot.revision_loop" />
+            <DisputeReport :report="snapshot.dispute_report" :reviews="snapshot.focused_reviews || []" />
             <p>{{ finalOutcome.detail }}</p>
             <p class="monitor-muted">三席审核齐全与允许准入分别记录。查看页面不会发起审核、恢复或模型请求。</p>
             <details><summary>审核版本与绑定</summary>

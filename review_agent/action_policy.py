@@ -8,11 +8,12 @@ class ActionPolicy:
     def __init__(self, config):
         self.config = config
         self.allowed = set(config.get("allowed_tools", TOOL_SCHEMAS))
-        if self.allowed - set(TOOL_SCHEMAS):
+        if config.get('enable_dispute_review'):self.allowed.add('review_dispute')
+        if self.allowed - (set(TOOL_SCHEMAS)|({'review_dispute'} if config.get('enable_dispute_review') else set())):
             raise ValueError("planner whitelist contains unregistered tools")
 
     def definitions(self):
-        return {k: v for k, v in argument_schemas().items() if k in self.allowed}
+        return {k: v for k, v in argument_schemas(bool(self.config.get('enable_dispute_review'))).items() if k in self.allowed}
 
     @staticmethod
     def blocked_tools(state):
@@ -40,6 +41,12 @@ class ActionPolicy:
         if state.context.get('revision_only'):
             blocked['run_validation']='revision investigation uses historical observations; new revision gets final independent review'
             if state.ontology_checked: blocked.pop('finish_review',None)
+        baseline=state.context.get('dispute_baseline')
+        if baseline:
+            blocked['run_validation']='initial ballot is preserved; supplement context and review only the frozen dispute, or hand off'
+            if state.ontology_checked:blocked.pop('finish_review',None)
+        if not baseline or not any(d['status']=='open' for d in (state.context.get('dispute_report') or {}).get('disputes',[])):
+            blocked['review_dispute']='no open claim-level disagreement from the initial ballot'
         from .extension_eligibility import extension_eligibility
         eligibility=extension_eligibility(state)
         if not eligibility['allowed_change_kinds']:
@@ -58,6 +65,10 @@ class ActionPolicy:
             raise ActionError('evidence reference is outside current verified source; select exact valid_evidence_ids')
         reason=self.blocked_tools(state).get(action['action'])
         if reason: raise ActionError(reason)
+        if action['action']=='review_dispute':
+            report=state.context.get('dispute_report') or {}
+            if not any(d['dispute_id']==args['dispute_id'] and d['status']=='open' for d in report.get('disputes',[])):
+                raise ActionError('select an exact open dispute from the initial ballot')
         if action['action']=='get_ontology_extension_status' and args['extension_id']!=state.pending_extension_id:
             raise ActionError('extension_id differs from the subscribed task')
         if action['action'] in {'review_revision','apply_reviewed_revision'}:

@@ -11,7 +11,8 @@
     "family": "qwen",
     "connection_config": "ontology_generate/config/ontology_config.yaml",
     "verify_ssl": false,
-    "fallback": "manual",
+    "fallback": "deterministic",
+    "failure_policy": "bounded_minimum_v1",
     "max_output_tokens": 2048,
     "max_invalid_steps": 2,
     "max_repeated_actions": 2,
@@ -164,9 +165,48 @@
     "auto_import_enabled": false,
     "require_current_decision": true
   },
-  "validator_contract_version": "validator_response_v6_3",
+  "validator_contract_version": "validator_response_v8",
   "response_correction": {"max_corrections_per_seat":1,"max_calls_per_candidate_version":3,"max_input_bytes":16000,"max_output_tokens":1536,"max_reserved_tokens_per_candidate_version":54000,"timeout_seconds":60,"max_initial_attempts_per_seat":2},
   "ontology_context": {"top_k_properties":8,"max_properties":24,"max_classes":64,"max_chars":32000},
+  "mapping_preflight": {"enabled":true},
+  "dispute_review": {"enabled":true},
+  "semantic_clarification": {"enabled":true},
   "output_structure": {"capabilities_path":"config/review_output_capabilities.json"},
-  "scope_policy": {"version":"knowledge_scope_v1","excluded_scopes":["local_definition","derivation","example"]}
+  "scope_policy": {
+    "version": "knowledge_scope_v2",
+    "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+    "decision_authority": "program",
+    "excluded_scopes": [
+      "local_definition",
+      "derivation",
+      "example"
+    ],
+    "unresolved_action": "scope_review",
+    "categories": {
+      "general": {
+        "label": "一般知识",
+        "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+      },
+      "conditional": {
+        "label": "条件性知识",
+        "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+      },
+      "local_definition": {
+        "label": "局部定义或符号约定",
+        "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+      },
+      "derivation": {
+        "label": "推导步骤",
+        "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+      },
+      "example": {
+        "label": "教学示例",
+        "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+      },
+      "unresolved": {
+        "label": "类别待确认",
+        "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+      }
+    }
+  }
 }

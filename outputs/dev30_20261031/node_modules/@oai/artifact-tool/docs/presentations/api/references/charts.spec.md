@@ -146,6 +146,21 @@ type ChartLineOptionsConfig = {
 `funnelOptions.gapWidth` ranges from 0 to 0.8. `barOptions.gapWidth` is an
 integer from 0 to 500.
 
+### 3D Bar Charts
+
+```ts
+const bars = slide.charts.add("bar3D", {
+  categories: ["Category 1", "Category 2", "Category 3"],
+  series: [
+    { name: "Series 1", values: [12, 18, 15] },
+    { name: "Series 2", values: [8, 14, 10] },
+  ],
+  barOptions: { direction: "bar", grouping: "clustered" },
+  view3d: { rotX: 15, rotY: 20 },
+});
+bars.barOptions.grouping = "stacked";
+```
+
 ### 3D Area Charts
 
 `area3D` renders standard, stacked and 100% stacked filled volumes. Standard
@@ -545,6 +560,19 @@ slide.charts.add("doughnut", {
   series: [{ name: "Share", values: [52, 31, 17] }],
   dataLabels: { showPercent: true, showCategoryName: true, position: "outEnd" },
   legend: { position: "right" },
+});
+```
+
+```ts
+// Each doughnut series becomes a ring, from innermost to outermost.
+slide.charts.add("doughnut", {
+  categories: ["1st Qtr", "2nd Qtr", "3rd Qtr", "4th Qtr"],
+  series: [
+    { name: "Previous year", values: [8.2, 3.2, 1.4, 1.2] },
+    { name: "Current year", values: [5, 6, 7, 8] },
+  ],
+  doughnutOptions: { holeSize: 75, firstSliceAngle: 50 },
+  legend: { position: "bottom" },
 });
 ```
 

@@ -45,7 +45,8 @@ def validate_admission(candidate, decision, ontology_release, source_snapshot, e
     if decision.get("active") is False: reasons.append("DECISION_NOT_CURRENT")
     for key, release_key in (("ontology_release_id", "release_id"), ("ontology_version", "ontology_version"), ("profile_hash", "profile_hash")):
         if not candidate.get(key) or candidate.get(key) != ontology_release.manifest.get(release_key): reasons.append("ONTOLOGY_RELEASE_BINDING_MISMATCH")
-    blocked_states={"awaiting_ontology_review", "awaiting_ontology_release", "schema_unresolved", "revision_required",'excluded_by_scope','mapping_review','scope_review'}
+    blocked_states={"awaiting_ontology_review", "awaiting_ontology_release", "schema_unresolved", "revision_required",'excluded_by_scope','mapping_review','scope_review','superseded_by_split',
+                    'semantic_revision_required','normalization_required','evidence_insufficient','expression_review','review_incomplete','source_review'}
     if (decision.get('scope_policy_decision') or {}).get('excluded_from_main_graph'):
         reasons.append('EXCLUDED_BY_SCOPE')
     if not (mode=='human' and decision.get('decision')=='human_accept'): blocked_states.add('reaudit_required')

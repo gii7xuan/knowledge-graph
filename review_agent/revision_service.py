@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 import json
 from uuid import uuid4
+from contextlib import nullcontext
 from .contracts import canonical_json, sha256_json
 from .revision_patch import merge_triple_patch
 from evidence.verification import verify_evidence_bundle
@@ -27,6 +28,8 @@ RESPONSE_SCHEMA={'type':'object','additionalProperties':False,'required':['decis
 
 
 def revision_prompt(proposal):
+    if proposal.get('change_analysis',{}).get('source_validation_mode')=='bounded_preservation':
+        return PROMPT + '\nThis draft has a source-bound exact duplicate cleanup proof. Verify that proof, the retained qualifier, its attachment and unchanged conditions. Do not infer final ontology validity or admission from this simplified preservation review.'
     if proposal.get('semantic_review_version')!='full_expression_v2': return PROMPT
     return PROMPT + '''\nReview the COMPLETE before/after statement, including unchanged fields and semantic_context.
 Entity scope and original mentions must remain traceable; predicate substitution does not imply endpoint inversion.
@@ -34,7 +37,8 @@ Do not approve a generic association/feature that drops the original specific pr
 Check each qualifier attachment and conjunction branch; approximation/degree/discourse are not automatically quantities.
 Event/proposition tails need their own modeling, never inferred from text length. Local scope must not become universal.
 Unknown polarity requires affirmative source evidence to revise, not simply absence of negation.
-Explain any lost meaning in field_reviews and reject/uncertain even if a short human suggestion proposed the edit.'''
+Explain any lost meaning in field_reviews and reject/uncertain even if a short human suggestion proposed the edit.
+For split_child, independently review THIS child's complete statement against source, alongside the original collective statement and sibling plan. Do not distribute a collective relation to each member without evidence. Original approvals and sibling approvals are not this child's approval.'''
 
 
 def revision_expression(candidate):
@@ -76,6 +80,7 @@ def mapping_review_context(repository,before,after):
 def initialize_revisions(connection):
     connection.execute('CREATE TABLE IF NOT EXISTS revision_drafts(draft_id TEXT PRIMARY KEY,candidate_id TEXT NOT NULL,base_revision INTEGER NOT NULL,expected_row_version INTEGER NOT NULL,draft_hash TEXT NOT NULL,status TEXT NOT NULL,draft_json TEXT NOT NULL,result_json TEXT NOT NULL DEFAULT \'{}\')')
     connection.execute('CREATE TABLE IF NOT EXISTS revision_votes(draft_id TEXT NOT NULL,voter_id TEXT NOT NULL,vote_json TEXT NOT NULL,PRIMARY KEY(draft_id,voter_id))')
+    connection.execute("CREATE TABLE IF NOT EXISTS revision_split_groups(group_id TEXT PRIMARY KEY,parent_candidate_id TEXT NOT NULL,group_json TEXT NOT NULL,status TEXT NOT NULL,result_json TEXT NOT NULL DEFAULT '{}')")
 
 
 def binding(voter, proposal):
@@ -110,6 +115,10 @@ def response_errors(value, proposal):
         if not value['supporting_evidence_ids'] or value['counter_evidence_ids']: errors.append('approval requires support and no unresolved counterevidence')
         if any(r['status']=='unknown' or not r['evidence_ids'] for r in reviews): errors.append('approval requires grounded field reviews')
         if not set(proposal.get('protected_evidence_ids',[]))<=set(value['counterevidence_reviewed_ids']): errors.append('all historical material evidence must be assessed')
+        if proposal.get('operation')=='split_child':
+            child_source=set(proposal['evidence_ids'])
+            if not child_source & set(value['supporting_evidence_ids']) or any(not child_source & set(r['evidence_ids']) for r in reviews):
+                errors.append('each split child requires its own selected source evidence in every field review')
         for review in reviews:
             path=review['field'].split('.')
             scoped_absence=(path[0] in {'qualifiers','qualifier_status'} and
@@ -187,7 +196,7 @@ class RevisionService:
             if not entry and not vote.get('outcome_unknown'): return True
         return False
 
-    def propose(self, candidate, expected_row_version, changes, evidence_ids, reason, bundle, document, *, protected_ids=(), source_audit_id=None):
+    def propose(self, candidate, expected_row_version, changes, evidence_ids, reason, bundle, document, *, protected_ids=(), source_audit_id=None, _connection=None, _split_context=None):
         from .repository import ConflictError, ValidationError
         updated=deepcopy(candidate)
         updated['triple']=merge_triple_patch(candidate['triple'],changes,
@@ -212,6 +221,18 @@ class RevisionService:
         for field in ('head_type','tail_type','relation_id'):
             if field_value(candidate,field)!=field_value(updated,field) and field not in fields:fields.append(field)
         if not fields or revision_expression(candidate)==revision_expression(updated):raise ValidationError('revision requires a substantive expression or mapping change')
+        if _split_context:
+            updated.update(candidate_id=_split_context['child_candidate_id'],revision=1)
+            updated.pop('supersedes_revision',None)
+            updated.pop('revision_provenance',None)
+            updated['split_origin']={k:deepcopy(_split_context[k]) for k in ('group_id','parent_candidate_id','parent_revision','child_index')}
+            selected=[e for e in verified['items'] if e['evidence_id'] in set(evidence_ids)|set(protected_ids)]
+            updated.update(evidence_items=deepcopy(selected),evidence_quotes=[e['quote'] for e in selected],extraction_quote=selected[0]['quote'])
+            updated['fact_key_state']='provisional'
+            from .contracts import fact_key_for
+            updated['fact_key']=fact_key_for(updated)
+        from .revision_loop import analyze,lineage
+        updated['revision_lineage']=lineage(candidate,updated,operation='split_child' if _split_context else 'revision',bundle=verified)
         ontology_context=mapping_review_context(self.repository,candidate,updated)
         draft={'draft_id':'draft_'+uuid4().hex,'contract_version':VERSION,'candidate_id':candidate['candidate_id'],
             'semantic_review_version':'full_expression_v2',
@@ -223,16 +244,18 @@ class RevisionService:
                 'section_id':candidate.get('section_id'),'evidence_ids':sorted(allowed),
                 'meaning':'not_stated applies only to this frozen verification scope'},
             'field_evidence':{field:list(evidence_ids) for field in fields}}
+        draft['change_analysis']=analyze(candidate,updated,verified)
+        if _split_context: draft.update(operation='split_child',split_context=deepcopy(_split_context))
         if ontology_context:draft['ontology_context']=ontology_context
         draft.update(task_type='candidate_revision_review',task_id=draft['draft_id'],object_revision=candidate['revision'])
         draft['draft_hash']=sha256_json(draft)
-        with self.repository.transaction(immediate=True) as c:
+        with (self.repository.transaction(immediate=True) if _connection is None else nullcontext(_connection)) as c:
             row=c.execute('SELECT current_revision,row_version FROM candidates WHERE candidate_id=?',(candidate['candidate_id'],)).fetchone()
             if row['current_revision']!=candidate['revision'] or row['row_version']!=expected_row_version:
                 raise ConflictError('candidate changed before revision draft creation')
             prior=c.execute('SELECT draft_id FROM revision_drafts WHERE candidate_id=? AND base_revision=? AND expected_row_version=? AND status IN (\'proposed\',\'approved\',\'needs_human\',\'review_incomplete\') AND json_extract(draft_json,\'$.changes\')=? AND json_extract(draft_json,\'$.evidence_bundle.evidence_hash\')=?',
                             (candidate['candidate_id'],candidate['revision'],expected_row_version,canonical_json(changes),verified['evidence_hash'])).fetchone()
-            if prior:
+            if prior and not _split_context:
                 existing=self.draft(prior[0])
                 if revision_expression(existing['after'])==revision_expression(updated):return existing
             c.execute('INSERT INTO revision_drafts(draft_id,candidate_id,base_revision,expected_row_version,draft_hash,status,draft_json) VALUES(?,?,?,?,?,\'proposed\',?)',
@@ -289,6 +312,7 @@ class RevisionService:
             if not row or row['status']!='approved' or row['draft_hash']!=draft_hash:
                 raise ConflictError('only the exact independently approved draft can be applied')
             draft=json.loads(row['draft_json']); result=json.loads(row['result_json'])
+            if draft.get('operation')=='split_child': raise ConflictError('split children must be applied together through their exact split group')
             original={k:v for k,v in draft.items() if k!='draft_hash'}
             if sha256_json(original)!=draft_hash or result.get('evidence_hash')!=draft['evidence_bundle']['evidence_hash']:
                 raise ConflictError('draft/evidence hash changed')
@@ -302,7 +326,7 @@ class RevisionService:
             candidate=self.repository.revise_candidate(draft['candidate_id'],draft['expected_row_version'],
                 {'triple':draft['changes']},_connection=c,_revision_provenance={'draft_id':draft_id,'draft_hash':draft_hash,
                     'review_proposal_digest':proposal['proposal_digest'],'field_evidence':draft['field_evidence'],
-                    'verification_scope':draft['verification_scope']})
+                    'verification_scope':draft['verification_scope'],'change_analysis':draft.get('change_analysis')})
             from .contracts import canonical_triple
             if revision_expression(candidate)!=revision_expression(draft['after']):
                 raise ConflictError('applied expression differs from independently reviewed revision')
@@ -311,3 +335,82 @@ class RevisionService:
                 'candidate_ids':[draft['candidate_id']],'revision_draft_id':draft_id,'force':False})
         return {'status':'revision_applied','draft_id':draft_id,'new_revision':candidate['revision'],
                 'reaudit_job_id':job_id,'old_votes_reusable':False,'new_version_requires_independent_review':True}
+
+    def split(self,group_id):
+        from .repository import NotFoundError
+        with self.repository.connect() as c:
+            row=c.execute('SELECT * FROM revision_split_groups WHERE group_id=?',(group_id,)).fetchone()
+        if not row:raise NotFoundError('split group not found')
+        group=json.loads(row['group_json']);drafts=[self.draft(d) for d in group['draft_ids']]
+        basis={k:group[k] for k in ('parent_candidate_id','parent_revision','expected_row_version','candidate_hash','children','evidence_hash','protected_evidence_ids','reason')}
+        if group_id!='split_'+sha256_json(basis)[:24]:
+            from .repository import ConflictError
+            raise ConflictError('split group hash mismatch')
+        current=self.repository.get_candidate(group['parent_candidate_id'])
+        status=row['status']
+        if status!='applied' and (current['revision']!=group['parent_revision'] or current['row_version']!=group['expected_row_version']):status='stale'
+        return {**group,'status':status,'drafts':drafts,'result':json.loads(row['result_json']),
+            'ready_to_apply':status!='applied' and status!='stale' and all(d['status']=='approved' for d in drafts)}
+
+    def propose_split(self,candidate,expected_row_version,children,reason,bundle,document,*,protected_ids=(),source_audit_id=None):
+        from .repository import ValidationError,ConflictError
+        if not isinstance(children,list) or not 2<=len(children)<=8:raise ValidationError('split requires 2..8 explicit child proposals')
+        for child in children:
+            if not isinstance(child,dict) or set(child)!={'changes','evidence_ids'} or not isinstance(child['changes'],dict) or not isinstance(child['evidence_ids'],list):
+                raise ValidationError('each split child requires changes and its own evidence_ids')
+            if not child['evidence_ids'] or any(not isinstance(e,str) or not e for e in child['evidence_ids']):raise ValidationError('each child must select explicit source evidence IDs')
+        basis={'parent_candidate_id':candidate['candidate_id'],'parent_revision':candidate['revision'],
+            'expected_row_version':expected_row_version,'candidate_hash':sha256_json(candidate),'children':deepcopy(children),
+            'evidence_hash':bundle['evidence_hash'],'protected_evidence_ids':sorted(set(protected_ids)),'reason':reason}
+        group_id='split_'+sha256_json(basis)[:24]
+        with self.repository.transaction(immediate=True) as c:
+            row=c.execute('SELECT current_revision,row_version FROM candidates WHERE candidate_id=?',(candidate['candidate_id'],)).fetchone()
+            if not row or row['current_revision']!=candidate['revision'] or row['row_version']!=expected_row_version:raise ConflictError('split parent baseline is stale')
+            prior=c.execute('SELECT group_id FROM revision_split_groups WHERE group_id=?',(group_id,)).fetchone()
+            if prior:return self.split(group_id)
+            drafts=[];seen=set()
+            for index,child in enumerate(children):
+                context={**basis,'group_id':group_id,'child_index':index,'child_candidate_id':group_id+'_child_'+str(index+1)}
+                draft=self.propose(candidate,expected_row_version,child['changes'],child['evidence_ids'],reason,bundle,document,
+                    protected_ids=protected_ids,source_audit_id=source_audit_id,_connection=c,_split_context=context)
+                identity=sha256_json(revision_expression(draft['after']))
+                if identity in seen:raise ValidationError('split children must be distinct expressions')
+                seen.add(identity);drafts.append(draft)
+            group={**basis,'group_id':group_id,'draft_ids':[d['draft_id'] for d in drafts],
+                'child_candidate_ids':[d['after']['candidate_id'] for d in drafts],'old_votes_reusable':False}
+            c.execute('INSERT INTO revision_split_groups(group_id,parent_candidate_id,group_json,status) VALUES(?,?,?,?)',
+                (group_id,candidate['candidate_id'],canonical_json(group),'proposed'))
+        return self.split(group_id)
+
+    def apply_split(self,group_id):
+        from .repository import ConflictError
+        group=self.split(group_id)
+        if not group['ready_to_apply']:raise ConflictError('each exact split child must have its own independent approval')
+        with self.repository.transaction(immediate=True) as c:
+            row=c.execute('SELECT current_revision,row_version FROM candidates WHERE candidate_id=?',(group['parent_candidate_id'],)).fetchone()
+            if row['current_revision']!=group['parent_revision'] or row['row_version']!=group['expected_row_version']:raise ConflictError('split parent baseline is stale')
+            for index,record in enumerate(group['drafts']):
+                row=c.execute('SELECT * FROM revision_drafts WHERE draft_id=?',(record['draft_id'],)).fetchone()
+                draft=json.loads(row['draft_json']);result=json.loads(row['result_json'])
+                origin=draft.get('split_context') or {}
+                if (origin.get('group_id')!=group_id or origin.get('parent_candidate_id')!=group['parent_candidate_id'] or
+                    origin.get('parent_revision')!=group['parent_revision'] or origin.get('child_index')!=index or
+                    draft['after']['candidate_id']!=group['child_candidate_ids'][index]):raise ConflictError('split child provenance differs from the approved group')
+                proposal={**draft,'committee_members':result['committee_members'],'committee_policy':result['committee_policy']}
+                proposal['proposal_digest']=sha256_json(proposal)
+                if (row['status']!='approved' or sha256_json({k:v for k,v in draft.items() if k!='draft_hash'})!=draft['draft_hash']
+                    or result.get('proposal_digest')!=proposal['proposal_digest'] or result.get('draft_hash')!=draft['draft_hash']
+                    or not revision_consensus(result['votes'],proposal)['approved']):raise ConflictError('split approval binding changed')
+                child=deepcopy(draft['after']);child['split_origin'].update(draft_id=draft['draft_id'],draft_hash=draft['draft_hash'],
+                    evidence_ids=draft['evidence_ids'],protected_evidence_ids=draft['protected_evidence_ids'])
+                self.repository.add_candidate(child,_connection=c)
+                c.execute("UPDATE revision_drafts SET status='applied' WHERE draft_id=?",(draft['draft_id'],))
+            c.execute("UPDATE candidates SET workflow_state='superseded_by_split',row_version=row_version+1,latest_decision_id=NULL WHERE candidate_id=?",(group['parent_candidate_id'],))
+            c.execute('UPDATE decisions SET active=0 WHERE candidate_id=?',(group['parent_candidate_id'],))
+            self.repository.mark_graph_dirty(c,group['parent_candidate_id'],'candidate_split_requires_new_review')
+            job=self.repository.enqueue_job_in_transaction(c,'audit',{'run_id':group['drafts'][0]['before']['run_id'],
+                'candidate_ids':group['child_candidate_ids'],'split_group_id':group_id,'force':False})
+            result={'status':'split_applied','child_candidate_ids':group['child_candidate_ids'],'reaudit_job_id':job,
+                'old_votes_reusable':False,'each_child_requires_evidence_and_mapping_review':True}
+            c.execute("UPDATE revision_split_groups SET status='applied',result_json=? WHERE group_id=?",(canonical_json(result),group_id))
+        return result

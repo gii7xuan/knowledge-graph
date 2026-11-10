@@ -62,6 +62,17 @@ class ReviewMonitorTests(unittest.TestCase):
             with self.assertRaises(sqlite3.OperationalError):
                 connection.execute("UPDATE audit_runs SET status='running'")
 
+    def test_quality_panel_requires_the_same_population_revision_and_audits(self):
+        summary=self.monitor.summary('experiment',self.batch['id'])
+        report={'version':'four_axis_quality_v1','population':len(summary['candidates']),
+            'audit_bindings':[{k:row.get(k) for k in ('candidate_id','revision','audit_id')} for row in summary['candidates']],
+            'metrics':[],'human_resolved':0}
+        (self.root/'quality_report.json').write_text(json.dumps(report),encoding='utf-8')
+        self.assertIn('quality_report',self.monitor.summary('experiment',self.batch['id']))
+        report['audit_bindings'][0]['audit_id']='stale-audit'
+        (self.root/'quality_report.json').write_text(json.dumps(report),encoding='utf-8')
+        self.assertNotIn('quality_report',self.monitor.summary('experiment',self.batch['id']))
+
     def test_unregistered_source_and_outside_workspace_are_rejected(self):
         with self.assertRaises(NotFoundError):
             self.monitor.batches('../review.sqlite3')

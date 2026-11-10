@@ -82,7 +82,7 @@ class AdmissionRepository:
                             "round_id": proposal["round_id"], "proposal_digest": proposal["proposal_digest"],
                             "source_support": vote.get("source_support"), "schema_status": vote.get("schema_status"),
                             **({k:vote.get(k) for k in ('knowledge_scope','expression_status','response_contract_version')}
-                               if vote.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'} else {}),
+                               if vote.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
                             "checks": vote.get("checks", []), "note": "independent frozen proposal assessment"})
             release, document = load_admission_artifacts(self, candidate)
             effective = {**decision, "candidate_id": candidate_id, "revision": revision, "consensus": consensus, "admission_policy": policy}

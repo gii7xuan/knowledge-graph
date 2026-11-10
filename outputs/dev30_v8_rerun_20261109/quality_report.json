@@ -1,0 +1,255 @@
+{
+  "version": "four_axis_quality_v1",
+  "partition": "development",
+  "quality_claim": "开发回归，不能作为独立泛化结论",
+  "population": 30,
+  "human_resolved": 0,
+  "human_admission_truth_missing": 30,
+  "auto_admitted": 0,
+  "all_manual_is_success": false,
+  "metrics": [
+    {
+      "id": "auto_admission_precision",
+      "title": "自动准入精确率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 0,
+      "status": "not_evaluable",
+      "reason": "没有自动准入候选，暂不可评估",
+      "denominator_note": "所有已实际自动准入的候选；缺失真值不缩小分母"
+    },
+    {
+      "id": "false_admission_rate",
+      "title": "错误放行率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 30,
+      "status": "not_evaluable",
+      "reason": "没有符合分母条件的样本",
+      "denominator_note": "人工确认不满足完整准入条件的候选；全体缺失真值另计"
+    },
+    {
+      "id": "usable_auto_admission_rate",
+      "title": "可用候选自动通过率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 30,
+      "status": "not_evaluable",
+      "reason": "没有符合分母条件的样本",
+      "denominator_note": "人工确认满足全部准入条件的候选"
+    },
+    {
+      "id": "revision_success_rate",
+      "title": "修订成功率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 0,
+      "status": "not_evaluable",
+      "reason": "没有实际应用的修订；修订建议不计成功",
+      "denominator_note": "实际应用的修订操作；拆分须全部子候选独立验证"
+    },
+    {
+      "id": "unnecessary_revision_rate",
+      "title": "不必要修订率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 30,
+      "status": "not_evaluable",
+      "reason": "没有符合分母条件的样本",
+      "denominator_note": "人工确认原始表达规范的候选；范围排除、等待映射和技术失败不算修订要求"
+    },
+    {
+      "id": "mapping_accuracy",
+      "title": "本体映射正确率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 0,
+      "status": "not_evaluable",
+      "reason": "没有完成的正式映射，暂不可评估",
+      "denominator_note": "已完成且有正式ID的映射；人工同时核验身份、关系语义和类型约束"
+    }
+  ],
+  "axis_annotation_counts": {
+    "source": {},
+    "expression": {},
+    "mapping": {},
+    "scope": {}
+  },
+  "experiment_id": "dev30_v8_rerun_20261109",
+  "generated_at": "2026-11-09T15:41:51.014850+08:00",
+  "audit_bindings": [
+    {
+      "candidate_id": "cand_7643b4bd5b5fdd4dfad6",
+      "revision": 1,
+      "audit_id": "audit_8e2758c757824688866e86b3b0db3198"
+    },
+    {
+      "candidate_id": "cand_5b459021eb0a3fe91145",
+      "revision": 3,
+      "audit_id": "audit_48336a199d83411daae92330697c3640"
+    },
+    {
+      "candidate_id": "cand_f4876022d0c83d291ac3",
+      "revision": 2,
+      "audit_id": "audit_5f1fd17741d04918ad4db681429fe2d3"
+    },
+    {
+      "candidate_id": "cand_4d903306be730770f49b",
+      "revision": 2,
+      "audit_id": "audit_8e3c8ed7331e43dc9f7df8202e8d045d"
+    },
+    {
+      "candidate_id": "cand_b5ac87a42c7a1fa289d6",
+      "revision": 1,
+      "audit_id": "audit_31d21931ad6d47628c4a90c4d97455f1"
+    },
+    {
+      "candidate_id": "cand_de3414495fa05d4e6672",
+      "revision": 1,
+      "audit_id": "audit_34ad030c640c458abbeb76b41e9148d3"
+    },
+    {
+      "candidate_id": "cand_1733237c3026d874c587",
+      "revision": 3,
+      "audit_id": "audit_d505f44a19564ae3bdd8dca37e4becb6"
+    },
+    {
+      "candidate_id": "cand_cc7f508e0ee31b09d27d",
+      "revision": 2,
+      "audit_id": "audit_702c475550814cafb0a798c9fafbbc6c"
+    },
+    {
+      "candidate_id": "cand_4992400347d94dfbbc00",
+      "revision": 1,
+      "audit_id": "audit_3417740a952a4240949d43a7c86e1639"
+    },
+    {
+      "candidate_id": "cand_13adbb2c2c5e41e099e5",
+      "revision": 1,
+      "audit_id": "audit_7be0ce43f89f4b0e9e722214f813351d"
+    },
+    {
+      "candidate_id": "cand_f796e51209e35106f7c1",
+      "revision": 2,
+      "audit_id": "audit_3a9d2f7d664f42a4b82b38055bab8964"
+    },
+    {
+      "candidate_id": "cand_fcd525b7a47d9236d3ba",
+      "revision": 2,
+      "audit_id": "audit_ec1bf99225e04a31a44a3718a884fbd8"
+    },
+    {
+      "candidate_id": "cand_a79f2100df7c5c252829",
+      "revision": 1,
+      "audit_id": "audit_d259bbfcbf7b451cacaf0d9f4c043ea0"
+    },
+    {
+      "candidate_id": "cand_b188efe51c5bee059d16",
+      "revision": 1,
+      "audit_id": "audit_d22f733c4304409eb78787a9b0cf7eae"
+    },
+    {
+      "candidate_id": "cand_006761af7b46d4cb89f6",
+      "revision": 2,
+      "audit_id": "audit_f470bc7f92044a669b6f26ad60ff2d29"
+    },
+    {
+      "candidate_id": "cand_ccda7f5e8cf2b462ccab",
+      "revision": 2,
+      "audit_id": "audit_1d31bd8d85e549cfb1eb4a8c58b758c8"
+    },
+    {
+      "candidate_id": "cand_63e1e9f14fcf7bcef63a",
+      "revision": 1,
+      "audit_id": "audit_8e2fe756a3ac4d9c9fad3fae7a3c4dbd"
+    },
+    {
+      "candidate_id": "cand_3b412a707f4f4fa04a2a",
+      "revision": 1,
+      "audit_id": "audit_b673a5ea6fe24d46b9b946e9cc849592"
+    },
+    {
+      "candidate_id": "cand_064a5e16f5359b74ef07",
+      "revision": 1,
+      "audit_id": "audit_ba583aecddcd43c796dea30526f0ada2"
+    },
+    {
+      "candidate_id": "cand_52159eb442b708f4e860",
+      "revision": 2,
+      "audit_id": "audit_91b7b3063f0549358718eeeb64b8fa18"
+    },
+    {
+      "candidate_id": "cand_e701d8ef2859275576ea",
+      "revision": 3,
+      "audit_id": "audit_8f612d4c0f934879ab503c17ce6060a5"
+    },
+    {
+      "candidate_id": "cand_ca27ef4e78caeece9179",
+      "revision": 1,
+      "audit_id": "audit_8365c68a64314fbdac87db71bbb8d900"
+    },
+    {
+      "candidate_id": "cand_c0f4aaed85c469d0afd6",
+      "revision": 1,
+      "audit_id": "audit_dc8820f96dd74ae8902f012287294f55"
+    },
+    {
+      "candidate_id": "cand_e6ace1981cf9b8b16200",
+      "revision": 2,
+      "audit_id": "audit_1fd8d6966f32465a9fdf859a7a9d3888"
+    },
+    {
+      "candidate_id": "cand_7619a3990068828ab44a",
+      "revision": 2,
+      "audit_id": "audit_a9617dc141384c4c948482c57186def4"
+    },
+    {
+      "candidate_id": "cand_f89f9bd12a09240375b7",
+      "revision": 1,
+      "audit_id": "audit_b3fbb6cbe0ba4e79ad1d9d535b7046ed"
+    },
+    {
+      "candidate_id": "cand_27498364cdfe1e4202f8",
+      "revision": 1,
+      "audit_id": "audit_f97fa4803e9c469fbfb05cfb2701ac18"
+    },
+    {
+      "candidate_id": "cand_808d8f2198c5723ef4cc",
+      "revision": 1,
+      "audit_id": "audit_d2a39e0228164ad49dbc03c9731da8a5"
+    },
+    {
+      "candidate_id": "cand_31bd91d40eac020d152d",
+      "revision": 2,
+      "audit_id": "audit_9d148089542149d5813f20284d38a837"
+    },
+    {
+      "candidate_id": "cand_4699137d543b768e4b3e",
+      "revision": 1,
+      "audit_id": "audit_7965deb333b147ee8fcc939ebd51a0fb"
+    }
+  ],
+  "auto_admission_policy_enabled": false,
+  "auto_apply_revisions_enabled": false,
+  "population_manifest_hash": "28d7bdd635e58869d6a2faaacafad55995d3706b8dc1f45c633f0d660e5552b8",
+  "technical_note": "本轮旧汇总受字段修复校验缺陷影响：23条中的35张票被误判。缺陷已修复；离线重验有15份提案保留三席有效票。原决定未改写，这不是修复后新的整批复跑，也不代表准入或事实正确率。",
+  "offline_revalidation": {
+    "stage": "offline_revalidation_of_unchanged_original_votes",
+    "model_calls": 0,
+    "stored_votes_changed": false,
+    "stored_decisions_changed": false,
+    "admission_authorized": false,
+    "affected_candidates": 23,
+    "affected_votes": 35,
+    "preserved_final_packets": 29,
+    "full_roster_after_revalidation": 15,
+    "source_before_sha256": "4325e0db6cb3ae3192d59318a54d8ddfe4bf4705638c63cff9c1ef499c816de4",
+    "source_after_sha256": "bd6e63957d772efbd7eba7f23376e1263dffc7227809ea28258364927507568b"
+  }
+}

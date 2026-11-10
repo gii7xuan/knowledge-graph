@@ -1,0 +1,80 @@
+{
+  "created_at_beijing": "2026-11-06T15:03:06.365293+08:00",
+  "population": 30,
+  "review_complete_before": 17,
+  "review_complete_after": 27,
+  "qwen": {
+    "before": {
+      "requests": 31,
+      "unique_candidates": 30,
+      "valid_responses": 18,
+      "http_504": 13,
+      "success_over_64_8_seconds": 0,
+      "success_latency_seconds": {
+        "min": 39.265,
+        "median": 52.101,
+        "max": 62.53
+      }
+    },
+    "after": {
+      "requests": 30,
+      "unique_candidates": 29,
+      "valid_responses": 30,
+      "http_504": 0,
+      "success_over_64_8_seconds": 9,
+      "success_latency_seconds": {
+        "min": 42.452,
+        "median": 59.2575,
+        "max": 80.141
+      }
+    }
+  },
+  "current_counts": {
+    "core_source_support_result": {
+      "supported": 26,
+      "unresolved": 3,
+      "not_available": 1
+    },
+    "source_support_result": {
+      "supported": 15,
+      "unresolved": 15
+    },
+    "expression_status": {
+      "faithful": 15,
+      "needs_revision": 13,
+      "unresolved": 1,
+      "not_available": 1
+    },
+    "effective_mapping_status": {
+      "unassigned": 28,
+      "constraint_conflict": 1,
+      "not_available": 1
+    },
+    "knowledge_scope": {
+      "general": 12,
+      "unresolved": 12,
+      "conditional": 4,
+      "local_definition": 1,
+      "not_available": 1
+    },
+    "workflow_state": {
+      "mapping_review": 14,
+      "revision_required": 12,
+      "manual_review": 3,
+      "excluded_by_scope": 1
+    }
+  },
+  "both_runs_complete": 16,
+  "expression_changed": [
+    "DEV-002",
+    "DEV-016",
+    "DEV-017",
+    "DEV-019",
+    "DEV-020"
+  ],
+  "changed_packet_caveat": "Same candidate and evidence hashes for the five changes; four have different ontology contexts. Not a controlled accuracy or repeatability test.",
+  "accuracy": null,
+  "accuracy_reason": "Historical labels apply to different candidate/statement and evidence scopes; current-packet adjudication is required.",
+  "new_model_requests": 0,
+  "production_written": false
+}

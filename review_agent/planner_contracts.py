@@ -24,6 +24,7 @@ TOOL_SCHEMAS = {
                                    "description": "nonempty string <=800", "proposed_changes": "bounded draft object", "evidence_ids": "current evidence IDs"},
     "get_ontology_extension_status": {"extension_id": "subscribed task ID"},
 }
+DISPUTE_TOOLS={'review_dispute':{'dispute_id':'exact open dispute ID'}}
 SYSTEM_PROMPT = (Path(__file__).resolve().parents[1] / "prompts" / "triple_planner_v4.txt").read_text(encoding="utf-8")
 PLANNER_PROMPT_HASH = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()
 
@@ -40,12 +41,13 @@ def validate_action(value):
     if not isinstance(value, dict) or set(value) != {"action", "arguments", "target_issue", "rationale_summary"}:
         raise ActionError("expected exactly action, arguments, target_issue, rationale_summary")
     name, args = value["action"], value["arguments"]
-    if not isinstance(name, str) or name not in TOOL_SCHEMAS or not isinstance(args, dict):
+    shapes={**TOOL_SCHEMAS,**DISPUTE_TOOLS}
+    if not isinstance(name, str) or name not in shapes or not isinstance(args, dict):
         raise ActionError("unknown tool or invalid arguments object")
     if not _text(value["target_issue"], 400) or not _text(value["rationale_summary"], 600):
         raise ActionError("issue/rationale must be bounded strings")
-    required = set(TOOL_SCHEMAS[name]) - ({"endpoint_types", "surface_relation", "query"} if name == "inspect_ontology" else set())
-    if not required <= set(args) or set(args) - set(TOOL_SCHEMAS[name]):
+    required = set(shapes[name]) - ({"endpoint_types", "surface_relation", "query"} if name == "inspect_ontology" else set())
+    if not required <= set(args) or set(args) - set(shapes[name]):
         raise ActionError("missing or forbidden tool arguments")
     for key, item in args.items():
         if name == "inspect_ontology" and key == "relation_id" and item is None:
@@ -105,7 +107,7 @@ def validate_action(value):
     return value
 
 
-def argument_schemas():
+def argument_schemas(include_disputes=False):
     """The model sees the same required/optional fields enforced by validate_action."""
     def text(limit=400,nullable=False,nonempty=False):
         return {"type":["string","null"] if nullable else "string","maxLength":limit,
@@ -124,7 +126,7 @@ def argument_schemas():
     changes['properties']['qualifiers']['properties']['polarity']={'enum':['positive','negative','unknown']}
     changes['properties']['qualifiers']['properties']['modality']={'enum':[None,*sorted(MODALITIES)]}
     changes['properties']['value']={'type':['string','number','boolean','null']}
-    return {
+    schemas = {
         "inspect_context":obj({"evidence_id":text(nonempty=True),"before":{"type":"integer","minimum":0,"maximum":5},"after":{"type":"integer","minimum":0,"maximum":5}}),
         "search_evidence":obj({"scope":{"type":"string","enum":list(CONTEXT_SCOPES)},"query":text(600,nonempty=True),"purpose":{"type":"string","enum":list(PURPOSES)},"limit":{"type":"integer","minimum":1,"maximum":6}}),
         "inspect_ontology":obj({"relation_id":text(200,nullable=True),"issue":text(),"endpoint_types":obj({"head":text(200,nullable=True),"tail":text(200,nullable=True)},optional=("head","tail")),"surface_relation":text(),"query":text(600)},optional=("endpoint_types","surface_relation","query")),
@@ -138,6 +140,8 @@ def argument_schemas():
         "request_ontology_extension":obj({"change_kind":{"type":"string","enum":["add_class","add_object_property","add_data_property","add_alias","revise_definition","revise_constraint","merge_terms"]},"description":text(800,nonempty=True),"proposed_changes":{"type":"object","minProperties":1},"evidence_ids":array(24)}),
         "get_ontology_extension_status":obj({"extension_id":text(nonempty=True)}),
     }
+    if include_disputes:schemas['review_dispute']=obj({'dispute_id':text(nonempty=True)})
+    return schemas
 
 
 def response_schema(tools):

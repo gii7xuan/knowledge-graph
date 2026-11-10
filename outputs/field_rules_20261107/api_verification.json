@@ -1,0 +1,51 @@
+{
+  "config": {
+    "validator_contract_version": "validator_response_v8",
+    "field_spec_version": "review_fields_v1",
+    "mapping_preflight_enabled": true
+  },
+  "cases": [
+    {
+      "sample_id": "DEV-002",
+      "rule_ids": [],
+      "review_rule_ids": [
+        "PAIR-001"
+      ],
+      "original_condition": null,
+      "normalized_condition": null,
+      "post_run_diagnostic": true
+    },
+    {
+      "sample_id": "DEV-019",
+      "rule_ids": [
+        "FREQ-001"
+      ],
+      "review_rule_ids": [],
+      "original_condition": null,
+      "normalized_condition": null,
+      "post_run_diagnostic": true
+    },
+    {
+      "sample_id": "DEV-020",
+      "rule_ids": [
+        "FREQ-001",
+        "DUP-001"
+      ],
+      "review_rule_ids": [],
+      "original_condition": "对于能保证飞行稳定的弹丸",
+      "normalized_condition": "对于能保证飞行稳定的弹丸",
+      "post_run_diagnostic": true
+    },
+    {
+      "sample_id": "DEV-021",
+      "rule_ids": [],
+      "review_rule_ids": [
+        "MOD-001"
+      ],
+      "original_condition": null,
+      "normalized_condition": null,
+      "post_run_diagnostic": true
+    }
+  ],
+  "ui_url": "http://127.0.0.1:8770/review-monitor?source_id=dev30-v63-stream-20261106&candidate_id=cand_52159eb442b708f4e860&audit_id=audit_216c2d68cd694db0bfadfe6438ad65e6"
+}

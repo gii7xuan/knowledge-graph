@@ -42,6 +42,13 @@ def validate_correction_trace(vote):
         merged=correction.apply_repairs(original,plan,patch)
         if merged!=vote['corrected_response']:return ['field correction merged response mismatch']
         from .response_contract_v6 import canonicalize
-        if canonicalize(merged)[0]!=canonicalize(raw_from_vote(vote))[0]:return ['field correction differs from stored model fields']
-    except (ValueError,KeyError,TypeError,IndexError):return ['invalid field correction provenance']
+        from .validator_contracts import contract_for
+        reader=contract_for(vote.get('response_contract_version') or CONTRACT_VERSION).raw_from_vote
+        recorded=reader(vote)
+        # Rejected envelopes retain raw/corrected bodies, not a normalized model
+        # projection. The immutable merge above is still verified; semantic/schema
+        # rejection is checked separately and must never become an eligible vote.
+        if vote.get('response_status') in {'invalid_contract','invalid_reference'} and not recorded:return []
+        if canonicalize(merged)[0]!=canonicalize(recorded)[0]:return ['field correction differs from stored model fields']
+    except (ValueError,KeyError,TypeError,IndexError,AttributeError):return ['invalid field correction provenance']
     return []

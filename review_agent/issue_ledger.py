@@ -53,6 +53,21 @@ class IssueLedger:
 
     def inherit_reviewed_revision_evidence(self, repository):
         """Carry the exact applied draft's verified evidence into its fresh review."""
+        split=self.state.candidate.get('split_origin') or {}
+        if split.get('draft_id'):
+            from .revision_service import RevisionService,revision_expression
+            from .repository import ConflictError
+            draft=RevisionService(repository).draft(split['draft_id'])
+            ancestor=repository.get_revision(self.state.candidate['candidate_id'],1)
+            if (draft['status']!='applied' or draft['draft_hash']!=split.get('draft_hash') or
+                sha256_json({k:v for k,v in draft.items() if k not in {'draft_hash','status','review_result'}})!=draft['draft_hash'] or
+                draft.get('operation')!='split_child' or draft['after']['candidate_id']!=ancestor['candidate_id'] or
+                revision_expression(draft['after'])!=revision_expression(ancestor)):
+                raise ConflictError('split source provenance does not match the independently reviewed child')
+            self.state.archive=list({e['evidence_id']:copy.deepcopy(e) for e in [*self.state.archive,*draft['evidence_bundle']['items']]}.values())
+            self.state.protected_ids=sorted(set(self.state.protected_ids)|set(draft['protected_evidence_ids'])|set(draft['evidence_ids']))
+            self.state.context['split_evidence_provenance']={'group_id':split['group_id'],'draft_id':draft['draft_id'],
+                'draft_hash':draft['draft_hash'],'parent_votes_reused':False,'each_child_requires_new_review':True}
         provenance=self.state.candidate.get('revision_provenance') or {}
         if not provenance.get('draft_id'):return
         from .revision_service import RevisionService
@@ -125,8 +140,10 @@ class IssueLedger:
             self.open("source_conflict", "存在需要独立复核适用范围的反证", True, proposal=digest,
                       evidence_ids=counter_ids | {eid for v in valid for eid in v.get("supporting_evidence_ids", [])}, evidence_hash=evidence_hash)
         for vote in valid:
-            if proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+            if proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 for check in vote.get('checks',[]):
+                    if proposal.get('response_contract_version') in {'validator_response_v7','validator_response_v8'} and check.get('check') in vote.get('representation_checks', []):
+                        continue
                     if check.get('status')=='fail' and check.get('check') in {'entity_reference','relation_semantics','qualifiers','relation_direction'}:
                         code={'entity_reference':'ENTITY_MISMATCH','relation_semantics':'RELATION_MISMATCH',
                               'qualifiers':'QUALIFIER_MISMATCH','relation_direction':'DIRECTION_MISMATCH'}[check['check']]

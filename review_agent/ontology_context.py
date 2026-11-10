@@ -75,6 +75,7 @@ def select_context(guard, candidate, bundle, policy, lookup=None):
         exact_searches.append({'query': query, 'status': result['status'], 'matched_ids': sorted(ids)})
     required.update(x for x in lookup.get('retrieval_property_ids', []) if x in properties)
     endpoints = set()
+    endpoints.update(x for x in lookup.get('retrieval_class_ids', []) if x in classes)
     endpoint_queries = {}
     for side in ('head', 'tail'):
         actual = triple.get(side + '_type')
@@ -191,6 +192,6 @@ def frozen_context(proposal):
 
 
 def selectable_properties(proposal):
-    if proposal.get('response_contract_version') == 'validator_response_v6_3':
+    if proposal.get('response_contract_version') in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         return frozen_context(proposal)['properties']
     return (proposal.get('ontology_catalog') or {}).get('properties', [])

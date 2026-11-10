@@ -12,6 +12,8 @@ from pathlib import Path
 import sqlite3
 
 from .repository import NotFoundError
+from .semantic_clarification import pending as clarification_pending
+from .failure_policy import failure_display
 
 ROOT = Path(__file__).resolve().parents[1]
 DIMENSIONS = ('triple_support', 'entity_reference', 'relation_semantics', 'relation_direction',
@@ -290,6 +292,7 @@ class ReviewMonitor:
                           'recorded_valid': recorded, 'binding_verified': binding_ok,
                           'response_status': opinion.get('response_status'),
                           'dimensions': dims if binding_ok else {},
+                          'review_axes': opinion.get('review_axes', {}) if binding_ok else {},
                           'received': bool(opinion.get('raw_response') is not None or opinion.get('response_status') == 'ok'),
                           'error_code': opinion.get('error_code'), 'error': opinion.get('error'),
                           'correction_stop_reason': opinion.get('correction_stop_reason'),
@@ -328,13 +331,21 @@ class ReviewMonitor:
         decision = next((obj(d['decision_json']) for d in decisions
                          if chosen and obj(d['decision_json']).get('selected_proposal_digest') == chosen['proposal_digest']
                          and obj(d['decision_json']).get('selected_round_id') == chosen['round_id']), None)
-        historical = current.get('current_revision') != audit['revision']
+        historical = current.get('current_revision') != audit['revision'] or current.get('workflow_state')=='superseded_by_split'
         failure = context.get('execution_failure') or {}
         stop_reason = context.get('agent_stop_reason') or failure.get('reason_code') or failure.get('error')
         evidence = proposal.get('evidence_bundle', {}).get('items', [])
         disagreed = [name for name in DIMENSIONS if len({s['dimensions'][name].get('status') for s in slots
                      if s['recorded_valid'] and name in s['dimensions']}) > 1]
         needs_revision = any(s['_opinion'].get('expression_status') == 'needs_revision' for s in slots if s['recorded_valid'])
+        from .review_axes import display_axes
+        from .review_observability import outcome
+        from .consensus import Committee
+        committee_policy=proposal.get('committee_policy') or {}
+        diagnostic=outcome(proposal,[s['_opinion'] for s in slots if s['_opinion']],
+            Committee([m['id'] for m in roster],required_votes=committee_policy.get('required_votes',len(roster)),
+                minimum_distinct_families=committee_policy.get('minimum_distinct_families',len(roster))),
+            audit_status=audit['status'],stop_reason=stop_reason,context=context,decision=decision) if roster else None
         public = {
             'audit_id': audit['audit_id'], 'candidate_id': audit['candidate_id'], 'revision': audit['revision'],
             'current_revision': current.get('current_revision'), 'historical': historical, 'status': audit['status'],
@@ -355,7 +366,15 @@ class ReviewMonitor:
             'independent_review_completed': bool(decision and decision.get('independent_review_completed')),
             'decision': pick(decision, ('decision', 'source_support_result', 'workflow_state', 'review_completion_status',
                                       'independent_review_completed', 'stop_reason', 'reason_codes', 'source_support_consensus',
-                                      'admission_consensus', 'explanation', 'schema_status')),
+                                      'admission_consensus', 'explanation', 'schema_status', 'pending_actions')),
+            'review_axes': display_axes(decision),
+            'review_outcome':diagnostic,
+            'mapping_preflight': proposal.get('mapping_preflight'),
+            'field_spec': proposal.get('field_spec'),
+            'field_standardization': proposal.get('field_standardization'),
+            'scope_policy': proposal.get('review_scope_policy') or (context.get('admission_policy') or {}).get('scope_policy'),
+            'failure_handling':failure_display(context),
+            'semantic_clarifications':[note for slot in slots if (note:=clarification_pending(slot['_opinion'] or {}))],
             'budget': pick(checkpoint.get('budget') or context.get('agent_budget') or {}, ('usage', 'remaining_llm_calls', 'max_planner_steps', 'max_validation_rounds')),
             'correction_limits': (context.get('correction_policy') or {}).get('limits', {}),
             '_evidence': evidence, '_proposal': proposal,
@@ -369,6 +388,7 @@ class ReviewMonitor:
 
     def _brief(self, c, audit, candidate):
         """Batch polling avoids loading request prompts and checkpoint payloads."""
+        from .review_axes import display_axes
         context = obj(audit['context_json'])
         latest = c.execute('SELECT round_id,proposal_digest,evidence_hash FROM proposals WHERE audit_id=? ORDER BY round_id DESC LIMIT 1',
                            (audit['audit_id'],)).fetchone()
@@ -384,10 +404,12 @@ class ReviewMonitor:
                     valid.append(value)
         checkpoint = c.execute('SELECT phase FROM agent_checkpoints WHERE audit_id=?', (audit['audit_id'],)).fetchone()
         complete = False
+        decision = {}
         for row in self._rows(c, 'decisions', 'WHERE audit_id=?', (audit['audit_id'],)):
             value = obj(row['decision_json'])
             if latest and value.get('selected_round_id') == latest['round_id'] and value.get('selected_proposal_digest') == latest['proposal_digest']:
                 complete = bool(value.get('independent_review_completed'))
+                decision = value
         opinions = [dimensions(v) for v in valid]
         disagreements = any(len({d[name].get('status') for d in opinions if name in d}) > 1 for name in DIMENSIONS)
         return {'phase': checkpoint['phase'] if checkpoint else None,
@@ -395,7 +417,9 @@ class ReviewMonitor:
                 'accepted_seats': len(valid), 'required_seats': len(roster),
                 'three_seats_ready': len(roster) > 0 and len(valid) == len(roster),
                 'independent_review_completed': complete, 'has_disagreement': disagreements,
-                'needs_revision': any(v.get('expression_status') == 'needs_revision' for v in valid)}
+                'needs_revision': any(v.get('expression_status') == 'needs_revision' for v in valid),
+                'workflow_state': decision.get('workflow_state'), 'pending_actions': decision.get('pending_actions', []),
+                'review_axes': display_axes(decision)}
 
     def summary(self, source_id, batch_id):
         source = self._source(source_id)
@@ -434,7 +458,7 @@ class ReviewMonitor:
                                 'head': triple.get('head'), 'relation': triple.get('relation_label') or triple.get('surface_relation') or triple.get('relation_id'),
                                 'tail': triple.get('tail'), 'status': audit['status'] if audit else 'not_started',
                                 **(pick(snapshot, ('phase', 'stop_reason', 'accepted_seats', 'received_seats', 'required_seats', 'three_seats_ready',
-                                                  'independent_review_completed', 'has_disagreement', 'needs_revision')) if snapshot else {})})
+                                                  'independent_review_completed', 'has_disagreement', 'needs_revision', 'workflow_state', 'pending_actions', 'review_axes')) if snapshot else {})})
             entries.sort(key=lambda e: (e['sample_id'] or '', e['candidate_id']))
             counts = {'total': len(entries), 'started': sum(bool(e['audit_id']) for e in entries),
                       'processing_closed': sum(e['status'] in CLOSED for e in entries),
@@ -448,6 +472,12 @@ class ReviewMonitor:
                        'batch_status': progress.get('status') if progress_matches else ('running' if counts['running'] else 'idle'),
                        'paused': bool(progress_matches and progress.get('paused')),
                        'pause_reason': {**pick(pause, ('reason_code',)), **pick(pause.get('vote') or {}, ('model_id', 'http_status'))} if progress_matches else {}}
+            quality=self._file(source,'quality_report.json')
+            expected=sorted((e['candidate_id'],e['revision'],e.get('audit_id')) for e in entries)
+            if (isinstance(quality,dict) and quality.get('version')=='four_axis_quality_v1' and
+                quality.get('population')==len(entries) and
+                sorted((e.get('candidate_id'),e.get('revision'),e.get('audit_id')) for e in quality.get('audit_bindings',[]))==expected):
+                payload['quality_report']=quality
             return self._with_cursor(payload)
 
     @staticmethod
@@ -470,8 +500,34 @@ class ReviewMonitor:
         return rows[0]
 
     def snapshot(self, source_id, audit_id, *, round_id=None, after=None):
-        with self._connect(self._source(source_id)) as c:
+        source = self._source(source_id)
+        with self._connect(source) as c:
             snapshot = self._project(c, self._audit(c, audit_id), round_id)
+            from .revision_loop import history
+            snapshot['revision_loop']=history(c,snapshot['candidate_id'])
+            from .disputes import build_report
+            original_votes=[s['_opinion'] for s in snapshot['slots'] if s['_opinion']]
+            snapshot['dispute_report']=build_report(snapshot['_proposal'],original_votes,[s['id'] for s in snapshot['slots'] if s['recorded_valid']]) if snapshot['_proposal'].get('evidence_bundle') else None
+            if snapshot['dispute_report']:snapshot['dispute_report']['historical_projection']='dispute_policy' not in snapshot['_proposal']
+            snapshot['focused_reviews']=[{'dispute_id':r['dispute_id'],'status':r['status'],'result':obj(r['result_json'])}
+                for r in self._rows(c,'dispute_focus_reviews','WHERE audit_id=?',(audit_id,))]
+            if not snapshot.get('mapping_preflight'):
+                from .mapping_preflight import diagnostic_report
+                sidecar = self._file(source, 'mapping_diagnostics.json')
+                entries = sidecar.get('entries', {}) if isinstance(sidecar, dict) else {}
+                entries = entries if isinstance(entries, dict) else {}
+                snapshot['mapping_preflight'] = diagnostic_report(entries.get(audit_id), snapshot['_proposal'])
+            report = snapshot.get('mapping_preflight') or {}
+            ids = {eid for e in report.get('entities', {}).values() for eid in e.get('source_evidence_ids', [])}
+            snapshot['mapping_source_evidence'] = [pick(e, ('evidence_id','quote','anchor_valid'))
+                for e in snapshot['_evidence'] if e.get('evidence_id') in ids]
+            if not snapshot.get('field_standardization'):
+                from .field_spec import diagnostic_report, specification
+                sidecar = self._file(source,'field_diagnostics.json')
+                entries = sidecar.get('entries',{}) if isinstance(sidecar,dict) else {}
+                entries = entries if isinstance(entries,dict) else {}
+                snapshot['field_standardization'] = diagnostic_report(entries.get(audit_id),snapshot['_proposal'])
+                if snapshot['field_standardization']: snapshot['field_spec'] = specification()
             return self._with_cursor({'source_id': source_id, **self._public(snapshot), 'read_only': True}, after)
 
     def opinion(self, source_id, audit_id, voter_id, *, round_id=None):

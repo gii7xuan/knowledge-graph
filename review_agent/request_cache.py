@@ -23,16 +23,16 @@ def validation_request_key(voter, proposal, *, legacy_generation=False):
         "committee_version", "committee_policy_hash", "committee_members", "candidate_review_hash", "ontology_check_hash", "evidence_bundle_hash", "memory_snapshot_id", "memory_bundle_hash", "memory_scope_hash", "memory_policy_hash", "agent_versions")}
     if not legacy_generation and proposal.get('validator_generation') is not None:
         frozen['validator_generation']=proposal['validator_generation']
-    if proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         frozen.update({k:proposal.get(k) for k in ('summary_policy_version','summary_policy_hash')})
     wire_format='json_object'
-    if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         from .output_structure import response_format
         wire_format=response_format(payload['output_structure'],contract.RESPONSE_SCHEMA)
         frozen.update({k:proposal.get(k) for k in ('output_delivery_version','output_delivery_hash')})
-    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         frozen.update({k:proposal.get(k) for k in ('correction_policy_version','correction_policy_hash','correction_policy')})
-    if proposal.get('response_contract_version')=='validator_response_v6_3':
+    if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         frozen.update({k:proposal.get(k) for k in ('ontology_context_hash','ontology_context_policy_hash')})
     return sha256_json({"version": "validation_single_flight_v2", "role": "validator", "task_type": "triple_review",
         "object_revision": proposal["candidate"]["revision"], "model_identity": binding["model_identity"],

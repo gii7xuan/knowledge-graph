@@ -682,6 +682,12 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
             elif re.fullmatch(r"/api/triplets/candidates/[^/]+/audit", path):
                 candidate_id = path.split("/")[-2]
                 self.send_json(get_default_service().audit(candidate_id, query.get("audit_id", [None])[0]))
+            elif re.fullmatch(r"/api/triplets/candidates/[^/]+/revision-history", path):
+                from review_agent.revision_loop import history
+                with get_default_service().repository.connect() as connection:self.send_json(history(connection,path.split('/')[-2]))
+            elif re.fullmatch(r"/api/triplets/splits/[^/]+", path):
+                from review_agent.revision_service import RevisionService
+                self.send_json(RevisionService(get_default_service().repository).split(path.rsplit('/',1)[-1]))
             elif re.fullmatch(r"/api/triplets/candidates/[^/]+", path):
                 candidate_id = path.rsplit("/", 1)[-1]
                 revision = query.get("revision", [None])[0]
@@ -750,6 +756,15 @@ class WorkbenchHandler(triplets.ReviewHandler, ontology.OntologyBuildHandler):
                 self.send_json(get_default_service().create_audit_job(self.read_payload()), 202)
             elif re.fullmatch(r"/api/triplets/audit-jobs/[^/]+/cancel", path):
                 self.send_json(get_default_service().cancel_job(path.split("/")[-2]))
+            elif re.fullmatch(r"/api/triplets/candidates/[^/]+/split-proposals", path):
+                from review_agent.review_actions import propose_split
+                self.send_json(propose_split(get_default_service(),path.split('/')[-2],self.read_payload()),201)
+            elif path == '/api/triplets/bounded-review-jobs':
+                from review_agent.review_actions import submit
+                self.send_json(submit(get_default_service(),self.read_payload()),202)
+            elif re.fullmatch(r"/api/triplets/splits/[^/]+/apply", path):
+                from review_agent.revision_service import RevisionService
+                self.send_json(RevisionService(get_default_service().repository).apply_split(path.split('/')[-2]))
             elif re.fullmatch(r"/api/triplets/candidates/[^/]+/reaudit", path):
                 payload = self.read_payload()
                 self.send_json(get_default_service().create_reaudit_job(

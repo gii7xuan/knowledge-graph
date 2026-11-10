@@ -36,7 +36,7 @@ def bounded_json(client, payload, timeout, *, should_stop=None, max_tokens=1024,
 
 class LLMPlanner:
     def __init__(self, client, *, max_retries=1, max_output_tokens=1024, system_prompt=SYSTEM_PROMPT, action_validator=validate_action):
-        self.client, self.max_retries = client, max(0, int(max_retries))
+        self.client, self.max_retries = client, min(1, max(0, int(max_retries)))
         self.max_output_tokens = int(max_output_tokens)
         self.system_prompt, self.action_validator = system_prompt, action_validator
 
@@ -48,6 +48,7 @@ class LLMPlanner:
             payload = state.planner_input(budget, tools)
             if feedback:
                 payload["correction_feedback"] = feedback
+                payload['output_instruction']='仅返回一个简短 JSON 工具动作；不要输出分析过程、说明段落或 Markdown。'
             if on_request:
                 on_request(payload, attempts)
             began = time.monotonic()
@@ -64,6 +65,8 @@ class LLMPlanner:
                     response_id=getattr(response,'response_id',None),
                     finish_reason=getattr(response,'finish_reason',None),reasoning_tokens=getattr(response,'reasoning_tokens',None))
                 try:
+                    if getattr(response,'finish_reason',None) in {'length','max_tokens'}:
+                        raise ValueError('planner output truncated at token limit')
                     action = self.action_validator(_parse_content(response.content))
                     attempt["response_status"] = "ok"
                 except (ValueError, TypeError) as exc:
@@ -83,7 +86,9 @@ class LLMPlanner:
                 "valid_evidence_ids":payload.get('valid_evidence_ids',[]),
                 'output_schema':payload.get('output_schema'),
                 "blocked_tools":payload.get('blocked_tools',{}),"required_obligations":payload.get('required_obligations',[])}
-            if attempt.get("retryable") is False:
+            # Only a completed malformed action gets one format retry. Unknown
+            # transport outcomes are never resubmitted as a format repair.
+            if attempt.get("response_status") != 'invalid_action':
                 break
         return {"action": None, "status": "failed", "attempts": attempts,
                 "error": attempts[-1].get("error") if attempts else "planner call budget exhausted"}

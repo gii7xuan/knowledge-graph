@@ -69,7 +69,7 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
     from .output_structure import frozen_profile,response_format
     from .correction_repository import reserve,allowance
     policy=proposal['correction_policy'];limits=policy['limits'];history=repository.request_history(key) if repository else []
-    attempts=[];initial_count=sum((r['metadata'].get('feedback') or {}).get('kind')!='field_patch' for r in history)
+    attempts=[];initial_count=sum((r['metadata'].get('feedback') or {}).get('kind') not in {'field_patch','contradiction_clarification'} for r in history)
     prior=deepcopy(history[-1]['result']) if history else None
     max_calls=1+min(max(0,int(max_retries)),1)
     final=prior or {**vote_binding(voter,proposal),'response_status':'api_error','verdict':None,'error_code':'DEADLINE_EXHAUSTED','actual_calls':0}
@@ -92,6 +92,11 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
     elif final.get('correction_terminal'):pass
     elif final.get('response_status') in {'invalid_json','invalid_contract','invalid_reference'}:
         original,plan,blocked=prepare(final,proposal,policy)
+        conflicts=repairs._conflicts(original) if isinstance(original,dict) else []
+        if blocked and conflicts and policy.get('semantic_clarification'):
+            from .semantic_clarification import make_plan
+            plan=make_plan(original,proposal,policy,conflicts)
+            blocked=[]
         if blocked:final=terminal(final,'; '.join(blocked))
         elif not limits['max_corrections_per_seat']:final=terminal(final,'field corrections disabled','RESPONSE_CORRECTION_EXHAUSTED')
         elif len(attempts)<max_calls and (history or max_retries>0):
@@ -99,10 +104,18 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
             if why:final=terminal(final,why,'RESPONSE_CORRECTION_EXHAUSTED')
             else:
                 contract=contract_for(proposal['response_contract_version']);profile=frozen_profile(voter,proposal,contract.RESPONSE_SCHEMA)
-                payload=repairs.repair_payload(original,plan,proposal)
+                clarify=plan.get('kind')=='contradiction_clarification'
+                if clarify:
+                    from . import semantic_clarification as clarification
+                    payload=clarification.payload(original,plan,proposal)
+                    prompt=clarification.PROMPT
+                    wire={'type':'json_object'}
+                else:
+                    payload=repairs.repair_payload(original,plan,proposal)
+                    prompt=repairs.PROMPT
+                    wire=response_format(profile,repairs.repair_schema(plan))
                 if profile['mode']=='json_schema':payload.pop('output_template',None)
-                wire=response_format(profile,repairs.repair_schema(plan))
-                input_bytes=len(json.dumps({'system':repairs.PROMPT,'payload':payload,'response_format':wire},ensure_ascii=False).encode('utf-8'))
+                input_bytes=len(json.dumps({'system':prompt,'payload':payload,'response_format':wire},ensure_ascii=False).encode('utf-8'))
                 reserve_tokens=input_bytes+1024+limits['max_output_tokens']
                 if input_bytes>limits['max_input_bytes'] or reserve_tokens>limits['max_reserved_tokens_per_candidate_version'] or reserve_tokens>voter.get('correction_token_budget',float('inf')):
                     final=terminal(final,'field correction payload exceeds frozen input/token budget','RESPONSE_CORRECTION_BUDGET')
@@ -111,10 +124,19 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
                         if repository else ('memory_'+uuid4().hex,None))
                     if why:final=terminal(final,why,'RESPONSE_CORRECTION_BUDGET')
                     else:
-                        feedback={'kind':'field_patch','repair_plan':plan,'original_response':original,
+                        feedback={'kind':'contradiction_clarification' if clarify else 'field_patch','repair_plan':plan,'original_response':original,
                             'original_raw_response':deepcopy(final['raw_response']),'original_attempt_id':final.get('attempt_id'),
                             'correction_id':ident,'reserved_token_upper_bound':reserve_tokens}
-                        final=dispatch(feedback);attempts.append(final)
+                        if clarify:feedback['original_vote']=deepcopy(final)
+                        final=dispatch(feedback)
+                        if clarify:
+                            final['raw_response']=deepcopy(feedback['original_raw_response'])
+                            final.setdefault('semantic_clarification',{'version':clarification.VERSION,
+                                'status':'outcome_unknown' if final.get('outcome_unknown') else 'failed',
+                                'original_response_hash':plan['original_response_hash'],
+                                'original_judgments_immutable':True,'counts_as_vote':False})
+                            final=terminal(final,'内部矛盾已请求澄清；保留原判断，等待人工复核','SEMANTIC_CLARIFICATION_REQUIRED')
+                        attempts.append(final)
         else:final={**final,'correction_available':True,'retryable':False}
     if not attempts:
         final={**final,'cached':True,'input_tokens':0,'output_tokens':0}

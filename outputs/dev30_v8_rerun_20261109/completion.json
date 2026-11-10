@@ -1,0 +1,116 @@
+{
+  "status": {
+    "status": "completed",
+    "updated_at": "2026-11-09T11:09:58.012038+08:00",
+    "population": 30,
+    "sample_audits_started": 30,
+    "sample_model_requests": 0,
+    "synthetic_service_probes": 6,
+    "destinations": [
+      "https://43.143.151.41:3000/v1",
+      "https://api.deepseek.com"
+    ],
+    "data_to_send": [
+      "candidate triples",
+      "source evidence passages",
+      "ontology context"
+    ],
+    "blocked_action": "start real 30-sample regression and two additional DEV-016 ballots",
+    "approval_review_reason": "Specific external destinations require explicit user authorization.",
+    "production_candidates_unchanged": true,
+    "automatic_retries": false,
+    "user_authorized_destinations": true,
+    "authorized_at": "2026-11-09T14:33:13.271497+08:00",
+    "authorization": "Explicit user reply: 允许，按这些现有服务复跑",
+    "started_at": "2026-11-09T14:37:20.345700+08:00",
+    "processing_closed": 30,
+    "independent_review_completed_in_original_run": 2,
+    "main_committee_request_attempts": 140,
+    "planner_calls": 99,
+    "repeat_new_model_calls": 7,
+    "elapsed_minutes": 56.39459467331569,
+    "completed_at": "2026-11-09T15:41:51.759267+08:00",
+    "original_workbook_unchanged": true,
+    "previous_experiment_unchanged": true,
+    "post_fix_offline_revalidation_only": true,
+    "post_fix_real_model_calls": 0
+  },
+  "offline_revalidation": {
+    "stage": "offline_revalidation_of_unchanged_original_votes",
+    "model_calls": 0,
+    "stored_votes_changed": false,
+    "stored_decisions_changed": false,
+    "admission_authorized": false,
+    "affected_candidates": 23,
+    "affected_votes": 35,
+    "preserved_final_packets": 29,
+    "full_roster_after_revalidation": 15,
+    "source_before_sha256": "4325e0db6cb3ae3192d59318a54d8ddfe4bf4705638c63cff9c1ef499c816de4",
+    "source_after_sha256": "bd6e63957d772efbd7eba7f23376e1263dffc7227809ea28258364927507568b"
+  },
+  "repeat": {
+    "status": "observed",
+    "trials": 3,
+    "input_fingerprint": "378a237bb5976817eb5202750df861a9f48c843963234a5c29333c0b388da611",
+    "voters": [
+      {
+        "voter_id": "judge_a",
+        "valid_trials": 3,
+        "technical_failures": 0,
+        "changed": false,
+        "changed_checks": [],
+        "changed_axes": [],
+        "findings_changed": false,
+        "reported_model_ids": [
+          "Qwen"
+        ],
+        "backend_weight_version_pinned": false
+      },
+      {
+        "voter_id": "judge_b",
+        "valid_trials": 0,
+        "technical_failures": 3,
+        "changed": null,
+        "changed_checks": [],
+        "changed_axes": [],
+        "findings_changed": null,
+        "reported_model_ids": [
+          "Gemma"
+        ],
+        "backend_weight_version_pinned": false
+      },
+      {
+        "voter_id": "judge_c",
+        "valid_trials": 3,
+        "technical_failures": 0,
+        "changed": false,
+        "changed_checks": [],
+        "changed_axes": [],
+        "findings_changed": false,
+        "reported_model_ids": [
+          "deepseek-flash"
+        ],
+        "backend_weight_version_pinned": false
+      }
+    ],
+    "interpretation": "重复一致性仅说明固定请求下的行为，不等于正确率；服务模型别名不能证明后端权重版本固定。",
+    "sample_id": "DEV-016",
+    "new_model_calls": 7,
+    "calls_this_invocation": 7,
+    "sampling": {
+      "temperature": 0.0,
+      "top_p": "not_sent_provider_default",
+      "seed": "not_sent",
+      "backend_weight_version": "not_pinned_by_model_alias"
+    },
+    "production_written": false,
+    "baseline_votes_overwritten": false,
+    "human_gold_used": false,
+    "comparison_version": "dimensions_axes_findings_v2",
+    "comparison_stage": "post_run_contract_validation_of_original_responses",
+    "raw_trials_unchanged": true,
+    "new_model_calls_after_fix": 0
+  },
+  "human_gold_count": 0,
+  "quality_claim": false
+}

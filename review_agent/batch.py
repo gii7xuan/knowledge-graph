@@ -40,6 +40,9 @@ def versions_for(config):
         'max_positive_cases':(config.get('memory') or {}).get('max_positive_cases',3),
         'max_negative_cases':(config.get('memory') or {}).get('max_negative_cases',3)})
     planner = config.get("planner") or {}
+    if planner.get('failure_policy'):
+        if planner['failure_policy']!='bounded_minimum_v1':raise ValueError('unsupported planner failure policy')
+        versions['planner_failure_policy_hash']=sha256_json({'version':'bounded_minimum_v1','format_retry_limit':1,'minimum_steps_limit':4})
     if planner.get("enabled") and planner.get("strategy") == "llm_react":
         from .planner_contracts import PLANNER_CONTRACT_VERSION, PLANNER_PROMPT_VERSION, AGENT_STRATEGY_VERSION, PLANNER_PROMPT_HASH, argument_schemas
         settings = configured_planner(config)
@@ -48,10 +51,12 @@ def versions_for(config):
             planner_prompt_hash=PLANNER_PROMPT_HASH,
             planner_strategy_version=AGENT_STRATEGY_VERSION, planner_model_id=settings["model"],
             planner_model_family=settings["family"], configured_strategy="llm_react")
+        if config.get('validator_contract_version')=='validator_response_v8' and (config.get('dispute_review') or {}).get('enabled'):
+            versions.update(planner_contract_version='planner_action_v5_disputes',planner_contract_hash=sha256_json(argument_schemas(True)))
     from .validator_contracts import versions_for as validator_versions
-    if config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
-        from .scope_policy import DEFAULT_POLICY
-        versions['scope_policy_hash']=sha256_json(config.get('scope_policy') or DEFAULT_POLICY)
+    if config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
+        from .scope_policy import DEFAULT_POLICY,validate_policy
+        versions['scope_policy_hash']=sha256_json(validate_policy(config.get('scope_policy') or DEFAULT_POLICY))
     return {**versions,**validator_versions(config)}
 
 

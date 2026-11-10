@@ -408,7 +408,7 @@ def main() -> None:
     audit.add_argument("--force", action="store_true", help="also re-audit healthy completed revisions")
     audit.add_argument("--status-file", help="atomic live progress JSON")
     audit.add_argument('--no-consumer',action='store_true',help='run triple batch only; use separate worker command for durable queue')
-    audit.add_argument('--validator-contract',choices=['validator_response_v3','validator_response_v4','validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'])
+    audit.add_argument('--validator-contract',choices=['validator_response_v3','validator_response_v4','validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'])
     worker_parser=sub.add_parser('worker')
     worker_parser.add_argument('--job-type',action='append',choices=['audit','ontology_extension'])
     worker_parser.add_argument('--once',action='store_true')

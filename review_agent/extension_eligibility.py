@@ -15,15 +15,16 @@ def extension_eligibility(state):
     blockers = []
     if consensus.get('expression_status') not in (None,'faithful'):
         blockers.append('faithful candidate expression required before extension')
-    from .scope_policy import DEFAULT_POLICY
-    if consensus.get('scope_confirmed') and consensus.get('knowledge_scope') in DEFAULT_POLICY['excluded_scopes']:
+    from .scope_policy import classification_decision
+    scope_policy=(state.context.get('admission_policy') or {}).get('scope_policy') or state.context.get('review_scope_policy')
+    if classification_decision(consensus.get('knowledge_scope'),consensus.get('scope_confirmed'),scope_policy)['status']=='exclude':
         blockers.append('knowledge scope is excluded from the main graph')
     if consensus.get('source_support_consensus', {}).get('result') != 'supported':
         blockers.append('current independent source-support consensus required')
     if (lookup.get('scope') != 'full_frozen_ontology' or
             lookup.get('candidate_revision') != state.candidate['revision']):
         blockers.append('current full frozen ontology lookup required')
-    if state.context.get('response_contract_version')=='validator_response_v6_3' and 'not_covered' in issues:
+    if state.context.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'} and 'not_covered' in issues:
         # Preserve the opinions, but a recalled subset cannot certify global absence.
         if not consensus.get('ontology_coverage_review',{}).get('global_gap_confirmable'):
             blockers.append('retrieved ontology subset cannot confirm a global gap; further semantic lookup or manual review required')
@@ -45,6 +46,10 @@ def extension_eligibility(state):
     allowed, reasons = [], {}
     for kind in KINDS:
         reason = '; '.join(blockers)
+        preparation = (consensus.get('review_axes') or {}).get('mapping', {}).get('preflight') or lookup.get('mapping_preflight')
+        if not reason and 'mapping_preflight_policy' in state.context and kind in {'add_class','add_object_property','add_data_property'}:
+            if not preparation or not preparation.get('judgment_ready'):
+                reason = 'mapping information incomplete; supplement definitions and identity before proposing new ontology terms'
         if not reason and kind in {'add_object_property', 'add_data_property'}:
             if state.guard.get('relation_known') or matches or issues != {'not_covered'}:
                 reason = 'existing/ambiguous mapping must be revised; confirmed absent relation required'

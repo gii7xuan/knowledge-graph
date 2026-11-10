@@ -136,12 +136,12 @@ def durable_attempt(repository, key, owner, binding, voter, proposal, feedback, 
                   **({'ontology_delivery_version':voter['ontology_delivery_version']} if voter.get('ontology_delivery_version') else {}),
                   **({'stream_responses':True} if getattr(voter['client'],'stream_responses',False) else {}),
                   **({'thinking_mode':voter['client'].thinking_mode} if getattr(voter['client'],'thinking_mode',None) else {})}}
-    if task_type=='triple_review' and proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if task_type=='triple_review' and proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         generation=next((g for g in proposal.get('validator_generation',[]) if g.get('voter_id')==voter['id']),{})
         metadata['generation']['output_transport']=copy.deepcopy(generation.get('output_transport'))
-    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'} and (feedback or {}).get('kind')=='field_patch':
+    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} and (feedback or {}).get('kind') in {'field_patch','contradiction_clarification'}:
         metadata['generation']['max_output_tokens']=feedback['repair_plan']['policy']['limits']['max_output_tokens']
-        metadata['generation']['request_phase']='field_patch'
+        metadata['generation']['request_phase']=feedback['kind']
         metadata['generation']['reserved_token_upper_bound']=feedback['reserved_token_upper_bound']
     attempt_id=repository.begin_request_attempt(key,owner,max(.001,timeout-(time.monotonic()-started)),metadata)
     if time.monotonic()-started>=timeout:

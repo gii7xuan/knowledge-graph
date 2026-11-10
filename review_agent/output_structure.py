@@ -56,5 +56,7 @@ def frozen_profile(voter,proposal,schema):
 
 
 def response_format(profile,schema):
-    return ({'type':'json_schema','json_schema':{'name':'triple_review_v6_1','strict':True,'schema':deepcopy(schema)}}
+    findings=schema.get('properties',{}).get('expression_findings',{}).get('items',{}).get('properties',{})
+    name='triple_review_v8' if 'rule_id' in findings else 'triple_review_v7' if findings else 'triple_review_v6_1'
+    return ({'type':'json_schema','json_schema':{'name':name,'strict':True,'schema':deepcopy(schema)}}
             if profile['mode']=='json_schema' else {'type':'json_object'})

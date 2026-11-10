@@ -44,13 +44,15 @@ def summarize_vote(vote):
                       for c in vote.get('checks',[])[:10]]
     for key in ('expression_status','knowledge_scope','mapping','counterevidence_reviewed_ids','primary_evidence_ids'):
         if key in vote: result[key]=bounded_hint(vote[key])
-    for key in ('mapping_diagnosis','summary_derivation','program_reason_codes'):
+    for key in ('mapping_diagnosis','summary_derivation','program_reason_codes','review_axes','expression_findings'):
         if key in vote:result[key]=bounded_hint(vote[key])
     for key in ('suggested_revision','requested_context','schema_change_hint'):
         result[key]=bounded_hint(vote.get(key))
     result['failure']={k:bounded_hint(vote.get(k),300) for k in ('error_code','error','retryable','outcome_unknown','request_key','attempt_id','validation_errors')}
     for key in ('correction_terminal','correction_stop_reason','correction_available'):
         if key in vote:result['failure'][key]=bounded_hint(vote[key],300)
+    if vote.get('semantic_clarification'):
+        result['failure']['semantic_clarification']=bounded_hint(vote['semantic_clarification'])
     return result
 
 
@@ -85,6 +87,7 @@ def planner_view(state,budget,tools):
         if 'evidence_ids' in fields and valid_ids: fields['evidence_ids']['items']['enum']=valid_ids
         elif 'evidence_ids' in fields: fields['evidence_ids']['maxItems']=0
         if name=='get_ontology_extension_status': fields['extension_id']['enum']=[state.pending_extension_id]
+        if name=='review_dispute':fields['dispute_id']['enum']=[d['dispute_id'] for d in (state.context.get('dispute_report') or {}).get('disputes',[]) if d['status']=='open']
         if name in {'review_revision','apply_reviewed_revision'}:
             status='proposed' if name=='review_revision' else 'approved'
             fields['draft_id']['enum']=[d['draft_id'] for d in state.revision_drafts if d.get('status')==status or
@@ -132,6 +135,8 @@ def planner_view(state,budget,tools):
               'voter_id':v.get('voter_id'),'legal_next_actions':[name for name in ('recover_validation','finish_review') if name in enabled]}
              for v in (validation or {}).get('votes',[]) if v.get('response_status')!='ok'],
         'frozen_versions':state.context.get('agent_versions'),'evidence_catalog':catalog,'valid_evidence_ids':valid_ids,
+        'knowledge_scope_task':{'policy':(state.context.get('admission_policy') or {}).get('scope_policy'),
+            'instruction':'模型只识别知识类别并引用原文；收录由程序按冻结任务配置决定。禁止按候选ID套用历史答案。'},
         'selected_evidence_ids':sorted(selected),'ontology_check':state.guard,'ontology_checked':state.ontology_checked,
         'unresolved_issues':[i for i in state.issues if i.get('status','open')!='resolved'],
         'issue_history':state.issues,'evidence_exclusions':state.evidence_exclusions,
@@ -142,6 +147,8 @@ def planner_view(state,budget,tools):
         'previous_votes_are_historical_not_current_validation':state.current_validation() is None,
         'revision_drafts':[bounded_hint({k:d.get(k) for k in ('draft_id','draft_hash','base_revision','status','changes','evidence_ids','reason')})
                            for d in state.revision_drafts[-4:]],
+        **({'claim_disputes':bounded_hint(state.context.get('dispute_report',{}),5000),
+        'dispute_instruction':'After the initial ballot, preserve all original opinions. Supplement the specific disputed source context or mapping definitions and call review_dispute for only that dispute. An unresolved focused review goes to human review. No counterevidence found is not positive support.'} if 'dispute_policy' in state.context else {}),
         'validation_recovery':state.validation_recovery,'available_tools':sorted(enabled),'output_schema':response_schema(enabled),
         'source_supported_evidence_ids':supported_ids,
         'blocked_tools':{k:v for k,v in blocked.items() if k in tools},'required_obligations':obligations,

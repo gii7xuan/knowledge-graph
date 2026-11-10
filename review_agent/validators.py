@@ -33,7 +33,7 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
     safe_candidate["triple"]["qualifiers"] = {key: (triple.get("qualifiers") or {}).get(key)
                                                 for key in ("polarity", "condition", "time_scope", "applicability", "modality", "quantifier")}
     safe_candidate["triple"]["qualifier_status"] = dict(triple.get("qualifier_status") or {})
-    if proposal.get('response_contract_version') in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version') in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         safe_candidate['triple']['semantic_context'] = copy.deepcopy(triple.get('semantic_context') or {})
     evidence = proposal.get("evidence_bundle", {}).get("items", [])
     from .validator_contracts import contract_for
@@ -48,7 +48,7 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
            if proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2'} and 'ontology_catalog' in proposal else {}),
         **({'ontology_context':frozen_context(proposal),
              'ontology_context_hash':proposal['ontology_context_hash']}
-           if proposal.get('response_contract_version')=='validator_response_v6_3' else {}),
+           if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
         "evidence": evidence,
         "allowed_evidence_ids": [item["evidence_id"] for item in evidence],
         "history_examples": {"purpose": "审核标准示例，禁止引用其中证据 ID",
@@ -63,7 +63,22 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
            if getattr(contract,'SERVER_DERIVED_SUMMARY',False) else {}),
         **({'diagnostic_codes':list(REASON_CODES)} if getattr(contract,'SERVER_DERIVED_SUMMARY',False) else {'reason_codes':list(REASON_CODES)}),
     }
-    if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version') in {'validator_response_v7','validator_response_v8'}:
+        payload['review_scope_policy'] = copy.deepcopy(proposal['review_scope_policy'])
+        if proposal['review_scope_policy'].get('version')=='knowledge_scope_v2':
+            payload['scope_instruction']='仅按类别边界识别 knowledge_scope 并引用原文，收录或排除由程序按冻结任务配置决定。通用概念定义不等于局部符号约定；无法区分时返回 unresolved。历史案例不能按候选ID套用。'
+        if 'mapping_preflight_policy' in proposal:
+            from .mapping_preflight import frozen, model_view
+            payload['mapping_preflight'] = model_view(frozen(proposal))
+    if proposal.get('response_contract_version') == 'validator_response_v8':
+        from .field_spec import frozen
+        payload['field_spec'] = copy.deepcopy(proposal['field_spec'])
+        payload['field_standardization'] = frozen(proposal)
+    if 'dispute_policy' in proposal:
+        from .disputes import frozen
+        payload['claim_review_context']=frozen(proposal)
+        payload['dispute_policy']=copy.deepcopy(proposal['dispute_policy'])
+    if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         from .output_structure import frozen_profile
         from .schema_validation import fixed_template
         profile=frozen_profile(voter,proposal,contract.RESPONSE_SCHEMA)
@@ -102,9 +117,9 @@ def vote_binding(voter, proposal):
         "evidence_hash": (proposal.get("evidence_bundle") or {}).get("evidence_hash"),
         "response_contract_version": proposal.get('response_contract_version',CONTRACT_VERSION),
         **({k:proposal.get(k) for k in ('correction_policy_version','correction_policy_hash')}
-           if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'} else {}),
+           if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
         **({k:proposal.get(k) for k in ('ontology_context_hash','ontology_context_policy_hash')}
-           if proposal.get('response_contract_version')=='validator_response_v6_3' else {}),
+           if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
     }
 
 
@@ -115,7 +130,10 @@ def model_request_count(vote):
 
 def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                           feedback: Any = None) -> Dict[str, Any]:
-    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'} and (feedback or {}).get('kind')=='field_patch':
+    if (feedback or {}).get('kind')=='contradiction_clarification':
+        from .semantic_clarification import judge_once
+        return judge_once(voter,proposal,feedback)
+    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} and (feedback or {}).get('kind')=='field_patch':
         from .targeted_validation import judge_repair_once
         return judge_repair_once(voter,proposal,feedback)
     client = voter["client"]
@@ -130,13 +148,20 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
         if feedback:
             payload["correction_feedback"] = feedback
         delivery={}
-        if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .output_structure import response_format
             delivery['response_format']=response_format(payload['output_structure'],contract.RESPONSE_SCHEMA)
         system_prompt=prompt_for(proposal)
         provider_called=True
         response = client.complete_json(payload, system_prompt=system_prompt,
             max_tokens=voter.get('max_output_tokens',4096),timeout_seconds=voter.get('http_timeout_seconds'),**delivery)
+        if getattr(response,'finish_reason',None) in {'length','max_tokens','incomplete'}:
+            return {**base,'response_status':'output_incomplete','verdict':None,
+                'error':'provider reported incomplete output','error_category':'output_incomplete',
+                'raw_response':response.content,'finish_reason':response.finish_reason,
+                'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
+                'input_tokens':getattr(response,'input_tokens',None),'output_tokens':getattr(response,'output_tokens',None),
+                'retryable':False,'latency_ms':int((time.monotonic()-started)*1000)}
         parsed = _parse_content(response.content)
     except TimeoutError as exc:
         return {**base, "response_status": "timeout", "verdict": None, "error": str(exc),
@@ -150,11 +175,13 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 'finish_reason':getattr(response,'finish_reason',None),'reasoning_tokens':getattr(response,'reasoning_tokens',None),
                 "latency_ms": int((time.monotonic() - started) * 1000)}
     except ValueError as exc:
-        if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'} and not provider_called:
+        if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} and not provider_called:
             return {**base,'response_status':'api_error','verdict':None,'error':str(exc),
                 'error_code':'OUTPUT_DELIVERY_PREFLIGHT_FAILED','not_sent':True,'actual_calls':0,'retryable':False,
                 'latency_ms':int((time.monotonic()-started)*1000)}
         return {**base, "response_status": "invalid_contract", "verdict": None, "error": str(exc),
+                'raw_response':getattr(response,'content',None),'finish_reason':getattr(response,'finish_reason',None),
+                'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
                 "latency_ms": int((time.monotonic() - started) * 1000)}
     except Exception as exc:
         status = "timeout" if "timeout" in type(exc).__name__.lower() else "api_error"
@@ -177,6 +204,7 @@ def _normalize_review_result(voter,proposal,parsed,response,contract):
                 "error": "; ".join(errors), "validation_errors": errors,
                 **(contract.format_metadata(parsed) if hasattr(contract,'format_metadata') else {}),
                 "raw_response": response.content, "latency_ms": getattr(response, "latency_ms", None),
+                'finish_reason':getattr(response,'finish_reason',None),
                 'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
                 "input_tokens": getattr(response, "input_tokens", None),
                 "output_tokens": getattr(response, "output_tokens", None)}
@@ -204,7 +232,7 @@ def _normalize_review_result(voter,proposal,parsed,response,contract):
         parsed["ontology_disagreement"] = True
         reason_field='program_reason_codes' if getattr(contract,'SERVER_DERIVED_SUMMARY',False) else 'reason_codes'
         parsed.setdefault(reason_field,[]).append("ONTOLOGY_DISAGREEMENT")
-    if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         guard=proposal.get('ontology_check',{})
         mapping=parsed.get('mapping') or {}
         assigned=(proposal.get('candidate') or {}).get('triple',{}).get('relation_id')
@@ -233,7 +261,7 @@ def judge_validator(
                 _initial_feedback=_initial_feedback),
             min(per_call_timeout_seconds * (max(0, int(max_retries)) + 1),
                 max(0.,deadline_epoch-time.time()) if deadline_epoch else float('inf')))
-    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         from .targeted_validation import judge_targeted
         return judge_targeted(voter,proposal,max_retries=max_retries,timeout=per_call_timeout_seconds,
             repository=repository,deadline=deadline_epoch,owner=_request_owner,key=_request_key)

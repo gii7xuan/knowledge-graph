@@ -21,6 +21,10 @@ def contract_for(version=None):
     if version==response_contract_v6_2.CONTRACT_VERSION: return response_contract_v6_2
     from . import response_contract_v6_3
     if version==response_contract_v6_3.CONTRACT_VERSION: return response_contract_v6_3
+    from . import response_contract_v7
+    if version==response_contract_v7.CONTRACT_VERSION: return response_contract_v7
+    from . import response_contract_v8
+    if version==response_contract_v8.CONTRACT_VERSION: return response_contract_v8
     raise ValueError('unsupported validator response contract: '+str(version))
 
 
@@ -37,13 +41,27 @@ def versions_for(config):
         policy=policy_for(config)
         ontology={'ontology_context_policy':policy,'ontology_context_policy_version':policy['version'],
                   'ontology_context_policy_hash':sha256_json(policy)}
+    mapping = {}
+    if contract.CONTRACT_VERSION in {'validator_response_v7','validator_response_v8'} and (config.get('mapping_preflight') or {}).get('enabled'):
+        from .mapping_preflight import policy_for
+        policy = policy_for(config)
+        mapping = {'mapping_preflight_policy': policy, 'mapping_preflight_policy_hash': sha256_json(policy)}
+    fields = {}
+    if contract.CONTRACT_VERSION == 'validator_response_v8':
+        from .field_spec import specification
+        spec = specification()
+        fields = {'field_spec':spec,'field_spec_version':spec['version'],'field_spec_hash':sha256_json(spec)}
+        if (config.get('dispute_review') or {}).get('enabled'):
+            from .disputes import policy_for
+            policy=policy_for(config)
+            fields.update(dispute_policy=policy,dispute_policy_hash=sha256_json(policy))
     return {'response_contract_version':contract.CONTRACT_VERSION,'response_contract_hash':sha256_json(contract.RESPONSE_SCHEMA),
             'prompt_version':contract.PROMPT_VERSION,'prompt_hash':contract.PROMPT_HASH,
-            **({'evidence_bundle_version':'evidence_bundle_v3'} if contract.CONTRACT_VERSION in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'} else {}),
+            **({'evidence_bundle_version':'evidence_bundle_v3'} if contract.CONTRACT_VERSION in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
             **({'summary_policy_version':contract.SUMMARY_POLICY_VERSION,'summary_policy_hash':sha256_json(contract.SUMMARY_POLICY)}
                if hasattr(contract,'SUMMARY_POLICY') else {}),
             **({'output_delivery_version':contract.OUTPUT_DELIVERY_VERSION,'output_delivery_hash':sha256_json(contract.OUTPUT_DELIVERY_POLICY)}
-               if hasattr(contract,'OUTPUT_DELIVERY_POLICY') else {}),**correction,**ontology}
+               if hasattr(contract,'OUTPUT_DELIVERY_POLICY') else {}),**correction,**ontology,**mapping,**fields}
 
 
 def prompt_for(proposal):
@@ -51,9 +69,21 @@ def prompt_for(proposal):
     from pathlib import Path
     import hashlib
     contract = contract_for(proposal.get('response_contract_version'))
+    if 'review_scope_policy' in proposal:
+        from .scope_policy import validate_policy
+        validate_policy(proposal['review_scope_policy'])
     if getattr(contract,'DYNAMIC_ONTOLOGY',False):
         from .ontology_context import frozen_context
         frozen_context(proposal)
+    if 'mapping_preflight_policy' in proposal:
+        from .mapping_preflight import frozen
+        frozen(proposal)
+    if proposal.get('response_contract_version') == 'validator_response_v8':
+        from .field_spec import frozen
+        frozen(proposal)
+    if 'dispute_policy' in proposal:
+        from .disputes import frozen
+        frozen(proposal)
     if getattr(contract,'TARGETED_REPAIRS',False):
         from .response_corrections import POLICY_VERSION,PROMPT_HASH
         policy=proposal.get('correction_policy') or {}
@@ -70,7 +100,7 @@ def prompt_for(proposal):
         prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v4_legacy.txt').read_text(encoding='utf-8')
     else:
         prompt = contract.SYSTEM_PROMPT
-    if version in {'triple_validator_v4', 'triple_validator_v4_direction_scope_v1', 'triple_validator_v5_semantic_units_v1', 'triple_validator_v5_1_complete_output_v1', 'triple_validator_v5_2_auxiliary_format_v1', 'triple_validator_v6_dimensions_v1', 'triple_validator_v6_1_structured_output_v1', 'triple_validator_v6_2_targeted_repairs_v1', 'triple_validator_v6_3_dynamic_ontology_v1'} and proposal.get('prompt_hash'):
+    if version in {'triple_validator_v4', 'triple_validator_v4_direction_scope_v1', 'triple_validator_v5_semantic_units_v1', 'triple_validator_v5_1_complete_output_v1', 'triple_validator_v5_2_auxiliary_format_v1', 'triple_validator_v6_dimensions_v1', 'triple_validator_v6_1_structured_output_v1', 'triple_validator_v6_2_targeted_repairs_v1', 'triple_validator_v6_3_dynamic_ontology_v1','triple_validator_v7_four_axes_v1','triple_validator_v8_field_rules_v1'} and proposal.get('prompt_hash'):
         if hashlib.sha256(prompt.encode()).hexdigest() != proposal['prompt_hash']:
             raise ValueError('frozen source prompt hash mismatch')
     return prompt
@@ -90,22 +120,35 @@ def validate_vote(vote,version=None):
 
 
 def proposal_errors(value,proposal):
-    if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+    if proposal.get('response_contract_version') == 'validator_response_v8':
+        from .field_spec import finding_errors
+        errors = finding_errors(value,proposal)
+        if errors: return errors
+    elif proposal.get('response_contract_version') == 'validator_response_v7':
+        from .review_axes import normalization_errors
+        errors = normalization_errors(value, proposal)
+        if errors: return errors
+    return mapping_reference_errors(value,proposal)
+
+
+def mapping_reference_errors(value,proposal):
+    """Formal references can be checked without inventing other dimension fields."""
+    if proposal.get('response_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         # A model's semantic opinion is valid even when the server cannot admit it.
         # Only references to nonexistent formal properties are protocol errors.
-        if proposal.get('response_contract_version')=='validator_response_v6_3':
+        if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .ontology_context import frozen_context
             catalog=frozen_context(proposal)
         else:
             catalog=proposal.get('ontology_catalog')
-        mapping=((value.get('dimensions') or {}).get('mapping') if proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'} else value.get('mapping')) or {}
+        mapping=((value.get('dimensions') or {}).get('mapping') if proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} else value.get('mapping')) or {}
         if catalog is not None:
             known={p.get('id') for p in catalog.get('properties',[])}
             referenced=set(mapping.get('competing_relation_ids') or [])
             if mapping.get('relation_id'): referenced.add(mapping['relation_id'])
             if referenced-known:
                 prefix=('mapping references relation IDs outside frozen ontology context: '
-                        if proposal.get('response_contract_version')=='validator_response_v6_3'
+                        if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}
                         else 'mapping references unknown formal relation IDs: ')
                 return [prefix+str(sorted(referenced-known))]
         return []

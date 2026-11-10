@@ -152,7 +152,7 @@ def recover_frozen_audit(repository,orchestrator,candidate_id,audit_id,*,reason,
                 None if proposal.get('response_contract_version')=='validator_response_v3' else voter.get('max_output_tokens',4096))
             legacy={**voter,'max_output_tokens':cap}
             frozen_transport={}
-            if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+            if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 frozen_transport=next((g.get('output_transport',{}) for g in proposal.get('validator_generation',[]) if g.get('voter_id')==voter['id']),{})
             if hasattr(voter['client'],'thinking_mode'):
                 from .llm_clients import OpenAICompatibleClient
@@ -162,9 +162,9 @@ def recover_frozen_audit(repository,orchestrator,candidate_id,audit_id,*,reason,
                     verify_ssl=client.verify_ssl,thinking_mode=frozen_transport.get('thinking_mode',(generation or {}).get('thinking_mode')),
                     stream_responses=frozen_transport.get('stream_responses',getattr(client,'stream_responses',False)))
             feedback=None
-            if old.get('response_status') in {'invalid_contract','invalid_json','invalid_reference'} and not old.get('outcome_unknown') and proposal.get('response_contract_version')not in {'validator_response_v6_2','validator_response_v6_3'}:
+            if old.get('response_status') in {'invalid_contract','invalid_json','invalid_reference'} and not old.get('outcome_unknown') and proposal.get('response_contract_version')not in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 version=proposal.get('response_contract_version')
-                if version in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+                if version in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                     from .validator_contracts import contract_for
                     constraints=contract_for(version).correction_constraints()
                 elif version in {'validator_response_v4','validator_response_v5','validator_response_v5_1','validator_response_v5_2'}:
@@ -174,7 +174,7 @@ def recover_frozen_audit(repository,orchestrator,candidate_id,audit_id,*,reason,
                         'schema_status_allowed':schema['status']['enum'],'schema_issue_allowed':schema['issue']['enum'],
                         'checks':'Exactly triple_support, qualifiers, relation_direction and counterevidence.',
                         'coverage':'not_covered is an issue, not a status. Missing coverage is unknown; an actual constraint violation remains fail. Do not change a substantive judgment merely to satisfy shape.'}
-                    if version in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+                    if version in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                         from .response_contract_v5 import CHECK_NAMES
                         constraints['checks']='Exactly '+', '.join(CHECK_NAMES)+', with evidence_ids and issue_code.'
                         constraints['roles']='Material counterevidence differs from inspected-but-dismissed counterexamples; preserve substantive votes.'
@@ -188,7 +188,7 @@ def recover_frozen_audit(repository,orchestrator,candidate_id,audit_id,*,reason,
                     'raw_response_ref':old.get('attempt_id'),
                     'field_constraints':constraints,
                     'instruction':'Correct only the original JSON contract/reference failure for the same frozen candidate and evidence. Do not change identifiers or seek an approval outcome.'}
-            if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3'}:
+            if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 legacy['correction_token_budget']=max(0,extra_tokens-budget.usage.get('input_tokens',0)-budget.usage.get('output_tokens',0))
             recovered=judge_validator(legacy,proposal,repository=repository,_request_owner=owner,_request_key=key,
                 deadline_epoch=budget.deadline_epoch,max_retries=0,_initial_feedback=feedback)

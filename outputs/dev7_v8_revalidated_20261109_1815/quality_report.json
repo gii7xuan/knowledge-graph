@@ -1,0 +1,223 @@
+{
+  "all_manual_is_success": false,
+  "audit_bindings": [
+    {
+      "audit_id": "audit_1f8e17a4b0e243bf8c815883d31227e8",
+      "candidate_id": "cand_de3414495fa05d4e6672",
+      "revision": 1
+    },
+    {
+      "audit_id": "audit_9c589c214f314ec286be20966b1fb32e",
+      "candidate_id": "cand_cc7f508e0ee31b09d27d",
+      "revision": 2
+    },
+    {
+      "audit_id": "audit_6b3dc2fcc51d4e7692e20903bc56dfc8",
+      "candidate_id": "cand_ccda7f5e8cf2b462ccab",
+      "revision": 2
+    },
+    {
+      "audit_id": "audit_ccd8fbd5a3ad4b81b9d7ec0851873897",
+      "candidate_id": "cand_e701d8ef2859275576ea",
+      "revision": 3
+    },
+    {
+      "audit_id": "audit_0413bd605878450eb7258b03f5c604ba",
+      "candidate_id": "cand_808d8f2198c5723ef4cc",
+      "revision": 1
+    },
+    {
+      "audit_id": "audit_372b4d19cdf746a5b628e266afc4be05",
+      "candidate_id": "cand_31bd91d40eac020d152d",
+      "revision": 2
+    },
+    {
+      "audit_id": "audit_36ecf9db21804f728dbd190ba89023b6",
+      "candidate_id": "cand_4699137d543b768e4b3e",
+      "revision": 1
+    }
+  ],
+  "auto_admission_policy_enabled": false,
+  "auto_admitted": 0,
+  "auto_apply_revisions_enabled": false,
+  "axis_annotation_counts": {
+    "expression": {},
+    "mapping": {},
+    "scope": {},
+    "source": {}
+  },
+  "experiment_id": "dev7_v8_revalidated_20261109_1815",
+  "human_admission_truth_missing": 7,
+  "human_resolved": 0,
+  "metrics": [
+    {
+      "denominator": 0,
+      "denominator_note": "所有已实际自动准入的候选；缺失真值不缩小分母",
+      "id": "auto_admission_precision",
+      "numerator": 0,
+      "reason": "没有自动准入候选，暂不可评估",
+      "status": "not_evaluable",
+      "title": "自动准入精确率",
+      "unknown_count": 0,
+      "value": null
+    },
+    {
+      "denominator": 0,
+      "denominator_note": "人工确认不满足完整准入条件的候选；全体缺失真值另计",
+      "id": "false_admission_rate",
+      "numerator": 0,
+      "reason": "没有符合分母条件的样本",
+      "status": "not_evaluable",
+      "title": "错误放行率",
+      "unknown_count": 7,
+      "value": null
+    },
+    {
+      "denominator": 0,
+      "denominator_note": "人工确认满足全部准入条件的候选",
+      "id": "usable_auto_admission_rate",
+      "numerator": 0,
+      "reason": "没有符合分母条件的样本",
+      "status": "not_evaluable",
+      "title": "可用候选自动通过率",
+      "unknown_count": 7,
+      "value": null
+    },
+    {
+      "denominator": 0,
+      "denominator_note": "实际应用的修订操作；拆分须全部子候选独立验证",
+      "id": "revision_success_rate",
+      "numerator": 0,
+      "reason": "没有实际应用的修订；修订建议不计成功",
+      "status": "not_evaluable",
+      "title": "修订成功率",
+      "unknown_count": 0,
+      "value": null
+    },
+    {
+      "denominator": 0,
+      "denominator_note": "人工确认原始表达规范的候选；范围排除、等待映射和技术失败不算修订要求",
+      "id": "unnecessary_revision_rate",
+      "numerator": 0,
+      "reason": "没有符合分母条件的样本",
+      "status": "not_evaluable",
+      "title": "不必要修订率",
+      "unknown_count": 7,
+      "value": null
+    },
+    {
+      "denominator": 0,
+      "denominator_note": "已完成且有正式ID的映射；人工同时核验身份、关系语义和类型约束",
+      "id": "mapping_accuracy",
+      "numerator": 0,
+      "reason": "没有完成的正式映射，暂不可评估",
+      "status": "not_evaluable",
+      "title": "本体映射正确率",
+      "unknown_count": 0,
+      "value": null
+    }
+  ],
+  "partition": "development",
+  "population": 7,
+  "quality_claim": "开发回归，不能作为独立泛化结论",
+  "recommendation_metrics": {
+    "human_admission_unknown": 0,
+    "human_resolved": 0,
+    "metrics": [
+      {
+        "coverage": {
+          "labeled_comparable": 0,
+          "population": 7,
+          "unknown_or_missing": 7
+        },
+        "denominator": 0,
+        "id": "recommendation_precision",
+        "numerator": 0,
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错",
+        "status": "not_evaluable",
+        "title": "准入建议精确率",
+        "value": null
+      },
+      {
+        "coverage": {
+          "labeled_comparable": 0,
+          "population": 7,
+          "unknown_or_missing": 7
+        },
+        "denominator": 0,
+        "id": "false_recommendation_rate",
+        "numerator": 0,
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错",
+        "status": "not_evaluable",
+        "title": "错误建议准入率",
+        "value": null
+      },
+      {
+        "coverage": {
+          "labeled_comparable": 0,
+          "population": 7,
+          "unknown_or_missing": 7
+        },
+        "denominator": 0,
+        "id": "usable_recommendation_rate",
+        "numerator": 0,
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错",
+        "status": "not_evaluable",
+        "title": "可用候选建议通过率",
+        "value": null
+      },
+      {
+        "coverage": {
+          "human_no_revision": 0,
+          "population": 7,
+          "unknown_or_missing": 7
+        },
+        "denominator": 0,
+        "id": "unnecessary_revision_recommendation_rate",
+        "numerator": 0,
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错",
+        "status": "not_evaluable",
+        "title": "不必要修订建议率",
+        "value": null
+      },
+      {
+        "coverage": {
+          "attempted_cases": 0,
+          "labeled_cases": 0,
+          "unlabeled_cases": 0
+        },
+        "denominator": 0,
+        "id": "shadow_revision_success_rate",
+        "numerator": 0,
+        "reason": "尚未执行影子修订",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错",
+        "status": "not_evaluable",
+        "title": "影子修订成功率",
+        "value": null
+      },
+      {
+        "coverage": {
+          "formed_mappings": 0,
+          "labeled_mappings": 0,
+          "population": 7,
+          "unknown_or_missing": 0
+        },
+        "denominator": 0,
+        "id": "recommendation_mapping_accuracy",
+        "numerator": 0,
+        "reason": "尚未形成正式映射",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错",
+        "status": "not_evaluable",
+        "title": "建议映射正确率",
+        "value": null
+      }
+    ],
+    "unlabeled": 7,
+    "version": "recommendation_quality_v1"
+  },
+  "version": "four_axis_quality_v1"
+}

@@ -22,7 +22,7 @@ class AgentTools:
     def merge_evidence(self, bundle):
         state, runtime = self.state, self.runtime
         verified = verify_evidence_bundle(bundle, runtime.document, state.candidate)
-        if runtime.orchestrator.config.get('validator_contract_version') in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}:
+        if runtime.orchestrator.config.get('validator_contract_version') in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from evidence.units import enrich_bundle
             verified = enrich_bundle(verified, runtime.document, state.candidate)
         previous = {x["evidence_id"] for x in state.archive}
@@ -32,7 +32,7 @@ class AgentTools:
         # Deterministic, stable selection. Original quote and discovered conflicts
         # are protected; every discovered item remains in the archive/checkpoint.
         initial_ids = runtime.initial_ids
-        use_units=runtime.orchestrator.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3'}
+        use_units=runtime.orchestrator.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
         ordered = sorted(enumerate(all_items), key=lambda pair: (
             -1 if use_units and pair[1]["evidence_id"] in state.protected_ids else
             3 if use_units and pair[1].get('substantive') is False else
@@ -59,6 +59,7 @@ class AgentTools:
                     "get_ontology_extension_status": self.get_ontology_extension_status}
         registry['recover_validation']=self.recover_validation
         registry.update(review_revision=self.review_revision,apply_reviewed_revision=self.apply_reviewed_revision)
+        registry['review_dispute']=self.review_dispute
         return registry[name](**args)
 
     def recover_validation(self):
@@ -137,7 +138,7 @@ class AgentTools:
             triple.get('relation_id') or triple.get('surface_relation') or '',
             head_type=triple.get('head_type'),tail_type=triple.get('tail_type'),tail_kind=triple.get('tail_kind','entity'),guard=guard)
         self.state.ontology_lookup['reference_catalog_counts'] = registry.reference_catalog()['counts']
-        if self.runtime.orchestrator.config.get('validator_contract_version')=='validator_response_v6_3':
+        if self.runtime.orchestrator.config.get('validator_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             from .ontology_context import select_context
             previous=self.state.context.get('ontology_retrieval') or {}
             retrieval={'retrieval_queries':sorted(set(previous.get('retrieval_queries',[])) |
@@ -145,6 +146,11 @@ class AgentTools:
                        'retrieval_property_ids':sorted(set(previous.get('retrieval_property_ids',[])) | matched)}
             selected=select_context(guard,self.state.candidate,self.state.bundle,
                                     self.state.context['ontology_context_policy'],retrieval)
+            if 'mapping_preflight_policy' in self.state.context:
+                from .mapping_preflight import prepare
+                selected, preflight = prepare(guard, self.state.candidate, self.state.bundle, selected,
+                    self.state.context['ontology_context_policy'], self.state.context['mapping_preflight_policy'], retrieval)
+                self.state.ontology_lookup['mapping_preflight'] = preflight
             self.state.context['ontology_retrieval']=retrieval
             self.state.ontology_lookup['retrieved_context']=selected
             self.state.ontology_lookup['retrieved_context_hash']=sha256_json(selected)
@@ -200,6 +206,8 @@ class AgentTools:
 
     def run_validation(self):
         runtime, state, budget = self.runtime, self.state, self.runtime.budget
+        if state.context.get('dispute_baseline'):
+            return {'status':'blocked','error':'use focused dispute review; original full ballot cannot be repeated'}
         if not state.ontology_checked:
             return {"status":"blocked","error":"inspect_ontology is required before independent validation"}
         key = state.validation_key()
@@ -275,6 +283,9 @@ class AgentTools:
         validation = {"proposal_digest": proposal["proposal_digest"], "round_id": proposal["round_id"],
             "evidence_hash": state.bundle.get("evidence_hash"), "votes": votes, "consensus": consensus}
         state.validations[key], state.votes, state.consensus = validation, votes, consensus
+        if consensus.get('dispute_report',{}).get('disputes') and not state.context.get('dispute_baseline'):
+            state.context['dispute_baseline']={'proposal_digest':proposal['proposal_digest'],'round_id':proposal['round_id']}
+            state.context['dispute_report']=consensus['dispute_report']
         runtime.repository.record_issue_events(state.audit_id, state.issue_events)
         runtime.repository.update_round_gaps(state.audit_id, proposal["round_id"], {**state.gaps, "validation_key": key})
         # append_round's frozen proposal is immutable; consensus is a system result.
@@ -283,6 +294,21 @@ class AgentTools:
             connection.execute("UPDATE proposals SET consensus_json=? WHERE audit_id=? AND round_id=?",
                 (canonical_json(consensus), state.audit_id, proposal["round_id"]))
         return {"status": "ok", "validation": validation, "independent_committee": True}
+
+    def review_dispute(self,dispute_id):
+        runtime,state=self.runtime,self.state
+        report=state.context.get('dispute_report') or {}
+        dispute=next((d for d in report.get('disputes',[]) if d['dispute_id']==dispute_id and d['status']=='open'),None)
+        if not dispute:return {'status':'blocked','error':'exact open dispute required'}
+        audit=runtime.repository.get_audit(state.candidate['candidate_id'],state.audit_id)
+        base=next(p for p in audit['rounds'] if p['proposal_digest']==state.context['dispute_baseline']['proposal_digest'])
+        bundle=verify_evidence_bundle(make_evidence_bundle([*base['evidence_bundle']['items'],*state.bundle['items']],state.searched_scopes),runtime.document,state.candidate)
+        from .dispute_review import review
+        prep=state.ontology_lookup.get('mapping_preflight') or {}
+        result=review(runtime.repository,base,dispute,bundle,runtime.orchestrator.validators,runtime.orchestrator.committee,
+            runtime.budget,state.ontology_lookup.get('retrieved_context'),prep.get('judgment_ready',False))
+        dispute['status']=result['status'];state.context.setdefault('dispute_results',{})[dispute_id]=result
+        return {'status':result['status'],'dispute_id':dispute_id,'focused_result':result,'original_votes_changed':False}
 
     def propose_revision(self, changes, evidence_ids, reason):
         from .revision_service import RevisionService

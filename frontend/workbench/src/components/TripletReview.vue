@@ -4,6 +4,13 @@ import { Check, ChevronLeft, ChevronRight, Clock3, Pencil, Play, RefreshCw, X } 
 import MarkdownIt from 'markdown-it';
 import { api, post } from '../api';
 import ModelSelector from './ModelSelector.vue';
+import ReviewAxes from './ReviewAxes.vue';
+import ReviewOutcome from './ReviewOutcome.vue';
+import ReviewTaskPolicy from './ReviewTaskPolicy.vue';
+import MappingPreflight from './MappingPreflight.vue';
+import FieldStandardization from './FieldStandardization.vue';
+import RevisionLoop from './RevisionLoop.vue';
+import DisputeReport from './DisputeReport.vue';
 import { agentTimeline } from '../reviewAgentTimeline';
 import { prepareAcceptance, acceptanceErrorMessage, requiresScopeReview } from '../manualAcceptance.js';
 
@@ -34,7 +41,7 @@ const annotationFields = {
   knowledge_scope: { label: '知识范围', options: { general: '一般知识', conditional: '条件性知识', local_definition: '局部符号约定', example: '示例', derivation: '推导步骤', unresolved: '待确认' } },
   admission_preference: { label: '收录意见', options: { include: '收录', revise: '修订后再审', exclude: '排除', unresolved: '未决定' } }
 };
-const workflowLabels = { ready_for_review: '待审核', manual_review: '待人工审核', revision_required: '需修改候选', schema_unresolved: '本体问题待处理', awaiting_ontology_review: '等待本体审核', awaiting_ontology_release: '等待本体发布', reaudit_required: '需按新版本重审', review_completed: '审核完成', human_reviewed: '人工已处理', mapping_review: '待核验正式映射', excluded_by_scope: '按知识范围排除', scope_review: '待确认知识范围' };
+const workflowLabels = { source_review: '原文支持分歧 · 待复核', semantic_revision_required: '需要语义修订', normalization_required: '待无损规范化', evidence_insufficient: '证据不足 · 待补证', expression_review: '待核验表达', review_incomplete: '审核未完成', ready_for_review: '待审核', manual_review: '待人工审核', revision_required: '需修改候选', schema_unresolved: '本体问题待处理', awaiting_ontology_review: '等待本体审核', awaiting_ontology_release: '等待本体发布', reaudit_required: '需按新版本重审', review_completed: '审核完成', human_reviewed: '人工已处理', mapping_review: '待核验正式映射', excluded_by_scope: '按知识范围排除', scope_review: '待确认知识范围' };
 async function showExtension(id) {
   try { extensionDetails[id] = await api('/api/ontology/extensions/' + encodeURIComponent(id)); }
   catch (cause) { error.value = cause.message; }
@@ -548,6 +555,7 @@ onUnmounted(stopPolling);
       </aside>
 
       <div class="review-content">
+        <ReviewTaskPolicy v-if="isV3" :policy="summary.task_scope_policy" :failure-policy="summary.planner_failure_policy" current />
         <div class="stats-row">
           <div><span>总数</span><strong>{{ summary.total || 0 }}</strong></div>
           <div><span>待处理</span><strong>{{ summary.pending || 0 }}</strong></div>
@@ -583,6 +591,13 @@ onUnmounted(stopPolling);
               <div v-if="rawConfidence(item).evidence_info" class="detail-line">{{ rawConfidence(item).evidence_info }}</div>
               <div v-if="isV3" class="detail-line">冻结本体检查：{{ item.audit_summary?.ontology_check?.status || '未审核' }} · {{ (item.audit_summary?.ontology_check?.reason_codes || []).join('；') }}</div>
               <div v-if="isV3" class="detail-line">流程：{{ workflowLabels[item.workflow_state] || item.workflow_state }} · 原文共识：{{ item.audit_summary?.source_support_consensus?.result || '未形成' }} · 准入共识：{{ item.audit_summary?.admission_consensus?.result || '未形成' }}</div>
+              <ReviewAxes v-if="isV3" :axes="item.audit_summary?.review_axes || {}" :pending-actions="item.audit_summary?.pending_actions || []" />
+              <ReviewOutcome v-if="isV3" :result="item.audit_summary?.review_outcome" />
+              <ReviewTaskPolicy v-if="isV3" :policy="item.audit_summary?.scope_policy" :failure="item.audit_summary?.failure_handling" :clarifications="item.audit_summary?.semantic_clarifications || []" />
+              <MappingPreflight v-if="isV3" :report="item.audit_summary?.mapping_preflight" :evidence="item.audit_summary?.evidence_bundle?.items || []" />
+              <FieldStandardization v-if="isV3" :spec="item.audit_summary?.field_spec" :report="item.audit_summary?.field_standardization" />
+              <RevisionLoop v-if="isV3" :loop="item.audit_summary?.revision_loop" />
+              <DisputeReport v-if="isV3" :report="item.audit_summary?.dispute_report" />
               <div v-if="isV3 && item.expression_complete === false" class="notice">候选表达待补齐：{{ (item.blocking_fields || []).join('、') }}。委员对原文的支持意见仍需经过完整表达核验。</div>
               <div v-for="failure in item.audit_summary?.request_failures || []" :key="failure.voter_id" class="detail-line">{{ failure.model_id }}：{{ failure.outcome_unknown ? '原请求结果待核实，暂停重发' : '技术失败席位待恢复' }} · {{ failure.error_code || failure.error }}</div>
               <div v-if="item.pending_extension_id" class="detail-line">

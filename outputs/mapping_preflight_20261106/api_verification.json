@@ -1,0 +1,67 @@
+{
+  "config": {
+    "validator_contract_version": "validator_response_v7",
+    "ontology_context_mode": "dynamic_subset",
+    "mapping_preflight_enabled": true
+  },
+  "snapshots": [
+    {
+      "sample_id": "DEV-004",
+      "audit_id": "audit_85f5ac1b6335409383db0fd72c7accca",
+      "source": {
+        "status": "supported"
+      },
+      "post_run_diagnostic": true,
+      "assigned_relation_id": "R_5d7591372f1859dc86e0",
+      "ready": false,
+      "evidence_count": 3,
+      "search_trace": [
+        {
+          "stage": "review_subset",
+          "property_count": 8,
+          "metadata_complete": false
+        },
+        {
+          "stage": "full_bound_release_and_aliases",
+          "properties_scanned": 81,
+          "classes_scanned": 189,
+          "exact_match_ids": [
+            "R_2bcf30f9a9b27f4ed54f",
+            "R_5d7591372f1859dc86e0"
+          ],
+          "property_count": 8,
+          "lexical_recall_is_semantic_confirmation": false
+        }
+      ]
+    },
+    {
+      "sample_id": "DEV-003",
+      "audit_id": "audit_23a32824246844cabf838d5ae1e3deb5",
+      "source": {
+        "status": "supported"
+      },
+      "post_run_diagnostic": true,
+      "assigned_relation_id": null,
+      "ready": false,
+      "evidence_count": 1,
+      "search_trace": [
+        {
+          "stage": "review_subset",
+          "property_count": 8,
+          "metadata_complete": false
+        },
+        {
+          "stage": "full_bound_release_and_aliases",
+          "properties_scanned": 81,
+          "classes_scanned": 189,
+          "exact_match_ids": [
+            "R_37918d1714e9945397f3"
+          ],
+          "property_count": 8,
+          "lexical_recall_is_semantic_confirmation": false
+        }
+      ]
+    }
+  ],
+  "ui_url": "http://127.0.0.1:8770/review-monitor?source_id=dev30-v63-stream-20261106&candidate_id=cand_4d903306be730770f49b&audit_id=audit_85f5ac1b6335409383db0fd72c7accca"
+}

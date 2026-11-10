@@ -35,6 +35,9 @@ def main():
         elif descriptor['task_type']=='candidate_revision_review':
             from .revision_service import judge_revision_once
             vote=judge_revision_once(voter,proposal,feedback)
+        elif descriptor['task_type']=='candidate_dispute_review':
+            from .dispute_review import judge_once
+            vote=judge_once(voter,proposal,feedback)
         else:
             raise ValueError('unknown frozen request task_type')
     except Exception as exc:
