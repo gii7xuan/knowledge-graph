@@ -1,0 +1,5878 @@
+{
+  "at": "2026-11-11T10:52:01.370307+08:00",
+  "current": {
+    "summary": {
+      "actual_actions": {
+        "none": 30
+      },
+      "audit_status_counts": {
+        "completed": 30
+      },
+      "audits_started": 30,
+      "backend_weights_pinned": false,
+      "cache_hits": 0,
+      "comparison": {
+        "current_fresh_full_committee_packets": 25,
+        "note": "different execution budgets/clarification policy; no causal accuracy claim; offline revalidation is not a fresh call",
+        "prior_offline_full_committee_packets": 15,
+        "prior_original_independent_complete": 2,
+        "same_candidate_population": true
+      },
+      "derived_execution_counts": {
+        "completed": 25,
+        "partial_failure": 5
+      },
+      "dimension_complete": {
+        "expression": 19,
+        "mapping": 0,
+        "scope": 20,
+        "source": 19
+      },
+      "engineering_gate_passed": true,
+      "four_dimensions_judgment_complete": 0,
+      "full_committee_packets": 25,
+      "human_labels": 0,
+      "import_outbox": 0,
+      "independent_review_completed": 25,
+      "known_trace_defect_recurred": false,
+      "late_receipts": {
+        "additional_full_committee_packets": 2,
+        "extra_model_calls": 0,
+        "later_valid_seats": 3,
+        "offline_only": true,
+        "original_decisions_changed": false,
+        "original_votes_changed": false,
+        "selected_timeout_seats": 3
+      },
+      "mode": "fresh_complete_pipeline",
+      "new_committee_request_attempts": 99,
+      "planner_calls": 91,
+      "population": 30,
+      "production_written": false,
+      "quality_evaluable": false,
+      "recommendations": {
+        "exclude": 1,
+        "manual_review": 11,
+        "revise": 2,
+        "wait_mapping": 16
+      },
+      "recorded_planner_calls": 91,
+      "reported_models": {
+        "judge_a": [
+          "Qwen"
+        ],
+        "judge_b": [
+          "Gemma"
+        ],
+        "judge_c": [
+          "deepseek-flash"
+        ]
+      },
+      "request_attempts": 99,
+      "request_phases": {
+        "field_patch": 9,
+        "initial": 90
+      },
+      "request_states": {
+        "completed": 87,
+        "failed": 12
+      },
+      "usage": {
+        "input_tokens": 1770192,
+        "output_tokens": 112623,
+        "requests_with_missing_usage": 0,
+        "scope": "durable committee request attempts; planner usage not included"
+      }
+    },
+    "by_voter": {
+      "judge_a": {
+        "initial_attempts": 30,
+        "actual_initial_receipt_statuses": {
+          "ok": 29,
+          "invalid_reference": 1
+        },
+        "initial_http_statuses": {},
+        "initial_output_limited": 0,
+        "median_actual_initial_seconds": 55.5705,
+        "max_actual_initial_seconds": 149.375,
+        "within_window_selected_eligible": 27,
+        "within_window_selected_ineligible": [
+          {
+            "sample_id": "DEV-012",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-019",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-028",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          }
+        ]
+      },
+      "judge_b": {
+        "initial_attempts": 30,
+        "actual_initial_receipt_statuses": {
+          "ok": 20,
+          "invalid_contract": 10
+        },
+        "initial_http_statuses": {},
+        "initial_output_limited": 0,
+        "median_actual_initial_seconds": 48.5775,
+        "max_actual_initial_seconds": 128.141,
+        "within_window_selected_eligible": 27,
+        "within_window_selected_ineligible": [
+          {
+            "sample_id": "DEV-019",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "normalization must reference the exact source-bound deterministic plan",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-022",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "dismissed counterexamples and unresolved material counterevidence have different roles",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "material counterevidence conflicts with counterevidence=pass",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence_reviewed_ids overlaps material counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles; dismissed counterexamples and unresolved material counterevidence have different roles",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-024",
+            "errors": [
+              {
+                "category": "schema",
+                "stage": "schema",
+                "path": "/dimensions/mapping/relation_id",
+                "message": "missing",
+                "axes": [
+                  "mapping"
+                ],
+                "expected": [
+                  "string",
+                  "null"
+                ],
+                "actual_type": "missing"
+              },
+              {
+                "category": "schema",
+                "stage": "schema",
+                "path": "/dimensions/mapping/competing_relation_ids",
+                "message": "missing",
+                "axes": [
+                  "mapping"
+                ],
+                "expected": "array",
+                "actual_type": "missing"
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "$.dimensions.mapping.relation_id: required; $.dimensions.mapping.competing_relation_ids: required",
+                "axes": [
+                  "mapping"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          }
+        ]
+      },
+      "judge_c": {
+        "initial_attempts": 30,
+        "actual_initial_receipt_statuses": {
+          "ok": 30
+        },
+        "initial_http_statuses": {},
+        "initial_output_limited": 0,
+        "median_actual_initial_seconds": 7.0465,
+        "max_actual_initial_seconds": 9.436,
+        "within_window_selected_eligible": 30,
+        "within_window_selected_ineligible": []
+      }
+    },
+    "receipts": [
+      {
+        "attempt_id": "attempt_c365ccc209ba449398ac664a85cad49e",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 54110,
+        "input_tokens": 19390,
+        "output_tokens": 1229,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1224,
+          "first_chunk_ms": 10188,
+          "first_content_ms": 13327,
+          "max_inter_chunk_gap_ms": 3139,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 54110,
+          "visible_chars": 2321
+        }
+      },
+      {
+        "attempt_id": "attempt_90d046ee44034138b7965d5ff219e63f",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 49139,
+        "input_tokens": 17907,
+        "output_tokens": 1455,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1457,
+          "first_chunk_ms": 9922,
+          "first_content_ms": 9922,
+          "max_inter_chunk_gap_ms": 594,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 49139,
+          "visible_chars": 2816
+        }
+      },
+      {
+        "attempt_id": "attempt_f30189bf4e8e491698f80c65998d9a41",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7202,
+        "input_tokens": 17179,
+        "output_tokens": 918,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b7c51c0299544152baf81eb4b2678fbc",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6561,
+        "input_tokens": 14435,
+        "output_tokens": 804,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_bbd0a50076ce4e5f85a91d37b9cb6191",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48186,
+        "input_tokens": 16174,
+        "output_tokens": 1040,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1007,
+          "first_chunk_ms": 15233,
+          "first_content_ms": 15342,
+          "max_inter_chunk_gap_ms": 110,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 48186,
+          "visible_chars": 2291
+        }
+      },
+      {
+        "attempt_id": "attempt_456d74b2f93c4dfc81172f4807526b26",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 39030,
+        "input_tokens": 15025,
+        "output_tokens": 1010,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1012,
+          "first_chunk_ms": 14172,
+          "first_content_ms": 14172,
+          "max_inter_chunk_gap_ms": 108,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 39030,
+          "visible_chars": 2145
+        }
+      },
+      {
+        "attempt_id": "attempt_cf5245b6bc114376afed76306141f316",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 47407,
+        "input_tokens": 19320,
+        "output_tokens": 1208,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1210,
+          "first_chunk_ms": 10157,
+          "first_content_ms": 10157,
+          "max_inter_chunk_gap_ms": 625,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 47407,
+          "visible_chars": 2464
+        }
+      },
+      {
+        "attempt_id": "attempt_3e79d734a3f54cb6b09413aa00a64d5e",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 42500,
+        "input_tokens": 20665,
+        "output_tokens": 729,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 714,
+          "first_chunk_ms": 11313,
+          "first_content_ms": 14110,
+          "max_inter_chunk_gap_ms": 2797,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 42500,
+          "visible_chars": 1617
+        }
+      },
+      {
+        "attempt_id": "attempt_06444c34a7424722a982b1e0c1f4301c",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7625,
+        "input_tokens": 18485,
+        "output_tokens": 927,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_24d7dfe319fb43bb8025744c3dba5ac8",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 63079,
+        "input_tokens": 23568,
+        "output_tokens": 1379,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1358,
+          "first_chunk_ms": 17688,
+          "first_content_ms": 17797,
+          "max_inter_chunk_gap_ms": 672,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 63079,
+          "visible_chars": 2464
+        }
+      },
+      {
+        "attempt_id": "attempt_e50edbf1e3354a93bdcde66f7bbec892",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 57750,
+        "input_tokens": 22097,
+        "output_tokens": 1726,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1728,
+          "first_chunk_ms": 15952,
+          "first_content_ms": 15952,
+          "max_inter_chunk_gap_ms": 64,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 57750,
+          "visible_chars": 3211
+        }
+      },
+      {
+        "attempt_id": "attempt_a2ec6b6009f04bfe99c0c49b7e8edaf4",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8110,
+        "input_tokens": 20543,
+        "output_tokens": 1212,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c6e9bd58383a49feaefe8700904743e0",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 40655,
+        "input_tokens": 3306,
+        "output_tokens": 1217,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1156,
+          "first_chunk_ms": 2842,
+          "first_content_ms": 40186,
+          "max_inter_chunk_gap_ms": 719,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 40655,
+          "visible_chars": 45
+        }
+      },
+      {
+        "attempt_id": "attempt_743cb90782794532bc44704d9be3eb68",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 19764,
+        "input_tokens": 4847,
+        "output_tokens": 596,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 564,
+          "first_chunk_ms": 3202,
+          "first_content_ms": 18155,
+          "max_inter_chunk_gap_ms": 92,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 19764,
+          "visible_chars": 89
+        }
+      },
+      {
+        "attempt_id": "attempt_b134e3376a224e399ade5b1565ecd8f9",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50219,
+        "input_tokens": 14528,
+        "output_tokens": 1175,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1146,
+          "first_chunk_ms": 7250,
+          "first_content_ms": 10375,
+          "max_inter_chunk_gap_ms": 3125,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 50219,
+          "visible_chars": 2159
+        }
+      },
+      {
+        "attempt_id": "attempt_d6373a3e02f94a2b829623f431c671f4",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6485,
+        "input_tokens": 12960,
+        "output_tokens": 898,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_92094b45055a4cd6a39dcc5a244640df",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 83969,
+        "input_tokens": 13348,
+        "output_tokens": 1522,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1523,
+          "first_chunk_ms": 8250,
+          "first_content_ms": 8250,
+          "max_inter_chunk_gap_ms": 827,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 83969,
+          "visible_chars": 3004
+        }
+      },
+      {
+        "attempt_id": "attempt_be35187c3f3249a098253af86e38dee2",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 46530,
+        "input_tokens": 17989,
+        "output_tokens": 1368,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1370,
+          "first_chunk_ms": 12483,
+          "first_content_ms": 12483,
+          "max_inter_chunk_gap_ms": 139,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 46514,
+          "visible_chars": 2564
+        }
+      },
+      {
+        "attempt_id": "attempt_700b387c49054a7caca43de59e42d8e4",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 39577,
+        "input_tokens": 19409,
+        "output_tokens": 892,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 885,
+          "first_chunk_ms": 11500,
+          "first_content_ms": 11610,
+          "max_inter_chunk_gap_ms": 140,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 39577,
+          "visible_chars": 1815
+        }
+      },
+      {
+        "attempt_id": "attempt_6048cb18da584028bb1b3ca6011de76b",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7219,
+        "input_tokens": 17227,
+        "output_tokens": 948,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_44c5946360be421a8cc38563ac597593",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6938,
+        "input_tokens": 17908,
+        "output_tokens": 882,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_516a7d36553e4797aedce2d034bdfe84",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 44625,
+        "input_tokens": 20145,
+        "output_tokens": 901,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 895,
+          "first_chunk_ms": 9672,
+          "first_content_ms": 9764,
+          "max_inter_chunk_gap_ms": 1061,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 44625,
+          "visible_chars": 1872
+        }
+      },
+      {
+        "attempt_id": "attempt_61dd9a5619bf4fcfb9251c7fa6aeb9cb",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 52000,
+        "input_tokens": 18776,
+        "output_tokens": 1246,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1248,
+          "first_chunk_ms": 9172,
+          "first_content_ms": 9172,
+          "max_inter_chunk_gap_ms": 594,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 52000,
+          "visible_chars": 2457
+        }
+      },
+      {
+        "attempt_id": "attempt_7ac178b73e8f4767a2ae29c7573eecc1",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 75188,
+        "input_tokens": 18305,
+        "output_tokens": 1160,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1161,
+          "first_chunk_ms": 11641,
+          "first_content_ms": 11641,
+          "max_inter_chunk_gap_ms": 844,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 75188,
+          "visible_chars": 2378
+        }
+      },
+      {
+        "attempt_id": "attempt_a331b7e7c3df4a8db02b759ca82665a9",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8702,
+        "input_tokens": 17395,
+        "output_tokens": 792,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2e3c86a0ca634e049562cef7722008ec",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 45719,
+        "input_tokens": 19554,
+        "output_tokens": 1085,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1069,
+          "first_chunk_ms": 11954,
+          "first_content_ms": 12063,
+          "max_inter_chunk_gap_ms": 109,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 45719,
+          "visible_chars": 2102
+        }
+      },
+      {
+        "attempt_id": "attempt_699f5b1aca72438fb72902c733da8954",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 35204,
+        "input_tokens": 6465,
+        "output_tokens": 1138,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1097,
+          "first_chunk_ms": 3860,
+          "first_content_ms": 34157,
+          "max_inter_chunk_gap_ms": 93,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 35188,
+          "visible_chars": 65
+        }
+      },
+      {
+        "attempt_id": "attempt_9c119c9354b74700acf83adac57f0fec",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 45032,
+        "input_tokens": 15551,
+        "output_tokens": 1097,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1099,
+          "first_chunk_ms": 12204,
+          "first_content_ms": 12219,
+          "max_inter_chunk_gap_ms": 594,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 45032,
+          "visible_chars": 2188
+        }
+      },
+      {
+        "attempt_id": "attempt_93e9f342da5a46979063f2c03a15a963",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6766,
+        "input_tokens": 14873,
+        "output_tokens": 841,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1c5afaf3ed314aa78c286a1fc9f448b5",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 44985,
+        "input_tokens": 16713,
+        "output_tokens": 973,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 946,
+          "first_chunk_ms": 8016,
+          "first_content_ms": 8125,
+          "max_inter_chunk_gap_ms": 1688,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 44969,
+          "visible_chars": 1899
+        }
+      },
+      {
+        "attempt_id": "attempt_ab5e7b7bb8cc4867a62ff74f50cf0e38",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6641,
+        "input_tokens": 17662,
+        "output_tokens": 820,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_92585e49eede4d42b73c94410b4b1190",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 35030,
+        "input_tokens": 19710,
+        "output_tokens": 810,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 797,
+          "first_chunk_ms": 9577,
+          "first_content_ms": 9672,
+          "max_inter_chunk_gap_ms": 95,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 35016,
+          "visible_chars": 1720
+        }
+      },
+      {
+        "attempt_id": "attempt_47fbfbbd290a4679bf1283cad32605d8",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 65360,
+        "input_tokens": 18356,
+        "output_tokens": 1010,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1011,
+          "first_chunk_ms": 8985,
+          "first_content_ms": 8985,
+          "max_inter_chunk_gap_ms": 828,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 65360,
+          "visible_chars": 2102
+        }
+      },
+      {
+        "attempt_id": "attempt_e22c8d66104f4a5b90bd51ed7780ba21",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 59188,
+        "input_tokens": 20072,
+        "output_tokens": 1416,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1418,
+          "first_chunk_ms": 10202,
+          "first_content_ms": 10202,
+          "max_inter_chunk_gap_ms": 610,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 59188,
+          "visible_chars": 2790
+        }
+      },
+      {
+        "attempt_id": "attempt_c44dd838f30c4602b27beaf97a531a48",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6952,
+        "input_tokens": 19179,
+        "output_tokens": 971,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c8e0791f97024c8d87e0fe39dc4f1a76",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 56358,
+        "input_tokens": 21502,
+        "output_tokens": 1251,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1233,
+          "first_chunk_ms": 10327,
+          "first_content_ms": 10436,
+          "max_inter_chunk_gap_ms": 1064,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 56358,
+          "visible_chars": 2415
+        }
+      },
+      {
+        "attempt_id": "attempt_d899873b768a4fa3a0bd12847dd36b54",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 33483,
+        "input_tokens": 19066,
+        "output_tokens": 762,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 758,
+          "first_chunk_ms": 9297,
+          "first_content_ms": 9389,
+          "max_inter_chunk_gap_ms": 92,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 33469,
+          "visible_chars": 1708
+        }
+      },
+      {
+        "attempt_id": "attempt_b4a5d00916c14c21829fa00f3d222ddc",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 99530,
+        "input_tokens": 17777,
+        "output_tokens": 1293,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1294,
+          "first_chunk_ms": 8764,
+          "first_content_ms": 8764,
+          "max_inter_chunk_gap_ms": 952,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 99530,
+          "visible_chars": 2705
+        }
+      },
+      {
+        "attempt_id": "attempt_d177cbfb2b444de4833f9c95f0216b1b",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7452,
+        "input_tokens": 17058,
+        "output_tokens": 1240,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2c79d75448fa4acab561317b256a8c61",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 52530,
+        "input_tokens": 17697,
+        "output_tokens": 1186,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1153,
+          "first_chunk_ms": 8936,
+          "first_content_ms": 9030,
+          "max_inter_chunk_gap_ms": 1061,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 52530,
+          "visible_chars": 2135
+        }
+      },
+      {
+        "attempt_id": "attempt_76b0ead3698f47e6be9b325876406254",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6625,
+        "input_tokens": 15645,
+        "output_tokens": 824,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ad8a2bf43bc449dca3b3038a12028d55",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50905,
+        "input_tokens": 16424,
+        "output_tokens": 1234,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1236,
+          "first_chunk_ms": 8264,
+          "first_content_ms": 8264,
+          "max_inter_chunk_gap_ms": 609,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 50905,
+          "visible_chars": 2402
+        }
+      },
+      {
+        "attempt_id": "attempt_6c847407bbf7492a9d57eb839a743cce",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 47594,
+        "input_tokens": 19539,
+        "output_tokens": 1170,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1149,
+          "first_chunk_ms": 9469,
+          "first_content_ms": 9563,
+          "max_inter_chunk_gap_ms": 687,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 47594,
+          "visible_chars": 2257
+        }
+      },
+      {
+        "attempt_id": "attempt_1cb873fea587444b8d30d5dc6c7754fa",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 41077,
+        "input_tokens": 18239,
+        "output_tokens": 1366,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1368,
+          "first_chunk_ms": 8922,
+          "first_content_ms": 8922,
+          "max_inter_chunk_gap_ms": 48,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 41077,
+          "visible_chars": 2695
+        }
+      },
+      {
+        "attempt_id": "attempt_397b230b405b4707ba6d15d7e15509ee",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6608,
+        "input_tokens": 17031,
+        "output_tokens": 1032,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_cb8443ddd9d3432d9397259a9f6ab893",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 20952,
+        "input_tokens": 3737,
+        "output_tokens": 578,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 555,
+          "first_chunk_ms": 2969,
+          "first_content_ms": 19969,
+          "max_inter_chunk_gap_ms": 78,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 20952,
+          "visible_chars": 65
+        }
+      },
+      {
+        "attempt_id": "attempt_0b714e1e497c40c28a9c08bc13d33def",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 22094,
+        "input_tokens": 3921,
+        "output_tokens": 718,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 693,
+          "first_chunk_ms": 3016,
+          "first_content_ms": 21061,
+          "max_inter_chunk_gap_ms": 64,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 22094,
+          "visible_chars": 65
+        }
+      },
+      {
+        "attempt_id": "attempt_2d8b708553454f809cf44c923114dadd",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 44842,
+        "input_tokens": 17983,
+        "output_tokens": 1054,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1056,
+          "first_chunk_ms": 9672,
+          "first_content_ms": 9672,
+          "max_inter_chunk_gap_ms": 640,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 44842,
+          "visible_chars": 2176
+        }
+      },
+      {
+        "attempt_id": "attempt_565a06c0079040f2ace8519b716e845a",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 52155,
+        "input_tokens": 19522,
+        "output_tokens": 961,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 943,
+          "first_chunk_ms": 9983,
+          "first_content_ms": 13125,
+          "max_inter_chunk_gap_ms": 3142,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 52155,
+          "visible_chars": 1975
+        }
+      },
+      {
+        "attempt_id": "attempt_a4c274e244724951902fa8356c3064ed",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6016,
+        "input_tokens": 17385,
+        "output_tokens": 730,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_801f43dea192430089e72b16e00eb1cd",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 87436,
+        "input_tokens": 26340,
+        "output_tokens": 1555,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1556,
+          "first_chunk_ms": 17592,
+          "first_content_ms": 17592,
+          "max_inter_chunk_gap_ms": 2437,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 87436,
+          "visible_chars": 3303
+        }
+      },
+      {
+        "attempt_id": "attempt_88e4bd70a34245a8996bb825a7373839",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7063,
+        "input_tokens": 24580,
+        "output_tokens": 803,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_bb76a8900db44fc89a357f82abb7561c",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 55625,
+        "input_tokens": 27989,
+        "output_tokens": 1093,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1078,
+          "first_chunk_ms": 20047,
+          "first_content_ms": 20141,
+          "max_inter_chunk_gap_ms": 125,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 55625,
+          "visible_chars": 2150
+        }
+      },
+      {
+        "attempt_id": "attempt_bad34eeec4b54a8199cc3f4573eb51d4",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 55313,
+        "input_tokens": 19208,
+        "output_tokens": 1400,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1402,
+          "first_chunk_ms": 13827,
+          "first_content_ms": 13827,
+          "max_inter_chunk_gap_ms": 611,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 55313,
+          "visible_chars": 2769
+        }
+      },
+      {
+        "attempt_id": "attempt_6fda57d44f13458a95b934a6b86952b2",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50719,
+        "input_tokens": 20581,
+        "output_tokens": 1033,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 998,
+          "first_chunk_ms": 10000,
+          "first_content_ms": 10094,
+          "max_inter_chunk_gap_ms": 1125,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 50719,
+          "visible_chars": 2154
+        }
+      },
+      {
+        "attempt_id": "attempt_60a00216bcdf42adadead955c99ee6c7",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6172,
+        "input_tokens": 18168,
+        "output_tokens": 879,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a921e6afea744e6aa4dc33e0ebdbd10f",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7030,
+        "input_tokens": 19595,
+        "output_tokens": 934,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_868796149e084c9c91fb9d0fe5bc5a68",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 86188,
+        "input_tokens": 20577,
+        "output_tokens": 1299,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1300,
+          "first_chunk_ms": 9952,
+          "first_content_ms": 9952,
+          "max_inter_chunk_gap_ms": 922,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 86188,
+          "visible_chars": 2587
+        }
+      },
+      {
+        "attempt_id": "attempt_b6435a8e2ace484fa354b94ba9a58938",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 46108,
+        "input_tokens": 22078,
+        "output_tokens": 1113,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1110,
+          "first_chunk_ms": 10750,
+          "first_content_ms": 10858,
+          "max_inter_chunk_gap_ms": 609,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 46108,
+          "visible_chars": 2169
+        }
+      },
+      {
+        "attempt_id": "attempt_445cd9e071c049adb32e0e8ca3650a86",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8797,
+        "input_tokens": 20306,
+        "output_tokens": 1394,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_78b6261f287d4ce6bb8c56d122213e93",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 135202,
+        "input_tokens": 21582,
+        "output_tokens": 2441,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 2443,
+          "first_chunk_ms": 10842,
+          "first_content_ms": 10858,
+          "max_inter_chunk_gap_ms": 1484,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 135202,
+          "visible_chars": 4664
+        }
+      },
+      {
+        "attempt_id": "attempt_e91decf8bd8b4f008786c24df745439e",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 57250,
+        "input_tokens": 22998,
+        "output_tokens": 1194,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1169,
+          "first_chunk_ms": 11827,
+          "first_content_ms": 15110,
+          "max_inter_chunk_gap_ms": 3283,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 57250,
+          "visible_chars": 2528
+        }
+      },
+      {
+        "attempt_id": "attempt_533c3dbd197b4670961ee95fa3d520ff",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8172,
+        "input_tokens": 18994,
+        "output_tokens": 1331,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d69c4a1a800945809d1ba8f13241bfd5",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 54219,
+        "input_tokens": 21167,
+        "output_tokens": 1212,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1190,
+          "first_chunk_ms": 15233,
+          "first_content_ms": 15327,
+          "max_inter_chunk_gap_ms": 983,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 54219,
+          "visible_chars": 2545
+        }
+      },
+      {
+        "attempt_id": "attempt_736aed54538e419f8d95ab12929786a1",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 59842,
+        "input_tokens": 19692,
+        "output_tokens": 1852,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1854,
+          "first_chunk_ms": 13467,
+          "first_content_ms": 13467,
+          "max_inter_chunk_gap_ms": 1014,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 59842,
+          "visible_chars": 3778
+        }
+      },
+      {
+        "attempt_id": "attempt_185a9a1b5bfc4762a2980e6cb292cd9d",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": 18141,
+        "input_tokens": 4520,
+        "output_tokens": 555,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 521,
+          "first_chunk_ms": 3313,
+          "first_content_ms": 17141,
+          "max_inter_chunk_gap_ms": 64,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 18141,
+          "visible_chars": 65
+        }
+      },
+      {
+        "attempt_id": "attempt_9060fa8a3019406caa97673d43569e2c",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 68235,
+        "input_tokens": 21389,
+        "output_tokens": 1775,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1777,
+          "first_chunk_ms": 10485,
+          "first_content_ms": 10485,
+          "max_inter_chunk_gap_ms": 656,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 68235,
+          "visible_chars": 3216
+        }
+      },
+      {
+        "attempt_id": "attempt_0ef2620ec0164801af0197450ae085d6",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 128141,
+        "input_tokens": 22878,
+        "output_tokens": 3441,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 3254,
+          "first_chunk_ms": 11391,
+          "first_content_ms": 66828,
+          "max_inter_chunk_gap_ms": 1125,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 128141,
+          "visible_chars": 3912
+        }
+      },
+      {
+        "attempt_id": "attempt_7f569025b1f24ed681e5c68395ccfdf9",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9436,
+        "input_tokens": 20347,
+        "output_tokens": 1519,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b7c7f1e4af804521b3a77d3118ac15cf",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 52264,
+        "input_tokens": 19761,
+        "output_tokens": 1755,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1757,
+          "first_chunk_ms": 9577,
+          "first_content_ms": 9577,
+          "max_inter_chunk_gap_ms": 79,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 52264,
+          "visible_chars": 3238
+        }
+      },
+      {
+        "attempt_id": "attempt_8e059eb362f24400822489e1c231d403",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7186,
+        "input_tokens": 18507,
+        "output_tokens": 1082,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_180897ff2abb43ab87816719c2364489",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 45016,
+        "input_tokens": 21151,
+        "output_tokens": 1079,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1072,
+          "first_chunk_ms": 10250,
+          "first_content_ms": 10358,
+          "max_inter_chunk_gap_ms": 110,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 45016,
+          "visible_chars": 2351
+        }
+      },
+      {
+        "attempt_id": "attempt_5b8f53c83950437eaa2b2317481b2cb6",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 51078,
+        "input_tokens": 21674,
+        "output_tokens": 926,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 886,
+          "first_chunk_ms": 10297,
+          "first_content_ms": 10391,
+          "max_inter_chunk_gap_ms": 1328,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 51078,
+          "visible_chars": 1921
+        }
+      },
+      {
+        "attempt_id": "attempt_a81946db17524d15b27811ed3b25125f",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6438,
+        "input_tokens": 19152,
+        "output_tokens": 917,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a02e8dd6dc93429d9aa07648ac2a1263",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 68014,
+        "input_tokens": 20185,
+        "output_tokens": 1384,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1386,
+          "first_chunk_ms": 9467,
+          "first_content_ms": 9467,
+          "max_inter_chunk_gap_ms": 673,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 68014,
+          "visible_chars": 2714
+        }
+      },
+      {
+        "attempt_id": "attempt_d4fc0fc990ca45b4a3aa7d317ed6ea2a",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 78703,
+        "input_tokens": 28031,
+        "output_tokens": 1099,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1100,
+          "first_chunk_ms": 12967,
+          "first_content_ms": 12967,
+          "max_inter_chunk_gap_ms": 875,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 78703,
+          "visible_chars": 2200
+        }
+      },
+      {
+        "attempt_id": "attempt_28fd2bf94b584822b05528d936e4262c",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6765,
+        "input_tokens": 26101,
+        "output_tokens": 973,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a28369d3582c4a7381f9f428d188992f",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48311,
+        "input_tokens": 29709,
+        "output_tokens": 1048,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1034,
+          "first_chunk_ms": 14780,
+          "first_content_ms": 14875,
+          "max_inter_chunk_gap_ms": 95,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 48311,
+          "visible_chars": 2058
+        }
+      },
+      {
+        "attempt_id": "attempt_03c54f5e7b734088adb50e99c0546b80",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7250,
+        "input_tokens": 17496,
+        "output_tokens": 1026,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_7a55006fcade4adea887d8919f1e5fa5",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50452,
+        "input_tokens": 20017,
+        "output_tokens": 1051,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1029,
+          "first_chunk_ms": 10702,
+          "first_content_ms": 14030,
+          "max_inter_chunk_gap_ms": 3328,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 50452,
+          "visible_chars": 2177
+        }
+      },
+      {
+        "attempt_id": "attempt_056e1dd6984245bcb706a58a2e41f9cd",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48594,
+        "input_tokens": 18671,
+        "output_tokens": 1348,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1350,
+          "first_chunk_ms": 9609,
+          "first_content_ms": 9609,
+          "max_inter_chunk_gap_ms": 594,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 48594,
+          "visible_chars": 2708
+        }
+      },
+      {
+        "attempt_id": "attempt_5d54fef05f574c3b8bca5ed1d4a21d18",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 44032,
+        "input_tokens": 18395,
+        "output_tokens": 1190,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1192,
+          "first_chunk_ms": 14516,
+          "first_content_ms": 14516,
+          "max_inter_chunk_gap_ms": 47,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 44032,
+          "visible_chars": 2432
+        }
+      },
+      {
+        "attempt_id": "attempt_a79285c37c4243eeb676d9c135f8a5b6",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48844,
+        "input_tokens": 19801,
+        "output_tokens": 1035,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1032,
+          "first_chunk_ms": 15844,
+          "first_content_ms": 15936,
+          "max_inter_chunk_gap_ms": 92,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 48844,
+          "visible_chars": 2056
+        }
+      },
+      {
+        "attempt_id": "attempt_bcac766b8c1e40f8aa3246cc495fff0a",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7811,
+        "input_tokens": 17567,
+        "output_tokens": 864,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d886b9af6b754f5c917e20d5828cf229",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 54092,
+        "input_tokens": 16733,
+        "output_tokens": 1145,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1113,
+          "first_chunk_ms": 8311,
+          "first_content_ms": 8405,
+          "max_inter_chunk_gap_ms": 1547,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 54092,
+          "visible_chars": 2239
+        }
+      },
+      {
+        "attempt_id": "attempt_c47b9ee0162e4af7b22b56f528885b61",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6452,
+        "input_tokens": 15045,
+        "output_tokens": 910,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c579d84bbf5a4af78dade6275427008b",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 55828,
+        "input_tokens": 15550,
+        "output_tokens": 1437,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1439,
+          "first_chunk_ms": 12140,
+          "first_content_ms": 12140,
+          "max_inter_chunk_gap_ms": 625,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 55828,
+          "visible_chars": 2962
+        }
+      },
+      {
+        "attempt_id": "attempt_021153ec52be452f897fe09d327176ac",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48015,
+        "input_tokens": 25584,
+        "output_tokens": 1100,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1088,
+          "first_chunk_ms": 12640,
+          "first_content_ms": 12750,
+          "max_inter_chunk_gap_ms": 1548,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 48000,
+          "visible_chars": 2133
+        }
+      },
+      {
+        "attempt_id": "attempt_33d74e80e1b248be9a2f04b2e1895781",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7563,
+        "input_tokens": 22356,
+        "output_tokens": 1220,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_04b9dc4248d44a3a8d1a7d13ec2e7541",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 149375,
+        "input_tokens": 24013,
+        "output_tokens": 2168,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 2169,
+          "first_chunk_ms": 11235,
+          "first_content_ms": 11235,
+          "max_inter_chunk_gap_ms": 3672,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 149375,
+          "visible_chars": 4146
+        }
+      },
+      {
+        "attempt_id": "attempt_6a09ad3b97734b5badee909658477692",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7438,
+        "input_tokens": 16810,
+        "output_tokens": 1023,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f31b22c065dc4e9c8542242f89252b1e",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 42282,
+        "input_tokens": 18951,
+        "output_tokens": 894,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 891,
+          "first_chunk_ms": 9125,
+          "first_content_ms": 9219,
+          "max_inter_chunk_gap_ms": 3328,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 42282,
+          "visible_chars": 1837
+        }
+      },
+      {
+        "attempt_id": "attempt_12f7f5bc1e484bd381e94f2f137c7b52",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_reference",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50077,
+        "input_tokens": 17495,
+        "output_tokens": 1377,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1379,
+          "first_chunk_ms": 10750,
+          "first_content_ms": 10750,
+          "max_inter_chunk_gap_ms": 3671,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 50077,
+          "visible_chars": 2735
+        }
+      },
+      {
+        "attempt_id": "attempt_a96440def9c74ec5b8528430ff59805e",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 37750,
+        "input_tokens": 14820,
+        "output_tokens": 1210,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1212,
+          "first_chunk_ms": 7983,
+          "first_content_ms": 7983,
+          "max_inter_chunk_gap_ms": 3671,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 37750,
+          "visible_chars": 2360
+        }
+      },
+      {
+        "attempt_id": "attempt_7ea09762cade4820b411b15bc1c13360",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6702,
+        "input_tokens": 14406,
+        "output_tokens": 912,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_15b25296a99c4602a2b844256dd3206c",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 45969,
+        "input_tokens": 16031,
+        "output_tokens": 1172,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 1141,
+          "first_chunk_ms": 8250,
+          "first_content_ms": 8360,
+          "max_inter_chunk_gap_ms": 3656,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 45969,
+          "visible_chars": 2128
+        }
+      },
+      {
+        "attempt_id": "attempt_8c7121222ead425599c2f14b9954bb78",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 29578,
+        "input_tokens": 4168,
+        "output_tokens": 852,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 787,
+          "first_chunk_ms": 3532,
+          "first_content_ms": 29109,
+          "max_inter_chunk_gap_ms": 688,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 29578,
+          "visible_chars": 45
+        }
+      },
+      {
+        "attempt_id": "attempt_24069cf7f9a440acb55649db49f090d1",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 3953,
+        "input_tokens": 3576,
+        "output_tokens": 43,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 45,
+          "first_chunk_ms": 3047,
+          "first_content_ms": 3047,
+          "max_inter_chunk_gap_ms": 46,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 3953,
+          "visible_chars": 63
+        }
+      },
+      {
+        "attempt_id": "attempt_9e587895410b46a0bd6920e6c0d64845",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 23671,
+        "input_tokens": 3855,
+        "output_tokens": 766,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": {
+          "chunk_count": 727,
+          "first_chunk_ms": 2936,
+          "first_content_ms": 23217,
+          "max_inter_chunk_gap_ms": 111,
+          "reasoning_chars": 0,
+          "stream": true,
+          "terminal_ms": 23671,
+          "visible_chars": 45
+        }
+      }
+    ],
+    "formally_valid_mapping_candidates": 0,
+    "actual_receipt_statuses": {
+      "ok": 87,
+      "invalid_contract": 11,
+      "invalid_reference": 1
+    },
+    "unknown_or_running_attempts": [],
+    "raw_database_sha256": "894d47bb07f638a6a4a2757b8b64652f38dc023b4f8a50a2ed0cfc7757137f4b"
+  },
+  "previous_diagnostics_of_20261110_run": {
+    "summary": {
+      "actual_actions": {
+        "none": 30
+      },
+      "audit_status_counts": {
+        "completed": 30
+      },
+      "audits_started": 30,
+      "backend_weights_pinned": false,
+      "cache_hits": 0,
+      "comparison": {
+        "current_fresh_full_committee_packets": 14,
+        "note": "different execution budgets/clarification policy; no causal accuracy claim; offline revalidation is not a fresh call",
+        "prior_offline_full_committee_packets": 15,
+        "prior_original_independent_complete": 2,
+        "same_candidate_population": true
+      },
+      "derived_execution_counts": {
+        "completed": 14,
+        "partial_failure": 16
+      },
+      "dimension_complete": {
+        "expression": 13,
+        "mapping": 0,
+        "scope": 15,
+        "source": 6
+      },
+      "engineering_gate_passed": true,
+      "four_dimensions_judgment_complete": 0,
+      "full_committee_packets": 14,
+      "human_labels": 0,
+      "import_outbox": 0,
+      "independent_review_completed": 14,
+      "known_trace_defect_recurred": false,
+      "late_receipts": {
+        "additional_full_committee_packets": 3,
+        "extra_model_calls": 0,
+        "later_valid_seats": 3,
+        "offline_only": true,
+        "original_decisions_changed": false,
+        "original_votes_changed": false,
+        "selected_timeout_seats": 9
+      },
+      "mode": "fresh_source_regression_plus_offline_diagnostic_revalidation",
+      "new_committee_request_attempts": 0,
+      "planner_calls": 0,
+      "population": 30,
+      "production_written": false,
+      "quality_evaluable": false,
+      "recommendations": {
+        "exclude": 1,
+        "manual_review": 24,
+        "wait_mapping": 5
+      },
+      "recorded_planner_calls": 90,
+      "reported_models": {
+        "judge_a": [
+          "Qwen"
+        ],
+        "judge_b": [
+          "Gemma"
+        ],
+        "judge_c": [
+          "deepseek-flash"
+        ]
+      },
+      "request_attempts": 133,
+      "request_phases": {
+        "contradiction_clarification": 1,
+        "field_patch": 42,
+        "initial": 90
+      },
+      "request_states": {
+        "completed": 75,
+        "failed": 58
+      },
+      "usage": {
+        "input_tokens": 1797723,
+        "output_tokens": 208058,
+        "requests_with_missing_usage": 0,
+        "scope": "durable committee request attempts; planner usage not included"
+      }
+    },
+    "by_voter": {
+      "judge_a": {
+        "initial_attempts": 30,
+        "actual_initial_receipt_statuses": {
+          "invalid_contract": 9,
+          "ok": 20,
+          "output_incomplete": 1
+        },
+        "initial_http_statuses": {},
+        "initial_output_limited": 1,
+        "median_actual_initial_seconds": 59.6715,
+        "max_actual_initial_seconds": 310.5,
+        "within_window_selected_eligible": 27,
+        "within_window_selected_ineligible": [
+          {
+            "sample_id": "DEV-005",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_semantics: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-019",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "entity_reference: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_semantics: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_direction: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "qualifiers: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "entity_reference: failed or unresolved checks require an explicit finding; relation_semantics: failed or unresolved checks require an explicit finding; relation_direction: failed or unresolved checks require an explicit finding; qualifiers: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-027",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          }
+        ]
+      },
+      "judge_b": {
+        "initial_attempts": 30,
+        "actual_initial_receipt_statuses": {
+          "invalid_contract": 25,
+          "ok": 5
+        },
+        "initial_http_statuses": {},
+        "initial_output_limited": 0,
+        "median_actual_initial_seconds": 117.3195,
+        "max_actual_initial_seconds": 664.516,
+        "within_window_selected_eligible": 18,
+        "within_window_selected_ineligible": [
+          {
+            "sample_id": "DEV-006",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence: resolved source check requires verified evidence_ids",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "Expecting value: line 1 column 1 (char 0)",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "provenance",
+                "stage": "provenance",
+                "path": null,
+                "message": "missing reviewed source citations: counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-009",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence: resolved source check requires verified evidence_ids",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "Expecting value: line 1 column 1 (char 0)",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "provenance",
+                "stage": "provenance",
+                "path": null,
+                "message": "missing reviewed source citations: counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-010",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-016",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence: resolved source check requires verified evidence_ids",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "changed meaning requires a substantive semantic finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence: resolved source check requires verified evidence_ids; changed meaning requires a substantive semantic finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "provenance",
+                "stage": "provenance",
+                "path": null,
+                "message": "missing reviewed source citations: counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-018",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-019",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-020",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-021",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-022",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "primary support set cannot contain unresolved counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "dismissed counterexamples and unresolved material counterevidence have different roles",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_semantics: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "material counterevidence conflicts with counterevidence=pass",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "primary_evidence_ids overlaps material counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "counterevidence_reviewed_ids overlaps material counterevidence",
+                "axes": [
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "primary support set cannot contain unresolved counterevidence; unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles; dismissed counterexamples and unresolved material counterevidence have different roles; relation_semantics: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-023",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-028",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-030",
+            "errors": [
+              {
+                "category": "transport",
+                "stage": "transport",
+                "path": null,
+                "message": "caller wait deadline reached; original request may complete later",
+                "axes": [
+                  "expression",
+                  "mapping",
+                  "scope",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          }
+        ]
+      },
+      "judge_c": {
+        "initial_attempts": 30,
+        "actual_initial_receipt_statuses": {
+          "invalid_contract": 16,
+          "ok": 14
+        },
+        "initial_http_statuses": {},
+        "initial_output_limited": 0,
+        "median_actual_initial_seconds": 10.006499999999999,
+        "max_actual_initial_seconds": 12.157,
+        "within_window_selected_eligible": 27,
+        "within_window_selected_ineligible": [
+          {
+            "sample_id": "DEV-002",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "unresolved findings must agree with the unresolved expression check",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "unresolved meaning requires an unresolved check",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "unresolved findings must agree with the unresolved expression check; unresolved meaning requires an unresolved check",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-017",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_direction: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          },
+          {
+            "sample_id": "DEV-019",
+            "errors": [
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "entity_reference: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_semantics: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "relation_direction: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              },
+              {
+                "category": "semantic_consistency",
+                "stage": "semantic_consistency",
+                "path": null,
+                "message": "entity_reference: failed or unresolved checks require an explicit finding; relation_semantics: failed or unresolved checks require an explicit finding; relation_direction: failed or unresolved checks require an explicit finding",
+                "axes": [
+                  "expression",
+                  "source"
+                ],
+                "expected": null,
+                "actual_type": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "receipts": [
+      {
+        "attempt_id": "attempt_776d88a9f1bb40b5a1615d6c5d2754fb",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9625,
+        "input_tokens": 13517,
+        "output_tokens": 1099,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d88211b6e67d459a99bfc7bd4764588b",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 154359,
+        "input_tokens": 15236,
+        "output_tokens": 4449,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_34181d9d5efd48598a007ac4e2871eab",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 46311,
+        "input_tokens": 14655,
+        "output_tokens": 1293,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d0d7ff4a976d4856adbea16ad2663e32",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 61454,
+        "input_tokens": 18459,
+        "output_tokens": 1524,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1036059b52824c46aa2a87184fa0ca9f",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 58953,
+        "input_tokens": 17545,
+        "output_tokens": 1920,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_25bd72040bc1435e8dc4a08170eab2ec",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9047,
+        "input_tokens": 16258,
+        "output_tokens": 1031,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c1c80844eeb143439f8672882beee972",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": 4077,
+        "input_tokens": 2542,
+        "output_tokens": 25,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c1462775f52d4b118712f1c01885b45e",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 5796,
+        "input_tokens": 2634,
+        "output_tokens": 50,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1ce8413d48094a319b8856792b632157",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 41421,
+        "input_tokens": 2966,
+        "output_tokens": 1195,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_fa3bbf27f34f4adf8a60bb1914f228de",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 23844,
+        "input_tokens": 2767,
+        "output_tokens": 767,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f02cc37e28c8412b923f84b04066a2c0",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 71297,
+        "input_tokens": 18944,
+        "output_tokens": 1704,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_4a78fe5342864af18dfb0397a4bd3c48",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9139,
+        "input_tokens": 17572,
+        "output_tokens": 1113,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_62fcd38b763948f580c93501cde843ce",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 110358,
+        "input_tokens": 19718,
+        "output_tokens": 2891,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a559120bb5614ab0a2022a21f143c873",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 3967,
+        "input_tokens": 3010,
+        "output_tokens": 24,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_7caaf08bd7fa4b779d1fa5350b02d829",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10641,
+        "input_tokens": 19633,
+        "output_tokens": 1532,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_81962b45eee44b4ba73632b37768b837",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 101593,
+        "input_tokens": 21723,
+        "output_tokens": 2442,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_487b4ead1b4944b387c428ddfe084b44",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 117156,
+        "input_tokens": 22627,
+        "output_tokens": 3291,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b7ea4713d72743118f293b771e7e9ea3",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 6125,
+        "input_tokens": 3434,
+        "output_tokens": 69,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_6a80145ab1d14651bbecfee9c2e4d7d3",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50796,
+        "input_tokens": 4016,
+        "output_tokens": 1396,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_7457dca7b9034e29b7e13f0e8d0ce2d9",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9046,
+        "input_tokens": 11944,
+        "output_tokens": 1017,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_4d3af9123f8144cc8fdb314ccfab8122",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 40171,
+        "input_tokens": 12867,
+        "output_tokens": 1479,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e404d209d1514185b2a748727f0813a2",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 103608,
+        "input_tokens": 13457,
+        "output_tokens": 3206,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f17fe047b6314f4aba0b44efca6588af",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 3639,
+        "input_tokens": 2388,
+        "output_tokens": 27,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_8361bb67bd6148fab2f860c6f3bc2fc0",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": 5858,
+        "input_tokens": 2718,
+        "output_tokens": 72,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f41186f33dea4c819cd5f46b7d4105fe",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9686,
+        "input_tokens": 16311,
+        "output_tokens": 1199,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a4f0cc5f2cb045199aeb8a18844f65aa",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 88125,
+        "input_tokens": 18473,
+        "output_tokens": 2239,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_faccb558d1ad41e3babbffbc4dc51716",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 71483,
+        "input_tokens": 17621,
+        "output_tokens": 1871,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c51d89eeccd34843851db867bd829554",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 46563,
+        "input_tokens": 19206,
+        "output_tokens": 1084,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d4b0db194df5418e8ff78f4eeb666cc1",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10420,
+        "input_tokens": 16992,
+        "output_tokens": 1149,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_170077b94ed945eaae9eccae6bd17d02",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 50125,
+        "input_tokens": 18406,
+        "output_tokens": 1643,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_124149fdf29f44c48f4a0d30e964f360",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 37125,
+        "input_tokens": 2597,
+        "output_tokens": 1190,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_082a87abffeb4a949b1a40662e63d9e2",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": null,
+        "input_tokens": 2536,
+        "output_tokens": 1536,
+        "finish_reason": null,
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f696e440eb574e5cbd795cee731a9489",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 53108,
+        "input_tokens": 17930,
+        "output_tokens": 1425,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_46b358affcd7401fb7b705af93133cc3",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8202,
+        "input_tokens": 16479,
+        "output_tokens": 904,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_64af7a7174534e3fb51de365bfd4c604",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 87781,
+        "input_tokens": 18610,
+        "output_tokens": 2253,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2c97ecc2f5db4443b0abd7f82a3b7d7e",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4047,
+        "input_tokens": 2252,
+        "output_tokens": 22,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_eb67896ad679402b89ada2d4cf5303d3",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9608,
+        "input_tokens": 13956,
+        "output_tokens": 1188,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1ec4ca48b9414aca9054fb451822abe7",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 47452,
+        "input_tokens": 15184,
+        "output_tokens": 1624,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_5e0b74ba9ae64c0394dec3dbb00a86d5",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48609,
+        "input_tokens": 15777,
+        "output_tokens": 1236,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_cbc4d4d354a8447ea528f84eec009285",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": null,
+        "input_tokens": 2538,
+        "output_tokens": 1536,
+        "finish_reason": null,
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a84aff3cf6ee4e6bbc177a3b4bb3523b",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 210266,
+        "input_tokens": 18770,
+        "output_tokens": 5991,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_41dddaac3ec84f3da21239992d08dad2",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 56188,
+        "input_tokens": 17986,
+        "output_tokens": 1435,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_592a665dffba4247bedb7fdf3258f529",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8578,
+        "input_tokens": 16754,
+        "output_tokens": 981,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_4f05a239e41d4d288737d482921332eb",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4046,
+        "input_tokens": 2159,
+        "output_tokens": 42,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_6d1fdcc0b4df4450b657028416e207c7",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 43688,
+        "input_tokens": 19701,
+        "output_tokens": 1360,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_817dc005a3ce479eb7085b2df0be511f",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 118469,
+        "input_tokens": 20561,
+        "output_tokens": 3331,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_9a7b1810f8b543acb49a075265832864",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9516,
+        "input_tokens": 18268,
+        "output_tokens": 1178,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_3b5bf86e8b71476aa9b9d49437b37851",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4093,
+        "input_tokens": 2987,
+        "output_tokens": 80,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2f0019b6286d4e3ebee815c45dff288c",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 5889,
+        "input_tokens": 3077,
+        "output_tokens": 71,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1f1deeee69ee43579c1ad0f2c4913ae6",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 47077,
+        "input_tokens": 3016,
+        "output_tokens": 1308,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2285567021eb449f9389c0c0c3eb56d2",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 55547,
+        "input_tokens": 17402,
+        "output_tokens": 1608,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b1714514b6a34bad8da358763a126e6f",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 48110,
+        "input_tokens": 18124,
+        "output_tokens": 991,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_cb3259e328974bd799b8aea2ff6519d0",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 11545,
+        "input_tokens": 16140,
+        "output_tokens": 1371,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b00e8b4b52a6495d82801579998f7d7d",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 53437,
+        "input_tokens": 16756,
+        "output_tokens": 1160,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f7f6f53599d3429aacf9db9c77c27dae",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 60390,
+        "input_tokens": 16053,
+        "output_tokens": 1812,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_9b6eb4a6dd9b4b2d99df3416561d234b",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10890,
+        "input_tokens": 14735,
+        "output_tokens": 1133,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_3ccaa967bd8044bd80cf28622e77ed5d",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4282,
+        "input_tokens": 3363,
+        "output_tokens": 26,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c7395e61719c4128aefdbd8658ed1220",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 16889,
+        "input_tokens": 3145,
+        "output_tokens": 422,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_fb53d8befd4d42ba9035d9cd39cff62a",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 32875,
+        "input_tokens": 2665,
+        "output_tokens": 1075,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_cb1a428208a04fd882f1e7f532e624ea",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 5795,
+        "input_tokens": 3636,
+        "output_tokens": 44,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_080a5f9ae28d4fe7bfb25d7dbd652c92",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 11375,
+        "input_tokens": 15967,
+        "output_tokens": 1451,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_aacdf8afcf754e199779bc244e2ab4a4",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 95327,
+        "input_tokens": 18428,
+        "output_tokens": 2318,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_97e397b723a14b89b1467882236ead30",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 86046,
+        "input_tokens": 17703,
+        "output_tokens": 2154,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b0f470145d9f41028f60242279ece987",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 58281,
+        "input_tokens": 25856,
+        "output_tokens": 1795,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_567262dd1e2c44948d0c9c4a884e4c12",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 117483,
+        "input_tokens": 26936,
+        "output_tokens": 3110,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ff73af75c2a346639b6b9e92b3711d93",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9983,
+        "input_tokens": 23581,
+        "output_tokens": 1061,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b3a7d1e4a4064eb4b05fdb63be7f493c",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4546,
+        "input_tokens": 2440,
+        "output_tokens": 25,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_8bf676c19d4c461a89cb8b2aa073e3c5",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 32281,
+        "input_tokens": 3130,
+        "output_tokens": 839,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1d69fd38cf6b4643836a3f0e9d70fcde",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 39781,
+        "input_tokens": 2554,
+        "output_tokens": 1352,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e534563d5e494a7cbd2900a919ae89d8",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 160936,
+        "input_tokens": 18577,
+        "output_tokens": 4499,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b4698f70b2df41cfb844b1de75025977",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8579,
+        "input_tokens": 16475,
+        "output_tokens": 800,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_968f067b16cf4b4e8957c2998b2c65b8",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 61858,
+        "input_tokens": 17605,
+        "output_tokens": 1483,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ffecf753e49441b793d3a5b32a55bb04",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4750,
+        "input_tokens": 2064,
+        "output_tokens": 26,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_3b64cd4373ae475fa2e185a6687078f0",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 47733,
+        "input_tokens": 18838,
+        "output_tokens": 1566,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c87a84dbb29d4f418ff025f5f551c868",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10468,
+        "input_tokens": 17255,
+        "output_tokens": 1246,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_8b251c8081604148b6da658a00f140d6",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 142858,
+        "input_tokens": 19643,
+        "output_tokens": 4052,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_063cd984d44b4e898d5aa9741f548cce",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "contradiction_clarification",
+        "response_status": "invalid_contract",
+        "error_code": "SEMANTIC_CLARIFICATION_REQUIRED",
+        "http_status": null,
+        "latency_ms": 160936,
+        "input_tokens": 5015,
+        "output_tokens": 1077,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b34b5c85257e43d88623c967a4dad983",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 35250,
+        "input_tokens": 2494,
+        "output_tokens": 1130,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_32ab7f584002449fb19693f549aea2cd",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9358,
+        "input_tokens": 18681,
+        "output_tokens": 1105,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ba1dc00a5b6146ebaed099edfe3471f6",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 77078,
+        "input_tokens": 20196,
+        "output_tokens": 1939,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ad41b334eac5447e99dcbe37bb5b6c88",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 261609,
+        "input_tokens": 21128,
+        "output_tokens": 2204,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_339e1b92175442269b2d7aaf86ca2d8e",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4436,
+        "input_tokens": 3220,
+        "output_tokens": 111,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f6c6e81a5329464da73f913ea3467aff",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 12157,
+        "input_tokens": 19416,
+        "output_tokens": 1468,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a0aad75603474584a60199cd04f65de0",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 664516,
+        "input_tokens": 22088,
+        "output_tokens": 5975,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_280a6f93679240419c65f4994a1e603f",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 51327,
+        "input_tokens": 21236,
+        "output_tokens": 1632,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_212d5a75348846c1bd50ee47a4ad85a0",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": 4125,
+        "input_tokens": 4161,
+        "output_tokens": 40,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_07b9baa0592a4d0491d4a6c656a5d3bd",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "invalid_contract",
+        "error_code": "RESPONSE_CORRECTION_FAILED",
+        "http_status": null,
+        "latency_ms": 7030,
+        "input_tokens": 4366,
+        "output_tokens": 94,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_51dfd4cd0bb74aa29619fc14abf1f67e",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 11282,
+        "input_tokens": 18076,
+        "output_tokens": 1612,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e7a96734b4bf455996da99dbafbcc685",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 84718,
+        "input_tokens": 19298,
+        "output_tokens": 2462,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_6c0f13e7f46d4b868fee2708c7d122bc",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 286375,
+        "input_tokens": 20206,
+        "output_tokens": 1325,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_4ad56496cb4c4befbab43eab0c4675a2",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 3968,
+        "input_tokens": 3227,
+        "output_tokens": 54,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2c70f9cae1944c4e823b6df4c728ad25",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 409233,
+        "input_tokens": 21878,
+        "output_tokens": 3514,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ec6d9cc9f1e54ef6aa8ef63873cf23c9",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 11875,
+        "input_tokens": 19373,
+        "output_tokens": 1552,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2716999d1452413dbf9b07f36a88ce81",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 70202,
+        "input_tokens": 20959,
+        "output_tokens": 2390,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e71fdc58b839485086eac55267f82902",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4657,
+        "input_tokens": 3642,
+        "output_tokens": 172,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2250d1d9fa2649998958729ccd25011b",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8016,
+        "input_tokens": 4230,
+        "output_tokens": 136,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_20b02695f59e4b58aa39cefd8826382d",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 164797,
+        "input_tokens": 20172,
+        "output_tokens": 2756,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1655075778b34e8ebee2c4d81fbbd97a",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9313,
+        "input_tokens": 17564,
+        "output_tokens": 1137,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_01861c9eef86435784f75099ce623fca",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 68797,
+        "input_tokens": 19349,
+        "output_tokens": 1887,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f829474fbadb49a4923fa6e7b13f2dde",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4906,
+        "input_tokens": 3161,
+        "output_tokens": 24,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2f9f631c5b8649f996e4e7a4222000a3",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 228859,
+        "input_tokens": 20741,
+        "output_tokens": 4400,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_329bc81fdb5747a7a50173a9cf241513",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 62391,
+        "input_tokens": 19818,
+        "output_tokens": 2041,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_fb2af985811a41a587217c1b6b308e5d",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10593,
+        "input_tokens": 18243,
+        "output_tokens": 1101,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_899355de1d0b4039a496d0226e351f50",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 8500,
+        "input_tokens": 3831,
+        "output_tokens": 141,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_be66cd3456e94aba955c59e8a573e9f4",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 65859,
+        "input_tokens": 27661,
+        "output_tokens": 1579,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e0f92455f54d4e3d8a85c7dddb27972a",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 157061,
+        "input_tokens": 28769,
+        "output_tokens": 4047,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2f56c00726c645c9a65d0273305b49a7",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10891,
+        "input_tokens": 25180,
+        "output_tokens": 1317,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a93d25d522b94e5caa63247601292c8f",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10766,
+        "input_tokens": 16588,
+        "output_tokens": 1328,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c72b1e5fb6d8419c88f5797973edb270",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 46327,
+        "input_tokens": 18308,
+        "output_tokens": 1454,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_364a55773dd9465fac9b67ed1f072c78",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 114858,
+        "input_tokens": 19086,
+        "output_tokens": 3141,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d750888c5445436fa47710040b148fc9",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 42000,
+        "input_tokens": 2936,
+        "output_tokens": 1266,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e6c2886a06104f238e4014ff68dd0798",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 36907,
+        "input_tokens": 3636,
+        "output_tokens": 1185,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_83185800d042432daab42b48bffbe876",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10172,
+        "input_tokens": 14200,
+        "output_tokens": 1162,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_ead50b477e804e239aa201161b35183b",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "output_incomplete",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 310500,
+        "input_tokens": 15233,
+        "output_tokens": 8192,
+        "finish_reason": "length",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e64ede669aa84f9a9073a3b5f8aca135",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 112063,
+        "input_tokens": 15849,
+        "output_tokens": 2996,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_24920bfed36a444b97119c32a154a473",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 51967,
+        "input_tokens": 18025,
+        "output_tokens": 1539,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_40edd7bcf7ad4d8cbd9c065ee669f2db",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9797,
+        "input_tokens": 16647,
+        "output_tokens": 975,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a6ebd860c1ce4e42bc0804c398a93920",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 101765,
+        "input_tokens": 18861,
+        "output_tokens": 2731,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_f980bc03ea9944aea9cb85a255db1311",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 36905,
+        "input_tokens": 2742,
+        "output_tokens": 1157,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_c39bd71c6921484288f392b705e3356f",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 37796,
+        "input_tokens": 2774,
+        "output_tokens": 1240,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2b92daf4271c4e25a0b2b4bb75678f84",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 124625,
+        "input_tokens": 18008,
+        "output_tokens": 2457,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1d29d4a6401c4a71ac3e87a9e75065df",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 73422,
+        "input_tokens": 17120,
+        "output_tokens": 2084,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_d5ff33582522464a975fa9159c757aa9",
+        "state": "failed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 10030,
+        "input_tokens": 15892,
+        "output_tokens": 1071,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_e92159dd3cbf46acb144a8606f4804c9",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 197500,
+        "input_tokens": 24646,
+        "output_tokens": 4728,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_92156936781e463a851904c79d76698c",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 12063,
+        "input_tokens": 21446,
+        "output_tokens": 1574,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_7c885908598f4bf198f1a8c3d18a3d2f",
+        "state": "failed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 72186,
+        "input_tokens": 23644,
+        "output_tokens": 2075,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_2faaf32d010b4c4e846a85f4b49e69a9",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 4170,
+        "input_tokens": 3104,
+        "output_tokens": 37,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_a9c1a412306346c2b6cf6d7af8b67a58",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 7217,
+        "input_tokens": 5140,
+        "output_tokens": 97,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_1afeb6425df04ccd93930fe69ae3ca43",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 31797,
+        "input_tokens": 2979,
+        "output_tokens": 842,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_b3cdcc55ca7f4868a04b61b7769b6e64",
+        "state": "completed",
+        "voter_id": "judge_c",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 9266,
+        "input_tokens": 13493,
+        "output_tokens": 1062,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_0c44eb9895f94426acbbf2233481754c",
+        "state": "completed",
+        "voter_id": "judge_a",
+        "phase": "initial",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 44047,
+        "input_tokens": 14444,
+        "output_tokens": 1608,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_3a459065b3f5455aa7e2b47a948ce503",
+        "state": "failed",
+        "voter_id": "judge_b",
+        "phase": "initial",
+        "response_status": "invalid_contract",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 47703,
+        "input_tokens": 15087,
+        "output_tokens": 1306,
+        "finish_reason": "stop",
+        "late_response": false,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      },
+      {
+        "attempt_id": "attempt_43b6e8e0d4a74f05bd1426dd8e899cb5",
+        "state": "completed",
+        "voter_id": "judge_b",
+        "phase": "field_patch",
+        "response_status": "ok",
+        "error_code": null,
+        "http_status": null,
+        "latency_ms": 75641,
+        "input_tokens": 2608,
+        "output_tokens": 1418,
+        "finish_reason": "stop",
+        "late_response": true,
+        "outcome_unknown": null,
+        "transport_metrics": null
+      }
+    ],
+    "formally_valid_mapping_candidates": 0,
+    "actual_receipt_statuses": {
+      "invalid_contract": 57,
+      "ok": 75,
+      "output_incomplete": 1
+    },
+    "unknown_or_running_attempts": [],
+    "raw_database_sha256": "29097c062316ecb4cc71c29869cfa3f8b3c9c6f4799847e31786dd6e04f5c098"
+  },
+  "fresh_smoke_summary": {
+    "actual_actions": {
+      "none": 7
+    },
+    "audit_status_counts": {
+      "completed": 7
+    },
+    "audits_started": 7,
+    "backend_weights_pinned": false,
+    "cache_hits": 0,
+    "comparison": {
+      "current_fresh_full_committee_packets": 5,
+      "note": "different execution budgets/clarification policy; no causal accuracy claim; offline revalidation is not a fresh call",
+      "prior_offline_full_committee_packets": 15,
+      "prior_original_independent_complete": 2,
+      "same_candidate_population": false
+    },
+    "derived_execution_counts": {
+      "completed": 5,
+      "partial_failure": 2
+    },
+    "dimension_complete": {
+      "expression": 4,
+      "mapping": 0,
+      "scope": 5,
+      "source": 4
+    },
+    "engineering_gate_passed": true,
+    "four_dimensions_judgment_complete": 0,
+    "full_committee_packets": 5,
+    "human_labels": 0,
+    "import_outbox": 0,
+    "independent_review_completed": 5,
+    "known_trace_defect_recurred": false,
+    "late_receipts": {
+      "additional_full_committee_packets": 1,
+      "extra_model_calls": 0,
+      "later_valid_seats": 1,
+      "offline_only": true,
+      "original_decisions_changed": false,
+      "original_votes_changed": false,
+      "selected_timeout_seats": 1
+    },
+    "mode": "fresh_complete_pipeline",
+    "new_committee_request_attempts": 23,
+    "planner_calls": 21,
+    "population": 7,
+    "production_written": false,
+    "quality_evaluable": false,
+    "recommendations": {
+      "exclude": 1,
+      "manual_review": 3,
+      "wait_mapping": 3
+    },
+    "recorded_planner_calls": 21,
+    "reported_models": {
+      "judge_a": [
+        "Qwen"
+      ],
+      "judge_b": [
+        "Gemma"
+      ],
+      "judge_c": [
+        "deepseek-flash"
+      ]
+    },
+    "request_attempts": 23,
+    "request_phases": {
+      "contradiction_clarification": 1,
+      "field_patch": 1,
+      "initial": 21
+    },
+    "request_states": {
+      "completed": 20,
+      "failed": 3
+    },
+    "usage": {
+      "input_tokens": 408471,
+      "output_tokens": 26252,
+      "requests_with_missing_usage": 0,
+      "scope": "durable committee request attempts; planner usage not included"
+    }
+  },
+  "synthetic_preflight_calls": 3,
+  "previous_human_labels": [
+    {
+      "sample_id": "DEV-004",
+      "original_human_axes": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "old_packet_id": "packet_1bfc4338a8fa6ac7d53341d171b3fa3c6449e4f4f403852e590a911597f3ae26",
+      "new_packet_id": "packet_aae4cee51b3bb7161472c7cddd7842d00cb8d9cca36b7b523b5c436b56cde962",
+      "exact_packet_match": false,
+      "changed_material_fields": [],
+      "original_annotation_unchanged": true,
+      "automatically_rebound": false
+    },
+    {
+      "sample_id": "DEV-007",
+      "original_human_axes": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "old_packet_id": "packet_810e076a81862ec27e552b4c38725789fbd856290869b1d1d7ef62bca55820c5",
+      "new_packet_id": "packet_8dfe65d4d89babed000dd523578fb43e5065e47e940f9c2bdf7e1156d9e7cf8e",
+      "exact_packet_match": false,
+      "changed_material_fields": [
+        "mapping_preflight",
+        "ontology_context"
+      ],
+      "original_annotation_unchanged": true,
+      "automatically_rebound": false
+    },
+    {
+      "sample_id": "DEV-008",
+      "original_human_axes": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "old_packet_id": "packet_e944d21152c13e2ad2678598b01556a7ebc57cafb4aaf2678de1c32abaaf8869",
+      "new_packet_id": "packet_1cf5482999c7fa5ce883614398343ba0b493e1023d6efc5a0c3e1b6df9a03e2b",
+      "exact_packet_match": false,
+      "changed_material_fields": [],
+      "original_annotation_unchanged": true,
+      "automatically_rebound": false
+    },
+    {
+      "sample_id": "DEV-014",
+      "original_human_axes": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "old_packet_id": "packet_e27f4d61aabaa223187a39011b5b154a5d882038772f53a600bb9ae938000dbb",
+      "new_packet_id": "packet_cb583765e29f20fd9e005ada22679971c9b48bf41eff97185077373e1e427823",
+      "exact_packet_match": false,
+      "changed_material_fields": [
+        "mapping_preflight",
+        "ontology_context"
+      ],
+      "original_annotation_unchanged": true,
+      "automatically_rebound": false
+    },
+    {
+      "sample_id": "DEV-015",
+      "original_human_axes": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "old_packet_id": "packet_edc8f753aea6322ddea387b8f4cb3a702e0d7955f943c78124f2a1d706d52a27",
+      "new_packet_id": "packet_5389853f9e151a0e7633937ef7b70b92d90a55399268004b90f3b99cf1f95641",
+      "exact_packet_match": false,
+      "changed_material_fields": [
+        "mapping_preflight",
+        "ontology_context"
+      ],
+      "original_annotation_unchanged": true,
+      "automatically_rebound": false
+    }
+  ],
+  "already_executed_smoke_overlap": [
+    {
+      "sample_id": "DEV-006",
+      "same_review_material": false,
+      "smoke_material_hash": "e377bd9a0635e451a7ae138622091e1971f17a4743b182c2a6fd4233d5e18839",
+      "full_material_hash": "f9e413c5c007477ae912ad9b0ddf921db5ed187ee4e769d98e7aa5391326c4e2",
+      "smoke": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "wait_mapping"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "wait_mapping"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    },
+    {
+      "sample_id": "DEV-008",
+      "same_review_material": true,
+      "smoke_material_hash": "83de966cca8b95b73cf8ddfea9b593a5bc33d839080593aca53ab1c5ca4a8a05",
+      "full_material_hash": "83de966cca8b95b73cf8ddfea9b593a5bc33d839080593aca53ab1c5ca4a8a05",
+      "smoke": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "wait_mapping"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "wait_mapping"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    },
+    {
+      "sample_id": "DEV-016",
+      "same_review_material": true,
+      "smoke_material_hash": "19643942fea91b78bc29104fe0b97507e8cc7af6e728f543e2c2dde97bb69851",
+      "full_material_hash": "19643942fea91b78bc29104fe0b97507e8cc7af6e728f543e2c2dde97bb69851",
+      "smoke": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "unresolved",
+          "expression": "unresolved",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "manual_review"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "unresolved",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "manual_review"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    },
+    {
+      "sample_id": "DEV-021",
+      "same_review_material": false,
+      "smoke_material_hash": "045bc5ec7bbea93922c24f6fd0ad154e859c9e62a4419a0773a7af83a3814ea9",
+      "full_material_hash": "ae92c6a129bed250ca6792fd0d54a0100f0e20759c0e108a7fe9b7d86a9309b8",
+      "smoke": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "unresolved",
+          "expression": "unresolved",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "manual_review"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "unresolved",
+          "expression": "unresolved",
+          "mapping": "context_incomplete",
+          "scope": "include"
+        },
+        "recommendation": "manual_review"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    },
+    {
+      "sample_id": "DEV-028",
+      "same_review_material": true,
+      "smoke_material_hash": "37ba689813ed6fe3aeebdeb606accdb8d43cda259b5f1ce6385378e07ef8597a",
+      "full_material_hash": "37ba689813ed6fe3aeebdeb606accdb8d43cda259b5f1ce6385378e07ef8597a",
+      "smoke": {
+        "eligible_voters": [
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "unresolved",
+          "expression": "unresolved",
+          "mapping": "context_incomplete",
+          "scope": "unclear"
+        },
+        "recommendation": "manual_review"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "unresolved",
+          "expression": "unresolved",
+          "mapping": "context_incomplete",
+          "scope": "unclear"
+        },
+        "recommendation": "manual_review"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    },
+    {
+      "sample_id": "DEV-029",
+      "same_review_material": false,
+      "smoke_material_hash": "12094339b820f6b225aeee1a39b5be0de1a65344b8bf50acf5d69a6640e55b5a",
+      "full_material_hash": "05413f41d27ab0186b118ef4b07fe8337f4aea16ac5ec4174104440f4a0be13e",
+      "smoke": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "exclude"
+        },
+        "recommendation": "exclude"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "exclude"
+        },
+        "recommendation": "exclude"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    },
+    {
+      "sample_id": "DEV-030",
+      "same_review_material": true,
+      "smoke_material_hash": "0116b921c88c2c828c75d77b765d2686582cfadccf814a08512ae4cec71776c1",
+      "full_material_hash": "0116b921c88c2c828c75d77b765d2686582cfadccf814a08512ae4cec71776c1",
+      "smoke": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "unclear"
+        },
+        "recommendation": "wait_mapping"
+      },
+      "full": {
+        "eligible_voters": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "axes": {
+          "source": "supported",
+          "expression": "standard",
+          "mapping": "context_incomplete",
+          "scope": "unclear"
+        },
+        "recommendation": "wait_mapping"
+      },
+      "audit_and_proposal_bindings_differ": true,
+      "additional_model_calls": 0
+    }
+  ],
+  "new_human_labels": 0,
+  "old_votes_reused": false,
+  "production_written": false,
+  "comparison_limit": "Development regression; provider aliases do not pin weights; no accuracy causal claim",
+  "remaining_within_window_ineligible_seats": [
+    {
+      "sample_id": "DEV-012",
+      "voter_id": "judge_a",
+      "response_status": "timeout",
+      "error": "caller wait deadline reached; original request may complete later",
+      "error_code": "HARD_REQUEST_TIMEOUT",
+      "correction_stop_reason": null,
+      "correction_terminal": null,
+      "actual_calls": 1
+    },
+    {
+      "sample_id": "DEV-019",
+      "voter_id": "judge_a",
+      "response_status": "timeout",
+      "error": "caller wait deadline reached; original request may complete later",
+      "error_code": "HARD_REQUEST_TIMEOUT",
+      "correction_stop_reason": null,
+      "correction_terminal": null,
+      "actual_calls": 1
+    },
+    {
+      "sample_id": "DEV-019",
+      "voter_id": "judge_b",
+      "response_status": "invalid_contract",
+      "error": "normalization must reference the exact source-bound deterministic plan",
+      "error_code": "RESPONSE_CORRECTION_FAILED",
+      "correction_stop_reason": "field patch did not satisfy the unchanged review contract",
+      "correction_terminal": true,
+      "actual_calls": 2
+    },
+    {
+      "sample_id": "DEV-022",
+      "voter_id": "judge_b",
+      "response_status": "invalid_contract",
+      "error": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles; dismissed counterexamples and unresolved material counterevidence have different roles",
+      "error_code": "RESPONSE_CORRECTION_BUDGET",
+      "correction_stop_reason": "field correction payload exceeds frozen input/token budget",
+      "correction_terminal": true,
+      "actual_calls": 1
+    },
+    {
+      "sample_id": "DEV-024",
+      "voter_id": "judge_b",
+      "response_status": "invalid_contract",
+      "error": "$.dimensions.mapping.relation_id: required; $.dimensions.mapping.competing_relation_ids: required",
+      "error_code": "RESPONSE_CORRECTION_BUDGET",
+      "correction_stop_reason": "field correction payload exceeds frozen input/token budget",
+      "correction_terminal": true,
+      "actual_calls": 1
+    },
+    {
+      "sample_id": "DEV-028",
+      "voter_id": "judge_a",
+      "response_status": "timeout",
+      "error": "caller wait deadline reached; original request may complete later",
+      "error_code": "HARD_REQUEST_TIMEOUT",
+      "correction_stop_reason": null,
+      "correction_terminal": null,
+      "actual_calls": 1
+    }
+  ]
+}

@@ -98,9 +98,15 @@ def prompt_for(proposal):
     version = proposal.get('prompt_version')
     if contract.CONTRACT_VERSION == 'validator_response_v4' and version == 'triple_validator_v4':
         prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v4_legacy.txt').read_text(encoding='utf-8')
+    elif contract.CONTRACT_VERSION == 'validator_response_v8' and version == 'triple_validator_v8_field_rules_v1':
+        prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v8.txt').read_text(encoding='utf-8')
+    elif contract.CONTRACT_VERSION == 'validator_response_v8' and version == 'triple_validator_v8_citations_v2':
+        prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v8_citations_v2.txt').read_text(encoding='utf-8')
     else:
         prompt = contract.SYSTEM_PROMPT
-    if version in {'triple_validator_v4', 'triple_validator_v4_direction_scope_v1', 'triple_validator_v5_semantic_units_v1', 'triple_validator_v5_1_complete_output_v1', 'triple_validator_v5_2_auxiliary_format_v1', 'triple_validator_v6_dimensions_v1', 'triple_validator_v6_1_structured_output_v1', 'triple_validator_v6_2_targeted_repairs_v1', 'triple_validator_v6_3_dynamic_ontology_v1','triple_validator_v7_four_axes_v1','triple_validator_v8_field_rules_v1'} and proposal.get('prompt_hash'):
+    if contract.CONTRACT_VERSION == 'validator_response_v8' and version not in {'triple_validator_v8_field_rules_v1','triple_validator_v8_citations_v2','triple_validator_v8_citations_v3'}:
+        raise ValueError('unsupported frozen V8 prompt version')
+    if version in {'triple_validator_v4', 'triple_validator_v4_direction_scope_v1', 'triple_validator_v5_semantic_units_v1', 'triple_validator_v5_1_complete_output_v1', 'triple_validator_v5_2_auxiliary_format_v1', 'triple_validator_v6_dimensions_v1', 'triple_validator_v6_1_structured_output_v1', 'triple_validator_v6_2_targeted_repairs_v1', 'triple_validator_v6_3_dynamic_ontology_v1','triple_validator_v7_four_axes_v1','triple_validator_v8_field_rules_v1','triple_validator_v8_citations_v2','triple_validator_v8_citations_v3'} and proposal.get('prompt_hash'):
         if hashlib.sha256(prompt.encode()).hexdigest() != proposal['prompt_hash']:
             raise ValueError('frozen source prompt hash mismatch')
     return prompt

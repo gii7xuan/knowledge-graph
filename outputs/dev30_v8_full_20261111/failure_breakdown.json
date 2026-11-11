@@ -1,0 +1,207 @@
+{
+  "by_category": {
+    "schema": 2,
+    "semantic_consistency": 7,
+    "transport": 3
+  },
+  "by_seat_category": {
+    "judge_a:transport": 3,
+    "judge_b:schema": 2,
+    "judge_b:semantic_consistency": 7
+  },
+  "missing_seats": {
+    "DEV-012": [
+      "judge_a"
+    ],
+    "DEV-019": [
+      "judge_a"
+    ],
+    "DEV-028": [
+      "judge_a"
+    ]
+  },
+  "unavailable_recorded_seats": [
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "expression",
+            "mapping",
+            "scope",
+            "source"
+          ],
+          "category": "transport",
+          "expected": null,
+          "message": "caller wait deadline reached; original request may complete later",
+          "path": null,
+          "stage": "transport"
+        }
+      ],
+      "sample_id": "DEV-012",
+      "voter_id": "judge_a"
+    },
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "expression",
+            "mapping",
+            "scope",
+            "source"
+          ],
+          "category": "transport",
+          "expected": null,
+          "message": "caller wait deadline reached; original request may complete later",
+          "path": null,
+          "stage": "transport"
+        }
+      ],
+      "sample_id": "DEV-019",
+      "voter_id": "judge_a"
+    },
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "expression",
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "normalization must reference the exact source-bound deterministic plan",
+          "path": null,
+          "stage": "semantic_consistency"
+        }
+      ],
+      "sample_id": "DEV-019",
+      "voter_id": "judge_b"
+    },
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles",
+          "path": null,
+          "stage": "semantic_consistency"
+        },
+        {
+          "actual_type": null,
+          "axes": [
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "dismissed counterexamples and unresolved material counterevidence have different roles",
+          "path": null,
+          "stage": "semantic_consistency"
+        },
+        {
+          "actual_type": null,
+          "axes": [
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "material counterevidence conflicts with counterevidence=pass",
+          "path": null,
+          "stage": "semantic_consistency"
+        },
+        {
+          "actual_type": null,
+          "axes": [
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "counterevidence_reviewed_ids overlaps material counterevidence",
+          "path": null,
+          "stage": "semantic_consistency"
+        },
+        {
+          "actual_type": null,
+          "axes": [
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles; dismissed counterexamples and unresolved material counterevidence have different roles",
+          "path": null,
+          "stage": "semantic_consistency"
+        }
+      ],
+      "sample_id": "DEV-022",
+      "voter_id": "judge_b"
+    },
+    {
+      "errors": [
+        {
+          "actual_type": "missing",
+          "axes": [
+            "mapping"
+          ],
+          "category": "schema",
+          "expected": [
+            "string",
+            "null"
+          ],
+          "message": "missing",
+          "path": "/dimensions/mapping/relation_id",
+          "stage": "schema"
+        },
+        {
+          "actual_type": "missing",
+          "axes": [
+            "mapping"
+          ],
+          "category": "schema",
+          "expected": "array",
+          "message": "missing",
+          "path": "/dimensions/mapping/competing_relation_ids",
+          "stage": "schema"
+        },
+        {
+          "actual_type": null,
+          "axes": [
+            "mapping"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "$.dimensions.mapping.relation_id: required; $.dimensions.mapping.competing_relation_ids: required",
+          "path": null,
+          "stage": "semantic_consistency"
+        }
+      ],
+      "sample_id": "DEV-024",
+      "voter_id": "judge_b"
+    },
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "expression",
+            "mapping",
+            "scope",
+            "source"
+          ],
+          "category": "transport",
+          "expected": null,
+          "message": "caller wait deadline reached; original request may complete later",
+          "path": null,
+          "stage": "transport"
+        }
+      ],
+      "sample_id": "DEV-028",
+      "voter_id": "judge_a"
+    }
+  ],
+  "unit": "error occurrences, not distinct failed candidates"
+}

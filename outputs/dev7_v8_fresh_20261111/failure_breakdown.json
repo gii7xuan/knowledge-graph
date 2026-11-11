@@ -1,0 +1,67 @@
+{
+  "by_category": {
+    "semantic_consistency": 2,
+    "transport": 1
+  },
+  "by_seat_category": {
+    "judge_a:transport": 1,
+    "judge_b:semantic_consistency": 2
+  },
+  "missing_seats": {
+    "DEV-028": [
+      "judge_a"
+    ]
+  },
+  "unavailable_recorded_seats": [
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "expression",
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "changed meaning requires a substantive semantic finding",
+          "path": null,
+          "stage": "semantic_consistency"
+        },
+        {
+          "actual_type": null,
+          "axes": [
+            "source"
+          ],
+          "category": "semantic_consistency",
+          "expected": null,
+          "message": "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification",
+          "path": null,
+          "stage": "semantic_consistency"
+        }
+      ],
+      "sample_id": "DEV-016",
+      "voter_id": "judge_b"
+    },
+    {
+      "errors": [
+        {
+          "actual_type": null,
+          "axes": [
+            "expression",
+            "mapping",
+            "scope",
+            "source"
+          ],
+          "category": "transport",
+          "expected": null,
+          "message": "caller wait deadline reached; original request may complete later",
+          "path": null,
+          "stage": "transport"
+        }
+      ],
+      "sample_id": "DEV-028",
+      "voter_id": "judge_a"
+    }
+  ],
+  "unit": "error occurrences, not distinct failed candidates"
+}

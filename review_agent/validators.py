@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Mapping
 
 from evidence.verification import verify_vote_references
 from .execution import AuditPaused, api_error_fields
+from .llm_clients import response_metadata
 from .response_contract import (CONTRACT_VERSION, RESPONSE_SCHEMA, SYSTEM_PROMPT,
                                 REASON_CODES, VALID_VERDICTS, VALID_SUPPORT, VALID_SCHEMA,
                                 validate_response)
@@ -84,6 +85,8 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
         profile=frozen_profile(voter,proposal,contract.RESPONSE_SCHEMA)
         payload['output_structure']=profile
         if profile['mode']=='json_template':payload['output_template']=fixed_template(contract.RESPONSE_SCHEMA)
+    if proposal.get('prompt_version')=='triple_validator_v8_citations_v3':
+        payload['output_instruction']=contract.USER_SUFFIX
     return payload
 
 
@@ -152,6 +155,7 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
             from .output_structure import response_format
             delivery['response_format']=response_format(payload['output_structure'],contract.RESPONSE_SCHEMA)
         system_prompt=prompt_for(proposal)
+        if 'output_instruction' in payload:delivery['user_suffix']=payload['output_instruction']
         provider_called=True
         response = client.complete_json(payload, system_prompt=system_prompt,
             max_tokens=voter.get('max_output_tokens',4096),timeout_seconds=voter.get('http_timeout_seconds'),**delivery)
@@ -161,19 +165,25 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 'raw_response':response.content,'finish_reason':response.finish_reason,
                 'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
                 'input_tokens':getattr(response,'input_tokens',None),'output_tokens':getattr(response,'output_tokens',None),
-                'retryable':False,'latency_ms':int((time.monotonic()-started)*1000)}
+                'retryable':False,'latency_ms':int((time.monotonic()-started)*1000),**response_metadata(response)}
+        if isinstance(response.content,str) and not response.content.strip():
+            return {**base,'response_status':'invalid_json','verdict':None,'raw_response':response.content,
+                'error_code':'EMPTY_MODEL_RESPONSE','error':'provider returned no visible JSON content',
+                'retryable':False,**response_metadata(response)}
         parsed = _parse_content(response.content)
     except TimeoutError as exc:
         return {**base, "response_status": "timeout", "verdict": None, "error": str(exc),
                 "retryable": False, "outcome_unknown": True,
-                "latency_ms": int((time.monotonic() - started) * 1000)}
+                "latency_ms": int((time.monotonic() - started) * 1000),
+                'raw_response':getattr(getattr(exc,'llm_response',None),'content',None),
+                **response_metadata(getattr(exc,'llm_response',None))}
     except json.JSONDecodeError as exc:
         return {**base, "response_status": "invalid_json", "verdict": None, "error": str(exc),
                 'raw_response':getattr(response,'content',None),'response_id':getattr(response,'response_id',None),
                 'returned_model_id':getattr(response,'returned_model_id',None),
                 'input_tokens':getattr(response,'input_tokens',None),'output_tokens':getattr(response,'output_tokens',None),
                 'finish_reason':getattr(response,'finish_reason',None),'reasoning_tokens':getattr(response,'reasoning_tokens',None),
-                "latency_ms": int((time.monotonic() - started) * 1000)}
+                "latency_ms": int((time.monotonic() - started) * 1000),**response_metadata(response)}
     except ValueError as exc:
         if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} and not provider_called:
             return {**base,'response_status':'api_error','verdict':None,'error':str(exc),
@@ -182,13 +192,15 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
         return {**base, "response_status": "invalid_contract", "verdict": None, "error": str(exc),
                 'raw_response':getattr(response,'content',None),'finish_reason':getattr(response,'finish_reason',None),
                 'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
-                "latency_ms": int((time.monotonic() - started) * 1000)}
+                "latency_ms": int((time.monotonic() - started) * 1000),**response_metadata(response)}
     except Exception as exc:
         status = "timeout" if "timeout" in type(exc).__name__.lower() else "api_error"
         return {**base, "response_status": status, "verdict": None, "error": str(exc),
                 **api_error_fields(exc),
                 **({"retryable": False, "outcome_unknown": True} if status == "timeout" else {}),
-                "latency_ms": int((time.monotonic() - started) * 1000)}
+                "latency_ms": int((time.monotonic() - started) * 1000),
+                'raw_response':getattr(getattr(exc,'llm_response',None),'content',None),
+                **response_metadata(getattr(exc,'llm_response',None))}
 
     return _normalize_review_result(voter,proposal,parsed,response,contract)
 
@@ -207,7 +219,7 @@ def _normalize_review_result(voter,proposal,parsed,response,contract):
                 'finish_reason':getattr(response,'finish_reason',None),
                 'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
                 "input_tokens": getattr(response, "input_tokens", None),
-                "output_tokens": getattr(response, "output_tokens", None)}
+                "output_tokens": getattr(response, "output_tokens", None),**response_metadata(response)}
     if hasattr(contract,'normalize'):
         raw_assessment=parsed.get('schema_assessment')
         parsed=contract.normalize(parsed)
@@ -227,6 +239,7 @@ def _normalize_review_result(voter,proposal,parsed,response,contract):
     parsed["response_id"] = getattr(response, "response_id", None)
     parsed['finish_reason']=getattr(response,'finish_reason',None)
     parsed['reasoning_tokens']=getattr(response,'reasoning_tokens',None)
+    parsed.update(response_metadata(response))
     parsed["model_version_verification"] = "reported" if parsed["returned_model_id"] else "unavailable"
     if proposal.get("ontology_check", {}).get("status") == "fail" and parsed["schema_status"] != "fail":
         parsed["ontology_disagreement"] = True

@@ -6,6 +6,7 @@ import time
 from uuid import uuid4
 from .contracts import sha256_json
 from . import response_corrections as repairs
+from .llm_clients import response_metadata
 
 
 def terminal(vote,reason,code='RESPONSE_CORRECTION_UNAVAILABLE'):
@@ -42,6 +43,18 @@ def judge_repair_once(voter,proposal,feedback):
         patch_response=voter['client'].complete_json(payload,system_prompt=repairs.PROMPT,
             max_tokens=plan['policy']['limits']['max_output_tokens'],
             timeout_seconds=min(plan['policy']['limits']['timeout_seconds'],voter.get('http_timeout_seconds',60)),response_format=wire)
+        if getattr(patch_response,'finish_reason',None) in {'length','max_tokens','incomplete'}:
+            return terminal({**base,'response_status':'output_incomplete','verdict':None,
+                'error':'provider reported incomplete field patch','error_category':'output_incomplete',
+                'raw_response':deepcopy(feedback['original_raw_response']),
+                'raw_correction_response':deepcopy(patch_response.content),**response_metadata(patch_response)},
+                'bounded field correction was truncated; original opinion retained','RESPONSE_CORRECTION_FAILED')
+        if isinstance(patch_response.content,str) and not patch_response.content.strip():
+            return terminal({**base,'response_status':'invalid_json','verdict':None,
+                'error_code':'EMPTY_MODEL_RESPONSE','error':'provider returned no visible field patch JSON',
+                'raw_response':deepcopy(feedback['original_raw_response']),
+                'raw_correction_response':patch_response.content,**response_metadata(patch_response)},
+                'bounded field correction was empty; original opinion retained','EMPTY_MODEL_RESPONSE')
         patch=_parse_content(patch_response.content)
         merged=repairs.apply_repairs(original,plan,patch)
         result=_normalize_review_result(voter,proposal,merged,replace(patch_response,content=merged),contract)
@@ -52,11 +65,13 @@ def judge_repair_once(voter,proposal,feedback):
         if result['response_status']!='ok':result=terminal(result,'field patch did not satisfy the unchanged review contract','RESPONSE_CORRECTION_FAILED')
         return result
     except Exception as exc:
+        patch_response=patch_response or getattr(exc,'llm_response',None)
         fields=api_error_fields(exc)
         result={**base,'response_status':'invalid_contract' if isinstance(exc,ValueError) else 'api_error','verdict':None,
             'error':str(exc),'raw_response':deepcopy(feedback['original_raw_response']),
             'raw_correction_response':getattr(patch_response,'content',None),
             'input_tokens':getattr(patch_response,'input_tokens',None),'output_tokens':getattr(patch_response,'output_tokens',None),
+            **response_metadata(patch_response),
             **({} if isinstance(exc,ValueError) else fields)}
         return terminal(result,'bounded field correction failed; original opinion retained','RESPONSE_CORRECTION_FAILED')
 

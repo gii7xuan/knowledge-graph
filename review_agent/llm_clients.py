@@ -21,6 +21,16 @@ class LLMResponse:
     response_id: Optional[str] = None
     finish_reason: Optional[str] = None
     reasoning_tokens: Optional[int] = None
+    transport_metrics: Optional[Dict[str, Any]] = None
+
+
+def response_metadata(response):
+    """Preserve usage and transport diagnostics on rejected as well as valid output."""
+    if response is None:
+        return {}
+    return {name: copy.deepcopy(getattr(response, name, None)) for name in (
+        'latency_ms', 'input_tokens', 'output_tokens', 'returned_model_id', 'response_id',
+        'finish_reason', 'reasoning_tokens', 'transport_metrics')}
 
 
 class MockLLMClient:
@@ -93,6 +103,9 @@ class OpenAICompatibleClient:
 
     def complete_json(self, payload: Mapping[str, Any], *, system_prompt: str = "", **kwargs: Any) -> LLMResponse:
         started = time.monotonic()
+        user_suffix=kwargs.get('user_suffix','')
+        if not isinstance(user_suffix,str):raise ValueError('user_suffix must be text')
+        user_content=json.dumps(payload,ensure_ascii=False)+(('\n\n'+user_suffix) if user_suffix else '')
         output_format=copy.deepcopy(kwargs.get('response_format',{'type':'json_object'}))
         if not isinstance(output_format,dict) or output_format.get('type') not in {'json_object','json_schema'}:
             raise ValueError('unsupported JSON response format')
@@ -104,7 +117,7 @@ class OpenAICompatibleClient:
             model=self.model_id,
             messages=[
                 {"role": "system", "content": system_prompt + "\nReturn only a valid JSON object."},
-                {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
+                {"role": "user", "content": user_content},
             ],
             response_format=output_format,
             temperature=float(kwargs.get("temperature", 0.0)),
@@ -115,23 +128,43 @@ class OpenAICompatibleClient:
         )
         if self.stream_responses:
             parts=[];usage=None;finish=None;response_id=None;model=None
+            first_chunk=None;first_content=None;terminal=None;last_chunk=None;max_gap=0;chunks=0;reasoning_chars=0
+            def snapshot():
+                return LLMResponse(''.join(parts),latency_ms=int((time.monotonic()-started)*1000),
+                    input_tokens=getattr(usage,'prompt_tokens',None),output_tokens=getattr(usage,'completion_tokens',None),
+                    returned_model_id=model,response_id=response_id,finish_reason=finish,
+                    reasoning_tokens=getattr(getattr(usage,'completion_tokens_details',None),'reasoning_tokens',None),
+                    transport_metrics={'stream':True,'first_chunk_ms':first_chunk,'first_content_ms':first_content,
+                        'terminal_ms':terminal,'max_inter_chunk_gap_ms':max_gap if chunks>1 else None,
+                        'chunk_count':chunks,'visible_chars':sum(map(len,parts)),'reasoning_chars':reasoning_chars})
             try:
                 for chunk in response:
+                    arrived=int((time.monotonic()-started)*1000)
+                    if first_chunk is None:first_chunk=arrived
+                    if last_chunk is not None:max_gap=max(max_gap,arrived-last_chunk)
+                    last_chunk=arrived;chunks+=1
                     usage=getattr(chunk,'usage',None) or usage
                     response_id=getattr(chunk,'id',None) or response_id
                     model=getattr(chunk,'model',None) or model
                     for choice in getattr(chunk,'choices',[]) or []:
-                        content=getattr(getattr(choice,'delta',None),'content',None)
-                        if content: parts.append(content)
+                        delta=getattr(choice,'delta',None)
+                        content=getattr(delta,'content',None)
+                        if content:
+                            if first_content is None:first_content=arrived
+                            parts.append(content)
+                        # Count, but never retain or log, private reasoning text.
+                        reasoning=getattr(delta,'reasoning_content',None)
+                        if isinstance(reasoning,str):reasoning_chars+=len(reasoning)
                         finish=getattr(choice,'finish_reason',None) or finish
+                        if finish is not None and terminal is None:terminal=arrived
+                if finish is None:raise ConnectionError('stream ended without a terminal completion; provider outcome unknown')
+            except Exception as exc:
+                exc.llm_response=snapshot()
+                raise
             finally:
                 close=getattr(response,'close',None)
                 if close: close()
-            if finish is None: raise ConnectionError('stream ended without a terminal completion; provider outcome unknown')
-            return LLMResponse(''.join(parts),latency_ms=int((time.monotonic()-started)*1000),
-                input_tokens=getattr(usage,'prompt_tokens',None),output_tokens=getattr(usage,'completion_tokens',None),
-                returned_model_id=model,response_id=response_id,finish_reason=finish,
-                reasoning_tokens=getattr(getattr(usage,'completion_tokens_details',None),'reasoning_tokens',None))
+            return snapshot()
         usage = getattr(response, "usage", None)
         return LLMResponse(
             response.choices[0].message.content,

@@ -1,0 +1,4166 @@
+{
+  "cases": [
+    {
+      "sample_id": "DEV-019",
+      "proposal_digest": "1c4b08e3d7df60d7406327dd17900918afd25a447d16123c73ae8bbd75b69cde",
+      "baseline_whole_eligible": [],
+      "baseline_statuses": {
+        "judge_a": "invalid_contract",
+        "judge_b": "timeout",
+        "judge_c": "invalid_contract"
+      },
+      "votes": [
+        {
+          "attempt_id": "attempt_30ec451fb5d545faa4f502e87d3ae58e",
+          "audit_id": "missing_vote_pilot_d0b242c7030a4adc941a23ef2e24fa2e",
+          "checks": [
+            {
+              "check": "triple_support",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。",
+              "status": "unknown"
+            },
+            {
+              "check": "entity_reference",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "ENTITY_MISMATCH",
+              "note": "“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。",
+              "status": "unknown"
+            },
+            {
+              "check": "relation_semantics",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "RELATION_MISMATCH",
+              "note": "证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。",
+              "status": "unknown"
+            },
+            {
+              "check": "relation_direction",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "DIRECTION_MISMATCH",
+              "note": "缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。",
+              "status": "unknown"
+            },
+            {
+              "check": "qualifiers",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "QUALIFIER_MISMATCH",
+              "note": "“常常”在证据中未出现，频率与模态附着无法核验。",
+              "status": "unknown"
+            },
+            {
+              "check": "evidence_sufficiency",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。",
+              "status": "fail"
+            },
+            {
+              "check": "mapping",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "",
+              "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+              "status": "unknown"
+            },
+            {
+              "check": "knowledge_scope",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "",
+              "note": "无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。",
+              "status": "unknown"
+            },
+            {
+              "check": "counterevidence",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_2c6591efadb82c766444",
+                "ev_5c0bed735fde192b5200",
+                "ev_d2402871add1675fc85d",
+                "ev_14f03c9a1e670b211b71",
+                "ev_bcff8fd09dfeb393ddfb",
+                "ev_1064c5207afba6d84ad1",
+                "ev_625ecd7c48d58a6a7254",
+                "ev_1261be262ec9dca3e4e7"
+              ],
+              "issue_code": "",
+              "note": "已检查全部证据，未发现与候选关系直接矛盾的材料。",
+              "status": "pass"
+            },
+            {
+              "check": "ontology",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "unknown",
+              "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+              "status": "unknown"
+            }
+          ],
+          "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "correction_policy_hash": "1d9090d007f1fabf222079a500675e532f3f6a5753f67585299bff72d28113d4",
+          "correction_policy_version": "targeted_review_repairs_v1",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_1a46b288f99c3b382558",
+            "ev_36b787204f191cfd7e4c",
+            "ev_2c6591efadb82c766444",
+            "ev_5c0bed735fde192b5200",
+            "ev_d2402871add1675fc85d",
+            "ev_14f03c9a1e670b211b71",
+            "ev_bcff8fd09dfeb393ddfb",
+            "ev_1064c5207afba6d84ad1",
+            "ev_625ecd7c48d58a6a7254",
+            "ev_1261be262ec9dca3e4e7"
+          ],
+          "dimensions": {
+            "counterevidence": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_2c6591efadb82c766444",
+                "ev_5c0bed735fde192b5200",
+                "ev_d2402871add1675fc85d",
+                "ev_14f03c9a1e670b211b71",
+                "ev_bcff8fd09dfeb393ddfb",
+                "ev_1064c5207afba6d84ad1",
+                "ev_625ecd7c48d58a6a7254",
+                "ev_1261be262ec9dca3e4e7"
+              ],
+              "issue_code": "",
+              "note": "已检查全部证据，未发现与候选关系直接矛盾的材料。",
+              "status": "pass"
+            },
+            "entity_reference": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "ENTITY_MISMATCH",
+              "note": "“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。",
+              "status": "unknown"
+            },
+            "evidence_sufficiency": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。",
+              "status": "fail"
+            },
+            "knowledge_scope": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "",
+              "note": "无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。",
+              "status": "unresolved"
+            },
+            "mapping": {
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "",
+              "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+              "relation_id": "R_5eb753682c8d887575fc",
+              "status": "unassigned"
+            },
+            "qualifiers": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "QUALIFIER_MISMATCH",
+              "note": "“常常”在证据中未出现，频率与模态附着无法核验。",
+              "status": "unknown"
+            },
+            "relation_direction": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "issue_code": "DIRECTION_MISMATCH",
+              "note": "缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。",
+              "status": "unknown"
+            },
+            "relation_semantics": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "RELATION_MISMATCH",
+              "note": "证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。",
+              "status": "unknown"
+            },
+            "triple_support": {
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。",
+              "status": "insufficient"
+            }
+          },
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "evidence_assessments": [
+            {
+              "evidence_id": "ev_1a46b288f99c3b382558",
+              "note": "说明顶点θs可计算，但未提及地炮或需要知道。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_36b787204f191cfd7e4c",
+              "note": "说明顶点诸元可用C、v0、θ0表示，未涉及地炮关系。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_2c6591efadb82c766444",
+              "note": "说明微分方程组解的存在唯一性，与候选关系无直接关联。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_5c0bed735fde192b5200",
+              "note": "微分方程组公式，未支持候选关系。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_d2402871add1675fc85d",
+              "note": "说明变量是初始条件的函数，未涉及地炮。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_14f03c9a1e670b211b71",
+              "note": "函数表达式公式，未支持候选关系。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_bcff8fd09dfeb393ddfb",
+              "note": "θs函数公式，未提及地炮或需要知道。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_1064c5207afba6d84ad1",
+              "note": "说明外弹道表编制依据，未明确地炮需要知道顶点。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_625ecd7c48d58a6a7254",
+              "note": "公式片段，无独立语义支持。",
+              "role": "irrelevant"
+            },
+            {
+              "evidence_id": "ev_1261be262ec9dca3e4e7",
+              "note": "公式片段，无独立语义支持。",
+              "role": "irrelevant"
+            }
+          ],
+          "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+          "expression_findings": [
+            {
+              "check": "entity_reference",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "kind": "unresolved",
+              "meaning_effect": "unresolved",
+              "normalization": null,
+              "note": "头实体“地炮”在证据中未出现，指称无法确认。",
+              "rule_id": "SPLIT-001",
+              "suggested_change": "补充包含“地炮”的原文证据以确认头实体指称。"
+            },
+            {
+              "check": "relation_semantics",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "kind": "unresolved",
+              "meaning_effect": "unresolved",
+              "normalization": null,
+              "note": "“需要知道”在证据中未出现，关系语义无法确认。",
+              "rule_id": "MEANING-001",
+              "suggested_change": "补充明确表述“需要知道”或等价关系的原文证据。"
+            },
+            {
+              "check": "relation_direction",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "kind": "unresolved",
+              "meaning_effect": "unresolved",
+              "normalization": null,
+              "note": "缺乏主谓结构，头尾方向无法确认。",
+              "rule_id": "MEANING-001",
+              "suggested_change": "补充明确“地炮”与“顶点”方向关系的原文证据。"
+            },
+            {
+              "check": "qualifiers",
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "kind": "unresolved",
+              "meaning_effect": "unresolved",
+              "normalization": null,
+              "note": "“常常”在证据中未出现，频率附着无法核验。",
+              "rule_id": "FREQ-001",
+              "suggested_change": "补充包含“常常”的原文证据以确认频率限定。"
+            }
+          ],
+          "expression_status": "unresolved",
+          "finish_reason": "stop",
+          "format_normalization": {
+            "changes": [
+              {
+                "operation": "add",
+                "path": "/dimensions/mapping/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/knowledge_scope/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/counterevidence/issue_code",
+                "to": ""
+              }
+            ],
+            "version": "dimension_auxiliary_fields_v1"
+          },
+          "input_tokens": 21608,
+          "knowledge_scope": "unresolved",
+          "late_response": false,
+          "latency_ms": 67843,
+          "mapping": {
+            "competing_relation_ids": [],
+            "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+            "relation_id": "R_5eb753682c8d887575fc",
+            "status": "unassigned"
+          },
+          "mapping_diagnosis": "unassigned",
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "model_version_verification": "reported",
+          "object_revision": 1,
+          "ontology_context_hash": "5d9d120cb6c8d2160ed40bc7e01b5b87442b28c0b661bd3e4177ba28dd9b87da",
+          "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "output_tokens": 2495,
+          "primary_evidence_ids": [],
+          "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "prompt_version": "triple_validator_v8_citations_v3",
+          "proposal_digest": "1c4b08e3d7df60d7406327dd17900918afd25a447d16123c73ae8bbd75b69cde",
+          "provider_started_at": 1794298903.1864483,
+          "queue_time_ms": 488,
+          "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"insufficient\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"entity_reference\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。\", \"issue_code\": \"ENTITY_MISMATCH\"}, \"relation_semantics\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。\", \"issue_code\": \"RELATION_MISMATCH\"}, \"relation_direction\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。\", \"issue_code\": \"DIRECTION_MISMATCH\"}, \"qualifiers\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"“常常”在证据中未出现，频率与模态附着无法核验。\", \"issue_code\": \"QUALIFIER_MISMATCH\"}, \"evidence_sufficiency\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"关系定义缺失且头实体指称未确认，正式映射保持未分配。\", \"relation_id\": \"R_5eb753682c8d887575fc\", \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"unresolved\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。\", \"issue_code\": null}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_2c6591efadb82c766444\", \"ev_5c0bed735fde192b5200\", \"ev_d2402871add1675fc85d\", \"ev_14f03c9a1e670b211b71\", \"ev_bcff8fd09dfeb393ddfb\", \"ev_1064c5207afba6d84ad1\", \"ev_625ecd7c48d58a6a7254\", \"ev_1261be262ec9dca3e4e7\"], \"note\": \"已检查全部证据，未发现与候选关系直接矛盾的材料。\", \"issue_code\": null}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_1a46b288f99c3b382558\", \"role\": \"context\", \"note\": \"说明顶点θs可计算，但未提及地炮或需要知道。\"}, {\"evidence_id\": \"ev_36b787204f191cfd7e4c\", \"role\": \"context\", \"note\": \"说明顶点诸元可用C、v0、θ0表示，未涉及地炮关系。\"}, {\"evidence_id\": \"ev_2c6591efadb82c766444\", \"role\": \"context\", \"note\": \"说明微分方程组解的存在唯一性，与候选关系无直接关联。\"}, {\"evidence_id\": \"ev_5c0bed735fde192b5200\", \"role\": \"context\", \"note\": \"微分方程组公式，未支持候选关系。\"}, {\"evidence_id\": \"ev_d2402871add1675fc85d\", \"role\": \"context\", \"note\": \"说明变量是初始条件的函数，未涉及地炮。\"}, {\"evidence_id\": \"ev_14f03c9a1e670b211b71\", \"role\": \"context\", \"note\": \"函数表达式公式，未支持候选关系。\"}, {\"evidence_id\": \"ev_bcff8fd09dfeb393ddfb\", \"role\": \"context\", \"note\": \"θs函数公式，未提及地炮或需要知道。\"}, {\"evidence_id\": \"ev_1064c5207afba6d84ad1\", \"role\": \"context\", \"note\": \"说明外弹道表编制依据，未明确地炮需要知道顶点。\"}, {\"evidence_id\": \"ev_625ecd7c48d58a6a7254\", \"role\": \"irrelevant\", \"note\": \"公式片段，无独立语义支持。\"}, {\"evidence_id\": \"ev_1261be262ec9dca3e4e7\", \"role\": \"irrelevant\", \"note\": \"公式片段，无独立语义支持。\"}], \"primary_evidence_ids\": [], \"counterevidence_reviewed_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_2c6591efadb82c766444\", \"ev_5c0bed735fde192b5200\", \"ev_d2402871add1675fc85d\", \"ev_14f03c9a1e670b211b71\", \"ev_bcff8fd09dfeb393ddfb\", \"ev_1064c5207afba6d84ad1\", \"ev_625ecd7c48d58a6a7254\", \"ev_1261be262ec9dca3e4e7\"], \"requested_context\": {\"scope\": \"same_section\", \"query\": \"地炮 需要知道 顶点 常常\", \"limit\": 6}, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": [{\"check\": \"entity_reference\", \"kind\": \"unresolved\", \"note\": \"头实体“地炮”在证据中未出现，指称无法确认。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"normalization\": null, \"rule_id\": \"SPLIT-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充包含“地炮”的原文证据以确认头实体指称。\"}, {\"check\": \"relation_semantics\", \"kind\": \"unresolved\", \"note\": \"“需要知道”在证据中未出现，关系语义无法确认。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"normalization\": null, \"rule_id\": \"MEANING-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充明确表述“需要知道”或等价关系的原文证据。\"}, {\"check\": \"relation_direction\", \"kind\": \"unresolved\", \"note\": \"缺乏主谓结构，头尾方向无法确认。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"normalization\": null, \"rule_id\": \"MEANING-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充明确“地炮”与“顶点”方向关系的原文证据。\"}, {\"check\": \"qualifiers\", \"kind\": \"unresolved\", \"note\": \"“常常”在证据中未出现，频率附着无法核验。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"normalization\": null, \"rule_id\": \"FREQ-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充包含“常常”的原文证据以确认频率限定。\"}]}",
+          "reason_codes": [
+            "EVIDENCE_INSUFFICIENT"
+          ],
+          "reasoning_tokens": null,
+          "representation_checks": [],
+          "request_key": "66d74ac7b5de0c56d0c7bbd04e80831d42cece1ed4dc03de81daeae4362be051",
+          "requested_context": {
+            "limit": 6,
+            "query": "地炮 需要知道 顶点 常常",
+            "scope": "same_section"
+          },
+          "response_contract_version": "validator_response_v8",
+          "response_id": "chatcmpl-b7967fd135a73614",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "review_axes": {
+            "expression": {
+              "findings": [
+                {
+                  "check": "entity_reference",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "头实体“地炮”在证据中未出现，指称无法确认。",
+                  "rule_id": "SPLIT-001",
+                  "suggested_change": "补充包含“地炮”的原文证据以确认头实体指称。"
+                },
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "“需要知道”在证据中未出现，关系语义无法确认。",
+                  "rule_id": "MEANING-001",
+                  "suggested_change": "补充明确表述“需要知道”或等价关系的原文证据。"
+                },
+                {
+                  "check": "relation_direction",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "缺乏主谓结构，头尾方向无法确认。",
+                  "rule_id": "MEANING-001",
+                  "suggested_change": "补充明确“地炮”与“顶点”方向关系的原文证据。"
+                },
+                {
+                  "check": "qualifiers",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "“常常”在证据中未出现，频率附着无法核验。",
+                  "rule_id": "FREQ-001",
+                  "suggested_change": "补充包含“常常”的原文证据以确认频率限定。"
+                }
+              ],
+              "status": "unresolved"
+            },
+            "mapping": {
+              "status": "unassigned"
+            },
+            "scope": {
+              "knowledge_scope": "unresolved",
+              "status": "unclear"
+            },
+            "source": {
+              "status": "insufficient"
+            }
+          },
+          "round_id": 1,
+          "schema_assessment": {
+            "evidence_ids": [
+              "ev_1a46b288f99c3b382558",
+              "ev_36b787204f191cfd7e4c"
+            ],
+            "issue": "unknown",
+            "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+            "status": "unknown"
+          },
+          "schema_change_hint": null,
+          "schema_issue": "unknown",
+          "schema_status": "unknown",
+          "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+          "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+          "source_support": "insufficient",
+          "suggested_revision": null,
+          "summary_derivation": {
+            "final_admission_requires_frozen_committee_and_program_guards": true,
+            "model_input_fields": [
+              "dimensions",
+              "evidence_assessments"
+            ],
+            "policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+            "version": "review_field_rules_v1"
+          },
+          "supporting_evidence_ids": [],
+          "task_id": "cand_064a5e16f5359b74ef07",
+          "task_type": "triple_review",
+          "transport_metrics": {
+            "chunk_count": 2497,
+            "first_chunk_ms": 11827,
+            "first_content_ms": 11827,
+            "max_inter_chunk_gap_ms": 438,
+            "reasoning_chars": 0,
+            "stream": true,
+            "terminal_ms": 67843,
+            "visible_chars": 4711
+          },
+          "verdict": "uncertain",
+          "voter_id": "judge_a",
+          "attempts": [
+            {
+              "attempt_id": "attempt_30ec451fb5d545faa4f502e87d3ae58e",
+              "audit_id": "missing_vote_pilot_d0b242c7030a4adc941a23ef2e24fa2e",
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "entity_reference",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "ENTITY_MISMATCH",
+                  "note": "“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "RELATION_MISMATCH",
+                  "note": "证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "relation_direction",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "DIRECTION_MISMATCH",
+                  "note": "缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "qualifiers",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "QUALIFIER_MISMATCH",
+                  "note": "“常常”在证据中未出现，频率与模态附着无法核验。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "evidence_sufficiency",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。",
+                  "status": "fail"
+                },
+                {
+                  "check": "mapping",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "",
+                  "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "knowledge_scope",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "",
+                  "note": "无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "counterevidence",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_2c6591efadb82c766444",
+                    "ev_5c0bed735fde192b5200",
+                    "ev_d2402871add1675fc85d",
+                    "ev_14f03c9a1e670b211b71",
+                    "ev_bcff8fd09dfeb393ddfb",
+                    "ev_1064c5207afba6d84ad1",
+                    "ev_625ecd7c48d58a6a7254",
+                    "ev_1261be262ec9dca3e4e7"
+                  ],
+                  "issue_code": "",
+                  "note": "已检查全部证据，未发现与候选关系直接矛盾的材料。",
+                  "status": "pass"
+                },
+                {
+                  "check": "ontology",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "unknown",
+                  "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+                  "status": "unknown"
+                }
+              ],
+              "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+              "committee_version": "committee_qwen_gemma_deepseek_v1",
+              "correction_policy_hash": "1d9090d007f1fabf222079a500675e532f3f6a5753f67585299bff72d28113d4",
+              "correction_policy_version": "targeted_review_repairs_v1",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_2c6591efadb82c766444",
+                "ev_5c0bed735fde192b5200",
+                "ev_d2402871add1675fc85d",
+                "ev_14f03c9a1e670b211b71",
+                "ev_bcff8fd09dfeb393ddfb",
+                "ev_1064c5207afba6d84ad1",
+                "ev_625ecd7c48d58a6a7254",
+                "ev_1261be262ec9dca3e4e7"
+              ],
+              "dimensions": {
+                "counterevidence": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_2c6591efadb82c766444",
+                    "ev_5c0bed735fde192b5200",
+                    "ev_d2402871add1675fc85d",
+                    "ev_14f03c9a1e670b211b71",
+                    "ev_bcff8fd09dfeb393ddfb",
+                    "ev_1064c5207afba6d84ad1",
+                    "ev_625ecd7c48d58a6a7254",
+                    "ev_1261be262ec9dca3e4e7"
+                  ],
+                  "issue_code": "",
+                  "note": "已检查全部证据，未发现与候选关系直接矛盾的材料。",
+                  "status": "pass"
+                },
+                "entity_reference": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "ENTITY_MISMATCH",
+                  "note": "“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。",
+                  "status": "unknown"
+                },
+                "evidence_sufficiency": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。",
+                  "status": "fail"
+                },
+                "knowledge_scope": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "",
+                  "note": "无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。",
+                  "status": "unresolved"
+                },
+                "mapping": {
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "",
+                  "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+                  "relation_id": "R_5eb753682c8d887575fc",
+                  "status": "unassigned"
+                },
+                "qualifiers": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "QUALIFIER_MISMATCH",
+                  "note": "“常常”在证据中未出现，频率与模态附着无法核验。",
+                  "status": "unknown"
+                },
+                "relation_direction": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "issue_code": "DIRECTION_MISMATCH",
+                  "note": "缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。",
+                  "status": "unknown"
+                },
+                "relation_semantics": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "RELATION_MISMATCH",
+                  "note": "证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。",
+                  "status": "unknown"
+                },
+                "triple_support": {
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。",
+                  "status": "insufficient"
+                }
+              },
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "evidence_assessments": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "note": "说明顶点θs可计算，但未提及地炮或需要知道。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "note": "说明顶点诸元可用C、v0、θ0表示，未涉及地炮关系。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_2c6591efadb82c766444",
+                  "note": "说明微分方程组解的存在唯一性，与候选关系无直接关联。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_5c0bed735fde192b5200",
+                  "note": "微分方程组公式，未支持候选关系。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_d2402871add1675fc85d",
+                  "note": "说明变量是初始条件的函数，未涉及地炮。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_14f03c9a1e670b211b71",
+                  "note": "函数表达式公式，未支持候选关系。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_bcff8fd09dfeb393ddfb",
+                  "note": "θs函数公式，未提及地炮或需要知道。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_1064c5207afba6d84ad1",
+                  "note": "说明外弹道表编制依据，未明确地炮需要知道顶点。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_625ecd7c48d58a6a7254",
+                  "note": "公式片段，无独立语义支持。",
+                  "role": "irrelevant"
+                },
+                {
+                  "evidence_id": "ev_1261be262ec9dca3e4e7",
+                  "note": "公式片段，无独立语义支持。",
+                  "role": "irrelevant"
+                }
+              ],
+              "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+              "expression_findings": [
+                {
+                  "check": "entity_reference",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "头实体“地炮”在证据中未出现，指称无法确认。",
+                  "rule_id": "SPLIT-001",
+                  "suggested_change": "补充包含“地炮”的原文证据以确认头实体指称。"
+                },
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c",
+                    "ev_1064c5207afba6d84ad1"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "“需要知道”在证据中未出现，关系语义无法确认。",
+                  "rule_id": "MEANING-001",
+                  "suggested_change": "补充明确表述“需要知道”或等价关系的原文证据。"
+                },
+                {
+                  "check": "relation_direction",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "缺乏主谓结构，头尾方向无法确认。",
+                  "rule_id": "MEANING-001",
+                  "suggested_change": "补充明确“地炮”与“顶点”方向关系的原文证据。"
+                },
+                {
+                  "check": "qualifiers",
+                  "evidence_ids": [
+                    "ev_1a46b288f99c3b382558",
+                    "ev_36b787204f191cfd7e4c"
+                  ],
+                  "kind": "unresolved",
+                  "meaning_effect": "unresolved",
+                  "normalization": null,
+                  "note": "“常常”在证据中未出现，频率附着无法核验。",
+                  "rule_id": "FREQ-001",
+                  "suggested_change": "补充包含“常常”的原文证据以确认频率限定。"
+                }
+              ],
+              "expression_status": "unresolved",
+              "finish_reason": "stop",
+              "format_normalization": {
+                "changes": [
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/mapping/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/knowledge_scope/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/counterevidence/issue_code",
+                    "to": ""
+                  }
+                ],
+                "version": "dimension_auxiliary_fields_v1"
+              },
+              "input_tokens": 21608,
+              "knowledge_scope": "unresolved",
+              "late_response": false,
+              "latency_ms": 67843,
+              "mapping": {
+                "competing_relation_ids": [],
+                "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+                "relation_id": "R_5eb753682c8d887575fc",
+                "status": "unassigned"
+              },
+              "mapping_diagnosis": "unassigned",
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "model_version_verification": "reported",
+              "object_revision": 1,
+              "ontology_context_hash": "5d9d120cb6c8d2160ed40bc7e01b5b87442b28c0b661bd3e4177ba28dd9b87da",
+              "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "output_tokens": 2495,
+              "primary_evidence_ids": [],
+              "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+              "prompt_version": "triple_validator_v8_citations_v3",
+              "proposal_digest": "1c4b08e3d7df60d7406327dd17900918afd25a447d16123c73ae8bbd75b69cde",
+              "provider_started_at": 1794298903.1864483,
+              "queue_time_ms": 488,
+              "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"insufficient\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"entity_reference\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。\", \"issue_code\": \"ENTITY_MISMATCH\"}, \"relation_semantics\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。\", \"issue_code\": \"RELATION_MISMATCH\"}, \"relation_direction\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。\", \"issue_code\": \"DIRECTION_MISMATCH\"}, \"qualifiers\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"“常常”在证据中未出现，频率与模态附着无法核验。\", \"issue_code\": \"QUALIFIER_MISMATCH\"}, \"evidence_sufficiency\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"note\": \"关系定义缺失且头实体指称未确认，正式映射保持未分配。\", \"relation_id\": \"R_5eb753682c8d887575fc\", \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"unresolved\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"note\": \"无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。\", \"issue_code\": null}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_2c6591efadb82c766444\", \"ev_5c0bed735fde192b5200\", \"ev_d2402871add1675fc85d\", \"ev_14f03c9a1e670b211b71\", \"ev_bcff8fd09dfeb393ddfb\", \"ev_1064c5207afba6d84ad1\", \"ev_625ecd7c48d58a6a7254\", \"ev_1261be262ec9dca3e4e7\"], \"note\": \"已检查全部证据，未发现与候选关系直接矛盾的材料。\", \"issue_code\": null}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_1a46b288f99c3b382558\", \"role\": \"context\", \"note\": \"说明顶点θs可计算，但未提及地炮或需要知道。\"}, {\"evidence_id\": \"ev_36b787204f191cfd7e4c\", \"role\": \"context\", \"note\": \"说明顶点诸元可用C、v0、θ0表示，未涉及地炮关系。\"}, {\"evidence_id\": \"ev_2c6591efadb82c766444\", \"role\": \"context\", \"note\": \"说明微分方程组解的存在唯一性，与候选关系无直接关联。\"}, {\"evidence_id\": \"ev_5c0bed735fde192b5200\", \"role\": \"context\", \"note\": \"微分方程组公式，未支持候选关系。\"}, {\"evidence_id\": \"ev_d2402871add1675fc85d\", \"role\": \"context\", \"note\": \"说明变量是初始条件的函数，未涉及地炮。\"}, {\"evidence_id\": \"ev_14f03c9a1e670b211b71\", \"role\": \"context\", \"note\": \"函数表达式公式，未支持候选关系。\"}, {\"evidence_id\": \"ev_bcff8fd09dfeb393ddfb\", \"role\": \"context\", \"note\": \"θs函数公式，未提及地炮或需要知道。\"}, {\"evidence_id\": \"ev_1064c5207afba6d84ad1\", \"role\": \"context\", \"note\": \"说明外弹道表编制依据，未明确地炮需要知道顶点。\"}, {\"evidence_id\": \"ev_625ecd7c48d58a6a7254\", \"role\": \"irrelevant\", \"note\": \"公式片段，无独立语义支持。\"}, {\"evidence_id\": \"ev_1261be262ec9dca3e4e7\", \"role\": \"irrelevant\", \"note\": \"公式片段，无独立语义支持。\"}], \"primary_evidence_ids\": [], \"counterevidence_reviewed_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_2c6591efadb82c766444\", \"ev_5c0bed735fde192b5200\", \"ev_d2402871add1675fc85d\", \"ev_14f03c9a1e670b211b71\", \"ev_bcff8fd09dfeb393ddfb\", \"ev_1064c5207afba6d84ad1\", \"ev_625ecd7c48d58a6a7254\", \"ev_1261be262ec9dca3e4e7\"], \"requested_context\": {\"scope\": \"same_section\", \"query\": \"地炮 需要知道 顶点 常常\", \"limit\": 6}, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": [{\"check\": \"entity_reference\", \"kind\": \"unresolved\", \"note\": \"头实体“地炮”在证据中未出现，指称无法确认。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"normalization\": null, \"rule_id\": \"SPLIT-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充包含“地炮”的原文证据以确认头实体指称。\"}, {\"check\": \"relation_semantics\", \"kind\": \"unresolved\", \"note\": \"“需要知道”在证据中未出现，关系语义无法确认。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\", \"ev_1064c5207afba6d84ad1\"], \"normalization\": null, \"rule_id\": \"MEANING-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充明确表述“需要知道”或等价关系的原文证据。\"}, {\"check\": \"relation_direction\", \"kind\": \"unresolved\", \"note\": \"缺乏主谓结构，头尾方向无法确认。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"normalization\": null, \"rule_id\": \"MEANING-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充明确“地炮”与“顶点”方向关系的原文证据。\"}, {\"check\": \"qualifiers\", \"kind\": \"unresolved\", \"note\": \"“常常”在证据中未出现，频率附着无法核验。\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\", \"ev_36b787204f191cfd7e4c\"], \"normalization\": null, \"rule_id\": \"FREQ-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"补充包含“常常”的原文证据以确认频率限定。\"}]}",
+              "reason_codes": [
+                "EVIDENCE_INSUFFICIENT"
+              ],
+              "reasoning_tokens": null,
+              "representation_checks": [],
+              "request_key": "66d74ac7b5de0c56d0c7bbd04e80831d42cece1ed4dc03de81daeae4362be051",
+              "requested_context": {
+                "limit": 6,
+                "query": "地炮 需要知道 顶点 常常",
+                "scope": "same_section"
+              },
+              "response_contract_version": "validator_response_v8",
+              "response_id": "chatcmpl-b7967fd135a73614",
+              "response_status": "ok",
+              "returned_model_id": "Qwen",
+              "review_axes": {
+                "expression": {
+                  "findings": [
+                    {
+                      "check": "entity_reference",
+                      "evidence_ids": [
+                        "ev_1a46b288f99c3b382558",
+                        "ev_36b787204f191cfd7e4c"
+                      ],
+                      "kind": "unresolved",
+                      "meaning_effect": "unresolved",
+                      "normalization": null,
+                      "note": "头实体“地炮”在证据中未出现，指称无法确认。",
+                      "rule_id": "SPLIT-001",
+                      "suggested_change": "补充包含“地炮”的原文证据以确认头实体指称。"
+                    },
+                    {
+                      "check": "relation_semantics",
+                      "evidence_ids": [
+                        "ev_1a46b288f99c3b382558",
+                        "ev_36b787204f191cfd7e4c",
+                        "ev_1064c5207afba6d84ad1"
+                      ],
+                      "kind": "unresolved",
+                      "meaning_effect": "unresolved",
+                      "normalization": null,
+                      "note": "“需要知道”在证据中未出现，关系语义无法确认。",
+                      "rule_id": "MEANING-001",
+                      "suggested_change": "补充明确表述“需要知道”或等价关系的原文证据。"
+                    },
+                    {
+                      "check": "relation_direction",
+                      "evidence_ids": [
+                        "ev_1a46b288f99c3b382558",
+                        "ev_36b787204f191cfd7e4c"
+                      ],
+                      "kind": "unresolved",
+                      "meaning_effect": "unresolved",
+                      "normalization": null,
+                      "note": "缺乏主谓结构，头尾方向无法确认。",
+                      "rule_id": "MEANING-001",
+                      "suggested_change": "补充明确“地炮”与“顶点”方向关系的原文证据。"
+                    },
+                    {
+                      "check": "qualifiers",
+                      "evidence_ids": [
+                        "ev_1a46b288f99c3b382558",
+                        "ev_36b787204f191cfd7e4c"
+                      ],
+                      "kind": "unresolved",
+                      "meaning_effect": "unresolved",
+                      "normalization": null,
+                      "note": "“常常”在证据中未出现，频率附着无法核验。",
+                      "rule_id": "FREQ-001",
+                      "suggested_change": "补充包含“常常”的原文证据以确认频率限定。"
+                    }
+                  ],
+                  "status": "unresolved"
+                },
+                "mapping": {
+                  "status": "unassigned"
+                },
+                "scope": {
+                  "knowledge_scope": "unresolved",
+                  "status": "unclear"
+                },
+                "source": {
+                  "status": "insufficient"
+                }
+              },
+              "round_id": 1,
+              "schema_assessment": {
+                "evidence_ids": [
+                  "ev_1a46b288f99c3b382558",
+                  "ev_36b787204f191cfd7e4c"
+                ],
+                "issue": "unknown",
+                "note": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+                "status": "unknown"
+              },
+              "schema_change_hint": null,
+              "schema_issue": "unknown",
+              "schema_status": "unknown",
+              "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+              "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+              "source_support": "insufficient",
+              "suggested_revision": null,
+              "summary_derivation": {
+                "final_admission_requires_frozen_committee_and_program_guards": true,
+                "model_input_fields": [
+                  "dimensions",
+                  "evidence_assessments"
+                ],
+                "policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+                "version": "review_field_rules_v1"
+              },
+              "supporting_evidence_ids": [],
+              "task_id": "cand_064a5e16f5359b74ef07",
+              "task_type": "triple_review",
+              "transport_metrics": {
+                "chunk_count": 2497,
+                "first_chunk_ms": 11827,
+                "first_content_ms": 11827,
+                "max_inter_chunk_gap_ms": 438,
+                "reasoning_chars": 0,
+                "stream": true,
+                "terminal_ms": 67843,
+                "visible_chars": 4711
+              },
+              "verdict": "uncertain",
+              "voter_id": "judge_a"
+            }
+          ],
+          "attempt_no": 1,
+          "actual_calls": 1
+        }
+      ],
+      "consensus": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "valid_votes": 0,
+        "invalid_votes": 0,
+        "uncertain_votes": 1,
+        "error_votes": 0,
+        "missing_votes": 2,
+        "duplicate_attempts": 0,
+        "duplicate_model_votes": 0,
+        "invalid_attempts": 0,
+        "distinct_family_count": 1,
+        "valid_distinct_family_count": 0,
+        "invalid_distinct_family_count": 0,
+        "diversity_ready": false,
+        "result": "unresolved",
+        "unresolved_counterevidence": false,
+        "unresolved_support_conflict": false,
+        "counter_evidence_ids": [],
+        "supporting_evidence_ids": [],
+        "source_support_consensus": {
+          "result": "unresolved",
+          "support_votes": 0,
+          "contradiction_votes": 0,
+          "support_voter_ids": [],
+          "committee_size": 3,
+          "required_votes": 3,
+          "contradiction_voter_ids": []
+        },
+        "admission_consensus": {
+          "result": "unresolved"
+        },
+        "eligible_voter_ids": [
+          "judge_a"
+        ],
+        "expression_complete": true,
+        "blocking_fields": [],
+        "raw_source_support_votes": [
+          {
+            "voter_id": "judge_a",
+            "source_support": "insufficient"
+          }
+        ],
+        "expression_status": "unresolved",
+        "knowledge_scope": "unresolved",
+        "scope_confirmed": false,
+        "mapping_status": "ambiguous",
+        "effective_mapping_status": "unassigned",
+        "core_source_support_result": "unresolved",
+        "ontology_coverage_review": {
+          "context_hash": "5d9d120cb6c8d2160ed40bc7e01b5b87442b28c0b661bd3e4177ba28dd9b87da",
+          "full_catalog_included": false,
+          "global_gap_confirmable": false
+        },
+        "review_axes": {
+          "version": "review_axes_v1",
+          "source": {
+            "status": "unresolved",
+            "core_relation_status": "unresolved",
+            "evidence_ids": []
+          },
+          "expression": {
+            "status": "unresolved",
+            "findings": [
+              {
+                "check": "entity_reference",
+                "evidence_ids": [
+                  "ev_1a46b288f99c3b382558",
+                  "ev_36b787204f191cfd7e4c"
+                ],
+                "kind": "unresolved",
+                "meaning_effect": "unresolved",
+                "normalization": null,
+                "note": "头实体“地炮”在证据中未出现，指称无法确认。",
+                "rule_id": "SPLIT-001",
+                "suggested_change": "补充包含“地炮”的原文证据以确认头实体指称。",
+                "voter_id": "judge_a"
+              },
+              {
+                "check": "relation_semantics",
+                "evidence_ids": [
+                  "ev_1a46b288f99c3b382558",
+                  "ev_36b787204f191cfd7e4c",
+                  "ev_1064c5207afba6d84ad1"
+                ],
+                "kind": "unresolved",
+                "meaning_effect": "unresolved",
+                "normalization": null,
+                "note": "“需要知道”在证据中未出现，关系语义无法确认。",
+                "rule_id": "MEANING-001",
+                "suggested_change": "补充明确表述“需要知道”或等价关系的原文证据。",
+                "voter_id": "judge_a"
+              },
+              {
+                "check": "relation_direction",
+                "evidence_ids": [
+                  "ev_1a46b288f99c3b382558",
+                  "ev_36b787204f191cfd7e4c"
+                ],
+                "kind": "unresolved",
+                "meaning_effect": "unresolved",
+                "normalization": null,
+                "note": "缺乏主谓结构，头尾方向无法确认。",
+                "rule_id": "MEANING-001",
+                "suggested_change": "补充明确“地炮”与“顶点”方向关系的原文证据。",
+                "voter_id": "judge_a"
+              },
+              {
+                "check": "qualifiers",
+                "evidence_ids": [
+                  "ev_1a46b288f99c3b382558",
+                  "ev_36b787204f191cfd7e4c"
+                ],
+                "kind": "unresolved",
+                "meaning_effect": "unresolved",
+                "normalization": null,
+                "note": "“常常”在证据中未出现，频率附着无法核验。",
+                "rule_id": "FREQ-001",
+                "suggested_change": "补充包含“常常”的原文证据以确认频率限定。",
+                "voter_id": "judge_a"
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "effective_mapping_status": "unassigned",
+            "preflight": {
+              "blocking_information": [
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_5eb753682c8d887575fc",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "referent_source_context_unavailable"
+                  ],
+                  "id": "head",
+                  "kind": "entity"
+                }
+              ],
+              "budget_excluded_property_ids": [],
+              "candidate_hash": "a17e7dc493b4f2d4e8ace6152891d4ed3461ba24836d0efead4e95b77c26e8f8",
+              "confusable_relations": [],
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_b8e61312f36ba02ccaa7",
+                  "candidate_id": "local_6ecbf7f38268d64357c5e83dc5b9284257d4ec9234017e01356845b0cfd87d83",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "referent_source_context_unavailable"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [],
+                  "surface": "地炮",
+                  "type_candidate_ids": [
+                    "C_b8e61312f36ba02ccaa7"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_ed590570ee28bf2c3d9e",
+                  "candidate_id": "local_9730e354cb164cd00e58ce4d9e41f32371c47cf5bee817e4059ad56c3ed17975",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_1a46b288f99c3b382558"
+                  ],
+                  "surface": "顶点",
+                  "type_candidate_ids": [
+                    "C_ed590570ee28bf2c3d9e"
+                  ]
+                }
+              },
+              "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+              "formal_mapping": {
+                "assigned_head_type": "C_b8e61312f36ba02ccaa7",
+                "assigned_relation_id": "R_5eb753682c8d887575fc",
+                "assigned_tail_type": "C_ed590570ee28bf2c3d9e",
+                "candidate_relation_ids": [
+                  "R_5eb753682c8d887575fc"
+                ],
+                "semantic_approval": false
+              },
+              "global_gap_confirmed": false,
+              "judgment_ready": false,
+              "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema.",
+              "ontology_context_hash": "5d9d120cb6c8d2160ed40bc7e01b5b87442b28c0b661bd3e4177ba28dd9b87da",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "original_expression": {
+                "candidate_id": "cand_064a5e16f5359b74ef07",
+                "head": "地炮",
+                "qualifier_status": {
+                  "applicability": "extracted",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": "常常",
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 1,
+                "surface_relation": "需要知道",
+                "tail": "顶点"
+              },
+              "policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+              "relation_candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_b8e61312f36ba02ccaa7"
+                  ],
+                  "id": "R_5eb753682c8d887575fc",
+                  "label": "需要知道",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_ed590570ee28bf2c3d9e"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "search_trace": [
+                {
+                  "metadata_complete": false,
+                  "property_count": 6,
+                  "stage": "review_subset"
+                },
+                {
+                  "classes_scanned": 189,
+                  "exact_match_ids": [
+                    "R_5eb753682c8d887575fc"
+                  ],
+                  "lexical_recall_is_semantic_confirmation": false,
+                  "properties_scanned": 81,
+                  "property_count": 6,
+                  "stage": "full_bound_release_and_aliases"
+                }
+              ],
+              "semantic_applicability": "not_programmatically_confirmed",
+              "source_catalog_hash": "b1a42a3b6479ba491255113706717f582ed266e938ac17cfe252f88c6255a321",
+              "version": "mapping_preflight_v1"
+            },
+            "reason_codes": [
+              "RELATION_DEFINITION_UNAVAILABLE"
+            ]
+          },
+          "scope": {
+            "status": "unclear",
+            "knowledge_scope": "unresolved",
+            "classification_confirmed": false,
+            "policy_version": "knowledge_scope_v2",
+            "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+            "authority": "program",
+            "category_label": "类别待确认",
+            "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。",
+            "reason": "类别未确认或审核席位不完整，等待范围复核"
+          }
+        },
+        "dispute_report": {
+          "version": "claim_disputes_v1",
+          "candidate_hash": "a17e7dc493b4f2d4e8ace6152891d4ed3461ba24836d0efead4e95b77c26e8f8",
+          "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+          "base_proposal_digest": "1c4b08e3d7df60d7406327dd17900918afd25a447d16123c73ae8bbd75b69cde",
+          "opinions": [
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "counterevidence",
+              "claim": {
+                "check": "counterevidence",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "已核验材料中是否存在可能推翻“地炮 — 需要知道 — 顶点”的证据？未发现反证与找到正面支持分开记录。",
+                "formal_mapping": null,
+                "claim_id": "ff184802f02a2e729a8336c72e62f0f6e6141b14562963fa7cabe9c60215937b"
+              },
+              "status": "pass",
+              "reason": "已检查全部证据，未发现与候选关系直接矛盾的材料。",
+              "issue_type": "counterevidence",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_2c6591efadb82c766444",
+                "ev_5c0bed735fde192b5200",
+                "ev_d2402871add1675fc85d",
+                "ev_14f03c9a1e670b211b71",
+                "ev_bcff8fd09dfeb393ddfb",
+                "ev_1064c5207afba6d84ad1",
+                "ev_625ecd7c48d58a6a7254",
+                "ev_1261be262ec9dca3e4e7"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_2c6591efadb82c766444",
+                  "quote": "在基本假设条件下，只要给定了初始条件，即  $C$  、  $v_{0}$  、  $\\theta_0$  已知，弹丸质心运动微分方程组的解不仅存在，而且是唯一的，例如",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_f39631142b28",
+                  "start": 34395,
+                  "end": 34479,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_5c0bed735fde192b5200",
+                  "quote": "$$\n\\left\\{ \\begin{array}{l} \\frac {\\mathrm {d} v}{\\mathrm {d} t} = - C H (y) F (v) - g \\sin \\theta \\\\ \\frac {\\mathrm {d} \\theta}{\\mathrm {d} t} = - \\frac {g \\cos \\theta}{v} \\\\ \\frac {\\mathrm {d} y}{\\mathrm {d} t} = v \\sin \\theta \\\\ \\frac {\\mathrm {d} x}{\\mathrm {d} t} = v \\cos \\theta \\end{array} \\right.\n$$",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_f39631142b28",
+                  "start": 34481,
+                  "end": 34788,
+                  "offset_basis": "canonical_document",
+                  "block_type": "equation"
+                },
+                {
+                  "evidence_id": "ev_d2402871add1675fc85d",
+                  "quote": "当初始条件  $t = 0$  ，  $v = v_{0}$  ，  $\\theta = \\theta_0$  ，  $x = y = 0$  时，所积分的上述各方向的变量  $v$  、  $\\theta$  、  $x$  及  $y$  一定都是起始条件  $v_{0}$  、  $\\theta_0$  、参量  $C$  和自变量  $t$  的函数，即",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_31f743bd48b0",
+                  "start": 34790,
+                  "end": 34972,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_14f03c9a1e670b211b71",
+                  "quote": "$$\n\\left\\{ \\begin{array}{l} v = v (C, v _ {0}, \\theta_ {0}, t) \\\\ \\theta = \\theta (C, v _ {0}, \\theta_ {0}, t) \\\\ x = x (C, v _ {0}, \\theta_ {0}, t) \\\\ y = y (C, v _ {0}, \\theta_ {0}, t) \\end{array} \\right. \\tag {1-71}\n$$",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_31f743bd48b0",
+                  "start": 34974,
+                  "end": 35195,
+                  "offset_basis": "canonical_document",
+                  "block_type": "equation"
+                },
+                {
+                  "evidence_id": "ev_bcff8fd09dfeb393ddfb",
+                  "quote": "$$\n\\theta_ {s} = \\theta_ {s} (C, v _ {0}, \\theta_ {0})\n$$",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35804,
+                  "end": 35861,
+                  "offset_basis": "canonical_document",
+                  "block_type": "equation"
+                },
+                {
+                  "evidence_id": "ev_1064c5207afba6d84ad1",
+                  "quote": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35940,
+                  "end": 36012,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_625ecd7c48d58a6a7254",
+                  "quote": "\\left\\{ \\begin{array}{l} \\frac {\\mathrm {d} v}{\\mathrm {d} t} = - C H (y) F (v) - g \\sin \\theta \\\\ \\frac {\\mathrm {d} \\theta}{\\mathrm {d} t} = - \\frac {g \\cos \\theta}{v} \\\\ \\frac {\\mathrm {d} y}{\\mathrm {d} t} = v \\sin \\theta \\\\ \\frac {\\mathrm {d} x}{\\mathrm {d} t} = v \\cos \\theta \\end{array} \\right.",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_f39631142b28",
+                  "start": 34484,
+                  "end": 34785,
+                  "offset_basis": "canonical_document",
+                  "block_type": "equation_fragment"
+                },
+                {
+                  "evidence_id": "ev_1261be262ec9dca3e4e7",
+                  "quote": "\\theta_ {s} = \\theta_ {s} (C, v _ {0}, \\theta_ {0})",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35807,
+                  "end": 35858,
+                  "offset_basis": "canonical_document",
+                  "block_type": "equation_fragment"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "entity_reference",
+              "claim": {
+                "check": "entity_reference",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“地炮 — 需要知道 — 顶点”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+                "formal_mapping": null,
+                "claim_id": "303c09da5fd1cb621ddd4855858c0a0f00f1bf31cbd676c985e99489d55b936e"
+              },
+              "status": "unknown",
+              "reason": "“地炮”在证据中未出现，无法确认头实体指称与原文对象一致。",
+              "issue_type": "referent",
+              "meaning_effect": "unresolved",
+              "rule_ids": [
+                "SPLIT-001"
+              ],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "evidence_sufficiency",
+              "claim": {
+                "check": "evidence_sufficiency",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "当前证据是否足以确认“地炮 — 需要知道 — 顶点”的完整含义？缺哪一段材料？",
+                "formal_mapping": null,
+                "claim_id": "827f2ef8123a0a0b83c7848c081ac57638850a7230f38e6803d706e9ce24ec6b"
+              },
+              "status": "fail",
+              "reason": "缺少包含“地炮”“需要知道”“常常”的原文段落，当前证据不足以确认完整含义。",
+              "issue_type": "evidence_sufficiency",
+              "meaning_effect": "unresolved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_1064c5207afba6d84ad1",
+                  "quote": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35940,
+                  "end": 36012,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "knowledge_scope",
+              "claim": {
+                "check": "knowledge_scope",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“地炮 — 需要知道 — 顶点”属于哪种收录范围？范围分类不能替代事实判断。",
+                "formal_mapping": null,
+                "claim_id": "5cc3adbdb4c91aed9f21e67fae75e0ee2eb37ceb4cc28c2577fbaf93eb519757"
+              },
+              "status": "unresolved",
+              "reason": "无法区分该关系是通用领域知识还是局部推导步骤，需更多上下文。",
+              "issue_type": "scope",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_1064c5207afba6d84ad1",
+                  "quote": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35940,
+                  "end": 36012,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "mapping",
+              "claim": {
+                "check": "mapping",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“地炮 — 需要知道 — 顶点”与已填写关系 R_5eb753682c8d887575fc 的正式定义、实体身份、方向和类型约束是否匹配？",
+                "formal_mapping": {
+                  "relation_id": "R_5eb753682c8d887575fc",
+                  "head_type": "C_b8e61312f36ba02ccaa7",
+                  "tail_type": "C_ed590570ee28bf2c3d9e"
+                },
+                "claim_id": "817aab0cd7cff89ab2f3b18e16c085ae2e8852c0d41575f280648a6caa1b3f7a"
+              },
+              "status": "unassigned",
+              "reason": "关系定义缺失且头实体指称未确认，正式映射保持未分配。",
+              "issue_type": "formal_mapping",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": "R_5eb753682c8d887575fc"
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "qualifiers",
+              "claim": {
+                "check": "qualifiers",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“地炮 — 需要知道 — 顶点”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+                "formal_mapping": null,
+                "claim_id": "df766ef04eaf6d1badd2d92836119d28bedb8cfdcbf06a67f23119963a8344cd"
+              },
+              "status": "unknown",
+              "reason": "“常常”在证据中未出现，频率与模态附着无法核验。",
+              "issue_type": "qualifiers",
+              "meaning_effect": "unresolved",
+              "rule_ids": [
+                "FREQ-001"
+              ],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "relation_direction",
+              "claim": {
+                "check": "relation_direction",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否支持“地炮 — 需要知道 — 顶点”的头尾方向？",
+                "formal_mapping": null,
+                "claim_id": "bc4d30f3d0654bae3d41dbb3e8a2d3acbd714a3b074602172b92f1c638f993e0"
+              },
+              "status": "unknown",
+              "reason": "缺乏明确主谓结构，无法确认“地炮”指向“顶点”的方向。",
+              "issue_type": "direction",
+              "meaning_effect": "unresolved",
+              "rule_ids": [
+                "MEANING-001"
+              ],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "relation_semantics",
+              "claim": {
+                "check": "relation_semantics",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“地炮 — 需要知道 — 顶点”中的“需要知道”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+                "formal_mapping": null,
+                "claim_id": "97940f36920cdf2568be1f8fec91e8628b26c8e318a495ae8520f23447800563"
+              },
+              "status": "unknown",
+              "reason": "证据未出现“需要知道”或等价表述，无法确认关系语义与原文一致。",
+              "issue_type": "relation_meaning",
+              "meaning_effect": "unresolved",
+              "rule_ids": [
+                "MEANING-001"
+              ],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_1064c5207afba6d84ad1",
+                  "quote": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35940,
+                  "end": 36012,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "triple_support",
+              "claim": {
+                "check": "triple_support",
+                "expression": {
+                  "head": "地炮",
+                  "surface_relation": "需要知道",
+                  "tail": "顶点",
+                  "qualifiers": {
+                    "applicability": "常常",
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否明确支持“地炮 — 需要知道 — 顶点”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+                "formal_mapping": null,
+                "claim_id": "8742e53280e375fed14a28c7b1b23defa9e956acc6019766d249341fa7c447c0"
+              },
+              "status": "insufficient",
+              "reason": "现有证据仅说明顶点诸元可计算及外弹道表编制，未明确支持“地炮需要知道顶点”这一具体关系。",
+              "issue_type": "relation_meaning",
+              "meaning_effect": "unresolved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_1a46b288f99c3b382558",
+                "ev_36b787204f191cfd7e4c",
+                "ev_1064c5207afba6d84ad1"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_1a46b288f99c3b382558",
+                  "quote": "对于顶点，利用  $t = t_{s}$  时  $\\theta = \\theta_{s} = 0^{\\circ}$  的特点，同样可以得到相应的  $\\theta_{s}$ ，有",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_6be68a643f7b",
+                  "start": 35712,
+                  "end": 35802,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_36b787204f191cfd7e4c",
+                  "quote": "因而也可以得到用  $C$  、  $v_{0}$  、  $\\theta_0$  表示的  $v_{s},t_{s},x_{s},y_{s}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35863,
+                  "end": 35938,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_1064c5207afba6d84ad1",
+                  "quote": "按照这样的思路，可以编制出地面火炮外弹道表、低伸弹道表和航空炸弹弹道表。上述高射炮、地面火炮和低伸弹道表，我国均是以43年阻力定律为依据编制的。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_276109bc91dd",
+                  "chunk_id": "chunk_d7ea812c42eb",
+                  "start": 35940,
+                  "end": 36012,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            }
+          ],
+          "disputes": [],
+          "evidence_observations": [
+            {
+              "voter_id": "judge_a",
+              "positive_support": {
+                "status": "not_recorded",
+                "evidence_ids": [],
+                "core_source_status": "insufficient",
+                "full_source_status": "insufficient",
+                "not_inferred_from_counter_absence": true
+              },
+              "counterevidence_search": {
+                "status": "reviewed_no_material_counter_recorded",
+                "counter_evidence_ids": [],
+                "reviewed_evidence_ids": [
+                  "ev_1a46b288f99c3b382558",
+                  "ev_36b787204f191cfd7e4c",
+                  "ev_2c6591efadb82c766444",
+                  "ev_5c0bed735fde192b5200",
+                  "ev_d2402871add1675fc85d",
+                  "ev_14f03c9a1e670b211b71",
+                  "ev_bcff8fd09dfeb393ddfb",
+                  "ev_1064c5207afba6d84ad1",
+                  "ev_625ecd7c48d58a6a7254",
+                  "ev_1261be262ec9dca3e4e7"
+                ],
+                "note": "已检查全部证据，未发现与候选关系直接矛盾的材料。",
+                "scope": "frozen_evidence_bundle_only",
+                "absence_is_support": false
+              }
+            }
+          ],
+          "technical_seats": [
+            {
+              "voter_id": "judge_b",
+              "response_status": "missing",
+              "error_code": null
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "missing",
+              "error_code": null
+            }
+          ],
+          "majority_is_resolution": false,
+          "counter_absence_is_support": false,
+          "admission_authorized": false
+        }
+      },
+      "vote_assessments": {
+        "judge_a": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_a",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "250f7373b08b9743971a180e12b86e7b6d993a741d81342ee23876ea981fb56f",
+          "normalized_response_hash": "88567577a50f35b73f64488f6a118cb60ecd0e8d0872a5bf845a69cf49f9a614",
+          "original_attempt_id": "attempt_30ec451fb5d545faa4f502e87d3ae58e",
+          "attempt_id": "attempt_30ec451fb5d545faa4f502e87d3ae58e",
+          "request_key": "66d74ac7b5de0c56d0c7bbd04e80831d42cece1ed4dc03de81daeae4362be051",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "insufficient"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "unresolved",
+                "findings": [
+                  {
+                    "check": "entity_reference",
+                    "kind": "unresolved",
+                    "note": "头实体“地炮”在证据中未出现，指称无法确认。",
+                    "evidence_ids": [
+                      "ev_1a46b288f99c3b382558",
+                      "ev_36b787204f191cfd7e4c"
+                    ],
+                    "normalization": null,
+                    "rule_id": "SPLIT-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "补充包含“地炮”的原文证据以确认头实体指称。"
+                  },
+                  {
+                    "check": "relation_semantics",
+                    "kind": "unresolved",
+                    "note": "“需要知道”在证据中未出现，关系语义无法确认。",
+                    "evidence_ids": [
+                      "ev_1a46b288f99c3b382558",
+                      "ev_36b787204f191cfd7e4c",
+                      "ev_1064c5207afba6d84ad1"
+                    ],
+                    "normalization": null,
+                    "rule_id": "MEANING-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "补充明确表述“需要知道”或等价关系的原文证据。"
+                  },
+                  {
+                    "check": "relation_direction",
+                    "kind": "unresolved",
+                    "note": "缺乏主谓结构，头尾方向无法确认。",
+                    "evidence_ids": [
+                      "ev_1a46b288f99c3b382558",
+                      "ev_36b787204f191cfd7e4c"
+                    ],
+                    "normalization": null,
+                    "rule_id": "MEANING-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "补充明确“地炮”与“顶点”方向关系的原文证据。"
+                  },
+                  {
+                    "check": "qualifiers",
+                    "kind": "unresolved",
+                    "note": "“常常”在证据中未出现，频率附着无法核验。",
+                    "evidence_ids": [
+                      "ev_1a46b288f99c3b382558",
+                      "ev_36b787204f191cfd7e4c"
+                    ],
+                    "normalization": null,
+                    "rule_id": "FREQ-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "补充包含“常常”的原文证据以确认频率限定。"
+                  }
+                ]
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "unresolved"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "DEV-027",
+      "proposal_digest": "629f45fe7ff5ab5bb8bf13873e0ade3f8358cf97ea07a63830097ec61d76a0fc",
+      "baseline_whole_eligible": [],
+      "baseline_statuses": {
+        "judge_a": "timeout",
+        "judge_b": "ok",
+        "judge_c": "ok"
+      },
+      "votes": [
+        {
+          "attempt_id": "attempt_23d067ae523c4a328c9d0217e6614a12",
+          "audit_id": "missing_vote_pilot_42cdaac5acab45ef9ffc8496fb2d071a",
+          "checks": [
+            {
+              "check": "triple_support",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。",
+              "status": "unknown"
+            },
+            {
+              "check": "entity_reference",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。",
+              "status": "pass"
+            },
+            {
+              "check": "relation_semantics",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "RELATION_MISMATCH",
+              "note": "“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。",
+              "status": "fail"
+            },
+            {
+              "check": "relation_direction",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "原文支持极限速度在特定物体条件下出现，方向一致。",
+              "status": "pass"
+            },
+            {
+              "check": "qualifiers",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "条件、时间范围、模态和适用对象均与原文一致。",
+              "status": "pass"
+            },
+            {
+              "check": "evidence_sufficiency",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。",
+              "status": "fail"
+            },
+            {
+              "check": "mapping",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "SCHEMA_GAP",
+              "note": "关系未分配，端点类型未确定，需进一步映射。",
+              "status": "unknown"
+            },
+            {
+              "check": "knowledge_scope",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "该知识在明确条件下成立，属于条件性知识。",
+              "status": "pass"
+            },
+            {
+              "check": "counterevidence",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4",
+                "ev_c5efe073339500f9139b",
+                "ev_11b2e5019eca4abf270d",
+                "ev_bf5e78c4defacad4b2c0"
+              ],
+              "issue_code": "",
+              "note": "未发现推翻该关系的反证。",
+              "status": "pass"
+            },
+            {
+              "check": "ontology",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "unknown",
+              "note": "关系未分配，端点类型未确定，需进一步映射。",
+              "status": "unknown"
+            }
+          ],
+          "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "correction_policy_hash": "1d9090d007f1fabf222079a500675e532f3f6a5753f67585299bff72d28113d4",
+          "correction_policy_version": "targeted_review_repairs_v1",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_c5efe073339500f9139b",
+            "ev_11b2e5019eca4abf270d",
+            "ev_bf5e78c4defacad4b2c0"
+          ],
+          "dimensions": {
+            "counterevidence": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4",
+                "ev_c5efe073339500f9139b",
+                "ev_11b2e5019eca4abf270d",
+                "ev_bf5e78c4defacad4b2c0"
+              ],
+              "issue_code": "",
+              "note": "未发现推翻该关系的反证。",
+              "status": "pass"
+            },
+            "entity_reference": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。",
+              "status": "pass"
+            },
+            "evidence_sufficiency": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。",
+              "status": "fail"
+            },
+            "knowledge_scope": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "该知识在明确条件下成立，属于条件性知识。",
+              "status": "conditional"
+            },
+            "mapping": {
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "SCHEMA_GAP",
+              "note": "关系未分配，端点类型未确定，需进一步映射。",
+              "relation_id": null,
+              "status": "unassigned"
+            },
+            "qualifiers": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "条件、时间范围、模态和适用对象均与原文一致。",
+              "status": "pass"
+            },
+            "relation_direction": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "",
+              "note": "原文支持极限速度在特定物体条件下出现，方向一致。",
+              "status": "pass"
+            },
+            "relation_semantics": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "RELATION_MISMATCH",
+              "note": "“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。",
+              "status": "fail"
+            },
+            "triple_support": {
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "issue_code": "EVIDENCE_INSUFFICIENT",
+              "note": "原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。",
+              "status": "insufficient"
+            }
+          },
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "evidence_assessments": [
+            {
+              "evidence_id": "ev_74cbf07fbd9bd95d7404",
+              "note": "直接支持极限速度在特定条件下出现。",
+              "role": "support"
+            },
+            {
+              "evidence_id": "ev_de1b5bb727f4b980cff4",
+              "note": "包含完整段落，支持条件性出现。",
+              "role": "support"
+            },
+            {
+              "evidence_id": "ev_c5efe073339500f9139b",
+              "note": "提供速度极大值的背景，无直接支持。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_11b2e5019eca4abf270d",
+              "note": "提供速度二次导数的背景，无直接支持。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_bf5e78c4defacad4b2c0",
+              "note": "提供表1-3的背景，无直接支持。",
+              "role": "context"
+            }
+          ],
+          "evidence_hash": "cb44f52b4e8e7c4d4dc60e8a0025c31bd7904ad62c35f573101e394f03dac4e4",
+          "expression_findings": [
+            {
+              "check": "relation_semantics",
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "kind": "semantic_error",
+              "meaning_effect": "changed",
+              "normalization": null,
+              "note": "“出现于”与原文“会出现极限速度的情况”含义不一致。",
+              "rule_id": "MEANING-001",
+              "suggested_change": "将关系改为“在条件下出现”或类似表达以匹配原文。"
+            }
+          ],
+          "expression_status": "needs_revision",
+          "finish_reason": "stop",
+          "format_normalization": {
+            "changes": [
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/entity_reference/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/relation_direction/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/qualifiers/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/knowledge_scope/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/counterevidence/issue_code",
+                "to": ""
+              }
+            ],
+            "version": "dimension_auxiliary_fields_v1"
+          },
+          "input_tokens": 15599,
+          "knowledge_scope": "conditional",
+          "late_response": false,
+          "latency_ms": 39545,
+          "mapping": {
+            "competing_relation_ids": [],
+            "note": "关系未分配，端点类型未确定，需进一步映射。",
+            "relation_id": null,
+            "status": "unassigned"
+          },
+          "mapping_diagnosis": "unassigned",
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "model_version_verification": "reported",
+          "object_revision": 1,
+          "ontology_context_hash": "22f869cf4ede7040d7e7c48970bae68ec00a01fcd7224a586264093f4992204e",
+          "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "output_tokens": 1349,
+          "primary_evidence_ids": [
+            "ev_74cbf07fbd9bd95d7404",
+            "ev_de1b5bb727f4b980cff4"
+          ],
+          "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "prompt_version": "triple_validator_v8_citations_v3",
+          "proposal_digest": "629f45fe7ff5ab5bb8bf13873e0ade3f8358cf97ea07a63830097ec61d76a0fc",
+          "provider_started_at": 1794298971.7619424,
+          "queue_time_ms": 439,
+          "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"insufficient\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"entity_reference\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。\", \"issue_code\": null}, \"relation_semantics\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。\", \"issue_code\": \"RELATION_MISMATCH\"}, \"relation_direction\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"原文支持极限速度在特定物体条件下出现，方向一致。\", \"issue_code\": null}, \"qualifiers\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"条件、时间范围、模态和适用对象均与原文一致。\", \"issue_code\": null}, \"evidence_sufficiency\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"关系未分配，端点类型未确定，需进一步映射。\", \"issue_code\": \"SCHEMA_GAP\", \"relation_id\": null, \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"conditional\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"该知识在明确条件下成立，属于条件性知识。\", \"issue_code\": null}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\", \"ev_c5efe073339500f9139b\", \"ev_11b2e5019eca4abf270d\", \"ev_bf5e78c4defacad4b2c0\"], \"note\": \"未发现推翻该关系的反证。\", \"issue_code\": null}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_74cbf07fbd9bd95d7404\", \"role\": \"support\", \"note\": \"直接支持极限速度在特定条件下出现。\"}, {\"evidence_id\": \"ev_de1b5bb727f4b980cff4\", \"role\": \"support\", \"note\": \"包含完整段落，支持条件性出现。\"}, {\"evidence_id\": \"ev_c5efe073339500f9139b\", \"role\": \"context\", \"note\": \"提供速度极大值的背景，无直接支持。\"}, {\"evidence_id\": \"ev_11b2e5019eca4abf270d\", \"role\": \"context\", \"note\": \"提供速度二次导数的背景，无直接支持。\"}, {\"evidence_id\": \"ev_bf5e78c4defacad4b2c0\", \"role\": \"context\", \"note\": \"提供表1-3的背景，无直接支持。\"}], \"primary_evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"counterevidence_reviewed_ids\": [\"ev_c5efe073339500f9139b\", \"ev_11b2e5019eca4abf270d\", \"ev_bf5e78c4defacad4b2c0\"], \"requested_context\": null, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": [{\"check\": \"relation_semantics\", \"kind\": \"semantic_error\", \"note\": \"“出现于”与原文“会出现极限速度的情况”含义不一致。\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"normalization\": null, \"rule_id\": \"MEANING-001\", \"meaning_effect\": \"changed\", \"suggested_change\": \"将关系改为“在条件下出现”或类似表达以匹配原文。\"}]}",
+          "reason_codes": [
+            "EVIDENCE_INSUFFICIENT",
+            "RELATION_MISMATCH"
+          ],
+          "reasoning_tokens": null,
+          "representation_checks": [],
+          "request_key": "c12faaf269e98be7529446a5cdc920f4dea6cf2412a2f19da5a59151c4712e70",
+          "requested_context": null,
+          "response_contract_version": "validator_response_v8",
+          "response_id": "chatcmpl-aeccb8836d21603c",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "review_axes": {
+            "expression": {
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "kind": "semantic_error",
+                  "meaning_effect": "changed",
+                  "normalization": null,
+                  "note": "“出现于”与原文“会出现极限速度的情况”含义不一致。",
+                  "rule_id": "MEANING-001",
+                  "suggested_change": "将关系改为“在条件下出现”或类似表达以匹配原文。"
+                }
+              ],
+              "status": "semantic_revision"
+            },
+            "mapping": {
+              "status": "unassigned"
+            },
+            "scope": {
+              "knowledge_scope": "conditional",
+              "status": "unclear"
+            },
+            "source": {
+              "status": "insufficient"
+            }
+          },
+          "round_id": 1,
+          "schema_assessment": {
+            "evidence_ids": [
+              "ev_74cbf07fbd9bd95d7404",
+              "ev_de1b5bb727f4b980cff4"
+            ],
+            "issue": "unknown",
+            "note": "关系未分配，端点类型未确定，需进一步映射。",
+            "status": "unknown"
+          },
+          "schema_change_hint": null,
+          "schema_issue": "unknown",
+          "schema_status": "unknown",
+          "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+          "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+          "source_support": "insufficient",
+          "suggested_revision": null,
+          "summary_derivation": {
+            "final_admission_requires_frozen_committee_and_program_guards": true,
+            "model_input_fields": [
+              "dimensions",
+              "evidence_assessments"
+            ],
+            "policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+            "version": "review_field_rules_v1"
+          },
+          "supporting_evidence_ids": [
+            "ev_74cbf07fbd9bd95d7404",
+            "ev_de1b5bb727f4b980cff4"
+          ],
+          "task_id": "cand_27498364cdfe1e4202f8",
+          "task_type": "triple_review",
+          "transport_metrics": {
+            "chunk_count": 1351,
+            "first_chunk_ms": 9592,
+            "first_content_ms": 9592,
+            "max_inter_chunk_gap_ms": 468,
+            "reasoning_chars": 0,
+            "stream": true,
+            "terminal_ms": 39545,
+            "visible_chars": 2836
+          },
+          "verdict": "uncertain",
+          "voter_id": "judge_a",
+          "attempts": [
+            {
+              "attempt_id": "attempt_23d067ae523c4a328c9d0217e6614a12",
+              "audit_id": "missing_vote_pilot_42cdaac5acab45ef9ffc8496fb2d071a",
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "entity_reference",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。",
+                  "status": "pass"
+                },
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "RELATION_MISMATCH",
+                  "note": "“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。",
+                  "status": "fail"
+                },
+                {
+                  "check": "relation_direction",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "原文支持极限速度在特定物体条件下出现，方向一致。",
+                  "status": "pass"
+                },
+                {
+                  "check": "qualifiers",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "条件、时间范围、模态和适用对象均与原文一致。",
+                  "status": "pass"
+                },
+                {
+                  "check": "evidence_sufficiency",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。",
+                  "status": "fail"
+                },
+                {
+                  "check": "mapping",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "SCHEMA_GAP",
+                  "note": "关系未分配，端点类型未确定，需进一步映射。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "knowledge_scope",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "该知识在明确条件下成立，属于条件性知识。",
+                  "status": "pass"
+                },
+                {
+                  "check": "counterevidence",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4",
+                    "ev_c5efe073339500f9139b",
+                    "ev_11b2e5019eca4abf270d",
+                    "ev_bf5e78c4defacad4b2c0"
+                  ],
+                  "issue_code": "",
+                  "note": "未发现推翻该关系的反证。",
+                  "status": "pass"
+                },
+                {
+                  "check": "ontology",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "unknown",
+                  "note": "关系未分配，端点类型未确定，需进一步映射。",
+                  "status": "unknown"
+                }
+              ],
+              "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+              "committee_version": "committee_qwen_gemma_deepseek_v1",
+              "correction_policy_hash": "1d9090d007f1fabf222079a500675e532f3f6a5753f67585299bff72d28113d4",
+              "correction_policy_version": "targeted_review_repairs_v1",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [
+                "ev_c5efe073339500f9139b",
+                "ev_11b2e5019eca4abf270d",
+                "ev_bf5e78c4defacad4b2c0"
+              ],
+              "dimensions": {
+                "counterevidence": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4",
+                    "ev_c5efe073339500f9139b",
+                    "ev_11b2e5019eca4abf270d",
+                    "ev_bf5e78c4defacad4b2c0"
+                  ],
+                  "issue_code": "",
+                  "note": "未发现推翻该关系的反证。",
+                  "status": "pass"
+                },
+                "entity_reference": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。",
+                  "status": "pass"
+                },
+                "evidence_sufficiency": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。",
+                  "status": "fail"
+                },
+                "knowledge_scope": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "该知识在明确条件下成立，属于条件性知识。",
+                  "status": "conditional"
+                },
+                "mapping": {
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "SCHEMA_GAP",
+                  "note": "关系未分配，端点类型未确定，需进一步映射。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                "qualifiers": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "条件、时间范围、模态和适用对象均与原文一致。",
+                  "status": "pass"
+                },
+                "relation_direction": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "",
+                  "note": "原文支持极限速度在特定物体条件下出现，方向一致。",
+                  "status": "pass"
+                },
+                "relation_semantics": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "RELATION_MISMATCH",
+                  "note": "“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。",
+                  "status": "fail"
+                },
+                "triple_support": {
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "issue_code": "EVIDENCE_INSUFFICIENT",
+                  "note": "原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。",
+                  "status": "insufficient"
+                }
+              },
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "evidence_assessments": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "note": "直接支持极限速度在特定条件下出现。",
+                  "role": "support"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "note": "包含完整段落，支持条件性出现。",
+                  "role": "support"
+                },
+                {
+                  "evidence_id": "ev_c5efe073339500f9139b",
+                  "note": "提供速度极大值的背景，无直接支持。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_11b2e5019eca4abf270d",
+                  "note": "提供速度二次导数的背景，无直接支持。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_bf5e78c4defacad4b2c0",
+                  "note": "提供表1-3的背景，无直接支持。",
+                  "role": "context"
+                }
+              ],
+              "evidence_hash": "cb44f52b4e8e7c4d4dc60e8a0025c31bd7904ad62c35f573101e394f03dac4e4",
+              "expression_findings": [
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "kind": "semantic_error",
+                  "meaning_effect": "changed",
+                  "normalization": null,
+                  "note": "“出现于”与原文“会出现极限速度的情况”含义不一致。",
+                  "rule_id": "MEANING-001",
+                  "suggested_change": "将关系改为“在条件下出现”或类似表达以匹配原文。"
+                }
+              ],
+              "expression_status": "needs_revision",
+              "finish_reason": "stop",
+              "format_normalization": {
+                "changes": [
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/entity_reference/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/relation_direction/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/qualifiers/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/knowledge_scope/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/counterevidence/issue_code",
+                    "to": ""
+                  }
+                ],
+                "version": "dimension_auxiliary_fields_v1"
+              },
+              "input_tokens": 15599,
+              "knowledge_scope": "conditional",
+              "late_response": false,
+              "latency_ms": 39545,
+              "mapping": {
+                "competing_relation_ids": [],
+                "note": "关系未分配，端点类型未确定，需进一步映射。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              "mapping_diagnosis": "unassigned",
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "model_version_verification": "reported",
+              "object_revision": 1,
+              "ontology_context_hash": "22f869cf4ede7040d7e7c48970bae68ec00a01fcd7224a586264093f4992204e",
+              "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "output_tokens": 1349,
+              "primary_evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+              "prompt_version": "triple_validator_v8_citations_v3",
+              "proposal_digest": "629f45fe7ff5ab5bb8bf13873e0ade3f8358cf97ea07a63830097ec61d76a0fc",
+              "provider_started_at": 1794298971.7619424,
+              "queue_time_ms": 439,
+              "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"insufficient\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"entity_reference\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。\", \"issue_code\": null}, \"relation_semantics\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。\", \"issue_code\": \"RELATION_MISMATCH\"}, \"relation_direction\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"原文支持极限速度在特定物体条件下出现，方向一致。\", \"issue_code\": null}, \"qualifiers\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"条件、时间范围、模态和适用对象均与原文一致。\", \"issue_code\": null}, \"evidence_sufficiency\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。\", \"issue_code\": \"EVIDENCE_INSUFFICIENT\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"关系未分配，端点类型未确定，需进一步映射。\", \"issue_code\": \"SCHEMA_GAP\", \"relation_id\": null, \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"conditional\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"note\": \"该知识在明确条件下成立，属于条件性知识。\", \"issue_code\": null}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\", \"ev_c5efe073339500f9139b\", \"ev_11b2e5019eca4abf270d\", \"ev_bf5e78c4defacad4b2c0\"], \"note\": \"未发现推翻该关系的反证。\", \"issue_code\": null}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_74cbf07fbd9bd95d7404\", \"role\": \"support\", \"note\": \"直接支持极限速度在特定条件下出现。\"}, {\"evidence_id\": \"ev_de1b5bb727f4b980cff4\", \"role\": \"support\", \"note\": \"包含完整段落，支持条件性出现。\"}, {\"evidence_id\": \"ev_c5efe073339500f9139b\", \"role\": \"context\", \"note\": \"提供速度极大值的背景，无直接支持。\"}, {\"evidence_id\": \"ev_11b2e5019eca4abf270d\", \"role\": \"context\", \"note\": \"提供速度二次导数的背景，无直接支持。\"}, {\"evidence_id\": \"ev_bf5e78c4defacad4b2c0\", \"role\": \"context\", \"note\": \"提供表1-3的背景，无直接支持。\"}], \"primary_evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"counterevidence_reviewed_ids\": [\"ev_c5efe073339500f9139b\", \"ev_11b2e5019eca4abf270d\", \"ev_bf5e78c4defacad4b2c0\"], \"requested_context\": null, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": [{\"check\": \"relation_semantics\", \"kind\": \"semantic_error\", \"note\": \"“出现于”与原文“会出现极限速度的情况”含义不一致。\", \"evidence_ids\": [\"ev_74cbf07fbd9bd95d7404\", \"ev_de1b5bb727f4b980cff4\"], \"normalization\": null, \"rule_id\": \"MEANING-001\", \"meaning_effect\": \"changed\", \"suggested_change\": \"将关系改为“在条件下出现”或类似表达以匹配原文。\"}]}",
+              "reason_codes": [
+                "EVIDENCE_INSUFFICIENT",
+                "RELATION_MISMATCH"
+              ],
+              "reasoning_tokens": null,
+              "representation_checks": [],
+              "request_key": "c12faaf269e98be7529446a5cdc920f4dea6cf2412a2f19da5a59151c4712e70",
+              "requested_context": null,
+              "response_contract_version": "validator_response_v8",
+              "response_id": "chatcmpl-aeccb8836d21603c",
+              "response_status": "ok",
+              "returned_model_id": "Qwen",
+              "review_axes": {
+                "expression": {
+                  "findings": [
+                    {
+                      "check": "relation_semantics",
+                      "evidence_ids": [
+                        "ev_74cbf07fbd9bd95d7404",
+                        "ev_de1b5bb727f4b980cff4"
+                      ],
+                      "kind": "semantic_error",
+                      "meaning_effect": "changed",
+                      "normalization": null,
+                      "note": "“出现于”与原文“会出现极限速度的情况”含义不一致。",
+                      "rule_id": "MEANING-001",
+                      "suggested_change": "将关系改为“在条件下出现”或类似表达以匹配原文。"
+                    }
+                  ],
+                  "status": "semantic_revision"
+                },
+                "mapping": {
+                  "status": "unassigned"
+                },
+                "scope": {
+                  "knowledge_scope": "conditional",
+                  "status": "unclear"
+                },
+                "source": {
+                  "status": "insufficient"
+                }
+              },
+              "round_id": 1,
+              "schema_assessment": {
+                "evidence_ids": [
+                  "ev_74cbf07fbd9bd95d7404",
+                  "ev_de1b5bb727f4b980cff4"
+                ],
+                "issue": "unknown",
+                "note": "关系未分配，端点类型未确定，需进一步映射。",
+                "status": "unknown"
+              },
+              "schema_change_hint": null,
+              "schema_issue": "unknown",
+              "schema_status": "unknown",
+              "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+              "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+              "source_support": "insufficient",
+              "suggested_revision": null,
+              "summary_derivation": {
+                "final_admission_requires_frozen_committee_and_program_guards": true,
+                "model_input_fields": [
+                  "dimensions",
+                  "evidence_assessments"
+                ],
+                "policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+                "version": "review_field_rules_v1"
+              },
+              "supporting_evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "task_id": "cand_27498364cdfe1e4202f8",
+              "task_type": "triple_review",
+              "transport_metrics": {
+                "chunk_count": 1351,
+                "first_chunk_ms": 9592,
+                "first_content_ms": 9592,
+                "max_inter_chunk_gap_ms": 468,
+                "reasoning_chars": 0,
+                "stream": true,
+                "terminal_ms": 39545,
+                "visible_chars": 2836
+              },
+              "verdict": "uncertain",
+              "voter_id": "judge_a"
+            }
+          ],
+          "attempt_no": 1,
+          "actual_calls": 1
+        }
+      ],
+      "consensus": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "valid_votes": 0,
+        "invalid_votes": 0,
+        "uncertain_votes": 1,
+        "error_votes": 0,
+        "missing_votes": 2,
+        "duplicate_attempts": 0,
+        "duplicate_model_votes": 0,
+        "invalid_attempts": 0,
+        "distinct_family_count": 1,
+        "valid_distinct_family_count": 0,
+        "invalid_distinct_family_count": 0,
+        "diversity_ready": false,
+        "result": "unresolved",
+        "unresolved_counterevidence": false,
+        "unresolved_support_conflict": false,
+        "counter_evidence_ids": [],
+        "supporting_evidence_ids": [],
+        "source_support_consensus": {
+          "result": "unresolved",
+          "support_votes": 0,
+          "contradiction_votes": 0,
+          "support_voter_ids": [],
+          "committee_size": 3,
+          "required_votes": 3,
+          "contradiction_voter_ids": []
+        },
+        "admission_consensus": {
+          "result": "unresolved"
+        },
+        "eligible_voter_ids": [
+          "judge_a"
+        ],
+        "expression_complete": true,
+        "blocking_fields": [],
+        "raw_source_support_votes": [
+          {
+            "voter_id": "judge_a",
+            "source_support": "insufficient"
+          }
+        ],
+        "expression_status": "needs_revision",
+        "knowledge_scope": "unresolved",
+        "scope_confirmed": false,
+        "mapping_status": "ambiguous",
+        "effective_mapping_status": "unassigned",
+        "core_source_support_result": "unresolved",
+        "ontology_coverage_review": {
+          "context_hash": "22f869cf4ede7040d7e7c48970bae68ec00a01fcd7224a586264093f4992204e",
+          "full_catalog_included": false,
+          "global_gap_confirmable": false
+        },
+        "review_axes": {
+          "version": "review_axes_v1",
+          "source": {
+            "status": "unresolved",
+            "core_relation_status": "unresolved",
+            "evidence_ids": [
+              "ev_74cbf07fbd9bd95d7404",
+              "ev_de1b5bb727f4b980cff4"
+            ]
+          },
+          "expression": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "evidence_ids": [
+                  "ev_74cbf07fbd9bd95d7404",
+                  "ev_de1b5bb727f4b980cff4"
+                ],
+                "kind": "semantic_error",
+                "meaning_effect": "changed",
+                "normalization": null,
+                "note": "“出现于”与原文“会出现极限速度的情况”含义不一致。",
+                "rule_id": "MEANING-001",
+                "suggested_change": "将关系改为“在条件下出现”或类似表达以匹配原文。",
+                "voter_id": "judge_a"
+              }
+            ]
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "effective_mapping_status": "unassigned",
+            "preflight": {
+              "blocking_information": [
+                {
+                  "fields": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "id": "head",
+                  "kind": "entity"
+                },
+                {
+                  "fields": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "id": "tail",
+                  "kind": "entity"
+                },
+                {
+                  "fields": [
+                    "no_relation_candidate_recalled"
+                  ],
+                  "id": null,
+                  "kind": "relation"
+                }
+              ],
+              "budget_excluded_property_ids": [],
+              "candidate_hash": "fe19909096598bea55f9e1ce9a95a17a98586b5815504b5829f1b371a8f7bcd3",
+              "confusable_relations": [],
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_6d4e4bc59b551d0cbbebcb194591af2fb038602a560789521acfd9885217bade",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_bf5e78c4defacad4b2c0",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "surface": "极限速度",
+                  "type_candidate_ids": [
+                    "C_50d429da8af655ef68ae"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": null,
+                  "candidate_id": "local_572fe29e7c149893eeb34ce756db0d67a785b8054ea29e9ab919650a4d96bff3",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "endpoint_type_unassigned_or_ambiguous"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "surface": "弹道系数大而速度小的物体",
+                  "type_candidate_ids": []
+                }
+              },
+              "evidence_hash": "cb44f52b4e8e7c4d4dc60e8a0025c31bd7904ad62c35f573101e394f03dac4e4",
+              "formal_mapping": {
+                "assigned_head_type": null,
+                "assigned_relation_id": null,
+                "assigned_tail_type": null,
+                "candidate_relation_ids": [],
+                "semantic_approval": false
+              },
+              "global_gap_confirmed": false,
+              "judgment_ready": false,
+              "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema.",
+              "ontology_context_hash": "22f869cf4ede7040d7e7c48970bae68ec00a01fcd7224a586264093f4992204e",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "original_expression": {
+                "candidate_id": "cand_27498364cdfe1e4202f8",
+                "head": "极限速度",
+                "qualifier_status": {
+                  "applicability": "extracted",
+                  "condition": "extracted",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "extracted"
+                },
+                "qualifiers": {
+                  "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                  "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                  "modality": "may",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": "在通过速度最小值点后"
+                },
+                "revision": 1,
+                "surface_relation": "出现于",
+                "tail": "弹道系数大而速度小的物体"
+              },
+              "policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+              "relation_candidates": [],
+              "search_trace": [
+                {
+                  "metadata_complete": false,
+                  "property_count": 0,
+                  "stage": "review_subset"
+                },
+                {
+                  "classes_scanned": 189,
+                  "exact_match_ids": [],
+                  "lexical_recall_is_semantic_confirmation": false,
+                  "properties_scanned": 81,
+                  "property_count": 0,
+                  "stage": "full_bound_release_and_aliases"
+                }
+              ],
+              "semantic_applicability": "not_programmatically_confirmed",
+              "source_catalog_hash": "b1a42a3b6479ba491255113706717f582ed266e938ac17cfe252f88c6255a321",
+              "version": "mapping_preflight_v1"
+            },
+            "reason_codes": [
+              "FORMAL_MAPPING_UNASSIGNED"
+            ]
+          },
+          "scope": {
+            "status": "unclear",
+            "knowledge_scope": "unresolved",
+            "classification_confirmed": false,
+            "policy_version": "knowledge_scope_v2",
+            "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+            "authority": "program",
+            "category_label": "类别待确认",
+            "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。",
+            "reason": "类别未确认或审核席位不完整，等待范围复核"
+          }
+        },
+        "dispute_report": {
+          "version": "claim_disputes_v1",
+          "candidate_hash": "fe19909096598bea55f9e1ce9a95a17a98586b5815504b5829f1b371a8f7bcd3",
+          "evidence_hash": "cb44f52b4e8e7c4d4dc60e8a0025c31bd7904ad62c35f573101e394f03dac4e4",
+          "base_proposal_digest": "629f45fe7ff5ab5bb8bf13873e0ade3f8358cf97ea07a63830097ec61d76a0fc",
+          "opinions": [
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "counterevidence",
+              "claim": {
+                "check": "counterevidence",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "已核验材料中是否存在可能推翻“极限速度 — 出现于 — 弹道系数大而速度小的物体”的证据？未发现反证与找到正面支持分开记录。",
+                "formal_mapping": null,
+                "claim_id": "a1103049f8f6e677229a87b54c9910845a1e2c490078d8d8c9d7a871dde8d059"
+              },
+              "status": "pass",
+              "reason": "未发现推翻该关系的反证。",
+              "issue_type": "counterevidence",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4",
+                "ev_c5efe073339500f9139b",
+                "ev_11b2e5019eca4abf270d",
+                "ev_bf5e78c4defacad4b2c0"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_c5efe073339500f9139b",
+                  "quote": "当上式第一项的绝对值大于第二项时，则  $\\mathrm{d}^2 v / \\mathrm{d}t^2 < 0$  ，速度就能达到极大值  $v_{\\mathrm{max}}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29211,
+                  "end": 29302,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_11b2e5019eca4abf270d",
+                  "quote": "因为  $H(y)$  为  $y$  的减函数，故  $H_{y}^{\\prime}(y)$  为负值， $\\sin \\theta$  在降弧上也是负值，因而上式第一项始终为负值，而第二项只可能为正值。故速度的二次导数就有正、负两种可能性。当上式第一项的绝对值大于第二项时，则  $\\mathrm{d}^2 v / \\mathrm{d}t^2 < 0$  ，速度就能达到极大值  $v_{\\mathrm{max}}$  。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29090,
+                  "end": 29302,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_bf5e78c4defacad4b2c0",
+                  "quote": "表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_29d7bc4d8d69",
+                  "start": 29458,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "caption"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "entity_reference",
+              "claim": {
+                "check": "entity_reference",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "“极限速度 — 出现于 — 弹道系数大而速度小的物体”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+                "formal_mapping": null,
+                "claim_id": "66f8109f8943301ef0cfbd6f436ada3f5753997998405f8dc7674d28166b5dc6"
+              },
+              "status": "pass",
+              "reason": "“极限速度”和“弹道系数大而速度小的物体”均指向原文同一对象。",
+              "issue_type": "referent",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "evidence_sufficiency",
+              "claim": {
+                "check": "evidence_sufficiency",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "当前证据是否足以确认“极限速度 — 出现于 — 弹道系数大而速度小的物体”的完整含义？缺哪一段材料？",
+                "formal_mapping": null,
+                "claim_id": "8faa6b46b6ee90e40fafdb7de53f4dd9c259a5d7997152c2578944dd9981ad9f"
+              },
+              "status": "fail",
+              "reason": "当前证据不足以确认“出现于”关系的完整含义，缺少明确的关系定义。",
+              "issue_type": "evidence_sufficiency",
+              "meaning_effect": "unresolved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "knowledge_scope",
+              "claim": {
+                "check": "knowledge_scope",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "“极限速度 — 出现于 — 弹道系数大而速度小的物体”属于哪种收录范围？范围分类不能替代事实判断。",
+                "formal_mapping": null,
+                "claim_id": "3f456e5ac8652dfa0e0a487bf86b946881231b4be9aceef74b79350081102e11"
+              },
+              "status": "conditional",
+              "reason": "该知识在明确条件下成立，属于条件性知识。",
+              "issue_type": "scope",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "mapping",
+              "claim": {
+                "check": "mapping",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "“极限速度 — 出现于 — 弹道系数大而速度小的物体”与已填写关系 None 的正式定义、实体身份、方向和类型约束是否匹配？",
+                "formal_mapping": {
+                  "relation_id": null,
+                  "head_type": null,
+                  "tail_type": null
+                },
+                "claim_id": "64f5456e4f2949ee62706c33f1ae3b371c3d408fec6bc35da0f086ba63541653"
+              },
+              "status": "unassigned",
+              "reason": "关系未分配，端点类型未确定，需进一步映射。",
+              "issue_type": "formal_mapping",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "qualifiers",
+              "claim": {
+                "check": "qualifiers",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "“极限速度 — 出现于 — 弹道系数大而速度小的物体”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+                "formal_mapping": null,
+                "claim_id": "4314fe968b671f3a65b6a868b27114bce8b8403edafcb4d7501cabffc00f99ad"
+              },
+              "status": "pass",
+              "reason": "条件、时间范围、模态和适用对象均与原文一致。",
+              "issue_type": "qualifiers",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "relation_direction",
+              "claim": {
+                "check": "relation_direction",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否支持“极限速度 — 出现于 — 弹道系数大而速度小的物体”的头尾方向？",
+                "formal_mapping": null,
+                "claim_id": "08d73a80c42a46ee7e6268f22723962eb1b67b95bdf607364785898db64db606"
+              },
+              "status": "pass",
+              "reason": "原文支持极限速度在特定物体条件下出现，方向一致。",
+              "issue_type": "direction",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "relation_semantics",
+              "claim": {
+                "check": "relation_semantics",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "“极限速度 — 出现于 — 弹道系数大而速度小的物体”中的“出现于”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+                "formal_mapping": null,
+                "claim_id": "5730db5eacd240125b509c160aa8030f248d76b2cb6056e16a169da6b0329429"
+              },
+              "status": "fail",
+              "reason": "“出现于”与原文“会出现极限速度的情况”含义不一致，原文是条件性出现而非所属关系。",
+              "issue_type": "relation_meaning",
+              "meaning_effect": "changed",
+              "rule_ids": [
+                "MEANING-001"
+              ],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "triple_support",
+              "claim": {
+                "check": "triple_support",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否明确支持“极限速度 — 出现于 — 弹道系数大而速度小的物体”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+                "formal_mapping": null,
+                "claim_id": "13e886e072ac47398cb65cc3458e69dd555fa992977008c8a533470298f3e201"
+              },
+              "status": "insufficient",
+              "reason": "原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。",
+              "issue_type": "relation_meaning",
+              "meaning_effect": "unresolved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_74cbf07fbd9bd95d7404",
+                "ev_de1b5bb727f4b980cff4"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29458,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_de1b5bb727f4b980cff4",
+                  "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_f96ea77425fa",
+                  "chunk_id": "chunk_d370f9b140b8",
+                  "start": 29304,
+                  "end": 29514,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            }
+          ],
+          "disputes": [
+            {
+              "dispute_id": "dispute_c509bf3263be1a17363350f6",
+              "claim": {
+                "check": "triple_support",
+                "expression": {
+                  "head": "极限速度",
+                  "surface_relation": "出现于",
+                  "tail": "弹道系数大而速度小的物体",
+                  "qualifiers": {
+                    "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                    "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                    "modality": "may",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": "在通过速度最小值点后"
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否明确支持“极限速度 — 出现于 — 弹道系数大而速度小的物体”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+                "formal_mapping": null,
+                "claim_id": "13e886e072ac47398cb65cc3458e69dd555fa992977008c8a533470298f3e201"
+              },
+              "check": "triple_support",
+              "issue_type": "relation_meaning",
+              "question": "原文是否明确支持“极限速度 — 出现于 — 弹道系数大而速度小的物体”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+              "opinions": [
+                {
+                  "voter_id": "judge_a",
+                  "model_id": "Qwen",
+                  "check": "triple_support",
+                  "claim": {
+                    "check": "triple_support",
+                    "expression": {
+                      "head": "极限速度",
+                      "surface_relation": "出现于",
+                      "tail": "弹道系数大而速度小的物体",
+                      "qualifiers": {
+                        "applicability": "弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备",
+                        "condition": "在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性",
+                        "modality": "may",
+                        "polarity": "positive",
+                        "quantifier": null,
+                        "time_scope": "在通过速度最小值点后"
+                      },
+                      "semantic_context": null
+                    },
+                    "question": "原文是否明确支持“极限速度 — 出现于 — 弹道系数大而速度小的物体”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+                    "formal_mapping": null,
+                    "claim_id": "13e886e072ac47398cb65cc3458e69dd555fa992977008c8a533470298f3e201"
+                  },
+                  "status": "insufficient",
+                  "reason": "原文仅说明在特定条件下会出现极限速度，未明确支持“出现于”这一具体关系。",
+                  "issue_type": "relation_meaning",
+                  "meaning_effect": "unresolved",
+                  "rule_ids": [],
+                  "classification_basis": "structured_finding_or_dimension",
+                  "legacy": false,
+                  "evidence_ids": [
+                    "ev_74cbf07fbd9bd95d7404",
+                    "ev_de1b5bb727f4b980cff4"
+                  ],
+                  "source_positions": [
+                    {
+                      "evidence_id": "ev_74cbf07fbd9bd95d7404",
+                      "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。",
+                      "anchor_valid": true,
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                      "section_id": "section_f96ea77425fa",
+                      "chunk_id": "chunk_d370f9b140b8",
+                      "start": 29304,
+                      "end": 29458,
+                      "offset_basis": "canonical_document",
+                      "block_type": "paragraph"
+                    },
+                    {
+                      "evidence_id": "ev_de1b5bb727f4b980cff4",
+                      "quote": "② 对于弹道系数大而速度小的物体，如空投炸弹，用降落伞空投人员或装备，在通过速度最小值点后，由于落下角度  $\\theta = \\pi /2$  ，  $H(y)\\approx 1$  ，会出现  $CH(y)F(v) = g$  的可能性，因而会出现极限速度  $v_{\\mathrm{j}}$  的情况。表1-3列出了弹道系数  $C$  （43年阻力定律）与极限速度  $v_{\\mathrm{j}}$  的关系。",
+                      "anchor_valid": true,
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                      "section_id": "section_f96ea77425fa",
+                      "chunk_id": "chunk_d370f9b140b8",
+                      "start": 29304,
+                      "end": 29514,
+                      "offset_basis": "canonical_document",
+                      "block_type": "paragraph"
+                    }
+                  ],
+                  "relation_id": null
+                }
+              ],
+              "route": "supplement_source_context",
+              "status": "open",
+              "positive_role_conflict": true,
+              "majority_is_resolution": false,
+              "required_material": "相关完整句子、条件、公式及前后文"
+            }
+          ],
+          "evidence_observations": [
+            {
+              "voter_id": "judge_a",
+              "positive_support": {
+                "status": "unresolved",
+                "evidence_ids": [
+                  "ev_74cbf07fbd9bd95d7404",
+                  "ev_de1b5bb727f4b980cff4"
+                ],
+                "core_source_status": "insufficient",
+                "full_source_status": "insufficient",
+                "not_inferred_from_counter_absence": true
+              },
+              "counterevidence_search": {
+                "status": "reviewed_no_material_counter_recorded",
+                "counter_evidence_ids": [],
+                "reviewed_evidence_ids": [
+                  "ev_74cbf07fbd9bd95d7404",
+                  "ev_de1b5bb727f4b980cff4",
+                  "ev_c5efe073339500f9139b",
+                  "ev_11b2e5019eca4abf270d",
+                  "ev_bf5e78c4defacad4b2c0"
+                ],
+                "note": "未发现推翻该关系的反证。",
+                "scope": "frozen_evidence_bundle_only",
+                "absence_is_support": false
+              }
+            }
+          ],
+          "technical_seats": [
+            {
+              "voter_id": "judge_b",
+              "response_status": "missing",
+              "error_code": null
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "missing",
+              "error_code": null
+            }
+          ],
+          "majority_is_resolution": false,
+          "counter_absence_is_support": false,
+          "admission_authorized": false
+        }
+      },
+      "vote_assessments": {
+        "judge_a": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_a",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "c476accea6e2f20c6cf940673514dde47cd20ef7ebf514aa1600c713c5a1aded",
+          "normalized_response_hash": "4d37b3d574821c208bd3e6915cd2360888518a9611247f304f41e717ae44bba5",
+          "original_attempt_id": "attempt_23d067ae523c4a328c9d0217e6614a12",
+          "attempt_id": "attempt_23d067ae523c4a328c9d0217e6614a12",
+          "request_key": "c12faaf269e98be7529446a5cdc920f4dea6cf2412a2f19da5a59151c4712e70",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "insufficient"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "semantic_revision",
+                "findings": [
+                  {
+                    "check": "relation_semantics",
+                    "kind": "semantic_error",
+                    "note": "“出现于”与原文“会出现极限速度的情况”含义不一致。",
+                    "evidence_ids": [
+                      "ev_74cbf07fbd9bd95d7404",
+                      "ev_de1b5bb727f4b980cff4"
+                    ],
+                    "normalization": null,
+                    "rule_id": "MEANING-001",
+                    "meaning_effect": "changed",
+                    "suggested_change": "将关系改为“在条件下出现”或类似表达以匹配原文。"
+                  }
+                ]
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "conditional"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      }
+    }
+  ]
+}
