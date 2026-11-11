@@ -1,0 +1,49 @@
+{
+  "phases": {
+    "committee:initial": {
+      "requests": 90,
+      "input_tokens": 1731797,
+      "output_tokens": 106160,
+      "usage_missing": 0,
+      "latency_ms_sum": 3686248,
+      "receipt_statuses": {
+        "ok": 79,
+        "invalid_contract": 10,
+        "invalid_reference": 1
+      }
+    },
+    "committee:field_patch": {
+      "requests": 9,
+      "input_tokens": 38395,
+      "output_tokens": 6463,
+      "usage_missing": 0,
+      "latency_ms_sum": 214012,
+      "receipt_statuses": {
+        "ok": 8,
+        "invalid_contract": 1
+      }
+    },
+    "planner": {
+      "requests": 91,
+      "input_tokens": 1525505,
+      "output_tokens": 17385,
+      "usage_missing": 20,
+      "latency_ms_sum": 2989357,
+      "receipt_statuses": {
+        "ok": 70,
+        "api_error": 20,
+        "invalid_action": 1
+      }
+    }
+  },
+  "tool_calls": {
+    "inspect_ontology": 30,
+    "run_validation": 30,
+    "finish_review": 30,
+    "search_evidence": 2
+  },
+  "currency_cost": null,
+  "total_reported_tokens": 3425705,
+  "semantic_quality_not_inferred_from_receipt_status": true,
+  "latency_sums_are_not_wall_time": true
+}

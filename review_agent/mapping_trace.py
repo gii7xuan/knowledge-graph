@@ -3,7 +3,7 @@ from collections import Counter
 from copy import deepcopy
 from .contracts import sha256_json
 
-VERSION='mapping_execution_trace_v1'
+VERSION='mapping_execution_trace_v2'
 
 
 def process(proposal, votes=()):
@@ -42,8 +42,30 @@ def process(proposal, votes=()):
         original_expression=deepcopy(preflight.get('original_expression')),semantic_equivalence_confirmed=False)
     stage('constraint_check','completed' if guard.get('status')=='pass' else 'failed' if guard.get('status')=='fail' else 'not_found' if guard else 'not_executed',
         result=guard.get('status'),reason_codes=guard.get('reason_codes',[]))
+    blockers=[]
+    if not preflight:blockers.append({'stage':'mapping_entry','reason':'mapping_not_executed'})
+    if failure:blockers.append({'stage':'global_retrieval','reason':'retrieval_failed','detail':deepcopy(failure)})
+    for item in preflight.get('blocking_information') or []:
+        fields=item.get('fields') or []
+        reason=('identity_ambiguous' if item.get('kind')=='entity' else
+                'retrieval_failed' if item.get('kind')=='context' else
+                'definition_missing' if any('definition' in f for f in fields) else 'mapping_material_incomplete')
+        blockers.append({'stage':'entity_identity' if item.get('kind')=='entity' else 'relation_definitions',
+            'reason':reason,'detail':deepcopy(item)})
+    if guard.get('status')=='fail':
+        blockers.append({'stage':'constraint_check','reason':'constraint_conflict','detail':deepcopy(guard.get('reason_codes'))})
+    # An assigned candidate ID and a model opinion are proposals, not approved mappings.
+    stages.insert(0,{'stage':'mapping_entry','status':'completed' if preflight else 'not_executed'})
+    stage('state_summary','observed',candidate_assignment=deepcopy(preflight.get('formal_mapping')),
+        guard_status=guard.get('status'),publication_is_mapping_validation=False)
     return {'version':VERSION,'proposal_digest':proposal.get('proposal_digest'),
         'preflight_hash':sha256_json(preflight) if preflight else None,'stages':stages,
+        'blockers':blockers,
+        'milestones':{'proposal_formed':bool(mappings),
+            'candidate_id_assigned':bool((preflight.get('formal_mapping') or {}).get('assigned_relation_id')),
+            'structural_constraints_passed':guard.get('structural_status')=='pass',
+            'full_guard_passed':guard.get('status')=='pass',
+            'human_confirmed':None,'formally_registered':None},
         'blocking_information':deepcopy(preflight.get('blocking_information') or []),
         'global_gap_confirmed':False,'mapping_accuracy':'requires_current_packet_human_annotation'}
 

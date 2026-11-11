@@ -41,6 +41,7 @@ def judge_repair_once(voter,proposal,feedback):
         wire=response_format(profile,repairs.repair_schema(plan))
         if wire['type']=='json_schema':wire['json_schema']['name']='triple_review_field_repair_v1'
         patch_response=voter['client'].complete_json(payload,system_prompt=repairs.PROMPT,
+            compact_json=plan['policy'].get('version')=='targeted_review_repairs_v2',
             max_tokens=plan['policy']['limits']['max_output_tokens'],
             timeout_seconds=min(plan['policy']['limits']['timeout_seconds'],voter.get('http_timeout_seconds',60)),response_format=wire)
         if getattr(patch_response,'finish_reason',None) in {'length','max_tokens','incomplete'}:
@@ -130,7 +131,9 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
                     prompt=repairs.PROMPT
                     wire=response_format(profile,repairs.repair_schema(plan))
                 if profile['mode']=='json_schema':payload.pop('output_template',None)
-                input_bytes=len(json.dumps({'system':prompt,'payload':payload,'response_format':wire},ensure_ascii=False).encode('utf-8'))
+                compact=plan['policy'].get('version')=='targeted_review_repairs_v2'
+                input_bytes=len(json.dumps({'system':prompt,'payload':payload,'response_format':wire},ensure_ascii=False,
+                    **({'separators':(',',':')} if compact else {})).encode('utf-8'))
                 reserve_tokens=input_bytes+1024+limits['max_output_tokens']
                 if input_bytes>limits['max_input_bytes'] or reserve_tokens>limits['max_reserved_tokens_per_candidate_version'] or reserve_tokens>voter.get('correction_token_budget',float('inf')):
                     final=terminal(final,'field correction payload exceeds frozen input/token budget','RESPONSE_CORRECTION_BUDGET')

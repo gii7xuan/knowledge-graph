@@ -85,7 +85,7 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
         profile=frozen_profile(voter,proposal,contract.RESPONSE_SCHEMA)
         payload['output_structure']=profile
         if profile['mode']=='json_template':payload['output_template']=fixed_template(contract.RESPONSE_SCHEMA)
-    if proposal.get('prompt_version')=='triple_validator_v8_citations_v3':
+    if proposal.get('prompt_version') in {'triple_validator_v8_citations_v3','triple_validator_v8_citations_v4'}:
         payload['output_instruction']=contract.USER_SUFFIX
     return payload
 

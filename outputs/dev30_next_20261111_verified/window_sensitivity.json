@@ -1,0 +1,247 @@
+{
+  "kind": "counterfactual_saved_receipt_reconciliation",
+  "new_model_calls": 0,
+  "historical_decisions_changed": false,
+  "timing_origin": "durable request started_at to response_received_at (persisted after worker result)",
+  "limitation": "Fixed selected attempts and vote rules. Larger windows can change scheduling in a real run; no throughput prediction.",
+  "receipts": [
+    {
+      "sample_id": "DEV-012",
+      "voter_id": "judge_a",
+      "attempt_id": "attempt_b4a5d00916c14c21829fa00f3d222ddc",
+      "started_at_epoch": 1794363630.192815,
+      "response_received_at_epoch": 1794363730.0861347,
+      "original_deadline_epoch": 1794363720.192815,
+      "settlement_elapsed_seconds": 99.893319606781,
+      "worker_latency_ms": 99530,
+      "local_dispatch_queue_ms": 283,
+      "transport_metrics": {
+        "chunk_count": 1294,
+        "first_chunk_ms": 8764,
+        "first_content_ms": 8764,
+        "max_inter_chunk_gap_ms": 952,
+        "reasoning_chars": 0,
+        "stream": true,
+        "terminal_ms": 99530,
+        "visible_chars": 2705
+      },
+      "actual_receipt_eligible": true,
+      "provider_queue_ms": null,
+      "parse_and_validation_separate_ms": null
+    },
+    {
+      "sample_id": "DEV-019",
+      "voter_id": "judge_a",
+      "attempt_id": "attempt_78b6261f287d4ce6bb8c56d122213e93",
+      "started_at_epoch": 1794364349.197992,
+      "response_received_at_epoch": 1794364484.8143032,
+      "original_deadline_epoch": 1794364439.197992,
+      "settlement_elapsed_seconds": 135.61631107330322,
+      "worker_latency_ms": 135202,
+      "local_dispatch_queue_ms": 321,
+      "transport_metrics": {
+        "chunk_count": 2443,
+        "first_chunk_ms": 10842,
+        "first_content_ms": 10858,
+        "max_inter_chunk_gap_ms": 1484,
+        "reasoning_chars": 0,
+        "stream": true,
+        "terminal_ms": 135202,
+        "visible_chars": 4664
+      },
+      "actual_receipt_eligible": true,
+      "provider_queue_ms": null,
+      "parse_and_validation_separate_ms": null
+    },
+    {
+      "sample_id": "DEV-028",
+      "voter_id": "judge_a",
+      "attempt_id": "attempt_04b9dc4248d44a3a8d1a7d13ec2e7541",
+      "started_at_epoch": 1794365071.2543206,
+      "response_received_at_epoch": 1794365221.123824,
+      "original_deadline_epoch": 1794365161.2383206,
+      "settlement_elapsed_seconds": 149.8695032596588,
+      "worker_latency_ms": 149375,
+      "local_dispatch_queue_ms": 355,
+      "transport_metrics": {
+        "chunk_count": 2169,
+        "first_chunk_ms": 11235,
+        "first_content_ms": 11235,
+        "max_inter_chunk_gap_ms": 3672,
+        "reasoning_chars": 0,
+        "stream": true,
+        "terminal_ms": 149375,
+        "visible_chars": 4146
+      },
+      "actual_receipt_eligible": true,
+      "provider_queue_ms": null,
+      "parse_and_validation_separate_ms": null
+    }
+  ],
+  "windows": [
+    {
+      "window_seconds": 90,
+      "complete_proposals": 25,
+      "sample_ids": [
+        "DEV-001",
+        "DEV-002",
+        "DEV-003",
+        "DEV-004",
+        "DEV-005",
+        "DEV-006",
+        "DEV-007",
+        "DEV-008",
+        "DEV-009",
+        "DEV-010",
+        "DEV-011",
+        "DEV-013",
+        "DEV-014",
+        "DEV-015",
+        "DEV-016",
+        "DEV-017",
+        "DEV-018",
+        "DEV-020",
+        "DEV-021",
+        "DEV-023",
+        "DEV-025",
+        "DEV-026",
+        "DEV-027",
+        "DEV-029",
+        "DEV-030"
+      ],
+      "reconciled_seats": []
+    },
+    {
+      "window_seconds": 120,
+      "complete_proposals": 26,
+      "sample_ids": [
+        "DEV-001",
+        "DEV-002",
+        "DEV-003",
+        "DEV-004",
+        "DEV-005",
+        "DEV-006",
+        "DEV-007",
+        "DEV-008",
+        "DEV-009",
+        "DEV-010",
+        "DEV-011",
+        "DEV-012",
+        "DEV-013",
+        "DEV-014",
+        "DEV-015",
+        "DEV-016",
+        "DEV-017",
+        "DEV-018",
+        "DEV-020",
+        "DEV-021",
+        "DEV-023",
+        "DEV-025",
+        "DEV-026",
+        "DEV-027",
+        "DEV-029",
+        "DEV-030"
+      ],
+      "reconciled_seats": [
+        {
+          "sample_id": "DEV-012",
+          "voter_id": "judge_a"
+        }
+      ]
+    },
+    {
+      "window_seconds": 150,
+      "complete_proposals": 27,
+      "sample_ids": [
+        "DEV-001",
+        "DEV-002",
+        "DEV-003",
+        "DEV-004",
+        "DEV-005",
+        "DEV-006",
+        "DEV-007",
+        "DEV-008",
+        "DEV-009",
+        "DEV-010",
+        "DEV-011",
+        "DEV-012",
+        "DEV-013",
+        "DEV-014",
+        "DEV-015",
+        "DEV-016",
+        "DEV-017",
+        "DEV-018",
+        "DEV-020",
+        "DEV-021",
+        "DEV-023",
+        "DEV-025",
+        "DEV-026",
+        "DEV-027",
+        "DEV-028",
+        "DEV-029",
+        "DEV-030"
+      ],
+      "reconciled_seats": [
+        {
+          "sample_id": "DEV-012",
+          "voter_id": "judge_a"
+        },
+        {
+          "sample_id": "DEV-019",
+          "voter_id": "judge_a"
+        },
+        {
+          "sample_id": "DEV-028",
+          "voter_id": "judge_a"
+        }
+      ]
+    },
+    {
+      "window_seconds": 180,
+      "complete_proposals": 27,
+      "sample_ids": [
+        "DEV-001",
+        "DEV-002",
+        "DEV-003",
+        "DEV-004",
+        "DEV-005",
+        "DEV-006",
+        "DEV-007",
+        "DEV-008",
+        "DEV-009",
+        "DEV-010",
+        "DEV-011",
+        "DEV-012",
+        "DEV-013",
+        "DEV-014",
+        "DEV-015",
+        "DEV-016",
+        "DEV-017",
+        "DEV-018",
+        "DEV-020",
+        "DEV-021",
+        "DEV-023",
+        "DEV-025",
+        "DEV-026",
+        "DEV-027",
+        "DEV-028",
+        "DEV-029",
+        "DEV-030"
+      ],
+      "reconciled_seats": [
+        {
+          "sample_id": "DEV-012",
+          "voter_id": "judge_a"
+        },
+        {
+          "sample_id": "DEV-019",
+          "voter_id": "judge_a"
+        },
+        {
+          "sample_id": "DEV-028",
+          "voter_id": "judge_a"
+        }
+      ]
+    }
+  ]
+}

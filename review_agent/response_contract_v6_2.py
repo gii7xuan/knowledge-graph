@@ -34,7 +34,7 @@ def validate_correction_trace(vote):
         from .contracts import sha256_json
         plan=vote['correction_trace']['plan'];original=_parse_content(vote['raw_response'])
         patch=_parse_content(vote['raw_correction_response'])
-        if plan['policy']['version']!=correction.POLICY_VERSION or sha256_json(plan['policy'])!=vote['correction_policy_hash']:
+        if plan['policy']['version'] not in {'targeted_review_repairs_v1',correction.POLICY_VERSION} or sha256_json(plan['policy'])!=vote['correction_policy_hash']:
             return ['field correction policy mismatch']
         if sha256_json({k:v for k,v in plan.items() if k!='plan_hash'})!=plan['plan_hash']:return ['field correction plan hash mismatch']
         bound=vote.get('cache_source',{}).get('proposal_digest',vote.get('proposal_digest'))

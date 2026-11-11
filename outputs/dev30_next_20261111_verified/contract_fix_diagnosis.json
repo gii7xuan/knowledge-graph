@@ -1,0 +1,55 @@
+[
+  {
+    "sample_id": "DEV-019",
+    "voter_id": "judge_b",
+    "original_status": "invalid_contract",
+    "original_error": "normalization must reference the exact source-bound deterministic plan",
+    "original_stop_reason": "field patch did not satisfy the unchanged review contract",
+    "conflicts": [],
+    "blocked_field_repairs": [
+      "semantic inconsistency has no safe field-only repair"
+    ],
+    "next_attempt_kind": "manual_review",
+    "new_payload_input_bytes": null,
+    "new_payload_fits_input_limit": null,
+    "source_bound_plan_ids": [],
+    "new_payload_is_offline_only": true,
+    "new_semantic_judgment": null
+  },
+  {
+    "sample_id": "DEV-022",
+    "voter_id": "judge_b",
+    "original_status": "invalid_contract",
+    "original_error": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles; dismissed counterexamples and unresolved material counterevidence have different roles",
+    "original_stop_reason": "field correction payload exceeds frozen input/token budget",
+    "conflicts": [
+      "material counterevidence conflicts with counterevidence=pass",
+      "counterevidence_reviewed_ids overlaps material counterevidence"
+    ],
+    "blocked_field_repairs": [
+      "material counterevidence conflicts with counterevidence=pass",
+      "counterevidence_reviewed_ids overlaps material counterevidence"
+    ],
+    "next_attempt_kind": "semantic_clarification",
+    "new_payload_input_bytes": 10210,
+    "new_payload_fits_input_limit": true,
+    "source_bound_plan_ids": [],
+    "new_payload_is_offline_only": true,
+    "new_semantic_judgment": null
+  },
+  {
+    "sample_id": "DEV-024",
+    "voter_id": "judge_b",
+    "original_status": "invalid_contract",
+    "original_error": "$.dimensions.mapping.relation_id: required; $.dimensions.mapping.competing_relation_ids: required",
+    "original_stop_reason": "field correction payload exceeds frozen input/token budget",
+    "conflicts": [],
+    "blocked_field_repairs": [],
+    "next_attempt_kind": "field_patch",
+    "new_payload_input_bytes": 15882,
+    "new_payload_fits_input_limit": true,
+    "source_bound_plan_ids": [],
+    "new_payload_is_offline_only": true,
+    "new_semantic_judgment": null
+  }
+]

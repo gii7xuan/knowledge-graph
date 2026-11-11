@@ -522,9 +522,9 @@ type ChartAxisConfig = {
 ```
 
 Set chart fonts with `textStyle.typeface`, as in
-`{ typeface: "Arial", fontSize: 14 }`. `ChartTextStyleConfig` does not accept
-`fontFamily`. Use a string for `typeface` and booleans for `bold` and `italic`
-in axis, legend, title, and data-label configs.
+`{ typeface: "Arial", fontSize: 14 }`. Data-label styles also accept the string
+alias `fontFamily`; an explicit `typeface` takes precedence. Use booleans for
+`bold` and `italic`.
 
 ## Cookbook
 

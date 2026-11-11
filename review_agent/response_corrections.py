@@ -7,7 +7,7 @@ from .contracts import sha256_json
 from .schema_validation import schema_errors,fixed_template
 from . import response_contract_v6 as v6
 
-POLICY_VERSION='targeted_review_repairs_v1'
+POLICY_VERSION='targeted_review_repairs_v2'
 PROMPT=(Path(__file__).resolve().parents[1]/'prompts/triple_review_field_repair_v1.txt').read_text(encoding='utf-8')
 PROMPT_HASH=hashlib.sha256(PROMPT.encode()).hexdigest()
 DEFAULT_LIMITS={'max_corrections_per_seat':1,'max_calls_per_candidate_version':3,'max_input_bytes':16000,
@@ -255,4 +255,7 @@ def repair_payload(original,plan,proposal):
                 'source_context_hash':proposal['ontology_context_hash'],'full_catalog_reviewed_in_this_call':False,
                 'absence_confirmed':False,'constraint':'A partial repair lookup cannot confirm a global ontology gap.'}
             payload['ontology_context_hash']=proposal['ontology_context_hash']
+    if plan['policy'].get('version') == 'targeted_review_repairs_v2':
+        from .correction_context import compact_ontology
+        compact_ontology(payload)
     return payload

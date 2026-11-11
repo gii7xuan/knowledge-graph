@@ -36,7 +36,10 @@ def now():return datetime.now(timezone(timedelta(hours=8))).isoformat()
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',required=True,type=Path);parser.add_argument('--run',action='store_true')
-    parser.add_argument('--samples',nargs='+',choices=CASES,default=list(CASES))
+    parser.add_argument('--source',type=Path,default=SOURCE)
+    parser.add_argument('--derived',type=Path,default=DERIVED)
+    parser.add_argument('--current-correction-policy',action='store_true')
+    parser.add_argument('--samples',nargs='+',default=list(CASES))
     parser.add_argument('--voters',nargs='+',choices=('judge_a','judge_b','judge_c'),default=['judge_a','judge_b','judge_c'])
     args=parser.parse_args()
     out=args.output.resolve()
@@ -51,10 +54,10 @@ def main():
         if (u.scheme,u.hostname,u.port,u.path.rstrip('/')) not in {
             ('https','43.143.151.41',3000,'/v1'),('https','api.deepseek.com',None,'')}:
             raise ValueError('pilot may use only the user-authorized destinations')
-    watched=[SOURCE/'review.sqlite3',DERIVED/'review_packets.json',DERIVED/'smoke_report.json',
+    watched=[args.source/'review.sqlite3',args.derived/'review_packets.json',args.derived/'smoke_report.json',
         ROOT/'runs/v3/review.sqlite3',ROOT/'outputs/dev30_v8_focus_20261110_final/annotation_first5/annotations.json']
     protected={str(p):digest(p) for p in watched}
-    old_repo=ReadOnlyRepository(SOURCE/'review.sqlite3');cases=read(DERIVED/'smoke_report.json')['cases']
+    old_repo=ReadOnlyRepository(args.source/'review.sqlite3');cases=read(args.derived/'smoke_report.json')['cases']
     contract=contract_for('validator_response_v8');prepared=[]
     for sid in args.samples:
         case=next(c for c in cases if c['sample_id']==sid)
@@ -62,6 +65,10 @@ def main():
         old_p=deepcopy(p);p=deepcopy(p)
         p.update(audit_id='missing_vote_pilot_'+uuid4().hex,round_id=1,
             prompt_version=contract.PROMPT_VERSION,prompt_hash=contract.PROMPT_HASH,request_cache_namespace=out.name)
+        if args.current_correction_policy:
+            from review_agent.response_corrections import policy_for
+            policy=policy_for(config)
+            p.update(correction_policy=policy,correction_policy_version=policy['version'],correction_policy_hash=sha256_json(policy))
         for generation in p['validator_generation']:
             voter=next((v for v in voters if v['id']==generation['voter_id']),None)
             if voter:generation['output_transport']=resolve_profile(voter,config,contract.RESPONSE_SCHEMA)
@@ -69,8 +76,9 @@ def main():
         assert p['proposal_digest']!=old_p['proposal_digest']
         # No source, ontology, field rules or old opinions are changed/replayed.
         for key in ('candidate','evidence_bundle','ontology_context','field_spec','field_standardization',
-                    'review_scope_policy','correction_policy','committee_policy','committee_members'):
+                    'review_scope_policy','committee_policy','committee_members'):
             assert p[key]==old_p[key]
+        if not args.current_correction_policy:assert p['correction_policy']==old_p['correction_policy']
         prompt_for(p)
         for v in voters:validator_payload(p,v)
         prepared.append({'sample_id':sid,'old_proposal_digest':old_p['proposal_digest'],'proposal':p,

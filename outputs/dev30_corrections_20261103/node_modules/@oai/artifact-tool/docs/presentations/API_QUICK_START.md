@@ -100,15 +100,16 @@ file copy.
 
 - Use `.items` for array methods, `chart.series.getItemAt(index)` for a series,
   and `presentation.slides.getItem(index)` for a slide.
-- Use `.add()` for individual points and label overrides. Assign a config to
-  `series.marker` or `chart.xAxis.textStyle`. See [chart editing](api/references/charts.spec.md).
+- Style a point by data index with `series.apply`. Add label overrides with
+  `series.dataLabelOverrides.add(index)`. Assign a config to `series.marker`
+  or `chart.xAxis.textStyle`. See [chart editing](api/references/charts.spec.md).
 - Combo charts take series through `groups`, with at least one primary-axis
   group. See [combo charts](api/references/charts.spec.md#combo-charts).
 
 ```js
 const seriesNames = chart.series.items.map((series) => series.name);
 const firstSeries = chart.series.getItemAt(0);
-firstSeries.points.add(0).fill = "#2563eb";
+firstSeries.apply({ name: firstSeries.name, points: [{ idx: 0, fill: "#2563eb" }] });
 firstSeries.marker = { symbol: "circle", size: 8 };
 firstSeries.dataLabelOverrides.add(0).showValue = true;
 chart.xAxis.textStyle = { fontSize: "17pt", bold: true };

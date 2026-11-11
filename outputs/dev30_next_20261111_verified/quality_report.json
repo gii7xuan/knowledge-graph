@@ -1,0 +1,183 @@
+{
+  "version": "four_axis_quality_v1",
+  "partition": "development",
+  "quality_claim": "开发回归，不能作为独立泛化结论",
+  "population": 30,
+  "human_resolved": 0,
+  "human_admission_truth_missing": 30,
+  "auto_admitted": 0,
+  "all_manual_is_success": false,
+  "metrics": [
+    {
+      "id": "auto_admission_precision",
+      "title": "自动准入精确率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 0,
+      "status": "not_evaluable",
+      "reason": "没有自动准入候选，暂不可评估",
+      "denominator_note": "所有已实际自动准入的候选；缺失真值不缩小分母"
+    },
+    {
+      "id": "false_admission_rate",
+      "title": "错误放行率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 30,
+      "status": "not_evaluable",
+      "reason": "没有符合分母条件的样本",
+      "denominator_note": "人工确认不满足完整准入条件的候选；全体缺失真值另计"
+    },
+    {
+      "id": "usable_auto_admission_rate",
+      "title": "可用候选自动通过率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 30,
+      "status": "not_evaluable",
+      "reason": "没有符合分母条件的样本",
+      "denominator_note": "人工确认满足全部准入条件的候选"
+    },
+    {
+      "id": "revision_success_rate",
+      "title": "修订成功率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 0,
+      "status": "not_evaluable",
+      "reason": "没有实际应用的修订；修订建议不计成功",
+      "denominator_note": "实际应用的修订操作；拆分须全部子候选独立验证"
+    },
+    {
+      "id": "unnecessary_revision_rate",
+      "title": "不必要修订率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 30,
+      "status": "not_evaluable",
+      "reason": "没有符合分母条件的样本",
+      "denominator_note": "人工确认原始表达规范的候选；范围排除、等待映射和技术失败不算修订要求"
+    },
+    {
+      "id": "mapping_accuracy",
+      "title": "本体映射正确率",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unknown_count": 0,
+      "status": "not_evaluable",
+      "reason": "没有完成的正式映射，暂不可评估",
+      "denominator_note": "已完成且有正式ID的映射；人工同时核验身份、关系语义和类型约束"
+    }
+  ],
+  "recommendation_metrics": {
+    "version": "recommendation_quality_v1",
+    "human_resolved": 0,
+    "unlabeled": 30,
+    "human_admission_unknown": 0,
+    "metrics": [
+      {
+        "id": "recommendation_precision",
+        "title": "准入建议精确率",
+        "value": null,
+        "numerator": 0,
+        "denominator": 0,
+        "status": "not_evaluable",
+        "coverage": {
+          "population": 30,
+          "labeled_comparable": 0,
+          "unknown_or_missing": 30
+        },
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错"
+      },
+      {
+        "id": "false_recommendation_rate",
+        "title": "错误建议准入率",
+        "value": null,
+        "numerator": 0,
+        "denominator": 0,
+        "status": "not_evaluable",
+        "coverage": {
+          "population": 30,
+          "labeled_comparable": 0,
+          "unknown_or_missing": 30
+        },
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错"
+      },
+      {
+        "id": "usable_recommendation_rate",
+        "title": "可用候选建议通过率",
+        "value": null,
+        "numerator": 0,
+        "denominator": 0,
+        "status": "not_evaluable",
+        "coverage": {
+          "population": 30,
+          "labeled_comparable": 0,
+          "unknown_or_missing": 30
+        },
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错"
+      },
+      {
+        "id": "unnecessary_revision_recommendation_rate",
+        "title": "不必要修订建议率",
+        "value": null,
+        "numerator": 0,
+        "denominator": 0,
+        "status": "not_evaluable",
+        "coverage": {
+          "population": 30,
+          "human_no_revision": 0,
+          "unknown_or_missing": 30
+        },
+        "reason": "没有对应的有效人工标签或分母样本",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错"
+      },
+      {
+        "id": "shadow_revision_success_rate",
+        "title": "影子修订成功率",
+        "value": null,
+        "numerator": 0,
+        "denominator": 0,
+        "status": "not_evaluable",
+        "coverage": {
+          "attempted_cases": 0,
+          "labeled_cases": 0,
+          "unlabeled_cases": 0
+        },
+        "reason": "尚未执行影子修订",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错"
+      },
+      {
+        "id": "recommendation_mapping_accuracy",
+        "title": "建议映射正确率",
+        "value": null,
+        "numerator": 0,
+        "denominator": 0,
+        "status": "not_evaluable",
+        "coverage": {
+          "population": 30,
+          "formed_mappings": 0,
+          "labeled_mappings": 0,
+          "unknown_or_missing": 0
+        },
+        "reason": "尚未形成正式映射",
+        "scope": "仅有效标签子集，未标注与不可判断样本不计对错"
+      }
+    ]
+  },
+  "axis_annotation_counts": {
+    "source": {},
+    "expression": {},
+    "mapping": {},
+    "scope": {}
+  }
+}

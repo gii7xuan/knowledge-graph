@@ -1,0 +1,3417 @@
+{
+  "cases": [
+    {
+      "sample_id": "DEV-019",
+      "proposal_digest": "b392c61625378094c9b71a2e5e791e8e8c135d416fbcefc7fe6bfdb8fa624da8",
+      "baseline_whole_eligible": [],
+      "baseline_statuses": {
+        "judge_a": "timeout",
+        "judge_b": "invalid_contract",
+        "judge_c": "ok"
+      },
+      "votes": [
+        {
+          "attempt_id": "attempt_b4adbc9557b941dca9363c12b4328c16",
+          "audit_id": "missing_vote_pilot_d78de7be72094e95ad73c67df5916f0c",
+          "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+          "correction_policy_version": "targeted_review_repairs_v2",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "error": "unresolved findings must agree with the unresolved expression check; unresolved meaning requires an unresolved check",
+          "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+          "finish_reason": "stop",
+          "format_normalization": {
+            "changes": [
+              {
+                "operation": "add",
+                "path": "/dimensions/triple_support/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/entity_reference/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/relation_semantics/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/relation_direction/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/qualifiers/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/evidence_sufficiency/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/mapping/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/knowledge_scope/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/counterevidence/issue_code",
+                "to": ""
+              }
+            ],
+            "version": "dimension_auxiliary_fields_v1"
+          },
+          "input_tokens": 23299,
+          "late_response": false,
+          "latency_ms": 47407,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_context_hash": "7d1e742ae0e852f345ac10d2e6186e2541805354a7af150e0b1b5ce73cd2b479",
+          "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "output_tokens": 1165,
+          "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "prompt_version": "triple_validator_v8_citations_v4",
+          "proposal_digest": "b392c61625378094c9b71a2e5e791e8e8c135d416fbcefc7fe6bfdb8fa624da8",
+          "provider_started_at": 1794382161.868622,
+          "queue_time_ms": 283,
+          "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"supported\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"原文定义地炮为常常只需要知道顶点s及落点c诸元即可的火炮类型\"}, \"entity_reference\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"地炮与顶点均在原文定义中明确出现\"}, \"relation_semantics\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"需要知道与原文定义语义一致\"}, \"relation_direction\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"方向为地炮需要知道顶点，符合原文\"}, \"qualifiers\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"频率词常常被错误地放入applicability字段\"}, \"evidence_sufficiency\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"单一证据已足以支持该定义\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"mapping_preflight.judgment_ready为false，保留未分配状态\", \"relation_id\": null, \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"general\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"属于地炮的通用定义\"}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"未发现矛盾材料\"}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_1a46b288f99c3b382558\", \"role\": \"support\", \"note\": \"直接定义了地炮需要知道顶点和落点诸元\"}, {\"evidence_id\": \"ev_36b787204f191cfd7e4c\", \"role\": \"irrelevant\", \"note\": \"讨论顶点参数的表示方式\"}, {\"evidence_id\": \"ev_2c6591efadb82c766444\", \"role\": \"irrelevant\", \"note\": \"讨论微分方程组的解\"}, {\"evidence_id\": \"ev_5c0bed735fde192b5200\", \"role\": \"irrelevant\", \"note\": \"微分方程组公式\"}, {\"evidence_id\": \"ev_d2402871add1675fc85d\", \"role\": \"irrelevant\", \"note\": \"讨论变量函数关系\"}, {\"evidence_id\": \"ev_14f03c9a1e670b211b71\", \"role\": \"irrelevant\", \"note\": \"函数关系公式\"}, {\"evidence_id\": \"ev_bcff8fd09dfeb393ddfb\", \"role\": \"irrelevant\", \"note\": \"顶点角度公式\"}, {\"evidence_id\": \"ev_1064c5207afba6d84ad1\", \"role\": \"irrelevant\", \"note\": \"讨论弹道表编制依据\"}, {\"evidence_id\": \"ev_625ecd7c48d58a6a7254\", \"role\": \"irrelevant\", \"note\": \"公式片段\"}, {\"evidence_id\": \"ev_1261be262ec9dca3e4e7\", \"role\": \"irrelevant\", \"note\": \"公式片段\"}], \"primary_evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"counterevidence_reviewed_ids\": [\"ev_1a46b288f99c3b382558\"], \"requested_context\": null, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": [{\"check\": \"qualifiers\", \"kind\": \"unresolved\", \"note\": \"频率词常常应迁移至frequency字段，但无可用plan_id\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"normalization\": null, \"rule_id\": \"FREQ-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"将qualifiers.applicability的值'常常'迁移至qualifiers.frequency\"}]}",
+          "reasoning_tokens": 2,
+          "request_key": "9670c2fac7ce464296e78fefe6b9bef47bed6d361188575013786957ead810a1",
+          "response_contract_version": "validator_response_v8",
+          "response_id": "chatcmpl-a4a3b25df40e4ae2",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Gemma",
+          "round_id": 1,
+          "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+          "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+          "task_id": "cand_064a5e16f5359b74ef07",
+          "task_type": "triple_review",
+          "transport_metrics": {
+            "chunk_count": 1141,
+            "first_chunk_ms": 10829,
+            "first_content_ms": 10922,
+            "max_inter_chunk_gap_ms": 125,
+            "reasoning_chars": 0,
+            "stream": true,
+            "terminal_ms": 47407,
+            "visible_chars": 2517
+          },
+          "validation_errors": [
+            "unresolved findings must agree with the unresolved expression check",
+            "unresolved meaning requires an unresolved check"
+          ],
+          "verdict": null,
+          "voter_id": "judge_b",
+          "correction_terminal": true,
+          "correction_available": false,
+          "retryable": false,
+          "correction_stop_reason": "semantic inconsistency has no safe field-only repair",
+          "error_code": "RESPONSE_CORRECTION_UNAVAILABLE",
+          "attempts": [
+            {
+              "attempt_id": "attempt_b4adbc9557b941dca9363c12b4328c16",
+              "audit_id": "missing_vote_pilot_d78de7be72094e95ad73c67df5916f0c",
+              "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+              "committee_version": "committee_qwen_gemma_deepseek_v1",
+              "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+              "correction_policy_version": "targeted_review_repairs_v2",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "error": "unresolved findings must agree with the unresolved expression check; unresolved meaning requires an unresolved check",
+              "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+              "finish_reason": "stop",
+              "format_normalization": {
+                "changes": [
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/triple_support/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/entity_reference/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/relation_semantics/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/relation_direction/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/qualifiers/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/evidence_sufficiency/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/mapping/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/knowledge_scope/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/counterevidence/issue_code",
+                    "to": ""
+                  }
+                ],
+                "version": "dimension_auxiliary_fields_v1"
+              },
+              "input_tokens": 23299,
+              "late_response": false,
+              "latency_ms": 47407,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 1,
+              "ontology_context_hash": "7d1e742ae0e852f345ac10d2e6186e2541805354a7af150e0b1b5ce73cd2b479",
+              "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "output_tokens": 1165,
+              "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+              "prompt_version": "triple_validator_v8_citations_v4",
+              "proposal_digest": "b392c61625378094c9b71a2e5e791e8e8c135d416fbcefc7fe6bfdb8fa624da8",
+              "provider_started_at": 1794382161.868622,
+              "queue_time_ms": 283,
+              "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"supported\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"原文定义地炮为常常只需要知道顶点s及落点c诸元即可的火炮类型\"}, \"entity_reference\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"地炮与顶点均在原文定义中明确出现\"}, \"relation_semantics\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"需要知道与原文定义语义一致\"}, \"relation_direction\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"方向为地炮需要知道顶点，符合原文\"}, \"qualifiers\": {\"status\": \"fail\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"频率词常常被错误地放入applicability字段\"}, \"evidence_sufficiency\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"单一证据已足以支持该定义\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"mapping_preflight.judgment_ready为false，保留未分配状态\", \"relation_id\": null, \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"general\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"属于地炮的通用定义\"}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"note\": \"未发现矛盾材料\"}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_1a46b288f99c3b382558\", \"role\": \"support\", \"note\": \"直接定义了地炮需要知道顶点和落点诸元\"}, {\"evidence_id\": \"ev_36b787204f191cfd7e4c\", \"role\": \"irrelevant\", \"note\": \"讨论顶点参数的表示方式\"}, {\"evidence_id\": \"ev_2c6591efadb82c766444\", \"role\": \"irrelevant\", \"note\": \"讨论微分方程组的解\"}, {\"evidence_id\": \"ev_5c0bed735fde192b5200\", \"role\": \"irrelevant\", \"note\": \"微分方程组公式\"}, {\"evidence_id\": \"ev_d2402871add1675fc85d\", \"role\": \"irrelevant\", \"note\": \"讨论变量函数关系\"}, {\"evidence_id\": \"ev_14f03c9a1e670b211b71\", \"role\": \"irrelevant\", \"note\": \"函数关系公式\"}, {\"evidence_id\": \"ev_bcff8fd09dfeb393ddfb\", \"role\": \"irrelevant\", \"note\": \"顶点角度公式\"}, {\"evidence_id\": \"ev_1064c5207afba6d84ad1\", \"role\": \"irrelevant\", \"note\": \"讨论弹道表编制依据\"}, {\"evidence_id\": \"ev_625ecd7c48d58a6a7254\", \"role\": \"irrelevant\", \"note\": \"公式片段\"}, {\"evidence_id\": \"ev_1261be262ec9dca3e4e7\", \"role\": \"irrelevant\", \"note\": \"公式片段\"}], \"primary_evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"counterevidence_reviewed_ids\": [\"ev_1a46b288f99c3b382558\"], \"requested_context\": null, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": [{\"check\": \"qualifiers\", \"kind\": \"unresolved\", \"note\": \"频率词常常应迁移至frequency字段，但无可用plan_id\", \"evidence_ids\": [\"ev_1a46b288f99c3b382558\"], \"normalization\": null, \"rule_id\": \"FREQ-001\", \"meaning_effect\": \"unresolved\", \"suggested_change\": \"将qualifiers.applicability的值'常常'迁移至qualifiers.frequency\"}]}",
+              "reasoning_tokens": 2,
+              "request_key": "9670c2fac7ce464296e78fefe6b9bef47bed6d361188575013786957ead810a1",
+              "response_contract_version": "validator_response_v8",
+              "response_id": "chatcmpl-a4a3b25df40e4ae2",
+              "response_status": "invalid_contract",
+              "returned_model_id": "Gemma",
+              "round_id": 1,
+              "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+              "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+              "task_id": "cand_064a5e16f5359b74ef07",
+              "task_type": "triple_review",
+              "transport_metrics": {
+                "chunk_count": 1141,
+                "first_chunk_ms": 10829,
+                "first_content_ms": 10922,
+                "max_inter_chunk_gap_ms": 125,
+                "reasoning_chars": 0,
+                "stream": true,
+                "terminal_ms": 47407,
+                "visible_chars": 2517
+              },
+              "validation_errors": [
+                "unresolved findings must agree with the unresolved expression check",
+                "unresolved meaning requires an unresolved check"
+              ],
+              "verdict": null,
+              "voter_id": "judge_b"
+            }
+          ],
+          "attempt_no": 1,
+          "actual_calls": 1
+        }
+      ],
+      "consensus": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "valid_votes": 0,
+        "invalid_votes": 0,
+        "uncertain_votes": 0,
+        "error_votes": 1,
+        "missing_votes": 2,
+        "duplicate_attempts": 0,
+        "duplicate_model_votes": 0,
+        "invalid_attempts": 0,
+        "distinct_family_count": 0,
+        "valid_distinct_family_count": 0,
+        "invalid_distinct_family_count": 0,
+        "diversity_ready": false,
+        "result": "unresolved",
+        "unresolved_counterevidence": false,
+        "unresolved_support_conflict": false,
+        "counter_evidence_ids": [],
+        "supporting_evidence_ids": [],
+        "source_support_consensus": {
+          "result": "unresolved",
+          "support_votes": 0,
+          "contradiction_votes": 0,
+          "support_voter_ids": [],
+          "committee_size": 3,
+          "required_votes": 3,
+          "contradiction_voter_ids": []
+        },
+        "admission_consensus": {
+          "result": "unresolved"
+        },
+        "eligible_voter_ids": [],
+        "expression_complete": true,
+        "blocking_fields": [],
+        "raw_source_support_votes": [],
+        "expression_status": "unresolved",
+        "knowledge_scope": "unresolved",
+        "scope_confirmed": false,
+        "mapping_status": "ambiguous",
+        "effective_mapping_status": "unassigned",
+        "core_source_support_result": "unresolved",
+        "ontology_coverage_review": {
+          "context_hash": "7d1e742ae0e852f345ac10d2e6186e2541805354a7af150e0b1b5ce73cd2b479",
+          "full_catalog_included": false,
+          "global_gap_confirmable": false
+        },
+        "review_axes": {
+          "version": "review_axes_v1",
+          "source": {
+            "status": "unresolved",
+            "core_relation_status": "unresolved",
+            "evidence_ids": []
+          },
+          "expression": {
+            "status": "unresolved",
+            "findings": []
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "effective_mapping_status": "unassigned",
+            "preflight": {
+              "blocking_information": [
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_5eb753682c8d887575fc",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "referent_source_context_unavailable"
+                  ],
+                  "id": "head",
+                  "kind": "entity"
+                }
+              ],
+              "budget_excluded_property_ids": [],
+              "candidate_hash": "a17e7dc493b4f2d4e8ace6152891d4ed3461ba24836d0efead4e95b77c26e8f8",
+              "confusable_relations": [],
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_b8e61312f36ba02ccaa7",
+                  "candidate_id": "local_6ecbf7f38268d64357c5e83dc5b9284257d4ec9234017e01356845b0cfd87d83",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [
+                    "referent_source_context_unavailable"
+                  ],
+                  "referent_scope": null,
+                  "source_evidence_ids": [],
+                  "surface": "地炮",
+                  "type_candidate_ids": [
+                    "C_b8e61312f36ba02ccaa7"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_ed590570ee28bf2c3d9e",
+                  "candidate_id": "local_9730e354cb164cd00e58ce4d9e41f32371c47cf5bee817e4059ad56c3ed17975",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_1a46b288f99c3b382558"
+                  ],
+                  "surface": "顶点",
+                  "type_candidate_ids": [
+                    "C_ed590570ee28bf2c3d9e"
+                  ]
+                }
+              },
+              "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+              "formal_mapping": {
+                "assigned_head_type": "C_b8e61312f36ba02ccaa7",
+                "assigned_relation_id": "R_5eb753682c8d887575fc",
+                "assigned_tail_type": "C_ed590570ee28bf2c3d9e",
+                "candidate_relation_ids": [
+                  "R_5eb753682c8d887575fc"
+                ],
+                "semantic_approval": false
+              },
+              "global_gap_confirmed": false,
+              "judgment_ready": false,
+              "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema.",
+              "ontology_context_hash": "7d1e742ae0e852f345ac10d2e6186e2541805354a7af150e0b1b5ce73cd2b479",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "original_expression": {
+                "candidate_id": "cand_064a5e16f5359b74ef07",
+                "head": "地炮",
+                "qualifier_status": {
+                  "applicability": "extracted",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": "常常",
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 1,
+                "surface_relation": "需要知道",
+                "tail": "顶点"
+              },
+              "policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+              "relation_candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_b8e61312f36ba02ccaa7"
+                  ],
+                  "id": "R_5eb753682c8d887575fc",
+                  "label": "需要知道",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_ed590570ee28bf2c3d9e"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "search_trace": [
+                {
+                  "metadata_complete": false,
+                  "property_count": 6,
+                  "stage": "review_subset"
+                },
+                {
+                  "classes_scanned": 189,
+                  "exact_match_ids": [
+                    "R_5eb753682c8d887575fc"
+                  ],
+                  "lexical_recall_is_semantic_confirmation": false,
+                  "properties_scanned": 81,
+                  "property_count": 6,
+                  "stage": "full_bound_release_and_aliases"
+                }
+              ],
+              "semantic_applicability": "not_programmatically_confirmed",
+              "source_catalog_hash": "b1a42a3b6479ba491255113706717f582ed266e938ac17cfe252f88c6255a321",
+              "version": "mapping_preflight_v1"
+            },
+            "reason_codes": [
+              "RELATION_DEFINITION_UNAVAILABLE"
+            ]
+          },
+          "scope": {
+            "status": "unclear",
+            "knowledge_scope": "unresolved",
+            "classification_confirmed": false,
+            "policy_version": "knowledge_scope_v2",
+            "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+            "authority": "program",
+            "category_label": "类别待确认",
+            "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。",
+            "reason": "类别未确认或审核席位不完整，等待范围复核"
+          }
+        },
+        "dispute_report": {
+          "version": "claim_disputes_v1",
+          "candidate_hash": "a17e7dc493b4f2d4e8ace6152891d4ed3461ba24836d0efead4e95b77c26e8f8",
+          "evidence_hash": "67a94e7ec5039859c6f53037bc1e80aaa4b79804379161a9646e275c6b1b56e9",
+          "base_proposal_digest": "b392c61625378094c9b71a2e5e791e8e8c135d416fbcefc7fe6bfdb8fa624da8",
+          "opinions": [],
+          "disputes": [],
+          "evidence_observations": [],
+          "technical_seats": [
+            {
+              "voter_id": "judge_b",
+              "response_status": "invalid_contract",
+              "error_code": "RESPONSE_CORRECTION_UNAVAILABLE"
+            },
+            {
+              "voter_id": "judge_a",
+              "response_status": "missing",
+              "error_code": null
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "missing",
+              "error_code": null
+            }
+          ],
+          "majority_is_resolution": false,
+          "counter_absence_is_support": false,
+          "admission_authorized": false
+        }
+      },
+      "vote_assessments": {
+        "judge_b": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_b",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": false,
+          "raw_response_hash": "7d9157abc3191bb09922c43e2a109c4f98cc887b4eb6f3721bf565afb21c0e18",
+          "normalized_response_hash": "61b036dc7ab3b0249da8a9e11c2c68587758051062e9132caa8a40d6a5bf819a",
+          "original_attempt_id": "attempt_b4adbc9557b941dca9363c12b4328c16",
+          "attempt_id": "attempt_b4adbc9557b941dca9363c12b4328c16",
+          "request_key": "9670c2fac7ce464296e78fefe6b9bef47bed6d361188575013786957ead810a1",
+          "cache_source": null,
+          "errors": [
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "unresolved findings must agree with the unresolved expression check",
+              "axes": [
+                "expression",
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            },
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "unresolved meaning requires an unresolved check",
+              "axes": [
+                "expression",
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            },
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "unresolved findings must agree with the unresolved expression check; unresolved meaning requires an unresolved check",
+              "axes": [
+                "expression",
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            }
+          ],
+          "axis_observations": {
+            "source": {
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "unresolved findings must agree with the unresolved expression check",
+                "unresolved meaning requires an unresolved check"
+              ]
+            },
+            "expression": {
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "unresolved findings must agree with the unresolved expression check",
+                "unresolved meaning requires an unresolved check"
+              ]
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "DEV-022",
+      "proposal_digest": "e2cd6d3aa658d9fd1c9fd8150f43dc95ef5406cdd7b158eddde575176af5f1ae",
+      "baseline_whole_eligible": [],
+      "baseline_statuses": {
+        "judge_a": "ok",
+        "judge_b": "invalid_contract",
+        "judge_c": "ok"
+      },
+      "votes": [
+        {
+          "attempt_id": "attempt_eef3f12e37b1408c924bf7446bb4e631",
+          "audit_id": "missing_vote_pilot_932610aa365948fb8166a95a9b3f9303",
+          "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "correction_available": false,
+          "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+          "correction_policy_version": "targeted_review_repairs_v2",
+          "correction_stop_reason": "内部矛盾已请求澄清；保留原判断，等待人工复核",
+          "correction_terminal": true,
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "error": "dismissed counterexamples and unresolved material counterevidence have different roles",
+          "error_code": "SEMANTIC_CLARIFICATION_REQUIRED",
+          "evidence_hash": "e7ab59ed7289680d5222ed98f4d8866f75c2bdd0c27544a828ded6b2ec452c38",
+          "finish_reason": "stop",
+          "format_normalization": {
+            "changes": [
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/entity_reference/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/qualifiers/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/evidence_sufficiency/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/mapping/issue_code",
+                "to": ""
+              },
+              {
+                "from": null,
+                "operation": "replace",
+                "path": "/dimensions/knowledge_scope/issue_code",
+                "to": ""
+              }
+            ],
+            "version": "dimension_auxiliary_fields_v1"
+          },
+          "input_tokens": 3910,
+          "late_response": false,
+          "latency_ms": 151171,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_context_hash": "88dfe9319586437d05bfff98768f84342606e3501b7f5ca4e91343317ea7231b",
+          "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "output_tokens": 1536,
+          "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "prompt_version": "triple_validator_v8_citations_v4",
+          "proposal_digest": "e2cd6d3aa658d9fd1c9fd8150f43dc95ef5406cdd7b158eddde575176af5f1ae",
+          "provider_started_at": 1794382361.443942,
+          "queue_time_ms": 328,
+          "raw_clarification_response": "",
+          "raw_response": "{\n  \"dimensions\": {\n    \"triple_support\": {\n      \"status\": \"contradicted\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"原文指出投影矢量方程可写出微分方程组，而非微分方程组被投影。\",\n      \"issue_code\": \"SOURCE_CONTRADICTS\"\n    },\n    \"entity_reference\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\",\n        \"ev_64a0803630bedab49c55\"\n      ],\n      \"note\": \"实体在文中均有出现且指称正确。\",\n      \"issue_code\": null\n    },\n    \"relation_semantics\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"投影关系的主体应为矢量方程而非微分方程组。\",\n      \"issue_code\": \"RELATION_MISMATCH\"\n    },\n    \"relation_direction\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"由于关系主体错误，头尾方向不成立。\",\n      \"issue_code\": \"DIRECTION_MISMATCH\"\n    },\n    \"qualifiers\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_3c257acf77bccb69eb66\"\n      ],\n      \"note\": \"条件限定与原文一致。\",\n      \"issue_code\": null\n    },\n    \"evidence_sufficiency\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"证据足以确认语义矛盾。\",\n      \"issue_code\": null\n    },\n    \"mapping\": {\n      \"status\": \"unassigned\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"语义错误，无法匹配本体关系。\",\n      \"issue_code\": null,\n      \"relation_id\": null,\n      \"competing_relation_ids\": []\n    },\n    \"knowledge_scope\": {\n      \"status\": \"derivation\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"描述的是从矢量方程推导微分方程组的中间步骤。\",\n      \"issue_code\": null\n    },\n    \"counterevidence\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"原文明确指出投影对象是矢量方程而非微分方程组。\",\n      \"issue_code\": \"SOURCE_CONTRADICTS\"\n    }\n  },\n  \"evidence_assessments\": [\n    {\n      \"evidence_id\": \"ev_e6de37594d24ed42f3b2\",\n      \"role\": \"counter\",\n      \"note\": \"明确指出投影对象是矢量方程而非微分方程组。\"\n    },\n    {\n      \"evidence_id\": \"ev_3c257acf77bccb69eb66\",\n      \"role\": \"support\",\n      \"note\": \"支持条件限定。\"\n    },\n    {\n      \"evidence_id\": \"ev_64a0803630bedab49c55\",\n      \"role\": \"context\",\n      \"note\": \"提及直角坐标系的微分方程组。\"\n    }\n  ],\n  \"primary_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [\n    \"ev_e6de37594d24ed42f3b2\"\n  ],\n  \"requested_context\": null,\n  \"suggested_revision\": null,\n  \"schema_change_hint\": null,\n  \"expression_findings\": [\n    {\n      \"check\": \"relation_semantics\",\n      \"kind\": \"semantic_error\",\n      \"note\": \"投影对象应为矢量方程而非微分方程组\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"normalization\": null,\n      \"rule_id\": \"MEANING-001\",\n      \"meaning_effect\": \"changed\",\n      \"suggested_change\": \"将头实体改为'弹丸质心运动矢量方程'\"\n    },\n    {\n      \"check\": \"relation_direction\",\n      \"kind\": \"semantic_error\",\n      \"note\": \"关系主体错误导致方向失效\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"normalization\": null,\n      \"rule_id\": \"MEANING-001\",\n      \"meaning_effect\": \"changed\",\n      \"suggested_change\": \"将头实体改为'弹丸质心运动矢量方程'\"\n    }\n  ]\n}",
+          "reasoning_tokens": 3182,
+          "request_key": "a23c1efeaa7c37a025ea3bef5015821a2276ce7c9e6acbabee2e4c0dec291dc5",
+          "response_contract_version": "validator_response_v8",
+          "response_id": "chatcmpl-b82ef4ed0ea2ad61",
+          "response_status": "invalid_contract",
+          "retryable": false,
+          "returned_model_id": "Gemma",
+          "round_id": 1,
+          "semantic_clarification": {
+            "counts_as_vote": false,
+            "error": "Expecting value: line 1 column 1 (char 0)",
+            "original_judgments_immutable": true,
+            "original_response_hash": "4bcae5f97014aa4a30a6dbc0b1742f54cfc2f9cbb830cbbebe12edb7b58f2d05",
+            "status": "failed",
+            "version": "review_contradiction_clarification_v3"
+          },
+          "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+          "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+          "task_id": "cand_ca27ef4e78caeece9179",
+          "task_type": "triple_review",
+          "transport_metrics": {
+            "chunk_count": 4205,
+            "first_chunk_ms": 9844,
+            "first_content_ms": 109500,
+            "max_inter_chunk_gap_ms": 344,
+            "reasoning_chars": 0,
+            "stream": true,
+            "terminal_ms": 151171,
+            "visible_chars": 3113
+          },
+          "validation_errors": [
+            "dismissed counterexamples and unresolved material counterevidence have different roles"
+          ],
+          "verdict": null,
+          "voter_id": "judge_b",
+          "attempts": [
+            {
+              "attempt_id": "attempt_26b4ce943c104f3aa385b28173aac39b",
+              "audit_id": "missing_vote_pilot_932610aa365948fb8166a95a9b3f9303",
+              "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+              "committee_version": "committee_qwen_gemma_deepseek_v1",
+              "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+              "correction_policy_version": "targeted_review_repairs_v2",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "error": "dismissed counterexamples and unresolved material counterevidence have different roles",
+              "evidence_hash": "e7ab59ed7289680d5222ed98f4d8866f75c2bdd0c27544a828ded6b2ec452c38",
+              "finish_reason": "stop",
+              "format_normalization": {
+                "changes": [
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/entity_reference/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/qualifiers/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/evidence_sufficiency/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/mapping/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/knowledge_scope/issue_code",
+                    "to": ""
+                  }
+                ],
+                "version": "dimension_auxiliary_fields_v1"
+              },
+              "input_tokens": 21446,
+              "late_response": false,
+              "latency_ms": 151171,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 1,
+              "ontology_context_hash": "88dfe9319586437d05bfff98768f84342606e3501b7f5ca4e91343317ea7231b",
+              "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "output_tokens": 4504,
+              "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+              "prompt_version": "triple_validator_v8_citations_v4",
+              "proposal_digest": "e2cd6d3aa658d9fd1c9fd8150f43dc95ef5406cdd7b158eddde575176af5f1ae",
+              "provider_started_at": 1794382209.7694402,
+              "queue_time_ms": 300,
+              "raw_response": "{\n  \"dimensions\": {\n    \"triple_support\": {\n      \"status\": \"contradicted\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"原文指出投影矢量方程可写出微分方程组，而非微分方程组被投影。\",\n      \"issue_code\": \"SOURCE_CONTRADICTS\"\n    },\n    \"entity_reference\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\",\n        \"ev_64a0803630bedab49c55\"\n      ],\n      \"note\": \"实体在文中均有出现且指称正确。\",\n      \"issue_code\": null\n    },\n    \"relation_semantics\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"投影关系的主体应为矢量方程而非微分方程组。\",\n      \"issue_code\": \"RELATION_MISMATCH\"\n    },\n    \"relation_direction\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"由于关系主体错误，头尾方向不成立。\",\n      \"issue_code\": \"DIRECTION_MISMATCH\"\n    },\n    \"qualifiers\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_3c257acf77bccb69eb66\"\n      ],\n      \"note\": \"条件限定与原文一致。\",\n      \"issue_code\": null\n    },\n    \"evidence_sufficiency\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"证据足以确认语义矛盾。\",\n      \"issue_code\": null\n    },\n    \"mapping\": {\n      \"status\": \"unassigned\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"语义错误，无法匹配本体关系。\",\n      \"issue_code\": null,\n      \"relation_id\": null,\n      \"competing_relation_ids\": []\n    },\n    \"knowledge_scope\": {\n      \"status\": \"derivation\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"描述的是从矢量方程推导微分方程组的中间步骤。\",\n      \"issue_code\": null\n    },\n    \"counterevidence\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"原文明确指出投影对象是矢量方程而非微分方程组。\",\n      \"issue_code\": \"SOURCE_CONTRADICTS\"\n    }\n  },\n  \"evidence_assessments\": [\n    {\n      \"evidence_id\": \"ev_e6de37594d24ed42f3b2\",\n      \"role\": \"counter\",\n      \"note\": \"明确指出投影对象是矢量方程而非微分方程组。\"\n    },\n    {\n      \"evidence_id\": \"ev_3c257acf77bccb69eb66\",\n      \"role\": \"support\",\n      \"note\": \"支持条件限定。\"\n    },\n    {\n      \"evidence_id\": \"ev_64a0803630bedab49c55\",\n      \"role\": \"context\",\n      \"note\": \"提及直角坐标系的微分方程组。\"\n    }\n  ],\n  \"primary_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [\n    \"ev_e6de37594d24ed42f3b2\"\n  ],\n  \"requested_context\": null,\n  \"suggested_revision\": null,\n  \"schema_change_hint\": null,\n  \"expression_findings\": [\n    {\n      \"check\": \"relation_semantics\",\n      \"kind\": \"semantic_error\",\n      \"note\": \"投影对象应为矢量方程而非微分方程组\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"normalization\": null,\n      \"rule_id\": \"MEANING-001\",\n      \"meaning_effect\": \"changed\",\n      \"suggested_change\": \"将头实体改为'弹丸质心运动矢量方程'\"\n    },\n    {\n      \"check\": \"relation_direction\",\n      \"kind\": \"semantic_error\",\n      \"note\": \"关系主体错误导致方向失效\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"normalization\": null,\n      \"rule_id\": \"MEANING-001\",\n      \"meaning_effect\": \"changed\",\n      \"suggested_change\": \"将头实体改为'弹丸质心运动矢量方程'\"\n    }\n  ]\n}",
+              "reasoning_tokens": 3182,
+              "request_key": "a23c1efeaa7c37a025ea3bef5015821a2276ce7c9e6acbabee2e4c0dec291dc5",
+              "response_contract_version": "validator_response_v8",
+              "response_id": "chatcmpl-b82ef4ed0ea2ad61",
+              "response_status": "invalid_contract",
+              "returned_model_id": "Gemma",
+              "round_id": 1,
+              "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+              "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+              "task_id": "cand_ca27ef4e78caeece9179",
+              "task_type": "triple_review",
+              "transport_metrics": {
+                "chunk_count": 4205,
+                "first_chunk_ms": 9844,
+                "first_content_ms": 109500,
+                "max_inter_chunk_gap_ms": 344,
+                "reasoning_chars": 0,
+                "stream": true,
+                "terminal_ms": 151171,
+                "visible_chars": 3113
+              },
+              "validation_errors": [
+                "dismissed counterexamples and unresolved material counterevidence have different roles"
+              ],
+              "verdict": null,
+              "voter_id": "judge_b"
+            },
+            {
+              "attempt_id": "attempt_eef3f12e37b1408c924bf7446bb4e631",
+              "audit_id": "missing_vote_pilot_932610aa365948fb8166a95a9b3f9303",
+              "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+              "committee_version": "committee_qwen_gemma_deepseek_v1",
+              "correction_available": false,
+              "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+              "correction_policy_version": "targeted_review_repairs_v2",
+              "correction_stop_reason": "内部矛盾已请求澄清；保留原判断，等待人工复核",
+              "correction_terminal": true,
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "error": "dismissed counterexamples and unresolved material counterevidence have different roles",
+              "error_code": "SEMANTIC_CLARIFICATION_REQUIRED",
+              "evidence_hash": "e7ab59ed7289680d5222ed98f4d8866f75c2bdd0c27544a828ded6b2ec452c38",
+              "finish_reason": "stop",
+              "format_normalization": {
+                "changes": [
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/entity_reference/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/qualifiers/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/evidence_sufficiency/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/mapping/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "from": null,
+                    "operation": "replace",
+                    "path": "/dimensions/knowledge_scope/issue_code",
+                    "to": ""
+                  }
+                ],
+                "version": "dimension_auxiliary_fields_v1"
+              },
+              "input_tokens": 3910,
+              "late_response": false,
+              "latency_ms": 151171,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 1,
+              "ontology_context_hash": "88dfe9319586437d05bfff98768f84342606e3501b7f5ca4e91343317ea7231b",
+              "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "output_tokens": 1536,
+              "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+              "prompt_version": "triple_validator_v8_citations_v4",
+              "proposal_digest": "e2cd6d3aa658d9fd1c9fd8150f43dc95ef5406cdd7b158eddde575176af5f1ae",
+              "provider_started_at": 1794382361.443942,
+              "queue_time_ms": 328,
+              "raw_clarification_response": "",
+              "raw_response": "{\n  \"dimensions\": {\n    \"triple_support\": {\n      \"status\": \"contradicted\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"原文指出投影矢量方程可写出微分方程组，而非微分方程组被投影。\",\n      \"issue_code\": \"SOURCE_CONTRADICTS\"\n    },\n    \"entity_reference\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\",\n        \"ev_64a0803630bedab49c55\"\n      ],\n      \"note\": \"实体在文中均有出现且指称正确。\",\n      \"issue_code\": null\n    },\n    \"relation_semantics\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"投影关系的主体应为矢量方程而非微分方程组。\",\n      \"issue_code\": \"RELATION_MISMATCH\"\n    },\n    \"relation_direction\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"由于关系主体错误，头尾方向不成立。\",\n      \"issue_code\": \"DIRECTION_MISMATCH\"\n    },\n    \"qualifiers\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_3c257acf77bccb69eb66\"\n      ],\n      \"note\": \"条件限定与原文一致。\",\n      \"issue_code\": null\n    },\n    \"evidence_sufficiency\": {\n      \"status\": \"pass\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"证据足以确认语义矛盾。\",\n      \"issue_code\": null\n    },\n    \"mapping\": {\n      \"status\": \"unassigned\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"语义错误，无法匹配本体关系。\",\n      \"issue_code\": null,\n      \"relation_id\": null,\n      \"competing_relation_ids\": []\n    },\n    \"knowledge_scope\": {\n      \"status\": \"derivation\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"描述的是从矢量方程推导微分方程组的中间步骤。\",\n      \"issue_code\": null\n    },\n    \"counterevidence\": {\n      \"status\": \"fail\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"note\": \"原文明确指出投影对象是矢量方程而非微分方程组。\",\n      \"issue_code\": \"SOURCE_CONTRADICTS\"\n    }\n  },\n  \"evidence_assessments\": [\n    {\n      \"evidence_id\": \"ev_e6de37594d24ed42f3b2\",\n      \"role\": \"counter\",\n      \"note\": \"明确指出投影对象是矢量方程而非微分方程组。\"\n    },\n    {\n      \"evidence_id\": \"ev_3c257acf77bccb69eb66\",\n      \"role\": \"support\",\n      \"note\": \"支持条件限定。\"\n    },\n    {\n      \"evidence_id\": \"ev_64a0803630bedab49c55\",\n      \"role\": \"context\",\n      \"note\": \"提及直角坐标系的微分方程组。\"\n    }\n  ],\n  \"primary_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [\n    \"ev_e6de37594d24ed42f3b2\"\n  ],\n  \"requested_context\": null,\n  \"suggested_revision\": null,\n  \"schema_change_hint\": null,\n  \"expression_findings\": [\n    {\n      \"check\": \"relation_semantics\",\n      \"kind\": \"semantic_error\",\n      \"note\": \"投影对象应为矢量方程而非微分方程组\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"normalization\": null,\n      \"rule_id\": \"MEANING-001\",\n      \"meaning_effect\": \"changed\",\n      \"suggested_change\": \"将头实体改为'弹丸质心运动矢量方程'\"\n    },\n    {\n      \"check\": \"relation_direction\",\n      \"kind\": \"semantic_error\",\n      \"note\": \"关系主体错误导致方向失效\",\n      \"evidence_ids\": [\n        \"ev_e6de37594d24ed42f3b2\"\n      ],\n      \"normalization\": null,\n      \"rule_id\": \"MEANING-001\",\n      \"meaning_effect\": \"changed\",\n      \"suggested_change\": \"将头实体改为'弹丸质心运动矢量方程'\"\n    }\n  ]\n}",
+              "reasoning_tokens": 3182,
+              "request_key": "a23c1efeaa7c37a025ea3bef5015821a2276ce7c9e6acbabee2e4c0dec291dc5",
+              "response_contract_version": "validator_response_v8",
+              "response_id": "chatcmpl-b82ef4ed0ea2ad61",
+              "response_status": "invalid_contract",
+              "retryable": false,
+              "returned_model_id": "Gemma",
+              "round_id": 1,
+              "semantic_clarification": {
+                "counts_as_vote": false,
+                "error": "Expecting value: line 1 column 1 (char 0)",
+                "original_judgments_immutable": true,
+                "original_response_hash": "4bcae5f97014aa4a30a6dbc0b1742f54cfc2f9cbb830cbbebe12edb7b58f2d05",
+                "status": "failed",
+                "version": "review_contradiction_clarification_v3"
+              },
+              "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+              "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+              "task_id": "cand_ca27ef4e78caeece9179",
+              "task_type": "triple_review",
+              "transport_metrics": {
+                "chunk_count": 4205,
+                "first_chunk_ms": 9844,
+                "first_content_ms": 109500,
+                "max_inter_chunk_gap_ms": 344,
+                "reasoning_chars": 0,
+                "stream": true,
+                "terminal_ms": 151171,
+                "visible_chars": 3113
+              },
+              "validation_errors": [
+                "dismissed counterexamples and unresolved material counterevidence have different roles"
+              ],
+              "verdict": null,
+              "voter_id": "judge_b"
+            }
+          ],
+          "attempt_no": 2,
+          "actual_calls": 2
+        }
+      ],
+      "consensus": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "valid_votes": 0,
+        "invalid_votes": 0,
+        "uncertain_votes": 0,
+        "error_votes": 1,
+        "missing_votes": 2,
+        "duplicate_attempts": 0,
+        "duplicate_model_votes": 0,
+        "invalid_attempts": 0,
+        "distinct_family_count": 0,
+        "valid_distinct_family_count": 0,
+        "invalid_distinct_family_count": 0,
+        "diversity_ready": false,
+        "result": "unresolved",
+        "unresolved_counterevidence": false,
+        "unresolved_support_conflict": false,
+        "counter_evidence_ids": [],
+        "supporting_evidence_ids": [],
+        "source_support_consensus": {
+          "result": "unresolved",
+          "support_votes": 0,
+          "contradiction_votes": 0,
+          "support_voter_ids": [],
+          "committee_size": 3,
+          "required_votes": 3,
+          "contradiction_voter_ids": []
+        },
+        "admission_consensus": {
+          "result": "unresolved"
+        },
+        "eligible_voter_ids": [],
+        "expression_complete": false,
+        "blocking_fields": [
+          "polarity"
+        ],
+        "raw_source_support_votes": [],
+        "expression_status": "unresolved",
+        "knowledge_scope": "unresolved",
+        "scope_confirmed": false,
+        "mapping_status": "ambiguous",
+        "effective_mapping_status": "unassigned",
+        "core_source_support_result": "unresolved",
+        "ontology_coverage_review": {
+          "context_hash": "88dfe9319586437d05bfff98768f84342606e3501b7f5ca4e91343317ea7231b",
+          "full_catalog_included": false,
+          "global_gap_confirmable": false
+        },
+        "review_axes": {
+          "version": "review_axes_v1",
+          "source": {
+            "status": "unresolved",
+            "core_relation_status": "unresolved",
+            "evidence_ids": []
+          },
+          "expression": {
+            "status": "unresolved",
+            "findings": []
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "effective_mapping_status": "unassigned",
+            "preflight": {
+              "blocking_information": [
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_5da207e3fa51409de7b9",
+                  "kind": "relation"
+                }
+              ],
+              "budget_excluded_property_ids": [],
+              "candidate_hash": "ad382043fff5db392cac5fc37721afc5b6781f2b390535214131ae2d02920157",
+              "confusable_relations": [],
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_5d265e9d9a9bd7644687",
+                  "candidate_id": "local_b0266ec458e4e059d932127b67e6ff98aee32bf4942b6ad549565f0f31b764fc",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_e6de37594d24ed42f3b2",
+                    "ev_64a0803630bedab49c55",
+                    "ev_80b7937c87bc974e5337",
+                    "ev_5f366e8868772de9478e"
+                  ],
+                  "surface": "弹丸质心运动微分方程组",
+                  "type_candidate_ids": [
+                    "C_5d265e9d9a9bd7644687"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_d7f09946ffab58f94585",
+                  "candidate_id": "local_c36a1d88639f5d16190873f3609413079565358d94e8f48d59fe68d603310e5f",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_e6de37594d24ed42f3b2",
+                    "ev_64a0803630bedab49c55",
+                    "ev_5f366e8868772de9478e"
+                  ],
+                  "surface": "直角坐标系",
+                  "type_candidate_ids": [
+                    "C_d7f09946ffab58f94585"
+                  ]
+                }
+              },
+              "evidence_hash": "e7ab59ed7289680d5222ed98f4d8866f75c2bdd0c27544a828ded6b2ec452c38",
+              "formal_mapping": {
+                "assigned_head_type": "C_5d265e9d9a9bd7644687",
+                "assigned_relation_id": "R_5da207e3fa51409de7b9",
+                "assigned_tail_type": "C_d7f09946ffab58f94585",
+                "candidate_relation_ids": [
+                  "R_5da207e3fa51409de7b9"
+                ],
+                "semantic_approval": false
+              },
+              "global_gap_confirmed": false,
+              "judgment_ready": false,
+              "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema.",
+              "ontology_context_hash": "88dfe9319586437d05bfff98768f84342606e3501b7f5ca4e91343317ea7231b",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "original_expression": {
+                "candidate_id": "cand_ca27ef4e78caeece9179",
+                "head": "弹丸质心运动微分方程组",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "extracted",
+                  "modality": "extracted",
+                  "polarity": "unknown",
+                  "quantifier": "not_stated",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": "在前述基本假设条件下",
+                  "modality": "asserted",
+                  "polarity": "unknown",
+                  "quantifier": null,
+                  "time_scope": null
+                },
+                "revision": 1,
+                "surface_relation": "投影于",
+                "tail": "直角坐标系"
+              },
+              "policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+              "relation_candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_5d265e9d9a9bd7644687"
+                  ],
+                  "id": "R_5da207e3fa51409de7b9",
+                  "label": "投影于",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_d7f09946ffab58f94585"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "search_trace": [
+                {
+                  "metadata_complete": false,
+                  "property_count": 5,
+                  "stage": "review_subset"
+                },
+                {
+                  "classes_scanned": 189,
+                  "exact_match_ids": [
+                    "R_5da207e3fa51409de7b9"
+                  ],
+                  "lexical_recall_is_semantic_confirmation": false,
+                  "properties_scanned": 81,
+                  "property_count": 5,
+                  "stage": "full_bound_release_and_aliases"
+                }
+              ],
+              "semantic_applicability": "not_programmatically_confirmed",
+              "source_catalog_hash": "b1a42a3b6479ba491255113706717f582ed266e938ac17cfe252f88c6255a321",
+              "version": "mapping_preflight_v1"
+            },
+            "reason_codes": [
+              "RELATION_DEFINITION_UNAVAILABLE"
+            ]
+          },
+          "scope": {
+            "status": "unclear",
+            "knowledge_scope": "unresolved",
+            "classification_confirmed": false,
+            "policy_version": "knowledge_scope_v2",
+            "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+            "authority": "program",
+            "category_label": "类别待确认",
+            "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。",
+            "reason": "类别未确认或审核席位不完整，等待范围复核"
+          }
+        },
+        "dispute_report": {
+          "version": "claim_disputes_v1",
+          "candidate_hash": "ad382043fff5db392cac5fc37721afc5b6781f2b390535214131ae2d02920157",
+          "evidence_hash": "e7ab59ed7289680d5222ed98f4d8866f75c2bdd0c27544a828ded6b2ec452c38",
+          "base_proposal_digest": "e2cd6d3aa658d9fd1c9fd8150f43dc95ef5406cdd7b158eddde575176af5f1ae",
+          "opinions": [],
+          "disputes": [],
+          "evidence_observations": [],
+          "technical_seats": [
+            {
+              "voter_id": "judge_b",
+              "response_status": "invalid_contract",
+              "error_code": "SEMANTIC_CLARIFICATION_REQUIRED"
+            },
+            {
+              "voter_id": "judge_a",
+              "response_status": "missing",
+              "error_code": null
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "missing",
+              "error_code": null
+            }
+          ],
+          "majority_is_resolution": false,
+          "counter_absence_is_support": false,
+          "admission_authorized": false
+        }
+      },
+      "vote_assessments": {
+        "judge_b": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_b",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": false,
+          "raw_response_hash": "0dec317d6cf4548221e79f06fc839a74294035565cf9d7feeae53c5f4455331a",
+          "normalized_response_hash": "4bcae5f97014aa4a30a6dbc0b1742f54cfc2f9cbb830cbbebe12edb7b58f2d05",
+          "original_attempt_id": "attempt_eef3f12e37b1408c924bf7446bb4e631",
+          "attempt_id": "attempt_eef3f12e37b1408c924bf7446bb4e631",
+          "request_key": "a23c1efeaa7c37a025ea3bef5015821a2276ce7c9e6acbabee2e4c0dec291dc5",
+          "cache_source": null,
+          "errors": [
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "dismissed counterexamples and unresolved material counterevidence have different roles",
+              "axes": [
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            },
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "counterevidence_reviewed_ids overlaps material counterevidence",
+              "axes": [
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            }
+          ],
+          "axis_observations": {
+            "source": {
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "counterevidence_reviewed_ids overlaps material counterevidence",
+                "dismissed counterexamples and unresolved material counterevidence have different roles"
+              ]
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "semantic_revision",
+                "findings": [
+                  {
+                    "check": "relation_semantics",
+                    "kind": "semantic_error",
+                    "note": "投影对象应为矢量方程而非微分方程组",
+                    "evidence_ids": [
+                      "ev_e6de37594d24ed42f3b2"
+                    ],
+                    "normalization": null,
+                    "rule_id": "MEANING-001",
+                    "meaning_effect": "changed",
+                    "suggested_change": "将头实体改为'弹丸质心运动矢量方程'"
+                  },
+                  {
+                    "check": "relation_direction",
+                    "kind": "semantic_error",
+                    "note": "关系主体错误导致方向失效",
+                    "evidence_ids": [
+                      "ev_e6de37594d24ed42f3b2"
+                    ],
+                    "normalization": null,
+                    "rule_id": "MEANING-001",
+                    "meaning_effect": "changed",
+                    "suggested_change": "将头实体改为'弹丸质心运动矢量方程'"
+                  }
+                ]
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "derivation"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "DEV-024",
+      "proposal_digest": "05088071eb6d579a3b1863ebd0f4cbced70dbd5598db9a4c3b4d6f17ab0324cc",
+      "baseline_whole_eligible": [],
+      "baseline_statuses": {
+        "judge_a": "ok",
+        "judge_b": "invalid_contract",
+        "judge_c": "ok"
+      },
+      "votes": [
+        {
+          "attempt_id": "attempt_00ec3a2e42894c739932d006c6487ef1",
+          "audit_id": "missing_vote_pilot_0098bb636fc94b9f81cf5b5721ad3e85",
+          "checks": [
+            {
+              "check": "triple_support",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。",
+              "status": "pass"
+            },
+            {
+              "check": "entity_reference",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "实体指称与原文一致。",
+              "status": "pass"
+            },
+            {
+              "check": "relation_semantics",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "关系语义与原文“影响”一致。",
+              "status": "pass"
+            },
+            {
+              "check": "relation_direction",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "方向为空气阻力影响枪弹，符合原文。",
+              "status": "pass"
+            },
+            {
+              "check": "qualifiers",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "量词“特别大”准确提取。",
+              "status": "pass"
+            },
+            {
+              "check": "evidence_sufficiency",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "证据足以支持该三元组。",
+              "status": "pass"
+            },
+            {
+              "check": "mapping",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba"
+              ],
+              "issue_code": "",
+              "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+              "status": "unknown"
+            },
+            {
+              "check": "knowledge_scope",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "描述的是弹道学中的一般物理规律。",
+              "status": "pass"
+            },
+            {
+              "check": "counterevidence",
+              "evidence_ids": [
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "未发现矛盾证据。",
+              "status": "pass"
+            },
+            {
+              "check": "ontology",
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba"
+              ],
+              "issue_code": "unknown",
+              "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+              "status": "unknown"
+            }
+          ],
+          "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+          "committee_version": "committee_qwen_gemma_deepseek_v1",
+          "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+          "correction_policy_version": "targeted_review_repairs_v2",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_65ac14eea568d8e8224e"
+          ],
+          "dimensions": {
+            "counterevidence": {
+              "evidence_ids": [
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "未发现矛盾证据。",
+              "status": "pass"
+            },
+            "entity_reference": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "实体指称与原文一致。",
+              "status": "pass"
+            },
+            "evidence_sufficiency": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "证据足以支持该三元组。",
+              "status": "pass"
+            },
+            "knowledge_scope": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "描述的是弹道学中的一般物理规律。",
+              "status": "general"
+            },
+            "mapping": {
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba"
+              ],
+              "issue_code": "",
+              "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+              "relation_id": null,
+              "status": "unassigned"
+            },
+            "qualifiers": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "量词“特别大”准确提取。",
+              "status": "pass"
+            },
+            "relation_direction": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "方向为空气阻力影响枪弹，符合原文。",
+              "status": "pass"
+            },
+            "relation_semantics": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "关系语义与原文“影响”一致。",
+              "status": "pass"
+            },
+            "triple_support": {
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "issue_code": "",
+              "note": "原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。",
+              "status": "supported"
+            }
+          },
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "evidence_assessments": [
+            {
+              "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+              "note": "直接支持空气阻力对枪弹影响特别大。",
+              "role": "support"
+            },
+            {
+              "evidence_id": "ev_65ac14eea568d8e8224e",
+              "note": "包含上述支持内容及上下文。",
+              "role": "support"
+            },
+            {
+              "evidence_id": "ev_3eaf01e77f8ebf1a1533",
+              "note": "提供关系片段。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_9dea26c8392f28e05d1d",
+              "note": "讨论空气阻力作用时间。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_9d60ef2956420ef29035",
+              "note": "讨论最大射程角差异。",
+              "role": "context"
+            },
+            {
+              "evidence_id": "ev_c8f946ad518f8a50e42d",
+              "note": "提供枪弹射程角数据。",
+              "role": "context"
+            }
+          ],
+          "evidence_hash": "a641a4ccc2d9cfe6e3b4653dbfda73f6d7c5c553573194171bc3bb67cca4cf15",
+          "expression_findings": [],
+          "expression_status": "faithful",
+          "finish_reason": "stop",
+          "format_normalization": {
+            "changes": [
+              {
+                "operation": "add",
+                "path": "/dimensions/triple_support/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/entity_reference/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/relation_semantics/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/relation_direction/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/qualifiers/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/evidence_sufficiency/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/mapping/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/knowledge_scope/issue_code",
+                "to": ""
+              },
+              {
+                "operation": "add",
+                "path": "/dimensions/counterevidence/issue_code",
+                "to": ""
+              }
+            ],
+            "version": "dimension_auxiliary_fields_v1"
+          },
+          "input_tokens": 30003,
+          "knowledge_scope": "general",
+          "late_response": false,
+          "latency_ms": 48297,
+          "mapping": {
+            "competing_relation_ids": [],
+            "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+            "relation_id": null,
+            "status": "unassigned"
+          },
+          "mapping_diagnosis": "unassigned",
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "model_version_verification": "reported",
+          "object_revision": 2,
+          "ontology_context_hash": "e761748aadd93319e7cd6796efdd5b9758c1dea6f936ac1c2154230a6c3a5a63",
+          "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "output_tokens": 1037,
+          "primary_evidence_ids": [
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e"
+          ],
+          "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "prompt_version": "triple_validator_v8_citations_v4",
+          "proposal_digest": "05088071eb6d579a3b1863ebd0f4cbced70dbd5598db9a4c3b4d6f17ab0324cc",
+          "provider_started_at": 1794382406.1203911,
+          "queue_time_ms": 297,
+          "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"supported\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。\"}, \"entity_reference\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"实体指称与原文一致。\"}, \"relation_semantics\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"关系语义与原文“影响”一致。\"}, \"relation_direction\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"方向为空气阻力影响枪弹，符合原文。\"}, \"qualifiers\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"量词“特别大”准确提取。\"}, \"evidence_sufficiency\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"证据足以支持该三元组。\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\"], \"note\": \"由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。\", \"relation_id\": null, \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"general\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"描述的是弹道学中的一般物理规律。\"}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_65ac14eea568d8e8224e\"], \"note\": \"未发现矛盾证据。\"}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_4ca8b0a5dbe39a97b7ba\", \"role\": \"support\", \"note\": \"直接支持空气阻力对枪弹影响特别大。\"}, {\"evidence_id\": \"ev_65ac14eea568d8e8224e\", \"role\": \"support\", \"note\": \"包含上述支持内容及上下文。\"}, {\"evidence_id\": \"ev_3eaf01e77f8ebf1a1533\", \"role\": \"context\", \"note\": \"提供关系片段。\"}, {\"evidence_id\": \"ev_9dea26c8392f28e05d1d\", \"role\": \"context\", \"note\": \"讨论空气阻力作用时间。\"}, {\"evidence_id\": \"ev_9d60ef2956420ef29035\", \"role\": \"context\", \"note\": \"讨论最大射程角差异。\"}, {\"evidence_id\": \"ev_c8f946ad518f8a50e42d\", \"role\": \"context\", \"note\": \"提供枪弹射程角数据。\"}], \"primary_evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"counterevidence_reviewed_ids\": [\"ev_65ac14eea568d8e8224e\"], \"requested_context\": null, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": []}",
+          "reason_codes": [],
+          "reasoning_tokens": 2,
+          "representation_checks": [],
+          "request_key": "fe8288f18de965ad02d736762eaa5aaec90d574e7fbcd1f158d3e3a71128a8b6",
+          "requested_context": null,
+          "response_contract_version": "validator_response_v8",
+          "response_id": "chatcmpl-92bf8d04b05f233b",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "review_axes": {
+            "expression": {
+              "findings": [],
+              "status": "standard"
+            },
+            "mapping": {
+              "status": "unassigned"
+            },
+            "scope": {
+              "knowledge_scope": "general",
+              "status": "unclear"
+            },
+            "source": {
+              "status": "supported"
+            }
+          },
+          "round_id": 1,
+          "schema_assessment": {
+            "evidence_ids": [
+              "ev_4ca8b0a5dbe39a97b7ba"
+            ],
+            "issue": "unknown",
+            "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+            "status": "unknown"
+          },
+          "schema_change_hint": null,
+          "schema_issue": "unknown",
+          "schema_status": "unknown",
+          "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+          "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+          "source_support": "supported",
+          "suggested_revision": null,
+          "summary_derivation": {
+            "final_admission_requires_frozen_committee_and_program_guards": true,
+            "model_input_fields": [
+              "dimensions",
+              "evidence_assessments"
+            ],
+            "policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+            "version": "review_field_rules_v1"
+          },
+          "supporting_evidence_ids": [
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e"
+          ],
+          "task_id": "cand_e6ace1981cf9b8b16200",
+          "task_type": "triple_review",
+          "transport_metrics": {
+            "chunk_count": 1023,
+            "first_chunk_ms": 15172,
+            "first_content_ms": 15235,
+            "max_inter_chunk_gap_ms": 312,
+            "reasoning_chars": 0,
+            "stream": true,
+            "terminal_ms": 48297,
+            "visible_chars": 2104
+          },
+          "verdict": "uncertain",
+          "voter_id": "judge_b",
+          "attempts": [
+            {
+              "attempt_id": "attempt_00ec3a2e42894c739932d006c6487ef1",
+              "audit_id": "missing_vote_pilot_0098bb636fc94b9f81cf5b5721ad3e85",
+              "checks": [
+                {
+                  "check": "triple_support",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。",
+                  "status": "pass"
+                },
+                {
+                  "check": "entity_reference",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "实体指称与原文一致。",
+                  "status": "pass"
+                },
+                {
+                  "check": "relation_semantics",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "关系语义与原文“影响”一致。",
+                  "status": "pass"
+                },
+                {
+                  "check": "relation_direction",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "方向为空气阻力影响枪弹，符合原文。",
+                  "status": "pass"
+                },
+                {
+                  "check": "qualifiers",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "量词“特别大”准确提取。",
+                  "status": "pass"
+                },
+                {
+                  "check": "evidence_sufficiency",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "证据足以支持该三元组。",
+                  "status": "pass"
+                },
+                {
+                  "check": "mapping",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba"
+                  ],
+                  "issue_code": "",
+                  "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+                  "status": "unknown"
+                },
+                {
+                  "check": "knowledge_scope",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "描述的是弹道学中的一般物理规律。",
+                  "status": "pass"
+                },
+                {
+                  "check": "counterevidence",
+                  "evidence_ids": [
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "未发现矛盾证据。",
+                  "status": "pass"
+                },
+                {
+                  "check": "ontology",
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba"
+                  ],
+                  "issue_code": "unknown",
+                  "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+                  "status": "unknown"
+                }
+              ],
+              "committee_policy_hash": "04a768977e3c3a7dec63d8093fcac710d855d80e6977ce7758d8f8a120767636",
+              "committee_version": "committee_qwen_gemma_deepseek_v1",
+              "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+              "correction_policy_version": "targeted_review_repairs_v2",
+              "counter_evidence_ids": [],
+              "counterevidence_reviewed_ids": [
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "dimensions": {
+                "counterevidence": {
+                  "evidence_ids": [
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "未发现矛盾证据。",
+                  "status": "pass"
+                },
+                "entity_reference": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "实体指称与原文一致。",
+                  "status": "pass"
+                },
+                "evidence_sufficiency": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "证据足以支持该三元组。",
+                  "status": "pass"
+                },
+                "knowledge_scope": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "描述的是弹道学中的一般物理规律。",
+                  "status": "general"
+                },
+                "mapping": {
+                  "competing_relation_ids": [],
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba"
+                  ],
+                  "issue_code": "",
+                  "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+                  "relation_id": null,
+                  "status": "unassigned"
+                },
+                "qualifiers": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "量词“特别大”准确提取。",
+                  "status": "pass"
+                },
+                "relation_direction": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "方向为空气阻力影响枪弹，符合原文。",
+                  "status": "pass"
+                },
+                "relation_semantics": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "关系语义与原文“影响”一致。",
+                  "status": "pass"
+                },
+                "triple_support": {
+                  "evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "issue_code": "",
+                  "note": "原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。",
+                  "status": "supported"
+                }
+              },
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "evidence_assessments": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "note": "直接支持空气阻力对枪弹影响特别大。",
+                  "role": "support"
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "note": "包含上述支持内容及上下文。",
+                  "role": "support"
+                },
+                {
+                  "evidence_id": "ev_3eaf01e77f8ebf1a1533",
+                  "note": "提供关系片段。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_9dea26c8392f28e05d1d",
+                  "note": "讨论空气阻力作用时间。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_9d60ef2956420ef29035",
+                  "note": "讨论最大射程角差异。",
+                  "role": "context"
+                },
+                {
+                  "evidence_id": "ev_c8f946ad518f8a50e42d",
+                  "note": "提供枪弹射程角数据。",
+                  "role": "context"
+                }
+              ],
+              "evidence_hash": "a641a4ccc2d9cfe6e3b4653dbfda73f6d7c5c553573194171bc3bb67cca4cf15",
+              "expression_findings": [],
+              "expression_status": "faithful",
+              "finish_reason": "stop",
+              "format_normalization": {
+                "changes": [
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/triple_support/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/entity_reference/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/relation_semantics/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/relation_direction/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/qualifiers/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/evidence_sufficiency/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/mapping/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/knowledge_scope/issue_code",
+                    "to": ""
+                  },
+                  {
+                    "operation": "add",
+                    "path": "/dimensions/counterevidence/issue_code",
+                    "to": ""
+                  }
+                ],
+                "version": "dimension_auxiliary_fields_v1"
+              },
+              "input_tokens": 30003,
+              "knowledge_scope": "general",
+              "late_response": false,
+              "latency_ms": 48297,
+              "mapping": {
+                "competing_relation_ids": [],
+                "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              "mapping_diagnosis": "unassigned",
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "model_version_verification": "reported",
+              "object_revision": 2,
+              "ontology_context_hash": "e761748aadd93319e7cd6796efdd5b9758c1dea6f936ac1c2154230a6c3a5a63",
+              "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "output_tokens": 1037,
+              "primary_evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+              "prompt_version": "triple_validator_v8_citations_v4",
+              "proposal_digest": "05088071eb6d579a3b1863ebd0f4cbced70dbd5598db9a4c3b4d6f17ab0324cc",
+              "provider_started_at": 1794382406.1203911,
+              "queue_time_ms": 297,
+              "raw_response": "{\"dimensions\": {\"triple_support\": {\"status\": \"supported\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。\"}, \"entity_reference\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"实体指称与原文一致。\"}, \"relation_semantics\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"关系语义与原文“影响”一致。\"}, \"relation_direction\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"方向为空气阻力影响枪弹，符合原文。\"}, \"qualifiers\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"量词“特别大”准确提取。\"}, \"evidence_sufficiency\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"证据足以支持该三元组。\"}, \"mapping\": {\"status\": \"unassigned\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\"], \"note\": \"由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。\", \"relation_id\": null, \"competing_relation_ids\": []}, \"knowledge_scope\": {\"status\": \"general\", \"evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"note\": \"描述的是弹道学中的一般物理规律。\"}, \"counterevidence\": {\"status\": \"pass\", \"evidence_ids\": [\"ev_65ac14eea568d8e8224e\"], \"note\": \"未发现矛盾证据。\"}}, \"evidence_assessments\": [{\"evidence_id\": \"ev_4ca8b0a5dbe39a97b7ba\", \"role\": \"support\", \"note\": \"直接支持空气阻力对枪弹影响特别大。\"}, {\"evidence_id\": \"ev_65ac14eea568d8e8224e\", \"role\": \"support\", \"note\": \"包含上述支持内容及上下文。\"}, {\"evidence_id\": \"ev_3eaf01e77f8ebf1a1533\", \"role\": \"context\", \"note\": \"提供关系片段。\"}, {\"evidence_id\": \"ev_9dea26c8392f28e05d1d\", \"role\": \"context\", \"note\": \"讨论空气阻力作用时间。\"}, {\"evidence_id\": \"ev_9d60ef2956420ef29035\", \"role\": \"context\", \"note\": \"讨论最大射程角差异。\"}, {\"evidence_id\": \"ev_c8f946ad518f8a50e42d\", \"role\": \"context\", \"note\": \"提供枪弹射程角数据。\"}], \"primary_evidence_ids\": [\"ev_4ca8b0a5dbe39a97b7ba\", \"ev_65ac14eea568d8e8224e\"], \"counterevidence_reviewed_ids\": [\"ev_65ac14eea568d8e8224e\"], \"requested_context\": null, \"suggested_revision\": null, \"schema_change_hint\": null, \"expression_findings\": []}",
+              "reason_codes": [],
+              "reasoning_tokens": 2,
+              "representation_checks": [],
+              "request_key": "fe8288f18de965ad02d736762eaa5aaec90d574e7fbcd1f158d3e3a71128a8b6",
+              "requested_context": null,
+              "response_contract_version": "validator_response_v8",
+              "response_id": "chatcmpl-92bf8d04b05f233b",
+              "response_status": "ok",
+              "returned_model_id": "Gemma",
+              "review_axes": {
+                "expression": {
+                  "findings": [],
+                  "status": "standard"
+                },
+                "mapping": {
+                  "status": "unassigned"
+                },
+                "scope": {
+                  "knowledge_scope": "general",
+                  "status": "unclear"
+                },
+                "source": {
+                  "status": "supported"
+                }
+              },
+              "round_id": 1,
+              "schema_assessment": {
+                "evidence_ids": [
+                  "ev_4ca8b0a5dbe39a97b7ba"
+                ],
+                "issue": "unknown",
+                "note": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+                "status": "unknown"
+              },
+              "schema_change_hint": null,
+              "schema_issue": "unknown",
+              "schema_status": "unknown",
+              "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+              "source_snapshot_hash": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+              "source_support": "supported",
+              "suggested_revision": null,
+              "summary_derivation": {
+                "final_admission_requires_frozen_committee_and_program_guards": true,
+                "model_input_fields": [
+                  "dimensions",
+                  "evidence_assessments"
+                ],
+                "policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+                "version": "review_field_rules_v1"
+              },
+              "supporting_evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "task_id": "cand_e6ace1981cf9b8b16200",
+              "task_type": "triple_review",
+              "transport_metrics": {
+                "chunk_count": 1023,
+                "first_chunk_ms": 15172,
+                "first_content_ms": 15235,
+                "max_inter_chunk_gap_ms": 312,
+                "reasoning_chars": 0,
+                "stream": true,
+                "terminal_ms": 48297,
+                "visible_chars": 2104
+              },
+              "verdict": "uncertain",
+              "voter_id": "judge_b"
+            }
+          ],
+          "attempt_no": 1,
+          "actual_calls": 1
+        }
+      ],
+      "consensus": {
+        "committee_size": 3,
+        "required_votes": 3,
+        "valid_votes": 0,
+        "invalid_votes": 0,
+        "uncertain_votes": 1,
+        "error_votes": 0,
+        "missing_votes": 2,
+        "duplicate_attempts": 0,
+        "duplicate_model_votes": 0,
+        "invalid_attempts": 0,
+        "distinct_family_count": 1,
+        "valid_distinct_family_count": 0,
+        "invalid_distinct_family_count": 0,
+        "diversity_ready": false,
+        "result": "unresolved",
+        "unresolved_counterevidence": false,
+        "unresolved_support_conflict": false,
+        "counter_evidence_ids": [],
+        "supporting_evidence_ids": [
+          "ev_4ca8b0a5dbe39a97b7ba",
+          "ev_65ac14eea568d8e8224e"
+        ],
+        "source_support_consensus": {
+          "result": "unresolved",
+          "support_votes": 1,
+          "contradiction_votes": 0,
+          "support_voter_ids": [
+            "judge_b"
+          ],
+          "committee_size": 3,
+          "required_votes": 3,
+          "contradiction_voter_ids": []
+        },
+        "admission_consensus": {
+          "result": "unresolved"
+        },
+        "eligible_voter_ids": [
+          "judge_b"
+        ],
+        "expression_complete": true,
+        "blocking_fields": [],
+        "raw_source_support_votes": [
+          {
+            "voter_id": "judge_b",
+            "source_support": "supported"
+          }
+        ],
+        "expression_status": "unresolved",
+        "knowledge_scope": "unresolved",
+        "scope_confirmed": false,
+        "mapping_status": "ambiguous",
+        "effective_mapping_status": "unassigned",
+        "core_source_support_result": "unresolved",
+        "ontology_coverage_review": {
+          "context_hash": "e761748aadd93319e7cd6796efdd5b9758c1dea6f936ac1c2154230a6c3a5a63",
+          "full_catalog_included": false,
+          "global_gap_confirmable": false
+        },
+        "review_axes": {
+          "version": "review_axes_v1",
+          "source": {
+            "status": "unresolved",
+            "core_relation_status": "unresolved",
+            "evidence_ids": [
+              "ev_4ca8b0a5dbe39a97b7ba",
+              "ev_65ac14eea568d8e8224e"
+            ]
+          },
+          "expression": {
+            "status": "unresolved",
+            "findings": []
+          },
+          "mapping": {
+            "status": "context_incomplete",
+            "effective_mapping_status": "unassigned",
+            "preflight": {
+              "blocking_information": [
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_12a1cf5c80d7e73a97a2",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_1654fcf38913d94cb712",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_23510018faf8ec45724e",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_2b18880939600d01a389",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_2eb6c3f7a4060a8f5083",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_36719caf973ba4631cbb",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_5763e573f6d5b26574ec",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_73e1ca764a0070c03ef9",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_75fc128ee24174d4af9a",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_84ec7faad76ddd289126",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_a0032cdfe322b4304a79",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_a2c7a219ea7a7cf55eb2",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_a66ceee55ad57847f8f4",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_b204199d1589f60b3c39",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_c21d76f3bc6b8ad6a528",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_e149c7098d8359d6fd64",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_f29f60e4559cc505f99b",
+                  "kind": "relation"
+                },
+                {
+                  "fields": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "id": "R_f9f5af6e13d54970e1c6",
+                  "kind": "relation"
+                }
+              ],
+              "budget_excluded_property_ids": [],
+              "candidate_hash": "38e98c2e3f9111f51c0da5a49c3c78133520ad784e84fdb5a42e39d0211b73ef",
+              "confusable_relations": [
+                {
+                  "candidate_ids": [
+                    "R_12a1cf5c80d7e73a97a2",
+                    "R_1654fcf38913d94cb712",
+                    "R_23510018faf8ec45724e",
+                    "R_2b18880939600d01a389",
+                    "R_2eb6c3f7a4060a8f5083",
+                    "R_36719caf973ba4631cbb",
+                    "R_5763e573f6d5b26574ec",
+                    "R_73e1ca764a0070c03ef9",
+                    "R_75fc128ee24174d4af9a",
+                    "R_84ec7faad76ddd289126",
+                    "R_a0032cdfe322b4304a79",
+                    "R_a2c7a219ea7a7cf55eb2",
+                    "R_a66ceee55ad57847f8f4",
+                    "R_b204199d1589f60b3c39",
+                    "R_c21d76f3bc6b8ad6a528",
+                    "R_e149c7098d8359d6fd64",
+                    "R_f29f60e4559cc505f99b",
+                    "R_f9f5af6e13d54970e1c6"
+                  ],
+                  "comparison": "compare full definitions, declared direction and endpoint constraints",
+                  "query": "影响"
+                }
+              ],
+              "entities": {
+                "head": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_3d1e92e945b2c3dbbd16",
+                  "candidate_id": "local_8f818c85fa7dce06fe18bdd27d0b5079f0934162ab072e57a531d7035a8e3ce1",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_3eaf01e77f8ebf1a1533",
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_9dea26c8392f28e05d1d",
+                    "ev_9d60ef2956420ef29035"
+                  ],
+                  "surface": "空气阻力",
+                  "type_candidate_ids": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ]
+                },
+                "tail": {
+                  "aliases": [],
+                  "aliases_are_unconfirmed": true,
+                  "assigned_type": "C_c1dc2344033e9fa4ba30",
+                  "candidate_id": "local_b5b2f07322aec6393524a37dd713d411a61d88f32829278bf49a1e7365f2283b",
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "missing_information": [],
+                  "referent_scope": null,
+                  "source_evidence_ids": [
+                    "ev_4ca8b0a5dbe39a97b7ba",
+                    "ev_c8f946ad518f8a50e42d",
+                    "ev_9d60ef2956420ef29035",
+                    "ev_65ac14eea568d8e8224e"
+                  ],
+                  "surface": "枪弹",
+                  "type_candidate_ids": [
+                    "C_c1dc2344033e9fa4ba30"
+                  ]
+                }
+              },
+              "evidence_hash": "a641a4ccc2d9cfe6e3b4653dbfda73f6d7c5c553573194171bc3bb67cca4cf15",
+              "formal_mapping": {
+                "assigned_head_type": "C_3d1e92e945b2c3dbbd16",
+                "assigned_relation_id": "R_84ec7faad76ddd289126",
+                "assigned_tail_type": "C_c1dc2344033e9fa4ba30",
+                "candidate_relation_ids": [
+                  "R_12a1cf5c80d7e73a97a2",
+                  "R_1654fcf38913d94cb712",
+                  "R_23510018faf8ec45724e",
+                  "R_2b18880939600d01a389",
+                  "R_2eb6c3f7a4060a8f5083",
+                  "R_36719caf973ba4631cbb",
+                  "R_5763e573f6d5b26574ec",
+                  "R_73e1ca764a0070c03ef9",
+                  "R_75fc128ee24174d4af9a",
+                  "R_84ec7faad76ddd289126",
+                  "R_a0032cdfe322b4304a79",
+                  "R_a2c7a219ea7a7cf55eb2",
+                  "R_a66ceee55ad57847f8f4",
+                  "R_b204199d1589f60b3c39",
+                  "R_c21d76f3bc6b8ad6a528",
+                  "R_e149c7098d8359d6fd64",
+                  "R_f29f60e4559cc505f99b",
+                  "R_f9f5af6e13d54970e1c6"
+                ],
+                "semantic_approval": false
+              },
+              "global_gap_confirmed": false,
+              "judgment_ready": false,
+              "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema.",
+              "ontology_context_hash": "e761748aadd93319e7cd6796efdd5b9758c1dea6f936ac1c2154230a6c3a5a63",
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+              "original_expression": {
+                "candidate_id": "cand_e6ace1981cf9b8b16200",
+                "head": "空气阻力",
+                "qualifier_status": {
+                  "applicability": "not_stated",
+                  "condition": "not_stated",
+                  "modality": "extracted",
+                  "polarity": "extracted",
+                  "quantifier": "extracted",
+                  "time_scope": "not_stated"
+                },
+                "qualifiers": {
+                  "applicability": null,
+                  "condition": null,
+                  "modality": "asserted",
+                  "polarity": "positive",
+                  "quantifier": "特别大",
+                  "time_scope": null
+                },
+                "revision": 2,
+                "surface_relation": "影响",
+                "tail": "枪弹"
+              },
+              "policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+              "relation_candidates": [
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_4f620706279a1779b20b"
+                  ],
+                  "id": "R_12a1cf5c80d7e73a97a2",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_8168a48ff2e280e56e5a"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_a902e72f8e9d12ecd166"
+                  ],
+                  "id": "R_1654fcf38913d94cb712",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_70780e1e31a41f0ff86a"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_cbcb15d49fba77017748"
+                  ],
+                  "id": "R_23510018faf8ec45724e",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_e93d960291ef82ed2a2c"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_02ca97ebf11ae1d3c3ad"
+                  ],
+                  "id": "R_2b18880939600d01a389",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_5d0b94cd0cd9ae0220e9"
+                  ],
+                  "id": "R_2eb6c3f7a4060a8f5083",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_61338e5480fb086c0938"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ],
+                  "id": "R_36719caf973ba4631cbb",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_113e838bda76ceba1c37"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ],
+                  "id": "R_5763e573f6d5b26574ec",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "id": "R_73e1ca764a0070c03ef9",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_125e9268788e296b6e64"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_85d7c2e6732f8a304f88"
+                  ],
+                  "id": "R_75fc128ee24174d4af9a",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_53d15a0ecfc3dc8ecd93"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_3d1e92e945b2c3dbbd16"
+                  ],
+                  "id": "R_84ec7faad76ddd289126",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_c1dc2344033e9fa4ba30"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_02ca97ebf11ae1d3c3ad"
+                  ],
+                  "id": "R_a0032cdfe322b4304a79",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_2596ed9929a2eb4634d6"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_a1bfa7db3298783a8f65"
+                  ],
+                  "id": "R_a2c7a219ea7a7cf55eb2",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_5c072ee8bc4ede36b807"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_02ca97ebf11ae1d3c3ad"
+                  ],
+                  "id": "R_a66ceee55ad57847f8f4",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_69cf4586df615323b544"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_0b7c9c45d5ac893efbd9"
+                  ],
+                  "id": "R_b204199d1589f60b3c39",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_70780e1e31a41f0ff86a"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_02ca97ebf11ae1d3c3ad"
+                  ],
+                  "id": "R_c21d76f3bc6b8ad6a528",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_70780e1e31a41f0ff86a"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_cf22ec523db237003250"
+                  ],
+                  "id": "R_e149c7098d8359d6fd64",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_5c072ee8bc4ede36b807"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_5d0b94cd0cd9ae0220e9"
+                  ],
+                  "id": "R_f29f60e4559cc505f99b",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_8168a48ff2e280e56e5a"
+                  ],
+                  "retrieved": true
+                },
+                {
+                  "aliases": [],
+                  "datatype": null,
+                  "definition_available": false,
+                  "direction": "head_to_tail",
+                  "direction_basis": "formal_property_signature_not_semantic_approval",
+                  "domain": [
+                    "C_02ca97ebf11ae1d3c3ad"
+                  ],
+                  "id": "R_f9f5af6e13d54970e1c6",
+                  "label": "影响",
+                  "missing_information": [
+                    "definition_missing_in_bound_release"
+                  ],
+                  "property_kind": "object",
+                  "range": [
+                    "C_d0eb59a46cf6f1abad3a"
+                  ],
+                  "retrieved": true
+                }
+              ],
+              "search_trace": [
+                {
+                  "metadata_complete": false,
+                  "property_count": 18,
+                  "stage": "review_subset"
+                },
+                {
+                  "classes_scanned": 189,
+                  "exact_match_ids": [
+                    "R_12a1cf5c80d7e73a97a2",
+                    "R_1654fcf38913d94cb712",
+                    "R_23510018faf8ec45724e",
+                    "R_2b18880939600d01a389",
+                    "R_2eb6c3f7a4060a8f5083",
+                    "R_36719caf973ba4631cbb",
+                    "R_5763e573f6d5b26574ec",
+                    "R_73e1ca764a0070c03ef9",
+                    "R_75fc128ee24174d4af9a",
+                    "R_84ec7faad76ddd289126",
+                    "R_a0032cdfe322b4304a79",
+                    "R_a2c7a219ea7a7cf55eb2",
+                    "R_a66ceee55ad57847f8f4",
+                    "R_b204199d1589f60b3c39",
+                    "R_c21d76f3bc6b8ad6a528",
+                    "R_e149c7098d8359d6fd64",
+                    "R_f29f60e4559cc505f99b",
+                    "R_f9f5af6e13d54970e1c6"
+                  ],
+                  "lexical_recall_is_semantic_confirmation": false,
+                  "properties_scanned": 81,
+                  "property_count": 18,
+                  "stage": "full_bound_release_and_aliases"
+                }
+              ],
+              "semantic_applicability": "not_programmatically_confirmed",
+              "source_catalog_hash": "b1a42a3b6479ba491255113706717f582ed266e938ac17cfe252f88c6255a321",
+              "version": "mapping_preflight_v1"
+            },
+            "reason_codes": [
+              "RELATION_DEFINITION_UNAVAILABLE"
+            ]
+          },
+          "scope": {
+            "status": "unclear",
+            "knowledge_scope": "unresolved",
+            "classification_confirmed": false,
+            "policy_version": "knowledge_scope_v2",
+            "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+            "authority": "program",
+            "category_label": "类别待确认",
+            "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。",
+            "reason": "类别未确认或审核席位不完整，等待范围复核"
+          }
+        },
+        "dispute_report": {
+          "version": "claim_disputes_v1",
+          "candidate_hash": "38e98c2e3f9111f51c0da5a49c3c78133520ad784e84fdb5a42e39d0211b73ef",
+          "evidence_hash": "a641a4ccc2d9cfe6e3b4653dbfda73f6d7c5c553573194171bc3bb67cca4cf15",
+          "base_proposal_digest": "05088071eb6d579a3b1863ebd0f4cbced70dbd5598db9a4c3b4d6f17ab0324cc",
+          "opinions": [
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "counterevidence",
+              "claim": {
+                "check": "counterevidence",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "已核验材料中是否存在可能推翻“空气阻力 — 影响 — 枪弹”的证据？未发现反证与找到正面支持分开记录。",
+                "formal_mapping": null,
+                "claim_id": "c1dca88402a5c8fb838edf30024186469f6e0b9f08e0480fee193ca1df59b201"
+              },
+              "status": "pass",
+              "reason": "未发现矛盾证据。",
+              "issue_type": "counterevidence",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "entity_reference",
+              "claim": {
+                "check": "entity_reference",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“空气阻力 — 影响 — 枪弹”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+                "formal_mapping": null,
+                "claim_id": "1deb768dc6fce763a5057da1762b757dc647867e62ca20fe67e7928fd2b96be0"
+              },
+              "status": "pass",
+              "reason": "实体指称与原文一致。",
+              "issue_type": "referent",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "evidence_sufficiency",
+              "claim": {
+                "check": "evidence_sufficiency",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "当前证据是否足以确认“空气阻力 — 影响 — 枪弹”的完整含义？缺哪一段材料？",
+                "formal_mapping": null,
+                "claim_id": "0cc9ee74bab7bfb9f440142a89a159aa24a3bbd0649894b6f54ba11b0d2b358d"
+              },
+              "status": "pass",
+              "reason": "证据足以支持该三元组。",
+              "issue_type": "evidence_sufficiency",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "knowledge_scope",
+              "claim": {
+                "check": "knowledge_scope",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“空气阻力 — 影响 — 枪弹”属于哪种收录范围？范围分类不能替代事实判断。",
+                "formal_mapping": null,
+                "claim_id": "4863f231f8b1c7926aa0042dd0d0a9dfcabafe72accddafa4021e68240f2b3d5"
+              },
+              "status": "general",
+              "reason": "描述的是弹道学中的一般物理规律。",
+              "issue_type": "scope",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "mapping",
+              "claim": {
+                "check": "mapping",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“空气阻力 — 影响 — 枪弹”与已填写关系 R_84ec7faad76ddd289126 的正式定义、实体身份、方向和类型约束是否匹配？",
+                "formal_mapping": {
+                  "relation_id": "R_84ec7faad76ddd289126",
+                  "head_type": "C_3d1e92e945b2c3dbbd16",
+                  "tail_type": "C_c1dc2344033e9fa4ba30"
+                },
+                "claim_id": "4a8862f8c677b992aafb57a675b72b2790c439298282cba3cadbf781283209b9"
+              },
+              "status": "unassigned",
+              "reason": "由于 mapping_preflight.judgment_ready 为 false 且关系定义缺失，保持未分配状态。",
+              "issue_type": "formal_mapping",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "qualifiers",
+              "claim": {
+                "check": "qualifiers",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“空气阻力 — 影响 — 枪弹”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+                "formal_mapping": null,
+                "claim_id": "16d53ca63bb229bc812148e9873a375550423bbcde8c5401fde6d9f3654f0d12"
+              },
+              "status": "pass",
+              "reason": "量词“特别大”准确提取。",
+              "issue_type": "qualifiers",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "relation_direction",
+              "claim": {
+                "check": "relation_direction",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否支持“空气阻力 — 影响 — 枪弹”的头尾方向？",
+                "formal_mapping": null,
+                "claim_id": "93139b2a6b3646fe5b34c08b7889c061ef28fb0606e4ad1b8949ab8c7485b2f2"
+              },
+              "status": "pass",
+              "reason": "方向为空气阻力影响枪弹，符合原文。",
+              "issue_type": "direction",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "relation_semantics",
+              "claim": {
+                "check": "relation_semantics",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“空气阻力 — 影响 — 枪弹”中的“影响”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+                "formal_mapping": null,
+                "claim_id": "2bbb51fcbe0375c6320604b65756eab639b57000f172df6546c04807b7a4e24e"
+              },
+              "status": "pass",
+              "reason": "关系语义与原文“影响”一致。",
+              "issue_type": "relation_meaning",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "triple_support",
+              "claim": {
+                "check": "triple_support",
+                "expression": {
+                  "head": "空气阻力",
+                  "surface_relation": "影响",
+                  "tail": "枪弹",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "positive",
+                    "quantifier": "特别大",
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "原文是否明确支持“空气阻力 — 影响 — 枪弹”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+                "formal_mapping": null,
+                "claim_id": "9cac4f1e4b77462f8f152527a1b04c5bd51d744f62bfb0eea978e7832e61b638"
+              },
+              "status": "supported",
+              "reason": "原文明确指出枪弹在稠密大气层中飞行，空气阻力的影响特别大。",
+              "issue_type": "relation_meaning",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_4ca8b0a5dbe39a97b7ba",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 33927,
+                  "offset_basis": "canonical_document",
+                  "block_type": null
+                },
+                {
+                  "evidence_id": "ev_65ac14eea568d8e8224e",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_7f8f53ded6f7",
+                  "chunk_id": "chunk_4bc2a0050fb1",
+                  "start": 33876,
+                  "end": 34339,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            }
+          ],
+          "disputes": [],
+          "evidence_observations": [
+            {
+              "voter_id": "judge_b",
+              "positive_support": {
+                "status": "found",
+                "evidence_ids": [
+                  "ev_4ca8b0a5dbe39a97b7ba",
+                  "ev_65ac14eea568d8e8224e"
+                ],
+                "core_source_status": "supported",
+                "full_source_status": "supported",
+                "not_inferred_from_counter_absence": true
+              },
+              "counterevidence_search": {
+                "status": "reviewed_no_material_counter_recorded",
+                "counter_evidence_ids": [],
+                "reviewed_evidence_ids": [
+                  "ev_65ac14eea568d8e8224e"
+                ],
+                "note": "未发现矛盾证据。",
+                "scope": "frozen_evidence_bundle_only",
+                "absence_is_support": false
+              }
+            }
+          ],
+          "technical_seats": [
+            {
+              "voter_id": "judge_a",
+              "response_status": "missing",
+              "error_code": null
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "missing",
+              "error_code": null
+            }
+          ],
+          "majority_is_resolution": false,
+          "counter_absence_is_support": false,
+          "admission_authorized": false
+        }
+      },
+      "vote_assessments": {
+        "judge_b": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_b",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "4f259eeb9d8cb24dfffdc32df40840cb136f6431aaaf1aa9d2ba717fabfb6277",
+          "normalized_response_hash": "729eaf7632d69eaccad2fff730dbeb389299672462e8fb9175b2f0b58cf050f9",
+          "original_attempt_id": "attempt_00ec3a2e42894c739932d006c6487ef1",
+          "attempt_id": "attempt_00ec3a2e42894c739932d006c6487ef1",
+          "request_key": "fe8288f18de965ad02d736762eaa5aaec90d574e7fbcd1f158d3e3a71128a8b6",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      }
+    }
+  ]
+}

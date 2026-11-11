@@ -105,7 +105,7 @@ class OpenAICompatibleClient:
         started = time.monotonic()
         user_suffix=kwargs.get('user_suffix','')
         if not isinstance(user_suffix,str):raise ValueError('user_suffix must be text')
-        user_content=json.dumps(payload,ensure_ascii=False)+(('\n\n'+user_suffix) if user_suffix else '')
+        user_content=json.dumps(payload,ensure_ascii=False,**({'separators':(',',':')} if kwargs.get('compact_json') else {}))+(('\n\n'+user_suffix) if user_suffix else '')
         output_format=copy.deepcopy(kwargs.get('response_format',{'type':'json_object'}))
         if not isinstance(output_format,dict) or output_format.get('type') not in {'json_object','json_schema'}:
             raise ValueError('unsupported JSON response format')
