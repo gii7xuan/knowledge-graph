@@ -1,0 +1,80 @@
+{
+  "at": "2026-11-11T16:51:35.677499+08:00",
+  "definitions_prepared": 8,
+  "local_guard_pass": 8,
+  "new_model_calls": 5,
+  "authorized_max_calls": 6,
+  "effective_modeling_votes": [
+    {
+      "voter_id": "judge_a",
+      "response_status": "ok",
+      "decision": "approve",
+      "error_code": null,
+      "outcome_unknown": null
+    },
+    {
+      "voter_id": "judge_b",
+      "response_status": "api_error",
+      "decision": null,
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "outcome_unknown": true
+    },
+    {
+      "voter_id": "judge_c",
+      "response_status": "ok",
+      "decision": "approve",
+      "error_code": null,
+      "outcome_unknown": null
+    }
+  ],
+  "valid_modeling_approvals": 2,
+  "semantic_competency_executed": false,
+  "semantic_competency_passed": false,
+  "remaining_unknown_requests": [
+    {
+      "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+      "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+      "model": "judge_b",
+      "started_at_epoch": 1794386193.1115596,
+      "http_status": 504,
+      "provider_request_id": null,
+      "source_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+      "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+      "status": "provider_outcome_unknown",
+      "local_request_key_is_provider_id": false,
+      "automatic_resend_allowed": false,
+      "resolution": "查询网关/上游日志以确认原请求实际完成状态；仅对账原请求，不换命名空间重发。"
+    }
+  ],
+  "isolated_release_published": false,
+  "production_release_changed": false,
+  "formal_definition_coverage_in_production": 0,
+  "production_written": false,
+  "protected_inputs_unchanged": true,
+  "costs": {
+    "reported_input_tokens": 339701,
+    "reported_output_tokens": 9413,
+    "usage_missing_requests": 1,
+    "currency_cost": null
+  },
+  "consensus": {
+    "result": "unresolved",
+    "counts": {
+      "approve": 2,
+      "revise": 0,
+      "reject": 0,
+      "uncertain": 0,
+      "error": 1
+    },
+    "committee_size": 3,
+    "required_votes": 3,
+    "missing": 0,
+    "eligible_voter_ids": [
+      "judge_a",
+      "judge_c"
+    ],
+    "counter_evidence_ids": [],
+    "deterministic_checks_pass": false
+  },
+  "historical_unknown_requests_not_retried": true
+}

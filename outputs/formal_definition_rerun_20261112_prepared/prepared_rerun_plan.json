@@ -1,0 +1,84 @@
+{
+  "prepared_at": "2026-11-12T09:46:14.698055+08:00",
+  "authorization_status": "pending_additional_scope_and_call_budget",
+  "new_model_calls": 0,
+  "prior_calls_used": 9,
+  "prior_authorized_limit": 9,
+  "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+  "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+  "competency_request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+  "source_document_chars": 55505,
+  "endpoints": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "request_timeout_seconds": 90.0,
+      "http_timeout_seconds": 90.0
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "base_url": "https://43.143.151.41:3000/v1",
+      "request_timeout_seconds": 180.0,
+      "http_timeout_seconds": 170.0
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "request_timeout_seconds": 90.0,
+      "http_timeout_seconds": 90.0
+    }
+  ],
+  "same_data_and_destinations_as_previously_authorized": true,
+  "frozen_files": {
+    "frozen_competency_request.json": "f225699883e57edbdf531f1d6c3d36919d3ca9f383fd9672a91c1cb8980ce524",
+    "frozen_modeling_payload.json": "2557c086f247ba0bdb5c68ae0d3b9a50def9e06ff81e93044bf2dbe14a9b48ed",
+    "frozen_modeling_proposal.json": "abb2e17906f8971b4827e4f5f515fa673c0df7eb25d169016ffce96a2b68fe67",
+    "gemma_competency_repair_feedback.json": "81dde2e0664b7959a4f5346e9b6080aab01c07a90952b47dbd91a60c1156d4ab"
+  },
+  "profiles": {
+    "targeted": {
+      "max_new_calls": 2,
+      "new_cumulative_limit": 11,
+      "jobs": [
+        "one additional expressly authorized Gemma modeling reassessment, preserving both existing unknown attempts",
+        "one Gemma competency quotation repair on the exact frozen request"
+      ],
+      "qwen_valid_votes": "unchanged",
+      "deepseek_valid_fail": "unchanged"
+    },
+    "full_comparison": {
+      "max_new_calls": 4,
+      "new_cumulative_limit": 13,
+      "jobs": [
+        "one Gemma modeling reassessment",
+        "Qwen full-chapter diagnostic replication",
+        "Gemma full-chapter quotation-repair replication",
+        "DeepSeek full-chapter diagnostic replication"
+      ],
+      "original_valid_votes": "all retained; new diagnostic results cannot erase existing objections or authorize publication"
+    }
+  },
+  "unknown_gemma_attempts": [
+    {
+      "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+      "state": "unknown",
+      "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b"
+    },
+    {
+      "attempt_id": "attempt_d1e77c8b62684340b60becc9a23bac3b",
+      "state": "unknown",
+      "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b"
+    }
+  ],
+  "possible_duplicate_billing": true,
+  "automatic_retries": 0,
+  "production_activation_authorized": false,
+  "publication_in_this_rerun": false,
+  "inputs_and_code_fingerprints_verified": true
+}

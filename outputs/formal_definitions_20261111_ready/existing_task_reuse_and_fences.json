@@ -1,0 +1,85 @@
+{
+  "relevant_existing_tasks": [
+    {
+      "extension_id": "ext_0debae0687b04b2c959fcf9c95750a8d",
+      "status": "needs_human",
+      "delta_revision": 1,
+      "targets": [
+        "R_5cfeb014dc68c80c2f5c"
+      ],
+      "selected_proposal_digest": null,
+      "operations": [
+        {
+          "changes": {
+            "range": [
+              "C_e0f77606c291cca8d429",
+              "C_8612eaecaeff24215686"
+            ]
+          },
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629"
+          ],
+          "kind": "revise_constraint",
+          "target": "R_5cfeb014dc68c80c2f5c"
+        }
+      ]
+    },
+    {
+      "extension_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "status": "needs_human",
+      "delta_revision": 2,
+      "targets": [
+        "R_1654fcf38913d94cb712"
+      ],
+      "selected_proposal_digest": "4ba6cd402b25d3013256b4e6daf9b949519181fdb06ca010a1176ecf974d7648",
+      "operations": [
+        {
+          "changes": {
+            "definition": "横风对弹道的影响。教材说明，横风通过改变空气阻力的方向来影响弹道。",
+            "definition_language": "zh"
+          },
+          "evidence_ids": [
+            "ev_c8bc5b0bf7eca019fc99"
+          ],
+          "kind": "revise_definition",
+          "target": "R_1654fcf38913d94cb712"
+        }
+      ]
+    }
+  ],
+  "crosswind_unknown_requests": [
+    {
+      "attempt_id": "attempt_f2d3311d7beb442ebbd473870a770696",
+      "request_key": "0e3793d369a9ee8bfa2c65fca585460353cda54f45fb9625449c42ebbb381ec6",
+      "state": "unknown",
+      "task_id": "ext_4272d42b83144e8c8da86d3530f76019",
+      "object_revision": 2,
+      "response_status": "api_error",
+      "outcome_unknown": true,
+      "automatic_resend_allowed": false
+    }
+  ],
+  "held_relations": [
+    {
+      "sample_id": "DEV-008",
+      "relation_id": "R_1654fcf38913d94cb712",
+      "reason": "复用现有ext_4272d42b83144e8c8da86d3530f76019定义草案；原能力审核含结果未知请求和有效分歧，保留围栏，不纳入新批次绕过旧票。"
+    },
+    {
+      "sample_id": "DEV-019",
+      "relation_id": "R_5eb753682c8d887575fc",
+      "reason": "原证据包缺地炮/常常原句，且需要知道顶点与计算所需顶点诸元的指称尚需澄清；只提供精确补充来源，不替候选补语义。"
+    },
+    {
+      "sample_id": "DEV-022",
+      "relation_id": "R_5da207e3fa51409de7b9",
+      "reason": "domain是投影结果的微分方程组，而原文投影输入是矢量方程；单补定义可能固化错误建模，需独立处理实体/约束，不在本批改变domain。"
+    },
+    {
+      "sample_id": "DEV-028",
+      "relation_id": "R_fbc54f6800679e25d95d",
+      "reason": "原关系限定科氏加速度，当前候选尾项为地面曲率且源模型身份不清。可据科氏项原句单独准备定义，但它不能消除当前range冲突，不将错误候选混入本批能力通过的分母。"
+    }
+  ],
+  "production_tasks_changed": false
+}

@@ -1,0 +1,346 @@
+{
+  "attempt_id": "attempt_7c46c1d76cb44c2e84450cda8c119876",
+  "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+  "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+  "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+  "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+  "contract_version": "ontology_review_response_v2",
+  "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+  "error": "reference outside frozen ontology proposal",
+  "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+  "finish_reason": "stop",
+  "input_tokens": 79326,
+  "late_response": false,
+  "latency_ms": 9937,
+  "model_family": "deepseek",
+  "model_id": "deepseek-flash",
+  "model_identity": "deepseek-flash",
+  "object_revision": 2,
+  "output_tokens": 1481,
+  "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+  "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+  "provider_started_at": 1794386433.559382,
+  "queue_time_ms": 295,
+  "raw_response": {
+    "checks": [
+      {
+        "check": "necessity",
+        "evidence_ids": [
+          "ev_49cebfb2fa94214e55e4",
+          "ev_3ac495284f0e81c6c629",
+          "ev_4f89e426cf3ce358975f",
+          "ev_91c17b69ff3b7aba9fbf",
+          "ev_a3da0498469c6db1da87",
+          "ev_0ddb306cd5e0abb97cd2",
+          "ev_4ca8b0a5dbe39a97b7ba",
+          "ev_fb32c0b835deace58bfa"
+        ],
+        "evidence_scope": "definition",
+        "note": "8个关系在base中均无skos:definition，原文对每个关系均有可定位的表述，补定义填补真实缺口而非重复已有表达。",
+        "status": "pass"
+      },
+      {
+        "check": "reuse",
+        "evidence_ids": [
+          "ev_49cebfb2fa94214e55e4",
+          "ev_916c5c438459f294e912",
+          "ev_3ac495284f0e81c6c629",
+          "ev_4f89e426cf3ce358975f",
+          "ev_91c17b69ff3b7aba9fbf",
+          "ev_a3da0498469c6db1da87",
+          "ev_0ddb306cd5e0abb97cd2",
+          "ev_4ca8b0a5dbe39a97b7b7ba"
+        ],
+        "evidence_scope": "definition",
+        "note": "未新增类或属性，仅对既有属性IRI追加定义注解；无重复概念或别名合并。",
+        "status": "pass"
+      },
+      {
+        "check": "definition",
+        "evidence_ids": [
+          "ev_49cebfb2fa94214e55e4",
+          "ev_916c5c438459f294e912",
+          "ev_e4af69959862e9e59f68",
+          "ev_3ac495284f0e81c6c629",
+          "ev_bcc35ff4d1e37f138b4c",
+          "ev_4f89e426cf3ce358975f",
+          "ev_fcb5968b00ade4ff51ec",
+          "ev_91c17b69ff3b7aba9fbf",
+          "ev_171e0d4473814e741d1a",
+          "ev_a3da0498469c6db1da87",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_0ddb306cd5e0abb97cd2",
+          "ev_823711a6a4f5b03ed371",
+          "ev_cbc8565ad08104e5a34c",
+          "ev_4ca8b0a5dbe39a97b7ba",
+          "ev_65ac14eea568d8e8224e",
+          "ev_fb32c0b835deace58bfa",
+          "ev_df581a342a45722ca57b",
+          "ev_b6e7a7036f328a430b3a"
+        ],
+        "evidence_scope": "definition",
+        "note": "各定义与原文一致：横风引起侧偏、状态方程得到H(y)、超声速弹丸形成弹道波、摩擦阻力与粗糙度有关、法线与切线垂直、空气阻力影响空气弹道不对称、枪弹受空气阻力影响大、空气近似理想气体；定性文字未被推成数值或阈值。",
+        "status": "pass"
+      },
+      {
+        "check": "hierarchy_direction",
+        "evidence_ids": [
+          "ev_49cebfb2fa94214e55e4",
+          "ev_4f89e426cf3ce358975f",
+          "ev_a3da0498469c6db1da87",
+          "ev_0ddb306cd5e0abb97cd2"
+        ],
+        "evidence_scope": "classification",
+        "note": "定义方向与既有domain/range一致（横风→侧偏、超声速弹丸→弹道波、法线方向→切线方向、空气阻力→空气弹道），未改动类层次或属性端点。",
+        "status": "pass"
+      },
+      {
+        "check": "constraint_strength",
+        "evidence_ids": [
+          "ev_e4af69959862e9e59f68",
+          "ev_cea52461a565c9585322",
+          "ev_65ac14eea568d8e8224e",
+          "ev_b6e7a7036f328a430b3a"
+        ],
+        "evidence_scope": "scope_rule",
+        "note": "定义明确保留定性/条件语义：横风侧偏不作无条件定量断言、枪弹影响特别大限于低弹道稠密大气背景、近似看成不表示严格等同；未把domain/range误当存在性约束，未新增基数或全称约束。",
+        "status": "pass"
+      },
+      {
+        "check": "structure",
+        "evidence_ids": [],
+        "evidence_scope": "unknown",
+        "note": "结构检查通过：类189、关系81，新增8条定义三元组，无删除，匿名公理与语言标签保留，reasoner=not_run如实保留。",
+        "status": "pass"
+      },
+      {
+        "check": "impact",
+        "evidence_ids": [],
+        "evidence_scope": "unknown",
+        "note": "影响检查通过：仅注解变更，8个受影响候选的guard端点未变，无历史候选自动接受，需人工复核标记保留。",
+        "status": "pass"
+      }
+    ],
+    "counter_evidence_ids": [],
+    "decision": "approve",
+    "impact_status": "pass",
+    "necessity": "confirmed_gap",
+    "reason_codes": [
+      "definitions_only_patch",
+      "no_domain_range_change",
+      "no_hierarchy_change",
+      "reasoner_not_run_preserved",
+      "source_bound_definitions"
+    ],
+    "requested_context": null,
+    "semantic_status": "pass",
+    "structure_status": "pass",
+    "suggested_changes": null,
+    "supporting_evidence_ids": [
+      "ev_49cebfb2fa94214e55e4",
+      "ev_916c5c438459f294e912",
+      "ev_e4af69959862e9e59f68",
+      "ev_3ac495284f0e81c6c629",
+      "ev_bcc35ff4d1e37f138b4c",
+      "ev_4f89e426cf3ce358975f",
+      "ev_fcb5968b00ade4ff51ec",
+      "ev_91c17b69ff3b7aba9fbf",
+      "ev_171e0d4473814e741d1a",
+      "ev_a3da0498469c6db1da87",
+      "ev_49a0b96c3f815e30ee47",
+      "ev_0ddb306cd5e0abb97cd2",
+      "ev_823711a6a4f5b03ed371",
+      "ev_cbc8565ad08104e5a34c",
+      "ev_4ca8b0a5dbe39a97b7ba",
+      "ev_65ac14eea568d8e8224e",
+      "ev_fb32c0b835deace58bfa",
+      "ev_df581a342a45722ca57b",
+      "ev_b6e7a7036f328a430b3a"
+    ]
+  },
+  "reasoning_tokens": null,
+  "request_key": "cb8d31a0ccf5d972d822adda89e83a115e6681f96be9e13822213835f97ed7b3",
+  "response_id": "ce290223-7dd5-493f-b6d5-341af6f06682",
+  "response_status": "invalid_contract",
+  "returned_model_id": "deepseek-flash",
+  "round_id": 1,
+  "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+  "task_type": "ontology_extension",
+  "voter_id": "judge_c",
+  "attempts": [
+    {
+      "attempt_id": "attempt_7c46c1d76cb44c2e84450cda8c119876",
+      "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+      "error": "reference outside frozen ontology proposal",
+      "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+      "finish_reason": "stop",
+      "input_tokens": 79326,
+      "late_response": false,
+      "latency_ms": 9937,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 2,
+      "output_tokens": 1481,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+      "provider_started_at": 1794386433.559382,
+      "queue_time_ms": 295,
+      "raw_response": {
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_49cebfb2fa94214e55e4",
+              "ev_3ac495284f0e81c6c629",
+              "ev_4f89e426cf3ce358975f",
+              "ev_91c17b69ff3b7aba9fbf",
+              "ev_a3da0498469c6db1da87",
+              "ev_0ddb306cd5e0abb97cd2",
+              "ev_4ca8b0a5dbe39a97b7ba",
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "evidence_scope": "definition",
+            "note": "8个关系在base中均无skos:definition，原文对每个关系均有可定位的表述，补定义填补真实缺口而非重复已有表达。",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [
+              "ev_49cebfb2fa94214e55e4",
+              "ev_916c5c438459f294e912",
+              "ev_3ac495284f0e81c6c629",
+              "ev_4f89e426cf3ce358975f",
+              "ev_91c17b69ff3b7aba9fbf",
+              "ev_a3da0498469c6db1da87",
+              "ev_0ddb306cd5e0abb97cd2",
+              "ev_4ca8b0a5dbe39a97b7b7ba"
+            ],
+            "evidence_scope": "definition",
+            "note": "未新增类或属性，仅对既有属性IRI追加定义注解；无重复概念或别名合并。",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_49cebfb2fa94214e55e4",
+              "ev_916c5c438459f294e912",
+              "ev_e4af69959862e9e59f68",
+              "ev_3ac495284f0e81c6c629",
+              "ev_bcc35ff4d1e37f138b4c",
+              "ev_4f89e426cf3ce358975f",
+              "ev_fcb5968b00ade4ff51ec",
+              "ev_91c17b69ff3b7aba9fbf",
+              "ev_171e0d4473814e741d1a",
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47",
+              "ev_0ddb306cd5e0abb97cd2",
+              "ev_823711a6a4f5b03ed371",
+              "ev_cbc8565ad08104e5a34c",
+              "ev_4ca8b0a5dbe39a97b7ba",
+              "ev_65ac14eea568d8e8224e",
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b",
+              "ev_b6e7a7036f328a430b3a"
+            ],
+            "evidence_scope": "definition",
+            "note": "各定义与原文一致：横风引起侧偏、状态方程得到H(y)、超声速弹丸形成弹道波、摩擦阻力与粗糙度有关、法线与切线垂直、空气阻力影响空气弹道不对称、枪弹受空气阻力影响大、空气近似理想气体；定性文字未被推成数值或阈值。",
+            "status": "pass"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [
+              "ev_49cebfb2fa94214e55e4",
+              "ev_4f89e426cf3ce358975f",
+              "ev_a3da0498469c6db1da87",
+              "ev_0ddb306cd5e0abb97cd2"
+            ],
+            "evidence_scope": "classification",
+            "note": "定义方向与既有domain/range一致（横风→侧偏、超声速弹丸→弹道波、法线方向→切线方向、空气阻力→空气弹道），未改动类层次或属性端点。",
+            "status": "pass"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [
+              "ev_e4af69959862e9e59f68",
+              "ev_cea52461a565c9585322",
+              "ev_65ac14eea568d8e8224e",
+              "ev_b6e7a7036f328a430b3a"
+            ],
+            "evidence_scope": "scope_rule",
+            "note": "定义明确保留定性/条件语义：横风侧偏不作无条件定量断言、枪弹影响特别大限于低弹道稠密大气背景、近似看成不表示严格等同；未把domain/range误当存在性约束，未新增基数或全称约束。",
+            "status": "pass"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "结构检查通过：类189、关系81，新增8条定义三元组，无删除，匿名公理与语言标签保留，reasoner=not_run如实保留。",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "影响检查通过：仅注解变更，8个受影响候选的guard端点未变，无历史候选自动接受，需人工复核标记保留。",
+            "status": "pass"
+          }
+        ],
+        "counter_evidence_ids": [],
+        "decision": "approve",
+        "impact_status": "pass",
+        "necessity": "confirmed_gap",
+        "reason_codes": [
+          "definitions_only_patch",
+          "no_domain_range_change",
+          "no_hierarchy_change",
+          "reasoner_not_run_preserved",
+          "source_bound_definitions"
+        ],
+        "requested_context": null,
+        "semantic_status": "pass",
+        "structure_status": "pass",
+        "suggested_changes": null,
+        "supporting_evidence_ids": [
+          "ev_49cebfb2fa94214e55e4",
+          "ev_916c5c438459f294e912",
+          "ev_e4af69959862e9e59f68",
+          "ev_3ac495284f0e81c6c629",
+          "ev_bcc35ff4d1e37f138b4c",
+          "ev_4f89e426cf3ce358975f",
+          "ev_fcb5968b00ade4ff51ec",
+          "ev_91c17b69ff3b7aba9fbf",
+          "ev_171e0d4473814e741d1a",
+          "ev_a3da0498469c6db1da87",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_0ddb306cd5e0abb97cd2",
+          "ev_823711a6a4f5b03ed371",
+          "ev_cbc8565ad08104e5a34c",
+          "ev_4ca8b0a5dbe39a97b7ba",
+          "ev_65ac14eea568d8e8224e",
+          "ev_fb32c0b835deace58bfa",
+          "ev_df581a342a45722ca57b",
+          "ev_b6e7a7036f328a430b3a"
+        ]
+      },
+      "reasoning_tokens": null,
+      "request_key": "cb8d31a0ccf5d972d822adda89e83a115e6681f96be9e13822213835f97ed7b3",
+      "response_id": "ce290223-7dd5-493f-b6d5-341af6f06682",
+      "response_status": "invalid_contract",
+      "returned_model_id": "deepseek-flash",
+      "round_id": 1,
+      "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_c",
+      "attempt_no": 1
+    }
+  ],
+  "actual_calls": 1
+}

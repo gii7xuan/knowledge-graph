@@ -1,0 +1,145 @@
+{
+  "at": "2026-11-12T09:36:26.494807+08:00",
+  "definitions_prepared": 8,
+  "local_guard_pass": 8,
+  "new_model_calls": 9,
+  "calls_in_this_continuation": 4,
+  "authorized_max_calls": 9,
+  "effective_modeling_votes": [
+    {
+      "voter_id": "judge_a",
+      "response_status": "ok",
+      "decision": "approve",
+      "error_code": null,
+      "outcome_unknown": null
+    },
+    {
+      "voter_id": "judge_b",
+      "response_status": "api_error",
+      "decision": null,
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "outcome_unknown": true
+    },
+    {
+      "voter_id": "judge_c",
+      "response_status": "ok",
+      "decision": "approve",
+      "error_code": null,
+      "outcome_unknown": null
+    }
+  ],
+  "valid_modeling_approvals": 2,
+  "semantic_competency_executed": true,
+  "semantic_competency_passed": false,
+  "semantic_competency_assessment": {
+    "status": "unknown",
+    "eligible_voter_ids": [
+      "judge_a",
+      "judge_c"
+    ],
+    "passed_voter_ids": [
+      "judge_a"
+    ],
+    "executed": true,
+    "question_ids": [
+      "chapter1_source_coverage"
+    ]
+  },
+  "semantic_competency_votes": [
+    {
+      "voter_id": "judge_a",
+      "response_status": "ok",
+      "coverage": "complete",
+      "error_code": null,
+      "outcome_unknown": null
+    },
+    {
+      "voter_id": "judge_b",
+      "response_status": "invalid_contract",
+      "coverage": null,
+      "error_code": null,
+      "outcome_unknown": null
+    },
+    {
+      "voter_id": "judge_c",
+      "response_status": "ok",
+      "coverage": "partial",
+      "error_code": null,
+      "outcome_unknown": null
+    }
+  ],
+  "whole_chapter_call_count": 3,
+  "remaining_unknown_requests": [
+    {
+      "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+      "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+      "task_type": "ontology_review",
+      "voter_id": "judge_b",
+      "state": "unknown",
+      "started_at": 1794386193.1115596,
+      "http_status": 504,
+      "provider_request_id": null,
+      "automatic_resend_allowed": false,
+      "local_request_key_is_provider_id": false
+    },
+    {
+      "attempt_id": "attempt_d1e77c8b62684340b60becc9a23bac3b",
+      "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+      "task_type": "ontology_review",
+      "voter_id": "judge_b",
+      "state": "unknown",
+      "started_at": 1794446802.7485762,
+      "http_status": 504,
+      "provider_request_id": null,
+      "automatic_resend_allowed": false,
+      "local_request_key_is_provider_id": false
+    }
+  ],
+  "original_gemma_provider_outcome_reconciled": false,
+  "manual_reassessment_authorization": {
+    "user_answer": "允许一次受控重评",
+    "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+    "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+    "reason": "后台无法登录，原请求无法确定是否执行；用户接受可能重复计费，授权同一冻结提案一次Gemma受控重评，随后继续原三席整章审核。",
+    "replaces_original_reconciliation_precondition": true,
+    "original_provider_outcome": "unknown; not reconciled or declared unexecuted",
+    "max_new_gemma_modeling_calls": 1,
+    "total_batch_call_limit": 9,
+    "automatic_retries": 0,
+    "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+    "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+    "no_production_activation": true
+  },
+  "original_gemma_attempt_and_result_preserved": true,
+  "isolated_release_published": false,
+  "production_release_changed": false,
+  "production_written": false,
+  "formal_definition_coverage_in_production": 0,
+  "protected_inputs_unchanged": true,
+  "frozen_proposal_and_cq_unchanged": true,
+  "costs": {
+    "reported_input_tokens": 551715,
+    "reported_output_tokens": 17186,
+    "usage_missing_requests": 2,
+    "currency_cost": null
+  },
+  "consensus": {
+    "result": "unresolved",
+    "counts": {
+      "approve": 2,
+      "revise": 0,
+      "reject": 0,
+      "uncertain": 0,
+      "error": 1
+    },
+    "committee_size": 3,
+    "required_votes": 3,
+    "missing": 0,
+    "eligible_voter_ids": [
+      "judge_a",
+      "judge_c"
+    ],
+    "counter_evidence_ids": [],
+    "deterministic_checks_pass": false
+  }
+}

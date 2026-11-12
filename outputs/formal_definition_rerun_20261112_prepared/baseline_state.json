@@ -1,0 +1,1803 @@
+{
+  "at": "2026-11-12T09:53:08.495158+08:00",
+  "source_database": "D:\\knowledge-huopao\\outputs\\formal_definitions_20261111_ready\\review.sqlite3",
+  "source_database_sha256": "558ff9153d554941adbb7cd18205fa8f045f3d1a27d35732456f2fa8c0c29d18",
+  "manifest": {
+    "at": "2026-11-11T16:26:31.146791+08:00",
+    "extension_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+    "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+    "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+    "proposal_sha256": "abb2e17906f8971b4827e4f5f515fa673c0df7eb25d169016ffce96a2b68fe67",
+    "competency_request_sha256": "f225699883e57edbdf531f1d6c3d36919d3ca9f383fd9672a91c1cb8980ce524",
+    "roster": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "destinations": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "base_url": "https://43.143.151.41:3000/v1",
+        "request_timeout_seconds": 90.0,
+        "http_timeout_seconds": 90.0
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "base_url": "https://43.143.151.41:3000/v1",
+        "request_timeout_seconds": 180.0,
+        "http_timeout_seconds": 170.0
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "base_url": "https://api.deepseek.com",
+        "request_timeout_seconds": 90.0,
+        "http_timeout_seconds": 90.0
+      }
+    ],
+    "production_release_head": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "new_model_calls": 0,
+    "max_model_calls": 6,
+    "modeling_calls": 3,
+    "semantic_competency_calls": 3,
+    "no_retries": true,
+    "production_written": false,
+    "independent_approval": false,
+    "local_constraint_checks_passed": 8,
+    "definition_operations": 8,
+    "rdf_added": 8,
+    "rdf_removed": 0,
+    "source_document_chars": 55505,
+    "code_fingerprints": {
+      "ontology_review\\clarification.py": "865deac966ee47df3daa88ba74b5c1e227f61114731122b560349299e943e426",
+      "ontology_review\\contracts.py": "e50c02e85231f55d785fc35ac5853f06bea0ef5f3b6bc0a609a4681e0b963232",
+      "ontology_review\\delta.py": "14c25039c222f06e96ff948a2b0a101e93d5dee13dafc1695fbaf1d85d7bcd00",
+      "ontology_review\\draft_repair.py": "4ddbfd92935b3892f17b67cf956532dd060c2108b836c28e68d51d67b4ab11c9",
+      "ontology_review\\evidence.py": "b55f4b3d708e4bba44b0d3c1c1ffb465ca2f3fefefca1a669a6b5afd67923428",
+      "ontology_review\\impact.py": "2fb80fe6f8e521faf64700a24b15e3bb41ea9fea6c43834373e7b0506092cb5b",
+      "ontology_review\\owl_delta.py": "6f1c08bf9d02d8c30637488d38ad3a2dd67a19bbc6fca04278a6843e40d11175",
+      "ontology_review\\planner_view.py": "a2aa9c7f446f9c1309656c52cf6438470e8e4c2542f6e1e94b610ec070d2df5a",
+      "ontology_review\\preparation.py": "8c997c5526afaa26dd075aba4c39a11f17aeaf6f9ffb3652384340982ec2ddb1",
+      "ontology_review\\publisher.py": "0e722e96ee0f9022464c2dfc17e309b7ff2c5acf74b1285cbf7b076e3edcc527",
+      "ontology_review\\recovery.py": "e3d7b6aaa0adcc25034dbfb10569204c9be0d014e9fd6d539db38c3532ce68b6",
+      "ontology_review\\repository.py": "2e7b1e624808332d1e650d6996c6d2d1ad22b69b23b8091d6daecd09904ba3e2",
+      "ontology_review\\review_payload.py": "011939c2059a83c27f9df187204462ece87a59f15111b856821c043c8f3c4fcf",
+      "ontology_review\\runtime.py": "15938880b227fb06267eab4830182b6fc338d082a4c50681b9513e0bf4157ee5",
+      "ontology_review\\semantic_competency.py": "5980ca424db8a1cc5c74e1dfbafc282a4f3c5564816ca0d3a8c2d0d11e3b075c",
+      "ontology_review\\service.py": "651ade1af8e7a772d3736f5f9054e7edee5c43c85e8e55ed529a94e34e67f4dc",
+      "ontology_review\\tools.py": "7aec158b8103a75a592afb9cf0245708a377c3b8175cf10b0d865bf666b20a5c",
+      "ontology_review\\validators.py": "7d7fa2c0805832a70e55d61439c6d77f7ec089e2ffd77c4e1306b65c9fef20ea",
+      "ontology_review\\__init__.py": "dbe1a1beec2b434a6206b6df6453eb56c4c07d654c3f74d4db03a24790f05c89",
+      "ontology_review\\__main__.py": "ebf13b32b0fca9587dd971eba1b4109b199848f4a381e9e0dc79c368fc9857ce",
+      "ontologyBuild\\application_profile.py": "1ba0042a4d81da1d33025c959b0ff40713e69bdc8ff562b4dd5a069618ad7c91",
+      "ontologyBuild\\base_ontology_audit.py": "f407a67e60fae617c598da70eb977ce8c95e51646fd5a2ef2ef86024cfd36896",
+      "ontologyBuild\\business_validate.py": "5b590f5df87dc41a4f09896fe433e91570fffd743bc0cc789db08a40f73ec164",
+      "ontologyBuild\\candidate_quality.py": "89a5a5c15d6b384cc8fe869e2e3b8cf5710b39d185127d4c183387f1d7672de3",
+      "ontologyBuild\\candidate_validator.py": "76234c31483589992602f01ca7f69363fdd9ffb8a1016bf9af2a0016b87dfa90",
+      "ontologyBuild\\config.py": "996fd19669e9def233f1759a5ac08043d6affac2fd25dd3d4da41b8ebff04ca0",
+      "ontologyBuild\\consistency_checker.py": "0e810583281fb98ec6bf3e48be2583f81354ffcffc0daa96aef7e11f48d200c2",
+      "ontologyBuild\\context_builder.py": "ea158ae017503066388dc9ebab134b988b1625f7cdd44d272dfa5873144e79e7",
+      "ontologyBuild\\directory_guided_builder.py": "99d2e446d3e31e6f963b72596b084ec55a59c23a2bd7ea473f5ed3bee7067f8c",
+      "ontologyBuild\\document_preprocessor.py": "be7121b06ad03c1d6c4968853f0ccfba923ff2fdd0ed2e754763ed860a5b598f",
+      "ontologyBuild\\domain_range_inferencer.py": "2d7be387ac020399082faf8c5139f7ef9c265cd6f0aa7359a328406d3282e0a7",
+      "ontologyBuild\\evidence_validator.py": "e116fba260222d64476b50721e22ecc37337aa420bfff5b9fe16ec84f866e9ca",
+      "ontologyBuild\\import_service.py": "532c55503af69156cd3937f325d38acc263e5ff4ea835014dbf0051709cfc9e0",
+      "ontologyBuild\\iri_identity.py": "cb20481c57f6b1d75b18f87392564734b6af194d5c2a022f157ee86d53f3dc5d",
+      "ontologyBuild\\ontology_adapter.py": "de641727a08d674b2b2bfecefb001298327c5b38f9e503c85422db4bd8aafff8",
+      "ontologyBuild\\ontology_candidate.py": "c34720df2d8dad939b2753e78d46ec0a099833fb76b1f5f90a7577887a847e98",
+      "ontologyBuild\\ontology_candidates.json": "db6eb37a7cd0d3bc83924c4e70e9097e05cfb2223ad98825376a43a80a8bb431",
+      "ontologyBuild\\ontology_candidates_raw.json": "3266510d4b5b2a84a14697eef59c37983837c531080a7929537b25b9679a01a0",
+      "ontologyBuild\\ontology_candidate_schema.py": "97009232b5c6cc736dba730951dfa6bd2ef14655cab30a832e6718d074ec06cd",
+      "ontologyBuild\\ontology_matcher.py": "92545c9dae7c6f0f7e1dc5ebc3038bd631d2252ec8de3b4839ca5779a1646901",
+      "ontologyBuild\\ontology_modules.json": "e2c96378ec35ff030103abed450fe07fba48d1d47000fdc57091b07cc2ef16b8",
+      "ontologyBuild\\ontology_normalizer.py": "c37b74f90c59d2a1319aa68c0a49c25428ba3011fa7948d04ecabb3b661037bc",
+      "ontologyBuild\\ontology_preview.json": "2bf6019edb54d2863b4959ea7127f0cdb4fddf7008955533d9fa95d03f269423",
+      "ontologyBuild\\ontology_review_log.json": "79104fc77d29579f3ae0923379281acaf07afb8f312dcbf12c4376b2300cefcf",
+      "ontologyBuild\\ontology_review_result.json": "58739c0ab174e10062aac8cc9fc7f0e6a21110c76eb54e49f0be3f4317b1041d",
+      "ontologyBuild\\owl_to_project_schema.py": "94aaa2627460beb90d6d6b98b05de90e6b9f21e781671429041016aae2699da5",
+      "ontologyBuild\\pipeline.py": "026e9676ab75313a39ca1fd0f0da26c63312b0674740472e576865bce0b31f56",
+      "ontologyBuild\\rdf_artifact.py": "d6cf533d142f116a2082ae59c0cef9c59e196c08160612ac6948eb3d38e6c466",
+      "ontologyBuild\\rdf_graph.py": "4d8686bac56d408db2caf9b384377352c960e85350d18b825db35b5da79a85e4",
+      "ontologyBuild\\relation_endpoint_statistics.py": "1ffd5cdfa33cd68530fcd8407ddb700dccc5bc2c58bb35ec7e6067b0d2be4f81",
+      "ontologyBuild\\release_catalog.py": "e590c4f9f37a70ae7a581f0efe0a4999debcedf18c4c014b454587171ad4bd59",
+      "ontologyBuild\\release_service.py": "e68e688d2afe774fb421740a07ff12ec1936e27ad3a77f823f52db86cd7580a7",
+      "ontologyBuild\\requirements-import.txt": "bc751face67e462852b03cb8acf45daebf273d218cc1674edb2db2ac33c964b3",
+      "ontologyBuild\\review_module.py": "61c4cb86314a5874ffdf852f6d9a81e542de59be273369f4cc385f0c70ecd95c",
+      "ontologyBuild\\semantic_validator.py": "17cea4304b49c443e006769bdd7ef12b7efa8ee8711437d6bfddad4b26a35423",
+      "ontologyBuild\\providers\\base.py": "ae88280a1f7ad3ef2af592ed117c1b75ea2cf5d14291410c3284cbab7b7645ca",
+      "ontologyBuild\\providers\\legacy.py": "e5d9cf5aca13c4eb313bd7c328769cee078b203b24ff7b4bc23876fe380db429",
+      "ontologyBuild\\providers\\neon_import.py": "ff28f0873765b23efa2cc57d246432060c751a4f90d654b255f4a21b1b49bd6f",
+      "ontologyBuild\\providers\\__init__.py": "095a8dd4e78399e0bf580e655962740fe817ae90eead2d0d6dd780b83211ac42",
+      "review_agent\\action_policy.py": "34c14ba7c8fbf1b6b1920fd68d26bf92b283bdd05facb27d760adaeef1094d23",
+      "review_agent\\admission.py": "bb4a846ec7800270f4b429fcafe42a17aa9e6a0af2d74c1c2743ac1b1925069a",
+      "review_agent\\admission_repository.py": "72898f66f6985bd5501630705fe6dfcb5838fbfad782842166c688d884824bcf",
+      "review_agent\\agent_state.py": "2d66751d52c40416ed25762720ef3bd3833e2afb6bc19f6eae6791df76a4e839",
+      "review_agent\\annotation_contract.py": "eccbefd65a85d5fd605b963f5f52a91e0f547dc4203213d4010b18837f0d7b94",
+      "review_agent\\annotation_store.py": "9b06faabd11d1874c21646167ed8cbb3fe8b8830fb989cab1167b30122de50c4",
+      "review_agent\\batch.py": "458951d4d038538772d3de83fc4a1b4c008290916301fa646af7fefb8193ee4b",
+      "review_agent\\case_budget.py": "d184523f70f4fcb93dc643faa91e96d2a4aaa073bbe527d448d7ca5927d977d4",
+      "review_agent\\cli.py": "6f5688e8a62831532868d3e766c11f19334718fc7abdaf50e2e8fed8ecf873bd",
+      "review_agent\\completed_audit_recovery.py": "004ace5b083d0304e5bc86227dbd87cb46f12332e9594395a6797179383884b2",
+      "review_agent\\configuration.py": "ed158c62093d947e0e120701c29944095779f7cd0f027d8c9e610d117a05bea4",
+      "review_agent\\consensus.py": "8b291cbe5d147405ea2a0841309aa670f0179f07e9137f7d26aa0609daf79a9e",
+      "review_agent\\contracts.py": "6755e974e35134dafd4848f5ba495cf88c98f25e1517b6ac01c021b71868ab2d",
+      "review_agent\\correction_context.py": "819158c2ff207829e1e292b964736973764862c2093a395151b4950a1d6f5325",
+      "review_agent\\correction_repository.py": "184626c897be6ffde7d42f3c22f25ff59f9b50e0592a97fbb5b4f78360754449",
+      "review_agent\\disputes.py": "1e7b11d00f5543642b3f1f820c51a59c73b863ccf6ef4fc3842d0cc37739df91",
+      "review_agent\\dispute_review.py": "d28efc0d1a9abc33b3ac0ded4505788caf642c014b6e7fa59d15ed23b0f7d3f5",
+      "review_agent\\evidence_view.py": "9cfc3e94d20903731d1be442caadb536446e48f910a6d0ca988eec119a9129b7",
+      "review_agent\\execution.py": "ecb8f4c2ecbfb90b6ab97ad48015d0c8808bb1bdbaa20ff5138fe1a2604fff0e",
+      "review_agent\\explanation.py": "3580d3551e297daa741529a0672b99fa1a492e49dcd8a0dfdc9b9af7baded444",
+      "review_agent\\extension_eligibility.py": "535fc7aac51bf283f2a329385afec05c0baabd358f844e1d09f4a6af973a7704",
+      "review_agent\\failure_policy.py": "41767c8ef4199115659b2900cc8f8b8d94e3f12287834f29bccc9d4b335140bb",
+      "review_agent\\feedback.py": "c024dc04663cbe077748f97178d53a54ee958ce09e5bca0bd010b6731305a768",
+      "review_agent\\field_spec.py": "0bee2a5264fee792214ee8491714c64e2d94d91a15be72e670ba806ce6d8498f",
+      "review_agent\\human_evidence.py": "778e66610974244fbc48ef75704dafefe60dab47b17fb8ae6243cd508f7215ab",
+      "review_agent\\issue_ledger.py": "a9e8ba34b1e710a87e0d33b6fb1b0088d1a8ee332e5ba5a794dd7edd1d6791d3",
+      "review_agent\\jobs.py": "976bd149719608d3ba655eb30d73cf744a1887774b4ce328aec5f33a5a72db94",
+      "review_agent\\labels.py": "e18aa3157a916f2ed04a826eb7290e31a87eb6c7fe51619f7f1a8170de765641",
+      "review_agent\\lifecycle_repository.py": "685233078c21e471146ee13ef2d527c83f10d268019627c3a53e1d2fc2af1101",
+      "review_agent\\llm_clients.py": "cde2b5873edd40db2ce46d4fa71a22b2687d866e354e9b2a93e50b3c93604e04",
+      "review_agent\\mapping_preflight.py": "88acedcc8b0a065815d5820c73e428b4ceb6586767dd583ec2d0122ba4ae1d2f",
+      "review_agent\\mapping_trace.py": "a81d074c8b11064ca6c3ee34e7559693e5e4d800b36211ca47dd4fa919a8a7c2",
+      "review_agent\\memory.py": "ba9458c0277d88e44a5e3b3489274d0c277224fe2686775c0dda3b5de6f66808",
+      "review_agent\\memory_scope.py": "671c6af1077feeb15dfd838b99c16a1937b8fb76accb4e3425db9fe41cae6ea1",
+      "review_agent\\model_settings.py": "6f1fefbc289d6f51f0464175ee5373ce618bcbf91fdb5a46ad88de1046f50ed4",
+      "review_agent\\monitor.py": "d58742daa3e2052d6a489377f4b81c231ca069ee0d936b3435b4a6c224462551",
+      "review_agent\\ontology_context.py": "bcb44998cdeb2f5c9321b8eae0122628aa8365c141397f9890d609c8b2d7fe48",
+      "review_agent\\ontology_guard.py": "4ab90ebe99c527494409852423f41227b2fb816b706b5df766b9cfc6f17a5ed1",
+      "review_agent\\orchestrator.py": "e41536ab358b52582591fc49308cf8ac84f66949649db13c3b3b2f472684b46c",
+      "review_agent\\output_structure.py": "184ca21aff6c353c5f10502279ad0061b7ab4003dfc30d216b39bd1b1d31f6b8",
+      "review_agent\\planner.py": "b5c7d48c7815118b32a13b738bccd3a5dc0882355785d1c69a215ee0040b4ff1",
+      "review_agent\\planner_contracts.py": "d352442b58da80507b13cf86123451ab7ef8e06223790d40b77835026716ab3a",
+      "review_agent\\planner_view.py": "a1babc594a0671c750aad24eccc5d5cfcb2d3016b822d6d8831bac603d2313fa",
+      "review_agent\\progress.py": "9e7ea36160163a91b2b5314ee77c11670a557ba633fc145a28c930dc8d9e5a4b",
+      "review_agent\\proposal_resolver.py": "1ebaaf78d5d245d2af15fdb7c8dbb763627df724f20bfb4685ef499b8cf93ca9",
+      "review_agent\\recovery_service.py": "59519e4ea651e761d998250039203517c1174e184e7adb36a2a0d9662cbb653e",
+      "review_agent\\repository.py": "006e2672f7471a3779507d35ef95f5a769897e6fbf882c46eaa915e669c2ab3d",
+      "review_agent\\request_cache.py": "bb202191a90af6080f5c5397c7271bfc7e35fecc3bd9b3c742232753c6e565fe",
+      "review_agent\\request_execution.py": "1ccb911472d1491d227efbcd707288902267ae1efe8ddb4620b24cb636a31660",
+      "review_agent\\request_identity.py": "f951169e54d31e279e785586421f700a71340c882f3a8cb8d0c8e9f0862eef60",
+      "review_agent\\request_repository.py": "af2f65ecdb6f137e622fcb9dfd0c655ee841221c8e1bfb82fd2f89344189e88b",
+      "review_agent\\request_worker.py": "c44a67e472165d9dcdf2704fc08135a9c3b08d736f22f92c5f3080a3cea7b216",
+      "review_agent\\response_contract.py": "1bc06606a8c28d8f7533f18f41fd9a0b7e73c8d3c00ac74070714c095f0f5457",
+      "review_agent\\response_contract_v4.py": "8985ba0b9d4848dfc6da68ce59e570cdd84bae61ea74071ca332388293214595",
+      "review_agent\\response_contract_v5.py": "6c43ec67106a95966c50943a13ef6bf2c126328f5d93ac901652caec32759f61",
+      "review_agent\\response_contract_v5_1.py": "96a3a61541a4633673c61706c15c01fc55922d606119d818b73c61956c3b5760",
+      "review_agent\\response_contract_v5_2.py": "211433393ed9660e8ad850c471ca89c411d66dfd7166374ccd2fc9b9c8e53dc1",
+      "review_agent\\response_contract_v6.py": "33203e729d3a9914a600e454b16583b8cf8658bf489c7a8510f12d14996a7cff",
+      "review_agent\\response_contract_v6_1.py": "ee729cd38b6bdc95c39f8d2bd1b365d9674b19a1faa56e5b99e663754195a56f",
+      "review_agent\\response_contract_v6_2.py": "44476e50e2853e7abbd7c104a8d5948d61c9b7373a8facbf040295c25a13d17e",
+      "review_agent\\response_contract_v6_3.py": "7c991930b4f8510c1b57e80064e8c70d901011e89d5ed7542d72937a49418f15",
+      "review_agent\\response_contract_v7.py": "eeac4d16037874d4bded541e87362aa1feae6748ce4f4d98d57f2056685a37ab",
+      "review_agent\\response_contract_v8.py": "89a349982e698b8cfcd90fb56e481c5e50f7a07bde356181b4f6a7f804df8608",
+      "review_agent\\response_corrections.py": "a1b41ce3cb9263c56171f16ab286615bac8fbc9c7368b64ed3ec2b72803ae335",
+      "review_agent\\review_actions.py": "a6ebd4b284121549e4c7f5015e5c2cc5bffd5f08b540411caaae42cb129dc733",
+      "review_agent\\review_axes.py": "8b8a4e96b913dd5c87b6b6965bb9bd175343493b470e053966028728d3a3e78a",
+      "review_agent\\review_observability.py": "fcf7a60c0c88e63f35b8a673b8704a225fb9b3bdb6813f3c7621092d152161a9",
+      "review_agent\\revision_loop.py": "63e44c702d1a94f1915fdfebae6780f58915851ced5a39f9b8ed45cf9c62ecce",
+      "review_agent\\revision_patch.py": "a7021d2a00cabd5338800b0c74d79b0d71617101b3f05849037d6cdef2ec9fc7",
+      "review_agent\\revision_service.py": "e7439974008979cf6a28882009e132857b001170a5ee993f226658a7c37e6c5f",
+      "review_agent\\runtime.py": "7513dff7913135434d4fd4732fd80f872c4786c15c9d6be6e26db8d7de93ff2e",
+      "review_agent\\schema_validation.py": "c8548bbe6e220bb98bdaeb1b10657126475ec9a47456e37f774f53076a49debf",
+      "review_agent\\scope_policy.py": "6220dc689fb05149b9c088853e1facfb55e3a0bb0e0eb0d636b19beb4ddda138",
+      "review_agent\\semantic_clarification.py": "72bccdf7e414ec2a5d1062a3e9c5d8eeb956f413621ee04b0965176bd2f06009",
+      "review_agent\\service.py": "4bba513096b7cf0d0ab2d921b0dd20114ed912ac64f74eeac5f2bc5d848b894f",
+      "review_agent\\shadow_revision.py": "c0f816cf141434a2231871bc6674e3168a4f454c06e18995aa10941a9397fe8d",
+      "review_agent\\targeted_validation.py": "ea8a839a4e32f5f7fc5a8f0cac1343ee9dcf7b16799b74b6893e662655762b41",
+      "review_agent\\task_adapter.py": "e71135309b4c5c1a35f21946eb3f40a42ad60dfe579e9fe044565f921467586a",
+      "review_agent\\tools.py": "7c10421e37c85a2da0ea85e7287a44f3271dc49135aa00ca825640f1672f8f4f",
+      "review_agent\\validation_recovery.py": "e0eec6520883186cbf0b49b5e76ebe7bed25a33b1376d6c4c47d2643287cf3fb",
+      "review_agent\\validators.py": "498f1db63faaaf7f54e0a6e687148ebd472544a4b9e5284bf96088a5ed3dcc36",
+      "review_agent\\validator_contracts.py": "e9c0b18b7f36200f198c695a68555ee61153c25a1f56fb748869e86e8711670d",
+      "review_agent\\__init__.py": "a91971a28c035971ad7714f07ec70bb8fcb9fc7a5b786b4383e25df30cf25f12",
+      "evidence\\hierarchical_retriever.py": "7df15edd508d53f7ba50cc30c8fda31f7ca339bbe40124b03af72b7dbaf90727",
+      "evidence\\span_locator.py": "6d9fa5824f72597e54a8cb08bf61fe3357ccf83f3445db4084b5ce2cf041c27d",
+      "evidence\\units.py": "2b422e2aee982f76b20d011abb013d414946209554af8b46d045c8442623b6d2",
+      "evidence\\verification.py": "debd684d3fe3c4ad1e13180e2b334af28729dd6dba205a5e574d11bad38b7e8c",
+      "evidence\\__init__.py": "ae696e0df78d778f67ba84d06f59edbb074d9b06ab7f3f17d76a315c7c03b064",
+      "document\\hierarchy_index.py": "7abf465238dc089f9629b1c1a30c98230e106f38f73df01631a3f3992085551e",
+      "document\\index_builder.py": "811907cb5d5c24cc90f15fc9bc805e0d88ed7d511b756b0eca2a88551bc95893",
+      "document\\index_integrity.py": "ef817f844211c6b595c487d2e04c4e84471298004c52244ad967051da28e81a7",
+      "document\\snapshot.py": "a7de7066a513b9faa70388262f66aecc508d08965e016be2cf070dc3d54f50c3",
+      "document\\__init__.py": "231e28de734b293f96fae9f282218f333a96a7bca414955df507669be8aa37b4",
+      "schema\\datatypes.py": "8886d1cefacaf8841dc25796049443e814b4e778ae06c5ca19dff24737a0eac3",
+      "schema\\entity_registry.py": "2f7fde22afba9e2ded13a513f62e406e73809ee242f6603fad90c3de4ed988ac",
+      "schema\\fact_identity.py": "ce6973276ed7867ab84046a12588b6848f54242de3584c9a1fc392575811053e",
+      "schema\\relation_registry.py": "ddbe980b5892475528f58fa303958bd044bf2a403afb2c7ba11b6441efd3d3a0",
+      "schema\\subontology_retriever.py": "347d54513d523ae94987ae8a3d8c51aac40e71eac88c0ffe24837cf4c0c8dd2a",
+      "schema\\__init__.py": "fd81e0eb2487035b177b6b4d0c3382d9a0d61b0303a84706296fab34b52f76c6",
+      "prompts\\extraction_v4.txt": "f3ff0d783e8fefaedd99adc58fbaf98a95d73971e1debf4e1fc74cf5e87e8375",
+      "prompts\\extraction_v5.txt": "f84689becb4148d52853e02cf182a2b177b2aa770a271d53571a9272c0f09ad1",
+      "prompts\\ontology_extension_planner_v1.txt": "7a056e389dfe19b1b05c8509dd2081be3493c3a9e5805f7f9f8a939ca886fbf9",
+      "prompts\\ontology_extension_planner_v2.txt": "9f7548428323873c275e63c0b8fb62dd3d33b7db97c6675442258e3b57654c4f",
+      "prompts\\ontology_extension_validator_v1.txt": "e516cae7a062b89df134877348042474604dd3ee7c595e3154f3ccb72fcf7d0f",
+      "prompts\\ontology_extension_validator_v2.txt": "25c665201f1a3cd3fd265632edab78615615a6ab78939b8717395fcfeb62a837",
+      "prompts\\ontology_extension_validator_v2_legacy.txt": "672e94e75435daea972789b3730bd5ce99489122bb682614834eadd242706d6d",
+      "prompts\\triple_planner_v2.txt": "aa3d59f25836213fa0b6ea3dc22d5f19870fb2374799da7168deca501fa0235f",
+      "prompts\\triple_planner_v3.txt": "94abf3ed85d174d690e37bd509b8d6437490d99c1e0317c565fb6d2bd113e4cb",
+      "prompts\\triple_planner_v4.txt": "512fe0a7a02e66123e6ae47ee4af04d4e13426baa2882fc819157aa83084395f",
+      "prompts\\triple_review_field_repair_v1.txt": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+      "prompts\\triple_validator_v3.txt": "6e343b5b7733b43a64550599c3357b7c94b5f8309e656c868f7fb915fc012d0b",
+      "prompts\\triple_validator_v4.txt": "ec20f48e276d55c086d176a4f2080818142eb6fb64f41519d624df6d9082f2ca",
+      "prompts\\triple_validator_v4_legacy.txt": "84bb4c262d1c1e245f6fa39b9a1492467d2b9666494d969018919c39124620b1",
+      "prompts\\triple_validator_v5.txt": "1011625b93f5a4cd5226d5b9b296280a3f959bb88bd50dcff7aa567487d8a523",
+      "prompts\\triple_validator_v5_1.txt": "9778d0e79ee57b6820c001059eec4826a90e2aac04f00d8d3f0b59fa39da1df7",
+      "prompts\\triple_validator_v5_2.txt": "d91bc680259c176cbd36f45645acdfdfe4670f813170be14b8e56058ac1aafee",
+      "prompts\\triple_validator_v6.txt": "0c51e30bafa36e7dab671d5ea900f82e97133d7f419da4b8e50728be31a14941",
+      "prompts\\triple_validator_v6_1.txt": "c941c819458682231751ffc269da58043339756edca53bbc1c357cac0d6e64ac",
+      "prompts\\triple_validator_v6_2.txt": "389390fa38d542007b26f53aedd79f4a148a71d02dbff9947edbd43a67c66588",
+      "prompts\\triple_validator_v6_3.txt": "c36cfd6b1fbf5399166b5dd32711975bca675476fa20185789a0c1ba37ee170e",
+      "prompts\\triple_validator_v7.txt": "f4e84cb2613b4d0395c64158eff821aaba9899172f69f03fdcba13ea514bfb33",
+      "prompts\\triple_validator_v8.txt": "9c51f543d042ecb069ce7ea38b59174f45180e746bc86c17a4fd550e839add83",
+      "prompts\\triple_validator_v8_citations_v2.txt": "16c2ce699379885880f518d66970be3ff5b0f96888529fef25df6dc6b5f2eafb",
+      "prompts\\triple_validator_v8_citations_v3.txt": "52e92ff1cf2943194bd7997aed1f32b853d1a0ae2d9b782cf56e5855d95752cf",
+      "prompts\\triple_validator_v8_citations_v4.txt": "6d3b69e323698befa291fa1b22fc29ea29c08a823db4501dc98d8eef80f80a23",
+      "runs\\formal_definitions_20261111.py": "a996be7daa19dc9ae53a566699a3cdfc638771787f0951f28ef081a0866a8d67",
+      "specs\\formal_definition_candidates_20261111.json": "dfbefcf5eddecdccdf1ce3149c704e9b1e573d95f8607ad59353adb6d3594e58",
+      "config\\review_agent.json": "943d9d1feed8e52922924f270846167751301d7b5081087aac82aad26e91ac02"
+    },
+    "isolated_publication_only_after_both_review_gates": true
+  },
+  "modeling_votes": [
+    {
+      "attempt_id": "attempt_8b557498435d4e9187a786ee38f149ea",
+      "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "definition",
+          "note": "The proposed definitions fill a gap in the formal ontology by providing source-bound, precise definitions for eight object properties. The evidence directly supports the necessity of these definitions by showing that the source text contains specific, non-trivial relationships that are not fully captured by the existing schema. The definitions are necessary to ensure that the ontology accurately reflects the source material and to prevent misinterpretation or over-generalization of the relationships.",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "definition",
+          "note": "The proposed changes do not introduce redundant or duplicate concepts. Each definition is unique and addresses a specific relationship that is not already fully defined in the existing schema. The reuse of existing terms and structures is appropriate and does not lead to unnecessary complexity or ambiguity.",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "definition",
+          "note": "The definitions are precise, source-bound, and do not introduce unsupported quantification or over-generalization. Each definition is carefully crafted to reflect the specific context and conditions described in the source text. The definitions are clear and unambiguous, and they do not introduce any new concepts or relationships that are not supported by the evidence.",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "classification",
+          "note": "The hierarchy and direction of the relationships are correctly represented in the proposed definitions. The domain and range of each property are consistent with the source text and the existing schema. The direction of the relationships is clear and unambiguous, and it does not introduce any circular or contradictory dependencies.",
+          "status": "pass"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "scope_rule",
+          "note": "The constraints introduced by the proposed definitions are appropriately strong and do not introduce any unsupported or overly restrictive conditions. The definitions are carefully crafted to reflect the specific context and conditions described in the source text, and they do not introduce any new constraints that are not supported by the evidence. The constraints are consistent with the existing schema and do not lead to any contradictions or inconsistencies.",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "classification",
+          "note": "The structure of the proposed changes is sound and does not introduce any structural issues. The changes are minimal and focused, and they do not lead to any unnecessary complexity or ambiguity. The structure of the ontology is preserved, and the changes are consistent with the existing schema and the source text.",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "mixed",
+          "note": "The impact of the proposed changes is manageable and does not introduce any significant risks or issues. The changes are minimal and focused, and they do not lead to any unnecessary complexity or ambiguity. The impact of the changes is consistent with the existing schema and the source text, and they do not introduce any new constraints or relationships that are not supported by the evidence.",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+      "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 90515,
+      "late_response": true,
+      "latency_ms": 117592,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "necessity": "confirmed_gap",
+      "object_revision": 2,
+      "output_tokens": 4465,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+      "provider_started_at": 1794386809.2785695,
+      "queue_time_ms": 402,
+      "reason_codes": [
+        "definitions_are_source_bound",
+        "no_unsupported_quantification",
+        "domain_range_preserved",
+        "structure_verified",
+        "impact_managed"
+      ],
+      "reasoning_tokens": null,
+      "request_key": "680adaf30ce49f46987fad2421e998bdc9a4d360aa3805bb724d4990340c0598",
+      "requested_context": null,
+      "response_id": "chatcmpl-ac7cc49902bf40f6",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_49cebfb2fa94214e55e4",
+        "ev_916c5c438459f294e912",
+        "ev_e4af69959862e9e59f68",
+        "ev_3ac495284f0e81c6c629",
+        "ev_bcc35ff4d1e37f138b4c",
+        "ev_4f89e426cf3ce358975f",
+        "ev_fcb5968b00ade4ff51ec",
+        "ev_91c17b69ff3b7aba9fbf",
+        "ev_171e0d4473814e741d1a",
+        "ev_a3da0498469c6db1da87",
+        "ev_49a0b96c3f815e30ee47",
+        "ev_0ddb306cd5e0abb97cd2",
+        "ev_823711a6a4f5b03ed371",
+        "ev_cbc8565ad08104e5a34c",
+        "ev_4ca8b0a5dbe39a97b7ba",
+        "ev_65ac14eea568d8e8224e",
+        "ev_fb32c0b835deace58bfa",
+        "ev_df581a342a45722ca57b",
+        "ev_b6e7a7036f328a430b3a"
+      ],
+      "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_a"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_d1e77c8b62684340b60becc9a23bac3b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_d1e77c8b62684340b60becc9a23bac3b",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+          "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+          "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+          "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+          "http_status": 504,
+          "late_response": false,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 2,
+          "outcome_unknown": true,
+          "pause_job": false,
+          "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+          "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+          "provider_started_at": 1794446803.0518022,
+          "queue_time_ms": 303,
+          "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+          "response_status": "api_error",
+          "retryable": false,
+          "round_id": 1,
+          "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_b"
+        }
+      ],
+      "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+      "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+      "http_status": 504,
+      "late_response": false,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 2,
+      "outcome_unknown": true,
+      "pause_job": false,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+      "provider_started_at": 1794446803.0518022,
+      "queue_time_ms": 303,
+      "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+      "response_status": "api_error",
+      "retryable": false,
+      "round_id": 1,
+      "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_b"
+    },
+    {
+      "actual_calls": 1,
+      "attempt_id": "attempt_adec30ab053e4de9be7bf1a5d9fbeae0",
+      "attempts": [
+        {
+          "attempt_id": "attempt_adec30ab053e4de9be7bf1a5d9fbeae0",
+          "attempt_no": 1,
+          "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+          "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+          "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+          "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "checks": [
+            {
+              "check": "necessity",
+              "evidence_ids": [
+                "ev_3ac495284f0e81c6c629",
+                "ev_49cebfb2fa94214e55e4",
+                "ev_4f89e426cf3ce358975f",
+                "ev_91c17b69ff3b7aba9fbf",
+                "ev_a3da0498469c6db1da87",
+                "ev_0ddb306cd5e0abb97cd2",
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_fb32c0b835deace58bfa"
+              ],
+              "evidence_scope": "definition",
+              "note": "八个既有关系属性在 base 中无 skos:definition，原文对每个关系均有可引用的语义依据，补齐定义为必要缺口。",
+              "status": "pass"
+            },
+            {
+              "check": "reuse",
+              "evidence_ids": [
+                "ev_3ac495284f0e81c6c629",
+                "ev_49cebfb2fa94214e55e4"
+              ],
+              "evidence_scope": "definition",
+              "note": "变更仅向既有 IRI 追加定义，未新建重复概念或别名；复用既有关系目标。",
+              "status": "pass"
+            },
+            {
+              "check": "definition",
+              "evidence_ids": [
+                "ev_3ac495284f0e81c6c629",
+                "ev_bcc35ff4d1e37f138b4c",
+                "ev_49cebfb2fa94214e55e4",
+                "ev_916c5c438459f294e912",
+                "ev_e4af69959862e9e59f68",
+                "ev_4f89e426cf3ce358975f",
+                "ev_fcb5968b00ade4ff51ec",
+                "ev_91c17b69ff3b7aba9fbf",
+                "ev_171e0d4473814e741d1a",
+                "ev_a3da0498469c6db1da87",
+                "ev_49a0b96c3f815e30ee47",
+                "ev_0ddb306cd5e0abb97cd2",
+                "ev_823711a6a4f5b03ed371",
+                "ev_cbc8565ad08104e5a34c",
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_65ac14eea568d8e8224e",
+                "ev_fb32c0b835deace58bfa",
+                "ev_df581a342a45722ca57b",
+                "ev_b6e7a7036f328a430b3a"
+              ],
+              "evidence_scope": "definition",
+              "note": "各定义与原文一致：状态方程得到 H(y)、横风引起侧偏、超声速弹丸形成弹道波、摩擦阻力与粗糙度有关、法线与切线垂直、空气阻力影响空气弹道、空气阻力影响枪弹、空气近似理想气体；定性文字未推成数值或阈值。",
+              "status": "pass"
+            },
+            {
+              "check": "hierarchy_direction",
+              "evidence_ids": [
+                "ev_49cebfb2fa94214e55e4",
+                "ev_4f89e426cf3ce358975f",
+                "ev_a3da0498469c6db1da87",
+                "ev_0ddb306cd5e0abb97cd2",
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_fb32c0b835deace58bfa"
+              ],
+              "evidence_scope": "definition",
+              "note": "定义方向与既有 domain/range 一致：横风→侧偏、超声速弹丸→弹道波、法线方向→切线方向、空气阻力→空气弹道/枪弹、空气→理想气体；未反转端点。",
+              "status": "pass"
+            },
+            {
+              "check": "constraint_strength",
+              "evidence_ids": [
+                "ev_3ac495284f0e81c6c629",
+                "ev_49cebfb2fa94214e55e4",
+                "ev_4f89e426cf3ce358975f",
+                "ev_91c17b69ff3b7aba9fbf",
+                "ev_a3da0498469c6db1da87",
+                "ev_0ddb306cd5e0abb97cd2",
+                "ev_4ca8b0a5dbe39a97b7ba",
+                "ev_fb32c0b835deace58bfa"
+              ],
+              "evidence_scope": "definition",
+              "note": "定义保留定性强度与适用范围，未把 domain/range 端点约束误作实例存在性，也未将“影响特别大”等背景文字升为全称强度断言。",
+              "status": "pass"
+            },
+            {
+              "check": "structure",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "结构检查通过：新增 8 条定义三元组，无删除，匿名公理与语言标签保留，reasoner=not_run 如实保留。",
+              "status": "pass"
+            },
+            {
+              "check": "impact",
+              "evidence_ids": [],
+              "evidence_scope": "unknown",
+              "note": "影响检查通过：仅追加定义注解，不改变类层次、端点约束或 ABox 引用；受影响候选需重新审核但无硬失败。",
+              "status": "pass"
+            }
+          ],
+          "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+          "contract_version": "ontology_review_response_v2",
+          "counter_evidence_ids": [],
+          "decision": "approve",
+          "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+          "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+          "finish_reason": "stop",
+          "impact_status": "pass",
+          "input_tokens": 79684,
+          "late_response": false,
+          "latency_ms": 9358,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "necessity": "confirmed_gap",
+          "object_revision": 2,
+          "output_tokens": 1580,
+          "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+          "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+          "provider_started_at": 1794386809.313412,
+          "queue_time_ms": 425,
+          "reason_codes": [
+            "definitions_added_to_existing_relations",
+            "definitions_scope_preserved",
+            "no_structural_change",
+            "reasoner_not_run"
+          ],
+          "reasoning_tokens": null,
+          "request_key": "cb8d31a0ccf5d972d822adda89e83a115e6681f96be9e13822213835f97ed7b3",
+          "requested_context": null,
+          "response_id": "5aea0f58-ca48-4f45-8576-b222e9a3e15e",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "round_id": 1,
+          "semantic_status": "pass",
+          "structure_status": "pass",
+          "suggested_changes": null,
+          "supporting_evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+          "task_type": "ontology_extension",
+          "voter_id": "judge_c"
+        }
+      ],
+      "audit_id": "ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad",
+      "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "checks": [
+        {
+          "check": "necessity",
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_49cebfb2fa94214e55e4",
+            "ev_4f89e426cf3ce358975f",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_a3da0498469c6db1da87",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_fb32c0b835deace58bfa"
+          ],
+          "evidence_scope": "definition",
+          "note": "八个既有关系属性在 base 中无 skos:definition，原文对每个关系均有可引用的语义依据，补齐定义为必要缺口。",
+          "status": "pass"
+        },
+        {
+          "check": "reuse",
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_49cebfb2fa94214e55e4"
+          ],
+          "evidence_scope": "definition",
+          "note": "变更仅向既有 IRI 追加定义，未新建重复概念或别名；复用既有关系目标。",
+          "status": "pass"
+        },
+        {
+          "check": "definition",
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_49cebfb2fa94214e55e4",
+            "ev_916c5c438459f294e912",
+            "ev_e4af69959862e9e59f68",
+            "ev_4f89e426cf3ce358975f",
+            "ev_fcb5968b00ade4ff51ec",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_171e0d4473814e741d1a",
+            "ev_a3da0498469c6db1da87",
+            "ev_49a0b96c3f815e30ee47",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_823711a6a4f5b03ed371",
+            "ev_cbc8565ad08104e5a34c",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_65ac14eea568d8e8224e",
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "evidence_scope": "definition",
+          "note": "各定义与原文一致：状态方程得到 H(y)、横风引起侧偏、超声速弹丸形成弹道波、摩擦阻力与粗糙度有关、法线与切线垂直、空气阻力影响空气弹道、空气阻力影响枪弹、空气近似理想气体；定性文字未推成数值或阈值。",
+          "status": "pass"
+        },
+        {
+          "check": "hierarchy_direction",
+          "evidence_ids": [
+            "ev_49cebfb2fa94214e55e4",
+            "ev_4f89e426cf3ce358975f",
+            "ev_a3da0498469c6db1da87",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_fb32c0b835deace58bfa"
+          ],
+          "evidence_scope": "definition",
+          "note": "定义方向与既有 domain/range 一致：横风→侧偏、超声速弹丸→弹道波、法线方向→切线方向、空气阻力→空气弹道/枪弹、空气→理想气体；未反转端点。",
+          "status": "pass"
+        },
+        {
+          "check": "constraint_strength",
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_49cebfb2fa94214e55e4",
+            "ev_4f89e426cf3ce358975f",
+            "ev_91c17b69ff3b7aba9fbf",
+            "ev_a3da0498469c6db1da87",
+            "ev_0ddb306cd5e0abb97cd2",
+            "ev_4ca8b0a5dbe39a97b7ba",
+            "ev_fb32c0b835deace58bfa"
+          ],
+          "evidence_scope": "definition",
+          "note": "定义保留定性强度与适用范围，未把 domain/range 端点约束误作实例存在性，也未将“影响特别大”等背景文字升为全称强度断言。",
+          "status": "pass"
+        },
+        {
+          "check": "structure",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "结构检查通过：新增 8 条定义三元组，无删除，匿名公理与语言标签保留，reasoner=not_run 如实保留。",
+          "status": "pass"
+        },
+        {
+          "check": "impact",
+          "evidence_ids": [],
+          "evidence_scope": "unknown",
+          "note": "影响检查通过：仅追加定义注解，不改变类层次、端点约束或 ABox 引用；受影响候选需重新审核但无硬失败。",
+          "status": "pass"
+        }
+      ],
+      "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+      "contract_version": "ontology_review_response_v2",
+      "counter_evidence_ids": [],
+      "decision": "approve",
+      "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+      "evidence_hash": "afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360",
+      "finish_reason": "stop",
+      "impact_status": "pass",
+      "input_tokens": 79684,
+      "late_response": false,
+      "latency_ms": 9358,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "necessity": "confirmed_gap",
+      "object_revision": 2,
+      "output_tokens": 1580,
+      "prompt_version": "ontology_extension_validator_v2_constraint_scope_v1",
+      "proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+      "provider_started_at": 1794386809.313412,
+      "queue_time_ms": 425,
+      "reason_codes": [
+        "definitions_added_to_existing_relations",
+        "definitions_scope_preserved",
+        "no_structural_change",
+        "reasoner_not_run"
+      ],
+      "reasoning_tokens": null,
+      "request_key": "cb8d31a0ccf5d972d822adda89e83a115e6681f96be9e13822213835f97ed7b3",
+      "requested_context": null,
+      "response_id": "5aea0f58-ca48-4f45-8576-b222e9a3e15e",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "round_id": 1,
+      "semantic_status": "pass",
+      "structure_status": "pass",
+      "suggested_changes": null,
+      "supporting_evidence_ids": [
+        "ev_3ac495284f0e81c6c629",
+        "ev_bcc35ff4d1e37f138b4c",
+        "ev_49cebfb2fa94214e55e4",
+        "ev_916c5c438459f294e912",
+        "ev_e4af69959862e9e59f68",
+        "ev_4f89e426cf3ce358975f",
+        "ev_fcb5968b00ade4ff51ec",
+        "ev_91c17b69ff3b7aba9fbf",
+        "ev_171e0d4473814e741d1a",
+        "ev_a3da0498469c6db1da87",
+        "ev_49a0b96c3f815e30ee47",
+        "ev_0ddb306cd5e0abb97cd2",
+        "ev_823711a6a4f5b03ed371",
+        "ev_cbc8565ad08104e5a34c",
+        "ev_4ca8b0a5dbe39a97b7ba",
+        "ev_65ac14eea568d8e8224e",
+        "ev_fb32c0b835deace58bfa",
+        "ev_df581a342a45722ca57b",
+        "ev_b6e7a7036f328a430b3a"
+      ],
+      "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+      "task_type": "ontology_extension",
+      "voter_id": "judge_c"
+    }
+  ],
+  "competency_result": {
+    "assessment": {
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "executed": true,
+      "passed_voter_ids": [
+        "judge_a"
+      ],
+      "question_ids": [
+        "chapter1_source_coverage"
+      ],
+      "status": "unknown"
+    },
+    "budget": {
+      "case_accounts": [
+        {
+          "case_id": "case_3563beacb92e92b9b0cfefedc9a9a366",
+          "limits": {
+            "extension_requests": 1,
+            "llm_calls": 96,
+            "rebinds": 2,
+            "tokens": 910188,
+            "tool_calls": 64
+          },
+          "usage": {
+            "extension_requests": 1,
+            "llm_calls": 13,
+            "rebinds": 0,
+            "tokens": 679975,
+            "tool_calls": 3
+          }
+        }
+      ],
+      "case_call_reservations": [
+        "e8acba904e0f4941b6d316c51a0d9d7d",
+        "33068cf2721645ccb3e2409fc5e7786d",
+        "703a99de9f5044dfb8170ac693e67786"
+      ],
+      "case_ids": [
+        "case_3563beacb92e92b9b0cfefedc9a9a366"
+      ],
+      "deadline_epoch": 1794447719.0131752,
+      "max_planner_steps": 6,
+      "max_validation_rounds": 2,
+      "remaining_llm_calls": 0,
+      "remaining_seconds": 389.7955131530762,
+      "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+      "usage": {
+        "input_tokens": 212014,
+        "llm_calls": 3,
+        "output_tokens": 7773,
+        "planner_steps": 0,
+        "tool_calls": 0,
+        "unknown_token_requests": 0,
+        "validation_rounds": 0
+      }
+    },
+    "parent_modeling_approvals": 2,
+    "parent_unknown_requests_preserved": true,
+    "publication_authorized_by_this_assessment": false,
+    "reason": "用户已授权一次Gemma受控重评及随后原三席各一次整章审核，总上限9次。重评仍504，建模门槛未满足；独立完成冻结整章问题，不重试未知请求，不授权发布。",
+    "votes": [
+      {
+        "actual_calls": 1,
+        "assessments": [
+          {
+            "note": "All eight revised relation definitions are grounded in the supplied chapter and preserve the original relationship meanings. The RDF base and patch show the corresponding named object properties with unchanged labels, domains, and ranges; the patch only adds skos:definition literals. The quoted source passages support: state equation to air density function standard law H(y); crosswind to lateral deviation; supersonic projectile in flight to ballistic wave; friction drag to surface roughness; normal direction to tangent direction perpendicularity; air resistance to air trajectory asymmetry; air resistance to rifle bullet flight; and air to ideal gas approximation. No unsupported names or changed meanings were found in the reviewed delta.",
+            "question_id": "chapter1_source_coverage",
+            "quotes": [
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "得横风引起的侧偏为"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "对于落点，横风引起的侧偏为"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "由方程组（1-95）第一、二式看出，横风是通过  $v_{\\mathrm{r}}$  来影响  $v_{x}$  、  $v_{y}$  及  $x$  、  $y$  的。由于  $W_{z}$  与  $v_{x}$  和  $v_{y}$  相比是很小的量，由式（1-88）知  $W_{z}$  对  $v_{\\mathrm{r}}$  影响甚小。可以认为横风除了引起侧偏外，对弹道没有别的影响，故式（1-99）中的  $X$  和  $T$  可以使用无风条件下的射程和全飞行时间。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关，在实践中，常用在弹丸表面涂漆的办法来减小表面粗糙度，可使射程增加  $0.5\\% \\sim 2.5\\%$  。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "自然坐标是根据跟随弹丸质心运动的方向而取的坐标。取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "# 2. 空气弹道的不对称性"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。图1-14给出了  $v_{0} =$"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "空气可近似看成理想气体"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "实际空气常是含有水蒸气的湿空气，因此尚须对湿空气状态方程中的量做进一步的研究。由实验得知，水蒸气的气体常数  $R_{\\text{水}}$  与干空气的气体常数  $R$  之间的关系为"
+              }
+            ],
+            "status": "pass"
+          }
+        ],
+        "attempt_id": "attempt_8a3ac1d15f04474980d9472b7f7bcc78",
+        "attempts": [
+          {
+            "assessments": [
+              {
+                "note": "All eight revised relation definitions are grounded in the supplied chapter and preserve the original relationship meanings. The RDF base and patch show the corresponding named object properties with unchanged labels, domains, and ranges; the patch only adds skos:definition literals. The quoted source passages support: state equation to air density function standard law H(y); crosswind to lateral deviation; supersonic projectile in flight to ballistic wave; friction drag to surface roughness; normal direction to tangent direction perpendicularity; air resistance to air trajectory asymmetry; air resistance to rifle bullet flight; and air to ideal gas approximation. No unsupported names or changed meanings were found in the reviewed delta.",
+                "question_id": "chapter1_source_coverage",
+                "quotes": [
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "得横风引起的侧偏为"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "对于落点，横风引起的侧偏为"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "由方程组（1-95）第一、二式看出，横风是通过  $v_{\\mathrm{r}}$  来影响  $v_{x}$  、  $v_{y}$  及  $x$  、  $y$  的。由于  $W_{z}$  与  $v_{x}$  和  $v_{y}$  相比是很小的量，由式（1-88）知  $W_{z}$  对  $v_{\\mathrm{r}}$  影响甚小。可以认为横风除了引起侧偏外，对弹道没有别的影响，故式（1-99）中的  $X$  和  $T$  可以使用无风条件下的射程和全飞行时间。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关，在实践中，常用在弹丸表面涂漆的办法来减小表面粗糙度，可使射程增加  $0.5\\% \\sim 2.5\\%$  。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "自然坐标是根据跟随弹丸质心运动的方向而取的坐标。取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "# 2. 空气弹道的不对称性"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。图1-14给出了  $v_{0} =$"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。因此，射角较小的弹道，飞行时间也短，缩短了空气阻力作用的时间，反而可以飞行较远的距离，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  小；迫击炮弹初速小，空气阻力影响较小，因而  $\\theta_{0X\\mathrm{m}}$  接近  $45^{\\circ}$  ；大口径高初速的火炮，一方面弹道系数小，另一方面其最大弹道高  $H$  高，弹丸可以很快穿过稠密大气层而到达空气稀薄的高空（ $y > 15~\\mathrm{km}$ ， $H(y)\\leqslant 0.16$ ），此时弹道倾角如果接近  $45^{\\circ}$ ，在该层飞行最远，这样在地面的射角必然大于  $45^{\\circ}$ ，因而  $\\theta_{0X\\mathrm{m}}$  远比  $45^{\\circ}$  大，一般为  $50^{\\circ} \\sim 55^{\\circ}$ 。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "空气可近似看成理想气体"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "实际空气常是含有水蒸气的湿空气，因此尚须对湿空气状态方程中的量做进一步的研究。由实验得知，水蒸气的气体常数  $R_{\\text{水}}$  与干空气的气体常数  $R$  之间的关系为"
+                  }
+                ],
+                "status": "pass"
+              }
+            ],
+            "attempt_id": "attempt_8a3ac1d15f04474980d9472b7f7bcc78",
+            "attempt_no": 1,
+            "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "coverage": "complete",
+            "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+            "finish_reason": "stop",
+            "input_tokens": 72338,
+            "late_response": false,
+            "latency_ms": 70625,
+            "model_family": "qwen",
+            "model_id": "Qwen",
+            "model_identity": "qwen",
+            "object_revision": 2,
+            "output_tokens": 1513,
+            "parent_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+            "provider_started_at": 1794447119.3850293,
+            "queue_time_ms": 311,
+            "reasoning_tokens": null,
+            "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+            "request_key": "fbb972e7694afdcdd1f0dffde5cb989542294fb6037ce0143a9b0b91dea45dc4",
+            "response_contract_version": "ontology_semantic_competency_v1",
+            "response_id": "chatcmpl-b21415c07ff2ba3c",
+            "response_status": "ok",
+            "returned_model_id": "Qwen",
+            "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+            "task_type": "ontology_competency_review",
+            "unresolved_terms": [],
+            "voter_id": "judge_a"
+          }
+        ],
+        "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "coverage": "complete",
+        "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+        "finish_reason": "stop",
+        "input_tokens": 72338,
+        "late_response": false,
+        "latency_ms": 70625,
+        "model_family": "qwen",
+        "model_id": "Qwen",
+        "model_identity": "qwen",
+        "object_revision": 2,
+        "output_tokens": 1513,
+        "parent_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+        "provider_started_at": 1794447119.3850293,
+        "queue_time_ms": 311,
+        "reasoning_tokens": null,
+        "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+        "request_key": "fbb972e7694afdcdd1f0dffde5cb989542294fb6037ce0143a9b0b91dea45dc4",
+        "response_contract_version": "ontology_semantic_competency_v1",
+        "response_id": "chatcmpl-b21415c07ff2ba3c",
+        "response_status": "ok",
+        "returned_model_id": "Qwen",
+        "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+        "task_type": "ontology_competency_review",
+        "unresolved_terms": [],
+        "voter_id": "judge_a"
+      },
+      {
+        "actual_calls": 1,
+        "attempt_id": "attempt_73d8f8a2031f45ef9b05cd1d163e0c55",
+        "attempts": [
+          {
+            "attempt_id": "attempt_73d8f8a2031f45ef9b05cd1d163e0c55",
+            "attempt_no": 1,
+            "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+            "error": "quotation must uniquely match the frozen verified chapter: question_id=chapter1_source_coverage, quote_index=0, occurrences=0",
+            "finish_reason": "stop",
+            "input_tokens": 74307,
+            "late_response": false,
+            "latency_ms": 116610,
+            "model_family": "gemma",
+            "model_id": "Gemma",
+            "model_identity": "gemma",
+            "object_revision": 2,
+            "output_tokens": 1849,
+            "parent_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+            "provider_started_at": 1794447212.2406254,
+            "queue_time_ms": 320,
+            "raw_response": {
+              "assessments": [
+                {
+                  "note": "All revised relationship definitions are grounded in the source text and retain their original meaning. Named concepts in the RDF are consistently present in the chapter.",
+                  "question_id": "chapter1_source_coverage",
+                  "quotes": [
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm {s}}(y)$"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "得横风引起的侧偏为"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。"
+                    },
+                    {
+                      "document_id": "火炮弹道学_钱林方_第一章",
+                      "quote": "空气可近似看成理想气体"
+                    }
+                  ],
+                  "status": "pass"
+                }
+              ],
+              "coverage": "complete",
+              "unresolved_terms": []
+            },
+            "reasoning_tokens": 1305,
+            "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+            "request_key": "4659990817cc091f713320f8d6ad53c24b4d53348ad5f584fcd3cc26c9cce715",
+            "response_contract_version": "ontology_semantic_competency_v1",
+            "response_id": "chatcmpl-aad543f2ff6c63b4",
+            "response_status": "invalid_contract",
+            "returned_model_id": "Gemma",
+            "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+            "task_type": "ontology_competency_review",
+            "validation_errors": [
+              "quotation must uniquely match the frozen verified chapter: question_id=chapter1_source_coverage, quote_index=0, occurrences=0"
+            ],
+            "voter_id": "judge_b"
+          }
+        ],
+        "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+        "error": "quotation must uniquely match the frozen verified chapter: question_id=chapter1_source_coverage, quote_index=0, occurrences=0",
+        "finish_reason": "stop",
+        "input_tokens": 74307,
+        "late_response": false,
+        "latency_ms": 116610,
+        "model_family": "gemma",
+        "model_id": "Gemma",
+        "model_identity": "gemma",
+        "object_revision": 2,
+        "output_tokens": 1849,
+        "parent_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+        "provider_started_at": 1794447212.2406254,
+        "queue_time_ms": 320,
+        "raw_response": {
+          "assessments": [
+            {
+              "note": "All revised relationship definitions are grounded in the source text and retain their original meaning. Named concepts in the RDF are consistently present in the chapter.",
+              "question_id": "chapter1_source_coverage",
+              "quotes": [
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm {s}}(y)$"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "得横风引起的侧偏为"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。"
+                },
+                {
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "quote": "空气可近似看成理想气体"
+                }
+              ],
+              "status": "pass"
+            }
+          ],
+          "coverage": "complete",
+          "unresolved_terms": []
+        },
+        "reasoning_tokens": 1305,
+        "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+        "request_key": "4659990817cc091f713320f8d6ad53c24b4d53348ad5f584fcd3cc26c9cce715",
+        "response_contract_version": "ontology_semantic_competency_v1",
+        "response_id": "chatcmpl-aad543f2ff6c63b4",
+        "response_status": "invalid_contract",
+        "returned_model_id": "Gemma",
+        "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+        "task_type": "ontology_competency_review",
+        "validation_errors": [
+          "quotation must uniquely match the frozen verified chapter: question_id=chapter1_source_coverage, quote_index=0, occurrences=0"
+        ],
+        "voter_id": "judge_b"
+      },
+      {
+        "actual_calls": 1,
+        "assessments": [
+          {
+            "note": "The single frozen question asks whether all named concepts are grounded in the chapter and whether declared relationships retain their original meaning, including the baseline. The eight revised definitions are individually supported by the quoted source passages and preserve the original domain/range directions (state equation→density function law; crosswind→side deflection; supersonic projectile→ballistic wave; friction drag→surface roughness; normal direction→tangent direction; air drag→air trajectory; air drag→bullet; air→ideal gas model). However, complete coverage cannot be established: the base graph contains numerous named classes and object properties whose labels/definitions are not fully grounded in the supplied chapter text, e.g. classes such as '航空炸弹弹道表', '弹道高', '高射炮', '空气迎面阻力', '三自由度方程', '刚体运动', '阻力系数', '质点弹道学', '射表', '方向偏差', '外弹道学', '切向阻力', '离心惯性力', '地面直角坐标系', '弹带波', '声速', '弹丸质量', '枣核弹', '火炮弹丸', '涡旋', '迫击炮弹', '密度函数', '中间层', '地面火炮外弹道表', '质点平面运动', '穿甲弹', '质心运动方程组', '底凹弹', '大气微小单元体', '外层大气', '同温层', '真空弹道', '质点弹道', '迎面阻力', '质点弹道方程组', '章动角', '弹道降弧', '标准定律', '地球表面曲率', '速度极小值', '高温层', '标准条件', '超声速区', '底阻', '低伸弹道表', '阻力函数', '旋转稳定的炮弹', '速度极大值', '惯性参考系', '空气动力学', '湿空气', '坐标系', '标准分布', '雷诺数', '弹头波', '量纲分析', '亚同温层', '大口径高初速远程炮弹', '加速度', '气压和密度随高度分布的标准分布', '攻角', '重力加速度矢量', '空气阻力定律', '气体状态方程', '空气阻力矢量', '空气质点弹道', '亚声速弹丸', '地球自转角速度矢量', '低伸弹道', '中口径中初速炮弹', '弹道规律', '斜激波', '绝对速度', '极限速度', '弹道顶点', '弹道弧长', '43年阻力定律', '地面火炮', '全飞行时间', '弹丸质心运动微分方程', '相对速度矢量', '弹道升弧', '混合边界层', '重力加速度变化', '跨声速区', '弹丸速度', and properties such as '带动', '消耗', '产生', '得到', '编制', '忽略', '跟随', '取为', '位于', '描述', '夹角取决于', '用于', '与...有关', '研究', '近似看成', '考虑', '取决于', '形成', '影响', '基于', '引起', '属于', '具有部件', '减小', '共线反向', '观察于', '修正', '改变', '作用于', '随...不同而有差异', '对应', '投影于', '具有', '求出', '垂直于', '表示', '随高度变化', '反映', '使...减速', '需要知道', '具有方向', '黏附', '转化为', '分为'. Many of these are not explicitly named or defined in the supplied chapter, and several baseline definitions are unsupported or semantically questionable (e.g. '空气阻力定律' definition is present but the class label is '空气阻力定律' while the definition text says '标准弹的阻力系数 Cx0 与 Ma 的函数关系称为空气阻力定律'; '标准定律' is defined only as '空气密度函数的标准定律 H(y)' while the chapter also uses standard laws for temperature and pressure; '标准分布' is defined only as '空气密度函数的标准分布 H_s(y)' while the chapter uses standard distributions for temperature, pressure, and density; '弹道高' has no definition; '高射炮' has no definition; '空气迎面阻力' has no definition; '三自由度方程' definition says '考虑横风情况下建立的运动方程' but the chapter says '在考虑横风的情况下，弹道不再是平面曲线，而是一条空间曲线，此时所建立的运动方程称为三自由度方程'; '刚体运动' definition says '弹丸在空气中的复杂运动，包含6个自由度' which is supported; '阻力系数' definition says '在跨声速区随马赫数急剧上升，在超声速区急剧下降，受气温和空气密度共同影响的系数' which conflates the coefficient with its behavior and omits the standard definition; '质点弹道学' definition says '将弹丸当作质点研究的弹道学分支' which is not exactly the chapter's wording; '射表' definition says '根据标准气象条件编制的火炮射击数据表' which is not exactly the chapter's wording; '方向偏差' has no definition; '外弹道学' has no definition; '切向阻力' has no definition; '离心惯性力' definition says '地球旋转的影响之一，已在重力中加以考虑' which is supported; '地面直角坐标系' definition says '用于描述弹丸运动状态的地面参考坐标系。' which is not exactly the chapter's wording; '弹带波' definition says '由弹带处产生的弹道波' which is supported; '声速' definition says '介质中声音传播的速度，文中指当地声速和地面标准值' which is supported; '弹丸质量' has no definition; '枣核弹' definition says '结构上具有减小底阻特点的新型弹丸类型。' which is supported; '火炮弹丸' definition says '火炮发射的弹丸' which is supported; '涡旋' definition says '周围压力较高的气流向低压区填补时形成的杂乱无章的气流运动形态。' which is supported; '迫击炮弹' definition says '具有特定最大射程角的炮弹类型' which is supported; '密度函数' definition says '表示空气特征的函数' which is supported; '中间层' definition says '从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气' which is supported; '地面火炮外弹道表' definition says '按照特定思路编制出的弹道表' which is supported; '质点平面运动' definition says '在特定假设下，弹丸刚体一般运动简化成的在其发射面内的运动' which is supported; '穿甲弹' definition says '一种具有特定质量系数范围的弹丸类型' which is supported; '质心运动方程组' definition says '描述有风情况下质心运动的方程组' which is supported; '底凹弹' definition says '结构上具有减小底阻特点的新型弹丸类型。' which is supported; '大气微小单元体' has no definition; '外层大气' definition says '从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气' which is supported; '同温层' definition says '气温恒定不变，大气没有上下对流，只有水平移动' which is supported; '真空弹道' definition says '在真空中运动的弹道' which is supported; '质点弹道' definition says '将弹丸质量集中于质心一点的一种弹丸运动的规律' which is supported; '迎面阻力' definition says '在弹丸轴对称且章动角忽略不计的假设下，通过弹丸质心的空气阻力' which is supported; '质点弹道方程组' definition says '在特定基本假设下建立的反映弹丸质心运动主要规律的方程组' which is supported; '章动角' definition says '绕轴旋转体中相当于攻角的夹角' which is supported; '弹道降弧' definition says '弹道中倾角小于零的部分' which is supported; '标准定律' definition says '空气密度函数的标准定律 H(y)' which is supported but incomplete; '地球表面曲率' definition says '地球表面的弯曲程度，影响弹丸运动方程' which is supported; '速度极小值' definition says '弹丸速度在弹道上的局部最小值' which is supported; '高温层' definition says '从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气' which is supported; '标准条件' definition says '非标准条件所相对的基准条件。' which is supported; '超声速区' definition says '阻力系数急剧下降，气温对弹道影响不太显著甚至相反的速度范围' which is supported; '底阻' definition says '涡流阻力的别称，指由弹底涡流效应产生的阻力分量。' which is supported; '低伸弹道表' definition says '按照特定思路编制出的弹道表' which is supported; '阻力函数' has no definition; '旋转稳定的炮弹' definition says '通常将尾部做成船尾形的炮弹类型。' which is supported; '速度极大值' definition says '弹丸速度在弹道上的局部最大值' which is supported; '惯性参考系' definition says '速度为常量的参考系' which is supported; '空气动力学' has no definition; '湿空气' definition says '含有水蒸气的空气' which is supported; '坐标系' definition says '动坐标系' which is supported; '标准分布' definition says '空气密度函数的标准分布 H_s(y)' which is supported but incomplete; '雷诺数' has no definition; '弹头波' definition says '由弹丸头部产生的弹道波' which is supported; '量纲分析' has no definition; '亚同温层' definition says '对流层与平流层之间的过渡层' which is supported; '大口径高初速远程炮弹' definition says '具有特定最大射程角范围的炮弹类型' which is supported; '加速度' definition says 'dv/dt 可以看成 v 的矢端速度' which is supported; '气压和密度随高度分布的标准分布' definition says '有了温度随高度的分布，就可以利用流体静力学基本方程和气体状态方程求出大气气压' which is supported; '攻角' definition says '飞行中弹丸轴线和弹丸速度矢量之间的夹角' which is supported; '重力加速度矢量' has no definition; '空气阻力定律' definition says '标准弹的阻力系数 Cx0 与 Ma 的函数关系称为空气阻力定律。' which is supported; '气体状态方程' definition says '利用流体静力学基本方程和气体状态方程求出大气气压' which is supported; '空气阻力矢量' definition says '弹丸在空气中运动时受到的阻力矢量' which is supported; '空气质点弹道' definition says '空气质点弹道的一般特性' which is supported; '亚声速弹丸' definition says '飞行速度低于声速的弹丸类型。' which is supported; '地球自转角速度矢量' definition says '用于计算科氏加速度的物理量' which is supported; '低伸弹道' definition says '落速与速度极小值接近的弹道类型' which is supported; '中口径中初速炮弹' definition says '具有特定最大射程角范围的炮弹类型' which is supported; '弹道规律' definition says '定性地了解弹道规律' which is supported; '斜激波' has no definition; '绝对速度' definition says '弹丸相对于地面的速度' which is supported; '极限速度' definition says '物体在特定条件下达到的稳定速度' which is supported; '弹道顶点' definition says '弹道中倾角为零的点' which is supported; '弹道弧长' definition says '可作为自变量来列写描述弹丸质心运动规律的微分方程组的变量' which is supported; '43年阻力定律' definition says '我国编制高射炮、地面火炮和低伸弹道表的依据' which is supported; '地面火炮' has no definition; '全飞行时间' definition says '弹丸从发射到落地所经历的总时间' which is supported; '弹丸质心运动微分方程' definition says '弹丸质心运动微分方程的解法' which is supported; '相对速度矢量' definition says '弹丸相对于空气的速度矢量' which is supported; '弹道升弧' definition says '弹道中倾角大于零的部分' which is supported; '混合边界层' definition says '弹丸高速运动时通常形成的边界层类型' which is supported; '重力加速度变化' definition says '重力加速度随位置或高度的变化，影响弹丸运动方程' which is supported; '跨声速区' definition says '阻力系数急剧上升，气温对弹道影响显著的速度范围' which is supported; '弹丸速度' definition says '用于计算科氏加速度的物理量' which is supported. The baseline also contains object properties whose labels are generic and whose definitions are absent or not fully grounded, e.g. '带动', '消耗', '产生', '得到', '编制', '忽略', '跟随', '取为', '位于', '描述', '夹角取决于', '用于', '与...有关', '研究', '近似看成', '考虑', '取决于', '形成', '影响', '基于', '引起', '属于', '具有部件', '减小', '共线反向', '观察于', '修正', '改变', '作用于', '随...不同而有差异', '对应', '投影于', '具有', '求出', '垂直于', '表示', '随高度变化', '反映', '使...减速', '需要知道', '具有方向', '黏附', '转化为', '分为'. Several of these are not explicitly named in the chapter, and some have domain/range assignments that are not clearly supported by the source (e.g. '得到' domain '状态方程' range '空气密度函数' is supported by the revised definition, but the baseline property '得到' is generic and its domain/range may not capture the full derivation context; '与...有关' domain '摩擦阻力' range '表面粗糙度' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full relation; '垂直于' domain '法线方向' range '切线方向' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full geometric relation; '影响' domain '空气阻力' range '空气弹道' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full influence relation; '影响' domain '空气阻力' range '枪弹' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full influence relation; '近似看成' domain '空气' range '理想气体' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full approximation relation; '引起' domain '横风' range '侧偏' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full causal relation; '形成' domain '超声速弹丸' range '弹道波' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full formation relation). Therefore the question cannot be answered 'pass' because complete coverage is not demonstrated and several baseline names/meanings are unsupported or changed. The status is 'fail' rather than 'unknown' because the supplied complete chapter and complete RDF base plus exact patch are sufficient to identify unsupported baseline concepts and relationships, and the question requires complete coverage and exact source quotations for a pass.",
+            "question_id": "chapter1_source_coverage",
+            "quotes": [
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示"
+              },
+              {
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "quote": "得横风引起的侧偏为"
+              }
+            ],
+            "status": "fail"
+          }
+        ],
+        "attempt_id": "attempt_a1648b034e45472ab092b24c15220ff1",
+        "attempts": [
+          {
+            "assessments": [
+              {
+                "note": "The single frozen question asks whether all named concepts are grounded in the chapter and whether declared relationships retain their original meaning, including the baseline. The eight revised definitions are individually supported by the quoted source passages and preserve the original domain/range directions (state equation→density function law; crosswind→side deflection; supersonic projectile→ballistic wave; friction drag→surface roughness; normal direction→tangent direction; air drag→air trajectory; air drag→bullet; air→ideal gas model). However, complete coverage cannot be established: the base graph contains numerous named classes and object properties whose labels/definitions are not fully grounded in the supplied chapter text, e.g. classes such as '航空炸弹弹道表', '弹道高', '高射炮', '空气迎面阻力', '三自由度方程', '刚体运动', '阻力系数', '质点弹道学', '射表', '方向偏差', '外弹道学', '切向阻力', '离心惯性力', '地面直角坐标系', '弹带波', '声速', '弹丸质量', '枣核弹', '火炮弹丸', '涡旋', '迫击炮弹', '密度函数', '中间层', '地面火炮外弹道表', '质点平面运动', '穿甲弹', '质心运动方程组', '底凹弹', '大气微小单元体', '外层大气', '同温层', '真空弹道', '质点弹道', '迎面阻力', '质点弹道方程组', '章动角', '弹道降弧', '标准定律', '地球表面曲率', '速度极小值', '高温层', '标准条件', '超声速区', '底阻', '低伸弹道表', '阻力函数', '旋转稳定的炮弹', '速度极大值', '惯性参考系', '空气动力学', '湿空气', '坐标系', '标准分布', '雷诺数', '弹头波', '量纲分析', '亚同温层', '大口径高初速远程炮弹', '加速度', '气压和密度随高度分布的标准分布', '攻角', '重力加速度矢量', '空气阻力定律', '气体状态方程', '空气阻力矢量', '空气质点弹道', '亚声速弹丸', '地球自转角速度矢量', '低伸弹道', '中口径中初速炮弹', '弹道规律', '斜激波', '绝对速度', '极限速度', '弹道顶点', '弹道弧长', '43年阻力定律', '地面火炮', '全飞行时间', '弹丸质心运动微分方程', '相对速度矢量', '弹道升弧', '混合边界层', '重力加速度变化', '跨声速区', '弹丸速度', and properties such as '带动', '消耗', '产生', '得到', '编制', '忽略', '跟随', '取为', '位于', '描述', '夹角取决于', '用于', '与...有关', '研究', '近似看成', '考虑', '取决于', '形成', '影响', '基于', '引起', '属于', '具有部件', '减小', '共线反向', '观察于', '修正', '改变', '作用于', '随...不同而有差异', '对应', '投影于', '具有', '求出', '垂直于', '表示', '随高度变化', '反映', '使...减速', '需要知道', '具有方向', '黏附', '转化为', '分为'. Many of these are not explicitly named or defined in the supplied chapter, and several baseline definitions are unsupported or semantically questionable (e.g. '空气阻力定律' definition is present but the class label is '空气阻力定律' while the definition text says '标准弹的阻力系数 Cx0 与 Ma 的函数关系称为空气阻力定律'; '标准定律' is defined only as '空气密度函数的标准定律 H(y)' while the chapter also uses standard laws for temperature and pressure; '标准分布' is defined only as '空气密度函数的标准分布 H_s(y)' while the chapter uses standard distributions for temperature, pressure, and density; '弹道高' has no definition; '高射炮' has no definition; '空气迎面阻力' has no definition; '三自由度方程' definition says '考虑横风情况下建立的运动方程' but the chapter says '在考虑横风的情况下，弹道不再是平面曲线，而是一条空间曲线，此时所建立的运动方程称为三自由度方程'; '刚体运动' definition says '弹丸在空气中的复杂运动，包含6个自由度' which is supported; '阻力系数' definition says '在跨声速区随马赫数急剧上升，在超声速区急剧下降，受气温和空气密度共同影响的系数' which conflates the coefficient with its behavior and omits the standard definition; '质点弹道学' definition says '将弹丸当作质点研究的弹道学分支' which is not exactly the chapter's wording; '射表' definition says '根据标准气象条件编制的火炮射击数据表' which is not exactly the chapter's wording; '方向偏差' has no definition; '外弹道学' has no definition; '切向阻力' has no definition; '离心惯性力' definition says '地球旋转的影响之一，已在重力中加以考虑' which is supported; '地面直角坐标系' definition says '用于描述弹丸运动状态的地面参考坐标系。' which is not exactly the chapter's wording; '弹带波' definition says '由弹带处产生的弹道波' which is supported; '声速' definition says '介质中声音传播的速度，文中指当地声速和地面标准值' which is supported; '弹丸质量' has no definition; '枣核弹' definition says '结构上具有减小底阻特点的新型弹丸类型。' which is supported; '火炮弹丸' definition says '火炮发射的弹丸' which is supported; '涡旋' definition says '周围压力较高的气流向低压区填补时形成的杂乱无章的气流运动形态。' which is supported; '迫击炮弹' definition says '具有特定最大射程角的炮弹类型' which is supported; '密度函数' definition says '表示空气特征的函数' which is supported; '中间层' definition says '从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气' which is supported; '地面火炮外弹道表' definition says '按照特定思路编制出的弹道表' which is supported; '质点平面运动' definition says '在特定假设下，弹丸刚体一般运动简化成的在其发射面内的运动' which is supported; '穿甲弹' definition says '一种具有特定质量系数范围的弹丸类型' which is supported; '质心运动方程组' definition says '描述有风情况下质心运动的方程组' which is supported; '底凹弹' definition says '结构上具有减小底阻特点的新型弹丸类型。' which is supported; '大气微小单元体' has no definition; '外层大气' definition says '从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气' which is supported; '同温层' definition says '气温恒定不变，大气没有上下对流，只有水平移动' which is supported; '真空弹道' definition says '在真空中运动的弹道' which is supported; '质点弹道' definition says '将弹丸质量集中于质心一点的一种弹丸运动的规律' which is supported; '迎面阻力' definition says '在弹丸轴对称且章动角忽略不计的假设下，通过弹丸质心的空气阻力' which is supported; '质点弹道方程组' definition says '在特定基本假设下建立的反映弹丸质心运动主要规律的方程组' which is supported; '章动角' definition says '绕轴旋转体中相当于攻角的夹角' which is supported; '弹道降弧' definition says '弹道中倾角小于零的部分' which is supported; '标准定律' definition says '空气密度函数的标准定律 H(y)' which is supported but incomplete; '地球表面曲率' definition says '地球表面的弯曲程度，影响弹丸运动方程' which is supported; '速度极小值' definition says '弹丸速度在弹道上的局部最小值' which is supported; '高温层' definition says '从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气' which is supported; '标准条件' definition says '非标准条件所相对的基准条件。' which is supported; '超声速区' definition says '阻力系数急剧下降，气温对弹道影响不太显著甚至相反的速度范围' which is supported; '底阻' definition says '涡流阻力的别称，指由弹底涡流效应产生的阻力分量。' which is supported; '低伸弹道表' definition says '按照特定思路编制出的弹道表' which is supported; '阻力函数' has no definition; '旋转稳定的炮弹' definition says '通常将尾部做成船尾形的炮弹类型。' which is supported; '速度极大值' definition says '弹丸速度在弹道上的局部最大值' which is supported; '惯性参考系' definition says '速度为常量的参考系' which is supported; '空气动力学' has no definition; '湿空气' definition says '含有水蒸气的空气' which is supported; '坐标系' definition says '动坐标系' which is supported; '标准分布' definition says '空气密度函数的标准分布 H_s(y)' which is supported but incomplete; '雷诺数' has no definition; '弹头波' definition says '由弹丸头部产生的弹道波' which is supported; '量纲分析' has no definition; '亚同温层' definition says '对流层与平流层之间的过渡层' which is supported; '大口径高初速远程炮弹' definition says '具有特定最大射程角范围的炮弹类型' which is supported; '加速度' definition says 'dv/dt 可以看成 v 的矢端速度' which is supported; '气压和密度随高度分布的标准分布' definition says '有了温度随高度的分布，就可以利用流体静力学基本方程和气体状态方程求出大气气压' which is supported; '攻角' definition says '飞行中弹丸轴线和弹丸速度矢量之间的夹角' which is supported; '重力加速度矢量' has no definition; '空气阻力定律' definition says '标准弹的阻力系数 Cx0 与 Ma 的函数关系称为空气阻力定律。' which is supported; '气体状态方程' definition says '利用流体静力学基本方程和气体状态方程求出大气气压' which is supported; '空气阻力矢量' definition says '弹丸在空气中运动时受到的阻力矢量' which is supported; '空气质点弹道' definition says '空气质点弹道的一般特性' which is supported; '亚声速弹丸' definition says '飞行速度低于声速的弹丸类型。' which is supported; '地球自转角速度矢量' definition says '用于计算科氏加速度的物理量' which is supported; '低伸弹道' definition says '落速与速度极小值接近的弹道类型' which is supported; '中口径中初速炮弹' definition says '具有特定最大射程角范围的炮弹类型' which is supported; '弹道规律' definition says '定性地了解弹道规律' which is supported; '斜激波' has no definition; '绝对速度' definition says '弹丸相对于地面的速度' which is supported; '极限速度' definition says '物体在特定条件下达到的稳定速度' which is supported; '弹道顶点' definition says '弹道中倾角为零的点' which is supported; '弹道弧长' definition says '可作为自变量来列写描述弹丸质心运动规律的微分方程组的变量' which is supported; '43年阻力定律' definition says '我国编制高射炮、地面火炮和低伸弹道表的依据' which is supported; '地面火炮' has no definition; '全飞行时间' definition says '弹丸从发射到落地所经历的总时间' which is supported; '弹丸质心运动微分方程' definition says '弹丸质心运动微分方程的解法' which is supported; '相对速度矢量' definition says '弹丸相对于空气的速度矢量' which is supported; '弹道升弧' definition says '弹道中倾角大于零的部分' which is supported; '混合边界层' definition says '弹丸高速运动时通常形成的边界层类型' which is supported; '重力加速度变化' definition says '重力加速度随位置或高度的变化，影响弹丸运动方程' which is supported; '跨声速区' definition says '阻力系数急剧上升，气温对弹道影响显著的速度范围' which is supported; '弹丸速度' definition says '用于计算科氏加速度的物理量' which is supported. The baseline also contains object properties whose labels are generic and whose definitions are absent or not fully grounded, e.g. '带动', '消耗', '产生', '得到', '编制', '忽略', '跟随', '取为', '位于', '描述', '夹角取决于', '用于', '与...有关', '研究', '近似看成', '考虑', '取决于', '形成', '影响', '基于', '引起', '属于', '具有部件', '减小', '共线反向', '观察于', '修正', '改变', '作用于', '随...不同而有差异', '对应', '投影于', '具有', '求出', '垂直于', '表示', '随高度变化', '反映', '使...减速', '需要知道', '具有方向', '黏附', '转化为', '分为'. Several of these are not explicitly named in the chapter, and some have domain/range assignments that are not clearly supported by the source (e.g. '得到' domain '状态方程' range '空气密度函数' is supported by the revised definition, but the baseline property '得到' is generic and its domain/range may not capture the full derivation context; '与...有关' domain '摩擦阻力' range '表面粗糙度' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full relation; '垂直于' domain '法线方向' range '切线方向' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full geometric relation; '影响' domain '空气阻力' range '空气弹道' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full influence relation; '影响' domain '空气阻力' range '枪弹' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full influence relation; '近似看成' domain '空气' range '理想气体' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full approximation relation; '引起' domain '横风' range '侧偏' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full causal relation; '形成' domain '超声速弹丸' range '弹道波' is supported by the revised definition, but the baseline property is generic and its domain/range may not capture the full formation relation). Therefore the question cannot be answered 'pass' because complete coverage is not demonstrated and several baseline names/meanings are unsupported or changed. The status is 'fail' rather than 'unknown' because the supplied complete chapter and complete RDF base plus exact patch are sufficient to identify unsupported baseline concepts and relationships, and the question requires complete coverage and exact source quotations for a pass.",
+                "question_id": "chapter1_source_coverage",
+                "quotes": [
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "可以看到，摩擦阻力与弹丸表面的粗糙度有关"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "由于空气阻力的影响，弹道不像抛物线那样，其并不对称于顶点。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "枪弹口径小，弹道系数大，特别是它的弹道高也很小，全飞行过程均在稠密的大气层中，空气阻力的影响就特别大。"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示"
+                  },
+                  {
+                    "document_id": "火炮弹道学_钱林方_第一章",
+                    "quote": "得横风引起的侧偏为"
+                  }
+                ],
+                "status": "fail"
+              }
+            ],
+            "attempt_id": "attempt_a1648b034e45472ab092b24c15220ff1",
+            "attempt_no": 1,
+            "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "coverage": "partial",
+            "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+            "finish_reason": "stop",
+            "input_tokens": 65369,
+            "late_response": false,
+            "latency_ms": 20656,
+            "model_family": "deepseek",
+            "model_id": "deepseek-flash",
+            "model_identity": "deepseek-flash",
+            "object_revision": 2,
+            "output_tokens": 4411,
+            "parent_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+            "provider_started_at": 1794447190.7158923,
+            "queue_time_ms": 344,
+            "reasoning_tokens": null,
+            "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+            "request_key": "bf61432e75b84c00a06a1e397315d9bf145eda48ee7c39819cb16a49deaf0d54",
+            "response_contract_version": "ontology_semantic_competency_v1",
+            "response_id": "eecadcbf-c1c4-450f-8c1e-2851dfeb8bd7",
+            "response_status": "ok",
+            "returned_model_id": "deepseek-flash",
+            "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+            "task_type": "ontology_competency_review",
+            "unresolved_terms": [
+              "航空炸弹弹道表",
+              "弹道高",
+              "高射炮",
+              "空气迎面阻力",
+              "三自由度方程",
+              "刚体运动",
+              "阻力系数",
+              "质点弹道学",
+              "射表",
+              "方向偏差",
+              "外弹道学",
+              "切向阻力",
+              "离心惯性力",
+              "地面直角坐标系",
+              "弹带波",
+              "声速",
+              "弹丸质量",
+              "枣核弹",
+              "火炮弹丸",
+              "涡旋",
+              "迫击炮弹",
+              "密度函数",
+              "中间层",
+              "地面火炮外弹道表",
+              "质点平面运动",
+              "穿甲弹",
+              "质心运动方程组",
+              "底凹弹",
+              "大气微小单元体",
+              "外层大气",
+              "同温层",
+              "真空弹道",
+              "质点弹道",
+              "迎面阻力",
+              "质点弹道方程组",
+              "章动角",
+              "弹道降弧",
+              "标准定律",
+              "地球表面曲率",
+              "速度极小值",
+              "高温层",
+              "标准条件",
+              "超声速区",
+              "底阻",
+              "低伸弹道表",
+              "阻力函数",
+              "旋转稳定的炮弹",
+              "速度极大值",
+              "惯性参考系",
+              "空气动力学",
+              "湿空气",
+              "坐标系",
+              "标准分布",
+              "雷诺数",
+              "弹头波",
+              "量纲分析",
+              "亚同温层",
+              "大口径高初速远程炮弹",
+              "加速度",
+              "气压和密度随高度分布的标准分布",
+              "攻角",
+              "重力加速度矢量",
+              "空气阻力定律",
+              "气体状态方程",
+              "空气阻力矢量",
+              "空气质点弹道",
+              "亚声速弹丸",
+              "地球自转角速度矢量",
+              "低伸弹道",
+              "中口径中初速炮弹",
+              "弹道规律",
+              "斜激波",
+              "绝对速度",
+              "极限速度",
+              "弹道顶点",
+              "弹道弧长",
+              "43年阻力定律",
+              "地面火炮",
+              "全飞行时间",
+              "弹丸质心运动微分方程",
+              "相对速度矢量",
+              "弹道升弧",
+              "混合边界层",
+              "重力加速度变化",
+              "跨声速区",
+              "弹丸速度",
+              "带动",
+              "消耗",
+              "产生",
+              "得到",
+              "编制",
+              "忽略",
+              "跟随",
+              "取为",
+              "位于",
+              "描述",
+              "夹角取决于",
+              "用于",
+              "与...有关",
+              "研究",
+              "近似看成",
+              "考虑",
+              "取决于",
+              "形成",
+              "影响",
+              "基于",
+              "引起",
+              "属于",
+              "具有部件",
+              "减小",
+              "共线反向",
+              "观察于",
+              "修正",
+              "改变",
+              "作用于",
+              "随...不同而有差异",
+              "对应",
+              "投影于",
+              "具有",
+              "求出",
+              "垂直于",
+              "表示",
+              "随高度变化",
+              "反映",
+              "使...减速",
+              "需要知道",
+              "具有方向",
+              "黏附",
+              "转化为",
+              "分为"
+            ],
+            "voter_id": "judge_c"
+          }
+        ],
+        "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "coverage": "partial",
+        "delta_hash": "e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce",
+        "finish_reason": "stop",
+        "input_tokens": 65369,
+        "late_response": false,
+        "latency_ms": 20656,
+        "model_family": "deepseek",
+        "model_id": "deepseek-flash",
+        "model_identity": "deepseek-flash",
+        "object_revision": 2,
+        "output_tokens": 4411,
+        "parent_proposal_digest": "4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f",
+        "provider_started_at": 1794447190.7158923,
+        "queue_time_ms": 344,
+        "reasoning_tokens": null,
+        "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+        "request_key": "bf61432e75b84c00a06a1e397315d9bf145eda48ee7c39819cb16a49deaf0d54",
+        "response_contract_version": "ontology_semantic_competency_v1",
+        "response_id": "eecadcbf-c1c4-450f-8c1e-2851dfeb8bd7",
+        "response_status": "ok",
+        "returned_model_id": "deepseek-flash",
+        "task_id": "ext_bf690b903dfa4b3faf2510c98ce4310d",
+        "task_type": "ontology_competency_review",
+        "unresolved_terms": [
+          "航空炸弹弹道表",
+          "弹道高",
+          "高射炮",
+          "空气迎面阻力",
+          "三自由度方程",
+          "刚体运动",
+          "阻力系数",
+          "质点弹道学",
+          "射表",
+          "方向偏差",
+          "外弹道学",
+          "切向阻力",
+          "离心惯性力",
+          "地面直角坐标系",
+          "弹带波",
+          "声速",
+          "弹丸质量",
+          "枣核弹",
+          "火炮弹丸",
+          "涡旋",
+          "迫击炮弹",
+          "密度函数",
+          "中间层",
+          "地面火炮外弹道表",
+          "质点平面运动",
+          "穿甲弹",
+          "质心运动方程组",
+          "底凹弹",
+          "大气微小单元体",
+          "外层大气",
+          "同温层",
+          "真空弹道",
+          "质点弹道",
+          "迎面阻力",
+          "质点弹道方程组",
+          "章动角",
+          "弹道降弧",
+          "标准定律",
+          "地球表面曲率",
+          "速度极小值",
+          "高温层",
+          "标准条件",
+          "超声速区",
+          "底阻",
+          "低伸弹道表",
+          "阻力函数",
+          "旋转稳定的炮弹",
+          "速度极大值",
+          "惯性参考系",
+          "空气动力学",
+          "湿空气",
+          "坐标系",
+          "标准分布",
+          "雷诺数",
+          "弹头波",
+          "量纲分析",
+          "亚同温层",
+          "大口径高初速远程炮弹",
+          "加速度",
+          "气压和密度随高度分布的标准分布",
+          "攻角",
+          "重力加速度矢量",
+          "空气阻力定律",
+          "气体状态方程",
+          "空气阻力矢量",
+          "空气质点弹道",
+          "亚声速弹丸",
+          "地球自转角速度矢量",
+          "低伸弹道",
+          "中口径中初速炮弹",
+          "弹道规律",
+          "斜激波",
+          "绝对速度",
+          "极限速度",
+          "弹道顶点",
+          "弹道弧长",
+          "43年阻力定律",
+          "地面火炮",
+          "全飞行时间",
+          "弹丸质心运动微分方程",
+          "相对速度矢量",
+          "弹道升弧",
+          "混合边界层",
+          "重力加速度变化",
+          "跨声速区",
+          "弹丸速度",
+          "带动",
+          "消耗",
+          "产生",
+          "得到",
+          "编制",
+          "忽略",
+          "跟随",
+          "取为",
+          "位于",
+          "描述",
+          "夹角取决于",
+          "用于",
+          "与...有关",
+          "研究",
+          "近似看成",
+          "考虑",
+          "取决于",
+          "形成",
+          "影响",
+          "基于",
+          "引起",
+          "属于",
+          "具有部件",
+          "减小",
+          "共线反向",
+          "观察于",
+          "修正",
+          "改变",
+          "作用于",
+          "随...不同而有差异",
+          "对应",
+          "投影于",
+          "具有",
+          "求出",
+          "垂直于",
+          "表示",
+          "随高度变化",
+          "反映",
+          "使...减速",
+          "需要知道",
+          "具有方向",
+          "黏附",
+          "转化为",
+          "分为"
+        ],
+        "voter_id": "judge_c"
+      }
+    ]
+  },
+  "gemma_competency_request_key": "4659990817cc091f713320f8d6ad53c24b4d53348ad5f584fcd3cc26c9cce715",
+  "original_modeling_attempts": [
+    {
+      "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+      "state": "unknown",
+      "result_json": "{\"attempt_id\":\"attempt_9db64a66e56f4347bca5e8fcae5450bc\",\"audit_id\":\"ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad\",\"base_ontology_version\":\"2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2\",\"base_profile_hash\":\"5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865\",\"base_release_id\":\"release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb\",\"committee_hash\":\"f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e\",\"contract_version\":\"ontology_review_response_v2\",\"delta_hash\":\"e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce\",\"error\":\"<html>\\r\\n<head><title>504 Gateway Time-out</title></head>\\r\\n<body>\\r\\n<center><h1>504 Gateway Time-out</h1></center>\\r\\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\\r\\n</body>\\r\\n</html>\",\"error_code\":\"GATEWAY_REQUEST_OUTCOME_UNKNOWN\",\"evidence_hash\":\"afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360\",\"http_status\":504,\"late_response\":false,\"model_family\":\"gemma\",\"model_id\":\"Gemma\",\"model_identity\":\"gemma\",\"object_revision\":2,\"outcome_unknown\":true,\"pause_job\":false,\"prompt_version\":\"ontology_extension_validator_v2_constraint_scope_v1\",\"proposal_digest\":\"4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f\",\"provider_started_at\":1794386193.4396653,\"queue_time_ms\":328,\"request_key\":\"460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b\",\"response_status\":\"api_error\",\"retryable\":false,\"round_id\":1,\"task_id\":\"ext_bf690b903dfa4b3faf2510c98ce4310d\",\"task_type\":\"ontology_extension\",\"voter_id\":\"judge_b\"}"
+    },
+    {
+      "attempt_id": "attempt_d1e77c8b62684340b60becc9a23bac3b",
+      "state": "unknown",
+      "result_json": "{\"attempt_id\":\"attempt_d1e77c8b62684340b60becc9a23bac3b\",\"audit_id\":\"ontology_audit_f47d56a2b5074c2e81c6dab1bd7705ad\",\"base_ontology_version\":\"2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2\",\"base_profile_hash\":\"5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865\",\"base_release_id\":\"release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb\",\"committee_hash\":\"f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e\",\"contract_version\":\"ontology_review_response_v2\",\"delta_hash\":\"e2cad34302de9e852388de97fac0a9f184a07e04bf8db7db7bc54a1f257748ce\",\"error\":\"<html>\\r\\n<head><title>504 Gateway Time-out</title></head>\\r\\n<body>\\r\\n<center><h1>504 Gateway Time-out</h1></center>\\r\\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\\r\\n</body>\\r\\n</html>\",\"error_code\":\"GATEWAY_REQUEST_OUTCOME_UNKNOWN\",\"evidence_hash\":\"afe8283d6f1bfc47effe7ce67d22fe1f3baf370dc7f4ff51feecfb715685f360\",\"http_status\":504,\"late_response\":false,\"model_family\":\"gemma\",\"model_id\":\"Gemma\",\"model_identity\":\"gemma\",\"object_revision\":2,\"outcome_unknown\":true,\"pause_job\":false,\"prompt_version\":\"ontology_extension_validator_v2_constraint_scope_v1\",\"proposal_digest\":\"4c57ff1678d864a3cd49e839adfa33f8384a513bdac71c38394158958101961f\",\"provider_started_at\":1794446803.0518022,\"queue_time_ms\":303,\"request_key\":\"460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b\",\"response_status\":\"api_error\",\"retryable\":false,\"round_id\":1,\"task_id\":\"ext_bf690b903dfa4b3faf2510c98ce4310d\",\"task_type\":\"ontology_extension\",\"voter_id\":\"judge_b\"}"
+    }
+  ]
+}

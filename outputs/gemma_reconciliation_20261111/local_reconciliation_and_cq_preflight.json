@@ -1,0 +1,132 @@
+{
+  "checked_at": "2026-11-12T09:13:32.047191+08:00",
+  "scope": "local durable receipts and exact frozen inputs; provider reconciliation is still required",
+  "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+  "request_key": "460c42a4f1c0bb4977b70a9b85189ab47b0b7645085df511bdcb3db14c143f1b",
+  "request_key_is_provider_request_id": false,
+  "started_at": "2026-11-11T16:36:33.111560+08:00",
+  "local_deadline_at": "2026-11-11T16:39:33.111560+08:00",
+  "response_received_at": "2026-11-11T16:37:36.079542+08:00",
+  "state": "unknown",
+  "response_status": "api_error",
+  "http_status": 504,
+  "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+  "provider_request_id": null,
+  "response_id": null,
+  "has_original_model_body": false,
+  "events": [
+    {
+      "event": "started",
+      "at": 1794386193.1115596
+    },
+    {
+      "event": "unknown",
+      "at": 1794386256.0795422
+    }
+  ],
+  "attempt_history": [
+    {
+      "attempt_id": "attempt_9db64a66e56f4347bca5e8fcae5450bc",
+      "state": "unknown",
+      "started_at": 1794386193.1115596,
+      "response_received_at": 1794386256.0795422
+    }
+  ],
+  "original_modeling_request_count": 5,
+  "current_modeling_seats": [
+    {
+      "voter_id": "judge_a",
+      "model_id": "Qwen",
+      "response_status": "ok",
+      "decision": "approve",
+      "valid_contract_and_binding": true,
+      "outcome_unknown": false
+    },
+    {
+      "voter_id": "judge_b",
+      "model_id": "Gemma",
+      "response_status": "api_error",
+      "decision": null,
+      "valid_contract_and_binding": false,
+      "outcome_unknown": true
+    },
+    {
+      "voter_id": "judge_c",
+      "model_id": "deepseek-flash",
+      "response_status": "ok",
+      "decision": "approve",
+      "valid_contract_and_binding": true,
+      "outcome_unknown": false
+    }
+  ],
+  "provider_reconciliation_complete": false,
+  "provider_log_access": {
+    "message": "无权进行此操作，access token 无效",
+    "success": false
+  },
+  "browser_log_access": "Chrome app access approval timed out; no browser session read",
+  "unknown_request_resent": false,
+  "new_model_calls": 0,
+  "whole_chapter": {
+    "frozen_request_identical": true,
+    "request_hash": "24152d280b082b2bb4c6c3c063511472bfc6bd2d359d0a0903963b61c1f3494f",
+    "file_sha256": "f225699883e57edbdf531f1d6c3d36919d3ca9f383fd9672a91c1cb8980ce524",
+    "questions": [
+      {
+        "id": "chapter1_source_coverage",
+        "status": "requires_semantic_review",
+        "text": "Are the named concepts grounded in the chapter and do declared relationships retain their original meaning?"
+      }
+    ],
+    "source_document_chars": 55505,
+    "source_documents": [
+      {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      }
+    ],
+    "base_rdf_chars": 45679,
+    "merged_rdf_delivery": "complete_base_minus_removed_plus_added_v1",
+    "base_rdf_triples": 882,
+    "merged_rdf_triples": 890,
+    "merged_graph_hash_verified": true,
+    "rdf_added": 8,
+    "rdf_removed": 0,
+    "verified_context_spans": 28,
+    "committee": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "required_calls": 3,
+    "executed_for_this_parent": false,
+    "blocked_by_parent_unknown_request": true
+  },
+  "prior_total_call_limit": 6,
+  "prior_calls_used": 5,
+  "current_authorized_total_call_limit": 9,
+  "remaining_authorized_calls": 4,
+  "minimum_total_if_original_gemma_approved_and_three_cq_calls": 8,
+  "code_and_config_unchanged": true,
+  "protected_inputs_unchanged": true,
+  "review_database_unchanged": true,
+  "production_head_unchanged": true,
+  "isolated_head_unchanged": true,
+  "published": false
+}
