@@ -35,15 +35,24 @@ def response_errors(value, proposal):
 
 def judge_once(voter, proposal, feedback=None):
     from review_agent.execution import api_error_fields
+    from review_agent.llm_clients import response_metadata
+    from review_agent.transport_diagnostics import safe_error_text
+    from .modeling_context import enabled, verify, suggestion_diagnostics
     vote=vote_binding(voter,proposal)
     from .review_payload import validator_payload
-    semantic=validator_payload(proposal,delivery_version=voter.get('ontology_delivery_version'))
-    payload={**semantic,'output_contract':RESPONSE_SCHEMA,
-        'allowed_evidence_ids':[e['evidence_id'] for e in proposal['evidence']],
-        **({'correction_feedback':feedback} if feedback else {})}
+    response = None
+    provider_called = False
     try:
-        response=voter['client'].complete_json(payload,system_prompt=prompt_for(proposal),
+        verify(proposal)
+        semantic=validator_payload(proposal,delivery_version=voter.get('ontology_delivery_version'))
+        payload={**semantic,'output_contract':RESPONSE_SCHEMA,
+            'allowed_evidence_ids':[e['evidence_id'] for e in proposal['evidence']],
+            **({'correction_feedback':feedback} if feedback else {})}
+        prompt=prompt_for(proposal)
+        provider_called = True
+        response=voter['client'].complete_json(payload,system_prompt=prompt,
             max_tokens=int(voter.get('max_output_tokens',4096)),timeout_seconds=voter.get('http_timeout_seconds'))
+        vote.update(response_metadata(response))
         raw=_parse_content(response.content)
         errors=response_errors(raw,proposal)
         vote.update(raw if not errors else {'error':'; '.join(errors),'raw_response':raw},
@@ -51,24 +60,38 @@ def judge_once(voter, proposal, feedback=None):
             output_tokens=response.output_tokens,returned_model_id=response.returned_model_id,
             response_id=response.response_id,latency_ms=response.latency_ms,
             finish_reason=getattr(response,'finish_reason',None),reasoning_tokens=getattr(response,'reasoning_tokens',None))
+        if enabled(proposal):
+            vote['suggestion_diagnostics']=suggestion_diagnostics(raw,proposal)
     except Exception as exc:
+        if not provider_called:
+            vote.update(response_status='api_error',error=safe_error_text(exc,voter['client']),
+                error_code='ONTOLOGY_MODELING_CONTEXT_PREFLIGHT_FAILED' if enabled(proposal) else 'ONTOLOGY_PAYLOAD_PREFLIGHT_FAILED',
+                not_sent=True,actual_calls=0,retryable=False)
+            return vote
         timed_out=isinstance(exc,TimeoutError) or 'timeout' in type(exc).__name__.lower()
-        vote.update(response_status='timeout' if timed_out else 'api_error',error=str(exc),**api_error_fields(exc))
+        vote.update(response_status='timeout' if timed_out else 'api_error',
+                    error=safe_error_text(exc,voter['client']),**api_error_fields(exc))
         if timed_out: vote.update(retryable=False,outcome_unknown=True)
     return vote
 
 
 def prompt_for(proposal):
-    if proposal.get('versions',{}).get('prompt_version')=='ontology_extension_validator_v1':
-        from .contracts import ROOT
-        return (ROOT/'prompts/ontology_extension_validator_v1.txt').read_text(encoding='utf-8')
-    if proposal.get('versions',{}).get('prompt_version')=='ontology_extension_validator_v2':
-        from .contracts import ROOT
-        prompt=(ROOT/'prompts/ontology_extension_validator_v2_legacy.txt').read_text(encoding='utf-8')
-        if proposal.get('versions',{}).get('prompt_hash') and sha256_json(prompt)!=proposal['versions']['prompt_hash']:
-            raise ValueError('frozen ontology prompt hash mismatch')
-        return prompt
-    return VALIDATOR_PROMPT
+    from .contracts import ROOT, PROMPT_VERSION
+    version=proposal.get('versions',{}).get('prompt_version')
+    paths={'ontology_extension_validator_v1':'ontology_extension_validator_v1.txt',
+           'ontology_extension_validator_v2':'ontology_extension_validator_v2_legacy.txt',
+           'ontology_extension_validator_v2_constraint_scope_v1':'ontology_extension_validator_v2.txt',
+           PROMPT_VERSION:'ontology_extension_validator_v3.txt'}
+    if version is None:
+        prompt=(ROOT/'prompts/ontology_extension_validator_v2.txt').read_text(encoding='utf-8')
+    elif version in paths:
+        prompt=(ROOT/'prompts'/paths[version]).read_text(encoding='utf-8')
+    else:
+        raise ValueError('unsupported frozen ontology prompt version')
+    expected=proposal.get('versions',{}).get('prompt_hash')
+    if expected and sha256_json(prompt)!=expected:
+        raise ValueError('frozen ontology prompt hash mismatch')
+    return prompt
 
 
 def judge(voter, proposal, repository, *, retries, timeout,deadline_epoch=None):

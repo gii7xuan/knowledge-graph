@@ -1,0 +1,227 @@
+{
+  "attempt_id": "attempt_98b5301fdec3472d88166e3cec96fcbf",
+  "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+  "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+  "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+  "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "checks": [
+    {
+      "check": "necessity",
+      "evidence_ids": [
+        "ev_cfdbd38784f815374861",
+        "ev_a9e9eb155e2d04ccd3b9",
+        "ev_f6ac92318c3db8b8176b"
+      ],
+      "evidence_scope": "definition",
+      "note": "The source text explicitly describes the relationships being modified: air consuming projectile kinetic energy (ev_cfdbd38784f815374861), separation waves composed of normal and oblique shock waves (ev_a9e9eb155e2d04ccd3b9), and wave drag depending on nose shape (ev_f6ac92318c3db8b8176b). The current ontology lacks these specific constraints, confirming a gap.",
+      "status": "pass"
+    },
+    {
+      "check": "reuse",
+      "evidence_ids": [
+        "ev_cfdbd38784f815374861",
+        "ev_a9e9eb155e2d04ccd3b9",
+        "ev_f6ac92318c3db8b8176b"
+      ],
+      "evidence_scope": "definition",
+      "note": "The proposal reuses existing classes (Air, Kinetic Energy, Separation Wave, Normal Shock Wave, Wave Drag, Nose Shape) and properties (Consumes, Has Part, Depends On) rather than creating new ones. This aligns with the existing schema structure.",
+      "status": "pass"
+    },
+    {
+      "check": "definition",
+      "evidence_ids": [
+        "ev_6ce780e3cf654f1cb4de",
+        "ev_592bc0f78d5c82ac062c",
+        "ev_885a18552be7c4d6b103",
+        "ev_321917f1ef84c5135c34",
+        "ev_c74cc8a33819ea9a98aa",
+        "ev_49a0b96c3f815e30ee47",
+        "ev_7165805a7dd5be958b56"
+      ],
+      "evidence_scope": "definition",
+      "note": "The definition for 'Drag Coefficient' (C_afb01b87134088624d72) is overgeneralized. The source text (ev_6ce780e3cf654f1cb4de, ev_592bc0f78d5c82ac062c) specifies that C_x0 is a function of Mach number at zero angle of attack, and C_x is a function of both Mach number and angle of attack when non-zero. The proposed definition '本章空气阻力表达式中的空气阻力系数；C_x0(v/c)的量纲为1，在零攻角近似下以马赫数为自变量，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。' is acceptable but the previous definition '在跨声速区随马赫数急剧上升，在超声速区急剧下降，受气温和空气密度共同影响的系数' was more specific to the context of temperature and density effects (ev_885a18552be7c4d6b103). The new definition loses the specific context of transonic/supersonic behavior. Similarly, the definition for 'Coordinate System' (C_ad498a2e8a3eb22fdd25) '本章描述弹丸质心位置、速度等运动状态时所用的坐标；具体形式包括地面直角坐标、自然坐标及动坐标。' is too broad. The source text (ev_c74cc8a33819ea9a98aa, ev_49a0b96c3f815e30ee47, ev_7165805a7dd5be958b56) describes specific coordinate systems (rectangular, natural, moving) used in different contexts, not a single generic 'coordinate system' class. The class '坐标系' is a parent class, and the specific instances (地面直角坐标系, 自然坐标系, 动坐标系) should be used instead of redefining the parent class so broadly.",
+      "status": "fail"
+    },
+    {
+      "check": "hierarchy_direction",
+      "evidence_ids": [
+        "ev_a9e9eb155e2d04ccd3b9"
+      ],
+      "evidence_scope": "classification",
+      "note": "The hierarchy direction for 'Separation Wave' having 'Normal Shock Wave' as a part is correct. The source text (ev_a9e9eb155e2d04ccd3b9) states '正激波与斜激波组成的分离波', meaning separation wave is composed of normal and oblique shock waves. The direction from Separation Wave to Normal Shock Wave is correct.",
+      "status": "pass"
+    },
+    {
+      "check": "constraint_strength",
+      "evidence_ids": [
+        "ev_cfdbd38784f815374861",
+        "ev_a9e9eb155e2d04ccd3b9",
+        "ev_f6ac92318c3db8b8176b"
+      ],
+      "evidence_scope": "scope_rule",
+      "note": "The constraint for 'Consumes' (R_2a66075367666d54e7e7) changing range from 'Projectile' to 'Kinetic Energy' is correct based on ev_cfdbd38784f815374861 ('消耗着弹丸的动能'). However, the constraint for 'Has Part' (R_e1de72d5c68b765c28b9) changing domain from 'Normal Shock Wave' to 'Separation Wave' and range from 'Separation Wave' to 'Normal Shock Wave' is a direction reversal. The base had domain=Normal Shock Wave, range=Separation Wave, which was incorrect. The new domain=Separation Wave, range=Normal Shock Wave is correct. The constraint for 'Depends On' (R_3c75dd89923bc714630d) changing range from 'Nose' to 'Nose Shape' is correct based on ev_f6ac92318c3db8b8176b ('波动阻力的大小主要取决于弹头部的形状'). The issue is that the definition changes for C_afb01b87134088624d72 and C_ad498a2e8a3eb22fdd25 are not supported by the evidence in the way they are phrased, leading to overgeneralization.",
+      "status": "fail"
+    },
+    {
+      "check": "structure",
+      "evidence_ids": [],
+      "evidence_scope": "unknown",
+      "note": "The RDF structure is valid. The patch correctly modifies the domain/range of object properties and updates skos:definitions. No structural errors detected.",
+      "status": "pass"
+    },
+    {
+      "check": "impact",
+      "evidence_ids": [],
+      "evidence_scope": "unknown",
+      "note": "The changes are localized to specific properties and classes. The impact is manageable and does not break existing inferences. The high_impact risk category is noted but the changes are semantically justified where correct.",
+      "status": "pass"
+    }
+  ],
+  "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+  "contract_version": "ontology_review_response_v2",
+  "counter_evidence_ids": [],
+  "decision": "revise",
+  "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+  "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+  "finish_reason": "stop",
+  "gateway_request_id": "2026111310414078060216067076751",
+  "impact_status": "pass",
+  "input_tokens": 81605,
+  "late_response": true,
+  "latency_ms": 100141,
+  "model_family": "qwen",
+  "model_id": "Qwen",
+  "model_identity": "qwen",
+  "necessity": "confirmed_gap",
+  "object_revision": 3,
+  "output_tokens": 2423,
+  "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+  "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+  "provider_started_at": 1794537696.6770847,
+  "queue_time_ms": 388,
+  "reason_codes": [
+    "DEFINITION_OVERGENERALIZATION",
+    "CONSTRAINT_DIRECTION_ERROR",
+    "SCOPE_MISMATCH"
+  ],
+  "reasoning_tokens": null,
+  "request_key": "57129752e86f8bf876beb01d5c8423343bc6225a509b6da242b2d77e16d288d5",
+  "requested_context": null,
+  "response_id": "chatcmpl-968722f07bf3024a",
+  "response_status": "ok",
+  "returned_model_id": "Qwen",
+  "round_id": 1,
+  "semantic_status": "fail",
+  "structure_status": "pass",
+  "suggested_changes": {
+    "C_ad498a2e8a3eb22fdd25": {
+      "definition": "用于描述弹丸质心运动的参考坐标系，包括地面直角坐标系、自然坐标系和动坐标系等具体形式。"
+    },
+    "C_afb01b87134088624d72": {
+      "definition": "空气阻力系数 C_x0 是马赫数 Ma=v/c 的函数，量纲为1，在零攻角下定义；当攻角非零时，C_x 是 Ma 和攻角 δ 的函数。在跨声速区随马赫数急剧上升，在超声速区急剧下降。"
+    }
+  },
+  "suggestion_diagnostics": [],
+  "supporting_evidence_ids": [
+    "ev_cfdbd38784f815374861",
+    "ev_a9e9eb155e2d04ccd3b9",
+    "ev_f6ac92318c3db8b8176b",
+    "ev_6ce780e3cf654f1cb4de",
+    "ev_592bc0f78d5c82ac062c",
+    "ev_885a18552be7c4d6b103",
+    "ev_321917f1ef84c5135c34",
+    "ev_c74cc8a33819ea9a98aa",
+    "ev_49a0b96c3f815e30ee47",
+    "ev_7165805a7dd5be958b56",
+    "ev_c53271ce776b5b72c9cb",
+    "ev_4cf1f8e0e98212fd454b",
+    "ev_10f024862916f28f216f"
+  ],
+  "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+  "task_type": "ontology_extension",
+  "transport_metrics": {
+    "body_bytes_received": 521041,
+    "body_chunk_count": 2421,
+    "chunk_count": 2424,
+    "first_body_byte_ms": 39230.336,
+    "first_chunk_ms": 39233,
+    "first_content_ms": 39233,
+    "gateway_request_id": "2026111310414078060216067076751",
+    "http_status": 200,
+    "max_inter_body_chunk_gap_ms": 756.73,
+    "max_inter_chunk_gap_ms": 750,
+    "reasoning_chars": 0,
+    "response_headers": {
+      "connection": "keep-alive",
+      "content-type": "text/event-stream",
+      "date": "Fri, 13 Nov 2026 02:42:17 GMT",
+      "server": "nginx/1.24.0 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "x-oneapi-request-id": "2026111310414078060216067076751"
+    },
+    "response_headers_ms": 39230.087,
+    "stream": true,
+    "terminal_ms": 100141,
+    "trace": [
+      {
+        "elapsed_ms": 2245.561,
+        "event": "connection.connect_tcp.started"
+      },
+      {
+        "elapsed_ms": 2324.42,
+        "event": "connection.connect_tcp.complete"
+      },
+      {
+        "elapsed_ms": 2325.344,
+        "event": "connection.start_tls.started"
+      },
+      {
+        "elapsed_ms": 2487.475,
+        "event": "connection.start_tls.complete"
+      },
+      {
+        "elapsed_ms": 2487.608,
+        "event": "http11.send_request_headers.started"
+      },
+      {
+        "elapsed_ms": 2487.998,
+        "event": "http11.send_request_headers.complete"
+      },
+      {
+        "elapsed_ms": 2488.011,
+        "event": "http11.send_request_body.started"
+      },
+      {
+        "elapsed_ms": 2626.06,
+        "event": "http11.send_request_body.complete"
+      },
+      {
+        "elapsed_ms": 2626.089,
+        "event": "http11.receive_response_headers.started"
+      },
+      {
+        "elapsed_ms": 39229.354,
+        "event": "http11.receive_response_headers.complete"
+      },
+      {
+        "elapsed_ms": 39230.277,
+        "event": "http11.receive_response_body.started"
+      },
+      {
+        "elapsed_ms": 100144.593,
+        "event": "http11.receive_response_body.complete"
+      },
+      {
+        "elapsed_ms": 100144.649,
+        "event": "http11.response_closed.started"
+      },
+      {
+        "elapsed_ms": 100144.67,
+        "event": "http11.response_closed.complete"
+      }
+    ],
+    "transport_elapsed_ms": 100144.884,
+    "visible_chars": 6071
+  },
+  "voter_id": "judge_a"
+}

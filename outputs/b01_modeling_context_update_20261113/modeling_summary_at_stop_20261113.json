@@ -1,0 +1,82 @@
+{
+  "observed_at_utc": "2026-11-13T02:43:06.620649+00:00",
+  "scope": "b01_v3_context_three_modeling_calls",
+  "new_model_calls": 1,
+  "cumulative_model_calls": 20,
+  "authorized_cumulative_limit": 22,
+  "modeling_approvals": 0,
+  "modeling_three_seats_approve": false,
+  "consensus_including_all_publication_gates": {
+    "result": "unresolved",
+    "counts": {
+      "approve": 0,
+      "revise": 0,
+      "reject": 0,
+      "uncertain": 0,
+      "error": 1
+    },
+    "committee_size": 3,
+    "required_votes": 3,
+    "missing": 2,
+    "eligible_voter_ids": [],
+    "counter_evidence_ids": [],
+    "deterministic_checks_pass": false
+  },
+  "stop_reason": "unknown_outcome_or_account_pause_preserved",
+  "attempts": [
+    {
+      "attempt_id": "attempt_98b5301fdec3472d88166e3cec96fcbf",
+      "state": "unknown",
+      "voter_id": "judge_a",
+      "counted_calls": 1,
+      "gateway_request_id": null
+    }
+  ],
+  "budget": {
+    "usage": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "planner_steps": 0,
+      "validation_rounds": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "unknown_token_requests": 1
+    },
+    "deadline_epoch": 1794538116.0898468,
+    "remaining_seconds": 329.4690000000119,
+    "remaining_llm_calls": 2,
+    "max_planner_steps": 6,
+    "max_validation_rounds": 2,
+    "case_ids": [
+      "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc"
+    ],
+    "case_call_reservations": [
+      "50249e35adf547beae734fa527fc4cd0"
+    ],
+    "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+    "case_accounts": [
+      {
+        "case_id": "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc",
+        "limits": {
+          "extension_requests": 1,
+          "llm_calls": 96,
+          "rebinds": 2,
+          "tokens": 900808,
+          "tool_calls": 64
+        },
+        "usage": {
+          "extension_requests": 1,
+          "llm_calls": 13,
+          "rebinds": 0,
+          "tokens": 600808,
+          "tool_calls": 3
+        }
+      }
+    ]
+  },
+  "full_chapter_review_executed": false,
+  "sample_model_review_executed": false,
+  "published": false,
+  "production_written": false,
+  "old_reviews_and_protected_inputs_unchanged": true
+}

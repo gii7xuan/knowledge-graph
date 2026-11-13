@@ -22,6 +22,7 @@ class LLMResponse:
     finish_reason: Optional[str] = None
     reasoning_tokens: Optional[int] = None
     transport_metrics: Optional[Dict[str, Any]] = None
+    gateway_request_id: Optional[str] = None
 
 
 def response_metadata(response):
@@ -30,7 +31,7 @@ def response_metadata(response):
         return {}
     return {name: copy.deepcopy(getattr(response, name, None)) for name in (
         'latency_ms', 'input_tokens', 'output_tokens', 'returned_model_id', 'response_id',
-        'finish_reason', 'reasoning_tokens', 'transport_metrics')}
+        'finish_reason', 'reasoning_tokens', 'transport_metrics', 'gateway_request_id')}
 
 
 class MockLLMClient:
@@ -87,6 +88,7 @@ class OpenAICompatibleClient:
         if self._client is None:
             import httpx
             from openai import OpenAI
+            from .transport_diagnostics import request_hook, response_hook
             verify_ssl = os.environ.get("KG_LLM_VERIFY_SSL", "true").strip().lower() not in {
                 "0", "false", "no", "off",
             }
@@ -97,12 +99,31 @@ class OpenAICompatibleClient:
                 base_url=self.base_url,
                 timeout=self.timeout_seconds,
                 max_retries=0,
-                http_client=httpx.Client(trust_env=False, verify=verify_ssl),
+                http_client=httpx.Client(trust_env=False, verify=verify_ssl,
+                    event_hooks={'request': [request_hook], 'response': [response_hook]}),
             )
         return self._client
 
     def complete_json(self, payload: Mapping[str, Any], *, system_prompt: str = "", **kwargs: Any) -> LLMResponse:
         started = time.monotonic()
+        from .transport_diagnostics import TransportDiagnostics, active_transport
+        diagnostics = TransportDiagnostics(secrets=(self.api_key,))
+        with active_transport(diagnostics):
+            try:
+                return self._complete_json(payload, system_prompt=system_prompt, started=started,
+                                           diagnostics=diagnostics, **kwargs)
+            except Exception as exc:
+                # HTTP errors can occur before a stream object exists.
+                response = getattr(exc, 'response', None)
+                if response is not None and not diagnostics.headers:
+                    diagnostics.response(response)
+                partial = getattr(exc, 'llm_response', None)
+                exc.transport_metrics = {**(getattr(partial, 'transport_metrics', None) or {}),
+                                         **diagnostics.snapshot()}
+                exc.gateway_request_id = diagnostics.gateway_request_id or getattr(partial, 'gateway_request_id', None)
+                raise
+
+    def _complete_json(self, payload, *, system_prompt, started, diagnostics, **kwargs):
         user_suffix=kwargs.get('user_suffix','')
         if not isinstance(user_suffix,str):raise ValueError('user_suffix must be text')
         user_content=json.dumps(payload,ensure_ascii=False,**({'separators':(',',':')} if kwargs.get('compact_json') else {}))+(('\n\n'+user_suffix) if user_suffix else '')
@@ -134,7 +155,8 @@ class OpenAICompatibleClient:
                     input_tokens=getattr(usage,'prompt_tokens',None),output_tokens=getattr(usage,'completion_tokens',None),
                     returned_model_id=model,response_id=response_id,finish_reason=finish,
                     reasoning_tokens=getattr(getattr(usage,'completion_tokens_details',None),'reasoning_tokens',None),
-                    transport_metrics={'stream':True,'first_chunk_ms':first_chunk,'first_content_ms':first_content,
+                    gateway_request_id=diagnostics.gateway_request_id,
+                    transport_metrics={**diagnostics.snapshot(),'stream':True,'first_chunk_ms':first_chunk,'first_content_ms':first_content,
                         'terminal_ms':terminal,'max_inter_chunk_gap_ms':max_gap if chunks>1 else None,
                         'chunk_count':chunks,'visible_chars':sum(map(len,parts)),'reasoning_chars':reasoning_chars})
             try:
@@ -174,4 +196,6 @@ class OpenAICompatibleClient:
             returned_model_id=getattr(response, "model", None), response_id=getattr(response, "id", None),
             finish_reason=getattr(response.choices[0], 'finish_reason', None),
             reasoning_tokens=getattr(getattr(usage, 'completion_tokens_details', None), 'reasoning_tokens', None),
+            gateway_request_id=diagnostics.gateway_request_id,
+            transport_metrics={**diagnostics.snapshot(), 'stream':False},
         )

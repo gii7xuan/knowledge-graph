@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-12T09:06:20.470705+00:00",
+  "status": "ready_for_authorization",
+  "proposal_digest": "938d787615817724c932e68f810120cc941680ce34397cd574e5fbd7516be5b8",
+  "round_id": 2,
+  "operations": 10,
+  "evidence_spans": 14,
+  "request_payload_sha256": "bff307cf3bac8790c0f21679c17edf29622b44be1122060d1d34ca29d834a094",
+  "prompt_sha256": "94e6c59f2d92db470220a29ec29225dd4de2f14bb8bca23e73e89b59c1fe0729",
+  "request_json_utf8_bytes": 206196,
+  "runtime_settings": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "max_output_tokens": 8192,
+      "request_timeout_seconds": 90.0,
+      "http_timeout_seconds": 90.0,
+      "base_url": "https://43.143.151.41:3000/v1",
+      "stream": true,
+      "retry_count": 0
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "max_output_tokens": 8192,
+      "request_timeout_seconds": 180.0,
+      "http_timeout_seconds": 170.0,
+      "base_url": "https://43.143.151.41:3000/v1",
+      "stream": true,
+      "retry_count": 0
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "max_output_tokens": 8192,
+      "request_timeout_seconds": 90.0,
+      "http_timeout_seconds": 90.0,
+      "base_url": "https://api.deepseek.com",
+      "stream": false,
+      "retry_count": 0
+    }
+  ],
+  "case_ids": [
+    "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc"
+  ],
+  "max_new_calls": 3,
+  "previous_cumulative_calls": 13,
+  "requested_cumulative_limit": 16,
+  "no_automatic_retry": true,
+  "stop_on_unknown": true,
+  "runner_sha256": "5351cf94558a73aa229658b124030033f54f7640fa3c566bf68f3b54b3484c24",
+  "sample_review_or_publication_implemented": false,
+  "model_calls_executed": 0
+}

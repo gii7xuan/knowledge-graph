@@ -62,11 +62,13 @@ def errors(value,request):
 def judge_once(voter,request,feedback=None):
     from review_agent.validators import _parse_content
     from review_agent.execution import api_error_fields
+    from review_agent.llm_clients import response_metadata
     vote=binding(voter,request);response=None;parsed=False
     try:
         r=voter['client'].complete_json({**request,'output_contract':SCHEMA,**({'correction_feedback':feedback} if feedback else {})},
             system_prompt=PROMPT,max_tokens=int(voter.get('max_output_tokens',4096)),timeout_seconds=voter.get('http_timeout_seconds'))
         response=r
+        vote.update(response_metadata(r))
         vote.update(returned_model_id=r.returned_model_id,response_id=r.response_id,input_tokens=r.input_tokens,
             output_tokens=r.output_tokens,latency_ms=r.latency_ms,finish_reason=getattr(r,'finish_reason',None),
             reasoning_tokens=getattr(r,'reasoning_tokens',None))

@@ -1,0 +1,42 @@
+......E............E.....................................................................
+======================================================================
+ERROR: test_request_builder_opt_in_binds_complete_schema_without_changing_legacy_request (tests.test_competency_inventory.CoverageInventoryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_competency_inventory.py", line 112, in test_request_builder_opt_in_binds_complete_schema_without_changing_legacy_request
+    before, _ = semantic.request_for(f.repo, f.root, fixture.parent)
+  File "D:\knowledge-huopao\ontology_review\semantic_competency.py", line 67, in request_for
+    if not natural or len({q.get('id') for q in natural})!=len(natural) or any(not q.get('id') for q in natural):raise ValueError('explicit unique natural-language questions required')
+ValueError: explicit unique natural-language questions required
+
+======================================================================
+ERROR: test_received_malformed_json_preserves_raw_response_and_usage (tests.test_semantic_competency.SemanticCompetencyTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\ontology_review\semantic_competency.py", line 146, in judge_once
+    raw=_parse_content(response.content);parsed=True;validation=errors(raw,request)
+  File "D:\knowledge-huopao\review_agent\validators.py", line 101, in _parse_content
+    value = json.loads(content)
+  File "D:\miniconda3\envs\knowledge\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\miniconda3\envs\knowledge\lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\miniconda3\envs\knowledge\lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 2 (char 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_semantic_competency.py", line 154, in test_received_malformed_json_preserves_raw_response_and_usage
+    vote=semantic.judge_once({**member,'client':client},self.request)
+  File "D:\knowledge-huopao\ontology_review\semantic_competency.py", line 152, in judge_once
+    vote.update(response_status='invalid_contract' if parsed else 'invalid_json',error=safe_error_text(exc,voter['client']),raw_response=response.content)
+  File "D:\knowledge-huopao\review_agent\transport_diagnostics.py", line 132, in safe_error_text
+    return text.replace(key, '[REDACTED]') if key else text
+TypeError: replace() argument 1 must be str, not Mock
+
+----------------------------------------------------------------------
+Ran 89 tests in 368.332s
+
+FAILED (errors=2)

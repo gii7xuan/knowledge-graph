@@ -6,10 +6,11 @@ from review_agent.planner_contracts import ActionError
 TASK_TYPE = "ontology_extension"
 CONTRACT_VERSION = "ontology_review_response_v2"
 PLANNER_VERSION = "ontology_extension_planner_v4"
-PROMPT_VERSION = "ontology_extension_validator_v2_constraint_scope_v1"
+PROMPT_VERSION = "ontology_extension_validator_v3_modeling_context_v1"
+LEGACY_PROMPT_VERSION = "ontology_extension_validator_v2_constraint_scope_v1"
 ROOT = Path(__file__).resolve().parents[1]
 PLANNER_PROMPT = (ROOT / "prompts/ontology_extension_planner_v2.txt").read_text(encoding="utf-8")
-VALIDATOR_PROMPT = (ROOT / "prompts/ontology_extension_validator_v2.txt").read_text(encoding="utf-8")
+VALIDATOR_PROMPT = (ROOT / "prompts/ontology_extension_validator_v3.txt").read_text(encoding="utf-8")
 CHECKS = ("necessity", "reuse", "definition", "hierarchy_direction", "constraint_strength", "structure", "impact")
 EVIDENCE_SCOPES = {"definition", "classification", "scope_rule", "mixed", "instance_only", "unknown"}
 KINDS = {"add_class", "add_object_property", "add_data_property", "add_alias", "revise_definition", "revise_constraint", "merge_terms"}
@@ -108,6 +109,6 @@ def vote_binding(voter, proposal):
     return {**{k: proposal[k] for k in ("task_type", "task_id", "object_revision", "audit_id", "round_id", "proposal_digest",
             "base_release_id", "base_ontology_version", "base_profile_hash", "delta_hash", "evidence_hash", "committee_hash")},
             "contract_version": proposal.get('versions',{}).get('contract_version',CONTRACT_VERSION),
-            "prompt_version": proposal.get('versions',{}).get('prompt_version',PROMPT_VERSION),
+            "prompt_version": proposal.get('versions',{}).get('prompt_version',LEGACY_PROMPT_VERSION),
             "voter_id": voter["id"], "model_id": voter["model_id"], "model_family": voter["model_family"],
             "model_identity": str(voter.get("model_identity") or voter["model_id"]).strip().casefold()}

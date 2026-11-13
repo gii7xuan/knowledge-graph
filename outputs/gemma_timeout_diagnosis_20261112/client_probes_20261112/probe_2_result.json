@@ -1,0 +1,95 @@
+{
+  "started_at": "2026-11-12T11:01:52.554428+08:00",
+  "state": "completed",
+  "stream": false,
+  "model": "Gemma",
+  "max_output_tokens": 32,
+  "synthetic_prompt_only": true,
+  "retry_count": 0,
+  "trace": [
+    {
+      "event": "connection.connect_tcp.started",
+      "elapsed_ms": 125.0
+    },
+    {
+      "event": "connection.connect_tcp.complete",
+      "elapsed_ms": 172.0
+    },
+    {
+      "event": "connection.start_tls.started",
+      "elapsed_ms": 172.0
+    },
+    {
+      "event": "connection.start_tls.complete",
+      "elapsed_ms": 343.0
+    },
+    {
+      "event": "http11.send_request_headers.started",
+      "elapsed_ms": 343.0
+    },
+    {
+      "event": "http11.send_request_headers.complete",
+      "elapsed_ms": 359.0
+    },
+    {
+      "event": "http11.send_request_body.started",
+      "elapsed_ms": 359.0
+    },
+    {
+      "event": "http11.send_request_body.complete",
+      "elapsed_ms": 359.0
+    },
+    {
+      "event": "http11.receive_response_headers.started",
+      "elapsed_ms": 359.0
+    },
+    {
+      "event": "http11.receive_response_headers.complete",
+      "elapsed_ms": 1265.0
+    },
+    {
+      "event": "http11.receive_response_body.started",
+      "elapsed_ms": 1281.0
+    },
+    {
+      "event": "http11.receive_response_body.complete",
+      "elapsed_ms": 1281.0
+    },
+    {
+      "event": "http11.response_closed.started",
+      "elapsed_ms": 1281.0
+    },
+    {
+      "event": "http11.response_closed.complete",
+      "elapsed_ms": 1281.0
+    }
+  ],
+  "request_json_bytes": 194,
+  "outcome_unknown": false,
+  "http_status": 200,
+  "response_headers_ms": 1281.0,
+  "http_version": "HTTP/1.1",
+  "headers": {
+    "server": "nginx/1.24.0 (Ubuntu)",
+    "date": "Thu, 12 Nov 2026 03:01:53 GMT",
+    "content-type": "application/json",
+    "content-length": "819",
+    "connection": "keep-alive",
+    "x-oneapi-request-id": "2026111211015247606347978103783"
+  },
+  "first_body_bytes_ms": 1281.0,
+  "body_chunks": 1,
+  "body_bytes_received": 819,
+  "response_id": "chatcmpl-a6cc62868a123983",
+  "returned_model": "Gemma",
+  "usage": {
+    "prompt_tokens": 27,
+    "completion_tokens": 32,
+    "total_tokens": 59
+  },
+  "finish_reason": "length",
+  "visible_content_chars": 0,
+  "visible_json_matches_expected": false,
+  "finished_at": "2026-11-12T11:01:53.835830+08:00",
+  "total_elapsed_ms": 1281.0
+}

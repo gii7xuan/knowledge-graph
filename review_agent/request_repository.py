@@ -98,7 +98,7 @@ class RequestRepository:
                 raise ConflictError('late result differs from frozen attempt binding')
             stored = {**vote,'attempt_id':attempt_id,'request_key':row['request_key'],'late_response':late}
             c.execute('UPDATE request_attempts SET state=?,response_received_at=?,response_status=?,provider_request_id=?,raw_response_ref=?,usage_state=?,result_json=? WHERE attempt_id=? AND owner_token=?',
-                      (status,now,vote.get('response_status'),vote.get('response_id'),
+                      (status,now,vote.get('response_status'),vote.get('gateway_request_id') or vote.get('response_id'),
                        attempt_id + '#result_json', 'known' if any(type(vote.get(k)) is int for k in ('input_tokens','output_tokens')) else 'unknown',
                        canonical_json(stored),attempt_id,owner))
             c.execute('INSERT INTO request_attempt_events VALUES(?,?,?,?,?)',

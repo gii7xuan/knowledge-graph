@@ -1,0 +1,30 @@
+{
+  "formal_review_call_count_unchanged": 11,
+  "synthetic_diagnostic_calls": 2,
+  "combined_call_count": 13,
+  "authorized_combined_limit": 13,
+  "synthetic_outcome_unknown_count": 0,
+  "formal_unknown_count_unchanged": 4,
+  "streaming": {
+    "http_status": 200,
+    "headers_seconds": 0.375,
+    "first_sse_seconds": 0.375,
+    "total_seconds": 1.172,
+    "maximum_chunk_gap_seconds": 0.078,
+    "sse_events": 28
+  },
+  "nonstreaming": {
+    "http_status": 200,
+    "headers_seconds": 1.281,
+    "total_seconds": 1.281
+  },
+  "both_finish_reason": "length",
+  "both_visible_json_matches_expected": false,
+  "input_tokens": 54,
+  "output_tokens": 64,
+  "usage_missing": 0,
+  "review_votes_or_source_inputs_modified": false,
+  "review_code_and_config_unchanged": true,
+  "production_head_unchanged": true,
+  "interpretation": "The tiny requests demonstrate current transport availability and timely SSE for this small workload. They do not establish that long prompts are the sole cause, because workload and observation time differ from historical failures; neither returned the target JSON within the 32-token cap."
+}

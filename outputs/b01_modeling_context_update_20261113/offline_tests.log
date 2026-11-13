@@ -1,0 +1,303 @@
+..........................................E...E...........................................................................EEEEEE..............
+======================================================================
+ERROR: test_owned_worker_timeout_returns_and_marks_failure_without_hanging (tests.test_ontology_extension_agent.OntologyExtensionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 501, in test_owned_worker_timeout_returns_and_marks_failure_without_hanging
+    result = service.execute({"extension_id": self.extension_id, "audit_id": "blocked_fixture"}, _worker_target=blocked_ontology_worker)
+  File "D:\knowledge-huopao\ontology_review\service.py", line 92, in execute
+    receiver, sender = context.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_real_sdk_and_killable_worker_use_separate_ontology_contract (tests.test_ontology_extension_agent.OntologyExtensionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 600, in test_real_sdk_and_killable_worker_use_separate_ontology_contract
+    result = service.execute({"extension_id": self.extension_id, "audit_id": "sdk_ontology"})
+  File "D:\knowledge-huopao\ontology_review\service.py", line 92, in execute
+    receiver, sender = context.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_additional_budget_is_idempotent_and_does_not_reset_usage (tests.test_review_followup_v5.RequestAndBudgetTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_followup_v5.py", line 21, in setUp
+    self.fixture.setUp();self.addCleanup(self.fixture.doCleanups)
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 137, in initialize
+    with self.transaction(immediate=True) as connection:
+  File "D:\miniconda3\envs\knowledge\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 122, in transaction
+    connection = self.connect()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+sqlite3.OperationalError: unable to open database file
+
+======================================================================
+ERROR: test_gateway_504_is_unknown_and_never_automatically_retried (tests.test_review_followup_v5.RequestAndBudgetTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_followup_v5.py", line 21, in setUp
+    self.fixture.setUp();self.addCleanup(self.fixture.doCleanups)
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 137, in initialize
+    with self.transaction(immediate=True) as connection:
+  File "D:\miniconda3\envs\knowledge\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 122, in transaction
+    connection = self.connect()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+sqlite3.OperationalError: unable to open database file
+
+======================================================================
+ERROR: test_generation_change_cannot_escape_an_unknown_request (tests.test_review_followup_v5.RequestAndBudgetTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_followup_v5.py", line 21, in setUp
+    self.fixture.setUp();self.addCleanup(self.fixture.doCleanups)
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 137, in initialize
+    with self.transaction(immediate=True) as connection:
+  File "D:\miniconda3\envs\knowledge\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 122, in transaction
+    connection = self.connect()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+sqlite3.OperationalError: unable to open database file
+
+======================================================================
+ERROR: test_legacy_gateway_failure_is_quarantined_with_history (tests.test_review_followup_v5.RequestAndBudgetTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_followup_v5.py", line 21, in setUp
+    self.fixture.setUp();self.addCleanup(self.fixture.doCleanups)
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 137, in initialize
+    with self.transaction(immediate=True) as connection:
+  File "D:\miniconda3\envs\knowledge\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 122, in transaction
+    connection = self.connect()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+sqlite3.OperationalError: unable to open database file
+
+======================================================================
+ERROR: test_run_once_does_not_silently_start_the_remaining_queue (tests.test_review_followup_v5.RequestAndBudgetTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_followup_v5.py", line 21, in setUp
+    self.fixture.setUp();self.addCleanup(self.fixture.doCleanups)
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 137, in initialize
+    with self.transaction(immediate=True) as connection:
+  File "D:\miniconda3\envs\knowledge\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 122, in transaction
+    connection = self.connect()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+sqlite3.OperationalError: unable to open database file
+
+======================================================================
+ERROR: test_serve_honors_one_worker_instead_of_chaining_a_second_worker (tests.test_review_followup_v5.RequestAndBudgetTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_followup_v5.py", line 21, in setUp
+    self.fixture.setUp();self.addCleanup(self.fixture.doCleanups)
+  File "D:\knowledge-huopao\tests\test_review_deduplication.py", line 22, in setUp
+    self.repo.initialize()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 137, in initialize
+    with self.transaction(immediate=True) as connection:
+  File "D:\miniconda3\envs\knowledge\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 122, in transaction
+    connection = self.connect()
+  File "D:\knowledge-huopao\review_agent\repository.py", line 88, in connect
+    connection = sqlite3.connect(
+sqlite3.OperationalError: unable to open database file
+
+----------------------------------------------------------------------
+Ran 142 tests in 402.902s
+
+FAILED (errors=8)
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpqa4ridr6'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 667, in _exitfunc
+    f()
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 591, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 868, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 849, in onerror
+    _resetperms(path)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpqa4ridr6'
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpi385tqhd'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 667, in _exitfunc
+    f()
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 591, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 868, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 849, in onerror
+    _resetperms(path)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpi385tqhd'
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpuu7ou_9q'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 667, in _exitfunc
+    f()
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 591, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 868, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 849, in onerror
+    _resetperms(path)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpuu7ou_9q'
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp9rzztej2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 667, in _exitfunc
+    f()
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 591, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 868, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 849, in onerror
+    _resetperms(path)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp9rzztej2'
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpk_zyo2q8'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 667, in _exitfunc
+    f()
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 591, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 868, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 849, in onerror
+    _resetperms(path)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmpk_zyo2q8'
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp1zs30bwn'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 667, in _exitfunc
+    f()
+  File "D:\miniconda3\envs\knowledge\lib\weakref.py", line 591, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 868, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 849, in onerror
+    _resetperms(path)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] 拒绝访问。: 'D:\\knowledge-huopao\\runs\\tmp1zs30bwn'

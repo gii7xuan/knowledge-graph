@@ -112,6 +112,10 @@ class OntologyReviewRuntime:
             proposal['base_application_profile']=self.base.application_profile
         proposal["human_review_context"] = task.get("human_events", [])
         proposal["prior_counter_evidence_ids"] = state.get("prior_counter_evidence_ids", [])
+        from .modeling_context import enabled, build, check_record
+        if enabled(proposal):
+            proposal['modeling_context'] = build(proposal)
+            proposal['check_records']['modeling_context'] = check_record(proposal['modeling_context'])
         proposal["proposal_digest"] = proposal_digest(proposal)
         return proposal
 

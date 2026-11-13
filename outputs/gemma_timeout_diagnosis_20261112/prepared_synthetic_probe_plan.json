@@ -1,0 +1,71 @@
+{
+  "prepared_at": "2026-11-12T10:19:07.972525+08:00",
+  "authorization_status": "not_authorized_to_dispatch",
+  "model_inference_calls_in_this_diagnosis": 0,
+  "previous_model_call_budget_used": 11,
+  "max_new_model_calls_requested_if_user_continues": 2,
+  "cumulative_max_if_both_probes_run": 13,
+  "destination": "https://43.143.151.41:3000/v1/chat/completions",
+  "credential_source": "existing configured Gemma model key; no value stored",
+  "synthetic_data_only": true,
+  "project_document_or_ontology_sent": false,
+  "retry_count": 0,
+  "stop_on_any_unknown_outcome": true,
+  "second_probe_only_after_first_has_known_successful_terminal_response": true,
+  "counts_as_review_vote": false,
+  "changes_existing_unknown_request_state": false,
+  "planned_metrics": [
+    "TCP and TLS timing",
+    "request body upload completion",
+    "HTTP response headers and safe gateway request ID",
+    "time to first response headers",
+    "time to first SSE event and first visible content",
+    "maximum inter-event gap",
+    "terminal event and token usage"
+  ],
+  "probes": [
+    {
+      "purpose": "tiny streaming baseline",
+      "request_body": {
+        "model": "Gemma",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Return exactly this JSON object: {\"ok\": true}"
+          }
+        ],
+        "temperature": 0,
+        "max_tokens": 32,
+        "response_format": {
+          "type": "json_object"
+        },
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        }
+      },
+      "http_timeout_seconds": 170,
+      "hard_wait_seconds": 180
+    },
+    {
+      "purpose": "tiny non-streaming comparison",
+      "request_body": {
+        "model": "Gemma",
+        "messages": [
+          {
+            "role": "user",
+            "content": "Return exactly this JSON object: {\"ok\": true}"
+          }
+        ],
+        "temperature": 0,
+        "max_tokens": 32,
+        "response_format": {
+          "type": "json_object"
+        },
+        "stream": false
+      },
+      "http_timeout_seconds": 170,
+      "hard_wait_seconds": 180
+    }
+  ]
+}

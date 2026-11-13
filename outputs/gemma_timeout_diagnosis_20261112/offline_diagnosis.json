@@ -1,0 +1,41 @@
+{
+  "model_calls_made_for_this_diagnosis": 0,
+  "historical_model_calls": 11,
+  "gemma_historical_attempts": 5,
+  "gemma_http_504_count": 4,
+  "gemma_returned_model_body_count": 1,
+  "504_elapsed_seconds": [
+    62.968,
+    63.289,
+    75.376,
+    62.625
+  ],
+  "504_provider_elapsed_seconds": [
+    62.64,
+    62.985,
+    75.088,
+    62.313
+  ],
+  "504_local_wait_limits_seconds": [
+    180.0,
+    180.0,
+    179.984,
+    179.984
+  ],
+  "configured_http_timeout_seconds": 170,
+  "configured_request_wait_seconds": 180,
+  "configured_stream_responses": true,
+  "all_504s_arrived_before_local_wait_deadline": true,
+  "all_504s_contain_nginx_error_body": true,
+  "historical_gemma_stream_timing_observable": false,
+  "runtime_versions": {
+    "openai": "2.2.0",
+    "httpx": "0.28.1"
+  },
+  "inferences": [
+    "The four failures are actual HTTP 504 responses, not expiration of the 170-second client HTTP timeout or 180-second caller wait.",
+    "A gateway/upstream delay is implicated. Exact Nginx timeout configuration and which hop generated the error are unproven without server logs or future response headers.",
+    "Requested streaming does not prove any SSE bytes reached this client; current ontology wrappers do not preserve the client stream timing metrics."
+  ],
+  "next_probe_requires_additional_model_call_authorization": true
+}

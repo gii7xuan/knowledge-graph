@@ -1,0 +1,1386 @@
+[
+  {
+    "actual_calls": 1,
+    "attempt_id": "attempt_98b5301fdec3472d88166e3cec96fcbf",
+    "attempts": [
+      {
+        "attempt_id": "attempt_98b5301fdec3472d88166e3cec96fcbf",
+        "attempt_no": 1,
+        "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+        "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+        "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+        "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "definition",
+            "note": "The source text explicitly describes the relationships being modified: air consuming projectile kinetic energy (ev_cfdbd38784f815374861), separation waves composed of normal and oblique shock waves (ev_a9e9eb155e2d04ccd3b9), and wave drag depending on nose shape (ev_f6ac92318c3db8b8176b). The current ontology lacks these specific constraints, confirming a gap.",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "definition",
+            "note": "The proposal reuses existing classes (Air, Kinetic Energy, Separation Wave, Normal Shock Wave, Wave Drag, Nose Shape) and properties (Consumes, Has Part, Depends On) rather than creating new ones. This aligns with the existing schema structure.",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_6ce780e3cf654f1cb4de",
+              "ev_592bc0f78d5c82ac062c",
+              "ev_885a18552be7c4d6b103",
+              "ev_321917f1ef84c5135c34",
+              "ev_c74cc8a33819ea9a98aa",
+              "ev_49a0b96c3f815e30ee47",
+              "ev_7165805a7dd5be958b56"
+            ],
+            "evidence_scope": "definition",
+            "note": "The definition for 'Drag Coefficient' (C_afb01b87134088624d72) is overgeneralized. The source text (ev_6ce780e3cf654f1cb4de, ev_592bc0f78d5c82ac062c) specifies that C_x0 is a function of Mach number at zero angle of attack, and C_x is a function of both Mach number and angle of attack when non-zero. The proposed definition '本章空气阻力表达式中的空气阻力系数；C_x0(v/c)的量纲为1，在零攻角近似下以马赫数为自变量，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。' is acceptable but the previous definition '在跨声速区随马赫数急剧上升，在超声速区急剧下降，受气温和空气密度共同影响的系数' was more specific to the context of temperature and density effects (ev_885a18552be7c4d6b103). The new definition loses the specific context of transonic/supersonic behavior. Similarly, the definition for 'Coordinate System' (C_ad498a2e8a3eb22fdd25) '本章描述弹丸质心位置、速度等运动状态时所用的坐标；具体形式包括地面直角坐标、自然坐标及动坐标。' is too broad. The source text (ev_c74cc8a33819ea9a98aa, ev_49a0b96c3f815e30ee47, ev_7165805a7dd5be958b56) describes specific coordinate systems (rectangular, natural, moving) used in different contexts, not a single generic 'coordinate system' class. The class '坐标系' is a parent class, and the specific instances (地面直角坐标系, 自然坐标系, 动坐标系) should be used instead of redefining the parent class so broadly.",
+            "status": "fail"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [
+              "ev_a9e9eb155e2d04ccd3b9"
+            ],
+            "evidence_scope": "classification",
+            "note": "The hierarchy direction for 'Separation Wave' having 'Normal Shock Wave' as a part is correct. The source text (ev_a9e9eb155e2d04ccd3b9) states '正激波与斜激波组成的分离波', meaning separation wave is composed of normal and oblique shock waves. The direction from Separation Wave to Normal Shock Wave is correct.",
+            "status": "pass"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "scope_rule",
+            "note": "The constraint for 'Consumes' (R_2a66075367666d54e7e7) changing range from 'Projectile' to 'Kinetic Energy' is correct based on ev_cfdbd38784f815374861 ('消耗着弹丸的动能'). However, the constraint for 'Has Part' (R_e1de72d5c68b765c28b9) changing domain from 'Normal Shock Wave' to 'Separation Wave' and range from 'Separation Wave' to 'Normal Shock Wave' is a direction reversal. The base had domain=Normal Shock Wave, range=Separation Wave, which was incorrect. The new domain=Separation Wave, range=Normal Shock Wave is correct. The constraint for 'Depends On' (R_3c75dd89923bc714630d) changing range from 'Nose' to 'Nose Shape' is correct based on ev_f6ac92318c3db8b8176b ('波动阻力的大小主要取决于弹头部的形状'). The issue is that the definition changes for C_afb01b87134088624d72 and C_ad498a2e8a3eb22fdd25 are not supported by the evidence in the way they are phrased, leading to overgeneralization.",
+            "status": "fail"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "The RDF structure is valid. The patch correctly modifies the domain/range of object properties and updates skos:definitions. No structural errors detected.",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "The changes are localized to specific properties and classes. The impact is manageable and does not break existing inferences. The high_impact risk category is noted but the changes are semantically justified where correct.",
+            "status": "pass"
+          }
+        ],
+        "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+        "contract_version": "ontology_review_response_v2",
+        "counter_evidence_ids": [],
+        "decision": "revise",
+        "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+        "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+        "finish_reason": "stop",
+        "gateway_request_id": "2026111310414078060216067076751",
+        "impact_status": "pass",
+        "input_tokens": 81605,
+        "late_response": true,
+        "latency_ms": 100141,
+        "model_family": "qwen",
+        "model_id": "Qwen",
+        "model_identity": "qwen",
+        "necessity": "confirmed_gap",
+        "object_revision": 3,
+        "output_tokens": 2423,
+        "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+        "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+        "provider_started_at": 1794537696.6770847,
+        "queue_time_ms": 388,
+        "reason_codes": [
+          "DEFINITION_OVERGENERALIZATION",
+          "CONSTRAINT_DIRECTION_ERROR",
+          "SCOPE_MISMATCH"
+        ],
+        "reasoning_tokens": null,
+        "request_key": "57129752e86f8bf876beb01d5c8423343bc6225a509b6da242b2d77e16d288d5",
+        "requested_context": null,
+        "response_id": "chatcmpl-968722f07bf3024a",
+        "response_status": "ok",
+        "returned_model_id": "Qwen",
+        "round_id": 1,
+        "semantic_status": "fail",
+        "structure_status": "pass",
+        "suggested_changes": {
+          "C_ad498a2e8a3eb22fdd25": {
+            "definition": "用于描述弹丸质心运动的参考坐标系，包括地面直角坐标系、自然坐标系和动坐标系等具体形式。"
+          },
+          "C_afb01b87134088624d72": {
+            "definition": "空气阻力系数 C_x0 是马赫数 Ma=v/c 的函数，量纲为1，在零攻角下定义；当攻角非零时，C_x 是 Ma 和攻角 δ 的函数。在跨声速区随马赫数急剧上升，在超声速区急剧下降。"
+          }
+        },
+        "suggestion_diagnostics": [],
+        "supporting_evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b",
+          "ev_6ce780e3cf654f1cb4de",
+          "ev_592bc0f78d5c82ac062c",
+          "ev_885a18552be7c4d6b103",
+          "ev_321917f1ef84c5135c34",
+          "ev_c74cc8a33819ea9a98aa",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_7165805a7dd5be958b56",
+          "ev_c53271ce776b5b72c9cb",
+          "ev_4cf1f8e0e98212fd454b",
+          "ev_10f024862916f28f216f"
+        ],
+        "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+        "task_type": "ontology_extension",
+        "transport_metrics": {
+          "body_bytes_received": 521041,
+          "body_chunk_count": 2421,
+          "chunk_count": 2424,
+          "first_body_byte_ms": 39230.336,
+          "first_chunk_ms": 39233,
+          "first_content_ms": 39233,
+          "gateway_request_id": "2026111310414078060216067076751",
+          "http_status": 200,
+          "max_inter_body_chunk_gap_ms": 756.73,
+          "max_inter_chunk_gap_ms": 750,
+          "reasoning_chars": 0,
+          "response_headers": {
+            "connection": "keep-alive",
+            "content-type": "text/event-stream",
+            "date": "Fri, 13 Nov 2026 02:42:17 GMT",
+            "server": "nginx/1.24.0 (Ubuntu)",
+            "transfer-encoding": "chunked",
+            "x-oneapi-request-id": "2026111310414078060216067076751"
+          },
+          "response_headers_ms": 39230.087,
+          "stream": true,
+          "terminal_ms": 100141,
+          "trace": [
+            {
+              "elapsed_ms": 2245.561,
+              "event": "connection.connect_tcp.started"
+            },
+            {
+              "elapsed_ms": 2324.42,
+              "event": "connection.connect_tcp.complete"
+            },
+            {
+              "elapsed_ms": 2325.344,
+              "event": "connection.start_tls.started"
+            },
+            {
+              "elapsed_ms": 2487.475,
+              "event": "connection.start_tls.complete"
+            },
+            {
+              "elapsed_ms": 2487.608,
+              "event": "http11.send_request_headers.started"
+            },
+            {
+              "elapsed_ms": 2487.998,
+              "event": "http11.send_request_headers.complete"
+            },
+            {
+              "elapsed_ms": 2488.011,
+              "event": "http11.send_request_body.started"
+            },
+            {
+              "elapsed_ms": 2626.06,
+              "event": "http11.send_request_body.complete"
+            },
+            {
+              "elapsed_ms": 2626.089,
+              "event": "http11.receive_response_headers.started"
+            },
+            {
+              "elapsed_ms": 39229.354,
+              "event": "http11.receive_response_headers.complete"
+            },
+            {
+              "elapsed_ms": 39230.277,
+              "event": "http11.receive_response_body.started"
+            },
+            {
+              "elapsed_ms": 100144.593,
+              "event": "http11.receive_response_body.complete"
+            },
+            {
+              "elapsed_ms": 100144.649,
+              "event": "http11.response_closed.started"
+            },
+            {
+              "elapsed_ms": 100144.67,
+              "event": "http11.response_closed.complete"
+            }
+          ],
+          "transport_elapsed_ms": 100144.884,
+          "visible_chars": 6071
+        },
+        "voter_id": "judge_a"
+      }
+    ],
+    "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+    "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+    "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "checks": [
+      {
+        "check": "necessity",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "definition",
+        "note": "The source text explicitly describes the relationships being modified: air consuming projectile kinetic energy (ev_cfdbd38784f815374861), separation waves composed of normal and oblique shock waves (ev_a9e9eb155e2d04ccd3b9), and wave drag depending on nose shape (ev_f6ac92318c3db8b8176b). The current ontology lacks these specific constraints, confirming a gap.",
+        "status": "pass"
+      },
+      {
+        "check": "reuse",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "definition",
+        "note": "The proposal reuses existing classes (Air, Kinetic Energy, Separation Wave, Normal Shock Wave, Wave Drag, Nose Shape) and properties (Consumes, Has Part, Depends On) rather than creating new ones. This aligns with the existing schema structure.",
+        "status": "pass"
+      },
+      {
+        "check": "definition",
+        "evidence_ids": [
+          "ev_6ce780e3cf654f1cb4de",
+          "ev_592bc0f78d5c82ac062c",
+          "ev_885a18552be7c4d6b103",
+          "ev_321917f1ef84c5135c34",
+          "ev_c74cc8a33819ea9a98aa",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_7165805a7dd5be958b56"
+        ],
+        "evidence_scope": "definition",
+        "note": "The definition for 'Drag Coefficient' (C_afb01b87134088624d72) is overgeneralized. The source text (ev_6ce780e3cf654f1cb4de, ev_592bc0f78d5c82ac062c) specifies that C_x0 is a function of Mach number at zero angle of attack, and C_x is a function of both Mach number and angle of attack when non-zero. The proposed definition '本章空气阻力表达式中的空气阻力系数；C_x0(v/c)的量纲为1，在零攻角近似下以马赫数为自变量，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。' is acceptable but the previous definition '在跨声速区随马赫数急剧上升，在超声速区急剧下降，受气温和空气密度共同影响的系数' was more specific to the context of temperature and density effects (ev_885a18552be7c4d6b103). The new definition loses the specific context of transonic/supersonic behavior. Similarly, the definition for 'Coordinate System' (C_ad498a2e8a3eb22fdd25) '本章描述弹丸质心位置、速度等运动状态时所用的坐标；具体形式包括地面直角坐标、自然坐标及动坐标。' is too broad. The source text (ev_c74cc8a33819ea9a98aa, ev_49a0b96c3f815e30ee47, ev_7165805a7dd5be958b56) describes specific coordinate systems (rectangular, natural, moving) used in different contexts, not a single generic 'coordinate system' class. The class '坐标系' is a parent class, and the specific instances (地面直角坐标系, 自然坐标系, 动坐标系) should be used instead of redefining the parent class so broadly.",
+        "status": "fail"
+      },
+      {
+        "check": "hierarchy_direction",
+        "evidence_ids": [
+          "ev_a9e9eb155e2d04ccd3b9"
+        ],
+        "evidence_scope": "classification",
+        "note": "The hierarchy direction for 'Separation Wave' having 'Normal Shock Wave' as a part is correct. The source text (ev_a9e9eb155e2d04ccd3b9) states '正激波与斜激波组成的分离波', meaning separation wave is composed of normal and oblique shock waves. The direction from Separation Wave to Normal Shock Wave is correct.",
+        "status": "pass"
+      },
+      {
+        "check": "constraint_strength",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "scope_rule",
+        "note": "The constraint for 'Consumes' (R_2a66075367666d54e7e7) changing range from 'Projectile' to 'Kinetic Energy' is correct based on ev_cfdbd38784f815374861 ('消耗着弹丸的动能'). However, the constraint for 'Has Part' (R_e1de72d5c68b765c28b9) changing domain from 'Normal Shock Wave' to 'Separation Wave' and range from 'Separation Wave' to 'Normal Shock Wave' is a direction reversal. The base had domain=Normal Shock Wave, range=Separation Wave, which was incorrect. The new domain=Separation Wave, range=Normal Shock Wave is correct. The constraint for 'Depends On' (R_3c75dd89923bc714630d) changing range from 'Nose' to 'Nose Shape' is correct based on ev_f6ac92318c3db8b8176b ('波动阻力的大小主要取决于弹头部的形状'). The issue is that the definition changes for C_afb01b87134088624d72 and C_ad498a2e8a3eb22fdd25 are not supported by the evidence in the way they are phrased, leading to overgeneralization.",
+        "status": "fail"
+      },
+      {
+        "check": "structure",
+        "evidence_ids": [],
+        "evidence_scope": "unknown",
+        "note": "The RDF structure is valid. The patch correctly modifies the domain/range of object properties and updates skos:definitions. No structural errors detected.",
+        "status": "pass"
+      },
+      {
+        "check": "impact",
+        "evidence_ids": [],
+        "evidence_scope": "unknown",
+        "note": "The changes are localized to specific properties and classes. The impact is manageable and does not break existing inferences. The high_impact risk category is noted but the changes are semantically justified where correct.",
+        "status": "pass"
+      }
+    ],
+    "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+    "contract_version": "ontology_review_response_v2",
+    "counter_evidence_ids": [],
+    "decision": "revise",
+    "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+    "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+    "finish_reason": "stop",
+    "gateway_request_id": "2026111310414078060216067076751",
+    "impact_status": "pass",
+    "input_tokens": 81605,
+    "late_response": true,
+    "latency_ms": 100141,
+    "model_family": "qwen",
+    "model_id": "Qwen",
+    "model_identity": "qwen",
+    "necessity": "confirmed_gap",
+    "object_revision": 3,
+    "output_tokens": 2423,
+    "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+    "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+    "provider_started_at": 1794537696.6770847,
+    "queue_time_ms": 388,
+    "reason_codes": [
+      "DEFINITION_OVERGENERALIZATION",
+      "CONSTRAINT_DIRECTION_ERROR",
+      "SCOPE_MISMATCH"
+    ],
+    "reasoning_tokens": null,
+    "recovered_from_original_attempt": true,
+    "recovery_model_calls": 0,
+    "request_key": "57129752e86f8bf876beb01d5c8423343bc6225a509b6da242b2d77e16d288d5",
+    "requested_context": null,
+    "response_id": "chatcmpl-968722f07bf3024a",
+    "response_status": "ok",
+    "returned_model_id": "Qwen",
+    "round_id": 1,
+    "semantic_status": "fail",
+    "structure_status": "pass",
+    "suggested_changes": {
+      "C_ad498a2e8a3eb22fdd25": {
+        "definition": "用于描述弹丸质心运动的参考坐标系，包括地面直角坐标系、自然坐标系和动坐标系等具体形式。"
+      },
+      "C_afb01b87134088624d72": {
+        "definition": "空气阻力系数 C_x0 是马赫数 Ma=v/c 的函数，量纲为1，在零攻角下定义；当攻角非零时，C_x 是 Ma 和攻角 δ 的函数。在跨声速区随马赫数急剧上升，在超声速区急剧下降。"
+      }
+    },
+    "suggestion_diagnostics": [],
+    "supporting_evidence_ids": [
+      "ev_cfdbd38784f815374861",
+      "ev_a9e9eb155e2d04ccd3b9",
+      "ev_f6ac92318c3db8b8176b",
+      "ev_6ce780e3cf654f1cb4de",
+      "ev_592bc0f78d5c82ac062c",
+      "ev_885a18552be7c4d6b103",
+      "ev_321917f1ef84c5135c34",
+      "ev_c74cc8a33819ea9a98aa",
+      "ev_49a0b96c3f815e30ee47",
+      "ev_7165805a7dd5be958b56",
+      "ev_c53271ce776b5b72c9cb",
+      "ev_4cf1f8e0e98212fd454b",
+      "ev_10f024862916f28f216f"
+    ],
+    "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+    "task_type": "ontology_extension",
+    "transport_metrics": {
+      "body_bytes_received": 521041,
+      "body_chunk_count": 2421,
+      "chunk_count": 2424,
+      "first_body_byte_ms": 39230.336,
+      "first_chunk_ms": 39233,
+      "first_content_ms": 39233,
+      "gateway_request_id": "2026111310414078060216067076751",
+      "http_status": 200,
+      "max_inter_body_chunk_gap_ms": 756.73,
+      "max_inter_chunk_gap_ms": 750,
+      "reasoning_chars": 0,
+      "response_headers": {
+        "connection": "keep-alive",
+        "content-type": "text/event-stream",
+        "date": "Fri, 13 Nov 2026 02:42:17 GMT",
+        "server": "nginx/1.24.0 (Ubuntu)",
+        "transfer-encoding": "chunked",
+        "x-oneapi-request-id": "2026111310414078060216067076751"
+      },
+      "response_headers_ms": 39230.087,
+      "stream": true,
+      "terminal_ms": 100141,
+      "trace": [
+        {
+          "elapsed_ms": 2245.561,
+          "event": "connection.connect_tcp.started"
+        },
+        {
+          "elapsed_ms": 2324.42,
+          "event": "connection.connect_tcp.complete"
+        },
+        {
+          "elapsed_ms": 2325.344,
+          "event": "connection.start_tls.started"
+        },
+        {
+          "elapsed_ms": 2487.475,
+          "event": "connection.start_tls.complete"
+        },
+        {
+          "elapsed_ms": 2487.608,
+          "event": "http11.send_request_headers.started"
+        },
+        {
+          "elapsed_ms": 2487.998,
+          "event": "http11.send_request_headers.complete"
+        },
+        {
+          "elapsed_ms": 2488.011,
+          "event": "http11.send_request_body.started"
+        },
+        {
+          "elapsed_ms": 2626.06,
+          "event": "http11.send_request_body.complete"
+        },
+        {
+          "elapsed_ms": 2626.089,
+          "event": "http11.receive_response_headers.started"
+        },
+        {
+          "elapsed_ms": 39229.354,
+          "event": "http11.receive_response_headers.complete"
+        },
+        {
+          "elapsed_ms": 39230.277,
+          "event": "http11.receive_response_body.started"
+        },
+        {
+          "elapsed_ms": 100144.593,
+          "event": "http11.receive_response_body.complete"
+        },
+        {
+          "elapsed_ms": 100144.649,
+          "event": "http11.response_closed.started"
+        },
+        {
+          "elapsed_ms": 100144.67,
+          "event": "http11.response_closed.complete"
+        }
+      ],
+      "transport_elapsed_ms": 100144.884,
+      "visible_chars": 6071
+    },
+    "voter_id": "judge_a"
+  },
+  {
+    "attempt_id": "attempt_5cef61dae8634c569e61b2db15ea9984",
+    "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+    "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+    "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "checks": [
+      {
+        "check": "necessity",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "definition",
+        "note": "原文确实分别陈述空气带动边界层消耗弹丸动能、分离波由正激波与斜激波组成、波动阻力主要取决于弹头部形状，现有端点与原文不符，修订有必要。",
+        "status": "pass"
+      },
+      {
+        "check": "reuse",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "classification",
+        "note": "目标类C_a7877ae0fe8183f8b986（动能）、C_c89817eb0fc6a2a0b963（分离波）、C_426d7ce8c711071adac8（正激波）、C_cbcb15d49fba77017748（头部形状）均已存在，无需新建类。",
+        "status": "pass"
+      },
+      {
+        "check": "definition",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b",
+          "ev_321917f1ef84c5135c34",
+          "ev_592bc0f78d5c82ac062c",
+          "ev_6ce780e3cf654f1cb4de",
+          "ev_c74cc8a33819ea9a98aa",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_7165805a7dd5be958b56",
+          "ev_c53271ce776b5b72c9cb",
+          "ev_4cf1f8e0e98212fd454b",
+          "ev_10f024862916f28f216f"
+        ],
+        "evidence_scope": "definition",
+        "note": "三处关系定义基本贴合原文，但C_afb01b87134088624d72（阻力系数）新定义把“C_x0(v/c)量纲为1、零攻角近似下以马赫数为自变量、攻角非零时还与攻角有关、另讨论雷诺数影响”等具体公式条件写入通用类定义，且与既有C_e4f3000a2284a7d0fa12（空气阻力函数）定义“表示弹丸相对于空气的运动速度对弹丸运动的影响部分”高度重叠；原文该段是在特定表达式语境下说明C_x0，不能直接作为“阻力系数”类的普适定义。C_ad498a2e8a3eb22fdd25（坐标系）新定义“具体形式包括地面直角坐标、自然坐标及动坐标”把本章列举的若干具体坐标系当作该类的穷尽或标准形式，原文只是分别引入这些坐标系，未给出这种包含关系；且“动坐标”与既有C_29309f2a3a84cce01e0e（动参考系）名称相近但种类不同，定义中混用易致歧义。",
+        "status": "fail"
+      },
+      {
+        "check": "hierarchy_direction",
+        "evidence_ids": [
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "scope_rule",
+        "note": "R_e1de72d5c68b765c28b9（具有部件）由正激波→分离波改为分离波→正激波，符合“正激波与斜激波组成的分离波”的整体—部分方向；R_3c75dd89923bc714630d（取决于）由波动阻力→弹头部改为波动阻力→头部形状，方向正确。",
+        "status": "pass"
+      },
+      {
+        "check": "constraint_strength",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "scope_rule",
+        "note": "三处约束修订均只改端点类，未新增存在性、基数或全称约束；R_2a66075367666d54e7e7（消耗）range改为动能，与“消耗着弹丸的动能”一致；R_e1de72d5c68b765c28b9（具有部件）端点互换后仍为单值部件关系，未断言分离波仅有正激波；R_3c75dd89923bc714630d（取决于）range改为头部形状，未断言唯一决定因素。",
+        "status": "pass"
+      },
+      {
+        "check": "structure",
+        "evidence_ids": [],
+        "evidence_scope": "unknown",
+        "note": "结构检查通过：类189、关系81，无错误或警告；补丁为具名三元组增删，保留匿名公理与语言标签，图哈希一致。",
+        "status": "pass"
+      },
+      {
+        "check": "impact",
+        "evidence_ids": [],
+        "evidence_scope": "unknown",
+        "note": "影响检查通过，变更涉及6个schema ID，风险类别high_impact且需人工复核；未发现迁移阻断，但定义修订仍需按上述语义问题调整。",
+        "status": "pass"
+      }
+    ],
+    "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+    "contract_version": "ontology_review_response_v2",
+    "counter_evidence_ids": [],
+    "decision": "revise",
+    "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+    "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+    "finish_reason": "stop",
+    "gateway_request_id": null,
+    "impact_status": "pass",
+    "input_tokens": 72033,
+    "late_response": false,
+    "latency_ms": 11484,
+    "model_family": "deepseek",
+    "model_id": "deepseek-flash",
+    "model_identity": "deepseek-flash",
+    "necessity": "confirmed_gap",
+    "object_revision": 3,
+    "output_tokens": 1710,
+    "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+    "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+    "provider_started_at": 1794538343.674973,
+    "queue_time_ms": 287,
+    "reason_codes": [
+      "DEFINITION_OVERBROAD",
+      "DEFINITION_UNDERSPECIFIED",
+      "CONSTRAINT_DIRECTION_CORRECT",
+      "DEFINITION_OVERLAP_WITH_EXISTING_CLASS"
+    ],
+    "reasoning_tokens": null,
+    "request_key": "4a531fc6e82a098374f8dc614bf0106478d6439aabba9ddcf5679b3474ca894a",
+    "requested_context": null,
+    "response_id": "5a00f9f8-94a0-4f44-b485-909e51336f92",
+    "response_status": "ok",
+    "returned_model_id": "deepseek-flash",
+    "round_id": 1,
+    "semantic_status": "fail",
+    "structure_status": "pass",
+    "suggested_changes": {
+      "C_ad498a2e8a3eb22fdd25": {
+        "definition": "本章描述弹丸质心位置、速度等运动状态时所用的坐标；本章分别使用地面直角坐标、自然坐标及动坐标等具体坐标系。"
+      },
+      "C_afb01b87134088624d72": {
+        "definition": "本章空气阻力表达式中的空气阻力系数；在零攻角近似下主要随马赫数变化，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。"
+      },
+      "R_2a66075367666d54e7e7": {
+        "definition": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。"
+      },
+      "R_3c75dd89923bc714630d": {
+        "definition": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。"
+      },
+      "R_e1de72d5c68b765c28b9": {
+        "definition": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。"
+      }
+    },
+    "suggestion_diagnostics": [
+      {
+        "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+        "fields": [
+          "definition"
+        ],
+        "severity": "warning",
+        "target": "R_2a66075367666d54e7e7"
+      },
+      {
+        "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+        "fields": [
+          "definition"
+        ],
+        "severity": "warning",
+        "target": "R_e1de72d5c68b765c28b9"
+      },
+      {
+        "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+        "fields": [
+          "definition"
+        ],
+        "severity": "warning",
+        "target": "R_3c75dd89923bc714630d"
+      }
+    ],
+    "supporting_evidence_ids": [
+      "ev_cfdbd38784f815374861",
+      "ev_a9e9eb155e2d04ccd3b9",
+      "ev_f6ac92318c3db8b8176b",
+      "ev_321917f1ef84c5135c34",
+      "ev_592bc0f78d5c82ac062c",
+      "ev_6ce780e3cf654f1cb4de",
+      "ev_c74cc8a33819ea9a98aa",
+      "ev_49a0b96c3f815e30ee47",
+      "ev_7165805a7dd5be958b56",
+      "ev_c53271ce776b5b72c9cb",
+      "ev_4cf1f8e0e98212fd454b",
+      "ev_10f024862916f28f216f"
+    ],
+    "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+    "task_type": "ontology_extension",
+    "transport_metrics": {
+      "body_bytes_received": 3041,
+      "body_chunk_count": 1,
+      "first_body_byte_ms": 11471.072,
+      "gateway_request_id": null,
+      "http_status": 200,
+      "response_headers": {
+        "connection": "keep-alive",
+        "content-encoding": "gzip",
+        "content-type": "application/json",
+        "date": "Fri, 13 Nov 2026 02:52:26 GMT",
+        "server": "openresty",
+        "transfer-encoding": "chunked"
+      },
+      "response_headers_ms": 2424.481,
+      "stream": false,
+      "trace": [
+        {
+          "elapsed_ms": 1847.552,
+          "event": "connection.connect_tcp.started"
+        },
+        {
+          "elapsed_ms": 1985.689,
+          "event": "connection.connect_tcp.complete"
+        },
+        {
+          "elapsed_ms": 1985.763,
+          "event": "connection.start_tls.started"
+        },
+        {
+          "elapsed_ms": 2023.503,
+          "event": "connection.start_tls.complete"
+        },
+        {
+          "elapsed_ms": 2023.621,
+          "event": "http11.send_request_headers.started"
+        },
+        {
+          "elapsed_ms": 2024.026,
+          "event": "http11.send_request_headers.complete"
+        },
+        {
+          "elapsed_ms": 2024.039,
+          "event": "http11.send_request_body.started"
+        },
+        {
+          "elapsed_ms": 2108.793,
+          "event": "http11.send_request_body.complete"
+        },
+        {
+          "elapsed_ms": 2108.818,
+          "event": "http11.receive_response_headers.started"
+        },
+        {
+          "elapsed_ms": 2423.864,
+          "event": "http11.receive_response_headers.complete"
+        },
+        {
+          "elapsed_ms": 2425.307,
+          "event": "http11.receive_response_body.started"
+        },
+        {
+          "elapsed_ms": 11473.082,
+          "event": "http11.receive_response_body.complete"
+        },
+        {
+          "elapsed_ms": 11473.144,
+          "event": "http11.response_closed.started"
+        },
+        {
+          "elapsed_ms": 11473.169,
+          "event": "http11.response_closed.complete"
+        }
+      ],
+      "transport_elapsed_ms": 11480.334
+    },
+    "voter_id": "judge_c",
+    "attempts": [
+      {
+        "attempt_id": "attempt_5cef61dae8634c569e61b2db15ea9984",
+        "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+        "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+        "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+        "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "definition",
+            "note": "原文确实分别陈述空气带动边界层消耗弹丸动能、分离波由正激波与斜激波组成、波动阻力主要取决于弹头部形状，现有端点与原文不符，修订有必要。",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "classification",
+            "note": "目标类C_a7877ae0fe8183f8b986（动能）、C_c89817eb0fc6a2a0b963（分离波）、C_426d7ce8c711071adac8（正激波）、C_cbcb15d49fba77017748（头部形状）均已存在，无需新建类。",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b",
+              "ev_321917f1ef84c5135c34",
+              "ev_592bc0f78d5c82ac062c",
+              "ev_6ce780e3cf654f1cb4de",
+              "ev_c74cc8a33819ea9a98aa",
+              "ev_49a0b96c3f815e30ee47",
+              "ev_7165805a7dd5be958b56",
+              "ev_c53271ce776b5b72c9cb",
+              "ev_4cf1f8e0e98212fd454b",
+              "ev_10f024862916f28f216f"
+            ],
+            "evidence_scope": "definition",
+            "note": "三处关系定义基本贴合原文，但C_afb01b87134088624d72（阻力系数）新定义把“C_x0(v/c)量纲为1、零攻角近似下以马赫数为自变量、攻角非零时还与攻角有关、另讨论雷诺数影响”等具体公式条件写入通用类定义，且与既有C_e4f3000a2284a7d0fa12（空气阻力函数）定义“表示弹丸相对于空气的运动速度对弹丸运动的影响部分”高度重叠；原文该段是在特定表达式语境下说明C_x0，不能直接作为“阻力系数”类的普适定义。C_ad498a2e8a3eb22fdd25（坐标系）新定义“具体形式包括地面直角坐标、自然坐标及动坐标”把本章列举的若干具体坐标系当作该类的穷尽或标准形式，原文只是分别引入这些坐标系，未给出这种包含关系；且“动坐标”与既有C_29309f2a3a84cce01e0e（动参考系）名称相近但种类不同，定义中混用易致歧义。",
+            "status": "fail"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "scope_rule",
+            "note": "R_e1de72d5c68b765c28b9（具有部件）由正激波→分离波改为分离波→正激波，符合“正激波与斜激波组成的分离波”的整体—部分方向；R_3c75dd89923bc714630d（取决于）由波动阻力→弹头部改为波动阻力→头部形状，方向正确。",
+            "status": "pass"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "scope_rule",
+            "note": "三处约束修订均只改端点类，未新增存在性、基数或全称约束；R_2a66075367666d54e7e7（消耗）range改为动能，与“消耗着弹丸的动能”一致；R_e1de72d5c68b765c28b9（具有部件）端点互换后仍为单值部件关系，未断言分离波仅有正激波；R_3c75dd89923bc714630d（取决于）range改为头部形状，未断言唯一决定因素。",
+            "status": "pass"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "结构检查通过：类189、关系81，无错误或警告；补丁为具名三元组增删，保留匿名公理与语言标签，图哈希一致。",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [],
+            "evidence_scope": "unknown",
+            "note": "影响检查通过，变更涉及6个schema ID，风险类别high_impact且需人工复核；未发现迁移阻断，但定义修订仍需按上述语义问题调整。",
+            "status": "pass"
+          }
+        ],
+        "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+        "contract_version": "ontology_review_response_v2",
+        "counter_evidence_ids": [],
+        "decision": "revise",
+        "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+        "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+        "finish_reason": "stop",
+        "gateway_request_id": null,
+        "impact_status": "pass",
+        "input_tokens": 72033,
+        "late_response": false,
+        "latency_ms": 11484,
+        "model_family": "deepseek",
+        "model_id": "deepseek-flash",
+        "model_identity": "deepseek-flash",
+        "necessity": "confirmed_gap",
+        "object_revision": 3,
+        "output_tokens": 1710,
+        "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+        "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+        "provider_started_at": 1794538343.674973,
+        "queue_time_ms": 287,
+        "reason_codes": [
+          "DEFINITION_OVERBROAD",
+          "DEFINITION_UNDERSPECIFIED",
+          "CONSTRAINT_DIRECTION_CORRECT",
+          "DEFINITION_OVERLAP_WITH_EXISTING_CLASS"
+        ],
+        "reasoning_tokens": null,
+        "request_key": "4a531fc6e82a098374f8dc614bf0106478d6439aabba9ddcf5679b3474ca894a",
+        "requested_context": null,
+        "response_id": "5a00f9f8-94a0-4f44-b485-909e51336f92",
+        "response_status": "ok",
+        "returned_model_id": "deepseek-flash",
+        "round_id": 1,
+        "semantic_status": "fail",
+        "structure_status": "pass",
+        "suggested_changes": {
+          "C_ad498a2e8a3eb22fdd25": {
+            "definition": "本章描述弹丸质心位置、速度等运动状态时所用的坐标；本章分别使用地面直角坐标、自然坐标及动坐标等具体坐标系。"
+          },
+          "C_afb01b87134088624d72": {
+            "definition": "本章空气阻力表达式中的空气阻力系数；在零攻角近似下主要随马赫数变化，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。"
+          },
+          "R_2a66075367666d54e7e7": {
+            "definition": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。"
+          },
+          "R_3c75dd89923bc714630d": {
+            "definition": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。"
+          },
+          "R_e1de72d5c68b765c28b9": {
+            "definition": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。"
+          }
+        },
+        "suggestion_diagnostics": [
+          {
+            "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+            "fields": [
+              "definition"
+            ],
+            "severity": "warning",
+            "target": "R_2a66075367666d54e7e7"
+          },
+          {
+            "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+            "fields": [
+              "definition"
+            ],
+            "severity": "warning",
+            "target": "R_e1de72d5c68b765c28b9"
+          },
+          {
+            "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+            "fields": [
+              "definition"
+            ],
+            "severity": "warning",
+            "target": "R_3c75dd89923bc714630d"
+          }
+        ],
+        "supporting_evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b",
+          "ev_321917f1ef84c5135c34",
+          "ev_592bc0f78d5c82ac062c",
+          "ev_6ce780e3cf654f1cb4de",
+          "ev_c74cc8a33819ea9a98aa",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_7165805a7dd5be958b56",
+          "ev_c53271ce776b5b72c9cb",
+          "ev_4cf1f8e0e98212fd454b",
+          "ev_10f024862916f28f216f"
+        ],
+        "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+        "task_type": "ontology_extension",
+        "transport_metrics": {
+          "body_bytes_received": 3041,
+          "body_chunk_count": 1,
+          "first_body_byte_ms": 11471.072,
+          "gateway_request_id": null,
+          "http_status": 200,
+          "response_headers": {
+            "connection": "keep-alive",
+            "content-encoding": "gzip",
+            "content-type": "application/json",
+            "date": "Fri, 13 Nov 2026 02:52:26 GMT",
+            "server": "openresty",
+            "transfer-encoding": "chunked"
+          },
+          "response_headers_ms": 2424.481,
+          "stream": false,
+          "trace": [
+            {
+              "elapsed_ms": 1847.552,
+              "event": "connection.connect_tcp.started"
+            },
+            {
+              "elapsed_ms": 1985.689,
+              "event": "connection.connect_tcp.complete"
+            },
+            {
+              "elapsed_ms": 1985.763,
+              "event": "connection.start_tls.started"
+            },
+            {
+              "elapsed_ms": 2023.503,
+              "event": "connection.start_tls.complete"
+            },
+            {
+              "elapsed_ms": 2023.621,
+              "event": "http11.send_request_headers.started"
+            },
+            {
+              "elapsed_ms": 2024.026,
+              "event": "http11.send_request_headers.complete"
+            },
+            {
+              "elapsed_ms": 2024.039,
+              "event": "http11.send_request_body.started"
+            },
+            {
+              "elapsed_ms": 2108.793,
+              "event": "http11.send_request_body.complete"
+            },
+            {
+              "elapsed_ms": 2108.818,
+              "event": "http11.receive_response_headers.started"
+            },
+            {
+              "elapsed_ms": 2423.864,
+              "event": "http11.receive_response_headers.complete"
+            },
+            {
+              "elapsed_ms": 2425.307,
+              "event": "http11.receive_response_body.started"
+            },
+            {
+              "elapsed_ms": 11473.082,
+              "event": "http11.receive_response_body.complete"
+            },
+            {
+              "elapsed_ms": 11473.144,
+              "event": "http11.response_closed.started"
+            },
+            {
+              "elapsed_ms": 11473.169,
+              "event": "http11.response_closed.complete"
+            }
+          ],
+          "transport_elapsed_ms": 11480.334
+        },
+        "voter_id": "judge_c",
+        "attempt_no": 1
+      }
+    ],
+    "actual_calls": 1
+  },
+  {
+    "attempt_id": "attempt_b5353c23540c4cf3938b047bc7e12be5",
+    "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+    "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+    "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "checks": [
+      {
+        "check": "necessity",
+        "evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "note": "Corrects incorrect range for '消耗' (from projectile to kinetic energy), fixes swapped domain/range for '具有部件' (separation wave to normal shock), and refines '取决于' range to '头部形状' for precision.",
+        "status": "pass"
+      },
+      {
+        "check": "reuse",
+        "evidence_ids": [],
+        "note": "Existing classes like C_a7877ae0fe8183f8b986 (动能) and C_cbcb15d49fba77017748 (头部形状) are correctly reused.",
+        "status": "pass"
+      },
+      {
+        "check": "definition",
+        "evidence_ids": [
+          "ev_6ce780e3cf654f1cb4de",
+          "ev_c74cc8a33819ea9a98aa",
+          "ev_c53271ce776b5b72c9cb"
+        ],
+        "note": "Updated definitions for '阻力系数', '坐标系', and '表示' are significantly more precise and grounded in the source text.",
+        "status": "pass"
+      },
+      {
+        "check": "hierarchy_direction",
+        "evidence_ids": [],
+        "note": "No hierarchy changes proposed.",
+        "status": "not_applicable"
+      },
+      {
+        "check": "constraint_strength",
+        "evidence_ids": [
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b"
+        ],
+        "evidence_scope": "definition",
+        "note": "Domain and range revisions are strictly supported by the textual descriptions of composition and dependency.",
+        "status": "pass"
+      },
+      {
+        "check": "structure",
+        "evidence_ids": [],
+        "note": "RDF changes are logically consistent and correctly implement the requested revisions.",
+        "status": "pass"
+      },
+      {
+        "check": "impact",
+        "evidence_ids": [],
+        "note": "Changes are corrective and improve the semantic accuracy of the ontology without introducing contradictions.",
+        "status": "pass"
+      }
+    ],
+    "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+    "contract_version": "ontology_review_response_v2",
+    "counter_evidence_ids": [],
+    "decision": "approve",
+    "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+    "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+    "finish_reason": "stop",
+    "gateway_request_id": "2026111310524043471383183892280",
+    "impact_status": "pass",
+    "input_tokens": 84692,
+    "late_response": false,
+    "latency_ms": 171046,
+    "model_family": "gemma",
+    "model_id": "Gemma",
+    "model_identity": "gemma",
+    "necessity": "confirmed_gap",
+    "object_revision": 3,
+    "output_tokens": 2917,
+    "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+    "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+    "provider_started_at": 1794538357.2615771,
+    "queue_time_ms": 337,
+    "reason_codes": [],
+    "reasoning_tokens": 1849,
+    "request_key": "d13ffb26c9c82e06a1f02336c9bb22fb255df87b01610c19e53c3205c01f8a78",
+    "requested_context": null,
+    "response_id": "chatcmpl-91f0ee25fdc8f8c9",
+    "response_status": "ok",
+    "returned_model_id": "Gemma",
+    "round_id": 1,
+    "semantic_status": "pass",
+    "structure_status": "pass",
+    "suggested_changes": null,
+    "suggestion_diagnostics": [],
+    "supporting_evidence_ids": [
+      "ev_cfdbd38784f815374861",
+      "ev_a9e9eb155e2d04ccd3b9",
+      "ev_f6ac92318c3db8b8176b",
+      "ev_6ce780e3cf654f1cb4de",
+      "ev_592bc0f78d5c82ac062c",
+      "ev_885a18552be7c4d6b103",
+      "ev_321917f1ef84c5135c34",
+      "ev_c74cc8a33819ea9a98aa",
+      "ev_49a0b96c3f815e30ee47",
+      "ev_7165805a7dd5be958b56",
+      "ev_c53271ce776b5b72c9cb",
+      "ev_4cf1f8e0e98212fd454b",
+      "ev_10f024862916f28f216f"
+    ],
+    "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+    "task_type": "ontology_extension",
+    "transport_metrics": {
+      "body_bytes_received": 608216,
+      "body_chunk_count": 2800,
+      "chunk_count": 2803,
+      "first_body_byte_ms": 60927.836,
+      "first_chunk_ms": 60921,
+      "first_content_ms": 130625,
+      "gateway_request_id": "2026111310524043471383183892280",
+      "http_status": 200,
+      "max_inter_body_chunk_gap_ms": 1078.837,
+      "max_inter_chunk_gap_ms": 1078,
+      "reasoning_chars": 0,
+      "response_headers": {
+        "connection": "keep-alive",
+        "content-type": "text/event-stream",
+        "date": "Fri, 13 Nov 2026 02:53:39 GMT",
+        "server": "nginx/1.24.0 (Ubuntu)",
+        "transfer-encoding": "chunked",
+        "x-oneapi-request-id": "2026111310524043471383183892280"
+      },
+      "response_headers_ms": 60927.602,
+      "stream": true,
+      "terminal_ms": 171046,
+      "trace": [
+        {
+          "elapsed_ms": 1808.708,
+          "event": "connection.connect_tcp.started"
+        },
+        {
+          "elapsed_ms": 1860.932,
+          "event": "connection.connect_tcp.complete"
+        },
+        {
+          "elapsed_ms": 1861.025,
+          "event": "connection.start_tls.started"
+        },
+        {
+          "elapsed_ms": 1893.966,
+          "event": "connection.start_tls.complete"
+        },
+        {
+          "elapsed_ms": 1894.066,
+          "event": "http11.send_request_headers.started"
+        },
+        {
+          "elapsed_ms": 1894.385,
+          "event": "http11.send_request_headers.complete"
+        },
+        {
+          "elapsed_ms": 1894.395,
+          "event": "http11.send_request_body.started"
+        },
+        {
+          "elapsed_ms": 2032.544,
+          "event": "http11.send_request_body.complete"
+        },
+        {
+          "elapsed_ms": 2032.578,
+          "event": "http11.receive_response_headers.started"
+        },
+        {
+          "elapsed_ms": 60926.964,
+          "event": "http11.receive_response_headers.complete"
+        },
+        {
+          "elapsed_ms": 60927.792,
+          "event": "http11.receive_response_body.started"
+        },
+        {
+          "elapsed_ms": 171057.779,
+          "event": "http11.receive_response_body.complete"
+        },
+        {
+          "elapsed_ms": 171057.825,
+          "event": "http11.response_closed.started"
+        },
+        {
+          "elapsed_ms": 171057.844,
+          "event": "http11.response_closed.complete"
+        }
+      ],
+      "transport_elapsed_ms": 171057.978,
+      "visible_chars": 2566
+    },
+    "voter_id": "judge_b",
+    "attempts": [
+      {
+        "attempt_id": "attempt_b5353c23540c4cf3938b047bc7e12be5",
+        "audit_id": "ontology_audit_77f23d328ac14ae3a87158e24dae2c37",
+        "base_ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+        "base_profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+        "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+        "checks": [
+          {
+            "check": "necessity",
+            "evidence_ids": [
+              "ev_cfdbd38784f815374861",
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "note": "Corrects incorrect range for '消耗' (from projectile to kinetic energy), fixes swapped domain/range for '具有部件' (separation wave to normal shock), and refines '取决于' range to '头部形状' for precision.",
+            "status": "pass"
+          },
+          {
+            "check": "reuse",
+            "evidence_ids": [],
+            "note": "Existing classes like C_a7877ae0fe8183f8b986 (动能) and C_cbcb15d49fba77017748 (头部形状) are correctly reused.",
+            "status": "pass"
+          },
+          {
+            "check": "definition",
+            "evidence_ids": [
+              "ev_6ce780e3cf654f1cb4de",
+              "ev_c74cc8a33819ea9a98aa",
+              "ev_c53271ce776b5b72c9cb"
+            ],
+            "note": "Updated definitions for '阻力系数', '坐标系', and '表示' are significantly more precise and grounded in the source text.",
+            "status": "pass"
+          },
+          {
+            "check": "hierarchy_direction",
+            "evidence_ids": [],
+            "note": "No hierarchy changes proposed.",
+            "status": "not_applicable"
+          },
+          {
+            "check": "constraint_strength",
+            "evidence_ids": [
+              "ev_a9e9eb155e2d04ccd3b9",
+              "ev_f6ac92318c3db8b8176b"
+            ],
+            "evidence_scope": "definition",
+            "note": "Domain and range revisions are strictly supported by the textual descriptions of composition and dependency.",
+            "status": "pass"
+          },
+          {
+            "check": "structure",
+            "evidence_ids": [],
+            "note": "RDF changes are logically consistent and correctly implement the requested revisions.",
+            "status": "pass"
+          },
+          {
+            "check": "impact",
+            "evidence_ids": [],
+            "note": "Changes are corrective and improve the semantic accuracy of the ontology without introducing contradictions.",
+            "status": "pass"
+          }
+        ],
+        "committee_hash": "f78febccd36e9b8dd3bddf2c2817c1a3326ecb29a0aed1047abb8dd16bad962e",
+        "contract_version": "ontology_review_response_v2",
+        "counter_evidence_ids": [],
+        "decision": "approve",
+        "delta_hash": "1eb18f6a339b1a70f8dfdeda72a9bc918aa19609992a51356ce5168c3efd7d9e",
+        "evidence_hash": "b1d4cf25cc6884df9503b86ebc5adc076cfdf175d9680337fab1fd56879fae37",
+        "finish_reason": "stop",
+        "gateway_request_id": "2026111310524043471383183892280",
+        "impact_status": "pass",
+        "input_tokens": 84692,
+        "late_response": false,
+        "latency_ms": 171046,
+        "model_family": "gemma",
+        "model_id": "Gemma",
+        "model_identity": "gemma",
+        "necessity": "confirmed_gap",
+        "object_revision": 3,
+        "output_tokens": 2917,
+        "prompt_version": "ontology_extension_validator_v3_modeling_context_v1",
+        "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+        "provider_started_at": 1794538357.2615771,
+        "queue_time_ms": 337,
+        "reason_codes": [],
+        "reasoning_tokens": 1849,
+        "request_key": "d13ffb26c9c82e06a1f02336c9bb22fb255df87b01610c19e53c3205c01f8a78",
+        "requested_context": null,
+        "response_id": "chatcmpl-91f0ee25fdc8f8c9",
+        "response_status": "ok",
+        "returned_model_id": "Gemma",
+        "round_id": 1,
+        "semantic_status": "pass",
+        "structure_status": "pass",
+        "suggested_changes": null,
+        "suggestion_diagnostics": [],
+        "supporting_evidence_ids": [
+          "ev_cfdbd38784f815374861",
+          "ev_a9e9eb155e2d04ccd3b9",
+          "ev_f6ac92318c3db8b8176b",
+          "ev_6ce780e3cf654f1cb4de",
+          "ev_592bc0f78d5c82ac062c",
+          "ev_885a18552be7c4d6b103",
+          "ev_321917f1ef84c5135c34",
+          "ev_c74cc8a33819ea9a98aa",
+          "ev_49a0b96c3f815e30ee47",
+          "ev_7165805a7dd5be958b56",
+          "ev_c53271ce776b5b72c9cb",
+          "ev_4cf1f8e0e98212fd454b",
+          "ev_10f024862916f28f216f"
+        ],
+        "task_id": "ext_391d5db23b094c2a9601e0e6c4452efb",
+        "task_type": "ontology_extension",
+        "transport_metrics": {
+          "body_bytes_received": 608216,
+          "body_chunk_count": 2800,
+          "chunk_count": 2803,
+          "first_body_byte_ms": 60927.836,
+          "first_chunk_ms": 60921,
+          "first_content_ms": 130625,
+          "gateway_request_id": "2026111310524043471383183892280",
+          "http_status": 200,
+          "max_inter_body_chunk_gap_ms": 1078.837,
+          "max_inter_chunk_gap_ms": 1078,
+          "reasoning_chars": 0,
+          "response_headers": {
+            "connection": "keep-alive",
+            "content-type": "text/event-stream",
+            "date": "Fri, 13 Nov 2026 02:53:39 GMT",
+            "server": "nginx/1.24.0 (Ubuntu)",
+            "transfer-encoding": "chunked",
+            "x-oneapi-request-id": "2026111310524043471383183892280"
+          },
+          "response_headers_ms": 60927.602,
+          "stream": true,
+          "terminal_ms": 171046,
+          "trace": [
+            {
+              "elapsed_ms": 1808.708,
+              "event": "connection.connect_tcp.started"
+            },
+            {
+              "elapsed_ms": 1860.932,
+              "event": "connection.connect_tcp.complete"
+            },
+            {
+              "elapsed_ms": 1861.025,
+              "event": "connection.start_tls.started"
+            },
+            {
+              "elapsed_ms": 1893.966,
+              "event": "connection.start_tls.complete"
+            },
+            {
+              "elapsed_ms": 1894.066,
+              "event": "http11.send_request_headers.started"
+            },
+            {
+              "elapsed_ms": 1894.385,
+              "event": "http11.send_request_headers.complete"
+            },
+            {
+              "elapsed_ms": 1894.395,
+              "event": "http11.send_request_body.started"
+            },
+            {
+              "elapsed_ms": 2032.544,
+              "event": "http11.send_request_body.complete"
+            },
+            {
+              "elapsed_ms": 2032.578,
+              "event": "http11.receive_response_headers.started"
+            },
+            {
+              "elapsed_ms": 60926.964,
+              "event": "http11.receive_response_headers.complete"
+            },
+            {
+              "elapsed_ms": 60927.792,
+              "event": "http11.receive_response_body.started"
+            },
+            {
+              "elapsed_ms": 171057.779,
+              "event": "http11.receive_response_body.complete"
+            },
+            {
+              "elapsed_ms": 171057.825,
+              "event": "http11.response_closed.started"
+            },
+            {
+              "elapsed_ms": 171057.844,
+              "event": "http11.response_closed.complete"
+            }
+          ],
+          "transport_elapsed_ms": 171057.978,
+          "visible_chars": 2566
+        },
+        "voter_id": "judge_b",
+        "attempt_no": 1
+      }
+    ],
+    "actual_calls": 1
+  }
+]

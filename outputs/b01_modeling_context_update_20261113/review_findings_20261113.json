@@ -1,0 +1,196 @@
+{
+  "proposal_digest": "017f29a3fba399f74bce646cd24f610eefc87c83b686d9458ff2a7d960e39bf7",
+  "human_gold": false,
+  "review_kind": "local_ai_check_of_model_objections",
+  "valid_decisions": {
+    "judge_a": "revise",
+    "judge_c": "revise",
+    "judge_b": "approve"
+  },
+  "three_seat_gate": "unresolved",
+  "ontology_changed": false,
+  "original_votes_amended": false,
+  "definition_items": [
+    {
+      "target": "C_afb01b87134088624d72",
+      "actual_label": "阻力系数",
+      "schema_kind": "class",
+      "baseline_definition": "在跨声速区随马赫数急剧上升，在超声速区急剧下降，受气温和空气密度共同影响的系数",
+      "frozen_definition": "本章空气阻力表达式中的空气阻力系数；C_x0(v/c)的量纲为1，在零攻角近似下以马赫数为自变量，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。",
+      "suggestions_by_seat": {
+        "judge_a": {
+          "definition": "空气阻力系数 C_x0 是马赫数 Ma=v/c 的函数，量纲为1，在零攻角下定义；当攻角非零时，C_x 是 Ma 和攻角 δ 的函数。在跨声速区随马赫数急剧上升，在超声速区急剧下降。"
+        },
+        "judge_c": {
+          "definition": "本章空气阻力表达式中的空气阻力系数；在零攻角近似下主要随马赫数变化，攻角非零时还与攻角有关，本章另讨论雷诺数的影响。"
+        },
+        "judge_b": null
+      },
+      "changes_applied": false,
+      "evidence_ids": [
+        "ev_6ce780e3cf654f1cb4de",
+        "ev_592bc0f78d5c82ac062c",
+        "ev_885a18552be7c4d6b103",
+        "ev_c53271ce776b5b72c9cb",
+        "ev_10f024862916f28f216f"
+      ],
+      "local_ai_assessment": "应明确 C_x0 的零攻角条件与 C_x 的非零攻角表达，避免指代不清。Qwen建议补充跨/超声速变化，DeepSeek建议减少公式细节，两者不一致。源文变化描述带有“段内”条件，不宜直接泛化；空气阻力函数 F(v) 与系数不能仅凭都随速度变化就认定重叠或等价。未采纳任何一席建议。"
+    },
+    {
+      "target": "C_ad498a2e8a3eb22fdd25",
+      "actual_label": "坐标系",
+      "schema_kind": "class",
+      "baseline_definition": "动坐标系",
+      "frozen_definition": "本章描述弹丸质心位置、速度等运动状态时所用的坐标；具体形式包括地面直角坐标、自然坐标及动坐标。",
+      "suggestions_by_seat": {
+        "judge_a": {
+          "definition": "用于描述弹丸质心运动的参考坐标系，包括地面直角坐标系、自然坐标系和动坐标系等具体形式。"
+        },
+        "judge_c": {
+          "definition": "本章描述弹丸质心位置、速度等运动状态时所用的坐标；本章分别使用地面直角坐标、自然坐标及动坐标等具体坐标系。"
+        },
+        "judge_b": null
+      },
+      "changes_applied": false,
+      "evidence_ids": [
+        "ev_c74cc8a33819ea9a98aa",
+        "ev_49a0b96c3f815e30ee47",
+        "ev_7165805a7dd5be958b56"
+      ],
+      "local_ai_assessment": "正式ID实际标签为坐标系，当前定义却使用“所用的坐标”，可进一步区分参考坐标系与坐标数值；三种形式应标作本章采用的例子，并保留各自语境。模型提及父类或包含关系，不构成新增subClassOf的依据；不得由名称相近而把动坐标系与动参考系合并。未采纳任何一席建议。"
+    }
+  ],
+  "relation_constraint_operations": [
+    {
+      "changes": {
+        "range": [
+          "C_a7877ae0fe8183f8b986"
+        ]
+      },
+      "evidence_ids": [
+        "ev_cfdbd38784f815374861"
+      ],
+      "kind": "revise_constraint",
+      "target": "R_2a66075367666d54e7e7"
+    },
+    {
+      "changes": {
+        "domain": [
+          "C_c89817eb0fc6a2a0b963"
+        ],
+        "range": [
+          "C_426d7ce8c711071adac8"
+        ]
+      },
+      "evidence_ids": [
+        "ev_a9e9eb155e2d04ccd3b9"
+      ],
+      "kind": "revise_constraint",
+      "target": "R_e1de72d5c68b765c28b9"
+    },
+    {
+      "changes": {
+        "range": [
+          "C_cbcb15d49fba77017748"
+        ]
+      },
+      "evidence_ids": [
+        "ev_f6ac92318c3db8b8176b"
+      ],
+      "kind": "revise_constraint",
+      "target": "R_3c75dd89923bc714630d"
+    }
+  ],
+  "relation_assessment": "三席文字说明均认可三处关系端点或方向修订；这不等于已获得逐项独立批准。Qwen的constraint_strength汇总仍为fail，原样保留。",
+  "suggestion_diagnostics": {
+    "judge_a": [],
+    "judge_c": [
+      {
+        "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+        "fields": [
+          "definition"
+        ],
+        "severity": "warning",
+        "target": "R_2a66075367666d54e7e7"
+      },
+      {
+        "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+        "fields": [
+          "definition"
+        ],
+        "severity": "warning",
+        "target": "R_e1de72d5c68b765c28b9"
+      },
+      {
+        "code": "SUGGESTION_EQUALS_PROPOSED_STATE",
+        "fields": [
+          "definition"
+        ],
+        "severity": "warning",
+        "target": "R_3c75dd89923bc714630d"
+      }
+    ],
+    "judge_b": []
+  },
+  "diagnostics_change_vote_eligibility": false,
+  "qwen_note_caution": "Qwen的constraint_strength说明认可三处端点修订，却以两项类定义的异议将该检查判为fail，并保留CONSTRAINT_DIRECTION_ERROR原因码。属于需解释的判据混用，不据此取消有效revise。",
+  "supporting_source_spans": [
+    {
+      "evidence_id": "ev_49a0b96c3f815e30ee47",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 25204,
+      "end": 25328,
+      "quote": "自然坐标是根据跟随弹丸质心运动的方向而取的坐标。取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为"
+    },
+    {
+      "evidence_id": "ev_592bc0f78d5c82ac062c",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 11812,
+      "end": 11974,
+      "quote": " 是声速。当攻角  $\\delta \\neq 0^{\\circ}$  时，空气阻力系数  $C_{x}(v / c, \\delta)$  将既是  $Ma$  又是  $\\delta$  的函数。但一般保证飞行稳定的弹丸的攻角通常都很小，可以近似看成  $\\delta = 0^{\\circ}$  。严格地说，空气阻力系数还"
+    },
+    {
+      "evidence_id": "ev_6ce780e3cf654f1cb4de",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 11580,
+      "end": 11645,
+      "quote": "式（1-30）说明弹丸的空气阻力与弹丸的横截面积、弹丸的动能及空气密度成正比。其比例系数就是空气阻力系数  $C_{x0}$  。"
+    },
+    {
+      "evidence_id": "ev_7165805a7dd5be958b56",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 36124,
+      "end": 36295,
+      "quote": "为了考虑地球表面曲率，建立以弹丸质心  $O^{\\prime}$  为原点的动坐标系，以地心  $O_{1}$  至  $O^{\\prime}$  的连线为  $y^\\prime$  轴，向上为正（图1-16）， $O^{\\prime}x^{\\prime}$  轴与  $O^{\\prime}y^{\\prime}$  轴垂直，沿发射方向为正。"
+    },
+    {
+      "evidence_id": "ev_885a18552be7c4d6b103",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 41165,
+      "end": 41416,
+      "quote": "气压是通过改变空气密度来影响弹道的，气压升高使空气密度增大，因而使射程减小。气温除了影响空气密度外，还对马赫数有影响。在跨声速区阻力系数急剧上升段内，马赫数微小的增加可以引起阻力系数明显增大，而且气温通过阻力系数和空气密度对空气阻力的影响在这一段内是互相叠加的，所以在这一速度范围内气温对弹道的影响比较显著，气温的升高能使射程明显增大。在超声速区阻力系数急剧下降段内，气温通过阻力系数和通过空气密度对阻力的影响二者是互相抵消的，所以在这一速度范围内气温对弹道的影响不太显著，甚至气温升高可以使射程减小。"
+    },
+    {
+      "evidence_id": "ev_c53271ce776b5b72c9cb",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 18716,
+      "end": 18778,
+      "quote": "式中第三个组合表示弹丸相对于空气的运动速度  $v$  对弹丸运动的影响部分，称为空气阻力函数，用  $F(v)$  表示。"
+    },
+    {
+      "evidence_id": "ev_c74cc8a33819ea9a98aa",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 23082,
+      "end": 23390,
+      "quote": "在外弹道计算中，常用直角坐标系，即取水平面向炮口的方向为  $x$  方向，铅垂向上的方向为  $y$  方向，炮口为坐标原点  $O$  ，如图1-10所示。要知道弹丸质心在空中运动的规律，只要知道在弹丸出炮口任意时刻  $t$  时弹丸质心的坐标  $(x,y)$  以及该时刻弹丸质心运动的速度矢量  $\\pmb{v}$  即可。因此，用来描述弹丸质心运动规律的参量共有  $t,x,y,v,\\theta$  五个变量，其中 $\\theta$  为速度矢量与水平方向的夹角。有时速度矢量不用  $\\pmb{v}$  、  $\\theta$  表示，而用其水平和铅垂分速度 $v_{x},v_{y}$  来表示。"
+    },
+    {
+      "evidence_id": "ev_10f024862916f28f216f",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "start": 19122,
+      "end": 19294,
+      "quote": "这样，空气阻力加速度的表达式可以简化成\n\n$$\na _ {x} = C H (y) F (v) = C H (y) v G (v) \\tag {1-43}\n$$\n\n空气阻力加速度是表示弹丸特征的弹道系数  $C$  、表示空气特征的密度函数  $H(y)$  和表示弹丸相对于空气的运动速度对运动影响的阻力函数  $F(v)$  三者的连乘积。"
+    }
+  ],
+  "next_action": "先对两项类定义形成源文约束清楚、可执行的修订；保留三处关系修订。未通过前不进入整章门禁或样本复跑。"
+}

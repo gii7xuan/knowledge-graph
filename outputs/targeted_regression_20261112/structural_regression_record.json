@@ -1,0 +1,1757 @@
+{
+  "status": "pass",
+  "scope": "eight_source_bound_structural_fixtures_named_constraints_only",
+  "source_parent_digest": "bc9671b47c163f2f12d7e84c6f15d9343b9d7d69d3a1b48990ba2588572809ce",
+  "case_ids": [
+    "STR-01-P",
+    "STR-01-N",
+    "STR-02-P",
+    "STR-02-N",
+    "STR-03-P",
+    "STR-03-N",
+    "STR-04-P",
+    "STR-04-N"
+  ],
+  "cases_sha256": "522402261cc74641eced95c6ee0c37776e4daf42d592507682758534adcd9fe6",
+  "cases": [
+    {
+      "case_id": "STR-01-P",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "R_2a66075367666d54e7e7",
+      "polarity": "positive",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 377,
+          "chunk_id": "chunk_fd62ad0f09dc",
+          "chunk_start": 251,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 8748,
+          "evidence_id": "ev_cfdbd38784f815374861",
+          "offset_basis": "canonical_document",
+          "quote": "的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_915928c6b90c",
+          "semantic_status": "unknown",
+          "sentence_id": "P0101",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_fd62ad0f09dc"
+          ],
+          "start": 8622,
+          "text": "的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "边界层附近被带动的空气",
+          "head_type": "C_2800f3a353c9063a4ccb",
+          "surface_relation": "消耗",
+          "relation_id": "R_2a66075367666d54e7e7",
+          "tail": "弹丸动能",
+          "tail_type": "C_a7877ae0fe8183f8b986",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        },
+        "B01": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "integrated_preview": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "来源消耗对象为动能；原文黏性及飞行语境保留在证据中。"
+    },
+    {
+      "case_id": "STR-01-N",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "R_2a66075367666d54e7e7",
+      "polarity": "negative",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 377,
+          "chunk_id": "chunk_fd62ad0f09dc",
+          "chunk_start": 251,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 8748,
+          "evidence_id": "ev_cfdbd38784f815374861",
+          "offset_basis": "canonical_document",
+          "quote": "的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_915928c6b90c",
+          "semantic_status": "unknown",
+          "sentence_id": "P0101",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_fd62ad0f09dc"
+          ],
+          "start": 8622,
+          "text": "的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "边界层附近的空气",
+          "head_type": "C_2800f3a353c9063a4ccb",
+          "surface_relation": "消耗",
+          "relation_id": "R_2a66075367666d54e7e7",
+          "tail": "弹丸实体",
+          "tail_type": "C_85d7c2e6732f8a304f88",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "B01": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        },
+        "integrated_preview": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "检测把能量对象错置为弹丸实体的旧错误，不把负例写入事实库。"
+    },
+    {
+      "case_id": "STR-02-P",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "R_e1de72d5c68b765c28b9",
+      "polarity": "positive",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 241,
+          "chunk_id": "chunk_8c00fff56f41",
+          "chunk_start": 130,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 10807,
+          "evidence_id": "ev_a9e9eb155e2d04ccd3b9",
+          "offset_basis": "canonical_document",
+          "quote": "当弹头较钝时，在弹前可能出现正激波与斜激波组成的分离波，这时消耗弹丸的动能将更大。减小波阻的办法是尽量使弹头部延长、弹顶平面适当减小、弹表面平滑无突起、弹头低平、发射后无毛刺和翻边。图1-7给出了头部形状与激波强弱的关系。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_410c6925d6cf",
+          "semantic_status": "unknown",
+          "sentence_id": "P0123",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_8c00fff56f41"
+          ],
+          "start": 10696,
+          "text": "当弹头较钝时，在弹前可能出现正激波与斜激波组成的分离波，这时消耗弹丸的动能将更大。减小波阻的办法是尽量使弹头部延长、弹顶平面适当减小、弹表面平滑无突起、弹头低平、发射后无毛刺和翻边。图1-7给出了头部形状与激波强弱的关系。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "分离波",
+          "head_type": "C_c89817eb0fc6a2a0b963",
+          "surface_relation": "具有部件",
+          "relation_id": "R_e1de72d5c68b765c28b9",
+          "tail": "正激波",
+          "tail_type": "C_426d7ce8c711071adac8",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "fail",
+          "domain_status": "fail",
+          "range_status": "fail"
+        },
+        "B01": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "integrated_preview": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "分离波由正激波与斜激波组成；本例检验其中正激波这一部件，不声称部件只有一个。"
+    },
+    {
+      "case_id": "STR-02-N",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "R_e1de72d5c68b765c28b9",
+      "polarity": "negative",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 241,
+          "chunk_id": "chunk_8c00fff56f41",
+          "chunk_start": 130,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 10807,
+          "evidence_id": "ev_a9e9eb155e2d04ccd3b9",
+          "offset_basis": "canonical_document",
+          "quote": "当弹头较钝时，在弹前可能出现正激波与斜激波组成的分离波，这时消耗弹丸的动能将更大。减小波阻的办法是尽量使弹头部延长、弹顶平面适当减小、弹表面平滑无突起、弹头低平、发射后无毛刺和翻边。图1-7给出了头部形状与激波强弱的关系。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_410c6925d6cf",
+          "semantic_status": "unknown",
+          "sentence_id": "P0123",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_8c00fff56f41"
+          ],
+          "start": 10696,
+          "text": "当弹头较钝时，在弹前可能出现正激波与斜激波组成的分离波，这时消耗弹丸的动能将更大。减小波阻的办法是尽量使弹头部延长、弹顶平面适当减小、弹表面平滑无突起、弹头低平、发射后无毛刺和翻边。图1-7给出了头部形状与激波强弱的关系。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "正激波",
+          "head_type": "C_426d7ce8c711071adac8",
+          "surface_relation": "具有部件",
+          "relation_id": "R_e1de72d5c68b765c28b9",
+          "tail": "分离波",
+          "tail_type": "C_c89817eb0fc6a2a0b963",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "B01": {
+          "status": "fail",
+          "domain_status": "fail",
+          "range_status": "fail"
+        },
+        "integrated_preview": {
+          "status": "fail",
+          "domain_status": "fail",
+          "range_status": "fail"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "原部件关系的反向误读应被拒绝。"
+    },
+    {
+      "case_id": "STR-03-P",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "R_3c75dd89923bc714630d",
+      "polarity": "positive",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 151,
+          "chunk_id": "chunk_83d5675ff738",
+          "chunk_start": 102,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 11233,
+          "evidence_id": "ev_f6ac92318c3db8b8176b",
+          "offset_basis": "canonical_document",
+          "quote": "波动阻力的大小主要取决于弹头部的形状。一般超声速弹丸的头部都设计得比较尖，目的就在于减小波动阻力。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_410c6925d6cf",
+          "semantic_status": "unknown",
+          "sentence_id": "P0129",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_83d5675ff738"
+          ],
+          "start": 11184,
+          "text": "波动阻力的大小主要取决于弹头部的形状。一般超声速弹丸的头部都设计得比较尖，目的就在于减小波动阻力。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "波动阻力大小",
+          "head_type": "C_52c1a1e08cb0ee536af8",
+          "surface_relation": "取决于",
+          "relation_id": "R_3c75dd89923bc714630d",
+          "tail": "弹头部形状",
+          "tail_type": "C_cbcb15d49fba77017748",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        },
+        "B01": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "integrated_preview": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "来源主要取决于形状，不将主要取决于改写为唯一决定因素。"
+    },
+    {
+      "case_id": "STR-03-N",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "R_3c75dd89923bc714630d",
+      "polarity": "negative",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 151,
+          "chunk_id": "chunk_83d5675ff738",
+          "chunk_start": 102,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 11233,
+          "evidence_id": "ev_f6ac92318c3db8b8176b",
+          "offset_basis": "canonical_document",
+          "quote": "波动阻力的大小主要取决于弹头部的形状。一般超声速弹丸的头部都设计得比较尖，目的就在于减小波动阻力。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_410c6925d6cf",
+          "semantic_status": "unknown",
+          "sentence_id": "P0129",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_83d5675ff738"
+          ],
+          "start": 11184,
+          "text": "波动阻力的大小主要取决于弹头部的形状。一般超声速弹丸的头部都设计得比较尖，目的就在于减小波动阻力。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "波动阻力大小",
+          "head_type": "C_52c1a1e08cb0ee536af8",
+          "surface_relation": "取决于",
+          "relation_id": "R_3c75dd89923bc714630d",
+          "tail": "弹头部实体",
+          "tail_type": "C_f0037f9e5d770063017b",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "B01": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        },
+        "integrated_preview": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "检测对象特征被弹头部实体替代的旧端点问题。"
+    },
+    {
+      "case_id": "STR-04-P",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "C_88ecbdb51d6e44007aec",
+      "polarity": "positive",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 220,
+          "chunk_id": "chunk_413e74f69c60",
+          "chunk_start": 15,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 46381,
+          "evidence_id": "ev_9805b1be29003d1bcb9e",
+          "offset_basis": "canonical_document",
+          "quote": "设有一个从左向右的恒定横风  $W_{z}$ ，则整个大气都以相同的速度  $W_{z}$  从左向右运动。这时可以把大气作为动参考系，由于  $W_{z}$  为常量，所以此参考系也是一个惯性参考系。弹丸的运动可以看成是两部分运动的合成，即相对动参考系的相对运动与随动参考系的牵连运动，在动参考系内所观察的弹道称为相对弹道。图1-19（a）描述了无风弹道、相对弹道与有风弹道之间的关系。下面首先研究相对弹道。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_9fb9562ff572",
+          "semantic_status": "unknown",
+          "sentence_id": "P0456",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_413e74f69c60"
+          ],
+          "start": 46176,
+          "text": "设有一个从左向右的恒定横风  $W_{z}$ ，则整个大气都以相同的速度  $W_{z}$  从左向右运动。这时可以把大气作为动参考系，由于  $W_{z}$  为常量，所以此参考系也是一个惯性参考系。弹丸的运动可以看成是两部分运动的合成，即相对动参考系的相对运动与随动参考系的牵连运动，在动参考系内所观察的弹道称为相对弹道。图1-19（a）描述了无风弹道、相对弹道与有风弹道之间的关系。下面首先研究相对弹道。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "本章相对弹道",
+          "head_type": "C_2596ed9929a2eb4634d6",
+          "surface_relation": "观察于",
+          "relation_id": "R_fb229b192204df6b55e3",
+          "tail": "恒定风条件下明确选取的动参考系",
+          "tail_type": "C_29309f2a3a84cce01e0e",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "B01": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "integrated_preview": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "具体动参考系仍可用于观察相对弹道；删除错误全称父类不否定来源中该系可兼具惯性性质。"
+    },
+    {
+      "case_id": "STR-04-N",
+      "origin": "ai_authored_structural_fixture",
+      "human_gold": false,
+      "target_revision": "C_88ecbdb51d6e44007aec",
+      "polarity": "negative",
+      "source_document": {
+        "document_id": "火炮弹道学_钱林方_第一章",
+        "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde"
+      },
+      "evidence": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "chunk_end": 220,
+          "chunk_id": "chunk_413e74f69c60",
+          "chunk_start": 15,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 46381,
+          "evidence_id": "ev_9805b1be29003d1bcb9e",
+          "offset_basis": "canonical_document",
+          "quote": "设有一个从左向右的恒定横风  $W_{z}$ ，则整个大气都以相同的速度  $W_{z}$  从左向右运动。这时可以把大气作为动参考系，由于  $W_{z}$  为常量，所以此参考系也是一个惯性参考系。弹丸的运动可以看成是两部分运动的合成，即相对动参考系的相对运动与随动参考系的牵连运动，在动参考系内所观察的弹道称为相对弹道。图1-19（a）描述了无风弹道、相对弹道与有风弹道之间的关系。下面首先研究相对弹道。",
+          "retrieval_level": "other_section",
+          "retrieval_score": 0.42,
+          "retrieved_via_levels": [
+            "other_section"
+          ],
+          "section_id": "section_9fb9562ff572",
+          "semantic_status": "unknown",
+          "sentence_id": "P0456",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_413e74f69c60"
+          ],
+          "start": 46176,
+          "text": "设有一个从左向右的恒定横风  $W_{z}$ ，则整个大气都以相同的速度  $W_{z}$  从左向右运动。这时可以把大气作为动参考系，由于  $W_{z}$  为常量，所以此参考系也是一个惯性参考系。弹丸的运动可以看成是两部分运动的合成，即相对动参考系的相对运动与随动参考系的牵连运动，在动参考系内所观察的弹道称为相对弹道。图1-19（a）描述了无风弹道、相对弹道与有风弹道之间的关系。下面首先研究相对弹道。"
+        }
+      ],
+      "candidate": {
+        "triple": {
+          "head": "本章相对弹道",
+          "head_type": "C_2596ed9929a2eb4634d6",
+          "surface_relation": "观察于",
+          "relation_id": "R_fb229b192204df6b55e3",
+          "tail": "仅标注为惯性参考系的对象",
+          "tail_type": "C_88ecbdb51d6e44007aec",
+          "tail_kind": "entity"
+        }
+      },
+      "expected": {
+        "baseline": {
+          "status": "pass",
+          "domain_status": "pass",
+          "range_status": "pass"
+        },
+        "B01": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        },
+        "integrated_preview": {
+          "status": "fail",
+          "domain_status": "pass",
+          "range_status": "fail"
+        }
+      },
+      "expectation_scope": "named domain/range/hierarchy acceptance only; not semantic approval or a human label",
+      "semantic_note": "只阻止凭惯性参考系类型自动继承动参考系类型；不推断两个类互斥，也不判此对象在现实中不可能是动系。"
+    }
+  ],
+  "results": [
+    {
+      "case_id": "STR-01-P",
+      "schema": "B01",
+      "expected": {
+        "status": "pass",
+        "domain_status": "pass",
+        "range_status": "pass"
+      },
+      "observed_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_2a66075367666d54e7e7",
+        "mapping_status": "matched",
+        "requested_head_type": "C_2800f3a353c9063a4ccb",
+        "requested_tail_type": "C_a7877ae0fe8183f8b986",
+        "allowed_domain": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "allowed_range": [
+          "C_a7877ae0fe8183f8b986"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2800f3a353c9063a4ccb": [
+              "C_2800f3a353c9063a4ccb"
+            ]
+          },
+          "tail": {
+            "C_a7877ae0fe8183f8b986": [
+              "C_a7877ae0fe8183f8b986"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_2a66075367666d54e7e7",
+          "label": "消耗",
+          "description": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。",
+          "domain": [
+            "C_2800f3a353c9063a4ccb"
+          ],
+          "range": [
+            "C_a7877ae0fe8183f8b986"
+          ],
+          "iri": "urn:kg:chapter1:property:0504f4b135d8d847885d32f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "消耗"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:dd4a875013d7c403c4474d9c>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:641e268b45540864e2254cbd>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_2a66075367666d54e7e7",
+        "structural_status": "pass",
+        "definition_available": true,
+        "mapping_status": "matched",
+        "requested_head_type": "C_2800f3a353c9063a4ccb",
+        "requested_tail_type": "C_a7877ae0fe8183f8b986",
+        "allowed_domain": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "allowed_range": [
+          "C_a7877ae0fe8183f8b986"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2800f3a353c9063a4ccb": [
+              "C_2800f3a353c9063a4ccb"
+            ]
+          },
+          "tail": {
+            "C_a7877ae0fe8183f8b986": [
+              "C_a7877ae0fe8183f8b986"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_2a66075367666d54e7e7",
+          "label": "消耗",
+          "description": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。",
+          "domain": [
+            "C_2800f3a353c9063a4ccb"
+          ],
+          "range": [
+            "C_a7877ae0fe8183f8b986"
+          ],
+          "iri": "urn:kg:chapter1:property:0504f4b135d8d847885d32f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "消耗"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:dd4a875013d7c403c4474d9c>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:641e268b45540864e2254cbd>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-01-N",
+      "schema": "B01",
+      "expected": {
+        "status": "fail",
+        "domain_status": "pass",
+        "range_status": "fail"
+      },
+      "observed_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_2a66075367666d54e7e7",
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_2800f3a353c9063a4ccb",
+        "requested_tail_type": "C_85d7c2e6732f8a304f88",
+        "allowed_domain": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "allowed_range": [
+          "C_a7877ae0fe8183f8b986"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2800f3a353c9063a4ccb": [
+              "C_2800f3a353c9063a4ccb"
+            ]
+          },
+          "tail": {
+            "C_a7877ae0fe8183f8b986": []
+          }
+        },
+        "relation": {
+          "id": "R_2a66075367666d54e7e7",
+          "label": "消耗",
+          "description": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。",
+          "domain": [
+            "C_2800f3a353c9063a4ccb"
+          ],
+          "range": [
+            "C_a7877ae0fe8183f8b986"
+          ],
+          "iri": "urn:kg:chapter1:property:0504f4b135d8d847885d32f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "消耗"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:dd4a875013d7c403c4474d9c>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:641e268b45540864e2254cbd>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_2a66075367666d54e7e7",
+        "structural_status": "fail",
+        "definition_available": true,
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_2800f3a353c9063a4ccb",
+        "requested_tail_type": "C_85d7c2e6732f8a304f88",
+        "allowed_domain": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "allowed_range": [
+          "C_a7877ae0fe8183f8b986"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2800f3a353c9063a4ccb": [
+              "C_2800f3a353c9063a4ccb"
+            ]
+          },
+          "tail": {
+            "C_a7877ae0fe8183f8b986": []
+          }
+        },
+        "relation": {
+          "id": "R_2a66075367666d54e7e7",
+          "label": "消耗",
+          "description": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。",
+          "domain": [
+            "C_2800f3a353c9063a4ccb"
+          ],
+          "range": [
+            "C_a7877ae0fe8183f8b986"
+          ],
+          "iri": "urn:kg:chapter1:property:0504f4b135d8d847885d32f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "消耗"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章弹丸表面附近空气因黏性作用被带动时消耗弹丸动能的关系；方向为空气到被消耗的动能，所用边界层及飞行条件随来源保留。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:dd4a875013d7c403c4474d9c>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:641e268b45540864e2254cbd>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-02-P",
+      "schema": "B01",
+      "expected": {
+        "status": "pass",
+        "domain_status": "pass",
+        "range_status": "pass"
+      },
+      "observed_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_e1de72d5c68b765c28b9",
+        "mapping_status": "matched",
+        "requested_head_type": "C_c89817eb0fc6a2a0b963",
+        "requested_tail_type": "C_426d7ce8c711071adac8",
+        "allowed_domain": [
+          "C_c89817eb0fc6a2a0b963"
+        ],
+        "allowed_range": [
+          "C_426d7ce8c711071adac8"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_c89817eb0fc6a2a0b963": [
+              "C_c89817eb0fc6a2a0b963"
+            ]
+          },
+          "tail": {
+            "C_426d7ce8c711071adac8": [
+              "C_426d7ce8c711071adac8"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_e1de72d5c68b765c28b9",
+          "label": "具有部件",
+          "description": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。",
+          "domain": [
+            "C_c89817eb0fc6a2a0b963"
+          ],
+          "range": [
+            "C_426d7ce8c711071adac8"
+          ],
+          "iri": "urn:kg:chapter1:property:d46a39c08ab673b9f98952f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "具有部件"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:42cc7218020ec12d014477f1>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:6808bf460bf94dacbcdc7b4f>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_e1de72d5c68b765c28b9",
+        "structural_status": "pass",
+        "definition_available": true,
+        "mapping_status": "matched",
+        "requested_head_type": "C_c89817eb0fc6a2a0b963",
+        "requested_tail_type": "C_426d7ce8c711071adac8",
+        "allowed_domain": [
+          "C_c89817eb0fc6a2a0b963"
+        ],
+        "allowed_range": [
+          "C_426d7ce8c711071adac8"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_c89817eb0fc6a2a0b963": [
+              "C_c89817eb0fc6a2a0b963"
+            ]
+          },
+          "tail": {
+            "C_426d7ce8c711071adac8": [
+              "C_426d7ce8c711071adac8"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_e1de72d5c68b765c28b9",
+          "label": "具有部件",
+          "description": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。",
+          "domain": [
+            "C_c89817eb0fc6a2a0b963"
+          ],
+          "range": [
+            "C_426d7ce8c711071adac8"
+          ],
+          "iri": "urn:kg:chapter1:property:d46a39c08ab673b9f98952f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "具有部件"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:42cc7218020ec12d014477f1>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:6808bf460bf94dacbcdc7b4f>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-02-N",
+      "schema": "B01",
+      "expected": {
+        "status": "fail",
+        "domain_status": "fail",
+        "range_status": "fail"
+      },
+      "observed_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_e1de72d5c68b765c28b9",
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_426d7ce8c711071adac8",
+        "requested_tail_type": "C_c89817eb0fc6a2a0b963",
+        "allowed_domain": [
+          "C_c89817eb0fc6a2a0b963"
+        ],
+        "allowed_range": [
+          "C_426d7ce8c711071adac8"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_c89817eb0fc6a2a0b963": []
+          },
+          "tail": {
+            "C_426d7ce8c711071adac8": []
+          }
+        },
+        "relation": {
+          "id": "R_e1de72d5c68b765c28b9",
+          "label": "具有部件",
+          "description": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。",
+          "domain": [
+            "C_c89817eb0fc6a2a0b963"
+          ],
+          "range": [
+            "C_426d7ce8c711071adac8"
+          ],
+          "iri": "urn:kg:chapter1:property:d46a39c08ab673b9f98952f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "具有部件"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:42cc7218020ec12d014477f1>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:6808bf460bf94dacbcdc7b4f>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "fail",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "DOMAIN_CONSTRAINT_FAILED",
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_e1de72d5c68b765c28b9",
+        "structural_status": "fail",
+        "definition_available": true,
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_426d7ce8c711071adac8",
+        "requested_tail_type": "C_c89817eb0fc6a2a0b963",
+        "allowed_domain": [
+          "C_c89817eb0fc6a2a0b963"
+        ],
+        "allowed_range": [
+          "C_426d7ce8c711071adac8"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_c89817eb0fc6a2a0b963": []
+          },
+          "tail": {
+            "C_426d7ce8c711071adac8": []
+          }
+        },
+        "relation": {
+          "id": "R_e1de72d5c68b765c28b9",
+          "label": "具有部件",
+          "description": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。",
+          "domain": [
+            "C_c89817eb0fc6a2a0b963"
+          ],
+          "range": [
+            "C_426d7ce8c711071adac8"
+          ],
+          "iri": "urn:kg:chapter1:property:d46a39c08ab673b9f98952f2",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "具有部件"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章分离波具有正激波这一组成部分的关系，方向为分离波到正激波；该端点不表示其全部组成部分，也不排除原文同时说明的斜激波。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:42cc7218020ec12d014477f1>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:6808bf460bf94dacbcdc7b4f>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "fail",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "DOMAIN_CONSTRAINT_FAILED",
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-03-P",
+      "schema": "B01",
+      "expected": {
+        "status": "pass",
+        "domain_status": "pass",
+        "range_status": "pass"
+      },
+      "observed_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_3c75dd89923bc714630d",
+        "mapping_status": "matched",
+        "requested_head_type": "C_52c1a1e08cb0ee536af8",
+        "requested_tail_type": "C_cbcb15d49fba77017748",
+        "allowed_domain": [
+          "C_52c1a1e08cb0ee536af8"
+        ],
+        "allowed_range": [
+          "C_cbcb15d49fba77017748"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_52c1a1e08cb0ee536af8": [
+              "C_52c1a1e08cb0ee536af8"
+            ]
+          },
+          "tail": {
+            "C_cbcb15d49fba77017748": [
+              "C_cbcb15d49fba77017748"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_3c75dd89923bc714630d",
+          "label": "取决于",
+          "description": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。",
+          "domain": [
+            "C_52c1a1e08cb0ee536af8"
+          ],
+          "range": [
+            "C_cbcb15d49fba77017748"
+          ],
+          "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "取决于"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:29ee6da8da577682f0cf422c>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_3c75dd89923bc714630d",
+        "structural_status": "pass",
+        "definition_available": true,
+        "mapping_status": "matched",
+        "requested_head_type": "C_52c1a1e08cb0ee536af8",
+        "requested_tail_type": "C_cbcb15d49fba77017748",
+        "allowed_domain": [
+          "C_52c1a1e08cb0ee536af8"
+        ],
+        "allowed_range": [
+          "C_cbcb15d49fba77017748"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_52c1a1e08cb0ee536af8": [
+              "C_52c1a1e08cb0ee536af8"
+            ]
+          },
+          "tail": {
+            "C_cbcb15d49fba77017748": [
+              "C_cbcb15d49fba77017748"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_3c75dd89923bc714630d",
+          "label": "取决于",
+          "description": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。",
+          "domain": [
+            "C_52c1a1e08cb0ee536af8"
+          ],
+          "range": [
+            "C_cbcb15d49fba77017748"
+          ],
+          "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "取决于"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:29ee6da8da577682f0cf422c>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-03-N",
+      "schema": "B01",
+      "expected": {
+        "status": "fail",
+        "domain_status": "pass",
+        "range_status": "fail"
+      },
+      "observed_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_3c75dd89923bc714630d",
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_52c1a1e08cb0ee536af8",
+        "requested_tail_type": "C_f0037f9e5d770063017b",
+        "allowed_domain": [
+          "C_52c1a1e08cb0ee536af8"
+        ],
+        "allowed_range": [
+          "C_cbcb15d49fba77017748"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_52c1a1e08cb0ee536af8": [
+              "C_52c1a1e08cb0ee536af8"
+            ]
+          },
+          "tail": {
+            "C_cbcb15d49fba77017748": []
+          }
+        },
+        "relation": {
+          "id": "R_3c75dd89923bc714630d",
+          "label": "取决于",
+          "description": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。",
+          "domain": [
+            "C_52c1a1e08cb0ee536af8"
+          ],
+          "range": [
+            "C_cbcb15d49fba77017748"
+          ],
+          "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "取决于"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:29ee6da8da577682f0cf422c>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_3c75dd89923bc714630d",
+        "structural_status": "fail",
+        "definition_available": true,
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_52c1a1e08cb0ee536af8",
+        "requested_tail_type": "C_f0037f9e5d770063017b",
+        "allowed_domain": [
+          "C_52c1a1e08cb0ee536af8"
+        ],
+        "allowed_range": [
+          "C_cbcb15d49fba77017748"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_52c1a1e08cb0ee536af8": [
+              "C_52c1a1e08cb0ee536af8"
+            ]
+          },
+          "tail": {
+            "C_cbcb15d49fba77017748": []
+          }
+        },
+        "relation": {
+          "id": "R_3c75dd89923bc714630d",
+          "label": "取决于",
+          "description": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。",
+          "domain": [
+            "C_52c1a1e08cb0ee536af8"
+          ],
+          "range": [
+            "C_cbcb15d49fba77017748"
+          ],
+          "iri": "urn:kg:chapter1:property:381222715f64c49d9c934e51",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "取决于"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示本章超声速流动讨论中，波动阻力大小主要取决于弹头部形状的关系；方向从波动阻力到头部形状，不断言形状为唯一决定因素。"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:29ee6da8da577682f0cf422c>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-04-P",
+      "schema": "B01",
+      "expected": {
+        "status": "pass",
+        "domain_status": "pass",
+        "range_status": "pass"
+      },
+      "observed_guard": {
+        "status": "pass",
+        "relation_known": true,
+        "relation_id": "R_fb229b192204df6b55e3",
+        "mapping_status": "matched",
+        "requested_head_type": "C_2596ed9929a2eb4634d6",
+        "requested_tail_type": "C_29309f2a3a84cce01e0e",
+        "allowed_domain": [
+          "C_2596ed9929a2eb4634d6"
+        ],
+        "allowed_range": [
+          "C_29309f2a3a84cce01e0e"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2596ed9929a2eb4634d6": [
+              "C_2596ed9929a2eb4634d6"
+            ]
+          },
+          "tail": {
+            "C_29309f2a3a84cce01e0e": [
+              "C_29309f2a3a84cce01e0e"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_fb229b192204df6b55e3",
+          "label": "观察于",
+          "description": "",
+          "domain": [
+            "C_2596ed9929a2eb4634d6"
+          ],
+          "range": [
+            "C_29309f2a3a84cce01e0e"
+          ],
+          "iri": "urn:kg:chapter1:property:562dbf1deaf09d9162ba57ed",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "观察于"
+            }
+          ],
+          "definitions": [],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:b82bea9211186db98b92f6d5>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:85725c736e01ee3e819cc5e2>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "unknown",
+        "relation_known": true,
+        "relation_id": "R_fb229b192204df6b55e3",
+        "structural_status": "pass",
+        "definition_available": false,
+        "mapping_status": "unassigned",
+        "requested_head_type": "C_2596ed9929a2eb4634d6",
+        "requested_tail_type": "C_29309f2a3a84cce01e0e",
+        "allowed_domain": [
+          "C_2596ed9929a2eb4634d6"
+        ],
+        "allowed_range": [
+          "C_29309f2a3a84cce01e0e"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2596ed9929a2eb4634d6": [
+              "C_2596ed9929a2eb4634d6"
+            ]
+          },
+          "tail": {
+            "C_29309f2a3a84cce01e0e": [
+              "C_29309f2a3a84cce01e0e"
+            ]
+          }
+        },
+        "relation": {
+          "id": "R_fb229b192204df6b55e3",
+          "label": "观察于",
+          "description": "",
+          "domain": [
+            "C_2596ed9929a2eb4634d6"
+          ],
+          "range": [
+            "C_29309f2a3a84cce01e0e"
+          ],
+          "iri": "urn:kg:chapter1:property:562dbf1deaf09d9162ba57ed",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "观察于"
+            }
+          ],
+          "definitions": [],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:b82bea9211186db98b92f6d5>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:85725c736e01ee3e819cc5e2>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "pass",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": false,
+        "reason_codes": [
+          "RELATION_DEFINITION_UNAVAILABLE"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    },
+    {
+      "case_id": "STR-04-N",
+      "schema": "B01",
+      "expected": {
+        "status": "fail",
+        "domain_status": "pass",
+        "range_status": "fail"
+      },
+      "observed_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_fb229b192204df6b55e3",
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_2596ed9929a2eb4634d6",
+        "requested_tail_type": "C_88ecbdb51d6e44007aec",
+        "allowed_domain": [
+          "C_2596ed9929a2eb4634d6"
+        ],
+        "allowed_range": [
+          "C_29309f2a3a84cce01e0e"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2596ed9929a2eb4634d6": [
+              "C_2596ed9929a2eb4634d6"
+            ]
+          },
+          "tail": {
+            "C_29309f2a3a84cce01e0e": []
+          }
+        },
+        "relation": {
+          "id": "R_fb229b192204df6b55e3",
+          "label": "观察于",
+          "description": "",
+          "domain": [
+            "C_2596ed9929a2eb4634d6"
+          ],
+          "range": [
+            "C_29309f2a3a84cce01e0e"
+          ],
+          "iri": "urn:kg:chapter1:property:562dbf1deaf09d9162ba57ed",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "观察于"
+            }
+          ],
+          "definitions": [],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:b82bea9211186db98b92f6d5>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:85725c736e01ee3e819cc5e2>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "RANGE_CONSTRAINT_FAILED"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "strict_definition_guard": {
+        "status": "fail",
+        "relation_known": true,
+        "relation_id": "R_fb229b192204df6b55e3",
+        "structural_status": "fail",
+        "definition_available": false,
+        "mapping_status": "constraint_conflict",
+        "requested_head_type": "C_2596ed9929a2eb4634d6",
+        "requested_tail_type": "C_88ecbdb51d6e44007aec",
+        "allowed_domain": [
+          "C_2596ed9929a2eb4634d6"
+        ],
+        "allowed_range": [
+          "C_29309f2a3a84cce01e0e"
+        ],
+        "hierarchy_paths": {
+          "head": {
+            "C_2596ed9929a2eb4634d6": [
+              "C_2596ed9929a2eb4634d6"
+            ]
+          },
+          "tail": {
+            "C_29309f2a3a84cce01e0e": []
+          }
+        },
+        "relation": {
+          "id": "R_fb229b192204df6b55e3",
+          "label": "观察于",
+          "description": "",
+          "domain": [
+            "C_2596ed9929a2eb4634d6"
+          ],
+          "range": [
+            "C_29309f2a3a84cce01e0e"
+          ],
+          "iri": "urn:kg:chapter1:property:562dbf1deaf09d9162ba57ed",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "观察于"
+            }
+          ],
+          "definitions": [],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:b82bea9211186db98b92f6d5>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:85725c736e01ee3e819cc5e2>"
+          ],
+          "kind": "object_property"
+        },
+        "domain_status": "pass",
+        "range_status": "fail",
+        "type_unknown": false,
+        "mapping_ambiguous": false,
+        "hard_failure": true,
+        "reason_codes": [
+          "RANGE_CONSTRAINT_FAILED",
+          "RELATION_DEFINITION_UNAVAILABLE"
+        ],
+        "constraint_semantics": "required_all",
+        "ontology_version": "ccf20f2d5bca9afbfccd28b3fc1c9b5f13284739122f368584d7e035a669796d"
+      },
+      "expectation_matched": true
+    }
+  ],
+  "expectations_authored_by": "ai",
+  "independent_semantic_approval": false,
+  "does_not_replace_source_checks_or_full_chapter_review": true,
+  "record_id": "check_1623e1219badc84fecb5c0b745bebbcac4bd6e120776f47390bbebd741b35e4b"
+}

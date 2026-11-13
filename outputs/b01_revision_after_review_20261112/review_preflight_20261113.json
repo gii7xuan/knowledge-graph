@@ -1,0 +1,89 @@
+{
+  "client_date": "2026-11-13",
+  "observed_at_utc": "2026-11-13T01:27:01.231519+00:00",
+  "status": "ready_for_additional_authorization",
+  "proposal_digest": "d8030a326c9d42cae5b13cd6babb7b081e857269968dcb73b6102f78605c0145",
+  "audit_id": "ontology_audit_67aa335730c0473787c5154629716334",
+  "round_id": 1,
+  "operations": 9,
+  "evidence_spans": 17,
+  "request_payload_sha256": "ca0cf266f9b51693dac410e446b2a1ca60e8511efaf28b6c8b8d1ceb4b50ce1a",
+  "prompt_sha256": "94e6c59f2d92db470220a29ec29225dd4de2f14bb8bca23e73e89b59c1fe0729",
+  "request_json_utf8_bytes": 165525,
+  "runtime_settings": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "max_output_tokens": 8192,
+      "request_timeout_seconds": 90.0,
+      "http_timeout_seconds": 90.0,
+      "base_url": "https://43.143.151.41:3000/v1",
+      "stream": true,
+      "retry_count": 0
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "max_output_tokens": 8192,
+      "request_timeout_seconds": 180.0,
+      "http_timeout_seconds": 170.0,
+      "base_url": "https://43.143.151.41:3000/v1",
+      "stream": true,
+      "retry_count": 0
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "max_output_tokens": 8192,
+      "request_timeout_seconds": 90.0,
+      "http_timeout_seconds": 90.0,
+      "base_url": "https://api.deepseek.com",
+      "stream": false,
+      "retry_count": 0
+    }
+  ],
+  "case_ids": [
+    "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc"
+  ],
+  "case_candidates": {
+    "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc": "cand_13adbb2c2c5e41e099e5"
+  },
+  "case_budget_additions": {
+    "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc": {
+      "tokens": 277343,
+      "llm_calls": 0
+    }
+  },
+  "case_accounts_before": [
+    {
+      "case_id": "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 96,
+        "rebinds": 2,
+        "tokens": 400000,
+        "tool_calls": 64
+      },
+      "usage": {
+        "extension_requests": 1,
+        "llm_calls": 9,
+        "rebinds": 0,
+        "tokens": 377343,
+        "tool_calls": 3
+      }
+    }
+  ],
+  "token_envelope_for_this_pass": 300000,
+  "previous_cumulative_calls": 16,
+  "max_new_calls": 3,
+  "requested_cumulative_limit": 19,
+  "stop_on_unknown": true,
+  "no_automatic_retry": true,
+  "runner_sha256": "1726770a6562c427b7da57db4690bb1b4fa87660b52d4a85e994589ed678e0bb",
+  "whole_chapter_or_sample_calls_implemented": false,
+  "publication_implemented": false,
+  "model_calls_executed": 0
+}

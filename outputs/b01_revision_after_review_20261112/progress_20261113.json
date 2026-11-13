@@ -1,0 +1,103 @@
+{
+  "active": false,
+  "observed_at_utc": "2026-11-13T01:31:42.604021+00:00",
+  "scope": "revised_b01_three_modeling_calls",
+  "new_model_calls": 3,
+  "cumulative_model_calls": 19,
+  "authorized_cumulative_limit": 19,
+  "modeling_approvals": 2,
+  "modeling_three_seats_approve": false,
+  "consensus_including_all_publication_gates": {
+    "result": "unresolved",
+    "counts": {
+      "approve": 2,
+      "revise": 1,
+      "reject": 0,
+      "uncertain": 0,
+      "error": 0
+    },
+    "committee_size": 3,
+    "required_votes": 3,
+    "missing": 0,
+    "eligible_voter_ids": [
+      "judge_a",
+      "judge_c",
+      "judge_b"
+    ],
+    "counter_evidence_ids": [],
+    "deterministic_checks_pass": false
+  },
+  "stop_reason": "fixed_three_seats_attempted_once",
+  "attempts": [
+    {
+      "attempt_id": "attempt_6fd7c53e02384519a5b3fda3e10252cc",
+      "state": "completed",
+      "voter_id": "judge_a",
+      "counted_calls": 1,
+      "gateway_request_id": "2026111309284910943328221211925"
+    },
+    {
+      "attempt_id": "attempt_fbdfe6d4bbd6468fb7fde1493e2f5aec",
+      "state": "completed",
+      "voter_id": "judge_c",
+      "counted_calls": 1,
+      "gateway_request_id": null
+    },
+    {
+      "attempt_id": "attempt_2b9e7d2a445841ecbaf67477a37c99b3",
+      "state": "completed",
+      "voter_id": "judge_b",
+      "counted_calls": 1,
+      "gateway_request_id": "2026111309301719111734213745212"
+    }
+  ],
+  "budget": {
+    "usage": {
+      "llm_calls": 3,
+      "tool_calls": 0,
+      "planner_steps": 0,
+      "validation_rounds": 0,
+      "input_tokens": 219854,
+      "output_tokens": 3611,
+      "unknown_token_requests": 0
+    },
+    "deadline_epoch": 1794533744.2771368,
+    "remaining_seconds": 241.67199999999139,
+    "remaining_llm_calls": 0,
+    "max_planner_steps": 6,
+    "max_validation_rounds": 2,
+    "case_ids": [
+      "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc"
+    ],
+    "case_call_reservations": [
+      "45b67dcd6e464dc39b75182e38dd8b9a",
+      "7aabe0a15cd340fda98971473fcaed0a",
+      "4109e36fed2044d8a089c631c3b24db4"
+    ],
+    "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+    "case_accounts": [
+      {
+        "case_id": "case_bd6bf670d0b7c8c2bf98b592c9b2c8bc",
+        "limits": {
+          "extension_requests": 1,
+          "llm_calls": 96,
+          "rebinds": 2,
+          "tokens": 677343,
+          "tool_calls": 64
+        },
+        "usage": {
+          "extension_requests": 1,
+          "llm_calls": 12,
+          "rebinds": 0,
+          "tokens": 600808,
+          "tool_calls": 3
+        }
+      }
+    ]
+  },
+  "full_chapter_review_executed": false,
+  "sample_model_review_executed": false,
+  "published": false,
+  "production_written": false,
+  "old_reviews_and_protected_inputs_unchanged": true
+}

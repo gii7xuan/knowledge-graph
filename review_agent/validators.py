@@ -14,6 +14,7 @@ from typing import Any, Dict, Iterable, List, Mapping
 from evidence.verification import verify_vote_references
 from .execution import AuditPaused, api_error_fields
 from .llm_clients import response_metadata
+from .transport_diagnostics import exception_metadata
 from .response_contract import (CONTRACT_VERSION, RESPONSE_SCHEMA, SYSTEM_PROMPT,
                                 REASON_CODES, VALID_VERDICTS, VALID_SUPPORT, VALID_SCHEMA,
                                 validate_response)
@@ -176,7 +177,7 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 "retryable": False, "outcome_unknown": True,
                 "latency_ms": int((time.monotonic() - started) * 1000),
                 'raw_response':getattr(getattr(exc,'llm_response',None),'content',None),
-                **response_metadata(getattr(exc,'llm_response',None))}
+                **response_metadata(getattr(exc,'llm_response',None)), **exception_metadata(exc)}
     except json.JSONDecodeError as exc:
         return {**base, "response_status": "invalid_json", "verdict": None, "error": str(exc),
                 'raw_response':getattr(response,'content',None),'response_id':getattr(response,'response_id',None),
@@ -200,7 +201,7 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
                 **({"retryable": False, "outcome_unknown": True} if status == "timeout" else {}),
                 "latency_ms": int((time.monotonic() - started) * 1000),
                 'raw_response':getattr(getattr(exc,'llm_response',None),'content',None),
-                **response_metadata(getattr(exc,'llm_response',None))}
+                **response_metadata(getattr(exc,'llm_response',None)), **exception_metadata(exc)}
 
     return _normalize_review_result(voter,proposal,parsed,response,contract)
 

@@ -20,9 +20,11 @@ def api_error_fields(error):
     gateway_unknown=status in {408,504}
     transport_unknown = gateway_unknown or status is None and any(part in type(error).__name__.lower() for part in (
         "timeout", "connection", "protocol", "readerror", "writeerror"))
+    from .transport_diagnostics import exception_metadata
     return {"http_status": status, "retryable": not (permanent or transport_unknown),
             "pause_job": status == 402,
             **({"outcome_unknown": True} if transport_unknown else {}),
             "error_code": "INSUFFICIENT_BALANCE" if status == 402 else
             "GATEWAY_REQUEST_OUTCOME_UNKNOWN" if gateway_unknown else "UNKNOWN_REQUEST_OUTCOME" if transport_unknown else
-                          "PERMANENT_API_ERROR" if permanent else "TRANSIENT_API_ERROR"}
+                          "PERMANENT_API_ERROR" if permanent else "TRANSIENT_API_ERROR",
+            **exception_metadata(error)}
