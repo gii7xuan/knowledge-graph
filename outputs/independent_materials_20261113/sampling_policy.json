@@ -1,0 +1,22 @@
+{
+  "version": "independent_source_sampling_v1",
+  "window_count": 12,
+  "paragraph_characters": [
+    300,
+    1800
+  ],
+  "minimum_chinese_character_fraction": 0.2,
+  "sampling": "nearest distinct eligible paragraph to each equal-width canonical-text stratum midpoint",
+  "tie_breaker": "earlier source offset",
+  "replacement_after_results": false,
+  "candidate_limit_per_window": 1,
+  "no_extractable_fact": "retain as uncovered; never replace after seeing results",
+  "duplicate_fact_screen": "required after extraction against every development candidate and other selected windows",
+  "gold_label_policy": "blank independent annotations; model or assistant labels must retain their actual provenance",
+  "proposed_call_ceiling": {
+    "extraction": 12,
+    "review_including_planning_and_repairs": 216,
+    "total": 228
+  },
+  "live_execution_enabled": false
+}

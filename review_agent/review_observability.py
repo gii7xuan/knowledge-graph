@@ -58,7 +58,7 @@ def error_item(category,message,*,path=None,axes=AXES,expected=None,actual=None,
 
 def assess_vote(vote,proposal,*,frozen_request=None):
     """Keep reliable axes from a locally bad dimension; identity failures fence all axes."""
-    from .validator_contracts import contract_for,validate_vote,proposal_errors,mapping_reference_errors,prompt_for
+    from .validator_contracts import contract_for,validate_vote,proposal_errors,mapping_reference_errors,prompt_for,raw_from_vote
     from .validators import _parse_content
     from .response_corrections import schema_issues
     from .review_axes import axis_opinion
@@ -94,7 +94,7 @@ def assess_vote(vote,proposal,*,frozen_request=None):
         try:
             raw=deepcopy(vote.get('corrected_response')) if vote.get('corrected_response') is not None else _parse_content(vote.get('raw_response'))
         except (ValueError,TypeError):
-            if contract and vote.get('response_status')=='ok':raw=contract.raw_from_vote(vote)
+            if contract and vote.get('response_status')=='ok':raw=raw_from_vote(vote,version)
             else:errors.append(error_item('parse','raw response is not a complete JSON object'));global_ok=False
     elif global_ok:
         errors.append(error_item('parse','response body unavailable'));global_ok=False
@@ -174,7 +174,7 @@ def assess_vote(vote,proposal,*,frozen_request=None):
         observations[axis]={'usable':value is not None,'opinion':value,'missing_reasons':sorted(set(blocked[axis]))}
     complete_errors=[]
     if global_ok:
-        try:complete_errors=validate_vote(vote,version)+proposal_errors(contract.raw_from_vote(vote),proposal) if vote.get('response_status')=='ok' else [vote.get('error') or 'response not accepted']
+        try:complete_errors=validate_vote(vote,version)+proposal_errors(raw_from_vote(vote,version),proposal) if vote.get('response_status')=='ok' else [vote.get('error') or 'response not accepted']
         except (ValueError,TypeError,KeyError):complete_errors=['whole response contract unavailable']
         if not complete_errors:
             from evidence.verification import verify_vote_references

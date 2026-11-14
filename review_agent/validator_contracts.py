@@ -114,9 +114,15 @@ def prompt_for(proposal):
     return prompt
 
 
+def raw_from_vote(vote,version=None):
+    """Read stored model fields for every supported frozen response contract."""
+    contract=contract_for(version or vote.get('response_contract_version'))
+    return contract.raw_from_vote(vote) if hasattr(contract,'raw_from_vote') else {k:vote[k] for k in contract.RESPONSE_SCHEMA['properties'] if k in vote}
+
+
 def validate_vote(vote,version=None):
     contract=contract_for(version or vote.get('response_contract_version'))
-    raw=contract.raw_from_vote(vote) if hasattr(contract,'raw_from_vote') else {k:vote[k] for k in contract.RESPONSE_SCHEMA['properties'] if k in vote}
+    raw=raw_from_vote(vote,version)
     errors=contract.validate_response(raw)
     if not errors and hasattr(contract,'validate_correction_trace'):errors+=contract.validate_correction_trace(vote)
     if not errors and hasattr(contract,'normalize'):

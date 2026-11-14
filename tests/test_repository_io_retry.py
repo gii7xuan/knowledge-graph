@@ -14,7 +14,7 @@ class RepositoryConnectionRetryTests(unittest.TestCase):
     def test_wal_io_failure_closes_handle_and_recovers(self):
         broken,healthy=MagicMock(),MagicMock()
         def configure(statement):
-            if statement=='PRAGMA journal_mode': raise self.error(sqlite3.SQLITE_IOERR)
+            if statement=='PRAGMA journal_mode': raise self.error(10)  # SQLITE_IOERR, including Python 3.10.
         broken.execute.side_effect=configure
         with patch('review_agent.repository.sqlite3.connect',side_effect=[broken,healthy]) as connect, \
              patch('review_agent.repository.time.sleep'):
@@ -25,7 +25,7 @@ class RepositoryConnectionRetryTests(unittest.TestCase):
 
     def test_persistent_io_failure_is_bounded_and_all_handles_close(self):
         handles=[MagicMock() for _ in range(4)]
-        for handle in handles: handle.execute.side_effect=self.error(sqlite3.SQLITE_IOERR)
+        for handle in handles: handle.execute.side_effect=self.error(10)
         with patch('review_agent.repository.sqlite3.connect',side_effect=handles) as connect, \
              patch('review_agent.repository.time.sleep'):
             with self.assertRaises(sqlite3.OperationalError): ReviewRepository(':memory:').connect()
@@ -34,7 +34,7 @@ class RepositoryConnectionRetryTests(unittest.TestCase):
 
     def test_corruption_is_not_retried(self):
         handle=MagicMock()
-        handle.execute.side_effect=self.error(sqlite3.SQLITE_CORRUPT)
+        handle.execute.side_effect=self.error(11)  # SQLITE_CORRUPT must never trigger a retry.
         with patch('review_agent.repository.sqlite3.connect',return_value=handle) as connect:
             with self.assertRaises(sqlite3.OperationalError): ReviewRepository(':memory:').connect()
         self.assertEqual(connect.call_count,1)

@@ -22,6 +22,7 @@ def main():
         p=next((p for p in audit['rounds'] if p['proposal_digest']==decision.get('selected_proposal_digest')),
             audit['rounds'][-1] if audit['rounds'] else {'candidate':repo.get_revision(row['candidate_id']),'evidence_bundle':{'items':[]}})
         o=row['outcome'];system={'auto_admitted':False,'recommendation':o['recommendation'],
+            'source_support_result':o['dimension_results']['source']['status'],
             'prediction_observed':bool(audit['rounds']),'mapping_completed':o['dimension_results']['mapping']['status']=='valid',
             'revision_requested':o['recommendation']=='revise'}
         packet=bind_packet(p['candidate'],p,p['evidence_bundle'],p.get('review_scope_policy') or {},system=system)

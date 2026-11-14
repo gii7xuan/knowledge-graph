@@ -24,8 +24,8 @@ from review_agent.service import ReviewService
 from review_agent.validators import vote_binding
 from document.hierarchy_index import build_document_index
 from review_agent.cli import _document_index
-import test_review_planner as planner_helpers
-from test_review_planner import valid_response, action, ontology, finish
+from tests import test_review_planner as planner_helpers
+from tests.test_review_planner import valid_response, action, ontology, finish
 
 
 class IssueLifecycleTests(unittest.TestCase):

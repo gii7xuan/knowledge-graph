@@ -52,6 +52,51 @@ class TypedRecoveryFeedbackTests(unittest.TestCase):
         self.judge();again=self.judge()
         self.assertTrue(again['cached']);self.assertEqual(len(self.feedback),1)
 
+    def test_inline_retry_uses_the_same_task_specific_contract_feedback(self):
+        recorded=[]
+        def invoke(feedback):
+            recorded.append(feedback)
+            return {**self.binding,'response_status':'invalid_contract' if len(recorded)==1 else 'ok',
+                'error':'protected evidence not reviewed',
+                'raw_response':{'counterevidence_reviewed_ids':['original-counter']}}
+        result=judge_typed(self.voter,self.proposal,self.repo,task_type='candidate_revision_review',
+            binding=self.binding,invoke=invoke,validate_cached=lambda vote:[],
+            prompt_hash='inline-repair',retries=1,timeout=2)
+        self.assertEqual(result['response_status'],'ok')
+        self.assertEqual(recorded[1]['required_changed_fields'],['qualifiers.condition'])
+        self.assertEqual(recorded[1]['missing_reviewed_evidence_ids'],['original-support'])
+
+    def test_transient_error_does_not_erase_the_previous_contract_repair(self):
+        self.judge(invalid=True,raw={'counterevidence_reviewed_ids':['original-counter']})
+        recorded=[]
+        def invoke(feedback):
+            recorded.append(feedback)
+            return {**self.binding,'response_status':'api_error','retryable':True,'error':'HTTP 500'}
+        judge_typed(self.voter,self.proposal,self.repo,task_type='candidate_revision_review',
+            binding=self.binding,invoke=invoke,validate_cached=lambda vote:[],prompt_hash='frozen-prompt',timeout=2)
+        self.judge()
+        self.assertEqual(self.feedback[-1]['missing_reviewed_evidence_ids'],['original-support'])
+
+    def test_inline_semantic_repair_handles_malformed_references_and_transient_error(self):
+        recorded=[]
+        proposal={**self.proposal,'questions':[{'id':'coverage'}],
+            'source_documents':[{'document_id':'manual','text':'An exact source statement.'}]}
+        def invoke(feedback):
+            recorded.append(feedback)
+            status=('invalid_contract','api_error','ok')[len(recorded)-1]
+            return {**self.binding,'response_status':status,'retryable':True,'error':'malformed quotation reference',
+                'raw_response':{'assessments':[{'question_id':'coverage',
+                    'quotes':[{'document_id':['invalid-id-type'],'quote':'wrong'}]}]}}
+        result=judge_typed(self.voter,proposal,self.repo,task_type='ontology_competency_review',
+            binding=self.binding,invoke=invoke,validate_cached=lambda vote:[],
+            prompt_hash='inline-semantic-repair',retries=2,timeout=2)
+        self.assertEqual(result['response_status'],'ok')
+        self.assertEqual(result['actual_calls'],3)
+        self.assertEqual(recorded[1],recorded[2])
+        self.assertEqual(recorded[1]['question_ids'],['coverage'])
+        self.assertEqual(recorded[1]['invalid_quotation_references'][0]['exact_occurrences'],0)
+        self.assertIn('Preserve the actual pass/fail/unknown',recorded[1]['quotation_rule'])
+
     def test_unknown_request_is_not_reopened_to_supply_feedback(self):
         first=self.judge(invalid=True)
         with self.repo.transaction(immediate=True) as connection:

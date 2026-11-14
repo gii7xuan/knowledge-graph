@@ -33,7 +33,8 @@ def annotation_template(packet):
     return {'packet_id':packet['packet_id'],'binding':deepcopy(packet['binding']),'status':'pending',
         'annotated_by':'human','reviewer':None,'annotated_at':None,'full_packet_reviewed':False,
         'saw_model_conclusions':None,'four_axes':{name:None for name in AXES},
-        'admission_eligible':None,'needs_revision':None,'mapping_correct':None,'evidence_ids':[],'note':None}
+        'admission_eligible':None,'needs_revision':None,'mapping_correct':None,
+        'avoidable_manual_review':None,'evidence_ids':[],'note':None}
 
 
 def validate_annotation(annotation,packet):
@@ -49,7 +50,7 @@ def validate_annotation(annotation,packet):
         raise ValueError('invalid four-axis human annotation')
     eligible=annotation.get('admission_eligible')
     if eligible is not None and type(eligible) is not bool:raise ValueError('admission eligibility must be a human boolean or unknown')
-    for key in ('needs_revision','mapping_correct'):
+    for key in ('needs_revision','mapping_correct','avoidable_manual_review'):
         if annotation.get(key) is not None and type(annotation[key]) is not bool:raise ValueError(key+' must be a human boolean or unknown')
     if eligible is True and axes!={'source':'supported','expression':'standard','mapping':'valid','scope':'include'}:
         raise ValueError('admission gold requires all four complete admission conditions')
@@ -57,7 +58,9 @@ def validate_annotation(annotation,packet):
     available={e['evidence_id'] for e in packet['evidence_bundle'].get('items',[])}
     if not isinstance(ids,list) or any(not isinstance(e,str) for e in ids) or set(ids)-available:
         raise ValueError('human annotation cites foreign evidence')
-    if any(v is not None for v in axes.values()) and (not ids or not str(annotation.get('note') or '').strip()):
+    has_judgment=any(v is not None for v in axes.values()) or any(annotation.get(k) is not None for k in
+        ('admission_eligible','needs_revision','mapping_correct','avoidable_manual_review'))
+    if has_judgment and (not ids or not str(annotation.get('note') or '').strip()):
         raise ValueError('human axis judgments require current source references and explanation')
     return deepcopy(annotation)
 
@@ -125,10 +128,12 @@ def quality_report(packets,annotations=(),*,revision_operations=(),revision_asse
         metric('mapping_accuracy',sum(a['four_axes']['mapping']=='valid' for a in known_mapping),len(mapping),unknown=len(mapping)-len(known_mapping),
             reason='没有完成的正式映射，暂不可评估' if not mapping else None,
             denominator_note='已完成且有正式ID的映射；人工同时核验身份、关系语义和类型约束')]
+    from .generalization_metrics import report as semantic_metrics
     return {'version':VERSION,'partition':partition,'quality_claim':'开发回归，不能作为独立泛化结论' if partition=='development' else '仅适用于已核验的独立标注样本',
         'population':len(rows),'human_resolved':sum(bool(a) for _,a in rows),'human_admission_truth_missing':missing_gold,
         'auto_admitted':len(auto),'all_manual_is_success':False,'metrics':results,
         'recommendation_metrics':recommendation_metrics(rows,indexed,annotations_by_id,shadow_revision_operations,shadow_revision_assessments),
+        'generalization_metrics':semantic_metrics(rows),
         'axis_annotation_counts':{name:dict(Counter(a['four_axes'][name] for _,a in rows if a and a['four_axes'][name] is not None)) for name in AXES}}
 
 

@@ -102,9 +102,9 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
                 if connection is not None:
                     connection.close()
                 code = getattr(exc, "sqlite_errorcode", None)
-                transient = code is not None and (code & 0xff) in {
-                    sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED, sqlite3.SQLITE_IOERR,
-                }
+                # Primary result codes are stable across SQLite releases. Their
+                # Python names were only exported in Python 3.11; retain 3.10.
+                transient = type(code) is int and (code & 0xff) in {5, 6, 10}
                 if not transient or attempt == 3:
                     if hasattr(exc,'add_note'):
                         exc.add_note(f"SQLite connection setup: {getattr(exc, 'sqlite_errorname', 'unknown')} ({code})")

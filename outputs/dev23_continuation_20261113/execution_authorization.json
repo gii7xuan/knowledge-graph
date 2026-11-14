@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-11-13T09:20:18.519560+00:00",
+  "source": "current user instruction in this chat",
+  "instruction": "我没法提供网关管理入口或日志，没有权限。如果不能对账的话就当做未完成的需要人工审核的部分，继续剩下的样本",
+  "scope": "continue only the 23 previously untouched cases; hold unresolved originals for human review without changing their unknown outcome or resending them",
+  "freeze_hash": "068dc0ba420d3d75ce2295bb2ca7048b6e3d13b64b36065efe74f0dbe116544e",
+  "manual_holds_hash": "c60ce9d8bb37ceede69a7642074ebe76d4c50beb33437e6344f145d3e5a16214",
+  "additional_call_upper_bound": 414,
+  "combined_upper_bound_including_previous_43": 457,
+  "original_approved_upper_bound": 540,
+  "prior_destination_and_payload_authorization": "outputs/dev30_frozen_20261113_r2/execution_authorization.json",
+  "destinations": [
+    {
+      "role": "planner",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_a",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_b",
+      "model": "Gemma",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_c",
+      "model": "deepseek-flash",
+      "base_url": "https://api.deepseek.com"
+    }
+  ],
+  "old_requests_retry_authorized": false,
+  "unknown_outcome_reclassified_as_not_sent": false
+}

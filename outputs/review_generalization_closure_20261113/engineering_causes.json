@@ -1,0 +1,72 @@
+[
+  {
+    "id": "C01",
+    "cause": "反证存在被无条件当成委员分歧",
+    "code": "review_agent/review_axes.py:aggregate_axes",
+    "verification": "tests.test_review_four_axes",
+    "status": "fixed"
+  },
+  {
+    "id": "C02",
+    "cause": "同轮与跨轮恢复反馈不一致，瞬时失败覆盖契约修复要求",
+    "code": "review_agent/request_execution.py:judge_typed",
+    "verification": "tests.test_typed_recovery_feedback",
+    "status": "fixed"
+  },
+  {
+    "id": "C03",
+    "cause": "同源文档及表面变体重复事实可跨验证分区",
+    "code": "evaluation/split_integrity.py",
+    "verification": "tests.test_split_integrity",
+    "status": "fixed"
+  },
+  {
+    "id": "C04",
+    "cause": "存在未知请求或空人口时，冒烟门禁可错误放行扩批",
+    "code": "evaluation/regression_gate.py; runs/regress_v8.py",
+    "verification": "tests.test_regression_readiness",
+    "status": "fixed"
+  },
+  {
+    "id": "C05",
+    "cause": "冻结未覆盖本体审核及图交付代码；旧入口无法先准备再单次执行",
+    "code": "runs/regress_v8.py:fingerprints; evaluation/frozen_regression.py",
+    "verification": "tests.test_frozen_regression",
+    "status": "fixed"
+  },
+  {
+    "id": "C06",
+    "cause": "冻结快照后晚到回复被丢弃，用量未回记，504被当成已知失败",
+    "code": "evaluation/request_meter.py",
+    "verification": "tests.test_regression_readiness.RequestMeterReconciliationTests",
+    "status": "fixed"
+  },
+  {
+    "id": "E01",
+    "cause": "原文判断、必要修订、合理及可避免转人工建议缺独立指标与覆盖分母",
+    "code": "evaluation/generalization_metrics.py; evaluation/review_quality.py",
+    "verification": "tests.test_generalization_metrics",
+    "status": "implemented; current truth remains unavailable"
+  },
+  {
+    "id": "C07",
+    "cause": "连接错误分类和测试依赖 Python 3.11 才导出的 SQLite 错误码名称",
+    "code": "review_agent/repository.py; tests/test_repository_io_retry.py",
+    "verification": "tests.test_repository_io_retry",
+    "status": "fixed, including corruption no-retry and bounded IO retry"
+  },
+  {
+    "id": "C08",
+    "cause": "旧版有效投票展示调用不存在的新版 raw_from_vote 方法",
+    "code": "review_agent/validator_contracts.py; review_agent/review_observability.py",
+    "verification": "tests.test_legacy_vote_projection and all three original failed service projections",
+    "status": "fixed; legacy axes are not invented"
+  },
+  {
+    "id": "C09",
+    "cause": "扩批门禁漏查规划器台账中的已开始或结果未知请求",
+    "code": "evaluation/regression_gate.py:request_accounting",
+    "verification": "tests.test_regression_readiness and 19 postrun tests",
+    "status": "fixed after this live run; no new live calls; original execution snapshot preserved"
+  }
+]

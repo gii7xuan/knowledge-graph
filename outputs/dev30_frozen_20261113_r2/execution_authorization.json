@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-11-13T08:30:45.029541+00:00",
+  "source": "user reply in current chat to the explicit destination, payload and budget approval question",
+  "user_reply": "重跑",
+  "scope": "one frozen 30-case development rerun, 7 then remaining 23, no automatic relaunch",
+  "transfer_plan_hash": "b68a5e05dc314281c5d674da9c307ad392ad845633f6f122b076cc1b1044ad16",
+  "freeze_hash": "316d5f3e58dc1d312f58d08c59ec5549dc032225c1cdb36d36a510ff39ab1735",
+  "destinations": [
+    {
+      "role": "planner",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_a",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_b",
+      "model": "Gemma",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_c",
+      "model": "deepseek-flash",
+      "base_url": "https://api.deepseek.com"
+    }
+  ],
+  "limits": {
+    "llm_calls_per_candidate": 18,
+    "llm_calls_total_upper_bound": 540,
+    "tokens_per_case_stop_threshold": 400000,
+    "candidate_deadline_seconds": 420,
+    "extra_service_probes": 0,
+    "relaunches": 0
+  }
+}

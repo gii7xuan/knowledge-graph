@@ -49,13 +49,7 @@ def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, vali
         return {**binding,'response_status':'api_error','error_code':'DUPLICATE_REQUEST_SUPPRESSED',
                 'error':'frozen request running or outcome unknown','outcome_unknown':True,
                 'retryable':False,'cached':True,'actual_calls':0,'attempts':[],'request_key':key}
-    attempts=[]
-    feedback=None
-    history=repository.request_history(key)
-    prior=history[-1] if history else None
-    failed=(prior or {}).get('result') or {}
-    if (prior and prior.get('state')=='failed' and not failed.get('outcome_unknown')
-            and failed.get('response_status') in {'invalid_contract','invalid_json','invalid_reference'}):
+    def correction_feedback(failed, prior):
         feedback={'error':failed.get('error'),'response_status':failed['response_status'],
             'raw_response_ref':prior['attempt_id'],'validation_errors':failed.get('validation_errors',[]),
             'instruction':'Correct the original contract/reference error for this exact frozen task. Preserve IDs, evidence, constraints and substantive uncertainty; do not seek an approval outcome.'}
@@ -81,7 +75,9 @@ def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, vali
                 if not isinstance(quotes,list):continue
                 for quote in quotes:
                     if not isinstance(quote,dict):continue
-                    document=documents.get(quote.get('document_id'),'');literal=quote.get('quote')
+                    document_id=quote.get('document_id')
+                    document=documents.get(document_id,'') if isinstance(document_id,str) else ''
+                    literal=quote.get('quote')
                     count=document.count(literal) if isinstance(literal,str) and literal else 0
                     if count!=1:
                         feedback['invalid_quotation_references'].append({'question_id':assessment.get('question_id'),
@@ -91,7 +87,8 @@ def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, vali
             feedback['required_reviewed_evidence_ids']=proposal.get('protected_evidence_ids',[])
             feedback['protected_material_rule']='Independently assess every protected_evidence_id, including supporting/context material. counterevidence_reviewed_ids records which protected items were assessed, not which items actually contradict the revision. Approval still requires all protected items assessed; do not add a contradictory item to support merely to pass the contract.'
             try:
-                previous=json.loads(failed.get('raw_response') or '{}')
+                previous=failed.get('raw_response') or {}
+                if isinstance(previous,str):previous=json.loads(previous)
                 reviewed=previous.get('counterevidence_reviewed_ids',[]) if isinstance(previous,dict) else []
                 reviewed={value for value in reviewed if isinstance(value,str)} if isinstance(reviewed,list) else set()
             except (TypeError,ValueError):reviewed=set()
@@ -103,6 +100,18 @@ def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, vali
                 after.get('qualifier_status',{}).get(field.split('.')[1])=='not_stated' else 'supported')
                 for field in proposal.get('changed_fields',[])}
             feedback['field_status_instruction']='These are the original contract conditions for approval, not a requested outcome. An evidence-grounded removal of an unsupported type mapping is assessed as an operation; not_stated_in_scope is reserved for qualifier absence. Return uncertain/reject when the operation is not grounded. Every approved field review must cite actual allowed source evidence.'
+        return feedback
+    attempts=[]
+    feedback=None
+    repairable={'invalid_contract','invalid_json','invalid_reference'}
+    # An intervening known transport failure contains no new semantic response.
+    # Retain the last contract repair for this exact frozen request.
+    for prior in reversed(repository.request_history(key)):
+        failed=prior.get('result') or {}
+        if prior.get('state') not in {'failed','not_sent'} or failed.get('outcome_unknown'):break
+        if failed.get('response_status') in repairable:
+            feedback=correction_feedback(failed,prior)
+            break
     result={**binding,'response_status':'api_error','error_code':'DEADLINE_EXHAUSTED','actual_calls':0}
     for number in range(retries+1):
         wait=min(float(voter.get('request_timeout_seconds',timeout)),
@@ -115,8 +124,8 @@ def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, vali
                               lambda:invoke(feedback),task_type=task_type)
         attempts.append({**result,'attempt_no':number+1})
         if result['response_status']=='ok' or result.get('retryable') is False or result.get('pause_job'): break
-        feedback={'error':result.get('error'),'raw_response_ref':result.get('attempt_id'),
-                  'instruction':'Repair contract/reference failures for exactly the same frozen task. Do not change IDs or facts.'}
+        if result['response_status'] in repairable:
+            feedback=correction_feedback(result,{'attempt_id':result.get('attempt_id')})
     result={**result,'attempts':attempts,'request_key':key,
             'actual_calls':sum(0 if a.get('actual_calls')==0 else 1 for a in attempts)}
     repository.finish_validation_request(key,owner,result)

@@ -1,0 +1,47 @@
+{
+  "freeze_hash": "316d5f3e58dc1d312f58d08c59ec5549dc032225c1cdb36d36a510ff39ab1735",
+  "population": 30,
+  "roles_and_destinations": [
+    {
+      "role": "planner",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_a",
+      "model": "Qwen",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_b",
+      "model": "Gemma",
+      "base_url": "https://43.143.151.41:3000/v1"
+    },
+    {
+      "role": "judge_c",
+      "model": "deepseek-flash",
+      "base_url": "https://api.deepseek.com"
+    }
+  ],
+  "payload_categories": [
+    "fixed development candidate triples and qualifiers",
+    "related original chapter source evidence with locators",
+    "approved ontology review context and formal identifiers",
+    "frozen task rules, evidence references and correction feedback"
+  ],
+  "source": "fixed 30 samples from 火炮弹道学_钱林方_第一章",
+  "human_labels_in_prompt": false,
+  "independent_source_included": false,
+  "limits": {
+    "llm_calls_per_candidate": 18,
+    "llm_calls_total_upper_bound": 540,
+    "tokens_per_case_stop_threshold": 400000,
+    "candidate_deadline_seconds": 420,
+    "extra_service_probes": 0,
+    "relaunches": 0
+  },
+  "sequence": "7 initial cases, then only the remaining 23 if engineering gate passes",
+  "production_publication_and_graph_import": false,
+  "external_calls_started": 0,
+  "status": "blocked_pending_explicit_destination_and_payload_authorization"
+}

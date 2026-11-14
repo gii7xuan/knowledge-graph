@@ -1,0 +1,1404 @@
+{
+  "disputes": [
+    {
+      "sample_id": "DEV-002",
+      "axis": "source",
+      "proposal_digest": "6845ab495ebd554a67a674ae7531ef589ae6dbba83c3e1b5debc4566821b4d7e",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-002",
+      "axis": "expression",
+      "proposal_digest": "6845ab495ebd554a67a674ae7531ef589ae6dbba83c3e1b5debc4566821b4d7e",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "qualifiers",
+                "kind": "semantic_error",
+                "note": "“分别”表示对象间的对应关系，不应作为单一三元组的量词。",
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "normalization": null,
+                "rule_id": "PAIR-001",
+                "meaning_effect": "changed",
+                "suggested_change": "删除 quantifier 中的“分别”"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-002",
+      "axis": "scope",
+      "proposal_digest": "6845ab495ebd554a67a674ae7531ef589ae6dbba83c3e1b5debc4566821b4d7e",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "derivation"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-003",
+      "axis": "scope",
+      "proposal_digest": "4451999f1494d8997e2edb9041860f74cfd034570e798b70126a72a804a63413",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "local_definition"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-004",
+      "axis": "mapping",
+      "proposal_digest": "d17739cf8685ba3345dfe09abd2a27d786328496039f5dd599d43d7f89cdef8c",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-005",
+      "axis": "source",
+      "proposal_digest": "c057161ca47d229e358b865e34d3c93f4640f6a12c4c14299f5553a8f2eb6a17",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-005",
+      "axis": "expression",
+      "proposal_digest": "c057161ca47d229e358b865e34d3c93f4640f6a12c4c14299f5553a8f2eb6a17",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "原文“的”表示所属关系，候选“包含”表示集合成员关系，语义不一致。",
+                "evidence_ids": [
+                  "ev_d8eb2350a2ff41e8cc1c",
+                  "ev_0e7e640295d9744ca81f"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将surface_relation从“包含”改为“具有”或“的”以匹配原文所属关系。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-005",
+      "axis": "scope",
+      "proposal_digest": "c057161ca47d229e358b865e34d3c93f4640f6a12c4c14299f5553a8f2eb6a17",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "local_definition"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-007",
+      "axis": "mapping",
+      "proposal_digest": "66fd3180c942b667190ad0a4de5e36c409a2f42ca306730c80e0e13a3908853f",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-008",
+      "axis": "mapping",
+      "proposal_digest": "e88169639087a2f48d9e8989438325c4b623d277e52414283d4d6d8f79bcf0ef",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-009",
+      "axis": "scope",
+      "proposal_digest": "d1a594e2573acc6e7befe0feb9a0fe8d2a7f6aadf734969c04feed1c11db7268",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "conditional"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-011",
+      "axis": "source",
+      "proposal_digest": "2347827286a2434ccc515623cd54e73fee28b6b2fec2372321863e8ac5c81c6e",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-011",
+      "axis": "expression",
+      "proposal_digest": "2347827286a2434ccc515623cd54e73fee28b6b2fec2372321863e8ac5c81c6e",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "原文未明确支持“关联”这一关系表达，需重新审核关系语义。",
+                "evidence_ids": [
+                  "ev_70d282af42b7e86dc26c",
+                  "ev_7dc9be5d435b4779052f",
+                  "ev_fe016523a8edc315f7fc"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将关系表达修改为原文支持的相对大小关系。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-012",
+      "axis": "source",
+      "proposal_digest": "4d01fbe834a217f0353ef71faa0ff619826b75d8772bae2c6f82bb276680e8df",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-012",
+      "axis": "expression",
+      "proposal_digest": "4d01fbe834a217f0353ef71faa0ff619826b75d8772bae2c6f82bb276680e8df",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unresolved",
+            "findings": [
+              {
+                "check": "qualifiers",
+                "kind": "unresolved",
+                "note": "“即可直接求出”是能力还是断言，需结合完整语境判断模态。",
+                "evidence_ids": [
+                  "ev_efbbb0cad7b03e2db95d"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "unresolved",
+                "suggested_change": "补充该句前后语境以确认modality应为can还是asserted。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-013",
+      "axis": "mapping",
+      "proposal_digest": "358e80167a9148a5db3d8edb5d39acaba9e81413b1c792f3795441fee62d9584",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-014",
+      "axis": "mapping",
+      "proposal_digest": "10321319800c8f8b59968904970992f7727e9b8f6e80e49555010438fee0b086",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-014",
+      "axis": "scope",
+      "proposal_digest": "10321319800c8f8b59968904970992f7727e9b8f6e80e49555010438fee0b086",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "local_definition"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-015",
+      "axis": "mapping",
+      "proposal_digest": "5566e5c812bbd1794d8190e3e2de43f79a28e0247a3bf4e634efc6530dbfa498",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-016",
+      "axis": "expression",
+      "proposal_digest": "669ef35ef148481bc334e5897c25dfbea116bb8cc0a25f29bf0283112d80b005",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "entity_reference",
+                "kind": "compound_entity",
+                "note": "尾实体包含摩擦阻力、涡流阻力、波动阻力三个独立概念，需拆分。",
+                "evidence_ids": [
+                  "ev_34a9e63d42e4c425b893"
+                ],
+                "normalization": null,
+                "rule_id": "SPLIT-001",
+                "meaning_effect": "unresolved",
+                "suggested_change": "将尾实体拆分为三个独立的三元组，分别对应摩擦阻力、涡流阻力和波动阻力。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-017",
+      "axis": "source",
+      "proposal_digest": "73e64e8d4148a2f4c70e9d4215176406a3e4af91520ab631b75457caf2ef169c",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-017",
+      "axis": "mapping",
+      "proposal_digest": "73e64e8d4148a2f4c70e9d4215176406a3e4af91520ab631b75457caf2ef169c",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-019",
+      "axis": "mapping",
+      "proposal_digest": "f1bc4ef02c219a17da1e792edec7511dff32aaa9f8d907f09aa57823ed802693",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-019",
+      "axis": "scope",
+      "proposal_digest": "f1bc4ef02c219a17da1e792edec7511dff32aaa9f8d907f09aa57823ed802693",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "unresolved"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-021",
+      "axis": "source",
+      "proposal_digest": "179c57cde81c6c1cab9490aaf46e011c9a819611646a93f933841ca3894ea44f",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-021",
+      "axis": "expression",
+      "proposal_digest": "179c57cde81c6c1cab9490aaf46e011c9a819611646a93f933841ca3894ea44f",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "qualifiers",
+                "kind": "semantic_error",
+                "note": "在定义或等价表示中，“可表示为”不应被判定为模态can。",
+                "evidence_ids": [
+                  "ev_5f04a1717f2ae5f320ad"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将qualifiers.modality由can改为null或not_stated。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "qualifiers",
+                "kind": "semantic_error",
+                "note": "“可表示为”是定义式，标为can误作能力或可能性。",
+                "evidence_ids": [
+                  "ev_5f04a1717f2ae5f320ad",
+                  "ev_815b810c15295d1c9e69"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将modality由can改为asserted。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-022",
+      "axis": "expression",
+      "proposal_digest": "ebb6301c694079eb61085b850579611eacd3b9fde0ebe3e809306067b9e6b8e5",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "投影对象应为矢量方程而非微分方程组",
+                "evidence_ids": [
+                  "ev_e6de37594d24ed42f3b2"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将头实体改为弹丸质心运动矢量方程"
+              },
+              {
+                "check": "relation_direction",
+                "kind": "semantic_error",
+                "note": "关系方向与推导逻辑不符",
+                "evidence_ids": [
+                  "ev_e6de37594d24ed42f3b2"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "修正头实体以匹配投影方向"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-022",
+      "axis": "scope",
+      "proposal_digest": "ebb6301c694079eb61085b850579611eacd3b9fde0ebe3e809306067b9e6b8e5",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "derivation"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "derivation"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "conditional"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-025",
+      "axis": "source",
+      "proposal_digest": "aa4e6d94f595d6cfc2952845b349f0996ab6d00edc2958265d290c22ff1fd131",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-025",
+      "axis": "expression",
+      "proposal_digest": "aa4e6d94f595d6cfc2952845b349f0996ab6d00edc2958265d290c22ff1fd131",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "qualifiers",
+                "kind": "semantic_error",
+                "note": "原文“可”在此表示模型等价简化，而非能力或可能性。",
+                "evidence_ids": [
+                  "ev_fb32c0b835deace58bfa",
+                  "ev_df581a342a45722ca57b"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将modality从can改为asserted"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unresolved",
+            "findings": [
+              {
+                "check": "qualifiers",
+                "kind": "unresolved",
+                "note": "可近似看成是定义性近似，模态can未由语境确认。",
+                "evidence_ids": [
+                  "ev_df581a342a45722ca57b",
+                  "ev_1c843963c93e22bc17f3"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "unresolved",
+                "suggested_change": "结合完整句与公式确认模态，或改为未标注模态。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-027",
+      "axis": "source",
+      "proposal_digest": "1162953776558438f97c340672089f715cc21a37127574511e315b97a0324f77",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-027",
+      "axis": "expression",
+      "proposal_digest": "1162953776558438f97c340672089f715cc21a37127574511e315b97a0324f77",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "“出现于”与原文“会出现极限速度的情况”语义不一致，原文表达条件性可能而非空间或归属关系。",
+                "evidence_ids": [
+                  "ev_74cbf07fbd9bd95d7404",
+                  "ev_de1b5bb727f4b980cff4"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将关系改为“在条件下可能出现”或类似表达，以匹配原文的条件性可能语义。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    },
+    {
+      "sample_id": "DEV-030",
+      "axis": "scope",
+      "proposal_digest": "06659533017ef40023a9b34c762c3e41472be05b494cc4f928958cf52dcb159e",
+      "source_database": "D:\\knowledge-huopao\\outputs\\dev30_v8_full_20261111\\review.sqlite3",
+      "original_observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "local_definition"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "conditional"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "conditional"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "resolution": "preserve all substantive opinions; no approval-seeking reroll"
+    }
+  ],
+  "historical_votes_changed": false
+}

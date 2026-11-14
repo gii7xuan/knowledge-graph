@@ -1,0 +1,150 @@
+{
+  "status": "imported_pending_approval",
+  "draft_path": "D:\\knowledge-huopao\\runs\\_test_ontology_import\\41ad03958aa94fb6b1c208b289207df0\\draft",
+  "valid": true,
+  "auto_review_allowed": true,
+  "ontology_version": "95189d1440dd6bac864a7736494428c23d48d23f4b221dba351050616b45df93",
+  "release_id": null
+}
+[ontology] 1/1 chunk=chunk_dff4ff0f2f39 status=succeeded candidates=1
+[ontology] 1/1 chunk=chunk_dff4ff0f2f39 status=succeeded candidates=1
+片段 chunk_timeout 第 1/2 次抽取失败: 504 Gateway Time-out
+片段 chunk_timeout 首次超时，拆分为 2 个子片段后重试。
+[review] status_file=D:\knowledge-huopao\runs\tmpjqx3maes\status.json
+[review] status=running completed=0/1 skipped=0 failed=0
+[review] status=running completed=1/1 skipped=0 failed=0
+[review] status=completed completed=1/1 skipped=0 failed=0
+[review] status_file=D:\knowledge-huopao\runs\tmpjqx3maes\status.json
+[review] status=running completed=0/0 skipped=1 failed=0
+[review] status=completed completed=0/0 skipped=1 failed=0
+D:\miniconda3\envs\knowledge\lib\subprocess.py:1072: ResourceWarning: subprocess 22116 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "observed", "comparison_version": "dimensions_axes_findings_v2", "trials": 3, "input_fingerprint": "4e40d3a52ac349c54c316b2e24e6f4255ea4a83f9746253cc39ab6adf817dbf5", "voters": [{"voter_id": "a", "valid_trials": 3, "technical_failures": 0, "changed": false, "changed_checks": [], "changed_axes": [], "findings_changed": false, "reported_model_ids": [], "backend_weight_version_pinned": false}, {"voter_id": "b", "valid_trials": 3, "technical_failures": 0, "changed": false, "changed_checks": [], "changed_axes": [], "findings_changed": false, "reported_model_ids": [], "backend_weight_version_pinned": false}, {"voter_id": "c", "valid_trials": 3, "technical_failures": 0, "changed": false, "changed_checks": [], "changed_axes": [], "findings_changed": false, "reported_model_ids": [], "backend_weight_version_pinned": false}], "interpretation": "重复一致性仅说明固定请求下的行为，不等于正确率；服务模型别名不能证明后端权重版本固定。", "sample_id": "DEV-016", "new_model_calls": 6, "calls_this_invocation": 6, "sampling": {"temperature": 0.0}, "production_written": false, "baseline_votes_overwritten": false, "human_gold_used": false}
+{"status": "observed", "comparison_version": "dimensions_axes_findings_v2", "trials": 3, "input_fingerprint": "4e40d3a52ac349c54c316b2e24e6f4255ea4a83f9746253cc39ab6adf817dbf5", "voters": [{"voter_id": "a", "valid_trials": 3, "technical_failures": 0, "changed": false, "changed_checks": [], "changed_axes": [], "findings_changed": false, "reported_model_ids": [], "backend_weight_version_pinned": false}, {"voter_id": "b", "valid_trials": 3, "technical_failures": 0, "changed": false, "changed_checks": [], "changed_axes": [], "findings_changed": false, "reported_model_ids": [], "backend_weight_version_pinned": false}, {"voter_id": "c", "valid_trials": 3, "technical_failures": 0, "changed": false, "changed_checks": [], "changed_axes": [], "findings_changed": false, "reported_model_ids": [], "backend_weight_version_pinned": false}], "interpretation": "重复一致性仅说明固定请求下的行为，不等于正确率；服务模型别名不能证明后端权重版本固定。", "sample_id": "DEV-016", "new_model_calls": 6, "calls_this_invocation": 0, "sampling": {"temperature": 0.0}, "production_written": false, "baseline_votes_overwritten": false, "human_gold_used": false}
+D:\miniconda3\envs\knowledge\lib\subprocess.py:1072: ResourceWarning: subprocess 12960 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\miniconda3\envs\knowledge\lib\subprocess.py:1072: ResourceWarning: subprocess 30496 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+======================================================================
+ERROR: test_corruption_is_not_retried (test_repository_io_retry.RepositoryConnectionRetryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_repository_io_retry.py", line 37, in test_corruption_is_not_retried
+    handle.execute.side_effect=self.error(sqlite3.SQLITE_CORRUPT)
+  File "D:\miniconda3\envs\knowledge\lib\sqlite3\__init__.py", line 71, in __getattr__
+    raise AttributeError(f"module 'sqlite3' has no attribute '{name}'")
+AttributeError: module 'sqlite3' has no attribute 'SQLITE_CORRUPT'
+
+======================================================================
+ERROR: test_persistent_io_failure_is_bounded_and_all_handles_close (test_repository_io_retry.RepositoryConnectionRetryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_repository_io_retry.py", line 28, in test_persistent_io_failure_is_bounded_and_all_handles_close
+    for handle in handles: handle.execute.side_effect=self.error(sqlite3.SQLITE_IOERR)
+  File "D:\miniconda3\envs\knowledge\lib\sqlite3\__init__.py", line 71, in __getattr__
+    raise AttributeError(f"module 'sqlite3' has no attribute '{name}'")
+AttributeError: module 'sqlite3' has no attribute 'SQLITE_IOERR'. Did you mean: 'SQLITE_INSERT'?
+
+======================================================================
+ERROR: test_wal_io_failure_closes_handle_and_recovers (test_repository_io_retry.RepositoryConnectionRetryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_repository_io_retry.py", line 21, in test_wal_io_failure_closes_handle_and_recovers
+    self.assertIs(ReviewRepository(':memory:').connect(),healthy)
+  File "D:\knowledge-huopao\review_agent\repository.py", line 97, in connect
+    mode = connection.execute("PRAGMA journal_mode").fetchone()[0]
+  File "D:\miniconda3\envs\knowledge\lib\unittest\mock.py", line 1114, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "D:\miniconda3\envs\knowledge\lib\unittest\mock.py", line 1118, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "D:\miniconda3\envs\knowledge\lib\unittest\mock.py", line 1179, in _execute_mock_call
+    result = effect(*args, **kwargs)
+  File "D:\knowledge-huopao\tests\test_repository_io_retry.py", line 17, in configure
+    if statement=='PRAGMA journal_mode': raise self.error(sqlite3.SQLITE_IOERR)
+  File "D:\miniconda3\envs\knowledge\lib\sqlite3\__init__.py", line 71, in __getattr__
+    raise AttributeError(f"module 'sqlite3' has no attribute '{name}'")
+AttributeError: module 'sqlite3' has no attribute 'SQLITE_IOERR'. Did you mean: 'SQLITE_INSERT'?
+
+======================================================================
+ERROR: test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round (test_review_enhancement_v4.EnhancedAgentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 95, in assess_vote
+    raw=deepcopy(vote.get('corrected_response')) if vote.get('corrected_response') is not None else _parse_content(vote.get('raw_response'))
+  File "D:\knowledge-huopao\review_agent\validators.py", line 104, in _parse_content
+    raise ValueError("validator response must be a JSON object")
+ValueError: validator response must be a JSON object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_enhancement_v4.py", line 248, in test_conflict_is_resolved_by_current_independent_checks_and_import_uses_only_selected_round
+    displayed = ReviewService(self.repo, config=self.config).items("run")["items"][0]["audit_summary"]
+  File "D:\knowledge-huopao\review_agent\service.py", line 214, in items
+    diagnostic=outcome(displayed,displayed_votes,Committee([m['id'] for m in members],
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 239, in outcome
+    context=context or {};decision=decision or {};report=summarize_dimensions(votes,proposal,committee)
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 213, in summarize_dimensions
+    selected[voter]=vote;report=assess_vote(vote,proposal)
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 97, in assess_vote
+    if contract and vote.get('response_status')=='ok':raw=contract.raw_from_vote(vote)
+AttributeError: module 'review_agent.response_contract' has no attribute 'raw_from_vote'
+
+======================================================================
+ERROR: test_source_supported_schema_gap_creates_waiting_task_without_outbox (test_review_enhancement_v4.EnhancedAgentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 95, in assess_vote
+    raw=deepcopy(vote.get('corrected_response')) if vote.get('corrected_response') is not None else _parse_content(vote.get('raw_response'))
+  File "D:\knowledge-huopao\review_agent\validators.py", line 104, in _parse_content
+    raise ValueError("validator response must be a JSON object")
+ValueError: validator response must be a JSON object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_enhancement_v4.py", line 138, in test_source_supported_schema_gap_creates_waiting_task_without_outbox
+    self.assertEqual(service.items("run", workflow_state="awaiting_ontology_review")["total"], 1)
+  File "D:\knowledge-huopao\review_agent\service.py", line 214, in items
+    diagnostic=outcome(displayed,displayed_votes,Committee([m['id'] for m in members],
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 239, in outcome
+    context=context or {};decision=decision or {};report=summarize_dimensions(votes,proposal,committee)
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 213, in summarize_dimensions
+    selected[voter]=vote;report=assess_vote(vote,proposal)
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 97, in assess_vote
+    if contract and vote.get('response_status')=='ok':raw=contract.raw_from_vote(vote)
+AttributeError: module 'review_agent.response_contract' has no attribute 'raw_from_vote'
+
+======================================================================
+ERROR: test_real_evidence_enum_and_exact_output_contract_are_sent (test_review_planner.PlannerRuntimeTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 95, in assess_vote
+    raw=deepcopy(vote.get('corrected_response')) if vote.get('corrected_response') is not None else _parse_content(vote.get('raw_response'))
+  File "D:\knowledge-huopao\review_agent\validators.py", line 104, in _parse_content
+    raise ValueError("validator response must be a JSON object")
+ValueError: validator response must be a JSON object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_planner.py", line 379, in test_real_evidence_enum_and_exact_output_contract_are_sent
+    projected=service.items('run')['items'][0]['audit_summary']
+  File "D:\knowledge-huopao\review_agent\service.py", line 214, in items
+    diagnostic=outcome(displayed,displayed_votes,Committee([m['id'] for m in members],
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 239, in outcome
+    context=context or {};decision=decision or {};report=summarize_dimensions(votes,proposal,committee)
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 213, in summarize_dimensions
+    selected[voter]=vote;report=assess_vote(vote,proposal)
+  File "D:\knowledge-huopao\review_agent\review_observability.py", line 97, in assess_vote
+    if contract and vote.get('response_status')=='ok':raw=contract.raw_from_vote(vote)
+AttributeError: module 'review_agent.response_contract' has no attribute 'raw_from_vote'
+
+----------------------------------------------------------------------
+Ran 871 tests in 1158.835s
+
+FAILED (errors=6, skipped=23)
+{"run_id": "source_fixture", "candidate_count": 1, "extraction_status": "completed_for_selected_policy", "model_calls": 1}

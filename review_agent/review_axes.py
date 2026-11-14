@@ -88,7 +88,8 @@ def aggregate_axes(votes, proposal, consensus):
     from .scope_policy import DEFAULT_POLICY, classification_decision
     all_seats = len(votes) == len(proposal['committee_members']) and consensus.get('diversity_ready', False)
     sources = {v['review_axes']['source']['status'] for v in votes}
-    conflicts = bool(consensus.get('unresolved_counterevidence') or consensus.get('unresolved_support_conflict') or consensus.get('counter_evidence_ids'))
+    conflicts = bool(consensus.get('unresolved_counterevidence') or consensus.get('unresolved_support_conflict') or
+                     (consensus.get('counter_evidence_ids') and sources != {'contradicted'}))
     source = next(iter(sources)) if all_seats and len(sources) == 1 and not conflicts else 'unresolved'
     if source == 'supported' and not consensus.get('expression_complete', True):
         source = 'insufficient'
@@ -112,7 +113,8 @@ def aggregate_axes(votes, proposal, consensus):
     scope = consensus.get('knowledge_scope', 'unresolved')
     scope_decision = classification_decision(scope,all_seats and consensus.get('scope_confirmed'),policy)
     return {'version': VERSION, 'source': {'status': source, 'core_relation_status': consensus.get('core_source_support_result'),
-                'evidence_ids': sorted({eid for v in votes for eid in v.get('supporting_evidence_ids', [])})},
+                'evidence_ids': sorted({eid for v in votes for key in ('supporting_evidence_ids','counter_evidence_ids')
+                                        for eid in v.get(key, [])})},
             'expression': {'status': expression, 'findings': [dict(f, voter_id=v['voter_id'])
                 for v in votes for f in v.get('expression_findings', [])]},
             'mapping': {'status': mapping, 'effective_mapping_status': effective,

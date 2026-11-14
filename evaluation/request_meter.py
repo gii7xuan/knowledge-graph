@@ -2,6 +2,7 @@
 import json
 import threading
 import time
+from copy import deepcopy
 from uuid import uuid4
 from review_agent.contracts import sha256_json
 
@@ -38,10 +39,17 @@ class RequestMeter:
     def finish(self,request_id,response,error,latency):
         with self.lock:
             record=self.records[request_id]
-            # Snapshot marks unresolved requests unknown. A late reply never
-            # changes an already frozen experiment result.
-            if record['status']!='started': return
-            record.update(status='completed' if error is None else 'failed',latency_ms=latency)
+            # Reconcile the original request and charge its late usage. Returned
+            # snapshots are independent copies and keep their original unknown.
+            if record['status'] not in {'started','outcome_unknown'} or record.get('response_reconciled'): return
+            late=record['status']=='outcome_unknown'
+            if error is None:
+                fields={}
+            else:
+                from review_agent.execution import api_error_fields
+                fields=api_error_fields(error)
+            record.update(status='completed' if error is None else 'outcome_unknown' if fields.get('outcome_unknown') else 'failed',
+                latency_ms=latency,late_response=late,response_reconciled=True,**fields)
             if response is not None:
                 record.update(input_tokens=getattr(response,'input_tokens',None),output_tokens=getattr(response,'output_tokens',None),
                     returned_model_id=getattr(response,'returned_model_id',None),response_id=getattr(response,'response_id',None))
@@ -54,7 +62,7 @@ class RequestMeter:
         with self.lock:
             for record in self.records.values():
                 if record['status']=='started': record['status']='outcome_unknown';self.write(record)
-            return [dict(r) for r in self.records.values()]
+            return deepcopy(list(self.records.values()))
 
 
 class MeteredClient:

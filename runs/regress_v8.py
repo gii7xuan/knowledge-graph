@@ -20,9 +20,11 @@ SMOKE=('DEV-006','DEV-008','DEV-016','DEV-021','DEV-028','DEV-029','DEV-030')
 
 
 def fingerprints():
-    files=[p for folder in ('review_agent','evidence','evaluation','schema','extract_triplets','document','confidence','ontologyBuild','prompts','specs')
+    files=[p for folder in ('review_agent','ontology_review','evidence','evaluation','schema','extract_triplets','document','confidence','ontologyBuild','to_neo4j','prompts','specs')
         for p in (ROOT/folder).rglob('*') if p.is_file() and p.suffix in {'.py','.txt','.json'}]
-    files += [Path(__file__),ROOT/'runs/revalidate_v8.py',ROOT/'config/review_agent.json',ROOT/'config/review_output_capabilities.json']
+    files += [Path(__file__),ROOT/'runs/revalidate_v8.py',ROOT/'runs/rerun_dev30_v8_20261109.py',
+              ROOT/'runs/finalize_v8_regression.py',ROOT/'runs/report_v8_regression.py',
+              ROOT/'config/review_agent.json',ROOT/'config/review_output_capabilities.json']
     return {p.relative_to(ROOT).as_posix():digest(p) for p in sorted(files)}
 
 
@@ -49,20 +51,20 @@ def summarize(repo,bindings,directory):
                 for r in derived['vote_validation'].values() for e in r['errors']),
             'trace_defect_recurred':any('field correction differs from stored model fields' in e['message'] for r in derived['vote_validation'].values() for e in r['errors'])})
     with repo.connect() as c:
+        from evaluation.regression_gate import request_accounting
+        accounting=request_accounting(c)
         outbox=c.execute('SELECT COUNT(*) FROM import_outbox').fetchone()[0]
         requests=c.execute('SELECT state,result_json FROM request_attempts').fetchall()
         applied=c.execute("SELECT COUNT(*) FROM revision_drafts WHERE status='applied' AND draft_id NOT IN (SELECT value FROM json_each(?))",(json.dumps(
             json.loads((directory/'ancestry.json').read_text(encoding='utf-8'))['historical_applied_draft_ids']),)).fetchone()[0]
         planner=c.execute('SELECT record_json FROM planner_steps').fetchall()
-    terminal=all(r['outcome']['execution_status'] not in {'running','not_started'} and r['outcome']['execution_reason'] for r in rows)
-    failures=any(r['trace_defect_recurred'] or r['systematic_version_or_binding_error'] or (r['runtime_error'] or {}).get('reason_code')=='RUNTIME_EXCEPTION' for r in rows)
+    from evaluation.regression_gate import engineering_gate
+    gate=engineering_gate(rows,accounting,outbox=outbox,applied=applied)
     report={'mode':'fresh_complete_pipeline','cases':rows,'population':len(rows),'new_committee_request_attempts':len(requests),
         'planner_calls':sum(len(json.loads(r[0]).get('attempts') or []) for r in planner),
-        'request_states':dict(Counter(r['state'] for r in requests)),
-        'all_have_explainable_terminal_state':terminal,'known_trace_defect_recurred':any(r['trace_defect_recurred'] for r in rows),
+        **gate,'known_trace_defect_recurred':any(r['trace_defect_recurred'] for r in rows),
         'production_written':False,'isolated_import_outbox':outbox,'isolated_revisions_applied':applied,
-        'engineering_gate_passed':terminal and not failures and not outbox and not applied,
-        'quality_evaluable':False,'human_labels':0,'expansion_rule':'explainable terminal states, no systematic runtime/version/trace defects; no unanimity requirement'}
+        'quality_evaluable':False,'human_labels':0,'expansion_rule':'nonempty explainable terminal states, all original requests settled, no systematic runtime/version/trace defects; no unanimity requirement'}
     write_status_snapshot(directory/'smoke_report.json',report)
     return report
 
@@ -77,8 +79,11 @@ def main():
         if not args.smoke_gate:raise ValueError('full run requires --smoke-gate')
         gate=json.loads((args.smoke_gate/'smoke_report.json').read_text(encoding='utf-8'))
         frozen=json.loads((args.smoke_gate/'code_fingerprints.json').read_text(encoding='utf-8'))
+        from evaluation.regression_gate import request_accounting
+        with ReadOnlyRepository(args.smoke_gate/'review.sqlite3').connect() as connection:
+            settled=request_accounting(connection)['requests_settled']
         if (not gate.get('engineering_gate_passed') or set(r['sample_id'] for r in gate['cases'])!=set(SMOKE)
-            or frozen!=fingerprints()):raise ValueError('smoke engineering gate/code version mismatch; do not expand')
+            or not settled or frozen!=fingerprints()):raise ValueError('smoke engineering gate/code version mismatch or unsettled requests; do not expand')
     data=json.loads(DATA.read_text(encoding='utf-8'));all_bindings=data['bindings'];all_candidates=data['selected_raw_candidates']
     pairs=[(b,c) for b,c in zip(all_bindings,all_candidates) if args.mode=='full' or b['sample_id'] in SMOKE]
     bindings=[b for b,_ in pairs];candidates=[c for _,c in pairs]

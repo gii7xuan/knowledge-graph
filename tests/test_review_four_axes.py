@@ -175,6 +175,22 @@ class FourAxisRoutingTests(unittest.TestCase):
         axes=aggregate_axes(votes,proposal,{'diversity_ready':True,'counter_evidence_ids':['counter']})
         self.assertEqual(axes['source']['status'],'unresolved')
 
+    def test_unanimous_contradiction_retains_the_counterevidence_conclusion(self):
+        votes=[{'voter_id':n,'review_axes':self.axes(source='contradicted'),
+                'expression_findings':[],'counter_evidence_ids':['counter']} for n in 'abc']
+        proposal={'committee_members':[{'id':n} for n in 'abc']}
+        consensus={'diversity_ready':True,'counter_evidence_ids':['counter']}
+        axes=aggregate_axes(votes,proposal,consensus)
+        self.assertEqual(axes['source']['status'],'contradicted')
+        self.assertEqual(axes['source']['evidence_ids'],['counter'])
+        votes[0]['review_axes']['source']['status']='supported'
+        self.assertEqual(aggregate_axes(votes,proposal,consensus)['source']['status'],'unresolved')
+        votes[0]['review_axes']['source']['status']='contradicted'
+        consensus['unresolved_support_conflict']=True
+        self.assertEqual(aggregate_axes(votes,proposal,consensus)['source']['status'],'unresolved')
+        consensus['unresolved_support_conflict']=False
+        self.assertEqual(aggregate_axes(votes[:2],proposal,consensus)['source']['status'],'unresolved')
+
 
 class FourAxisIntegrationTests(unittest.TestCase):
     def setUp(self):
@@ -261,6 +277,23 @@ class FourAxisIntegrationTests(unittest.TestCase):
         self.assertTrue(result['independent_review_completed'],result)
         self.assertEqual(result['workflow_state'],'semantic_revision_required')
         self.assertEqual(result['review_axes']['source']['status'],'contradicted')
+        self.assertEqual(result['admission_consensus']['result'],'unresolved')
+
+    def test_unanimous_source_counterevidence_survives_full_aggregation(self):
+        def contradict(payload,value):
+            eid=value['evidence_assessments'][0]['evidence_id']
+            value['dimensions']['triple_support']['status']='contradicted'
+            value['dimensions']['counterevidence']['status']='fail'
+            value['evidence_assessments'][0]['role']='counter'
+            value['primary_evidence_ids']=[]
+            value['counterevidence_reviewed_ids']=[]
+            return value
+        _,result,_=self.run_case(version='validator_response_v8',opinion_override=contradict)
+        self.assertTrue(result['independent_review_completed'],result)
+        self.assertEqual(result['review_axes']['source']['status'],'contradicted')
+        self.assertTrue(result['review_axes']['source']['evidence_ids'])
+        self.assertEqual(result['source_support_result'],'contradicted')
+        self.assertEqual(result['consensus']['result'],'reject_consensus')
         self.assertEqual(result['admission_consensus']['result'],'unresolved')
 
     def test_scope_exclusion_is_independent_from_fact_support(self):
