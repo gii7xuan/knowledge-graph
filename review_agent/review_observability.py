@@ -237,14 +237,22 @@ def summarize_dimensions(votes,proposal,committee):
 
 def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None,context=None,decision=None):
     context=context or {};decision=decision or {};report=summarize_dimensions(votes,proposal,committee)
+    from .resolution_state import from_context
+    snapshot=from_context(proposal,votes,committee,context)
+    if snapshot:
+        report['dimension_results']=snapshot['dimension_results']
+        report['resolution_snapshot_id']=snapshot['snapshot_id']
+        report['original_whole_vote_eligible_voter_ids']=report['whole_vote_eligible_voter_ids']
+        report['whole_vote_eligible_voter_ids']=snapshot['whole_vote_eligible_voter_ids']
     dimensions=report['dimension_results'];blockers=[]
     complete=set(report['whole_vote_eligible_voter_ids'])==set(committee.voter_ids)
     if not complete:blockers.append('required_committee_incomplete')
     guard=proposal.get('ontology_check') or {}
     if guard.get('status')!='pass':blockers.append('ontology_guard_not_passed')
     assigned=proposal.get('candidate',{}).get('triple',{}).get('relation_id')
-    if not assigned or any((v.get('dimensions') or {}).get('mapping',{}).get('relation_id')!=assigned
-            for v in votes if v.get('voter_id') in report['whole_vote_eligible_voter_ids']):blockers.append('formal_mapping_not_bound_to_candidate')
+    mapped=(snapshot['effective_mapping_bindings'].values() if snapshot else
+        [(v.get('dimensions') or {}).get('mapping',{}).get('relation_id') for v in votes if v.get('voter_id') in report['whole_vote_eligible_voter_ids']])
+    if not assigned or any(value!=assigned for value in mapped):blockers.append('formal_mapping_not_bound_to_candidate')
     if proposal.get('candidate',{}).get('contract_version')=='extraction_candidate_v4' and proposal['candidate'].get('fact_key_state')!='canonical':blockers.append('candidate_identity_unresolved')
     from .revision_patch import expression_diagnostics
     if proposal.get('candidate') and expression_diagnostics(proposal['candidate']).get('expression_complete') is False:blockers.append('candidate_expression_incomplete')
@@ -258,18 +266,28 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
         if dimensions[axis]['status']!=wanted:blockers.append(axis+':'+dimensions[axis]['status'])
     if any(d['has_conflict'] for d in dimensions.values()):blockers.append('unresolved_dimension_disagreement')
     if any(i.get('critical') and i.get('status','open')!='resolved' for i in context.get('issue_history',[])):blockers.append('critical_issue_unresolved')
-    if any(d.get('status')=='open' for d in (context.get('dispute_report') or decision.get('consensus',{}).get('dispute_report') or {}).get('disputes',[])):blockers.append('unresolved_claim_dispute')
+    if snapshot:
+        if snapshot['unresolved_dispute_ids']:blockers.append('unresolved_claim_dispute')
+        if snapshot['new_obligations']:blockers.append('resolution_dependency_review_pending')
+    elif any(d.get('status')=='open' for d in (context.get('dispute_report') or decision.get('consensus',{}).get('dispute_report') or {}).get('disputes',[])):blockers.append('unresolved_claim_dispute')
     execution=('not_started' if audit_status=='not_started' else 'running' if audit_status=='running' else
         'timed_out' if audit_status=='timeout' else 'interrupted' if audit_status in {'interrupted','superseded'} else
         'paused' if audit_status=='paused' else 'failed' if audit_status=='failed' else 'completed' if complete else 'partial_failure')
-    if execution not in {'completed','partial_failure'}:blockers.append('execution:'+execution)
+    if execution not in {'completed','partial_failure'} and not (context.get('semantic_recovery_projection') and
+            snapshot and snapshot['semantic_obligations_complete']):blockers.append('execution:'+execution)
     recommendation=('exclude' if dimensions['scope']['status']=='exclude' else 'admit' if not blockers else
         'revise' if dimensions['expression']['status'] in {'semantic_revision','lossless_normalization'} or dimensions['source']['status']=='contradicted' else
         'wait_mapping' if dimensions['source']['status']=='supported' and dimensions['expression']['status']=='standard' and dimensions['mapping']['status']!='valid' else
         'insufficient_evidence' if dimensions['source']['status']=='insufficient' else 'manual_review')
     from .mapping_trace import process
-    return {**report,'policy_hash':sha256_json(policy()),'execution_status':execution,'execution_reason':stop_reason or context.get('agent_stop_reason') or context.get('execution_failure',{}).get('reason_code') or audit_status,
+    result={**report,'policy_hash':sha256_json(policy()),'execution_status':execution,'execution_reason':stop_reason or context.get('agent_stop_reason') or context.get('execution_failure',{}).get('reason_code') or audit_status,
         'mapping_process':process(proposal,votes),
-        'review_completed':complete and all(d['judgment_complete'] for d in dimensions.values()),
+        'review_completed':complete and all(d['judgment_complete'] for d in dimensions.values()) and
+            (not snapshot or snapshot['semantic_obligations_complete']),
         'recommendation':recommendation,'action_taken':'none','blocking_reasons':sorted(set(blockers)),
         'writes_authorized':False,'derivation':'current_frozen_input_only'}
+    if context.get('resolution_snapshots_enabled'):
+        from .resolution_status import classify
+        result.update(classify(result,context.get('technical_recovery_tasks',[])))
+        result['human_problem_cards']=context.get('human_problem_cards',[])
+    return result

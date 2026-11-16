@@ -12,7 +12,7 @@ TITLES={'auto_admission_precision':'自动准入精确率','false_admission_rate
     'unnecessary_revision_rate':'不必要修订率','mapping_accuracy':'本体映射正确率'}
 
 
-def bind_packet(candidate,proposal,evidence,policy,*,system=None):
+def bind_packet(candidate,proposal,evidence,policy,*,system=None,resolution_snapshot=None):
     binding={'candidate_id':candidate['candidate_id'],'revision':candidate['revision'],
         'candidate_content_hash':sha256_json(candidate),'proposal_digest':proposal.get('proposal_digest'),
         'evidence_hash':evidence.get('evidence_hash'),'ontology_context_hash':proposal.get('ontology_context_hash'),
@@ -23,6 +23,9 @@ def bind_packet(candidate,proposal,evidence,policy,*,system=None):
         'field_spec':deepcopy(proposal.get('field_spec')),'ontology_check':deepcopy(proposal.get('ontology_check')),
         'mapping_preflight':deepcopy(proposal.get('mapping_preflight')),
         'field_standardization':deepcopy(proposal.get('field_standardization'))}
+    if resolution_snapshot is not None:
+        binding['resolution_snapshot_id']=resolution_snapshot['snapshot_id']
+        result['resolution_snapshot']=deepcopy(resolution_snapshot)
     # Identity covers the complete material shown to a human, not just the name.
     result['packet_id']='packet_'+sha256_json(result)
     result['system']=deepcopy(system or {})
@@ -40,6 +43,9 @@ def annotation_template(packet):
 def validate_annotation(annotation,packet):
     if annotation.get('packet_id')!=packet['packet_id'] or annotation.get('binding')!=packet['binding']:
         raise ValueError('human annotation must bind the exact candidate, evidence, ontology and task policy')
+    if annotation.get('status')=='inherited':
+        from .annotation_reuse import validate
+        return validate(annotation,packet)
     if annotation.get('status')=='pending':return None
     if (annotation.get('status')!='resolved' or annotation.get('annotated_by')!='human' or
         not annotation.get('reviewer') or not annotation.get('annotated_at') or
@@ -74,7 +80,7 @@ def metric(name,numerator,denominator,*,unknown=0,reason=None,denominator_note='
 
 
 def quality_report(packets,annotations=(),*,revision_operations=(),revision_assessments=(),partition='development',
-                   shadow_revision_operations=(),shadow_revision_assessments=()):
+                   shadow_revision_operations=(),shadow_revision_assessments=(),work_logs=(),execution_costs=None):
     for p in packets:
         material={k:v for k,v in p.items() if k not in {'packet_id','system','sample_id','human_and_model_same_packet'}}
         if p['packet_id']!='packet_'+sha256_json(material) or p['binding']['candidate_content_hash']!=sha256_json(p['candidate']):
@@ -129,11 +135,14 @@ def quality_report(packets,annotations=(),*,revision_operations=(),revision_asse
             reason='没有完成的正式映射，暂不可评估' if not mapping else None,
             denominator_note='已完成且有正式ID的映射；人工同时核验身份、关系语义和类型约束')]
     from .generalization_metrics import report as semantic_metrics
+    from .resolution_metrics import report as workflow_metrics
     return {'version':VERSION,'partition':partition,'quality_claim':'开发回归，不能作为独立泛化结论' if partition=='development' else '仅适用于已核验的独立标注样本',
         'population':len(rows),'human_resolved':sum(bool(a) for _,a in rows),'human_admission_truth_missing':missing_gold,
         'auto_admitted':len(auto),'all_manual_is_success':False,'metrics':results,
         'recommendation_metrics':recommendation_metrics(rows,indexed,annotations_by_id,shadow_revision_operations,shadow_revision_assessments),
         'generalization_metrics':semantic_metrics(rows),
+        'resolution_metrics':workflow_metrics(rows,work_logs=work_logs,execution_costs=execution_costs),
+        'annotation_provenance':dict(Counter(a['status'] for _,a in rows if a)),
         'axis_annotation_counts':{name:dict(Counter(a['four_axes'][name] for _,a in rows if a and a['four_axes'][name] is not None)) for name in AXES}}
 
 

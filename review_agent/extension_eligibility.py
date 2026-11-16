@@ -13,6 +13,8 @@ def extension_eligibility(state):
     votes = [v for v in validation.get('votes', []) if v.get('voter_id') in eligible]
     issues = {v.get('schema_issue') for v in votes}
     blockers = []
+    from .ontology_coverage import current_assessment
+    coverage_ready=bool(state.context.get('resolution_snapshots_enabled') and current_assessment(state))
     if consensus.get('expression_status') not in (None,'faithful'):
         blockers.append('faithful candidate expression required before extension')
     from .scope_policy import classification_decision
@@ -26,7 +28,7 @@ def extension_eligibility(state):
         blockers.append('current full frozen ontology lookup required')
     if state.context.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'} and 'not_covered' in issues:
         # Preserve the opinions, but a recalled subset cannot certify global absence.
-        if not consensus.get('ontology_coverage_review',{}).get('global_gap_confirmable'):
+        if not consensus.get('ontology_coverage_review',{}).get('global_gap_confirmable') and not coverage_ready:
             blockers.append('retrieved ontology subset cannot confirm a global gap; further semantic lookup or manual review required')
     if any(i.get('status', 'open') != 'resolved' and i['code'] in {
         'source_conflict', 'counterevidence', 'CONDITION_MISSING', 'QUALIFIER_MISMATCH',
@@ -42,16 +44,21 @@ def extension_eligibility(state):
                if name and not lookup.get('endpoint_class_matches', {}).get(side)}
     definitions = lookup.get('matched_definitions', [])
     targets = sorted(set(matches) | {v for v in lookup.get('endpoint_class_matches', {}).values() if v})
+    missing_definitions={r['id'] for r in (lookup.get('mapping_preflight') or {}).get('relation_candidates',[])
+                         if 'definition_missing_in_bound_release' in r.get('missing_information',[])}
+    if state.context.get('resolution_snapshots_enabled'):targets=sorted(set(targets)|missing_definitions)
     diagnostics = issues & {'suspected_schema_error', 'incompatible'}
     allowed, reasons = [], {}
     for kind in KINDS:
         reason = '; '.join(blockers)
         preparation = (consensus.get('review_axes') or {}).get('mapping', {}).get('preflight') or lookup.get('mapping_preflight')
         if not reason and 'mapping_preflight_policy' in state.context and kind in {'add_class','add_object_property','add_data_property'}:
-            if not preparation or not preparation.get('judgment_ready'):
+            incomplete=[b for b in (preparation or {}).get('blocking_information',[]) if
+                b.get('fields')!=['no_relation_candidate_recalled']]
+            if not preparation or not preparation.get('judgment_ready') and not (coverage_ready and not incomplete):
                 reason = 'mapping information incomplete; supplement definitions and identity before proposing new ontology terms'
         if not reason and kind in {'add_object_property', 'add_data_property'}:
-            if state.guard.get('relation_known') or matches or issues != {'not_covered'}:
+            if state.guard.get('relation_known') or (matches or issues != {'not_covered'}) and not coverage_ready:
                 reason = 'existing/ambiguous mapping must be revised; confirmed absent relation required'
             elif (kind == 'add_data_property') != (triple.get('tail_kind', 'entity') == 'literal'):
                 reason = 'property kind must match the frozen tail kind'
@@ -66,7 +73,8 @@ def extension_eligibility(state):
                           set(v['schema_change_hint']) & {'alias','synonym','synonym_evidence'}) for v in votes):
                 reason = 'alias requires independent synonym diagnosis'
         elif not reason and kind in {'revise_definition', 'revise_constraint'}:
-            if not targets or not diagnostics:
+            definition_fill=kind=='revise_definition' and state.context.get('resolution_snapshots_enabled') and bool(missing_definitions)
+            if not targets or not diagnostics and not definition_fill:
                 reason = 'existing target and independent schema-error diagnosis required'
         elif not reason and kind == 'merge_terms':
             if len(targets) < 2 or not diagnostics:
@@ -77,6 +85,7 @@ def extension_eligibility(state):
             allowed.append(kind)
     return {'allowed_change_kinds': allowed, 'blocked_change_kinds': reasons,
             'target_term_ids': targets, 'missing_endpoint_classes': missing,
+            'definition_fill_only_ids':sorted(missing_definitions) if state.context.get('resolution_snapshots_enabled') and not diagnostics else [],
             'matched_definitions': definitions}
 
 
@@ -121,6 +130,8 @@ def validate_extension(state, kind, changes):
             raise ActionError('add_alias requires an explicit synonym')
         if kind == 'revise_definition' and not str(changes.get('definition') or '').strip():
             raise ActionError('revise_definition requires a definition')
+        if kind=='revise_definition' and eligibility.get('definition_fill_only_ids') and target not in eligibility['definition_fill_only_ids']:
+            raise ActionError('definition-fill eligibility applies only to the actual missing-definition targets')
         if kind == 'revise_constraint' and not (set(changes) & {'domain', 'range', 'datatype', 'datatypes', 'constraints'}):
             raise ActionError('revise_constraint requires explicit constraint fields')
     return eligibility

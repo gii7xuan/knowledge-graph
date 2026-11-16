@@ -25,6 +25,16 @@ TOOL_SCHEMAS = {
     "get_ontology_extension_status": {"extension_id": "subscribed task ID"},
 }
 DISPUTE_TOOLS={'review_dispute':{'dispute_id':'exact open dispute ID'}}
+RESOLUTION_TOOLS={
+    'propose_mapping':{'relation_id':'retrieved formal ID','head_type':'source-grounded class ID','tail_type':'class ID or null',
+        'identity_evidence':'per-entity source IDs','type_evidence':'per-entity source justification',
+        'competing_relations':'explicit competing relation exclusions','evidence_ids':'source IDs','reason':'mapping reason'},
+    'propose_split_revision':{'children':'2..4 independently reviewable child changes and evidence','reason':'split reason'},
+    'review_split_revision':{'group_id':'current proposed split group'},
+    'apply_reviewed_split':{'group_id':'current independently approved split group'},
+    'review_semantic_contract':{'voter_id':'one completed invalid original seat'},
+    'assess_ontology_coverage':{'exclusions':'all in-scope relation IDs with source-grounded exclusion reasons','search_queries':'queries used for full-release search'},
+}
 SYSTEM_PROMPT = (Path(__file__).resolve().parents[1] / "prompts" / "triple_planner_v4.txt").read_text(encoding="utf-8")
 PLANNER_PROMPT_HASH = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()
 
@@ -41,11 +51,20 @@ def validate_action(value):
     if not isinstance(value, dict) or set(value) != {"action", "arguments", "target_issue", "rationale_summary"}:
         raise ActionError("expected exactly action, arguments, target_issue, rationale_summary")
     name, args = value["action"], value["arguments"]
-    shapes={**TOOL_SCHEMAS,**DISPUTE_TOOLS}
+    shapes={**TOOL_SCHEMAS,**DISPUTE_TOOLS,**RESOLUTION_TOOLS}
     if not isinstance(name, str) or name not in shapes or not isinstance(args, dict):
         raise ActionError("unknown tool or invalid arguments object")
     if not _text(value["target_issue"], 400) or not _text(value["rationale_summary"], 600):
         raise ActionError("issue/rationale must be bounded strings")
+    if name in RESOLUTION_TOOLS:
+        from .schema_validation import schema_errors
+        errors=schema_errors(args,argument_schemas(True,True)[name])
+        if errors:raise ActionError('; '.join(errors))
+        if name=='propose_split_revision':
+            for child in args['children']:
+                validate_action({'action':'propose_revision','arguments':{**child,'reason':args['reason']},
+                    'target_issue':value['target_issue'],'rationale_summary':value['rationale_summary']})
+        return value
     required = set(shapes[name]) - ({"endpoint_types", "surface_relation", "query"} if name == "inspect_ontology" else set())
     if not required <= set(args) or set(args) - set(shapes[name]):
         raise ActionError("missing or forbidden tool arguments")
@@ -99,6 +118,12 @@ def validate_action(value):
                     import math
                     if not (content is None or isinstance(content,(str,bool,int,float))) or isinstance(content,float) and not math.isfinite(content):
                         raise ActionError('value must be a finite scalar')
+                elif field=='semantic_context':
+                    from extract_triplets.semantic_context import validate_context
+                    if not isinstance(content,dict) or set(content)-{'entity_mentions','relation_meaning','qualifier_attachments','knowledge_scope'}:
+                        raise ActionError('semantic context may change meaning fields only; source provenance is server-owned')
+                    try:validate_context(content)
+                    except ValueError as exc:raise ActionError(str(exc)) from exc
                 elif content is not None and not _text(content, 600):
                     raise ActionError("revision fields must be bounded strings")
         elif not _text(item, 800 if key == "description" else 600 if key == "query" else 400,
@@ -107,7 +132,7 @@ def validate_action(value):
     return value
 
 
-def argument_schemas(include_disputes=False):
+def argument_schemas(include_disputes=False,include_resolution=False):
     """The model sees the same required/optional fields enforced by validate_action."""
     def text(limit=400,nullable=False,nonempty=False):
         return {"type":["string","null"] if nullable else "string","maxLength":limit,
@@ -126,6 +151,14 @@ def argument_schemas(include_disputes=False):
     changes['properties']['qualifiers']['properties']['polarity']={'enum':['positive','negative','unknown']}
     changes['properties']['qualifiers']['properties']['modality']={'enum':[None,*sorted(MODALITIES)]}
     changes['properties']['value']={'type':['string','number','boolean','null']}
+    if include_resolution:
+        from copy import deepcopy
+        from extract_triplets.semantic_context import SCHEMA
+        context=deepcopy(SCHEMA);context['required']=[]
+        context['properties']['entity_mentions']['required']=[]
+        for mention in context['properties']['entity_mentions']['properties'].values():mention['required']=[]
+        context['properties']['relation_meaning']['required']=[]
+        changes['properties']['semantic_context']=context
     schemas = {
         "inspect_context":obj({"evidence_id":text(nonempty=True),"before":{"type":"integer","minimum":0,"maximum":5},"after":{"type":"integer","minimum":0,"maximum":5}}),
         "search_evidence":obj({"scope":{"type":"string","enum":list(CONTEXT_SCOPES)},"query":text(600,nonempty=True),"purpose":{"type":"string","enum":list(PURPOSES)},"limit":{"type":"integer","minimum":1,"maximum":6}}),
@@ -141,6 +174,23 @@ def argument_schemas(include_disputes=False):
         "get_ontology_extension_status":obj({"extension_id":text(nonempty=True)}),
     }
     if include_disputes:schemas['review_dispute']=obj({'dispute_id':text(nonempty=True)})
+    if include_resolution:
+        source_ids=array(24);source_ids['minItems']=1
+        justification=obj({'evidence_ids':source_ids,'basis':{'enum':['source']},'note':text(800,nonempty=True)})
+        entity_ids=obj({'head':source_ids,'tail':source_ids},optional=('tail',))
+        typing=obj({'head':justification,'tail':justification},optional=('tail',))
+        exclusion=obj({'relation_id':text(200,nonempty=True),'evidence_ids':source_ids,'note':text(800,nonempty=True)})
+        exclusions={'type':'array','maxItems':200,'items':exclusion}
+        schemas.update({
+            'propose_mapping':obj({'relation_id':text(200,nonempty=True),'head_type':text(200,nonempty=True),
+                'tail_type':text(200,nullable=True),'identity_evidence':entity_ids,'type_evidence':typing,
+                'competing_relations':exclusions,'evidence_ids':source_ids,'reason':text(nonempty=True)}),
+            'propose_split_revision':obj({'children':{'type':'array','minItems':2,'maxItems':4,
+                'items':obj({'changes':changes,'evidence_ids':source_ids})},'reason':text(nonempty=True)}),
+            'review_split_revision':obj({'group_id':text(nonempty=True)}),
+            'apply_reviewed_split':obj({'group_id':text(nonempty=True)}),
+            'review_semantic_contract':obj({'voter_id':text(nonempty=True)}),
+            'assess_ontology_coverage':obj({'exclusions':exclusions,'search_queries':source_ids})})
     return schemas
 
 

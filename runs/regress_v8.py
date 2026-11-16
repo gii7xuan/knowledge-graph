@@ -93,11 +93,7 @@ def main():
     index=load_document_index(original['document_path'],candidates[0]['source_index_hash'],require_verified=True)
     if index['source_snapshot']['canonical_text']!=data['source_canonical_text']:raise ValueError('frozen source mismatch')
     directory.mkdir(parents=True)
-    config=configuration();config.update(database_path=str(directory/'review.sqlite3'),request_cache_namespace=directory.name)
-    # Same limits in smoke and full; bounded minimum fallback retains existing committee rules.
-    config['budget'].update(max_total_tokens=360000,total_timeout_seconds=420,max_llm_calls_per_candidate=18,
-        max_planner_steps=3,max_validation_rounds=1,max_tool_calls=8,max_parallel_candidates=2)
-    config['case_budget'].update(tokens=400000)
+    config=configuration(profile='diagnostic',directory=directory)
     settings=public_settings(config)
     if config['mode']!='shadow' or any(settings[k] for k in ('candidate_revisions_automatically_applied','ontology_publication_enabled','graph_import_enabled')):
         raise ValueError('production actions must remain disabled')

@@ -12,6 +12,8 @@ class CaseBudget(AgentBudget):
         self.repository, self.case_ids = repository, sorted(set(case_ids))
         self.task_type, self.task_id = task_type, task_id
         self.reservations = list((saved or {}).get("case_call_reservations", []))
+        self.stage='preprocessing'
+        self.stage_usage=dict((saved or {}).get('stage_usage',{}))
 
     def exhausted(self):
         if super().exhausted(): return True
@@ -34,6 +36,7 @@ class CaseBudget(AgentBudget):
         except AgentStopped: return False
         self.usage["llm_calls"] += count
         self.reservations.append(reservation)
+        self.stage_usage.setdefault(self.stage,{'llm_calls':0,'tool_calls':0})['llm_calls']+=count
         return True
 
     def refund_calls(self, count):
@@ -42,12 +45,15 @@ class CaseBudget(AgentBudget):
         # reservation, so their local refund must not subtract historical cost.
         if count and self.reservations: self.charge({"llm_calls": -count}, "refund:" + self.reservations[-1] + ":" + str(count))
         super().refund_calls(count)
+        self.stage_usage.setdefault(self.stage,{'llm_calls':0,'tool_calls':0})['llm_calls']-=count
 
     def consume_tool(self):
         if self.exhausted() or self.usage["tool_calls"] >= int(self.config.get("max_tool_calls", 8)): return False
         try: self.charge({"tool_calls": 1})
         except AgentStopped: return False
-        return super().consume_tool()
+        result=super().consume_tool()
+        if result:self.stage_usage.setdefault(self.stage,{'llm_calls':0,'tool_calls':0})['tool_calls']+=1
+        return result
 
     def tokens(self, attempt):
         super().tokens(attempt)
@@ -58,5 +64,6 @@ class CaseBudget(AgentBudget):
 
     def snapshot(self):
         return {**super().snapshot(), "case_ids": self.case_ids, "case_call_reservations": self.reservations,
+                'stage_usage':self.stage_usage,
                 "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
                 "case_accounts": [self.repository.case_status(case_id) for case_id in self.case_ids]}

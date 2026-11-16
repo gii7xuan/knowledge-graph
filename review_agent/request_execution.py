@@ -12,8 +12,10 @@ from uuid import uuid4
 
 def service_key(voter):
     client=voter['client']
-    return sha256_json([str(getattr(client,'base_url','')).rstrip('/'),
-                        voter.get('model_id') or getattr(client,'model_id','')])
+    parts=[str(getattr(client,'base_url','')).rstrip('/'),
+           voter.get('model_id') or getattr(client,'model_id','')]
+    if voter.get('request_channel'):parts.append(voter['request_channel'])
+    return sha256_json(parts)
 
 
 def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, validate_cached,
@@ -145,6 +147,10 @@ def durable_attempt(repository, key, owner, binding, voter, proposal, feedback, 
                   **({'ontology_delivery_version':voter['ontology_delivery_version']} if voter.get('ontology_delivery_version') else {}),
                   **({'stream_responses':True} if getattr(voter['client'],'stream_responses',False) else {}),
                   **({'thinking_mode':voter['client'].thinking_mode} if getattr(voter['client'],'thinking_mode',None) else {})}}
+    if task_type=='planner_action':
+        metadata['channel_reliability']={'consecutive_unknown_limit':int(voter.get('consecutive_unknown_limit',3)),
+                                         'channel':'planner','automatic_probe':False}
+    if voter.get('case_ids'):metadata['case_ids']=list(voter['case_ids'])
     if task_type=='triple_review' and proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         generation=next((g for g in proposal.get('validator_generation',[]) if g.get('voter_id')==voter['id']),{})
         metadata['generation']['output_transport']=copy.deepcopy(generation.get('output_transport'))

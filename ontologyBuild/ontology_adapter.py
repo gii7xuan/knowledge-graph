@@ -41,6 +41,8 @@ def _property_values(value: Any) -> Iterable[Any]:
 
 
 def _preserve_property_metadata(current, item):
+    for field in ('definition','description'):
+        if item.get(field) and not current.get(field):current[field]=deepcopy(item[field])
     for field in ("iri", "aliases", "labels", "definitions", "domain_semantics", "range_semantics",
                   "domain_expressions", "range_expressions", "datatypes", "range", "auto_review_blocked"):
         if field in item and field not in current:

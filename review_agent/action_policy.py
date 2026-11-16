@@ -1,7 +1,7 @@
 """Permissions and minimum obligations remain outside the planner's authority."""
 
 from .contracts import sha256_json
-from .planner_contracts import ActionError, TOOL_SCHEMAS, validate_action, argument_schemas
+from .planner_contracts import ActionError, TOOL_SCHEMAS, RESOLUTION_TOOLS, validate_action, argument_schemas
 
 
 class ActionPolicy:
@@ -9,17 +9,22 @@ class ActionPolicy:
         self.config = config
         self.allowed = set(config.get("allowed_tools", TOOL_SCHEMAS))
         if config.get('enable_dispute_review'):self.allowed.add('review_dispute')
-        if self.allowed - (set(TOOL_SCHEMAS)|({'review_dispute'} if config.get('enable_dispute_review') else set())):
+        if self.allowed - (set(TOOL_SCHEMAS)|({'review_dispute'} if config.get('enable_dispute_review') else set())|
+                           (set(RESOLUTION_TOOLS) if config.get('enable_resolution') else set())):
             raise ValueError("planner whitelist contains unregistered tools")
 
     def definitions(self):
-        return {k: v for k, v in argument_schemas(bool(self.config.get('enable_dispute_review'))).items() if k in self.allowed}
+        return {k: v for k, v in argument_schemas(bool(self.config.get('enable_dispute_review')),
+                    bool(self.config.get('enable_resolution'))).items() if k in self.allowed}
 
     @staticmethod
     def blocked_tools(state):
         available={i['evidence_id'] for i in state.archive if i.get('anchor_valid') is True}
         validation=state.current_validation()
         blocked={}
+        if state.context.get('resolution_snapshots_enabled'):
+            from .semantic_recheck import candidates
+            if not candidates(state):blocked['review_semantic_contract']='no completed semantic-contract diagnosis; unknown requests cannot be reassessed'
         if validation is not None:
             blocked['run_validation']='current frozen input already validated; consume results, revise, search or recover failed seats'
         if not state.validation_recovery.get('recoverable_voter_ids'):
@@ -53,6 +58,8 @@ class ActionPolicy:
             blocked['request_ontology_extension']='; '.join(sorted(set(eligibility['blocked_change_kinds'].values())))
         if not state.pending_extension_id:
             blocked['get_ontology_extension_status']='no subscribed ontology extension task'
+        if state.context.get('resolution_snapshots_enabled') and state.context.get('resolution_no_further_validation') and state.ontology_checked:
+            blocked.pop('finish_review',None) # Explicit incomplete handoff; final_gaps still blocks admission.
         return blocked
 
     def validate_request(self, action, state):
@@ -65,6 +72,22 @@ class ActionPolicy:
             raise ActionError('evidence reference is outside current verified source; select exact valid_evidence_ids')
         reason=self.blocked_tools(state).get(action['action'])
         if reason: raise ActionError(reason)
+        if state.context.get('resolution_snapshots_enabled'):
+            from .resolution_obligations import resolution_obligations,attempt_targets
+            maximum=int(state.context.get('agent_resolution_policy',{}).get('max_attempts_per_issue',2))
+            if any(state.context.get('resolution_attempts',{}).get(k,0)>=maximum for k in attempt_targets(action,state)):
+                raise ActionError('bounded recovery attempt limit for the exact server issue')
+            if action['action']=='finish_review':
+                remaining=[o for o in resolution_obligations(state) if o['legal_next_tool'] in self.allowed]
+                if remaining and not state.context.get('resolution_budget_exhausted'):
+                    raise ActionError('known funded recovery remains: '+remaining[0]['legal_next_tool'])
+            if action['action'] in {'propose_revision','propose_mapping','propose_split_revision'}:
+                if state.context.get('agent_resolution_policy',{}).get('final_review_only') or state.revision_drafts or state.context.get('split_revision_groups'):
+                    raise ActionError('one semantic revision version per candidate in this experiment')
+            if action['action'] in {'review_split_revision','apply_reviewed_split'}:
+                group=next((g for g in state.context.get('split_revision_groups',[]) if g['group_id']==args['group_id']),None)
+                if not group or action['action']=='apply_reviewed_split' and not group.get('ready_to_apply'):
+                    raise ActionError('select the exact current independently reviewed split group')
         if action['action']=='review_dispute':
             report=state.context.get('dispute_report') or {}
             if not any(d['dispute_id']==args['dispute_id'] and d['status']=='open' for d in report.get('disputes',[])):
@@ -84,6 +107,7 @@ class ActionPolicy:
             eligible=set(validation['consensus'].get('eligible_voter_ids',[]))
             supported={eid for vote in validation.get('votes',[]) if vote.get('voter_id') in eligible
                        for eid in vote.get('supporting_evidence_ids',[])}
+            supported.update(validation.get('effective_supporting_evidence_ids',[]))
             if not args['evidence_ids'] or not set(args['evidence_ids'])<=supported:
                 raise ActionError('extension evidence_ids must select current source_supported_evidence_ids')
         return action
@@ -109,8 +133,12 @@ class ActionPolicy:
         if not state.ontology_checked:
             gaps["ontology_not_checked"] = True
         validation = state.current_validation()
-        gaps["validation_missing"] = validation is None
-        gaps["version_stale"] = bool(state.validations and validation is None)
+        snapshot=state.context.get('resolution_snapshot') or {}
+        scoped=bool((snapshot.get('accepted_resolutions') or snapshot.get('accepted_semantic_review_ids') or snapshot.get('accepted_original_receipt_ids')) and not snapshot.get('new_obligations') and
+            snapshot.get('candidate_hash')==sha256_json(state.candidate) and
+            snapshot.get('evidence_hash')==state.bundle.get('evidence_hash'))
+        gaps["validation_missing"] = validation is None and not scoped
+        gaps["version_stale"] = bool(state.validations and validation is None and not scoped)
         unresolved = [i for i in state.issues if i.get("status", "open") != "resolved"]
         gaps["critical_issues_unresolved"] = any(i.get("critical") for i in unresolved)
         selected = {i["evidence_id"] for i in state.bundle.get("items", [])}
@@ -121,4 +149,7 @@ class ActionPolicy:
         gaps["unresolved_counterevidence"] = any(i["code"] in {"source_conflict", "counterevidence"} for i in unresolved)
         gaps["unresolved_support_conflict"] = gaps["unresolved_counterevidence"]
         gaps["need_more_evidence"] = any(i["code"] in {"EVIDENCE_INSUFFICIENT", "source_conflict", "counterevidence"} for i in unresolved)
+        if snapshot.get('dimension_results',{}).get('mapping',{}).get('status')=='valid' and (
+            any(r['check']=='mapping' for r in snapshot.get('accepted_resolutions',[])) or snapshot.get('accepted_semantic_review_ids')):
+            gaps['ontology_disagreement']=False
         return gaps

@@ -30,9 +30,10 @@ def pending_bindings(bindings, started_ids, requested_ids):
 def physical_calls(repository):
     with repository.connect() as c:
         committee=[(r['state'],json.loads(r['result_json'] or '{}')) for r in c.execute('SELECT state,result_json FROM request_attempts')]
+        durable_ids={r[0] for r in c.execute('SELECT attempt_id FROM request_attempts')}
         planner=[a for r in c.execute('SELECT record_json FROM planner_steps') for a in json.loads(r[0]).get('attempts') or []]
     return sum(state!='not_sent' and result.get('actual_calls')!=0 for state,result in committee)+sum(
-        not a.get('cached') and a.get('actual_calls')!=0 for a in planner)
+        not a.get('cached') and a.get('actual_calls')!=0 and a.get('attempt_id') not in durable_ids for a in planner)
 
 
 def collect_manual_holds(repository,bindings):

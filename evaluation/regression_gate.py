@@ -12,9 +12,18 @@ def request_accounting(connection):
     unresolved = sum(count for state, count in states.items() if state not in TERMINAL_REQUEST_STATES)
     unresolved_reservations = sum(count for state, count in reservations.items() if state not in {'completed', 'failed'})
     planner=[]
+    columns={r[1] for r in connection.execute('PRAGMA table_info(request_attempts)')}
+    durable=({r[0]:(r[1],json.loads(r[2] or '{}')) for r in connection.execute('SELECT attempt_id,state,result_json FROM request_attempts')}
+             if {'attempt_id','result_json'}<=columns else {})
     if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='planner_steps'").fetchone():
         for row in connection.execute('SELECT record_json FROM planner_steps'):
-            planner.extend(json.loads(row[0]).get('attempts') or [])
+            for attempt in json.loads(row[0]).get('attempts') or []:
+                saved=durable.get(attempt.get('attempt_id'))
+                if saved:
+                    state,result=saved
+                    attempt={**result,'outcome_unknown':state not in TERMINAL_REQUEST_STATES,
+                             'response_status':result.get('response_status') or 'started'}
+                planner.append(attempt)
     planner_states=dict(Counter(attempt.get('response_status') for attempt in planner))
     unresolved_planner=sum(bool(attempt.get('outcome_unknown')) or attempt.get('response_status') not in
         {'ok','invalid_action','invalid_json','invalid_contract','invalid_reference','api_error','not_sent'} for attempt in planner)

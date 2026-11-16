@@ -48,18 +48,10 @@ def freeze_code():
 def save(name,value):write_status_snapshot(OUT/name,value)
 
 
-def configuration():
-    c=load_config();c['validator_contract_version']='validator_response_v8'
-    c=deepcopy(c)
-    c['budget']={**c['budget'],'max_total_tokens':360000}
-    c['case_budget']={**c.get('case_budget',{}),'tokens':400000}
-    c.update(mode='shadow',database_path=str(DB),request_cache_namespace='dev30_v8_rerun_20261109')
-    c['planner']={**c.get('planner',{}),'enabled':True,'strategy':'llm_react','allowed_tools':TOOLS}
-    c['memory']={**c.get('memory',{}),'enabled':False,'scope':{'mode':'disabled'}}
-    c['ontology_extension']={**c.get('ontology_extension',{}),'enabled':False,'auto_publish_enabled':False}
-    c['routing']={**c.get('routing',{}),'auto_accept_enabled':False,'semantic_auto_reject_enabled':False}
-    c['neo4j']={**c.get('neo4j',{}),'auto_import_enabled':False}
-    return c
+def configuration(profile='diagnostic', directory=None):
+    from review_agent.experiment_profiles import build_config
+    c=load_config()
+    return build_config(c,profile=profile,directory=directory or OUT)
 
 
 def public_settings(config):
@@ -74,12 +66,13 @@ def public_settings(config):
     from review_agent.response_contract_v8 import RESPONSE_SCHEMA
     return {'output_profiles':[{'voter_id':v['id'],**resolve_profile(v,config,RESPONSE_SCHEMA)} for v in _configured_validators(config)],'mode':config['mode'],'versions':versions_for(config),'committee_members':configured_members(config),
         'consensus':config['consensus'],'budget':config['budget'],'case_budget':config.get('case_budget'),
-        'planner':{**safe(configured_planner(config)),'allowed_tools':TOOLS},
+        'planner':{**safe(configured_planner(config)),'allowed_tools':list(config['planner']['allowed_tools'])},
         'validators':[{'id':v['id'],**safe(validator_settings(v))} for v in config['validators']],
         'scope_policy':config.get('scope_policy'),'human_labels_in_prompt':False,'review_memory_enabled':False,
         'sampling':{'temperature':0.0,'top_p':'not_sent_provider_default','seed':'not_sent','backend_weight_version':'not_pinned_by_model_alias'},
-        'candidate_revisions_automatically_applied':False,'ontology_extension_execution_enabled':False,
-        'ontology_publication_enabled':False,'graph_import_enabled':False}
+        'candidate_revisions_automatically_applied':bool(config.get('agent_resolution',{}).get('enabled')),'ontology_extension_execution_enabled':bool(config.get('ontology_extension',{}).get('enabled')),
+        'ontology_publication_enabled':False,'graph_import_enabled':False,
+        **({'experiment_profile':__import__('review_agent.experiment_profiles',fromlist=['describe']).describe(config)} if config.get('experiment_profile') else {})}
 
 
 def prepare():

@@ -16,6 +16,9 @@ def semantic_request_key(task_type,voter,proposal,prompt_hash=None):
         if proposal.get('response_contract_version') in {'validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
             payload.pop('output_structure',None);payload.pop('output_template',None)
         prompt_hash=sha256_json([prompt_for(proposal),contract.RESPONSE_SCHEMA])
+    elif task_type=='planner_action':
+        payload={k:proposal.get(k) for k in ('version','candidate_id','candidate_revision','candidate_hash',
+                                           'tool_contract_hash','decision_hash','prompt_hash')}
     else:
         payload={k:v for k,v in proposal.items() if k not in {'audit_id','round_id','proposal_digest',
                   'request_cache_namespace','prior_counter_evidence_ids','human_review_context'}}

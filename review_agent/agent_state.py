@@ -111,7 +111,15 @@ class AgentState:
                             'memory_policy_hash':self.context.get('memory_policy_hash')})
 
     def current_validation(self):
-        return self.validations.get(self.validation_key())
+        current=self.validations.get(self.validation_key())
+        snapshot=self.context.get('resolution_snapshot') or {}
+        changed=bool(snapshot.get('accepted_resolutions') or snapshot.get('accepted_semantic_review_ids') or snapshot.get('accepted_original_receipt_ids'))
+        if (changed and not snapshot.get('new_obligations') and snapshot.get('candidate_hash')==sha256_json(self.candidate)
+                and snapshot.get('evidence_hash')==self.bundle.get('evidence_hash')):
+            base=next((v for v in self.validations.values() if v['proposal_digest']==snapshot['base_proposal_digest']),None)
+            if base:return {**base,'consensus':self.consensus,'resolution_snapshot_id':snapshot['snapshot_id'],
+                'effective_supporting_evidence_ids':snapshot.get('effective_supporting_evidence_ids',[])}
+        return current
 
     def export(self):
         return copy.deepcopy(self.__dict__)

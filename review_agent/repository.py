@@ -1383,7 +1383,7 @@ class ReviewRepository(LifecycleRepository, OntologyReviewRepository, AdmissionR
             timespec="seconds"
         ).replace("+00:00", "Z")
         with self.transaction(immediate=True) as connection:
-            if connection.execute("SELECT 1 FROM service_pauses WHERE status='paused' LIMIT 1").fetchone(): return None
+            if connection.execute("SELECT 1 FROM service_pauses WHERE status='paused' AND COALESCE(json_extract(reason_json,'$.error_code'),'')!='CHANNEL_UNKNOWN_STREAK' LIMIT 1").fetchone(): return None
             kinds=tuple(job_types or ('audit','ontology_extension'))
             if not kinds or set(kinds)-{'audit','ontology_extension'}: raise ValidationError('unsupported job type filter')
             row = connection.execute(

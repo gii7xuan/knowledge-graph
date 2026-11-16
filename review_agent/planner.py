@@ -35,10 +35,12 @@ def bounded_json(client, payload, timeout, *, should_stop=None, max_tokens=1024,
 
 
 class LLMPlanner:
-    def __init__(self, client, *, max_retries=1, max_output_tokens=1024, system_prompt=SYSTEM_PROMPT, action_validator=validate_action):
+    def __init__(self, client, *, max_retries=1, max_output_tokens=1024, system_prompt=SYSTEM_PROMPT, action_validator=validate_action,
+                 repository=None, request_settings=None):
         self.client, self.max_retries = client, min(1, max(0, int(max_retries)))
         self.max_output_tokens = int(max_output_tokens)
         self.system_prompt, self.action_validator = system_prompt, action_validator
+        self.repository, self.request_settings = repository, dict(request_settings or {})
 
     def next_action(self, state, budget, tools, *, should_stop=None, reserve_validation_calls=0, on_request=None):
         attempts, feedback = [], None
@@ -49,6 +51,38 @@ class LLMPlanner:
             if feedback:
                 payload["correction_feedback"] = feedback
                 payload['output_instruction']='仅返回一个简短 JSON 工具动作；不要输出分析过程、说明段落或 Markdown。'
+            if self.repository is not None:
+                from .planner_requests import proposal_for, request, current_action
+                proposal = proposal_for(state, payload, tools, system_prompt=self.system_prompt)
+                if on_request:
+                    on_request(payload, attempts, request_proposal=proposal)
+                voter = {**self.request_settings, 'id': 'planner', 'client': self.client,
+                    'model_id': self.client.model_id, 'model_family': self.client.model_family,
+                    'max_output_tokens': self.max_output_tokens, 'request_channel': 'planner'}
+                voter['case_ids']=list(getattr(budget,'case_ids',[]))
+                wait = min(float(budget.config.get('planner_timeout_seconds',
+                    budget.config.get('per_call_timeout_seconds', 45))), budget.remaining_seconds())
+                receipt = request(self.repository, voter, proposal, wait)
+                attempt = {k: v for k, v in receipt.items() if k != 'attempts'}
+                attempt.update(attempt_no=len(attempts)+1, input_state=payload)
+                if receipt.get('actual_calls') == 0:
+                    budget.refund_calls(1)
+                budget.tokens(attempt)
+                attempts.append(attempt)
+                if should_stop and should_stop():
+                    raise AgentStopped('cancelled_or_revision_changed')
+                action, action_error = current_action(receipt, proposal, state, self.action_validator)
+                if action is not None:
+                    return {'action': action, 'status': 'ok', 'attempts': attempts,
+                            'request_proposal': proposal}
+                attempt['error'] = action_error
+                # State drift and unknown outcomes never become a new format request.
+                if receipt.get('response_status') != 'invalid_action' or action_error == 'stale_planner_state':
+                    break
+                feedback = {'error': action_error, 'previous_attempt_id': receipt.get('attempt_id'),
+                    'instruction': 'Return one legal action for the same unresolved task; preserve uncertainty.',
+                    'output_schema': payload.get('output_schema')}
+                continue
             if on_request:
                 on_request(payload, attempts)
             began = time.monotonic()

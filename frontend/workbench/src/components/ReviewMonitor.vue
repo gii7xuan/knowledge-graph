@@ -285,7 +285,7 @@ onUnmounted(() => { active = false; stop(); document.removeEventListener('visibi
           </div>
           <section class="monitor-outcome">
             <div class="monitor-section-title"><h2>程序汇总</h2><strong>{{ finalOutcome.title }}</strong></div>
-            <ReviewAxes :axes="snapshot.review_axes || {}" :pending-actions="snapshot.decision?.pending_actions || []" />
+            <ReviewAxes :axes="snapshot.review_axes || {}" :pending-actions="snapshot.derived_pending_actions || snapshot.decision?.pending_actions || []" />
             <ReviewOutcome :result="snapshot.review_outcome" />
             <ReviewTaskPolicy :policy="snapshot.scope_policy" :failure="snapshot.failure_handling" :clarifications="snapshot.semantic_clarifications || []" />
             <MappingPreflight :report="snapshot.mapping_preflight" :evidence="snapshot.mapping_source_evidence || []" />

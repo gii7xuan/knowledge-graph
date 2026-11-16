@@ -184,14 +184,25 @@ class OntologyPublisher:
             raise
         return self._wake(extension_id, release, proposal)
 
-    def _wake(self, extension_id, release, proposal):
+    def reconcile_subscribers(self,extension_id):
+        task=self.repository.extension_status(extension_id)
+        if task['status']!='published' or task.get('review_invalidated_by_human'):
+            raise ConflictError('only the exact published, non-withdrawn release can wake late subscribers')
+        if not any(s['status']=='active' for s in task['subscriptions']):return {'rebound':[],'reaudit_jobs':[],'old_votes_reused':False}
+        audit=self.repository.ontology_audit(task['latest_audit_id'])
+        proposal=next((p for p in audit['proposals'] if p['proposal_digest']==task['publication_proposal_digest']),None)
+        if not proposal or proposal_digest(proposal)!=proposal['proposal_digest']:raise ConflictError('published proposal binding changed')
+        release=load_release(self.root/task['published_release_id'])
+        return self._wake(extension_id,release,proposal,reconcile_only=True)
+
+    def _wake(self, extension_id, release, proposal,*,reconcile_only=False):
         task = self.repository.extension_status(extension_id)
         rebound, skipped, jobs, affected_rebound = [], [], [], []
         now = utc_now()
         with self.repository.transaction(immediate=True) as connection:
             targets=[{**s,"origin":"subscription"} for s in task['subscriptions']]
             subscribed={s['candidate_id'] for s in task['subscriptions']}
-            for affected in proposal['check_records']['impact']['affected_candidates']:
+            for affected in ([] if reconcile_only else proposal['check_records']['impact']['affected_candidates']):
                 if affected['candidate_id'] not in subscribed:
                     targets.append({**affected,'expected_row_version':affected['row_version'],'status':'active','origin':'historical_impact'})
             for subscription in targets:
@@ -249,6 +260,12 @@ class OntologyPublisher:
             data = {**task, "status": "published", "published_release_id": release.manifest["release_id"], "publication_proposal_digest": proposal["proposal_digest"]}
             for key in ("subscriptions", "row_version"): data.pop(key, None)
             connection.execute("UPDATE ontology_extension_tasks SET status='published',task_json=?,row_version=row_version+1 WHERE extension_id=?", (canonical_json(data), extension_id))
+            if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='shared_definition_tasks'").fetchone():
+                connection.execute("UPDATE shared_definition_tasks SET status='published',task_json=json_set(task_json,'$.status','published','$.published_release_id',?) WHERE json_extract(task_json,'$.extension_id')=?",
+                                   (release.manifest['release_id'],extension_id))
             result = {**release.binding(), "extension_id": extension_id, "rebound": rebound, "affected_rebound":affected_rebound, "skipped": skipped, "reaudit_jobs": jobs, "old_votes_reused": False}
-            connection.execute("UPDATE ontology_publish_outbox SET status='completed',result_json=? WHERE extension_id=?", (canonical_json(result), extension_id))
+            if reconcile_only:
+                connection.execute('CREATE TABLE IF NOT EXISTS ontology_subscription_wake_receipts(wake_id TEXT PRIMARY KEY,extension_id TEXT NOT NULL,result_json TEXT NOT NULL)')
+                connection.execute('INSERT INTO ontology_subscription_wake_receipts VALUES(?,?,?)',(uuid4().hex,extension_id,canonical_json(result)))
+            else:connection.execute("UPDATE ontology_publish_outbox SET status='completed',result_json=? WHERE extension_id=?", (canonical_json(result), extension_id))
         return result

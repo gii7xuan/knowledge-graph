@@ -35,10 +35,19 @@ def analyze_impact(repository,base_release_id,before,after,remap):
     old_guard,new_guard=OntologyGuard(load_snapshot(before)),OntologyGuard(load_snapshot(after))
     with repository.connect() as connection:
         rows=connection.execute('SELECT c.candidate_id,c.current_revision,c.row_version,c.human_status,r.candidate_json FROM candidates c JOIN candidate_revisions r ON r.candidate_id=c.candidate_id AND r.revision=c.current_revision ORDER BY c.candidate_id').fetchall()
+        shared=[]
+        if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='shared_definition_tasks'").fetchone():
+            shared=[json.loads(r[0]) for r in connection.execute('SELECT task_json FROM shared_definition_tasks WHERE release_id=?',(base_release_id,))]
     affected=[]
     for row in rows:
         candidate=json.loads(row['candidate_json']); triple=candidate.get('triple',{})
         reasons=sorted(set(dependencies)&{triple.get('relation_id'),triple.get('head_type'),triple.get('tail_type')})
+        for task in shared:
+            subscriber=task.get('subscribers',{}).get(candidate['candidate_id']) or {}
+            if (task['term_id'] in dependencies and subscriber.get('priority') in {'direct','exact_competitor'}
+                    and subscriber.get('revision')==candidate['revision']
+                    and subscriber.get('candidate_content_hash')==sha256_json(candidate)):
+                reasons=sorted(set(reasons)|{task['term_id']})
         if candidate.get('ontology_release_id') != base_release_id or not reasons: continue
         affected.append({'candidate_id':row['candidate_id'],'revision':row['current_revision'],'row_version':row['row_version'],
             'human_status':row['human_status'],'candidate_content_hash':sha256_json(candidate),'dependency_ids':reasons,

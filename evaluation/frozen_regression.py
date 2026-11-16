@@ -42,13 +42,8 @@ def validated_population(data):
     return list(zip(bindings,candidates))
 
 
-def settings_for(directory):
-    config=configuration()
-    config.update(database_path=str(directory/'review.sqlite3'),request_cache_namespace=directory.name)
-    config['budget'].update(max_total_tokens=360000,total_timeout_seconds=420,max_llm_calls_per_candidate=18,
-        max_planner_steps=3,max_validation_rounds=1,max_tool_calls=8,max_parallel_candidates=2)
-    config['case_budget'].update(tokens=400000)
-    return config
+def settings_for(directory,profile='diagnostic'):
+    return configuration(profile=profile,directory=directory)
 
 
 def prepare(directory,data_path=DATA):

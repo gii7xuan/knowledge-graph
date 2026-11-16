@@ -20,6 +20,7 @@ RESPONSE_SCHEMA={'type':'object','additionalProperties':False,
   'counterevidence_search':{'type':'object','additionalProperties':False,'required':['status','evidence_ids'],
    'properties':{'status':{'enum':['found','none_found_in_reviewed_scope','incomplete']},'evidence_ids':{'type':'array','items':{'type':'string'}}}},
   'reviewed_evidence_ids':{'type':'array','items':{'type':'string'}},'definition_ids':{'type':'array','items':{'type':'string'}},
+  'other_affected_checks':{'type':'array','items':{'enum':['triple_support','entity_reference','relation_semantics','relation_direction','qualifiers','evidence_sufficiency','counterevidence','mapping','knowledge_scope']}},
   'note':{'type':'string','minLength':1}}}
 
 
@@ -30,6 +31,8 @@ def initialize(connection):
 def response_errors(raw,proposal):
     errors=schema_errors(raw,RESPONSE_SCHEMA)
     if errors:return errors
+    if proposal.get('resolution_policy') and 'other_affected_checks' not in raw:
+        errors.append('explicit review of other affected checks is required; use [] only after assessing spillover')
     if raw['dispute_id']!=proposal['dispute']['dispute_id']:errors.append('dispute ID mismatch')
     allowed={e['evidence_id'] for e in proposal['evidence_bundle']['items'] if e.get('anchor_valid')}
     ids=set(raw['reviewed_evidence_ids'])|set(raw['positive_support']['evidence_ids'])|set(raw['counterevidence_search']['evidence_ids'])
@@ -54,6 +57,9 @@ def response_errors(raw,proposal):
     definitions={p['id'] for p in (proposal.get('ontology_context') or {}).get('properties',[])}
     if set(raw['definition_ids'])-definitions:errors.append('unknown formal definition ID')
     if proposal['dispute']['check']=='mapping' and raw['answer']=='supports' and not raw['definition_ids']:errors.append('mapping support needs the actual formal definitions')
+    if proposal['dispute']['check']=='mapping' and raw['answer']=='supports' and proposal.get('resolution_policy'):
+        assigned=proposal['dispute']['claim'].get('formal_mapping',{}).get('relation_id')
+        if not assigned or assigned not in raw['definition_ids']:errors.append('mapping resolution must review the exact relation already assigned to the candidate; it cannot assign a new ID')
     return errors
 
 
@@ -74,6 +80,9 @@ def judge_once(voter,proposal,feedback=None):
             return {**vote,'response_status':'api_error','error_code':'DISPUTE_BINDING_MISMATCH','actual_calls':0,'not_sent':True,'retryable':False}
         response=voter['client'].complete_json({**proposal,'output_contract':RESPONSE_SCHEMA},system_prompt=PROMPT,
             max_tokens=min(int(voter.get('max_output_tokens',2048)),2048))
+        if getattr(response,'finish_reason',None) in {'length','max_tokens','incomplete'}:
+            return {**vote,'response_status':'output_incomplete','error':'focused review output truncated',
+                'raw_response':response.content,'input_tokens':response.input_tokens,'output_tokens':response.output_tokens}
         raw=_parse_content(response.content);errors=response_errors(raw,proposal)
         vote.update(raw if not errors else {'error':'; '.join(errors),'raw_response':response.content},
             response_status='invalid_contract' if errors else 'ok',input_tokens=response.input_tokens,
@@ -89,7 +98,7 @@ def focused_consensus(votes,proposal):
     for member in proposal['committee_members']:
         vote=next((v for v in votes if v.get('voter_id')==member['id']),{})
         if vote.get('response_status')!='ok' or any(vote.get(k)!=v for k,v in binding(member,proposal).items()):continue
-        if response_errors({k:vote.get(k) for k in RESPONSE_SCHEMA['required']},proposal):continue
+        if response_errors({k:vote[k] for k in RESPONSE_SCHEMA['properties'] if k in vote},proposal):continue
         identities={str(vote.get(k) or '').casefold() for k in ('model_identity','returned_model_id')}-{''}
         if not identities or models & identities:continue
         models|=identities;families.add(vote['model_family']);eligible.append(vote)
@@ -100,7 +109,7 @@ def focused_consensus(votes,proposal):
         'whole_candidate_admitted':False,'original_votes_changed':False,'majority_is_resolution':False}
 
 
-def review(repository,base,dispute,bundle,voters,committee,budget,ontology_context=None,mapping_ready=False):
+def review(repository,base,dispute,bundle,voters,committee,budget,ontology_context=None,mapping_ready=False,*,resolution_policy=None):
     from .repository import ValidationError
     from .request_execution import judge_typed
     if dispute['route'] in {'apply_field_spec','human_scope_review'}:
@@ -118,6 +127,7 @@ def review(repository,base,dispute,bundle,voters,committee,budget,ontology_conte
         'evidence_bundle':deepcopy(bundle),'protected_evidence_ids':sorted(old),'ontology_context':deepcopy(ontology_context),
         'committee_members':[{k:v[k] for k in ('id','model_id','model_family')}|{'model_identity':str(v.get('model_identity') or v['model_id']).casefold()} for v in voters],
         'committee_policy':{'committee_size':len(committee.voter_ids),'required_votes':committee.required_votes,'minimum_distinct_families':committee.minimum_distinct_families}}
+    if resolution_policy:proposal['resolution_policy']=resolution_policy
     proposal['proposal_digest']=sha256_json(proposal);did=dispute['dispute_id']
     with repository.connect() as c:
         row=c.execute('SELECT status,result_json FROM dispute_focus_reviews WHERE dispute_id=?',(did,)).fetchone()
@@ -130,8 +140,9 @@ def review(repository,base,dispute,bundle,voters,committee,budget,ontology_conte
         budget.refund_calls(len(voters))
         return json.loads(prior[0]) or {'status':'review_incomplete','model_calls':0}
     def run(voter):
+        voter={**voter,'case_ids':list(getattr(budget,'case_ids',[]))}
         return judge_typed(voter,proposal,repository,task_type='candidate_dispute_review',binding=binding(voter,proposal),
-            invoke=lambda feedback:judge_once(voter,proposal),validate_cached=lambda v:response_errors({k:v.get(k) for k in RESPONSE_SCHEMA['required']},proposal),
+            invoke=lambda feedback:judge_once(voter,proposal),validate_cached=lambda v:response_errors({k:v[k] for k in RESPONSE_SCHEMA['properties'] if k in v},proposal),
             prompt_hash=sha256_json([PROMPT,RESPONSE_SCHEMA]),retries=0,
             timeout=min(90,budget.remaining_seconds()),deadline_epoch=budget.deadline_epoch)
     with ThreadPoolExecutor(max_workers=max(1,len(voters))) as pool:votes=list(pool.map(run,voters))
@@ -141,5 +152,6 @@ def review(repository,base,dispute,bundle,voters,committee,budget,ontology_conte
         for attempt in vote.get('attempts') or [vote]:budget.tokens(attempt)
     result={**focused_consensus(votes,proposal),'dispute_id':did,'votes':votes,'model_calls':calls,
         'proposal_digest':proposal['proposal_digest'],'evidence_hash':bundle['evidence_hash']}
+    if resolution_policy:result['review_proposal']=proposal
     with repository.transaction(immediate=True) as c:c.execute('UPDATE dispute_focus_reviews SET status=?,result_json=? WHERE dispute_id=?',(result['status'],canonical_json(result),did))
     return result

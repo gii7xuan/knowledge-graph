@@ -40,6 +40,13 @@ def versions_for(config):
         'max_positive_cases':(config.get('memory') or {}).get('max_positive_cases',3),
         'max_negative_cases':(config.get('memory') or {}).get('max_negative_cases',3)})
     planner = config.get("planner") or {}
+    if planner.get('durable_requests'):
+        versions['planner_request_contract_version']='planner_action_v1'
+    if (config.get('agent_resolution') or {}).get('enabled'):
+        from .planner_contracts import argument_schemas
+        versions.update(agent_resolution_policy_hash=sha256_json(config['agent_resolution']),
+            experiment_profile_hash=sha256_json(config.get('experiment_profile')),
+            resolution_tool_contract_hash=sha256_json(argument_schemas(True,True)))
     if planner.get('failure_policy'):
         if planner['failure_policy']!='bounded_minimum_v1':raise ValueError('unsupported planner failure policy')
         versions['planner_failure_policy_hash']=sha256_json({'version':'bounded_minimum_v1','format_retry_limit':1,'minimum_steps_limit':4})

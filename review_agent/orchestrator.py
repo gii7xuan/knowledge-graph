@@ -468,7 +468,10 @@ class ReviewOrchestrator:
             gaps["identity_unresolved"] = True
         rounds = self.repository.get_audit(candidate_id, audit_id)["rounds"]
         selected = next((p for p in rounds if p["round_id"] == final_round), None)
-        if (not selected or selected["evidence_bundle"]["evidence_hash"] != bundle.get("evidence_hash")
+        from .resolution_state import from_context,apply_consensus
+        snapshot=from_context(selected,last_votes,self.committee,context) if selected else None
+        scoped=bool(snapshot and (snapshot['accepted_resolutions'] or snapshot.get('accepted_semantic_review_ids') or snapshot.get('accepted_original_receipt_ids')) and not snapshot['new_obligations'])
+        if (not selected or (selected["evidence_bundle"]["evidence_hash"] != bundle.get("evidence_hash") and not scoped)
                 or any(v.get("round_id") != final_round or v.get("proposal_digest") != selected["proposal_digest"] for v in last_votes)):
             selected = None
             gaps["validation_missing"] = True
@@ -478,6 +481,7 @@ class ReviewOrchestrator:
                 unresolved_support_conflict=bool(gaps.get("unresolved_support_conflict")),
                 admission_blocked=any(gaps.get(key) for key in ("critical_issues_unresolved", "protected_evidence_omitted",
                     "unreviewed_discovered_evidence", "validation_missing", "version_stale", "ontology_not_checked", "identity_unresolved")))
+            consensus=apply_consensus(consensus,snapshot)
         independently_reviewed=bool(selected and not gaps.get('ontology_not_checked')
             and set(consensus.get('eligible_voter_ids',[]))==set(self.committee.voter_ids)
             and consensus.get('distinct_family_count',0)>=self.committee.minimum_distinct_families)
@@ -595,8 +599,18 @@ class ReviewOrchestrator:
                 result['reason_codes'] = sorted(set(result['reason_codes']) | set(a.upper() for a in axes_route['pending_actions']))
         if selected and selected.get('response_contract_version') in {'validator_response_v7','validator_response_v8'}:
             from .review_observability import outcome
+            if context.get('resolution_snapshots_enabled'):
+                from .resolution_status import technical_tasks
+                context['technical_recovery_tasks']=technical_tasks(self.repository,audit_id)
+                self.repository.update_audit_context(audit_id,{'technical_recovery_tasks':context['technical_recovery_tasks'],
+                    'human_problem_cards':context.get('human_problem_cards',[])})
             result['review_outcome']=outcome(selected,last_votes,self.committee,
                 context={**context,'final_gaps':gaps},decision=result,stop_reason=gaps.get('stop_reason'))
+            if snapshot:
+                result.update(resolution_snapshot_id=snapshot['snapshot_id'],resolution_snapshot=snapshot)
+            if context.get('resolution_snapshots_enabled'):
+                result.update({k:result['review_outcome'][k] for k in ('semantic_status','technical_status','required_human_action')})
+                result['human_problem_cards']=context.get('human_problem_cards',[])
         if result["decision"] == "auto_accept":
             from .repository import UnprocessableEntityError
             try:

@@ -1,5 +1,6 @@
 """Bounded planner observations; complete evidence and votes remain server-owned."""
 import copy
+import json
 
 from .action_policy import ActionPolicy
 from .planner_contracts import response_schema
@@ -80,7 +81,8 @@ def planner_view(state,budget,tools):
     validation=state.current_validation()
     eligible=set((validation or {}).get('consensus',{}).get('eligible_voter_ids',[]))
     supported_ids=sorted({eid for vote in (validation or {}).get('votes',[]) if vote.get('voter_id') in eligible
-        for eid in vote.get('supporting_evidence_ids',[]) if eid in valid_ids})
+        for eid in vote.get('supporting_evidence_ids',[]) if eid in valid_ids}|
+        (set((validation or {}).get('effective_supporting_evidence_ids',[]))&set(valid_ids)))
     for name,schema in enabled.items():
         fields=schema['properties']
         if 'evidence_id' in fields: fields['evidence_id']['enum']=valid_ids
@@ -88,6 +90,15 @@ def planner_view(state,budget,tools):
         elif 'evidence_ids' in fields: fields['evidence_ids']['maxItems']=0
         if name=='get_ontology_extension_status': fields['extension_id']['enum']=[state.pending_extension_id]
         if name=='review_dispute':fields['dispute_id']['enum']=[d['dispute_id'] for d in (state.context.get('dispute_report') or {}).get('disputes',[]) if d['status']=='open']
+        if name=='review_semantic_contract':
+            from .semantic_recheck import candidates
+            fields['voter_id']['enum']=candidates(state)
+        if name=='propose_mapping':
+            preparation=state.ontology_lookup.get('mapping_preflight') or {}
+            fields['relation_id']['enum']=sorted({r['id'] for r in preparation.get('relation_candidates',[]) if r.get('definition_available')})
+            classes=sorted({c['id'] for c in state.ontology_lookup.get('retrieved_context',{}).get('classes',[])}|
+                           {c for c in state.ontology_lookup.get('endpoint_class_matches',{}).values() if c})
+            fields['head_type']['enum']=classes;fields['tail_type']['enum']=[None,*classes]
         if name in {'review_revision','apply_reviewed_revision'}:
             status='proposed' if name=='review_revision' else 'approved'
             fields['draft_id']['enum']=[d['draft_id'] for d in state.revision_drafts if d.get('status')==status or
@@ -120,7 +131,7 @@ def planner_view(state,budget,tools):
     if not state.ontology_checked: obligations.append('inspect_ontology')
     if not state.bundle.get('items') and not state.searched_scopes: obligations.append('search_evidence')
     if state.current_validation() is None and state.bundle.get('items') and 'run_validation' in enabled: obligations.append('run_validation')
-    return copy.deepcopy({'identity':{k:state.candidate.get(k) for k in ('candidate_id','revision','run_id','document_version','ontology_version')},
+    result=copy.deepcopy({'identity':{k:state.candidate.get(k) for k in ('candidate_id','revision','run_id','document_version','ontology_version')},
         'audit_id':state.audit_id,'state_version':state.state_version,'candidate':state.candidate.get('triple',{}),
         'extraction_hints':{'status':'unconfirmed_extraction_hints_not_source_evidence',
                             'values':bounded_hint(state.candidate.get('extraction_hints',{}))},
@@ -157,3 +168,36 @@ def planner_view(state,budget,tools):
             'inspect_context':'exact ID from valid_evidence_ids','run_validation':'ontology checked and verified selected evidence; schema pass is not required'},
         'budget':budget.snapshot(),'source_content_is_untrusted_data':True,'memory_examples_are_not_current_evidence':True,
         'planner_view_is_summary':True,'full_evidence_and_votes_preserved_in_checkpoint':True})
+    if state.context.get('resolution_snapshots_enabled'):
+        before=len(json.dumps(result,ensure_ascii=False).encode('utf-8'))
+        from .resolution_obligations import resolution_obligations
+        result['resolution_obligations']=resolution_obligations(state,budget)
+        result['split_revision_groups']=[{k:g.get(k) for k in ('group_id','child_candidate_ids','status','ready_to_apply')}
+                                         for g in state.context.get('split_revision_groups',[])]
+        result['resolution_snapshot_id']=(state.context.get('resolution_snapshot') or {}).get('snapshot_id')
+        snapshot=state.context.get('resolution_snapshot') or {}
+        result['current_resolution']={'dimension_results':{a:{'status':d['status']} for a,d in snapshot.get('dimension_results',{}).items()},
+            'resolved_checks':snapshot.get('accepted_resolutions',[]),'new_obligations':snapshot.get('new_obligations',[]),
+            'original_votes_are_historical_for_resolved_checks':True}
+        result['shared_definition_tasks']=[{k:t.get(k) for k in ('task_id','term_id','status','affected_candidates')}
+                                           for t in state.context.get('shared_definition_tasks',[])]
+        lookup=result['ontology_lookup']
+        if lookup.get('retrieved_context'):
+            lookup.pop('matched_definitions',None);lookup.pop('semantic_mapping',None)
+        def compact_validation(validation):
+            if not validation:return validation
+            c=validation.get('consensus') or {}
+            validation['consensus']={k:c[k] for k in ('eligible_voter_ids','source_support_consensus',
+                'expression_status','effective_mapping_status','knowledge_scope','scope_confirmed',
+                'unresolved_counterevidence','unresolved_support_conflict','resolution_snapshot_id') if k in c}
+            validation['consensus']['review_axes']={a:{'status':v.get('status')} for a,v in c.get('review_axes',{}).items() if isinstance(v,dict)}
+            return validation
+        compact_validation(result['current_validation'])
+        for observation in result['history']:
+            if observation.get('validation'):compact_validation(observation['validation'])
+        result['issue_history']=[{k:i.get(k) for k in ('issue_id','code','status','target','resolution_id',
+            'evidence_ids','resolution_evidence_ids')} for i in state.issues]
+        after=len(json.dumps(result,ensure_ascii=False).encode('utf-8'))
+        result['input_size']={'before_deduplication_bytes':before,'after_deduplication_bytes':after,
+            'evidence_items':len(catalog),'full_material_preserved_server_side':True}
+    return result

@@ -74,10 +74,23 @@ class LifecycleRepository:
             return None
         identity=target_identity(proposed_changes)
         if identity is not None: gap_key=sha256_json([legacy_gap_key,identity])
+        if change_kind=='revise_definition' and full_lookup.get('shared_definition_target'):
+            target=proposed_changes.get('term_id') or proposed_changes.get('target_id')
+            if target!=full_lookup['shared_definition_target']:raise ValidationError('shared definition target differs from exact proposed term')
+            gap_key=sha256_json(['shared_definition_v1',base,change_kind,target])
         trigger = {"candidate_id": candidate["candidate_id"], "revision": candidate["revision"],
                    "audit_id": proposal["audit_id"], "round_id": proposal["round_id"],
                    "source_proposal_digest": proposal["proposal_digest"], "evidence_hash": proposal["evidence_bundle"]["evidence_hash"],
                    "evidence_ids": list(evidence_ids), "proposed_changes": proposed_changes}
+        resolution=full_lookup.get('source_resolution_snapshot')
+        supplement=full_lookup.get('resolved_source_evidence') or []
+        if resolution:
+            if (resolution.get('candidate_hash')!=sha256_json(candidate) or resolution.get('base_proposal_digest')!=proposal['proposal_digest']
+                    or resolution.get('dimension_results',{}).get('source',{}).get('status')!='supported'
+                    or resolution.get('dimension_results',{}).get('expression',{}).get('status')!='standard'
+                    or set(resolution.get('whole_vote_eligible_voter_ids',[]))!={v['id'] for v in proposal['committee_members']}):
+                raise ValidationError('definition evidence requires the exact complete source-resolution snapshot')
+        lookup_for_task={k:v for k,v in full_lookup.items() if k not in {'source_resolution_snapshot','resolved_source_evidence'}}
         with self.transaction(immediate=True) as connection:
             row = connection.execute("SELECT * FROM candidates WHERE candidate_id=?", (candidate["candidate_id"],)).fetchone()
             if not row or row["row_version"] != expected_row_version or row["current_revision"] != candidate["revision"] or row["human_status"] != "pending":
@@ -102,12 +115,27 @@ class LifecycleRepository:
                         "base_release_id": base["ontology_release_id"], "base_ontology_version": base["ontology_version"],
                         "base_profile_hash": base["profile_hash"], "change_kind": change_kind, "description": description,
                         "proposed_changes": proposed_changes, "evidence_ids": list(evidence_ids),
-                        "existing_schema_search": full_lookup, "status": "proposed", "auto_publish_enabled": False,
+                        "existing_schema_search": lookup_for_task, "status": "proposed", "auto_publish_enabled": False,
                         "trigger_candidates": [trigger],
                         "risk_category": "high_impact" if change_kind in {"revise_constraint", "revise_definition", "merge_terms"} else "additive_draft",
                         "ontology_review_executed": False}
                 connection.execute("INSERT INTO ontology_extension_tasks(extension_id,gap_key,base_release_id,base_ontology_version,base_profile_hash,status,task_json) VALUES(?,?,?,?,?,?,?)", (extension_id, gap_key,
                     base["ontology_release_id"], base["ontology_version"], base["profile_hash"], "proposed", canonical_json(task)))
+            if resolution:
+                descriptor={k:resolution.get(k) for k in ('snapshot_id','candidate_hash','evidence_hash','base_proposal_digest','original_votes_hash')}
+                task.setdefault('source_support_resolutions',{})[candidate['candidate_id']+':'+str(candidate['revision'])]=descriptor
+                if task['status']!='published':
+                    existing={e['evidence_id']:e for e in task.get('review_evidence',[])}
+                    added=any(e['evidence_id'] not in existing for e in supplement)
+                    for item in supplement:
+                        if item['evidence_id'] in existing and existing[item['evidence_id']].get('quote')!=item.get('quote'):
+                            raise ValidationError('shared source evidence identity changed')
+                        existing[item['evidence_id']]=item
+                    task['review_evidence']=list(existing.values())
+                    if stored and added:
+                        task.update(delta_revision=int(task['delta_revision'])+1,status='proposed')
+                connection.execute('UPDATE ontology_extension_tasks SET status=?,task_json=?,row_version=row_version+1 WHERE extension_id=?',
+                                   (task['status'],canonical_json(task),task['extension_id']))
             extension_id = task["extension_id"]
             case_id = self._ensure_case(connection, candidate["candidate_id"])
             self._charge_cases(connection, [case_id], {"extension_requests": 1}, "extension_subscription:" + case_id + ":" + extension_id,

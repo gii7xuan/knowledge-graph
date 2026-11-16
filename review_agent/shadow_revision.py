@@ -50,14 +50,19 @@ def apply_reviewed(repository, *, draft_id=None, group_id=None):
         path==Path(manifest['source']).resolve() or not path.is_relative_to(Path(manifest['allowed_root']).resolve()) or
         hashlib.sha256(Path(manifest['source']).read_bytes()).hexdigest()!=manifest['source_sha256']):
         raise ConflictError('shadow source/isolation binding changed')
-    marker=path.parent/'revision_started.json'
-    if marker.exists():raise ConflictError('one semantic revision round per isolated experiment; no automatic repeat')
     if bool(draft_id)==bool(group_id):raise ValueError('select one exact reviewed draft or split group')
     service=RevisionService(repository)
     drafts=service.split(group_id)['drafts'] if group_id else [service.draft(draft_id)]
     if any(d['status']!='approved' for d in drafts):raise ConflictError('every child must be independently approved before shadow application')
-    marker.write_text(json.dumps({'version':VERSION,'draft_ids':[d['draft_id'] for d in drafts],
-        'changes':[d.get('change_analysis') for d in drafts],'old_votes_reusable':False}),encoding='utf-8')
+    if manifest.get('revision_scope')=='per_candidate':
+        claims=path.parent/'revision_claims';claims.mkdir(exist_ok=True)
+        marker=claims/(sha256_json(drafts[0]['candidate_id'])+'.json')
+    else:marker=path.parent/'revision_started.json'
+    try:
+        with marker.open('x',encoding='utf-8') as stream:
+            json.dump({'version':VERSION,'draft_ids':[d['draft_id'] for d in drafts],
+                'changes':[d.get('change_analysis') for d in drafts],'old_votes_reusable':False},stream)
+    except FileExistsError:raise ConflictError('one semantic revision round per isolated candidate; no automatic repeat')
     result=service.apply_split(group_id) if group_id else service.apply(draft_id,drafts[0]['draft_hash'])
     result.update(mode='isolated_shadow',production_written=False,verification_status='verification_incomplete',
         quality_success=None,new_rounds_limit=1,parent_case_id=drafts[0]['candidate_id'])

@@ -211,9 +211,16 @@ class ReviewService:
             from .consensus import Committee
             members=displayed.get('committee_members') or []
             thresholds=displayed.get('committee_policy') or {}
+            derived_context={**(audit or {}).get('context',{}),'final_gaps':displayed.get('gaps') or {}}
+            if audit and members and derived_context.get('resolution_snapshots_enabled'):
+                from .resolution_recovery import project_context
+                derived_context=project_context(self.repository,audit,Committee([m['id'] for m in members],
+                    thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members))))
             diagnostic=outcome(displayed,displayed_votes,Committee([m['id'] for m in members],
                 thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members))),
-                audit_status=audit['status'],context={**audit['context'],'final_gaps':displayed.get('gaps') or {}},decision=decision) if audit and members else None
+                audit_status=audit['status'],context=derived_context,decision=decision) if audit and members else None
+            from .resolution_state import display_projection
+            displayed_axes,pending_actions=display_projection(decision if selected else None,diagnostic,derived_context)
             summaries.append({**public_candidate(item), "latest_decision": decision,
                               "audit_summary": None if audit is None else {
                                   "audit_id": audit["audit_id"], "status": audit["status"],
@@ -223,9 +230,9 @@ class ReviewService:
                                   "calibration_status": audit["calibration_status"],
                                   "rounds": len(audit["rounds"]), "votes": displayed_votes,
                                   "authoritative_selection": selected is not None,
-                                  "review_axes": display_axes(decision) if selected else {},
+                                  "review_axes": displayed_axes,
                                   "review_outcome": diagnostic,
-                                  "pending_actions": (decision or {}).get('pending_actions', []) if selected else [],
+                                  "pending_actions": pending_actions,
                                   "mapping_preflight": displayed.get('mapping_preflight'),
                                   "field_spec": displayed.get('field_spec'),
                                   "field_standardization": displayed.get('field_standardization'),

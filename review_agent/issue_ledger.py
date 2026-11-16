@@ -31,6 +31,16 @@ class IssueLedger:
         if not prior:
             return
         saved = (prior.get("agent_state") or {}).get("state", {})
+        if prior.get('context',{}).get('resolution_snapshots_enabled'):
+            previous_candidate=repository.get_revision(self.state.candidate['candidate_id'],prior['revision'])
+            if all(previous_candidate.get(k)==self.state.candidate.get(k) for k in ('document_version','source_index_hash')):
+                bundle=saved.get('bundle') or prior['context'].get('resolution_bundle') or {}
+                self.state.archive=list({e['evidence_id']:copy.deepcopy(e) for e in [*self.state.archive,*bundle.get('items',[])]}.values())
+                snapshot=saved.get('context',{}).get('resolution_snapshot') or prior['context'].get('resolution_snapshot') or {}
+                ids={eid for r in snapshot.get('accepted_resolutions',[]) for key in ('supporting_evidence_ids','counter_evidence_ids') for eid in r.get(key,[])}
+                self.state.protected_ids=sorted(set(self.state.protected_ids)|ids)
+                self.state.context['resolution_evidence_provenance']={'source_audit_id':prior['audit_id'],
+                    'evidence_hash':bundle.get('evidence_hash'),'old_votes_reused':False}
         counters={eid for vote in prior.get('votes',[]) if vote.get('response_status')=='ok' for eid in vote.get('counter_evidence_ids',[])}
         carried = [i for i in prior["context"].get("issue_history", saved.get("issues", []))
                    if i.get("status", "open") != "resolved" and i["code"] in REVISION_ISSUES | SOURCE_ISSUES | {"ontology_gap"}]
@@ -103,8 +113,10 @@ class IssueLedger:
         event["event_id"] = sha256_json([self.state.audit_id, event])
         self.state.issue_events.append(event)
 
-    def open(self, code, description, critical=False, *, proposal=None, evidence_ids=(), evidence_hash=None):
-        existing = next((i for i in self.state.issues if i["code"] == code and i.get("status", "open") != "resolved"), None)
+    def open(self, code, description, critical=False, *, proposal=None, evidence_ids=(), evidence_hash=None,
+             target=None, dimensions=()):
+        existing = next((i for i in self.state.issues if i["code"] == code and i.get('target') == target
+                         and i.get("status", "open") != "resolved"), None)
         if existing:
             existing["critical"] = bool(existing.get("critical") or critical)
             existing["evidence_ids"] = sorted(set(existing.get("evidence_ids", [])) | set(evidence_ids))
@@ -116,9 +128,22 @@ class IssueLedger:
                  "evidence_ids": sorted(set(evidence_ids)), "resolution_evidence_ids": [],
                  "resolved_in_proposal": None, "resolution_rule": None,
                  "requires_revision": code in REVISION_ISSUES}
+        if target is not None:issue.update(target=copy.deepcopy(target),dimensions=sorted(set(dimensions)))
         self.state.issues.append(issue)
         self.event(issue, "opened", proposal)
         return issue
+
+    def resolve_target(self, issue_id, dimensions, *, resolution_id, proposal, evidence_ids):
+        issue=next((i for i in self.state.issues if i['issue_id']==issue_id),None)
+        if not issue or not resolution_id or not evidence_ids or set(issue.get('dimensions',[]))-set(dimensions):
+            return False
+        self.resolve(issue,proposal,'independent_focused_exact_target_recheck',evidence_ids)
+        if issue.get('status')=='resolved':
+            issue['resolution_id']=resolution_id
+            self.event(issue,'resolution_bound',proposal['proposal_digest'],resolution_id=resolution_id,
+                       dimensions=sorted(set(dimensions)))
+            return True
+        return False
 
     def resolve(self, issue, proposal, rule, evidence_ids):
         policy=getattr(self.state,'context',{}).get('experimental_policy',{})
@@ -130,6 +155,12 @@ class IssueLedger:
         self.event(issue, "resolved", proposal["proposal_digest"], rule=rule, evidence_ids=issue["resolution_evidence_ids"])
 
     def observe(self, proposal, votes, consensus, required_votes):
+        def target(check):
+            if not self.state.context.get('resolution_snapshots_enabled'):return {}
+            from .disputes import target_for
+            from .resolution_state import CHECK_AXES
+            claim=target_for(proposal['candidate'],check)
+            return {'target':{'claim_id':claim['claim_id'],'check':check},'dimensions':CHECK_AXES[check]}
         eligible = set(consensus.get("eligible_voter_ids", []))
         valid = [v for v in votes if v.get("voter_id") in eligible]
         digest, evidence_hash = proposal["proposal_digest"], proposal["evidence_bundle"]["evidence_hash"]
@@ -138,7 +169,7 @@ class IssueLedger:
         if counter_ids and (any(v.get("source_support") == "supported" for v in valid)
                             or source != "contradicted"):
             self.open("source_conflict", "存在需要独立复核适用范围的反证", True, proposal=digest,
-                      evidence_ids=counter_ids | {eid for v in valid for eid in v.get("supporting_evidence_ids", [])}, evidence_hash=evidence_hash)
+                      evidence_ids=counter_ids | {eid for v in valid for eid in v.get("supporting_evidence_ids", [])}, evidence_hash=evidence_hash,**target('counterevidence'))
         for vote in valid:
             if proposal.get('response_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
                 for check in vote.get('checks',[]):
@@ -148,13 +179,24 @@ class IssueLedger:
                         code={'entity_reference':'ENTITY_MISMATCH','relation_semantics':'RELATION_MISMATCH',
                               'qualifiers':'QUALIFIER_MISMATCH','relation_direction':'DIRECTION_MISMATCH'}[check['check']]
                         self.open(code,check.get('note') or '表达须修订',True,proposal=digest,
-                            evidence_ids=check.get('evidence_ids') or [],evidence_hash=evidence_hash)
+                            evidence_ids=check.get('evidence_ids') or [],evidence_hash=evidence_hash,**target(check['check']))
             for code in set(vote.get("reason_codes", [])) & (REVISION_ISSUES | {"EVIDENCE_INSUFFICIENT"}):
+                if code=='EVIDENCE_INSUFFICIENT' and self.state.context.get('resolution_snapshots_enabled'):
+                    continue # The exact dependency is recorded below, rather than a second broad obligation.
                 self.open(code, "当前候选存在来源、限定或方向义务", True, proposal=digest,
-                          evidence_ids=vote.get("counter_evidence_ids") or vote.get("supporting_evidence_ids") or [], evidence_hash=evidence_hash)
+                          evidence_ids=vote.get("counter_evidence_ids") or vote.get("supporting_evidence_ids") or [], evidence_hash=evidence_hash,
+                          **target({'ENTITY_MISMATCH':'entity_reference','RELATION_MISMATCH':'relation_semantics',
+                              'DIRECTION_MISMATCH':'relation_direction','EVIDENCE_INSUFFICIENT':'evidence_sufficiency'}.get(code,'qualifiers')))
             if vote.get("source_support") == "insufficient":
-                self.open("EVIDENCE_INSUFFICIENT", "当前原文不足，需定向补证", True, proposal=digest,
-                          evidence_ids=[item["evidence_id"] for item in proposal["evidence_bundle"]["items"]], evidence_hash=evidence_hash)
+                checks=['evidence_sufficiency']
+                if self.state.context.get('resolution_snapshots_enabled'):
+                    dims=vote.get('dimensions') or {}
+                    checks=[name for name in ('entity_reference','relation_semantics','relation_direction','qualifiers','evidence_sufficiency')
+                            if dims.get(name,{}).get('status') not in {'pass','not_applicable'}]
+                    if dims.get('triple_support',{}).get('status')!='supported':checks.append('triple_support')
+                for name in checks or ['evidence_sufficiency']:
+                    self.open("EVIDENCE_INSUFFICIENT", "当前原文不足，需定向补证", True, proposal=digest,
+                              evidence_ids=[item["evidence_id"] for item in proposal["evidence_bundle"]["items"]], evidence_hash=evidence_hash,**target(name))
         if source in {"supported", "contradicted"}:
             supporting = ([v for v in valid if v["voter_id"] in consensus["source_support_consensus"]["support_voter_ids"]]
                           if source == "supported" else [v for v in valid if v.get("source_support") == "contradicted"])

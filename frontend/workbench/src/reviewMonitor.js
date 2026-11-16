@@ -54,7 +54,7 @@ const labels = {
   mapping_review: '待核验正式映射', scope_review: '待确认知识范围', excluded_by_scope: '按范围排除',
   semantic_revision_required: '需要语义修订', normalization_required: '待无损规范化',
   evidence_insufficient: '证据不足 · 待补证', expression_review: '待核验表达', review_incomplete: '审核未完成',
-  source_review: '原文支持分歧 · 待复核',
+  source_review: '原文支持分歧 · 待复核', technical_recovery: '技术恢复或用量对账',
   review_completed: '审核完成', ready_for_review: '等待审核', auto_accept: '允许准入',
   auto_reject: '未获准入', manual: '待人工处理', accept: '允许准入', reject: '未获准入',
   awaiting_ontology_review: '等待本体审核', awaiting_ontology_release: '等待本体发布', reaudit_required: '需重新审核'

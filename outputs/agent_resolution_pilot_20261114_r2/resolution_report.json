@@ -1,0 +1,3191 @@
+{
+  "version": "isolated_agent_resolution_experiment_v1",
+  "root_population": 3,
+  "evaluated_child_or_original_population": 3,
+  "semantic_completed": 0,
+  "technical_incomplete": 1,
+  "root_automatic_closure_rate": 0.0,
+  "root_technical_recovery_tasks": {
+    "cand_7643b4bd5b5fdd4dfad6": [],
+    "cand_5b459021eb0a3fe91145": [
+      {
+        "task_type": "execution_obligation",
+        "issue_id": "issue_aa8a9cc5feaa36ee4b21d5d9",
+        "execution_unknown": false,
+        "usage_unknown": false,
+        "required_action": "technical_recovery",
+        "automatic_resend": false
+      },
+      {
+        "task_type": "committee_material_incomplete",
+        "semantic_dependency": true,
+        "execution_unknown": false,
+        "usage_unknown": false,
+        "automatic_resend": false,
+        "required_action": "bounded_contract_or_execution_recovery"
+      }
+    ],
+    "cand_f4876022d0c83d291ac3": []
+  },
+  "cases": [
+    {
+      "candidate_id": "cand_7643b4bd5b5fdd4dfad6",
+      "root_candidate_id": "cand_7643b4bd5b5fdd4dfad6",
+      "version": "review_outcome_v3",
+      "dimension_results": {
+        "source": {
+          "status": "supported",
+          "observed_result": "supported",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": true,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "expression": {
+          "status": "standard",
+          "observed_result": "standard",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": true,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "mapping": {
+          "status": "context_incomplete",
+          "observed_result": "unassigned",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": false,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "scope": {
+          "status": "include",
+          "observed_result": "general",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": true,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          ]
+        }
+      },
+      "vote_validation": {
+        "judge_a": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_a",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "67038e2d37f291e6ed71d0f18af48488e0b52c5d74d3e759efdc1aae95da6a71",
+          "normalized_response_hash": "9f602b41a48cf0a344d9eb1a29aa3b6b2a0414200d31e23f338690bfe678ad56",
+          "original_attempt_id": "attempt_93f7d41796ae452297e3327f72b6a3c6",
+          "attempt_id": "attempt_93f7d41796ae452297e3327f72b6a3c6",
+          "request_key": "a079d222f155a84241858053ca4a435fb7842d9b60449444985eb6dc8a63ca7a",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        },
+        "judge_b": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_b",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "33cd0f1b52d2f6755646ee1a66cf97f30065a760fd022c668e8952e226827721",
+          "normalized_response_hash": "7906d3612f6111ec4311ac2ab463c6ba0da52d65413b6a75e17faf30635379d3",
+          "original_attempt_id": "attempt_00c30990965e4173bd5fe386cbad9d99",
+          "attempt_id": "attempt_00c30990965e4173bd5fe386cbad9d99",
+          "request_key": "905f26738fee7f97d402456da6409661d7a18e7297fc9fea286195fb5f9924f7",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        },
+        "judge_c": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_c",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "858ed46e83c1c7d828708fda439355fa4c819c77598c6022a685d30d58305c5a",
+          "normalized_response_hash": "32573ead468416789a4471ca196d507390e25ebf614f80cd549f350dfe1724eb",
+          "original_attempt_id": "attempt_94a7798e89e342fe92e76aa79db10f24",
+          "attempt_id": "attempt_94a7798e89e342fe92e76aa79db10f24",
+          "request_key": "a168bf2872c90f7a6e22a54f39bda411b74943d2487d549655fdf5e068bf54a6",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      },
+      "duplicate_records_ignored": 0,
+      "whole_vote_eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "resolution_snapshot_id": "snapshot_40f11b3585e79bd053b7ad6225fa868337ef35f51698e796b671f744a30a1ca0",
+      "original_whole_vote_eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+      "execution_status": "completed",
+      "execution_reason": "来源支持已获3/3独立委员确认，但正式映射因冻结本体中候选关系定义缺失且尾实体类型未定而保持未分配；当前无合法且有信息增益的修订或扩展动作，需等待共用正式定义集中审核发布。",
+      "mapping_process": {
+        "version": "mapping_execution_trace_v2",
+        "proposal_digest": "2981ecf8b0dc476d2f255532361d6f79874794a489ff7be626ea8fa46a580e30",
+        "preflight_hash": "296d775834e3c70a44c8e4cd710d86aedcffcdc55d00d45f8c241f7ec33163e7",
+        "stages": [
+          {
+            "stage": "mapping_entry",
+            "status": "completed"
+          },
+          {
+            "stage": "local_retrieval",
+            "status": "completed",
+            "recalled_ids": [
+              "R_029d377fdd30415aa4e3",
+              "R_34c14554de9690a0bac8",
+              "R_3a4d4e6372b2170ec6a1",
+              "R_4f50d9e9384ae5c2980a",
+              "R_8c8d928b1aa9b0f97bd4"
+            ],
+            "source": {
+              "metadata_complete": false,
+              "property_count": 5,
+              "stage": "review_subset"
+            }
+          },
+          {
+            "stage": "global_retrieval",
+            "status": "completed",
+            "source": {
+              "classes_scanned": 189,
+              "exact_match_ids": [],
+              "lexical_recall_is_semantic_confirmation": false,
+              "properties_scanned": 81,
+              "property_count": 5,
+              "stage": "full_bound_release_and_aliases"
+            },
+            "failure": null,
+            "recall_is_semantic_proof": false
+          },
+          {
+            "stage": "relation_definitions",
+            "status": "not_found",
+            "complete_ids": [],
+            "candidates": [
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_5d0b94cd0cd9ae0220e9"
+                ],
+                "id": "R_029d377fdd30415aa4e3",
+                "label": "随高度变化",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_ca67f873a92ca5ca8713"
+                ],
+                "retrieved": true
+              },
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_2e93a01c7d86a22c0ffc"
+                ],
+                "id": "R_34c14554de9690a0bac8",
+                "label": "用于",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_70780e1e31a41f0ff86a"
+                ],
+                "retrieved": true
+              },
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_2e93a01c7d86a22c0ffc"
+                ],
+                "id": "R_3a4d4e6372b2170ec6a1",
+                "label": "具有部件",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_c9a8caf70874ae7c9f89"
+                ],
+                "retrieved": true
+              },
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_0b7c9c45d5ac893efbd9"
+                ],
+                "id": "R_4f50d9e9384ae5c2980a",
+                "label": "修正",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_7d974ce2ac555675d1f3"
+                ],
+                "retrieved": true
+              },
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_3435baf6d201eea60563"
+                ],
+                "id": "R_8c8d928b1aa9b0f97bd4",
+                "label": "编制",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_f459437ed9067a73ce23"
+                ],
+                "retrieved": true
+              }
+            ],
+            "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "ontology_context_hash": "30dddc45c250131cefba85b67b57d45cce65472f9db693668f724939a93ea330"
+          },
+          {
+            "stage": "entity_identity",
+            "status": "not_found",
+            "entities": {
+              "head": {
+                "aliases": [],
+                "aliases_are_unconfirmed": true,
+                "assigned_type": "C_2e93a01c7d86a22c0ffc",
+                "candidate_id": "local_a4546a02f01ab291b1a7fd6541534459b5c909e925fdb0c08f46123c4cee6d73",
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                "missing_information": [],
+                "referent_scope": null,
+                "source_evidence_ids": [
+                  "ev_42fcaba6366e416b57f9",
+                  "ev_30cd7460cc15fbf2d5ec",
+                  "ev_28447b75288eef9dcad9"
+                ],
+                "surface": "我国炮兵用标准气象条件",
+                "type_candidate_ids": [
+                  "C_2e93a01c7d86a22c0ffc"
+                ]
+              },
+              "tail": {
+                "aliases": [],
+                "aliases_are_unconfirmed": true,
+                "assigned_type": null,
+                "candidate_id": "local_f41e6c0aad29d2b8bfb75a85155f308bd0977188630d243ac32c521eff2d6328",
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                "missing_information": [
+                  "endpoint_type_unassigned_or_ambiguous"
+                ],
+                "referent_scope": null,
+                "source_evidence_ids": [
+                  "ev_42fcaba6366e416b57f9",
+                  "ev_30cd7460cc15fbf2d5ec",
+                  "ev_28447b75288eef9dcad9"
+                ],
+                "surface": "国际上通用的标准",
+                "type_candidate_ids": []
+              }
+            },
+            "candidate_ids_are_formal_entity_ids": false
+          },
+          {
+            "stage": "mapping_attempt",
+            "status": "completed",
+            "opinions": [
+              {
+                "voter_id": "judge_a",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_42fcaba6366e416b57f9",
+                  "ev_30cd7460cc15fbf2d5ec",
+                  "ev_28447b75288eef9dcad9"
+                ],
+                "issue_code": "",
+                "note": "映射预检未就绪，关系ID保持未分配，不强行匹配相似谓词。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              {
+                "voter_id": "judge_b",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_42fcaba6366e416b57f9"
+                ],
+                "issue_code": "",
+                "note": "由于mapping_preflight.judgment_ready为false且无匹配关系ID，保持unassigned。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              {
+                "voter_id": "judge_c",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_30cd7460cc15fbf2d5ec"
+                ],
+                "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                "note": "预检judgment_ready为false，关系定义缺失且尾实体类型未定，正式映射保持未分配。",
+                "relation_id": null,
+                "status": "unassigned"
+              }
+            ],
+            "formal_assignment": {
+              "assigned_head_type": "C_2e93a01c7d86a22c0ffc",
+              "assigned_relation_id": null,
+              "assigned_tail_type": null,
+              "candidate_relation_ids": [
+                "R_029d377fdd30415aa4e3",
+                "R_34c14554de9690a0bac8",
+                "R_3a4d4e6372b2170ec6a1",
+                "R_4f50d9e9384ae5c2980a",
+                "R_8c8d928b1aa9b0f97bd4"
+              ],
+              "semantic_approval": false
+            },
+            "original_expression": {
+              "candidate_id": "cand_7643b4bd5b5fdd4dfad6",
+              "head": "我国炮兵用标准气象条件",
+              "qualifier_status": {
+                "applicability": "not_stated",
+                "condition": "not_stated",
+                "modality": "extracted",
+                "polarity": "extracted",
+                "quantifier": "extracted",
+                "time_scope": "not_stated"
+              },
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "positive",
+                "quantifier": "基本",
+                "time_scope": null
+              },
+              "revision": 1,
+              "surface_relation": "与国际上通用的标准基本一致",
+              "tail": "国际上通用的标准"
+            },
+            "semantic_equivalence_confirmed": false
+          },
+          {
+            "stage": "constraint_check",
+            "status": "not_found",
+            "result": "unknown",
+            "reason_codes": [
+              "FORMAL_MAPPING_UNASSIGNED"
+            ]
+          },
+          {
+            "stage": "state_summary",
+            "status": "observed",
+            "candidate_assignment": {
+              "assigned_head_type": "C_2e93a01c7d86a22c0ffc",
+              "assigned_relation_id": null,
+              "assigned_tail_type": null,
+              "candidate_relation_ids": [
+                "R_029d377fdd30415aa4e3",
+                "R_34c14554de9690a0bac8",
+                "R_3a4d4e6372b2170ec6a1",
+                "R_4f50d9e9384ae5c2980a",
+                "R_8c8d928b1aa9b0f97bd4"
+              ],
+              "semantic_approval": false
+            },
+            "guard_status": "unknown",
+            "publication_is_mapping_validation": false
+          }
+        ],
+        "blockers": [
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_029d377fdd30415aa4e3",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_34c14554de9690a0bac8",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_3a4d4e6372b2170ec6a1",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_4f50d9e9384ae5c2980a",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_8c8d928b1aa9b0f97bd4",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "entity_identity",
+            "reason": "identity_ambiguous",
+            "detail": {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "id": "tail",
+              "kind": "entity"
+            }
+          }
+        ],
+        "milestones": {
+          "proposal_formed": true,
+          "candidate_id_assigned": false,
+          "structural_constraints_passed": false,
+          "full_guard_passed": false,
+          "human_confirmed": null,
+          "formally_registered": null
+        },
+        "blocking_information": [
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_029d377fdd30415aa4e3",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_34c14554de9690a0bac8",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_3a4d4e6372b2170ec6a1",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_4f50d9e9384ae5c2980a",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_8c8d928b1aa9b0f97bd4",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "endpoint_type_unassigned_or_ambiguous"
+            ],
+            "id": "tail",
+            "kind": "entity"
+          }
+        ],
+        "global_gap_confirmed": false,
+        "mapping_accuracy": "requires_current_packet_human_annotation"
+      },
+      "review_completed": false,
+      "recommendation": "wait_mapping",
+      "action_taken": "none",
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed"
+      ],
+      "writes_authorized": false,
+      "derivation": "current_frozen_input_only",
+      "semantic_status": "waiting_mapping",
+      "technical_status": "settled",
+      "required_human_action": "shared_definition_or_mapping_review",
+      "technical_recovery_tasks": [],
+      "technical_incomplete": false,
+      "execution_outcome_unknown": false,
+      "end_to_end_incomplete": true,
+      "human_problem_cards": [
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "finish_requested",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "我国炮兵用标准气象条件",
+            "head_entity_id": "local_a4546a02f01ab291b1a7fd6541534459b5c909e925fdb0c08f46123c4cee6d73",
+            "head_type": "C_2e93a01c7d86a22c0ffc",
+            "language": "zh",
+            "mapping_status": "needs_full_schema_lookup",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "基本",
+              "time_scope": null
+            },
+            "relation_id": null,
+            "relation_label": null,
+            "relation_semantic_hash": null,
+            "surface_relation": "与国际上通用的标准基本一致",
+            "tail": "国际上通用的标准",
+            "tail_entity_id": "local_f41e6c0aad29d2b8bfb75a85155f308bd0977188630d243ac32c521eff2d6328",
+            "tail_kind": "entity",
+            "tail_type": null,
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [],
+          "issue_id": "issue_f397b58d6fa7471844cfa8a1",
+          "question": "冻结本体检查未通过",
+          "resolution_snapshot_id": "snapshot_40f11b3585e79bd053b7ad6225fa868337ef35f51698e796b671f744a30a1ca0",
+          "shared_definitions": [],
+          "source_material": [],
+          "target": null,
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "finish_requested",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "我国炮兵用标准气象条件",
+            "head_entity_id": "local_a4546a02f01ab291b1a7fd6541534459b5c909e925fdb0c08f46123c4cee6d73",
+            "head_type": "C_2e93a01c7d86a22c0ffc",
+            "language": "zh",
+            "mapping_status": "needs_full_schema_lookup",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "基本",
+              "time_scope": null
+            },
+            "relation_id": null,
+            "relation_label": null,
+            "relation_semantic_hash": null,
+            "surface_relation": "与国际上通用的标准基本一致",
+            "tail": "国际上通用的标准",
+            "tail_entity_id": "local_f41e6c0aad29d2b8bfb75a85155f308bd0977188630d243ac32c521eff2d6328",
+            "tail_kind": "entity",
+            "tail_type": null,
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [],
+          "issue_id": "issue_113ec401129f0c34f7dbfc04",
+          "question": "ontology_gap: 冻结本体检查未通过，关系ID未分配，尾实体类型未定，等待共用正式定义集中审核和发布",
+          "resolution_snapshot_id": "snapshot_40f11b3585e79bd053b7ad6225fa868337ef35f51698e796b671f744a30a1ca0",
+          "shared_definitions": [],
+          "source_material": [],
+          "target": null,
+          "unresolved_reason": null
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_5b459021eb0a3fe91145",
+      "root_candidate_id": "cand_5b459021eb0a3fe91145",
+      "version": "review_outcome_v3",
+      "dimension_results": {
+        "source": {
+          "status": "unresolved",
+          "observed_result": null,
+          "executed": true,
+          "seat_coverage_complete": false,
+          "judgment_complete": false,
+          "valid_seats": 2,
+          "required_seats": 3,
+          "missing_voter_ids": [
+            "judge_b"
+          ],
+          "has_conflict": true,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "changed meaning requires a substantive semantic finding",
+                "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification"
+              ]
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "insufficient"
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "expression": {
+          "status": "unresolved",
+          "observed_result": null,
+          "executed": true,
+          "seat_coverage_complete": false,
+          "judgment_complete": false,
+          "valid_seats": 2,
+          "required_seats": 3,
+          "missing_voter_ids": [
+            "judge_b"
+          ],
+          "has_conflict": true,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "changed meaning requires a substantive semantic finding"
+              ]
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unresolved",
+                "findings": [
+                  {
+                    "check": "entity_reference",
+                    "kind": "unresolved",
+                    "note": "“分别”配对定律与分布，单条尾实体未确认独立配对。",
+                    "evidence_ids": [
+                      "ev_3ac495284f0e81c6c629"
+                    ],
+                    "normalization": null,
+                    "rule_id": "PAIR-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "核验配对后按原文分别拆分定律与分布两条事实。"
+                  },
+                  {
+                    "check": "qualifiers",
+                    "kind": "unresolved",
+                    "note": "“分别”是对应关系，不应作为数量限定保留。",
+                    "evidence_ids": [
+                      "ev_3ac495284f0e81c6c629"
+                    ],
+                    "normalization": null,
+                    "rule_id": "PAIR-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "将“分别”移入对应关系说明，quantifier置空。"
+                  }
+                ]
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "mapping": {
+          "status": "context_incomplete",
+          "observed_result": "unassigned",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": false,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "scope": {
+          "status": "unclear",
+          "observed_result": null,
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": false,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": true,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "derivation"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          ]
+        }
+      },
+      "vote_validation": {
+        "judge_a": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_a",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "ecd1d578611daeccafa1834d1c2f6a35a1f56659c213654611c59d32788b60cd",
+          "normalized_response_hash": "8a84da366fab02b603a8e5965bc131c74a9ef5d956346d975bffaadf9ba1d8a1",
+          "original_attempt_id": "attempt_51073c26745c4eeb8dfb7b11b129fb6b",
+          "attempt_id": "attempt_51073c26745c4eeb8dfb7b11b129fb6b",
+          "request_key": "884efa1eeddcbfe5575fad75e643daf7d96802a26804b23264ea755d537324e9",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "derivation"
+              },
+              "missing_reasons": []
+            }
+          }
+        },
+        "judge_b": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_b",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": false,
+          "raw_response_hash": "b29c80514d1bb08674011bd51afe6d79f64bc978bb2f1dbca2baf58e045e93c6",
+          "normalized_response_hash": "8d034d8c359c1957339c27669f898ec795aeff3094b5dc62b05fd64c8af701f5",
+          "original_attempt_id": "attempt_a3c5c710939b479d87737f2fdadca979",
+          "attempt_id": "attempt_a3c5c710939b479d87737f2fdadca979",
+          "request_key": "16add94432ba2830c4af267d515a0b6574fe34301e75ddf9fb888c7c4f97ed95",
+          "cache_source": null,
+          "errors": [
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "changed meaning requires a substantive semantic finding",
+              "axes": [
+                "expression",
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            },
+            {
+              "category": "semantic_consistency",
+              "stage": "semantic_consistency",
+              "path": null,
+              "message": "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification",
+              "axes": [
+                "source"
+              ],
+              "expected": null,
+              "actual_type": null
+            }
+          ],
+          "axis_observations": {
+            "source": {
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "changed meaning requires a substantive semantic finding",
+                "expression_findings/0: changed meaning conflicts with non-semantic kind; requires semantic clarification"
+              ]
+            },
+            "expression": {
+              "usable": false,
+              "opinion": null,
+              "missing_reasons": [
+                "changed meaning requires a substantive semantic finding"
+              ]
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        },
+        "judge_c": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_c",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "3a839d2338b9224c74baf6a3d88274cc22ae6217f49816e58daa7c0d881f2a99",
+          "normalized_response_hash": "5f1167ab162b2b2210ab8f3e1dffb7749d3a91a58d5ff2bd621588df26d63a98",
+          "original_attempt_id": "attempt_70ed0140b0d34672b02066a75d6102cf",
+          "attempt_id": "attempt_70ed0140b0d34672b02066a75d6102cf",
+          "request_key": "85efeb80771e34773d817cd2368c2f9a27c9a3f1757f72e8ab3e5b2069185d60",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "insufficient"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "unresolved",
+                "findings": [
+                  {
+                    "check": "entity_reference",
+                    "kind": "unresolved",
+                    "note": "“分别”配对定律与分布，单条尾实体未确认独立配对。",
+                    "evidence_ids": [
+                      "ev_3ac495284f0e81c6c629"
+                    ],
+                    "normalization": null,
+                    "rule_id": "PAIR-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "核验配对后按原文分别拆分定律与分布两条事实。"
+                  },
+                  {
+                    "check": "qualifiers",
+                    "kind": "unresolved",
+                    "note": "“分别”是对应关系，不应作为数量限定保留。",
+                    "evidence_ids": [
+                      "ev_3ac495284f0e81c6c629"
+                    ],
+                    "normalization": null,
+                    "rule_id": "PAIR-001",
+                    "meaning_effect": "unresolved",
+                    "suggested_change": "将“分别”移入对应关系说明，quantifier置空。"
+                  }
+                ]
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      },
+      "duplicate_records_ignored": 0,
+      "whole_vote_eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "resolution_snapshot_id": "snapshot_a26630ad7735d4e645652be0ffa72ad9e4b05b0e13fc7e9c134826bc3ef6a5c1",
+      "original_whole_vote_eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+      "execution_status": "partial_failure",
+      "execution_reason": "minimum_review_incomplete",
+      "mapping_process": {
+        "version": "mapping_execution_trace_v2",
+        "proposal_digest": "f193f9f7a67c135e66db76c07c06e8169ea524cd4415a1e66e8a8fb5044b4369",
+        "preflight_hash": "7909aaee877e2f2608d74dacf2e9aa8f65769546fef5f8ff82dc7d23f9ab2cb8",
+        "stages": [
+          {
+            "stage": "mapping_entry",
+            "status": "completed"
+          },
+          {
+            "stage": "local_retrieval",
+            "status": "completed",
+            "recalled_ids": [
+              "R_5cfeb014dc68c80c2f5c"
+            ],
+            "source": {
+              "metadata_complete": false,
+              "property_count": 1,
+              "stage": "review_subset"
+            }
+          },
+          {
+            "stage": "global_retrieval",
+            "status": "completed",
+            "source": {
+              "classes_scanned": 189,
+              "exact_match_ids": [
+                "R_5cfeb014dc68c80c2f5c"
+              ],
+              "lexical_recall_is_semantic_confirmation": false,
+              "properties_scanned": 81,
+              "property_count": 1,
+              "stage": "full_bound_release_and_aliases"
+            },
+            "failure": null,
+            "recall_is_semantic_proof": false
+          },
+          {
+            "stage": "relation_definitions",
+            "status": "not_found",
+            "complete_ids": [],
+            "candidates": [
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_eaa767de9c851cd73be7"
+                ],
+                "id": "R_5cfeb014dc68c80c2f5c",
+                "label": "得到",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_e0f77606c291cca8d429"
+                ],
+                "retrieved": true
+              }
+            ],
+            "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "ontology_context_hash": "5f3b1fdec3e9035cd3dc12acb0f27f9d49ad21591fb1f256719113711c12b546"
+          },
+          {
+            "stage": "entity_identity",
+            "status": "not_found",
+            "entities": {
+              "head": {
+                "aliases": [],
+                "aliases_are_unconfirmed": true,
+                "assigned_type": "C_eaa767de9c851cd73be7",
+                "candidate_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                "missing_information": [],
+                "referent_scope": null,
+                "source_evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "surface": "状态方程",
+                "type_candidate_ids": [
+                  "C_eaa767de9c851cd73be7"
+                ]
+              },
+              "tail": {
+                "aliases": [],
+                "aliases_are_unconfirmed": true,
+                "assigned_type": "C_e0f77606c291cca8d429",
+                "candidate_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                "missing_information": [
+                  "referent_source_context_unavailable"
+                ],
+                "referent_scope": null,
+                "source_evidence_ids": [],
+                "surface": "空气密度函数的标准定律 H(y)",
+                "type_candidate_ids": [
+                  "C_e0f77606c291cca8d429"
+                ]
+              }
+            },
+            "candidate_ids_are_formal_entity_ids": false
+          },
+          {
+            "stage": "mapping_attempt",
+            "status": "completed",
+            "opinions": [
+              {
+                "voter_id": "judge_a",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "issue_code": "",
+                "note": "关系定义缺失且尾实体指称上下文不可用，正式映射保持未分配。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              {
+                "voter_id": "judge_b",
+                "response_status": "invalid_contract",
+                "status": "unassigned",
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "note": "由于 mapping_preflight.judgment_ready 为 false，保持未分配状态。",
+                "relation_id": null,
+                "competing_relation_ids": []
+              },
+              {
+                "voter_id": "judge_c",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_3ac495284f0e81c6c629"
+                ],
+                "issue_code": "RELATION_DEFINITION_UNAVAILABLE",
+                "note": "关系定义缺失且尾实体上下文不可用，正式映射保留未定。",
+                "relation_id": null,
+                "status": "unassigned"
+              }
+            ],
+            "formal_assignment": {
+              "assigned_head_type": "C_eaa767de9c851cd73be7",
+              "assigned_relation_id": "R_5cfeb014dc68c80c2f5c",
+              "assigned_tail_type": "C_e0f77606c291cca8d429",
+              "candidate_relation_ids": [
+                "R_5cfeb014dc68c80c2f5c"
+              ],
+              "semantic_approval": false
+            },
+            "original_expression": {
+              "candidate_id": "cand_5b459021eb0a3fe91145",
+              "head": "状态方程",
+              "qualifier_status": {
+                "applicability": "not_stated",
+                "condition": "not_stated",
+                "modality": "extracted",
+                "polarity": "extracted",
+                "quantifier": "extracted",
+                "time_scope": "not_stated"
+              },
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "positive",
+                "quantifier": "分别",
+                "time_scope": null
+              },
+              "revision": 3,
+              "surface_relation": "得到",
+              "tail": "空气密度函数的标准定律 H(y)"
+            },
+            "semantic_equivalence_confirmed": false
+          },
+          {
+            "stage": "constraint_check",
+            "status": "not_found",
+            "result": "unknown",
+            "reason_codes": [
+              "RELATION_DEFINITION_UNAVAILABLE"
+            ]
+          },
+          {
+            "stage": "state_summary",
+            "status": "observed",
+            "candidate_assignment": {
+              "assigned_head_type": "C_eaa767de9c851cd73be7",
+              "assigned_relation_id": "R_5cfeb014dc68c80c2f5c",
+              "assigned_tail_type": "C_e0f77606c291cca8d429",
+              "candidate_relation_ids": [
+                "R_5cfeb014dc68c80c2f5c"
+              ],
+              "semantic_approval": false
+            },
+            "guard_status": "unknown",
+            "publication_is_mapping_validation": false
+          }
+        ],
+        "blockers": [
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_5cfeb014dc68c80c2f5c",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "entity_identity",
+            "reason": "identity_ambiguous",
+            "detail": {
+              "fields": [
+                "referent_source_context_unavailable"
+              ],
+              "id": "tail",
+              "kind": "entity"
+            }
+          }
+        ],
+        "milestones": {
+          "proposal_formed": true,
+          "candidate_id_assigned": true,
+          "structural_constraints_passed": true,
+          "full_guard_passed": false,
+          "human_confirmed": null,
+          "formally_registered": null
+        },
+        "blocking_information": [
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_5cfeb014dc68c80c2f5c",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "referent_source_context_unavailable"
+            ],
+            "id": "tail",
+            "kind": "entity"
+          }
+        ],
+        "global_gap_confirmed": false,
+        "mapping_accuracy": "requires_current_packet_human_annotation"
+      },
+      "review_completed": false,
+      "recommendation": "manual_review",
+      "action_taken": "none",
+      "blocking_reasons": [
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "scope:unclear",
+        "source:unresolved",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "writes_authorized": false,
+      "derivation": "current_frozen_input_only",
+      "semantic_status": "review_incomplete",
+      "technical_status": "pending",
+      "required_human_action": "technical_recovery",
+      "technical_recovery_tasks": [
+        {
+          "task_type": "execution_obligation",
+          "issue_id": "issue_aa8a9cc5feaa36ee4b21d5d9",
+          "execution_unknown": false,
+          "usage_unknown": false,
+          "required_action": "technical_recovery",
+          "automatic_resend": false
+        },
+        {
+          "task_type": "committee_material_incomplete",
+          "semantic_dependency": true,
+          "execution_unknown": false,
+          "usage_unknown": false,
+          "automatic_resend": false,
+          "required_action": "bounded_contract_or_execution_recovery"
+        }
+      ],
+      "technical_incomplete": true,
+      "execution_outcome_unknown": false,
+      "end_to_end_incomplete": true,
+      "human_problem_cards": [
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "review_incomplete",
+              "tool": "review_semantic_contract"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "状态方程",
+            "head_entity_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+            "head_type": "C_eaa767de9c851cd73be7",
+            "language": "zh",
+            "mapping_status": "mapped",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "分别",
+              "time_scope": null
+            },
+            "relation_id": "R_5cfeb014dc68c80c2f5c",
+            "relation_label": "得到",
+            "relation_semantic_hash": "5c48ad0ba9c35fc1a788cf3bf732b1219f30dccd65f3f2779494c6271bcdb341",
+            "surface_relation": "得到",
+            "tail": "空气密度函数的标准定律 H(y)",
+            "tail_entity_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+            "tail_kind": "entity",
+            "tail_type": "C_e0f77606c291cca8d429",
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [],
+          "issue_id": "issue_6154a67471c8238533abb5cf",
+          "question": "冻结本体检查未通过",
+          "resolution_snapshot_id": "snapshot_f3d8062c48f4f8942f2cb19abc75d2d12942266805da97832ea9a59e148853de",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_3cbc2963dc07e9b8522e0d5c7f754751",
+              "term_id": "R_5cfeb014dc68c80c2f5c"
+            }
+          ],
+          "source_material": [],
+          "target": null,
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "review_incomplete",
+              "tool": "review_semantic_contract"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "状态方程",
+            "head_entity_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+            "head_type": "C_eaa767de9c851cd73be7",
+            "language": "zh",
+            "mapping_status": "mapped",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "分别",
+              "time_scope": null
+            },
+            "relation_id": "R_5cfeb014dc68c80c2f5c",
+            "relation_label": "得到",
+            "relation_semantic_hash": "5c48ad0ba9c35fc1a788cf3bf732b1219f30dccd65f3f2779494c6271bcdb341",
+            "surface_relation": "得到",
+            "tail": "空气密度函数的标准定律 H(y)",
+            "tail_entity_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+            "tail_kind": "entity",
+            "tail_type": "C_e0f77606c291cca8d429",
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_828d457877b1f198015e",
+            "ev_95c40b04093f9413b976",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_ec10538a6b19b186ec10"
+          ],
+          "issue_id": "issue_bbb58e81863a8b8ec8a03003",
+          "question": "“状态方程 — 得到 — 空气密度函数的标准定律 H(y)”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+          "resolution_snapshot_id": "snapshot_f3d8062c48f4f8942f2cb19abc75d2d12942266805da97832ea9a59e148853de",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_3cbc2963dc07e9b8522e0d5c7f754751",
+              "term_id": "R_5cfeb014dc68c80c2f5c"
+            }
+          ],
+          "source_material": [
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7464,
+              "evidence_id": "ev_3ac495284f0e81c6c629",
+              "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$",
+              "role": "support",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7401
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7468,
+              "evidence_id": "ev_828d457877b1f198015e",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7466
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7396,
+              "evidence_id": "ev_95c40b04093f9413b976",
+              "quote": "3 ] \\\\ (1 - 2 7) \\end{array}",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7368
+            },
+            {
+              "chunk_id": "chunk_0f555554b535",
+              "end": 7599,
+              "evidence_id": "ev_bcc35ff4d1e37f138b4c",
+              "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7469
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7399,
+              "evidence_id": "ev_ec10538a6b19b186ec10",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7397
+            }
+          ],
+          "target": {
+            "check": "entity_reference",
+            "claim_id": "3d176311b65fcd83aec92e427adcf73993d190b8a75c2982432f3538acda6999"
+          },
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "review_incomplete",
+              "tool": "review_semantic_contract"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "状态方程",
+            "head_entity_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+            "head_type": "C_eaa767de9c851cd73be7",
+            "language": "zh",
+            "mapping_status": "mapped",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "分别",
+              "time_scope": null
+            },
+            "relation_id": "R_5cfeb014dc68c80c2f5c",
+            "relation_label": "得到",
+            "relation_semantic_hash": "5c48ad0ba9c35fc1a788cf3bf732b1219f30dccd65f3f2779494c6271bcdb341",
+            "surface_relation": "得到",
+            "tail": "空气密度函数的标准定律 H(y)",
+            "tail_entity_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+            "tail_kind": "entity",
+            "tail_type": "C_e0f77606c291cca8d429",
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_828d457877b1f198015e",
+            "ev_95c40b04093f9413b976",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_ec10538a6b19b186ec10"
+          ],
+          "issue_id": "issue_f93d5002ed7dfbb52f6128ac",
+          "question": "“状态方程 — 得到 — 空气密度函数的标准定律 H(y)”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+          "resolution_snapshot_id": "snapshot_f3d8062c48f4f8942f2cb19abc75d2d12942266805da97832ea9a59e148853de",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_3cbc2963dc07e9b8522e0d5c7f754751",
+              "term_id": "R_5cfeb014dc68c80c2f5c"
+            }
+          ],
+          "source_material": [
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7464,
+              "evidence_id": "ev_3ac495284f0e81c6c629",
+              "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$",
+              "role": "support",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7401
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7468,
+              "evidence_id": "ev_828d457877b1f198015e",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7466
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7396,
+              "evidence_id": "ev_95c40b04093f9413b976",
+              "quote": "3 ] \\\\ (1 - 2 7) \\end{array}",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7368
+            },
+            {
+              "chunk_id": "chunk_0f555554b535",
+              "end": 7599,
+              "evidence_id": "ev_bcc35ff4d1e37f138b4c",
+              "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7469
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7399,
+              "evidence_id": "ev_ec10538a6b19b186ec10",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7397
+            }
+          ],
+          "target": {
+            "check": "qualifiers",
+            "claim_id": "99e4308618ea583a45462d7061d8ba3e84ebb0759ecfdddf6e366b2e4a794c4f"
+          },
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "review_incomplete",
+              "tool": "review_semantic_contract"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "状态方程",
+            "head_entity_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+            "head_type": "C_eaa767de9c851cd73be7",
+            "language": "zh",
+            "mapping_status": "mapped",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "分别",
+              "time_scope": null
+            },
+            "relation_id": "R_5cfeb014dc68c80c2f5c",
+            "relation_label": "得到",
+            "relation_semantic_hash": "5c48ad0ba9c35fc1a788cf3bf732b1219f30dccd65f3f2779494c6271bcdb341",
+            "surface_relation": "得到",
+            "tail": "空气密度函数的标准定律 H(y)",
+            "tail_entity_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+            "tail_kind": "entity",
+            "tail_type": "C_e0f77606c291cca8d429",
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [
+            "ev_3ac495284f0e81c6c629",
+            "ev_828d457877b1f198015e",
+            "ev_95c40b04093f9413b976",
+            "ev_bcc35ff4d1e37f138b4c",
+            "ev_ec10538a6b19b186ec10"
+          ],
+          "issue_id": "issue_4a32e69aafc97b173d2d29a4",
+          "question": "“状态方程 — 得到 — 空气密度函数的标准定律 H(y)”属于哪种收录范围？范围分类不能替代事实判断。",
+          "resolution_snapshot_id": "snapshot_f3d8062c48f4f8942f2cb19abc75d2d12942266805da97832ea9a59e148853de",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_3cbc2963dc07e9b8522e0d5c7f754751",
+              "term_id": "R_5cfeb014dc68c80c2f5c"
+            }
+          ],
+          "source_material": [
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7464,
+              "evidence_id": "ev_3ac495284f0e81c6c629",
+              "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$",
+              "role": "support",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7401
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7468,
+              "evidence_id": "ev_828d457877b1f198015e",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7466
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7396,
+              "evidence_id": "ev_95c40b04093f9413b976",
+              "quote": "3 ] \\\\ (1 - 2 7) \\end{array}",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7368
+            },
+            {
+              "chunk_id": "chunk_0f555554b535",
+              "end": 7599,
+              "evidence_id": "ev_bcc35ff4d1e37f138b4c",
+              "quote": "H (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7469
+            },
+            {
+              "chunk_id": "chunk_97a3e8b593ba",
+              "end": 7399,
+              "evidence_id": "ev_ec10538a6b19b186ec10",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_bfc24259ccaf",
+              "start": 7397
+            }
+          ],
+          "target": {
+            "check": "knowledge_scope",
+            "claim_id": "94f1c0710a69f26e7497493c3e2a4de4e5b1143425dc6918526ab22bad363221"
+          },
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "review_incomplete",
+              "tool": "review_semantic_contract"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "invalid_action",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "状态方程",
+            "head_entity_id": "local_5fcf755403f17a78b68ffd3e12f784200b70ad89f1ecae48a218af281e79f299",
+            "head_type": "C_eaa767de9c851cd73be7",
+            "language": "zh",
+            "mapping_status": "mapped",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "extracted",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": "分别",
+              "time_scope": null
+            },
+            "relation_id": "R_5cfeb014dc68c80c2f5c",
+            "relation_label": "得到",
+            "relation_semantic_hash": "5c48ad0ba9c35fc1a788cf3bf732b1219f30dccd65f3f2779494c6271bcdb341",
+            "surface_relation": "得到",
+            "tail": "空气密度函数的标准定律 H(y)",
+            "tail_entity_id": "local_419c0a14c5ee71eec14b79015b11084e729e3eaf6721505e94dd6cb40d2554de",
+            "tail_kind": "entity",
+            "tail_type": "C_e0f77606c291cca8d429",
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [],
+          "issue_id": "issue_aa8a9cc5feaa36ee4b21d5d9",
+          "question": "固定最小审核未满足关键义务，审核未完成",
+          "resolution_snapshot_id": "snapshot_f3d8062c48f4f8942f2cb19abc75d2d12942266805da97832ea9a59e148853de",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_3cbc2963dc07e9b8522e0d5c7f754751",
+              "term_id": "R_5cfeb014dc68c80c2f5c"
+            }
+          ],
+          "source_material": [],
+          "target": null,
+          "unresolved_reason": null
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_f4876022d0c83d291ac3",
+      "root_candidate_id": "cand_f4876022d0c83d291ac3",
+      "version": "review_outcome_v3",
+      "dimension_results": {
+        "source": {
+          "status": "supported",
+          "observed_result": "supported",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": true,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "expression": {
+          "status": "standard",
+          "observed_result": "standard",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": true,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "mapping": {
+          "status": "context_incomplete",
+          "observed_result": "unassigned",
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": false,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": false,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            }
+          ]
+        },
+        "scope": {
+          "status": "unclear",
+          "observed_result": null,
+          "executed": true,
+          "seat_coverage_complete": true,
+          "judgment_complete": false,
+          "valid_seats": 3,
+          "required_seats": 3,
+          "missing_voter_ids": [],
+          "has_conflict": true,
+          "observations": [
+            {
+              "voter_id": "judge_a",
+              "model_family": "qwen",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "local_definition"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_b",
+              "model_family": "gemma",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            },
+            {
+              "voter_id": "judge_c",
+              "model_family": "deepseek",
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          ]
+        }
+      },
+      "vote_validation": {
+        "judge_a": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_a",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "e754741d0e867217ac463387a23ff7e5fd44d69ba3a25e1ad6fe923d63b14c92",
+          "normalized_response_hash": "b016af6388ab7d0ba3ac49ea0bcbc50917e85c809dd5e3e29dfe50a44696a7f7",
+          "original_attempt_id": "attempt_fd0343b6198647bc8303314cbf5132ba",
+          "attempt_id": "attempt_fd0343b6198647bc8303314cbf5132ba",
+          "request_key": "5e2e5e23384087dabbb06caa5dae1e1a41727741bef3e9faa1f103f654d4267f",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "local_definition"
+              },
+              "missing_reasons": []
+            }
+          }
+        },
+        "judge_b": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_b",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "bf658af0158f54f3d0018a1c3f7b5f436aed2900ca5004f5724817fc4b3a6d34",
+          "normalized_response_hash": "b74e0577be2bc14351cb287cf3e8216c8b1e4a7f91c83a8620440d859acf6840",
+          "original_attempt_id": "attempt_4acfcc9b6f9e45799bd0251b7d23b022",
+          "attempt_id": "attempt_4acfcc9b6f9e45799bd0251b7d23b022",
+          "request_key": "50afe676731ed1d9821afbf2dc08d3c4eeb0ba5a7f5ab58d484ba9f33e9e7f80",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        },
+        "judge_c": {
+          "validation_version": "vote_validation_v3",
+          "voter_id": "judge_c",
+          "response_contract_version": "validator_response_v8",
+          "version_inference": null,
+          "global_trustworthy": true,
+          "whole_vote_eligible": true,
+          "raw_response_hash": "e9e6a3a2923394cd28fe8812b576f0be558611adafbc50f90a2fa9840abd7912",
+          "normalized_response_hash": "0d7f52791476546896775580c965cae0e561aa24dfc63fcb2419fa4c45421d93",
+          "original_attempt_id": "attempt_0a2d7f4a60e94afa993153d611368a70",
+          "attempt_id": "attempt_0a2d7f4a60e94afa993153d611368a70",
+          "request_key": "adb33d296455065ccf15df4585c858a65b15043b3c50a371c8f8f544cb132162",
+          "cache_source": null,
+          "errors": [],
+          "axis_observations": {
+            "source": {
+              "usable": true,
+              "opinion": {
+                "status": "supported"
+              },
+              "missing_reasons": []
+            },
+            "expression": {
+              "usable": true,
+              "opinion": {
+                "status": "standard",
+                "findings": []
+              },
+              "missing_reasons": []
+            },
+            "mapping": {
+              "usable": true,
+              "opinion": {
+                "status": "unassigned"
+              },
+              "missing_reasons": []
+            },
+            "scope": {
+              "usable": true,
+              "opinion": {
+                "status": "unclear",
+                "knowledge_scope": "general"
+              },
+              "missing_reasons": []
+            }
+          }
+        }
+      },
+      "duplicate_records_ignored": 0,
+      "whole_vote_eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "resolution_snapshot_id": "snapshot_20865938b6ae8493510abf8567c819bdb948d9491fd4d5adae59c9fc7db79825",
+      "original_whole_vote_eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "policy_hash": "77395948bf736472203c132cc75b8ca2dec7ae756694bee24e38c0e37af799c5",
+      "execution_status": "completed",
+      "execution_reason": "来源支持已获3/3独立确认，但正式映射因R_37918d1714e9945397f3定义缺失且尾端类型未定而保持未分配；知识范围争议（局部定义vs一般知识）需人工裁决，且共享定义任务处于外部等待状态，无合法且有信息增益的后续动作。",
+      "mapping_process": {
+        "version": "mapping_execution_trace_v2",
+        "proposal_digest": "30da8fd4321f41d5e9b5fb9f5a38225bc88e746672d3f70143217d6d43ee4641",
+        "preflight_hash": "89bd5c3a1aadef327c9d162db6c4ec60f0f4a9b63b70b6f011402e632ea01985",
+        "stages": [
+          {
+            "stage": "mapping_entry",
+            "status": "completed"
+          },
+          {
+            "stage": "local_retrieval",
+            "status": "completed",
+            "recalled_ids": [
+              "R_37918d1714e9945397f3"
+            ],
+            "source": {
+              "metadata_complete": false,
+              "property_count": 8,
+              "stage": "review_subset"
+            }
+          },
+          {
+            "stage": "global_retrieval",
+            "status": "completed",
+            "source": {
+              "classes_scanned": 189,
+              "exact_match_ids": [
+                "R_37918d1714e9945397f3"
+              ],
+              "lexical_recall_is_semantic_confirmation": false,
+              "properties_scanned": 81,
+              "property_count": 8,
+              "stage": "full_bound_release_and_aliases"
+            },
+            "failure": null,
+            "recall_is_semantic_proof": false
+          },
+          {
+            "stage": "relation_definitions",
+            "status": "not_found",
+            "complete_ids": [],
+            "candidates": [
+              {
+                "aliases": [],
+                "datatype": null,
+                "definition_available": false,
+                "direction": "head_to_tail",
+                "direction_basis": "formal_property_signature_not_semantic_approval",
+                "domain": [
+                  "C_e4f3000a2284a7d0fa12"
+                ],
+                "id": "R_37918d1714e9945397f3",
+                "label": "表示",
+                "missing_information": [
+                  "definition_missing_in_bound_release"
+                ],
+                "property_kind": "object",
+                "range": [
+                  "C_125e9268788e296b6e64"
+                ],
+                "retrieved": true
+              }
+            ],
+            "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+            "ontology_context_hash": "09639b239463226a6a35a3a2812398d8d9768eb234809f808e4dc0f733795759"
+          },
+          {
+            "stage": "entity_identity",
+            "status": "not_found",
+            "entities": {
+              "head": {
+                "aliases": [],
+                "aliases_are_unconfirmed": true,
+                "assigned_type": "C_53d15a0ecfc3dc8ecd93",
+                "candidate_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                "missing_information": [],
+                "referent_scope": null,
+                "source_evidence_ids": [
+                  "ev_c15baaaa1767cf8bcdc6"
+                ],
+                "surface": "弹道系数",
+                "type_candidate_ids": [
+                  "C_53d15a0ecfc3dc8ecd93"
+                ]
+              },
+              "tail": {
+                "aliases": [],
+                "aliases_are_unconfirmed": true,
+                "assigned_type": null,
+                "candidate_id": "local_855bfe8c8f7d6be8f6761a41d5d1a3adca986b441da8eb211e84f15032627c30",
+                "document_id": "火炮弹道学_钱林方_第一章",
+                "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                "missing_information": [
+                  "endpoint_type_unassigned_or_ambiguous"
+                ],
+                "referent_scope": null,
+                "source_evidence_ids": [
+                  "ev_c15baaaa1767cf8bcdc6"
+                ],
+                "surface": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分",
+                "type_candidate_ids": []
+              }
+            },
+            "candidate_ids_are_formal_entity_ids": false
+          },
+          {
+            "stage": "mapping_attempt",
+            "status": "completed",
+            "opinions": [
+              {
+                "voter_id": "judge_a",
+                "response_status": "ok",
+                "competing_relation_ids": [
+                  "R_37918d1714e9945397f3"
+                ],
+                "evidence_ids": [
+                  "ev_c15baaaa1767cf8bcdc6"
+                ],
+                "issue_code": "",
+                "note": "候选关系R_37918d1714e9945397f3缺少定义且尾端类型未定，保持未分配。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              {
+                "voter_id": "judge_b",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_c15baaaa1767cf8bcdc6"
+                ],
+                "issue_code": "",
+                "note": "由于mapping_preflight.judgment_ready为false且缺乏关系定义，保持未分配状态。",
+                "relation_id": null,
+                "status": "unassigned"
+              },
+              {
+                "voter_id": "judge_c",
+                "response_status": "ok",
+                "competing_relation_ids": [],
+                "evidence_ids": [
+                  "ev_c15baaaa1767cf8bcdc6"
+                ],
+                "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+                "note": "候选关系R_37918d1714e9945397f3定义缺失且尾实体类型未定，映射保持未分配。",
+                "relation_id": null,
+                "status": "unassigned"
+              }
+            ],
+            "formal_assignment": {
+              "assigned_head_type": "C_53d15a0ecfc3dc8ecd93",
+              "assigned_relation_id": null,
+              "assigned_tail_type": null,
+              "candidate_relation_ids": [
+                "R_37918d1714e9945397f3"
+              ],
+              "semantic_approval": false
+            },
+            "original_expression": {
+              "candidate_id": "cand_f4876022d0c83d291ac3",
+              "head": "弹道系数",
+              "qualifier_status": {
+                "applicability": "not_stated",
+                "condition": "not_stated",
+                "modality": "extracted",
+                "polarity": "extracted",
+                "quantifier": "not_stated",
+                "time_scope": "not_stated"
+              },
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "revision": 2,
+              "surface_relation": "表示",
+              "tail": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分"
+            },
+            "semantic_equivalence_confirmed": false
+          },
+          {
+            "stage": "constraint_check",
+            "status": "not_found",
+            "result": "unknown",
+            "reason_codes": [
+              "FORMAL_MAPPING_UNASSIGNED"
+            ]
+          },
+          {
+            "stage": "state_summary",
+            "status": "observed",
+            "candidate_assignment": {
+              "assigned_head_type": "C_53d15a0ecfc3dc8ecd93",
+              "assigned_relation_id": null,
+              "assigned_tail_type": null,
+              "candidate_relation_ids": [
+                "R_37918d1714e9945397f3"
+              ],
+              "semantic_approval": false
+            },
+            "guard_status": "unknown",
+            "publication_is_mapping_validation": false
+          }
+        ],
+        "blockers": [
+          {
+            "stage": "relation_definitions",
+            "reason": "definition_missing",
+            "detail": {
+              "fields": [
+                "definition_missing_in_bound_release"
+              ],
+              "id": "R_37918d1714e9945397f3",
+              "kind": "relation"
+            }
+          },
+          {
+            "stage": "entity_identity",
+            "reason": "identity_ambiguous",
+            "detail": {
+              "fields": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "id": "tail",
+              "kind": "entity"
+            }
+          }
+        ],
+        "milestones": {
+          "proposal_formed": true,
+          "candidate_id_assigned": false,
+          "structural_constraints_passed": false,
+          "full_guard_passed": false,
+          "human_confirmed": null,
+          "formally_registered": null
+        },
+        "blocking_information": [
+          {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_37918d1714e9945397f3",
+            "kind": "relation"
+          },
+          {
+            "fields": [
+              "endpoint_type_unassigned_or_ambiguous"
+            ],
+            "id": "tail",
+            "kind": "entity"
+          }
+        ],
+        "global_gap_confirmed": false,
+        "mapping_accuracy": "requires_current_packet_human_annotation"
+      },
+      "review_completed": false,
+      "recommendation": "wait_mapping",
+      "action_taken": "none",
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "scope:unclear",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "writes_authorized": false,
+      "derivation": "current_frozen_input_only",
+      "semantic_status": "waiting_mapping",
+      "technical_status": "settled",
+      "required_human_action": "shared_definition_or_mapping_review",
+      "technical_recovery_tasks": [],
+      "technical_incomplete": false,
+      "execution_outcome_unknown": false,
+      "end_to_end_incomplete": true,
+      "human_problem_cards": [
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "finish_requested",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "弹道系数",
+            "head_entity_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+            "head_type": "C_53d15a0ecfc3dc8ecd93",
+            "language": "zh",
+            "mapping_status": "needs_full_schema_lookup",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "not_stated",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": null,
+              "time_scope": null
+            },
+            "relation_id": null,
+            "relation_label": "表示",
+            "relation_semantic_hash": null,
+            "surface_relation": "表示",
+            "tail": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分",
+            "tail_entity_id": "local_855bfe8c8f7d6be8f6761a41d5d1a3adca986b441da8eb211e84f15032627c30",
+            "tail_kind": "entity",
+            "tail_type": null,
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [],
+          "issue_id": "issue_d08f04d904237ab7819569d8",
+          "question": "冻结本体检查未通过",
+          "resolution_snapshot_id": "snapshot_20865938b6ae8493510abf8567c819bdb948d9491fd4d5adae59c9fc7db79825",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_66ae293361a3028db109381892ad3652",
+              "term_id": "R_37918d1714e9945397f3"
+            }
+          ],
+          "source_material": [],
+          "target": null,
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "finish_requested",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "弹道系数",
+            "head_entity_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+            "head_type": "C_53d15a0ecfc3dc8ecd93",
+            "language": "zh",
+            "mapping_status": "needs_full_schema_lookup",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "not_stated",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": null,
+              "time_scope": null
+            },
+            "relation_id": null,
+            "relation_label": "表示",
+            "relation_semantic_hash": null,
+            "surface_relation": "表示",
+            "tail": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分",
+            "tail_entity_id": "local_855bfe8c8f7d6be8f6761a41d5d1a3adca986b441da8eb211e84f15032627c30",
+            "tail_kind": "entity",
+            "tail_type": null,
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [
+            "ev_23c91abd41de08a5eef0",
+            "ev_327214437b24d755c4cb",
+            "ev_3e6253f522cc32e9d91d",
+            "ev_8779afefb4c83f0449e8",
+            "ev_b06a4bb4addd7ff8a319",
+            "ev_c15baaaa1767cf8bcdc6",
+            "ev_c5cefd187d16a3f2b51d",
+            "ev_e704a2a5d4782ccfba98"
+          ],
+          "issue_id": "issue_b948c1d0bf2f7b261a7525dc",
+          "question": "“弹道系数 — 表示 — 弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分”属于哪种收录范围？范围分类不能替代事实判断。",
+          "resolution_snapshot_id": "snapshot_20865938b6ae8493510abf8567c819bdb948d9491fd4d5adae59c9fc7db79825",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_66ae293361a3028db109381892ad3652",
+              "term_id": "R_37918d1714e9945397f3"
+            }
+          ],
+          "source_material": [
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18576,
+              "evidence_id": "ev_23c91abd41de08a5eef0",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_45e3b3342db3",
+              "start": 18574
+            },
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18633,
+              "evidence_id": "ev_327214437b24d755c4cb",
+              "quote": "$$\nC = \\frac {i d ^ {2}}{m} \\times 1 0 ^ {3} \\tag {1-38}\n$$",
+              "role": "support",
+              "section_id": "section_45e3b3342db3",
+              "start": 18574
+            },
+            {
+              "chunk_id": "chunk_92a82d1ae2b0",
+              "end": 18279,
+              "evidence_id": "ev_3e6253f522cc32e9d91d",
+              "quote": "将式（1-36）做一定的变化，并将式中各参量按性质分类组合，得到",
+              "role": "context",
+              "section_id": "section_45e3b3342db3",
+              "start": 18247
+            },
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18515,
+              "evidence_id": "ev_8779afefb4c83f0449e8",
+              "quote": "$$",
+              "role": "context",
+              "section_id": "section_45e3b3342db3",
+              "start": 18513
+            },
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18673,
+              "evidence_id": "ev_b06a4bb4addd7ff8a319",
+              "quote": "式中第二个组合已在前面讨论过，它反映了大气对弹丸飞行的影响，是空气密度函数。",
+              "role": "context",
+              "section_id": "section_45e3b3342db3",
+              "start": 18635
+            },
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18572,
+              "evidence_id": "ev_c15baaaa1767cf8bcdc6",
+              "quote": "式中第一个组合表示弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分，此部分称作弹道系数  $C$ 。",
+              "role": "support",
+              "section_id": "section_45e3b3342db3",
+              "start": 18517
+            },
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18515,
+              "evidence_id": "ev_c5cefd187d16a3f2b51d",
+              "quote": "$$\na _ {x} = \\left(\\frac {i d ^ {2}}{m} \\times 1 0 ^ {3}\\right) \\frac {\\rho}{\\rho_ {0 \\mathrm {N}}} \\left[ \\frac {\\pi}{8} \\rho_ {0 \\mathrm {N}} 1 0 ^ {- 3} v ^ {2} C _ {x 0 \\mathrm {N}} \\left(\\frac {v}{c}\\right) \\right] \\tag {1-37}\n$$",
+              "role": "support",
+              "section_id": "section_45e3b3342db3",
+              "start": 18281
+            },
+            {
+              "chunk_id": "chunk_00bd7372cd25",
+              "end": 18714,
+              "evidence_id": "ev_e704a2a5d4782ccfba98",
+              "quote": "$$\nH (y) = \\frac {\\rho}{\\rho_ {0 N}}\n$$",
+              "role": "context",
+              "section_id": "section_45e3b3342db3",
+              "start": 18675
+            }
+          ],
+          "target": {
+            "check": "knowledge_scope",
+            "claim_id": "76a4290b0540bd52d87f8cc0349b98bfda360cbaa70d2e61bcdebbff65adbd10"
+          },
+          "unresolved_reason": null
+        },
+        {
+          "attempted_steps": [
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "inspect_ontology"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "ok",
+              "tool": "run_validation"
+            },
+            {
+              "new_evidence_count": null,
+              "status": "finish_requested",
+              "tool": "finish_review"
+            }
+          ],
+          "candidate": {
+            "datatype": null,
+            "head": "弹道系数",
+            "head_entity_id": "local_bcaa33e9bf703792a2f6cdddd9b8215c9c2274ff666cc81fe1a6e97869f73012",
+            "head_type": "C_53d15a0ecfc3dc8ecd93",
+            "language": "zh",
+            "mapping_status": "needs_full_schema_lookup",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "not_stated",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": null,
+              "time_scope": null
+            },
+            "relation_id": null,
+            "relation_label": "表示",
+            "relation_semantic_hash": null,
+            "surface_relation": "表示",
+            "tail": "弹丸本身的特征（形状、尺寸大小和质量）对弹丸运动影响的部分",
+            "tail_entity_id": "local_855bfe8c8f7d6be8f6761a41d5d1a3adca986b441da8eb211e84f15032627c30",
+            "tail_kind": "entity",
+            "tail_type": null,
+            "unit": null,
+            "value": null
+          },
+          "evidence_ids": [],
+          "issue_id": "issue_236659ab3ed664eccae491e6",
+          "question": "ontology_gap: R_37918d1714e9945397f3定义缺失且尾端类型未定，映射保持未分配",
+          "resolution_snapshot_id": "snapshot_20865938b6ae8493510abf8567c819bdb948d9491fd4d5adae59c9fc7db79825",
+          "shared_definitions": [
+            {
+              "affected_candidates": 1,
+              "task_id": "definition_66ae293361a3028db109381892ad3652",
+              "term_id": "R_37918d1714e9945397f3"
+            }
+          ],
+          "source_material": [],
+          "target": null,
+          "unresolved_reason": null
+        }
+      ]
+    }
+  ],
+  "costs": {
+    "physical_model_calls": 14,
+    "by_task_type": {
+      "triple_review": 10,
+      "planner_action": 3,
+      "candidate_semantic_recheck_v1": 1
+    },
+    "reported_tokens": {
+      "input_tokens": 270593,
+      "output_tokens": 12618
+    },
+    "usage_missing_requests": 0,
+    "by_model": {
+      "Qwen": {
+        "physical_requests": 6,
+        "unknown_execution": 0,
+        "failed_responses": 0,
+        "usage_missing": 0,
+        "error_codes": {}
+      },
+      "deepseek-flash": {
+        "physical_requests": 3,
+        "unknown_execution": 0,
+        "failed_responses": 0,
+        "usage_missing": 0,
+        "error_codes": {}
+      },
+      "Gemma": {
+        "physical_requests": 5,
+        "unknown_execution": 0,
+        "failed_responses": 3,
+        "usage_missing": 0,
+        "error_codes": {
+          "SEMANTIC_CLARIFICATION_REQUIRED": 1
+        }
+      }
+    },
+    "physical_calls_by_phase": {
+      "final_review": 7,
+      "initial_review": 3,
+      "preprocessing": 3,
+      "evidence_dispute": 1
+    },
+    "elapsed_seconds": 180.29764246940613
+  },
+  "human_labels": 0,
+  "applied_root_revision_operations": 0,
+  "actual_human_minutes": null,
+  "quality_evaluable": false,
+  "production_written": false,
+  "source_database_unchanged": true
+}

@@ -1,0 +1,36 @@
+======================================================================
+ERROR: test_isolated_runner_drains_new_rebind_jobs_but_bounds_the_queue (tests.test_resolution_workflows.ResolutionWorkflowTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_resolution_workflows.py", line 161, in test_isolated_runner_drains_new_rebind_jobs_but_bounds_the_queue
+    first=f.repo.enqueue_job('audit',payload);calls=[]
+AttributeError: 'ReviewRepository' object has no attribute 'enqueue_job'
+
+======================================================================
+ERROR: test_late_subscription_rebind_preserves_original_publication_receipt (tests.test_resolution_workflows.ResolutionWorkflowTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_resolution_workflows.py", line 138, in test_late_subscription_rebind_preserves_original_publication_receipt
+    publisher.publish(f.extension_id,f.publication_request())
+  File "D:\knowledge-huopao\tests\test_ontology_extension_agent.py", line 130, in publication_request
+    preview = OntologyPublisher(self.repo, self.root).preview(self.extension_id)
+  File "D:\knowledge-huopao\ontology_review\publisher.py", line 97, in preview
+    task, proposal, base = self.reviewed(extension_id)
+  File "D:\knowledge-huopao\ontology_review\publisher.py", line 52, in reviewed
+    if consensus(votes, proposal,semantic_competency=semantic)["result"] != "approve": raise ValueError("independent ontology approval quorum not satisfied")
+ValueError: independent ontology approval quorum not satisfied
+
+======================================================================
+FAIL: test_mapping_proposal_review_isolated_application_and_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_resolution_workflows.py", line 131, in test_mapping_proposal_review_isolated_application_and_new_ballot
+    def test_mapping_proposal_review_isolated_application_and_new_ballot(self):self.execute_case('mapping')
+  File "D:\knowledge-huopao\tests\test_resolution_workflows.py", line 107, in execute_case
+    self.assertEqual(parent.get('status'),'revision_applied',{
+AssertionError: None != 'revision_applied' : {'stop_reason': 'program_verified_all_review_obligations', 'issues': [], 'history': None}
+
+----------------------------------------------------------------------
+Ran 5 tests in 50.466s
+
+FAILED (failures=1, errors=2)

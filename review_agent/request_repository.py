@@ -106,17 +106,30 @@ class RequestRepository:
             total=sum(max(0,vote.get(k) or 0) for k in ('input_tokens','output_tokens'))
             if total:
                 proposal=metadata.get('proposal',{})
-                candidate_id=(proposal.get('candidate') or proposal.get('before') or {}).get('candidate_id')
+                candidate_id=(proposal.get('candidate') or proposal.get('before') or {}).get('candidate_id') or proposal.get('candidate_id')
                 if candidate_id:
                     cases=[r[0] for r in c.execute('SELECT case_id FROM review_cases WHERE candidate_id=?',(candidate_id,))]
                 else:
                     cases=[r[0] for r in c.execute('SELECT rc.case_id FROM review_cases rc JOIN ontology_extension_subscriptions s ON s.candidate_id=rc.candidate_id WHERE s.extension_id=?',
                                                    (proposal.get('task_id'),))]
+                cases=metadata.get('case_ids') or cases
                 if cases: self._charge_cases(c,cases,{'tokens':total},'request_tokens:'+attempt_id,metadata['task_type'],binding_task_id(metadata))
             latest = c.execute('SELECT attempt_id FROM request_attempts WHERE request_key=? ORDER BY started_at DESC LIMIT 1', (row['request_key'],)).fetchone()
             if latest[0] == attempt_id:
                 c.execute('UPDATE validation_requests SET status=?,vote_json=?,updated_at=? WHERE request_key=? AND owner=? AND status IN (\'running\',\'unknown\')',
                           ('failed' if status=='not_sent' else status,canonical_json(stored),str(now),row['request_key'],owner))
+            reliability=metadata.get('channel_reliability') or {}
+            limit=max(1,int(reliability.get('consecutive_unknown_limit',3)))
+            if reliability and status=='unknown':
+                recent=c.execute("SELECT state,result_json FROM request_attempts WHERE "
+                    "json_extract(metadata_json,'$.service_key')=? AND state!='not_sent' ORDER BY started_at DESC LIMIT ?",
+                    (metadata['service_key'],limit)).fetchall()
+                if len(recent)==limit and all(r['state']=='unknown' for r in recent):
+                    reason={'error_code':'CHANNEL_UNKNOWN_STREAK','channel':reliability['channel'],
+                            'consecutive_unknown':limit,'automatic_probe':False,
+                            'recovery':'persist original receipts; explicit successful same-channel probe required'}
+                    c.execute("INSERT INTO service_pauses VALUES(?,'paused',?,?) ON CONFLICT(service_key) DO UPDATE SET status='paused',reason_json=excluded.reason_json,updated_at=excluded.updated_at",
+                              (metadata['service_key'],canonical_json(reason),now))
         return True
 
     def request_attempt(self, attempt_id):
@@ -263,7 +276,7 @@ class RequestRepository:
         from .repository import ConflictError,ValidationError
         if not str(reason).strip(): raise ValidationError('job resume requires an explicit reason')
         with self.transaction(immediate=True) as c:
-            if c.execute("SELECT 1 FROM service_pauses WHERE status='paused' LIMIT 1").fetchone():
+            if c.execute("SELECT 1 FROM service_pauses WHERE status='paused' AND COALESCE(json_extract(reason_json,'$.error_code'),'')!='CHANNEL_UNKNOWN_STREAK' LIMIT 1").fetchone():
                 raise ConflictError('same-model service availability must be confirmed before queue resume')
             changed=c.execute("UPDATE jobs SET status='queued',lease_owner=NULL,lease_token=NULL,lease_expires_at=NULL WHERE job_id=? AND status='paused' AND cancel_requested=0",(job_id,)).rowcount
             if changed!=1: raise ConflictError('job is not resumable')

@@ -60,6 +60,9 @@ class AgentTools:
         registry['recover_validation']=self.recover_validation
         registry.update(review_revision=self.review_revision,apply_reviewed_revision=self.apply_reviewed_revision)
         registry['review_dispute']=self.review_dispute
+        registry.update(propose_mapping=self.propose_mapping,propose_split_revision=self.propose_split_revision,
+            review_split_revision=self.review_split_revision,apply_reviewed_split=self.apply_reviewed_split,
+            review_semantic_contract=self.review_semantic_contract,assess_ontology_coverage=self.assess_ontology_coverage)
         return registry[name](**args)
 
     def recover_validation(self):
@@ -158,6 +161,9 @@ class AgentTools:
             self.state.ontology_lookup['full_reference_catalog'] = registry.reference_catalog()
         if self.state.guard.get("status") != "pass":
             self.runtime.issue("ontology_gap", "冻结本体检查未通过", critical=True)
+        if self.state.context.get('resolution_snapshots_enabled'):
+            from .definition_tasks import sync
+            self.state.context['shared_definition_tasks']=sync(self.runtime.repository,self.state)
         return {"status": "ok", "relation_id": relation_id, "definition": definition,
                 "requested_endpoint_types": endpoint_types, "issue": issue,
                 "check": self.state.guard,
@@ -173,20 +179,35 @@ class AgentTools:
         proposal = self.runtime.repository.get_audit(state.candidate["candidate_id"], state.audit_id)["rounds"]
         proposal = next(p for p in proposal if p["round_id"] == validation["round_id"])
         supporting = {eid for vote in validation["votes"] for eid in vote.get("supporting_evidence_ids", [])}
+        supporting.update(validation.get('effective_supporting_evidence_ids',[]))
         if not evidence_ids or not set(evidence_ids) <= supporting:
             raise ActionError("extension requires supported current evidence IDs")
+        full_lookup=state.ontology_lookup
+        if state.context.get('resolution_snapshots_enabled') and validation.get('resolution_snapshot_id'):
+            full_lookup={**full_lookup,'source_resolution_snapshot':state.context['resolution_snapshot'],
+                'resolved_source_evidence':state.bundle['items']}
+        if state.context.get('resolution_snapshots_enabled') and change_kind=='revise_definition':
+            full_lookup={**full_lookup,'shared_definition_target':proposed_changes.get('term_id') or proposed_changes.get('target_id')}
         result = self.runtime.repository.create_extension_request(state.candidate,
             expected_row_version=state.context["execution_row_version"], proposal=proposal, change_kind=change_kind,
-            description=description, proposed_changes=proposed_changes, evidence_ids=evidence_ids, full_lookup=state.ontology_lookup)
+            description=description, proposed_changes=proposed_changes, evidence_ids=evidence_ids, full_lookup=full_lookup)
+        if full_lookup.get('shared_definition_target'):
+            from .definition_tasks import link
+            link(self.runtime.repository,state.candidate['ontology_release_id'],full_lookup['shared_definition_target'],result['task']['extension_id'])
         state.pending_extension_id = result["task"]["extension_id"]
         state.workflow_state = result["workflow_state"]
         state.context["execution_row_version"] = result["row_version"]
         state.stop_reason = state.workflow_state
+        if state.context.get('resolution_snapshots_enabled') and result['task']['status']=='published':
+            self.reconcile_published_extension(state.pending_extension_id)
         return {"status": "waiting", "extension_id": state.pending_extension_id,
                 "workflow_state": state.workflow_state, "release_published": False, "worker_wait_required": False}
 
     def get_ontology_extension_status(self, extension_id):
         result = self.runtime.repository.extension_status(extension_id, self.state.candidate["candidate_id"])
+        if self.state.context.get('resolution_snapshots_enabled') and result['status']=='published':
+            woke=self.reconcile_published_extension(extension_id)
+            if woke.get('rebound'):return {'status':'reaudit_required','task':result,'wakeup':woke,'old_votes_reusable_for_new_release':False}
         self.state.pending_extension_id = extension_id
         self.state.workflow_state = ("reaudit_required" if result["status"] == "published" else
             "schema_unresolved" if result["status"] in {"rejected", "needs_human", "needs_rebase"} else
@@ -194,6 +215,18 @@ class AgentTools:
         self.state.stop_reason = self.state.workflow_state
         return {"status": "ok", "task": result, "workflow_state": self.state.workflow_state,
                 "old_votes_reusable_for_new_release": False, "automatic_rebind_implemented": True}
+
+    def reconcile_published_extension(self,extension_id):
+        from pathlib import Path
+        from ontology_review.publisher import OntologyPublisher
+        root=Path(self.state.candidate['ontology_release_path']).resolve().parent
+        result=OntologyPublisher(self.runtime.repository,root,self.runtime.orchestrator.config).reconcile_subscribers(extension_id)
+        rebound=next((r for r in result['rebound'] if r['candidate_id']==self.state.candidate['candidate_id']),None)
+        if rebound:
+            self.state.stop_reason='revision_submitted_for_reaudit';self.state.workflow_state='reaudit_required'
+            self.state.context['applied_revision']={'status':'ontology_rebound','new_revision':rebound['revision'],
+                'reaudit_jobs':result['reaudit_jobs'],'new_version_requires_independent_review':True,'old_votes_reusable':False}
+        return result
 
     def lookup_review_memory(self, relation_id, issue_type, limit):
         state = self.state
@@ -218,7 +251,7 @@ class AgentTools:
             return {"status": "budget_exhausted", "error": "validation round limit reached"}
         if not state.bundle.get("items"):
             return {"status": "blocked", "error": "no verified evidence"}
-        voters = runtime.orchestrator.validators
+        voters = [{**v,'case_ids':list(getattr(budget,'case_ids',[]))} for v in runtime.orchestrator.validators]
         if not voters:
             return {"status": "blocked", "error": "no configured validators"}
         baseline = len(voters)
@@ -286,6 +319,16 @@ class AgentTools:
         if consensus.get('dispute_report',{}).get('disputes') and not state.context.get('dispute_baseline'):
             state.context['dispute_baseline']={'proposal_digest':proposal['proposal_digest'],'round_id':proposal['round_id']}
             state.context['dispute_report']=consensus['dispute_report']
+        if state.context.get('resolution_snapshots_enabled'):
+            state.context['resolution_baseline']={'proposal_digest':proposal['proposal_digest'],'round_id':proposal['round_id']}
+            state.context.setdefault('dispute_source_evidence_ids',[e['evidence_id'] for e in proposal['evidence_bundle']['items']])
+            from .resolution_state import CHECK_AXES
+            for dispute in consensus.get('dispute_report',{}).get('disputes',[]):
+                ledger.open('claim_dispute',dispute['question'],True,proposal=proposal['proposal_digest'],
+                    evidence_ids=[eid for o in dispute['opinions'] for eid in o['evidence_ids']],
+                    evidence_hash=proposal['evidence_bundle']['evidence_hash'],
+                    target={'claim_id':dispute['claim']['claim_id'],'check':dispute['check']},
+                    dimensions=CHECK_AXES[dispute['check']])
         runtime.repository.record_issue_events(state.audit_id, state.issue_events)
         runtime.repository.update_round_gaps(state.audit_id, proposal["round_id"], {**state.gaps, "validation_key": key})
         # append_round's frozen proposal is immutable; consensus is a system result.
@@ -306,11 +349,16 @@ class AgentTools:
         from .dispute_review import review
         prep=state.ontology_lookup.get('mapping_preflight') or {}
         result=review(runtime.repository,base,dispute,bundle,runtime.orchestrator.validators,runtime.orchestrator.committee,
-            runtime.budget,state.ontology_lookup.get('retrieved_context'),prep.get('judgment_ready',False))
+            runtime.budget,state.ontology_lookup.get('retrieved_context'),prep.get('judgment_ready',False),
+            resolution_policy='review_resolution_snapshot_v1' if state.context.get('resolution_snapshots_enabled') else None)
         dispute['status']=result['status'];state.context.setdefault('dispute_results',{})[dispute_id]=result
+        if state.context.get('resolution_snapshots_enabled'):
+            if result.get('review_proposal'):state.bundle=bundle
+            runtime.refresh_resolution()
         return {'status':result['status'],'dispute_id':dispute_id,'focused_result':result,'original_votes_changed':False}
 
     def propose_revision(self, changes, evidence_ids, reason):
+        self.reserve_revision_path()
         from .revision_service import RevisionService
         draft=RevisionService(self.runtime.repository).propose(self.state.candidate,
             self.state.context['execution_row_version'],changes,evidence_ids,reason,self.state.bundle,
@@ -329,11 +377,68 @@ class AgentTools:
 
     def apply_reviewed_revision(self,draft_id,draft_hash):
         from .revision_service import RevisionService
-        result=RevisionService(self.runtime.repository).apply(draft_id,draft_hash)
+        if self.state.context.get('resolution_snapshots_enabled'):
+            from .shadow_revision import apply_reviewed
+            draft=RevisionService(self.runtime.repository).draft(draft_id)
+            if draft['draft_hash']!=draft_hash:raise ValueError('exact approved draft hash required')
+            result=apply_reviewed(self.runtime.repository,draft_id=draft_id)
+        else:result=RevisionService(self.runtime.repository).apply(draft_id,draft_hash)
         self.state.stop_reason='revision_submitted_for_reaudit'
         self.state.workflow_state='reaudit_required'
         self.state.context['applied_revision']=result
         return result
+
+    def reserve_revision_path(self,children=1):
+        if not self.state.context.get('resolution_snapshots_enabled'):return
+        from .planner_contracts import ActionError
+        final=int(self.state.context['agent_resolution_policy'].get('reserve_final_committee_calls',3))
+        required=children*(len(self.runtime.orchestrator.validators)+final)
+        if (self.state.context['agent_resolution_policy'].get('final_review_only') or self.state.revision_drafts or self.state.context.get('split_revision_groups')
+                or self.runtime.budget.remaining_calls()<required):
+            raise ActionError('one revision version; reserve independent revision review and every child final committee before proposing')
+
+    def propose_mapping(self,**arguments):
+        self.reserve_revision_path()
+        from .mapping_actions import propose
+        return propose(self.runtime,**arguments)
+
+    def propose_split_revision(self,children,reason):
+        self.reserve_revision_path(len(children))
+        from .revision_service import RevisionService
+        group=RevisionService(self.runtime.repository).propose_split(self.state.candidate,
+            self.state.context['execution_row_version'],children,reason,self.state.bundle,self.runtime.document,
+            protected_ids=self.state.protected_ids,source_audit_id=self.state.audit_id)
+        self.state.context.setdefault('split_revision_groups',[]).append(group)
+        self.runtime.issue('revision_proposed','拆分草案的全部子候选须分别审核、隔离应用并重新核验',critical=True)
+        return {'status':'split_proposed','group':group,'candidate_unchanged':True}
+
+    def review_split_revision(self,group_id):
+        from .revision_service import RevisionService
+        service=RevisionService(self.runtime.repository)
+        group=service.split(group_id)
+        if group_id not in {g['group_id'] for g in self.state.context.get('split_revision_groups',[])}:
+            raise ValueError('exact current split group required')
+        results=[service.review(d['draft_id'],self.runtime.orchestrator.validators,
+                 self.runtime.orchestrator.committee,self.runtime.budget) for d in group['drafts']]
+        group=service.split(group_id)
+        self.state.context['split_revision_groups']=[group if g['group_id']==group_id else g for g in self.state.context['split_revision_groups']]
+        return {'status':'approved' if group['ready_to_apply'] else 'review_incomplete','group':group,'reviews':results}
+
+    def apply_reviewed_split(self,group_id):
+        from .shadow_revision import apply_reviewed
+        if group_id not in {g['group_id'] for g in self.state.context.get('split_revision_groups',[])}:raise ValueError('current split group required')
+        result=apply_reviewed(self.runtime.repository,group_id=group_id)
+        self.state.stop_reason='revision_submitted_for_reaudit';self.state.workflow_state='reaudit_required'
+        self.state.context['applied_revision']=result
+        return result
+
+    def review_semantic_contract(self,voter_id):
+        from .semantic_recheck import review
+        return review(self.runtime,voter_id)
+
+    def assess_ontology_coverage(self,exclusions,search_queries):
+        from .ontology_coverage import review
+        return review(self.runtime,exclusions,search_queries)
 
     def finish_review(self, stop_reason, unresolved_issues, evidence_ids):
         self.runtime.policy.validate_request({'action':'finish_review','arguments':{'stop_reason':stop_reason,

@@ -153,7 +153,8 @@ def judge_revision_once(voter, proposal, feedback=None):
     vote=binding(voter,proposal)
     try:
         response=voter['client'].complete_json({**proposal,'output_contract':RESPONSE_SCHEMA,
-            **({'correction_feedback':feedback} if feedback else {})},system_prompt=revision_prompt(proposal),
+            **({'correction_feedback':feedback} if feedback else {})},system_prompt=revision_prompt(proposal)+(
+                '\nAssess mapping_rationale independently. Source evidence must establish each entity identity and type; domain/range compatibility alone is not type evidence. Assess the exact target and every competing-relation exclusion; uncertain is permitted.' if proposal.get('mapping_rationale') else ''),
             max_tokens=int(voter.get('max_output_tokens',4096)))
         raw=_parse_content(response.content)
         errors=response_errors(raw,proposal)
@@ -196,7 +197,7 @@ class RevisionService:
             if not entry and not vote.get('outcome_unknown'): return True
         return False
 
-    def propose(self, candidate, expected_row_version, changes, evidence_ids, reason, bundle, document, *, protected_ids=(), source_audit_id=None, _connection=None, _split_context=None):
+    def propose(self, candidate, expected_row_version, changes, evidence_ids, reason, bundle, document, *, protected_ids=(), source_audit_id=None, _connection=None, _split_context=None, mapping_rationale=None):
         from .repository import ConflictError, ValidationError
         updated=deepcopy(candidate)
         updated['triple']=merge_triple_patch(candidate['triple'],changes,
@@ -245,6 +246,7 @@ class RevisionService:
                 'meaning':'not_stated applies only to this frozen verification scope'},
             'field_evidence':{field:list(evidence_ids) for field in fields}}
         draft['change_analysis']=analyze(candidate,updated,verified)
+        if mapping_rationale is not None:draft['mapping_rationale']=deepcopy(mapping_rationale)
         if _split_context: draft.update(operation='split_child',split_context=deepcopy(_split_context))
         if ontology_context:draft['ontology_context']=ontology_context
         draft.update(task_type='candidate_revision_review',task_id=draft['draft_id'],object_revision=candidate['revision'])

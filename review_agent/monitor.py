@@ -342,10 +342,20 @@ class ReviewMonitor:
         from .review_observability import outcome
         from .consensus import Committee
         committee_policy=proposal.get('committee_policy') or {}
+        projected_roster=Committee([m['id'] for m in roster],required_votes=committee_policy.get('required_votes',len(roster)),
+                minimum_distinct_families=committee_policy.get('minimum_distinct_families',len(roster))) if roster else None
+        baseline=(context.get('dispute_baseline') or context.get('resolution_baseline') or {}).get('proposal_digest')
+        if context.get('resolution_snapshots_enabled') and projected_roster and baseline in {None,proposal.get('proposal_digest')}:
+            from .resolution_recovery import ReadView,project_context
+            view=ReadView(c)
+            context=project_context(view,view.get_audit(audit['candidate_id'],audit['audit_id']),projected_roster)
+            evidence=context.get('resolution_bundle',proposal.get('evidence_bundle',{})).get('items',evidence)
         diagnostic=outcome(proposal,[s['_opinion'] for s in slots if s['_opinion']],
             Committee([m['id'] for m in roster],required_votes=committee_policy.get('required_votes',len(roster)),
                 minimum_distinct_families=committee_policy.get('minimum_distinct_families',len(roster))),
             audit_status=audit['status'],stop_reason=stop_reason,context=context,decision=decision) if roster else None
+        from .resolution_state import display_projection
+        displayed_axes,derived_pending=display_projection(decision,diagnostic,context)
         public = {
             'audit_id': audit['audit_id'], 'candidate_id': audit['candidate_id'], 'revision': audit['revision'],
             'current_revision': current.get('current_revision'), 'historical': historical, 'status': audit['status'],
@@ -367,7 +377,8 @@ class ReviewMonitor:
             'decision': pick(decision, ('decision', 'source_support_result', 'workflow_state', 'review_completion_status',
                                       'independent_review_completed', 'stop_reason', 'reason_codes', 'source_support_consensus',
                                       'admission_consensus', 'explanation', 'schema_status', 'pending_actions')),
-            'review_axes': display_axes(decision),
+            'review_axes': displayed_axes,
+            **({'derived_pending_actions':derived_pending} if context.get('resolution_snapshot') else {}),
             'review_outcome':diagnostic,
             'mapping_preflight': proposal.get('mapping_preflight'),
             'field_spec': proposal.get('field_spec'),

@@ -1,0 +1,160 @@
+{
+  "version": "agent_resolution_rerun_receipt_v1",
+  "user_date": "2026-11-16",
+  "status": "three_cases_processed_with_unresolved_obligations",
+  "sample_ids": [
+    "DEV-001",
+    "DEV-002",
+    "DEV-003"
+  ],
+  "freeze_hash": "42d1fb8cf654a13917a52f98e899a8467a18142dce84aa37e169bb261e1efe2d",
+  "code_hash": "8104873b2665fc81a074c03676f6a5721901bad919017cb015dc3d3df2ed8924",
+  "physical_model_calls": 14,
+  "physical_calls_upper_bound": 192,
+  "reported_tokens": {
+    "input_tokens": 270593,
+    "output_tokens": 12618
+  },
+  "usage_missing_requests": 0,
+  "elapsed_seconds": 180.29764246940613,
+  "launch_phase_breakdown": {
+    "initial_committee_including_one_contract_clarification": 10,
+    "planner": 3,
+    "separate_semantic_recheck": 1
+  },
+  "phase_reporting_note": "resolution_report.json labels some initial requests final_review because the frozen source candidates already have historical revision_provenance. This receipt groups by this launch: no new revision was applied; all ten triple_review requests belong to the initial review/recovery phase. Overall call and token totals are unchanged.",
+  "semantic_completed": 0,
+  "technical_incomplete_cases": 1,
+  "new_execution_unknown_requests": 0,
+  "inherited_unknown_request_holds_retained": 28,
+  "external_gateway_billing_independently_reconciled": false,
+  "inherited_strict_engineering_gate_changed": false,
+  "applied_root_revision_operations": 0,
+  "shared_definition_tasks_registered": 7,
+  "human_labels": 0,
+  "actual_human_minutes": null,
+  "quality_evaluable": false,
+  "production_written": false,
+  "graph_imported": false,
+  "changed_historical_files_or_production_candidates": [],
+  "execution_archive_verified": true,
+  "automatic_relaunch": false,
+  "case_accounts": [
+    {
+      "sample_id": "DEV-001",
+      "case_id": "case_adc4381947a0569c3aea4cb4d5b3c1b2",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 64,
+        "rebinds": 2,
+        "tokens": 1200000,
+        "tool_calls": 40
+      },
+      "usage": {
+        "extension_requests": 0,
+        "llm_calls": 4,
+        "rebinds": 0,
+        "tokens": 87463,
+        "tool_calls": 3
+      }
+    },
+    {
+      "sample_id": "DEV-002",
+      "case_id": "case_d4052189bc8fdededc6ca5c24d73cab3",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 64,
+        "rebinds": 2,
+        "tokens": 1200000,
+        "tool_calls": 40
+      },
+      "usage": {
+        "extension_requests": 0,
+        "llm_calls": 6,
+        "rebinds": 0,
+        "tokens": 100871,
+        "tool_calls": 7
+      }
+    },
+    {
+      "sample_id": "DEV-003",
+      "case_id": "case_686371105b267ac04ad6ed3b339e8611",
+      "limits": {
+        "extension_requests": 1,
+        "llm_calls": 64,
+        "rebinds": 2,
+        "tokens": 1200000,
+        "tool_calls": 40
+      },
+      "usage": {
+        "extension_requests": 0,
+        "llm_calls": 4,
+        "rebinds": 0,
+        "tokens": 94877,
+        "tool_calls": 3
+      }
+    }
+  ],
+  "cases": [
+    {
+      "sample_id": "DEV-001",
+      "candidate_id": "cand_7643b4bd5b5fdd4dfad6",
+      "recommendation": "wait_mapping",
+      "semantic_status": "waiting_mapping",
+      "technical_status": "settled",
+      "required_human_action": "shared_definition_or_mapping_review",
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed"
+      ],
+      "execution_reason": "来源支持已获3/3独立委员确认，但正式映射因冻结本体中候选关系定义缺失且尾实体类型未定而保持未分配；当前无合法且有信息增益的修订或扩展动作，需等待共用正式定义集中审核发布。"
+    },
+    {
+      "sample_id": "DEV-002",
+      "candidate_id": "cand_5b459021eb0a3fe91145",
+      "recommendation": "manual_review",
+      "semantic_status": "review_incomplete",
+      "technical_status": "pending",
+      "required_human_action": "technical_recovery",
+      "blocking_reasons": [
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "scope:unclear",
+        "source:unresolved",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "execution_reason": "minimum_review_incomplete"
+    },
+    {
+      "sample_id": "DEV-003",
+      "candidate_id": "cand_f4876022d0c83d291ac3",
+      "recommendation": "wait_mapping",
+      "semantic_status": "waiting_mapping",
+      "technical_status": "settled",
+      "required_human_action": "shared_definition_or_mapping_review",
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "scope:unclear",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "execution_reason": "来源支持已获3/3独立确认，但正式映射因R_37918d1714e9945397f3定义缺失且尾端类型未定而保持未分配；知识范围争议（局部定义vs一般知识）需人工裁决，且共享定义任务处于外部等待状态，无合法且有信息增益的后续动作。"
+    }
+  ],
+  "model_calls_during_receipt_generation": 0
+}
