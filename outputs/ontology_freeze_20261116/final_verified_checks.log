@@ -1,0 +1,116 @@
+test_anchor_exists_but_semantic_error_quarantines (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_complete_independent_committee (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_cross_item_citation_and_duplicate_rejected (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_no_evidence_or_scope_pass (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_tampered_packet_never_sent (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_transport_metadata_and_truncation_survive (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_unknown_or_missing_never_approves (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_wrong_binding_or_family_collision_blocks (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_release_roundtrip_quarantine_identity_and_binding (tests.test_definition_audit.FreezeArtifactTests) ... ok
+test_source_blocker_can_only_quarantine_and_requires_own_quote (tests.test_definition_audit.FreezeArtifactTests) ... ok
+test_unknown_original_without_late_receipt_cannot_be_resent (tests.test_definition_audit.FreezeArtifactTests) ... ERROR
+test_generic_abstention_does_not_count_as_semantic_detection (tests.test_definition_audit.MappingAcceptanceTests) ... ok
+test_missing_material_requires_fresh_complete_committee (tests.test_definition_audit.MappingAcceptanceTests) ... ok
+test_post_run_diagnostic_does_not_modify_the_historical_decision (tests.test_mapping_preflight.MappingPreflightIntegrationTests) ... ok
+test_preflight_is_dispatched_before_mapping_and_preserves_valid_source_votes (tests.test_mapping_preflight.MappingPreflightIntegrationTests) ... ok
+test_budget_failure_does_not_drop_competitors_or_claim_absence (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_complete_packet_is_checked_before_semantic_review_without_global_replacement (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_declared_multilingual_alias_is_recalled_without_assigning_a_formal_id (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_definition_empty_in_release_remains_incomplete_after_search (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_empty_definition_containers_are_not_mistaken_for_definition_text (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_incomplete_mapping_metadata_and_lexical_scan_cannot_authorize_extension (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_incorrect_document_local_identity_does_not_pass_preflight (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_missing_subset_definition_triggers_full_release_retrieval (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_preflight_is_frozen_to_candidate_evidence_and_context (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_same_name_classes_are_not_silently_merged (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_same_name_competitors_and_type_definitions_are_preserved (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_unassigned_entity_type_is_not_inferred_from_relation_constraints (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_actual_source_bytes_survive_release_and_match_provenance (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_approved_class_aliases_are_resolved_and_ambiguous_relations_are_not (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_cli_publication_returns_the_release_id_and_updates_import_receipt (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_frozen_preview_survives_source_changes (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_independent_processes_cannot_both_publish_against_the_same_base (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_invalid_publication_does_not_move_the_head (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_legacy_constraint_reports_are_stable_across_python_hash_seeds (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_legacy_unexecuted_constraints_and_examples_are_not_silently_executed (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_old_preview_does_not_overwrite_a_new_head (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_profile_confirmation_is_invalidated_by_a_diff_change (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_quarantine_preserves_conflicts_and_never_adds_placeholder_classes (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_release_directory_identity_cannot_be_reused_for_other_content (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_retry_of_identical_publication_does_not_create_another_event (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_second_publication_requires_the_current_base (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_skos_definition_and_aliases_are_preserved (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_tampered_draft_cannot_use_the_old_preview_digest (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_workbench_functions_publish_the_frozen_preview (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_workbench_import_publish_and_conflict_http_routes (tests.test_ontology_release.OntologyReleaseTests) ... ok
+test_bound_candidate_or_run_package_is_used_with_a_separate_compiled_snapshot (tests.test_bound_release_loading.BoundReleaseLoadingTests) ... ok
+test_missing_explicit_package_does_not_fall_back_to_another_published_release (tests.test_bound_release_loading.BoundReleaseLoadingTests) ... ok
+test_wrong_binding_is_rejected_before_identity_or_admission_can_use_it (tests.test_bound_release_loading.BoundReleaseLoadingTests) ... ok
+test_exporter_annotation_helper_preserves_property_definition (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_round_trip_preserves_source_definition_and_formal_identity (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_long_rationale_is_projected_without_changing_fields_or_resending (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_proposal_does_not_mutate_candidate_and_approval_requires_new_version (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_unknown_request_remains_fenced_and_is_reported_without_resend (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_504_without_provider_id_keeps_client_correlation_and_unknown (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_revision_review_preserves_gateway_metadata_and_rejects_truncation (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_experiment_modes_are_explicit_and_versioned (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_invalid_modes_numbers_caps_and_history_are_rejected (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_projection_is_bounded_normalized_and_deterministic (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_unsupported_legacy_boolean_fails_explicitly (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_agent_runtime_and_resolution_snapshot_use_the_same_weighting (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_dynamic_weights_change_operation_and_are_replayable (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_equal_weights_match_explicit_mass_baseline (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_focused_weighting_and_new_evidence_recompute_without_rewriting_votes (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_low_weight_material_counterevidence_still_blocks (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_missing_or_duplicate_model_cannot_become_full_mass (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_planner_view_exposes_weight_reasons_without_repeating_full_snapshots (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_scope_exclusion_does_not_require_an_irrelevant_formal_mapping (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_scope_exclusion_is_discard (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_semantic_repair_and_scope_exclusion_are_separate_operations (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_static_weights_ignore_current_features_but_use_frozen_history (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_strategy_and_candidate_revisions_invalidate_old_bindings (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_verified_counterevidence_resolution_closes_only_the_bound_obligations (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_claimed_losslessness_cannot_drop_or_change_the_frequency (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_compound_entity_requires_review_without_claiming_false_source_contradiction (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_direction_change_and_missing_conditions_require_semantic_revision (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_duplicate_removal_cannot_erase_the_whole_predicate (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_findings_cannot_reference_outside_frozen_evidence (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_free_text_does_not_override_explicit_semantic_error (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_graph_projection_preserves_frequency_and_avoids_unconditional_edge (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_historical_contract_schema_and_interpretation_are_unchanged (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_missing_semantic_findings_are_not_synthesized_by_field_repair (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_polarity_and_modality_cannot_be_reclassified_as_normalization (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_preserved_frequency_is_not_a_source_error (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_qualifier_duplicate_requires_exact_boundary_and_source_anchor (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_standard_opinion_has_four_separate_axes (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_unresolved_counterevidence_prevents_a_supported_source_axis (tests.test_review_four_axes.FourAxisContractTests) ... ok
+test_failed_seat_is_review_incomplete_not_a_fact_error (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_frequency_normalization_persists_without_opening_semantic_revision_issue (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_planner_failure_before_validation_has_unresolved_new_axes (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_scope_exclusion_is_independent_from_fact_support (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_semantic_failure_enters_its_own_queue (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_standard_pipeline_persists_four_axes_and_frozen_scope_policy (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_unanimous_source_counterevidence_survives_full_aggregation (tests.test_review_four_axes.FourAxisIntegrationTests) ... ok
+test_queues_are_distinct_and_parallel_mapping_obligation_is_retained (tests.test_review_four_axes.FourAxisRoutingTests) ... ok
+test_scope_exclusion_preserves_supported_source (tests.test_review_four_axes.FourAxisRoutingTests) ... ok
+test_source_disagreement_is_distinct_from_insufficient_evidence (tests.test_review_four_axes.FourAxisRoutingTests) ... ok
+test_technical_missing_vote_does_not_become_evidence_insufficiency (tests.test_review_four_axes.FourAxisRoutingTests) ... ok
+test_three_models_of_insufficient_family_diversity_do_not_form_source_support (tests.test_review_four_axes.FourAxisRoutingTests) ... ok
+test_unanimous_contradiction_retains_the_counterevidence_conclusion (tests.test_review_four_axes.FourAxisRoutingTests) ... ok
+
+======================================================================
+ERROR: test_unknown_original_without_late_receipt_cannot_be_resent (tests.test_definition_audit.FreezeArtifactTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 87, in test_unknown_original_without_late_receipt_cannot_be_resent
+    with self.assertRaisesRegex(ValueError,'never resend'):recover_last_batch(output)
+  File "D:\knowledge-huopao\evaluation\finalize_ontology_freeze.py", line 42, in recover_last_batch
+    member=next(m for m in proposal['committee_members'] if m['id']==vote['voter_id'])
+KeyError: 'committee_members'
+
+----------------------------------------------------------------------
+Ran 101 tests in 76.249s
+
+FAILED (errors=1)

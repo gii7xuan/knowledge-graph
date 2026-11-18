@@ -116,7 +116,7 @@ def judge_typed(voter, proposal, repository, *, task_type, binding, invoke, vali
             break
     result={**binding,'response_status':'api_error','error_code':'DEADLINE_EXHAUSTED','actual_calls':0}
     for number in range(retries+1):
-        wait=min(float(voter.get('request_timeout_seconds',timeout)),
+        wait=min(float(timeout),float(voter.get('request_timeout_seconds',timeout)),
                  max(0.,deadline_epoch-time.time()) if deadline_epoch else timeout)
         if wait<=0: break
         if deadline_epoch:

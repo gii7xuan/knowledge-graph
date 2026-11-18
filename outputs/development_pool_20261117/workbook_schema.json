@@ -1,0 +1,111 @@
+{
+  "columns": [
+    {
+      "header": "样本编号",
+      "field": "sample_id"
+    },
+    {
+      "header": "原候选",
+      "field": "statement"
+    },
+    {
+      "header": "来源支持",
+      "field": "source_support"
+    },
+    {
+      "header": "表达质量",
+      "field": "expression_status"
+    },
+    {
+      "header": "已有映射",
+      "field": "mapping_status"
+    },
+    {
+      "header": "本体覆盖",
+      "field": "schema_coverage"
+    },
+    {
+      "header": "知识范围",
+      "field": "knowledge_scope"
+    },
+    {
+      "header": "操作偏好",
+      "field": "admission_preference"
+    },
+    {
+      "header": "支持证据ID",
+      "field": "supporting_evidence_ids"
+    },
+    {
+      "header": "反驳证据ID",
+      "field": "counter_evidence_ids"
+    },
+    {
+      "header": "理由与待核问题",
+      "field": "note"
+    },
+    {
+      "header": "修改建议",
+      "field": "expected_revision_text"
+    },
+    {
+      "header": "审核人",
+      "field": "reviewer"
+    },
+    {
+      "header": "标注时间",
+      "field": "annotated_at"
+    },
+    {
+      "header": "实际用时（秒）",
+      "field": "duration_seconds"
+    },
+    {
+      "header": "已核对完整材料",
+      "field": "full_bundle_reviewed"
+    },
+    {
+      "header": "看过模型审核结论",
+      "field": "saw_model_conclusions"
+    }
+  ],
+  "dimensions": {
+    "source_support": [
+      "contradicted",
+      "insufficient",
+      "supported",
+      "unresolved"
+    ],
+    "expression_status": [
+      "faithful",
+      "needs_revision",
+      "unresolved"
+    ],
+    "mapping_status": [
+      "ambiguous",
+      "correct",
+      "incorrect",
+      "unassigned",
+      "unresolved"
+    ],
+    "schema_coverage": [
+      "covered",
+      "not_covered",
+      "unresolved"
+    ],
+    "knowledge_scope": [
+      "conditional",
+      "derivation",
+      "example",
+      "general",
+      "local_definition",
+      "unresolved"
+    ],
+    "admission_preference": [
+      "exclude",
+      "include",
+      "revise",
+      "unresolved"
+    ]
+  }
+}

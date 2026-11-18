@@ -1,0 +1,4298 @@
+{
+  "audit_id": "audit_ca3397e5ea8342d7a2bc1cac9bfd4f6b",
+  "candidate_id": "cand_3fbc6d86b1a58d3b8c38",
+  "revision": 1,
+  "review_completion_status": "independent_review_completed",
+  "independent_review_completed": true,
+  "final_round_id": 1,
+  "consensus": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "valid_votes": 0,
+    "invalid_votes": 0,
+    "uncertain_votes": 2,
+    "error_votes": 1,
+    "missing_votes": 0,
+    "duplicate_attempts": 0,
+    "duplicate_model_votes": 0,
+    "invalid_attempts": 0,
+    "distinct_family_count": 2,
+    "valid_distinct_family_count": 0,
+    "invalid_distinct_family_count": 0,
+    "diversity_ready": true,
+    "result": "unresolved",
+    "unresolved_counterevidence": false,
+    "unresolved_support_conflict": false,
+    "counter_evidence_ids": [
+      "ev_b6e7a7036f328a430b3a",
+      "ev_df581a342a45722ca57b",
+      "ev_fb32c0b835deace58bfa"
+    ],
+    "supporting_evidence_ids": [],
+    "source_support_consensus": {
+      "result": "contradicted",
+      "derivation": "axis_weighting_v1",
+      "support_voter_ids": []
+    },
+    "admission_consensus": {
+      "result": "unresolved"
+    },
+    "eligible_voter_ids": [
+      "judge_a",
+      "judge_c"
+    ],
+    "expression_complete": true,
+    "blocking_fields": [],
+    "raw_source_support_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "contradicted"
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "contradicted"
+      }
+    ],
+    "expression_status": "needs_revision",
+    "knowledge_scope": "general",
+    "scope_confirmed": true,
+    "mapping_status": "ambiguous",
+    "effective_mapping_status": "constraint_conflict",
+    "core_source_support_result": "unresolved",
+    "ontology_coverage_review": {
+      "context_hash": "11419fe4147ac54cdb842360873d115a98cf13d76dbbcc1ede8976cece6538b2",
+      "full_catalog_included": false,
+      "global_gap_confirmable": false
+    },
+    "review_axes": {
+      "version": "review_axes_v1",
+      "source": {
+        "status": "contradicted",
+        "observed_result": "contradicted",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": true,
+        "valid_seats": 2,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_b"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "contradicted"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "material counterevidence conflicts with counterevidence=pass",
+              "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "contradicted"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 0.8888888888888888
+      },
+      "expression": {
+        "status": "semantic_revision",
+        "observed_result": "semantic_revision",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "“完全等同于”将近似关系改为严格等同，语义强度改变。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将surface_relation改回“近似看成”或“可近似看成”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "kind": "semantic_error",
+                  "note": "模态can与表面完全等同冲突，原文“可”仅表示近似可能。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MOD-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "保留modality=can并修正surface_relation为近似表述。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "将“近似看成”错误地表达为“完全等同于”，改变了物理含义的强度。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将 surface_relation 修改为“近似看成”"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "“完全等同于”丢失原文近似性，语义被强化。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将surface_relation改为“近似看成”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "kind": "semantic_error",
+                  "note": "原文“可近似看成”含近似限定，候选未保留。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MOD-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "保留近似限定并复核modality为can。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      },
+      "mapping": {
+        "status": "conflict",
+        "observed_result": "conflict",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      },
+      "scope": {
+        "status": "include",
+        "observed_result": "include",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      }
+    },
+    "dispute_report": {
+      "version": "claim_disputes_v1",
+      "candidate_hash": "5d77ca0abb70e69b71c2c2f95566948992e5c1895c17908368b17e73eb70d957",
+      "evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+      "base_proposal_digest": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+      "opinions": [
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "counterevidence",
+          "claim": {
+            "check": "counterevidence",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "已核验材料中是否存在可能推翻“空气 — 完全等同于 — 理想气体”的证据？未发现反证与找到正面支持分开记录。",
+            "formal_mapping": null,
+            "claim_id": "298704f2238f0fd6a967d3cdc84b5a909d514d4ccae7c39798806c5c751da0c4"
+          },
+          "status": "fail",
+          "reason": "原文“可近似看成”及湿空气说明构成对“完全等同”的反证。",
+          "issue_type": "counterevidence",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_b6e7a7036f328a430b3a"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b6e7a7036f328a430b3a",
+              "quote": "实际空气常是含有水蒸气的湿空气，因此尚须对湿空气状态方程中的量做进一步的研究。由实验得知，水蒸气的气体常数  $R_{\\text{水}}$  与干空气的气体常数  $R$  之间的关系为",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 1210,
+              "end": 1303,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "entity_reference",
+          "claim": {
+            "check": "entity_reference",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+            "formal_mapping": null,
+            "claim_id": "677ac7ebdd375d060732e66f890aea1cdc67dc4e58322688953c125a0f117e45"
+          },
+          "status": "pass",
+          "reason": "头尾实体“空气”和“理想气体”与原文指称一致。",
+          "issue_type": "referent",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "evidence_sufficiency",
+          "claim": {
+            "check": "evidence_sufficiency",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "当前证据是否足以确认“空气 — 完全等同于 — 理想气体”的完整含义？缺哪一段材料？",
+            "formal_mapping": null,
+            "claim_id": "a1976dd817feb342de884ffd97a17dcc7c61ea8d6da6ed8cb9549d3f296b6553"
+          },
+          "status": "pass",
+          "reason": "现有证据足以判定表面关系与原文不符。",
+          "issue_type": "evidence_sufficiency",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b",
+            "ev_1c843963c93e22bc17f3",
+            "ev_e88a9615a52979f2ad04"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_1c843963c93e22bc17f3",
+              "quote": "$$\np = \\rho R T \\tag {1-1}\n$$",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 1001,
+              "end": 1030,
+              "offset_basis": "canonical_document",
+              "block_type": "equation"
+            },
+            {
+              "evidence_id": "ev_e88a9615a52979f2ad04",
+              "quote": "式中，  $p$  为空气的压力，  $\\mathrm{Pa}$  ；  $\\rho$  为空气的密度，  $\\mathrm{kg / m^3}$  ；  $T$  为空气的热力学温度，K；  $R$  为空气的气体常数，对于干空气实验值，  $R = 287\\mathrm{J} / (\\mathrm{kg}\\cdot \\mathrm{K})$  。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 1032,
+              "end": 1208,
+              "offset_basis": "canonical_document",
+              "block_type": "symbol_definition"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "knowledge_scope",
+          "claim": {
+            "check": "knowledge_scope",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”属于哪种收录范围？范围分类不能替代事实判断。",
+            "formal_mapping": null,
+            "claim_id": "b7e8a8e99339bb4c63c7b3abc0b029594ed9fddb7c2d6fba0092d2b36cd5c394"
+          },
+          "status": "general",
+          "reason": "空气近似理想气体是领域内可复用的一般事实。",
+          "issue_type": "scope",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "mapping",
+          "claim": {
+            "check": "mapping",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”与已填写关系 R_406bc04a6711460b8da5 的正式定义、实体身份、方向和类型约束是否匹配？",
+            "formal_mapping": {
+              "relation_id": "R_406bc04a6711460b8da5",
+              "head_type": "C_2800f3a353c9063a4ccb",
+              "tail_type": "C_984f2a31e91e8e104662"
+            },
+            "claim_id": "66f5bdb2b4910f0a73f442ef18dd12155778aae0b6f8f56f773e5beb7bcb6470"
+          },
+          "status": "candidate_mapping_error",
+          "reason": "R_406bc04a6711460b8da5定义为“近似看成”，与表面“完全等同于”不匹配。",
+          "issue_type": "formal_mapping",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": "R_406bc04a6711460b8da5"
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "qualifiers",
+          "claim": {
+            "check": "qualifiers",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+            "formal_mapping": null,
+            "claim_id": "527ccec3aa1fad493d8944511cecbd5984d6cd7f3304836586cb2422b91871e3"
+          },
+          "status": "fail",
+          "reason": "原文“可”表示近似/可能，候选模态can与表面关系完全等同冲突。",
+          "issue_type": "modality",
+          "meaning_effect": "changed",
+          "rule_ids": [
+            "MOD-001"
+          ],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "relation_direction",
+          "claim": {
+            "check": "relation_direction",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否支持“空气 — 完全等同于 — 理想气体”的头尾方向？",
+            "formal_mapping": null,
+            "claim_id": "dcb3a556271c536a73a58c1b87ecc8ad33b550cdb02577760efd24b7165f7257"
+          },
+          "status": "pass",
+          "reason": "原文方向为空气被近似看成理想气体，与候选一致。",
+          "issue_type": "direction",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "relation_semantics",
+          "claim": {
+            "check": "relation_semantics",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”中的“完全等同于”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+            "formal_mapping": null,
+            "claim_id": "769b3c8012fb9cfb21b248505fc710f994d553a62e88842744ebdd5d0eb7d763"
+          },
+          "status": "fail",
+          "reason": "“完全等同于”改变了原文“近似看成”的语义强度。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "changed",
+          "rule_ids": [
+            "MEANING-001"
+          ],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "triple_support",
+          "claim": {
+            "check": "triple_support",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否明确支持“空气 — 完全等同于 — 理想气体”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+            "formal_mapping": null,
+            "claim_id": "fb15547c9c3ec7b27aab08744d2a8fd8cce8e1c34029ccd68e4baf9d51fa5e81"
+          },
+          "status": "contradicted",
+          "reason": "原文仅支持“可近似看成”，不支持“完全等同于”。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "unresolved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "counterevidence",
+          "claim": {
+            "check": "counterevidence",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "已核验材料中是否存在可能推翻“空气 — 完全等同于 — 理想气体”的证据？未发现反证与找到正面支持分开记录。",
+            "formal_mapping": null,
+            "claim_id": "298704f2238f0fd6a967d3cdc84b5a909d514d4ccae7c39798806c5c751da0c4"
+          },
+          "status": "fail",
+          "reason": "原文“可近似看成”直接反证“完全等同于”。",
+          "issue_type": "counterevidence",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "entity_reference",
+          "claim": {
+            "check": "entity_reference",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+            "formal_mapping": null,
+            "claim_id": "677ac7ebdd375d060732e66f890aea1cdc67dc4e58322688953c125a0f117e45"
+          },
+          "status": "pass",
+          "reason": "空气与理想气体均指向原文同一对象，无拆分需求。",
+          "issue_type": "referent",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "evidence_sufficiency",
+          "claim": {
+            "check": "evidence_sufficiency",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "当前证据是否足以确认“空气 — 完全等同于 — 理想气体”的完整含义？缺哪一段材料？",
+            "formal_mapping": null,
+            "claim_id": "a1976dd817feb342de884ffd97a17dcc7c61ea8d6da6ed8cb9549d3f296b6553"
+          },
+          "status": "pass",
+          "reason": "完整句子已给出，足以判定关系表达。",
+          "issue_type": "evidence_sufficiency",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "knowledge_scope",
+          "claim": {
+            "check": "knowledge_scope",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”属于哪种收录范围？范围分类不能替代事实判断。",
+            "formal_mapping": null,
+            "claim_id": "b7e8a8e99339bb4c63c7b3abc0b029594ed9fddb7c2d6fba0092d2b36cd5c394"
+          },
+          "status": "general",
+          "reason": "空气近似为理想气体属可复用领域事实。",
+          "issue_type": "scope",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "mapping",
+          "claim": {
+            "check": "mapping",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”与已填写关系 R_406bc04a6711460b8da5 的正式定义、实体身份、方向和类型约束是否匹配？",
+            "formal_mapping": {
+              "relation_id": "R_406bc04a6711460b8da5",
+              "head_type": "C_2800f3a353c9063a4ccb",
+              "tail_type": "C_984f2a31e91e8e104662"
+            },
+            "claim_id": "66f5bdb2b4910f0a73f442ef18dd12155778aae0b6f8f56f773e5beb7bcb6470"
+          },
+          "status": "candidate_mapping_error",
+          "reason": "R_406bc04a6711460b8da5定义为“近似看成”，与候选“完全等同于”不等价。",
+          "issue_type": "formal_mapping",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": "R_406bc04a6711460b8da5"
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "qualifiers",
+          "claim": {
+            "check": "qualifiers",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+            "formal_mapping": null,
+            "claim_id": "527ccec3aa1fad493d8944511cecbd5984d6cd7f3304836586cb2422b91871e3"
+          },
+          "status": "fail",
+          "reason": "原文“可近似看成”含近似与可能模态，候选仅记can且丢失近似限定。",
+          "issue_type": "modality",
+          "meaning_effect": "changed",
+          "rule_ids": [
+            "MOD-001"
+          ],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "relation_direction",
+          "claim": {
+            "check": "relation_direction",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否支持“空气 — 完全等同于 — 理想气体”的头尾方向？",
+            "formal_mapping": null,
+            "claim_id": "dcb3a556271c536a73a58c1b87ecc8ad33b550cdb02577760efd24b7165f7257"
+          },
+          "status": "pass",
+          "reason": "头空气到尾理想气体方向与原文一致。",
+          "issue_type": "direction",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "relation_semantics",
+          "claim": {
+            "check": "relation_semantics",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“空气 — 完全等同于 — 理想气体”中的“完全等同于”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+            "formal_mapping": null,
+            "claim_id": "769b3c8012fb9cfb21b248505fc710f994d553a62e88842744ebdd5d0eb7d763"
+          },
+          "status": "fail",
+          "reason": "“完全等同于”丢失近似性，与原文“可近似看成”语义不符。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "changed",
+          "rule_ids": [
+            "MEANING-001"
+          ],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "triple_support",
+          "claim": {
+            "check": "triple_support",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否明确支持“空气 — 完全等同于 — 理想气体”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+            "formal_mapping": null,
+            "claim_id": "fb15547c9c3ec7b27aab08744d2a8fd8cce8e1c34029ccd68e4baf9d51fa5e81"
+          },
+          "status": "contradicted",
+          "reason": "原文为“可近似看成”，非“完全等同于”，谓词被强化。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "unresolved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_fb32c0b835deace58bfa",
+            "ev_df581a342a45722ca57b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_fb32c0b835deace58bfa",
+              "quote": "空气可近似看成理想气体",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 977,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_df581a342a45722ca57b",
+              "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_096450b1124b",
+              "chunk_id": "chunk_ddaefd341610",
+              "start": 966,
+              "end": 999,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        }
+      ],
+      "disputes": [
+        {
+          "dispute_id": "dispute_131a26b85e150beab4b81606",
+          "claim": {
+            "check": "counterevidence",
+            "expression": {
+              "head": "空气",
+              "surface_relation": "完全等同于",
+              "tail": "理想气体",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "can",
+                "polarity": "positive",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "已核验材料中是否存在可能推翻“空气 — 完全等同于 — 理想气体”的证据？未发现反证与找到正面支持分开记录。",
+            "formal_mapping": null,
+            "claim_id": "298704f2238f0fd6a967d3cdc84b5a909d514d4ccae7c39798806c5c751da0c4"
+          },
+          "check": "counterevidence",
+          "issue_type": "counterevidence",
+          "question": "已核验材料中是否存在可能推翻“空气 — 完全等同于 — 理想气体”的证据？未发现反证与找到正面支持分开记录。",
+          "opinions": [
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "counterevidence",
+              "claim": {
+                "check": "counterevidence",
+                "expression": {
+                  "head": "空气",
+                  "surface_relation": "完全等同于",
+                  "tail": "理想气体",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "can",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "已核验材料中是否存在可能推翻“空气 — 完全等同于 — 理想气体”的证据？未发现反证与找到正面支持分开记录。",
+                "formal_mapping": null,
+                "claim_id": "298704f2238f0fd6a967d3cdc84b5a909d514d4ccae7c39798806c5c751da0c4"
+              },
+              "status": "fail",
+              "reason": "原文“可近似看成”及湿空气说明构成对“完全等同”的反证。",
+              "issue_type": "counterevidence",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_fb32c0b835deace58bfa",
+                "ev_df581a342a45722ca57b",
+                "ev_b6e7a7036f328a430b3a"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_fb32c0b835deace58bfa",
+                  "quote": "空气可近似看成理想气体",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_096450b1124b",
+                  "chunk_id": "chunk_ddaefd341610",
+                  "start": 966,
+                  "end": 977,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_df581a342a45722ca57b",
+                  "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_096450b1124b",
+                  "chunk_id": "chunk_ddaefd341610",
+                  "start": 966,
+                  "end": 999,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_b6e7a7036f328a430b3a",
+                  "quote": "实际空气常是含有水蒸气的湿空气，因此尚须对湿空气状态方程中的量做进一步的研究。由实验得知，水蒸气的气体常数  $R_{\\text{水}}$  与干空气的气体常数  $R$  之间的关系为",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_096450b1124b",
+                  "chunk_id": "chunk_ddaefd341610",
+                  "start": 1210,
+                  "end": 1303,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_c",
+              "model_id": "deepseek-flash",
+              "check": "counterevidence",
+              "claim": {
+                "check": "counterevidence",
+                "expression": {
+                  "head": "空气",
+                  "surface_relation": "完全等同于",
+                  "tail": "理想气体",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "can",
+                    "polarity": "positive",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "已核验材料中是否存在可能推翻“空气 — 完全等同于 — 理想气体”的证据？未发现反证与找到正面支持分开记录。",
+                "formal_mapping": null,
+                "claim_id": "298704f2238f0fd6a967d3cdc84b5a909d514d4ccae7c39798806c5c751da0c4"
+              },
+              "status": "fail",
+              "reason": "原文“可近似看成”直接反证“完全等同于”。",
+              "issue_type": "counterevidence",
+              "meaning_effect": "not_source_judgment",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_fb32c0b835deace58bfa",
+                "ev_df581a342a45722ca57b"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_fb32c0b835deace58bfa",
+                  "quote": "空气可近似看成理想气体",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_096450b1124b",
+                  "chunk_id": "chunk_ddaefd341610",
+                  "start": 966,
+                  "end": 977,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_df581a342a45722ca57b",
+                  "quote": "空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_096450b1124b",
+                  "chunk_id": "chunk_ddaefd341610",
+                  "start": 966,
+                  "end": 999,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            }
+          ],
+          "route": "supplement_source_context",
+          "status": "open",
+          "positive_role_conflict": false,
+          "majority_is_resolution": false,
+          "required_material": "相关完整句子、条件、公式及前后文"
+        }
+      ],
+      "evidence_observations": [
+        {
+          "voter_id": "judge_a",
+          "positive_support": {
+            "status": "not_recorded",
+            "evidence_ids": [],
+            "core_source_status": "contradicted",
+            "full_source_status": "contradicted",
+            "not_inferred_from_counter_absence": true
+          },
+          "counterevidence_search": {
+            "status": "found",
+            "counter_evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b",
+              "ev_b6e7a7036f328a430b3a"
+            ],
+            "reviewed_evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b",
+              "ev_b6e7a7036f328a430b3a"
+            ],
+            "note": "原文“可近似看成”及湿空气说明构成对“完全等同”的反证。",
+            "scope": "frozen_evidence_bundle_only",
+            "absence_is_support": false
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "positive_support": {
+            "status": "not_recorded",
+            "evidence_ids": [],
+            "core_source_status": "contradicted",
+            "full_source_status": "contradicted",
+            "not_inferred_from_counter_absence": true
+          },
+          "counterevidence_search": {
+            "status": "found",
+            "counter_evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "reviewed_evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "原文“可近似看成”直接反证“完全等同于”。",
+            "scope": "frozen_evidence_bundle_only",
+            "absence_is_support": false
+          }
+        }
+      ],
+      "technical_seats": [
+        {
+          "voter_id": "judge_b",
+          "response_status": "invalid_contract",
+          "error_code": null
+        }
+      ],
+      "majority_is_resolution": false,
+      "counter_absence_is_support": false,
+      "admission_authorized": false
+    },
+    "weight_snapshot": {
+      "version": "axis_weighting_v1",
+      "mode": "dynamic",
+      "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+      "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+      "feature_version": "check_completion_v1",
+      "candidate_hash": "5d77ca0abb70e69b71c2c2f95566948992e5c1895c17908368b17e73eb70d957",
+      "proposal_digest": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+      "evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+      "ontology_context_hash": "11419fe4147ac54cdb842360873d115a98cf13d76dbbcc1ede8976cece6538b2",
+      "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+      "original_votes_hash": "3a78b4783f072ed87e138d5c69ae05fae01c56ac119483594d74be0723b60917",
+      "critical_counter_evidence_ids": [
+        "ev_b6e7a7036f328a430b3a",
+        "ev_df581a342a45722ca57b",
+        "ev_fb32c0b835deace58bfa"
+      ],
+      "axes": {
+        "source": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "contradicted",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "material counterevidence conflicts with counterevidence=pass",
+                "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+              ],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.0
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "contradicted",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "contradicted": 0.8888888888888888,
+            "supported": 0.0
+          },
+          "available_mass": 0.8888888888888888,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "contradicted",
+          "has_conflict": false
+        },
+        "expression": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.1111111111111111
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "lossless_normalization": 0.0,
+            "semantic_revision": 1.0,
+            "standard": 0.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "semantic_revision",
+          "has_conflict": false
+        },
+        "mapping": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "mapping"
+                ],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.1111111111111111
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "mapping"
+                ],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "conflict": 1.0,
+            "valid": 0.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "conflict",
+          "has_conflict": false
+        },
+        "scope": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.1111111111111111
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "exclude": 0.0,
+            "include": 1.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "include",
+          "has_conflict": false
+        }
+      },
+      "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "resolved_counter_evidence_ids": [],
+      "snapshot_id": "weights_3f35d83970199d497a049790289d0c79072ff696952e96f0211a65f44d5332a9"
+    },
+    "weighted_review_complete": true
+  },
+  "calibrated_probability": null,
+  "calibration_status": "unavailable",
+  "calibrator_version": "untrained",
+  "policy_version": "disabled_cold_start_v3",
+  "decision": "manual_review",
+  "reason_codes": [
+    "CRITICAL_ISSUES_UNRESOLVED",
+    "EVIDENCE_GAP_UNRESOLVED",
+    "MAPPING_REVIEW",
+    "SEMANTIC_REVISION_REQUIRED"
+  ],
+  "review_versions": {
+    "prompt_version": "triple_validator_v8_citations_v5",
+    "prompt_hash": "5e5f539b54e120b2e852170c33149e83572d03de953026005d3edef1ba80277d",
+    "response_contract_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+    "committee_policy_hash": "bf53f4df8894bd9c312594ae0404e72a43ffa5b278bbd8fe746d6ec82750b0bc",
+    "memory_scope_hash": "1c173d17b34a47d2d96e982e0890691db39624d39f03210ea85190390c1536de",
+    "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+    "response_contract_version": "validator_response_v8",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "committee_version": "committee_qwen_gemma_deepseek_v1",
+    "configured_strategy": "deterministic",
+    "executed_strategy": "deterministic",
+    "summary_policy_version": "review_field_rules_v1",
+    "summary_policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+    "correction_policy_version": "targeted_review_repairs_v2",
+    "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e"
+  },
+  "features": {
+    "quote_located": 1.0,
+    "evidence_missing": 0.0,
+    "unique_span_count": 8.0,
+    "source_group_count": 1.0,
+    "relation_known": 1.0,
+    "domain_pass": 1.0,
+    "range_pass": 1.0,
+    "type_unknown": 0.0,
+    "mapping_ambiguous": 0.0,
+    "supporting_vote_count": 0.0,
+    "contradicting_vote_count": 0.0,
+    "qualifier_issue": 1.0,
+    "direction_issue": 0.0,
+    "valid_vote_fraction": 0.0,
+    "invalid_vote_fraction": 0.0,
+    "uncertain_fraction": 0.6666666666666666,
+    "error_fraction": 0.3333333333333333,
+    "distinct_family_count": 2.0,
+    "disagreement": 0.0,
+    "unresolved_counterevidence": 0.0,
+    "retrieval_depth": 2.0,
+    "round_count": 1.0,
+    "historical_weighted_support": 0.0,
+    "reliability_available": 0.0
+  },
+  "feature_schema_version": "review_features_v3",
+  "explanation": {
+    "summary": "候选仍需人工核验；系统未把不确定性当作事实结论。",
+    "reason_codes": [
+      "CRITICAL_ISSUES_UNRESOLVED",
+      "EVIDENCE_GAP_UNRESOLVED"
+    ],
+    "checks": [
+      {
+        "check": "ontology",
+        "status": "pass",
+        "constraint_ids": [
+          "R_406bc04a6711460b8da5"
+        ]
+      },
+      {
+        "check": "quote_location",
+        "status": "pass",
+        "evidence_ids": [
+          "ev_fb32c0b835deace58bfa",
+          "ev_fd76cb51ab3671178106",
+          "ev_df581a342a45722ca57b"
+        ]
+      }
+    ],
+    "supporting_evidence_ids": [],
+    "counter_evidence_ids": [
+      "ev_fb32c0b835deace58bfa",
+      "ev_df581a342a45722ca57b",
+      "ev_b6e7a7036f328a430b3a"
+    ],
+    "anchor_failures": [],
+    "source_support": [
+      "contradicted",
+      "contradicted"
+    ],
+    "response_errors": [
+      {
+        "voter_id": "judge_b",
+        "status": "invalid_contract",
+        "error": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+      }
+    ],
+    "open_questions": []
+  },
+  "budget": {
+    "llm_calls": 3,
+    "tool_calls": 0
+  },
+  "configured_strategy": "deterministic",
+  "executed_strategy": "deterministic",
+  "stop_reason": "round_limit",
+  "workflow_state": "semantic_revision_required",
+  "pending_extension_id": null,
+  "source_support_result": "contradicted",
+  "schema_status": "pass",
+  "schema_diagnostics": [
+    "candidate_mapping_error"
+  ],
+  "source_support_consensus": {
+    "result": "contradicted",
+    "derivation": "axis_weighting_v1",
+    "support_voter_ids": []
+  },
+  "admission_consensus": {
+    "result": "unresolved"
+  },
+  "selected_round_id": 1,
+  "selected_proposal_digest": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+  "selected_evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+  "committee_version": "committee_qwen_gemma_deepseek_v1",
+  "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+  "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+  "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+  "issue_history": [
+    {
+      "issue_id": "issue_32923fd205a88c4d468c212c",
+      "code": "RELATION_MISMATCH",
+      "description": "“完全等同于”改变了原文“近似看成”的语义强度。",
+      "status": "open",
+      "critical": true,
+      "opened_in_proposal": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+      "opened_evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+      "opened_revision": 1,
+      "evidence_ids": [
+        "ev_b6e7a7036f328a430b3a",
+        "ev_df581a342a45722ca57b",
+        "ev_fb32c0b835deace58bfa"
+      ],
+      "resolution_evidence_ids": [],
+      "resolved_in_proposal": null,
+      "resolution_rule": null,
+      "requires_revision": true
+    },
+    {
+      "issue_id": "issue_3e44c3bcb8d0c2f44825ecd4",
+      "code": "QUALIFIER_MISMATCH",
+      "description": "原文“可”表示近似/可能，候选模态can与表面关系完全等同冲突。",
+      "status": "open",
+      "critical": true,
+      "opened_in_proposal": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+      "opened_evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+      "opened_revision": 1,
+      "evidence_ids": [
+        "ev_b6e7a7036f328a430b3a",
+        "ev_df581a342a45722ca57b",
+        "ev_fb32c0b835deace58bfa"
+      ],
+      "resolution_evidence_ids": [],
+      "resolved_in_proposal": null,
+      "resolution_rule": null,
+      "requires_revision": true
+    }
+  ],
+  "evidence_exclusions": {},
+  "admission_policy": {
+    "mode": "shadow",
+    "policy_version": "disabled_cold_start_v3",
+    "policy_ready": false,
+    "calibrator_ready": false,
+    "accept_threshold": null,
+    "auto_accept_enabled": false,
+    "scope_policy": {
+      "version": "knowledge_scope_v2",
+      "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+      "decision_authority": "program",
+      "excluded_scopes": [
+        "local_definition",
+        "derivation",
+        "example"
+      ],
+      "unresolved_action": "scope_review",
+      "categories": {
+        "general": {
+          "label": "一般知识",
+          "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+        },
+        "conditional": {
+          "label": "条件性知识",
+          "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+        },
+        "local_definition": {
+          "label": "局部定义或符号约定",
+          "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+        },
+        "derivation": {
+          "label": "推导步骤",
+          "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+        },
+        "example": {
+          "label": "教学示例",
+          "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+        },
+        "unresolved": {
+          "label": "类别待确认",
+          "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+        }
+      }
+    }
+  },
+  "scope_policy_decision": {
+    "scope_policy_version": "knowledge_scope_v2",
+    "scope_policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+    "source_support": "unresolved",
+    "knowledge_scope": "general",
+    "classification": {
+      "status": "include",
+      "knowledge_scope": "general",
+      "classification_confirmed": true,
+      "policy_version": "knowledge_scope_v2",
+      "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+      "authority": "program",
+      "category_label": "一般知识",
+      "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。",
+      "reason": "类别已确认，属于任务收录范围"
+    },
+    "workflow_state": "evidence_review",
+    "preserve_source_record": true,
+    "excluded_from_main_graph": false
+  },
+  "review_axes": {
+    "version": "review_axes_v1",
+    "source": {
+      "status": "contradicted",
+      "observed_result": "contradicted",
+      "executed": true,
+      "seat_coverage_complete": false,
+      "judgment_complete": true,
+      "valid_seats": 2,
+      "required_seats": 2,
+      "missing_voter_ids": [
+        "judge_b"
+      ],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "material counterevidence conflicts with counterevidence=pass",
+            "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+          ]
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "contradicted"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": true,
+      "available_mass": 0.8888888888888888
+    },
+    "expression": {
+      "status": "semantic_revision",
+      "observed_result": "semantic_revision",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": true,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "“完全等同于”将近似关系改为严格等同，语义强度改变。",
+                "evidence_ids": [
+                  "ev_fb32c0b835deace58bfa",
+                  "ev_df581a342a45722ca57b"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将surface_relation改回“近似看成”或“可近似看成”。"
+              },
+              {
+                "check": "qualifiers",
+                "kind": "semantic_error",
+                "note": "模态can与表面完全等同冲突，原文“可”仅表示近似可能。",
+                "evidence_ids": [
+                  "ev_fb32c0b835deace58bfa",
+                  "ev_df581a342a45722ca57b"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "changed",
+                "suggested_change": "保留modality=can并修正surface_relation为近似表述。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "将“近似看成”错误地表达为“完全等同于”，改变了物理含义的强度。",
+                "evidence_ids": [
+                  "ev_fb32c0b835deace58bfa"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将 surface_relation 修改为“近似看成”"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "“完全等同于”丢失原文近似性，语义被强化。",
+                "evidence_ids": [
+                  "ev_fb32c0b835deace58bfa",
+                  "ev_df581a342a45722ca57b"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将surface_relation改为“近似看成”。"
+              },
+              {
+                "check": "qualifiers",
+                "kind": "semantic_error",
+                "note": "原文“可近似看成”含近似限定，候选未保留。",
+                "evidence_ids": [
+                  "ev_fb32c0b835deace58bfa",
+                  "ev_df581a342a45722ca57b"
+                ],
+                "normalization": null,
+                "rule_id": "MOD-001",
+                "meaning_effect": "changed",
+                "suggested_change": "保留近似限定并复核modality为can。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": true,
+      "available_mass": 1.0
+    },
+    "mapping": {
+      "status": "conflict",
+      "observed_result": "conflict",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": true,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "conflict"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "conflict"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "conflict"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": true,
+      "available_mass": 1.0
+    },
+    "scope": {
+      "status": "include",
+      "observed_result": "include",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": true,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": true,
+      "available_mass": 1.0
+    }
+  },
+  "pending_actions": [
+    "semantic_revision_required",
+    "mapping_review"
+  ],
+  "review_outcome": {
+    "version": "review_outcome_v3",
+    "dimension_results": {
+      "source": {
+        "status": "contradicted",
+        "observed_result": "contradicted",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": true,
+        "valid_seats": 2,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_b"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "contradicted"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "material counterevidence conflicts with counterevidence=pass",
+              "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "contradicted"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 0.8888888888888888
+      },
+      "expression": {
+        "status": "semantic_revision",
+        "observed_result": "semantic_revision",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "“完全等同于”将近似关系改为严格等同，语义强度改变。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将surface_relation改回“近似看成”或“可近似看成”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "kind": "semantic_error",
+                  "note": "模态can与表面完全等同冲突，原文“可”仅表示近似可能。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MOD-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "保留modality=can并修正surface_relation为近似表述。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "将“近似看成”错误地表达为“完全等同于”，改变了物理含义的强度。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将 surface_relation 修改为“近似看成”"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "“完全等同于”丢失原文近似性，语义被强化。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将surface_relation改为“近似看成”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "kind": "semantic_error",
+                  "note": "原文“可近似看成”含近似限定，候选未保留。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MOD-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "保留近似限定并复核modality为can。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      },
+      "mapping": {
+        "status": "conflict",
+        "observed_result": "conflict",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      },
+      "scope": {
+        "status": "include",
+        "observed_result": "include",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      }
+    },
+    "vote_validation": {
+      "judge_a": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_a",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": true,
+        "raw_response_hash": "1fc77039c2a9fc98967a6e944b34794c592877b55af1114cc0f220852427fc7a",
+        "normalized_response_hash": "64184e6ab1fa2ccd8585de5ad415c37757a9dd6aacc874b45f7afd7d44b44d26",
+        "original_attempt_id": "attempt_33a93b7511c84cef9bf0c874e057ae95",
+        "attempt_id": "attempt_33a93b7511c84cef9bf0c874e057ae95",
+        "request_key": "ed98530355598efc73508bd5757c9f64b33cd8d7032f826c2bc2eb73fe564ef9",
+        "cache_source": null,
+        "errors": [],
+        "axis_observations": {
+          "source": {
+            "usable": true,
+            "opinion": {
+              "status": "contradicted"
+            },
+            "missing_reasons": []
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "“完全等同于”将近似关系改为严格等同，语义强度改变。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将surface_relation改回“近似看成”或“可近似看成”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "kind": "semantic_error",
+                  "note": "模态can与表面完全等同冲突，原文“可”仅表示近似可能。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MOD-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "保留modality=can并修正surface_relation为近似表述。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      },
+      "judge_b": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_b",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": false,
+        "raw_response_hash": "bbb4b29b2d672a77264a51cf94424fee65f13c44c8b7d9a6c0d495d5fe21c9e3",
+        "normalized_response_hash": "b8c9f9e70a4b4d3967638bd6b733f0268f7738617aad8153d0259bfbacf9adf3",
+        "original_attempt_id": "attempt_317881217ed2457395106a10cb2180b6",
+        "attempt_id": "attempt_317881217ed2457395106a10cb2180b6",
+        "request_key": "3a715ec971c464ab46c1734e883338282759e685c87b859bf01642356715dbf8",
+        "cache_source": null,
+        "errors": [
+          {
+            "category": "semantic_consistency",
+            "stage": "semantic_consistency",
+            "path": null,
+            "message": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles",
+            "axes": [
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          },
+          {
+            "category": "semantic_consistency",
+            "stage": "semantic_consistency",
+            "path": null,
+            "message": "material counterevidence conflicts with counterevidence=pass",
+            "axes": [
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          }
+        ],
+        "axis_observations": {
+          "source": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "material counterevidence conflicts with counterevidence=pass",
+              "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+            ]
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "将“近似看成”错误地表达为“完全等同于”，改变了物理含义的强度。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将 surface_relation 修改为“近似看成”"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      },
+      "judge_c": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_c",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": true,
+        "raw_response_hash": "a4c2f19d1225fd18c75b75b92d853ff43c57287f409e52ca1e449443e927d73e",
+        "normalized_response_hash": "af30da6b6818b397d112896b46f5e4ad3f0ec2df375d71dfce351dbd2fd9427b",
+        "original_attempt_id": "attempt_007df2f161e54c10ad29ce39d27c6277",
+        "attempt_id": "attempt_007df2f161e54c10ad29ce39d27c6277",
+        "request_key": "62e17cabc6d22937d44aa43ae7ca4b011e37dd55bbf9b7cf5a5753b44df7ea10",
+        "cache_source": null,
+        "errors": [],
+        "axis_observations": {
+          "source": {
+            "usable": true,
+            "opinion": {
+              "status": "contradicted"
+            },
+            "missing_reasons": []
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "“完全等同于”丢失原文近似性，语义被强化。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将surface_relation改为“近似看成”。"
+                },
+                {
+                  "check": "qualifiers",
+                  "kind": "semantic_error",
+                  "note": "原文“可近似看成”含近似限定，候选未保留。",
+                  "evidence_ids": [
+                    "ev_fb32c0b835deace58bfa",
+                    "ev_df581a342a45722ca57b"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MOD-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "保留近似限定并复核modality为can。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      }
+    },
+    "duplicate_records_ignored": 0,
+    "whole_vote_eligible_voter_ids": [
+      "judge_a",
+      "judge_c"
+    ],
+    "weight_snapshot": {
+      "version": "axis_weighting_v1",
+      "mode": "dynamic",
+      "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+      "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+      "feature_version": "check_completion_v1",
+      "candidate_hash": "5d77ca0abb70e69b71c2c2f95566948992e5c1895c17908368b17e73eb70d957",
+      "proposal_digest": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+      "evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+      "ontology_context_hash": "11419fe4147ac54cdb842360873d115a98cf13d76dbbcc1ede8976cece6538b2",
+      "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+      "original_votes_hash": "3a78b4783f072ed87e138d5c69ae05fae01c56ac119483594d74be0723b60917",
+      "critical_counter_evidence_ids": [
+        "ev_b6e7a7036f328a430b3a",
+        "ev_df581a342a45722ca57b",
+        "ev_fb32c0b835deace58bfa"
+      ],
+      "axes": {
+        "source": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "contradicted",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "material counterevidence conflicts with counterevidence=pass",
+                "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+              ],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.0
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "contradicted",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "contradicted": 0.8888888888888888,
+            "supported": 0.0
+          },
+          "available_mass": 0.8888888888888888,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "contradicted",
+          "has_conflict": false
+        },
+        "expression": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.1111111111111111
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "lossless_normalization": 0.0,
+            "semantic_revision": 1.0,
+            "standard": 0.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "semantic_revision",
+          "has_conflict": false
+        },
+        "mapping": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "mapping"
+                ],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.1111111111111111
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "mapping"
+                ],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "conflict": 1.0,
+            "valid": 0.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "conflict",
+          "has_conflict": false
+        },
+        "scope": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.1111111111111111,
+              "effective_weight": 0.1111111111111111
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.4444444444444444,
+              "effective_weight": 0.4444444444444444
+            }
+          },
+          "scores": {
+            "exclude": 0.0,
+            "include": 1.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "include",
+          "has_conflict": false
+        }
+      },
+      "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "resolved_counter_evidence_ids": [],
+      "snapshot_id": "weights_3f35d83970199d497a049790289d0c79072ff696952e96f0211a65f44d5332a9"
+    },
+    "policy_hash": "c5a971d85ad9093125acdce6ed78db49635e25e3f58850a4a7fe1ae149adc475",
+    "execution_status": "completed",
+    "execution_reason": "round_limit",
+    "mapping_process": {
+      "version": "mapping_execution_trace_v2",
+      "proposal_digest": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+      "preflight_hash": "04c046968514ac01f0d9dc4272365f3a9b930c4f4343f7d9ecf26bbb364841cc",
+      "stages": [
+        {
+          "stage": "mapping_entry",
+          "status": "completed"
+        },
+        {
+          "stage": "local_retrieval",
+          "status": "completed",
+          "recalled_ids": [
+            "R_406bc04a6711460b8da5"
+          ],
+          "source": {
+            "metadata_complete": true,
+            "property_count": 8,
+            "stage": "review_subset"
+          }
+        },
+        {
+          "stage": "global_retrieval",
+          "status": "not_executed",
+          "source": null,
+          "failure": null,
+          "recall_is_semantic_proof": false
+        },
+        {
+          "stage": "relation_definitions",
+          "status": "completed",
+          "complete_ids": [
+            "R_406bc04a6711460b8da5"
+          ],
+          "candidates": [
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": true,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_2800f3a353c9063a4ccb"
+              ],
+              "id": "R_406bc04a6711460b8da5",
+              "label": "近似看成",
+              "missing_information": [],
+              "property_kind": "object",
+              "range": [
+                "C_984f2a31e91e8e104662"
+              ],
+              "retrieved": true
+            }
+          ],
+          "release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "ontology_context_hash": "11419fe4147ac54cdb842360873d115a98cf13d76dbbcc1ede8976cece6538b2"
+        },
+        {
+          "stage": "entity_identity",
+          "status": "completed",
+          "entities": {
+            "head": {
+              "aliases": [],
+              "aliases_are_unconfirmed": true,
+              "assigned_type": "C_2800f3a353c9063a4ccb",
+              "candidate_id": "local_4a67b42052260b3a357e895e940ad9b95fb218802c969b1c9e6ed696dc6c0803",
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "missing_information": [],
+              "referent_scope": null,
+              "source_evidence_ids": [
+                "ev_fb32c0b835deace58bfa",
+                "ev_fd76cb51ab3671178106",
+                "ev_df581a342a45722ca57b",
+                "ev_0391f3d828c7953906f9"
+              ],
+              "surface": "空气",
+              "type_candidate_ids": [
+                "C_2800f3a353c9063a4ccb"
+              ]
+            },
+            "tail": {
+              "aliases": [],
+              "aliases_are_unconfirmed": true,
+              "assigned_type": "C_984f2a31e91e8e104662",
+              "candidate_id": "local_6b7b4b552337fefad3e15bef45d883410c453534625d61c11097aaf23e1f0d2c",
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "missing_information": [],
+              "referent_scope": null,
+              "source_evidence_ids": [
+                "ev_fb32c0b835deace58bfa",
+                "ev_df581a342a45722ca57b"
+              ],
+              "surface": "理想气体",
+              "type_candidate_ids": [
+                "C_984f2a31e91e8e104662"
+              ]
+            }
+          },
+          "candidate_ids_are_formal_entity_ids": false
+        },
+        {
+          "stage": "mapping_attempt",
+          "status": "completed",
+          "opinions": [
+            {
+              "voter_id": "judge_a",
+              "response_status": "ok",
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_fb32c0b835deace58bfa",
+                "ev_df581a342a45722ca57b"
+              ],
+              "issue_code": "RELATION_MISMATCH",
+              "note": "R_406bc04a6711460b8da5定义为“近似看成”，与表面“完全等同于”不匹配。",
+              "relation_id": "R_406bc04a6711460b8da5",
+              "status": "candidate_mapping_error"
+            },
+            {
+              "voter_id": "judge_b",
+              "response_status": "invalid_contract",
+              "status": "candidate_mapping_error",
+              "evidence_ids": [
+                "ev_fb32c0b835deace58bfa"
+              ],
+              "note": "候选关系 surface_relation 为“完全等同于”，而映射的 R_406bc04a6711460b8da5 定义为“近似看成”，两者不匹配。",
+              "issue_code": "RELATION_MISMATCH",
+              "relation_id": "R_406bc04a6711460b8da5",
+              "competing_relation_ids": []
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "ok",
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_fb32c0b835deace58bfa",
+                "ev_df581a342a45722ca57b"
+              ],
+              "issue_code": "RELATION_MISMATCH",
+              "note": "R_406bc04a6711460b8da5定义为“近似看成”，与候选“完全等同于”不等价。",
+              "relation_id": "R_406bc04a6711460b8da5",
+              "status": "candidate_mapping_error"
+            }
+          ],
+          "formal_assignment": {
+            "assigned_head_type": "C_2800f3a353c9063a4ccb",
+            "assigned_relation_id": "R_406bc04a6711460b8da5",
+            "assigned_tail_type": "C_984f2a31e91e8e104662",
+            "candidate_relation_ids": [
+              "R_406bc04a6711460b8da5"
+            ],
+            "semantic_approval": false
+          },
+          "original_expression": {
+            "candidate_id": "cand_3fbc6d86b1a58d3b8c38",
+            "head": "空气",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "not_stated",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "can",
+              "polarity": "positive",
+              "quantifier": null,
+              "time_scope": null
+            },
+            "revision": 1,
+            "surface_relation": "完全等同于",
+            "tail": "理想气体"
+          },
+          "semantic_equivalence_confirmed": false
+        },
+        {
+          "stage": "constraint_check",
+          "status": "completed",
+          "result": "pass",
+          "reason_codes": []
+        },
+        {
+          "stage": "state_summary",
+          "status": "observed",
+          "candidate_assignment": {
+            "assigned_head_type": "C_2800f3a353c9063a4ccb",
+            "assigned_relation_id": "R_406bc04a6711460b8da5",
+            "assigned_tail_type": "C_984f2a31e91e8e104662",
+            "candidate_relation_ids": [
+              "R_406bc04a6711460b8da5"
+            ],
+            "semantic_approval": false
+          },
+          "guard_status": "pass",
+          "publication_is_mapping_validation": false
+        }
+      ],
+      "blockers": [],
+      "milestones": {
+        "proposal_formed": true,
+        "candidate_id_assigned": true,
+        "structural_constraints_passed": true,
+        "full_guard_passed": true,
+        "human_confirmed": null,
+        "formally_registered": null
+      },
+      "blocking_information": [],
+      "global_gap_confirmed": false,
+      "mapping_accuracy": "requires_current_packet_human_annotation"
+    },
+    "review_completed": true,
+    "recommendation": "revise",
+    "action_taken": "none",
+    "blocking_reasons": [
+      "critical_issue_unresolved",
+      "expression:semantic_revision",
+      "formal_mapping_not_bound_to_candidate",
+      "gap:critical_issues_unresolved",
+      "gap:need_more_evidence",
+      "mapping:conflict",
+      "source:contradicted",
+      "unresolved_claim_dispute"
+    ],
+    "writes_authorized": false,
+    "derivation": "current_frozen_input_only",
+    "research_operation": "revise"
+  },
+  "weight_snapshot": {
+    "version": "axis_weighting_v1",
+    "mode": "dynamic",
+    "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+    "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+    "feature_version": "check_completion_v1",
+    "candidate_hash": "5d77ca0abb70e69b71c2c2f95566948992e5c1895c17908368b17e73eb70d957",
+    "proposal_digest": "0c6feee49800ec7618b143cc6e614072483f85f377b0e3e679195b2fbc883830",
+    "evidence_hash": "914eac905f7efae2fd78fdbc8a87efab0322fac9b19b96f5f3487172704eba7c",
+    "ontology_context_hash": "11419fe4147ac54cdb842360873d115a98cf13d76dbbcc1ede8976cece6538b2",
+    "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+    "original_votes_hash": "3a78b4783f072ed87e138d5c69ae05fae01c56ac119483594d74be0723b60917",
+    "critical_counter_evidence_ids": [
+      "ev_b6e7a7036f328a430b3a",
+      "ev_df581a342a45722ca57b",
+      "ev_fb32c0b835deace58bfa"
+    ],
+    "axes": {
+      "source": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "contradicted",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "material counterevidence conflicts with counterevidence=pass",
+              "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+            ],
+            "weight": 0.1111111111111111,
+            "effective_weight": 0.0
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "contradicted",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          }
+        },
+        "scores": {
+          "contradicted": 0.8888888888888888,
+          "supported": 0.0
+        },
+        "available_mass": 0.8888888888888888,
+        "valid_opinion_count": 2,
+        "threshold": 0.7,
+        "status": "contradicted",
+        "has_conflict": false
+      },
+      "expression": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "semantic_revision",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "semantic_revision",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.1111111111111111,
+            "effective_weight": 0.1111111111111111
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "semantic_revision",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          }
+        },
+        "scores": {
+          "lossless_normalization": 0.0,
+          "semantic_revision": 1.0,
+          "standard": 0.0
+        },
+        "available_mass": 1.0,
+        "valid_opinion_count": 3,
+        "threshold": 0.7,
+        "status": "semantic_revision",
+        "has_conflict": false
+      },
+      "mapping": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "mapping"
+              ],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "conflict",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "conflict",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.1111111111111111,
+            "effective_weight": 0.1111111111111111
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "mapping"
+              ],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "conflict",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          }
+        },
+        "scores": {
+          "conflict": 1.0,
+          "valid": 0.0
+        },
+        "available_mass": 1.0,
+        "valid_opinion_count": 3,
+        "threshold": 0.7,
+        "status": "conflict",
+        "has_conflict": false
+      },
+      "scope": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "knowledge_scope"
+              ],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.1111111111111111,
+            "effective_weight": 0.1111111111111111
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "knowledge_scope"
+              ],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.4444444444444444,
+            "effective_weight": 0.4444444444444444
+          }
+        },
+        "scores": {
+          "exclude": 0.0,
+          "include": 1.0
+        },
+        "available_mass": 1.0,
+        "valid_opinion_count": 3,
+        "threshold": 0.7,
+        "status": "include",
+        "has_conflict": false
+      }
+    },
+    "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "resolved_counter_evidence_ids": [],
+    "snapshot_id": "weights_3f35d83970199d497a049790289d0c79072ff696952e96f0211a65f44d5332a9"
+  },
+  "research_operation": "revise",
+  "research_operation_basis": [
+    "critical_issue_unresolved",
+    "expression:semantic_revision",
+    "formal_mapping_not_bound_to_candidate",
+    "gap:critical_issues_unresolved",
+    "gap:need_more_evidence",
+    "mapping:conflict",
+    "source:contradicted",
+    "unresolved_claim_dispute"
+  ],
+  "committed": true
+}

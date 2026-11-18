@@ -1,0 +1,398 @@
+{
+  "passed": false,
+  "fixtures": [
+    {
+      "fixture": "positive_mapping",
+      "passed": true,
+      "expectation": "Complete real metadata and source-grounded predicate/type mapping are recognized by all three reviewers.",
+      "dimension_statuses": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "unclear"
+      },
+      "mapping_preflight_ready": true,
+      "research_operation": "manual_review",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "issue_code": "",
+            "note": "原文明确说明法线方向与切线方向垂直，支持该三元组。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "issue_code": "",
+            "note": "“垂直于”与原文“与其垂直的方向为法线方向”语义一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "issue_code": "",
+            "note": "关系R_198245964490791fcd11的定义与原文语义及类型约束完全匹配。",
+            "relation_id": "R_198245964490791fcd11",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "issue_code": "",
+            "note": "原文明确指出法线方向与其（切线方向）垂直。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "issue_code": "",
+            "note": "关系“垂直于”与原文语义完全一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "issue_code": "",
+            "note": "与本体关系R_198245964490791fcd11定义完全匹配。",
+            "relation_id": "R_198245964490791fcd11",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "issue_code": "",
+            "note": "原文明确取速度方向为切线方向，与其垂直的方向为法线方向。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "issue_code": "",
+            "note": "“垂直于”与原文“与其垂直”含义一致，非弱关联。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "issue_code": "",
+            "note": "R_198245964490791fcd11定义即法线方向与切线方向垂直，域值类型均匹配。",
+            "relation_id": "R_198245964490791fcd11",
+            "status": "matched"
+          }
+        }
+      ],
+      "weight_snapshot_id": "weights_9b904339372fe237ee750aeec6190f33e9a2da0cc00d71a126f78a0cb674b35b",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false
+    },
+    {
+      "fixture": "semantic_mismatch",
+      "passed": false,
+      "expectation": "Structural compatibility alone cannot admit a deliberately wrong predicate; at least two families identify its semantic mismatch.",
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "unresolved",
+        "scope": "unclear"
+      },
+      "mapping_preflight_ready": true,
+      "research_operation": "manual_review",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "invalid_contract",
+          "source": null,
+          "relation_semantics": null,
+          "mapping": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "invalid_contract",
+          "source": null,
+          "relation_semantics": null,
+          "mapping": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "invalid_contract",
+          "source": null,
+          "relation_semantics": null,
+          "mapping": null
+        }
+      ],
+      "weight_snapshot_id": "weights_f66c1d7faba78b961c0523d49a279ee5efda3b6b3c1351499decd7b12e46fa8a",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false
+    },
+    {
+      "fixture": "missing_material",
+      "passed": true,
+      "expectation": "Missing exact relation/tail type stays incomplete; no forced formal assignment.",
+      "dimension_statuses": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "mapping_preflight_ready": false,
+      "research_operation": "manual_review",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "issue_code": "",
+            "note": "原文“它类似于弯曲壁面边界层出现分离现象”直接支持该关系。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "issue_code": "",
+            "note": "“类似于”与原文“类似于”一致，未替换谓词。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+            "note": "尾端类型未定且无“类似于”正式关系，保持未分配。",
+            "relation_id": null,
+            "status": "unassigned"
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_b9da151192c2b2f7471b"
+            ],
+            "issue_code": "",
+            "note": "原文明确指出涡流阻力类似于弯曲壁面边界层出现分离现象。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc"
+            ],
+            "issue_code": "",
+            "note": "关系词“类似于”与原文完全一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc"
+            ],
+            "issue_code": "",
+            "note": "本体中无匹配的“类似于”关系，且mapping_preflight指示judgment_ready为false。",
+            "relation_id": null,
+            "status": "unassigned"
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "issue_code": "",
+            "note": "原文明确以“类似于”连接涡流阻力与弯曲壁面边界层分离现象。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc"
+            ],
+            "issue_code": "",
+            "note": "“类似于”保留原文类比关系，未替换为因果或等同。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc"
+            ],
+            "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+            "note": "尾实体类型未定且无匹配关系定义，正式映射保持未分配。",
+            "relation_id": null,
+            "status": "unassigned"
+          }
+        }
+      ],
+      "weight_snapshot_id": "weights_e2cf3128d8d9dd57bec41211969e08672422190cf359aa5200648b1f20ee85e1",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false
+    }
+  ],
+  "additional_structural_type_conflict_detected": true,
+  "request_details": [
+    {
+      "attempt_id": "attempt_b0859e2e4c944fdfa05080797cc71b15",
+      "state": "completed",
+      "input_tokens": 19656,
+      "output_tokens": 1062,
+      "response_status": "ok",
+      "error_code": null,
+      "client_request_id": "attempt_b0859e2e4c944fdfa05080797cc71b15"
+    },
+    {
+      "attempt_id": "attempt_d3d1b8f8eb09470789860dfb1fba8b4e",
+      "state": "completed",
+      "input_tokens": 21013,
+      "output_tokens": 1438,
+      "response_status": "ok",
+      "error_code": null,
+      "client_request_id": "attempt_d3d1b8f8eb09470789860dfb1fba8b4e"
+    },
+    {
+      "attempt_id": "attempt_af47c3e5444f4a169d0cb7e24b2e58db",
+      "state": "failed",
+      "input_tokens": 22391,
+      "output_tokens": 1222,
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "client_request_id": "attempt_af47c3e5444f4a169d0cb7e24b2e58db"
+    },
+    {
+      "attempt_id": "attempt_77f00df1571a4e098edf5522b2209e29",
+      "state": "failed",
+      "input_tokens": 22436,
+      "output_tokens": 1214,
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "client_request_id": "attempt_77f00df1571a4e098edf5522b2209e29"
+    },
+    {
+      "attempt_id": "attempt_f2697fca0dad465abae3bedd57439fa2",
+      "state": "failed",
+      "input_tokens": 19707,
+      "output_tokens": 1225,
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "client_request_id": "attempt_f2697fca0dad465abae3bedd57439fa2"
+    },
+    {
+      "attempt_id": "attempt_34a8b9578c9f46dcaf08be18b52a28a9",
+      "state": "failed",
+      "input_tokens": 21055,
+      "output_tokens": 1725,
+      "response_status": "invalid_contract",
+      "error_code": null,
+      "client_request_id": "attempt_34a8b9578c9f46dcaf08be18b52a28a9"
+    },
+    {
+      "attempt_id": "attempt_b1ac80e9b2634a62b67ed4d58c54c2b0",
+      "state": "completed",
+      "input_tokens": 18904,
+      "output_tokens": 1267,
+      "response_status": "ok",
+      "error_code": null,
+      "client_request_id": "attempt_b1ac80e9b2634a62b67ed4d58c54c2b0"
+    },
+    {
+      "attempt_id": "attempt_c74d42a7d02d41aeb198f48cebb40d53",
+      "state": "completed",
+      "input_tokens": 20324,
+      "output_tokens": 901,
+      "response_status": "ok",
+      "error_code": null,
+      "client_request_id": "attempt_c74d42a7d02d41aeb198f48cebb40d53"
+    },
+    {
+      "attempt_id": "attempt_5f8a7bd68dec4078ac313d5d5a0df1eb",
+      "state": "completed",
+      "input_tokens": 18159,
+      "output_tokens": 868,
+      "response_status": "ok",
+      "error_code": null,
+      "client_request_id": "attempt_5f8a7bd68dec4078ac313d5d5a0df1eb"
+    },
+    {
+      "attempt_id": "attempt_e4cc9043f73a435b86354d71dc51404a",
+      "state": "completed",
+      "input_tokens": 3632,
+      "output_tokens": 378,
+      "response_status": "ok",
+      "error_code": null,
+      "client_request_id": "attempt_e4cc9043f73a435b86354d71dc51404a"
+    },
+    {
+      "attempt_id": "attempt_30d6097217e8499480751f3b836ece93",
+      "state": "failed",
+      "input_tokens": 4488,
+      "output_tokens": 1536,
+      "response_status": "invalid_contract",
+      "error_code": "SEMANTIC_CLARIFICATION_REQUIRED",
+      "client_request_id": "attempt_30d6097217e8499480751f3b836ece93"
+    }
+  ],
+  "new_field_correction_calls": 2,
+  "mapping_known_tokens": 204601,
+  "cumulative_preparation_requests": 41,
+  "cumulative_known_preparation_tokens": 501269,
+  "new_unsettled_requests": 0,
+  "source_database_unchanged": true,
+  "isolated_import_outbox": 0,
+  "production_written": false,
+  "original_decisions_changed": false,
+  "human_gold": false,
+  "paper_accuracy": null
+}

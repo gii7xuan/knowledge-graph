@@ -95,9 +95,13 @@ def quote_anchors(quotes, scope, index):
     return anchors, issues
 
 
-def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id, ordinal, prompt_hash, require_semantic_context=False):
+def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id, ordinal, prompt_hash, require_semantic_context=False, qualifier_wire_policy=None):
     if not isinstance(raw,dict): raise ValueError('candidate must be an object')
     raw=deepcopy(raw)
+    wire_trace=None
+    if qualifier_wire_policy is not None:
+        from .qualifier_wire import project
+        raw,wire_trace=project(raw,qualifier_wire_policy)
     if require_semantic_context and raw.get('semantic_context') is None:
         raw['semantic_context']={'entity_mentions':{side:{'entity_surface':raw.get(side),'canonical_entity':raw.get(side),
             'referent_scope':None} for side in ('head','tail')},'relation_meaning':{'semantic_equivalence':'unresolved','note':'not supplied'},
@@ -161,6 +165,7 @@ def normalize_candidate(raw, *, index, scope, ontology, release_binding, run_id,
     candidate["fact_identity_version"] = "fact_identity_v3" if triple.get('semantic_context') else "fact_identity_v2"
     candidate["triple"]["relation_semantic_hash"] = relation_semantic_hash(ontology, mapping["relation_id"])
     candidate["fact_key"] = fact_key_for(candidate)
+    if wire_trace is not None:candidate['extraction_format_normalization']=wire_trace
     return candidate
 
 

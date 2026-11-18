@@ -18,6 +18,8 @@ def prepare(vote,proposal,policy):
     from .validators import _parse_content
     if vote.get('response_status')=='ok':return None,None,['valid substantive votes are immutable']
     if vote.get('outcome_unknown'):return None,None,['original request outcome unknown']
+    if vote.get('response_shape_projection') is not None:
+        return None,None,['shape-projected response still has unresolved errors; stacked model corrections are not authorized']
     try:original=_parse_content(vote.get('raw_response'))
     except (ValueError,TypeError):return None,None,['no reliably parsed original judgment; manual review required']
     plan,errors=repairs.make_plan(original,proposal,policy)
@@ -90,7 +92,7 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
     max_calls=1+min(max(0,int(max_retries)),1)
     final=prior or {**vote_binding(voter,proposal),'response_status':'api_error','verdict':None,'error_code':'DEADLINE_EXHAUSTED','actual_calls':0}
     def dispatch(feedback=None):
-        cap=min(float(voter.get('request_timeout_seconds',timeout)),deadline-time.time() if deadline else float('inf'))
+        cap=min(float(timeout),float(voter.get('request_timeout_seconds',timeout)),deadline-time.time() if deadline else float('inf'))
         if feedback:cap=min(cap,float(limits['timeout_seconds']))
         if cap<=0:return {**vote_binding(voter,proposal),'response_status':'api_error','not_sent':True,'actual_calls':0,'retryable':False,'error_code':'REQUEST_DEADLINE_EXHAUSTED'}
         current={**voter,'http_timeout_seconds':min(float(voter.get('http_timeout_seconds',cap)),cap)}
@@ -109,6 +111,9 @@ def judge_targeted(voter,proposal,*,max_retries,timeout,repository,deadline,owne
     elif final.get('response_status') in {'invalid_json','invalid_contract','invalid_reference'}:
         original,plan,blocked=prepare(final,proposal,policy)
         conflicts=repairs._conflicts(original) if isinstance(original,dict) else []
+        if proposal.get('prompt_version')=='triple_validator_v8_consistency_v6' and isinstance(original,dict):
+            from .response_consistency import issues
+            conflicts += [x['detail'] for x in issues(original) if x['code']=='FINDING_STATUS_CONFLICT']
         if blocked and conflicts and policy.get('semantic_clarification'):
             from .semantic_clarification import make_plan
             plan=make_plan(original,proposal,policy,conflicts)

@@ -34,4 +34,8 @@ def normalize_config(source):
     if 'scope_policy' in config:
         from .scope_policy import validate_policy
         config['scope_policy']=validate_policy(config['scope_policy'])
+    from .vote_weighting import configured_policy
+    weighting = configured_policy(config)
+    if weighting:
+        config['vote_weighting'] = weighting
     return config

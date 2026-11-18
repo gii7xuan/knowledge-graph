@@ -1,0 +1,2492 @@
+{
+  "audit_id": "audit_ddfc05e023ad405db5aebd2df28c0a50",
+  "candidate_id": "cand_3b7f111b52109ecbc112",
+  "revision": 1,
+  "review_completion_status": "independent_review_incomplete",
+  "independent_review_completed": false,
+  "final_round_id": 1,
+  "consensus": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "valid_votes": 0,
+    "invalid_votes": 0,
+    "uncertain_votes": 0,
+    "error_votes": 3,
+    "missing_votes": 0,
+    "duplicate_attempts": 0,
+    "duplicate_model_votes": 0,
+    "invalid_attempts": 0,
+    "distinct_family_count": 0,
+    "valid_distinct_family_count": 0,
+    "invalid_distinct_family_count": 0,
+    "diversity_ready": false,
+    "result": "unresolved",
+    "unresolved_counterevidence": false,
+    "unresolved_support_conflict": false,
+    "counter_evidence_ids": [],
+    "supporting_evidence_ids": [],
+    "source_support_consensus": {
+      "result": "unresolved",
+      "derivation": "axis_weighting_v1",
+      "support_voter_ids": []
+    },
+    "admission_consensus": {
+      "result": "unresolved"
+    },
+    "eligible_voter_ids": [],
+    "expression_complete": true,
+    "blocking_fields": [],
+    "raw_source_support_votes": [],
+    "expression_status": "unresolved",
+    "knowledge_scope": "unresolved",
+    "scope_confirmed": false,
+    "mapping_status": "ambiguous",
+    "effective_mapping_status": "ambiguous",
+    "core_source_support_result": "unresolved",
+    "ontology_coverage_review": {
+      "context_hash": "2a6bd79f66a8ee6d956080384ac1e1071b5b609ba9c8ce56c4cc0f5d1282d2b4",
+      "full_catalog_included": false,
+      "global_gap_confirmable": false
+    },
+    "review_axes": {
+      "version": "review_axes_v1",
+      "source": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": false,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 0,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "counterevidence_reviewed_ids overlaps material counterevidence",
+              "dismissed counterexamples and unresolved material counterevidence have different roles"
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "enum",
+              "primary_evidence_ids overlaps material counterevidence"
+            ]
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.0
+      },
+      "expression": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 1,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a",
+          "judge_c"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "将原文的“垂直”错误地表达为“平行”。",
+                  "evidence_ids": [
+                    "ev_a3da0498469c6db1da87",
+                    "ev_72da4f55c9a202fc6063"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将 surface_relation 修改为“垂直于”"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "enum"
+            ]
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.255
+      },
+      "mapping": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 2,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "valid"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.255
+      },
+      "scope": {
+        "status": "unclear",
+        "observed_result": "unclear",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 2,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.51
+      }
+    },
+    "dispute_report": {
+      "version": "claim_disputes_v1",
+      "candidate_hash": "14c49067bc28f7572535934271861eb5b8d7e1b6cee65149ed290020e20aa7ea",
+      "evidence_hash": "a62dcbade73388822d5d462a3e4f51cf106d245ab5dd012291722a51b4bec871",
+      "base_proposal_digest": "7d7541f0e500d4ec51a1f8048a8279c642ab1d67950757bf9d7820026f2c125a",
+      "opinions": [],
+      "disputes": [],
+      "evidence_observations": [],
+      "technical_seats": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "timeout",
+          "error_code": "HARD_REQUEST_TIMEOUT"
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "invalid_contract",
+          "error_code": null
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "invalid_contract",
+          "error_code": null
+        }
+      ],
+      "majority_is_resolution": false,
+      "counter_absence_is_support": false,
+      "admission_authorized": false
+    },
+    "weight_snapshot": {
+      "version": "axis_weighting_v1",
+      "mode": "dynamic",
+      "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+      "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+      "feature_version": "check_completion_v1",
+      "candidate_hash": "14c49067bc28f7572535934271861eb5b8d7e1b6cee65149ed290020e20aa7ea",
+      "proposal_digest": "7d7541f0e500d4ec51a1f8048a8279c642ab1d67950757bf9d7820026f2c125a",
+      "evidence_hash": "a62dcbade73388822d5d462a3e4f51cf106d245ab5dd012291722a51b4bec871",
+      "ontology_context_hash": "2a6bd79f66a8ee6d956080384ac1e1071b5b609ba9c8ce56c4cc0f5d1282d2b4",
+      "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+      "original_votes_hash": "30750b039bd82641c763787c191d6c5758966a578a0ef8c859e34e667a412c9d",
+      "critical_counter_evidence_ids": [],
+      "axes": {
+        "source": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "counterevidence_reviewed_ids overlaps material counterevidence",
+                "dismissed counterexamples and unresolved material counterevidence have different roles"
+              ],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "enum",
+                "primary_evidence_ids overlaps material counterevidence"
+              ],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "contradicted": 0.0,
+            "supported": 0.0
+          },
+          "available_mass": 0.0,
+          "valid_opinion_count": 0,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "expression": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "enum"
+              ],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "lossless_normalization": 0.0,
+            "semantic_revision": 0.255,
+            "standard": 0.0
+          },
+          "available_mass": 0.255,
+          "valid_opinion_count": 1,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "mapping": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "valid",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "conflict": 0.255,
+            "valid": 0.0
+          },
+          "available_mass": 0.255,
+          "valid_opinion_count": 1,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "scope": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            }
+          },
+          "scores": {
+            "exclude": 0.0,
+            "include": 0.51
+          },
+          "available_mass": 0.51,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "unclear",
+          "has_conflict": false
+        }
+      },
+      "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "resolved_counter_evidence_ids": [],
+      "snapshot_id": "weights_0a7d5946490e565a2fc461a55fb0d0e52c73035d72c4c57fc8aae4d45ecca906"
+    },
+    "weighted_review_complete": false
+  },
+  "calibrated_probability": null,
+  "calibration_status": "unavailable",
+  "calibrator_version": "untrained",
+  "policy_version": "disabled_cold_start_v3",
+  "decision": "manual_review",
+  "reason_codes": [
+    "CONSENSUS_UNRESOLVED",
+    "MAPPING_REVIEW",
+    "REVIEW_INCOMPLETE",
+    "SCOPE_REVIEW"
+  ],
+  "review_versions": {
+    "prompt_version": "triple_validator_v8_citations_v4",
+    "prompt_hash": "6d3b69e323698befa291fa1b22fc29ea29c08a823db4501dc98d8eef80f80a23",
+    "response_contract_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+    "committee_policy_hash": "bf53f4df8894bd9c312594ae0404e72a43ffa5b278bbd8fe746d6ec82750b0bc",
+    "memory_scope_hash": "1c173d17b34a47d2d96e982e0890691db39624d39f03210ea85190390c1536de",
+    "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+    "response_contract_version": "validator_response_v8",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "committee_version": "committee_qwen_gemma_deepseek_v1",
+    "configured_strategy": "deterministic",
+    "executed_strategy": "deterministic",
+    "summary_policy_version": "review_field_rules_v1",
+    "summary_policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+    "correction_policy_version": "targeted_review_repairs_v2",
+    "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e"
+  },
+  "features": {
+    "quote_located": 1.0,
+    "evidence_missing": 0.0,
+    "unique_span_count": 8.0,
+    "source_group_count": 1.0,
+    "relation_known": 1.0,
+    "domain_pass": 1.0,
+    "range_pass": 1.0,
+    "type_unknown": 0.0,
+    "mapping_ambiguous": 0.0,
+    "supporting_vote_count": 0.0,
+    "contradicting_vote_count": 0.0,
+    "qualifier_issue": 0.0,
+    "direction_issue": 0.0,
+    "valid_vote_fraction": 0.0,
+    "invalid_vote_fraction": 0.0,
+    "uncertain_fraction": 0.0,
+    "error_fraction": 1.0,
+    "distinct_family_count": 0.0,
+    "disagreement": 0.0,
+    "unresolved_counterevidence": 0.0,
+    "retrieval_depth": 2.0,
+    "round_count": 1.0,
+    "historical_weighted_support": 0.0,
+    "reliability_available": 0.0
+  },
+  "feature_schema_version": "review_features_v3",
+  "explanation": {
+    "summary": "候选仍需人工核验；系统未把不确定性当作事实结论。",
+    "reason_codes": [
+      "CONSENSUS_UNRESOLVED"
+    ],
+    "checks": [
+      {
+        "check": "ontology",
+        "status": "pass",
+        "constraint_ids": [
+          "R_198245964490791fcd11"
+        ]
+      },
+      {
+        "check": "quote_location",
+        "status": "pass",
+        "evidence_ids": [
+          "ev_72da4f55c9a202fc6063",
+          "ev_0cfba6985c52b79d48d6",
+          "ev_a3da0498469c6db1da87"
+        ]
+      }
+    ],
+    "supporting_evidence_ids": [],
+    "counter_evidence_ids": [],
+    "anchor_failures": [],
+    "source_support": [],
+    "response_errors": [
+      {
+        "voter_id": "judge_a",
+        "status": "timeout",
+        "error": "caller wait deadline reached; original request may complete later"
+      },
+      {
+        "voter_id": "judge_b",
+        "status": "invalid_contract",
+        "error": "dismissed counterexamples and unresolved material counterevidence have different roles"
+      },
+      {
+        "voter_id": "judge_c",
+        "status": "invalid_contract",
+        "error": "$.expression_findings[1].check: value outside enum"
+      }
+    ],
+    "open_questions": []
+  },
+  "budget": {
+    "llm_calls": 3,
+    "tool_calls": 0
+  },
+  "configured_strategy": "deterministic",
+  "executed_strategy": "deterministic",
+  "stop_reason": "committee_unresolved",
+  "workflow_state": "review_incomplete",
+  "pending_extension_id": null,
+  "source_support_result": "unresolved",
+  "schema_status": "pass",
+  "schema_diagnostics": [],
+  "source_support_consensus": {
+    "result": "unresolved",
+    "derivation": "axis_weighting_v1",
+    "support_voter_ids": []
+  },
+  "admission_consensus": {
+    "result": "unresolved"
+  },
+  "selected_round_id": 1,
+  "selected_proposal_digest": "7d7541f0e500d4ec51a1f8048a8279c642ab1d67950757bf9d7820026f2c125a",
+  "selected_evidence_hash": "a62dcbade73388822d5d462a3e4f51cf106d245ab5dd012291722a51b4bec871",
+  "committee_version": "committee_qwen_gemma_deepseek_v1",
+  "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+  "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+  "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+  "issue_history": [],
+  "evidence_exclusions": {},
+  "admission_policy": {
+    "mode": "shadow",
+    "policy_version": "disabled_cold_start_v3",
+    "policy_ready": false,
+    "calibrator_ready": false,
+    "accept_threshold": null,
+    "auto_accept_enabled": false,
+    "scope_policy": {
+      "version": "knowledge_scope_v2",
+      "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+      "decision_authority": "program",
+      "excluded_scopes": [
+        "local_definition",
+        "derivation",
+        "example"
+      ],
+      "unresolved_action": "scope_review",
+      "categories": {
+        "general": {
+          "label": "一般知识",
+          "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+        },
+        "conditional": {
+          "label": "条件性知识",
+          "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+        },
+        "local_definition": {
+          "label": "局部定义或符号约定",
+          "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+        },
+        "derivation": {
+          "label": "推导步骤",
+          "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+        },
+        "example": {
+          "label": "教学示例",
+          "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+        },
+        "unresolved": {
+          "label": "类别待确认",
+          "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+        }
+      }
+    }
+  },
+  "scope_policy_decision": {
+    "scope_policy_version": "knowledge_scope_v2",
+    "scope_policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+    "source_support": "unresolved",
+    "knowledge_scope": "unresolved",
+    "classification": {
+      "status": "unclear",
+      "knowledge_scope": "unresolved",
+      "classification_confirmed": false,
+      "policy_version": "knowledge_scope_v2",
+      "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+      "authority": "program",
+      "category_label": "类别待确认",
+      "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。",
+      "reason": "类别未确认或审核席位不完整，等待范围复核"
+    },
+    "workflow_state": "evidence_review",
+    "preserve_source_record": true,
+    "excluded_from_main_graph": false
+  },
+  "review_axes": {
+    "version": "review_axes_v1",
+    "source": {
+      "status": "unresolved",
+      "observed_result": "unresolved",
+      "executed": false,
+      "seat_coverage_complete": false,
+      "judgment_complete": false,
+      "valid_seats": 0,
+      "required_seats": 2,
+      "missing_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "counterevidence_reviewed_ids overlaps material counterevidence",
+            "dismissed counterexamples and unresolved material counterevidence have different roles"
+          ]
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "enum",
+            "primary_evidence_ids overlaps material counterevidence"
+          ]
+        }
+      ],
+      "weighted_quorum_complete": false,
+      "available_mass": 0.0
+    },
+    "expression": {
+      "status": "unresolved",
+      "observed_result": "unresolved",
+      "executed": true,
+      "seat_coverage_complete": false,
+      "judgment_complete": false,
+      "valid_seats": 1,
+      "required_seats": 2,
+      "missing_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "semantic_revision",
+            "findings": [
+              {
+                "check": "relation_semantics",
+                "kind": "semantic_error",
+                "note": "将原文的“垂直”错误地表达为“平行”。",
+                "evidence_ids": [
+                  "ev_a3da0498469c6db1da87",
+                  "ev_72da4f55c9a202fc6063"
+                ],
+                "normalization": null,
+                "rule_id": "MEANING-001",
+                "meaning_effect": "changed",
+                "suggested_change": "将 surface_relation 修改为“垂直于”"
+              }
+            ]
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "enum"
+          ]
+        }
+      ],
+      "weighted_quorum_complete": false,
+      "available_mass": 0.255
+    },
+    "mapping": {
+      "status": "unresolved",
+      "observed_result": "unresolved",
+      "executed": true,
+      "seat_coverage_complete": false,
+      "judgment_complete": false,
+      "valid_seats": 2,
+      "required_seats": 2,
+      "missing_voter_ids": [
+        "judge_a"
+      ],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "conflict"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "valid"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": false,
+      "available_mass": 0.255
+    },
+    "scope": {
+      "status": "unclear",
+      "observed_result": "unclear",
+      "executed": true,
+      "seat_coverage_complete": false,
+      "judgment_complete": false,
+      "valid_seats": 2,
+      "required_seats": 2,
+      "missing_voter_ids": [
+        "judge_a"
+      ],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": false,
+          "opinion": null,
+          "missing_reasons": [
+            "response identity/completeness/provenance unavailable"
+          ]
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": false,
+      "available_mass": 0.51
+    }
+  },
+  "pending_actions": [
+    "review_incomplete",
+    "mapping_review",
+    "scope_review"
+  ],
+  "review_outcome": {
+    "version": "review_outcome_v3",
+    "dimension_results": {
+      "source": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": false,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 0,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a",
+          "judge_b",
+          "judge_c"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "counterevidence_reviewed_ids overlaps material counterevidence",
+              "dismissed counterexamples and unresolved material counterevidence have different roles"
+            ]
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "enum",
+              "primary_evidence_ids overlaps material counterevidence"
+            ]
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.0
+      },
+      "expression": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 1,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a",
+          "judge_c"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "将原文的“垂直”错误地表达为“平行”。",
+                  "evidence_ids": [
+                    "ev_a3da0498469c6db1da87",
+                    "ev_72da4f55c9a202fc6063"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将 surface_relation 修改为“垂直于”"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "enum"
+            ]
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.255
+      },
+      "mapping": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 2,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "valid"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.255
+      },
+      "scope": {
+        "status": "unclear",
+        "observed_result": "unclear",
+        "executed": true,
+        "seat_coverage_complete": false,
+        "judgment_complete": false,
+        "valid_seats": 2,
+        "required_seats": 2,
+        "missing_voter_ids": [
+          "judge_a"
+        ],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.51
+      }
+    },
+    "vote_validation": {
+      "judge_a": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_a",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": false,
+        "whole_vote_eligible": false,
+        "raw_response_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "normalized_response_hash": null,
+        "original_attempt_id": "attempt_34a8b9578c9f46dcaf08be18b52a28a9",
+        "attempt_id": "attempt_34a8b9578c9f46dcaf08be18b52a28a9",
+        "request_key": "c92ad3bde0ce0b18532f49f430e57d81c4433ec62b9e0329eaef9afdd199708e",
+        "cache_source": null,
+        "errors": [
+          {
+            "category": "transport",
+            "stage": "transport",
+            "path": null,
+            "message": "caller wait deadline reached; original request may complete later",
+            "axes": [
+              "expression",
+              "mapping",
+              "scope",
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          }
+        ],
+        "axis_observations": {
+          "source": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          "expression": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          "mapping": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          },
+          "scope": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ]
+          }
+        }
+      },
+      "judge_b": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_b",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": false,
+        "raw_response_hash": "8b27fa1ab057d87cdfd9e8df1f0e5658887642ec898bd00c92240e81cdbd23a1",
+        "normalized_response_hash": "40ac4489a8fa9bc5809f8e2feb3f5baee09077de29f2e6ccce42b86722f874e9",
+        "original_attempt_id": "attempt_77f00df1571a4e098edf5522b2209e29",
+        "attempt_id": "attempt_77f00df1571a4e098edf5522b2209e29",
+        "request_key": "5ee746cff9667f1857a88ff693536ae5117f0286487cf21186e1edf1c5a34479",
+        "cache_source": null,
+        "errors": [
+          {
+            "category": "semantic_consistency",
+            "stage": "semantic_consistency",
+            "path": null,
+            "message": "dismissed counterexamples and unresolved material counterevidence have different roles",
+            "axes": [
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          },
+          {
+            "category": "semantic_consistency",
+            "stage": "semantic_consistency",
+            "path": null,
+            "message": "counterevidence_reviewed_ids overlaps material counterevidence",
+            "axes": [
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          }
+        ],
+        "axis_observations": {
+          "source": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "counterevidence_reviewed_ids overlaps material counterevidence",
+              "dismissed counterexamples and unresolved material counterevidence have different roles"
+            ]
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "semantic_revision",
+              "findings": [
+                {
+                  "check": "relation_semantics",
+                  "kind": "semantic_error",
+                  "note": "将原文的“垂直”错误地表达为“平行”。",
+                  "evidence_ids": [
+                    "ev_a3da0498469c6db1da87",
+                    "ev_72da4f55c9a202fc6063"
+                  ],
+                  "normalization": null,
+                  "rule_id": "MEANING-001",
+                  "meaning_effect": "changed",
+                  "suggested_change": "将 surface_relation 修改为“垂直于”"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "conflict"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      },
+      "judge_c": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_c",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": false,
+        "raw_response_hash": "35de18ceb9fecf25f56130d4397af8a19485f01392b36331e50c38b96b133e3c",
+        "normalized_response_hash": "6041903052a55a547d23672d6a275b085b8ec28b564b2255e1bd874035fecd2b",
+        "original_attempt_id": "attempt_f2697fca0dad465abae3bedd57439fa2",
+        "attempt_id": "attempt_f2697fca0dad465abae3bedd57439fa2",
+        "request_key": "228a5275277d15a2f0acf1419898442b02701c217dfa37c4c800bc84e8913795",
+        "cache_source": null,
+        "errors": [
+          {
+            "category": "schema",
+            "stage": "schema",
+            "path": "/expression_findings/1/check",
+            "message": "enum",
+            "axes": [
+              "expression",
+              "source"
+            ],
+            "expected": [
+              "entity_reference",
+              "relation_semantics",
+              "relation_direction",
+              "qualifiers"
+            ],
+            "actual_type": "str"
+          },
+          {
+            "category": "semantic_consistency",
+            "stage": "semantic_consistency",
+            "path": null,
+            "message": "primary_evidence_ids overlaps material counterevidence",
+            "axes": [
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          },
+          {
+            "category": "semantic_consistency",
+            "stage": "semantic_consistency",
+            "path": null,
+            "message": "$.expression_findings[1].check: value outside enum",
+            "axes": [
+              "expression",
+              "source"
+            ],
+            "expected": null,
+            "actual_type": null
+          }
+        ],
+        "axis_observations": {
+          "source": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "enum",
+              "primary_evidence_ids overlaps material counterevidence"
+            ]
+          },
+          "expression": {
+            "usable": false,
+            "opinion": null,
+            "missing_reasons": [
+              "enum"
+            ]
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "valid"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      }
+    },
+    "duplicate_records_ignored": 0,
+    "whole_vote_eligible_voter_ids": [],
+    "weight_snapshot": {
+      "version": "axis_weighting_v1",
+      "mode": "dynamic",
+      "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+      "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+      "feature_version": "check_completion_v1",
+      "candidate_hash": "14c49067bc28f7572535934271861eb5b8d7e1b6cee65149ed290020e20aa7ea",
+      "proposal_digest": "7d7541f0e500d4ec51a1f8048a8279c642ab1d67950757bf9d7820026f2c125a",
+      "evidence_hash": "a62dcbade73388822d5d462a3e4f51cf106d245ab5dd012291722a51b4bec871",
+      "ontology_context_hash": "2a6bd79f66a8ee6d956080384ac1e1071b5b609ba9c8ce56c4cc0f5d1282d2b4",
+      "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+      "original_votes_hash": "30750b039bd82641c763787c191d6c5758966a578a0ef8c859e34e667a412c9d",
+      "critical_counter_evidence_ids": [],
+      "axes": {
+        "source": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "counterevidence_reviewed_ids overlaps material counterevidence",
+                "dismissed counterexamples and unresolved material counterevidence have different roles"
+              ],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "enum",
+                "primary_evidence_ids overlaps material counterevidence"
+              ],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "contradicted": 0.0,
+            "supported": 0.0
+          },
+          "available_mass": 0.0,
+          "valid_opinion_count": 0,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "expression": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "semantic_revision",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "enum"
+              ],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "lossless_normalization": 0.0,
+            "semantic_revision": 0.255,
+            "standard": 0.0
+          },
+          "available_mass": 0.255,
+          "valid_opinion_count": 1,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "mapping": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "conflict",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "valid",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "conflict": 0.255,
+            "valid": 0.0
+          },
+          "available_mass": 0.255,
+          "valid_opinion_count": 1,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "scope": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": false,
+                "known_fraction": null,
+                "reason": "missing_or_untrusted_opinion"
+              },
+              "opinion": null,
+              "usable": false,
+              "missing_reasons": [
+                "response identity/completeness/provenance unavailable"
+              ],
+              "weight": 0.49,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.255,
+              "effective_weight": 0.255
+            }
+          },
+          "scores": {
+            "exclude": 0.0,
+            "include": 0.51
+          },
+          "available_mass": 0.51,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "unclear",
+          "has_conflict": false
+        }
+      },
+      "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "resolved_counter_evidence_ids": [],
+      "snapshot_id": "weights_0a7d5946490e565a2fc461a55fb0d0e52c73035d72c4c57fc8aae4d45ecca906"
+    },
+    "policy_hash": "c5a971d85ad9093125acdce6ed78db49635e25e3f58850a4a7fe1ae149adc475",
+    "execution_status": "partial_failure",
+    "execution_reason": "committee_unresolved",
+    "mapping_process": {
+      "version": "mapping_execution_trace_v2",
+      "proposal_digest": "7d7541f0e500d4ec51a1f8048a8279c642ab1d67950757bf9d7820026f2c125a",
+      "preflight_hash": "140f92f8692348348b8b462922c7a26e3af23559bf01e215fa877bed66e9ed38",
+      "stages": [
+        {
+          "stage": "mapping_entry",
+          "status": "completed"
+        },
+        {
+          "stage": "local_retrieval",
+          "status": "completed",
+          "recalled_ids": [
+            "R_198245964490791fcd11"
+          ],
+          "source": {
+            "metadata_complete": true,
+            "property_count": 8,
+            "stage": "review_subset"
+          }
+        },
+        {
+          "stage": "global_retrieval",
+          "status": "not_executed",
+          "source": null,
+          "failure": null,
+          "recall_is_semantic_proof": false
+        },
+        {
+          "stage": "relation_definitions",
+          "status": "completed",
+          "complete_ids": [
+            "R_198245964490791fcd11"
+          ],
+          "candidates": [
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": true,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_a8f0c937cda30ac94c46"
+              ],
+              "id": "R_198245964490791fcd11",
+              "label": "垂直于",
+              "missing_information": [],
+              "property_kind": "object",
+              "range": [
+                "C_4f1eebacebf2a7f644b6"
+              ],
+              "retrieved": true
+            }
+          ],
+          "release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "ontology_context_hash": "2a6bd79f66a8ee6d956080384ac1e1071b5b609ba9c8ce56c4cc0f5d1282d2b4"
+        },
+        {
+          "stage": "entity_identity",
+          "status": "completed",
+          "entities": {
+            "head": {
+              "aliases": [],
+              "aliases_are_unconfirmed": true,
+              "assigned_type": "C_a8f0c937cda30ac94c46",
+              "candidate_id": "local_27f21a4c928727ce4f345a9064a22ff030c6ccfd036fba5b6f243fcdba187382",
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "missing_information": [],
+              "referent_scope": null,
+              "source_evidence_ids": [
+                "ev_72da4f55c9a202fc6063",
+                "ev_a3da0498469c6db1da87",
+                "ev_49a0b96c3f815e30ee47"
+              ],
+              "surface": "法线方向",
+              "type_candidate_ids": [
+                "C_a8f0c937cda30ac94c46"
+              ]
+            },
+            "tail": {
+              "aliases": [],
+              "aliases_are_unconfirmed": true,
+              "assigned_type": "C_4f1eebacebf2a7f644b6",
+              "candidate_id": "local_c7cbf3f2ce000e5005fe2eb71fee200a5fdfdfebabbef4723c377a81b2964570",
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "missing_information": [],
+              "referent_scope": null,
+              "source_evidence_ids": [
+                "ev_a3da0498469c6db1da87",
+                "ev_49a0b96c3f815e30ee47"
+              ],
+              "surface": "切线方向",
+              "type_candidate_ids": [
+                "C_4f1eebacebf2a7f644b6"
+              ]
+            }
+          },
+          "candidate_ids_are_formal_entity_ids": false
+        },
+        {
+          "stage": "mapping_attempt",
+          "status": "completed",
+          "opinions": [
+            {
+              "voter_id": "judge_b",
+              "response_status": "invalid_contract",
+              "status": "candidate_mapping_error",
+              "evidence_ids": [
+                "ev_a3da0498469c6db1da87"
+              ],
+              "note": "表面关系“平行于”与映射关系 R_198245964490791fcd11（垂直于）语义矛盾。",
+              "relation_id": "R_198245964490791fcd11",
+              "competing_relation_ids": []
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "invalid_contract",
+              "status": "matched",
+              "evidence_ids": [
+                "ev_72da4f55c9a202fc6063",
+                "ev_a3da0498469c6db1da87"
+              ],
+              "note": "R_198245964490791fcd11定义即法线方向垂直于切线方向，类型约束满足。",
+              "issue_code": null,
+              "relation_id": "R_198245964490791fcd11",
+              "competing_relation_ids": []
+            }
+          ],
+          "formal_assignment": {
+            "assigned_head_type": "C_a8f0c937cda30ac94c46",
+            "assigned_relation_id": "R_198245964490791fcd11",
+            "assigned_tail_type": "C_4f1eebacebf2a7f644b6",
+            "candidate_relation_ids": [
+              "R_198245964490791fcd11"
+            ],
+            "semantic_approval": false
+          },
+          "original_expression": {
+            "candidate_id": "cand_3b7f111b52109ecbc112",
+            "head": "法线方向",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "extracted",
+              "quantifier": "not_stated",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "positive",
+              "quantifier": null,
+              "time_scope": null
+            },
+            "revision": 1,
+            "surface_relation": "平行于",
+            "tail": "切线方向"
+          },
+          "semantic_equivalence_confirmed": false
+        },
+        {
+          "stage": "constraint_check",
+          "status": "completed",
+          "result": "pass",
+          "reason_codes": []
+        },
+        {
+          "stage": "state_summary",
+          "status": "observed",
+          "candidate_assignment": {
+            "assigned_head_type": "C_a8f0c937cda30ac94c46",
+            "assigned_relation_id": "R_198245964490791fcd11",
+            "assigned_tail_type": "C_4f1eebacebf2a7f644b6",
+            "candidate_relation_ids": [
+              "R_198245964490791fcd11"
+            ],
+            "semantic_approval": false
+          },
+          "guard_status": "pass",
+          "publication_is_mapping_validation": false
+        }
+      ],
+      "blockers": [],
+      "milestones": {
+        "proposal_formed": true,
+        "candidate_id_assigned": true,
+        "structural_constraints_passed": true,
+        "full_guard_passed": true,
+        "human_confirmed": null,
+        "formally_registered": null
+      },
+      "blocking_information": [],
+      "global_gap_confirmed": false,
+      "mapping_accuracy": "requires_current_packet_human_annotation"
+    },
+    "review_completed": false,
+    "recommendation": "manual_review",
+    "action_taken": "none",
+    "blocking_reasons": [
+      "expression:unresolved",
+      "formal_mapping_not_bound_to_candidate",
+      "mapping:unresolved",
+      "required_committee_incomplete",
+      "scope:unclear",
+      "source:unresolved"
+    ],
+    "writes_authorized": false,
+    "derivation": "current_frozen_input_only",
+    "research_operation": "manual_review"
+  },
+  "weight_snapshot": {
+    "version": "axis_weighting_v1",
+    "mode": "dynamic",
+    "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+    "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+    "feature_version": "check_completion_v1",
+    "candidate_hash": "14c49067bc28f7572535934271861eb5b8d7e1b6cee65149ed290020e20aa7ea",
+    "proposal_digest": "7d7541f0e500d4ec51a1f8048a8279c642ab1d67950757bf9d7820026f2c125a",
+    "evidence_hash": "a62dcbade73388822d5d462a3e4f51cf106d245ab5dd012291722a51b4bec871",
+    "ontology_context_hash": "2a6bd79f66a8ee6d956080384ac1e1071b5b609ba9c8ce56c4cc0f5d1282d2b4",
+    "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+    "original_votes_hash": "30750b039bd82641c763787c191d6c5758966a578a0ef8c859e34e667a412c9d",
+    "critical_counter_evidence_ids": [],
+    "axes": {
+      "source": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": false,
+              "known_fraction": null,
+              "reason": "missing_or_untrusted_opinion"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ],
+            "weight": 0.49,
+            "effective_weight": 0.0
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "counterevidence_reviewed_ids overlaps material counterevidence",
+              "dismissed counterexamples and unresolved material counterevidence have different roles"
+            ],
+            "weight": 0.255,
+            "effective_weight": 0.0
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "enum",
+              "primary_evidence_ids overlaps material counterevidence"
+            ],
+            "weight": 0.255,
+            "effective_weight": 0.0
+          }
+        },
+        "scores": {
+          "contradicted": 0.0,
+          "supported": 0.0
+        },
+        "available_mass": 0.0,
+        "valid_opinion_count": 0,
+        "threshold": 0.7,
+        "status": "unresolved",
+        "has_conflict": false
+      },
+      "expression": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": false,
+              "known_fraction": null,
+              "reason": "missing_or_untrusted_opinion"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ],
+            "weight": 0.49,
+            "effective_weight": 0.0
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "semantic_revision",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.255,
+            "effective_weight": 0.255
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "enum"
+            ],
+            "weight": 0.255,
+            "effective_weight": 0.0
+          }
+        },
+        "scores": {
+          "lossless_normalization": 0.0,
+          "semantic_revision": 0.255,
+          "standard": 0.0
+        },
+        "available_mass": 0.255,
+        "valid_opinion_count": 1,
+        "threshold": 0.7,
+        "status": "unresolved",
+        "has_conflict": false
+      },
+      "mapping": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": false,
+              "known_fraction": null,
+              "reason": "missing_or_untrusted_opinion"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ],
+            "weight": 0.49,
+            "effective_weight": 0.0
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "conflict",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.255,
+            "effective_weight": 0.255
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "valid",
+            "usable": false,
+            "missing_reasons": [],
+            "weight": 0.255,
+            "effective_weight": 0.0
+          }
+        },
+        "scores": {
+          "conflict": 0.255,
+          "valid": 0.0
+        },
+        "available_mass": 0.255,
+        "valid_opinion_count": 1,
+        "threshold": 0.7,
+        "status": "unresolved",
+        "has_conflict": false
+      },
+      "scope": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": false,
+              "known_fraction": null,
+              "reason": "missing_or_untrusted_opinion"
+            },
+            "opinion": null,
+            "usable": false,
+            "missing_reasons": [
+              "response identity/completeness/provenance unavailable"
+            ],
+            "weight": 0.49,
+            "effective_weight": 0.0
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.255,
+            "effective_weight": 0.255
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.255,
+            "effective_weight": 0.255
+          }
+        },
+        "scores": {
+          "exclude": 0.0,
+          "include": 0.51
+        },
+        "available_mass": 0.51,
+        "valid_opinion_count": 2,
+        "threshold": 0.7,
+        "status": "unclear",
+        "has_conflict": false
+      }
+    },
+    "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "resolved_counter_evidence_ids": [],
+    "snapshot_id": "weights_0a7d5946490e565a2fc461a55fb0d0e52c73035d72c4c57fc8aae4d45ecca906"
+  },
+  "research_operation": "manual_review",
+  "research_operation_basis": [
+    "expression:unresolved",
+    "formal_mapping_not_bound_to_candidate",
+    "mapping:unresolved",
+    "required_committee_incomplete",
+    "scope:unclear",
+    "source:unresolved"
+  ],
+  "committed": true
+}

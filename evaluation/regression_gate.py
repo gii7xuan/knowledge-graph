@@ -16,8 +16,11 @@ def request_accounting(connection):
     durable=({r[0]:(r[1],json.loads(r[2] or '{}')) for r in connection.execute('SELECT attempt_id,state,result_json FROM request_attempts')}
              if {'attempt_id','result_json'}<=columns else {})
     if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='planner_steps'").fetchone():
+        from review_agent.planner_receipts import durable_planner_rows,reconcile_attempts
+        planner_receipts=durable_planner_rows(connection)
         for row in connection.execute('SELECT record_json FROM planner_steps'):
-            for attempt in json.loads(row[0]).get('attempts') or []:
+            step=json.loads(row[0])
+            for attempt in reconcile_attempts(step,planner_receipts):
                 saved=durable.get(attempt.get('attempt_id'))
                 if saved:
                     state,result=saved

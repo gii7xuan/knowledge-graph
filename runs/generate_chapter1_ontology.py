@@ -91,6 +91,7 @@ class ScopedCompletions:
 
 
 def build_draft(manifest):
+    from ontologyBuild.definition_materials import add_definition
     run=Path(manifest['outputs']['run_dir']);data=json.loads((run/'normalized_candidates.json').read_text(encoding='utf-8'))
     graph=Graph();provenance=[];pending=[];nodes={}
     for item in data.get('candidate_classes',[]):
@@ -99,8 +100,7 @@ def build_draft(manifest):
         node=URIRef('urn:kg:chapter1:class:'+hashlib.sha256(normalize_name(label).encode()).hexdigest()[:24])
         nodes[normalize_name(label)]=node
         graph.add((node,RDF.type,OWL.Class));graph.add((node,RDFS.label,Literal(label,lang='zh')))
-        definition=item.get('definition_candidate') or item.get('definition')
-        if definition and not re.search(r'\$|[=≈]|\\frac',str(definition)): graph.add((node,SKOS.definition,Literal(str(definition),lang='zh')))
+        add_definition(graph,node,item)
         provenance.append({'iri':str(node),'candidate_id':item['candidate_id'],'evidence':item.get('evidence',[]),
             'parent_candidate':item.get('parent_candidate'),'status':'pending_semantic_review'})
     for item in data.get('candidate_classes',[]):
@@ -125,6 +125,7 @@ def build_draft(manifest):
         node=URIRef('urn:kg:chapter1:property:'+hashlib.sha256(json.dumps([name,str(domain),str(range_node)],ensure_ascii=False).encode()).hexdigest()[:24])
         graph.add((node,RDF.type,OWL.ObjectProperty));graph.add((node,RDFS.label,Literal(name,lang='zh')))
         graph.add((node,RDFS.domain,domain));graph.add((node,RDFS.range,range_node))
+        add_definition(graph,node,item)
         provenance.append({'iri':str(node),'candidate_id':item['candidate_id'],'evidence':item.get('evidence',[]),'status':'pending_semantic_review'})
     ttl=run/'chapter1_ontology_draft.ttl';ttl.write_text(canonical_turtle(graph),encoding='utf-8')
     origin=json.loads((INPUT/'source_manifest.json').read_text(encoding='utf-8'))

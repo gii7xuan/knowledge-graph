@@ -76,6 +76,9 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
         from .field_spec import frozen
         payload['field_spec'] = copy.deepcopy(proposal['field_spec'])
         payload['field_standardization'] = frozen(proposal)
+        from .response_consistency import frozen as consistency_frozen
+        consistency=consistency_frozen(proposal)
+        if consistency is not None:payload['response_consistency_policy']=consistency
     if 'dispute_policy' in proposal:
         from .disputes import frozen
         payload['claim_review_context']=frozen(proposal)
@@ -86,8 +89,9 @@ def validator_payload(proposal: Mapping[str, Any], voter=None) -> Dict[str, Any]
         profile=frozen_profile(voter,proposal,contract.RESPONSE_SCHEMA)
         payload['output_structure']=profile
         if profile['mode']=='json_template':payload['output_template']=fixed_template(contract.RESPONSE_SCHEMA)
-    if proposal.get('prompt_version') in {'triple_validator_v8_citations_v3','triple_validator_v8_citations_v4'}:
-        payload['output_instruction']=contract.USER_SUFFIX
+    if proposal.get('prompt_version') in {'triple_validator_v8_citations_v3','triple_validator_v8_citations_v4','triple_validator_v8_citations_v5','triple_validator_v8_consistency_v6'}:
+        from .validator_contracts import prompt_for
+        payload['output_instruction']=prompt_for(proposal).split('\nFINAL_RESPONSE_INSTRUCTION\n',1)[1].strip()
     return payload
 
 
@@ -124,6 +128,8 @@ def vote_binding(voter, proposal):
            if proposal.get('response_contract_version')in {'validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
         **({k:proposal.get(k) for k in ('ontology_context_hash','ontology_context_policy_hash')}
            if proposal.get('response_contract_version')in {'validator_response_v6_3','validator_response_v7','validator_response_v8'} else {}),
+        **({k:proposal.get(k) for k in ('response_projection_policy_hash','response_projection_policy_version')}
+           if 'response_projection_policy' in proposal else {}),
     }
 
 
@@ -208,11 +214,19 @@ def _judge_validator_once(voter: Mapping[str, Any], proposal: Mapping[str, Any],
 
 def _normalize_review_result(voter,proposal,parsed,response,contract):
     base=vote_binding(voter,proposal)
+    projection=None
+    if proposal.get('prompt_version')=='triple_validator_v8_consistency_v6':
+        from .response_projection import project
+        parsed,projection=project(parsed,proposal)
     errors = contract.validate_response(parsed)
     if not errors:
         from .validator_contracts import proposal_errors
         errors += proposal_errors(parsed,proposal)
     if errors:
+        consistency={}
+        if proposal.get('prompt_version') in {'triple_validator_v8_citations_v5','triple_validator_v8_consistency_v6'}:
+            from .response_consistency import issues
+            consistency={'consistency_issues':issues(parsed)}
         return {**base, "response_status": "invalid_contract", "verdict": None,
                 "error": "; ".join(errors), "validation_errors": errors,
                 **(contract.format_metadata(parsed) if hasattr(contract,'format_metadata') else {}),
@@ -220,7 +234,7 @@ def _normalize_review_result(voter,proposal,parsed,response,contract):
                 'finish_reason':getattr(response,'finish_reason',None),
                 'response_id':getattr(response,'response_id',None),'returned_model_id':getattr(response,'returned_model_id',None),
                 "input_tokens": getattr(response, "input_tokens", None),
-                "output_tokens": getattr(response, "output_tokens", None),**response_metadata(response)}
+                "output_tokens": getattr(response, "output_tokens", None),**response_metadata(response),**consistency,**(projection or {})}
     if hasattr(contract,'normalize'):
         raw_assessment=parsed.get('schema_assessment')
         parsed=contract.normalize(parsed)
@@ -228,6 +242,7 @@ def _normalize_review_result(voter,proposal,parsed,response,contract):
     if getattr(contract,'PRESERVE_RAW_RESPONSE',False):
         parsed['raw_response']=copy.deepcopy(response.content)
     parsed.update(base)
+    if projection:parsed.update(projection)
     parsed["response_status"] = "ok"
     parsed.setdefault("reason_codes", [])
     parsed.setdefault("checks", [])
@@ -284,7 +299,7 @@ def judge_validator(
     retryable = {"timeout", "api_error", "invalid_json", "invalid_contract", "invalid_reference"}
     feedback = copy.deepcopy(_initial_feedback)
     for attempt_no in range(1, max(0, int(max_retries)) + 2):
-        timeout=min(float(voter.get('request_timeout_seconds',per_call_timeout_seconds)),
+        timeout=min(float(per_call_timeout_seconds),float(voter.get('request_timeout_seconds',per_call_timeout_seconds)),
                     max(0.,deadline_epoch-time.time()) if deadline_epoch else float('inf'))
         if timeout<=0: break
         if deadline_epoch:
@@ -358,12 +373,21 @@ def judge_independently(
     if not voters:
         return []
     results: Dict[str, Dict[str, Any]] = {}
+    from threading import Event
+    halted=Event()
+    def run(voter):
+        if halted.is_set():
+            return {**vote_binding(voter,proposal),'response_status':'api_error','not_sent':True,'actual_calls':0,
+                'retryable':False,'error_code':'VALIDATOR_DISPATCH_HALTED',
+                'error':'earlier validator request is unresolved or its service is paused'}
+        vote=judge_validator(voter,proposal,max_retries=max_retries,per_call_timeout_seconds=per_call_timeout_seconds,
+            repository=repository,deadline_epoch=deadline_epoch)
+        if vote.get('outcome_unknown') or vote.get('pause_job'):halted.set()
+        return vote
     pool = ThreadPoolExecutor(max_workers=max(1, min(max_workers, len(voters))))
     try:
         futures = {
-            pool.submit(judge_validator, voter, proposal, max_retries=max_retries,
-                        per_call_timeout_seconds=per_call_timeout_seconds,
-                        repository=repository,deadline_epoch=deadline_epoch): str(voter["id"])
+            pool.submit(run,voter): str(voter["id"])
             for voter in voters
         }
         for future in as_completed(futures):

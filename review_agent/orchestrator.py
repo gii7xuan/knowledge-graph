@@ -20,6 +20,7 @@ from .execution import AuditPaused
 from .memory import ReviewMemory
 from .repository import ReviewRepository
 from .validators import judge_independently, model_request_count
+from .vote_weighting import committee_policy
 
 
 MATERIAL_GAP_CODES = {"CONDITION_MISSING", "QUALIFIER_MISMATCH", "DIRECTION_MISMATCH", "EVIDENCE_INSUFFICIENT"}
@@ -97,7 +98,8 @@ class ReviewOrchestrator:
         self.validators = list(validators)
         self.calibrator = calibrator or TripleCalibrator()
         self.risk_policy = risk_policy or RiskPolicy()
-        self.config = dict(config or {})
+        from .configuration import normalize_config
+        self.config = normalize_config(dict(config or {}))
         self.ontology_guard.require_explicit_mapping = self.config.get('validator_contract_version')in {'validator_response_v5','validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
         self.ontology_guard.require_relation_definition = self.config.get('validator_contract_version') in {'validator_response_v5_1','validator_response_v5_2','validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}
         self.planner_client = planner_client
@@ -116,9 +118,10 @@ class ReviewOrchestrator:
             required_votes=required,
             minimum_distinct_families=int(consensus_config.get("minimum_distinct_families", 3)),
             version=str(consensus_config.get("version", "committee_v1")),
+            weighting_policy=self.config.get('vote_weighting') if (self.config.get('vote_weighting') or {}).get('mode') != 'legacy' else None,
         )
-        self.committee_policy_hash = sha256_json({"committee_size": len(self.committee.voter_ids),
-            "required_votes": self.committee.required_votes, "minimum_distinct_families": self.committee.minimum_distinct_families})
+        from .vote_weighting import committee_policy
+        self.committee_policy_hash = sha256_json(committee_policy(self.committee))
 
     def committee_members(self):
         return [{"id": v["id"],
@@ -156,8 +159,7 @@ class ReviewOrchestrator:
             "rubric_version": context.get("rubric_version", "triple_review_rubric_v1"),
             "committee_version": self.committee.version,
             "committee_policy_hash": self.committee_policy_hash,
-            "committee_policy": {"committee_size": len(self.committee.voter_ids), "required_votes": self.committee.required_votes,
-                                 "minimum_distinct_families": self.committee.minimum_distinct_families},
+            "committee_policy": committee_policy(self.committee),
             "committee_members": self.committee_members(),
             'validator_generation':[{'voter_id':v['id'],'max_output_tokens':v.get('max_output_tokens',4096)} for v in self.validators],
             "memory_snapshot_id": context.get("memory_snapshot_id", 0),
@@ -352,6 +354,7 @@ class ReviewOrchestrator:
                         max_workers=int((self.config.get("budget") or {}).get("max_parallel_validators", 4)),
                         max_retries=effective_retries,
                         repository=self.repository,
+                        deadline_epoch=budget.shared.deadline_epoch,
                         per_call_timeout_seconds=min(
                             float(budget_config.get("per_call_timeout_seconds", 45)),
                             max(.001, budget.total_timeout_seconds - (time.monotonic() - budget.started_at))),
@@ -405,6 +408,8 @@ class ReviewOrchestrator:
                 "critical_issues_unresolved": any(i.get("critical") for i in ledger.unresolved()),
                 "protected_evidence_omitted": bool(set(lifecycle.protected_ids) - {i["evidence_id"] for i in bundle["items"]}),
             }
+            if self.committee.weighting_policy and consensus.get('result')=='accept_consensus' and not material_counter and not material_support:
+                gaps['need_more_evidence']=False
             self.repository.append_round(audit_id, proposal, last_votes, consensus, gaps)
             if call_budget_exhausted or not gaps["need_more_evidence"] or round_id >= budget.max_rounds:
                 gaps["stop_reason"] = ("call_budget_exhausted" if call_budget_exhausted else
@@ -485,6 +490,8 @@ class ReviewOrchestrator:
         independently_reviewed=bool(selected and not gaps.get('ontology_not_checked')
             and set(consensus.get('eligible_voter_ids',[]))==set(self.committee.voter_ids)
             and consensus.get('distinct_family_count',0)>=self.committee.minimum_distinct_families)
+        if self.committee.weighting_policy:
+            independently_reviewed = bool(selected and not gaps.get('ontology_not_checked') and consensus.get('weighted_review_complete'))
         completion=('independent_review_completed' if independently_reviewed else
             'independent_review_incomplete' if selected else
             'manual_handoff_no_evidence' if context.get('review_completion_status')=='manual_handoff_no_evidence' and not bundle.get('items') else
@@ -606,6 +613,10 @@ class ReviewOrchestrator:
                     'human_problem_cards':context.get('human_problem_cards',[])})
             result['review_outcome']=outcome(selected,last_votes,self.committee,
                 context={**context,'final_gaps':gaps},decision=result,stop_reason=gaps.get('stop_reason'))
+            if self.committee.weighting_policy:
+                result.update(weight_snapshot=result['review_outcome']['weight_snapshot'],
+                    research_operation=result['review_outcome']['research_operation'],
+                    research_operation_basis=result['review_outcome']['blocking_reasons'])
             if snapshot:
                 result.update(resolution_snapshot_id=snapshot['snapshot_id'],resolution_snapshot=snapshot)
             if context.get('resolution_snapshots_enabled'):

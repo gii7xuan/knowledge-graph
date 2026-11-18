@@ -91,6 +91,11 @@ def request_hook(request):
     diagnostics = _active.get()
     if diagnostics is None:
         return
+    # Count the outgoing body without retaining text, headers or credentials.
+    try:
+        diagnostics.metrics['request_body_bytes'] = len(request.content)
+    except httpx.RequestNotRead:
+        diagnostics.metrics['request_body_size_unknown'] = True
     previous = request.extensions.get('trace')
     def trace(name, info):
         diagnostics.trace(name, info)

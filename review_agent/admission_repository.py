@@ -72,7 +72,7 @@ class AdmissionRepository:
             members = [m["id"] for m in proposal["committee_members"]]
             members.extend("unconfigured_" + str(i + 1) for i in range(committee["committee_size"] - len(members)))
             critical = any(i.get("critical") and i.get("status", "open") != "resolved" for i in audit["context"].get("issue_history", []))
-            consensus = aggregate_votes(votes, Committee(members, committee["required_votes"], committee["minimum_distinct_families"]), proposal=proposal, proposal_digest=proposal["proposal_digest"], admission_blocked=critical)
+            consensus = aggregate_votes(votes, Committee(members, committee["required_votes"], committee["minimum_distinct_families"], weighting_policy=committee.get('vote_weighting')), proposal=proposal, proposal_digest=proposal["proposal_digest"], admission_blocked=critical)
             assessments = []
             for vote in votes:
                 for role, key in (("support", "supporting_evidence_ids"), ("counter", "counter_evidence_ids")):

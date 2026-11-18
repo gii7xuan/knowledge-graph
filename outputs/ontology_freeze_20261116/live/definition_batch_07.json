@@ -1,0 +1,2083 @@
+{
+  "status": "reviewed",
+  "proposal": {
+    "version": "ontology_definition_audit_v1",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+    "source_text_hash": "e87ad709f3f67294599839457fce9a7196c3e37d7223649741ac2cfcf871cf2c",
+    "items": [
+      {
+        "relation_id": "R_b204199d1589f60b3c39",
+        "label": "影响",
+        "definition": "气象条件对火炮弹道计算和修正的作用关系",
+        "domain": [
+          "C_0b7c9c45d5ac893efbd9"
+        ],
+        "range": [
+          "C_70780e1e31a41f0ff86a"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "随地点、时间和高度变化的环境因素，影响火炮弹道计算与修正"
+              }
+            ],
+            "description": "随地点、时间和高度变化的环境因素，影响火炮弹道计算与修正",
+            "id": "C_0b7c9c45d5ac893efbd9",
+            "iri": "urn:kg:chapter1:class:f993b89b1b596c9a6342150e",
+            "label": "气象条件",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "气象条件"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+              }
+            ],
+            "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+            "id": "C_70780e1e31a41f0ff86a",
+            "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+            "label": "弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "火炮的弹道不可能也没有必要根据具体地点、时间的气象条件来计算，只能根据标准的气象条件进行弹道计算和编制射表。",
+            "start": 2240,
+            "end": 2294,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_cc8c5aaee4db",
+            "evidence_id": "def_ev_ac94e2d447aa9aab98525341",
+            "context_start": 2060,
+            "context_end": 2474,
+            "context": "和密度时干空气的温度。引入  $\\tau$  以后，就可以用干空气的  $R = 287~\\mathrm{J / (kg*K)}$  ，利用式（1-10）给出的状态方程来计算湿空气的  $\\rho$  。今后，除特别指明外，外弹道中所用的气温均为  $\\tau$  。\n\n# 2. 标准气象条件\n\n气象条件不仅随地点而变化，而且在同一地点还随时间和高度而变化。火炮的弹道不可能也没有必要根据具体地点、时间的气象条件来计算，只能根据标准的气象条件进行弹道计算和编制射表。在火炮正式射击时，则可根据当地的具体气象条件进行修正。下面介绍我国炮兵用标准气象条件，它与国际上通用的标准基本一致。\n\n（1）气象诸元的地面标准值\n\n$$\nT _ {0 \\mathrm {N}} = 15 ^ {\\circ} \\mathrm {C} \\quad p _ {0 \\mathrm {N}} = 100 \\mathrm {kPa} = 0.1 \\ma"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_b374d309647377365f38",
+        "label": "具有",
+        "definition": "表示弹丸拥有质量系数这一属性",
+        "domain": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "range": [
+          "C_a623689d554aab46c8f1"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸质量与直径立方之比的系数，单位为 kg/dm³"
+              }
+            ],
+            "description": "弹丸质量与直径立方之比的系数，单位为 kg/dm³",
+            "id": "C_a623689d554aab46c8f1",
+            "iri": "urn:kg:chapter1:class:ee2985b979269c5b6a747b17",
+            "label": "弹丸质量系数",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸质量系数"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "对于同一类型的弹丸，不论直径大小，具有变化范围不大的弹丸质量系数。",
+            "start": 19903,
+            "end": 19936,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_857ef0bc4247",
+            "evidence_id": "def_ev_f1880ddbaa4536134c8167ba",
+            "context_start": 19723,
+            "context_end": 20116,
+            "context": "就是说，同样形状、同样初速的弹丸由于直径的增大而使弹的质量增大得更快，反而会使射程增大。\n\n在弹丸设计理论中，有一个弹丸质量系数  $C_m$  （单位为  $\\mathrm{kg} / \\mathrm{dm}^3$  ）\n\n$$\nC _ {m} = \\frac {m}{d ^ {3}} \\times 1 0 ^ {- 3} \\tag {1-44}\n$$\n\n对于同一类型的弹丸，不论直径大小，具有变化范围不大的弹丸质量系数。例如，杀伤爆破弹  $C_m = 12 \\sim 14$ ，同口径穿甲弹  $C_m = 15 \\sim 18$  等。弹道系数  $C$  可表示为\n\n$$\nC = \\frac {i}{C _ {m} d} \\tag {1-45}\n$$\n\n这也再一次说明了在弹形相同的条件下，直径  $d$  越大，弹道系数  $C$  越小的道理。\n\n# 3. 阻力函数 "
+          }
+        ]
+      },
+      {
+        "relation_id": "R_b6c9f202b6f2fb55af5d",
+        "label": "跟随",
+        "definition": "自然坐标跟随弹丸质心运动",
+        "domain": [
+          "C_b01fa0de9c5da123ef25"
+        ],
+        "range": [
+          "C_87a27abd212bc2fb9da8"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "根据跟随弹丸质心运动的方向而取的坐标"
+              }
+            ],
+            "description": "根据跟随弹丸质心运动的方向而取的坐标",
+            "id": "C_b01fa0de9c5da123ef25",
+            "iri": "urn:kg:chapter1:class:667d7d6db47a9f4710041156",
+            "label": "自然坐标系",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "自然坐标系"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸的质量中心，是重力与空气阻力作用的参考点"
+              }
+            ],
+            "description": "弹丸的质量中心，是重力与空气阻力作用的参考点",
+            "id": "C_87a27abd212bc2fb9da8",
+            "iri": "urn:kg:chapter1:class:4223820fee0114c205d127f2",
+            "label": "弹丸质心",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸质心"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "自然坐标是根据跟随弹丸质心运动的方向而取的坐标。",
+            "start": 25204,
+            "end": 25228,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_9c835c2a6247",
+            "evidence_id": "def_ev_b98f670e471883e293f42c27",
+            "context_start": 25024,
+            "context_end": 25408,
+            "context": "$\\theta_0$\n\n$$\nt = 0: x = y = 0, v _ {x} = v _ {x 0} = v _ {0} \\cos \\theta_ {0}, v _ {y} = v _ {y 0} = v _ {0} \\sin \\theta_ {0}\n$$\n\n这就是最常用的求解弹丸质心运动的微分方程组。\n\n# 2. 自然坐标系的弹丸质心运动微分方程组\n\n自然坐标是根据跟随弹丸质心运动的方向而取的坐标。取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为\n\n$$\ng _ {\\tau} = - g \\sin \\theta , g _ {\\eta} = - g \\cos \\theta\n$$\n\n即可写出自然坐标系的弹"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_bacd990da3482215545f",
+        "label": "减小",
+        "definition": "表示设计尖头目的为降低波动阻力",
+        "domain": [
+          "C_e56f1a44eef9d89bc3b6"
+        ],
+        "range": [
+          "C_52c1a1e08cb0ee536af8"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "飞行速度超过声速的弹丸"
+              }
+            ],
+            "description": "飞行速度超过声速的弹丸",
+            "id": "C_e56f1a44eef9d89bc3b6",
+            "iri": "urn:kg:chapter1:class:6cdf968aa148b291a5570ab1",
+            "label": "超声速弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "超声速弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "超声速时所特有的波动阻力"
+              }
+            ],
+            "description": "超声速时所特有的波动阻力",
+            "id": "C_52c1a1e08cb0ee536af8",
+            "iri": "urn:kg:chapter1:class:05231e5069c0c3b2cb81b3ec",
+            "label": "波动阻力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "波动阻力"
+              }
+            ],
+            "parent": "C_3d1e92e945b2c3dbbd16",
+            "parents": [
+              "C_3d1e92e945b2c3dbbd16"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "一般超声速弹丸的头部都设计得比较尖，目的就在于减小波动阻力。",
+            "start": 11203,
+            "end": 11233,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_5da7b788e236",
+            "evidence_id": "def_ev_529904e4b1ad8936f958e9de",
+            "context_start": 11023,
+            "context_end": 11413,
+            "context": ".org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/4b14af8794af7cd261c0b4ea5d2c9bc1dca8c781fb1e9c9cf2ccd3ddd9743e80.jpg)\n\n\n\n（b）\n\n\n\n图1-7 头部形状与激波的强弱\n\n\n波动阻力的大小主要取决于弹头部的形状。一般超声速弹丸的头部都设计得比较尖，目的就在于减小波动阻力。\n\n# 2. 空气阻力的一般表达式\n\n和对流体力学中绕流物体的阻力分析方法一样，弹丸的空气阻力表达式可以用量纲分析的方法得到，可以写为\n\n$$\nR _ {x} = \\frac {\\rho v ^ {2}}{2} S C _ {x 0} \\left(\\frac {v}{c}\\right) \\tag {1-30}\n$$\n\n式中，  $R_{x}$  为空气阻力，"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_c21d76f3bc6b8ad6a528",
+        "label": "影响",
+        "definition": "纵风对弹道的影响",
+        "domain": [
+          "C_02ca97ebf11ae1d3c3ad"
+        ],
+        "range": [
+          "C_70780e1e31a41f0ff86a"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风"
+              }
+            ],
+            "description": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风",
+            "id": "C_02ca97ebf11ae1d3c3ad",
+            "iri": "urn:kg:chapter1:class:ff0676ed29a29545cda3afd9",
+            "label": "纵风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "纵风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+              }
+            ],
+            "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+            "id": "C_70780e1e31a41f0ff86a",
+            "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+            "label": "弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "纵风对弹道的影响",
+            "start": 49022,
+            "end": 49030,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_7ffb3744e26d",
+            "evidence_id": "def_ev_ce1087234ff1365a866162e2",
+            "context_start": 48842,
+            "context_end": 49210,
+            "context": "{0} - X) = \\frac {W _ {z}}{v _ {0}} \\Delta \\tag {1-100}\n$$\n\n$$\n\\Delta = T v _ {0} - X\n$$\n\n$\\Delta$  的物理意义是当炸弹落地时飞机与炸弹的水平距离（设飞机匀速直线飞行）。 $\\Delta$  称为退电，式（1-100）描述了横风偏与退电之间的关系。\n\n# (2）纵风对弹道的影响\n\n在恒定纵风的情况下，同样也可以取大气为动参考系。在此动参考系内的初速同样由式（1-87）求得\n\n$$\nv _ {0 \\mathrm {r}} = v _ {0} - W _ {x} \\tag {1-101}\n$$\n\n相对速度在  $x$  、  $y$  轴上的投影分别为  $v_{0}\\cos \\theta_{0} - W_{x}$  和  $v_{0"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_c22216c1566b62b5846d",
+        "label": "占",
+        "definition": "表示一个量在另一个总量中所占的比例",
+        "domain": [
+          "C_75505394a779d58e7cb3"
+        ],
+        "range": [
+          "C_1fa9be1c5b09c2bc5e6d"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成"
+              }
+            ],
+            "description": "空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成",
+            "id": "C_75505394a779d58e7cb3",
+            "iri": "urn:kg:chapter1:class:9b9ad65e4c676b1bade01be6",
+            "label": "摩擦阻力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "摩擦阻力"
+              }
+            ],
+            "parent": "C_3d1e92e945b2c3dbbd16",
+            "parents": [
+              "C_3d1e92e945b2c3dbbd16"
+            ]
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_1fa9be1c5b09c2bc5e6d",
+            "iri": "urn:kg:chapter1:class:2fb225315fa3dc0da1923d5f",
+            "label": "空气总阻力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气总阻力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "在亚声速时，弹丸的摩擦阻力占空气总阻力的  $35\\% \\sim 40\\%$  ，而超声速时仅占  $10\\%$  左右。",
+            "start": 9233,
+            "end": 9294,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_361829da9756",
+            "evidence_id": "def_ev_a17c4d07e15d24045f076713",
+            "context_start": 9053,
+            "context_end": 9474,
+            "context": "](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/14f272645cff5db0dbc67551d3eaef1f7c66fa62a94d886a98e557a959b4dffc.jpg)\n\n\n\n图1-4 弹丸上的附面层\n\n\n在亚声速时，弹丸的摩擦阻力占空气总阻力的  $35\\% \\sim 40\\%$  ，而超声速时仅占  $10\\%$  左右。可以看到，摩擦阻力与弹丸表面的粗糙度有关，在实践中，常用在弹丸表面涂漆的办法来减小表面粗糙度，可使射程增加  $0.5\\% \\sim 2.5\\%$  。\n\n# (2）涡流阻力\n\n涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_c2ac6be881feb748de9b",
+        "label": "随...不同而有差异",
+        "definition": "表示最大射程角随弹丸口径和初速变化而变化的关系",
+        "domain": [
+          "C_9c47b068f5438cdc353f"
+        ],
+        "range": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角"
+              }
+            ],
+            "description": "某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角",
+            "id": "C_9c47b068f5438cdc353f",
+            "iri": "urn:kg:chapter1:class:cec5919330602d1fd64b8d5e",
+            "label": "最大射程角",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "最大射程角"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "最大射程角随弹丸的口径和初速的不同而有较大的差异。",
+            "start": 33588,
+            "end": 33613,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_934e79bfc4b9",
+            "evidence_id": "def_ev_8634e8321add4a857ce720d2",
+            "context_start": 33408,
+            "context_end": 33793,
+            "context": "\n\n$$\nv _ {s} = X / T\n$$\n\n# 3. 最大射程角\n\n某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角，记作  $\\theta_{0X\\mathrm{m}}$  。显然，真空弹道  $\\theta_{0X\\mathrm{m}} = 45^{\\circ}$  。\n\n空气质点弹道由于空气阻力的复杂影响，最大射程角随弹丸的口径和初速的不同而有较大的差异。一般枪弹的最大射程角  $\\theta_{0X\\mathrm{m}}$  为  $28^{\\circ} \\sim 35^{\\circ}$ ，中口径中初速炮弹的  $\\theta_{0X\\mathrm{m}}$  为  $42^{\\circ} \\sim 44^{\\circ}$ ，迫击炮弹的  $\\theta_{0X\\mathrm{m}}$  为  $45^{\\"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_c36ca12efed7fc47213a",
+        "label": "具有部件",
+        "definition": "一个概念由另一个概念组成",
+        "domain": [
+          "C_70780e1e31a41f0ff86a"
+        ],
+        "range": [
+          "C_ed590570ee28bf2c3d9e"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+              }
+            ],
+            "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+            "id": "C_70780e1e31a41f0ff86a",
+            "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+            "label": "弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "地炮诸元之一，用s表示"
+              }
+            ],
+            "description": "地炮诸元之一，用s表示",
+            "id": "C_ed590570ee28bf2c3d9e",
+            "iri": "urn:kg:chapter1:class:8d9cd8544fb38efc44c626c9",
+            "label": "顶点",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "顶点"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "升弧段由  $a$  点至顶点  $s$  积分式（1-64）",
+            "start": 30938,
+            "end": 30969,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_3f4fba022970",
+            "evidence_id": "def_ev_298ee119728d23f0ac9a0b85",
+            "context_start": 30758,
+            "context_end": 31149,
+            "context": " _ {x} ^ {2}} \\tag {1-63} \\\\ \\end{array}\n$$\n\n两边同乘以  $2p$  ，并根据  $p\\mathrm{d}x = \\mathrm{d}y$  ，得\n\n$$\n2 p \\mathrm {d} p = - \\frac {2 g}{v _ {x} ^ {2}} \\mathrm {d} y \\tag {1-64}\n$$\n\n升弧段由  $a$  点至顶点  $s$  积分式（1-64）\n\n$$\n\\int_ {p _ {a}} ^ {p _ {s} = 0} 2 p \\mathrm {d} p = - 2 g \\int_ {y _ {a}} ^ {y _ {s} = y} \\frac {\\mathrm {d} y}{v _ {x \\text {升}} ^ {2}}\n$$\n\n即  $p_{a}^{2} = 2g\\int_{y_{a}}^{y}"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_cc39e6dff3b1f60b2252",
+        "label": "转化为",
+        "definition": "层流边界层在弹丸后方转化为湍流边界层",
+        "domain": [
+          "C_0bc76fe5eb16f22a5b1e"
+        ],
+        "range": [
+          "C_8690bfccb8890ac871ea"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在接近弹丸的很小区域内存在的边界层类型"
+              }
+            ],
+            "description": "在接近弹丸的很小区域内存在的边界层类型",
+            "id": "C_0bc76fe5eb16f22a5b1e",
+            "iri": "urn:kg:chapter1:class:a4ca4683271ed9278db701d5",
+            "label": "层流边界层",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "层流边界层"
+              }
+            ],
+            "parent": "C_23b6984d594ee0674998",
+            "parents": [
+              "C_23b6984d594ee0674998"
+            ]
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "层流边界层后面转化形成的边界层类型"
+              }
+            ],
+            "description": "层流边界层后面转化形成的边界层类型",
+            "id": "C_8690bfccb8890ac871ea",
+            "iri": "urn:kg:chapter1:class:fecb5c201aac0613c709495f",
+            "label": "湍流边界层",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "湍流边界层"
+              }
+            ],
+            "parent": "C_23b6984d594ee0674998",
+            "parents": [
+              "C_23b6984d594ee0674998"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "只在接近弹丸的很小区域内为层流边界层，后面即转化为湍流边界层",
+            "start": 8786,
+            "end": 8816,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_361829da9756",
+            "evidence_id": "def_ev_64a865cbfef58273121877eb",
+            "context_start": 8606,
+            "context_end": 8996,
+            "context": "接近弹丸表面，受空气黏性影响\n\n的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。\n\n由于弹丸速度很高，它所形成的边界层通常都是混合边界层（图1-4（b)），只在接近弹丸的很小区域内为层流边界层，后面即转化为湍流边界层。由于湍流造成了空气质点的无规律脉动，它所消耗的能量远大于层流边界层，通常估算摩擦阻力时按湍流边界层来考虑较准确。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/c4c050bfc681166d758704"
+          }
+        ]
+      }
+    ],
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "policy": {
+      "rule": "all_three_independent_families_all_axes_pass_no_issues",
+      "human_labels_used": false,
+      "application": "isolated_research_preexperiment_subset",
+      "classes": "existing_class_hierarchy_preserved_not_fully_semantically_recertified"
+    },
+    "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+    "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de"
+  },
+  "votes": [
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ac94e2d447aa9aab98525341"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明弹道计算和修正需依据气象条件，定义准确反映了气象条件对弹道计算与修正的作用关系，方向与端点均符合。",
+          "relation_id": "R_b204199d1589f60b3c39",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_f1880ddbaa4536134c8167ba"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出同一类型弹丸具有变化范围不大的弹丸质量系数，定义准确表达了弹丸拥有该属性的关系，方向与端点匹配。",
+          "relation_id": "R_b374d309647377365f38",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_b98f670e471883e293f42c27"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明自然坐标是根据跟随弹丸质心运动的方向而取的，定义准确描述了自然坐标系跟随弹丸质心运动的关系。",
+          "relation_id": "R_b6c9f202b6f2fb55af5d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_529904e4b1ad8936f958e9de"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出一般超声速弹丸头部设计得比较尖，目的在于减小波动阻力，定义准确反映了设计尖头目的为降低波动阻力的关系。",
+          "relation_id": "R_bacd990da3482215545f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ce1087234ff1365a866162e2"
+          ],
+          "issue_codes": [],
+          "reason": "证据标题明确为“纵风对弹道的影响”，定义准确描述了纵风对弹道的影响关系，方向与端点均符合。",
+          "relation_id": "R_c21d76f3bc6b8ad6a528",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_a17c4d07e15d24045f076713"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明摩擦阻力占空气总阻力的比例，定义准确表达了摩擦阻力在空气总阻力中所占比例的关系，方向与端点匹配。",
+          "relation_id": "R_c22216c1566b62b5846d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_8634e8321add4a857ce720d2"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出最大射程角随弹丸口径和初速不同而有较大差异，定义准确描述了最大射程角随弹丸口径和初速变化的关系。",
+          "relation_id": "R_c2ac6be881feb748de9b",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_298ee119728d23f0ac9a0b85"
+          ],
+          "issue_codes": [
+            "definition_mismatch",
+            "direction_mismatch",
+            "endpoint_mismatch"
+          ],
+          "reason": "证据仅说明升弧段由a点至顶点s积分，未表明弹道由顶点组成；顶点是弹道上的一个点而非弹道的部件，定义与证据不符，方向与端点均错误。",
+          "relation_id": "R_c36ca12efed7fc47213a",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_64a865cbfef58273121877eb"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明层流边界层在弹丸后方转化为湍流边界层，定义准确描述了该转化关系，方向与端点均符合。",
+          "relation_id": "R_cc39e6dff3b1f60b2252",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_dfaca1e07002471eabcf660b144112ab",
+      "client_request_id": "attempt_dfaca1e07002471eabcf660b144112ab",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111620064447173534406511351",
+      "input_tokens": 8215,
+      "late_response": false,
+      "latency_ms": 35218,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 1381,
+      "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de",
+      "provider_started_at": 1794830801.754218,
+      "queue_time_ms": 355,
+      "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_b204199d1589f60b3c39\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ac94e2d447aa9aab98525341\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明弹道计算和修正需依据气象条件，定义准确反映了气象条件对弹道计算与修正的作用关系，方向与端点均符合。\"\n    },\n    {\n      \"relation_id\": \"R_b374d309647377365f38\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_f1880ddbaa4536134c8167ba\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出同一类型弹丸具有变化范围不大的弹丸质量系数，定义准确表达了弹丸拥有该属性的关系，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_b6c9f202b6f2fb55af5d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_b98f670e471883e293f42c27\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明自然坐标是根据跟随弹丸质心运动的方向而取的，定义准确描述了自然坐标系跟随弹丸质心运动的关系。\"\n    },\n    {\n      \"relation_id\": \"R_bacd990da3482215545f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_529904e4b1ad8936f958e9de\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出一般超声速弹丸头部设计得比较尖，目的在于减小波动阻力，定义准确反映了设计尖头目的为降低波动阻力的关系。\"\n    },\n    {\n      \"relation_id\": \"R_c21d76f3bc6b8ad6a528\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ce1087234ff1365a866162e2\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据标题明确为“纵风对弹道的影响”，定义准确描述了纵风对弹道的影响关系，方向与端点均符合。\"\n    },\n    {\n      \"relation_id\": \"R_c22216c1566b62b5846d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_a17c4d07e15d24045f076713\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明摩擦阻力占空气总阻力的比例，定义准确表达了摩擦阻力在空气总阻力中所占比例的关系，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_c2ac6be881feb748de9b\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_8634e8321add4a857ce720d2\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出最大射程角随弹丸口径和初速不同而有较大差异，定义准确描述了最大射程角随弹丸口径和初速变化的关系。\"\n    },\n    {\n      \"relation_id\": \"R_c36ca12efed7fc47213a\",\n      \"definition_fidelity\": \"revise\",\n      \"direction\": \"fail\",\n      \"endpoint_signature\": \"fail\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_298ee119728d23f0ac9a0b85\"],\n      \"issue_codes\": [\"definition_mismatch\", \"direction_mismatch\", \"endpoint_mismatch\"],\n      \"reason\": \"证据仅说明升弧段由a点至顶点s积分，未表明弹道由顶点组成；顶点是弹道上的一个点而非弹道的部件，定义与证据不符，方向与端点均错误。\"\n    },\n    {\n      \"relation_id\": \"R_cc39e6dff3b1f60b2252\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_64a865cbfef58273121877eb\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明层流边界层在弹丸后方转化为湍流边界层，定义准确描述了该转化关系，方向与端点均符合。\"\n    }\n  ]\n}",
+      "reasoning_tokens": null,
+      "request_key": "b3e9d93842dcca3f667ed6439376d7001cac0126a334143cff36d48dd2936f87",
+      "response_id": "chatcmpl-a7229bec1e149bdc",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 297623,
+        "body_chunk_count": 1380,
+        "chunk_count": 1382,
+        "client_request_id": "attempt_dfaca1e07002471eabcf660b144112ab",
+        "first_body_byte_ms": 5129.505,
+        "first_chunk_ms": 5139,
+        "first_content_ms": 5139,
+        "gateway_request_id": "2026111620064447173534406511351",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 128.345,
+        "max_inter_chunk_gap_ms": 125,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 12:06:47 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111620064447173534406511351"
+        },
+        "response_headers_ms": 5129.094,
+        "stream": true,
+        "terminal_ms": 35218,
+        "trace": [
+          {
+            "elapsed_ms": 1873.648,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1934.228,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1934.314,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1985.312,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1985.455,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1985.902,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1985.947,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1986.417,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1986.429,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5126.869,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5129.412,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 35218.112,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 35218.215,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 35218.249,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 35218.565,
+        "visible_chars": 3220
+      },
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ac94e2d447aa9aab98525341"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确说明弹道计算和修正需依据气象条件，定义准确反映了气象条件对弹道计算与修正的作用关系，方向与端点均符合。",
+              "relation_id": "R_b204199d1589f60b3c39",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_f1880ddbaa4536134c8167ba"
+              ],
+              "issue_codes": [],
+              "reason": "证据指出同一类型弹丸具有变化范围不大的弹丸质量系数，定义准确表达了弹丸拥有该属性的关系，方向与端点匹配。",
+              "relation_id": "R_b374d309647377365f38",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_b98f670e471883e293f42c27"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确说明自然坐标是根据跟随弹丸质心运动的方向而取的，定义准确描述了自然坐标系跟随弹丸质心运动的关系。",
+              "relation_id": "R_b6c9f202b6f2fb55af5d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_529904e4b1ad8936f958e9de"
+              ],
+              "issue_codes": [],
+              "reason": "证据指出一般超声速弹丸头部设计得比较尖，目的在于减小波动阻力，定义准确反映了设计尖头目的为降低波动阻力的关系。",
+              "relation_id": "R_bacd990da3482215545f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ce1087234ff1365a866162e2"
+              ],
+              "issue_codes": [],
+              "reason": "证据标题明确为“纵风对弹道的影响”，定义准确描述了纵风对弹道的影响关系，方向与端点均符合。",
+              "relation_id": "R_c21d76f3bc6b8ad6a528",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_a17c4d07e15d24045f076713"
+              ],
+              "issue_codes": [],
+              "reason": "证据说明摩擦阻力占空气总阻力的比例，定义准确表达了摩擦阻力在空气总阻力中所占比例的关系，方向与端点匹配。",
+              "relation_id": "R_c22216c1566b62b5846d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_8634e8321add4a857ce720d2"
+              ],
+              "issue_codes": [],
+              "reason": "证据指出最大射程角随弹丸口径和初速不同而有较大差异，定义准确描述了最大射程角随弹丸口径和初速变化的关系。",
+              "relation_id": "R_c2ac6be881feb748de9b",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "fail",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_298ee119728d23f0ac9a0b85"
+              ],
+              "issue_codes": [
+                "definition_mismatch",
+                "direction_mismatch",
+                "endpoint_mismatch"
+              ],
+              "reason": "证据仅说明升弧段由a点至顶点s积分，未表明弹道由顶点组成；顶点是弹道上的一个点而非弹道的部件，定义与证据不符，方向与端点均错误。",
+              "relation_id": "R_c36ca12efed7fc47213a",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_64a865cbfef58273121877eb"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确说明层流边界层在弹丸后方转化为湍流边界层，定义准确描述了该转化关系，方向与端点均符合。",
+              "relation_id": "R_cc39e6dff3b1f60b2252",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_dfaca1e07002471eabcf660b144112ab",
+          "client_request_id": "attempt_dfaca1e07002471eabcf660b144112ab",
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111620064447173534406511351",
+          "input_tokens": 8215,
+          "late_response": false,
+          "latency_ms": 35218,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "output_tokens": 1381,
+          "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de",
+          "provider_started_at": 1794830801.754218,
+          "queue_time_ms": 355,
+          "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_b204199d1589f60b3c39\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ac94e2d447aa9aab98525341\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明弹道计算和修正需依据气象条件，定义准确反映了气象条件对弹道计算与修正的作用关系，方向与端点均符合。\"\n    },\n    {\n      \"relation_id\": \"R_b374d309647377365f38\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_f1880ddbaa4536134c8167ba\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出同一类型弹丸具有变化范围不大的弹丸质量系数，定义准确表达了弹丸拥有该属性的关系，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_b6c9f202b6f2fb55af5d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_b98f670e471883e293f42c27\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明自然坐标是根据跟随弹丸质心运动的方向而取的，定义准确描述了自然坐标系跟随弹丸质心运动的关系。\"\n    },\n    {\n      \"relation_id\": \"R_bacd990da3482215545f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_529904e4b1ad8936f958e9de\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出一般超声速弹丸头部设计得比较尖，目的在于减小波动阻力，定义准确反映了设计尖头目的为降低波动阻力的关系。\"\n    },\n    {\n      \"relation_id\": \"R_c21d76f3bc6b8ad6a528\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ce1087234ff1365a866162e2\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据标题明确为“纵风对弹道的影响”，定义准确描述了纵风对弹道的影响关系，方向与端点均符合。\"\n    },\n    {\n      \"relation_id\": \"R_c22216c1566b62b5846d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_a17c4d07e15d24045f076713\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明摩擦阻力占空气总阻力的比例，定义准确表达了摩擦阻力在空气总阻力中所占比例的关系，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_c2ac6be881feb748de9b\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_8634e8321add4a857ce720d2\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出最大射程角随弹丸口径和初速不同而有较大差异，定义准确描述了最大射程角随弹丸口径和初速变化的关系。\"\n    },\n    {\n      \"relation_id\": \"R_c36ca12efed7fc47213a\",\n      \"definition_fidelity\": \"revise\",\n      \"direction\": \"fail\",\n      \"endpoint_signature\": \"fail\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_298ee119728d23f0ac9a0b85\"],\n      \"issue_codes\": [\"definition_mismatch\", \"direction_mismatch\", \"endpoint_mismatch\"],\n      \"reason\": \"证据仅说明升弧段由a点至顶点s积分，未表明弹道由顶点组成；顶点是弹道上的一个点而非弹道的部件，定义与证据不符，方向与端点均错误。\"\n    },\n    {\n      \"relation_id\": \"R_cc39e6dff3b1f60b2252\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_64a865cbfef58273121877eb\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明层流边界层在弹丸后方转化为湍流边界层，定义准确描述了该转化关系，方向与端点均符合。\"\n    }\n  ]\n}",
+          "reasoning_tokens": null,
+          "request_key": "b3e9d93842dcca3f667ed6439376d7001cac0126a334143cff36d48dd2936f87",
+          "response_id": "chatcmpl-a7229bec1e149bdc",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 297623,
+            "body_chunk_count": 1380,
+            "chunk_count": 1382,
+            "client_request_id": "attempt_dfaca1e07002471eabcf660b144112ab",
+            "first_body_byte_ms": 5129.505,
+            "first_chunk_ms": 5139,
+            "first_content_ms": 5139,
+            "gateway_request_id": "2026111620064447173534406511351",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 128.345,
+            "max_inter_chunk_gap_ms": 125,
+            "reasoning_chars": 0,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Mon, 16 Nov 2026 12:06:47 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111620064447173534406511351"
+            },
+            "response_headers_ms": 5129.094,
+            "stream": true,
+            "terminal_ms": 35218,
+            "trace": [
+              {
+                "elapsed_ms": 1873.648,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 1934.228,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 1934.314,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 1985.312,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 1985.455,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 1985.902,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 1985.947,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 1986.417,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 1986.429,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 5126.869,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 5129.412,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 35218.112,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 35218.215,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 35218.249,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 35218.565,
+            "visible_chars": 3220
+          },
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ac94e2d447aa9aab98525341"
+          ],
+          "issue_codes": [],
+          "reason": "原文支持气象条件影响弹道计算和修正。",
+          "relation_id": "R_b204199d1589f60b3c39",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_f1880ddbaa4536134c8167ba"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确提到弹丸具有弹丸质量系数。",
+          "relation_id": "R_b374d309647377365f38",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_b98f670e471883e293f42c27"
+          ],
+          "issue_codes": [],
+          "reason": "原文指出自然坐标是根据跟随弹丸质心运动的方向而取的，支持该关系。",
+          "relation_id": "R_b6c9f202b6f2fb55af5d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_529904e4b1ad8936f958e9de"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出超声速弹丸头部设计尖的目的在于减小波动阻力。",
+          "relation_id": "R_bacd990da3482215545f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ce1087234ff1365a866162e2"
+          ],
+          "issue_codes": [],
+          "reason": "原文标题明确提到纵风对弹道的影响。",
+          "relation_id": "R_c21d76f3bc6b8ad6a528",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_a17c4d07e15d24045f076713"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确提到摩擦阻力占空气总阻力的比例。",
+          "relation_id": "R_c22216c1566b62b5846d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_8634e8321add4a857ce720d2"
+          ],
+          "issue_codes": [],
+          "reason": "原文支持最大射程角随弹丸口径和初速的不同而有差异。",
+          "relation_id": "R_c2ac6be881feb748de9b",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_298ee119728d23f0ac9a0b85"
+          ],
+          "issue_codes": [
+            "fidelity_gap"
+          ],
+          "reason": "证据仅提到升弧段至顶点的积分，未明确定义弹道与顶点之间为“具有部件”的组成关系。",
+          "relation_id": "R_c36ca12efed7fc47213a",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_64a865cbfef58273121877eb"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确提到层流边界层后面转化为湍流边界层。",
+          "relation_id": "R_cc39e6dff3b1f60b2252",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_da1ba11587ad4a09adcbbae1aaee2046",
+      "client_request_id": "attempt_da1ba11587ad4a09adcbbae1aaee2046",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111620064453980030547983780",
+      "input_tokens": 8622,
+      "late_response": false,
+      "latency_ms": 99640,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "output_tokens": 3274,
+      "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de",
+      "provider_started_at": 1794830801.8138149,
+      "queue_time_ms": 374,
+      "raw_response": "{\"assessments\": [{\"relation_id\": \"R_b204199d1589f60b3c39\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ac94e2d447aa9aab98525341\"], \"issue_codes\": [], \"reason\": \"原文支持气象条件影响弹道计算和修正。\"}, {\"relation_id\": \"R_b374d309647377365f38\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_f1880ddbaa4536134c8167ba\"], \"issue_codes\": [], \"reason\": \"原文明确提到弹丸具有弹丸质量系数。\"}, {\"relation_id\": \"R_b6c9f202b6f2fb55af5d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_b98f670e471883e293f42c27\"], \"issue_codes\": [], \"reason\": \"原文指出自然坐标是根据跟随弹丸质心运动的方向而取的，支持该关系。\"}, {\"relation_id\": \"R_bacd990da3482215545f\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_529904e4b1ad8936f958e9de\"], \"issue_codes\": [], \"reason\": \"原文明确指出超声速弹丸头部设计尖的目的在于减小波动阻力。\"}, {\"relation_id\": \"R_c21d76f3bc6b8ad6a528\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ce1087234ff1365a866162e2\"], \"issue_codes\": [], \"reason\": \"原文标题明确提到纵风对弹道的影响。\"}, {\"relation_id\": \"R_c22216c1566b62b5846d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_a17c4d07e15d24045f076713\"], \"issue_codes\": [], \"reason\": \"原文明确提到摩擦阻力占空气总阻力的比例。\"}, {\"relation_id\": \"R_c2ac6be881feb748de9b\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_8634e8321add4a857ce720d2\"], \"issue_codes\": [], \"reason\": \"原文支持最大射程角随弹丸口径和初速的不同而有差异。\"}, {\"relation_id\": \"R_c36ca12efed7fc47213a\", \"definition_fidelity\": \"revise\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_298ee119728d23f0ac9a0b85\"], \"issue_codes\": [\"fidelity_gap\"], \"reason\": \"证据仅提到升弧段至顶点的积分，未明确定义弹道与顶点之间为“具有部件”的组成关系。\"}, {\"relation_id\": \"R_cc39e6dff3b1f60b2252\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_64a865cbfef58273121877eb\"], \"issue_codes\": [], \"reason\": \"原文明确提到层流边界层后面转化为湍流边界层。\"}]}",
+      "reasoning_tokens": 2189,
+      "request_key": "c6c294a252ca24fc3ee8f81f54339a821932701697bdde56b89c2dd544a65a35",
+      "response_id": "chatcmpl-8864250d65fd158b",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 646978,
+        "body_chunk_count": 2970,
+        "chunk_count": 2971,
+        "client_request_id": "attempt_da1ba11587ad4a09adcbbae1aaee2046",
+        "first_body_byte_ms": 4892.497,
+        "first_chunk_ms": 4906,
+        "first_content_ms": 68062,
+        "gateway_request_id": "2026111620064453980030547983780",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 211.376,
+        "max_inter_chunk_gap_ms": 205,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 12:06:47 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111620064453980030547983780"
+        },
+        "response_headers_ms": 4892.236,
+        "stream": true,
+        "terminal_ms": 99640,
+        "trace": [
+          {
+            "elapsed_ms": 1868.764,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1914.705,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1914.763,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1967.296,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1967.456,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1967.875,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1967.894,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1968.38,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1968.395,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 4890.426,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 4892.417,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 99632.957,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 99633.008,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 99633.028,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 99633.195,
+        "visible_chars": 2385
+      },
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ac94e2d447aa9aab98525341"
+              ],
+              "issue_codes": [],
+              "reason": "原文支持气象条件影响弹道计算和修正。",
+              "relation_id": "R_b204199d1589f60b3c39",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_f1880ddbaa4536134c8167ba"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确提到弹丸具有弹丸质量系数。",
+              "relation_id": "R_b374d309647377365f38",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_b98f670e471883e293f42c27"
+              ],
+              "issue_codes": [],
+              "reason": "原文指出自然坐标是根据跟随弹丸质心运动的方向而取的，支持该关系。",
+              "relation_id": "R_b6c9f202b6f2fb55af5d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_529904e4b1ad8936f958e9de"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确指出超声速弹丸头部设计尖的目的在于减小波动阻力。",
+              "relation_id": "R_bacd990da3482215545f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ce1087234ff1365a866162e2"
+              ],
+              "issue_codes": [],
+              "reason": "原文标题明确提到纵风对弹道的影响。",
+              "relation_id": "R_c21d76f3bc6b8ad6a528",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_a17c4d07e15d24045f076713"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确提到摩擦阻力占空气总阻力的比例。",
+              "relation_id": "R_c22216c1566b62b5846d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_8634e8321add4a857ce720d2"
+              ],
+              "issue_codes": [],
+              "reason": "原文支持最大射程角随弹丸口径和初速的不同而有差异。",
+              "relation_id": "R_c2ac6be881feb748de9b",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_298ee119728d23f0ac9a0b85"
+              ],
+              "issue_codes": [
+                "fidelity_gap"
+              ],
+              "reason": "证据仅提到升弧段至顶点的积分，未明确定义弹道与顶点之间为“具有部件”的组成关系。",
+              "relation_id": "R_c36ca12efed7fc47213a",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_64a865cbfef58273121877eb"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确提到层流边界层后面转化为湍流边界层。",
+              "relation_id": "R_cc39e6dff3b1f60b2252",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_da1ba11587ad4a09adcbbae1aaee2046",
+          "client_request_id": "attempt_da1ba11587ad4a09adcbbae1aaee2046",
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111620064453980030547983780",
+          "input_tokens": 8622,
+          "late_response": false,
+          "latency_ms": 99640,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "output_tokens": 3274,
+          "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de",
+          "provider_started_at": 1794830801.8138149,
+          "queue_time_ms": 374,
+          "raw_response": "{\"assessments\": [{\"relation_id\": \"R_b204199d1589f60b3c39\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ac94e2d447aa9aab98525341\"], \"issue_codes\": [], \"reason\": \"原文支持气象条件影响弹道计算和修正。\"}, {\"relation_id\": \"R_b374d309647377365f38\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_f1880ddbaa4536134c8167ba\"], \"issue_codes\": [], \"reason\": \"原文明确提到弹丸具有弹丸质量系数。\"}, {\"relation_id\": \"R_b6c9f202b6f2fb55af5d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_b98f670e471883e293f42c27\"], \"issue_codes\": [], \"reason\": \"原文指出自然坐标是根据跟随弹丸质心运动的方向而取的，支持该关系。\"}, {\"relation_id\": \"R_bacd990da3482215545f\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_529904e4b1ad8936f958e9de\"], \"issue_codes\": [], \"reason\": \"原文明确指出超声速弹丸头部设计尖的目的在于减小波动阻力。\"}, {\"relation_id\": \"R_c21d76f3bc6b8ad6a528\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ce1087234ff1365a866162e2\"], \"issue_codes\": [], \"reason\": \"原文标题明确提到纵风对弹道的影响。\"}, {\"relation_id\": \"R_c22216c1566b62b5846d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_a17c4d07e15d24045f076713\"], \"issue_codes\": [], \"reason\": \"原文明确提到摩擦阻力占空气总阻力的比例。\"}, {\"relation_id\": \"R_c2ac6be881feb748de9b\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_8634e8321add4a857ce720d2\"], \"issue_codes\": [], \"reason\": \"原文支持最大射程角随弹丸口径和初速的不同而有差异。\"}, {\"relation_id\": \"R_c36ca12efed7fc47213a\", \"definition_fidelity\": \"revise\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_298ee119728d23f0ac9a0b85\"], \"issue_codes\": [\"fidelity_gap\"], \"reason\": \"证据仅提到升弧段至顶点的积分，未明确定义弹道与顶点之间为“具有部件”的组成关系。\"}, {\"relation_id\": \"R_cc39e6dff3b1f60b2252\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_64a865cbfef58273121877eb\"], \"issue_codes\": [], \"reason\": \"原文明确提到层流边界层后面转化为湍流边界层。\"}]}",
+          "reasoning_tokens": 2189,
+          "request_key": "c6c294a252ca24fc3ee8f81f54339a821932701697bdde56b89c2dd544a65a35",
+          "response_id": "chatcmpl-8864250d65fd158b",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 646978,
+            "body_chunk_count": 2970,
+            "chunk_count": 2971,
+            "client_request_id": "attempt_da1ba11587ad4a09adcbbae1aaee2046",
+            "first_body_byte_ms": 4892.497,
+            "first_chunk_ms": 4906,
+            "first_content_ms": 68062,
+            "gateway_request_id": "2026111620064453980030547983780",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 211.376,
+            "max_inter_chunk_gap_ms": 205,
+            "reasoning_chars": 0,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Mon, 16 Nov 2026 12:06:47 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111620064453980030547983780"
+            },
+            "response_headers_ms": 4892.236,
+            "stream": true,
+            "terminal_ms": 99640,
+            "trace": [
+              {
+                "elapsed_ms": 1868.764,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 1914.705,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 1914.763,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 1967.296,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 1967.456,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 1967.875,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 1967.894,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 1968.38,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 1968.395,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 4890.426,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 4892.417,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 99632.957,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 99633.008,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 99633.028,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 99633.195,
+            "visible_chars": 2385
+          },
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ac94e2d447aa9aab98525341"
+          ],
+          "issue_codes": [],
+          "reason": "原文说明气象条件随地点时间高度变化，弹道需按标准气象条件计算并据当地气象修正，支持气象条件影响弹道计算与修正；方向为气象条件→弹道，端点相符。",
+          "relation_id": "R_b204199d1589f60b3c39",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_f1880ddbaa4536134c8167ba"
+          ],
+          "issue_codes": [],
+          "reason": "原文称同一类型弹丸不论直径大小具有变化范围不大的弹丸质量系数，支持弹丸具有质量系数属性；方向与端点相符。",
+          "relation_id": "R_b374d309647377365f38",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_b98f670e471883e293f42c27"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确自然坐标是根据跟随弹丸质心运动方向而取的坐标，定义与方向一致，端点为自然坐标系与弹丸质心。",
+          "relation_id": "R_b6c9f202b6f2fb55af5d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_529904e4b1ad8936f958e9de"
+          ],
+          "issue_codes": [],
+          "reason": "原文称超声速弹丸头部设计较尖目的在减小波动阻力，支持该关系；方向为超声速弹丸→波动阻力，端点相符。",
+          "relation_id": "R_bacd990da3482215545f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ce1087234ff1365a866162e2"
+          ],
+          "issue_codes": [],
+          "reason": "原文小节标题为纵风对弹道的影响，并讨论恒定纵风下初速修正，支持纵风影响弹道；方向与端点相符。",
+          "relation_id": "R_c21d76f3bc6b8ad6a528",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_a17c4d07e15d24045f076713"
+          ],
+          "issue_codes": [],
+          "reason": "原文给出摩擦阻力占空气总阻力的百分比，支持摩擦阻力占空气总阻力比例；方向与端点相符。",
+          "relation_id": "R_c22216c1566b62b5846d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_8634e8321add4a857ce720d2"
+          ],
+          "issue_codes": [
+            "direction_mismatch",
+            "endpoint_mismatch"
+          ],
+          "reason": "原文是最大射程角随弹丸口径和初速不同而有差异，变化主体为最大射程角，自变量为口径与初速；定义却把弹丸作为随变对象，方向与端点均不符。",
+          "relation_id": "R_c2ac6be881feb748de9b",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_298ee119728d23f0ac9a0b85"
+          ],
+          "issue_codes": [
+            "unsupported_relation",
+            "endpoint_mismatch"
+          ],
+          "reason": "原文仅述升弧段由a点至顶点s积分，未表达弹道具有顶点这一部件关系；顶点定义亦为地炮诸元，与弹道轨迹顶点不符。",
+          "relation_id": "R_c36ca12efed7fc47213a",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_64a865cbfef58273121877eb"
+          ],
+          "issue_codes": [],
+          "reason": "原文称只在接近弹丸很小区域为层流边界层，后面即转化为湍流边界层，支持层流边界层转化为湍流边界层；方向与端点相符。",
+          "relation_id": "R_cc39e6dff3b1f60b2252",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_582533c1874b430d88b886ca8e594b0f",
+      "client_request_id": "attempt_582533c1874b430d88b886ca8e594b0f",
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 7541,
+      "late_response": false,
+      "latency_ms": 6016,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 1019,
+      "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de",
+      "provider_started_at": 1794830801.7650628,
+      "queue_time_ms": 364,
+      "raw_response": "{\"assessments\":[{\"relation_id\":\"R_b204199d1589f60b3c39\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ac94e2d447aa9aab98525341\"],\"issue_codes\":[],\"reason\":\"原文说明气象条件随地点时间高度变化，弹道需按标准气象条件计算并据当地气象修正，支持气象条件影响弹道计算与修正；方向为气象条件→弹道，端点相符。\"},{\"relation_id\":\"R_b374d309647377365f38\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_f1880ddbaa4536134c8167ba\"],\"issue_codes\":[],\"reason\":\"原文称同一类型弹丸不论直径大小具有变化范围不大的弹丸质量系数，支持弹丸具有质量系数属性；方向与端点相符。\"},{\"relation_id\":\"R_b6c9f202b6f2fb55af5d\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_b98f670e471883e293f42c27\"],\"issue_codes\":[],\"reason\":\"原文明确自然坐标是根据跟随弹丸质心运动方向而取的坐标，定义与方向一致，端点为自然坐标系与弹丸质心。\"},{\"relation_id\":\"R_bacd990da3482215545f\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_529904e4b1ad8936f958e9de\"],\"issue_codes\":[],\"reason\":\"原文称超声速弹丸头部设计较尖目的在减小波动阻力，支持该关系；方向为超声速弹丸→波动阻力，端点相符。\"},{\"relation_id\":\"R_c21d76f3bc6b8ad6a528\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ce1087234ff1365a866162e2\"],\"issue_codes\":[],\"reason\":\"原文小节标题为纵风对弹道的影响，并讨论恒定纵风下初速修正，支持纵风影响弹道；方向与端点相符。\"},{\"relation_id\":\"R_c22216c1566b62b5846d\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_a17c4d07e15d24045f076713\"],\"issue_codes\":[],\"reason\":\"原文给出摩擦阻力占空气总阻力的百分比，支持摩擦阻力占空气总阻力比例；方向与端点相符。\"},{\"relation_id\":\"R_c2ac6be881feb748de9b\",\"definition_fidelity\":\"revise\",\"direction\":\"fail\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_8634e8321add4a857ce720d2\"],\"issue_codes\":[\"direction_mismatch\",\"endpoint_mismatch\"],\"reason\":\"原文是最大射程角随弹丸口径和初速不同而有差异，变化主体为最大射程角，自变量为口径与初速；定义却把弹丸作为随变对象，方向与端点均不符。\"},{\"relation_id\":\"R_c36ca12efed7fc47213a\",\"definition_fidelity\":\"revise\",\"direction\":\"fail\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_298ee119728d23f0ac9a0b85\"],\"issue_codes\":[\"unsupported_relation\",\"endpoint_mismatch\"],\"reason\":\"原文仅述升弧段由a点至顶点s积分，未表达弹道具有顶点这一部件关系；顶点定义亦为地炮诸元，与弹道轨迹顶点不符。\"},{\"relation_id\":\"R_cc39e6dff3b1f60b2252\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_64a865cbfef58273121877eb\"],\"issue_codes\":[],\"reason\":\"原文称只在接近弹丸很小区域为层流边界层，后面即转化为湍流边界层，支持层流边界层转化为湍流边界层；方向与端点相符。\"}]}",
+      "reasoning_tokens": null,
+      "request_key": "6d54fcd9586e21f0322667797772590813049573603d990cf7cc1df9282a9921",
+      "response_id": "2b2341aa-690d-4ed8-b00b-9a24abec02c4",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 1735,
+        "body_chunk_count": 2,
+        "client_request_id": "attempt_582533c1874b430d88b886ca8e594b0f",
+        "first_body_byte_ms": 5991.544,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 0.547,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Mon, 16 Nov 2026 12:06:44 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 2188.614,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 1889.55,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1948.528,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1948.602,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1997.136,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1997.292,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1997.894,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1997.915,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1998.47,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1998.49,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2186.291,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2188.779,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 5992.338,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 5992.433,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 5992.467,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 6002.965
+      },
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ac94e2d447aa9aab98525341"
+              ],
+              "issue_codes": [],
+              "reason": "原文说明气象条件随地点时间高度变化，弹道需按标准气象条件计算并据当地气象修正，支持气象条件影响弹道计算与修正；方向为气象条件→弹道，端点相符。",
+              "relation_id": "R_b204199d1589f60b3c39",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_f1880ddbaa4536134c8167ba"
+              ],
+              "issue_codes": [],
+              "reason": "原文称同一类型弹丸不论直径大小具有变化范围不大的弹丸质量系数，支持弹丸具有质量系数属性；方向与端点相符。",
+              "relation_id": "R_b374d309647377365f38",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_b98f670e471883e293f42c27"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确自然坐标是根据跟随弹丸质心运动方向而取的坐标，定义与方向一致，端点为自然坐标系与弹丸质心。",
+              "relation_id": "R_b6c9f202b6f2fb55af5d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_529904e4b1ad8936f958e9de"
+              ],
+              "issue_codes": [],
+              "reason": "原文称超声速弹丸头部设计较尖目的在减小波动阻力，支持该关系；方向为超声速弹丸→波动阻力，端点相符。",
+              "relation_id": "R_bacd990da3482215545f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ce1087234ff1365a866162e2"
+              ],
+              "issue_codes": [],
+              "reason": "原文小节标题为纵风对弹道的影响，并讨论恒定纵风下初速修正，支持纵风影响弹道；方向与端点相符。",
+              "relation_id": "R_c21d76f3bc6b8ad6a528",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_a17c4d07e15d24045f076713"
+              ],
+              "issue_codes": [],
+              "reason": "原文给出摩擦阻力占空气总阻力的百分比，支持摩擦阻力占空气总阻力比例；方向与端点相符。",
+              "relation_id": "R_c22216c1566b62b5846d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "fail",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_8634e8321add4a857ce720d2"
+              ],
+              "issue_codes": [
+                "direction_mismatch",
+                "endpoint_mismatch"
+              ],
+              "reason": "原文是最大射程角随弹丸口径和初速不同而有差异，变化主体为最大射程角，自变量为口径与初速；定义却把弹丸作为随变对象，方向与端点均不符。",
+              "relation_id": "R_c2ac6be881feb748de9b",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "fail",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_298ee119728d23f0ac9a0b85"
+              ],
+              "issue_codes": [
+                "unsupported_relation",
+                "endpoint_mismatch"
+              ],
+              "reason": "原文仅述升弧段由a点至顶点s积分，未表达弹道具有顶点这一部件关系；顶点定义亦为地炮诸元，与弹道轨迹顶点不符。",
+              "relation_id": "R_c36ca12efed7fc47213a",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_64a865cbfef58273121877eb"
+              ],
+              "issue_codes": [],
+              "reason": "原文称只在接近弹丸很小区域为层流边界层，后面即转化为湍流边界层，支持层流边界层转化为湍流边界层；方向与端点相符。",
+              "relation_id": "R_cc39e6dff3b1f60b2252",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_582533c1874b430d88b886ca8e594b0f",
+          "client_request_id": "attempt_582533c1874b430d88b886ca8e594b0f",
+          "finish_reason": "stop",
+          "gateway_request_id": null,
+          "input_tokens": 7541,
+          "late_response": false,
+          "latency_ms": 6016,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "output_tokens": 1019,
+          "proposal_digest": "29a6a0ab837ff6dd62568b70227d1762e995711da8e3a7b13edda1af9ad8e9de",
+          "provider_started_at": 1794830801.7650628,
+          "queue_time_ms": 364,
+          "raw_response": "{\"assessments\":[{\"relation_id\":\"R_b204199d1589f60b3c39\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ac94e2d447aa9aab98525341\"],\"issue_codes\":[],\"reason\":\"原文说明气象条件随地点时间高度变化，弹道需按标准气象条件计算并据当地气象修正，支持气象条件影响弹道计算与修正；方向为气象条件→弹道，端点相符。\"},{\"relation_id\":\"R_b374d309647377365f38\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_f1880ddbaa4536134c8167ba\"],\"issue_codes\":[],\"reason\":\"原文称同一类型弹丸不论直径大小具有变化范围不大的弹丸质量系数，支持弹丸具有质量系数属性；方向与端点相符。\"},{\"relation_id\":\"R_b6c9f202b6f2fb55af5d\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_b98f670e471883e293f42c27\"],\"issue_codes\":[],\"reason\":\"原文明确自然坐标是根据跟随弹丸质心运动方向而取的坐标，定义与方向一致，端点为自然坐标系与弹丸质心。\"},{\"relation_id\":\"R_bacd990da3482215545f\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_529904e4b1ad8936f958e9de\"],\"issue_codes\":[],\"reason\":\"原文称超声速弹丸头部设计较尖目的在减小波动阻力，支持该关系；方向为超声速弹丸→波动阻力，端点相符。\"},{\"relation_id\":\"R_c21d76f3bc6b8ad6a528\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ce1087234ff1365a866162e2\"],\"issue_codes\":[],\"reason\":\"原文小节标题为纵风对弹道的影响，并讨论恒定纵风下初速修正，支持纵风影响弹道；方向与端点相符。\"},{\"relation_id\":\"R_c22216c1566b62b5846d\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_a17c4d07e15d24045f076713\"],\"issue_codes\":[],\"reason\":\"原文给出摩擦阻力占空气总阻力的百分比，支持摩擦阻力占空气总阻力比例；方向与端点相符。\"},{\"relation_id\":\"R_c2ac6be881feb748de9b\",\"definition_fidelity\":\"revise\",\"direction\":\"fail\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_8634e8321add4a857ce720d2\"],\"issue_codes\":[\"direction_mismatch\",\"endpoint_mismatch\"],\"reason\":\"原文是最大射程角随弹丸口径和初速不同而有差异，变化主体为最大射程角，自变量为口径与初速；定义却把弹丸作为随变对象，方向与端点均不符。\"},{\"relation_id\":\"R_c36ca12efed7fc47213a\",\"definition_fidelity\":\"revise\",\"direction\":\"fail\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_298ee119728d23f0ac9a0b85\"],\"issue_codes\":[\"unsupported_relation\",\"endpoint_mismatch\"],\"reason\":\"原文仅述升弧段由a点至顶点s积分，未表达弹道具有顶点这一部件关系；顶点定义亦为地炮诸元，与弹道轨迹顶点不符。\"},{\"relation_id\":\"R_cc39e6dff3b1f60b2252\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_64a865cbfef58273121877eb\"],\"issue_codes\":[],\"reason\":\"原文称只在接近弹丸很小区域为层流边界层，后面即转化为湍流边界层，支持层流边界层转化为湍流边界层；方向与端点相符。\"}]}",
+          "reasoning_tokens": null,
+          "request_key": "6d54fcd9586e21f0322667797772590813049573603d990cf7cc1df9282a9921",
+          "response_id": "2b2341aa-690d-4ed8-b00b-9a24abec02c4",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "task_id": "definition_batch_c2cd8ea053171621a552f1cc",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 1735,
+            "body_chunk_count": 2,
+            "client_request_id": "attempt_582533c1874b430d88b886ca8e594b0f",
+            "first_body_byte_ms": 5991.544,
+            "gateway_request_id": null,
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 0.547,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-encoding": "gzip",
+              "content-type": "application/json",
+              "date": "Mon, 16 Nov 2026 12:06:44 GMT",
+              "server": "openresty",
+              "transfer-encoding": "chunked"
+            },
+            "response_headers_ms": 2188.614,
+            "stream": false,
+            "trace": [
+              {
+                "elapsed_ms": 1889.55,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 1948.528,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 1948.602,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 1997.136,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 1997.292,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 1997.894,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 1997.915,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 1998.47,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 1998.49,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 2186.291,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 2188.779,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 5992.338,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 5992.433,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 5992.467,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 6002.965
+          },
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "budget": {
+    "usage": {
+      "llm_calls": 23,
+      "tool_calls": 0,
+      "planner_steps": 0,
+      "validation_rounds": 0,
+      "input_tokens": 184472,
+      "output_tokens": 43430,
+      "unknown_token_requests": 0
+    },
+    "deadline_epoch": 1794832636.9032378,
+    "remaining_seconds": 1735.1374979019165,
+    "remaining_llm_calls": 25,
+    "max_planner_steps": 4,
+    "max_validation_rounds": 1,
+    "case_ids": [
+      "case_b3dd8ae6e241afa29d2e9dfa8e805deb"
+    ],
+    "case_call_reservations": [
+      "1825b2e0c2494002b929778b9bacfa3a",
+      "fefffb9fbfc241478a0a49168c675307",
+      "0bb3c4d414284529a77e21639a9f39f7",
+      "ca8c06da57bc4c20b7edede75a9ccb30",
+      "b01e7e6b047744e19d94e6ac3c011bc8",
+      "3bfe3ff309484e02a14f2c3d7874bc45",
+      "5bb2a0d9b25e453caefb47f815b0e703",
+      "ea127f31514942b68e7b0b0b76c75a82"
+    ],
+    "stage_usage": {
+      "preprocessing": {
+        "llm_calls": 20,
+        "tool_calls": 0
+      }
+    },
+    "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+    "case_accounts": [
+      {
+        "case_id": "case_b3dd8ae6e241afa29d2e9dfa8e805deb",
+        "limits": {
+          "extension_requests": 1,
+          "llm_calls": 66,
+          "rebinds": 2,
+          "tokens": 780000,
+          "tool_calls": 40
+        },
+        "usage": {
+          "extension_requests": 0,
+          "llm_calls": 39,
+          "rebinds": 0,
+          "tokens": 424455,
+          "tool_calls": 3
+        }
+      }
+    ]
+  }
+}

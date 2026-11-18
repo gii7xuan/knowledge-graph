@@ -52,6 +52,30 @@ def event(content=None, *, finish=None, reasoning=None):
 
 
 class TransportDiagnosticsTests(unittest.TestCase):
+    def test_alternate_noncontent_delta_fields_are_counted_without_retaining_text(self):
+        body={'id':'body-response','model':'fixture','object':'chat.completion.chunk','created':1,
+            'choices':[{'index':0,'delta':{'reasoning':'private-alternate-fixture'},'finish_reason':None}]}
+        stream=Pieces([('data: '+json.dumps(body)+'\n\n').encode(),event('{"ok":true}',finish='stop'),b'data: [DONE]\n\n'])
+        client=sdk_client(lambda request:httpx.Response(200,stream=stream),stream=True)
+        self.addCleanup(client._client.close)
+        response=client.complete_json({'fixture':True})
+        self.assertEqual(response.content,'{"ok":true}')
+        self.assertIn('reasoning',response.transport_metrics['delta_fields'])
+        self.assertEqual(response.transport_metrics['non_content_string_chars']['reasoning'],len('private-alternate-fixture'))
+        self.assertNotIn('private-alternate-fixture',json.dumps(response.transport_metrics))
+
+    def test_outgoing_body_size_is_recorded_without_body_or_credentials(self):
+        observed=[]
+        def handler(request):
+            observed.append(len(request.content))
+            return httpx.Response(200,json={'id':'size','model':'fixture','choices':[
+                {'message':{'content':'{}'},'finish_reason':'stop'}]})
+        client=sdk_client(handler);self.addCleanup(client._client.close)
+        response=client.complete_json({'private_fixture_text':'not-for-metrics'})
+        self.assertEqual(response.transport_metrics['request_body_bytes'],observed[0])
+        self.assertNotIn('not-for-metrics',json.dumps(response.transport_metrics))
+        self.assertNotIn('fixture-secret',json.dumps(response.transport_metrics))
+
     def test_real_sdk_stream_keeps_timing_usage_and_safe_ids_without_secrets(self):
         stream = Pieces([event('{"ok":', reasoning='private-reasoning-fixture'),
                          event('true}', finish='stop'), b'data: [DONE]\n\n'])

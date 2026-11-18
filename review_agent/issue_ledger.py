@@ -165,7 +165,14 @@ class IssueLedger:
         valid = [v for v in votes if v.get("voter_id") in eligible]
         digest, evidence_hash = proposal["proposal_digest"], proposal["evidence_bundle"]["evidence_hash"]
         counter_ids = {eid for vote in valid for eid in vote.get("counter_evidence_ids", [])}
+        counter_ids.update(consensus.get('weight_snapshot',{}).get('critical_counter_evidence_ids',[]))
         source = consensus.get("source_support_consensus", {}).get("result")
+        weighting=(proposal.get('committee_policy') or {}).get('vote_weighting')
+        weighted_source_ready=bool(weighting and consensus.get('weight_snapshot',{}).get('axes',{}).get('source',{}).get('status') in {'supported','contradicted'})
+        def enough(group, axis='source'):
+            if not weighting:return len(group)>=required_votes
+            from .vote_weighting import quorum_met
+            return quorum_met([v['voter_id'] for v in group],axis,consensus['weight_snapshot'],weighting)
         if counter_ids and (any(v.get("source_support") == "supported" for v in valid)
                             or source != "contradicted"):
             self.open("source_conflict", "存在需要独立复核适用范围的反证", True, proposal=digest,
@@ -181,13 +188,14 @@ class IssueLedger:
                         self.open(code,check.get('note') or '表达须修订',True,proposal=digest,
                             evidence_ids=check.get('evidence_ids') or [],evidence_hash=evidence_hash,**target(check['check']))
             for code in set(vote.get("reason_codes", [])) & (REVISION_ISSUES | {"EVIDENCE_INSUFFICIENT"}):
+                if code=='EVIDENCE_INSUFFICIENT' and weighted_source_ready:continue
                 if code=='EVIDENCE_INSUFFICIENT' and self.state.context.get('resolution_snapshots_enabled'):
                     continue # The exact dependency is recorded below, rather than a second broad obligation.
                 self.open(code, "当前候选存在来源、限定或方向义务", True, proposal=digest,
                           evidence_ids=vote.get("counter_evidence_ids") or vote.get("supporting_evidence_ids") or [], evidence_hash=evidence_hash,
                           **target({'ENTITY_MISMATCH':'entity_reference','RELATION_MISMATCH':'relation_semantics',
                               'DIRECTION_MISMATCH':'relation_direction','EVIDENCE_INSUFFICIENT':'evidence_sufficiency'}.get(code,'qualifiers')))
-            if vote.get("source_support") == "insufficient":
+            if vote.get("source_support") == "insufficient" and not weighted_source_ready:
                 checks=['evidence_sufficiency']
                 if self.state.context.get('resolution_snapshots_enabled'):
                     dims=vote.get('dimensions') or {}
@@ -208,10 +216,10 @@ class IssueLedger:
                     checks_ready=all(all(any(c['check']==name and c['status'] in {'pass','not_applicable'} and c['evidence_ids']
                         for c in vote.get('checks',[])) for name in ('triple_support','qualifiers','relation_direction')) for vote in supporting)
                     current_claim=any(issue['code'] in vote.get('reason_codes',[]) for vote in valid)
-                    if revised and source=='supported' and len(supporting)>=required_votes and checks_ready and not current_claim:
+                    if revised and source=='supported' and enough(supporting) and checks_ready and not current_claim:
                         self.resolve(issue,proposal,'independent_new_revision_expression_recheck',source_ids)
                     continue
-                if issue['code']=='ontology_gap' and proposal.get('ontology_check',{}).get('status')=='pass' and len(supporting)>=required_votes:
+                if issue['code']=='ontology_gap' and proposal.get('ontology_check',{}).get('status')=='pass' and enough(supporting):
                     self.resolve(issue,proposal,'independent_current_schema_recheck',source_ids)
                 if (issue["code"] == "EVIDENCE_INSUFFICIENT" and issue.get("opened_evidence_hash") != evidence_hash
                         and {i["evidence_id"] for i in proposal["evidence_bundle"]["items"]} - set(issue.get("evidence_ids", []))):
@@ -231,7 +239,7 @@ class IssueLedger:
                         set(provenance.get('supporting_evidence_ids',[]))<=
                             {item['evidence_id'] for item in proposal['evidence_bundle']['items']})
                     if (source=='supported' and old_expression and verified_revision and grounded
-                            and len(supporting)>=required_votes and
+                            and enough(supporting) and
                             not any({'EVIDENCE_INSUFFICIENT','SOURCE_CONTRADICTS'} & set(vote.get('reason_codes',[])) for vote in valid)):
                         self.resolve(issue,proposal,'independent_new_revision_source_recheck',source_ids)
                 if issue["code"] in {"source_conflict", "counterevidence"}:
@@ -239,7 +247,7 @@ class IssueLedger:
                     reviews = [vote for vote in supporting if any(c["check"] == "counterevidence"
                         and c["status"] in {"pass", "not_applicable"} and protected <= set(c["evidence_ids"])
                         for c in vote.get("checks", []))]
-                    if protected and len(reviews) >= required_votes:
+                    if protected and enough(reviews):
                         self.resolve(issue, proposal, "independent_current_counterevidence_recheck", protected | source_ids)
         # Relevance exclusions require independent quorum and retain their history.
         current_material = counter_ids | {eid for v in valid for eid in v.get("supporting_evidence_ids", [])}

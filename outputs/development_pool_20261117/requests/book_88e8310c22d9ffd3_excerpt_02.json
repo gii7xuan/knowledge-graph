@@ -1,0 +1,230 @@
+{
+  "attempt_id": "attempt_1ec9ad500a704361be21020d818031fb",
+  "client_request_id": "attempt_1ec9ad500a704361be21020d818031fb",
+  "counts_as_human_label": false,
+  "counts_as_review_vote": false,
+  "finish_reason": "stop",
+  "gateway_request_id": null,
+  "input_tokens": 6710,
+  "late_response": false,
+  "latency_ms": 11890,
+  "model_family": "deepseek",
+  "model_id": "deepseek-flash",
+  "model_identity": "deepseek-flash",
+  "object_revision": 1,
+  "output_tokens": 2518,
+  "proposal_digest": "fbe9032d96e6012991ff7263c6d8915b30294c7763a329ee8ca8c29c0fbf512e",
+  "provider_started_at": 1794904763.6134653,
+  "queue_time_ms": 300,
+  "raw_response": "{\"triplets\":[{\"head\":\"frictionless and adiabatic process\",\"surface_relation\":\"defines\",\"tail\":\"isentropic process\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"By our earlier assumptions\",\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"By our earlier assumptions, we stated that the process was frictionless and adiabatic. Recall, again from thermodynamics, that this actually defines an isentropic process [1].\"],\"head_type_candidate\":\"process\",\"tail_type_candidate\":\"process\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"the process was frictionless and adiabatic\",\"canonical_entity\":null,\"referent_scope\":\"the process under earlier assumptions in this section\"},\"tail\":{\"entity_surface\":\"isentropic process\",\"canonical_entity\":null,\"referent_scope\":\"thermodynamic process type\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"Source states that the frictionless and adiabatic assumptions define an isentropic process; this is a definitional characterization, not a generic equivalence.\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"By our earlier assumptions\",\"scope_id\":\"p2_q1\"},{\"qualifier_kind\":\"discourse\",\"attachment\":\"relation\",\"value\":\"actually\",\"scope_id\":\"p2_q2\"}],\"knowledge_scope\":\"conditional\"},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"absolute temperature T of our system\",\"surface_relation\":\"is related to\",\"tail\":\"initial temperature of the gas Ti\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"For a closed system (one with constant mass)\",\"time_scope\":null,\"applicability\":null,\"modality\":\"can\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"For a closed system (one with constant mass), it can be shown [6] that the absolute temperature  $T$  of our system is related to the initial temperature of the gas  $T_{i}$  through\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"thermodynamic quantity\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"absolute temperature  $T$  of our system\",\"canonical_entity\":null,\"referent_scope\":\"temperature of the closed system in this section\"},\"tail\":{\"entity_surface\":\"initial temperature of the gas  $T_{i}$\",\"canonical_entity\":null,\"referent_scope\":\"initial gas temperature in this section\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"The source asserts a relation between absolute temperature and initial gas temperature but the specific relation is expressed by an omitted equation; no direction or functional form is inferred.\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"For a closed system (one with constant mass)\",\"scope_id\":\"p2_q3\"},{\"qualifier_kind\":\"modality\",\"attachment\":\"relation\",\"value\":\"it can be shown\",\"scope_id\":\"p2_q4\"}],\"knowledge_scope\":\"conditional\"},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"pressure\",\"surface_relation\":\"determined from\",\"tail\":\"ideal gas Equation 2.4\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"4. Determine pressure from the ideal gas Equation 2.4.\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"equation\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"pressure\",\"canonical_entity\":null,\"referent_scope\":\"pressure at the position of interest in the procedure\"},\"tail\":{\"entity_surface\":\"ideal gas Equation 2.4\",\"canonical_entity\":null,\"referent_scope\":\"the ideal gas equation labeled 2.4 in the source\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"This is a procedural instruction to determine pressure from the ideal gas equation; it is not a general causal or definitional relation.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"gas temperature\",\"surface_relation\":\"determined from\",\"tail\":\"Equation 2.17\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"3. Determine the gas temperature at this position from Equation 2.17.\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"equation\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"gas temperature at this position\",\"canonical_entity\":null,\"referent_scope\":\"gas temperature at the position of interest in the procedure\"},\"tail\":{\"entity_surface\":\"Equation 2.17\",\"canonical_entity\":null,\"referent_scope\":\"the equation labeled 2.17 in the source\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"Procedural instruction to determine gas temperature from Equation 2.17; the equation itself is omitted and no functional form is inferred.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"volume\",\"surface_relation\":\"determined at\",\"tail\":\"position of interest\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"2. Determine the volume at the position of interest by using\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"spatial position\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"the volume\",\"canonical_entity\":null,\"referent_scope\":\"volume in the procedure at the position of interest\"},\"tail\":{\"entity_surface\":\"the position of interest\",\"canonical_entity\":null,\"referent_scope\":\"position of interest in the procedure\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"The source instructs determining volume at a position; this is a procedural relation, not a general property of volume.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"work term\",\"surface_relation\":\"solved up to\",\"tail\":\"position of interest x_proj\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"1. Solve for the work term up to the position of interest  $x_{\\\\mathrm{proj}}$  using\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"spatial position\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"the work term\",\"canonical_entity\":null,\"referent_scope\":\"work term in the procedure\"},\"tail\":{\"entity_surface\":\"the position of interest  $x_{\\\\mathrm{proj}}$\",\"canonical_entity\":null,\"referent_scope\":\"projected position of interest in the procedure\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"Procedural instruction to solve for work up to a position; not a general relation between work and position.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"temperature, pressure, and velocity\",\"surface_relation\":\"depicted vs.\",\"tail\":\"distance\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"for this idealized situation\",\"time_scope\":null,\"applicability\":null,\"modality\":\"can\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"From Figures 2.2 through 2.4, we can depict the results of a calculation for temperature, pressure, and velocity vs. distance for this idealized situation.\"],\"head_type_candidate\":\"thermodynamic quantities\",\"tail_type_candidate\":\"spatial quantity\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"temperature, pressure, and velocity\",\"canonical_entity\":null,\"referent_scope\":\"calculated quantities for the idealized situation\"},\"tail\":{\"entity_surface\":\"distance\",\"canonical_entity\":null,\"referent_scope\":\"distance axis in the calculation results\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"The source describes depicting calculation results of temperature, pressure, and velocity versus distance; this is a presentation relation, not a physical law.\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"for this idealized situation\",\"scope_id\":\"p11_q1\"},{\"qualifier_kind\":\"modality\",\"attachment\":\"relation\",\"value\":\"we can depict\",\"scope_id\":\"p11_q2\"}],\"knowledge_scope\":\"example\"},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"}],\"coverage_status\":\"complete_for_supplied_scope\"}",
+  "reasoning_tokens": null,
+  "request_key": "857ef5450fb23b8df4f608cd7091b580a873234d880fd58f795e807883ec2d7b",
+  "response_id": "6d78cc88-398f-40a3-a15a-013cd1191b0e",
+  "response_status": "invalid_contract",
+  "returned_model_id": "deepseek-flash",
+  "task_id": "development_pool_20261117_v1:book_88e8310c22d9ffd3_excerpt_02",
+  "task_type": "source_candidate_extraction_v1",
+  "transport_metrics": {
+    "body_bytes_received": 2733,
+    "body_chunk_count": 2,
+    "client_request_id": "attempt_1ec9ad500a704361be21020d818031fb",
+    "first_body_byte_ms": 11880.864,
+    "gateway_request_id": null,
+    "http_status": 200,
+    "max_inter_body_chunk_gap_ms": 0.164,
+    "request_body_bytes": 24040,
+    "response_headers": {
+      "connection": "keep-alive",
+      "content-encoding": "gzip",
+      "content-type": "application/json",
+      "date": "Tue, 17 Nov 2026 08:39:25 GMT",
+      "server": "openresty",
+      "transfer-encoding": "chunked"
+    },
+    "response_headers_ms": 2266.024,
+    "stream": false,
+    "trace": [
+      {
+        "elapsed_ms": 1964.174,
+        "event": "connection.connect_tcp.started"
+      },
+      {
+        "elapsed_ms": 2044.441,
+        "event": "connection.connect_tcp.complete"
+      },
+      {
+        "elapsed_ms": 2044.526,
+        "event": "connection.start_tls.started"
+      },
+      {
+        "elapsed_ms": 2079.608,
+        "event": "connection.start_tls.complete"
+      },
+      {
+        "elapsed_ms": 2079.717,
+        "event": "http11.send_request_headers.started"
+      },
+      {
+        "elapsed_ms": 2080.043,
+        "event": "http11.send_request_headers.complete"
+      },
+      {
+        "elapsed_ms": 2080.053,
+        "event": "http11.send_request_body.started"
+      },
+      {
+        "elapsed_ms": 2080.34,
+        "event": "http11.send_request_body.complete"
+      },
+      {
+        "elapsed_ms": 2080.35,
+        "event": "http11.receive_response_headers.started"
+      },
+      {
+        "elapsed_ms": 2264.51,
+        "event": "http11.receive_response_headers.complete"
+      },
+      {
+        "elapsed_ms": 2266.128,
+        "event": "http11.receive_response_body.started"
+      },
+      {
+        "elapsed_ms": 11881.203,
+        "event": "http11.receive_response_body.complete"
+      },
+      {
+        "elapsed_ms": 11881.283,
+        "event": "http11.response_closed.started"
+      },
+      {
+        "elapsed_ms": 11881.303,
+        "event": "http11.response_closed.complete"
+      }
+    ],
+    "transport_elapsed_ms": 11888.36
+  },
+  "validation_errors": [
+    "$.triplets[2].semantic_context.knowledge_scope: required",
+    "$.triplets[3].semantic_context.knowledge_scope: required",
+    "$.triplets[4].semantic_context.knowledge_scope: required",
+    "$.triplets[5].semantic_context.knowledge_scope: required"
+  ],
+  "voter_id": "extractor",
+  "attempts": [
+    {
+      "attempt_id": "attempt_1ec9ad500a704361be21020d818031fb",
+      "client_request_id": "attempt_1ec9ad500a704361be21020d818031fb",
+      "counts_as_human_label": false,
+      "counts_as_review_vote": false,
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 6710,
+      "late_response": false,
+      "latency_ms": 11890,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 2518,
+      "proposal_digest": "fbe9032d96e6012991ff7263c6d8915b30294c7763a329ee8ca8c29c0fbf512e",
+      "provider_started_at": 1794904763.6134653,
+      "queue_time_ms": 300,
+      "raw_response": "{\"triplets\":[{\"head\":\"frictionless and adiabatic process\",\"surface_relation\":\"defines\",\"tail\":\"isentropic process\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"By our earlier assumptions\",\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"By our earlier assumptions, we stated that the process was frictionless and adiabatic. Recall, again from thermodynamics, that this actually defines an isentropic process [1].\"],\"head_type_candidate\":\"process\",\"tail_type_candidate\":\"process\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"the process was frictionless and adiabatic\",\"canonical_entity\":null,\"referent_scope\":\"the process under earlier assumptions in this section\"},\"tail\":{\"entity_surface\":\"isentropic process\",\"canonical_entity\":null,\"referent_scope\":\"thermodynamic process type\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"Source states that the frictionless and adiabatic assumptions define an isentropic process; this is a definitional characterization, not a generic equivalence.\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"By our earlier assumptions\",\"scope_id\":\"p2_q1\"},{\"qualifier_kind\":\"discourse\",\"attachment\":\"relation\",\"value\":\"actually\",\"scope_id\":\"p2_q2\"}],\"knowledge_scope\":\"conditional\"},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"absolute temperature T of our system\",\"surface_relation\":\"is related to\",\"tail\":\"initial temperature of the gas Ti\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"For a closed system (one with constant mass)\",\"time_scope\":null,\"applicability\":null,\"modality\":\"can\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"For a closed system (one with constant mass), it can be shown [6] that the absolute temperature  $T$  of our system is related to the initial temperature of the gas  $T_{i}$  through\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"thermodynamic quantity\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"absolute temperature  $T$  of our system\",\"canonical_entity\":null,\"referent_scope\":\"temperature of the closed system in this section\"},\"tail\":{\"entity_surface\":\"initial temperature of the gas  $T_{i}$\",\"canonical_entity\":null,\"referent_scope\":\"initial gas temperature in this section\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"The source asserts a relation between absolute temperature and initial gas temperature but the specific relation is expressed by an omitted equation; no direction or functional form is inferred.\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"For a closed system (one with constant mass)\",\"scope_id\":\"p2_q3\"},{\"qualifier_kind\":\"modality\",\"attachment\":\"relation\",\"value\":\"it can be shown\",\"scope_id\":\"p2_q4\"}],\"knowledge_scope\":\"conditional\"},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"pressure\",\"surface_relation\":\"determined from\",\"tail\":\"ideal gas Equation 2.4\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"4. Determine pressure from the ideal gas Equation 2.4.\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"equation\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"pressure\",\"canonical_entity\":null,\"referent_scope\":\"pressure at the position of interest in the procedure\"},\"tail\":{\"entity_surface\":\"ideal gas Equation 2.4\",\"canonical_entity\":null,\"referent_scope\":\"the ideal gas equation labeled 2.4 in the source\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"This is a procedural instruction to determine pressure from the ideal gas equation; it is not a general causal or definitional relation.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"gas temperature\",\"surface_relation\":\"determined from\",\"tail\":\"Equation 2.17\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"3. Determine the gas temperature at this position from Equation 2.17.\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"equation\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"gas temperature at this position\",\"canonical_entity\":null,\"referent_scope\":\"gas temperature at the position of interest in the procedure\"},\"tail\":{\"entity_surface\":\"Equation 2.17\",\"canonical_entity\":null,\"referent_scope\":\"the equation labeled 2.17 in the source\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"Procedural instruction to determine gas temperature from Equation 2.17; the equation itself is omitted and no functional form is inferred.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"volume\",\"surface_relation\":\"determined at\",\"tail\":\"position of interest\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"2. Determine the volume at the position of interest by using\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"spatial position\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"the volume\",\"canonical_entity\":null,\"referent_scope\":\"volume in the procedure at the position of interest\"},\"tail\":{\"entity_surface\":\"the position of interest\",\"canonical_entity\":null,\"referent_scope\":\"position of interest in the procedure\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"The source instructs determining volume at a position; this is a procedural relation, not a general property of volume.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"work term\",\"surface_relation\":\"solved up to\",\"tail\":\"position of interest x_proj\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"1. Solve for the work term up to the position of interest  $x_{\\\\mathrm{proj}}$  using\"],\"head_type_candidate\":\"thermodynamic quantity\",\"tail_type_candidate\":\"spatial position\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"the work term\",\"canonical_entity\":null,\"referent_scope\":\"work term in the procedure\"},\"tail\":{\"entity_surface\":\"the position of interest  $x_{\\\\mathrm{proj}}$\",\"canonical_entity\":null,\"referent_scope\":\"projected position of interest in the procedure\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"Procedural instruction to solve for work up to a position; not a general relation between work and position.\"},\"qualifier_attachments\":[]},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"},{\"head\":\"temperature, pressure, and velocity\",\"surface_relation\":\"depicted vs.\",\"tail\":\"distance\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"for this idealized situation\",\"time_scope\":null,\"applicability\":null,\"modality\":\"can\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"From Figures 2.2 through 2.4, we can depict the results of a calculation for temperature, pressure, and velocity vs. distance for this idealized situation.\"],\"head_type_candidate\":\"thermodynamic quantities\",\"tail_type_candidate\":\"spatial quantity\",\"tail_kind\":\"entity\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"temperature, pressure, and velocity\",\"canonical_entity\":null,\"referent_scope\":\"calculated quantities for the idealized situation\"},\"tail\":{\"entity_surface\":\"distance\",\"canonical_entity\":null,\"referent_scope\":\"distance axis in the calculation results\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"The source describes depicting calculation results of temperature, pressure, and velocity versus distance; this is a presentation relation, not a physical law.\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"for this idealized situation\",\"scope_id\":\"p11_q1\"},{\"qualifier_kind\":\"modality\",\"attachment\":\"relation\",\"value\":\"we can depict\",\"scope_id\":\"p11_q2\"}],\"knowledge_scope\":\"example\"},\"datatype\":null,\"value\":null,\"unit\":null,\"language\":\"en\"}],\"coverage_status\":\"complete_for_supplied_scope\"}",
+      "reasoning_tokens": null,
+      "request_key": "857ef5450fb23b8df4f608cd7091b580a873234d880fd58f795e807883ec2d7b",
+      "response_id": "6d78cc88-398f-40a3-a15a-013cd1191b0e",
+      "response_status": "invalid_contract",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "development_pool_20261117_v1:book_88e8310c22d9ffd3_excerpt_02",
+      "task_type": "source_candidate_extraction_v1",
+      "transport_metrics": {
+        "body_bytes_received": 2733,
+        "body_chunk_count": 2,
+        "client_request_id": "attempt_1ec9ad500a704361be21020d818031fb",
+        "first_body_byte_ms": 11880.864,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 0.164,
+        "request_body_bytes": 24040,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Tue, 17 Nov 2026 08:39:25 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 2266.024,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 1964.174,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2044.441,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2044.526,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2079.608,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2079.717,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2080.043,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2080.053,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2080.34,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2080.35,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2264.51,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2266.128,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 11881.203,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 11881.283,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 11881.303,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 11888.36
+      },
+      "validation_errors": [
+        "$.triplets[2].semantic_context.knowledge_scope: required",
+        "$.triplets[3].semantic_context.knowledge_scope: required",
+        "$.triplets[4].semantic_context.knowledge_scope: required",
+        "$.triplets[5].semantic_context.knowledge_scope: required"
+      ],
+      "voter_id": "extractor",
+      "attempt_no": 1
+    }
+  ],
+  "actual_calls": 1
+}

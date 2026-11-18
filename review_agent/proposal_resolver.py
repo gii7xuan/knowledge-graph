@@ -47,7 +47,7 @@ def selected_proposal(repository, candidate, decision):
     policy = proposal["committee_policy"]
     members = [m["id"] for m in proposal["committee_members"]]
     members.extend("unconfigured_" + str(i + 1) for i in range(policy["committee_size"] - len(members)))
-    consensus = aggregate_votes(votes, Committee(members, policy["required_votes"], policy["minimum_distinct_families"], proposal["committee_version"]),
+    consensus = aggregate_votes(votes, Committee(members, policy["required_votes"], policy["minimum_distinct_families"], proposal["committee_version"], policy.get('vote_weighting')),
                                 proposal=proposal, proposal_digest=proposal["proposal_digest"])
     eligible = set(consensus["eligible_voter_ids"])
     return proposal, [vote for vote in votes if vote["voter_id"] in eligible]

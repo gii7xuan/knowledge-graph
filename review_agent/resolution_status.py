@@ -27,7 +27,8 @@ def classify(outcome, tasks):
     recommendation=outcome.get('recommendation')
     complete=bool(outcome.get('review_completed'))
     required=max((d.get('required_seats',0) for d in outcome.get('dimension_results',{}).values()),default=0)
-    if required and len(outcome.get('whole_vote_eligible_voter_ids',[]))<required and not any(t.get('semantic_dependency') for t in tasks):
+    weighted_complete=bool(outcome.get('weight_snapshot') and all(d.get('judgment_complete') for d in outcome.get('dimension_results',{}).values()))
+    if required and not weighted_complete and len(outcome.get('whole_vote_eligible_voter_ids',[]))<required and not any(t.get('semantic_dependency') for t in tasks):
         tasks.append({'task_type':'committee_material_incomplete','semantic_dependency':True,
             'execution_unknown':False,'usage_unknown':False,'automatic_resend':False,
             'required_action':'bounded_contract_or_execution_recovery'})

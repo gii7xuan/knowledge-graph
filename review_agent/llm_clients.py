@@ -108,6 +108,8 @@ class OpenAICompatibleClient:
         started = time.monotonic()
         from .transport_diagnostics import TransportDiagnostics, active_transport
         diagnostics = TransportDiagnostics(secrets=(self.api_key,))
+        client_request_id=getattr(self,'client_request_id',None)
+        if client_request_id:diagnostics.metrics['client_request_id']=client_request_id
         with active_transport(diagnostics):
             try:
                 return self._complete_json(payload, system_prompt=system_prompt, started=started,
@@ -146,10 +148,12 @@ class OpenAICompatibleClient:
             **({'stream':True,'stream_options':{'include_usage':True}} if self.stream_responses else {}),
             **({'timeout':float(kwargs['timeout_seconds'])} if kwargs.get('timeout_seconds') else {}),
             **({"max_tokens": int(kwargs["max_tokens"])} if kwargs.get("max_tokens") else {}),
+            **({'extra_headers':{'X-Client-Request-Id':self.client_request_id}} if getattr(self,'client_request_id',None) else {}),
         )
         if self.stream_responses:
             parts=[];usage=None;finish=None;response_id=None;model=None
             first_chunk=None;first_content=None;terminal=None;last_chunk=None;max_gap=0;chunks=0;reasoning_chars=0
+            delta_fields=set();non_content_string_chars={}
             def snapshot():
                 return LLMResponse(''.join(parts),latency_ms=int((time.monotonic()-started)*1000),
                     input_tokens=getattr(usage,'prompt_tokens',None),output_tokens=getattr(usage,'completion_tokens',None),
@@ -158,7 +162,8 @@ class OpenAICompatibleClient:
                     gateway_request_id=diagnostics.gateway_request_id,
                     transport_metrics={**diagnostics.snapshot(),'stream':True,'first_chunk_ms':first_chunk,'first_content_ms':first_content,
                         'terminal_ms':terminal,'max_inter_chunk_gap_ms':max_gap if chunks>1 else None,
-                        'chunk_count':chunks,'visible_chars':sum(map(len,parts)),'reasoning_chars':reasoning_chars})
+                        'chunk_count':chunks,'visible_chars':sum(map(len,parts)),'reasoning_chars':reasoning_chars,
+                        'delta_fields':sorted(delta_fields),'non_content_string_chars':dict(non_content_string_chars)})
             try:
                 for chunk in response:
                     arrived=int((time.monotonic()-started)*1000)
@@ -170,13 +175,19 @@ class OpenAICompatibleClient:
                     model=getattr(chunk,'model',None) or model
                     for choice in getattr(chunk,'choices',[]) or []:
                         delta=getattr(choice,'delta',None)
+                        values=(delta.model_dump(exclude_none=True) if hasattr(delta,'model_dump') else vars(delta) if hasattr(delta,'__dict__') else {})
+                        delta_fields.update(values)
+                        for name,value in values.items():
+                            if name not in {'content','role'} and isinstance(value,str):
+                                non_content_string_chars[name]=non_content_string_chars.get(name,0)+len(value)
                         content=getattr(delta,'content',None)
                         if content:
                             if first_content is None:first_content=arrived
                             parts.append(content)
                         # Count, but never retain or log, private reasoning text.
-                        reasoning=getattr(delta,'reasoning_content',None)
-                        if isinstance(reasoning,str):reasoning_chars+=len(reasoning)
+                        for name in ('reasoning_content','reasoning','analysis'):
+                            reasoning=getattr(delta,name,None)
+                            if isinstance(reasoning,str):reasoning_chars+=len(reasoning)
                         finish=getattr(choice,'finish_reason',None) or finish
                         if finish is not None and terminal is None:terminal=arrived
                 if finish is None:raise ConnectionError('stream ended without a terminal completion; provider outcome unknown')

@@ -1,0 +1,41 @@
+test_anchor_exists_but_semantic_error_quarantines (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_complete_independent_committee (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_cross_item_citation_and_duplicate_rejected (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_no_evidence_or_scope_pass (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_tampered_packet_never_sent (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_transport_metadata_and_truncation_survive (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_unknown_or_missing_never_approves (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_wrong_binding_or_family_collision_blocks (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_release_roundtrip_quarantine_identity_and_binding (tests.test_definition_audit.FreezeArtifactTests) ... ok
+test_generic_abstention_does_not_count_as_semantic_detection (tests.test_definition_audit.MappingAcceptanceTests) ... ok
+test_missing_material_requires_fresh_complete_committee (tests.test_definition_audit.MappingAcceptanceTests) ... ok
+test_post_run_diagnostic_does_not_modify_the_historical_decision (tests.test_mapping_preflight.MappingPreflightIntegrationTests) ... ok
+test_preflight_is_dispatched_before_mapping_and_preserves_valid_source_votes (tests.test_mapping_preflight.MappingPreflightIntegrationTests) ... ok
+test_budget_failure_does_not_drop_competitors_or_claim_absence (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_complete_packet_is_checked_before_semantic_review_without_global_replacement (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_declared_multilingual_alias_is_recalled_without_assigning_a_formal_id (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_definition_empty_in_release_remains_incomplete_after_search (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_empty_definition_containers_are_not_mistaken_for_definition_text (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_incomplete_mapping_metadata_and_lexical_scan_cannot_authorize_extension (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_incorrect_document_local_identity_does_not_pass_preflight (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_missing_subset_definition_triggers_full_release_retrieval (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_preflight_is_frozen_to_candidate_evidence_and_context (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_same_name_classes_are_not_silently_merged (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_same_name_competitors_and_type_definitions_are_preserved (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_unassigned_entity_type_is_not_inferred_from_relation_constraints (tests.test_mapping_preflight.MappingPreflightTests) ... ok
+test_ontology_releases (unittest.loader._FailedTest) ... ERROR
+
+======================================================================
+ERROR: test_ontology_releases (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_ontology_releases
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\unittest\loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'tests.test_ontology_releases'
+
+
+----------------------------------------------------------------------
+Ran 26 tests in 5.029s
+
+FAILED (errors=1)

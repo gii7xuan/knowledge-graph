@@ -61,7 +61,8 @@ def execute(service,payload):
     voters=_configured_validators(service.config)
     if not voters:raise ValidationError('no configured independent review committee')
     settings=service.config.get('consensus') or {}
-    committee=Committee([v['id'] for v in voters],int(settings.get('required_votes',3)),int(settings.get('minimum_distinct_families',3)))
+    from .vote_weighting import configured_policy
+    committee=Committee([v['id'] for v in voters],int(settings.get('required_votes',3)),int(settings.get('minimum_distinct_families',3)),weighting_policy=configured_policy(service.config))
     if len(voters)!=int(settings.get('committee_size',len(voters))):raise ValidationError('complete configured committee required')
     budget=CaseBudget(service.config.get('budget') or {},repository,[repository.ensure_case(candidate_id,service.config.get('case_budget'))],task_type=action,task_id=candidate_id)
     if action=='review_dispute':

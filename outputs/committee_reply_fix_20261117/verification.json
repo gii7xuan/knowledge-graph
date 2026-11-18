@@ -1,0 +1,112 @@
+{
+  "verification_passed": true,
+  "valid_original_responses": 12,
+  "prior_valid_original_responses": 9,
+  "initial_requests": 12,
+  "field_correction_calls": 0,
+  "live_shape_projections": 0,
+  "new_http504": 0,
+  "new_unknown": 0,
+  "known_input_tokens": 267663,
+  "known_output_tokens": 14906,
+  "known_total_tokens": 282569,
+  "price": null,
+  "old_unknown_still_unresolved": 3,
+  "old_unknown_requests_resent": 0,
+  "original_reply_schema_and_consistency_checks_passed": true,
+  "all_receipt_bindings_verified": true,
+  "core_mapping_acceptance_gate_passed": true,
+  "air_positive_accepted": false,
+  "any_positive_research_accept_demonstrated": true,
+  "prior_study_and_source_database_hashes_unchanged": true,
+  "production_head_unchanged": true,
+  "study_code_unchanged": true,
+  "candidates_unchanged": true,
+  "prior_reliability_unchanged": true,
+  "outbox_and_job_counts": {
+    "import_outbox": 0,
+    "ontology_publish_outbox": 0,
+    "graph_outbox": 0,
+    "jobs": 0
+  },
+  "production_written": false,
+  "human_gold": false,
+  "paper_accuracy": null,
+  "regression_tests": 164,
+  "targeted_tests": 32,
+  "compatibility_tests": 132,
+  "regression_logs": [
+    "final_targeted_checks.log",
+    "compatibility_checks.log"
+  ],
+  "rows": [
+    {
+      "fixture": "positive_mapping",
+      "valid_responses": 3,
+      "operation": "manual_review",
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "qualifier_statuses": {
+        "judge_a": "unknown",
+        "judge_b": "unknown",
+        "judge_c": "unknown"
+      },
+      "all_three_consistent": true
+    },
+    {
+      "fixture": "semantic_mismatch",
+      "valid_responses": 3,
+      "operation": "revise",
+      "dimension_statuses": {
+        "source": "contradicted",
+        "expression": "semantic_revision",
+        "mapping": "conflict",
+        "scope": "include"
+      },
+      "qualifier_statuses": {
+        "judge_a": "unknown",
+        "judge_b": "unknown",
+        "judge_c": "unknown"
+      },
+      "all_three_consistent": true
+    },
+    {
+      "fixture": "missing_material",
+      "valid_responses": 3,
+      "operation": "manual_review",
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "qualifier_statuses": {
+        "judge_a": "unknown",
+        "judge_b": "unknown",
+        "judge_c": "unknown"
+      },
+      "all_three_consistent": true
+    },
+    {
+      "fixture": "parallel_positive_mapping",
+      "valid_responses": 3,
+      "operation": "accept",
+      "dimension_statuses": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "qualifier_statuses": {
+        "judge_a": "pass",
+        "judge_b": "pass",
+        "judge_c": "pass"
+      },
+      "all_three_consistent": true
+    }
+  ]
+}

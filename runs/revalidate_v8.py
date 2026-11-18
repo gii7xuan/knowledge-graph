@@ -22,7 +22,7 @@ def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def read(path):return json.loads(path.read_text(encoding='utf-8'))
 def committee(proposal):
     p=proposal['committee_policy']
-    return Committee([m['id'] for m in proposal['committee_members']],p['required_votes'],p['minimum_distinct_families'],proposal['committee_version'])
+    return Committee([m['id'] for m in proposal['committee_members']],p['required_votes'],p['minimum_distinct_families'],proposal['committee_version'],p.get('vote_weighting'))
 
 
 def save(directory,name,value,*,jsonl=False):

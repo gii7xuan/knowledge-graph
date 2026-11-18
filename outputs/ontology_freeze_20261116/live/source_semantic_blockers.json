@@ -1,0 +1,68 @@
+{
+  "version": "source_semantic_veto_v1",
+  "human_confirmed": false,
+  "rule": "grounded unresolved semantic concerns block freeze even when all three model votes pass; blockers cannot approve a relation",
+  "findings": [
+    {
+      "relation_id": "R_0504da52903bd6259f7d",
+      "label": "具有部件",
+      "blocking": true,
+      "finding_type": "source_does_not_entail_part_whole_relation",
+      "affected_checks": [
+        "definition_fidelity",
+        "endpoint_signature"
+      ],
+      "evidence_ids": [
+        "def_ev_d049bd18067678cabfdc37d9"
+      ],
+      "source_quotes": [
+        "升弧段由  $a$  点至顶点  $s$  积分式（1-64）"
+      ],
+      "reason": "所引“由…点至…点积分”陈述积分区间，未明确陈述区段与所指端点构成“具有部件”的概念组成关系；将区间用语直接解释成组成关系缺少充分依据。",
+      "proposed_rewrite": null,
+      "human_confirmed": false,
+      "author": "codex_source_bound_semantic_check"
+    },
+    {
+      "relation_id": "R_0a4563d5984464c2626f",
+      "label": "具有部件",
+      "blocking": true,
+      "finding_type": "source_does_not_entail_part_whole_relation",
+      "affected_checks": [
+        "definition_fidelity",
+        "endpoint_signature"
+      ],
+      "evidence_ids": [
+        "def_ev_9ea0998d5750bdf645311757"
+      ],
+      "source_quotes": [
+        "降弧段由  $s$  点至  $d$  点积分式（1-64）"
+      ],
+      "reason": "所引“由…点至…点积分”陈述积分区间，未明确陈述区段与所指端点构成“具有部件”的概念组成关系；将区间用语直接解释成组成关系缺少充分依据。",
+      "proposed_rewrite": null,
+      "human_confirmed": false,
+      "author": "codex_source_bound_semantic_check"
+    },
+    {
+      "relation_id": "R_c36ca12efed7fc47213a",
+      "label": "具有部件",
+      "blocking": true,
+      "finding_type": "source_does_not_entail_part_whole_relation",
+      "affected_checks": [
+        "definition_fidelity",
+        "endpoint_signature"
+      ],
+      "evidence_ids": [
+        "def_ev_298ee119728d23f0ac9a0b85"
+      ],
+      "source_quotes": [
+        "升弧段由  $a$  点至顶点  $s$  积分式（1-64）"
+      ],
+      "reason": "所引“由…点至…点积分”陈述积分区间，未明确陈述区段与所指端点构成“具有部件”的概念组成关系；将区间用语直接解释成组成关系缺少充分依据。",
+      "proposed_rewrite": null,
+      "human_confirmed": false,
+      "author": "codex_source_bound_semantic_check"
+    }
+  ],
+  "discovery": "first two noted in source inspection before audit launch; same quoted pattern checked across all restored definitions"
+}

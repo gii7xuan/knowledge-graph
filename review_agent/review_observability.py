@@ -92,7 +92,8 @@ def assess_vote(vote,proposal,*,frozen_request=None):
         errors.append(error_item('output_incomplete','truncated or interrupted output cannot be a full vote'));global_ok=False
     if vote.get('raw_response') is not None or vote.get('corrected_response') is not None or vote.get('response_status')=='ok':
         try:
-            raw=deepcopy(vote.get('corrected_response')) if vote.get('corrected_response') is not None else _parse_content(vote.get('raw_response'))
+            raw=(deepcopy(vote['shape_projected_response']) if vote.get('shape_projected_response') is not None else
+                 deepcopy(vote['corrected_response']) if vote.get('corrected_response') is not None else _parse_content(vote.get('raw_response')))
         except (ValueError,TypeError):
             if contract and vote.get('response_status')=='ok':raw=raw_from_vote(vote,version)
             else:errors.append(error_item('parse','raw response is not a complete JSON object'));global_ok=False
@@ -102,8 +103,14 @@ def assess_vote(vote,proposal,*,frozen_request=None):
     if global_ok:
         try:
             prompt_for(proposal)
-            if vote.get('response_origin')=='field_patch_merge':
+            if (vote.get('response_origin')=='field_patch_merge' or vote.get('response_shape_projection') is not None
+                    or vote.get('shape_projected_response') is not None
+                    or vote.get('prompt_version')=='triple_validator_v8_consistency_v6' and vote.get('response_status')=='ok'):
                 trace_errors=contract.validate_correction_trace(vote)
+                if trace_errors:raise ValueError('; '.join(trace_errors))
+            if vote.get('response_shape_projection') is not None:
+                from .response_projection import validate
+                trace_errors=validate(vote,proposal)
                 if trace_errors:raise ValueError('; '.join(trace_errors))
         except (ValueError,KeyError,TypeError) as exc:
             errors.append(error_item('provenance',exc));global_ok=False
@@ -213,6 +220,7 @@ def summarize_dimensions(votes,proposal,committee):
         selected[voter]=vote;report=assess_vote(vote,proposal)
         model_ids={str(x).strip().casefold() for x in (vote.get('model_identity') or vote.get('model_id'),vote.get('returned_model_id')) if x}
         if model_ids & identities:
+            report['global_trustworthy']=False
             report['whole_vote_eligible']=False
             for observation in report['axis_observations'].values():observation.update(usable=False,opinion=None,missing_reasons=['duplicate model identity'])
         identities.update(model_ids);reports[voter]=report
@@ -231,8 +239,12 @@ def summarize_dimensions(votes,proposal,committee):
             'seat_coverage_complete':covered,'judgment_complete':covered and status not in {'unresolved','unclear','context_incomplete'},
             'valid_seats':len(usable),'required_seats':len(roster),'missing_voter_ids':sorted(roster-{o['voter_id'] for o in usable}),
             'has_conflict':len(states)>1,'observations':observations}
-    return {'version':VERSION,'dimension_results':result,'vote_validation':reports,'duplicate_records_ignored':duplicates,
+    report = {'version':VERSION,'dimension_results':result,'vote_validation':reports,'duplicate_records_ignored':duplicates,
         'whole_vote_eligible_voter_ids':sorted(v for v,r in reports.items() if r['whole_vote_eligible'])}
+    if committee.weighting_policy:
+        from .vote_weighting import weight_report
+        report = weight_report(report, list(selected.values()), proposal, committee)
+    return report
 
 
 def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None,context=None,decision=None):
@@ -244,14 +256,19 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
         report['resolution_snapshot_id']=snapshot['snapshot_id']
         report['original_whole_vote_eligible_voter_ids']=report['whole_vote_eligible_voter_ids']
         report['whole_vote_eligible_voter_ids']=snapshot['whole_vote_eligible_voter_ids']
+        if snapshot.get('weight_snapshot'):report['weight_snapshot']=snapshot['weight_snapshot']
     dimensions=report['dimension_results'];blockers=[]
     complete=set(report['whole_vote_eligible_voter_ids'])==set(committee.voter_ids)
+    if committee.weighting_policy:
+        complete=all(d['judgment_complete'] for d in dimensions.values())
     if not complete:blockers.append('required_committee_incomplete')
     guard=proposal.get('ontology_check') or {}
     if guard.get('status')!='pass':blockers.append('ontology_guard_not_passed')
     assigned=proposal.get('candidate',{}).get('triple',{}).get('relation_id')
     mapped=(snapshot['effective_mapping_bindings'].values() if snapshot else
         [(v.get('dimensions') or {}).get('mapping',{}).get('relation_id') for v in votes if v.get('voter_id') in report['whole_vote_eligible_voter_ids']])
+    if committee.weighting_policy:
+        mapped=[assigned] if dimensions['mapping']['status']=='valid' else [None]
     if not assigned or any(value!=assigned for value in mapped):blockers.append('formal_mapping_not_bound_to_candidate')
     if proposal.get('candidate',{}).get('contract_version')=='extraction_candidate_v4' and proposal['candidate'].get('fact_key_state')!='canonical':blockers.append('candidate_identity_unresolved')
     from .revision_patch import expression_diagnostics
@@ -269,7 +286,12 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
     if snapshot:
         if snapshot['unresolved_dispute_ids']:blockers.append('unresolved_claim_dispute')
         if snapshot['new_obligations']:blockers.append('resolution_dependency_review_pending')
-    elif any(d.get('status')=='open' for d in (context.get('dispute_report') or decision.get('consensus',{}).get('dispute_report') or {}).get('disputes',[])):blockers.append('unresolved_claim_dispute')
+    else:
+        disputes = deepcopy(context.get('dispute_report') or decision.get('consensus',{}).get('dispute_report') or {})
+        if committee.weighting_policy:
+            from .vote_weighting import annotate_disputes
+            annotate_disputes(disputes, report)
+        if any(d.get('status') in {'open','human_review'} for d in disputes.get('disputes',[])):blockers.append('unresolved_claim_dispute')
     execution=('not_started' if audit_status=='not_started' else 'running' if audit_status=='running' else
         'timed_out' if audit_status=='timeout' else 'interrupted' if audit_status in {'interrupted','superseded'} else
         'paused' if audit_status=='paused' else 'failed' if audit_status=='failed' else 'completed' if complete else 'partial_failure')
@@ -286,6 +308,15 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
             (not snapshot or snapshot['semantic_obligations_complete']),
         'recommendation':recommendation,'action_taken':'none','blocking_reasons':sorted(set(blockers)),
         'writes_authorized':False,'derivation':'current_frozen_input_only'}
+    if committee.weighting_policy:
+        from .vote_weighting import operation
+        hard = [b for b in blockers if not b.startswith(tuple(a+':' for a in AXES))
+                and b not in {'required_committee_incomplete', 'unresolved_dimension_disagreement'}]
+        if dimensions['expression']['status'] in {'semantic_revision','lossless_normalization'} or dimensions['source']['status']=='contradicted':
+            hard = [b for b in hard if b.startswith(('execution:', 'resolution_dependency', 'gap:version_stale',
+                'gap:validation_missing', 'gap:protected_evidence', 'gap:unreviewed_discovered'))]
+        result['research_operation']=operation(report, blockers=hard)
+        result['policy_hash']=sha256_json({'observability':policy(),'weighting':committee.weighting_policy})
     if context.get('resolution_snapshots_enabled'):
         from .resolution_status import classify
         result.update(classify(result,context.get('technical_recovery_tasks',[])))

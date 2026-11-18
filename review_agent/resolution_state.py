@@ -80,6 +80,7 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
                 or proposal.get('candidate_revision') != candidate['revision']
                 or proposal.get('dispute', {}).get('claim') != target['claim']
                 or proposal.get('committee_members') != base_proposal.get('committee_members')
+                or (committee.weighting_policy and proposal.get('committee_policy') != base_proposal.get('committee_policy'))
                 or proposal.get('resolution_policy') != VERSION):
             reason = 'focused binding or dependency-review policy mismatch'
         elif target['check'] == 'mapping' and formal_context_hash(proposal.get('ontology_context')) != formal_context_hash(ontology_context):
@@ -110,12 +111,22 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
             'supporting_evidence_ids':sorted({eid for v in votes for eid in v['positive_support']['evidence_ids']}),
             'counter_evidence_ids':sorted({eid for v in votes for eid in v['counterevidence_search']['evidence_ids']}),
             'other_affected_checks': sorted(other), 'proposal_digest': proposal['proposal_digest']})
+        if decision.get('weight_snapshot'):
+            accepted[-1]['weight_snapshot'] = deepcopy(decision['weight_snapshot'])
         targets[did]=target
         # These are ephemeral check observations. They are never serialized as replacement votes.
-        for observation in raw.values():
+        for voter_id, observation in raw.items():
             if check not in observation.get('dimensions', {}):
                 continue
             supports = status == 'resolved_supports'
+            if committee.weighting_policy:
+                focused = next((v for v in votes if v.get('voter_id')==voter_id and voter_id in decision['eligible_voter_ids']), None)
+                if not focused:continue
+                if focused['answer'] not in {'supports','opposes'}:
+                    observation['dimensions'][check]['status']='unknown'
+                    continue
+                supports = focused['answer']=='supports'
+                observation['dimensions'][check]['evidence_ids']=list(focused['reviewed_evidence_ids'])
             observation['dimensions'][check]['status'] = (
                 'supported' if supports else 'contradicted') if check == 'triple_support' else (
                 'matched' if supports else 'candidate_mapping_error') if check == 'mapping' else (
@@ -169,6 +180,24 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
             'route':'supplement_mapping_information' if check=='mapping' else 'human_scope_review' if check=='knowledge_scope' else 'supplement_source_context',
             'required_material':'new evidence or formal context affecting this check','dependency_generated':True})
     unresolved = [i for i in issue_ledger if i.get('status', 'open') != 'resolved']
+    weighted_report = None
+    if committee.weighting_policy:
+        from .review_axes import axis_opinion
+        from .vote_weighting import weight_report, annotate_disputes
+        effective_report = deepcopy(report)
+        for axis, dimension in effective_report['dimension_results'].items():
+            for observation in dimension['observations']:
+                if observation['voter_id'] in raw and observation['usable']:
+                    observation['opinion']=axis_opinion(raw[observation['voter_id']],axis)
+        resolved_counters = {eid for a in accepted if a['check']=='counterevidence' and a['status']=='resolved_supports'
+                             for eid in a['evidence_ids']}
+        weighted_report=weight_report(effective_report,effective_votes,base_proposal,committee,
+            raw_overrides=raw,evidence_bundle=bundle,resolved_counter_ids=resolved_counters)
+        dimensions=weighted_report['dimension_results']
+        for axis, dimension in dimensions.items():
+            dimension['resolution_ids']=[a['resolution_id'] for a in accepted if axis in CHECK_AXES[a['check']]]
+        annotate_disputes(disputes,weighted_report)
+        complete=all(d['judgment_complete'] for d in dimensions.values())
     result = {'version': VERSION, 'candidate_hash': sha256_json(candidate), 'candidate_revision': candidate['revision'],
         'base_proposal_digest': base_proposal['proposal_digest'], 'original_votes_hash': original_hash,
         'evidence_hash': bundle.get('evidence_hash'), 'ontology_context_hash': sha256_json(ontology_context),
@@ -187,11 +216,14 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
         'current_disputes':deepcopy(disputes['disputes']),
         'expression_findings':[dict(deepcopy(f),voter_id=v) for v,r in raw.items() for f in r.get('expression_findings',[])],
         'unresolved_issue_ids': [i['issue_id'] for i in unresolved if i.get('critical')],
-        'unresolved_dispute_ids': [did for did in targets if not any(a['dispute_id'] == did for a in accepted)],
+        'unresolved_dispute_ids': [did for did in targets if not any(a['dispute_id'] == did for a in accepted)
+            and (not committee.weighting_policy or next((d.get('status') for d in disputes['disputes'] if d['dispute_id']==did),None) not in {'nonblocking_abstention','policy_equivalent'})],
         'retained_counter_evidence_ids': sorted({e for v in [*original_votes,*effective_votes] for e in v.get('counter_evidence_ids', [])}|
                                               {e for r in accepted for e in r['counter_evidence_ids']}),
         'original_votes_changed': False, 'whole_candidate_admitted': False}
     result['semantic_obligations_complete'] = complete and not pending and not result['unresolved_issue_ids'] and not result['unresolved_dispute_ids']
+    if weighted_report:
+        result['weight_snapshot']=weighted_report['weight_snapshot']
     if any(a['check']=='mapping' and a['status']=='resolved_supports' for a in accepted) and dimensions['mapping']['status']=='valid':
         result['effective_mapping_bindings']={v:candidate['triple']['relation_id'] for v in eligible}
     result['snapshot_id'] = 'snapshot_' + sha256_json(result)
@@ -214,12 +246,16 @@ def apply_consensus(consensus, snapshot):
     result = deepcopy(consensus)
     if not snapshot:
         return result
+    if snapshot.get('weight_snapshot'):
+        from .vote_weighting import apply_to_consensus
+        result=apply_to_consensus(result, snapshot, {}, admission_blocked=not snapshot['semantic_obligations_complete'])
     dimensions = snapshot['dimension_results']
     result['resolution_snapshot'] = deepcopy(snapshot)
     result['resolution_snapshot_id'] = snapshot['snapshot_id']
     result['eligible_voter_ids']=snapshot['whole_vote_eligible_voter_ids']
     result['distinct_family_count']=snapshot['effective_distinct_families']
-    result['diversity_ready']=snapshot['effective_distinct_families']>=result.get('minimum_distinct_families',3)
+    if not snapshot.get('weight_snapshot'):
+        result['diversity_ready']=snapshot['effective_distinct_families']>=result.get('minimum_distinct_families',3)
     for axis, dimension in dimensions.items():
         result.setdefault('review_axes', {}).setdefault(axis, {}).update(status=dimension['status'])
     expression=result['review_axes']['expression']
@@ -260,6 +296,7 @@ def update_issue_ledger(state,base,original_votes,committee,snapshot):
         state.context['observed_resolution_response_ids']=sorted(seen|received)
     resolutions={r['dispute_id']:r for r in snapshot['accepted_resolutions']}
     for dispute in [*snapshot.get('current_disputes',[]),*snapshot.get('dependency_disputes',[])]:
+        if dispute.get('status') in {'nonblocking_abstention','policy_equivalent'}:continue
         state.context.setdefault('dispute_baseline',{'proposal_digest':base['proposal_digest'],'round_id':base['round_id']})
         report=state.context.setdefault('dispute_report',{'disputes':[]})
         if dispute['dispute_id'] not in {d['dispute_id'] for d in report['disputes']}:report['disputes'].append(deepcopy(dispute))
@@ -282,6 +319,7 @@ def display_projection(decision,diagnostic,context):
     snapshot=context.get('resolution_snapshot')
     if snapshot and diagnostic:
         axes=apply_consensus({'review_axes':axes},snapshot)['review_axes']
-        pending=route_axes(axes,complete=all(d['seat_coverage_complete'] for d in diagnostic['dimension_results'].values()))['pending_actions']
+        coverage_key='judgment_complete' if snapshot.get('weight_snapshot') else 'seat_coverage_complete'
+        pending=route_axes(axes,complete=all(d[coverage_key] for d in diagnostic['dimension_results'].values()))['pending_actions']
         if context.get('technical_recovery_tasks'):pending=[*pending,'technical_recovery']
     return axes,pending

@@ -16,6 +16,12 @@ not_stated means not stated within the specified verified evidence scope, never 
 An ontology gap alone does not reject an otherwise source-grounded expression correction.
 Approve only when every changed field is grounded and all prior counterevidence was explicitly assessed.
 Return JSON matching output_contract. Do not approve guessed polarity, deleted conditions or unsupported mappings.'''
+PROTECTED_MATERIAL_RULE='''
+counterevidence_reviewed_ids records EVERY protected_evidence_id that you examined for possible opposition,
+including supporting and context items. It does NOT mean those items contradict the revision.
+An examined supporting item belongs in both supporting_evidence_ids and counterevidence_reviewed_ids.
+counter_evidence_ids is different: list ONLY actual contradictions there. Assess all supplied protected
+material rather than copying IDs without reviewing it. Preserve reject/uncertain if the evidence is insufficient.'''
 RESPONSE_SCHEMA={'type':'object','additionalProperties':False,'required':['decision','field_reviews',
     'supporting_evidence_ids','counter_evidence_ids','counterevidence_reviewed_ids','rationale_summary'],
     'properties':{'decision':{'enum':['approve','reject','uncertain']},
@@ -28,17 +34,19 @@ RESPONSE_SCHEMA={'type':'object','additionalProperties':False,'required':['decis
 
 
 def revision_prompt(proposal):
+    from .revision_response_delivery import prompt_suffix
+    base=PROMPT+PROTECTED_MATERIAL_RULE if proposal.get('semantic_review_version')=='full_expression_v2' else PROMPT
     if proposal.get('change_analysis',{}).get('source_validation_mode')=='bounded_preservation':
-        return PROMPT + '\nThis draft has a source-bound exact duplicate cleanup proof. Verify that proof, the retained qualifier, its attachment and unchanged conditions. Do not infer final ontology validity or admission from this simplified preservation review.'
+        return base + '\nThis draft has a source-bound exact duplicate cleanup proof. Verify that proof, the retained qualifier, its attachment and unchanged conditions. Do not infer final ontology validity or admission from this simplified preservation review.' + prompt_suffix(proposal)
     if proposal.get('semantic_review_version')!='full_expression_v2': return PROMPT
-    return PROMPT + '''\nReview the COMPLETE before/after statement, including unchanged fields and semantic_context.
+    return base + '''\nReview the COMPLETE before/after statement, including unchanged fields and semantic_context.
 Entity scope and original mentions must remain traceable; predicate substitution does not imply endpoint inversion.
 Do not approve a generic association/feature that drops the original specific property, condition or object scope.
 Check each qualifier attachment and conjunction branch; approximation/degree/discourse are not automatically quantities.
 Event/proposition tails need their own modeling, never inferred from text length. Local scope must not become universal.
 Unknown polarity requires affirmative source evidence to revise, not simply absence of negation.
 Explain any lost meaning in field_reviews and reject/uncertain even if a short human suggestion proposed the edit.
-For split_child, independently review THIS child's complete statement against source, alongside the original collective statement and sibling plan. Do not distribute a collective relation to each member without evidence. Original approvals and sibling approvals are not this child's approval.'''
+For split_child, independently review THIS child's complete statement against source, alongside the original collective statement and sibling plan. Do not distribute a collective relation to each member without evidence. Original approvals and sibling approvals are not this child's approval.''' + prompt_suffix(proposal)
 
 
 def revision_expression(candidate):
@@ -142,6 +150,24 @@ def revision_consensus(votes,proposal):
         if vote.get('decision')=='approve' and not response_errors({k:vote[k] for k in RESPONSE_SCHEMA['required'] if k in vote},proposal):
             approved.append(member['id']);families.add(vote['model_family'])
     policy=proposal['committee_policy']
+    if policy.get('vote_weighting'):
+        from .vote_weighting import focused_weighting
+        checks={'mapping' if f in {'relation_id','head_type','tail_type'} else
+                'qualifiers' if f.startswith(('qualifiers.','qualifier_status.')) else 'entity_reference'
+                for f in proposal['changed_fields']}
+        eligible=[];models=set()
+        for member in proposal['committee_members']:
+            vote=by_id.get(member['id'],{})
+            if (vote.get('response_status')!='ok' or any(vote.get(k)!=v for k,v in binding(member,proposal).items())
+                    or response_errors({k:vote[k] for k in RESPONSE_SCHEMA['required'] if k in vote},proposal)):continue
+            identities={str(vote.get(k)or'').casefold() for k in ('model_identity','returned_model_id')}-{''}
+            if not identities or models&identities:continue
+            models|=identities
+            eligible.append({**vote,'answer':{'approve':'supports','reject':'opposes','uncertain':'insufficient'}[vote['decision']]})
+        weighted={check:focused_weighting(eligible,{**proposal,'dispute':{'check':check}}) for check in sorted(checks)}
+        return {'approved':bool(weighted) and all(r['status']=='resolved_supports' for r in weighted.values()),
+                'approved_voter_ids':approved,'weight_snapshot':{'version':'revision_weights_v1',
+                    'by_check':{check:r.get('weight_snapshot') for check,r in weighted.items()}}}
     ready=(len(approved)==policy['committee_size']==len(proposal['committee_members'])
            and len(approved)>=policy['required_votes'] and len(families)>=policy['minimum_distinct_families'])
     return {'approved':ready,'approved_voter_ids':approved}
@@ -152,21 +178,32 @@ def judge_revision_once(voter, proposal, feedback=None):
     from .execution import api_error_fields
     vote=binding(voter,proposal)
     try:
-        response=voter['client'].complete_json({**proposal,'output_contract':RESPONSE_SCHEMA,
+        from .revision_response_delivery import output_contract,request_fields,project
+        response=voter['client'].complete_json({**proposal,**request_fields(proposal),'output_contract':output_contract(proposal,RESPONSE_SCHEMA),
             **({'correction_feedback':feedback} if feedback else {})},system_prompt=revision_prompt(proposal)+(
                 '\nAssess mapping_rationale independently. Source evidence must establish each entity identity and type; domain/range compatibility alone is not type evidence. Assess the exact target and every competing-relation exclusion; uncertain is permitted.' if proposal.get('mapping_rationale') else ''),
             max_tokens=int(voter.get('max_output_tokens',4096)))
-        raw=_parse_content(response.content)
+        from .llm_clients import response_metadata
+        vote.update(response_metadata(response))
+        if getattr(response,'finish_reason',None) in {'length','max_tokens','incomplete'}:
+            return {**vote,'response_status':'output_incomplete','error':'revision review output incomplete','raw_response':response.content}
+        try:
+            raw,projection=project(_parse_content(response.content),proposal)
+        except (ValueError,TypeError) as exc:
+            return {**vote,'response_status':'invalid_contract','error':str(exc),'raw_response':response.content}
         errors=response_errors(raw,proposal)
         vote.update(raw if not errors else {'error':'; '.join(errors),'raw_response':response.content},
             response_status='invalid_contract' if errors else 'ok',input_tokens=response.input_tokens,
             output_tokens=response.output_tokens,returned_model_id=response.returned_model_id,response_id=response.response_id,
             finish_reason=getattr(response,'finish_reason',None),reasoning_tokens=getattr(response,'reasoning_tokens',None),
             latency_ms=response.latency_ms)
+        if projection:
+            vote.update(response_projection=projection,raw_response=response.content)
     except Exception as exc:
         from .execution import api_error_fields
         timed_out=isinstance(exc,TimeoutError) or 'timeout' in type(exc).__name__.lower()
-        vote.update(response_status='timeout' if timed_out else 'api_error',error=str(exc),**api_error_fields(exc))
+        from .transport_diagnostics import safe_error_text
+        vote.update(response_status='timeout' if timed_out else 'api_error',error=safe_error_text(exc,voter['client']),**api_error_fields(exc))
         if timed_out: vote.update(outcome_unknown=True,retryable=False)
     return vote
 
@@ -236,6 +273,7 @@ class RevisionService:
         updated['revision_lineage']=lineage(candidate,updated,operation='split_child' if _split_context else 'revision',bundle=verified)
         ontology_context=mapping_review_context(self.repository,candidate,updated)
         draft={'draft_id':'draft_'+uuid4().hex,'contract_version':VERSION,'candidate_id':candidate['candidate_id'],
+            'revision_delivery_version':'revision_field_map_v2',
             'semantic_review_version':'full_expression_v2',
             'requires_independent_revision_review':True,'requires_human_confirmation':False,
             'base_revision':candidate['revision'],'expected_row_version':expected_row_version,'changes':deepcopy(changes),
@@ -274,19 +312,33 @@ class RevisionService:
         proposal={k:v for k,v in draft.items() if k not in {'status','review_result'}}
         proposal['committee_members']=[{**{k:v[k] for k in ('id','model_id','model_family')},
             'model_identity':str(v.get('model_identity') or v['model_id']).casefold()} for v in voters]
-        proposal['committee_policy']={'committee_size':len(committee.voter_ids),'required_votes':committee.required_votes,'minimum_distinct_families':committee.minimum_distinct_families}
+        from .vote_weighting import committee_policy
+        proposal['committee_policy']=committee_policy(committee)
         proposal['proposal_digest']=sha256_json(proposal)
         with self.repository.connect() as c:
             saved={r['voter_id']:json.loads(r['vote_json']) for r in c.execute('SELECT * FROM revision_votes WHERE draft_id=?',(draft_id,))}
         selected=[v for v in voters if saved.get(v['id'],{}).get('response_status')!='ok']
+        workers=int(budget.config.get('max_parallel_validators',len(selected) or 1))
+        if workers<1:raise ValueError('revision committee parallelism must be positive')
         if not budget.reserve_calls(len(selected)): return {'status':'budget_exhausted','error':'revision committee budget unavailable'}
+        from threading import Event
+        halted=Event()
         def run(voter):
-            return judge_typed(voter,proposal,self.repository,task_type='candidate_revision_review',
+            if halted.is_set():
+                return {**binding(voter,proposal),'response_status':'api_error','not_sent':True,'actual_calls':0,
+                    'retryable':False,'error_code':'REVISION_DISPATCH_HALTED',
+                    'error':'earlier revision request is unresolved or its service is paused'}
+            from .revision_response_delivery import prompt_hash
+            remaining=budget.remaining_seconds()
+            wait=min(remaining,float(budget.config.get('per_call_timeout_seconds',remaining)))
+            vote=judge_typed(voter,proposal,self.repository,task_type='candidate_revision_review',
                 binding=binding(voter,proposal),invoke=lambda feedback:judge_revision_once(voter,proposal,feedback),
                 validate_cached=lambda vote:response_errors({k:vote[k] for k in RESPONSE_SCHEMA['required'] if k in vote},proposal),
-                prompt_hash=sha256_json([VERSION,revision_prompt(proposal),RESPONSE_SCHEMA]),timeout=budget.remaining_seconds(),
+                prompt_hash=prompt_hash(proposal,revision_prompt(proposal),RESPONSE_SCHEMA,VERSION),timeout=wait,
                 deadline_epoch=budget.deadline_epoch)
-        with ThreadPoolExecutor(max_workers=max(1,len(selected))) as pool:
+            if vote.get('outcome_unknown') or vote.get('pause_job'):halted.set()
+            return vote
+        with ThreadPoolExecutor(max_workers=max(1,min(workers,len(selected) or 1))) as pool:
             results=list(pool.map(run,selected))
         from .validators import model_request_count
         budget.refund_calls(len(selected)-sum(model_request_count(v) for v in results))
@@ -303,6 +355,7 @@ class RevisionService:
                 'proposal_digest':proposal['proposal_digest'],'evidence_hash':draft['evidence_bundle']['evidence_hash'],
                 'approved_voter_ids':assessed['approved_voter_ids'],'votes':list(saved.values()),'task_type':'candidate_revision_review',
                 'committee_members':proposal['committee_members'],'committee_policy':proposal['committee_policy']}
+        if assessed.get('weight_snapshot'):result['weight_snapshot']=assessed['weight_snapshot']
         with self.repository.transaction(immediate=True) as c:
             c.execute('UPDATE revision_drafts SET status=?,result_json=? WHERE draft_id=? AND status!=\'applied\'',(result['status'],canonical_json(result),draft_id))
         return result

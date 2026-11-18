@@ -42,6 +42,13 @@ def default_services(config):
 
 def configure(config,group,scope,limits):
     result=deepcopy(config)
+    if 'weighting_mode' in group:
+        mode=group['weighting_mode']
+        if mode not in {'legacy','equal','static','dynamic'}:raise ValueError('unknown experiment weighting mode')
+        result['vote_weighting']={'mode':'legacy'} if mode=='legacy' else {**(result.get('vote_weighting') or {}),'mode':mode}
+        if mode=='legacy':result.setdefault('consensus',{})['weighted_quorum_enabled']=False
+    from review_agent.vote_weighting import configured_policy
+    configured_policy(result)
     result.update(mode='shadow',case_budget={k:limits[k] for k in ('llm_calls','tokens','tool_calls','extension_requests','rebinds')})
     result.setdefault('memory',{}).update(scope=scope)
     result.setdefault('routing',{}).update(auto_accept_enabled=False,semantic_auto_reject_enabled=False)
@@ -134,7 +141,8 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
     if any(type(v) not in (int,float) or v<=0 for v in limits.values()): raise ValueError('experiment limits must be positive')
     if any(type(limits[k]) is not int for k in limits if k!='seconds'): raise ValueError('count budgets must be integers')
     for group in groups:
-        if set(group)-{'id','method','ontology_mode','ablations'}: raise ValueError('unknown experiment group field')
+        if set(group)-{'id','method','ontology_mode','ablations','weighting_mode'}: raise ValueError('unknown experiment group field')
+        if 'weighting_mode' in group and group['method'] not in {'agent','fixed_workflow'}:raise ValueError('weighting controls apply to agent/fixed_workflow groups')
         if (not re.fullmatch('[a-z][a-z0-9_-]{0,63}',group['id']) or group.get('method') not in METHODS
                 or set(group.get('ablations',[]))-ABLATIONS or group.get('ontology_mode','fixed') not in {'fixed','dynamic'}): raise ValueError('invalid experimental group')
         if group.get('ontology_mode')=='dynamic' and group['method']!='agent': raise ValueError('dynamic extensions require the full agent')
@@ -300,11 +308,14 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
             verdict=consensus.get('result') if isinstance(consensus,dict) else None
             overall=(result.get('consensus') or {}).get('result')
             prediction=result.get('predicted_decision') or ('accept' if verdict=='accept_consensus' else 'reject' if overall=='reject_consensus' else 'defer')
+            if result.get('research_operation'):
+                prediction={'accept':'accept','discard':'reject','revise':'defer','manual_review':'defer'}[result['research_operation']]
             status=result.get('status','completed')
             if status not in {'timeout','interrupted','paused','failed','cancelled'}: status='completed'
             predictions.append({'candidate_id':cid,'revision':original['revision'],'candidate_content_hash':sha256_json(original),
                 'candidate':original,'final_candidate':current,'final_revision':current['revision'],'decision':result.get('decision','manual_review'),
                 'predicted_decision':prediction,'decision_is_official_admission':False,
+                **({k:result.get(k) for k in ('research_operation','research_operation_basis','weight_snapshot')} if result.get('research_operation') else {}),
                 'status':'failed' if cid in errors else status,'error':errors.get(cid),'audit_id':result.get('audit_id'),
                 'stop_reason':result.get('stop_reason'),'budget':result.get('budget'),
                 'projection_status':'not_run',

@@ -215,9 +215,9 @@ class ReviewService:
             if audit and members and derived_context.get('resolution_snapshots_enabled'):
                 from .resolution_recovery import project_context
                 derived_context=project_context(self.repository,audit,Committee([m['id'] for m in members],
-                    thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members))))
+                    thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members)),weighting_policy=thresholds.get('vote_weighting')))
             diagnostic=outcome(displayed,displayed_votes,Committee([m['id'] for m in members],
-                thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members))),
+                thresholds.get('required_votes',len(members)),thresholds.get('minimum_distinct_families',len(members)),weighting_policy=thresholds.get('vote_weighting')),
                 audit_status=audit['status'],context=derived_context,decision=decision) if audit and members else None
             from .resolution_state import display_projection
             displayed_axes,pending_actions=display_projection(decision if selected else None,diagnostic,derived_context)

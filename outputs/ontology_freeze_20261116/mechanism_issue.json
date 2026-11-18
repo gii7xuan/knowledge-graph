@@ -1,0 +1,33 @@
+{
+  "priority": "next_before_expanding_experiments",
+  "fixture": "semantic_mismatch",
+  "acceptance_passed": false,
+  "required_independent_valid_detections": 2,
+  "actual_independent_valid_detections": 1,
+  "semantic_error_not_admitted": true,
+  "original_decisions_changed": false,
+  "human_gold": false,
+  "issues": [
+    {
+      "voter_id": "judge_a",
+      "problem": "contradicted source result lacks required counterevidence IDs; expression and mapping remain individually usable"
+    },
+    {
+      "voter_id": "judge_b",
+      "problem": "same evidence marked material counterevidence and dismissed; clarification retained as non-voting"
+    },
+    {
+      "voter_id": "judge_c",
+      "problem": "unsupported expression-finding check enum; no silent semantic rewrite"
+    }
+  ],
+  "offline_regression_fixture": "D:\\knowledge-huopao\\tests\\fixtures\\mapping_semantic_mismatch_20261116.json",
+  "next_implementation": "Tighten source/counterevidence role construction and allowed expression-check output; preserve substantive judgments and per-axis provenance. Run this recorded regression before new live comparison.",
+  "post_run_resource_fix": {
+    "known_token_stop_overshoot": 1269,
+    "cause": "shared remaining allowance was not passed into conservative field-correction reservation",
+    "changed_file": "D:\\knowledge-huopao\\evaluation\\recover_mapping_acceptance.py",
+    "new_rule": "field correction receives remaining shared token allowance; insufficient reservation prevents dispatch",
+    "extra_model_calls_after_fix": 0
+  }
+}

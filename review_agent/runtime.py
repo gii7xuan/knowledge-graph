@@ -67,8 +67,11 @@ class AgentRuntime:
         audit = self.repository.get_audit(self.state.candidate["candidate_id"], self.state.audit_id)
         step = next((s for s in audit["planner_steps"] if s["step_no"] == self.state.step_no), None)
         if step and step.get("status") == "started":
+            from .planner_receipts import durable_planner_rows,reconcile_attempts
+            with self.repository.connect() as connection:
+                attempts=reconcile_attempts(step,durable_planner_rows(connection))
             self.repository.record_planner_step(self.state.audit_id, self.state.step_no,
-                step["state_version"], step["state_hash"], {**step, "status": "interrupted", "error": reason})
+                step["state_version"], step["state_hash"], {**step, "status": "interrupted", "error": reason,'attempts':attempts})
 
     def initialize(self, candidate_id, revision, document, context):
         from .batch import versions_for
@@ -121,6 +124,8 @@ class AgentRuntime:
             'memory_scope':memory_scope,'memory_scope_hash':scope_hash(memory_scope),
             "review_memory": examples, "memory_bundle_hash": sha256_json(examples),
             "execution_deadline_epoch": self.budget.deadline_epoch}
+        if self.planner_config.get('compact_view'):
+            ctx['planner_compact_view']=True
         if (self.orchestrator.config.get('agent_resolution') or {}).get('enabled'):
             ctx.update(resolution_snapshots_enabled=True,
                        agent_resolution_policy=self.orchestrator.config['agent_resolution'])
@@ -463,6 +468,8 @@ class AgentRuntime:
             complete=bool(current and state.ontology_checked and
                 eligible==set(self.orchestrator.committee.voter_ids) and
                 consensus.get('distinct_family_count',0)>=self.orchestrator.committee.minimum_distinct_families)
+            if self.orchestrator.committee.weighting_policy:
+                complete=bool(current and state.ontology_checked and consensus.get('weighted_review_complete'))
             completion=('independent_review_completed' if complete else
                 'independent_review_incomplete' if current else
                 'manual_handoff_no_evidence' if state.ontology_checked and not state.bundle.get('items') and state.searched_scopes else

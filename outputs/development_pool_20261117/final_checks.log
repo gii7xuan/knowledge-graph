@@ -1,0 +1,30 @@
+test_extraction_result_is_not_a_review_vote_or_human_label (tests.test_development_pool.ExtractionRequestTests) ... ok
+test_hash_tampering_prevents_dispatch (tests.test_development_pool.ExtractionRequestTests) ... ok
+test_truncation_never_becomes_a_valid_extraction (tests.test_development_pool.ExtractionRequestTests) ... ok
+test_document_run_binding_is_audited_and_preserves_every_semantic_field (tests.test_development_pool.SourceSelectionTests) ... ok
+test_excerpt_quotes_bind_to_parent_offsets_and_cannot_cross_omissions (tests.test_development_pool.SourceSelectionTests) ... ok
+test_sampling_is_order_independent_and_does_not_read_predictions_or_labels (tests.test_development_pool.SourceSelectionTests) ... ok
+test_source_paragraphs_remain_exact_and_out_of_scope_text_is_not_selected (tests.test_development_pool.SourceSelectionTests) ... ok
+test_blanks_are_not_unknown_labels_or_zero_time (tests.test_pilot_annotations.RawAnnotationTests) ... ok
+test_changed_statement_bad_enum_foreign_quote_and_negative_time_are_rejected (tests.test_pilot_annotations.RawAnnotationTests) ... ok
+test_filled_claims_and_real_zero_remain_raw_not_adjudicated (tests.test_pilot_annotations.RawAnnotationTests) ... ok
+test_first_minimal_failure_and_two_unknowns_stop_more_probes (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_http200_shape_failure_is_transport_evidence_but_not_strict_schema_proof (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_nonce_reply_is_not_a_review_vote (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_schema_failure_does_not_trigger_equivalent_request_resend (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_sized_input_is_generated_and_bound (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_tampered_probe_never_calls_provider (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_cached_projection_retains_original_digest_and_evidence_binding (tests.test_response_projection.ShapeProjectionIntegrationTests) ... ok
+test_finding_status_clarification_explains_but_never_replaces_the_vote (tests.test_response_projection.ShapeProjectionIntegrationTests) ... ok
+test_old_v5_prompt_suffix_policy_and_no_projection_are_preserved (tests.test_response_projection.ShapeProjectionIntegrationTests) ... ok
+test_real_invocation_keeps_raw_and_proof_without_extra_call (tests.test_response_projection.ShapeProjectionIntegrationTests) ... ok
+test_tampered_or_stripped_projection_cannot_be_counted (tests.test_response_projection.ShapeProjectionIntegrationTests) ... ok
+test_unresolved_finding_is_classified_for_nonvoting_clarification (tests.test_response_projection.ShapeProjectionIntegrationTests) ... ok
+test_ambiguous_existing_target_other_extras_and_wrong_types_are_not_projected (tests.test_response_projection.ShapeProjectionTests) ... ok
+test_recorded_sibling_ids_are_moved_without_any_semantic_change (tests.test_response_projection.ShapeProjectionTests) ... ok
+test_semantic_conflicts_remain_invalid_and_unchanged (tests.test_response_projection.ShapeProjectionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 10.905s
+
+OK

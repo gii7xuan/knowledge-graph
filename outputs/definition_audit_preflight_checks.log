@@ -1,0 +1,61 @@
+test_anchor_exists_but_semantic_error_quarantines (tests.test_definition_audit.DefinitionAuditTests) ... ERROR
+test_complete_independent_committee (tests.test_definition_audit.DefinitionAuditTests) ... ERROR
+test_cross_item_citation_and_duplicate_rejected (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_no_evidence_or_scope_pass (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_tampered_packet_never_sent (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_unknown_or_missing_never_approves (tests.test_definition_audit.DefinitionAuditTests) ... ERROR
+test_wrong_binding_or_family_collision_blocks (tests.test_definition_audit.DefinitionAuditTests) ... ERROR
+test_exporter_annotation_helper_preserves_property_definition (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_round_trip_preserves_source_definition_and_formal_identity (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_long_rationale_is_projected_without_changing_fields_or_resending (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_proposal_does_not_mutate_candidate_and_approval_requires_new_version (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_unknown_request_remains_fenced_and_is_reported_without_resend (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_504_without_provider_id_keeps_client_correlation_and_unknown (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_revision_review_preserves_gateway_metadata_and_rejects_truncation (tests.test_review_completion.RequestCorrelationTests) ... ok
+
+======================================================================
+ERROR: test_anchor_exists_but_semantic_error_quarantines (tests.test_definition_audit.DefinitionAuditTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 30, in test_anchor_exists_but_semantic_error_quarantines
+    result=aggregate(self.proposal,votes,self.members)
+  File "D:\knowledge-huopao\ontology_review\definition_audit.py", line 128, in aggregate
+    result.append({'relation_id':item['relation_id'],'label':item['label'],
+KeyError: 'label'
+
+======================================================================
+ERROR: test_complete_independent_committee (tests.test_definition_audit.DefinitionAuditTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 24, in test_complete_independent_committee
+    rows=aggregate(self.proposal,self.votes(),self.members)
+  File "D:\knowledge-huopao\ontology_review\definition_audit.py", line 128, in aggregate
+    result.append({'relation_id':item['relation_id'],'label':item['label'],
+KeyError: 'label'
+
+======================================================================
+ERROR: test_unknown_or_missing_never_approves (tests.test_definition_audit.DefinitionAuditTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 36, in test_unknown_or_missing_never_approves
+    self.assertEqual('quarantined',aggregate(self.proposal,votes,self.members)[1]['status'])
+  File "D:\knowledge-huopao\ontology_review\definition_audit.py", line 128, in aggregate
+    result.append({'relation_id':item['relation_id'],'label':item['label'],
+KeyError: 'label'
+
+======================================================================
+ERROR: test_wrong_binding_or_family_collision_blocks (tests.test_definition_audit.DefinitionAuditTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 41, in test_wrong_binding_or_family_collision_blocks
+    self.assertFalse(any(r['status']=='machine_approved' for r in aggregate(self.proposal,votes,self.members)))
+  File "D:\knowledge-huopao\ontology_review\definition_audit.py", line 128, in aggregate
+    result.append({'relation_id':item['relation_id'],'label':item['label'],
+KeyError: 'label'
+
+----------------------------------------------------------------------
+Ran 16 tests in 14.924s
+
+FAILED (errors=4)

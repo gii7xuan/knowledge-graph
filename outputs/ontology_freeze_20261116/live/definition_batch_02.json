@@ -1,0 +1,2048 @@
+{
+  "status": "reviewed",
+  "proposal": {
+    "version": "ontology_definition_audit_v1",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+    "source_text_hash": "e87ad709f3f67294599839457fce9a7196c3e37d7223649741ac2cfcf871cf2c",
+    "items": [
+      {
+        "relation_id": "R_21f7b4d078c491d46d17",
+        "label": "黏附",
+        "definition": "弹丸在空气中运动时，其表面必黏附着一薄层空气伴随着弹丸一起运动。",
+        "domain": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "range": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "可近似看成理想气体的介质"
+              }
+            ],
+            "description": "可近似看成理想气体的介质",
+            "id": "C_2800f3a353c9063a4ccb",
+            "iri": "urn:kg:chapter1:class:dd4a875013d7c403c4474d9c",
+            "label": "空气",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "弹丸在空气中运动时，其表面必黏附着一薄层空气伴随着弹丸一起运动。",
+            "start": 8431,
+            "end": 8463,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_361829da9756",
+            "evidence_id": "def_ev_ab463f1c888965fe9f26f624",
+            "context_start": 8251,
+            "context_end": 8643,
+            "context": "以力的作用，这就是空气阻力。\n\n# 1. 空气阻力的组成部分\n\n此处简要说明对弹丸作用的空气阻力形成的基本原理，以便了解空气阻力的实质以及找到在设计中减小空气阻力的办法。空气阻力主要由摩擦阻力、涡流阻力及超声速时所特有的波动阻力所组成。\n\n# (1) 摩擦阻力\n\n摩擦阻力主要是由大气的黏性造成的。流体黏性的特征已在流体力学中说明，此处不再重复。根据黏附条件，弹丸在空气中运动时，其表面必黏附着一薄层空气伴随着弹丸一起运动。其外相邻的一层空气因黏性作用也被带动，但比黏附于弹丸上的一层空气的速度小。同样，此被带动的、速度较小的一层空气，又因黏性而带动其更外一层的空气。如此带动下去，速度渐小，总会有一个不被带动的空气层存在。在此层之外，空气就与弹丸运动无关，好像空气是没有黏性的理想气体一样形成对称的绕流流过。接近弹丸表面，受空气黏性影响\n\n的一层空气实际上是很薄的，这一层通常叫作附"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_23510018faf8ec45724e",
+        "label": "影响",
+        "definition": "头部形状影响激波强弱",
+        "domain": [
+          "C_cbcb15d49fba77017748"
+        ],
+        "range": [
+          "C_e93d960291ef82ed2a2c"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_cbcb15d49fba77017748",
+            "iri": "urn:kg:chapter1:class:29ee6da8da577682f0cf422c",
+            "label": "头部形状",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "头部形状"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "超声速弹丸飞行中由气流绕内钝角转折造成的扰动积累形成的强烈压缩现象"
+              }
+            ],
+            "description": "超声速弹丸飞行中由气流绕内钝角转折造成的扰动积累形成的强烈压缩现象",
+            "id": "C_e93d960291ef82ed2a2c",
+            "iri": "urn:kg:chapter1:class:1c9f3df7d0737d5a405c876c",
+            "label": "激波",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "激波"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "图1-7给出了头部形状与激波强弱的关系。",
+            "start": 10787,
+            "end": 10807,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_5da7b788e236",
+            "evidence_id": "def_ev_3d8e085cc09a054921fe3df8",
+            "context_start": 10607,
+            "context_end": 10987,
+            "context": "ab3ce53c516e302c60a91f.jpg)\n\n\n\n图1-6 弹道波\n\n\n产生相应的阻力，这就是波动阻力。超声速弹丸的波动阻力约占空气总阻力的  $60\\%$  。\n\n当弹头较钝时，在弹前可能出现正激波与斜激波组成的分离波，这时消耗弹丸的动能将更大。减小波阻的办法是尽量使弹头部延长、弹顶平面适当减小、弹表面平滑无突起、弹头低平、发射后无毛刺和翻边。图1-7给出了头部形状与激波强弱的关系。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/6c2df6e428de1466e457c70b9f0f0976c145bcac5fcba623fa61011138a8ddaa.jpg)\n\n\n\n(a)\n\n\n"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_23c30368744e610b9a5c",
+        "label": "描述",
+        "definition": "公式或方程表达两个概念之间的数学或物理关系",
+        "domain": [
+          "C_1f8334bc75a3051bd04e"
+        ],
+        "range": [
+          "C_b8c8854bc37611a59caa"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_1f8334bc75a3051bd04e",
+            "iri": "urn:kg:chapter1:class:c7faaab8b374b015fbb1d4d1",
+            "label": "横风偏",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "横风偏"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "当炸弹落地时飞机与炸弹的水平距离（设飞机匀速直线飞行）"
+              }
+            ],
+            "description": "当炸弹落地时飞机与炸弹的水平距离（设飞机匀速直线飞行）",
+            "id": "C_b8c8854bc37611a59caa",
+            "iri": "urn:kg:chapter1:class:f6cdf3f6dabe446c11ff3544",
+            "label": "退电",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "退电"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "式（1-100）描述了横风偏与退电之间的关系。",
+            "start": 48992,
+            "end": 49015,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_561db3317157",
+            "evidence_id": "def_ev_7b74ac780a91816a0c112c0f",
+            "context_start": 48812,
+            "context_end": 49195,
+            "context": "rac {W _ {z}}{v _ {0}} (T v _ {0} - X) = \\frac {W _ {z}}{v _ {0}} \\Delta \\tag {1-100}\n$$\n\n$$\n\\Delta = T v _ {0} - X\n$$\n\n$\\Delta$  的物理意义是当炸弹落地时飞机与炸弹的水平距离（设飞机匀速直线飞行）。 $\\Delta$  称为退电，式（1-100）描述了横风偏与退电之间的关系。\n\n# (2）纵风对弹道的影响\n\n在恒定纵风的情况下，同样也可以取大气为动参考系。在此动参考系内的初速同样由式（1-87）求得\n\n$$\nv _ {0 \\mathrm {r}} = v _ {0} - W _ {x} \\tag {1-101}\n$$\n\n相对速度在  $x$  、  $y$  轴上的投影分别为  $v_{0}\\cos \\theta_{0} - W"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_2a66075367666d54e7e7",
+        "label": "消耗",
+        "definition": "沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能",
+        "domain": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "range": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "可近似看成理想气体的介质"
+              }
+            ],
+            "description": "可近似看成理想气体的介质",
+            "id": "C_2800f3a353c9063a4ccb",
+            "iri": "urn:kg:chapter1:class:dd4a875013d7c403c4474d9c",
+            "label": "空气",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能",
+            "start": 8695,
+            "end": 8725,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_361829da9756",
+            "evidence_id": "def_ev_96a84dcb271526ec2abaebd7",
+            "context_start": 8515,
+            "context_end": 8905,
+            "context": "层空气，又因黏性而带动其更外一层的空气。如此带动下去，速度渐小，总会有一个不被带动的空气层存在。在此层之外，空气就与弹丸运动无关，好像空气是没有黏性的理想气体一样形成对称的绕流流过。接近弹丸表面，受空气黏性影响\n\n的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。\n\n由于弹丸速度很高，它所形成的边界层通常都是混合边界层（图1-4（b)），只在接近弹丸的很小区域内为层流边界层，后面即转化为湍流边界层。由于湍流造成了空气质点的无规律脉动，它所消耗的能量远大于层流边界层，通常估算摩擦阻力时按湍流边界层来考虑较准确。\n\n![image](https://cdn-mineru.op"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_2b18880939600d01a389",
+        "label": "影响",
+        "definition": "一个因素对另一个因素或对象产生作用",
+        "domain": [
+          "C_02ca97ebf11ae1d3c3ad"
+        ],
+        "range": [
+          "C_3d1e92e945b2c3dbbd16"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风"
+              }
+            ],
+            "description": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风",
+            "id": "C_02ca97ebf11ae1d3c3ad",
+            "iri": "urn:kg:chapter1:class:ff0676ed29a29545cda3afd9",
+            "label": "纵风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "纵风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "作用于弹丸上的力之一，来自空气的阻力"
+              }
+            ],
+            "description": "作用于弹丸上的力之一，来自空气的阻力",
+            "id": "C_3d1e92e945b2c3dbbd16",
+            "iri": "urn:kg:chapter1:class:caa290950d87fc8aaeb516b0",
+            "label": "空气阻力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气阻力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "纵风既能影响阻力的大小，又能影响阻力的方向",
+            "start": 45827,
+            "end": 45848,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_c1cb36e1a624",
+            "evidence_id": "def_ev_a20e5ad7d03c1bf4266a654f",
+            "context_start": 45647,
+            "context_end": 46028,
+            "context": "矢量偏向绝对速度的左侧。在弹轴与相对速度矢量重合的假设下，空气阻力矢量也与相对速度矢量重合，只是方向相反。这时空气阻力  $R_{x}$  可以分解出一个与绝对速度  $\\pmb{v}$  垂直的分力  $R_{y}$ ，在此分力作用下  $\\pmb{v}$  的方向逐渐向右偏转（当  $W_{z}$  向右时），因而使弹道偏向右方，也就是偏向顺风方向。\n\n纵风既能影响阻力的大小，又能影响阻力的方向，故而可以改变射程。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/c8741fa68d3e0f9ddfcaa80b579454f90e5fa56190529320f71cc3d1b7e3cb3b.jpg)"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_2bcf30f9a9b27f4ed54f",
+        "label": "引起",
+        "definition": "科氏力导致射程偏差和方向偏差",
+        "domain": [
+          "C_62fa9a888bbb2e1cf88a"
+        ],
+        "range": [
+          "C_d07b1fb42efc6ae72e04"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_62fa9a888bbb2e1cf88a",
+            "iri": "urn:kg:chapter1:class:daa0d248bc18255efb557a55",
+            "label": "科氏力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "科氏力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_d07b1fb42efc6ae72e04",
+            "iri": "urn:kg:chapter1:class:e797fcfab3e41d987c799f14",
+            "label": "射程偏差",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "射程偏差"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "科氏力引起的射程偏差",
+            "start": 54563,
+            "end": 54573,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_78a410aab1c4",
+            "evidence_id": "def_ev_7c84c52e6aeff34af800953b",
+            "context_start": 54383,
+            "context_end": 54753,
+            "context": "heta_{0}$  ，  $v_{y} = v_{0}\\sin \\theta_{0}$  ，  $v_{z} = 0$  ，  $x = y = z = 0$  。\n\n表1-5为两种弹丸在地理纬度为  $45^{\\circ}$  时向正北（  $\\alpha = 0^{\\circ}$  ）和正东（  $\\alpha = 90^{\\circ}$  ）发射时，科氏力引起的射程偏差  $\\Delta X$  和方向偏差  $\\Delta Z$  。两种弹丸的参数与表1-4的相同。\n\n\n表 1-5 科氏惯性力引起的射程偏差和方向偏差\n\n\n<table><tr><td rowspan=\"2\" colspan=\"3\">项目</td><td colspan=\"4\">射角/(°)</td></tr><tr><td>5</td><td>15</t"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_2eb6c3f7a4060a8f5083",
+        "label": "影响",
+        "definition": "一个物理量或条件对另一个物理量或结果产生的作用关系",
+        "domain": [
+          "C_5d0b94cd0cd9ae0220e9"
+        ],
+        "range": [
+          "C_61338e5480fb086c0938"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "随高度变化的温度"
+              }
+            ],
+            "description": "随高度变化的温度",
+            "id": "C_5d0b94cd0cd9ae0220e9",
+            "iri": "urn:kg:chapter1:class:b4f3ddd9a97461d203489bb7",
+            "label": "气温",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "气温"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_61338e5480fb086c0938",
+            "iri": "urn:kg:chapter1:class:efa98574e5d38f19150d418c",
+            "label": "马赫数",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "马赫数"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "气温除了影响空气密度外，还对马赫数有影响",
+            "start": 41203,
+            "end": 41223,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_329c680cbc08",
+            "evidence_id": "def_ev_cd40dc793bd7e7fc85421fbd",
+            "context_start": 41023,
+            "context_end": 41403,
+            "context": "小。二者综合的结果，炮弹I在  $15^{\\circ}$  射角时  $\\Delta X$  出现最大值，炮弹Ⅱ由于初速大，小射角时射程已很大，故  $5^{\\circ}$  射角时  $\\Delta X$  即出现最大值。\n\n# 1.3.2 考虑气温、气压非标准时的弹丸运动方程\n\n气压是通过改变空气密度来影响弹道的，气压升高使空气密度增大，因而使射程减小。气温除了影响空气密度外，还对马赫数有影响。在跨声速区阻力系数急剧上升段内，马赫数微小的增加可以引起阻力系数明显增大，而且气温通过阻力系数和空气密度对空气阻力的影响在这一段内是互相叠加的，所以在这一速度范围内气温对弹道的影响比较显著，气温的升高能使射程明显增大。在超声速区阻力系数急剧下降段内，气温通过阻力系数和通过空气密度对阻力的影响二者是互相抵消的，所以在这一速度范围内气温对弹道的影响不太显著，甚"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_2f8aae75f6eb22e7db9d",
+        "label": "取为",
+        "definition": "同样也可以取大气为动参考系",
+        "domain": [
+          "C_c5a3ac2010896be1ff9d"
+        ],
+        "range": [
+          "C_29309f2a3a84cce01e0e"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸飞行的介质，产生空气阻力"
+              }
+            ],
+            "description": "弹丸飞行的介质，产生空气阻力",
+            "id": "C_c5a3ac2010896be1ff9d",
+            "iri": "urn:kg:chapter1:class:8610daa85c85b752f3da4ae1",
+            "label": "大气",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "大气"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "以相同速度从左向右运动的大气作为参考系"
+              }
+            ],
+            "description": "以相同速度从左向右运动的大气作为参考系",
+            "id": "C_29309f2a3a84cce01e0e",
+            "iri": "urn:kg:chapter1:class:85725c736e01ee3e819cc5e2",
+            "label": "动参考系",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "动参考系"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "同样也可以取大气为动参考系",
+            "start": 49042,
+            "end": 49055,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_7ffb3744e26d",
+            "evidence_id": "def_ev_4f0e727bb8cd5030dd4b92fa",
+            "context_start": 48862,
+            "context_end": 49235,
+            "context": "_ {z}}{v _ {0}} \\Delta \\tag {1-100}\n$$\n\n$$\n\\Delta = T v _ {0} - X\n$$\n\n$\\Delta$  的物理意义是当炸弹落地时飞机与炸弹的水平距离（设飞机匀速直线飞行）。 $\\Delta$  称为退电，式（1-100）描述了横风偏与退电之间的关系。\n\n# (2）纵风对弹道的影响\n\n在恒定纵风的情况下，同样也可以取大气为动参考系。在此动参考系内的初速同样由式（1-87）求得\n\n$$\nv _ {0 \\mathrm {r}} = v _ {0} - W _ {x} \\tag {1-101}\n$$\n\n相对速度在  $x$  、  $y$  轴上的投影分别为  $v_{0}\\cos \\theta_{0} - W_{x}$  和  $v_{0}\\sin \\theta_{0}$  。由图1-1"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_30bf49bc0f38645ff31c",
+        "label": "形成",
+        "definition": "弹丸运动时在其表面附近产生边界层",
+        "domain": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "range": [
+          "C_23b6984d594ee0674998"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸高速运动时在其表面附近形成的流体层"
+              }
+            ],
+            "description": "弹丸高速运动时在其表面附近形成的流体层",
+            "id": "C_23b6984d594ee0674998",
+            "iri": "urn:kg:chapter1:class:a9616422d2c4fae158c58c16",
+            "label": "边界层",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "边界层"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "由于弹丸速度很高，它所形成的边界层通常都是混合边界层",
+            "start": 8750,
+            "end": 8776,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_361829da9756",
+            "evidence_id": "def_ev_2c322b009105aa3d8584f198",
+            "context_start": 8570,
+            "context_end": 8956,
+            "context": "气就与弹丸运动无关，好像空气是没有黏性的理想气体一样形成对称的绕流流过。接近弹丸表面，受空气黏性影响\n\n的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。\n\n由于弹丸速度很高，它所形成的边界层通常都是混合边界层（图1-4（b)），只在接近弹丸的很小区域内为层流边界层，后面即转化为湍流边界层。由于湍流造成了空气质点的无规律脉动，它所消耗的能量远大于层流边界层，通常估算摩擦阻力时按湍流边界层来考虑较准确。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-"
+          }
+        ]
+      }
+    ],
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "policy": {
+      "rule": "all_three_independent_families_all_axes_pass_no_issues",
+      "human_labels_used": false,
+      "application": "isolated_research_preexperiment_subset",
+      "classes": "existing_class_hierarchy_preserved_not_fully_semantically_recertified"
+    },
+    "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+    "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c"
+  },
+  "votes": [
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ab463f1c888965fe9f26f624"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据原文完全一致，准确描述了弹丸表面空气黏附现象。方向为弹丸（主体）到空气（客体），符合物理过程。端点类定义与源文本指代一致。",
+          "relation_id": "R_21f7b4d078c491d46d17",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_3d8e085cc09a054921fe3df8"
+          ],
+          "issue_codes": [],
+          "reason": "定义概括了证据中“头部形状与激波强弱的关系”，语义忠实。方向为头部形状（因）到激波（果），符合因果逻辑。端点类定义与源文本指代一致。",
+          "relation_id": "R_23510018faf8ec45724e",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_7b74ac780a91816a0c112c0f"
+          ],
+          "issue_codes": [],
+          "reason": "定义准确概括了公式（1-100）描述横风偏与退电关系的语义。方向为横风偏到退电，符合公式描述的变量关系。端点类定义与源文本指代一致。",
+          "relation_id": "R_23c30368744e610b9a5c",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_96a84dcb271526ec2abaebd7"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据原文一致，描述了空气层消耗弹丸动能的过程。方向为空气（施动者）到弹丸（受动者），符合物理过程。端点类定义与源文本指代一致。",
+          "relation_id": "R_2a66075367666d54e7e7",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_a20e5ad7d03c1bf4266a654f"
+          ],
+          "issue_codes": [],
+          "reason": "定义概括了纵风影响空气阻力的语义，与证据一致。方向为纵风（因）到空气阻力（果），符合因果逻辑。端点类定义与源文本指代一致。",
+          "relation_id": "R_2b18880939600d01a389",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_7c84c52e6aeff34af800953b"
+          ],
+          "issue_codes": [],
+          "reason": "定义概括了科氏力引起射程偏差的语义，与证据一致。方向为科氏力（因）到射程偏差（果），符合因果逻辑。端点类定义与源文本指代一致。",
+          "relation_id": "R_2bcf30f9a9b27f4ed54f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_cd40dc793bd7e7fc85421fbd"
+          ],
+          "issue_codes": [],
+          "reason": "定义概括了气温影响马赫数的语义，与证据一致。方向为气温（因）到马赫数（果），符合因果逻辑。端点类定义与源文本指代一致。",
+          "relation_id": "R_2eb6c3f7a4060a8f5083",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_4f0e727bb8cd5030dd4b92fa"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据原文一致，描述了取大气为动参考系的方法。方向为大气（对象）到动参考系（角色），符合语义。端点类定义与源文本指代一致。",
+          "relation_id": "R_2f8aae75f6eb22e7db9d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_2c322b009105aa3d8584f198"
+          ],
+          "issue_codes": [],
+          "reason": "定义概括了弹丸运动形成边界层的语义，与证据一致。方向为弹丸（主体）到边界层（产物），符合物理过程。端点类定义与源文本指代一致。",
+          "relation_id": "R_30bf49bc0f38645ff31c",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_bb200aab5ba1426eb963fdd5e74eb4b5",
+      "client_request_id": "attempt_bb200aab5ba1426eb963fdd5e74eb4b5",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111619572126426138050238674",
+      "input_tokens": 7711,
+      "late_response": false,
+      "latency_ms": 38031,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 1480,
+      "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c",
+      "provider_started_at": 1794830237.5728395,
+      "queue_time_ms": 501,
+      "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_21f7b4d078c491d46d17\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ab463f1c888965fe9f26f624\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义与证据原文完全一致，准确描述了弹丸表面空气黏附现象。方向为弹丸（主体）到空气（客体），符合物理过程。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_23510018faf8ec45724e\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_3d8e085cc09a054921fe3df8\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了证据中“头部形状与激波强弱的关系”，语义忠实。方向为头部形状（因）到激波（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_23c30368744e610b9a5c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_7b74ac780a91816a0c112c0f\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义准确概括了公式（1-100）描述横风偏与退电关系的语义。方向为横风偏到退电，符合公式描述的变量关系。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2a66075367666d54e7e7\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_96a84dcb271526ec2abaebd7\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义与证据原文一致，描述了空气层消耗弹丸动能的过程。方向为空气（施动者）到弹丸（受动者），符合物理过程。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2b18880939600d01a389\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_a20e5ad7d03c1bf4266a654f\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了纵风影响空气阻力的语义，与证据一致。方向为纵风（因）到空气阻力（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2bcf30f9a9b27f4ed54f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_7c84c52e6aeff34af800953b\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了科氏力引起射程偏差的语义，与证据一致。方向为科氏力（因）到射程偏差（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2eb6c3f7a4060a8f5083\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_cd40dc793bd7e7fc85421fbd\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了气温影响马赫数的语义，与证据一致。方向为气温（因）到马赫数（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2f8aae75f6eb22e7db9d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_4f0e727bb8cd5030dd4b92fa\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义与证据原文一致，描述了取大气为动参考系的方法。方向为大气（对象）到动参考系（角色），符合语义。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_30bf49bc0f38645ff31c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_2c322b009105aa3d8584f198\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了弹丸运动形成边界层的语义，与证据一致。方向为弹丸（主体）到边界层（产物），符合物理过程。端点类定义与源文本指代一致。\"\n    }\n  ]\n}",
+      "reasoning_tokens": null,
+      "request_key": "2af5c31ec90c31e41c7fd16e6f7d570cb97a79221db9dda7bc593270c04b2929",
+      "response_id": "chatcmpl-92f8ddaa93b76cad",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 319042,
+        "body_chunk_count": 1480,
+        "chunk_count": 1482,
+        "client_request_id": "attempt_bb200aab5ba1426eb963fdd5e74eb4b5",
+        "first_body_byte_ms": 5796.165,
+        "first_chunk_ms": 5813,
+        "first_content_ms": 5813,
+        "gateway_request_id": "2026111619572126426138050238674",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 119.661,
+        "max_inter_chunk_gap_ms": 125,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 11:57:24 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111619572126426138050238674"
+        },
+        "response_headers_ms": 5795.674,
+        "stream": true,
+        "terminal_ms": 38031,
+        "trace": [
+          {
+            "elapsed_ms": 2682.407,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2752.512,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2752.617,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2816.628,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2816.815,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2817.394,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2817.414,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2817.877,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2817.893,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5793.234,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5796.039,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 38026.886,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 38026.964,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 38026.994,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 38027.252,
+        "visible_chars": 3253
+      },
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ab463f1c888965fe9f26f624"
+              ],
+              "issue_codes": [],
+              "reason": "定义与证据原文完全一致，准确描述了弹丸表面空气黏附现象。方向为弹丸（主体）到空气（客体），符合物理过程。端点类定义与源文本指代一致。",
+              "relation_id": "R_21f7b4d078c491d46d17",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_3d8e085cc09a054921fe3df8"
+              ],
+              "issue_codes": [],
+              "reason": "定义概括了证据中“头部形状与激波强弱的关系”，语义忠实。方向为头部形状（因）到激波（果），符合因果逻辑。端点类定义与源文本指代一致。",
+              "relation_id": "R_23510018faf8ec45724e",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_7b74ac780a91816a0c112c0f"
+              ],
+              "issue_codes": [],
+              "reason": "定义准确概括了公式（1-100）描述横风偏与退电关系的语义。方向为横风偏到退电，符合公式描述的变量关系。端点类定义与源文本指代一致。",
+              "relation_id": "R_23c30368744e610b9a5c",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_96a84dcb271526ec2abaebd7"
+              ],
+              "issue_codes": [],
+              "reason": "定义与证据原文一致，描述了空气层消耗弹丸动能的过程。方向为空气（施动者）到弹丸（受动者），符合物理过程。端点类定义与源文本指代一致。",
+              "relation_id": "R_2a66075367666d54e7e7",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_a20e5ad7d03c1bf4266a654f"
+              ],
+              "issue_codes": [],
+              "reason": "定义概括了纵风影响空气阻力的语义，与证据一致。方向为纵风（因）到空气阻力（果），符合因果逻辑。端点类定义与源文本指代一致。",
+              "relation_id": "R_2b18880939600d01a389",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_7c84c52e6aeff34af800953b"
+              ],
+              "issue_codes": [],
+              "reason": "定义概括了科氏力引起射程偏差的语义，与证据一致。方向为科氏力（因）到射程偏差（果），符合因果逻辑。端点类定义与源文本指代一致。",
+              "relation_id": "R_2bcf30f9a9b27f4ed54f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_cd40dc793bd7e7fc85421fbd"
+              ],
+              "issue_codes": [],
+              "reason": "定义概括了气温影响马赫数的语义，与证据一致。方向为气温（因）到马赫数（果），符合因果逻辑。端点类定义与源文本指代一致。",
+              "relation_id": "R_2eb6c3f7a4060a8f5083",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_4f0e727bb8cd5030dd4b92fa"
+              ],
+              "issue_codes": [],
+              "reason": "定义与证据原文一致，描述了取大气为动参考系的方法。方向为大气（对象）到动参考系（角色），符合语义。端点类定义与源文本指代一致。",
+              "relation_id": "R_2f8aae75f6eb22e7db9d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_2c322b009105aa3d8584f198"
+              ],
+              "issue_codes": [],
+              "reason": "定义概括了弹丸运动形成边界层的语义，与证据一致。方向为弹丸（主体）到边界层（产物），符合物理过程。端点类定义与源文本指代一致。",
+              "relation_id": "R_30bf49bc0f38645ff31c",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_bb200aab5ba1426eb963fdd5e74eb4b5",
+          "client_request_id": "attempt_bb200aab5ba1426eb963fdd5e74eb4b5",
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111619572126426138050238674",
+          "input_tokens": 7711,
+          "late_response": false,
+          "latency_ms": 38031,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "output_tokens": 1480,
+          "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c",
+          "provider_started_at": 1794830237.5728395,
+          "queue_time_ms": 501,
+          "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_21f7b4d078c491d46d17\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ab463f1c888965fe9f26f624\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义与证据原文完全一致，准确描述了弹丸表面空气黏附现象。方向为弹丸（主体）到空气（客体），符合物理过程。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_23510018faf8ec45724e\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_3d8e085cc09a054921fe3df8\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了证据中“头部形状与激波强弱的关系”，语义忠实。方向为头部形状（因）到激波（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_23c30368744e610b9a5c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_7b74ac780a91816a0c112c0f\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义准确概括了公式（1-100）描述横风偏与退电关系的语义。方向为横风偏到退电，符合公式描述的变量关系。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2a66075367666d54e7e7\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_96a84dcb271526ec2abaebd7\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义与证据原文一致，描述了空气层消耗弹丸动能的过程。方向为空气（施动者）到弹丸（受动者），符合物理过程。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2b18880939600d01a389\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_a20e5ad7d03c1bf4266a654f\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了纵风影响空气阻力的语义，与证据一致。方向为纵风（因）到空气阻力（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2bcf30f9a9b27f4ed54f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_7c84c52e6aeff34af800953b\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了科氏力引起射程偏差的语义，与证据一致。方向为科氏力（因）到射程偏差（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2eb6c3f7a4060a8f5083\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_cd40dc793bd7e7fc85421fbd\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了气温影响马赫数的语义，与证据一致。方向为气温（因）到马赫数（果），符合因果逻辑。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_2f8aae75f6eb22e7db9d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_4f0e727bb8cd5030dd4b92fa\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义与证据原文一致，描述了取大气为动参考系的方法。方向为大气（对象）到动参考系（角色），符合语义。端点类定义与源文本指代一致。\"\n    },\n    {\n      \"relation_id\": \"R_30bf49bc0f38645ff31c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_2c322b009105aa3d8584f198\"],\n      \"issue_codes\": [],\n      \"reason\": \"定义概括了弹丸运动形成边界层的语义，与证据一致。方向为弹丸（主体）到边界层（产物），符合物理过程。端点类定义与源文本指代一致。\"\n    }\n  ]\n}",
+          "reasoning_tokens": null,
+          "request_key": "2af5c31ec90c31e41c7fd16e6f7d570cb97a79221db9dda7bc593270c04b2929",
+          "response_id": "chatcmpl-92f8ddaa93b76cad",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 319042,
+            "body_chunk_count": 1480,
+            "chunk_count": 1482,
+            "client_request_id": "attempt_bb200aab5ba1426eb963fdd5e74eb4b5",
+            "first_body_byte_ms": 5796.165,
+            "first_chunk_ms": 5813,
+            "first_content_ms": 5813,
+            "gateway_request_id": "2026111619572126426138050238674",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 119.661,
+            "max_inter_chunk_gap_ms": 125,
+            "reasoning_chars": 0,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Mon, 16 Nov 2026 11:57:24 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111619572126426138050238674"
+            },
+            "response_headers_ms": 5795.674,
+            "stream": true,
+            "terminal_ms": 38031,
+            "trace": [
+              {
+                "elapsed_ms": 2682.407,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2752.512,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2752.617,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2816.628,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2816.815,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2817.394,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2817.414,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2817.877,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2817.893,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 5793.234,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 5796.039,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 38026.886,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 38026.964,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 38026.994,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 38027.252,
+            "visible_chars": 3253
+          },
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ab463f1c888965fe9f26f624"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_21f7b4d078c491d46d17",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_3d8e085cc09a054921fe3df8"
+          ],
+          "issue_codes": [],
+          "reason": "证据支持头部形状与激波强弱的关系。",
+          "relation_id": "R_23510018faf8ec45724e",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_7b74ac780a91816a0c112c0f"
+          ],
+          "issue_codes": [
+            "direction_mismatch"
+          ],
+          "reason": "谓词“描述”的主体应该是公式（式1-100），而非“横风偏”，横风偏并不描述退电。",
+          "relation_id": "R_23c30368744e610b9a5c",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_96a84dcb271526ec2abaebd7"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_2a66075367666d54e7e7",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_a20e5ad7d03c1bf4266a654f"
+          ],
+          "issue_codes": [],
+          "reason": "证据支持纵风影响空气阻力。",
+          "relation_id": "R_2b18880939600d01a389",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_7c84c52e6aeff34af800953b"
+          ],
+          "issue_codes": [],
+          "reason": "证据支持科氏力引起射程偏差。",
+          "relation_id": "R_2bcf30f9a9b27f4ed54f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_cd40dc793bd7e7fc85421fbd"
+          ],
+          "issue_codes": [],
+          "reason": "证据支持气温影响马赫数。",
+          "relation_id": "R_2eb6c3f7a4060a8f5083",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_4f0e727bb8cd5030dd4b92fa"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_2f8aae75f6eb22e7db9d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_2c322b009105aa3d8584f198"
+          ],
+          "issue_codes": [],
+          "reason": "证据支持弹丸形成边界层。",
+          "relation_id": "R_30bf49bc0f38645ff31c",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_90b8b11b42f7434eaf2f49226d035171",
+      "client_request_id": "attempt_90b8b11b42f7434eaf2f49226d035171",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111619572132869030093029297",
+      "input_tokens": 8139,
+      "late_response": false,
+      "latency_ms": 102031,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "output_tokens": 3342,
+      "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c",
+      "provider_started_at": 1794830237.5855045,
+      "queue_time_ms": 482,
+      "raw_response": "{\"assessments\": [{\"relation_id\": \"R_21f7b4d078c491d46d17\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ab463f1c888965fe9f26f624\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_23510018faf8ec45724e\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_3d8e085cc09a054921fe3df8\"], \"issue_codes\": [], \"reason\": \"证据支持头部形状与激波强弱的关系。\"}, {\"relation_id\": \"R_23c30368744e610b9a5c\", \"definition_fidelity\": \"revise\", \"direction\": \"fail\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_7b74ac780a91816a0c112c0f\"], \"issue_codes\": [\"direction_mismatch\"], \"reason\": \"谓词“描述”的主体应该是公式（式1-100），而非“横风偏”，横风偏并不描述退电。\"}, {\"relation_id\": \"R_2a66075367666d54e7e7\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_96a84dcb271526ec2abaebd7\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_2b18880939600d01a389\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_a20e5ad7d03c1bf4266a654f\"], \"issue_codes\": [], \"reason\": \"证据支持纵风影响空气阻力。\"}, {\"relation_id\": \"R_2bcf30f9a9b27f4ed54f\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_7c84c52e6aeff34af800953b\"], \"issue_codes\": [], \"reason\": \"证据支持科氏力引起射程偏差。\"}, {\"relation_id\": \"R_2eb6c3f7a4060a8f5083\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_cd40dc793bd7e7fc85421fbd\"], \"issue_codes\": [], \"reason\": \"证据支持气温影响马赫数。\"}, {\"relation_id\": \"R_2f8aae75f6eb22e7db9d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_4f0e727bb8cd5030dd4b92fa\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_30bf49bc0f38645ff31c\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_2c322b009105aa3d8584f198\"], \"issue_codes\": [], \"reason\": \"证据支持弹丸形成边界层。\"}]}",
+      "reasoning_tokens": 2303,
+      "request_key": "8d0cacc19dd6630df2fc774b44b2fe44e165840b8ed7b668095ee6334b092e4a",
+      "response_id": "chatcmpl-b86dfb45c4257c8b",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 653271,
+        "body_chunk_count": 3000,
+        "chunk_count": 3001,
+        "client_request_id": "attempt_90b8b11b42f7434eaf2f49226d035171",
+        "first_body_byte_ms": 5664.472,
+        "first_chunk_ms": 5672,
+        "first_content_ms": 71844,
+        "gateway_request_id": "2026111619572132869030093029297",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 178.861,
+        "max_inter_chunk_gap_ms": 173,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 11:57:23 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111619572132869030093029297"
+        },
+        "response_headers_ms": 5664.22,
+        "stream": true,
+        "terminal_ms": 102031,
+        "trace": [
+          {
+            "elapsed_ms": 2732.106,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2787.31,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2787.402,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2898.99,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2899.147,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2899.833,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2899.859,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2900.419,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2900.443,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5662.208,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5664.412,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 102025.37,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 102025.444,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 102025.464,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 102025.629,
+        "visible_chars": 2320
+      },
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ab463f1c888965fe9f26f624"
+              ],
+              "issue_codes": [],
+              "reason": "定义与证据一致，方向正确。",
+              "relation_id": "R_21f7b4d078c491d46d17",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_3d8e085cc09a054921fe3df8"
+              ],
+              "issue_codes": [],
+              "reason": "证据支持头部形状与激波强弱的关系。",
+              "relation_id": "R_23510018faf8ec45724e",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "fail",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_7b74ac780a91816a0c112c0f"
+              ],
+              "issue_codes": [
+                "direction_mismatch"
+              ],
+              "reason": "谓词“描述”的主体应该是公式（式1-100），而非“横风偏”，横风偏并不描述退电。",
+              "relation_id": "R_23c30368744e610b9a5c",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_96a84dcb271526ec2abaebd7"
+              ],
+              "issue_codes": [],
+              "reason": "定义与证据一致，方向正确。",
+              "relation_id": "R_2a66075367666d54e7e7",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_a20e5ad7d03c1bf4266a654f"
+              ],
+              "issue_codes": [],
+              "reason": "证据支持纵风影响空气阻力。",
+              "relation_id": "R_2b18880939600d01a389",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_7c84c52e6aeff34af800953b"
+              ],
+              "issue_codes": [],
+              "reason": "证据支持科氏力引起射程偏差。",
+              "relation_id": "R_2bcf30f9a9b27f4ed54f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_cd40dc793bd7e7fc85421fbd"
+              ],
+              "issue_codes": [],
+              "reason": "证据支持气温影响马赫数。",
+              "relation_id": "R_2eb6c3f7a4060a8f5083",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_4f0e727bb8cd5030dd4b92fa"
+              ],
+              "issue_codes": [],
+              "reason": "定义与证据一致，方向正确。",
+              "relation_id": "R_2f8aae75f6eb22e7db9d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_2c322b009105aa3d8584f198"
+              ],
+              "issue_codes": [],
+              "reason": "证据支持弹丸形成边界层。",
+              "relation_id": "R_30bf49bc0f38645ff31c",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_90b8b11b42f7434eaf2f49226d035171",
+          "client_request_id": "attempt_90b8b11b42f7434eaf2f49226d035171",
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111619572132869030093029297",
+          "input_tokens": 8139,
+          "late_response": false,
+          "latency_ms": 102031,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "output_tokens": 3342,
+          "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c",
+          "provider_started_at": 1794830237.5855045,
+          "queue_time_ms": 482,
+          "raw_response": "{\"assessments\": [{\"relation_id\": \"R_21f7b4d078c491d46d17\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ab463f1c888965fe9f26f624\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_23510018faf8ec45724e\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_3d8e085cc09a054921fe3df8\"], \"issue_codes\": [], \"reason\": \"证据支持头部形状与激波强弱的关系。\"}, {\"relation_id\": \"R_23c30368744e610b9a5c\", \"definition_fidelity\": \"revise\", \"direction\": \"fail\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_7b74ac780a91816a0c112c0f\"], \"issue_codes\": [\"direction_mismatch\"], \"reason\": \"谓词“描述”的主体应该是公式（式1-100），而非“横风偏”，横风偏并不描述退电。\"}, {\"relation_id\": \"R_2a66075367666d54e7e7\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_96a84dcb271526ec2abaebd7\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_2b18880939600d01a389\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_a20e5ad7d03c1bf4266a654f\"], \"issue_codes\": [], \"reason\": \"证据支持纵风影响空气阻力。\"}, {\"relation_id\": \"R_2bcf30f9a9b27f4ed54f\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_7c84c52e6aeff34af800953b\"], \"issue_codes\": [], \"reason\": \"证据支持科氏力引起射程偏差。\"}, {\"relation_id\": \"R_2eb6c3f7a4060a8f5083\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_cd40dc793bd7e7fc85421fbd\"], \"issue_codes\": [], \"reason\": \"证据支持气温影响马赫数。\"}, {\"relation_id\": \"R_2f8aae75f6eb22e7db9d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_4f0e727bb8cd5030dd4b92fa\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_30bf49bc0f38645ff31c\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_2c322b009105aa3d8584f198\"], \"issue_codes\": [], \"reason\": \"证据支持弹丸形成边界层。\"}]}",
+          "reasoning_tokens": 2303,
+          "request_key": "8d0cacc19dd6630df2fc774b44b2fe44e165840b8ed7b668095ee6334b092e4a",
+          "response_id": "chatcmpl-b86dfb45c4257c8b",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 653271,
+            "body_chunk_count": 3000,
+            "chunk_count": 3001,
+            "client_request_id": "attempt_90b8b11b42f7434eaf2f49226d035171",
+            "first_body_byte_ms": 5664.472,
+            "first_chunk_ms": 5672,
+            "first_content_ms": 71844,
+            "gateway_request_id": "2026111619572132869030093029297",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 178.861,
+            "max_inter_chunk_gap_ms": 173,
+            "reasoning_chars": 0,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Mon, 16 Nov 2026 11:57:23 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111619572132869030093029297"
+            },
+            "response_headers_ms": 5664.22,
+            "stream": true,
+            "terminal_ms": 102031,
+            "trace": [
+              {
+                "elapsed_ms": 2732.106,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2787.31,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2787.402,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2898.99,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2899.147,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2899.833,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2899.859,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2900.419,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2900.443,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 5662.208,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 5664.412,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 102025.37,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 102025.444,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 102025.464,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 102025.629,
+            "visible_chars": 2320
+          },
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ab463f1c888965fe9f26f624"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确弹丸表面黏附薄层空气随弹丸运动，域为弹丸、范围为空气，方向与端点相符。",
+          "relation_id": "R_21f7b4d078c491d46d17",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_3d8e085cc09a054921fe3df8"
+          ],
+          "issue_codes": [],
+          "reason": "原文图1-7给出头部形状与激波强弱的关系，定义与方向一致。",
+          "relation_id": "R_23510018faf8ec45724e",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_7b74ac780a91816a0c112c0f"
+          ],
+          "issue_codes": [
+            "definition_generic_not_source_specific"
+          ],
+          "reason": "原文仅说式(1-100)描述横风偏与退电关系，定义泛化为公式表达概念关系，超出具体证据表述。",
+          "relation_id": "R_23c30368744e610b9a5c",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_96a84dcb271526ec2abaebd7"
+          ],
+          "issue_codes": [
+            "direction_mismatch",
+            "endpoint_mismatch"
+          ],
+          "reason": "原文是边界层空气被带动消耗弹丸动能，消耗者为空气层而非空气整体，且方向应为空气层→弹丸动能，现域空气、范围弹丸不符。",
+          "relation_id": "R_2a66075367666d54e7e7",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_a20e5ad7d03c1bf4266a654f"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确纵风影响阻力大小和方向，域纵风、范围空气阻力，方向与端点相符。",
+          "relation_id": "R_2b18880939600d01a389",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_7c84c52e6aeff34af800953b"
+          ],
+          "issue_codes": [
+            "endpoint_mismatch",
+            "definition_overgeneralized"
+          ],
+          "reason": "原文表1-5同时给出射程偏差和方向偏差，定义只提射程偏差且范围仅射程偏差，遗漏方向偏差端点。",
+          "relation_id": "R_2bcf30f9a9b27f4ed54f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_cd40dc793bd7e7fc85421fbd"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确气温除影响空气密度外还影响马赫数，域气温、范围马赫数一致。",
+          "relation_id": "R_2eb6c3f7a4060a8f5083",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_4f0e727bb8cd5030dd4b92fa"
+          ],
+          "issue_codes": [
+            "endpoint_mismatch",
+            "definition_not_concept_relation"
+          ],
+          "reason": "原文是取大气为动参考系的操作性表述，非概念关系定义；且动参考系类定义限定从左向右运动，与恒定纵风语境不符。",
+          "relation_id": "R_2f8aae75f6eb22e7db9d",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_2c322b009105aa3d8584f198"
+          ],
+          "issue_codes": [],
+          "reason": "原文说明弹丸飞行过程中表面边界层不断形成，域弹丸、范围边界层，方向与端点相符。",
+          "relation_id": "R_30bf49bc0f38645ff31c",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_004e6421969b4e0ebcbd59abf20e679a",
+      "client_request_id": "attempt_004e6421969b4e0ebcbd59abf20e679a",
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 7134,
+      "late_response": false,
+      "latency_ms": 7328,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 998,
+      "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c",
+      "provider_started_at": 1794830237.602195,
+      "queue_time_ms": 502,
+      "raw_response": "{\"assessments\":[{\"relation_id\":\"R_21f7b4d078c491d46d17\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ab463f1c888965fe9f26f624\"],\"issue_codes\":[],\"reason\":\"原文明确弹丸表面黏附薄层空气随弹丸运动，域为弹丸、范围为空气，方向与端点相符。\"},{\"relation_id\":\"R_23510018faf8ec45724e\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_3d8e085cc09a054921fe3df8\"],\"issue_codes\":[],\"reason\":\"原文图1-7给出头部形状与激波强弱的关系，定义与方向一致。\"},{\"relation_id\":\"R_23c30368744e610b9a5c\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_7b74ac780a91816a0c112c0f\"],\"issue_codes\":[\"definition_generic_not_source_specific\"],\"reason\":\"原文仅说式(1-100)描述横风偏与退电关系，定义泛化为公式表达概念关系，超出具体证据表述。\"},{\"relation_id\":\"R_2a66075367666d54e7e7\",\"definition_fidelity\":\"revise\",\"direction\":\"fail\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_96a84dcb271526ec2abaebd7\"],\"issue_codes\":[\"direction_mismatch\",\"endpoint_mismatch\"],\"reason\":\"原文是边界层空气被带动消耗弹丸动能，消耗者为空气层而非空气整体，且方向应为空气层→弹丸动能，现域空气、范围弹丸不符。\"},{\"relation_id\":\"R_2b18880939600d01a389\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_a20e5ad7d03c1bf4266a654f\"],\"issue_codes\":[],\"reason\":\"原文明确纵风影响阻力大小和方向，域纵风、范围空气阻力，方向与端点相符。\"},{\"relation_id\":\"R_2bcf30f9a9b27f4ed54f\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_7c84c52e6aeff34af800953b\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_overgeneralized\"],\"reason\":\"原文表1-5同时给出射程偏差和方向偏差，定义只提射程偏差且范围仅射程偏差，遗漏方向偏差端点。\"},{\"relation_id\":\"R_2eb6c3f7a4060a8f5083\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_cd40dc793bd7e7fc85421fbd\"],\"issue_codes\":[],\"reason\":\"原文明确气温除影响空气密度外还影响马赫数，域气温、范围马赫数一致。\"},{\"relation_id\":\"R_2f8aae75f6eb22e7db9d\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_4f0e727bb8cd5030dd4b92fa\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_not_concept_relation\"],\"reason\":\"原文是取大气为动参考系的操作性表述，非概念关系定义；且动参考系类定义限定从左向右运动，与恒定纵风语境不符。\"},{\"relation_id\":\"R_30bf49bc0f38645ff31c\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_2c322b009105aa3d8584f198\"],\"issue_codes\":[],\"reason\":\"原文说明弹丸飞行过程中表面边界层不断形成，域弹丸、范围边界层，方向与端点相符。\"}]}",
+      "reasoning_tokens": null,
+      "request_key": "f557f3792f7c3614e3186537ee4513e026948cfd927c7b56f13e4e8427f7f07f",
+      "response_id": "7c2fba60-e34a-4590-9117-3eeaf18e6e4f",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 1650,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_004e6421969b4e0ebcbd59abf20e679a",
+        "first_body_byte_ms": 7311.084,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Mon, 16 Nov 2026 11:57:21 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 3093.877,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 2694.359,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2795.446,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2795.535,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2888.337,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2888.525,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2889.238,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2889.266,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2889.912,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2889.936,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 3091.235,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 3094.074,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 7311.369,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 7311.444,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 7311.475,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 7320.145
+      },
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ab463f1c888965fe9f26f624"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确弹丸表面黏附薄层空气随弹丸运动，域为弹丸、范围为空气，方向与端点相符。",
+              "relation_id": "R_21f7b4d078c491d46d17",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_3d8e085cc09a054921fe3df8"
+              ],
+              "issue_codes": [],
+              "reason": "原文图1-7给出头部形状与激波强弱的关系，定义与方向一致。",
+              "relation_id": "R_23510018faf8ec45724e",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_7b74ac780a91816a0c112c0f"
+              ],
+              "issue_codes": [
+                "definition_generic_not_source_specific"
+              ],
+              "reason": "原文仅说式(1-100)描述横风偏与退电关系，定义泛化为公式表达概念关系，超出具体证据表述。",
+              "relation_id": "R_23c30368744e610b9a5c",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "fail",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_96a84dcb271526ec2abaebd7"
+              ],
+              "issue_codes": [
+                "direction_mismatch",
+                "endpoint_mismatch"
+              ],
+              "reason": "原文是边界层空气被带动消耗弹丸动能，消耗者为空气层而非空气整体，且方向应为空气层→弹丸动能，现域空气、范围弹丸不符。",
+              "relation_id": "R_2a66075367666d54e7e7",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_a20e5ad7d03c1bf4266a654f"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确纵风影响阻力大小和方向，域纵风、范围空气阻力，方向与端点相符。",
+              "relation_id": "R_2b18880939600d01a389",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_7c84c52e6aeff34af800953b"
+              ],
+              "issue_codes": [
+                "endpoint_mismatch",
+                "definition_overgeneralized"
+              ],
+              "reason": "原文表1-5同时给出射程偏差和方向偏差，定义只提射程偏差且范围仅射程偏差，遗漏方向偏差端点。",
+              "relation_id": "R_2bcf30f9a9b27f4ed54f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_cd40dc793bd7e7fc85421fbd"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确气温除影响空气密度外还影响马赫数，域气温、范围马赫数一致。",
+              "relation_id": "R_2eb6c3f7a4060a8f5083",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_4f0e727bb8cd5030dd4b92fa"
+              ],
+              "issue_codes": [
+                "endpoint_mismatch",
+                "definition_not_concept_relation"
+              ],
+              "reason": "原文是取大气为动参考系的操作性表述，非概念关系定义；且动参考系类定义限定从左向右运动，与恒定纵风语境不符。",
+              "relation_id": "R_2f8aae75f6eb22e7db9d",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_2c322b009105aa3d8584f198"
+              ],
+              "issue_codes": [],
+              "reason": "原文说明弹丸飞行过程中表面边界层不断形成，域弹丸、范围边界层，方向与端点相符。",
+              "relation_id": "R_30bf49bc0f38645ff31c",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_004e6421969b4e0ebcbd59abf20e679a",
+          "client_request_id": "attempt_004e6421969b4e0ebcbd59abf20e679a",
+          "finish_reason": "stop",
+          "gateway_request_id": null,
+          "input_tokens": 7134,
+          "late_response": false,
+          "latency_ms": 7328,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "output_tokens": 998,
+          "proposal_digest": "832a6c7772c0b196faf52ce195000811993f6c26229095ed701b36da8f53508c",
+          "provider_started_at": 1794830237.602195,
+          "queue_time_ms": 502,
+          "raw_response": "{\"assessments\":[{\"relation_id\":\"R_21f7b4d078c491d46d17\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ab463f1c888965fe9f26f624\"],\"issue_codes\":[],\"reason\":\"原文明确弹丸表面黏附薄层空气随弹丸运动，域为弹丸、范围为空气，方向与端点相符。\"},{\"relation_id\":\"R_23510018faf8ec45724e\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_3d8e085cc09a054921fe3df8\"],\"issue_codes\":[],\"reason\":\"原文图1-7给出头部形状与激波强弱的关系，定义与方向一致。\"},{\"relation_id\":\"R_23c30368744e610b9a5c\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_7b74ac780a91816a0c112c0f\"],\"issue_codes\":[\"definition_generic_not_source_specific\"],\"reason\":\"原文仅说式(1-100)描述横风偏与退电关系，定义泛化为公式表达概念关系，超出具体证据表述。\"},{\"relation_id\":\"R_2a66075367666d54e7e7\",\"definition_fidelity\":\"revise\",\"direction\":\"fail\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_96a84dcb271526ec2abaebd7\"],\"issue_codes\":[\"direction_mismatch\",\"endpoint_mismatch\"],\"reason\":\"原文是边界层空气被带动消耗弹丸动能，消耗者为空气层而非空气整体，且方向应为空气层→弹丸动能，现域空气、范围弹丸不符。\"},{\"relation_id\":\"R_2b18880939600d01a389\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_a20e5ad7d03c1bf4266a654f\"],\"issue_codes\":[],\"reason\":\"原文明确纵风影响阻力大小和方向，域纵风、范围空气阻力，方向与端点相符。\"},{\"relation_id\":\"R_2bcf30f9a9b27f4ed54f\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_7c84c52e6aeff34af800953b\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_overgeneralized\"],\"reason\":\"原文表1-5同时给出射程偏差和方向偏差，定义只提射程偏差且范围仅射程偏差，遗漏方向偏差端点。\"},{\"relation_id\":\"R_2eb6c3f7a4060a8f5083\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_cd40dc793bd7e7fc85421fbd\"],\"issue_codes\":[],\"reason\":\"原文明确气温除影响空气密度外还影响马赫数，域气温、范围马赫数一致。\"},{\"relation_id\":\"R_2f8aae75f6eb22e7db9d\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_4f0e727bb8cd5030dd4b92fa\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_not_concept_relation\"],\"reason\":\"原文是取大气为动参考系的操作性表述，非概念关系定义；且动参考系类定义限定从左向右运动，与恒定纵风语境不符。\"},{\"relation_id\":\"R_30bf49bc0f38645ff31c\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_2c322b009105aa3d8584f198\"],\"issue_codes\":[],\"reason\":\"原文说明弹丸飞行过程中表面边界层不断形成，域弹丸、范围边界层，方向与端点相符。\"}]}",
+          "reasoning_tokens": null,
+          "request_key": "f557f3792f7c3614e3186537ee4513e026948cfd927c7b56f13e4e8427f7f07f",
+          "response_id": "7c2fba60-e34a-4590-9117-3eeaf18e6e4f",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "task_id": "definition_batch_febe14add37a1f4f920b64e0",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 1650,
+            "body_chunk_count": 1,
+            "client_request_id": "attempt_004e6421969b4e0ebcbd59abf20e679a",
+            "first_body_byte_ms": 7311.084,
+            "gateway_request_id": null,
+            "http_status": 200,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-encoding": "gzip",
+              "content-type": "application/json",
+              "date": "Mon, 16 Nov 2026 11:57:21 GMT",
+              "server": "openresty",
+              "transfer-encoding": "chunked"
+            },
+            "response_headers_ms": 3093.877,
+            "stream": false,
+            "trace": [
+              {
+                "elapsed_ms": 2694.359,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2795.446,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2795.535,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2888.337,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2888.525,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2889.238,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2889.266,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2889.912,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2889.936,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 3091.235,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 3094.074,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 7311.369,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 7311.444,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 7311.475,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 7320.145
+          },
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "budget": {
+    "usage": {
+      "llm_calls": 6,
+      "tool_calls": 0,
+      "planner_steps": 0,
+      "validation_rounds": 0,
+      "input_tokens": 47891,
+      "output_tokens": 11856,
+      "unknown_token_requests": 0
+    },
+    "deadline_epoch": 1794832636.9032378,
+    "remaining_seconds": 2296.870504617691,
+    "remaining_llm_calls": 42,
+    "max_planner_steps": 4,
+    "max_validation_rounds": 1,
+    "case_ids": [
+      "case_b3dd8ae6e241afa29d2e9dfa8e805deb"
+    ],
+    "case_call_reservations": [
+      "1825b2e0c2494002b929778b9bacfa3a"
+    ],
+    "stage_usage": {
+      "preprocessing": {
+        "llm_calls": 3,
+        "tool_calls": 0
+      }
+    },
+    "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+    "case_accounts": [
+      {
+        "case_id": "case_b3dd8ae6e241afa29d2e9dfa8e805deb",
+        "limits": {
+          "extension_requests": 1,
+          "llm_calls": 66,
+          "rebinds": 2,
+          "tokens": 780000,
+          "tool_calls": 40
+        },
+        "usage": {
+          "extension_requests": 0,
+          "llm_calls": 22,
+          "rebinds": 0,
+          "tokens": 256300,
+          "tool_calls": 3
+        }
+      }
+    ]
+  }
+}

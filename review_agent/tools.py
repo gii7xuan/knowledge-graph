@@ -324,6 +324,7 @@ class AgentTools:
             state.context.setdefault('dispute_source_evidence_ids',[e['evidence_id'] for e in proposal['evidence_bundle']['items']])
             from .resolution_state import CHECK_AXES
             for dispute in consensus.get('dispute_report',{}).get('disputes',[]):
+                if dispute.get('status') in {'nonblocking_abstention','policy_equivalent'}:continue
                 ledger.open('claim_dispute',dispute['question'],True,proposal=proposal['proposal_digest'],
                     evidence_ids=[eid for o in dispute['opinions'] for eid in o['evidence_ids']],
                     evidence_hash=proposal['evidence_bundle']['evidence_hash'],

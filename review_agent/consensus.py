@@ -14,8 +14,12 @@ class Committee:
     required_votes: int = 3
     minimum_distinct_families: int = 3
     version: str = "committee_v1"
+    weighting_policy: Optional[Mapping[str, Any]] = None
 
     def __post_init__(self) -> None:
+        if self.weighting_policy is not None:
+            from .vote_weighting import normalize_policy
+            object.__setattr__(self, 'weighting_policy', normalize_policy(dict(self.weighting_policy), len(self.voter_ids)))
         if len(set(self.voter_ids)) != len(self.voter_ids):
             raise ValueError("committee voter ids must be unique")
         if self.required_votes < 1 or self.required_votes > len(self.voter_ids):
@@ -35,10 +39,11 @@ def aggregate_votes(
     admission_blocked: bool = False,
 ) -> Dict[str, Any]:
     """Count at most one contract-valid vote for every frozen voter slot."""
+    votes = list(votes)
     if proposal and proposal.get("committee_policy_hash"):
         from .contracts import sha256_json
-        policy = {"committee_size": len(committee.voter_ids), "required_votes": committee.required_votes,
-                  "minimum_distinct_families": committee.minimum_distinct_families}
+        from .vote_weighting import committee_policy
+        policy = committee_policy(committee)
         if sha256_json(policy) != proposal["committee_policy_hash"]:
             raise ValueError("current committee thresholds differ from frozen proposal")
     accepted_voters = set(committee.voter_ids)
@@ -277,6 +282,17 @@ def aggregate_votes(
         if any(d['status']=='open' for d in report['disputes']):
             result_payload['result']='unresolved'
             result_payload['admission_consensus']={'result':'unresolved'}
+    if committee.weighting_policy is not None and proposal is not None:
+        from .review_observability import summarize_dimensions
+        from .vote_weighting import apply_to_consensus, annotate_disputes
+        report = summarize_dimensions(votes, proposal, committee)
+        result_payload = apply_to_consensus(result_payload, report, proposal,
+            admission_blocked=admission_blocked or unresolved_counterevidence or unresolved_support_conflict)
+        if result_payload.get('dispute_report'):
+            annotate_disputes(result_payload['dispute_report'], report)
+            if any(d['status'] in {'open', 'human_review'} for d in result_payload['dispute_report']['disputes']):
+                result_payload['result'] = 'unresolved'
+                result_payload['admission_consensus'] = {'result': 'unresolved'}
     return result_payload
 
 

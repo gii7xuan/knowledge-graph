@@ -4,6 +4,7 @@ from copy import deepcopy
 import json
 from .contracts import sha256_json,canonical_json
 from .schema_validation import schema_errors
+from .vote_weighting import committee_policy
 
 VERSION='candidate_dispute_review_v1'
 PROMPT='''Review ONLY the frozen dispute.question and exact expression against the supplied source and formal definitions.
@@ -103,6 +104,9 @@ def focused_consensus(votes,proposal):
         if not identities or models & identities:continue
         models|=identities;families.add(vote['model_family']);eligible.append(vote)
     policy=proposal['committee_policy'];answers={v['answer'] for v in eligible}
+    if policy.get('vote_weighting'):
+        from .vote_weighting import focused_weighting
+        return focused_weighting(eligible,proposal)
     complete=len(eligible)==policy['committee_size'] and len(families)>=policy['minimum_distinct_families']
     decision='resolved_'+next(iter(answers)) if complete and len(answers)==1 and answers<={'supports','opposes'} else 'human_review' if complete else 'review_incomplete'
     return {'status':decision,'eligible_voter_ids':[v['voter_id'] for v in eligible],
@@ -126,7 +130,7 @@ def review(repository,base,dispute,bundle,voters,committee,budget,ontology_conte
         'source_proposal_digest':base['proposal_digest'],'dispute':{k:deepcopy(dispute[k]) for k in ('dispute_id','claim','check','issue_type','question','route')},
         'evidence_bundle':deepcopy(bundle),'protected_evidence_ids':sorted(old),'ontology_context':deepcopy(ontology_context),
         'committee_members':[{k:v[k] for k in ('id','model_id','model_family')}|{'model_identity':str(v.get('model_identity') or v['model_id']).casefold()} for v in voters],
-        'committee_policy':{'committee_size':len(committee.voter_ids),'required_votes':committee.required_votes,'minimum_distinct_families':committee.minimum_distinct_families}}
+        'committee_policy':committee_policy(committee)}
     if resolution_policy:proposal['resolution_policy']=resolution_policy
     proposal['proposal_digest']=sha256_json(proposal);did=dispute['dispute_id']
     with repository.connect() as c:

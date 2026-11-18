@@ -8,7 +8,23 @@ from .planner_contracts import response_schema
 
 def validation_summary(validation, detailed=True):
     if not validation: return None
-    return {k:copy.deepcopy(validation.get(k)) for k in ('round_id','proposal_digest','evidence_hash','consensus')}|{
+    result={k:copy.deepcopy(validation.get(k)) for k in ('round_id','proposal_digest','evidence_hash','consensus')}
+    consensus=result.get('consensus') or {}
+    if consensus.get('weight_snapshot'):
+        snapshot=consensus['weight_snapshot']
+        consensus['weight_snapshot']={k:snapshot.get(k) for k in ('snapshot_id','mode','policy_hash','feature_version','critical_counter_evidence_ids')}
+        consensus['weight_snapshot']['axes']={axis:{**{k:row.get(k) for k in ('status','scores','available_mass','threshold','valid_opinion_count')},
+            'seats':{voter:{**{k:seat.get(k) for k in ('model_id','model_family','reliability','adaptation','weight','effective_weight','opinion','usable','missing_reasons')},
+                'history_reason':seat.get('history',{}).get('reason'),
+                'known_checks':seat.get('features',{}).get('known_checks'),
+                'required_checks':seat.get('features',{}).get('required_checks')}
+                for voter,seat in row['seats'].items()}} for axis,row in snapshot['axes'].items()}
+        consensus['review_axes']={a:{k:d.get(k) for k in ('status','judgment_complete','has_conflict','available_mass','missing_voter_ids')}
+            for a,d in consensus.get('review_axes',{}).items() if isinstance(d,dict)}
+        if 'resolution_snapshot' in consensus:
+            consensus['resolution_snapshot']={'snapshot_id':consensus['resolution_snapshot'].get('snapshot_id')}
+        if 'dispute_report' in consensus:consensus['dispute_report']=bounded_hint(consensus['dispute_report'],4000)
+    return result|{
         'votes':[summarize_vote(v) if detailed else {k:copy.deepcopy(v.get(k)) for k in
             ('voter_id','response_status','source_support','reason_codes','supporting_evidence_ids','counter_evidence_ids')}
             for v in validation.get('votes',[])]}
@@ -36,6 +52,51 @@ def bounded_hint(value, remaining=1800, depth=0):
         budget[0]-=8
         return item if item is None or isinstance(item,(int,float,bool)) else str(item)[:120]
     return visit(value,depth)
+
+
+def compact_planner_payload(payload):
+    """Remove repeated server-owned metadata, never candidate or source evidence."""
+    from .contracts import sha256_json
+    result=copy.deepcopy(payload)
+    before=len(json.dumps(payload,ensure_ascii=False).encode('utf-8'))
+    versions=result.get('frozen_versions')or{}
+    result['frozen_versions']={k:({'value_hash':sha256_json(v),'full_value_preserved_server_side':True}
+        if isinstance(v,(dict,list)) or isinstance(v,str) and len(v)>200 else v) for k,v in versions.items()}
+    current=result.get('current_validation')
+    if current:
+        full=current.get('consensus')or{}
+        keys=('eligible_voter_ids','source_support_consensus','expression_status','effective_mapping_status',
+            'knowledge_scope','scope_confirmed','unresolved_counterevidence','unresolved_support_conflict',
+            'supporting_evidence_ids','counter_evidence_ids','weighted_review_complete','result','blocking_fields')
+        summary={k:full[k] for k in keys if k in full}
+        summary['review_axes']={a:{k:v.get(k) for k in ('status','judgment_complete','has_conflict','available_mass','missing_voter_ids')}
+            for a,v in full.get('review_axes',{}).items() if isinstance(v,dict)}
+        snapshot=full.get('weight_snapshot')or{}
+        if snapshot:
+            summary['weight_snapshot']={k:snapshot.get(k) for k in ('snapshot_id','mode','policy_hash')}
+            summary['weight_snapshot']['axes']={a:{**{k:row.get(k) for k in ('status','scores','available_mass','threshold')},
+                'seats':{sid:{k:seat.get(k) for k in ('model_family','reliability','adaptation','weight','effective_weight','usable')}
+                    for sid,seat in row.get('seats',{}).items()}} for a,row in snapshot.get('axes',{}).items()}
+        current['consensus']=summary
+        # Material objections and their exact evidence IDs remain in each vote.
+        vote_keys=('voter_id','model_id','model_family','response_status','source_support','expression_status','knowledge_scope',
+            'mapping','reason_codes','supporting_evidence_ids','counter_evidence_ids','checks','expression_findings',
+            'requested_context','suggested_revision','failure')
+        current['votes']=[{k:v[k] for k in vote_keys if k in v} for v in current.get('votes',[])]
+    for observation in result.get('history',[]):
+        validation=observation.get('validation')
+        if validation:
+            observation['validation']={k:validation.get(k) for k in ('round_id','proposal_digest','evidence_hash')}
+            observation['validation']['full_validation_preserved_server_side']=True
+            if current and validation.get('proposal_digest')==current.get('proposal_digest'):
+                observation['validation']['summary_ref']='current_validation'
+    lookup=result.get('ontology_lookup')or{}
+    if lookup.get('retrieved_context'):
+        lookup.pop('matched_definitions',None);lookup.pop('semantic_mapping',None)
+    result.update(planner_view_version='planner_compact_v2',full_evidence_and_votes_preserved_in_checkpoint=True)
+    result['input_size']={'before_deduplication_bytes':before,'after_deduplication_bytes':0,'full_material_preserved_server_side':True}
+    for _ in range(2):result['input_size']['after_deduplication_bytes']=len(json.dumps(result,ensure_ascii=False).encode('utf-8'))
+    return result
 
 
 def summarize_vote(vote):
@@ -200,4 +261,6 @@ def planner_view(state,budget,tools):
         after=len(json.dumps(result,ensure_ascii=False).encode('utf-8'))
         result['input_size']={'before_deduplication_bytes':before,'after_deduplication_bytes':after,
             'evidence_items':len(catalog),'full_material_preserved_server_side':True}
+    if state.context.get('planner_compact_view') and not state.context.get('resolution_snapshots_enabled'):
+        return compact_planner_payload(result)
     return result

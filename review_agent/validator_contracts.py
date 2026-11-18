@@ -51,6 +51,14 @@ def versions_for(config):
         from .field_spec import specification
         spec = specification()
         fields = {'field_spec':spec,'field_spec_version':spec['version'],'field_spec_hash':sha256_json(spec)}
+        from .response_consistency import policy as consistency_policy
+        consistency=consistency_policy()
+        fields.update(response_consistency_policy=consistency,response_consistency_policy_hash=sha256_json(consistency),
+                      response_consistency_binding_version='response_consistency_digest_v1')
+        from .response_projection import policy as projection_policy
+        projection=projection_policy()
+        fields.update(response_projection_policy=projection,response_projection_policy_hash=sha256_json(projection),
+                      response_projection_policy_version=projection['version'])
         if (config.get('dispute_review') or {}).get('enabled'):
             from .disputes import policy_for
             policy=policy_for(config)
@@ -81,6 +89,10 @@ def prompt_for(proposal):
     if proposal.get('response_contract_version') == 'validator_response_v8':
         from .field_spec import frozen
         frozen(proposal)
+        from .response_consistency import frozen as consistency_frozen
+        consistency_frozen(proposal)
+        from .response_projection import frozen as projection_frozen
+        projection_frozen(proposal)
     if 'dispute_policy' in proposal:
         from .disputes import frozen
         frozen(proposal)
@@ -104,11 +116,15 @@ def prompt_for(proposal):
         prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v8_citations_v2.txt').read_text(encoding='utf-8')
     elif contract.CONTRACT_VERSION == 'validator_response_v8' and version == 'triple_validator_v8_citations_v3':
         prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v8_citations_v3.txt').read_text(encoding='utf-8')
+    elif contract.CONTRACT_VERSION == 'validator_response_v8' and version == 'triple_validator_v8_citations_v4':
+        prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v8_citations_v4.txt').read_text(encoding='utf-8')
+    elif contract.CONTRACT_VERSION == 'validator_response_v8' and version == 'triple_validator_v8_citations_v5':
+        prompt = (Path(__file__).resolve().parents[1] / 'prompts/triple_validator_v8_citations_v5.txt').read_text(encoding='utf-8')
     else:
         prompt = contract.SYSTEM_PROMPT
-    if contract.CONTRACT_VERSION == 'validator_response_v8' and version not in {'triple_validator_v8_field_rules_v1','triple_validator_v8_citations_v2','triple_validator_v8_citations_v3','triple_validator_v8_citations_v4'}:
+    if contract.CONTRACT_VERSION == 'validator_response_v8' and version not in {'triple_validator_v8_field_rules_v1','triple_validator_v8_citations_v2','triple_validator_v8_citations_v3','triple_validator_v8_citations_v4','triple_validator_v8_citations_v5','triple_validator_v8_consistency_v6'}:
         raise ValueError('unsupported frozen V8 prompt version')
-    if version in {'triple_validator_v4', 'triple_validator_v4_direction_scope_v1', 'triple_validator_v5_semantic_units_v1', 'triple_validator_v5_1_complete_output_v1', 'triple_validator_v5_2_auxiliary_format_v1', 'triple_validator_v6_dimensions_v1', 'triple_validator_v6_1_structured_output_v1', 'triple_validator_v6_2_targeted_repairs_v1', 'triple_validator_v6_3_dynamic_ontology_v1','triple_validator_v7_four_axes_v1','triple_validator_v8_field_rules_v1','triple_validator_v8_citations_v2','triple_validator_v8_citations_v3','triple_validator_v8_citations_v4'} and proposal.get('prompt_hash'):
+    if version in {'triple_validator_v4', 'triple_validator_v4_direction_scope_v1', 'triple_validator_v5_semantic_units_v1', 'triple_validator_v5_1_complete_output_v1', 'triple_validator_v5_2_auxiliary_format_v1', 'triple_validator_v6_dimensions_v1', 'triple_validator_v6_1_structured_output_v1', 'triple_validator_v6_2_targeted_repairs_v1', 'triple_validator_v6_3_dynamic_ontology_v1','triple_validator_v7_four_axes_v1','triple_validator_v8_field_rules_v1','triple_validator_v8_citations_v2','triple_validator_v8_citations_v3','triple_validator_v8_citations_v4','triple_validator_v8_citations_v5','triple_validator_v8_consistency_v6'} and proposal.get('prompt_hash'):
         if hashlib.sha256(prompt.encode()).hexdigest() != proposal['prompt_hash']:
             raise ValueError('frozen source prompt hash mismatch')
     return prompt

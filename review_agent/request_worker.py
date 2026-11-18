@@ -12,6 +12,7 @@ def main():
     attempt=repository.request_attempt(descriptor['attempt_id'])
     voter={**descriptor['voter'],'client':OpenAICompatibleClient(**descriptor['client']),
            'max_output_tokens':descriptor['max_output_tokens']}
+    voter['client'].client_request_id=descriptor['attempt_id']
     proposal,feedback=attempt['metadata']['proposal'],attempt['metadata'].get('feedback')
     if attempt['state'] not in {'running','unknown'}: return
     provider_started_at=time.time()
@@ -47,6 +48,15 @@ def main():
         elif descriptor['task_type']=='ontology_coverage_assessment_v1':
             from .ontology_coverage import judge_once
             vote=judge_once(voter,proposal,feedback)
+        elif descriptor['task_type']=='ontology_definition_audit_v1':
+            from ontology_review.definition_audit import judge_once
+            vote=judge_once(voter,proposal,feedback)
+        elif descriptor['task_type']=='synthetic_channel_probe_v1':
+            from .channel_probe import judge_once
+            vote=judge_once(voter,proposal,feedback)
+        elif descriptor['task_type']=='source_candidate_extraction_v1':
+            from extract_triplets.audited_requests import judge_once
+            vote=judge_once(voter,proposal,feedback)
         else:
             raise ValueError('unknown frozen request task_type')
     except Exception as exc:
@@ -54,6 +64,10 @@ def main():
         vote={**attempt['metadata']['binding'],'response_status':'api_error','error':str(exc),**api_error_fields(exc)}
     vote.update(provider_started_at=provider_started_at,
                 queue_time_ms=int((provider_started_at-attempt['started_at'])*1000))
+    vote['client_request_id']=descriptor['attempt_id']
+    vote.setdefault('transport_metrics',{})
+    if vote['transport_metrics'] is None:vote['transport_metrics']={}
+    vote['transport_metrics']['client_request_id']=descriptor['attempt_id']
     if vote.get('pause_job'):
         repository.pause_model_service(attempt['metadata']['service_key'],vote)
     repository.finish_request_attempt(descriptor['attempt_id'],descriptor['owner'],vote,

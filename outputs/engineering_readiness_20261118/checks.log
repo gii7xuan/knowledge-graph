@@ -1,0 +1,25 @@
+test_canonical_array_still_requires_all_fields_and_genuine_rejection_is_valid (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_legacy_request_prompt_hash_and_wire_format_are_unchanged (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_missing_status_review_is_rejected_without_backfilling (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_named_response_runs_through_existing_judge_without_becoming_approval (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_projection_preserves_rejection_notes_and_all_evidence_exactly (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_required_value_and_status_fields_are_explicit_in_schema_and_checklist (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_budget_call_cap_is_not_overridden_by_longer_model_timeout (tests.test_revision_delivery_v2.RevisionPerCallDeadlineTests) ... ok
+test_serial_revision_seats_respect_the_frozen_parallel_limit (tests.test_priority_disputes.RevisionSchedulingTests) ... ok
+test_unknown_result_stops_queued_seats_without_counting_them_as_requests (tests.test_priority_disputes.RevisionSchedulingTests) ... ok
+test_derived_metadata_change_does_not_create_a_new_paid_review (tests.test_revision_normalization_binding.RevisionNormalizationBindingTests) ... ok
+test_resolved_relation_change_creates_a_new_unreviewed_draft_without_reusing_votes (tests.test_revision_normalization_binding.RevisionNormalizationBindingTests) ... ok
+test_type_normalization_cannot_change_under_an_old_approved_draft (tests.test_revision_normalization_binding.RevisionNormalizationBindingTests) ... ok
+test_ancestor_approval_does_not_close_later_revision_obligation (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_current_source_objection_remains_open (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_missing_grounded_qualifier_check_remains_open (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_revision_number_alone_without_verified_expression_change_is_insufficient (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_verified_changed_expression_can_resolve_old_insufficiency_with_same_evidence (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_corrupted_applied_draft_cannot_supply_new_audit_evidence (tests.test_revision_evidence_handoff.RevisionEvidenceHandoffTests) ... ok
+test_fresh_review_inherits_supplement_and_protects_its_source_id (tests.test_revision_evidence_handoff.RevisionEvidenceHandoffTests) ... ok
+test_later_revision_can_retain_ancestor_source_without_reusing_approval (tests.test_revision_evidence_handoff.RevisionEvidenceHandoffTests) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 26.438s
+
+OK

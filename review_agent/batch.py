@@ -29,11 +29,11 @@ def configured_members(config):
 
 def versions_for(config):
     from .memory_scope import resolve_scope,scope_hash
+    from .vote_weighting import policy_from_config
     versions = {"prompt_version": PROMPT_VERSION, "response_contract_version": CONTRACT_VERSION,
             "prompt_hash": PROMPT_HASH,
             "response_contract_hash": sha256_json(RESPONSE_SCHEMA),
-            "committee_policy_hash": sha256_json({key: (config.get("consensus") or {}).get(key, default)
-                for key, default in (("committee_size", 4), ("required_votes", 3), ("minimum_distinct_families", 3))}),
+            "committee_policy_hash": sha256_json(policy_from_config(config)),
             "evidence_bundle_version": EVIDENCE_BUNDLE_VERSION,
             "committee_version": (config.get("consensus") or {}).get("version", "committee_v1")}
     versions['memory_policy_hash']=sha256_json({'scope_hash':scope_hash(resolve_scope(config)),

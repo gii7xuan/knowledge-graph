@@ -1,0 +1,1127 @@
+{
+  "rows": [
+    {
+      "fixture": "positive_mapping",
+      "passed": true,
+      "expectation": "Complete real metadata and source-grounded predicate/type mapping are recognized by all three reviewers.",
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "mapping_preflight_ready": true,
+      "research_operation": "manual_review",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "原文直接陈述空气可近似看成理想气体，支持该三元组。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "“近似看成”与原文表述一致，未替换谓词。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "R_406bc04a6711460b8da5 的定义、域、值域与方向均与候选一致。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "原文明确指出空气可近似看成理想气体。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "关系语义与原文一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "",
+            "note": "与本体关系R_406bc04a6711460b8da5定义完全匹配。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "原文直接陈述空气可近似看成理想气体，主谓宾完整。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "近似看成与原文关系表达一致，未替换谓词。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "",
+            "note": "R_406bc04a6711460b8da5定义即空气可近似看成理想气体，域值匹配。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "matched"
+          }
+        }
+      ],
+      "weight_snapshot_id": "weights_4e6b9e96de83cf3641e6cc7baeb0bbe18f399086b6ce60228f9a3fbadb36d698",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false,
+      "max_parallel_validators": 1,
+      "whole_committee_valid": true,
+      "consistency": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        }
+      ],
+      "all_three_consistent": true,
+      "weight_checks": {
+        "mode": "dynamic",
+        "axes": {
+          "source": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": false,
+                "opinion": "insufficient"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": false,
+                "opinion": "insufficient"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": false,
+                "opinion": "insufficient"
+              }
+            }
+          },
+          "expression": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": false,
+                "opinion": "unresolved"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": false,
+                "opinion": "unresolved"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": false,
+                "opinion": "unresolved"
+              }
+            }
+          },
+          "mapping": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "valid"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "valid"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "valid"
+              }
+            }
+          },
+          "scope": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              }
+            }
+          }
+        },
+        "passed": true
+      },
+      "routing_check": true,
+      "qwen_gemma_request_overlap_seconds": 0,
+      "scheduling_check": true
+    },
+    {
+      "fixture": "semantic_mismatch",
+      "passed": true,
+      "expectation": "Structural compatibility alone cannot admit a deliberately wrong predicate; at least two families identify its semantic mismatch.",
+      "dimension_statuses": {
+        "source": "contradicted",
+        "expression": "semantic_revision",
+        "mapping": "conflict",
+        "scope": "include"
+      },
+      "mapping_preflight_ready": true,
+      "research_operation": "revise",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "SOURCE_CONTRADICTS",
+            "note": "原文仅支持“可近似看成”，不支持“完全等同于”。",
+            "status": "contradicted"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "“完全等同于”将近似关系误写为严格等同。",
+            "status": "fail"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "R_406bc04a6711460b8da5 对应“近似看成”，与候选表面谓词“完全等同于”不匹配。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "candidate_mapping_error"
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "原文表述为“近似看成”，而非“完全等同于”。",
+            "status": "contradicted"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "“完全等同于”与原文的“近似看成”语义不一致，前者表示绝对等价，后者表示近似模型。",
+            "status": "fail"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "候选的surface_relation“完全等同于”与映射的relation_id R_406bc04a6711460b8da5（近似看成）语义不符。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "candidate_mapping_error"
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "原文为“可近似看成”，非“完全等同于”，谓词强度被夸大。",
+            "status": "contradicted"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "“完全等同于”与原文“近似看成”语义不符，近似关系被误作等同。",
+            "status": "fail"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "RELATION_MISMATCH",
+            "note": "R_406bc04a6711460b8da5定义为“近似看成”，与候选表面谓词“完全等同于”不等价。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "candidate_mapping_error"
+          }
+        }
+      ],
+      "weight_snapshot_id": "weights_bbc668977e435c06f03519e47d14f5ed5ca4fde9ea784695b0a741479f5e3f57",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false,
+      "max_parallel_validators": 1,
+      "whole_committee_valid": true,
+      "consistency": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        }
+      ],
+      "all_three_consistent": true,
+      "weight_checks": {
+        "mode": "dynamic",
+        "axes": {
+          "source": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": true,
+                "opinion": "contradicted"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": true,
+                "opinion": "contradicted"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": true,
+                "opinion": "contradicted"
+              }
+            }
+          },
+          "expression": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": true,
+                "opinion": "semantic_revision"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": true,
+                "opinion": "semantic_revision"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": true,
+                "opinion": "semantic_revision"
+              }
+            }
+          },
+          "mapping": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "conflict"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "conflict"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "conflict"
+              }
+            }
+          },
+          "scope": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              }
+            }
+          }
+        },
+        "passed": true
+      },
+      "routing_check": true,
+      "qwen_gemma_request_overlap_seconds": 0,
+      "scheduling_check": true
+    },
+    {
+      "fixture": "missing_material",
+      "passed": true,
+      "expectation": "Missing exact relation/tail type stays incomplete; no forced formal assignment.",
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "mapping_preflight_ready": false,
+      "research_operation": "manual_review",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "原文直接陈述空气可近似看成理想气体，支持该三元组。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "“近似看成”与原文表述一致，表示近似模型关系。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [
+              "R_406bc04a6711460b8da5"
+            ],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "",
+            "note": "尾实体类型未分配，映射保持未定。",
+            "relation_id": null,
+            "status": "unassigned"
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "原文明确指出空气可近似看成理想气体。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "关系语义与原文一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "",
+            "note": "与本体关系R_406bc04a6711460b8da5定义完全匹配。",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "原文直接表述空气可近似看成理想气体，主谓宾完整。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "issue_code": "",
+            "note": "近似看成与原文关系表达一致，未替换谓词。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+            "note": "尾实体类型未定，映射预检未就绪，保留未分配。",
+            "relation_id": null,
+            "status": "unassigned"
+          }
+        }
+      ],
+      "weight_snapshot_id": "weights_e95c53ed7dbe02792522fd7baea95b013252b90b881e662e694dcc0723499aa5",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false,
+      "max_parallel_validators": 1,
+      "whole_committee_valid": true,
+      "consistency": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        }
+      ],
+      "all_three_consistent": true,
+      "weight_checks": {
+        "mode": "dynamic",
+        "axes": {
+          "source": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": false,
+                "opinion": "insufficient"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": false,
+                "opinion": "insufficient"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8928571428571428,
+                "usable": false,
+                "opinion": "insufficient"
+              }
+            }
+          },
+          "expression": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": false,
+                "opinion": "unresolved"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": false,
+                "opinion": "unresolved"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.8500000000000001,
+                "usable": false,
+                "opinion": "unresolved"
+              }
+            }
+          },
+          "mapping": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.255,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.25,
+                "usable": false,
+                "opinion": "unassigned"
+              },
+              "judge_b": {
+                "weight": 0.49,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": false,
+                "opinion": "valid"
+              },
+              "judge_c": {
+                "weight": 0.255,
+                "effective_weight": 0.0,
+                "reliability": 0.5,
+                "adaptation": 0.25,
+                "usable": false,
+                "opinion": "unassigned"
+              }
+            }
+          },
+          "scope": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              }
+            }
+          }
+        },
+        "passed": true
+      },
+      "routing_check": true,
+      "qwen_gemma_request_overlap_seconds": 0,
+      "scheduling_check": true
+    },
+    {
+      "fixture": "parallel_positive_mapping",
+      "passed": true,
+      "expectation": "Complete real metadata and source-grounded predicate/type mapping are recognized by all three reviewers.",
+      "dimension_statuses": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "valid",
+        "scope": "include"
+      },
+      "mapping_preflight_ready": true,
+      "research_operation": "accept",
+      "votes": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_13ea6181fbd095178ab1",
+              "ev_fdd53ef9fdb65759594b",
+              "ev_885a18552be7c4d6b103"
+            ],
+            "issue_code": "",
+            "note": "原文“气温除了影响空气密度外”明确支持气温影响空气密度。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_13ea6181fbd095178ab1",
+              "ev_fdd53ef9fdb65759594b"
+            ],
+            "issue_code": "",
+            "note": "“影响”与原文“气温除了影响空气密度外”语义一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [
+              "R_12a1cf5c80d7e73a97a2",
+              "R_1654fcf38913d94cb712",
+              "R_23510018faf8ec45724e",
+              "R_2b18880939600d01a389",
+              "R_2eb6c3f7a4060a8f5083",
+              "R_36719caf973ba4631cbb",
+              "R_a2c7a219ea7a7cf55eb2",
+              "R_a66ceee55ad57847f8f4",
+              "R_b204199d1589f60b3c39",
+              "R_c21d76f3bc6b8ad6a528",
+              "R_e149c7098d8359d6fd64"
+            ],
+            "evidence_ids": [
+              "ev_13ea6181fbd095178ab1",
+              "ev_fdd53ef9fdb65759594b"
+            ],
+            "issue_code": "",
+            "note": "R_f29f60e4559cc505f99b 定义与端点类型均匹配，无冲突候选。",
+            "relation_id": "R_f29f60e4559cc505f99b",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_13ea6181fbd095178ab1",
+              "ev_fdd53ef9fdb65759594b",
+              "ev_885a18552be7c4d6b103"
+            ],
+            "issue_code": "",
+            "note": "原文明确指出气温影响空气密度。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_13ea6181fbd095178ab1",
+              "ev_fdd53ef9fdb65759594b"
+            ],
+            "issue_code": "",
+            "note": "关系语义与原文“影响”一致。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_13ea6181fbd095178ab1",
+              "ev_fdd53ef9fdb65759594b"
+            ],
+            "issue_code": "",
+            "note": "映射关系R_f29f60e4559cc505f99b定义匹配。",
+            "relation_id": "R_f29f60e4559cc505f99b",
+            "status": "matched"
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "response_status": "ok",
+          "source": {
+            "evidence_ids": [
+              "ev_fdd53ef9fdb65759594b",
+              "ev_13ea6181fbd095178ab1"
+            ],
+            "issue_code": "",
+            "note": "原文明确表述气温影响空气密度，主谓宾完整。",
+            "status": "supported"
+          },
+          "relation_semantics": {
+            "evidence_ids": [
+              "ev_fdd53ef9fdb65759594b"
+            ],
+            "issue_code": "",
+            "note": "“影响”与原文作用关系含义一致，非仅共现。",
+            "status": "pass"
+          },
+          "mapping": {
+            "competing_relation_ids": [],
+            "evidence_ids": [
+              "ev_fdd53ef9fdb65759594b"
+            ],
+            "issue_code": "",
+            "note": "R_f29f60e4559cc505f99b定义、方向与端点约束均匹配。",
+            "relation_id": "R_f29f60e4559cc505f99b",
+            "status": "matched"
+          }
+        }
+      ],
+      "weight_snapshot_id": "weights_e567c09187d90157d7bfb07029e05520693ed3a4720bfbb3816f66c658412cbc",
+      "human_gold": false,
+      "paper_accuracy_evaluable": false,
+      "max_parallel_validators": 3,
+      "whole_committee_valid": true,
+      "consistency": [
+        {
+          "voter_id": "judge_a",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_b",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        },
+        {
+          "voter_id": "judge_c",
+          "response_status": "ok",
+          "issues": [],
+          "model_view_error": null,
+          "shape_projection_applied": false
+        }
+      ],
+      "all_three_consistent": true,
+      "weight_checks": {
+        "mode": "dynamic",
+        "axes": {
+          "source": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "supported"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "supported"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "supported"
+              }
+            }
+          },
+          "expression": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "standard"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "standard"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "standard"
+              }
+            }
+          },
+          "mapping": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "valid"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "valid"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "valid"
+              }
+            }
+          },
+          "scope": {
+            "weights_sum": 1.0,
+            "passed": true,
+            "weights": {
+              "judge_a": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_b": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              },
+              "judge_c": {
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "usable": true,
+                "opinion": "include"
+              }
+            }
+          }
+        },
+        "passed": true
+      },
+      "routing_check": true,
+      "qwen_gemma_request_overlap_seconds": 45.57055306434631,
+      "scheduling_check": true
+    }
+  ],
+  "core_three_case_gate_passed": true,
+  "positive_accept_path_demonstrated": false,
+  "concurrent_case_completed": true,
+  "stop_reason": null,
+  "calls": 12,
+  "known_tokens": 282569,
+  "unsettled_requests": 0,
+  "source_databases_unchanged": true,
+  "isolated_import_outbox": 0,
+  "field_correction_calls": 0,
+  "old_unknown_requests_resent": 0,
+  "price": null,
+  "unknown_cost_is_zero": false,
+  "human_gold": false,
+  "paper_accuracy": null,
+  "production_written": false
+}

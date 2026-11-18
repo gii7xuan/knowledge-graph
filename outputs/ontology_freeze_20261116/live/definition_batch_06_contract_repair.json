@@ -1,0 +1,1619 @@
+{
+  "status": "reviewed",
+  "proposal": {
+    "version": "ontology_definition_audit_v1",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+    "source_text_hash": "e87ad709f3f67294599839457fce9a7196c3e37d7223649741ac2cfcf871cf2c",
+    "items": [
+      {
+        "relation_id": "R_953fb4ee2f8c9e3ffde0",
+        "label": "共线反向",
+        "definition": "阻力加速度矢量的指向始终与弹丸质心速度矢量共线反向",
+        "domain": [
+          "C_7271d61c285fb9d01a20"
+        ],
+        "range": [
+          "C_741907931b549e11e6ec"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_7271d61c285fb9d01a20",
+            "iri": "urn:kg:chapter1:class:9cfca5efa3f83029100afe95",
+            "label": "阻力加速度矢量",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "阻力加速度矢量"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_741907931b549e11e6ec",
+            "iri": "urn:kg:chapter1:class:cb8bc0e0249ca761d18748aa",
+            "label": "弹丸质心速度矢量",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸质心速度矢量"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "阻力加速度矢量  $\\pmb{a}_{x}$  的指向始终与弹丸质心速度矢量  $\\mathbf{v}$  共线反向",
+            "start": 17848,
+            "end": 17906,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_73b8236a02e7",
+            "evidence_id": "def_ev_705b4b6e9029f9ab3627e92d",
+            "context_start": 17668,
+            "context_end": 18086,
+            "context": "td><td>0.788</td></tr></table>\n\n# 1.1.4 空气阻力加速度、弹道系数及阻力函数\n\n为了便于在后面简单地写出弹丸运动的微分方程，本节对空气阻力加速度进行专门的阐述。\n\n# 1. 空气阻力加速度\n\n空气迎面阻力  $R_{x}$  与弹丸质量  $m$  的比值称为空气阻力加速度。空气阻力加速度决定了空气阻力对弹丸运动的影响。阻力加速度矢量  $\\pmb{a}_{x}$  的指向始终与弹丸质心速度矢量  $\\mathbf{v}$  共线反向，实际上它是使弹丸速度减小的量，但习惯上称  $\\pmb{a}_{x}$  为阻力加速度，利用式（1-30），有\n\n$$\na _ {x} = \\frac {R _ {x}}{m} = \\frac {1}{m} \\frac {\\rho v ^ {2}}{2} S i C _ {x 0 \\mathrm {N}} \\left(\\frac {v}{c}\\right)"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_9aa34c7a4f252989587e",
+        "label": "作用于",
+        "definition": "力作用于弹丸质心的关系",
+        "domain": [
+          "C_867a1ffca461f14a69e8"
+        ],
+        "range": [
+          "C_87a27abd212bc2fb9da8"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "作用于弹丸上的力之一"
+              }
+            ],
+            "description": "作用于弹丸上的力之一",
+            "id": "C_867a1ffca461f14a69e8",
+            "iri": "urn:kg:chapter1:class:3367989f14e627c20c3cd976",
+            "label": "重力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "重力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸的质量中心，是重力与空气阻力作用的参考点"
+              }
+            ],
+            "description": "弹丸的质量中心，是重力与空气阻力作用的参考点",
+            "id": "C_87a27abd212bc2fb9da8",
+            "iri": "urn:kg:chapter1:class:4223820fee0114c205d127f2",
+            "label": "弹丸质心",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸质心"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "作用于弹丸质心的只有重力和空气阻力",
+            "start": 23633,
+            "end": 23650,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_42655caefaed",
+            "evidence_id": "def_ev_6e3d5ed34bc53cba529d5ada",
+            "context_start": 23453,
+            "context_end": 23830,
+            "context": "/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/6c0f15918b612eafce5b6d10f28fd36ad41069b71274c2e482f0a671e948fe14.jpg)\n\n\n\n图1-10 描述弹丸质心运动的主要参量\n\n\n# 1.2.2 以时间  $t$  为自变量的弹丸质心运动微分方程组\n\n在前述基本假设条件下，作用于弹丸质心的只有重力和空气阻力，因而可写出弹丸质心运动的矢量方程\n\n$$\n\\frac {\\mathrm {d} v}{\\mathrm {d} t} = \\boldsymbol {a} _ {x} + \\boldsymbol {g} \\tag {1-56}\n$$\n\n这是以时间  $t$  为自变量的运动方程。\n\n1. 直角坐标系的弹丸质心运动微分方程组\n\n将矢量方程（1-56）在直角坐标上"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_a0032cdfe322b4304a79",
+        "label": "影响",
+        "definition": "纵风作用于弹道，形成有纵风时的相对弹道与绝对弹道。",
+        "domain": [
+          "C_02ca97ebf11ae1d3c3ad"
+        ],
+        "range": [
+          "C_2596ed9929a2eb4634d6"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风"
+              }
+            ],
+            "description": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风",
+            "id": "C_02ca97ebf11ae1d3c3ad",
+            "iri": "urn:kg:chapter1:class:ff0676ed29a29545cda3afd9",
+            "label": "纵风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "纵风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在动参考系内所观察的弹道"
+              }
+            ],
+            "description": "在动参考系内所观察的弹道",
+            "id": "C_2596ed9929a2eb4634d6",
+            "iri": "urn:kg:chapter1:class:b82bea9211186db98b92f6d5",
+            "label": "相对弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "相对弹道"
+              }
+            ],
+            "parent": "C_70780e1e31a41f0ff86a",
+            "parents": [
+              "C_70780e1e31a41f0ff86a"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "图1-20 有纵风时的相对弹道与绝对弹道",
+            "start": 50407,
+            "end": 50427,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_7ffb3744e26d",
+            "evidence_id": "def_ev_39d6c8d05e0115ad200397eb",
+            "context_start": 50227,
+            "context_end": 50607,
+            "context": ".jpg)\n\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/9548fa88a751b4f5eb068942af69bb25391ee6b072c8be7789b91718576028c7.jpg)\n\n\n\n图1-20 有纵风时的相对弹道与绝对弹道\n\n\n# 1.3.4 考虑科氏惯性力时的弹丸运动方程\n\n由理论力学可知，地球旋转的影响一是产生离心惯性力（这已在重力中加以考虑）；二是产生科氏惯性力。\n\n设  $a_{\\mathrm{c}}$  为科氏加速度，考虑科氏加速度时，式（1-56）变成\n\n$$\n\\frac {\\mathrm {d} \\boldsymbol {v}}{\\mathrm {d} t} ="
+          }
+        ]
+      },
+      {
+        "relation_id": "R_a23cfe2d2d46e1860f13",
+        "label": "求出",
+        "definition": "利用流体静力学基本方程和气体状态方程求出大气气压",
+        "domain": [
+          "C_a5a6163ec108872e3ea9"
+        ],
+        "range": [
+          "C_846f1c8709274615cfb0"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "利用流体静力学基本方程和气体状态方程求出大气气压"
+              }
+            ],
+            "description": "利用流体静力学基本方程和气体状态方程求出大气气压",
+            "id": "C_a5a6163ec108872e3ea9",
+            "iri": "urn:kg:chapter1:class:4b8b8304162de05646a89a1f",
+            "label": "流体静力学基本方程",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "流体静力学基本方程"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "求出大气气压"
+              }
+            ],
+            "description": "求出大气气压",
+            "id": "C_846f1c8709274615cfb0",
+            "iri": "urn:kg:chapter1:class:afded0cb97a57c923d6f4ca1",
+            "label": "大气气压",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "大气气压"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "有了温度随高度的分布，就可以利用流体静力学基本方程和气体状态方程求出大气气压",
+            "start": 4430,
+            "end": 4468,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_9957fb6f7bb7",
+            "evidence_id": "def_ev_d9a77bd870d74fff4f71cdf4",
+            "context_start": 4250,
+            "context_end": 4648,
+            "context": "} = 2 3 0. 0 \\mathrm {K} \\quad G _ {1} = 6. 3 2 8 \\times 1 0 ^ {- 3} \\mathrm {K / m} \\quad C _ {1} = 1. 1 7 2 \\times 1 0 ^ {- 6} \\mathrm {K / m} \\tag {1-15}\n$$\n\n2）气压和密度随高度分布的标准分布\n\n有了温度随高度的分布，就可以利用流体静力学基本方程和气体状态方程求出大气气压\n\n$p$  和密度  $\\rho$  随高度  $y$  的变化关系，称为大气气压和密度随高度的标准分布，分别记为  $p_{\\mathrm{s}}$  和  $\\rho_{\\mathrm{s}}$  ，如图1-2所示。\n\n设在距地面高  $y$  处，有底面积为  $A$  、厚度为 $\\mathrm{dy}$  的气柱，该气柱的上面受到向下的压力  $"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_a2c7a219ea7a7cf55eb2",
+        "label": "影响",
+        "definition": "一个因素对另一个量产生作用",
+        "domain": [
+          "C_a1bfa7db3298783a8f65"
+        ],
+        "range": [
+          "C_5c072ee8bc4ede36b807"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "地球表面的曲率特征"
+              }
+            ],
+            "description": "地球表面的曲率特征",
+            "id": "C_a1bfa7db3298783a8f65",
+            "iri": "urn:kg:chapter1:class:348c3bcf46524830394a46e2",
+            "label": "地面曲率",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "地面曲率"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸飞行的水平距离"
+              }
+            ],
+            "description": "弹丸飞行的水平距离",
+            "id": "C_5c072ee8bc4ede36b807",
+            "iri": "urn:kg:chapter1:class:5262a412adb87f6333d4e778",
+            "label": "射程",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "射程"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "重力加速度随高度变化和地面曲率对射程的影响",
+            "start": 39820,
+            "end": 39841,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_fc47e3e30ee8",
+            "evidence_id": "def_ev_abd8f582fd2f7a7f17880ad3",
+            "context_start": 39640,
+            "context_end": 40021,
+            "context": "上影响时的射程，  $\\Delta X$  是两者之差，炮弹I口径为  $122\\mathrm{mm}$ ，  $v_{0} = 515\\mathrm{m / s}$ ，  $C = 0.82$ ；炮弹II口径为  $130\\mathrm{mm}$ ，  $v_{0} = 930\\mathrm{m / s}$ ，  $C = 0.56$ 。\n\n\n表 1-4 重力加速度随高度变化和地面曲率对射程的影响\n\n\n<table><tr><td rowspan=\"2\">炮弹</td><td rowspan=\"2\">射程</td><td colspan=\"4\">射角/(°)</td></tr><tr><td>5</td><td>15</td><td>30</td><td>45</td></tr><tr><td>X1/m</td><td>3323.2</td><td>"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_a469ea5435752b29ce79",
+        "label": "分为",
+        "definition": "按照不同高度上大气的特征，大气可分为五层",
+        "domain": [
+          "C_c5a3ac2010896be1ff9d"
+        ],
+        "range": [
+          "C_b4048c193bc4040085c7"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸飞行的介质，产生空气阻力"
+              }
+            ],
+            "description": "弹丸飞行的介质，产生空气阻力",
+            "id": "C_c5a3ac2010896be1ff9d",
+            "iri": "urn:kg:chapter1:class:8610daa85c85b752f3da4ae1",
+            "label": "大气",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "大气"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气"
+              }
+            ],
+            "description": "从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气",
+            "id": "C_b4048c193bc4040085c7",
+            "iri": "urn:kg:chapter1:class:3187e5c462958c587f423c37",
+            "label": "对流层",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "对流层"
+              }
+            ],
+            "parent": "C_c5a3ac2010896be1ff9d",
+            "parents": [
+              "C_c5a3ac2010896be1ff9d"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "按照不同高度上大气的特征，大气可分为五层",
+            "start": 2821,
+            "end": 2841,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_cc8c5aaee4db",
+            "evidence_id": "def_ev_74e587d234244d8e17ba4a56",
+            "context_start": 2641,
+            "context_end": 3021,
+            "context": " \\mathrm {k g} / \\mathrm {m} ^ {3}\n$$\n\n其中，“0”及“N”分别表示地面值和标准值； $\\varPhi$  为相对湿度，它是某温度下蒸气压与该温度下饱和蒸气压之比。\n\n(2）气象条件随高度分布的标准定律\n\n包围整个地球的空气总称为大气，地球大气层的厚度为  $2000 \\sim 3000 \\mathrm{~km}$  。按照不同高度上大气的特征，大气可分为五层。从海平面起，大气依次可分为对流层、平流层（又称同温层）、中间层（又称亚同温层）、高温层和外层大气。由于火炮弹丸飞行高度都在  $10 \\mathrm{~km}$  上下，不超出平流层高度，因此我们只关心在此高度以下的气象条件随高度的分布。\n\n对流层中气温随高度而降低，这是因为大气吸收太阳热量的能力远小于地表，地表温度高于大气温度，下层大气受热上升，膨胀而冷"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_a66ceee55ad57847f8f4",
+        "label": "影响",
+        "definition": "纵风对阻力大小和方向的作用",
+        "domain": [
+          "C_02ca97ebf11ae1d3c3ad"
+        ],
+        "range": [
+          "C_69cf4586df615323b544"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风"
+              }
+            ],
+            "description": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风",
+            "id": "C_02ca97ebf11ae1d3c3ad",
+            "iri": "urn:kg:chapter1:class:ff0676ed29a29545cda3afd9",
+            "label": "纵风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "纵风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "受纵风影响大小和方向的力"
+              }
+            ],
+            "description": "受纵风影响大小和方向的力",
+            "id": "C_69cf4586df615323b544",
+            "iri": "urn:kg:chapter1:class:85c0e27bb85e3f0e46644ac8",
+            "label": "阻力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "阻力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "纵风既能影响阻力的大小，又能影响阻力的方向，故而可以改变射程。",
+            "start": 45827,
+            "end": 45858,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_c1cb36e1a624",
+            "evidence_id": "def_ev_c4108035ec8d524dd1e063d7",
+            "context_start": 45647,
+            "context_end": 46038,
+            "context": "矢量偏向绝对速度的左侧。在弹轴与相对速度矢量重合的假设下，空气阻力矢量也与相对速度矢量重合，只是方向相反。这时空气阻力  $R_{x}$  可以分解出一个与绝对速度  $\\pmb{v}$  垂直的分力  $R_{y}$ ，在此分力作用下  $\\pmb{v}$  的方向逐渐向右偏转（当  $W_{z}$  向右时），因而使弹道偏向右方，也就是偏向顺风方向。\n\n纵风既能影响阻力的大小，又能影响阻力的方向，故而可以改变射程。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/c8741fa68d3e0f9ddfcaa80b579454f90e5fa56190529320f71cc3d1b7e3cb3b.jpg)\n\n\n\n图1-18 "
+          }
+        ]
+      },
+      {
+        "relation_id": "R_a7404479f25f40e36270",
+        "label": "消耗",
+        "definition": "分离波消耗弹丸的动能",
+        "domain": [
+          "C_c89817eb0fc6a2a0b963"
+        ],
+        "range": [
+          "C_a7877ae0fe8183f8b986"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "正激波与斜激波组成的波"
+              }
+            ],
+            "description": "正激波与斜激波组成的波",
+            "id": "C_c89817eb0fc6a2a0b963",
+            "iri": "urn:kg:chapter1:class:42cc7218020ec12d014477f1",
+            "label": "分离波",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "分离波"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_a7877ae0fe8183f8b986",
+            "iri": "urn:kg:chapter1:class:641e268b45540864e2254cbd",
+            "label": "动能",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "动能"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "这时消耗弹丸的动能将更大。",
+            "start": 10724,
+            "end": 10737,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_5da7b788e236",
+            "evidence_id": "def_ev_ec824c3c4ecca196e6d5539a",
+            "context_start": 10544,
+            "context_end": 10917,
+            "context": "07-ba7d-f1684da8d5ba/2ee12a4522685657644b94d5da50087e01b1aeef4bab3ce53c516e302c60a91f.jpg)\n\n\n\n图1-6 弹道波\n\n\n产生相应的阻力，这就是波动阻力。超声速弹丸的波动阻力约占空气总阻力的  $60\\%$  。\n\n当弹头较钝时，在弹前可能出现正激波与斜激波组成的分离波，这时消耗弹丸的动能将更大。减小波阻的办法是尽量使弹头部延长、弹顶平面适当减小、弹表面平滑无突起、弹头低平、发射后无毛刺和翻边。图1-7给出了头部形状与激波强弱的关系。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/6c2df6e42"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_ae22a57588ea3f168c9b",
+        "label": "具有方向",
+        "definition": "自然坐标系包含切线方向和法线方向",
+        "domain": [
+          "C_b01fa0de9c5da123ef25"
+        ],
+        "range": [
+          "C_4f1eebacebf2a7f644b6"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "根据跟随弹丸质心运动的方向而取的坐标"
+              }
+            ],
+            "description": "根据跟随弹丸质心运动的方向而取的坐标",
+            "id": "C_b01fa0de9c5da123ef25",
+            "iri": "urn:kg:chapter1:class:667d7d6db47a9f4710041156",
+            "label": "自然坐标系",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "自然坐标系"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸质心速度矢量的方向"
+              }
+            ],
+            "description": "弹丸质心速度矢量的方向",
+            "id": "C_4f1eebacebf2a7f644b6",
+            "iri": "urn:kg:chapter1:class:27ae6052592af53475b345a9",
+            "label": "切线方向",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "切线方向"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "取弹丸质心速度矢量的方向为切线方向",
+            "start": 25228,
+            "end": 25245,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_9c835c2a6247",
+            "evidence_id": "def_ev_84bf3b6db4df7b731e3600c1",
+            "context_start": 25048,
+            "context_end": 25425,
+            "context": "= y = 0, v _ {x} = v _ {x 0} = v _ {0} \\cos \\theta_ {0}, v _ {y} = v _ {y 0} = v _ {0} \\sin \\theta_ {0}\n$$\n\n这就是最常用的求解弹丸质心运动的微分方程组。\n\n# 2. 自然坐标系的弹丸质心运动微分方程组\n\n自然坐标是根据跟随弹丸质心运动的方向而取的坐标。取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为\n\n$$\ng _ {\\tau} = - g \\sin \\theta , g _ {\\eta} = - g \\cos \\theta\n$$\n\n即可写出自然坐标系的弹丸质心运动方程组：\n\n![imag"
+          }
+        ]
+      }
+    ],
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "policy": {
+      "rule": "all_three_independent_families_all_axes_pass_no_issues",
+      "human_labels_used": false,
+      "application": "isolated_research_preexperiment_subset",
+      "classes": "existing_class_hierarchy_preserved_not_fully_semantically_recertified"
+    },
+    "task_id": "definition_batch_b17a1b2991a6d4076c0150db",
+    "proposal_digest": "e702ba4d78a16f63925d4e4d2610315128fc76ee64f76832d325af53c94b7ab7"
+  },
+  "votes": [
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_705b4b6e9029f9ab3627e92d"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明阻力加速度矢量指向始终与弹丸质心速度矢量共线反向，定义与原文一致，方向为阻力加速度指向速度矢量，符合domain->range。",
+          "relation_id": "R_953fb4ee2f8c9e3ffde0",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_6e3d5ed34bc53cba529d5ada"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出作用于弹丸质心的只有重力和空气阻力，重力作用于弹丸质心的关系成立，方向为重力作用于质心，符合domain->range。",
+          "relation_id": "R_9aa34c7a4f252989587e",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_39d6c8d05e0115ad200397eb"
+          ],
+          "issue_codes": [
+            "endpoint_mismatch",
+            "definition_overgeneralization"
+          ],
+          "reason": "证据仅说明有纵风时存在相对弹道与绝对弹道，未直接说明纵风作用于弹道形成相对弹道；range仅相对弹道，遗漏绝对弹道，定义过度概括。",
+          "relation_id": "R_a0032cdfe322b4304a79",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_d9a77bd870d74fff4f71cdf4"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明利用流体静力学基本方程和气体状态方程求出大气气压，定义与原文一致，方向为流体静力学基本方程求出大气气压，符合domain->range。",
+          "relation_id": "R_a23cfe2d2d46e1860f13",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_abd8f582fd2f7a7f17880ad3"
+          ],
+          "issue_codes": [],
+          "reason": "证据标题为重力加速度随高度变化和地面曲率对射程的影响，说明地面曲率影响射程，定义为一个因素对另一个量产生作用，方向为地面曲率影响射程，符合domain->range。",
+          "relation_id": "R_a2c7a219ea7a7cf55eb2",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_74e587d234244d8e17ba4a56"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明按照不同高度上大气的特征，大气可分为五层，包括对流层等，定义与原文一致，方向为大气分为对流层，符合domain->range。",
+          "relation_id": "R_a469ea5435752b29ce79",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_c4108035ec8d524dd1e063d7"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明纵风既能影响阻力的大小，又能影响阻力的方向，定义与原文一致，方向为纵风影响阻力，符合domain->range。",
+          "relation_id": "R_a66ceee55ad57847f8f4",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ec824c3c4ecca196e6d5539a"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明当弹头较钝时出现分离波，消耗弹丸的动能将更大，定义与原文一致，方向为分离波消耗动能，符合domain->range。",
+          "relation_id": "R_a7404479f25f40e36270",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_84bf3b6db4df7b731e3600c1"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明自然坐标取弹丸质心速度矢量的方向为切线方向，定义自然坐标系包含切线方向，方向为自然坐标系具有切线方向，符合domain->range。",
+          "relation_id": "R_ae22a57588ea3f168c9b",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_11ce184ecbe442d08950516dcaf33c87",
+      "client_request_id": "attempt_11ce184ecbe442d08950516dcaf33c87",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111620045239416429686340224",
+      "input_tokens": 0,
+      "late_response": false,
+      "latency_ms": 35984,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 0,
+      "proposal_digest": "e702ba4d78a16f63925d4e4d2610315128fc76ee64f76832d325af53c94b7ab7",
+      "provider_started_at": 1794830689.5695753,
+      "queue_time_ms": 374,
+      "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_953fb4ee2f8c9e3ffde0\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_705b4b6e9029f9ab3627e92d\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明阻力加速度矢量指向始终与弹丸质心速度矢量共线反向，定义与原文一致，方向为阻力加速度指向速度矢量，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_9aa34c7a4f252989587e\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_6e3d5ed34bc53cba529d5ada\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出作用于弹丸质心的只有重力和空气阻力，重力作用于弹丸质心的关系成立，方向为重力作用于质心，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_a0032cdfe322b4304a79\",\n      \"definition_fidelity\": \"revise\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"fail\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_39d6c8d05e0115ad200397eb\"],\n      \"issue_codes\": [\"endpoint_mismatch\", \"definition_overgeneralization\"],\n      \"reason\": \"证据仅说明有纵风时存在相对弹道与绝对弹道，未直接说明纵风作用于弹道形成相对弹道；range仅相对弹道，遗漏绝对弹道，定义过度概括。\"\n    },\n    {\n      \"relation_id\": \"R_a23cfe2d2d46e1860f13\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_d9a77bd870d74fff4f71cdf4\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明利用流体静力学基本方程和气体状态方程求出大气气压，定义与原文一致，方向为流体静力学基本方程求出大气气压，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_a2c7a219ea7a7cf55eb2\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_abd8f582fd2f7a7f17880ad3\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据标题为重力加速度随高度变化和地面曲率对射程的影响，说明地面曲率影响射程，定义为一个因素对另一个量产生作用，方向为地面曲率影响射程，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_a469ea5435752b29ce79\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_74e587d234244d8e17ba4a56\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明按照不同高度上大气的特征，大气可分为五层，包括对流层等，定义与原文一致，方向为大气分为对流层，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_a66ceee55ad57847f8f4\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_c4108035ec8d524dd1e063d7\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明纵风既能影响阻力的大小，又能影响阻力的方向，定义与原文一致，方向为纵风影响阻力，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_a7404479f25f40e36270\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ec824c3c4ecca196e6d5539a\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明当弹头较钝时出现分离波，消耗弹丸的动能将更大，定义与原文一致，方向为分离波消耗动能，符合domain->range。\"\n    },\n    {\n      \"relation_id\": \"R_ae22a57588ea3f168c9b\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_84bf3b6db4df7b731e3600c1\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明自然坐标取弹丸质心速度矢量的方向为切线方向，定义自然坐标系包含切线方向，方向为自然坐标系具有切线方向，符合domain->range。\"\n    }\n  ]\n}",
+      "reasoning_tokens": null,
+      "request_key": "9df7d7c62f1266544fb69b080a931536d2358875f380f1479c8e78b1f5407e78",
+      "response_id": "chatcmpl-bbb3dd7f698e3c3b",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "task_id": "definition_batch_b17a1b2991a6d4076c0150db",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 306083,
+        "body_chunk_count": 1419,
+        "chunk_count": 1421,
+        "client_request_id": "attempt_11ce184ecbe442d08950516dcaf33c87",
+        "first_body_byte_ms": 5151.498,
+        "first_chunk_ms": 5172,
+        "first_content_ms": 5172,
+        "gateway_request_id": "2026111620045239416429686340224",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 130.744,
+        "max_inter_chunk_gap_ms": 125,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 12:04:55 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111620045239416429686340224"
+        },
+        "response_headers_ms": 5151.012,
+        "stream": true,
+        "terminal_ms": 35984,
+        "trace": [
+          {
+            "elapsed_ms": 1966.397,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2014.337,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2014.432,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2077.79,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2077.909,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2078.29,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2078.303,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2078.541,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2078.556,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5147.516,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5151.388,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 35978.288,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 35978.364,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 35978.384,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 35978.577,
+        "visible_chars": 3348
+      },
+      "voter_id": "judge_a",
+      "cached": true,
+      "actual_calls": 0,
+      "attempts": []
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_705b4b6e9029f9ab3627e92d"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据完全一致，方向正确。",
+          "relation_id": "R_953fb4ee2f8c9e3ffde0",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_6e3d5ed34bc53cba529d5ada"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_9aa34c7a4f252989587e",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_39d6c8d05e0115ad200397eb"
+          ],
+          "issue_codes": [
+            "fidelity_gap"
+          ],
+          "reason": "证据仅为图片标题，不足以支持定义中描述的“作用于...形成...”的因果机制。",
+          "relation_id": "R_a0032cdfe322b4304a79",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_d9a77bd870d74fff4f71cdf4"
+          ],
+          "issue_codes": [],
+          "reason": "该关系描述的是利用方程“求出”结果的计算步骤，属于计算过程，超出描述性教育概念范围。",
+          "relation_id": "R_a23cfe2d2d46e1860f13",
+          "task_scope": "out_of_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_abd8f582fd2f7a7f17880ad3"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_a2c7a219ea7a7cf55eb2",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_74e587d234244d8e17ba4a56"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_a469ea5435752b29ce79",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_c4108035ec8d524dd1e063d7"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_a66ceee55ad57847f8f4",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ec824c3c4ecca196e6d5539a"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_a7404479f25f40e36270",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_84bf3b6db4df7b731e3600c1"
+          ],
+          "issue_codes": [],
+          "reason": "定义与证据一致，方向正确。",
+          "relation_id": "R_ae22a57588ea3f168c9b",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_628170deb5ff4cd9aebd8a2a06f3a654",
+      "client_request_id": "attempt_628170deb5ff4cd9aebd8a2a06f3a654",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111620045241626669605477377",
+      "input_tokens": 0,
+      "late_response": false,
+      "latency_ms": 104672,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "output_tokens": 0,
+      "proposal_digest": "e702ba4d78a16f63925d4e4d2610315128fc76ee64f76832d325af53c94b7ab7",
+      "provider_started_at": 1794830689.5885968,
+      "queue_time_ms": 389,
+      "raw_response": "{\"assessments\": [{\"relation_id\": \"R_953fb4ee2f8c9e3ffde0\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_705b4b6e9029f9ab3627e92d\"], \"issue_codes\": [], \"reason\": \"定义与证据完全一致，方向正确。\"}, {\"relation_id\": \"R_9aa34c7a4f252989587e\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_6e3d5ed34bc53cba529d5ada\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_a0032cdfe322b4304a79\", \"definition_fidelity\": \"revise\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_39d6c8d05e0115ad200397eb\"], \"issue_codes\": [\"fidelity_gap\"], \"reason\": \"证据仅为图片标题，不足以支持定义中描述的“作用于...形成...”的因果机制。\"}, {\"relation_id\": \"R_a23cfe2d2d46e1860f13\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"out_of_scope\", \"evidence_ids\": [\"def_ev_d9a77bd870d74fff4f71cdf4\"], \"issue_codes\": [], \"reason\": \"该关系描述的是利用方程“求出”结果的计算步骤，属于计算过程，超出描述性教育概念范围。\"}, {\"relation_id\": \"R_a2c7a219ea7a7cf55eb2\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_abd8f582fd2f7a7f17880ad3\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_a469ea5435752b29ce79\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_74e587d234244d8e17ba4a56\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_a66ceee55ad57847f8f4\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_c4108035ec8d524dd1e063d7\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_a7404479f25f40e36270\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_ec824c3c4ecca196e6d5539a\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}, {\"relation_id\": \"R_ae22a57588ea3f168c9b\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_84bf3b6db4df7b731e3600c1\"], \"issue_codes\": [], \"reason\": \"定义与证据一致，方向正确。\"}]}",
+      "reasoning_tokens": 2417,
+      "request_key": "a7a9aad952ded0aeb8e50adacec63fb935a04e864b27d18f952ac704227b4c57",
+      "response_id": "chatcmpl-a6fb2b0c499b240a",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "task_id": "definition_batch_b17a1b2991a6d4076c0150db",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 674180,
+        "body_chunk_count": 3095,
+        "chunk_count": 3096,
+        "client_request_id": "attempt_628170deb5ff4cd9aebd8a2a06f3a654",
+        "first_body_byte_ms": 4919.149,
+        "first_chunk_ms": 4922,
+        "first_content_ms": 74484,
+        "gateway_request_id": "2026111620045241626669605477377",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 639.75,
+        "max_inter_chunk_gap_ms": 639,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 12:04:55 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111620045241626669605477377"
+        },
+        "response_headers_ms": 4918.826,
+        "stream": true,
+        "terminal_ms": 104672,
+        "trace": [
+          {
+            "elapsed_ms": 1954.975,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2032.651,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2032.721,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2086.214,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2086.318,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2086.64,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2086.652,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2087.253,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2087.266,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 4917.005,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 4919.074,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 104678.488,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 104678.549,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 104678.57,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 104678.735,
+        "visible_chars": 2344
+      },
+      "voter_id": "judge_b",
+      "cached": true,
+      "actual_calls": 0,
+      "attempts": []
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_705b4b6e9029f9ab3627e92d"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确阻力加速度矢量与弹丸质心速度矢量共线反向，定义与端点类别一致。",
+          "relation_id": "R_953fb4ee2f8c9e3ffde0",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_6e3d5ed34bc53cba529d5ada"
+          ],
+          "issue_codes": [],
+          "reason": "原文称作用于弹丸质心的只有重力和空气阻力，重力作用于质心关系成立。",
+          "relation_id": "R_9aa34c7a4f252989587e",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_39d6c8d05e0115ad200397eb"
+          ],
+          "issue_codes": [
+            "definition_overreach"
+          ],
+          "reason": "证据仅给出图题“有纵风时的相对弹道与绝对弹道”，未直接陈述纵风影响相对弹道，定义超出证据。",
+          "relation_id": "R_a0032cdfe322b4304a79",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_d9a77bd870d74fff4f71cdf4"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确利用流体静力学基本方程和气体状态方程求出大气气压，方向与端点相符。",
+          "relation_id": "R_a23cfe2d2d46e1860f13",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_abd8f582fd2f7a7f17880ad3"
+          ],
+          "issue_codes": [],
+          "reason": "表题明确地面曲率对射程的影响，方向与端点类别一致。",
+          "relation_id": "R_a2c7a219ea7a7cf55eb2",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_74e587d234244d8e17ba4a56"
+          ],
+          "issue_codes": [
+            "endpoint_mismatch",
+            "definition_overreach"
+          ],
+          "reason": "原文说大气可分为五层，range 仅取“对流层”一层，端点定义与“五层”不符。",
+          "relation_id": "R_a469ea5435752b29ce79",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_c4108035ec8d524dd1e063d7"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确纵风既能影响阻力大小又能影响阻力方向，定义与端点相符。",
+          "relation_id": "R_a66ceee55ad57847f8f4",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ec824c3c4ecca196e6d5539a"
+          ],
+          "issue_codes": [
+            "definition_overreach"
+          ],
+          "reason": "原文为“这时消耗弹丸的动能将更大”，是条件性比较，定义未保留条件与比较语义。",
+          "relation_id": "R_a7404479f25f40e36270",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_84bf3b6db4df7b731e3600c1"
+          ],
+          "issue_codes": [
+            "definition_overreach"
+          ],
+          "reason": "原文仅取速度方向为切线方向，未直接陈述自然坐标系包含切线方向和法线方向，定义超出证据。",
+          "relation_id": "R_ae22a57588ea3f168c9b",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_fa2253c03e114a05b284b4d5845fcff1",
+      "client_request_id": "attempt_fa2253c03e114a05b284b4d5845fcff1",
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 7311,
+      "late_response": false,
+      "latency_ms": 5983,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 926,
+      "proposal_digest": "e702ba4d78a16f63925d4e4d2610315128fc76ee64f76832d325af53c94b7ab7",
+      "provider_started_at": 1794830795.0184782,
+      "queue_time_ms": 325,
+      "raw_response": "{\"assessments\":[{\"relation_id\":\"R_953fb4ee2f8c9e3ffde0\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_705b4b6e9029f9ab3627e92d\"],\"issue_codes\":[],\"reason\":\"原文明确阻力加速度矢量与弹丸质心速度矢量共线反向，定义与端点类别一致。\"},{\"relation_id\":\"R_9aa34c7a4f252989587e\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_6e3d5ed34bc53cba529d5ada\"],\"issue_codes\":[],\"reason\":\"原文称作用于弹丸质心的只有重力和空气阻力，重力作用于质心关系成立。\"},{\"relation_id\":\"R_a0032cdfe322b4304a79\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_39d6c8d05e0115ad200397eb\"],\"issue_codes\":[\"definition_overreach\"],\"reason\":\"证据仅给出图题“有纵风时的相对弹道与绝对弹道”，未直接陈述纵风影响相对弹道，定义超出证据。\"},{\"relation_id\":\"R_a23cfe2d2d46e1860f13\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_d9a77bd870d74fff4f71cdf4\"],\"issue_codes\":[],\"reason\":\"原文明确利用流体静力学基本方程和气体状态方程求出大气气压，方向与端点相符。\"},{\"relation_id\":\"R_a2c7a219ea7a7cf55eb2\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_abd8f582fd2f7a7f17880ad3\"],\"issue_codes\":[],\"reason\":\"表题明确地面曲率对射程的影响，方向与端点类别一致。\"},{\"relation_id\":\"R_a469ea5435752b29ce79\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_74e587d234244d8e17ba4a56\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_overreach\"],\"reason\":\"原文说大气可分为五层，range 仅取“对流层”一层，端点定义与“五层”不符。\"},{\"relation_id\":\"R_a66ceee55ad57847f8f4\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_c4108035ec8d524dd1e063d7\"],\"issue_codes\":[],\"reason\":\"原文明确纵风既能影响阻力大小又能影响阻力方向，定义与端点相符。\"},{\"relation_id\":\"R_a7404479f25f40e36270\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ec824c3c4ecca196e6d5539a\"],\"issue_codes\":[\"definition_overreach\"],\"reason\":\"原文为“这时消耗弹丸的动能将更大”，是条件性比较，定义未保留条件与比较语义。\"},{\"relation_id\":\"R_ae22a57588ea3f168c9b\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_84bf3b6db4df7b731e3600c1\"],\"issue_codes\":[\"definition_overreach\"],\"reason\":\"原文仅取速度方向为切线方向，未直接陈述自然坐标系包含切线方向和法线方向，定义超出证据。\"}]}",
+      "reasoning_tokens": null,
+      "request_key": "9bcaec40ded4c59f46baef6ededf6ea9cc22ffcbc39b45ce507df5b8bbbe7070",
+      "response_id": "d5a68500-3cef-48e4-97a0-0a69bcb94e2a",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "definition_batch_b17a1b2991a6d4076c0150db",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 1516,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_fa2253c03e114a05b284b4d5845fcff1",
+        "first_body_byte_ms": 5972.093,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Mon, 16 Nov 2026 12:06:37 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 2350.339,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 1967.093,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2089.226,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2089.297,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2139.445,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2139.581,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2140.128,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2140.146,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2140.576,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2140.592,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2347.559,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2350.512,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 5972.378,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 5972.458,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 5972.493,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 5988.503
+      },
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_705b4b6e9029f9ab3627e92d"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确阻力加速度矢量与弹丸质心速度矢量共线反向，定义与端点类别一致。",
+              "relation_id": "R_953fb4ee2f8c9e3ffde0",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_6e3d5ed34bc53cba529d5ada"
+              ],
+              "issue_codes": [],
+              "reason": "原文称作用于弹丸质心的只有重力和空气阻力，重力作用于质心关系成立。",
+              "relation_id": "R_9aa34c7a4f252989587e",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_39d6c8d05e0115ad200397eb"
+              ],
+              "issue_codes": [
+                "definition_overreach"
+              ],
+              "reason": "证据仅给出图题“有纵风时的相对弹道与绝对弹道”，未直接陈述纵风影响相对弹道，定义超出证据。",
+              "relation_id": "R_a0032cdfe322b4304a79",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_d9a77bd870d74fff4f71cdf4"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确利用流体静力学基本方程和气体状态方程求出大气气压，方向与端点相符。",
+              "relation_id": "R_a23cfe2d2d46e1860f13",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_abd8f582fd2f7a7f17880ad3"
+              ],
+              "issue_codes": [],
+              "reason": "表题明确地面曲率对射程的影响，方向与端点类别一致。",
+              "relation_id": "R_a2c7a219ea7a7cf55eb2",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_74e587d234244d8e17ba4a56"
+              ],
+              "issue_codes": [
+                "endpoint_mismatch",
+                "definition_overreach"
+              ],
+              "reason": "原文说大气可分为五层，range 仅取“对流层”一层，端点定义与“五层”不符。",
+              "relation_id": "R_a469ea5435752b29ce79",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_c4108035ec8d524dd1e063d7"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确纵风既能影响阻力大小又能影响阻力方向，定义与端点相符。",
+              "relation_id": "R_a66ceee55ad57847f8f4",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ec824c3c4ecca196e6d5539a"
+              ],
+              "issue_codes": [
+                "definition_overreach"
+              ],
+              "reason": "原文为“这时消耗弹丸的动能将更大”，是条件性比较，定义未保留条件与比较语义。",
+              "relation_id": "R_a7404479f25f40e36270",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_84bf3b6db4df7b731e3600c1"
+              ],
+              "issue_codes": [
+                "definition_overreach"
+              ],
+              "reason": "原文仅取速度方向为切线方向，未直接陈述自然坐标系包含切线方向和法线方向，定义超出证据。",
+              "relation_id": "R_ae22a57588ea3f168c9b",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_fa2253c03e114a05b284b4d5845fcff1",
+          "client_request_id": "attempt_fa2253c03e114a05b284b4d5845fcff1",
+          "finish_reason": "stop",
+          "gateway_request_id": null,
+          "input_tokens": 7311,
+          "late_response": false,
+          "latency_ms": 5983,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "output_tokens": 926,
+          "proposal_digest": "e702ba4d78a16f63925d4e4d2610315128fc76ee64f76832d325af53c94b7ab7",
+          "provider_started_at": 1794830795.0184782,
+          "queue_time_ms": 325,
+          "raw_response": "{\"assessments\":[{\"relation_id\":\"R_953fb4ee2f8c9e3ffde0\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_705b4b6e9029f9ab3627e92d\"],\"issue_codes\":[],\"reason\":\"原文明确阻力加速度矢量与弹丸质心速度矢量共线反向，定义与端点类别一致。\"},{\"relation_id\":\"R_9aa34c7a4f252989587e\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_6e3d5ed34bc53cba529d5ada\"],\"issue_codes\":[],\"reason\":\"原文称作用于弹丸质心的只有重力和空气阻力，重力作用于质心关系成立。\"},{\"relation_id\":\"R_a0032cdfe322b4304a79\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_39d6c8d05e0115ad200397eb\"],\"issue_codes\":[\"definition_overreach\"],\"reason\":\"证据仅给出图题“有纵风时的相对弹道与绝对弹道”，未直接陈述纵风影响相对弹道，定义超出证据。\"},{\"relation_id\":\"R_a23cfe2d2d46e1860f13\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_d9a77bd870d74fff4f71cdf4\"],\"issue_codes\":[],\"reason\":\"原文明确利用流体静力学基本方程和气体状态方程求出大气气压，方向与端点相符。\"},{\"relation_id\":\"R_a2c7a219ea7a7cf55eb2\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_abd8f582fd2f7a7f17880ad3\"],\"issue_codes\":[],\"reason\":\"表题明确地面曲率对射程的影响，方向与端点类别一致。\"},{\"relation_id\":\"R_a469ea5435752b29ce79\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_74e587d234244d8e17ba4a56\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_overreach\"],\"reason\":\"原文说大气可分为五层，range 仅取“对流层”一层，端点定义与“五层”不符。\"},{\"relation_id\":\"R_a66ceee55ad57847f8f4\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_c4108035ec8d524dd1e063d7\"],\"issue_codes\":[],\"reason\":\"原文明确纵风既能影响阻力大小又能影响阻力方向，定义与端点相符。\"},{\"relation_id\":\"R_a7404479f25f40e36270\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ec824c3c4ecca196e6d5539a\"],\"issue_codes\":[\"definition_overreach\"],\"reason\":\"原文为“这时消耗弹丸的动能将更大”，是条件性比较，定义未保留条件与比较语义。\"},{\"relation_id\":\"R_ae22a57588ea3f168c9b\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_84bf3b6db4df7b731e3600c1\"],\"issue_codes\":[\"definition_overreach\"],\"reason\":\"原文仅取速度方向为切线方向，未直接陈述自然坐标系包含切线方向和法线方向，定义超出证据。\"}]}",
+          "reasoning_tokens": null,
+          "request_key": "9bcaec40ded4c59f46baef6ededf6ea9cc22ffcbc39b45ce507df5b8bbbe7070",
+          "response_id": "d5a68500-3cef-48e4-97a0-0a69bcb94e2a",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "task_id": "definition_batch_b17a1b2991a6d4076c0150db",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 1516,
+            "body_chunk_count": 1,
+            "client_request_id": "attempt_fa2253c03e114a05b284b4d5845fcff1",
+            "first_body_byte_ms": 5972.093,
+            "gateway_request_id": null,
+            "http_status": 200,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-encoding": "gzip",
+              "content-type": "application/json",
+              "date": "Mon, 16 Nov 2026 12:06:37 GMT",
+              "server": "openresty",
+              "transfer-encoding": "chunked"
+            },
+            "response_headers_ms": 2350.339,
+            "stream": false,
+            "trace": [
+              {
+                "elapsed_ms": 1967.093,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2089.226,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2089.297,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2139.445,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2139.581,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2140.128,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2140.146,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2140.576,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2140.592,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 2347.559,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 2350.512,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 5972.378,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 5972.458,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 5972.493,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 5988.503
+          },
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "budget": {
+    "usage": {
+      "llm_calls": 20,
+      "tool_calls": 0,
+      "planner_steps": 0,
+      "validation_rounds": 0,
+      "input_tokens": 160094,
+      "output_tokens": 37756,
+      "unknown_token_requests": 0
+    },
+    "deadline_epoch": 1794832636.9032378,
+    "remaining_seconds": 1835.5939999999828,
+    "remaining_llm_calls": 28,
+    "max_planner_steps": 4,
+    "max_validation_rounds": 1,
+    "case_ids": [
+      "case_b3dd8ae6e241afa29d2e9dfa8e805deb"
+    ],
+    "case_call_reservations": [
+      "1825b2e0c2494002b929778b9bacfa3a",
+      "fefffb9fbfc241478a0a49168c675307",
+      "0bb3c4d414284529a77e21639a9f39f7",
+      "ca8c06da57bc4c20b7edede75a9ccb30",
+      "b01e7e6b047744e19d94e6ac3c011bc8",
+      "3bfe3ff309484e02a14f2c3d7874bc45",
+      "5bb2a0d9b25e453caefb47f815b0e703"
+    ],
+    "stage_usage": {
+      "preprocessing": {
+        "llm_calls": 17,
+        "tool_calls": 0
+      }
+    },
+    "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+    "case_accounts": [
+      {
+        "case_id": "case_b3dd8ae6e241afa29d2e9dfa8e805deb",
+        "limits": {
+          "extension_requests": 1,
+          "llm_calls": 66,
+          "rebinds": 2,
+          "tokens": 780000,
+          "tool_calls": 40
+        },
+        "usage": {
+          "extension_requests": 0,
+          "llm_calls": 36,
+          "rebinds": 0,
+          "tokens": 394403,
+          "tool_calls": 3
+        }
+      }
+    ]
+  }
+}

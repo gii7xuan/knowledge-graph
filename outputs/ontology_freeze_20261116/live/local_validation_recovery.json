@@ -1,0 +1,1365 @@
+{
+  "status": "original_receipts_locally_revalidated",
+  "proposal": {
+    "version": "ontology_definition_audit_v1",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+    "source_text_hash": "e87ad709f3f67294599839457fce9a7196c3e37d7223649741ac2cfcf871cf2c",
+    "items": [
+      {
+        "relation_id": "R_029d377fdd30415aa4e3",
+        "label": "随高度变化",
+        "definition": "气温随高度变化的规律",
+        "domain": [
+          "C_5d0b94cd0cd9ae0220e9"
+        ],
+        "range": [
+          "C_ca67f873a92ca5ca8713"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "随高度变化的温度"
+              }
+            ],
+            "description": "随高度变化的温度",
+            "id": "C_5d0b94cd0cd9ae0220e9",
+            "iri": "urn:kg:chapter1:class:b4f3ddd9a97461d203489bb7",
+            "label": "气温",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "气温"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "气温分布的自变量"
+              }
+            ],
+            "description": "气温分布的自变量",
+            "id": "C_ca67f873a92ca5ca8713",
+            "iri": "urn:kg:chapter1:class:968dd036cbb1eb2b073ae010",
+            "label": "高度",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "高度"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "气温  $\\tau$  随高度的变化规律是：在对流层为线性，在亚同温层为抛物线，在同温层为常数。",
+            "start": 3413,
+            "end": 3461,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_9957fb6f7bb7",
+            "evidence_id": "def_ev_fcb0ecabfebd222c3e7b815a",
+            "context_start": 3233,
+            "context_end": 3641,
+            "context": "eru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/34957aed6cf0e886fc4f48fbc8e97b7f88ea12e64f74dcd1b4f0c5402e57f4c3.jpg)\n\n\n\n图1-1 气温随高度的分布\n\n\n# 1）气温随高度的标准分布\n\n气温  $\\tau$  随高度的变化规律是：在对流层为线性，在亚同温层为抛物线，在同温层为常数。根据交界层面温度及温度随高度的变化率连续的条件，可得到炮兵用温度随高度的标准分布，记为  $\\tau_{\\mathrm{s}}$  ，如图1-1所示\n\n对流层，  $y\\leqslant 9300\\mathrm{m}$\n\n$$\n\\tau_ {\\mathrm {s}} = \\tau_ {0} - G _ {1} y \\tag {1-11}\n$$\n\n亚同温层， "
+          }
+        ]
+      },
+      {
+        "relation_id": "R_0504da52903bd6259f7d",
+        "label": "具有部件",
+        "definition": "一个概念由另一个概念组成",
+        "domain": [
+          "C_70780e1e31a41f0ff86a"
+        ],
+        "range": [
+          "C_e2ae699555cdf609563b"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+              }
+            ],
+            "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+            "id": "C_70780e1e31a41f0ff86a",
+            "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+            "label": "弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹道中高度上升的部分"
+              }
+            ],
+            "description": "弹道中高度上升的部分",
+            "id": "C_e2ae699555cdf609563b",
+            "iri": "urn:kg:chapter1:class:acb40cfb9baf8fe6f9b479a5",
+            "label": "升弧",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "升弧"
+              }
+            ],
+            "parent": "C_70780e1e31a41f0ff86a",
+            "parents": [
+              "C_70780e1e31a41f0ff86a"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "升弧段由  $a$  点至顶点  $s$  积分式（1-64）",
+            "start": 30938,
+            "end": 30969,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_3f4fba022970",
+            "evidence_id": "def_ev_d049bd18067678cabfdc37d9",
+            "context_start": 30758,
+            "context_end": 31149,
+            "context": " _ {x} ^ {2}} \\tag {1-63} \\\\ \\end{array}\n$$\n\n两边同乘以  $2p$  ，并根据  $p\\mathrm{d}x = \\mathrm{d}y$  ，得\n\n$$\n2 p \\mathrm {d} p = - \\frac {2 g}{v _ {x} ^ {2}} \\mathrm {d} y \\tag {1-64}\n$$\n\n升弧段由  $a$  点至顶点  $s$  积分式（1-64）\n\n$$\n\\int_ {p _ {a}} ^ {p _ {s} = 0} 2 p \\mathrm {d} p = - 2 g \\int_ {y _ {a}} ^ {y _ {s} = y} \\frac {\\mathrm {d} y}{v _ {x \\text {升}} ^ {2}}\n$$\n\n即  $p_{a}^{2} = 2g\\int_{y_{a}}^{y}"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_0a4563d5984464c2626f",
+        "label": "具有部件",
+        "definition": "一个概念由另一个概念组成",
+        "domain": [
+          "C_70780e1e31a41f0ff86a"
+        ],
+        "range": [
+          "C_29a267036b238911b72c"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+              }
+            ],
+            "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+            "id": "C_70780e1e31a41f0ff86a",
+            "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+            "label": "弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹道中高度下降的部分"
+              }
+            ],
+            "description": "弹道中高度下降的部分",
+            "id": "C_29a267036b238911b72c",
+            "iri": "urn:kg:chapter1:class:15e8792c2bdf9eb2638cd65e",
+            "label": "降弧",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "降弧"
+              }
+            ],
+            "parent": "C_70780e1e31a41f0ff86a",
+            "parents": [
+              "C_70780e1e31a41f0ff86a"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "降弧段由  $s$  点至  $d$  点积分式（1-64）",
+            "start": 31189,
+            "end": 31219,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_3f4fba022970",
+            "evidence_id": "def_ev_9ea0998d5750bdf645311757",
+            "context_start": 31009,
+            "context_end": 31399,
+            "context": " \\mathrm {d} p = - 2 g \\int_ {y _ {a}} ^ {y _ {s} = y} \\frac {\\mathrm {d} y}{v _ {x \\text {升}} ^ {2}}\n$$\n\n即  $p_{a}^{2} = 2g\\int_{y_{a}}^{y}\\frac{\\mathrm{d}y}{v_{x}^{2}}$  (1-65)\n\n降弧段由  $s$  点至  $d$  点积分式（1-64）\n\n$$\n\\int_ {p _ {s}} ^ {p _ {d}} 2 p \\mathrm {d} p = - 2 g \\int_ {y _ {s} = y} ^ {y _ {d}} \\frac {\\mathrm {d} y}{v _ {x \\text {降}} ^ {2}}\n$$\n\n即  $p_d^2 = 2g\\int_{y_d}^{y}\\frac{\\mat"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_0aba3d423b601977e28c",
+        "label": "对应",
+        "definition": "某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角",
+        "domain": [
+          "C_5e50d1b1af9b1ad1d9bd"
+        ],
+        "range": [
+          "C_9c47b068f5438cdc353f"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_5e50d1b1af9b1ad1d9bd",
+            "iri": "urn:kg:chapter1:class:1f43426c9de05636aae2ebff",
+            "label": "全水平射程",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "全水平射程"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角"
+              }
+            ],
+            "description": "某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角",
+            "id": "C_9c47b068f5438cdc353f",
+            "iri": "urn:kg:chapter1:class:cec5919330602d1fd64b8d5e",
+            "label": "最大射程角",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "最大射程角"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角",
+            "start": 33457,
+            "end": 33489,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_934e79bfc4b9",
+            "evidence_id": "def_ev_84f76303ac5ae38d1b76b691",
+            "context_start": 33277,
+            "context_end": 33669,
+            "context": "{s}$\n\n由抛物线理论知，真空弹道顶点速度  $v_{s} = v_{0}\\cos \\theta_{0}$ ，恰与沿全弹道的平均水平速度  $v_{s} = X / T$  相等。根据经验，在空气弹道中此结论也近似符合。为此，空气弹道的顶点速度可用下式来估算：\n\n$$\nv _ {s} = X / T\n$$\n\n# 3. 最大射程角\n\n某一弹丸用同一速度射击，其全水平射程为最大时所对应的射角称为该弹丸在该初速时的最大射程角，记作  $\\theta_{0X\\mathrm{m}}$  。显然，真空弹道  $\\theta_{0X\\mathrm{m}} = 45^{\\circ}$  。\n\n空气质点弹道由于空气阻力的复杂影响，最大射程角随弹丸的口径和初速的不同而有较大的差异。一般枪弹的最大射程角  $\\theta_{0X\\mathrm{m}}$  为  $28^{\\circ} \\sim"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_0e6aeaed149fdb07cfac",
+        "label": "形成",
+        "definition": "表示某种条件或过程导致某种物理现象或波的出现",
+        "domain": [
+          "C_e56f1a44eef9d89bc3b6"
+        ],
+        "range": [
+          "C_bbbc79ec97fb8f7085d4"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "飞行速度超过声速的弹丸"
+              }
+            ],
+            "description": "飞行速度超过声速的弹丸",
+            "id": "C_e56f1a44eef9d89bc3b6",
+            "iri": "urn:kg:chapter1:class:6cdf968aa148b291a5570ab1",
+            "label": "超声速弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "超声速弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "超声速弹丸飞行中所形成的波"
+              }
+            ],
+            "description": "超声速弹丸飞行中所形成的波",
+            "id": "C_bbbc79ec97fb8f7085d4",
+            "iri": "urn:kg:chapter1:class:f79f35e6f29b66e30cedaf46",
+            "label": "弹道波",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道波"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "图1-6表示了超声速弹丸飞行中所形成的弹道波。",
+            "start": 10260,
+            "end": 10283,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_5da7b788e236",
+            "evidence_id": "def_ev_fa503c426cf63c12de4f480d",
+            "context_start": 10080,
+            "context_end": 10463,
+            "context": "行时，就会在弹头部及其他部位产生激波，激波的形成也会大量消耗能量，它相应形成的阻力就是波动阻力。\n\n在气体中弱扰动是以声速向外传播的，当弹丸以超声速在空气中运动时，在弹头部及弹的其他部位就会形成一个圆锥形的受扰动区域，而其圆锥形的包络面则是空气受扰动与未受扰动的分界面，其上有扰动的叠加作用，形成了压力、密度和温度的突变。这就是超声速气\n\n流中特有的激波现象。图1-6表示了超声速弹丸飞行中所形成的弹道波。\n\n在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。由图1-6可见，除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。弹尾波形成的原因是：流线进入弹尾部的低压区时向内转折，后因距弹尾较远处压力加大又向外转折，形成气流绕内钝角转折，因而形成了激波。弹道波总是形成强烈的压缩，它也消耗着弹丸的动能，因此，"
+          },
+          {
+            "quote": "弹道波总是形成强烈的压缩",
+            "start": 10436,
+            "end": 10448,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_5da7b788e236",
+            "evidence_id": "def_ev_1bcb425ca4bf179499e28220",
+            "context_start": 10256,
+            "context_end": 10628,
+            "context": "波现象。图1-6表示了超声速弹丸飞行中所形成的弹道波。\n\n在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。由图1-6可见，除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。弹尾波形成的原因是：流线进入弹尾部的低压区时向内转折，后因距弹尾较远处压力加大又向外转折，形成气流绕内钝角转折，因而形成了激波。弹道波总是形成强烈的压缩，它也消耗着弹丸的动能，因此，也\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/2ee12a4522685657644b94d5da50087e01b1aeef4bab3ce53c516e302c60a91"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_1019d420d55d6c331f64",
+        "label": "夹角取决于",
+        "definition": "相对射击面与绝对射击面之间的夹角大小取决于v和Wz在水平面内投影的大小",
+        "domain": [
+          "C_70804fa3ce2e209e9d9e"
+        ],
+        "range": [
+          "C_c5f91d8b53bb976eb043"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "与绝对射击面存在夹角，其夹角大小取决于v和Wz在水平面内投影大小的射击面"
+              }
+            ],
+            "description": "与绝对射击面存在夹角，其夹角大小取决于v和Wz在水平面内投影大小的射击面",
+            "id": "C_70804fa3ce2e209e9d9e",
+            "iri": "urn:kg:chapter1:class:186df1a5fbafa3a22b2e4ceb",
+            "label": "相对射击面",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "相对射击面"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "与相对射击面存在夹角，其夹角大小取决于v和Wz在水平面内投影大小的射击面"
+              }
+            ],
+            "description": "与相对射击面存在夹角，其夹角大小取决于v和Wz在水平面内投影大小的射击面",
+            "id": "C_c5f91d8b53bb976eb043",
+            "iri": "urn:kg:chapter1:class:84f29371c847c32e55586fd0",
+            "label": "绝对射击面",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "绝对射击面"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "相对射击面与绝对射击面之间的夹角大小取决于  $v$  和  $W_{z}$  在水平面内投影的大小。",
+            "start": 47418,
+            "end": 47469,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_561db3317157",
+            "evidence_id": "def_ev_f6612df9f25edf4223dbdf73",
+            "context_start": 47238,
+            "context_end": 47649,
+            "context": "ineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/12d540a219b0fcc70354dac25d0144c0eed26b41c56f3706198f5eede1fdee4d.jpg)\n\n\n\n图1-19 有风时弹丸运动合成\n\n\n如图1-19（b）所示，相对射击面与绝对射击面之间的夹角大小取决于  $v$  和  $W_{z}$  在水平面内投影的大小。由于  $v_{0}$  在水平面内的投影为  $v_{0} \\cos \\theta_{0}$ ， $W_{z}$  在水平面内的投影仍为  $W_{z}$ ，且以上两投影互相垂直，故  $Ox^{\\prime}$  与  $Ox$  之间的夹角为  $\\arctan \\left[ W_{z} / \\left( v_{0} \\cos \\theta_{0} \\"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_12a1cf5c80d7e73a97a2",
+        "label": "影响",
+        "definition": "一个物理量或条件对另一个物理量或结果产生的作用关系",
+        "domain": [
+          "C_4f620706279a1779b20b"
+        ],
+        "range": [
+          "C_8168a48ff2e280e56e5a"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "通过改变空气密度来影响弹道的物理量"
+              }
+            ],
+            "description": "通过改变空气密度来影响弹道的物理量",
+            "id": "C_4f620706279a1779b20b",
+            "iri": "urn:kg:chapter1:class:bc006debec35a21d9c9d90fb",
+            "label": "气压",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "气压"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_8168a48ff2e280e56e5a",
+            "iri": "urn:kg:chapter1:class:fac37efea6d2611468ed3561",
+            "label": "空气密度",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气密度"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "气压是通过改变空气密度来影响弹道的",
+            "start": 41165,
+            "end": 41182,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_329c680cbc08",
+            "evidence_id": "def_ev_41998c5929866a7793604085",
+            "context_start": 40985,
+            "context_end": 41362,
+            "context": "前者使  $\\Delta X$  增大，后者使  $\\Delta X$  减小。二者综合的结果，炮弹I在  $15^{\\circ}$  射角时  $\\Delta X$  出现最大值，炮弹Ⅱ由于初速大，小射角时射程已很大，故  $5^{\\circ}$  射角时  $\\Delta X$  即出现最大值。\n\n# 1.3.2 考虑气温、气压非标准时的弹丸运动方程\n\n气压是通过改变空气密度来影响弹道的，气压升高使空气密度增大，因而使射程减小。气温除了影响空气密度外，还对马赫数有影响。在跨声速区阻力系数急剧上升段内，马赫数微小的增加可以引起阻力系数明显增大，而且气温通过阻力系数和空气密度对空气阻力的影响在这一段内是互相叠加的，所以在这一速度范围内气温对弹道的影响比较显著，气温的升高能使射程明显增大。在超声速区阻力系数急剧下降段内，气温通过阻力系数和通过空气"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_1654fcf38913d94cb712",
+        "label": "影响",
+        "definition": "一个因素对另一个因素或对象产生作用",
+        "domain": [
+          "C_a902e72f8e9d12ecd166"
+        ],
+        "range": [
+          "C_70780e1e31a41f0ff86a"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "通过改变空气阻力的方向来影响弹道的风"
+              }
+            ],
+            "description": "通过改变空气阻力的方向来影响弹道的风",
+            "id": "C_a902e72f8e9d12ecd166",
+            "iri": "urn:kg:chapter1:class:58cba30533b55f2bbe96f958",
+            "label": "横风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "横风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+              }
+            ],
+            "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+            "id": "C_70780e1e31a41f0ff86a",
+            "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+            "label": "弹道",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "横风是通过改变空气阻力的方向来影响弹道的。",
+            "start": 45530,
+            "end": 45551,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_c1cb36e1a624",
+            "evidence_id": "def_ev_3ed974f659d88cc56a25b654",
+            "context_start": 45350,
+            "context_end": 45731,
+            "context": "}$  ，  $v_{z} = 0$  ，  $x = y = z = 0$  。\n\n方程组（1-95）可以用来计算各种复杂气象条件下的弹道，以相同的  $C$  、  $v_{0}$  、  $\\theta_0$  计算得到的非标准与标准条件下的射程之差称为该条件下的射程偏差。风引起的射程偏差和方向偏差统称为风偏。\n\n# 3. 风速对弹道影响的物理本质\n\n横风是通过改变空气阻力的方向来影响弹道的。有风时弹轴在相对速度矢量附近做角运\n\n动，相对速度矢量可看作弹轴的平均位置，故而本章假设弹轴时刻保持与相对速度矢量重合。在此假设下弹丸的受力情况如图1-18所示。设横风方向从左向右，则相对速度矢量偏向绝对速度的左侧。在弹轴与相对速度矢量重合的假设下，空气阻力矢量也与相对速度矢量重合，只是方向相反。这时空气阻力  $R_{x}$  可以分解出一个与绝对速度  "
+          }
+        ]
+      },
+      {
+        "relation_id": "R_198245964490791fcd11",
+        "label": "垂直于",
+        "definition": "法线方向与切线方向垂直",
+        "domain": [
+          "C_a8f0c937cda30ac94c46"
+        ],
+        "range": [
+          "C_4f1eebacebf2a7f644b6"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "与切线方向垂直的方向"
+              }
+            ],
+            "description": "与切线方向垂直的方向",
+            "id": "C_a8f0c937cda30ac94c46",
+            "iri": "urn:kg:chapter1:class:3b58e5e319355f9967266010",
+            "label": "法线方向",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "法线方向"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸质心速度矢量的方向"
+              }
+            ],
+            "description": "弹丸质心速度矢量的方向",
+            "id": "C_4f1eebacebf2a7f644b6",
+            "iri": "urn:kg:chapter1:class:27ae6052592af53475b345a9",
+            "label": "切线方向",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "切线方向"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "而与其垂直的方向为法线方向",
+            "start": 25256,
+            "end": 25269,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_9c835c2a6247",
+            "evidence_id": "def_ev_226b5033ad770cf49125a590",
+            "context_start": 25076,
+            "context_end": 25449,
+            "context": " = v _ {0} \\cos \\theta_ {0}, v _ {y} = v _ {y 0} = v _ {0} \\sin \\theta_ {0}\n$$\n\n这就是最常用的求解弹丸质心运动的微分方程组。\n\n# 2. 自然坐标系的弹丸质心运动微分方程组\n\n自然坐标是根据跟随弹丸质心运动的方向而取的坐标。取弹丸质心速度矢量的方向为切线方向  $\\tau$  ，而与其垂直的方向为法线方向  $\\eta$  ，则由图1-12可见，重力加速度矢量在  $\\tau$  和  $\\eta$  方向上的分量分别为\n\n$$\ng _ {\\tau} = - g \\sin \\theta , g _ {\\eta} = - g \\cos \\theta\n$$\n\n即可写出自然坐标系的弹丸质心运动方程组：\n\n![image](https://cdn-mineru.op"
+          }
+        ]
+      }
+    ],
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "policy": {
+      "rule": "all_three_independent_families_all_axes_pass_no_issues",
+      "human_labels_used": false,
+      "application": "isolated_research_preexperiment_subset",
+      "classes": "existing_class_hierarchy_preserved_not_fully_semantically_recertified"
+    },
+    "task_id": "definition_batch_3ce9524ef38f25755179c7e1",
+    "proposal_digest": "e465f8a95ce71c016e8d7f0917501457aff660d19b12e0bf69afb545ea694cb0"
+  },
+  "votes": [
+    {
+      "attempt_id": "attempt_1dd292b100ae484b8039a5e8db7c341f",
+      "client_request_id": "attempt_1dd292b100ae484b8039a5e8db7c341f",
+      "error": "$.assessments[0].evidence_ids: unsupported local schema keyword; $.assessments[0].issue_codes: unsupported local schema keyword; $.assessments[1].evidence_ids: unsupported local schema keyword; $.assessments[1].issue_codes: unsupported local schema keyword; $.assessments[2].evidence_ids: unsupported local schema keyword; $.assessments[2].issue_codes: unsupported local schema keyword; $.assessments[3].evidence_ids: unsupported local schema keyword; $.assessments[3].issue_codes: unsupported local schema keyword; $.assessments[4].evidence_ids: unsupported local schema keyword; $.assessments[4].issue_codes: unsupported local schema keyword; $.assessments[5].evidence_ids: unsupported local schema keyword; $.assessments[5].issue_codes: unsupported local schema keyword; $.assessments[6].evidence_ids: unsupported local schema keyword; $.assessments[6].issue_codes: unsupported local schema keyword; $.assessments[7].evidence_ids: unsupported local schema keyword; $.assessments[7].issue_codes: unsupported local schema keyword; $.assessments[8].evidence_ids: unsupported local schema keyword; $.assessments[8].issue_codes: unsupported local schema keyword",
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 7693,
+      "late_response": false,
+      "latency_ms": 5936,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 869,
+      "proposal_digest": "e465f8a95ce71c016e8d7f0917501457aff660d19b12e0bf69afb545ea694cb0",
+      "provider_started_at": 1794830041.0156128,
+      "queue_time_ms": 392,
+      "raw_response": "{\"assessments\":[{\"relation_id\":\"R_029d377fdd30415aa4e3\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_fcb0ecabfebd222c3e7b815a\"],\"issue_codes\":[],\"reason\":\"证据明确表述气温随高度的变化规律，域为气温、范围为高度，方向与定义一致。\"},{\"relation_id\":\"R_0504da52903bd6259f7d\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_d049bd18067678cabfdc37d9\"],\"issue_codes\":[],\"reason\":\"证据显示升弧段是弹道的一部分，弹道具有升弧的部件关系成立。\"},{\"relation_id\":\"R_0a4563d5984464c2626f\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_9ea0998d5750bdf645311757\"],\"issue_codes\":[],\"reason\":\"证据显示降弧段是弹道的一部分，弹道具有降弧的部件关系成立。\"},{\"relation_id\":\"R_0aba3d423b601977e28c\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_84f76303ac5ae38d1b76b691\"],\"issue_codes\":[],\"reason\":\"证据原文定义最大射程角为全水平射程最大时对应的射角，对应关系方向正确。\"},{\"relation_id\":\"R_0e6aeaed149fdb07cfac\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_fa503c426cf63c12de4f480d\",\"def_ev_1bcb425ca4bf179499e28220\"],\"issue_codes\":[],\"reason\":\"证据表明超声速弹丸飞行中形成弹道波，形成关系方向与端点匹配。\"},{\"relation_id\":\"R_1019d420d55d6c331f64\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_f6612df9f25edf4223dbdf73\"],\"issue_codes\":[],\"reason\":\"证据原文说明相对射击面与绝对射击面夹角取决于v和Wz水平投影大小，关系方向正确。\"},{\"relation_id\":\"R_12a1cf5c80d7e73a97a2\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_41998c5929866a7793604085\"],\"issue_codes\":[],\"reason\":\"证据明确气压通过改变空气密度影响弹道，影响关系方向与端点匹配。\"},{\"relation_id\":\"R_1654fcf38913d94cb712\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_3ed974f659d88cc56a25b654\"],\"issue_codes\":[],\"reason\":\"证据明确横风通过改变空气阻力方向影响弹道，影响关系方向正确。\"},{\"relation_id\":\"R_198245964490791fcd11\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_226b5033ad770cf49125a590\"],\"issue_codes\":[],\"reason\":\"证据说明法线方向与切线方向垂直，垂直关系方向与端点匹配。\"}]}",
+      "reasoning_tokens": null,
+      "request_key": "62cd67515fb0e47e36db768940ebc69103082c304e0fc266905b07186e994c89",
+      "response_id": "d30f9d91-360f-448e-a61c-94497e0b2d50",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "definition_batch_3ce9524ef38f25755179c7e1",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 1307,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_1dd292b100ae484b8039a5e8db7c341f",
+        "first_body_byte_ms": 5913.872,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Mon, 16 Nov 2026 11:54:03 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 2465.038,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 1865.663,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2159.396,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2159.476,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2217.164,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2217.274,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2217.641,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2217.654,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2218.032,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2218.043,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2462.312,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2465.285,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 5914.186,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 5914.287,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 5914.322,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 5930.438
+      },
+      "voter_id": "judge_c",
+      "assessments": [
+        {
+          "relation_id": "R_029d377fdd30415aa4e3",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_fcb0ecabfebd222c3e7b815a"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确表述气温随高度的变化规律，域为气温、范围为高度，方向与定义一致。"
+        },
+        {
+          "relation_id": "R_0504da52903bd6259f7d",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_d049bd18067678cabfdc37d9"
+          ],
+          "issue_codes": [],
+          "reason": "证据显示升弧段是弹道的一部分，弹道具有升弧的部件关系成立。"
+        },
+        {
+          "relation_id": "R_0a4563d5984464c2626f",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_9ea0998d5750bdf645311757"
+          ],
+          "issue_codes": [],
+          "reason": "证据显示降弧段是弹道的一部分，弹道具有降弧的部件关系成立。"
+        },
+        {
+          "relation_id": "R_0aba3d423b601977e28c",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_84f76303ac5ae38d1b76b691"
+          ],
+          "issue_codes": [],
+          "reason": "证据原文定义最大射程角为全水平射程最大时对应的射角，对应关系方向正确。"
+        },
+        {
+          "relation_id": "R_0e6aeaed149fdb07cfac",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_fa503c426cf63c12de4f480d",
+            "def_ev_1bcb425ca4bf179499e28220"
+          ],
+          "issue_codes": [],
+          "reason": "证据表明超声速弹丸飞行中形成弹道波，形成关系方向与端点匹配。"
+        },
+        {
+          "relation_id": "R_1019d420d55d6c331f64",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_f6612df9f25edf4223dbdf73"
+          ],
+          "issue_codes": [],
+          "reason": "证据原文说明相对射击面与绝对射击面夹角取决于v和Wz水平投影大小，关系方向正确。"
+        },
+        {
+          "relation_id": "R_12a1cf5c80d7e73a97a2",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_41998c5929866a7793604085"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确气压通过改变空气密度影响弹道，影响关系方向与端点匹配。"
+        },
+        {
+          "relation_id": "R_1654fcf38913d94cb712",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_3ed974f659d88cc56a25b654"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确横风通过改变空气阻力方向影响弹道，影响关系方向正确。"
+        },
+        {
+          "relation_id": "R_198245964490791fcd11",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_226b5033ad770cf49125a590"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明法线方向与切线方向垂直，垂直关系方向与端点匹配。"
+        }
+      ],
+      "local_validation_recovery": {
+        "original_receipt_hash": "7f28d7fdc70a31e0efbd03ff0cbc79773a4ed91f80f8477356c52f732bcaa737",
+        "original_status": "invalid_contract",
+        "original_attempt_state_unchanged": true,
+        "new_model_calls": 0,
+        "reason": "unsupported uniqueItems replaced by equivalent explicit duplicate checks"
+      }
+    },
+    {
+      "attempt_id": "attempt_7a5a46ac734b4a1a9d8099dda01aec1a",
+      "client_request_id": "attempt_7a5a46ac734b4a1a9d8099dda01aec1a",
+      "error": "$.assessments[0].evidence_ids: unsupported local schema keyword; $.assessments[0].issue_codes: unsupported local schema keyword; $.assessments[1].evidence_ids: unsupported local schema keyword; $.assessments[1].issue_codes: unsupported local schema keyword; $.assessments[2].evidence_ids: unsupported local schema keyword; $.assessments[2].issue_codes: unsupported local schema keyword; $.assessments[3].evidence_ids: unsupported local schema keyword; $.assessments[3].issue_codes: unsupported local schema keyword; $.assessments[4].evidence_ids: unsupported local schema keyword; $.assessments[4].issue_codes: unsupported local schema keyword; $.assessments[5].evidence_ids: unsupported local schema keyword; $.assessments[5].issue_codes: unsupported local schema keyword; $.assessments[6].evidence_ids: unsupported local schema keyword; $.assessments[6].issue_codes: unsupported local schema keyword; $.assessments[7].evidence_ids: unsupported local schema keyword; $.assessments[7].issue_codes: unsupported local schema keyword; $.assessments[8].evidence_ids: unsupported local schema keyword; $.assessments[8].issue_codes: unsupported local schema keyword",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111619540388805454131372855",
+      "input_tokens": 8407,
+      "late_response": false,
+      "latency_ms": 33983,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 1313,
+      "proposal_digest": "e465f8a95ce71c016e8d7f0917501457aff660d19b12e0bf69afb545ea694cb0",
+      "provider_started_at": 1794830041.0529816,
+      "queue_time_ms": 431,
+      "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_029d377fdd30415aa4e3\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_fcb0ecabfebd222c3e7b815a\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明气温随高度变化，且高度是气温分布的自变量，定义与端点类语义一致。\"\n    },\n    {\n      \"relation_id\": \"R_0504da52903bd6259f7d\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_d049bd18067678cabfdc37d9\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出升弧段是弹道的一部分，符合“具有部件”关系及端点类定义。\"\n    },\n    {\n      \"relation_id\": \"R_0a4563d5984464c2626f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_9ea0998d5750bdf645311757\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出降弧段是弹道的一部分，符合“具有部件”关系及端点类定义。\"\n    },\n    {\n      \"relation_id\": \"R_0aba3d423b601977e28c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_84f76303ac5ae38d1b76b691\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明全水平射程最大时对应的射角为最大射程角，定义与端点类语义一致。\"\n    },\n    {\n      \"relation_id\": \"R_0e6aeaed149fdb07cfac\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_fa503c426cf63c12de4f480d\", \"def_ev_1bcb425ca4bf179499e28220\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明超声速弹丸飞行形成弹道波，符合“形成”关系及端点类定义。\"\n    },\n    {\n      \"relation_id\": \"R_1019d420d55d6c331f64\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_f6612df9f25edf4223dbdf73\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明相对射击面与绝对射击面夹角取决于v和Wz投影，定义与端点类语义一致。\"\n    },\n    {\n      \"relation_id\": \"R_12a1cf5c80d7e73a97a2\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_41998c5929866a7793604085\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明气压通过改变空气密度影响弹道，符合“影响”关系及端点类定义。\"\n    },\n    {\n      \"relation_id\": \"R_1654fcf38913d94cb712\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_3ed974f659d88cc56a25b654\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明横风通过改变空气阻力方向影响弹道，符合“影响”关系及端点类定义。\"\n    },\n    {\n      \"relation_id\": \"R_198245964490791fcd11\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_226b5033ad770cf49125a590\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明法线方向与切线方向垂直，符合“垂直于”关系及端点类定义。\"\n    }\n  ]\n}",
+      "reasoning_tokens": null,
+      "request_key": "e07be7805db572e644025a85150aaabf103e6b71be329d86f292e42c352f69b7",
+      "response_id": "chatcmpl-9429b9e0ccd11ad0",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "task_id": "definition_batch_3ce9524ef38f25755179c7e1",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 282899,
+        "body_chunk_count": 1313,
+        "chunk_count": 1315,
+        "client_request_id": "attempt_7a5a46ac734b4a1a9d8099dda01aec1a",
+        "first_body_byte_ms": 5371.3,
+        "first_chunk_ms": 5375,
+        "first_content_ms": 5389,
+        "gateway_request_id": "2026111619540388805454131372855",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 190.09,
+        "max_inter_chunk_gap_ms": 187,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 11:54:06 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111619540388805454131372855"
+        },
+        "response_headers_ms": 5371.022,
+        "stream": true,
+        "terminal_ms": 33983,
+        "trace": [
+          {
+            "elapsed_ms": 1910.658,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2011.477,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2011.541,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2132.435,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2132.564,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2133.059,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2133.077,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2133.748,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2133.764,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5369.037,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5371.231,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 33979.603,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 33979.686,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 33979.715,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 33979.969,
+        "visible_chars": 3028
+      },
+      "voter_id": "judge_a",
+      "assessments": [
+        {
+          "relation_id": "R_029d377fdd30415aa4e3",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_fcb0ecabfebd222c3e7b815a"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明气温随高度变化，且高度是气温分布的自变量，定义与端点类语义一致。"
+        },
+        {
+          "relation_id": "R_0504da52903bd6259f7d",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_d049bd18067678cabfdc37d9"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出升弧段是弹道的一部分，符合“具有部件”关系及端点类定义。"
+        },
+        {
+          "relation_id": "R_0a4563d5984464c2626f",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_9ea0998d5750bdf645311757"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出降弧段是弹道的一部分，符合“具有部件”关系及端点类定义。"
+        },
+        {
+          "relation_id": "R_0aba3d423b601977e28c",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_84f76303ac5ae38d1b76b691"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明全水平射程最大时对应的射角为最大射程角，定义与端点类语义一致。"
+        },
+        {
+          "relation_id": "R_0e6aeaed149fdb07cfac",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_fa503c426cf63c12de4f480d",
+            "def_ev_1bcb425ca4bf179499e28220"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明超声速弹丸飞行形成弹道波，符合“形成”关系及端点类定义。"
+        },
+        {
+          "relation_id": "R_1019d420d55d6c331f64",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_f6612df9f25edf4223dbdf73"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明相对射击面与绝对射击面夹角取决于v和Wz投影，定义与端点类语义一致。"
+        },
+        {
+          "relation_id": "R_12a1cf5c80d7e73a97a2",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_41998c5929866a7793604085"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明气压通过改变空气密度影响弹道，符合“影响”关系及端点类定义。"
+        },
+        {
+          "relation_id": "R_1654fcf38913d94cb712",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_3ed974f659d88cc56a25b654"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明横风通过改变空气阻力方向影响弹道，符合“影响”关系及端点类定义。"
+        },
+        {
+          "relation_id": "R_198245964490791fcd11",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_226b5033ad770cf49125a590"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明法线方向与切线方向垂直，符合“垂直于”关系及端点类定义。"
+        }
+      ],
+      "local_validation_recovery": {
+        "original_receipt_hash": "0e818cc6e109a58d7d34fea2dec0cd6c694f099580798e6fe0fcaeb23b2dd8d3",
+        "original_status": "invalid_contract",
+        "original_attempt_state_unchanged": true,
+        "new_model_calls": 0,
+        "reason": "unsupported uniqueItems replaced by equivalent explicit duplicate checks"
+      }
+    },
+    {
+      "attempt_id": "attempt_3207e5ecd7d044238893b389c6ec2b8a",
+      "client_request_id": "attempt_3207e5ecd7d044238893b389c6ec2b8a",
+      "error": "$.assessments[0].evidence_ids: unsupported local schema keyword; $.assessments[0].issue_codes: unsupported local schema keyword; $.assessments[1].evidence_ids: unsupported local schema keyword; $.assessments[1].issue_codes: unsupported local schema keyword; $.assessments[2].evidence_ids: unsupported local schema keyword; $.assessments[2].issue_codes: unsupported local schema keyword; $.assessments[3].evidence_ids: unsupported local schema keyword; $.assessments[3].issue_codes: unsupported local schema keyword; $.assessments[4].evidence_ids: unsupported local schema keyword; $.assessments[4].issue_codes: unsupported local schema keyword; $.assessments[5].evidence_ids: unsupported local schema keyword; $.assessments[5].issue_codes: unsupported local schema keyword; $.assessments[6].evidence_ids: unsupported local schema keyword; $.assessments[6].issue_codes: unsupported local schema keyword; $.assessments[7].evidence_ids: unsupported local schema keyword; $.assessments[7].issue_codes: unsupported local schema keyword; $.assessments[8].evidence_ids: unsupported local schema keyword; $.assessments[8].issue_codes: unsupported local schema keyword",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111619540391619087622378707",
+      "input_tokens": 8807,
+      "late_response": false,
+      "latency_ms": 116860,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "output_tokens": 3854,
+      "proposal_digest": "e465f8a95ce71c016e8d7f0917501457aff660d19b12e0bf69afb545ea694cb0",
+      "provider_started_at": 1794830041.0637736,
+      "queue_time_ms": 431,
+      "raw_response": "{\"assessments\": [{\"relation_id\": \"R_029d377fdd30415aa4e3\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_fcb0ecabfebd222c3e7b815a\"], \"issue_codes\": [], \"reason\": \"原文明确指出气温随高度的变化规律，定义、方向和端点均符合。\"}, {\"relation_id\": \"R_0504da52903bd6259f7d\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_d049bd18067678cabfdc37d9\"], \"issue_codes\": [], \"reason\": \"原文提到升弧段，在弹道语境下，升弧是弹道的组成部分，符合具有部件关系。\"}, {\"relation_id\": \"R_0a4563d5984464c2626f\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_9ea0998d5750bdf645311757\"], \"issue_codes\": [], \"reason\": \"原文提到降弧段，在弹道语境下，降弧是弹道的组成部分，符合具有部件关系。\"}, {\"relation_id\": \"R_0aba3d423b601977e28c\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_84f76303ac5ae38d1b76b691\"], \"issue_codes\": [], \"reason\": \"原文定义最大射程角为全水平射程最大时所对应的射角，关系正确。\"}, {\"relation_id\": \"R_0e6aeaed149fdb07cfac\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_fa503c426cf63c12de4f480d\", \"def_ev_1bcb425ca4bf179499e28220\"], \"issue_codes\": [], \"reason\": \"原文明确提到超声速弹丸飞行中所形成的弹道波，符合形成关系。\"}, {\"relation_id\": \"R_1019d420d55d6c331f64\", \"definition_fidelity\": \"revise\", \"direction\": \"fail\", \"endpoint_signature\": \"fail\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_f6612df9f25edf4223dbdf73\"], \"issue_codes\": [\"direction_mismatch\", \"endpoint_mismatch\"], \"reason\": \"关系“夹角取决于”的逻辑主体应该是“夹角”与“投影”，而非两个“射击面”之间。两个射击面之间是“形成夹角”的关系。\"}, {\"relation_id\": \"R_12a1cf5c80d7e73a97a2\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_41998c5929866a7793604085\"], \"issue_codes\": [], \"reason\": \"原文指出气压通过改变空气密度来影响弹道，支持气压影响空气密度的关系。\"}, {\"relation_id\": \"R_1654fcf38913d94cb712\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_3ed974f659d88cc56a25b654\"], \"issue_codes\": [], \"reason\": \"原文明确指出横风影响弹道，符合影响关系。\"}, {\"relation_id\": \"R_198245964490791fcd11\", \"definition_fidelity\": \"pass\", \"direction\": \"pass\", \"endpoint_signature\": \"pass\", \"task_scope\": \"in_scope\", \"evidence_ids\": [\"def_ev_226b5033ad770cf49125a590\"], \"issue_codes\": [], \"reason\": \"原文明确指出法线方向与切线方向垂直，符合垂直于关系。\"}]}",
+      "reasoning_tokens": 2684,
+      "request_key": "b6ff46a6b225e0d056514340c35190ab1048b0b214c0786d4a88a74b3bc36cfc",
+      "response_id": "chatcmpl-be13bbfed01d8dba",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "task_id": "definition_batch_3ce9524ef38f25755179c7e1",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 766869,
+        "body_chunk_count": 3519,
+        "chunk_count": 3520,
+        "client_request_id": "attempt_3207e5ecd7d044238893b389c6ec2b8a",
+        "first_body_byte_ms": 5120.213,
+        "first_chunk_ms": 5125,
+        "first_content_ms": 82844,
+        "gateway_request_id": "2026111619540391619087622378707",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 175.702,
+        "max_inter_chunk_gap_ms": 172,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 11:54:06 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111619540391619087622378707"
+        },
+        "response_headers_ms": 5119.847,
+        "stream": true,
+        "terminal_ms": 116860,
+        "trace": [
+          {
+            "elapsed_ms": 1890.202,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2000.9,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2000.968,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2122.015,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2122.164,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2122.725,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2122.745,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2123.078,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2123.095,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5117.15,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5120.147,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 116861.167,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 116861.285,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 116861.32,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 116861.607,
+        "visible_chars": 2523
+      },
+      "voter_id": "judge_b",
+      "assessments": [
+        {
+          "relation_id": "R_029d377fdd30415aa4e3",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_fcb0ecabfebd222c3e7b815a"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出气温随高度的变化规律，定义、方向和端点均符合。"
+        },
+        {
+          "relation_id": "R_0504da52903bd6259f7d",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_d049bd18067678cabfdc37d9"
+          ],
+          "issue_codes": [],
+          "reason": "原文提到升弧段，在弹道语境下，升弧是弹道的组成部分，符合具有部件关系。"
+        },
+        {
+          "relation_id": "R_0a4563d5984464c2626f",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_9ea0998d5750bdf645311757"
+          ],
+          "issue_codes": [],
+          "reason": "原文提到降弧段，在弹道语境下，降弧是弹道的组成部分，符合具有部件关系。"
+        },
+        {
+          "relation_id": "R_0aba3d423b601977e28c",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_84f76303ac5ae38d1b76b691"
+          ],
+          "issue_codes": [],
+          "reason": "原文定义最大射程角为全水平射程最大时所对应的射角，关系正确。"
+        },
+        {
+          "relation_id": "R_0e6aeaed149fdb07cfac",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_fa503c426cf63c12de4f480d",
+            "def_ev_1bcb425ca4bf179499e28220"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确提到超声速弹丸飞行中所形成的弹道波，符合形成关系。"
+        },
+        {
+          "relation_id": "R_1019d420d55d6c331f64",
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "fail",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_f6612df9f25edf4223dbdf73"
+          ],
+          "issue_codes": [
+            "direction_mismatch",
+            "endpoint_mismatch"
+          ],
+          "reason": "关系“夹角取决于”的逻辑主体应该是“夹角”与“投影”，而非两个“射击面”之间。两个射击面之间是“形成夹角”的关系。"
+        },
+        {
+          "relation_id": "R_12a1cf5c80d7e73a97a2",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_41998c5929866a7793604085"
+          ],
+          "issue_codes": [],
+          "reason": "原文指出气压通过改变空气密度来影响弹道，支持气压影响空气密度的关系。"
+        },
+        {
+          "relation_id": "R_1654fcf38913d94cb712",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_3ed974f659d88cc56a25b654"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出横风影响弹道，符合影响关系。"
+        },
+        {
+          "relation_id": "R_198245964490791fcd11",
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "task_scope": "in_scope",
+          "evidence_ids": [
+            "def_ev_226b5033ad770cf49125a590"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出法线方向与切线方向垂直，符合垂直于关系。"
+        }
+      ],
+      "local_validation_recovery": {
+        "original_receipt_hash": "abe5bae251419915bf5a9e9599fc61ae4698896247399d808d70fb05f158bc0e",
+        "original_status": "invalid_contract",
+        "original_attempt_state_unchanged": true,
+        "new_model_calls": 0,
+        "reason": "unsupported uniqueItems replaced by equivalent explicit duplicate checks"
+      }
+    }
+  ],
+  "new_model_calls": 0
+}

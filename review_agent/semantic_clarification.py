@@ -48,6 +48,9 @@ def pending(vote):
     except (ValueError,TypeError):return None
     if not isinstance(original,dict):return None
     conflicts=_conflicts(original)
+    if vote.get('prompt_version')=='triple_validator_v8_consistency_v6':
+        from .response_consistency import issues
+        conflicts += [x['detail'] for x in issues(original) if x['code']=='FINDING_STATUS_CONFLICT']
     if not conflicts:return None
     return {'voter_id':vote.get('voter_id'),'status':'human_clarification_required','conflicts':conflicts,
         'original_response_hash':sha256_json(original),'original_judgments_immutable':True,

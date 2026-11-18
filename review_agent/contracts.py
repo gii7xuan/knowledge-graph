@@ -288,5 +288,11 @@ def proposal_digest(payload: Mapping[str, Any]) -> str:
             fields.update({k: payload.get(k) for k in ('mapping_preflight_policy','mapping_preflight_policy_hash','mapping_preflight_hash')})
     if payload.get('response_contract_version') == 'validator_response_v8':
         fields.update({k:payload.get(k) for k in ('field_spec_version','field_spec_hash','field_standardization_hash')})
+        if payload.get('response_consistency_binding_version'):
+            fields.update({k:payload.get(k) for k in ('response_consistency_binding_version',
+                'response_consistency_policy','response_consistency_policy_hash')})
+        if 'response_projection_policy' in payload:
+            fields.update({k:payload.get(k) for k in ('response_projection_policy',
+                'response_projection_policy_hash','response_projection_policy_version')})
         if 'dispute_policy' in payload:fields.update({k:payload.get(k) for k in ('dispute_policy_hash','dispute_context_hash')})
     return sha256_json(fields)

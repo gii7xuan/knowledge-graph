@@ -95,7 +95,9 @@ def project_context(repository,audit,committee):
     from .resolution_state import apply_consensus
     snapshot=context['resolution_snapshot']
     state.consensus=apply_consensus(aggregate_votes(votes,committee,proposal=base,proposal_digest=base['proposal_digest']),snapshot)
-    if (set(snapshot['whole_vote_eligible_voter_ids'])==set(committee.voter_ids)
+    review_ready=(snapshot.get('semantic_obligations_complete') if committee.weighting_policy else
+        set(snapshot['whole_vote_eligible_voter_ids'])==set(committee.voter_ids))
+    if (review_ready
             and state.bundle.get('evidence_hash')==base['evidence_bundle']['evidence_hash']
             and state.current_validation() is None):
         consensus=state.consensus

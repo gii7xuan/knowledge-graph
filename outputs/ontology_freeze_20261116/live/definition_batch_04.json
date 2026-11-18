@@ -1,0 +1,2063 @@
+{
+  "status": "reviewed",
+  "proposal": {
+    "version": "ontology_definition_audit_v1",
+    "base_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+    "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+    "source_text_hash": "e87ad709f3f67294599839457fce9a7196c3e37d7223649741ac2cfcf871cf2c",
+    "items": [
+      {
+        "relation_id": "R_52c7e2062efd9858ce95",
+        "label": "消耗",
+        "definition": "表示某一现象或过程导致某种能量或资源的减少",
+        "domain": [
+          "C_bbbc79ec97fb8f7085d4"
+        ],
+        "range": [
+          "C_a7877ae0fe8183f8b986"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "超声速弹丸飞行中所形成的波"
+              }
+            ],
+            "description": "超声速弹丸飞行中所形成的波",
+            "id": "C_bbbc79ec97fb8f7085d4",
+            "iri": "urn:kg:chapter1:class:f79f35e6f29b66e30cedaf46",
+            "label": "弹道波",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹道波"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_a7877ae0fe8183f8b986",
+            "iri": "urn:kg:chapter1:class:641e268b45540864e2254cbd",
+            "label": "动能",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "动能"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "它也消耗着弹丸的动能",
+            "start": 10449,
+            "end": 10459,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_5da7b788e236",
+            "evidence_id": "def_ev_e8d0ed136a0fb27d87a56e11",
+            "context_start": 10269,
+            "context_end": 10639,
+            "context": "速弹丸飞行中所形成的弹道波。\n\n在超声速弹丸上，凡是能使气流绕内钝角转折的部位，都会造成扰动的积累，从而产生激波。由图1-6可见，除了弹丸头部产生的弹头波外，还有弹带处产生的弹带波和距弹底一定距离的弹尾波。弹尾波形成的原因是：流线进入弹尾部的低压区时向内转折，后因距弹尾较远处压力加大又向外转折，形成气流绕内钝角转折，因而形成了激波。弹道波总是形成强烈的压缩，它也消耗着弹丸的动能，因此，也\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/2ee12a4522685657644b94d5da50087e01b1aeef4bab3ce53c516e302c60a91f.jpg)\n\n\n\n图"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5550f67bcf4a36b3531f",
+        "label": "忽略",
+        "definition": "在基本假设中不考虑某个因素或力",
+        "domain": [
+          "C_24d9f44b219469a35934"
+        ],
+        "range": [
+          "C_be6d4236cd787eac9a28"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "为了使问题简化并反映弹丸质心运动主要规律而引入的假设条件"
+              }
+            ],
+            "description": "为了使问题简化并反映弹丸质心运动主要规律而引入的假设条件",
+            "id": "C_24d9f44b219469a35934",
+            "iri": "urn:kg:chapter1:class:9207af458c3ac86c8a06c523",
+            "label": "基本假设",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "基本假设"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "作用于弹丸上的力之一"
+              }
+            ],
+            "description": "作用于弹丸上的力之一",
+            "id": "C_be6d4236cd787eac9a28",
+            "iri": "urn:kg:chapter1:class:c383d3d4a4d716a3531fdb40",
+            "label": "科氏惯性力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "科氏惯性力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "忽略由于地球自转而产生的作用于飞行弹丸上的科氏惯性力。",
+            "start": 22693,
+            "end": 22720,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_50133cd85b87",
+            "evidence_id": "def_ev_d03f1bcbc70f8b294060bd70",
+            "context_start": 22513,
+            "context_end": 22900,
+            "context": "基本假设\n\n为了使问题简化，以便使基本方程能反映弹丸质心运动的主要规律，引入下列基本假设：\n\n① 弹丸在全部飞行时间内攻角  $\\delta = 0^{\\circ}$\n\n② 弹丸是轴对称的；\n\n③气象条件是标准的，无风、雨、雪；\n\n④地表面是平面，重力加速度大小不变（ $g = 9.807 \\, \\mathrm{m/s}^2$ ），其方向始终铅垂向下；\n\n⑤忽略由于地球自转而产生的作用于飞行弹丸上的科氏惯性力。\n\n对于飞行稳定性良好的弹丸，在飞行中弹丸轴线和弹丸速度矢量之间只有一个很小的夹角  $\\delta$  。在飞行体中， $\\delta$  被称为攻角；在绕轴旋转体中， $\\delta$  相当于章动角。章动角的存在使气流对弹丸的作用轴不对称，空气阻力作用中心也不通过弹丸质心，将使弹丸在飞行中出现复杂的六自由度运动。但是由于此章动角  $\\delta$  "
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5763e573f6d5b26574ec",
+        "label": "影响",
+        "definition": "空气阻力对弹丸在空气中飞行的主要影响",
+        "domain": [
+          "C_3d1e92e945b2c3dbbd16"
+        ],
+        "range": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "作用于弹丸上的力之一，来自空气的阻力"
+              }
+            ],
+            "description": "作用于弹丸上的力之一，来自空气的阻力",
+            "id": "C_3d1e92e945b2c3dbbd16",
+            "iri": "urn:kg:chapter1:class:caa290950d87fc8aaeb516b0",
+            "label": "空气阻力",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气阻力"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "对弹丸在空气中飞行的主要影响是来自空气的阻力。",
+            "start": 885,
+            "end": 908,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_ad1f81e13ef4",
+            "evidence_id": "def_ev_aab80ed58e5cc0a35d741697",
+            "context_start": 705,
+            "context_end": 1088,
+            "context": " 以下）范围内，可认为重力加速度矢量  $\\pmb{g}$  的量值变化不大，可以把它当成常数而不影响计算精度，国际计量检定中标准重力加速度  $\\pmb{g}$  的值为  $9.80665\\mathrm{m / s^2}$  。在外弹道计算中，假设地表面为平面， $\\pmb{g}$  的方向垂直于地平面。在射程较小的情况下，也可以不考虑科氏惯性力的影响。对弹丸在空气中飞行的主要影响是来自空气的阻力。因此，本节着重介绍与空气阻力有关的大气方面的知识。\n\n# 1.1.1 大气特性\n\n# 1. 空气的状态方程与虚温\n\n空气可近似看成理想气体，因此，其状态方程可用理想气体状态方程来表示\n\n$$\np = \\rho R T \\tag {1-1}\n$$\n\n式中，  $p$  为空气的压力，  $\\mathrm{Pa}$  ；  $\\rho$  为空气的密度，  $\\"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5848ec7e02661adeae06",
+        "label": "描述",
+        "definition": "空气阻力加速度用于描述弹丸运动的微分方程",
+        "domain": [
+          "C_3936ec331d3ad51ff9c3"
+        ],
+        "range": [
+          "C_8b94ab81f853b8f892c6"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "用于便于写出弹丸运动的微分方程而专门阐述的概念"
+              }
+            ],
+            "description": "用于便于写出弹丸运动的微分方程而专门阐述的概念",
+            "id": "C_3936ec331d3ad51ff9c3",
+            "iri": "urn:kg:chapter1:class:67339ede95d5f40d65f21cf7",
+            "label": "空气阻力加速度",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气阻力加速度"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [],
+            "description": "",
+            "id": "C_8b94ab81f853b8f892c6",
+            "iri": "urn:kg:chapter1:class:c78553b3fabc7a28c2e8b7af",
+            "label": "微分方程",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "微分方程"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "为了便于在后面简单地写出弹丸运动的微分方程，本节对空气阻力加速度进行专门的阐述。",
+            "start": 17727,
+            "end": 17767,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_41110ce6aa7d",
+            "evidence_id": "def_ev_c055a06c2e688d528c1748ba",
+            "context_start": 17547,
+            "context_end": 17947,
+            "context": "d></tr><tr><td>19</td><td>美175 mm自行加农炮</td><td>杀伤爆破弹</td><td>941</td><td>66.80</td><td>50°</td><td>32 670</td><td>0.361</td><td>0.788</td></tr></table>\n\n# 1.1.4 空气阻力加速度、弹道系数及阻力函数\n\n为了便于在后面简单地写出弹丸运动的微分方程，本节对空气阻力加速度进行专门的阐述。\n\n# 1. 空气阻力加速度\n\n空气迎面阻力  $R_{x}$  与弹丸质量  $m$  的比值称为空气阻力加速度。空气阻力加速度决定了空气阻力对弹丸运动的影响。阻力加速度矢量  $\\pmb{a}_{x}$  的指向始终与弹丸质心速度矢量  $\\mathbf{v}$  共线反向，实际上它是使弹丸速度减小的量，但习惯上称  $\\pmb{a}_{x}$  为阻力"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_599326d798422a7654ad",
+        "label": "使...减速",
+        "definition": "消耗着弹丸的动能，使弹丸减速",
+        "domain": [
+          "C_2800f3a353c9063a4ccb"
+        ],
+        "range": [
+          "C_85d7c2e6732f8a304f88"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "可近似看成理想气体的介质"
+              }
+            ],
+            "description": "可近似看成理想气体的介质",
+            "id": "C_2800f3a353c9063a4ccb",
+            "iri": "urn:kg:chapter1:class:dd4a875013d7c403c4474d9c",
+            "label": "空气",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用"
+              }
+            ],
+            "description": "在空气中飞行的物体，受到重力、空气阻力和科氏惯性力作用",
+            "id": "C_85d7c2e6732f8a304f88",
+            "iri": "urn:kg:chapter1:class:77d9ce7ad19dfc27f99d614a",
+            "label": "弹丸",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "消耗着弹丸的动能，使弹丸减速",
+            "start": 8717,
+            "end": 8731,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_361829da9756",
+            "evidence_id": "def_ev_3ab46b8d7b10b869d843bc0d",
+            "context_start": 8537,
+            "context_end": 8911,
+            "context": "带动下去，速度渐小，总会有一个不被带动的空气层存在。在此层之外，空气就与弹丸运动无关，好像空气是没有黏性的理想气体一样形成对称的绕流流过。接近弹丸表面，受空气黏性影响\n\n的一层空气实际上是很薄的，这一层通常叫作附面层或边界层。弹丸边界层中空气速度的分布如图1-4（a）所示。由于弹丸飞行过程中表面上的边界层不断形成，沿途的、接近弹丸表面的一薄层空气不断被带动，消耗着弹丸的动能，使弹丸减速。与此相应的阻力，就称为摩擦阻力。\n\n由于弹丸速度很高，它所形成的边界层通常都是混合边界层（图1-4（b)），只在接近弹丸的很小区域内为层流边界层，后面即转化为湍流边界层。由于湍流造成了空气质点的无规律脉动，它所消耗的能量远大于层流边界层，通常估算摩擦阻力时按湍流边界层来考虑较准确。\n\n![image](https://cdn-mineru.openxlab"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5cfeb014dc68c80c2f5c",
+        "label": "得到",
+        "definition": "根据状态方程得到空气密度函数的标准定律和标准分布",
+        "domain": [
+          "C_eaa767de9c851cd73be7"
+        ],
+        "range": [
+          "C_e0f77606c291cca8d429"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "用于得到空气密度函数标准定律和标准分布的方程"
+              }
+            ],
+            "description": "用于得到空气密度函数标准定律和标准分布的方程",
+            "id": "C_eaa767de9c851cd73be7",
+            "iri": "urn:kg:chapter1:class:4bc8bec4b08bd444266944eb",
+            "label": "状态方程",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "状态方程"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "根据状态方程得到的标准定律 H(y)"
+              }
+            ],
+            "description": "根据状态方程得到的标准定律 H(y)",
+            "id": "C_e0f77606c291cca8d429",
+            "iri": "urn:kg:chapter1:class:aa0ffc2b6a3e4cf3c4be2230",
+            "label": "空气密度函数",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "空气密度函数"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$",
+            "start": 7401,
+            "end": 7464,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_9957fb6f7bb7",
+            "evidence_id": "def_ev_ab5f338306b8b9f76a074d06",
+            "context_start": 7221,
+            "context_end": 7644,
+            "context": "ight] \\right\\} \\right. \\tag {1-26}\n$$\n\n当  $y > 12000\\mathrm{m}$  时\n\n$$\n\\begin{array}{r} \\Pi (y) = 0. 1 9 3 7 2 \\exp [ - (y - 1 2 0 0 0) / 6 4 8 3. 3 ] \\\\ (1 - 2 7) \\end{array}\n$$\n\n最后再根据状态方程，即可分别得到空气密度函数的标准定律  $H(y)$  和标准分布  $H_{\\mathrm{s}}(y)$\n\n$$\nH (y) = \\frac {\\rho}{\\rho_ {0 N}} = \\frac {p}{p _ {0 N}} \\frac {\\tau_ {0 N}}{\\tau} = \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} \\tag {1-28}\n$$\n\n$$\nH _ {\\mathrm {s}} (y) = \\frac {\\rho_ "
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5d7591372f1859dc86e0",
+        "label": "引起",
+        "definition": "一个因素导致另一个现象或状态的发生",
+        "domain": [
+          "C_a902e72f8e9d12ecd166"
+        ],
+        "range": [
+          "C_09cdf04291934cb9c598"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "通过改变空气阻力的方向来影响弹道的风"
+              }
+            ],
+            "description": "通过改变空气阻力的方向来影响弹道的风",
+            "id": "C_a902e72f8e9d12ecd166",
+            "iri": "urn:kg:chapter1:class:58cba30533b55f2bbe96f958",
+            "label": "横风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "横风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹道在横向发生的偏移"
+              }
+            ],
+            "description": "弹道在横向发生的偏移",
+            "id": "C_09cdf04291934cb9c598",
+            "iri": "urn:kg:chapter1:class:4fcba3456cf06309d776eaef",
+            "label": "侧偏",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "侧偏"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "可以认为横风除了引起侧偏外，对弹道没有别的影响",
+            "start": 48392,
+            "end": 48415,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_561db3317157",
+            "evidence_id": "def_ev_56f0e55b0f2e05bc45e1a157",
+            "context_start": 48212,
+            "context_end": 48595,
+            "context": "\n\n由方程组（1-95）第一、二式看出，横风是通过  $v_{\\mathrm{r}}$  来影响  $v_{x}$  、  $v_{y}$  及  $x$  、  $y$  的。由于  $W_{z}$  与  $v_{x}$  和  $v_{y}$  相比是很小的量，由式（1-88）知  $W_{z}$  对  $v_{\\mathrm{r}}$  影响甚小。可以认为横风除了引起侧偏外，对弹道没有别的影响，故式（1-99）中的  $X$  和  $T$  可以使用无风条件下的射程和全飞行时间。\n\n式（1-98）中第二项  $x / (v_0\\cos \\theta_0)$  有明显的物理意义。它是当弹丸以不变的水平速度 $v_{0}\\cos \\theta_{0}$  飞行时，飞到  $x$  处所需的时间。显然这个时间比真实的飞行时间要小得多，所以用式（1-9"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5da207e3fa51409de7b9",
+        "label": "投影于",
+        "definition": "矢量方程在坐标系上的投影关系",
+        "domain": [
+          "C_5d265e9d9a9bd7644687"
+        ],
+        "range": [
+          "C_d7f09946ffab58f94585"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "用于分析弹丸运动规律的微分方程组"
+              }
+            ],
+            "description": "用于分析弹丸运动规律的微分方程组",
+            "id": "C_5d265e9d9a9bd7644687",
+            "iri": "urn:kg:chapter1:class:cb97ba565be38e1158e053ed",
+            "label": "弹丸质心运动微分方程组",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "弹丸质心运动微分方程组"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "用于投影矢量方程并建立弹丸质心运动微分方程组的坐标系"
+              }
+            ],
+            "description": "用于投影矢量方程并建立弹丸质心运动微分方程组的坐标系",
+            "id": "C_d7f09946ffab58f94585",
+            "iri": "urn:kg:chapter1:class:952676ce53f2e3ed81942993",
+            "label": "直角坐标系",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "直角坐标系"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "将矢量方程（1-56）在直角坐标上投影（图1-11），即可写出直角坐标系的弹丸质心运动微分方程组。",
+            "start": 23813,
+            "end": 23862,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_42655caefaed",
+            "evidence_id": "def_ev_e5faa93639eeb6c842db22e4",
+            "context_start": 23633,
+            "context_end": 24042,
+            "context": "作用于弹丸质心的只有重力和空气阻力，因而可写出弹丸质心运动的矢量方程\n\n$$\n\\frac {\\mathrm {d} v}{\\mathrm {d} t} = \\boldsymbol {a} _ {x} + \\boldsymbol {g} \\tag {1-56}\n$$\n\n这是以时间  $t$  为自变量的运动方程。\n\n1. 直角坐标系的弹丸质心运动微分方程组\n\n将矢量方程（1-56）在直角坐标上投影（图1-11），即可写出直角坐标系的弹丸质心运动微分方程组。\n\n对  $x$  轴投影，有\n\n$$\n\\frac {\\mathrm {d} v _ {x}}{\\mathrm {d} t} = - a _ {x} \\cos \\theta \\tag {1-57}\n$$\n\n由于\n\n$$\na _ {x} = C H (y) F (v) = C \\Pi (y) \\frac {\\tau_ {0 N}}{\\tau} F (v)\n$$"
+          }
+        ]
+      },
+      {
+        "relation_id": "R_5db05ead52149bdae580",
+        "label": "改变",
+        "definition": "一个因素使另一个因素或对象发生变化",
+        "domain": [
+          "C_02ca97ebf11ae1d3c3ad"
+        ],
+        "range": [
+          "C_5c072ee8bc4ede36b807"
+        ],
+        "domain_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风"
+              }
+            ],
+            "description": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风",
+            "id": "C_02ca97ebf11ae1d3c3ad",
+            "iri": "urn:kg:chapter1:class:ff0676ed29a29545cda3afd9",
+            "label": "纵风",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "纵风"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "range_classes": [
+          {
+            "aliases": [],
+            "definitions": [
+              {
+                "language": "zh",
+                "value": "弹丸飞行的水平距离"
+              }
+            ],
+            "description": "弹丸飞行的水平距离",
+            "id": "C_5c072ee8bc4ede36b807",
+            "iri": "urn:kg:chapter1:class:5262a412adb87f6333d4e778",
+            "label": "射程",
+            "labels": [
+              {
+                "language": "zh",
+                "value": "射程"
+              }
+            ],
+            "parent": null,
+            "parents": []
+          }
+        ],
+        "evidence": [
+          {
+            "quote": "故而可以改变射程。",
+            "start": 45849,
+            "end": 45858,
+            "offset_unit": "unicode_code_point",
+            "source_chunk_id": "chunk_c1cb36e1a624",
+            "evidence_id": "def_ev_e616f01de5564198e4da1fd2",
+            "context_start": 45669,
+            "context_end": 46038,
+            "context": "重合的假设下，空气阻力矢量也与相对速度矢量重合，只是方向相反。这时空气阻力  $R_{x}$  可以分解出一个与绝对速度  $\\pmb{v}$  垂直的分力  $R_{y}$ ，在此分力作用下  $\\pmb{v}$  的方向逐渐向右偏转（当  $W_{z}$  向右时），因而使弹道偏向右方，也就是偏向顺风方向。\n\n纵风既能影响阻力的大小，又能影响阻力的方向，故而可以改变射程。\n\n![image](https://cdn-mineru.openxlab.org.cn/result/2026-01-18/b1e04f23-8ba5-4d07-ba7d-f1684da8d5ba/c8741fa68d3e0f9ddfcaa80b579454f90e5fa56190529320f71cc3d1b7e3cb3b.jpg)\n\n\n\n图1-18 "
+          }
+        ]
+      }
+    ],
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_family": "qwen",
+        "model_identity": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_family": "gemma",
+        "model_identity": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_family": "deepseek",
+        "model_identity": "deepseek-flash"
+      }
+    ],
+    "policy": {
+      "rule": "all_three_independent_families_all_axes_pass_no_issues",
+      "human_labels_used": false,
+      "application": "isolated_research_preexperiment_subset",
+      "classes": "existing_class_hierarchy_preserved_not_fully_semantically_recertified"
+    },
+    "task_id": "definition_batch_7fa76fddf87191b1570de638",
+    "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f"
+  },
+  "votes": [
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e8d0ed136a0fb27d87a56e11"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确说明弹道波消耗弹丸动能，定义准确描述了该因果关系，方向与端点均符合。",
+          "relation_id": "R_52c7e2062efd9858ce95",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_d03f1bcbc70f8b294060bd70"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出基本假设中忽略科氏惯性力，定义准确反映了这一假设条件，方向与端点匹配。",
+          "relation_id": "R_5550f67bcf4a36b3531f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_aab80ed58e5cc0a35d741697"
+          ],
+          "issue_codes": [],
+          "reason": "证据表明空气阻力对弹丸飞行有主要影响，定义准确描述了这一关系，方向与端点正确。",
+          "relation_id": "R_5763e573f6d5b26574ec",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_c055a06c2e688d528c1748ba"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明空气阻力加速度用于描述弹丸运动的微分方程，定义准确，方向与端点符合。",
+          "relation_id": "R_5848ec7e02661adeae06",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_3ab46b8d7b10b869d843bc0d"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出空气消耗弹丸动能使其减速，定义准确描述了这一过程，方向与端点匹配。",
+          "relation_id": "R_599326d798422a7654ad",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ab5f338306b8b9f76a074d06"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明根据状态方程得到空气密度函数的标准定律和分布，定义准确，方向与端点正确。",
+          "relation_id": "R_5cfeb014dc68c80c2f5c",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_56f0e55b0f2e05bc45e1a157"
+          ],
+          "issue_codes": [],
+          "reason": "证据表明横风引起侧偏，定义准确描述了这一因果关系，方向与端点符合。",
+          "relation_id": "R_5d7591372f1859dc86e0",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e5faa93639eeb6c842db22e4"
+          ],
+          "issue_codes": [],
+          "reason": "证据说明矢量方程在直角坐标系上投影得到微分方程组，定义准确，方向与端点匹配。",
+          "relation_id": "R_5da207e3fa51409de7b9",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e616f01de5564198e4da1fd2"
+          ],
+          "issue_codes": [],
+          "reason": "证据指出纵风可以改变射程，定义准确描述了这一影响关系，方向与端点正确。",
+          "relation_id": "R_5db05ead52149bdae580",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_026ffc46bbf84c0ab1755a66947c8f2f",
+      "client_request_id": "attempt_026ffc46bbf84c0ab1755a66947c8f2f",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111620005237521159744385245",
+      "input_tokens": 7850,
+      "late_response": false,
+      "latency_ms": 33172,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 1279,
+      "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f",
+      "provider_started_at": 1794830449.2928345,
+      "queue_time_ms": 358,
+      "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_52c7e2062efd9858ce95\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_e8d0ed136a0fb27d87a56e11\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明弹道波消耗弹丸动能，定义准确描述了该因果关系，方向与端点均符合。\"\n    },\n    {\n      \"relation_id\": \"R_5550f67bcf4a36b3531f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_d03f1bcbc70f8b294060bd70\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出基本假设中忽略科氏惯性力，定义准确反映了这一假设条件，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_5763e573f6d5b26574ec\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_aab80ed58e5cc0a35d741697\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据表明空气阻力对弹丸飞行有主要影响，定义准确描述了这一关系，方向与端点正确。\"\n    },\n    {\n      \"relation_id\": \"R_5848ec7e02661adeae06\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_c055a06c2e688d528c1748ba\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明空气阻力加速度用于描述弹丸运动的微分方程，定义准确，方向与端点符合。\"\n    },\n    {\n      \"relation_id\": \"R_599326d798422a7654ad\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_3ab46b8d7b10b869d843bc0d\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出空气消耗弹丸动能使其减速，定义准确描述了这一过程，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_5cfeb014dc68c80c2f5c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ab5f338306b8b9f76a074d06\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明根据状态方程得到空气密度函数的标准定律和分布，定义准确，方向与端点正确。\"\n    },\n    {\n      \"relation_id\": \"R_5d7591372f1859dc86e0\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_56f0e55b0f2e05bc45e1a157\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据表明横风引起侧偏，定义准确描述了这一因果关系，方向与端点符合。\"\n    },\n    {\n      \"relation_id\": \"R_5da207e3fa51409de7b9\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_e5faa93639eeb6c842db22e4\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明矢量方程在直角坐标系上投影得到微分方程组，定义准确，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_5db05ead52149bdae580\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_e616f01de5564198e4da1fd2\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出纵风可以改变射程，定义准确描述了这一影响关系，方向与端点正确。\"\n    }\n  ]\n}",
+      "reasoning_tokens": null,
+      "request_key": "018c89611518239b1b25e1a356e51784cd04356d063ab9b2dcb5f0087b501edf",
+      "response_id": "chatcmpl-a473f6c4df0db5cb",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "task_id": "definition_batch_7fa76fddf87191b1570de638",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 275732,
+        "body_chunk_count": 1279,
+        "chunk_count": 1281,
+        "client_request_id": "attempt_026ffc46bbf84c0ab1755a66947c8f2f",
+        "first_body_byte_ms": 5365.631,
+        "first_chunk_ms": 5375,
+        "first_content_ms": 5375,
+        "gateway_request_id": "2026111620005237521159744385245",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 110.585,
+        "max_inter_chunk_gap_ms": 110,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 12:00:55 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111620005237521159744385245"
+        },
+        "response_headers_ms": 5365.18,
+        "stream": true,
+        "terminal_ms": 33172,
+        "trace": [
+          {
+            "elapsed_ms": 2197.55,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2270.041,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2270.099,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2344.951,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2345.07,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2345.46,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2345.474,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2345.896,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2345.911,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5362.424,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5365.532,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 33177.162,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 33177.225,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 33177.253,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 33177.462,
+        "visible_chars": 3017
+      },
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e8d0ed136a0fb27d87a56e11"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确说明弹道波消耗弹丸动能，定义准确描述了该因果关系，方向与端点均符合。",
+              "relation_id": "R_52c7e2062efd9858ce95",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_d03f1bcbc70f8b294060bd70"
+              ],
+              "issue_codes": [],
+              "reason": "证据指出基本假设中忽略科氏惯性力，定义准确反映了这一假设条件，方向与端点匹配。",
+              "relation_id": "R_5550f67bcf4a36b3531f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_aab80ed58e5cc0a35d741697"
+              ],
+              "issue_codes": [],
+              "reason": "证据表明空气阻力对弹丸飞行有主要影响，定义准确描述了这一关系，方向与端点正确。",
+              "relation_id": "R_5763e573f6d5b26574ec",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_c055a06c2e688d528c1748ba"
+              ],
+              "issue_codes": [],
+              "reason": "证据说明空气阻力加速度用于描述弹丸运动的微分方程，定义准确，方向与端点符合。",
+              "relation_id": "R_5848ec7e02661adeae06",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_3ab46b8d7b10b869d843bc0d"
+              ],
+              "issue_codes": [],
+              "reason": "证据指出空气消耗弹丸动能使其减速，定义准确描述了这一过程，方向与端点匹配。",
+              "relation_id": "R_599326d798422a7654ad",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ab5f338306b8b9f76a074d06"
+              ],
+              "issue_codes": [],
+              "reason": "证据说明根据状态方程得到空气密度函数的标准定律和分布，定义准确，方向与端点正确。",
+              "relation_id": "R_5cfeb014dc68c80c2f5c",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_56f0e55b0f2e05bc45e1a157"
+              ],
+              "issue_codes": [],
+              "reason": "证据表明横风引起侧偏，定义准确描述了这一因果关系，方向与端点符合。",
+              "relation_id": "R_5d7591372f1859dc86e0",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e5faa93639eeb6c842db22e4"
+              ],
+              "issue_codes": [],
+              "reason": "证据说明矢量方程在直角坐标系上投影得到微分方程组，定义准确，方向与端点匹配。",
+              "relation_id": "R_5da207e3fa51409de7b9",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e616f01de5564198e4da1fd2"
+              ],
+              "issue_codes": [],
+              "reason": "证据指出纵风可以改变射程，定义准确描述了这一影响关系，方向与端点正确。",
+              "relation_id": "R_5db05ead52149bdae580",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_026ffc46bbf84c0ab1755a66947c8f2f",
+          "client_request_id": "attempt_026ffc46bbf84c0ab1755a66947c8f2f",
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111620005237521159744385245",
+          "input_tokens": 7850,
+          "late_response": false,
+          "latency_ms": 33172,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "output_tokens": 1279,
+          "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f",
+          "provider_started_at": 1794830449.2928345,
+          "queue_time_ms": 358,
+          "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_52c7e2062efd9858ce95\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_e8d0ed136a0fb27d87a56e11\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据明确说明弹道波消耗弹丸动能，定义准确描述了该因果关系，方向与端点均符合。\"\n    },\n    {\n      \"relation_id\": \"R_5550f67bcf4a36b3531f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_d03f1bcbc70f8b294060bd70\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出基本假设中忽略科氏惯性力，定义准确反映了这一假设条件，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_5763e573f6d5b26574ec\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_aab80ed58e5cc0a35d741697\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据表明空气阻力对弹丸飞行有主要影响，定义准确描述了这一关系，方向与端点正确。\"\n    },\n    {\n      \"relation_id\": \"R_5848ec7e02661adeae06\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_c055a06c2e688d528c1748ba\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明空气阻力加速度用于描述弹丸运动的微分方程，定义准确，方向与端点符合。\"\n    },\n    {\n      \"relation_id\": \"R_599326d798422a7654ad\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_3ab46b8d7b10b869d843bc0d\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出空气消耗弹丸动能使其减速，定义准确描述了这一过程，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_5cfeb014dc68c80c2f5c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_ab5f338306b8b9f76a074d06\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明根据状态方程得到空气密度函数的标准定律和分布，定义准确，方向与端点正确。\"\n    },\n    {\n      \"relation_id\": \"R_5d7591372f1859dc86e0\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_56f0e55b0f2e05bc45e1a157\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据表明横风引起侧偏，定义准确描述了这一因果关系，方向与端点符合。\"\n    },\n    {\n      \"relation_id\": \"R_5da207e3fa51409de7b9\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_e5faa93639eeb6c842db22e4\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据说明矢量方程在直角坐标系上投影得到微分方程组，定义准确，方向与端点匹配。\"\n    },\n    {\n      \"relation_id\": \"R_5db05ead52149bdae580\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\"def_ev_e616f01de5564198e4da1fd2\"],\n      \"issue_codes\": [],\n      \"reason\": \"证据指出纵风可以改变射程，定义准确描述了这一影响关系，方向与端点正确。\"\n    }\n  ]\n}",
+          "reasoning_tokens": null,
+          "request_key": "018c89611518239b1b25e1a356e51784cd04356d063ab9b2dcb5f0087b501edf",
+          "response_id": "chatcmpl-a473f6c4df0db5cb",
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "task_id": "definition_batch_7fa76fddf87191b1570de638",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 275732,
+            "body_chunk_count": 1279,
+            "chunk_count": 1281,
+            "client_request_id": "attempt_026ffc46bbf84c0ab1755a66947c8f2f",
+            "first_body_byte_ms": 5365.631,
+            "first_chunk_ms": 5375,
+            "first_content_ms": 5375,
+            "gateway_request_id": "2026111620005237521159744385245",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 110.585,
+            "max_inter_chunk_gap_ms": 110,
+            "reasoning_chars": 0,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Mon, 16 Nov 2026 12:00:55 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111620005237521159744385245"
+            },
+            "response_headers_ms": 5365.18,
+            "stream": true,
+            "terminal_ms": 33172,
+            "trace": [
+              {
+                "elapsed_ms": 2197.55,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2270.041,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2270.099,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2344.951,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2345.07,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2345.46,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2345.474,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2345.896,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2345.911,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 5362.424,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 5365.532,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 33177.162,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 33177.225,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 33177.253,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 33177.462,
+            "visible_chars": 3017
+          },
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e8d0ed136a0fb27d87a56e11"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出弹道波消耗弹丸的动能，定义与方向一致。",
+          "relation_id": "R_52c7e2062efd9858ce95",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_d03f1bcbc70f8b294060bd70"
+          ],
+          "issue_codes": [],
+          "reason": "原文在基本假设部分明确提到忽略科氏惯性力，定义与方向一致。",
+          "relation_id": "R_5550f67bcf4a36b3531f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_aab80ed58e5cc0a35d741697"
+          ],
+          "issue_codes": [],
+          "reason": "原文指出对弹丸飞行的主要影响是空气阻力，定义与方向一致。",
+          "relation_id": "R_5763e573f6d5b26574ec",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_c055a06c2e688d528c1748ba"
+          ],
+          "issue_codes": [],
+          "reason": "原文提到对空气阻力加速度的阐述是为了便于写出微分方程，定义与方向一致。",
+          "relation_id": "R_5848ec7e02661adeae06",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_3ab46b8d7b10b869d843bc0d"
+          ],
+          "issue_codes": [],
+          "reason": "原文指出薄层空气消耗动能使弹丸减速，定义与方向一致。",
+          "relation_id": "R_599326d798422a7654ad",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ab5f338306b8b9f76a074d06"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出根据状态方程得到空气密度函数的标准定律和分布，定义与方向一致。",
+          "relation_id": "R_5cfeb014dc68c80c2f5c",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_56f0e55b0f2e05bc45e1a157"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出横风引起侧偏，定义与方向一致。",
+          "relation_id": "R_5d7591372f1859dc86e0",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "fail",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_e5faa93639eeb6c842db22e4"
+          ],
+          "issue_codes": [
+            "direction_mismatch"
+          ],
+          "reason": "原文是将“矢量方程”投影于“直角坐标系”从而写出“微分方程组”。此处Domain被设为结果（微分方程组）而非被投影的对象（矢量方程），方向错误。",
+          "relation_id": "R_5da207e3fa51409de7b9",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e616f01de5564198e4da1fd2"
+          ],
+          "issue_codes": [],
+          "reason": "原文明确指出纵风可以改变射程，定义与方向一致。",
+          "relation_id": "R_5db05ead52149bdae580",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_410bcf41aa6348dc84208d819e5b4a9b",
+      "client_request_id": "attempt_410bcf41aa6348dc84208d819e5b4a9b",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111620005239759990155775589",
+      "input_tokens": 8201,
+      "late_response": false,
+      "latency_ms": 120672,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "output_tokens": 3998,
+      "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f",
+      "provider_started_at": 1794830449.3107798,
+      "queue_time_ms": 376,
+      "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_52c7e2062efd9858ce95\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_e8d0ed136a0fb27d87a56e11\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出弹道波消耗弹丸的动能，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5550f67bcf4a36b3531f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_d03f1bcbc70f8b294060bd70\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文在基本假设部分明确提到忽略科氏惯性力，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5763e573f6d5b26574ec\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_aab80ed58e5cc0a35d741697\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文指出对弹丸飞行的主要影响是空气阻力，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5848ec7e02661adeae06\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_c055a06c2e688d528c1748ba\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文提到对空气阻力加速度的阐述是为了便于写出微分方程，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_599326d798422a7654ad\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_3ab46b8d7b10b869d843bc0d\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文指出薄层空气消耗动能使弹丸减速，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5cfeb014dc68c80c2f5c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_ab5f338306b8b9f76a074d06\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出根据状态方程得到空气密度函数的标准定律和分布，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5d7591372f1859dc86e0\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_56f0e55b0f2e05bc45e1a157\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出横风引起侧偏，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5da207e3fa51409de7b9\",\n      \"definition_fidelity\": \"revise\",\n      \"direction\": \"fail\",\n      \"endpoint_signature\": \"fail\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_e5faa93639eeb6c842db22e4\"\n      ],\n      \"issue_codes\": [\n        \"direction_mismatch\"\n      ],\n      \"reason\": \"原文是将“矢量方程”投影于“直角坐标系”从而写出“微分方程组”。此处Domain被设为结果（微分方程组）而非被投影的对象（矢量方程），方向错误。\"\n    },\n    {\n      \"relation_id\": \"R_5db05ead52149bdae580\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_e616f01de5564198e4da1fd2\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出纵风可以改变射程，定义与方向一致。\"\n    }\n  ]\n}",
+      "reasoning_tokens": 2614,
+      "request_key": "c240cb30f5dd7d59a99912c93c5f30b0232f5e2657512b33435c1cf202480157",
+      "response_id": "chatcmpl-915ca42b3e4e590e",
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "task_id": "definition_batch_7fa76fddf87191b1570de638",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 799208,
+        "body_chunk_count": 3670,
+        "chunk_count": 3672,
+        "client_request_id": "attempt_410bcf41aa6348dc84208d819e5b4a9b",
+        "first_body_byte_ms": 5130.799,
+        "first_chunk_ms": 5140,
+        "first_content_ms": 80406,
+        "gateway_request_id": "2026111620005239759990155775589",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 123.716,
+        "max_inter_chunk_gap_ms": 125,
+        "reasoning_chars": 0,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Mon, 16 Nov 2026 12:00:55 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111620005239759990155775589"
+        },
+        "response_headers_ms": 5130.41,
+        "stream": true,
+        "terminal_ms": 120672,
+        "trace": [
+          {
+            "elapsed_ms": 2192.009,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2267.891,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2267.958,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2343.903,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2344.062,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2344.664,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2344.684,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2345.108,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2345.137,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 5128.014,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 5130.71,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 120674.105,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 120674.19,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 120674.235,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 120674.424,
+        "visible_chars": 3158
+      },
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e8d0ed136a0fb27d87a56e11"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确指出弹道波消耗弹丸的动能，定义与方向一致。",
+              "relation_id": "R_52c7e2062efd9858ce95",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_d03f1bcbc70f8b294060bd70"
+              ],
+              "issue_codes": [],
+              "reason": "原文在基本假设部分明确提到忽略科氏惯性力，定义与方向一致。",
+              "relation_id": "R_5550f67bcf4a36b3531f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_aab80ed58e5cc0a35d741697"
+              ],
+              "issue_codes": [],
+              "reason": "原文指出对弹丸飞行的主要影响是空气阻力，定义与方向一致。",
+              "relation_id": "R_5763e573f6d5b26574ec",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_c055a06c2e688d528c1748ba"
+              ],
+              "issue_codes": [],
+              "reason": "原文提到对空气阻力加速度的阐述是为了便于写出微分方程，定义与方向一致。",
+              "relation_id": "R_5848ec7e02661adeae06",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_3ab46b8d7b10b869d843bc0d"
+              ],
+              "issue_codes": [],
+              "reason": "原文指出薄层空气消耗动能使弹丸减速，定义与方向一致。",
+              "relation_id": "R_599326d798422a7654ad",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ab5f338306b8b9f76a074d06"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确指出根据状态方程得到空气密度函数的标准定律和分布，定义与方向一致。",
+              "relation_id": "R_5cfeb014dc68c80c2f5c",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_56f0e55b0f2e05bc45e1a157"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确指出横风引起侧偏，定义与方向一致。",
+              "relation_id": "R_5d7591372f1859dc86e0",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "fail",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_e5faa93639eeb6c842db22e4"
+              ],
+              "issue_codes": [
+                "direction_mismatch"
+              ],
+              "reason": "原文是将“矢量方程”投影于“直角坐标系”从而写出“微分方程组”。此处Domain被设为结果（微分方程组）而非被投影的对象（矢量方程），方向错误。",
+              "relation_id": "R_5da207e3fa51409de7b9",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e616f01de5564198e4da1fd2"
+              ],
+              "issue_codes": [],
+              "reason": "原文明确指出纵风可以改变射程，定义与方向一致。",
+              "relation_id": "R_5db05ead52149bdae580",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_410bcf41aa6348dc84208d819e5b4a9b",
+          "client_request_id": "attempt_410bcf41aa6348dc84208d819e5b4a9b",
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111620005239759990155775589",
+          "input_tokens": 8201,
+          "late_response": false,
+          "latency_ms": 120672,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "output_tokens": 3998,
+          "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f",
+          "provider_started_at": 1794830449.3107798,
+          "queue_time_ms": 376,
+          "raw_response": "{\n  \"assessments\": [\n    {\n      \"relation_id\": \"R_52c7e2062efd9858ce95\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_e8d0ed136a0fb27d87a56e11\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出弹道波消耗弹丸的动能，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5550f67bcf4a36b3531f\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_d03f1bcbc70f8b294060bd70\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文在基本假设部分明确提到忽略科氏惯性力，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5763e573f6d5b26574ec\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_aab80ed58e5cc0a35d741697\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文指出对弹丸飞行的主要影响是空气阻力，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5848ec7e02661adeae06\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_c055a06c2e688d528c1748ba\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文提到对空气阻力加速度的阐述是为了便于写出微分方程，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_599326d798422a7654ad\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_3ab46b8d7b10b869d843bc0d\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文指出薄层空气消耗动能使弹丸减速，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5cfeb014dc68c80c2f5c\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_ab5f338306b8b9f76a074d06\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出根据状态方程得到空气密度函数的标准定律和分布，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5d7591372f1859dc86e0\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_56f0e55b0f2e05bc45e1a157\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出横风引起侧偏，定义与方向一致。\"\n    },\n    {\n      \"relation_id\": \"R_5da207e3fa51409de7b9\",\n      \"definition_fidelity\": \"revise\",\n      \"direction\": \"fail\",\n      \"endpoint_signature\": \"fail\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_e5faa93639eeb6c842db22e4\"\n      ],\n      \"issue_codes\": [\n        \"direction_mismatch\"\n      ],\n      \"reason\": \"原文是将“矢量方程”投影于“直角坐标系”从而写出“微分方程组”。此处Domain被设为结果（微分方程组）而非被投影的对象（矢量方程），方向错误。\"\n    },\n    {\n      \"relation_id\": \"R_5db05ead52149bdae580\",\n      \"definition_fidelity\": \"pass\",\n      \"direction\": \"pass\",\n      \"endpoint_signature\": \"pass\",\n      \"task_scope\": \"in_scope\",\n      \"evidence_ids\": [\n        \"def_ev_e616f01de5564198e4da1fd2\"\n      ],\n      \"issue_codes\": [],\n      \"reason\": \"原文明确指出纵风可以改变射程，定义与方向一致。\"\n    }\n  ]\n}",
+          "reasoning_tokens": 2614,
+          "request_key": "c240cb30f5dd7d59a99912c93c5f30b0232f5e2657512b33435c1cf202480157",
+          "response_id": "chatcmpl-915ca42b3e4e590e",
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "task_id": "definition_batch_7fa76fddf87191b1570de638",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 799208,
+            "body_chunk_count": 3670,
+            "chunk_count": 3672,
+            "client_request_id": "attempt_410bcf41aa6348dc84208d819e5b4a9b",
+            "first_body_byte_ms": 5130.799,
+            "first_chunk_ms": 5140,
+            "first_content_ms": 80406,
+            "gateway_request_id": "2026111620005239759990155775589",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 123.716,
+            "max_inter_chunk_gap_ms": 125,
+            "reasoning_chars": 0,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Mon, 16 Nov 2026 12:00:55 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111620005239759990155775589"
+            },
+            "response_headers_ms": 5130.41,
+            "stream": true,
+            "terminal_ms": 120672,
+            "trace": [
+              {
+                "elapsed_ms": 2192.009,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2267.891,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2267.958,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2343.903,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2344.062,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2344.664,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2344.684,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2345.108,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2345.137,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 5128.014,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 5130.71,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 120674.105,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 120674.19,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 120674.235,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 120674.424,
+            "visible_chars": 3158
+          },
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "assessments": [
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_e8d0ed136a0fb27d87a56e11"
+          ],
+          "issue_codes": [
+            "overgeneralized_definition",
+            "endpoint_mismatch"
+          ],
+          "reason": "证据仅说明弹道波消耗弹丸动能，定义泛化为“某一现象导致能量或资源减少”，且域类为弹道波而非泛指现象，端点签名不符。",
+          "relation_id": "R_52c7e2062efd9858ce95",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_d03f1bcbc70f8b294060bd70"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确基本假设中忽略科氏惯性力，域为基本假设、范围为科氏惯性力，方向与端点一致。",
+          "relation_id": "R_5550f67bcf4a36b3531f",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_aab80ed58e5cc0a35d741697"
+          ],
+          "issue_codes": [
+            "definition_mismatch"
+          ],
+          "reason": "原文说空气阻力是影响弹丸飞行的主要因素，定义写成“空气阻力对弹丸的主要影响”，主客关系颠倒，语义不精确。",
+          "relation_id": "R_5763e573f6d5b26574ec",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_c055a06c2e688d528c1748ba"
+          ],
+          "issue_codes": [
+            "definition_mismatch"
+          ],
+          "reason": "原文是为便于写出微分方程而专门阐述空气阻力加速度，定义写成“用于描述弹丸运动的微分方程”，表述不准确但方向可接受。",
+          "relation_id": "R_5848ec7e02661adeae06",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "revise",
+          "direction": "pass",
+          "endpoint_signature": "fail",
+          "evidence_ids": [
+            "def_ev_3ab46b8d7b10b869d843bc0d"
+          ],
+          "issue_codes": [
+            "endpoint_mismatch",
+            "definition_mismatch"
+          ],
+          "reason": "证据中消耗动能、使弹丸减速的是边界层空气，而非“空气”整体；域类空气与原文实际主体不符，定义亦泛化。",
+          "relation_id": "R_599326d798422a7654ad",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_ab5f338306b8b9f76a074d06"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确根据状态方程得到空气密度函数标准定律和标准分布，域为状态方程、范围为空气密度函数，方向与端点一致。",
+          "relation_id": "R_5cfeb014dc68c80c2f5c",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_56f0e55b0f2e05bc45e1a157"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确横风引起侧偏，域为横风、范围为侧偏，方向与端点一致。",
+          "relation_id": "R_5d7591372f1859dc86e0",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e5faa93639eeb6c842db22e4"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确将矢量方程在直角坐标上投影以写出质心运动微分方程组，域为方程组、范围为直角坐标系，方向与端点一致。",
+          "relation_id": "R_5da207e3fa51409de7b9",
+          "task_scope": "in_scope"
+        },
+        {
+          "definition_fidelity": "pass",
+          "direction": "pass",
+          "endpoint_signature": "pass",
+          "evidence_ids": [
+            "def_ev_e616f01de5564198e4da1fd2"
+          ],
+          "issue_codes": [],
+          "reason": "证据明确纵风既能影响阻力大小又能影响阻力方向，从而改变射程，域为纵风、范围为射程，方向与端点一致。",
+          "relation_id": "R_5db05ead52149bdae580",
+          "task_scope": "in_scope"
+        }
+      ],
+      "attempt_id": "attempt_62f1783981db4a8a9e353a88d95ba56d",
+      "client_request_id": "attempt_62f1783981db4a8a9e353a88d95ba56d",
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 7182,
+      "late_response": false,
+      "latency_ms": 6812,
+      "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 1004,
+      "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f",
+      "provider_started_at": 1794830449.3000631,
+      "queue_time_ms": 358,
+      "raw_response": "{\"assessments\":[{\"relation_id\":\"R_52c7e2062efd9858ce95\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_e8d0ed136a0fb27d87a56e11\"],\"issue_codes\":[\"overgeneralized_definition\",\"endpoint_mismatch\"],\"reason\":\"证据仅说明弹道波消耗弹丸动能，定义泛化为“某一现象导致能量或资源减少”，且域类为弹道波而非泛指现象，端点签名不符。\"},{\"relation_id\":\"R_5550f67bcf4a36b3531f\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_d03f1bcbc70f8b294060bd70\"],\"issue_codes\":[],\"reason\":\"证据明确基本假设中忽略科氏惯性力，域为基本假设、范围为科氏惯性力，方向与端点一致。\"},{\"relation_id\":\"R_5763e573f6d5b26574ec\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_aab80ed58e5cc0a35d741697\"],\"issue_codes\":[\"definition_mismatch\"],\"reason\":\"原文说空气阻力是影响弹丸飞行的主要因素，定义写成“空气阻力对弹丸的主要影响”，主客关系颠倒，语义不精确。\"},{\"relation_id\":\"R_5848ec7e02661adeae06\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_c055a06c2e688d528c1748ba\"],\"issue_codes\":[\"definition_mismatch\"],\"reason\":\"原文是为便于写出微分方程而专门阐述空气阻力加速度，定义写成“用于描述弹丸运动的微分方程”，表述不准确但方向可接受。\"},{\"relation_id\":\"R_599326d798422a7654ad\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_3ab46b8d7b10b869d843bc0d\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_mismatch\"],\"reason\":\"证据中消耗动能、使弹丸减速的是边界层空气，而非“空气”整体；域类空气与原文实际主体不符，定义亦泛化。\"},{\"relation_id\":\"R_5cfeb014dc68c80c2f5c\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ab5f338306b8b9f76a074d06\"],\"issue_codes\":[],\"reason\":\"证据明确根据状态方程得到空气密度函数标准定律和标准分布，域为状态方程、范围为空气密度函数，方向与端点一致。\"},{\"relation_id\":\"R_5d7591372f1859dc86e0\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_56f0e55b0f2e05bc45e1a157\"],\"issue_codes\":[],\"reason\":\"证据明确横风引起侧偏，域为横风、范围为侧偏，方向与端点一致。\"},{\"relation_id\":\"R_5da207e3fa51409de7b9\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_e5faa93639eeb6c842db22e4\"],\"issue_codes\":[],\"reason\":\"证据明确将矢量方程在直角坐标上投影以写出质心运动微分方程组，域为方程组、范围为直角坐标系，方向与端点一致。\"},{\"relation_id\":\"R_5db05ead52149bdae580\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_e616f01de5564198e4da1fd2\"],\"issue_codes\":[],\"reason\":\"证据明确纵风既能影响阻力大小又能影响阻力方向，从而改变射程，域为纵风、范围为射程，方向与端点一致。\"}]}",
+      "reasoning_tokens": null,
+      "request_key": "54dd8cf4a8d5ace60f3dae66302ff8217cbf0499f92626344de93be4f798cdad",
+      "response_id": "072936ab-d9db-46a2-a1c1-33072129ad35",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "definition_batch_7fa76fddf87191b1570de638",
+      "task_type": "ontology_definition_audit_v1",
+      "transport_metrics": {
+        "body_bytes_received": 1725,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_62f1783981db4a8a9e353a88d95ba56d",
+        "first_body_byte_ms": 6802.885,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Mon, 16 Nov 2026 12:00:52 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 2513.954,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 2187.091,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2277.646,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2277.713,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2327.198,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2327.358,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2327.981,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2328.003,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2328.452,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2328.472,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2511.533,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2514.196,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 6803.11,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 6803.175,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 6803.204,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 6813.626
+      },
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "assessments": [
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_e8d0ed136a0fb27d87a56e11"
+              ],
+              "issue_codes": [
+                "overgeneralized_definition",
+                "endpoint_mismatch"
+              ],
+              "reason": "证据仅说明弹道波消耗弹丸动能，定义泛化为“某一现象导致能量或资源减少”，且域类为弹道波而非泛指现象，端点签名不符。",
+              "relation_id": "R_52c7e2062efd9858ce95",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_d03f1bcbc70f8b294060bd70"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确基本假设中忽略科氏惯性力，域为基本假设、范围为科氏惯性力，方向与端点一致。",
+              "relation_id": "R_5550f67bcf4a36b3531f",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_aab80ed58e5cc0a35d741697"
+              ],
+              "issue_codes": [
+                "definition_mismatch"
+              ],
+              "reason": "原文说空气阻力是影响弹丸飞行的主要因素，定义写成“空气阻力对弹丸的主要影响”，主客关系颠倒，语义不精确。",
+              "relation_id": "R_5763e573f6d5b26574ec",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_c055a06c2e688d528c1748ba"
+              ],
+              "issue_codes": [
+                "definition_mismatch"
+              ],
+              "reason": "原文是为便于写出微分方程而专门阐述空气阻力加速度，定义写成“用于描述弹丸运动的微分方程”，表述不准确但方向可接受。",
+              "relation_id": "R_5848ec7e02661adeae06",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "revise",
+              "direction": "pass",
+              "endpoint_signature": "fail",
+              "evidence_ids": [
+                "def_ev_3ab46b8d7b10b869d843bc0d"
+              ],
+              "issue_codes": [
+                "endpoint_mismatch",
+                "definition_mismatch"
+              ],
+              "reason": "证据中消耗动能、使弹丸减速的是边界层空气，而非“空气”整体；域类空气与原文实际主体不符，定义亦泛化。",
+              "relation_id": "R_599326d798422a7654ad",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_ab5f338306b8b9f76a074d06"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确根据状态方程得到空气密度函数标准定律和标准分布，域为状态方程、范围为空气密度函数，方向与端点一致。",
+              "relation_id": "R_5cfeb014dc68c80c2f5c",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_56f0e55b0f2e05bc45e1a157"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确横风引起侧偏，域为横风、范围为侧偏，方向与端点一致。",
+              "relation_id": "R_5d7591372f1859dc86e0",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e5faa93639eeb6c842db22e4"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确将矢量方程在直角坐标上投影以写出质心运动微分方程组，域为方程组、范围为直角坐标系，方向与端点一致。",
+              "relation_id": "R_5da207e3fa51409de7b9",
+              "task_scope": "in_scope"
+            },
+            {
+              "definition_fidelity": "pass",
+              "direction": "pass",
+              "endpoint_signature": "pass",
+              "evidence_ids": [
+                "def_ev_e616f01de5564198e4da1fd2"
+              ],
+              "issue_codes": [],
+              "reason": "证据明确纵风既能影响阻力大小又能影响阻力方向，从而改变射程，域为纵风、范围为射程，方向与端点一致。",
+              "relation_id": "R_5db05ead52149bdae580",
+              "task_scope": "in_scope"
+            }
+          ],
+          "attempt_id": "attempt_62f1783981db4a8a9e353a88d95ba56d",
+          "client_request_id": "attempt_62f1783981db4a8a9e353a88d95ba56d",
+          "finish_reason": "stop",
+          "gateway_request_id": null,
+          "input_tokens": 7182,
+          "late_response": false,
+          "latency_ms": 6812,
+          "materials_hash": "8649fb2dfeb511db6c5f946b32aed7d7cf697387072178f591ba83e9c0c45b3e",
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "output_tokens": 1004,
+          "proposal_digest": "bbc628dac932de6ae5caa0abe75dbb06992aa67122468318803d4526c5e2924f",
+          "provider_started_at": 1794830449.3000631,
+          "queue_time_ms": 358,
+          "raw_response": "{\"assessments\":[{\"relation_id\":\"R_52c7e2062efd9858ce95\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_e8d0ed136a0fb27d87a56e11\"],\"issue_codes\":[\"overgeneralized_definition\",\"endpoint_mismatch\"],\"reason\":\"证据仅说明弹道波消耗弹丸动能，定义泛化为“某一现象导致能量或资源减少”，且域类为弹道波而非泛指现象，端点签名不符。\"},{\"relation_id\":\"R_5550f67bcf4a36b3531f\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_d03f1bcbc70f8b294060bd70\"],\"issue_codes\":[],\"reason\":\"证据明确基本假设中忽略科氏惯性力，域为基本假设、范围为科氏惯性力，方向与端点一致。\"},{\"relation_id\":\"R_5763e573f6d5b26574ec\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_aab80ed58e5cc0a35d741697\"],\"issue_codes\":[\"definition_mismatch\"],\"reason\":\"原文说空气阻力是影响弹丸飞行的主要因素，定义写成“空气阻力对弹丸的主要影响”，主客关系颠倒，语义不精确。\"},{\"relation_id\":\"R_5848ec7e02661adeae06\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_c055a06c2e688d528c1748ba\"],\"issue_codes\":[\"definition_mismatch\"],\"reason\":\"原文是为便于写出微分方程而专门阐述空气阻力加速度，定义写成“用于描述弹丸运动的微分方程”，表述不准确但方向可接受。\"},{\"relation_id\":\"R_599326d798422a7654ad\",\"definition_fidelity\":\"revise\",\"direction\":\"pass\",\"endpoint_signature\":\"fail\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_3ab46b8d7b10b869d843bc0d\"],\"issue_codes\":[\"endpoint_mismatch\",\"definition_mismatch\"],\"reason\":\"证据中消耗动能、使弹丸减速的是边界层空气，而非“空气”整体；域类空气与原文实际主体不符，定义亦泛化。\"},{\"relation_id\":\"R_5cfeb014dc68c80c2f5c\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_ab5f338306b8b9f76a074d06\"],\"issue_codes\":[],\"reason\":\"证据明确根据状态方程得到空气密度函数标准定律和标准分布，域为状态方程、范围为空气密度函数，方向与端点一致。\"},{\"relation_id\":\"R_5d7591372f1859dc86e0\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_56f0e55b0f2e05bc45e1a157\"],\"issue_codes\":[],\"reason\":\"证据明确横风引起侧偏，域为横风、范围为侧偏，方向与端点一致。\"},{\"relation_id\":\"R_5da207e3fa51409de7b9\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_e5faa93639eeb6c842db22e4\"],\"issue_codes\":[],\"reason\":\"证据明确将矢量方程在直角坐标上投影以写出质心运动微分方程组，域为方程组、范围为直角坐标系，方向与端点一致。\"},{\"relation_id\":\"R_5db05ead52149bdae580\",\"definition_fidelity\":\"pass\",\"direction\":\"pass\",\"endpoint_signature\":\"pass\",\"task_scope\":\"in_scope\",\"evidence_ids\":[\"def_ev_e616f01de5564198e4da1fd2\"],\"issue_codes\":[],\"reason\":\"证据明确纵风既能影响阻力大小又能影响阻力方向，从而改变射程，域为纵风、范围为射程，方向与端点一致。\"}]}",
+          "reasoning_tokens": null,
+          "request_key": "54dd8cf4a8d5ace60f3dae66302ff8217cbf0499f92626344de93be4f798cdad",
+          "response_id": "072936ab-d9db-46a2-a1c1-33072129ad35",
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "task_id": "definition_batch_7fa76fddf87191b1570de638",
+          "task_type": "ontology_definition_audit_v1",
+          "transport_metrics": {
+            "body_bytes_received": 1725,
+            "body_chunk_count": 1,
+            "client_request_id": "attempt_62f1783981db4a8a9e353a88d95ba56d",
+            "first_body_byte_ms": 6802.885,
+            "gateway_request_id": null,
+            "http_status": 200,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-encoding": "gzip",
+              "content-type": "application/json",
+              "date": "Mon, 16 Nov 2026 12:00:52 GMT",
+              "server": "openresty",
+              "transfer-encoding": "chunked"
+            },
+            "response_headers_ms": 2513.954,
+            "stream": false,
+            "trace": [
+              {
+                "elapsed_ms": 2187.091,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 2277.646,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 2277.713,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 2327.198,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 2327.358,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 2327.981,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 2328.003,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 2328.452,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 2328.472,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 2511.533,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 2514.196,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 6803.11,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 6803.175,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 6803.204,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 6813.626
+          },
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "budget": {
+    "usage": {
+      "llm_calls": 12,
+      "tool_calls": 0,
+      "planner_steps": 0,
+      "validation_rounds": 0,
+      "input_tokens": 96097,
+      "output_tokens": 24004,
+      "unknown_token_requests": 0
+    },
+    "deadline_epoch": 1794832636.9032378,
+    "remaining_seconds": 2066.5469999999623,
+    "remaining_llm_calls": 36,
+    "max_planner_steps": 4,
+    "max_validation_rounds": 1,
+    "case_ids": [
+      "case_b3dd8ae6e241afa29d2e9dfa8e805deb"
+    ],
+    "case_call_reservations": [
+      "1825b2e0c2494002b929778b9bacfa3a",
+      "fefffb9fbfc241478a0a49168c675307",
+      "0bb3c4d414284529a77e21639a9f39f7"
+    ],
+    "stage_usage": {
+      "preprocessing": {
+        "llm_calls": 9,
+        "tool_calls": 0
+      }
+    },
+    "shared_cost_policy": "full_cost_charged_to_each_subscribed_case",
+    "case_accounts": [
+      {
+        "case_id": "case_b3dd8ae6e241afa29d2e9dfa8e805deb",
+        "limits": {
+          "extension_requests": 1,
+          "llm_calls": 66,
+          "rebinds": 2,
+          "tokens": 780000,
+          "tool_calls": 40
+        },
+        "usage": {
+          "extension_requests": 0,
+          "llm_calls": 28,
+          "rebinds": 0,
+          "tokens": 316654,
+          "tool_calls": 3
+        }
+      }
+    ]
+  }
+}

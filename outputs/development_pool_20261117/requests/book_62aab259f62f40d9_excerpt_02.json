@@ -1,0 +1,218 @@
+{
+  "attempt_id": "attempt_c5f8c891f2fc4c688200e96f5fcc400d",
+  "client_request_id": "attempt_c5f8c891f2fc4c688200e96f5fcc400d",
+  "counts_as_human_label": false,
+  "counts_as_review_vote": false,
+  "finish_reason": "stop",
+  "gateway_request_id": null,
+  "input_tokens": 6597,
+  "late_response": false,
+  "latency_ms": 8750,
+  "model_family": "deepseek",
+  "model_id": "deepseek-flash",
+  "model_identity": "deepseek-flash",
+  "object_revision": 1,
+  "output_tokens": 1555,
+  "proposal_digest": "dc54ffbfa39dcc593ec57c94ce7faa3f5ad5ba2ff813e52889a904edf8178c5c",
+  "provider_started_at": 1794904705.588113,
+  "queue_time_ms": 319,
+  "raw_response": "{\"triplets\":[{\"head\":\"哈密顿算子\",\"surface_relation\":\"是\",\"tail\":\"∂/∂x i + ∂/∂y j + ∂/∂z k\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"$\\\\nabla$  ——哈密顿算子，  $\\\\nabla = \\\\frac{\\\\partial}{\\\\partial x}\\\\pmb {i} + \\\\frac{\\\\partial}{\\\\partial y}\\\\pmb {j} + \\\\frac{\\\\partial}{\\\\partial z}\\\\pmb{k}_{\\\\circ}$\"],\"head_type_candidate\":\"数学算子\",\"tail_type_candidate\":\"数学表达式\",\"tail_kind\":\"literal\",\"value\":null,\"datatype\":null,\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"哈密顿算子\",\"canonical_entity\":\"哈密顿算子\",\"referent_scope\":\"局部符号定义\"},\"tail\":{\"entity_surface\":\"∂/∂x i + ∂/∂y j + ∂/∂z k\",\"canonical_entity\":null,\"referent_scope\":\"局部符号定义\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文以破折号引出哈密顿算子的定义式，属于局部符号定义，不是一般实体属性。\"},\"qualifier_attachments\":[],\"knowledge_scope\":\"local_definition\"}},{\"head\":\"定常流动\",\"surface_relation\":\"满足\",\"tail\":\"∂ρ/∂t = 0\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"对于定常流动\",\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"对于定常流动，  $\\\\frac{\\\\partial\\\\rho}{\\\\partial t} = 0$  ，连续方程为：\"],\"head_type_candidate\":\"流动状态\",\"tail_type_candidate\":\"数学条件\",\"tail_kind\":\"proposition\",\"value\":null,\"datatype\":null,\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"定常流动\",\"canonical_entity\":\"定常流动\",\"referent_scope\":\"条件限定下的流动类型\"},\"tail\":{\"entity_surface\":\"∂ρ/∂t = 0\",\"canonical_entity\":null,\"referent_scope\":\"定常流动条件下的密度时间偏导条件\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文陈述定常流动条件下密度不随时间变化，属于条件性命题，不是实体间一般关系。\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"对于定常流动\",\"scope_id\":\"p2_cond\"}],\"knowledge_scope\":\"conditional\"}},{\"head\":\"不可压缩流体\",\"surface_relation\":\"各处密度均相等\",\"tail\":\"密度\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"对于不可压缩流体\",\"time_scope\":\"不随时间变化\",\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":\"各处\"},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"extracted\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"extracted\"},\"evidence_quotes\":[\"对于不可压缩流体，各处密度均相等，且不随时间变化，即  $\\\\rho =$  常数，则连续方程为：\"],\"head_type_candidate\":\"流体类型\",\"tail_type_candidate\":\"物理量\",\"tail_kind\":\"entity\",\"value\":null,\"datatype\":null,\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"不可压缩流体\",\"canonical_entity\":\"不可压缩流体\",\"referent_scope\":\"条件限定下的流体类型\"},\"tail\":{\"entity_surface\":\"密度\",\"canonical_entity\":\"密度\",\"referent_scope\":\"不可压缩流体的密度\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文陈述不可压缩流体各处密度相等且不随时间变化，属于条件性描述，不是定义等价。\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"对于不可压缩流体\",\"scope_id\":\"p3_cond\"},{\"qualifier_kind\":\"quantity\",\"attachment\":\"relation\",\"value\":\"各处\",\"scope_id\":\"p3_quant\"},{\"qualifier_kind\":\"time\",\"attachment\":\"relation\",\"value\":\"不随时间变化\",\"scope_id\":\"p3_time\"}],\"knowledge_scope\":\"conditional\"}},{\"head\":\"不可压缩流体\",\"surface_relation\":\"密度为\",\"tail\":\"常数\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"对于不可压缩流体\",\"time_scope\":\"不随时间变化\",\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":\"各处\"},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"extracted\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"extracted\"},\"evidence_quotes\":[\"对于不可压缩流体，各处密度均相等，且不随时间变化，即  $\\\\rho =$  常数，则连续方程为：\"],\"head_type_candidate\":\"流体类型\",\"tail_type_candidate\":\"物理量取值\",\"tail_kind\":\"literal\",\"value\":\"常数\",\"datatype\":\"qualitative\",\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"不可压缩流体\",\"canonical_entity\":\"不可压缩流体\",\"referent_scope\":\"条件限定下的流体类型\"},\"tail\":{\"entity_surface\":\"常数\",\"canonical_entity\":null,\"referent_scope\":\"不可压缩流体密度的取值性质\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文以“即 ρ = 常数”概括不可压缩流体的密度性质，属于条件性描述。\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"对于不可压缩流体\",\"scope_id\":\"p3_cond\"},{\"qualifier_kind\":\"quantity\",\"attachment\":\"relation\",\"value\":\"各处\",\"scope_id\":\"p3_quant\"},{\"qualifier_kind\":\"time\",\"attachment\":\"relation\",\"value\":\"不随时间变化\",\"scope_id\":\"p3_time\"}],\"knowledge_scope\":\"conditional\"}}],\"coverage_status\":\"complete_for_supplied_scope\"}",
+  "reasoning_tokens": null,
+  "request_key": "257a54ee2c8f251d17eec75592b7bd05b95e6f5fbb46f19128fe7ab65e4b81c2",
+  "response_id": "d02cc073-da3f-475e-9355-d6f7d92d21ef",
+  "response_status": "ok",
+  "returned_model_id": "deepseek-flash",
+  "task_id": "development_pool_20261117_v1:book_62aab259f62f40d9_excerpt_02",
+  "task_type": "source_candidate_extraction_v1",
+  "transport_metrics": {
+    "body_bytes_received": 2072,
+    "body_chunk_count": 1,
+    "client_request_id": "attempt_c5f8c891f2fc4c688200e96f5fcc400d",
+    "first_body_byte_ms": 8720.107,
+    "gateway_request_id": null,
+    "http_status": 200,
+    "request_body_bytes": 23149,
+    "response_headers": {
+      "connection": "keep-alive",
+      "content-encoding": "gzip",
+      "content-type": "application/json",
+      "date": "Tue, 17 Nov 2026 08:38:27 GMT",
+      "server": "openresty",
+      "transfer-encoding": "chunked"
+    },
+    "response_headers_ms": 2781.984,
+    "stream": false,
+    "trace": [
+      {
+        "elapsed_ms": 2041.934,
+        "event": "connection.connect_tcp.started"
+      },
+      {
+        "elapsed_ms": 2084.114,
+        "event": "connection.connect_tcp.complete"
+      },
+      {
+        "elapsed_ms": 2084.184,
+        "event": "connection.start_tls.started"
+      },
+      {
+        "elapsed_ms": 2139.346,
+        "event": "connection.start_tls.complete"
+      },
+      {
+        "elapsed_ms": 2139.461,
+        "event": "http11.send_request_headers.started"
+      },
+      {
+        "elapsed_ms": 2139.788,
+        "event": "http11.send_request_headers.complete"
+      },
+      {
+        "elapsed_ms": 2139.798,
+        "event": "http11.send_request_body.started"
+      },
+      {
+        "elapsed_ms": 2140.135,
+        "event": "http11.send_request_body.complete"
+      },
+      {
+        "elapsed_ms": 2140.146,
+        "event": "http11.receive_response_headers.started"
+      },
+      {
+        "elapsed_ms": 2780.064,
+        "event": "http11.receive_response_headers.complete"
+      },
+      {
+        "elapsed_ms": 2782.102,
+        "event": "http11.receive_response_body.started"
+      },
+      {
+        "elapsed_ms": 8747.184,
+        "event": "http11.receive_response_body.complete"
+      },
+      {
+        "elapsed_ms": 8747.268,
+        "event": "http11.response_closed.started"
+      },
+      {
+        "elapsed_ms": 8747.292,
+        "event": "http11.response_closed.complete"
+      }
+    ],
+    "transport_elapsed_ms": 8755.057
+  },
+  "validation_errors": [],
+  "voter_id": "extractor",
+  "attempts": [
+    {
+      "attempt_id": "attempt_c5f8c891f2fc4c688200e96f5fcc400d",
+      "client_request_id": "attempt_c5f8c891f2fc4c688200e96f5fcc400d",
+      "counts_as_human_label": false,
+      "counts_as_review_vote": false,
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 6597,
+      "late_response": false,
+      "latency_ms": 8750,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "output_tokens": 1555,
+      "proposal_digest": "dc54ffbfa39dcc593ec57c94ce7faa3f5ad5ba2ff813e52889a904edf8178c5c",
+      "provider_started_at": 1794904705.588113,
+      "queue_time_ms": 319,
+      "raw_response": "{\"triplets\":[{\"head\":\"哈密顿算子\",\"surface_relation\":\"是\",\"tail\":\"∂/∂x i + ∂/∂y j + ∂/∂z k\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":null,\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"not_stated\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"$\\\\nabla$  ——哈密顿算子，  $\\\\nabla = \\\\frac{\\\\partial}{\\\\partial x}\\\\pmb {i} + \\\\frac{\\\\partial}{\\\\partial y}\\\\pmb {j} + \\\\frac{\\\\partial}{\\\\partial z}\\\\pmb{k}_{\\\\circ}$\"],\"head_type_candidate\":\"数学算子\",\"tail_type_candidate\":\"数学表达式\",\"tail_kind\":\"literal\",\"value\":null,\"datatype\":null,\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"哈密顿算子\",\"canonical_entity\":\"哈密顿算子\",\"referent_scope\":\"局部符号定义\"},\"tail\":{\"entity_surface\":\"∂/∂x i + ∂/∂y j + ∂/∂z k\",\"canonical_entity\":null,\"referent_scope\":\"局部符号定义\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文以破折号引出哈密顿算子的定义式，属于局部符号定义，不是一般实体属性。\"},\"qualifier_attachments\":[],\"knowledge_scope\":\"local_definition\"}},{\"head\":\"定常流动\",\"surface_relation\":\"满足\",\"tail\":\"∂ρ/∂t = 0\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"对于定常流动\",\"time_scope\":null,\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":null},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"not_stated\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"not_stated\"},\"evidence_quotes\":[\"对于定常流动，  $\\\\frac{\\\\partial\\\\rho}{\\\\partial t} = 0$  ，连续方程为：\"],\"head_type_candidate\":\"流动状态\",\"tail_type_candidate\":\"数学条件\",\"tail_kind\":\"proposition\",\"value\":null,\"datatype\":null,\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"定常流动\",\"canonical_entity\":\"定常流动\",\"referent_scope\":\"条件限定下的流动类型\"},\"tail\":{\"entity_surface\":\"∂ρ/∂t = 0\",\"canonical_entity\":null,\"referent_scope\":\"定常流动条件下的密度时间偏导条件\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文陈述定常流动条件下密度不随时间变化，属于条件性命题，不是实体间一般关系。\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"对于定常流动\",\"scope_id\":\"p2_cond\"}],\"knowledge_scope\":\"conditional\"}},{\"head\":\"不可压缩流体\",\"surface_relation\":\"各处密度均相等\",\"tail\":\"密度\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"对于不可压缩流体\",\"time_scope\":\"不随时间变化\",\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":\"各处\"},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"extracted\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"extracted\"},\"evidence_quotes\":[\"对于不可压缩流体，各处密度均相等，且不随时间变化，即  $\\\\rho =$  常数，则连续方程为：\"],\"head_type_candidate\":\"流体类型\",\"tail_type_candidate\":\"物理量\",\"tail_kind\":\"entity\",\"value\":null,\"datatype\":null,\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"不可压缩流体\",\"canonical_entity\":\"不可压缩流体\",\"referent_scope\":\"条件限定下的流体类型\"},\"tail\":{\"entity_surface\":\"密度\",\"canonical_entity\":\"密度\",\"referent_scope\":\"不可压缩流体的密度\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文陈述不可压缩流体各处密度相等且不随时间变化，属于条件性描述，不是定义等价。\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"对于不可压缩流体\",\"scope_id\":\"p3_cond\"},{\"qualifier_kind\":\"quantity\",\"attachment\":\"relation\",\"value\":\"各处\",\"scope_id\":\"p3_quant\"},{\"qualifier_kind\":\"time\",\"attachment\":\"relation\",\"value\":\"不随时间变化\",\"scope_id\":\"p3_time\"}],\"knowledge_scope\":\"conditional\"}},{\"head\":\"不可压缩流体\",\"surface_relation\":\"密度为\",\"tail\":\"常数\",\"qualifiers\":{\"polarity\":\"positive\",\"condition\":\"对于不可压缩流体\",\"time_scope\":\"不随时间变化\",\"applicability\":null,\"modality\":\"asserted\",\"quantifier\":\"各处\"},\"qualifier_status\":{\"polarity\":\"extracted\",\"condition\":\"extracted\",\"time_scope\":\"extracted\",\"applicability\":\"not_stated\",\"modality\":\"extracted\",\"quantifier\":\"extracted\"},\"evidence_quotes\":[\"对于不可压缩流体，各处密度均相等，且不随时间变化，即  $\\\\rho =$  常数，则连续方程为：\"],\"head_type_candidate\":\"流体类型\",\"tail_type_candidate\":\"物理量取值\",\"tail_kind\":\"literal\",\"value\":\"常数\",\"datatype\":\"qualitative\",\"unit\":null,\"language\":\"zh\",\"relation_id_candidate\":null,\"schema_hint\":\"needs_full_schema_lookup\",\"semantic_context\":{\"entity_mentions\":{\"head\":{\"entity_surface\":\"不可压缩流体\",\"canonical_entity\":\"不可压缩流体\",\"referent_scope\":\"条件限定下的流体类型\"},\"tail\":{\"entity_surface\":\"常数\",\"canonical_entity\":null,\"referent_scope\":\"不可压缩流体密度的取值性质\"}},\"relation_meaning\":{\"semantic_equivalence\":\"needs_review\",\"note\":\"原文以“即 ρ = 常数”概括不可压缩流体的密度性质，属于条件性描述。\"},\"qualifier_attachments\":[{\"qualifier_kind\":\"condition\",\"attachment\":\"relation\",\"value\":\"对于不可压缩流体\",\"scope_id\":\"p3_cond\"},{\"qualifier_kind\":\"quantity\",\"attachment\":\"relation\",\"value\":\"各处\",\"scope_id\":\"p3_quant\"},{\"qualifier_kind\":\"time\",\"attachment\":\"relation\",\"value\":\"不随时间变化\",\"scope_id\":\"p3_time\"}],\"knowledge_scope\":\"conditional\"}}],\"coverage_status\":\"complete_for_supplied_scope\"}",
+      "reasoning_tokens": null,
+      "request_key": "257a54ee2c8f251d17eec75592b7bd05b95e6f5fbb46f19128fe7ab65e4b81c2",
+      "response_id": "d02cc073-da3f-475e-9355-d6f7d92d21ef",
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "task_id": "development_pool_20261117_v1:book_62aab259f62f40d9_excerpt_02",
+      "task_type": "source_candidate_extraction_v1",
+      "transport_metrics": {
+        "body_bytes_received": 2072,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_c5f8c891f2fc4c688200e96f5fcc400d",
+        "first_body_byte_ms": 8720.107,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "request_body_bytes": 23149,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Tue, 17 Nov 2026 08:38:27 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 2781.984,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 2041.934,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2084.114,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2084.184,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2139.346,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2139.461,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2139.788,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2139.798,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2140.135,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2140.146,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2780.064,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2782.102,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 8747.184,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 8747.268,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 8747.292,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 8755.057
+      },
+      "validation_errors": [],
+      "voter_id": "extractor",
+      "attempt_no": 1
+    }
+  ],
+  "actual_calls": 1
+}

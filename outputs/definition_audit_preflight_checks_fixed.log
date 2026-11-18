@@ -1,0 +1,44 @@
+test_anchor_exists_but_semantic_error_quarantines (tests.test_definition_audit.DefinitionAuditTests) ... FAIL
+test_complete_independent_committee (tests.test_definition_audit.DefinitionAuditTests) ... FAIL
+test_cross_item_citation_and_duplicate_rejected (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_no_evidence_or_scope_pass (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_tampered_packet_never_sent (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_unknown_or_missing_never_approves (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_wrong_binding_or_family_collision_blocks (tests.test_definition_audit.DefinitionAuditTests) ... ok
+test_exporter_annotation_helper_preserves_property_definition (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_round_trip_preserves_source_definition_and_formal_identity (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_long_rationale_is_projected_without_changing_fields_or_resending (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_proposal_does_not_mutate_candidate_and_approval_requires_new_version (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_unknown_request_remains_fenced_and_is_reported_without_resend (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_504_without_provider_id_keeps_client_correlation_and_unknown (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_revision_review_preserves_gateway_metadata_and_rejects_truncation (tests.test_review_completion.RequestCorrelationTests) ... ok
+
+======================================================================
+FAIL: test_anchor_exists_but_semantic_error_quarantines (tests.test_definition_audit.DefinitionAuditTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 31, in test_anchor_exists_but_semantic_error_quarantines
+    self.assertEqual(['quarantined','machine_approved'],[r['status'] for r in result])
+AssertionError: Lists differ: ['quarantined', 'machine_approved'] != ['quarantined', 'quarantined']
+
+First differing element 1:
+'machine_approved'
+'quarantined'
+
+- ['quarantined', 'machine_approved']
++ ['quarantined', 'quarantined']
+
+======================================================================
+FAIL: test_complete_independent_committee (tests.test_definition_audit.DefinitionAuditTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_definition_audit.py", line 25, in test_complete_independent_committee
+    self.assertTrue(all(r['status']=='machine_approved' and not r['human_confirmed'] for r in rows))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 16 tests in 14.934s
+
+FAILED (failures=2)

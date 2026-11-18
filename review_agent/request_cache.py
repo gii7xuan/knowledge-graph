@@ -23,6 +23,8 @@ def validation_request_key(voter, proposal, *, legacy_generation=False):
         "committee_version", "committee_policy_hash", "committee_members", "candidate_review_hash", "ontology_check_hash", "evidence_bundle_hash", "memory_snapshot_id", "memory_bundle_hash", "memory_scope_hash", "memory_policy_hash", "agent_versions")}
     if not legacy_generation and proposal.get('validator_generation') is not None:
         frozen['validator_generation']=proposal['validator_generation']
+    if 'response_projection_policy' in proposal:
+        frozen.update({k:proposal[k] for k in ('response_projection_policy','response_projection_policy_hash','response_projection_policy_version')})
     if proposal.get('response_contract_version') in {'validator_response_v6','validator_response_v6_1','validator_response_v6_2','validator_response_v6_3','validator_response_v7','validator_response_v8'}:
         frozen.update({k:proposal.get(k) for k in ('summary_policy_version','summary_policy_hash')})
     wire_format='json_object'

@@ -197,7 +197,7 @@ class FourAxisIntegrationTests(unittest.TestCase):
         self.fixture=integration_fixtures.OntologyExtensionTests(methodName='runTest');self.fixture.setUp()
         self.addCleanup(self.fixture.doCleanups)
 
-    def run_case(self, semantic=False, scope='general', frequency=False, missing=False, invalid_planner=False, mapping_preflight=False, model_mapping='unassigned', missing_mapping_definition=False, version=v7.CONTRACT_VERSION, dispute_review=False, opinion_override=None):
+    def run_case(self, semantic=False, scope='general', frequency=False, missing=False, invalid_planner=False, mapping_preflight=False, model_mapping='unassigned', missing_mapping_definition=False, version=v7.CONTRACT_VERSION, dispute_review=False, opinion_override=None, weighting=None, assigned_mapping=False):
         f=self.fixture;c=copy.deepcopy(f.candidate);c['candidate_id']+='_four'
         if missing_mapping_definition:
             from ontologyBuild.release_catalog import ReleaseCatalog
@@ -219,6 +219,11 @@ class FourAxisIntegrationTests(unittest.TestCase):
             triple=copy.deepcopy(c['triple']);triple['qualifiers']['applicability']='often';triple['qualifier_status']['applicability']='extracted'
             c=normalize_candidate({**triple,'evidence_quotes':[source_quote]},index=f.index,scope=source_scope(f.index,f.index['chunks'][0]),
                 ontology=f.base.ontology,release_binding=f.base.binding(),run_id='frequency',ordinal=0,prompt_hash='fixture')
+        if assigned_mapping:
+            from schema.fact_identity import relation_semantic_hash
+            c['triple'].update(relation_id='R_old',head_type='C',tail_type='C',mapping_status='matched',
+                relation_semantic_hash=relation_semantic_hash(f.base.ontology,'R_old'))
+            c['fact_key_state']='canonical'
         c['fact_key']=fact_key_for(c);f.repo.add_candidate(c)
         def respond(payload):
             eid=next(e['evidence_id'] for e in payload['evidence'] if source_quote in e['quote'])
@@ -244,12 +249,14 @@ class FourAxisIntegrationTests(unittest.TestCase):
             response={'dimensions':dims,'expression_findings':findings,'evidence_assessments':[{'evidence_id':eid,'role':'support','note':'MOCK source'}],
                     'primary_evidence_ids':[] if semantic else [eid],'counterevidence_reviewed_ids':[],'requested_context':None,'suggested_revision':None}
             return opinion_override(payload,response) if opinion_override else response
-        voters=[{'id':n,'model_id':n,'model_family':n,'client':MockLLMClient(respond,model_id=n,model_family=n)} for n in 'abc']
+        voters=[{'id':n,'model_id':n,'model_family':n,'client':MockLLMClient(
+            lambda payload, seat=n: respond({**payload,'fixture_voter_id':seat}),model_id=n,model_family=n)} for n in 'abc']
         if missing:voters[1]['client']=MockLLMClient([RuntimeError('MOCK service unavailable')],model_id='b',model_family='b')
         config={**f.config,'validator_contract_version':version,'planner':{'enabled':False,'strategy':'deterministic'},
                 'ontology_extension':{'enabled':False},'consensus':{**f.config['consensus'],'max_rounds':1}}
         if mapping_preflight: config['mapping_preflight']={'enabled':True}
         if dispute_review:config['dispute_review']={'enabled':True}
+        if weighting:config['vote_weighting']=weighting
         planner=None
         if invalid_planner:
             config['planner']={'enabled':True,'strategy':'llm_react','fallback':'manual','max_invalid_steps':1}

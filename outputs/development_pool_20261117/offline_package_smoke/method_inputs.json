@@ -1,0 +1,1906 @@
+[
+  {
+    "candidate_id": "cand_4cff87c3b5c14e78706b",
+    "revision": 1,
+    "candidate_review_hash": "47218dd3d3e590c9f1464d6a7e97c38c289a40e1e81ce2625a619923b030ea42",
+    "ontology_check_hash": "b3255856148597dae83fdceeff900c0d7a02d4b39726221dc95458e383e5d1ab",
+    "admission_policy_hash": "bc2afb0d45eb980e56ae964215f4fd7bdd97037aa0a4c7985120bbe80be870f4",
+    "canonical_triple": {
+      "head": "流体",
+      "head_entity_id": "local_784cb10e9a6d3dfd16571f19f7a144c17675d6b1f7d67b5fdb4befc678257811",
+      "relation_id": "",
+      "tail": "研究对象",
+      "tail_kind": "entity",
+      "tail_entity_id": "local_5829c5036d7b60b160bcfcc153ee53a5d3b668c3be350e800535db9822947a44",
+      "datatype": null,
+      "value": null,
+      "unit": null,
+      "language": null,
+      "qualifiers": {
+        "polarity": "positive",
+        "condition": null,
+        "time_scope": null,
+        "applicability": null,
+        "modality": "asserted",
+        "quantifier": null
+      },
+      "qualifier_status": {
+        "polarity": "extracted",
+        "condition": "unknown",
+        "time_scope": "unknown",
+        "applicability": "unknown",
+        "modality": "extracted",
+        "quantifier": "unknown"
+      }
+    },
+    "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+    "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+    "contract_version": "extraction_candidate_v4",
+    "source_index_hash": "30f8d65c1e7f0ca071e0350ffb8a1cff50179073643007bd4138ac1329990caf",
+    "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+    "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+    "evidence_bundle_hash": "240f106308e6dfc0425efe21ebb4b20a8b021b956e7a03674594deae94298ee4",
+    "prompt_version": "triple_validator_v8_consistency_v6",
+    "prompt_hash": "0476f98f97e0c2c14f0426d85c6c41ea5cfb7b25a104defeab5cbde1c2c6885c",
+    "response_contract_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+    "response_contract_version": "validator_response_v8",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "rubric_version": "triple_review_rubric_v1",
+    "committee_version": "committee_qwen_gemma_deepseek_v1",
+    "committee_policy_hash": "bf53f4df8894bd9c312594ae0404e72a43ffa5b278bbd8fe746d6ec82750b0bc",
+    "committee_policy": {
+      "committee_size": 3,
+      "required_votes": 3,
+      "minimum_distinct_families": 3,
+      "vote_weighting": {
+        "mode": "dynamic",
+        "version": "axis_weighting_v1",
+        "feature_version": "check_completion_v1",
+        "thresholds": {
+          "source": 0.7,
+          "expression": 0.7,
+          "mapping": 0.7,
+          "scope": 0.7
+        },
+        "min_available_mass": 0.65,
+        "min_opinions": 2,
+        "min_families": 2,
+        "max_seat_weight": 0.49,
+        "adaptation_floor": 0.25,
+        "prior": 0.5,
+        "prior_strength": 4.0,
+        "min_history_samples": 8,
+        "reliability": {
+          "data_version": "cold_start",
+          "partition": "development",
+          "models": {}
+        }
+      }
+    },
+    "committee_members": [
+      {
+        "id": "judge_a",
+        "model_id": "Qwen",
+        "model_identity": "qwen",
+        "model_family": "qwen"
+      },
+      {
+        "id": "judge_b",
+        "model_id": "Gemma",
+        "model_identity": "gemma",
+        "model_family": "gemma"
+      },
+      {
+        "id": "judge_c",
+        "model_id": "deepseek-flash",
+        "model_identity": "deepseek-flash",
+        "model_family": "deepseek"
+      }
+    ],
+    "validator_generation": [
+      {
+        "voter_id": "judge_a",
+        "max_output_tokens": 8192,
+        "output_transport": {
+          "protocol": "chat_completions",
+          "base_url": "https://43.143.151.41:3000/v1",
+          "model": "Qwen",
+          "stream_responses": true,
+          "thinking_mode": null,
+          "version": "typed_review_output_v1",
+          "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+          "mode": "json_schema",
+          "schema_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+          "template_hash": null,
+          "capability_record_hash": "cfd567b4fee9d013ee7d0090692bae6479abbcabccfbfdf4e7d3f038b9edd720",
+          "verification": "strict_schema_observed"
+        }
+      },
+      {
+        "voter_id": "judge_b",
+        "max_output_tokens": 8192,
+        "output_transport": {
+          "protocol": "chat_completions",
+          "base_url": "https://43.143.151.41:3000/v1",
+          "model": "Gemma",
+          "stream_responses": true,
+          "thinking_mode": null,
+          "version": "typed_review_output_v1",
+          "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+          "mode": "json_template",
+          "schema_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+          "template_hash": "e39c73a520bc3bb746c148669fb7bdbedc9090a252bf5a4f380f72bf3b879e9b",
+          "capability_record_hash": null,
+          "verification": "capability_not_verified"
+        }
+      },
+      {
+        "voter_id": "judge_c",
+        "max_output_tokens": 8192,
+        "output_transport": {
+          "protocol": "chat_completions",
+          "base_url": "https://api.deepseek.com",
+          "model": "deepseek-flash",
+          "stream_responses": false,
+          "thinking_mode": "disabled",
+          "version": "typed_review_output_v1",
+          "policy_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+          "mode": "json_template",
+          "schema_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+          "template_hash": "e39c73a520bc3bb746c148669fb7bdbedc9090a252bf5a4f380f72bf3b879e9b",
+          "capability_record_hash": null,
+          "verification": "capability_not_verified"
+        }
+      }
+    ],
+    "memory_snapshot_id": 0,
+    "memory_bundle_hash": null,
+    "round_id": 1,
+    "memory_scope_hash": null,
+    "memory_policy_hash": null,
+    "summary_policy_version": "review_field_rules_v1",
+    "summary_policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+    "correction_policy": {
+      "version": "targeted_review_repairs_v2",
+      "prompt_hash": "0b83d570354c1fdbb59418227354e11c25b7f37bcafac50c9a33806e1b932679",
+      "limits": {
+        "max_corrections_per_seat": 1,
+        "max_calls_per_candidate_version": 3,
+        "max_input_bytes": 16000,
+        "max_output_tokens": 1536,
+        "max_reserved_tokens_per_candidate_version": 54000,
+        "timeout_seconds": 60,
+        "max_initial_attempts_per_seat": 2
+      },
+      "mode": "field_patches_only",
+      "existing_judgments": "immutable",
+      "valid_evidence_and_counter_roles": "immutable",
+      "unparseable_or_semantic_conflict": "manual_review",
+      "partial_ontology_cannot_confirm_gap": true,
+      "semantic_clarification": {
+        "version": "review_contradiction_clarification_v3",
+        "prompt_hash": "e098fb9084fba363d02768d7486482f007f23770a5d9ad023f68514c1220228b",
+        "schema_hash": "31f1c80a8815e1cc9df1312da2feda5ec68b181fd0ae39668021f9b8f3ce9c83",
+        "mode": "explanation_only",
+        "admission_authorized": false
+      }
+    },
+    "correction_policy_version": "targeted_review_repairs_v2",
+    "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e",
+    "ontology_context_policy": {
+      "version": "review_ontology_context_v1",
+      "limits": {
+        "top_k_properties": 8,
+        "max_properties": 24,
+        "max_classes": 64,
+        "max_chars": 32000
+      },
+      "selection": "exact_alias_then_lexical_and_types",
+      "required_matches": "complete_or_stop",
+      "absence_from_subset": "not_proof_of_gap"
+    },
+    "ontology_context_policy_version": "review_ontology_context_v1",
+    "ontology_context_policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+    "mapping_preflight_policy": {
+      "version": "mapping_preflight_v1",
+      "search_order": [
+        "review_subset",
+        "full_bound_release_and_aliases"
+      ],
+      "automatic_assignment": false,
+      "absence_from_recall_is_gap_proof": false,
+      "entity_identity": "document_local_with_explicit_types_and_source",
+      "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema."
+    },
+    "mapping_preflight_policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+    "field_spec": {
+      "version": "review_fields_v1",
+      "scope": "审核字段口径与派生规范化表达；原始候选与正式映射分别保留",
+      "fields": {
+        "frequency": "命题成立的频率，如常常、总是；保留原词、强度、条件和语义附着，不等同于数量或适用条件。",
+        "quantifier": "对象数量或量化范围，如至少三个、所有；分别表示对象之间的对应，不是数量。",
+        "applicability": "命题适用的对象、环境或范围；频率不写在此字段。",
+        "condition": "命题成立所需条件；迁移和去重不得删除或扩大条件范围。",
+        "modality": "结合完整语境判断断言、假设、能力、可能性和必要性；定义或等价表示中的可不能仅按单字判为can。",
+        "surface_relation": "关系表达本身；独立频率放入frequency，正式本体关系另行核验。",
+        "correspondence": "原文明确的对象配对；拆分前逐条核对，禁止按顺序猜测配对或生成笛卡尔积。"
+      },
+      "rules": [
+        {
+          "id": "PAIR-001",
+          "title": "对应关系与数量分开",
+          "checks": [
+            "qualifiers",
+            "entity_reference"
+          ],
+          "automatic": false,
+          "rule": "分别、respectively表示对应。先明确原文的对象与配对，必要时拆分；每条新事实均需独立原文支持，不凭词语出现直接推断配对。"
+        },
+        {
+          "id": "FREQ-001",
+          "title": "频率与适用范围分开",
+          "checks": [
+            "qualifiers"
+          ],
+          "automatic": true,
+          "rule": "旧applicability或quantifier中独立、完整的频率词可以原样迁入派生frequency。仅执行程序提供的有锚点计划，保留强度、条件与附着；混合短语、冲突频率和不明附着需语义审核。"
+        },
+        {
+          "id": "DUP-001",
+          "title": "重复频率只保留一份",
+          "checks": [
+            "qualifiers",
+            "relation_semantics"
+          ],
+          "automatic": true,
+          "rule": "仅清除surface_relation边界上与独立frequency完全相同且有原文锚点的重复词。频率仍独立保存，关系不得变空，不能用近义改写或改变条件。"
+        },
+        {
+          "id": "MOD-001",
+          "title": "结合语境判断模态",
+          "checks": [
+            "qualifiers",
+            "relation_semantics"
+          ],
+          "automatic": false,
+          "rule": "结合完整句子、公式及上下文区分定义、等价表示与能力或可能性。可表示为不自动等于can，也不自动改成asserted；材料不足则请求上下文。"
+        },
+        {
+          "id": "SPLIT-001",
+          "title": "复合实体拆分逐条举证",
+          "checks": [
+            "entity_reference",
+            "relation_semantics"
+          ],
+          "automatic": false,
+          "rule": "拆分前检查每条新事实及原配对、联合、集合语义。包含组成集合不等于包含各成员；不将集合关系自动分配到每个成员。"
+        },
+        {
+          "id": "MEANING-001",
+          "title": "实质语义修改重新审核",
+          "checks": [
+            "entity_reference",
+            "relation_semantics",
+            "relation_direction",
+            "qualifiers"
+          ],
+          "automatic": false,
+          "rule": "关系替换、指称变更、方向或极性修改、条件增删和限定强度改变都需要新版本及证据审核。字段位置本身不构成事实矛盾；必须说明丢失或改变的含义。"
+        }
+      ],
+      "deterministic_frequency_tokens": [
+        "常常",
+        "经常",
+        "通常",
+        "总是",
+        "始终",
+        "有时",
+        "偶尔",
+        "often",
+        "usually",
+        "always",
+        "sometimes",
+        "occasionally"
+      ],
+      "normalization_policy": "确定性结果是候选版本绑定的派生表达，不覆盖原始候选、不自动准入；模型仍核验来源、限定附着与完整语义。"
+    },
+    "field_spec_version": "review_fields_v1",
+    "field_spec_hash": "b6748addab4a5b37af8a6166eabc6e5b49b233ccbd77e0eb2eb4af50967393bd",
+    "response_consistency_policy": {
+      "version": "original_candidate_response_consistency_v2",
+      "evidence_role_target": "exact_original_candidate_full_expression",
+      "expression_checks": [
+        "entity_reference",
+        "relation_semantics",
+        "relation_direction",
+        "qualifiers"
+      ],
+      "rules": [
+        "Assign support/counter/context/irrelevant relative to the ORIGINAL candidate, including its exact surface predicate, not a corrected candidate or a true sentence considered alone.",
+        "A positive source statement may contradict the original candidate. If triple_support=contradicted, at least one actual evidence_assessment must have role=counter. Do not label that evidence support merely because it proves a proposed correction.",
+        "primary_evidence_ids contains only role=support IDs and never counter IDs. It may be empty when the original candidate is contradicted; a correction needs a separate reviewed revision.",
+        "dimensions.counterevidence.evidence_ids cites material inspected for contradiction. counterevidence_reviewed_ids instead records dismissed potential counterexamples; it never includes unresolved role=counter IDs.",
+        "Actual unresolved role=counter evidence requires counterevidence=fail/unknown, never pass. Without an actual contradiction use insufficient/unknown where appropriate; do not fabricate counterevidence for consistency.",
+        "expression_findings.check uses ONLY expression_checks. Mapping findings belong in dimensions.mapping; do not add mapping/ontology/counterevidence as expression finding checks.",
+        "Complete every required mapping field: status, relation_id, competing_relation_ids, evidence_ids and note. A known ID and compatible types alone do not establish equivalence of the exact surface predicate to that property.",
+        "Check consistency of the independently reached statuses, roles and findings BEFORE sending. Do not alter substantive judgments merely to pass validation. Return no additional top-level fields and no admission decision.",
+        "Construct dimensions.mapping as ONE nested object with relation_id and competing_relation_ids inside it; those keys are never siblings of mapping.",
+        "For each expression check, independently decide its status and findings as one unit: unresolved findings require that same dimension status=unknown; semantic_error findings require status=fail. A pass cannot coexist with an unresolved or semantic_error finding for that check.",
+        "If modality remains genuinely uncertain after reading the sentence and formula, keep the qualifier check unknown and a matching unresolved MOD-001 finding. Never automatically replace can with asserted or clear the finding to achieve a pass.",
+        "Before sending, build the actual counter-role set. If it is nonempty, counterevidence.status cannot be pass; retain fail/unknown according to the evidence. A completed search is not a no-contradiction judgment."
+      ]
+    },
+    "response_consistency_policy_hash": "37f0f61be5bd8d2e49f903172afbe1892e2010685e5e604e6c5182b656fa3e20",
+    "response_consistency_binding_version": "response_consistency_digest_v1",
+    "response_projection_policy": {
+      "version": "mapping_field_shape_projection_v1",
+      "moves": [
+        {
+          "from": "/dimensions/relation_id",
+          "to": "/dimensions/mapping/relation_id"
+        },
+        {
+          "from": "/dimensions/competing_relation_ids",
+          "to": "/dimensions/mapping/competing_relation_ids"
+        }
+      ],
+      "target_must_be_absent": true,
+      "values_types_and_judgments": "unchanged",
+      "unknown_fields": "reject",
+      "semantic_conflicts": "retain_invalid",
+      "raw_response": "immutable",
+      "automatic_model_calls": 0
+    },
+    "response_projection_policy_hash": "6f9cbccb80f5a5e7210a6691fe5d1a4e1cff7e4a838639a8685fa2babaf5d497",
+    "response_projection_policy_version": "mapping_field_shape_projection_v1",
+    "dispute_policy": {
+      "version": "claim_disputes_v1",
+      "adjudication": "no_majority_override",
+      "max_rechecks_per_dispute": 1,
+      "scope": "one_frozen_claim_question",
+      "counter_role": "seek possible falsification, never mandatory opposition",
+      "counter_absence_is_positive_support": false,
+      "scoped_review_is_admission": false,
+      "model_rule": "Address each frozen claim target in the corresponding dimension, citing exact source evidence. Explain the specific expression, issue and effect on meaning; use expression_findings for field rules. Search for possible falsification without being required to oppose. No counterevidence found is not positive support. Preserve both observations independently. Do not settle a semantic disagreement by majority."
+    },
+    "dispute_policy_hash": "69d952653b5cfc0edbe5e93b9dd7bfd7ebcfdc8e9458719c4eb0c4e5561080c8",
+    "review_scope_policy": {
+      "version": "knowledge_scope_v2",
+      "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+      "decision_authority": "program",
+      "excluded_scopes": [
+        "local_definition",
+        "derivation",
+        "example"
+      ],
+      "unresolved_action": "scope_review",
+      "categories": {
+        "general": {
+          "label": "一般知识",
+          "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+        },
+        "conditional": {
+          "label": "条件性知识",
+          "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+        },
+        "local_definition": {
+          "label": "局部定义或符号约定",
+          "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+        },
+        "derivation": {
+          "label": "推导步骤",
+          "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+        },
+        "example": {
+          "label": "教学示例",
+          "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+        },
+        "unresolved": {
+          "label": "类别待确认",
+          "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+        }
+      }
+    },
+    "mapping_preflight_hash": "fcb6ef7d056e7c075eff9c0b91968cac4e5a10261af5a879ab822c9a61aef931",
+    "ontology_context_hash": "43628bda4d1c0a078698436632b5055f364045eea2ebbf6aecfd2c4383cce024",
+    "ontology_catalog_hash": "e909112b23358a608886a2570babdbd87c49cd27d26358e30c8981c720b282ae",
+    "field_standardization_hash": "64c32d8b5db4a4a7756ea47df13539cbf74b5814d22d2a157a07152e0c81ae93",
+    "dispute_context_hash": "b13f63cd027f606d906b02a069bee0a8f8709ae219e415eaddf9589471ce688b",
+    "audit_id": "annotation_input_cand_4cff87c3b5c14e78706b",
+    "proposal_digest": "3c47cecfd09640a36dfc6fb1b12139fa543efa5ddf26838b97d97f8e9f246945",
+    "candidate": {
+      "schema_version": "extraction_candidate_v4",
+      "contract_version": "extraction_candidate_v4",
+      "candidate_id": "cand_4cff87c3b5c14e78706b",
+      "revision": 1,
+      "run_id": "run_development_pool_20261117_v1",
+      "source_ordinal": 0,
+      "document_id": "book_62aab259f62f40d9_excerpt_01",
+      "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+      "domain": "default",
+      "fact_namespace": "default",
+      "source_snapshot_id": "8311eb62324479be2c26d4a0fabd83477e7e9e3cc12e5cd9fd323d30b6d50214",
+      "source_index_hash": "30f8d65c1e7f0ca071e0350ffb8a1cff50179073643007bd4138ac1329990caf",
+      "source_chunk_id": "chunk_6bfb04063024",
+      "section_id": "section_bd20bb363fa5",
+      "source_scope": {
+        "source_chunk_id": "chunk_6bfb04063024",
+        "section_id": "section_bd20bb363fa5",
+        "core_start": 0,
+        "core_end": 747,
+        "context_start": 0,
+        "context_end": 747
+      },
+      "triple": {
+        "head": "流体",
+        "surface_relation": "作为",
+        "tail": "研究对象",
+        "head_entity_id": "local_784cb10e9a6d3dfd16571f19f7a144c17675d6b1f7d67b5fdb4befc678257811",
+        "tail_entity_id": "local_5829c5036d7b60b160bcfcc153ee53a5d3b668c3be350e800535db9822947a44",
+        "relation_id": null,
+        "relation_label": null,
+        "mapping_status": "needs_full_schema_lookup",
+        "head_type": null,
+        "tail_type": null,
+        "value": null,
+        "datatype": null,
+        "unit": null,
+        "language": null,
+        "tail_kind": "entity",
+        "qualifiers": {
+          "polarity": "positive",
+          "condition": null,
+          "time_scope": null,
+          "applicability": null,
+          "modality": "asserted",
+          "quantifier": null
+        },
+        "qualifier_status": {
+          "polarity": "extracted",
+          "condition": "unknown",
+          "time_scope": "unknown",
+          "applicability": "unknown",
+          "modality": "extracted",
+          "quantifier": "unknown"
+        },
+        "relation_semantic_hash": null
+      },
+      "evidence_items": [
+        {
+          "evidence_id": "ev_7c7885f89f8ce7660bb0",
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "chunk_id": "chunk_6bfb04063024",
+          "section_id": "section_bd20bb363fa5",
+          "quote": "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。",
+          "text": "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。",
+          "start": 110,
+          "end": 166,
+          "chunk_start": 110,
+          "chunk_end": 166,
+          "offset_basis": "canonical_document",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6bfb04063024"
+          ],
+          "anchor_valid": true,
+          "semantic_status": "unknown"
+        }
+      ],
+      "extraction_quote": "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。",
+      "evidence_quotes": [
+        "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。"
+      ],
+      "extraction_hints": {
+        "relation_id_candidate": null,
+        "head_type_candidate": null,
+        "tail_type_candidate": null,
+        "schema_hint": null
+      },
+      "contract_issues": [],
+      "extraction_prompt_version": "extraction_v5_semantic_scope_v1",
+      "extraction_contract_hash": "a762ee5c4c30dbde4d67f391fb3b7d1275040875a38dc0afcce32dc6c17fa7f0",
+      "extraction_prompt_hash": "local-unit-fixture",
+      "fact_identity_version": "fact_identity_v2",
+      "fact_key_state": "provisional",
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+      "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "ontology_release_path": "D:\\knowledge-huopao\\outputs\\ontology_freeze_20261116\\live\\releases\\release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "fact_key": "provisional:cand_4cff87c3b5c14e78706b:1",
+      "source_group_id": "book_62aab259f62f40d9",
+      "source_section": "3.2.1 流体力学的基本概念",
+      "original_source_anchors": [
+        {
+          "evidence_id": "ev_7c7885f89f8ce7660bb0",
+          "source_group_id": "book_62aab259f62f40d9",
+          "parent_path": "D:\\knowledge-huopao\\mdfiles\\火炮设计理论 (张相炎、郑建国、袁人枢).md",
+          "parent_document_version": "ad9e6b8dd2569010d454e0d065602480b6259a24ead152ad5a66ab70d4dc3789",
+          "start": 153353,
+          "end": 153409,
+          "quote": "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。",
+          "offset_basis": "canonical_parent_document"
+        }
+      ]
+    },
+    "ontology_check": {
+      "status": "unknown",
+      "relation_known": false,
+      "relation_id": null,
+      "mapping_status": "unassigned",
+      "mapping_candidates": [],
+      "reason_codes": [
+        "FORMAL_MAPPING_UNASSIGNED"
+      ],
+      "domain_status": "unknown",
+      "range_status": "unknown",
+      "type_unknown": true,
+      "hard_failure": false,
+      "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9"
+    },
+    "evidence_bundle": {
+      "evidence_bundle_version": "evidence_bundle_v2",
+      "items": [
+        {
+          "evidence_id": "ev_7c7885f89f8ce7660bb0",
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "chunk_id": "chunk_6bfb04063024",
+          "section_id": "section_bd20bb363fa5",
+          "quote": "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。",
+          "text": "流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。",
+          "start": 110,
+          "end": 166,
+          "chunk_start": 110,
+          "chunk_end": 166,
+          "offset_basis": "canonical_document",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6bfb04063024"
+          ],
+          "anchor_valid": true,
+          "semantic_status": "unknown",
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "anchor_status": "exact",
+          "retrieval_score": 0.88
+        },
+        {
+          "evidence_id": "ev_3377d674be5e5828ed70",
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "chunk_id": "chunk_6bfb04063024",
+          "section_id": "section_bd20bb363fa5",
+          "sentence_id": "sentence_58e27145b95f95e28ff5",
+          "quote": "intervening text may be omitted]",
+          "text": "intervening text may be omitted]",
+          "start": 76,
+          "end": 108,
+          "chunk_start": 76,
+          "chunk_end": 108,
+          "offset_basis": "canonical_document",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6bfb04063024"
+          ],
+          "retrieval_level": "adjacent_sentence",
+          "retrieval_score": 0.88,
+          "semantic_status": "unknown",
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "anchor_valid": true,
+          "anchor_status": "exact"
+        },
+        {
+          "evidence_id": "ev_7e76c3525ccf0da30cdb",
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "chunk_id": "chunk_6bfb04063024",
+          "section_id": "section_bd20bb363fa5",
+          "sentence_id": "sentence_8ae0d6dc1b3bb1ccc5c0",
+          "quote": "[Source paragraph 2;",
+          "text": "[Source paragraph 2;",
+          "start": 168,
+          "end": 188,
+          "chunk_start": 168,
+          "chunk_end": 188,
+          "offset_basis": "canonical_document",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_6bfb04063024"
+          ],
+          "retrieval_level": "adjacent_sentence",
+          "retrieval_score": 0.88,
+          "semantic_status": "unknown",
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "anchor_valid": true,
+          "anchor_status": "exact"
+        },
+        {
+          "evidence_id": "ev_8e916da5554fb0da18d8",
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "chunk_id": "chunk_6bfb04063024",
+          "section_id": "section_bd20bb363fa5",
+          "sentence_id": null,
+          "quote": "# Descriptive concept source excerpt\n\n[Source paragraph 1; 3.2.1 流体力学的基本概念; intervening text may be omitted]\n\n流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。\n\n[Source paragraph 2; 3.2.1 流体力学的基本概念; intervening text may be omitted]\n\n从微观上讲，流体是由大量分子所组成的，其作用和运动十分复杂。流体力学通常将实际的、由大量分子所组成的流体抽象为在微观上充分大、在宏观上足够小的流体分子团所组成的连续流体。流体分子团的运动服从统计规律，而流体分子团在宏观上足够小可以看作一个“点”。因此这种流体分子团称为流体质点，它具有温度、密度、压强、速度等宏观参数。\n\n[Source paragraph 3; 3.2.1 流体力学的基本概念; intervening text may be omitted]\n\n从承受载荷能力的角度讲，流体只能承受压应力，不能承受拉应力和剪切应力，任何剪切应力的存在都会使流体发生流动，这也是流体与固体的重要区别。因此，在流体中，其法向应力只能是压应力，不能是拉应力，这种压应力称为压强，在工程上通常称为压力。真实的流体在流动时可以表现出一定的承受剪切应力的能力，这种性质称为流体的黏性。流体的黏性只有在流体中的相邻流体质点有相对运动时才表现出来，许多常见的流体(如水、空气等)的黏性都很小，在相对运动速度不大的情况下，其黏性的影响很小。在这种情况下，可以完全忽略黏性的影响，以使问题得到简化，忽略黏性的流体称为理想流体。\n\n",
+          "text": "# Descriptive concept source excerpt\n\n[Source paragraph 1; 3.2.1 流体力学的基本概念; intervening text may be omitted]\n\n流体力学以流体作为研究对象，主要研究流体的平衡规律、流体的运动规律、流体与流体以及流体与固体之间相互作用的规律。\n\n[Source paragraph 2; 3.2.1 流体力学的基本概念; intervening text may be omitted]\n\n从微观上讲，流体是由大量分子所组成的，其作用和运动十分复杂。流体力学通常将实际的、由大量分子所组成的流体抽象为在微观上充分大、在宏观上足够小的流体分子团所组成的连续流体。流体分子团的运动服从统计规律，而流体分子团在宏观上足够小可以看作一个“点”。因此这种流体分子团称为流体质点，它具有温度、密度、压强、速度等宏观参数。\n\n[Source paragraph 3; 3.2.1 流体力学的基本概念; intervening text may be omitted]\n\n从承受载荷能力的角度讲，流体只能承受压应力，不能承受拉应力和剪切应力，任何剪切应力的存在都会使流体发生流动，这也是流体与固体的重要区别。因此，在流体中，其法向应力只能是压应力，不能是拉应力，这种压应力称为压强，在工程上通常称为压力。真实的流体在流动时可以表现出一定的承受剪切应力的能力，这种性质称为流体的黏性。流体的黏性只有在流体中的相邻流体质点有相对运动时才表现出来，许多常见的流体(如水、空气等)的黏性都很小，在相对运动速度不大的情况下，其黏性的影响很小。在这种情况下，可以完全忽略黏性的影响，以使问题得到简化，忽略黏性的流体称为理想流体。\n\n",
+          "start": 0,
+          "end": 747,
+          "chunk_start": 0,
+          "chunk_end": 747,
+          "offset_basis": "canonical_document",
+          "breadcrumb_path": "Descriptive concept source excerpt",
+          "retrieval_level": "current_chunk",
+          "level": "current_chunk",
+          "retrieved_via_levels": [
+            "current_chunk"
+          ],
+          "retrieval_score": 0.78,
+          "lexical_relevance_score": 0.0,
+          "match_status": "retrieved",
+          "semantic_status": "unknown",
+          "source_role": "source_document",
+          "content_type": "heading",
+          "anchor_valid": true,
+          "anchor_status": "exact"
+        }
+      ],
+      "searched_levels": [
+        "extraction_quotes",
+        "adjacent_sentence",
+        "current_chunk"
+      ],
+      "retrieved_unique_span_count": 4,
+      "independent_document_count": 1,
+      "evidence_hash": "240f106308e6dfc0425efe21ebb4b20a8b021b956e7a03674594deae94298ee4",
+      "rejected_items": [],
+      "anchor_validation_complete": true
+    },
+    "review_memory": {},
+    "request_cache_namespace": "development_pool_20261117_v1",
+    "ontology_context": {
+      "version": "review_ontology_context_v1",
+      "scope": "retrieved_subset",
+      "policy_hash": "cac2e99e0c970fe2c05aecb31bc195cd0edf2759823e6725af8ac948c24514ae",
+      "source_catalog_hash": "e909112b23358a608886a2570babdbd87c49cd27d26358e30c8981c720b282ae",
+      "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "source_counts": {
+        "properties": 48,
+        "classes": 189
+      },
+      "properties": [
+        {
+          "id": "R_12a1cf5c80d7e73a97a2",
+          "label": "影响",
+          "description": "一个物理量或条件对另一个物理量或结果产生的作用关系",
+          "domain": [
+            "C_4f620706279a1779b20b"
+          ],
+          "range": [
+            "C_8168a48ff2e280e56e5a"
+          ],
+          "iri": "urn:kg:chapter1:property:e55de231663723f0f749c0b5",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "影响"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "一个物理量或条件对另一个物理量或结果产生的作用关系"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:bc006debec35a21d9c9d90fb>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:fac37efea6d2611468ed3561>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_1654fcf38913d94cb712",
+          "label": "影响",
+          "description": "一个因素对另一个因素或对象产生作用",
+          "domain": [
+            "C_a902e72f8e9d12ecd166"
+          ],
+          "range": [
+            "C_70780e1e31a41f0ff86a"
+          ],
+          "iri": "urn:kg:chapter1:property:439791fc7aa4053eab2bc3de",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "影响"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "一个因素对另一个因素或对象产生作用"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:58cba30533b55f2bbe96f958>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:f7799e469b1034028cacd4a7>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_2b18880939600d01a389",
+          "label": "影响",
+          "description": "一个因素对另一个因素或对象产生作用",
+          "domain": [
+            "C_02ca97ebf11ae1d3c3ad"
+          ],
+          "range": [
+            "C_3d1e92e945b2c3dbbd16"
+          ],
+          "iri": "urn:kg:chapter1:property:48b35d4a4c80bc69cfe8ff33",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "影响"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "一个因素对另一个因素或对象产生作用"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:ff0676ed29a29545cda3afd9>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:caa290950d87fc8aaeb516b0>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_2eb6c3f7a4060a8f5083",
+          "label": "影响",
+          "description": "一个物理量或条件对另一个物理量或结果产生的作用关系",
+          "domain": [
+            "C_5d0b94cd0cd9ae0220e9"
+          ],
+          "range": [
+            "C_61338e5480fb086c0938"
+          ],
+          "iri": "urn:kg:chapter1:property:889b437f5baf6696e5d8d63d",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "影响"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "一个物理量或条件对另一个物理量或结果产生的作用关系"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:b4f3ddd9a97461d203489bb7>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:efa98574e5d38f19150d418c>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_36719caf973ba4631cbb",
+          "label": "影响",
+          "description": "空气阻力对弹道形状的影响",
+          "domain": [
+            "C_3d1e92e945b2c3dbbd16"
+          ],
+          "range": [
+            "C_113e838bda76ceba1c37"
+          ],
+          "iri": "urn:kg:chapter1:property:be5d8d5c3a9d3b413d0e7cf9",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "影响"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "空气阻力对弹道形状的影响"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:caa290950d87fc8aaeb516b0>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:d40b78d29ebf64bdc1a23043>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_37918d1714e9945397f3",
+          "label": "表示",
+          "description": "组合表示弹丸相对于空气的运动速度对弹丸运动的影响部分",
+          "domain": [
+            "C_e4f3000a2284a7d0fa12"
+          ],
+          "range": [
+            "C_125e9268788e296b6e64"
+          ],
+          "iri": "urn:kg:chapter1:property:a9e5fa9bd254042a2a1ef1bd",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "表示"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "组合表示弹丸相对于空气的运动速度对弹丸运动的影响部分"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:55699fd1db8eecdd4d7049ae>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:7cdf8f6615fbf24d63de06de>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_5cfeb014dc68c80c2f5c",
+          "label": "得到",
+          "description": "根据状态方程得到空气密度函数的标准定律和标准分布",
+          "domain": [
+            "C_eaa767de9c851cd73be7"
+          ],
+          "range": [
+            "C_e0f77606c291cca8d429"
+          ],
+          "iri": "urn:kg:chapter1:property:07cb8a46977c5998463afa91",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "得到"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "根据状态方程得到空气密度函数的标准定律和标准分布"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:4bc8bec4b08bd444266944eb>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:aa0ffc2b6a3e4cf3c4be2230>"
+          ],
+          "property_kind": "object"
+        },
+        {
+          "id": "R_69d8ebeb21191bb11194",
+          "label": "研究",
+          "description": "外弹道研究弹丸质心运动的规律",
+          "domain": [
+            "C_e627636b6ff165a0ade0"
+          ],
+          "range": [
+            "C_80c1a9d862501a242bf2"
+          ],
+          "iri": "urn:kg:chapter1:property:3427768dba7ac1d7202e0f43",
+          "aliases": [],
+          "labels": [
+            {
+              "language": "zh",
+              "value": "研究"
+            }
+          ],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "外弹道研究弹丸质心运动的规律"
+            }
+          ],
+          "domain_semantics": "all",
+          "range_semantics": "all",
+          "domain_expressions": [
+            "<urn:kg:chapter1:class:06a934b8684924468170524e>"
+          ],
+          "range_expressions": [
+            "<urn:kg:chapter1:class:8d4909db0affd9fbb892d3ac>"
+          ],
+          "property_kind": "object"
+        }
+      ],
+      "classes": [
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风"
+            }
+          ],
+          "description": "既能影响阻力的大小，又能影响阻力的方向，从而改变射程的风",
+          "id": "C_02ca97ebf11ae1d3c3ad",
+          "iri": "urn:kg:chapter1:class:ff0676ed29a29545cda3afd9",
+          "label": "纵风",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "纵风"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "受空气阻力影响，不对称于顶点的弹道"
+            }
+          ],
+          "description": "受空气阻力影响，不对称于顶点的弹道",
+          "id": "C_113e838bda76ceba1c37",
+          "iri": "urn:kg:chapter1:class:d40b78d29ebf64bdc1a23043",
+          "label": "空气弹道",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "空气弹道"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [],
+          "description": "",
+          "id": "C_125e9268788e296b6e64",
+          "iri": "urn:kg:chapter1:class:7cdf8f6615fbf24d63de06de",
+          "label": "弹丸运动",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "弹丸运动"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "为了使问题简化并反映弹丸质心运动主要规律而引入的假设条件"
+            }
+          ],
+          "description": "为了使问题简化并反映弹丸质心运动主要规律而引入的假设条件",
+          "id": "C_24d9f44b219469a35934",
+          "iri": "urn:kg:chapter1:class:9207af458c3ac86c8a06c523",
+          "label": "基本假设",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "基本假设"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "作用于弹丸上的力之一，来自空气的阻力"
+            }
+          ],
+          "description": "作用于弹丸上的力之一，来自空气的阻力",
+          "id": "C_3d1e92e945b2c3dbbd16",
+          "iri": "urn:kg:chapter1:class:caa290950d87fc8aaeb516b0",
+          "label": "空气阻力",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "空气阻力"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "通过改变空气密度来影响弹道的物理量"
+            }
+          ],
+          "description": "通过改变空气密度来影响弹道的物理量",
+          "id": "C_4f620706279a1779b20b",
+          "iri": "urn:kg:chapter1:class:bc006debec35a21d9c9d90fb",
+          "label": "气压",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "气压"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "弹丸相对于空气的速度矢量"
+            }
+          ],
+          "description": "弹丸相对于空气的速度矢量",
+          "id": "C_518cd5938ed90c25b8fe",
+          "iri": "urn:kg:chapter1:class:f492ec825acc4c8737449e05",
+          "label": "相对速度矢量",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "相对速度矢量"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "随高度变化的温度"
+            }
+          ],
+          "description": "随高度变化的温度",
+          "id": "C_5d0b94cd0cd9ae0220e9",
+          "iri": "urn:kg:chapter1:class:b4f3ddd9a97461d203489bb7",
+          "label": "气温",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "气温"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [],
+          "description": "",
+          "id": "C_61338e5480fb086c0938",
+          "iri": "urn:kg:chapter1:class:efa98574e5d38f19150d418c",
+          "label": "马赫数",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "马赫数"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正"
+            }
+          ],
+          "description": "火炮射击时弹丸的运动轨迹，需根据气象条件进行计算和修正",
+          "id": "C_70780e1e31a41f0ff86a",
+          "iri": "urn:kg:chapter1:class:f7799e469b1034028cacd4a7",
+          "label": "弹道",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "弹道"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "弹丸质心在空中运动的规律"
+            }
+          ],
+          "description": "弹丸质心在空中运动的规律",
+          "id": "C_80c1a9d862501a242bf2",
+          "iri": "urn:kg:chapter1:class:8d4909db0affd9fbb892d3ac",
+          "label": "弹丸质心运动",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "弹丸质心运动"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [],
+          "description": "",
+          "id": "C_8168a48ff2e280e56e5a",
+          "iri": "urn:kg:chapter1:class:fac37efea6d2611468ed3561",
+          "label": "空气密度",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "空气密度"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "在特定假设下，弹丸刚体一般运动简化成的在其发射面内的运动"
+            }
+          ],
+          "description": "在特定假设下，弹丸刚体一般运动简化成的在其发射面内的运动",
+          "id": "C_a1a40b1239a9634fbea3",
+          "iri": "urn:kg:chapter1:class:5460cb3a3594a21706d5e2fd",
+          "label": "质点平面运动",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "质点平面运动"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "利用流体静力学基本方程和气体状态方程求出大气气压"
+            }
+          ],
+          "description": "利用流体静力学基本方程和气体状态方程求出大气气压",
+          "id": "C_a5a6163ec108872e3ea9",
+          "iri": "urn:kg:chapter1:class:4b8b8304162de05646a89a1f",
+          "label": "流体静力学基本方程",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "流体静力学基本方程"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "通过改变空气阻力的方向来影响弹道的风"
+            }
+          ],
+          "description": "通过改变空气阻力的方向来影响弹道的风",
+          "id": "C_a902e72f8e9d12ecd166",
+          "iri": "urn:kg:chapter1:class:58cba30533b55f2bbe96f958",
+          "label": "横风",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "横风"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "根据状态方程得到的标准定律 H(y)"
+            }
+          ],
+          "description": "根据状态方程得到的标准定律 H(y)",
+          "id": "C_e0f77606c291cca8d429",
+          "iri": "urn:kg:chapter1:class:aa0ffc2b6a3e4cf3c4be2230",
+          "label": "空气密度函数",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "空气密度函数"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "表示弹丸相对于空气的运动速度对弹丸运动的影响部分"
+            }
+          ],
+          "description": "表示弹丸相对于空气的运动速度对弹丸运动的影响部分",
+          "id": "C_e4f3000a2284a7d0fa12",
+          "iri": "urn:kg:chapter1:class:55699fd1db8eecdd4d7049ae",
+          "label": "空气阻力函数",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "空气阻力函数"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "研究弹丸质心运动的规律问题"
+            }
+          ],
+          "description": "研究弹丸质心运动的规律问题",
+          "id": "C_e627636b6ff165a0ade0",
+          "iri": "urn:kg:chapter1:class:06a934b8684924468170524e",
+          "label": "外弹道",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "外弹道"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        },
+        {
+          "aliases": [],
+          "definitions": [
+            {
+              "language": "zh",
+              "value": "用于得到空气密度函数标准定律和标准分布的方程"
+            }
+          ],
+          "description": "用于得到空气密度函数标准定律和标准分布的方程",
+          "id": "C_eaa767de9c851cd73be7",
+          "iri": "urn:kg:chapter1:class:4bc8bec4b08bd444266944eb",
+          "label": "状态方程",
+          "labels": [
+            {
+              "language": "zh",
+              "value": "状态方程"
+            }
+          ],
+          "parent": null,
+          "parents": []
+        }
+      ],
+      "retrieval": {
+        "queries": [
+          "作为"
+        ],
+        "exact_searches": [
+          {
+            "query": "作为",
+            "status": "needs_full_schema_lookup",
+            "matched_ids": []
+          }
+        ],
+        "endpoint_queries": {},
+        "required_property_ids": [],
+        "searched_full_frozen_schema": true,
+        "recall_is_mapping_confirmation": false
+      },
+      "full_catalog_included": false,
+      "absence_confirmed": false,
+      "coverage_rule": "A missing subset item is not an ontology gap; request further lookup or keep mapping unresolved."
+    },
+    "mapping_preflight": {
+      "version": "mapping_preflight_v1",
+      "policy_hash": "7c6d990fa473ab6014cd69e3ddf673b7f7426a5b5aa2d7c697ce4e26c059bb4a",
+      "candidate_hash": "47218dd3d3e590c9f1464d6a7e97c38c289a40e1e81ce2625a619923b030ea42",
+      "evidence_hash": "240f106308e6dfc0425efe21ebb4b20a8b021b956e7a03674594deae94298ee4",
+      "ontology_context_hash": "43628bda4d1c0a078698436632b5055f364045eea2ebbf6aecfd2c4383cce024",
+      "source_catalog_hash": "e909112b23358a608886a2570babdbd87c49cd27d26358e30c8981c720b282ae",
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+      "judgment_ready": false,
+      "blocking_information": [
+        {
+          "kind": "entity",
+          "id": "head",
+          "fields": [
+            "endpoint_type_unassigned_or_ambiguous"
+          ]
+        },
+        {
+          "kind": "entity",
+          "id": "tail",
+          "fields": [
+            "endpoint_type_unassigned_or_ambiguous"
+          ]
+        }
+      ],
+      "relation_candidates": [
+        {
+          "id": "R_12a1cf5c80d7e73a97a2",
+          "label": "影响",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_4f620706279a1779b20b"
+          ],
+          "range": [
+            "C_8168a48ff2e280e56e5a"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_1654fcf38913d94cb712",
+          "label": "影响",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_a902e72f8e9d12ecd166"
+          ],
+          "range": [
+            "C_70780e1e31a41f0ff86a"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_2b18880939600d01a389",
+          "label": "影响",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_02ca97ebf11ae1d3c3ad"
+          ],
+          "range": [
+            "C_3d1e92e945b2c3dbbd16"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_2eb6c3f7a4060a8f5083",
+          "label": "影响",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_5d0b94cd0cd9ae0220e9"
+          ],
+          "range": [
+            "C_61338e5480fb086c0938"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_36719caf973ba4631cbb",
+          "label": "影响",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_3d1e92e945b2c3dbbd16"
+          ],
+          "range": [
+            "C_113e838bda76ceba1c37"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_37918d1714e9945397f3",
+          "label": "表示",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_e4f3000a2284a7d0fa12"
+          ],
+          "range": [
+            "C_125e9268788e296b6e64"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_5cfeb014dc68c80c2f5c",
+          "label": "得到",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_eaa767de9c851cd73be7"
+          ],
+          "range": [
+            "C_e0f77606c291cca8d429"
+          ],
+          "datatype": null,
+          "missing_information": []
+        },
+        {
+          "id": "R_69d8ebeb21191bb11194",
+          "label": "研究",
+          "aliases": [],
+          "property_kind": "object",
+          "definition_available": true,
+          "retrieved": true,
+          "direction": "head_to_tail",
+          "direction_basis": "formal_property_signature_not_semantic_approval",
+          "domain": [
+            "C_e627636b6ff165a0ade0"
+          ],
+          "range": [
+            "C_80c1a9d862501a242bf2"
+          ],
+          "datatype": null,
+          "missing_information": []
+        }
+      ],
+      "entities": {
+        "head": {
+          "candidate_id": "local_784cb10e9a6d3dfd16571f19f7a144c17675d6b1f7d67b5fdb4befc678257811",
+          "surface": "流体",
+          "assigned_type": null,
+          "type_candidate_ids": [],
+          "aliases": [],
+          "aliases_are_unconfirmed": true,
+          "source_evidence_ids": [
+            "ev_7c7885f89f8ce7660bb0",
+            "ev_8e916da5554fb0da18d8"
+          ],
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "referent_scope": null,
+          "missing_information": [
+            "endpoint_type_unassigned_or_ambiguous"
+          ]
+        },
+        "tail": {
+          "candidate_id": "local_5829c5036d7b60b160bcfcc153ee53a5d3b668c3be350e800535db9822947a44",
+          "surface": "研究对象",
+          "assigned_type": null,
+          "type_candidate_ids": [],
+          "aliases": [],
+          "aliases_are_unconfirmed": true,
+          "source_evidence_ids": [
+            "ev_7c7885f89f8ce7660bb0",
+            "ev_8e916da5554fb0da18d8"
+          ],
+          "document_id": "book_62aab259f62f40d9_excerpt_01",
+          "document_version": "8e02a0f96673f29bc8384f3f59f71154b5d15281815e5eab0dfcd694a2e32938",
+          "referent_scope": null,
+          "missing_information": [
+            "endpoint_type_unassigned_or_ambiguous"
+          ]
+        }
+      },
+      "search_trace": [
+        {
+          "stage": "review_subset",
+          "property_count": 8,
+          "metadata_complete": false
+        },
+        {
+          "stage": "full_bound_release_and_aliases",
+          "properties_scanned": 48,
+          "classes_scanned": 189,
+          "exact_match_ids": [],
+          "property_count": 8,
+          "lexical_recall_is_semantic_confirmation": false
+        }
+      ],
+      "budget_excluded_property_ids": [],
+      "confusable_relations": [],
+      "global_gap_confirmed": false,
+      "semantic_applicability": "not_programmatically_confirmed",
+      "model_rule": "Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved mappings. Never replace surface_relation with a merely similar predicate to satisfy schema.",
+      "original_expression": {
+        "candidate_id": "cand_4cff87c3b5c14e78706b",
+        "revision": 1,
+        "head": "流体",
+        "surface_relation": "作为",
+        "tail": "研究对象",
+        "qualifiers": {
+          "polarity": "positive",
+          "condition": null,
+          "time_scope": null,
+          "applicability": null,
+          "modality": "asserted",
+          "quantifier": null
+        },
+        "qualifier_status": {
+          "polarity": "extracted",
+          "condition": "unknown",
+          "time_scope": "unknown",
+          "applicability": "unknown",
+          "modality": "extracted",
+          "quantifier": "unknown"
+        }
+      },
+      "formal_mapping": {
+        "assigned_relation_id": null,
+        "assigned_head_type": null,
+        "assigned_tail_type": null,
+        "candidate_relation_ids": [
+          "R_12a1cf5c80d7e73a97a2",
+          "R_1654fcf38913d94cb712",
+          "R_2b18880939600d01a389",
+          "R_2eb6c3f7a4060a8f5083",
+          "R_36719caf973ba4631cbb",
+          "R_37918d1714e9945397f3",
+          "R_5cfeb014dc68c80c2f5c",
+          "R_69d8ebeb21191bb11194"
+        ],
+        "semantic_approval": false
+      }
+    },
+    "field_standardization": {
+      "version": "field_standardization_v1",
+      "spec_version": "review_fields_v1",
+      "candidate_hash": "47218dd3d3e590c9f1464d6a7e97c38c289a40e1e81ce2625a619923b030ea42",
+      "evidence_hash": "240f106308e6dfc0425efe21ebb4b20a8b021b956e7a03674594deae94298ee4",
+      "spec_hash": "b6748addab4a5b37af8a6166eabc6e5b49b233ccbd77e0eb2eb4af50967393bd",
+      "candidate_id": "cand_4cff87c3b5c14e78706b",
+      "revision": 1,
+      "original_expression": {
+        "head": "流体",
+        "surface_relation": "作为",
+        "tail": "研究对象",
+        "head_entity_id": "local_784cb10e9a6d3dfd16571f19f7a144c17675d6b1f7d67b5fdb4befc678257811",
+        "tail_entity_id": "local_5829c5036d7b60b160bcfcc153ee53a5d3b668c3be350e800535db9822947a44",
+        "relation_id": null,
+        "relation_label": null,
+        "mapping_status": "needs_full_schema_lookup",
+        "head_type": null,
+        "tail_type": null,
+        "value": null,
+        "datatype": null,
+        "unit": null,
+        "language": null,
+        "tail_kind": "entity",
+        "qualifiers": {
+          "polarity": "positive",
+          "condition": null,
+          "time_scope": null,
+          "applicability": null,
+          "modality": "asserted",
+          "quantifier": null
+        },
+        "qualifier_status": {
+          "polarity": "extracted",
+          "condition": "unknown",
+          "time_scope": "unknown",
+          "applicability": "unknown",
+          "modality": "extracted",
+          "quantifier": "unknown"
+        },
+        "relation_semantic_hash": null
+      },
+      "normalized_expression": {
+        "head": "流体",
+        "surface_relation": "作为",
+        "tail": "研究对象",
+        "head_entity_id": "local_784cb10e9a6d3dfd16571f19f7a144c17675d6b1f7d67b5fdb4befc678257811",
+        "tail_entity_id": "local_5829c5036d7b60b160bcfcc153ee53a5d3b668c3be350e800535db9822947a44",
+        "relation_id": null,
+        "relation_label": null,
+        "mapping_status": "needs_full_schema_lookup",
+        "head_type": null,
+        "tail_type": null,
+        "value": null,
+        "datatype": null,
+        "unit": null,
+        "language": null,
+        "tail_kind": "entity",
+        "qualifiers": {
+          "polarity": "positive",
+          "condition": null,
+          "time_scope": null,
+          "applicability": null,
+          "modality": "asserted",
+          "quantifier": null,
+          "frequency": null
+        },
+        "qualifier_status": {
+          "polarity": "extracted",
+          "condition": "unknown",
+          "time_scope": "unknown",
+          "applicability": "unknown",
+          "modality": "extracted",
+          "quantifier": "unknown",
+          "frequency": "not_stated"
+        },
+        "relation_semantic_hash": null
+      },
+      "plans": [],
+      "semantic_review": [],
+      "original_candidate_changed": false,
+      "semantic_preservation_confirmed": false,
+      "admission_authorized": false
+    },
+    "dispute_context": {
+      "version": "claim_disputes_v1",
+      "candidate_hash": "47218dd3d3e590c9f1464d6a7e97c38c289a40e1e81ce2625a619923b030ea42",
+      "policy_hash": "69d952653b5cfc0edbe5e93b9dd7bfd7ebcfdc8e9458719c4eb0c4e5561080c8",
+      "targets": [
+        {
+          "check": "triple_support",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "原文是否明确支持“流体 — 作为 — 研究对象”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+          "formal_mapping": null,
+          "claim_id": "2680d40956d27d78d6c6b1bddd4e9d35e0121c37cabe84bd475dbc4effe474dc"
+        },
+        {
+          "check": "entity_reference",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "“流体 — 作为 — 研究对象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+          "formal_mapping": null,
+          "claim_id": "d7d206e823384b67f3cf9e3a2e384aab21e0ae70c82e51f6ee937d9a4e1c7e43"
+        },
+        {
+          "check": "relation_semantics",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "“流体 — 作为 — 研究对象”中的“作为”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+          "formal_mapping": null,
+          "claim_id": "5aa02dc0e9de58a3a735b7f074f9704ed08a2b188f1c3eb9577e606aff79d478"
+        },
+        {
+          "check": "relation_direction",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "原文是否支持“流体 — 作为 — 研究对象”的头尾方向？",
+          "formal_mapping": null,
+          "claim_id": "a2ba8f5a45ef779303f8d1089c2a92ca27cb97da215134d0ab566664172172fa"
+        },
+        {
+          "check": "qualifiers",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "“流体 — 作为 — 研究对象”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+          "formal_mapping": null,
+          "claim_id": "e8dfb54452b50848d6a4a59581d59295862f0578d1825f0126d7191afa79a279"
+        },
+        {
+          "check": "evidence_sufficiency",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "当前证据是否足以确认“流体 — 作为 — 研究对象”的完整含义？缺哪一段材料？",
+          "formal_mapping": null,
+          "claim_id": "d528d2fc38877c11afa644958e9c5fef0b5db20bda49e2b17191cad2e3b595e4"
+        },
+        {
+          "check": "counterevidence",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "已核验材料中是否存在可能推翻“流体 — 作为 — 研究对象”的证据？未发现反证与找到正面支持分开记录。",
+          "formal_mapping": null,
+          "claim_id": "1161f06cb75570b387829c15092e26f31058c0265ac839b3adc5e745283ec659"
+        },
+        {
+          "check": "mapping",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "“流体 — 作为 — 研究对象”与已填写关系 None 的正式定义、实体身份、方向和类型约束是否匹配？",
+          "formal_mapping": {
+            "relation_id": null,
+            "head_type": null,
+            "tail_type": null
+          },
+          "claim_id": "343591d4b098d047a600b0337a1e55a9c244f2b947a511094bb4a01b231bc30f"
+        },
+        {
+          "check": "knowledge_scope",
+          "expression": {
+            "head": "流体",
+            "surface_relation": "作为",
+            "tail": "研究对象",
+            "qualifiers": {
+              "polarity": "positive",
+              "condition": null,
+              "time_scope": null,
+              "applicability": null,
+              "modality": "asserted",
+              "quantifier": null
+            },
+            "semantic_context": null
+          },
+          "question": "“流体 — 作为 — 研究对象”属于哪种收录范围？范围分类不能替代事实判断。",
+          "formal_mapping": null,
+          "claim_id": "e8d21ef7e73532e98a84bd0dbe0116d80b29064ba125feee404b19c3e780c002"
+        }
+      ]
+    }
+  }
+]
