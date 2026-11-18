@@ -1,0 +1,140 @@
+{
+  "request_details": [
+    {
+      "state": "completed",
+      "task_type": "planner_action",
+      "voter_id": "planner",
+      "response_status": "ok",
+      "error_code": null,
+      "error": null,
+      "input_tokens": 7469,
+      "output_tokens": 261
+    },
+    {
+      "state": "completed",
+      "task_type": "planner_action",
+      "voter_id": "planner",
+      "response_status": "ok",
+      "error_code": null,
+      "error": null,
+      "input_tokens": 15892,
+      "output_tokens": 147
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "voter_id": "judge_a",
+      "response_status": "ok",
+      "error_code": null,
+      "error": null,
+      "input_tokens": 18262,
+      "output_tokens": 1280
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "voter_id": "judge_b",
+      "response_status": "ok",
+      "error_code": null,
+      "error": null,
+      "input_tokens": 19701,
+      "output_tokens": 897
+    },
+    {
+      "state": "completed",
+      "task_type": "triple_review",
+      "voter_id": "judge_c",
+      "response_status": "ok",
+      "error_code": null,
+      "error": null,
+      "input_tokens": 17504,
+      "output_tokens": 1068
+    },
+    {
+      "state": "unknown",
+      "task_type": "planner_action",
+      "voter_id": "planner",
+      "response_status": "api_error",
+      "error_code": "GATEWAY_REQUEST_OUTCOME_UNKNOWN",
+      "error": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+      "input_tokens": null,
+      "output_tokens": null
+    }
+  ],
+  "blockers": [
+    "candidate_expression_incomplete",
+    "candidate_identity_unresolved",
+    "critical_issue_unresolved",
+    "formal_mapping_not_bound_to_candidate",
+    "gap:critical_issues_unresolved",
+    "gap:identity_unresolved",
+    "mapping:context_incomplete",
+    "ontology_guard_not_passed",
+    "required_committee_incomplete",
+    "source:unresolved",
+    "unresolved_claim_dispute"
+  ],
+  "vote_statuses": {
+    "judge_a": true,
+    "judge_b": true,
+    "judge_c": true
+  },
+  "weighted_axes": {
+    "source": {
+      "status": "unresolved",
+      "scores": {
+        "contradicted": 0.0,
+        "supported": 0.691358024691358
+      },
+      "available_mass": 0.691358024691358,
+      "weights": {
+        "judge_a": 0.345679012345679,
+        "judge_b": 0.345679012345679,
+        "judge_c": 0.30864197530864196
+      }
+    },
+    "expression": {
+      "status": "standard",
+      "scores": {
+        "lossless_normalization": 0.0,
+        "semantic_revision": 0.0,
+        "standard": 0.7017543859649122
+      },
+      "available_mass": 0.7017543859649122,
+      "weights": {
+        "judge_a": 0.3508771929824561,
+        "judge_b": 0.3508771929824561,
+        "judge_c": 0.29824561403508776
+      }
+    },
+    "mapping": {
+      "status": "context_incomplete",
+      "scores": {
+        "conflict": 0.0,
+        "valid": 0.0
+      },
+      "available_mass": 0.0,
+      "weights": {
+        "judge_a": 0.3333333333333333,
+        "judge_b": 0.3333333333333333,
+        "judge_c": 0.3333333333333333
+      }
+    },
+    "scope": {
+      "status": "include",
+      "scores": {
+        "exclude": 0.0,
+        "include": 1.0
+      },
+      "available_mass": 1.0,
+      "weights": {
+        "judge_a": 0.3333333333333333,
+        "judge_b": 0.3333333333333333,
+        "judge_c": 0.3333333333333333
+      }
+    }
+  },
+  "automatic_resend": false,
+  "code_archive": "execution_code.zip",
+  "accuracy": null
+}

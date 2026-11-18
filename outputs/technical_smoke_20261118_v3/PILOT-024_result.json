@@ -1,0 +1,1347 @@
+{
+  "status": "needs_human",
+  "draft_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+  "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+  "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+  "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+  "approved_voter_ids": [
+    "judge_b"
+  ],
+  "votes": [
+    {
+      "attempt_id": "attempt_920c3be89f6b421c8e22238827d251aa",
+      "client_request_id": "attempt_920c3be89f6b421c8e22238827d251aa",
+      "counter_evidence_ids": [
+        "ev_03aa05b48427b1dfbb57",
+        "ev_9762d0a229f42fc5dff6"
+      ],
+      "counterevidence_reviewed_ids": [
+        "ev_03aa05b48427b1dfbb57",
+        "ev_b12827d451c29851756a",
+        "ev_e704aec0fe9da4864552",
+        "ev_9762d0a229f42fc5dff6"
+      ],
+      "decision": "reject",
+      "document_version": "4fec510483de49c4ffd1fbf06fe298d450c4d66eb34cc073a15f5757051017f2",
+      "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+      "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "field": "head",
+          "note": "The source text uses the first-person plural pronoun 'we' to refer to the authors. The revision changes the head to 'the authors' analysis in this passage', which is a semantic reinterpretation not explicitly stated in the source. The source does not explicitly state that the head is 'the authors' analysis in this passage'; it only uses 'we' as a pronoun. This change introduces a new entity that is not directly supported by the source text.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "surface_relation",
+          "note": "The source text states 'We have also arbitrarily assumed one inlet and one outlet.' The revision changes the surface_relation from 'have arbitrarily assumed' to 'assumes'. This is a grammatical and semantic shift. The source uses the present perfect tense 'have assumed' to indicate an action completed in the past with relevance to the present, while 'assumes' is a simple present tense. More importantly, the subject 'we' (plural) does not agree with 'assumes' (singular). The revision's head 'the authors' analysis in this passage' is singular, which would agree with 'assumes', but this head is not supported by the source. The source does not state that 'the authors' analysis' assumes anything; it states that 'we' (the authors) have assumed.",
+          "status": "not_stated_in_scope"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The source text explicitly states 'one inlet and one outlet'. The revision changes the quantifier from 'one' to 'one inlet and one outlet', which is a more complete and accurate representation of the source text. This change is supported by the evidence.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "field": "semantic_context",
+          "note": "The revision makes several changes to the semantic_context. The knowledge_scope is changed from 'conditional' to 'derivation'. The source text does not explicitly state that the knowledge scope is 'derivation'; it is a local assumption made by the authors. The referent_scope for the head is changed from 'authors' to 'the source-bounded referent described in the complete frozen evidence packet', which is a meta-reference not present in the source. The relation_meaning.note is expanded, but the core issue is that the head entity is not supported. The qualifier_attachments are updated with new scope_ids, but the underlying issue of the unsupported head entity remains.",
+          "status": "not_stated_in_scope"
+        }
+      ],
+      "finish_reason": "stop",
+      "gateway_request_id": "202611181710592386753037508583",
+      "input_tokens": 14064,
+      "late_response": false,
+      "latency_ms": 30000,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "output_tokens": 1049,
+      "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+      "provider_started_at": 1794993056.218822,
+      "queue_time_ms": 250,
+      "rationale_summary": "The revision introduces an unsupported head entity 'the authors' analysis in this passage' which is not stated in the source text. The source uses 'we' to refer to the authors, but does not explicitly state that the head is 'the authors' analysis in this passage'. The surface_relation change to 'assumes' is grammatically inconsistent with the original subject 'we' and semantically shifts the meaning from an action performed by the authors to a property of the analysis. The knowledge_scope change to 'derivation' is not supported by the source, which presents this as a local assumption. While the quantifier change is supported, the overall revision is rejected due to the unsupported head entity and the resulting semantic shifts.",
+      "raw_response": "{\n  \"decision\": \"reject\",\n  \"field_reviews\": {\n    \"head\": {\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_9762d0a229f42fc5dff6\"],\n      \"note\": \"The source text uses the first-person plural pronoun 'we' to refer to the authors. The revision changes the head to 'the authors' analysis in this passage', which is a semantic reinterpretation not explicitly stated in the source. The source does not explicitly state that the head is 'the authors' analysis in this passage'; it only uses 'we' as a pronoun. This change introduces a new entity that is not directly supported by the source text.\"\n    },\n    \"surface_relation\": {\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"],\n      \"note\": \"The source text states 'We have also arbitrarily assumed one inlet and one outlet.' The revision changes the surface_relation from 'have arbitrarily assumed' to 'assumes'. This is a grammatical and semantic shift. The source uses the present perfect tense 'have assumed' to indicate an action completed in the past with relevance to the present, while 'assumes' is a simple present tense. More importantly, the subject 'we' (plural) does not agree with 'assumes' (singular). The revision's head 'the authors' analysis in this passage' is singular, which would agree with 'assumes', but this head is not supported by the source. The source does not state that 'the authors' analysis' assumes anything; it states that 'we' (the authors) have assumed.\"\n    },\n    \"qualifiers.quantifier\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"],\n      \"note\": \"The source text explicitly states 'one inlet and one outlet'. The revision changes the quantifier from 'one' to 'one inlet and one outlet', which is a more complete and accurate representation of the source text. This change is supported by the evidence.\"\n    },\n    \"semantic_context\": {\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_9762d0a229f42fc5dff6\"],\n      \"note\": \"The revision makes several changes to the semantic_context. The knowledge_scope is changed from 'conditional' to 'derivation'. The source text does not explicitly state that the knowledge scope is 'derivation'; it is a local assumption made by the authors. The referent_scope for the head is changed from 'authors' to 'the source-bounded referent described in the complete frozen evidence packet', which is a meta-reference not present in the source. The relation_meaning.note is expanded, but the core issue is that the head entity is not supported. The qualifier_attachments are updated with new scope_ids, but the underlying issue of the unsupported head entity remains.\"\n    }\n  },\n  \"supporting_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"],\n  \"counter_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_9762d0a229f42fc5dff6\"],\n  \"counterevidence_reviewed_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_b12827d451c29851756a\", \"ev_e704aec0fe9da4864552\", \"ev_9762d0a229f42fc5dff6\"],\n  \"rationale_summary\": \"The revision introduces an unsupported head entity 'the authors' analysis in this passage' which is not stated in the source text. The source uses 'we' to refer to the authors, but does not explicitly state that the head is 'the authors' analysis in this passage'. The surface_relation change to 'assumes' is grammatically inconsistent with the original subject 'we' and semantically shifts the meaning from an action performed by the authors to a property of the analysis. The knowledge_scope change to 'derivation' is not supported by the source, which presents this as a local assumption. While the quantifier change is supported, the overall revision is rejected due to the unsupported head entity and the resulting semantic shifts.\"\n}",
+      "reasoning_tokens": null,
+      "request_key": "ad199428824f1e20320aa6e1530f976831df2c813fc5c98b595cbfdd6557737e",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-9df9a997fb4bc9e8",
+      "response_projection": {
+        "canonical_hash": "b29b8f58f0b8b3d2192c1aca7fb16dbdbc167a3d84a45ee683f79b5864843a32",
+        "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+        "operation": "named_fields_to_canonical_array_only",
+        "semantic_values_changed": false,
+        "version": "revision_field_map_v2",
+        "wire_hash": "17d7e7bd8232d7af9b9866647482ed772c6c57a6909e7e80b0324ab7d6879ab5"
+      },
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "supporting_evidence_ids": [
+        "ev_03aa05b48427b1dfbb57"
+      ],
+      "task_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+      "task_type": "candidate_revision_review",
+      "transport_metrics": {
+        "body_bytes_received": 226850,
+        "body_chunk_count": 1049,
+        "chunk_count": 1051,
+        "client_request_id": "attempt_920c3be89f6b421c8e22238827d251aa",
+        "delta_fields": [
+          "content",
+          "role"
+        ],
+        "first_body_byte_ms": 6879.77,
+        "first_chunk_ms": 6890,
+        "first_content_ms": 6890,
+        "gateway_request_id": "202611181710592386753037508583",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 104.591,
+        "max_inter_chunk_gap_ms": 110,
+        "non_content_string_chars": {},
+        "reasoning_chars": 0,
+        "request_body_bytes": 45472,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Wed, 18 Nov 2026 09:11:04 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "202611181710592386753037508583"
+        },
+        "response_headers_ms": 6879.476,
+        "stream": true,
+        "terminal_ms": 30000,
+        "trace": [
+          {
+            "elapsed_ms": 1297.1,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1354.093,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1354.181,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1407.861,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1407.961,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1408.272,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1408.283,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1408.649,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1408.659,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 6878.61,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 6879.721,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 29995.912,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 29995.962,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 29995.981,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 29996.117,
+        "visible_chars": 3814
+      },
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_920c3be89f6b421c8e22238827d251aa",
+          "client_request_id": "attempt_920c3be89f6b421c8e22238827d251aa",
+          "counter_evidence_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "counterevidence_reviewed_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_b12827d451c29851756a",
+            "ev_e704aec0fe9da4864552",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "decision": "reject",
+          "document_version": "4fec510483de49c4ffd1fbf06fe298d450c4d66eb34cc073a15f5757051017f2",
+          "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+          "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57",
+                "ev_9762d0a229f42fc5dff6"
+              ],
+              "field": "head",
+              "note": "The source text uses the first-person plural pronoun 'we' to refer to the authors. The revision changes the head to 'the authors' analysis in this passage', which is a semantic reinterpretation not explicitly stated in the source. The source does not explicitly state that the head is 'the authors' analysis in this passage'; it only uses 'we' as a pronoun. This change introduces a new entity that is not directly supported by the source text.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "surface_relation",
+              "note": "The source text states 'We have also arbitrarily assumed one inlet and one outlet.' The revision changes the surface_relation from 'have arbitrarily assumed' to 'assumes'. This is a grammatical and semantic shift. The source uses the present perfect tense 'have assumed' to indicate an action completed in the past with relevance to the present, while 'assumes' is a simple present tense. More importantly, the subject 'we' (plural) does not agree with 'assumes' (singular). The revision's head 'the authors' analysis in this passage' is singular, which would agree with 'assumes', but this head is not supported by the source. The source does not state that 'the authors' analysis' assumes anything; it states that 'we' (the authors) have assumed.",
+              "status": "not_stated_in_scope"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The source text explicitly states 'one inlet and one outlet'. The revision changes the quantifier from 'one' to 'one inlet and one outlet', which is a more complete and accurate representation of the source text. This change is supported by the evidence.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57",
+                "ev_9762d0a229f42fc5dff6"
+              ],
+              "field": "semantic_context",
+              "note": "The revision makes several changes to the semantic_context. The knowledge_scope is changed from 'conditional' to 'derivation'. The source text does not explicitly state that the knowledge scope is 'derivation'; it is a local assumption made by the authors. The referent_scope for the head is changed from 'authors' to 'the source-bounded referent described in the complete frozen evidence packet', which is a meta-reference not present in the source. The relation_meaning.note is expanded, but the core issue is that the head entity is not supported. The qualifier_attachments are updated with new scope_ids, but the underlying issue of the unsupported head entity remains.",
+              "status": "not_stated_in_scope"
+            }
+          ],
+          "finish_reason": "stop",
+          "gateway_request_id": "202611181710592386753037508583",
+          "input_tokens": 14064,
+          "late_response": false,
+          "latency_ms": 30000,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "output_tokens": 1049,
+          "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+          "provider_started_at": 1794993056.218822,
+          "queue_time_ms": 250,
+          "rationale_summary": "The revision introduces an unsupported head entity 'the authors' analysis in this passage' which is not stated in the source text. The source uses 'we' to refer to the authors, but does not explicitly state that the head is 'the authors' analysis in this passage'. The surface_relation change to 'assumes' is grammatically inconsistent with the original subject 'we' and semantically shifts the meaning from an action performed by the authors to a property of the analysis. The knowledge_scope change to 'derivation' is not supported by the source, which presents this as a local assumption. While the quantifier change is supported, the overall revision is rejected due to the unsupported head entity and the resulting semantic shifts.",
+          "raw_response": "{\n  \"decision\": \"reject\",\n  \"field_reviews\": {\n    \"head\": {\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_9762d0a229f42fc5dff6\"],\n      \"note\": \"The source text uses the first-person plural pronoun 'we' to refer to the authors. The revision changes the head to 'the authors' analysis in this passage', which is a semantic reinterpretation not explicitly stated in the source. The source does not explicitly state that the head is 'the authors' analysis in this passage'; it only uses 'we' as a pronoun. This change introduces a new entity that is not directly supported by the source text.\"\n    },\n    \"surface_relation\": {\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"],\n      \"note\": \"The source text states 'We have also arbitrarily assumed one inlet and one outlet.' The revision changes the surface_relation from 'have arbitrarily assumed' to 'assumes'. This is a grammatical and semantic shift. The source uses the present perfect tense 'have assumed' to indicate an action completed in the past with relevance to the present, while 'assumes' is a simple present tense. More importantly, the subject 'we' (plural) does not agree with 'assumes' (singular). The revision's head 'the authors' analysis in this passage' is singular, which would agree with 'assumes', but this head is not supported by the source. The source does not state that 'the authors' analysis' assumes anything; it states that 'we' (the authors) have assumed.\"\n    },\n    \"qualifiers.quantifier\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"],\n      \"note\": \"The source text explicitly states 'one inlet and one outlet'. The revision changes the quantifier from 'one' to 'one inlet and one outlet', which is a more complete and accurate representation of the source text. This change is supported by the evidence.\"\n    },\n    \"semantic_context\": {\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_9762d0a229f42fc5dff6\"],\n      \"note\": \"The revision makes several changes to the semantic_context. The knowledge_scope is changed from 'conditional' to 'derivation'. The source text does not explicitly state that the knowledge scope is 'derivation'; it is a local assumption made by the authors. The referent_scope for the head is changed from 'authors' to 'the source-bounded referent described in the complete frozen evidence packet', which is a meta-reference not present in the source. The relation_meaning.note is expanded, but the core issue is that the head entity is not supported. The qualifier_attachments are updated with new scope_ids, but the underlying issue of the unsupported head entity remains.\"\n    }\n  },\n  \"supporting_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"],\n  \"counter_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_9762d0a229f42fc5dff6\"],\n  \"counterevidence_reviewed_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_b12827d451c29851756a\", \"ev_e704aec0fe9da4864552\", \"ev_9762d0a229f42fc5dff6\"],\n  \"rationale_summary\": \"The revision introduces an unsupported head entity 'the authors' analysis in this passage' which is not stated in the source text. The source uses 'we' to refer to the authors, but does not explicitly state that the head is 'the authors' analysis in this passage'. The surface_relation change to 'assumes' is grammatically inconsistent with the original subject 'we' and semantically shifts the meaning from an action performed by the authors to a property of the analysis. The knowledge_scope change to 'derivation' is not supported by the source, which presents this as a local assumption. While the quantifier change is supported, the overall revision is rejected due to the unsupported head entity and the resulting semantic shifts.\"\n}",
+          "reasoning_tokens": null,
+          "request_key": "ad199428824f1e20320aa6e1530f976831df2c813fc5c98b595cbfdd6557737e",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-9df9a997fb4bc9e8",
+          "response_projection": {
+            "canonical_hash": "b29b8f58f0b8b3d2192c1aca7fb16dbdbc167a3d84a45ee683f79b5864843a32",
+            "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+            "operation": "named_fields_to_canonical_array_only",
+            "semantic_values_changed": false,
+            "version": "revision_field_map_v2",
+            "wire_hash": "17d7e7bd8232d7af9b9866647482ed772c6c57a6909e7e80b0324ab7d6879ab5"
+          },
+          "response_status": "ok",
+          "returned_model_id": "Qwen",
+          "supporting_evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "task_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "body_bytes_received": 226850,
+            "body_chunk_count": 1049,
+            "chunk_count": 1051,
+            "client_request_id": "attempt_920c3be89f6b421c8e22238827d251aa",
+            "delta_fields": [
+              "content",
+              "role"
+            ],
+            "first_body_byte_ms": 6879.77,
+            "first_chunk_ms": 6890,
+            "first_content_ms": 6890,
+            "gateway_request_id": "202611181710592386753037508583",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 104.591,
+            "max_inter_chunk_gap_ms": 110,
+            "non_content_string_chars": {},
+            "reasoning_chars": 0,
+            "request_body_bytes": 45472,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Wed, 18 Nov 2026 09:11:04 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "202611181710592386753037508583"
+            },
+            "response_headers_ms": 6879.476,
+            "stream": true,
+            "terminal_ms": 30000,
+            "trace": [
+              {
+                "elapsed_ms": 1297.1,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 1354.093,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 1354.181,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 1407.861,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 1407.961,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 1408.272,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 1408.283,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 1408.649,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 1408.659,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 6878.61,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 6879.721,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 29995.912,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 29995.962,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 29995.981,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 29996.117,
+            "visible_chars": 3814
+          },
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "attempt_id": "attempt_e744109c54314bc4a24702921ccc0cb5",
+      "client_request_id": "attempt_e744109c54314bc4a24702921ccc0cb5",
+      "counter_evidence_ids": [],
+      "counterevidence_reviewed_ids": [
+        "ev_03aa05b48427b1dfbb57",
+        "ev_9762d0a229f42fc5dff6",
+        "ev_b12827d451c29851756a",
+        "ev_e704aec0fe9da4864552"
+      ],
+      "decision": "approve",
+      "document_version": "4fec510483de49c4ffd1fbf06fe298d450c4d66eb34cc073a15f5757051017f2",
+      "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+      "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "head",
+          "note": "The source uses 'We', which refers to the authors of the text. Normalizing this to 'the authors' analysis in this passage' correctly identifies the source of the assumption within the provided context.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "surface_relation",
+          "note": "The simplification from 'have arbitrarily assumed' to 'assumes' preserves the core semantic meaning.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "The revision corrects the underspecified 'one' to 'one inlet and one outlet', which is the exact phrasing in the source.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_e704aec0fe9da4864552",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "field": "semantic_context",
+          "note": "The update to 'derivation' for knowledge_scope is accurate as the assumption is made to simplify the derivation of Equations 2.45 and 2.46. The refined qualifier attachments and relation note accurately reflect the conjunctive nature of the assumption (one inlet AND one outlet).",
+          "status": "supported"
+        }
+      ],
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111817112952401011259658442",
+      "input_tokens": 14803,
+      "late_response": false,
+      "latency_ms": 61500,
+      "model_family": "gemma",
+      "model_id": "Gemma",
+      "model_identity": "gemma",
+      "object_revision": 1,
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "output_tokens": 1830,
+      "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+      "provider_started_at": 1794993086.6842065,
+      "queue_time_ms": 249,
+      "rationale_summary": "The revision improves the precision of the quantifier, normalizes the head from a first-person pronoun to a descriptive referent, and correctly identifies the knowledge scope as a derivation. All changes are grounded in the provided evidence.",
+      "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": {\n    \"head\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\"\n      ],\n      \"note\": \"The source uses 'We', which refers to the authors of the text. Normalizing this to 'the authors' analysis in this passage' correctly identifies the source of the assumption within the provided context.\"\n    },\n    \"surface_relation\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\"\n      ],\n      \"note\": \"The simplification from 'have arbitrarily assumed' to 'assumes' preserves the core semantic meaning.\"\n    },\n    \"qualifiers.quantifier\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\"\n      ],\n      \"note\": \"The revision corrects the underspecified 'one' to 'one inlet and one outlet', which is the exact phrasing in the source.\"\n    },\n    \"semantic_context\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\",\n        \"ev_e704aec0fe9da4864552\",\n        \"ev_9762d0a229f42fc5dff6\"\n      ],\n      \"note\": \"The update to 'derivation' for knowledge_scope is accurate as the assumption is made to simplify the derivation of Equations 2.45 and 2.46. The refined qualifier attachments and relation note accurately reflect the conjunctive nature of the assumption (one inlet AND one outlet).\"\n    }\n  },\n  \"supporting_evidence_ids\": [\n    \"ev_03aa05b48427b1dfbb57\",\n    \"ev_e704aec0fe9da4864552\",\n    \"ev_9762d0a229f42fc5dff6\"\n  ],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [\n    \"ev_03aa05b48427b1dfbb57\",\n    \"ev_9762d0a229f42fc5dff6\",\n    \"ev_b12827d451c29851756a\",\n    \"ev_e704aec0fe9da4864552\"\n  ],\n  \"rationale_summary\": \"The revision improves the precision of the quantifier, normalizes the head from a first-person pronoun to a descriptive referent, and correctly identifies the knowledge scope as a derivation. All changes are grounded in the provided evidence.\"\n}",
+      "reasoning_tokens": 1124,
+      "request_key": "86c835bdab5aa8a22851076e57e22fcef2894297882ed357a16ad0bd6a448f41",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-8072ce77328287ee",
+      "response_projection": {
+        "canonical_hash": "68f51c5644a5f675c248750abfa89ff27540c992649e3af7bf8c1ed910a0cf9d",
+        "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+        "operation": "named_fields_to_canonical_array_only",
+        "semantic_values_changed": false,
+        "version": "revision_field_map_v2",
+        "wire_hash": "0f602ce966860da736e2c0d2e0e168ffeec17a917f9d777f32927dc9b19861c9"
+      },
+      "response_status": "ok",
+      "returned_model_id": "Gemma",
+      "supporting_evidence_ids": [
+        "ev_03aa05b48427b1dfbb57",
+        "ev_e704aec0fe9da4864552",
+        "ev_9762d0a229f42fc5dff6"
+      ],
+      "task_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+      "task_type": "candidate_revision_review",
+      "transport_metrics": {
+        "body_bytes_received": 368614,
+        "body_chunk_count": 1686,
+        "chunk_count": 1691,
+        "client_request_id": "attempt_e744109c54314bc4a24702921ccc0cb5",
+        "delta_fields": [
+          "content",
+          "reasoning",
+          "role"
+        ],
+        "first_body_byte_ms": 6839.761,
+        "first_chunk_ms": 6843,
+        "first_content_ms": 40390,
+        "gateway_request_id": "2026111817112952401011259658442",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 124.554,
+        "max_inter_chunk_gap_ms": 125,
+        "non_content_string_chars": {
+          "reasoning": 4032
+        },
+        "reasoning_chars": 4032,
+        "request_body_bytes": 45504,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Wed, 18 Nov 2026 09:11:34 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111817112952401011259658442"
+        },
+        "response_headers_ms": 6839.534,
+        "stream": true,
+        "terminal_ms": 61483,
+        "trace": [
+          {
+            "elapsed_ms": 1338.982,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1403.989,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1404.045,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1461.653,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1461.763,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1462.149,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1462.16,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1462.451,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1462.46,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 6838.786,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 6839.714,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 61499.572,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 61499.617,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 61499.636,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 61499.768,
+        "visible_chars": 1990
+      },
+      "voter_id": "judge_b",
+      "attempts": [
+        {
+          "attempt_id": "attempt_e744109c54314bc4a24702921ccc0cb5",
+          "client_request_id": "attempt_e744109c54314bc4a24702921ccc0cb5",
+          "counter_evidence_ids": [],
+          "counterevidence_reviewed_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_9762d0a229f42fc5dff6",
+            "ev_b12827d451c29851756a",
+            "ev_e704aec0fe9da4864552"
+          ],
+          "decision": "approve",
+          "document_version": "4fec510483de49c4ffd1fbf06fe298d450c4d66eb34cc073a15f5757051017f2",
+          "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+          "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "head",
+              "note": "The source uses 'We', which refers to the authors of the text. Normalizing this to 'the authors' analysis in this passage' correctly identifies the source of the assumption within the provided context.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "surface_relation",
+              "note": "The simplification from 'have arbitrarily assumed' to 'assumes' preserves the core semantic meaning.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "The revision corrects the underspecified 'one' to 'one inlet and one outlet', which is the exact phrasing in the source.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57",
+                "ev_e704aec0fe9da4864552",
+                "ev_9762d0a229f42fc5dff6"
+              ],
+              "field": "semantic_context",
+              "note": "The update to 'derivation' for knowledge_scope is accurate as the assumption is made to simplify the derivation of Equations 2.45 and 2.46. The refined qualifier attachments and relation note accurately reflect the conjunctive nature of the assumption (one inlet AND one outlet).",
+              "status": "supported"
+            }
+          ],
+          "finish_reason": "stop",
+          "gateway_request_id": "2026111817112952401011259658442",
+          "input_tokens": 14803,
+          "late_response": false,
+          "latency_ms": 61500,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "output_tokens": 1830,
+          "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+          "provider_started_at": 1794993086.6842065,
+          "queue_time_ms": 249,
+          "rationale_summary": "The revision improves the precision of the quantifier, normalizes the head from a first-person pronoun to a descriptive referent, and correctly identifies the knowledge scope as a derivation. All changes are grounded in the provided evidence.",
+          "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": {\n    \"head\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\"\n      ],\n      \"note\": \"The source uses 'We', which refers to the authors of the text. Normalizing this to 'the authors' analysis in this passage' correctly identifies the source of the assumption within the provided context.\"\n    },\n    \"surface_relation\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\"\n      ],\n      \"note\": \"The simplification from 'have arbitrarily assumed' to 'assumes' preserves the core semantic meaning.\"\n    },\n    \"qualifiers.quantifier\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\"\n      ],\n      \"note\": \"The revision corrects the underspecified 'one' to 'one inlet and one outlet', which is the exact phrasing in the source.\"\n    },\n    \"semantic_context\": {\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_03aa05b48427b1dfbb57\",\n        \"ev_e704aec0fe9da4864552\",\n        \"ev_9762d0a229f42fc5dff6\"\n      ],\n      \"note\": \"The update to 'derivation' for knowledge_scope is accurate as the assumption is made to simplify the derivation of Equations 2.45 and 2.46. The refined qualifier attachments and relation note accurately reflect the conjunctive nature of the assumption (one inlet AND one outlet).\"\n    }\n  },\n  \"supporting_evidence_ids\": [\n    \"ev_03aa05b48427b1dfbb57\",\n    \"ev_e704aec0fe9da4864552\",\n    \"ev_9762d0a229f42fc5dff6\"\n  ],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [\n    \"ev_03aa05b48427b1dfbb57\",\n    \"ev_9762d0a229f42fc5dff6\",\n    \"ev_b12827d451c29851756a\",\n    \"ev_e704aec0fe9da4864552\"\n  ],\n  \"rationale_summary\": \"The revision improves the precision of the quantifier, normalizes the head from a first-person pronoun to a descriptive referent, and correctly identifies the knowledge scope as a derivation. All changes are grounded in the provided evidence.\"\n}",
+          "reasoning_tokens": 1124,
+          "request_key": "86c835bdab5aa8a22851076e57e22fcef2894297882ed357a16ad0bd6a448f41",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-8072ce77328287ee",
+          "response_projection": {
+            "canonical_hash": "68f51c5644a5f675c248750abfa89ff27540c992649e3af7bf8c1ed910a0cf9d",
+            "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+            "operation": "named_fields_to_canonical_array_only",
+            "semantic_values_changed": false,
+            "version": "revision_field_map_v2",
+            "wire_hash": "0f602ce966860da736e2c0d2e0e168ffeec17a917f9d777f32927dc9b19861c9"
+          },
+          "response_status": "ok",
+          "returned_model_id": "Gemma",
+          "supporting_evidence_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_e704aec0fe9da4864552",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "task_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "body_bytes_received": 368614,
+            "body_chunk_count": 1686,
+            "chunk_count": 1691,
+            "client_request_id": "attempt_e744109c54314bc4a24702921ccc0cb5",
+            "delta_fields": [
+              "content",
+              "reasoning",
+              "role"
+            ],
+            "first_body_byte_ms": 6839.761,
+            "first_chunk_ms": 6843,
+            "first_content_ms": 40390,
+            "gateway_request_id": "2026111817112952401011259658442",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 124.554,
+            "max_inter_chunk_gap_ms": 125,
+            "non_content_string_chars": {
+              "reasoning": 4032
+            },
+            "reasoning_chars": 4032,
+            "request_body_bytes": 45504,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Wed, 18 Nov 2026 09:11:34 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "2026111817112952401011259658442"
+            },
+            "response_headers_ms": 6839.534,
+            "stream": true,
+            "terminal_ms": 61483,
+            "trace": [
+              {
+                "elapsed_ms": 1338.982,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 1403.989,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 1404.045,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 1461.653,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 1461.763,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 1462.149,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 1462.16,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 1462.451,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 1462.46,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 6838.786,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 6839.714,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 61499.572,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 61499.617,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 61499.636,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 61499.768,
+            "visible_chars": 1990
+          },
+          "voter_id": "judge_b",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "attempt_id": "attempt_69cbc8f08d1b4f05905b879b27565e39",
+      "client_request_id": "attempt_69cbc8f08d1b4f05905b879b27565e39",
+      "counter_evidence_ids": [
+        "ev_03aa05b48427b1dfbb57"
+      ],
+      "counterevidence_reviewed_ids": [
+        "ev_03aa05b48427b1dfbb57",
+        "ev_b12827d451c29851756a",
+        "ev_e704aec0fe9da4864552",
+        "ev_9762d0a229f42fc5dff6"
+      ],
+      "decision": "reject",
+      "document_version": "4fec510483de49c4ffd1fbf06fe298d450c4d66eb34cc073a15f5757051017f2",
+      "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+      "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+      "field_reviews": [
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "head",
+          "note": "Source says 'We have also arbitrarily assumed...'. Replacing the authorial agent 'we' with 'the authors' analysis in this passage' changes the entity from the authors to their analysis, which is not the same referent. The source does not state that an 'analysis' assumed anything; the authors did. This is an unsupported entity substitution.",
+          "status": "unknown"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "surface_relation",
+          "note": "Source predicate is 'have also arbitrarily assumed'. The revision drops 'arbitrarily' and the perfect aspect, reducing to 'assumes'. The 'arbitrarily' modifier is a material qualifier of the assumption and is lost from the surface relation (though retained in qualifier_attachments). The change is not a faithful expression of the source predicate.",
+          "status": "unknown"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "field": "qualifiers.quantifier",
+          "note": "Source explicitly states 'one inlet and one outlet'. Expanding the quantifier from 'one' to 'one inlet and one outlet' is grounded in the quote.",
+          "status": "supported"
+        },
+        {
+          "evidence_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_e704aec0fe9da4864552"
+          ],
+          "field": "semantic_context",
+          "note": "The knowledge_scope change from 'conditional' to 'derivation' is not clearly grounded; the sentence is an assumption within a derivation, and the source does not label it as a derivation scope. The head entity_mention change to 'the authors' analysis in this passage' repeats the unsupported entity substitution. The qualifier_attachment scope_id changes are cosmetic, but the head referent_scope 'the source-bounded referent described in the complete frozen evidence packet' is vague and not traceable to the original 'we'/authors. The relation_meaning note is reasonable but does not cure the head and scope issues.",
+          "status": "unknown"
+        }
+      ],
+      "finish_reason": "stop",
+      "gateway_request_id": null,
+      "input_tokens": 13117,
+      "late_response": false,
+      "latency_ms": 5625,
+      "model_family": "deepseek",
+      "model_id": "deepseek-flash",
+      "model_identity": "deepseek-flash",
+      "object_revision": 1,
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "output_tokens": 695,
+      "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+      "provider_started_at": 1794993148.638681,
+      "queue_time_ms": 246,
+      "rationale_summary": "Reject. The quantifier expansion to 'one inlet and one outlet' is supported by the source. However, the head change from 'we' (the authors) to 'the authors' analysis in this passage' is an unsupported entity substitution: the source states the authors assumed, not an analysis. The surface_relation change drops the material modifier 'arbitrarily' and the perfect aspect, losing source meaning. The knowledge_scope change from conditional to derivation is not grounded in the evidence. These unsupported changes require rejection.",
+      "raw_response": "{\"decision\": \"reject\", \"field_reviews\": {\"head\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"note\": \"Source says 'We have also arbitrarily assumed...'. Replacing the authorial agent 'we' with 'the authors' analysis in this passage' changes the entity from the authors to their analysis, which is not the same referent. The source does not state that an 'analysis' assumed anything; the authors did. This is an unsupported entity substitution.\"}, \"surface_relation\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"note\": \"Source predicate is 'have also arbitrarily assumed'. The revision drops 'arbitrarily' and the perfect aspect, reducing to 'assumes'. The 'arbitrarily' modifier is a material qualifier of the assumption and is lost from the surface relation (though retained in qualifier_attachments). The change is not a faithful expression of the source predicate.\"}, \"qualifiers.quantifier\": {\"status\": \"supported\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"note\": \"Source explicitly states 'one inlet and one outlet'. Expanding the quantifier from 'one' to 'one inlet and one outlet' is grounded in the quote.\"}, \"semantic_context\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_e704aec0fe9da4864552\"], \"note\": \"The knowledge_scope change from 'conditional' to 'derivation' is not clearly grounded; the sentence is an assumption within a derivation, and the source does not label it as a derivation scope. The head entity_mention change to 'the authors' analysis in this passage' repeats the unsupported entity substitution. The qualifier_attachment scope_id changes are cosmetic, but the head referent_scope 'the source-bounded referent described in the complete frozen evidence packet' is vague and not traceable to the original 'we'/authors. The relation_meaning note is reasonable but does not cure the head and scope issues.\"}}, \"supporting_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"counter_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"counterevidence_reviewed_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_b12827d451c29851756a\", \"ev_e704aec0fe9da4864552\", \"ev_9762d0a229f42fc5dff6\"], \"rationale_summary\": \"Reject. The quantifier expansion to 'one inlet and one outlet' is supported by the source. However, the head change from 'we' (the authors) to 'the authors' analysis in this passage' is an unsupported entity substitution: the source states the authors assumed, not an analysis. The surface_relation change drops the material modifier 'arbitrarily' and the perfect aspect, losing source meaning. The knowledge_scope change from conditional to derivation is not grounded in the evidence. These unsupported changes require rejection.\"}",
+      "reasoning_tokens": null,
+      "request_key": "97fa2a418edac269e4694c6813e4ea429fba0897cc95e83516e350241ef1df79",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "c28b6207-fe6b-413b-a698-a0ad5f0d4f64",
+      "response_projection": {
+        "canonical_hash": "8a9268b24896dcb5379cbca3620186a2733b17ed0df7cb34cb8c92208cb83581",
+        "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+        "operation": "named_fields_to_canonical_array_only",
+        "semantic_values_changed": false,
+        "version": "revision_field_map_v2",
+        "wire_hash": "6a423859d434bb545a672afc89bca522a33a5739a88d660f2789efc2dfee9be7"
+      },
+      "response_status": "ok",
+      "returned_model_id": "deepseek-flash",
+      "supporting_evidence_ids": [
+        "ev_03aa05b48427b1dfbb57"
+      ],
+      "task_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+      "task_type": "candidate_revision_review",
+      "transport_metrics": {
+        "body_bytes_received": 1470,
+        "body_chunk_count": 2,
+        "client_request_id": "attempt_69cbc8f08d1b4f05905b879b27565e39",
+        "first_body_byte_ms": 5611.438,
+        "gateway_request_id": null,
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 0.167,
+        "request_body_bytes": 45459,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-encoding": "gzip",
+          "content-type": "application/json",
+          "date": "Wed, 18 Nov 2026 09:12:31 GMT",
+          "server": "openresty",
+          "transfer-encoding": "chunked"
+        },
+        "response_headers_ms": 1787.609,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 1435.191,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1501.38,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1501.442,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1555.872,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1556.035,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1556.464,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1556.477,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1556.754,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1556.764,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 1786.94,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 1787.722,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 5611.719,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 5611.774,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 5611.795,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 5618.981
+      },
+      "voter_id": "judge_c",
+      "attempts": [
+        {
+          "attempt_id": "attempt_69cbc8f08d1b4f05905b879b27565e39",
+          "client_request_id": "attempt_69cbc8f08d1b4f05905b879b27565e39",
+          "counter_evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "counterevidence_reviewed_ids": [
+            "ev_03aa05b48427b1dfbb57",
+            "ev_b12827d451c29851756a",
+            "ev_e704aec0fe9da4864552",
+            "ev_9762d0a229f42fc5dff6"
+          ],
+          "decision": "reject",
+          "document_version": "4fec510483de49c4ffd1fbf06fe298d450c4d66eb34cc073a15f5757051017f2",
+          "draft_hash": "460f49af2b15422d3dcc7ccbcf51fcf03824f5fdaa3c243db0352274f14c3870",
+          "evidence_hash": "918bd7f20ce58850c8ddf771a0c6e0880e8affd04104bef3063da1431f1d0536",
+          "field_reviews": [
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "head",
+              "note": "Source says 'We have also arbitrarily assumed...'. Replacing the authorial agent 'we' with 'the authors' analysis in this passage' changes the entity from the authors to their analysis, which is not the same referent. The source does not state that an 'analysis' assumed anything; the authors did. This is an unsupported entity substitution.",
+              "status": "unknown"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "surface_relation",
+              "note": "Source predicate is 'have also arbitrarily assumed'. The revision drops 'arbitrarily' and the perfect aspect, reducing to 'assumes'. The 'arbitrarily' modifier is a material qualifier of the assumption and is lost from the surface relation (though retained in qualifier_attachments). The change is not a faithful expression of the source predicate.",
+              "status": "unknown"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57"
+              ],
+              "field": "qualifiers.quantifier",
+              "note": "Source explicitly states 'one inlet and one outlet'. Expanding the quantifier from 'one' to 'one inlet and one outlet' is grounded in the quote.",
+              "status": "supported"
+            },
+            {
+              "evidence_ids": [
+                "ev_03aa05b48427b1dfbb57",
+                "ev_e704aec0fe9da4864552"
+              ],
+              "field": "semantic_context",
+              "note": "The knowledge_scope change from 'conditional' to 'derivation' is not clearly grounded; the sentence is an assumption within a derivation, and the source does not label it as a derivation scope. The head entity_mention change to 'the authors' analysis in this passage' repeats the unsupported entity substitution. The qualifier_attachment scope_id changes are cosmetic, but the head referent_scope 'the source-bounded referent described in the complete frozen evidence packet' is vague and not traceable to the original 'we'/authors. The relation_meaning note is reasonable but does not cure the head and scope issues.",
+              "status": "unknown"
+            }
+          ],
+          "finish_reason": "stop",
+          "gateway_request_id": null,
+          "input_tokens": 13117,
+          "late_response": false,
+          "latency_ms": 5625,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "output_tokens": 695,
+          "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+          "provider_started_at": 1794993148.638681,
+          "queue_time_ms": 246,
+          "rationale_summary": "Reject. The quantifier expansion to 'one inlet and one outlet' is supported by the source. However, the head change from 'we' (the authors) to 'the authors' analysis in this passage' is an unsupported entity substitution: the source states the authors assumed, not an analysis. The surface_relation change drops the material modifier 'arbitrarily' and the perfect aspect, losing source meaning. The knowledge_scope change from conditional to derivation is not grounded in the evidence. These unsupported changes require rejection.",
+          "raw_response": "{\"decision\": \"reject\", \"field_reviews\": {\"head\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"note\": \"Source says 'We have also arbitrarily assumed...'. Replacing the authorial agent 'we' with 'the authors' analysis in this passage' changes the entity from the authors to their analysis, which is not the same referent. The source does not state that an 'analysis' assumed anything; the authors did. This is an unsupported entity substitution.\"}, \"surface_relation\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"note\": \"Source predicate is 'have also arbitrarily assumed'. The revision drops 'arbitrarily' and the perfect aspect, reducing to 'assumes'. The 'arbitrarily' modifier is a material qualifier of the assumption and is lost from the surface relation (though retained in qualifier_attachments). The change is not a faithful expression of the source predicate.\"}, \"qualifiers.quantifier\": {\"status\": \"supported\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"note\": \"Source explicitly states 'one inlet and one outlet'. Expanding the quantifier from 'one' to 'one inlet and one outlet' is grounded in the quote.\"}, \"semantic_context\": {\"status\": \"unknown\", \"evidence_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_e704aec0fe9da4864552\"], \"note\": \"The knowledge_scope change from 'conditional' to 'derivation' is not clearly grounded; the sentence is an assumption within a derivation, and the source does not label it as a derivation scope. The head entity_mention change to 'the authors' analysis in this passage' repeats the unsupported entity substitution. The qualifier_attachment scope_id changes are cosmetic, but the head referent_scope 'the source-bounded referent described in the complete frozen evidence packet' is vague and not traceable to the original 'we'/authors. The relation_meaning note is reasonable but does not cure the head and scope issues.\"}}, \"supporting_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"counter_evidence_ids\": [\"ev_03aa05b48427b1dfbb57\"], \"counterevidence_reviewed_ids\": [\"ev_03aa05b48427b1dfbb57\", \"ev_b12827d451c29851756a\", \"ev_e704aec0fe9da4864552\", \"ev_9762d0a229f42fc5dff6\"], \"rationale_summary\": \"Reject. The quantifier expansion to 'one inlet and one outlet' is supported by the source. However, the head change from 'we' (the authors) to 'the authors' analysis in this passage' is an unsupported entity substitution: the source states the authors assumed, not an analysis. The surface_relation change drops the material modifier 'arbitrarily' and the perfect aspect, losing source meaning. The knowledge_scope change from conditional to derivation is not grounded in the evidence. These unsupported changes require rejection.\"}",
+          "reasoning_tokens": null,
+          "request_key": "97fa2a418edac269e4694c6813e4ea429fba0897cc95e83516e350241ef1df79",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "c28b6207-fe6b-413b-a698-a0ad5f0d4f64",
+          "response_projection": {
+            "canonical_hash": "8a9268b24896dcb5379cbca3620186a2733b17ed0df7cb34cb8c92208cb83581",
+            "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+            "operation": "named_fields_to_canonical_array_only",
+            "semantic_values_changed": false,
+            "version": "revision_field_map_v2",
+            "wire_hash": "6a423859d434bb545a672afc89bca522a33a5739a88d660f2789efc2dfee9be7"
+          },
+          "response_status": "ok",
+          "returned_model_id": "deepseek-flash",
+          "supporting_evidence_ids": [
+            "ev_03aa05b48427b1dfbb57"
+          ],
+          "task_id": "draft_bdc628dc5dc5496ba0a7c73adc1ea432",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "body_bytes_received": 1470,
+            "body_chunk_count": 2,
+            "client_request_id": "attempt_69cbc8f08d1b4f05905b879b27565e39",
+            "first_body_byte_ms": 5611.438,
+            "gateway_request_id": null,
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 0.167,
+            "request_body_bytes": 45459,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-encoding": "gzip",
+              "content-type": "application/json",
+              "date": "Wed, 18 Nov 2026 09:12:31 GMT",
+              "server": "openresty",
+              "transfer-encoding": "chunked"
+            },
+            "response_headers_ms": 1787.609,
+            "stream": false,
+            "trace": [
+              {
+                "elapsed_ms": 1435.191,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 1501.38,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 1501.442,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 1555.872,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 1556.035,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 1556.464,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 1556.477,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 1556.754,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 1556.764,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 1786.94,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 1787.722,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 5611.719,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 5611.774,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 5611.795,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 5618.981
+          },
+          "voter_id": "judge_c",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3,
+    "vote_weighting": {
+      "mode": "dynamic",
+      "version": "axis_weighting_v1",
+      "feature_version": "check_completion_v1",
+      "thresholds": {
+        "source": 0.7,
+        "expression": 0.7,
+        "mapping": 0.7,
+        "scope": 0.7
+      },
+      "min_available_mass": 0.65,
+      "min_opinions": 2,
+      "min_families": 2,
+      "max_seat_weight": 0.49,
+      "adaptation_floor": 0.25,
+      "prior": 0.5,
+      "prior_strength": 4.0,
+      "min_history_samples": 8,
+      "reliability": {
+        "data_version": "cold_start",
+        "partition": "development",
+        "models": {}
+      }
+    }
+  },
+  "weight_snapshot": {
+    "version": "revision_weights_v1",
+    "by_check": {
+      "entity_reference": {
+        "version": "axis_weighting_v1",
+        "kind": "focused_review",
+        "mode": "dynamic",
+        "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+        "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+        "votes_hash": "222ec10db8c4af46bce6718cac9536c9d3885ab2a7842aa641c53f3013714709",
+        "axes": {
+          "expression": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          },
+          "source": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          }
+        },
+        "snapshot_id": "weights_bb1ab7494fad9051bdfa3b7cf8fdfc6cba0c9fd183d8b90ebcd1f6f34b90b944"
+      },
+      "qualifiers": {
+        "version": "axis_weighting_v1",
+        "kind": "focused_review",
+        "mode": "dynamic",
+        "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+        "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+        "votes_hash": "222ec10db8c4af46bce6718cac9536c9d3885ab2a7842aa641c53f3013714709",
+        "axes": {
+          "expression": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          },
+          "source": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          }
+        },
+        "snapshot_id": "weights_bb1ab7494fad9051bdfa3b7cf8fdfc6cba0c9fd183d8b90ebcd1f6f34b90b944"
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+test_exporter_annotation_helper_preserves_property_definition (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_round_trip_preserves_source_definition_and_formal_identity (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests) ... FAIL
+test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests) ... ERROR
+test_proposal_does_not_mutate_candidate_and_approval_requires_new_version (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_504_without_provider_id_keeps_client_correlation_and_unknown (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_competency_fail_and_invalid_json_keep_metadata_and_judgment (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_contexts_are_isolated_for_simultaneous_requests (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_fact_timeout_keeps_latest_transport_metrics_without_partial_response (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_http504_keeps_gateway_identity_and_unknown_state (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_interrupted_stream_retains_diagnostics_but_never_partial_text (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_nonstream_headers_and_first_byte_are_kept (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_ontology_wrapper_keeps_metadata_for_valid_and_bad_json (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_original_reviewer_invalid_json_keeps_transport_metadata (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_real_sdk_stream_keeps_timing_usage_and_safe_ids_without_secrets (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_sqlite_keeps_gateway_id_separate_from_body_id_and_unknown (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_ancestor_approval_does_not_close_later_revision_obligation (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_current_source_objection_remains_open (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_missing_grounded_qualifier_check_remains_open (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_revision_number_alone_without_verified_expression_change_is_insufficient (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_verified_changed_expression_can_resolve_old_insufficiency_with_same_evidence (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_mapping_change_carries_published_class_definitions_bound_to_original_release (tests.test_revision_mapping_context.RevisionMappingContextTests) ... ok
+test_unchanged_patch_cannot_manufacture_a_new_revision_review (tests.test_revision_mapping_context.RevisionMappingContextTests) ... ok
+test_imported_revision_ancestry_does_not_become_a_new_experiment_operation (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_isolated_runner_drains_new_rebind_jobs_but_bounds_the_queue (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_late_subscription_rebind_preserves_original_publication_receipt (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_mapping_proposal_review_isolated_application_and_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_no_new_information_stops_without_forcing_agreement (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_semantic_revision_keeps_modality_and_requires_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+
+======================================================================
+ERROR: test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_completion.py", line 36, in test_only_unknown_paired_fields_can_be_proposed
+    self.assertEqual(validate_completion_action(action(self.change,self.ids),self.c,self.bundle)['arguments']['changes'],self.change)
+  File "D:\knowledge-huopao\review_agent\qualifier_completion.py", line 43, in validate_completion_action
+    if not set(ids)<=allowed:raise ValueError('completion references unavailable source evidence')
+ValueError: completion references unavailable source evidence
+
+======================================================================
+FAIL: test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_completion.py", line 76, in test_agent_can_abstain_without_default_positive_or_revision
+    self.assertEqual(result['status'],'unresolved')
+AssertionError: 'proposal_unavailable' != 'unresolved'
+- proposal_unavailable
++ unresolved
+
+
+----------------------------------------------------------------------
+Ran 29 tests in 45.474s
+
+FAILED (failures=1, errors=1)

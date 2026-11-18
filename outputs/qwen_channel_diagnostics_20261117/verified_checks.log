@@ -1,0 +1,256 @@
+test_first_minimal_failure_and_two_unknowns_stop_more_probes (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_http200_shape_failure_is_transport_evidence_but_not_strict_schema_proof (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_nonce_reply_is_not_a_review_vote (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_schema_failure_does_not_trigger_equivalent_request_resend (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_sized_input_is_generated_and_bound (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_tampered_probe_never_calls_provider (tests.test_channel_probe.ChannelProbeTests) ... ok
+test_competency_fail_and_invalid_json_keep_metadata_and_judgment (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_contexts_are_isolated_for_simultaneous_requests (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_fact_timeout_keeps_latest_transport_metrics_without_partial_response (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_http504_keeps_gateway_identity_and_unknown_state (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_interrupted_stream_retains_diagnostics_but_never_partial_text (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_nonstream_headers_and_first_byte_are_kept (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_ontology_wrapper_keeps_metadata_for_valid_and_bad_json (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_original_reviewer_invalid_json_keeps_transport_metadata (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_outgoing_body_size_is_recorded_without_body_or_credentials (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_real_sdk_stream_keeps_timing_usage_and_safe_ids_without_secrets (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_sqlite_keeps_gateway_id_separate_from_body_id_and_unknown (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_billing_pauses_batch_and_does_not_dispatch_remaining_candidates (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_expired_agent_checkpoint_does_not_reuse_an_expired_execution_deadline (tests.test_review_execution.BatchExecutionTests) ... ok
+test_explicit_force_run_really_sends_a_fresh_model_request (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_healthy_checkpoints_skip_and_incomplete_votes_require_targeted_recovery (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_http_job_pause_status_is_terminal_until_explicit_resume (tests.test_review_execution.BatchExecutionTests) ... ok
+test_late_result_cannot_commit_a_decision (tests.test_review_execution.BatchExecutionTests) ... ok
+test_model_or_contract_change_does_not_reuse_checkpoint (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_persistently_locked_status_file_does_not_interrupt_review (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_real_sdk_402_pauses_http_service_and_persists_audit (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_real_sdk_cli_completes_and_resumes_without_another_request (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_real_sdk_planner_is_injected_into_spawned_candidate_worker (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_status_file_recovers_on_next_publish_after_lock_is_released (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_status_write_failure_does_not_mask_a_billing_pause (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_total_deadline_kills_blocked_process_and_keeps_audit (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_two_candidates_actually_overlap_and_leave_no_children (tests.test_review_execution.BatchExecutionTests) ... ERROR
+test_402_does_not_wait_for_other_model_sockets (tests.test_review_execution.RequestDeadlineTests) ... ok
+test_402_is_not_retried (tests.test_review_execution.RequestDeadlineTests) ... ok
+test_blocked_request_returns_by_its_deadline (tests.test_review_execution.RequestDeadlineTests) ... ok
+test_empty_initial_response_is_not_reported_as_a_substantive_judgment (tests.test_missing_vote_causes.MissingVoteCausesTests) ... ok
+test_empty_patch_keeps_usage_finish_and_original_without_inventing_a_repair (tests.test_missing_vote_causes.MissingVoteCausesTests) ... ok
+test_even_parseable_token_limited_patch_never_becomes_a_vote (tests.test_missing_vote_causes.MissingVoteCausesTests) ... ok
+test_final_output_instruction_is_frozen_and_old_v2_wire_is_unchanged (tests.test_missing_vote_causes.MissingVoteCausesTests) ... ok
+test_new_prompt_does_not_accept_absent_counter_review_or_contradictory_findings (tests.test_missing_vote_causes.MissingVoteCausesTests) ... ok
+test_new_prompt_has_separate_identity_and_historical_prompt_is_exact (tests.test_missing_vote_causes.MissingVoteCausesTests) ... ok
+test_current_v8_qwen_schema_capability_is_bound_to_the_actual_endpoint_and_stream (tests.test_missing_vote_causes.StreamingDiagnosticsTests) ... ok
+test_interrupted_stream_retains_untrusted_partial_diagnostics_and_remains_unknown (tests.test_missing_vote_causes.StreamingDiagnosticsTests) ... ok
+test_missing_terminal_marker_is_never_a_complete_response (tests.test_missing_vote_causes.StreamingDiagnosticsTests) ... ok
+test_reasoning_only_output_exposes_counts_without_retaining_private_text (tests.test_missing_vote_causes.StreamingDiagnosticsTests) ... ok
+test_exporter_annotation_helper_preserves_property_definition (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_round_trip_preserves_source_definition_and_formal_identity (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_long_rationale_is_projected_without_changing_fields_or_resending (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_proposal_does_not_mutate_candidate_and_approval_requires_new_version (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_unknown_request_remains_fenced_and_is_reported_without_resend (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_504_without_provider_id_keeps_client_correlation_and_unknown (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_revision_review_preserves_gateway_metadata_and_rejects_truncation (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_a_consistent_independent_negative_is_valid_and_remains_negative (tests.test_response_consistency.ConsistencyDiagnosticTests) ... ok
+test_all_recorded_failures_are_explained_without_rewriting (tests.test_response_consistency.ConsistencyDiagnosticTests) ... ok
+test_inspected_material_does_not_mean_dismissed_or_positive (tests.test_response_consistency.ConsistencyDiagnosticTests) ... ok
+test_malformed_structures_do_not_break_diagnostics (tests.test_response_consistency.ConsistencyDiagnosticTests) ... ok
+test_historical_v4_prompt_and_wire_remain_separate (tests.test_response_consistency.ConsistencyPromptTests) ... ok
+test_new_policy_is_sent_and_derived_from_actual_allowed_checks (tests.test_response_consistency.ConsistencyPromptTests) ... ok
+test_original_invalid_reply_is_retained_with_structured_diagnostics (tests.test_response_consistency.ConsistencyPromptTests) ... ok
+test_policy_is_bound_into_new_proposal_digest_without_rewriting_earlier_tickets (tests.test_response_consistency.ConsistencyPromptTests) ... ok
+test_tampered_policy_is_rejected_before_provider_dispatch (tests.test_response_consistency.ConsistencyPromptTests) ... ok
+
+======================================================================
+ERROR: test_billing_pauses_batch_and_does_not_dispatch_remaining_candidates (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 208, in test_billing_pauses_batch_and_does_not_dispatch_remaining_candidates
+    result = self.run_batch({**self.config, "test_mode": "paused"}, status_file=status)
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_explicit_force_run_really_sends_a_fresh_model_request (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 357, in test_explicit_force_run_really_sends_a_fresh_model_request
+    self.assertEqual(run_review_batch(self.repo, "real", config)["completed"], 1)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_healthy_checkpoints_skip_and_incomplete_votes_require_targeted_recovery (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 121, in test_healthy_checkpoints_skip_and_incomplete_votes_require_targeted_recovery
+    first = self.run_batch(candidate_ids=["c0"])
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_model_or_contract_change_does_not_reuse_checkpoint (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 233, in test_model_or_contract_change_does_not_reuse_checkpoint
+    self.run_batch(candidate_ids=["c0"])
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_persistently_locked_status_file_does_not_interrupt_review (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 147, in test_persistently_locked_status_file_does_not_interrupt_review
+    result = self.run_batch(config, candidate_ids=["c0", "c1"],
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_real_sdk_402_pauses_http_service_and_persists_audit (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 319, in test_real_sdk_402_pauses_http_service_and_persists_audit
+    result = ReviewService(self.repo, config=config).execute_audit_job({"run_id": "real"})
+  File "D:\knowledge-huopao\review_agent\service.py", line 453, in execute_audit_job
+    return run_review_batch(self.repository, str(payload.get("run_id") or ""), effective_config,
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_real_sdk_cli_completes_and_resumes_without_another_request (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 336, in test_real_sdk_cli_completes_and_resumes_without_another_request
+    result = command_audit(args)
+  File "D:\knowledge-huopao\review_agent\cli.py", line 193, in command_audit
+    result=run_review_batch(repository, args.run_id, config,
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_real_sdk_planner_is_injected_into_spawned_candidate_worker (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 347, in test_real_sdk_planner_is_injected_into_spawned_candidate_worker
+    result = run_review_batch(self.repo, "real", config)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_status_file_recovers_on_next_publish_after_lock_is_released (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 168, in test_status_file_recovers_on_next_publish_after_lock_is_released
+    result = self.run_batch(candidate_ids=["c0"], status_file=path)
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_status_write_failure_does_not_mask_a_billing_pause (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 179, in test_status_write_failure_does_not_mask_a_billing_pause
+    result = self.run_batch({**self.config, "test_mode": "paused"},
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_total_deadline_kills_blocked_process_and_keeps_audit (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 198, in test_total_deadline_kills_blocked_process_and_keeps_audit
+    result = self.run_batch(config, candidate_ids=["c0"])
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+======================================================================
+ERROR: test_two_candidates_actually_overlap_and_leave_no_children (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 112, in test_two_candidates_actually_overlap_and_leave_no_children
+    result = self.run_batch(on_progress=lambda state: states.append(state))
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 108, in run_batch
+    return run_review_batch(self.repo, "run", config or self.config, _worker_target=_fake_worker, **kwargs)
+  File "D:\knowledge-huopao\review_agent\batch.py", line 290, in run_review_batch
+    receiver, sender = ctx.Pipe(duplex=False)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\context.py", line 63, in Pipe
+    return Pipe(duplex)
+  File "D:\miniconda3\envs\knowledge\lib\multiprocessing\connection.py", line 558, in Pipe
+    h2 = _winapi.CreateFile(
+PermissionError: [WinError 5] 拒绝访问。
+
+----------------------------------------------------------------------
+Ran 63 tests in 74.218s
+
+FAILED (errors=12)

@@ -1,0 +1,238 @@
+{
+  "action": {
+    "action": "review_dispute",
+    "arguments": {
+      "dispute_id": "dispute_1cd7300afee61b9a69259f21"
+    },
+    "rationale_summary": "当前验证已确认来源支持，但映射轴因端点类型未分配而处于 context_incomplete 状态。冻结本体检查显示正式映射未分配，且扩展资格被阻止。根据争议指令，应针对特定争议调用 review_dispute，以补充映射定义或源上下文，而不是重复验证或请求扩展。",
+    "target_issue": "ontology_gap"
+  },
+  "attempt_id": "attempt_c41c4a0b39934bdeb1da2bd453b21365",
+  "client_request_id": "attempt_c41c4a0b39934bdeb1da2bd453b21365",
+  "finish_reason": "stop",
+  "gateway_request_id": "2026111818205793355399995787696",
+  "input_hash": "ced19f35dc82f0491249cd39dc2c145ec7b07ff10e877993e822986782ccb479",
+  "input_tokens": 21550,
+  "late_response": false,
+  "latency_ms": 13203,
+  "model_family": "qwen",
+  "model_id": "Qwen",
+  "model_identity": "qwen",
+  "object_revision": 1,
+  "output_tokens": 142,
+  "proposal_digest": "1758b98c47d94ddc97c0778c3a7bcfba0216cc7f7fab4c1af904ef6cc04450fd",
+  "provider_started_at": 1794997255.0014288,
+  "queue_time_ms": 259,
+  "raw_response": "{\n  \"action\": \"review_dispute\",\n  \"arguments\": {\n    \"dispute_id\": \"dispute_1cd7300afee61b9a69259f21\"\n  },\n  \"target_issue\": \"ontology_gap\",\n  \"rationale_summary\": \"当前验证已确认来源支持，但映射轴因端点类型未分配而处于 context_incomplete 状态。冻结本体检查显示正式映射未分配，且扩展资格被阻止。根据争议指令，应针对特定争议调用 review_dispute，以补充映射定义或源上下文，而不是重复验证或请求扩展。\"\n}",
+  "reasoning_tokens": null,
+  "request_key": "536a86147539be10024e726ab9142b84b018f66b86880aebe170c8c768f4a121",
+  "response_contract_version": "planner_action_v1",
+  "response_id": "chatcmpl-8a660998a572e5ca",
+  "response_status": "ok",
+  "returned_model_id": "Qwen",
+  "state_hash": "e5265f89624e4502e8d7203d38cb55645b24caab95677565b7870964e12fc154",
+  "state_version": 2,
+  "task_id": "cand_cfb3502f9b5e9b28c2d8",
+  "task_type": "planner_action",
+  "tool_contract_hash": "8a6c53ec0a4a269343c8d93e71c1d2eea5fa048b6f621ab6615b2aa90d18420a",
+  "transport_metrics": {
+    "body_bytes_received": 1209,
+    "body_chunk_count": 1,
+    "client_request_id": "attempt_c41c4a0b39934bdeb1da2bd453b21365",
+    "first_body_byte_ms": 13194.872,
+    "gateway_request_id": "2026111818205793355399995787696",
+    "http_status": 200,
+    "request_body_bytes": 62524,
+    "response_headers": {
+      "connection": "keep-alive",
+      "content-length": "1209",
+      "content-type": "application/json",
+      "date": "Wed, 18 Nov 2026 10:21:09 GMT",
+      "server": "nginx/1.24.0 (Ubuntu)",
+      "x-oneapi-request-id": "2026111818205793355399995787696"
+    },
+    "response_headers_ms": 13194.73,
+    "stream": false,
+    "trace": [
+      {
+        "elapsed_ms": 1592.424,
+        "event": "connection.connect_tcp.started"
+      },
+      {
+        "elapsed_ms": 1640.82,
+        "event": "connection.connect_tcp.complete"
+      },
+      {
+        "elapsed_ms": 1640.903,
+        "event": "connection.start_tls.started"
+      },
+      {
+        "elapsed_ms": 1693.307,
+        "event": "connection.start_tls.complete"
+      },
+      {
+        "elapsed_ms": 1693.412,
+        "event": "http11.send_request_headers.started"
+      },
+      {
+        "elapsed_ms": 1693.724,
+        "event": "http11.send_request_headers.complete"
+      },
+      {
+        "elapsed_ms": 1693.735,
+        "event": "http11.send_request_body.started"
+      },
+      {
+        "elapsed_ms": 1694.055,
+        "event": "http11.send_request_body.complete"
+      },
+      {
+        "elapsed_ms": 1694.064,
+        "event": "http11.receive_response_headers.started"
+      },
+      {
+        "elapsed_ms": 13194.035,
+        "event": "http11.receive_response_headers.complete"
+      },
+      {
+        "elapsed_ms": 13194.822,
+        "event": "http11.receive_response_body.started"
+      },
+      {
+        "elapsed_ms": 13194.91,
+        "event": "http11.receive_response_body.complete"
+      },
+      {
+        "elapsed_ms": 13194.948,
+        "event": "http11.response_closed.started"
+      },
+      {
+        "elapsed_ms": 13194.983,
+        "event": "http11.response_closed.complete"
+      }
+    ],
+    "transport_elapsed_ms": 13204.651
+  },
+  "voter_id": "planner",
+  "attempts": [
+    {
+      "action": {
+        "action": "review_dispute",
+        "arguments": {
+          "dispute_id": "dispute_1cd7300afee61b9a69259f21"
+        },
+        "rationale_summary": "当前验证已确认来源支持，但映射轴因端点类型未分配而处于 context_incomplete 状态。冻结本体检查显示正式映射未分配，且扩展资格被阻止。根据争议指令，应针对特定争议调用 review_dispute，以补充映射定义或源上下文，而不是重复验证或请求扩展。",
+        "target_issue": "ontology_gap"
+      },
+      "attempt_id": "attempt_c41c4a0b39934bdeb1da2bd453b21365",
+      "client_request_id": "attempt_c41c4a0b39934bdeb1da2bd453b21365",
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111818205793355399995787696",
+      "input_hash": "ced19f35dc82f0491249cd39dc2c145ec7b07ff10e877993e822986782ccb479",
+      "input_tokens": 21550,
+      "late_response": false,
+      "latency_ms": 13203,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 142,
+      "proposal_digest": "1758b98c47d94ddc97c0778c3a7bcfba0216cc7f7fab4c1af904ef6cc04450fd",
+      "provider_started_at": 1794997255.0014288,
+      "queue_time_ms": 259,
+      "raw_response": "{\n  \"action\": \"review_dispute\",\n  \"arguments\": {\n    \"dispute_id\": \"dispute_1cd7300afee61b9a69259f21\"\n  },\n  \"target_issue\": \"ontology_gap\",\n  \"rationale_summary\": \"当前验证已确认来源支持，但映射轴因端点类型未分配而处于 context_incomplete 状态。冻结本体检查显示正式映射未分配，且扩展资格被阻止。根据争议指令，应针对特定争议调用 review_dispute，以补充映射定义或源上下文，而不是重复验证或请求扩展。\"\n}",
+      "reasoning_tokens": null,
+      "request_key": "536a86147539be10024e726ab9142b84b018f66b86880aebe170c8c768f4a121",
+      "response_contract_version": "planner_action_v1",
+      "response_id": "chatcmpl-8a660998a572e5ca",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "state_hash": "e5265f89624e4502e8d7203d38cb55645b24caab95677565b7870964e12fc154",
+      "state_version": 2,
+      "task_id": "cand_cfb3502f9b5e9b28c2d8",
+      "task_type": "planner_action",
+      "tool_contract_hash": "8a6c53ec0a4a269343c8d93e71c1d2eea5fa048b6f621ab6615b2aa90d18420a",
+      "transport_metrics": {
+        "body_bytes_received": 1209,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_c41c4a0b39934bdeb1da2bd453b21365",
+        "first_body_byte_ms": 13194.872,
+        "gateway_request_id": "2026111818205793355399995787696",
+        "http_status": 200,
+        "request_body_bytes": 62524,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-length": "1209",
+          "content-type": "application/json",
+          "date": "Wed, 18 Nov 2026 10:21:09 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "x-oneapi-request-id": "2026111818205793355399995787696"
+        },
+        "response_headers_ms": 13194.73,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 1592.424,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 1640.82,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 1640.903,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 1693.307,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 1693.412,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 1693.724,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 1693.735,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 1694.055,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 1694.064,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 13194.035,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 13194.822,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 13194.91,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 13194.948,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 13194.983,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 13204.651
+      },
+      "voter_id": "planner",
+      "attempt_no": 1
+    }
+  ],
+  "actual_calls": 1
+}

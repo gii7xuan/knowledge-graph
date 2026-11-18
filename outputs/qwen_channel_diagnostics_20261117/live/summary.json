@@ -1,0 +1,138 @@
+{
+  "study_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7",
+  "results": [
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:small_json_stream",
+      "response_status": "invalid_contract",
+      "outcome_unknown": null,
+      "input_tokens": 172,
+      "output_tokens": 93,
+      "transport_metrics": {
+        "body_bytes_received": 20477,
+        "body_chunk_count": 93,
+        "chunk_count": 95,
+        "client_request_id": "attempt_fd0c76d16df444579d513ed7c011c70f",
+        "first_body_byte_ms": 2416.763,
+        "first_chunk_ms": 2422,
+        "first_content_ms": 2422,
+        "gateway_request_id": "2026111710210623568785548553475",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 30.154,
+        "max_inter_chunk_gap_ms": 33,
+        "reasoning_chars": 0,
+        "request_body_bytes": 587,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:21:06 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710210623568785548553475"
+        },
+        "response_headers_ms": 2416.53,
+        "stream": true,
+        "terminal_ms": 4375,
+        "trace": [
+          {
+            "elapsed_ms": 2000.966,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2058.916,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2058.991,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2125.748,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2125.851,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2126.203,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2126.214,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2126.362,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2126.371,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2415.954,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2416.714,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 4393.378,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 4393.467,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 4393.501,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 4393.749,
+        "visible_chars": 221
+      },
+      "error_code": null,
+      "validation_errors": [
+        "$.instruction: unknown field",
+        "$.probe_id: unknown field",
+        "$.task: unknown field",
+        "synthetic token mismatch"
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "probe": "small_schema_stream",
+      "reason": "minimal_channel_not_verified"
+    },
+    {
+      "probe": "small_json_nonstream",
+      "reason": "minimal_channel_not_verified"
+    },
+    {
+      "probe": "v8_schema_small_stream",
+      "reason": "minimal_channel_not_verified"
+    },
+    {
+      "probe": "v8_schema_sized_stream",
+      "reason": "minimal_channel_not_verified"
+    },
+    {
+      "probe": "v8_template_sized_stream",
+      "reason": "minimal_channel_not_verified"
+    }
+  ],
+  "generation_calls": 1,
+  "unknown_results": 0,
+  "known_input_tokens": 172,
+  "known_output_tokens": 93,
+  "original_databases_unchanged": true,
+  "old_unknown_requests_resent": 0,
+  "production_configuration_changed": false,
+  "review_votes_created": 0,
+  "price": null,
+  "unknown_cost_is_zero": false,
+  "full_committee_validated": false
+}

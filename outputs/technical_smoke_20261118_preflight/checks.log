@@ -1,0 +1,46 @@
+test_legacy_validator_respects_shorter_caller_cap (tests.test_validator_dispatch_limits.ValidatorDispatchLimitTests) ... ok
+test_targeted_v8_respects_shorter_caller_cap (tests.test_validator_dispatch_limits.ValidatorDispatchLimitTests) ... ok
+test_unknown_result_prevents_queued_seats_from_being_sent (tests.test_validator_dispatch_limits.ValidatorDispatchLimitTests) ... ok
+test_valid_rejection_does_not_stop_other_independent_seats (tests.test_validator_dispatch_limits.ValidatorDispatchLimitTests) ... ok
+test_atomic_reservation_allows_only_one_correction_for_a_frozen_seat (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_candidate_correction_budget_spans_different_seats (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_exact_type_error_repairs_only_note (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_failed_patch_cannot_be_repeated_by_resuming_the_same_seat (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_frozen_correction_prompt_cannot_silently_change (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_inline_patch_preserves_negative_judgment_and_limits_output (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_input_and_caller_budget_stop_correction_before_extra_call (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_internal_semantic_conflict_and_unparseable_json_do_not_trigger_a_revote (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_later_recovery_uses_one_patch_not_a_second_full_review (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_missing_counter_review_citation_is_completed_without_status_change (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_partial_ontology_context_cannot_invent_a_confirmed_gap (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_patch_cannot_add_an_unrequested_status_change (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_request_subprocess_uses_field_patch_and_frozen_small_output_limit (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... FAIL
+test_stored_correction_provenance_is_checked_again (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_true_source_rejection_and_counterevidence_survive_patch (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_unknown_patch_outcome_is_not_sent_again (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_valid_negative_vote_is_never_reasked (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_wrong_existing_status_type_is_not_reinterpreted_as_support (tests.test_targeted_review_corrections.TargetedCorrectionTests) ... ok
+test_canonical_array_still_requires_all_fields_and_genuine_rejection_is_valid (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_legacy_request_prompt_hash_and_wire_format_are_unchanged (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_missing_status_review_is_rejected_without_backfilling (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_named_response_runs_through_existing_judge_without_becoming_approval (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_projection_preserves_rejection_notes_and_all_evidence_exactly (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_required_value_and_status_fields_are_explicit_in_schema_and_checklist (tests.test_revision_delivery_v2.RevisionDeliveryTests) ... ok
+test_budget_call_cap_is_not_overridden_by_longer_model_timeout (tests.test_revision_delivery_v2.RevisionPerCallDeadlineTests) ... ok
+test_valid_named_rejections_finish_review_without_approval_or_format_recovery (tests.test_revision_delivery_v2.RevisionPerCallDeadlineTests) ... ok
+
+======================================================================
+FAIL: test_request_subprocess_uses_field_patch_and_frozen_small_output_limit (tests.test_targeted_review_corrections.TargetedCorrectionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_targeted_review_corrections.py", line 227, in test_request_subprocess_uses_field_patch_and_frozen_small_output_limit
+    self.assertEqual(vote['response_status'],'ok',vote)
+AssertionError: 'timeout' != 'ok'
+- timeout
++ ok
+ : {'task_type': 'triple_review', 'task_id': 'cand_58be3648efd2f7179b3e', 'object_revision': 1, 'source_snapshot_hash': 'e5f7751ebcc23356c49a4e5d530b7c9bdf45315e888628222084b5464f62c20e', 'audit_id': 'audit', 'round_id': 'round', 'proposal_digest': 'p', 'voter_id': 'a', 'model_id': 'm', 'model_family': 'family', 'model_identity': 'm', 'source_index_hash': None, 'document_version': None, 'ontology_version': None, 'ontology_release_id': None, 'profile_hash': None, 'committee_version': None, 'committee_policy_hash': None, 'prompt_version': 'triple_validator_v6_2_targeted_repairs_v1', 'evidence_hash': '28e30f1ff2052066d71edac0bc8ecd8c65bb6f3e17795d7006f3b485c3a13cce', 'response_contract_version': 'validator_response_v6_2', 'correction_policy_version': 'targeted_review_repairs_v2', 'correction_policy_hash': '5ac4e153f99605010577dd6092bf920e83b9d315c2b26f34b1cf1f314a68c7ad', 'response_status': 'timeout', 'verdict': None, 'retryable': False, 'outcome_unknown': True, 'error_code': 'HARD_REQUEST_TIMEOUT', 'error': 'caller wait deadline reached; original request may complete later', 'attempt_id': 'attempt_8edd967f9f39494eae0f209b7b2fa012', 'request_key': '9cfdb1b98534b6291c62cfe350eee0840e32a8c7a3a7a777dd1fb4b6193c347b', 'latency_ms': 8000, 'attempts': [{'task_type': 'triple_review', 'task_id': 'cand_58be3648efd2f7179b3e', 'object_revision': 1, 'source_snapshot_hash': 'e5f7751ebcc23356c49a4e5d530b7c9bdf45315e888628222084b5464f62c20e', 'audit_id': 'audit', 'round_id': 'round', 'proposal_digest': 'p', 'voter_id': 'a', 'model_id': 'm', 'model_family': 'family', 'model_identity': 'm', 'source_index_hash': None, 'document_version': None, 'ontology_version': None, 'ontology_release_id': None, 'profile_hash': None, 'committee_version': None, 'committee_policy_hash': None, 'prompt_version': 'triple_validator_v6_2_targeted_repairs_v1', 'evidence_hash': '28e30f1ff2052066d71edac0bc8ecd8c65bb6f3e17795d7006f3b485c3a13cce', 'response_contract_version': 'validator_response_v6_2', 'correction_policy_version': 'targeted_review_repairs_v2', 'correction_policy_hash': '5ac4e153f99605010577dd6092bf920e83b9d315c2b26f34b1cf1f314a68c7ad', 'response_status': 'timeout', 'verdict': None, 'retryable': False, 'outcome_unknown': True, 'error_code': 'HARD_REQUEST_TIMEOUT', 'error': 'caller wait deadline reached; original request may complete later', 'attempt_id': 'attempt_8edd967f9f39494eae0f209b7b2fa012', 'request_key': '9cfdb1b98534b6291c62cfe350eee0840e32a8c7a3a7a777dd1fb4b6193c347b', 'latency_ms': 8000}], 'attempt_no': 1, 'actual_calls': 1}
+
+----------------------------------------------------------------------
+Ran 30 tests in 13.256s
+
+FAILED (failures=1)

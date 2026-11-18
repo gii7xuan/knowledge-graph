@@ -1,0 +1,5042 @@
+{
+  "audit_id": "audit_8b77d838da7046f289a9ee157f55a778",
+  "candidate_id": "cand_de3414495fa05d4e6672",
+  "revision": 1,
+  "review_completion_status": "independent_review_incomplete",
+  "independent_review_completed": false,
+  "final_round_id": 1,
+  "consensus": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "valid_votes": 0,
+    "invalid_votes": 0,
+    "uncertain_votes": 3,
+    "error_votes": 0,
+    "missing_votes": 0,
+    "duplicate_attempts": 0,
+    "duplicate_model_votes": 0,
+    "invalid_attempts": 0,
+    "distinct_family_count": 3,
+    "valid_distinct_family_count": 0,
+    "invalid_distinct_family_count": 0,
+    "diversity_ready": false,
+    "result": "unresolved",
+    "unresolved_counterevidence": false,
+    "unresolved_support_conflict": false,
+    "counter_evidence_ids": [],
+    "supporting_evidence_ids": [
+      "ev_3fa93d4e0d6519345518",
+      "ev_7266b96bc5e3e52d2acc",
+      "ev_b9da151192c2b2f7471b"
+    ],
+    "source_support_consensus": {
+      "result": "unresolved",
+      "derivation": "axis_weighting_v1",
+      "support_voter_ids": [
+        "judge_a",
+        "judge_b"
+      ]
+    },
+    "admission_consensus": {
+      "result": "unresolved"
+    },
+    "eligible_voter_ids": [
+      "judge_a",
+      "judge_b",
+      "judge_c"
+    ],
+    "expression_complete": false,
+    "blocking_fields": [
+      "polarity"
+    ],
+    "raw_source_support_votes": [
+      {
+        "voter_id": "judge_a",
+        "source_support": "supported"
+      },
+      {
+        "voter_id": "judge_b",
+        "source_support": "supported"
+      },
+      {
+        "voter_id": "judge_c",
+        "source_support": "supported"
+      }
+    ],
+    "expression_status": "faithful",
+    "knowledge_scope": "general",
+    "scope_confirmed": true,
+    "mapping_status": "unassigned",
+    "effective_mapping_status": "ambiguous",
+    "core_source_support_result": "supported",
+    "ontology_coverage_review": {
+      "context_hash": "fc499bfda947331c85dd33a81f03837db7d74f99f7e97e303b2790fb36e0f11f",
+      "full_catalog_included": false,
+      "global_gap_confirmable": false
+    },
+    "review_axes": {
+      "version": "review_axes_v1",
+      "source": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": false,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "supported"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "supported"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "insufficient"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.691358024691358
+      },
+      "expression": {
+        "status": "standard",
+        "observed_result": "standard",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "standard",
+              "findings": []
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "standard",
+              "findings": []
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unresolved",
+              "findings": [
+                {
+                  "check": "entity_reference",
+                  "kind": "unresolved",
+                  "note": "尾实体为现象描述且类型未定，指称范围需确认。",
+                  "evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc",
+                    "ev_17a0eeb2aed3947a7d6a"
+                  ],
+                  "normalization": null,
+                  "rule_id": "SPLIT-001",
+                  "meaning_effect": "unresolved",
+                  "suggested_change": "确认尾实体类型或将其规范为可指称的现象实体。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 0.7017543859649122
+      },
+      "mapping": {
+        "status": "context_incomplete",
+        "observed_result": "context_incomplete",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": false,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.0
+      },
+      "scope": {
+        "status": "include",
+        "observed_result": "include",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      }
+    },
+    "dispute_report": {
+      "version": "claim_disputes_v1",
+      "candidate_hash": "bb6367637f6121257de215c500c82496f966579844aa6703749f05404dc058a3",
+      "evidence_hash": "f1fee27b7a82a5558e74267db0eea5dabc06f6fbb1ff4575f587326882615ad1",
+      "base_proposal_digest": "c6b70ed332554726ab81f59e52b7e2203216e086a34203135c7a6bfd2044abc8",
+      "opinions": [
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "counterevidence",
+          "claim": {
+            "check": "counterevidence",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "已核验材料中是否存在可能推翻“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的证据？未发现反证与找到正面支持分开记录。",
+            "formal_mapping": null,
+            "claim_id": "786f5bf586cb2c04152a35d834fd1ea85644587bd9160a18a236f80b3aab46dd"
+          },
+          "status": "pass",
+          "reason": "已检材料未发现推翻该关系的矛盾。",
+          "issue_type": "counterevidence",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b",
+            "ev_17a0eeb2aed3947a7d6a",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "entity_reference",
+          "claim": {
+            "check": "entity_reference",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+            "formal_mapping": null,
+            "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+          },
+          "status": "pass",
+          "reason": "“它”指代前句涡流阻力，尾端为原文所述分离现象。",
+          "issue_type": "referent",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_b9da151192c2b2f7471b",
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "evidence_sufficiency",
+          "claim": {
+            "check": "evidence_sufficiency",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "当前证据是否足以确认“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的完整含义？缺哪一段材料？",
+            "formal_mapping": null,
+            "claim_id": "77ea67c651781fc643105b50966f621ef772df2543f3b45de99da5ce27b65a98"
+          },
+          "status": "pass",
+          "reason": "相邻句与段落足以确认指代和关系，无需额外材料。",
+          "issue_type": "evidence_sufficiency",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b",
+            "ev_17a0eeb2aed3947a7d6a",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "knowledge_scope",
+          "claim": {
+            "check": "knowledge_scope",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”属于哪种收录范围？范围分类不能替代事实判断。",
+            "formal_mapping": null,
+            "claim_id": "09e282ebbe33cc28ffaa7ddd87ecc8995176dc6be126e62cc3906b66614645ab"
+          },
+          "status": "general",
+          "reason": "该句为领域内可复用的类比说明，非局部符号约定。",
+          "issue_type": "scope",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b",
+            "ev_17a0eeb2aed3947a7d6a",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "mapping",
+          "claim": {
+            "check": "mapping",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”与已填写关系 None 的正式定义、实体身份、方向和类型约束是否匹配？",
+            "formal_mapping": {
+              "relation_id": null,
+              "head_type": "C_9ca2918a695c60178dcc",
+              "tail_type": null
+            },
+            "claim_id": "8016324bd5a05b1bc3eefd64620219261216c6a090d36e4ae482a9ea5750c8be"
+          },
+          "status": "unassigned",
+          "reason": "预检未就绪，缺少关系定义与尾端类型，保持未分配。",
+          "issue_type": "formal_mapping",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "qualifiers",
+          "claim": {
+            "check": "qualifiers",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+            "formal_mapping": null,
+            "claim_id": "094e60d3078a6dffe4147ea3989ef94ae51c41245031acb739ea0f6c78ed2b95"
+          },
+          "status": "pass",
+          "reason": "原句无频率、条件、数量或极性，模态为断言。",
+          "issue_type": "qualifiers",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "relation_direction",
+          "claim": {
+            "check": "relation_direction",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否支持“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的头尾方向？",
+            "formal_mapping": null,
+            "claim_id": "482af0392bbd472458c0c331c2a5b934a3fff516b8549d9d6d4fa0c6d172a809"
+          },
+          "status": "pass",
+          "reason": "原文为涡流阻力类似于该现象，方向一致。",
+          "issue_type": "direction",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "relation_semantics",
+          "claim": {
+            "check": "relation_semantics",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的“类似于”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+            "formal_mapping": null,
+            "claim_id": "ed1436a4ff22cc5f4831091e10e255d334f3a320b0aa13db2a8f78b93f8fcf75"
+          },
+          "status": "pass",
+          "reason": "“类似于”与原文“类似于”一致，未替换谓词。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_a",
+          "model_id": "Qwen",
+          "check": "triple_support",
+          "claim": {
+            "check": "triple_support",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否明确支持“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+            "formal_mapping": null,
+            "claim_id": "084d9cd1c7b2ca8830481a53eae8a0ccb83c52ae2a92b0a971c96d9c3395de1e"
+          },
+          "status": "supported",
+          "reason": "原文“它类似于弯曲壁面边界层出现分离现象”直接支持该关系。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "counterevidence",
+          "claim": {
+            "check": "counterevidence",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "已核验材料中是否存在可能推翻“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的证据？未发现反证与找到正面支持分开记录。",
+            "formal_mapping": null,
+            "claim_id": "786f5bf586cb2c04152a35d834fd1ea85644587bd9160a18a236f80b3aab46dd"
+          },
+          "status": "pass",
+          "reason": "未发现矛盾证据。",
+          "issue_type": "counterevidence",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_3fa93d4e0d6519345518"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_3fa93d4e0d6519345518",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9501,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "entity_reference",
+          "claim": {
+            "check": "entity_reference",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+            "formal_mapping": null,
+            "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+          },
+          "status": "pass",
+          "reason": "头尾实体指称与原文一致。",
+          "issue_type": "referent",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "evidence_sufficiency",
+          "claim": {
+            "check": "evidence_sufficiency",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "当前证据是否足以确认“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的完整含义？缺哪一段材料？",
+            "formal_mapping": null,
+            "claim_id": "77ea67c651781fc643105b50966f621ef772df2543f3b45de99da5ce27b65a98"
+          },
+          "status": "pass",
+          "reason": "证据足以支持该三元组。",
+          "issue_type": "evidence_sufficiency",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "knowledge_scope",
+          "claim": {
+            "check": "knowledge_scope",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”属于哪种收录范围？范围分类不能替代事实判断。",
+            "formal_mapping": null,
+            "claim_id": "09e282ebbe33cc28ffaa7ddd87ecc8995176dc6be126e62cc3906b66614645ab"
+          },
+          "status": "general",
+          "reason": "该描述是对涡流阻力物理特性的通用类比说明。",
+          "issue_type": "scope",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "mapping",
+          "claim": {
+            "check": "mapping",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”与已填写关系 None 的正式定义、实体身份、方向和类型约束是否匹配？",
+            "formal_mapping": {
+              "relation_id": null,
+              "head_type": "C_9ca2918a695c60178dcc",
+              "tail_type": null
+            },
+            "claim_id": "8016324bd5a05b1bc3eefd64620219261216c6a090d36e4ae482a9ea5750c8be"
+          },
+          "status": "unassigned",
+          "reason": "本体中无匹配的“类似于”关系，且mapping_preflight指示judgment_ready为false。",
+          "issue_type": "formal_mapping",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "qualifiers",
+          "claim": {
+            "check": "qualifiers",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+            "formal_mapping": null,
+            "claim_id": "094e60d3078a6dffe4147ea3989ef94ae51c41245031acb739ea0f6c78ed2b95"
+          },
+          "status": "pass",
+          "reason": "无特殊限定词，模态为断言。",
+          "issue_type": "qualifiers",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "relation_direction",
+          "claim": {
+            "check": "relation_direction",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否支持“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的头尾方向？",
+            "formal_mapping": null,
+            "claim_id": "482af0392bbd472458c0c331c2a5b934a3fff516b8549d9d6d4fa0c6d172a809"
+          },
+          "status": "pass",
+          "reason": "头尾方向与原文描述一致。",
+          "issue_type": "direction",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "relation_semantics",
+          "claim": {
+            "check": "relation_semantics",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的“类似于”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+            "formal_mapping": null,
+            "claim_id": "ed1436a4ff22cc5f4831091e10e255d334f3a320b0aa13db2a8f78b93f8fcf75"
+          },
+          "status": "pass",
+          "reason": "关系词“类似于”与原文完全一致。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "check": "triple_support",
+          "claim": {
+            "check": "triple_support",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否明确支持“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+            "formal_mapping": null,
+            "claim_id": "084d9cd1c7b2ca8830481a53eae8a0ccb83c52ae2a92b0a971c96d9c3395de1e"
+          },
+          "status": "supported",
+          "reason": "原文明确指出涡流阻力类似于弯曲壁面边界层出现分离现象。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "counterevidence",
+          "claim": {
+            "check": "counterevidence",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "已核验材料中是否存在可能推翻“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的证据？未发现反证与找到正面支持分开记录。",
+            "formal_mapping": null,
+            "claim_id": "786f5bf586cb2c04152a35d834fd1ea85644587bd9160a18a236f80b3aab46dd"
+          },
+          "status": "pass",
+          "reason": "已核验相邻句，未发现推翻该类比关系的材料。",
+          "issue_type": "counterevidence",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b",
+            "ev_17a0eeb2aed3947a7d6a"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "entity_reference",
+          "claim": {
+            "check": "entity_reference",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+            "formal_mapping": null,
+            "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+          },
+          "status": "unknown",
+          "reason": "尾实体“弯曲壁面边界层出现分离现象”是现象描述，未分配类型，指称范围待确认。",
+          "issue_type": "referent",
+          "meaning_effect": "unresolved",
+          "rule_ids": [
+            "SPLIT-001"
+          ],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_17a0eeb2aed3947a7d6a"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "evidence_sufficiency",
+          "claim": {
+            "check": "evidence_sufficiency",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "当前证据是否足以确认“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的完整含义？缺哪一段材料？",
+            "formal_mapping": null,
+            "claim_id": "77ea67c651781fc643105b50966f621ef772df2543f3b45de99da5ce27b65a98"
+          },
+          "status": "pass",
+          "reason": "相邻句完整给出类比及分离机理，足以确认该关系含义。",
+          "issue_type": "evidence_sufficiency",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b",
+            "ev_17a0eeb2aed3947a7d6a"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "knowledge_scope",
+          "claim": {
+            "check": "knowledge_scope",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”属于哪种收录范围？范围分类不能替代事实判断。",
+            "formal_mapping": null,
+            "claim_id": "09e282ebbe33cc28ffaa7ddd87ecc8995176dc6be126e62cc3906b66614645ab"
+          },
+          "status": "general",
+          "reason": "涡流阻力概念定义及类比属可复用领域知识，非局部符号约定。",
+          "issue_type": "scope",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_b9da151192c2b2f7471b",
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "mapping",
+          "claim": {
+            "check": "mapping",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”与已填写关系 None 的正式定义、实体身份、方向和类型约束是否匹配？",
+            "formal_mapping": {
+              "relation_id": null,
+              "head_type": "C_9ca2918a695c60178dcc",
+              "tail_type": null
+            },
+            "claim_id": "8016324bd5a05b1bc3eefd64620219261216c6a090d36e4ae482a9ea5750c8be"
+          },
+          "status": "unassigned",
+          "reason": "预检judgment_ready=false，关系定义缺失且尾实体类型未定，正式映射保留未分配。",
+          "issue_type": "formal_mapping",
+          "meaning_effect": "not_source_judgment",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "qualifiers",
+          "claim": {
+            "check": "qualifiers",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的条件、频率、数量、极性和模态是否完整且附着正确？字段偏好与语义改变分别判断。",
+            "formal_mapping": null,
+            "claim_id": "094e60d3078a6dffe4147ea3989ef94ae51c41245031acb739ea0f6c78ed2b95"
+          },
+          "status": "pass",
+          "reason": "原文为断言，无条件、频率或数量限定；极性未明示但无否定。",
+          "issue_type": "qualifiers",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "relation_direction",
+          "claim": {
+            "check": "relation_direction",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否支持“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”的头尾方向？",
+            "formal_mapping": null,
+            "claim_id": "482af0392bbd472458c0c331c2a5b934a3fff516b8549d9d6d4fa0c6d172a809"
+          },
+          "status": "pass",
+          "reason": "原文以涡流阻力为主语指向分离现象，头尾方向一致。",
+          "issue_type": "direction",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "relation_semantics",
+          "claim": {
+            "check": "relation_semantics",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的“类似于”是否与原文关系含义一致？逐项区分明确支持与较弱关联。",
+            "formal_mapping": null,
+            "claim_id": "ed1436a4ff22cc5f4831091e10e255d334f3a320b0aa13db2a8f78b93f8fcf75"
+          },
+          "status": "pass",
+          "reason": "“类似于”与原文类比表达一致，未替换为因果或等同关系。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        },
+        {
+          "voter_id": "judge_c",
+          "model_id": "deepseek-flash",
+          "check": "triple_support",
+          "claim": {
+            "check": "triple_support",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "原文是否明确支持“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”这一具体关系，还是只说明相关性、所属线索或共同出现？不得替换谓词。",
+            "formal_mapping": null,
+            "claim_id": "084d9cd1c7b2ca8830481a53eae8a0ccb83c52ae2a92b0a971c96d9c3395de1e"
+          },
+          "status": "supported",
+          "reason": "原文明确以“它类似于弯曲壁面边界层出现分离现象”表述涡流阻力。",
+          "issue_type": "relation_meaning",
+          "meaning_effect": "preserved",
+          "rule_ids": [],
+          "classification_basis": "structured_finding_or_dimension",
+          "legacy": false,
+          "evidence_ids": [
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b",
+            "ev_17a0eeb2aed3947a7d6a"
+          ],
+          "source_positions": [
+            {
+              "evidence_id": "ev_7266b96bc5e3e52d2acc",
+              "quote": "它类似于弯曲壁面边界层出现分离现象。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9421,
+              "end": 9439,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_b9da151192c2b2f7471b",
+              "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9383,
+              "end": 9421,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            },
+            {
+              "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+              "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+              "anchor_valid": true,
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "section_id": "section_4eff9901fc40",
+              "chunk_id": "chunk_940dab42da00",
+              "start": 9439,
+              "end": 9498,
+              "offset_basis": "canonical_document",
+              "block_type": "paragraph"
+            }
+          ],
+          "relation_id": null
+        }
+      ],
+      "disputes": [
+        {
+          "dispute_id": "dispute_4aecf018419c504f93e036b2",
+          "claim": {
+            "check": "entity_reference",
+            "expression": {
+              "head": "涡流阻力",
+              "surface_relation": "类似于",
+              "tail": "弯曲壁面边界层出现分离现象",
+              "qualifiers": {
+                "applicability": null,
+                "condition": null,
+                "modality": "asserted",
+                "polarity": "unknown",
+                "quantifier": null,
+                "time_scope": null
+              },
+              "semantic_context": null
+            },
+            "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+            "formal_mapping": null,
+            "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+          },
+          "check": "entity_reference",
+          "issue_type": "referent",
+          "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+          "opinions": [
+            {
+              "voter_id": "judge_a",
+              "model_id": "Qwen",
+              "check": "entity_reference",
+              "claim": {
+                "check": "entity_reference",
+                "expression": {
+                  "head": "涡流阻力",
+                  "surface_relation": "类似于",
+                  "tail": "弯曲壁面边界层出现分离现象",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "unknown",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+                "formal_mapping": null,
+                "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+              },
+              "status": "pass",
+              "reason": "“它”指代前句涡流阻力，尾端为原文所述分离现象。",
+              "issue_type": "referent",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_b9da151192c2b2f7471b",
+                "ev_7266b96bc5e3e52d2acc",
+                "ev_3fa93d4e0d6519345518"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_b9da151192c2b2f7471b",
+                  "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9383,
+                  "end": 9421,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_7266b96bc5e3e52d2acc",
+                  "quote": "它类似于弯曲壁面边界层出现分离现象。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9421,
+                  "end": 9439,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_3fa93d4e0d6519345518",
+                  "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9383,
+                  "end": 9501,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_b",
+              "model_id": "Gemma",
+              "check": "entity_reference",
+              "claim": {
+                "check": "entity_reference",
+                "expression": {
+                  "head": "涡流阻力",
+                  "surface_relation": "类似于",
+                  "tail": "弯曲壁面边界层出现分离现象",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "unknown",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+                "formal_mapping": null,
+                "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+              },
+              "status": "pass",
+              "reason": "头尾实体指称与原文一致。",
+              "issue_type": "referent",
+              "meaning_effect": "preserved",
+              "rule_ids": [],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_7266b96bc5e3e52d2acc",
+                "ev_b9da151192c2b2f7471b"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_7266b96bc5e3e52d2acc",
+                  "quote": "它类似于弯曲壁面边界层出现分离现象。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9421,
+                  "end": 9439,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_b9da151192c2b2f7471b",
+                  "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9383,
+                  "end": 9421,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            },
+            {
+              "voter_id": "judge_c",
+              "model_id": "deepseek-flash",
+              "check": "entity_reference",
+              "claim": {
+                "check": "entity_reference",
+                "expression": {
+                  "head": "涡流阻力",
+                  "surface_relation": "类似于",
+                  "tail": "弯曲壁面边界层出现分离现象",
+                  "qualifiers": {
+                    "applicability": null,
+                    "condition": null,
+                    "modality": "asserted",
+                    "polarity": "unknown",
+                    "quantifier": null,
+                    "time_scope": null
+                  },
+                  "semantic_context": null
+                },
+                "question": "“涡流阻力 — 类似于 — 弯曲壁面边界层出现分离现象”中的实体是否指向原文同一对象？如需拆分，逐条核验配对与集合含义。",
+                "formal_mapping": null,
+                "claim_id": "bbc032d4e243c3fc8b32360511d5c3242f559a5844e162832507ef9575fd5467"
+              },
+              "status": "unknown",
+              "reason": "尾实体“弯曲壁面边界层出现分离现象”是现象描述，未分配类型，指称范围待确认。",
+              "issue_type": "referent",
+              "meaning_effect": "unresolved",
+              "rule_ids": [
+                "SPLIT-001"
+              ],
+              "classification_basis": "structured_finding_or_dimension",
+              "legacy": false,
+              "evidence_ids": [
+                "ev_7266b96bc5e3e52d2acc",
+                "ev_17a0eeb2aed3947a7d6a"
+              ],
+              "source_positions": [
+                {
+                  "evidence_id": "ev_7266b96bc5e3e52d2acc",
+                  "quote": "它类似于弯曲壁面边界层出现分离现象。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9421,
+                  "end": 9439,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                },
+                {
+                  "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+                  "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+                  "anchor_valid": true,
+                  "document_id": "火炮弹道学_钱林方_第一章",
+                  "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+                  "section_id": "section_4eff9901fc40",
+                  "chunk_id": "chunk_940dab42da00",
+                  "start": 9439,
+                  "end": 9498,
+                  "offset_basis": "canonical_document",
+                  "block_type": "paragraph"
+                }
+              ],
+              "relation_id": null
+            }
+          ],
+          "route": "supplement_source_context",
+          "status": "open",
+          "positive_role_conflict": false,
+          "majority_is_resolution": false,
+          "required_material": "相关完整句子、条件、公式及前后文"
+        }
+      ],
+      "evidence_observations": [
+        {
+          "voter_id": "judge_a",
+          "positive_support": {
+            "status": "found",
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_b9da151192c2b2f7471b",
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "core_source_status": "supported",
+            "full_source_status": "supported",
+            "not_inferred_from_counter_absence": true
+          },
+          "counterevidence_search": {
+            "status": "reviewed_no_material_counter_recorded",
+            "counter_evidence_ids": [],
+            "reviewed_evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_b9da151192c2b2f7471b",
+              "ev_17a0eeb2aed3947a7d6a",
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "note": "已检材料未发现推翻该关系的矛盾。",
+            "scope": "frozen_evidence_bundle_only",
+            "absence_is_support": false
+          }
+        },
+        {
+          "voter_id": "judge_b",
+          "positive_support": {
+            "status": "found",
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_b9da151192c2b2f7471b"
+            ],
+            "core_source_status": "supported",
+            "full_source_status": "supported",
+            "not_inferred_from_counter_absence": true
+          },
+          "counterevidence_search": {
+            "status": "reviewed_no_material_counter_recorded",
+            "counter_evidence_ids": [],
+            "reviewed_evidence_ids": [
+              "ev_3fa93d4e0d6519345518"
+            ],
+            "note": "未发现矛盾证据。",
+            "scope": "frozen_evidence_bundle_only",
+            "absence_is_support": false
+          }
+        },
+        {
+          "voter_id": "judge_c",
+          "positive_support": {
+            "status": "core_only",
+            "evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_b9da151192c2b2f7471b"
+            ],
+            "core_source_status": "supported",
+            "full_source_status": "insufficient",
+            "not_inferred_from_counter_absence": true
+          },
+          "counterevidence_search": {
+            "status": "reviewed_no_material_counter_recorded",
+            "counter_evidence_ids": [],
+            "reviewed_evidence_ids": [
+              "ev_7266b96bc5e3e52d2acc",
+              "ev_b9da151192c2b2f7471b",
+              "ev_17a0eeb2aed3947a7d6a"
+            ],
+            "note": "已核验相邻句，未发现推翻该类比关系的材料。",
+            "scope": "frozen_evidence_bundle_only",
+            "absence_is_support": false
+          }
+        }
+      ],
+      "technical_seats": [],
+      "majority_is_resolution": false,
+      "counter_absence_is_support": false,
+      "admission_authorized": false
+    },
+    "weight_snapshot": {
+      "version": "axis_weighting_v1",
+      "mode": "dynamic",
+      "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+      "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+      "feature_version": "check_completion_v1",
+      "candidate_hash": "bb6367637f6121257de215c500c82496f966579844aa6703749f05404dc058a3",
+      "proposal_digest": "c6b70ed332554726ab81f59e52b7e2203216e086a34203135c7a6bfd2044abc8",
+      "evidence_hash": "f1fee27b7a82a5558e74267db0eea5dabc06f6fbb1ff4575f587326882615ad1",
+      "ontology_context_hash": "fc499bfda947331c85dd33a81f03837db7d74f99f7e97e303b2790fb36e0f11f",
+      "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+      "original_votes_hash": "c42f90fdc29421549457b95902604b4bc5f39260f9b1b784075ce6293edf94d9",
+      "critical_counter_evidence_ids": [],
+      "axes": {
+        "source": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "supported",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.345679012345679,
+              "effective_weight": 0.345679012345679
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "supported",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.345679012345679,
+              "effective_weight": 0.345679012345679
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.8928571428571428,
+              "features": {
+                "available": true,
+                "known_fraction": 0.8571428571428571,
+                "known_checks": [
+                  "counterevidence",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "insufficient",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.30864197530864196,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "contradicted": 0.0,
+            "supported": 0.691358024691358
+          },
+          "available_mass": 0.691358024691358,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "expression": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "standard",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3508771929824561,
+              "effective_weight": 0.3508771929824561
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "standard",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3508771929824561,
+              "effective_weight": 0.3508771929824561
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.8500000000000001,
+              "features": {
+                "available": true,
+                "known_fraction": 0.8,
+                "known_checks": [
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unresolved",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.29824561403508776,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "lossless_normalization": 0.0,
+            "semantic_revision": 0.0,
+            "standard": 0.7017543859649122
+          },
+          "available_mass": 0.7017543859649122,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "standard",
+          "has_conflict": false
+        },
+        "mapping": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unassigned",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unassigned",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.0
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unassigned",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "conflict": 0.0,
+            "valid": 0.0
+          },
+          "available_mass": 0.0,
+          "valid_opinion_count": 0,
+          "threshold": 0.7,
+          "status": "context_incomplete",
+          "has_conflict": false
+        },
+        "scope": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.3333333333333333
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.3333333333333333
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.3333333333333333
+            }
+          },
+          "scores": {
+            "exclude": 0.0,
+            "include": 1.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "include",
+          "has_conflict": false
+        }
+      },
+      "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "resolved_counter_evidence_ids": [],
+      "snapshot_id": "weights_bf2ddaa0a1e664b2533e5c03b1a53f833cb416ec0b5ec3ec7b85ca57e51b38d6"
+    },
+    "weighted_review_complete": false
+  },
+  "calibrated_probability": null,
+  "calibration_status": "unavailable",
+  "calibrator_version": "untrained",
+  "policy_version": "disabled_cold_start_v3",
+  "decision": "manual_review",
+  "reason_codes": [
+    "CANDIDATE_IDENTITY_UNRESOLVED",
+    "CRITICAL_ISSUES_UNRESOLVED",
+    "FORMAL_MAPPING_UNASSIGNED",
+    "MAPPING_REVIEW",
+    "REVIEW_INCOMPLETE"
+  ],
+  "review_versions": {
+    "prompt_version": "triple_validator_v8_citations_v4",
+    "prompt_hash": "6d3b69e323698befa291fa1b22fc29ea29c08a823db4501dc98d8eef80f80a23",
+    "response_contract_hash": "0bab0a82eb9572c9aaeea69c3a4376a19704105b14ce94268ab2abc245991d0f",
+    "committee_policy_hash": "bf53f4df8894bd9c312594ae0404e72a43ffa5b278bbd8fe746d6ec82750b0bc",
+    "memory_scope_hash": "1c173d17b34a47d2d96e982e0890691db39624d39f03210ea85190390c1536de",
+    "memory_policy_hash": "acce82279fd8dd5982992fcbed95a002f74173339c56d7370f0cb01b0b2d1ee8",
+    "response_contract_version": "validator_response_v8",
+    "evidence_bundle_version": "evidence_bundle_v3",
+    "committee_version": "committee_qwen_gemma_deepseek_v1",
+    "planner_prompt_version": "triple_planner_v4",
+    "planner_prompt_hash": "512fe0a7a02e66123e6ae47ee4af04d4e13426baa2882fc819157aa83084395f",
+    "planner_contract_version": "planner_action_v5_disputes",
+    "planner_strategy_version": "bounded_react_v4",
+    "planner_model_id": "Qwen",
+    "planner_model_family": "qwen",
+    "configured_strategy": "llm_react",
+    "executed_strategy": "deterministic_fallback",
+    "summary_policy_version": "review_field_rules_v1",
+    "summary_policy_hash": "7618d16e8abebf7da9ca6b33c5f9484eed6992971e89892c7e75508b95332701",
+    "output_delivery_version": "typed_review_output_v1",
+    "output_delivery_hash": "e06f2dcc2b5cfc063e81bacf0fd33e8e0e9a50f4930227d4fd27f6fc6558180f",
+    "correction_policy_version": "targeted_review_repairs_v2",
+    "correction_policy_hash": "06a0d1e04832ff7cf8e3e224310b21e2b4b3030bf718af4948d89623aadf215e"
+  },
+  "features": {
+    "quote_located": 1.0,
+    "evidence_missing": 0.0,
+    "unique_span_count": 4.0,
+    "source_group_count": 1.0,
+    "relation_known": 0.0,
+    "domain_pass": 0.0,
+    "range_pass": 0.0,
+    "type_unknown": 1.0,
+    "mapping_ambiguous": 0.0,
+    "supporting_vote_count": 0.0,
+    "contradicting_vote_count": 0.0,
+    "qualifier_issue": 0.0,
+    "direction_issue": 0.0,
+    "valid_vote_fraction": 0.0,
+    "invalid_vote_fraction": 0.0,
+    "uncertain_fraction": 1.0,
+    "error_fraction": 0.0,
+    "distinct_family_count": 3.0,
+    "disagreement": 0.0,
+    "unresolved_counterevidence": 0.0,
+    "retrieval_depth": 0.0,
+    "round_count": 1.0,
+    "historical_weighted_support": 0.0,
+    "reliability_available": 0.0
+  },
+  "feature_schema_version": "review_features_v3",
+  "explanation": {
+    "summary": "候选仍需人工核验；系统未把不确定性当作事实结论。",
+    "reason_codes": [
+      "CANDIDATE_IDENTITY_UNRESOLVED",
+      "CRITICAL_ISSUES_UNRESOLVED",
+      "FORMAL_MAPPING_UNASSIGNED",
+      "MAPPING_REVIEW"
+    ],
+    "checks": [
+      {
+        "check": "ontology",
+        "status": "unknown",
+        "constraint_ids": []
+      },
+      {
+        "check": "quote_location",
+        "status": "pass",
+        "evidence_ids": [
+          "ev_7266b96bc5e3e52d2acc",
+          "ev_b9da151192c2b2f7471b",
+          "ev_17a0eeb2aed3947a7d6a"
+        ]
+      }
+    ],
+    "supporting_evidence_ids": [
+      "ev_7266b96bc5e3e52d2acc",
+      "ev_b9da151192c2b2f7471b",
+      "ev_3fa93d4e0d6519345518"
+    ],
+    "counter_evidence_ids": [],
+    "anchor_failures": [],
+    "source_support": [
+      "supported",
+      "supported",
+      "supported"
+    ],
+    "response_errors": [],
+    "open_questions": []
+  },
+  "budget": {
+    "llm_calls": 6,
+    "tool_calls": 3,
+    "planner_steps": 3,
+    "validation_rounds": 1,
+    "input_tokens": 78828,
+    "output_tokens": 3653,
+    "unknown_token_requests": 1,
+    "deadline_epoch": 1794816734.582362
+  },
+  "configured_strategy": "llm_react",
+  "executed_strategy": "deterministic_fallback",
+  "failure_handling": {
+    "version": "bounded_minimum_v1",
+    "reason": "<html>\r\n<head><title>504 Gateway Time-out</title></head>\r\n<body>\r\n<center><h1>504 Gateway Time-out</h1></center>\r\n<hr><center>nginx/1.24.0 (Ubuntu)</center>\r\n</body>\r\n</html>",
+    "format_retry_limit": 1,
+    "fallback": "ontology_then_source_then_independent_review",
+    "original_votes_immutable": true,
+    "minimum_steps": 1,
+    "minimum_review_status": "incomplete",
+    "missing_information": [
+      "independent_committee_incomplete",
+      "ontology_check_incomplete",
+      "source_information_incomplete",
+      "mapping_information_incomplete"
+    ],
+    "independent_ballot_complete": false
+  },
+  "stop_reason": "deterministic_fallback_finished",
+  "workflow_state": "review_incomplete",
+  "pending_extension_id": null,
+  "source_support_result": "unresolved",
+  "schema_status": "unknown",
+  "schema_diagnostics": [
+    "unknown"
+  ],
+  "source_support_consensus": {
+    "result": "unresolved",
+    "derivation": "axis_weighting_v1",
+    "support_voter_ids": [
+      "judge_a",
+      "judge_b"
+    ]
+  },
+  "admission_consensus": {
+    "result": "unresolved"
+  },
+  "selected_round_id": 1,
+  "selected_proposal_digest": "c6b70ed332554726ab81f59e52b7e2203216e086a34203135c7a6bfd2044abc8",
+  "selected_evidence_hash": "f1fee27b7a82a5558e74267db0eea5dabc06f6fbb1ff4575f587326882615ad1",
+  "committee_version": "committee_qwen_gemma_deepseek_v1",
+  "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+  "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+  "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+  "issue_history": [
+    {
+      "issue_id": "issue_aaa8666835791af18370c872",
+      "code": "ontology_gap",
+      "description": "冻结本体检查未通过",
+      "status": "open",
+      "critical": true,
+      "opened_in_proposal": null,
+      "opened_evidence_hash": null,
+      "opened_revision": 1,
+      "evidence_ids": [],
+      "resolution_evidence_ids": [],
+      "resolved_in_proposal": null,
+      "resolution_rule": null,
+      "requires_revision": false
+    }
+  ],
+  "evidence_exclusions": {},
+  "admission_policy": {
+    "mode": "shadow",
+    "policy_version": "disabled_cold_start_v3",
+    "policy_ready": false,
+    "calibrator_ready": false,
+    "accept_threshold": null,
+    "auto_accept_enabled": false,
+    "scope_policy": {
+      "version": "knowledge_scope_v2",
+      "task_goal": "收录可复用的一般领域知识与保留完整条件的知识；局部约定、推导步骤和教学示例保留来源记录，不进入主图。",
+      "decision_authority": "program",
+      "excluded_scopes": [
+        "local_definition",
+        "derivation",
+        "example"
+      ],
+      "unresolved_action": "scope_review",
+      "categories": {
+        "general": {
+          "label": "一般知识",
+          "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。"
+        },
+        "conditional": {
+          "label": "条件性知识",
+          "boundary": "在明确条件下可复用的领域事实；必须保留条件、频率、否定和模态。不能把‘在条件下成立’等同于局部符号约定。"
+        },
+        "local_definition": {
+          "label": "局部定义或符号约定",
+          "boundary": "仅在当前章节、推导或作者语境中约定的符号、命名和临时定义；不能直接推广为领域通用事实。"
+        },
+        "derivation": {
+          "label": "推导步骤",
+          "boundary": "为获得结论而采用的中间变形或证明过程。独立成立、可复用的最终定理按一般或条件性知识判断。"
+        },
+        "example": {
+          "label": "教学示例",
+          "boundary": "仅为演示方法而设定的具体对象、数值或情形；示例之外被明确支持的一般规律可单独审核。"
+        },
+        "unresolved": {
+          "label": "类别待确认",
+          "boundary": "上下文不足、类别分歧或有效审核席位不足时保留待确认，不由模型自行决定收录或排除。"
+        }
+      }
+    }
+  },
+  "scope_policy_decision": {
+    "scope_policy_version": "knowledge_scope_v2",
+    "scope_policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+    "source_support": "supported",
+    "knowledge_scope": "general",
+    "classification": {
+      "status": "include",
+      "knowledge_scope": "general",
+      "classification_confirmed": true,
+      "policy_version": "knowledge_scope_v2",
+      "policy_hash": "06d34c1d801fa1046f2f2783d96a655beceaca526f98c4622d628ac75b701f5c",
+      "authority": "program",
+      "category_label": "一般知识",
+      "boundary": "在领域内可复用的事实、规律或概念定义。标准术语的通用定义归此类；不能仅因原文出现‘定义’就判为局部约定。",
+      "reason": "类别已确认，属于任务收录范围"
+    },
+    "workflow_state": "mapping_review",
+    "preserve_source_record": true,
+    "excluded_from_main_graph": false
+  },
+  "review_axes": {
+    "version": "review_axes_v1",
+    "source": {
+      "status": "unresolved",
+      "observed_result": "unresolved",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": false,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "supported"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "insufficient"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": false,
+      "available_mass": 0.691358024691358
+    },
+    "expression": {
+      "status": "standard",
+      "observed_result": "standard",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": true,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "standard",
+            "findings": []
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unresolved",
+            "findings": [
+              {
+                "check": "entity_reference",
+                "kind": "unresolved",
+                "note": "尾实体为现象描述且类型未定，指称范围需确认。",
+                "evidence_ids": [
+                  "ev_7266b96bc5e3e52d2acc",
+                  "ev_17a0eeb2aed3947a7d6a"
+                ],
+                "normalization": null,
+                "rule_id": "SPLIT-001",
+                "meaning_effect": "unresolved",
+                "suggested_change": "确认尾实体类型或将其规范为可指称的现象实体。"
+              }
+            ]
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": true,
+      "available_mass": 0.7017543859649122
+    },
+    "mapping": {
+      "status": "context_incomplete",
+      "observed_result": "context_incomplete",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": false,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unassigned"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": false,
+      "available_mass": 0.0
+    },
+    "scope": {
+      "status": "include",
+      "observed_result": "include",
+      "executed": true,
+      "seat_coverage_complete": true,
+      "judgment_complete": true,
+      "valid_seats": 3,
+      "required_seats": 2,
+      "missing_voter_ids": [],
+      "has_conflict": false,
+      "observations": [
+        {
+          "voter_id": "judge_a",
+          "model_family": "qwen",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_b",
+          "model_family": "gemma",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        },
+        {
+          "voter_id": "judge_c",
+          "model_family": "deepseek",
+          "usable": true,
+          "opinion": {
+            "status": "unclear",
+            "knowledge_scope": "general"
+          },
+          "missing_reasons": []
+        }
+      ],
+      "weighted_quorum_complete": true,
+      "available_mass": 1.0
+    }
+  },
+  "pending_actions": [
+    "review_incomplete",
+    "mapping_review"
+  ],
+  "review_outcome": {
+    "version": "review_outcome_v3",
+    "dimension_results": {
+      "source": {
+        "status": "unresolved",
+        "observed_result": "unresolved",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": false,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "supported"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "supported"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "insufficient"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.691358024691358
+      },
+      "expression": {
+        "status": "standard",
+        "observed_result": "standard",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "standard",
+              "findings": []
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "standard",
+              "findings": []
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unresolved",
+              "findings": [
+                {
+                  "check": "entity_reference",
+                  "kind": "unresolved",
+                  "note": "尾实体为现象描述且类型未定，指称范围需确认。",
+                  "evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc",
+                    "ev_17a0eeb2aed3947a7d6a"
+                  ],
+                  "normalization": null,
+                  "rule_id": "SPLIT-001",
+                  "meaning_effect": "unresolved",
+                  "suggested_change": "确认尾实体类型或将其规范为可指称的现象实体。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 0.7017543859649122
+      },
+      "mapping": {
+        "status": "context_incomplete",
+        "observed_result": "context_incomplete",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": false,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": false,
+        "available_mass": 0.0
+      },
+      "scope": {
+        "status": "include",
+        "observed_result": "include",
+        "executed": true,
+        "seat_coverage_complete": true,
+        "judgment_complete": true,
+        "valid_seats": 3,
+        "required_seats": 2,
+        "missing_voter_ids": [],
+        "has_conflict": false,
+        "observations": [
+          {
+            "voter_id": "judge_a",
+            "model_family": "qwen",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_b",
+            "model_family": "gemma",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          },
+          {
+            "voter_id": "judge_c",
+            "model_family": "deepseek",
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        ],
+        "weighted_quorum_complete": true,
+        "available_mass": 1.0
+      }
+    },
+    "vote_validation": {
+      "judge_a": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_a",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": true,
+        "raw_response_hash": "6cd99732e94cdf9ab8c19e32b4bcbd7673f9fc49ac2f56bd957e60a4ff2faa13",
+        "normalized_response_hash": "abd85941df35149d7b304c4fd02e06ae81945eda1e949b35f6d2a932c3f9ea66",
+        "original_attempt_id": "attempt_4affd9eee7f24cf08c4a581613006151",
+        "attempt_id": "attempt_4affd9eee7f24cf08c4a581613006151",
+        "request_key": "9ea7e1deb5941ed5ed65850cfb324a57d2ad2dc82049a9d18f92ee3b35e6849b",
+        "cache_source": null,
+        "errors": [],
+        "axis_observations": {
+          "source": {
+            "usable": true,
+            "opinion": {
+              "status": "supported"
+            },
+            "missing_reasons": []
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "standard",
+              "findings": []
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      },
+      "judge_b": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_b",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": true,
+        "raw_response_hash": "3d91c9e5f7fc703a9b903d6cd7d538f40c74b7420c550f51b3a49754e97a7ba3",
+        "normalized_response_hash": "be3a45d75673c18036a49ed6f4c6196fff22b9d0bc916b8e087605a147a48e62",
+        "original_attempt_id": "attempt_f0ffa116757844b69cfcc4829c850a46",
+        "attempt_id": "attempt_f0ffa116757844b69cfcc4829c850a46",
+        "request_key": "3f99324375b6b4989eaa1dcef89c38a985588a1447f8232610e9dd113e8fc79d",
+        "cache_source": null,
+        "errors": [],
+        "axis_observations": {
+          "source": {
+            "usable": true,
+            "opinion": {
+              "status": "supported"
+            },
+            "missing_reasons": []
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "standard",
+              "findings": []
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      },
+      "judge_c": {
+        "validation_version": "vote_validation_v3",
+        "voter_id": "judge_c",
+        "response_contract_version": "validator_response_v8",
+        "version_inference": null,
+        "global_trustworthy": true,
+        "whole_vote_eligible": true,
+        "raw_response_hash": "e0deed306a649585bcb5d27d71cfef761ec0a2727186ff4e5cc5a7e5c9925ced",
+        "normalized_response_hash": "74ccb38bf8a76b58a89ad5de000abd7e8f7ace1471e816f98d97746c056f701e",
+        "original_attempt_id": "attempt_ec4b7742b3c545a99bd77c6e7d28b3a0",
+        "attempt_id": "attempt_ec4b7742b3c545a99bd77c6e7d28b3a0",
+        "request_key": "2fee2a5e1a0b2f362ff750cd70707d7f80bf12611811d7cebd0d0a4c10370af8",
+        "cache_source": null,
+        "errors": [],
+        "axis_observations": {
+          "source": {
+            "usable": true,
+            "opinion": {
+              "status": "insufficient"
+            },
+            "missing_reasons": []
+          },
+          "expression": {
+            "usable": true,
+            "opinion": {
+              "status": "unresolved",
+              "findings": [
+                {
+                  "check": "entity_reference",
+                  "kind": "unresolved",
+                  "note": "尾实体为现象描述且类型未定，指称范围需确认。",
+                  "evidence_ids": [
+                    "ev_7266b96bc5e3e52d2acc",
+                    "ev_17a0eeb2aed3947a7d6a"
+                  ],
+                  "normalization": null,
+                  "rule_id": "SPLIT-001",
+                  "meaning_effect": "unresolved",
+                  "suggested_change": "确认尾实体类型或将其规范为可指称的现象实体。"
+                }
+              ]
+            },
+            "missing_reasons": []
+          },
+          "mapping": {
+            "usable": true,
+            "opinion": {
+              "status": "unassigned"
+            },
+            "missing_reasons": []
+          },
+          "scope": {
+            "usable": true,
+            "opinion": {
+              "status": "unclear",
+              "knowledge_scope": "general"
+            },
+            "missing_reasons": []
+          }
+        }
+      }
+    },
+    "duplicate_records_ignored": 0,
+    "whole_vote_eligible_voter_ids": [
+      "judge_a",
+      "judge_b",
+      "judge_c"
+    ],
+    "weight_snapshot": {
+      "version": "axis_weighting_v1",
+      "mode": "dynamic",
+      "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+      "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+      "feature_version": "check_completion_v1",
+      "candidate_hash": "bb6367637f6121257de215c500c82496f966579844aa6703749f05404dc058a3",
+      "proposal_digest": "c6b70ed332554726ab81f59e52b7e2203216e086a34203135c7a6bfd2044abc8",
+      "evidence_hash": "f1fee27b7a82a5558e74267db0eea5dabc06f6fbb1ff4575f587326882615ad1",
+      "ontology_context_hash": "fc499bfda947331c85dd33a81f03837db7d74f99f7e97e303b2790fb36e0f11f",
+      "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+      "original_votes_hash": "c42f90fdc29421549457b95902604b4bc5f39260f9b1b784075ce6293edf94d9",
+      "critical_counter_evidence_ids": [],
+      "axes": {
+        "source": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "supported",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.345679012345679,
+              "effective_weight": 0.345679012345679
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "supported",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.345679012345679,
+              "effective_weight": 0.345679012345679
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.8928571428571428,
+              "features": {
+                "available": true,
+                "known_fraction": 0.8571428571428571,
+                "known_checks": [
+                  "counterevidence",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "counterevidence",
+                  "entity_reference",
+                  "evidence_sufficiency",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "insufficient",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.30864197530864196,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "contradicted": 0.0,
+            "supported": 0.691358024691358
+          },
+          "available_mass": 0.691358024691358,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "unresolved",
+          "has_conflict": false
+        },
+        "expression": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "standard",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3508771929824561,
+              "effective_weight": 0.3508771929824561
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "standard",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3508771929824561,
+              "effective_weight": 0.3508771929824561
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.8500000000000001,
+              "features": {
+                "available": true,
+                "known_fraction": 0.8,
+                "known_checks": [
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "required_checks": [
+                  "entity_reference",
+                  "qualifiers",
+                  "relation_direction",
+                  "relation_semantics",
+                  "triple_support"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unresolved",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.29824561403508776,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "lossless_normalization": 0.0,
+            "semantic_revision": 0.0,
+            "standard": 0.7017543859649122
+          },
+          "available_mass": 0.7017543859649122,
+          "valid_opinion_count": 2,
+          "threshold": 0.7,
+          "status": "standard",
+          "has_conflict": false
+        },
+        "mapping": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unassigned",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.0
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unassigned",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.0
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 0.25,
+              "features": {
+                "available": true,
+                "known_fraction": 0.0,
+                "known_checks": [],
+                "required_checks": [
+                  "mapping"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "unassigned",
+              "usable": false,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.0
+            }
+          },
+          "scores": {
+            "conflict": 0.0,
+            "valid": 0.0
+          },
+          "available_mass": 0.0,
+          "valid_opinion_count": 0,
+          "threshold": 0.7,
+          "status": "context_incomplete",
+          "has_conflict": false
+        },
+        "scope": {
+          "seats": {
+            "judge_a": {
+              "model_id": "Qwen",
+              "model_family": "qwen",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.3333333333333333
+            },
+            "judge_b": {
+              "model_id": "Gemma",
+              "model_family": "gemma",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.3333333333333333
+            },
+            "judge_c": {
+              "model_id": "deepseek-flash",
+              "model_family": "deepseek",
+              "reliability": 0.5,
+              "history": {
+                "reason": "insufficient_history",
+                "counts": null
+              },
+              "adaptation": 1.0,
+              "features": {
+                "available": true,
+                "known_fraction": 1.0,
+                "known_checks": [
+                  "knowledge_scope"
+                ],
+                "required_checks": [
+                  "knowledge_scope"
+                ],
+                "meaning": "recorded_completion_not_entailment"
+              },
+              "opinion": "include",
+              "usable": true,
+              "missing_reasons": [],
+              "weight": 0.3333333333333333,
+              "effective_weight": 0.3333333333333333
+            }
+          },
+          "scores": {
+            "exclude": 0.0,
+            "include": 1.0
+          },
+          "available_mass": 1.0,
+          "valid_opinion_count": 3,
+          "threshold": 0.7,
+          "status": "include",
+          "has_conflict": false
+        }
+      },
+      "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "resolved_counter_evidence_ids": [],
+      "snapshot_id": "weights_bf2ddaa0a1e664b2533e5c03b1a53f833cb416ec0b5ec3ec7b85ca57e51b38d6"
+    },
+    "policy_hash": "c5a971d85ad9093125acdce6ed78db49635e25e3f58850a4a7fe1ae149adc475",
+    "execution_status": "partial_failure",
+    "execution_reason": "deterministic_fallback_finished",
+    "mapping_process": {
+      "version": "mapping_execution_trace_v2",
+      "proposal_digest": "c6b70ed332554726ab81f59e52b7e2203216e086a34203135c7a6bfd2044abc8",
+      "preflight_hash": "10a2ebd614ac2b8623ca6dbae067f1a755423c6b41796149bad01852eeeba67e",
+      "stages": [
+        {
+          "stage": "mapping_entry",
+          "status": "completed"
+        },
+        {
+          "stage": "local_retrieval",
+          "status": "completed",
+          "recalled_ids": [
+            "R_029d377fdd30415aa4e3",
+            "R_0e6aeaed149fdb07cfac",
+            "R_30bf49bc0f38645ff31c",
+            "R_92a43480096d210c6ba6",
+            "R_92ea9560d7f254ee1fe2",
+            "R_bacd990da3482215545f",
+            "R_dea5c49458b0cebab6ea"
+          ],
+          "source": {
+            "metadata_complete": false,
+            "property_count": 7,
+            "stage": "review_subset"
+          }
+        },
+        {
+          "stage": "global_retrieval",
+          "status": "completed",
+          "source": {
+            "classes_scanned": 189,
+            "exact_match_ids": [],
+            "lexical_recall_is_semantic_confirmation": false,
+            "properties_scanned": 81,
+            "property_count": 7,
+            "stage": "full_bound_release_and_aliases"
+          },
+          "failure": null,
+          "recall_is_semantic_proof": false
+        },
+        {
+          "stage": "relation_definitions",
+          "status": "not_found",
+          "complete_ids": [],
+          "candidates": [
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_5d0b94cd0cd9ae0220e9"
+              ],
+              "id": "R_029d377fdd30415aa4e3",
+              "label": "随高度变化",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_ca67f873a92ca5ca8713"
+              ],
+              "retrieved": true
+            },
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_e56f1a44eef9d89bc3b6"
+              ],
+              "id": "R_0e6aeaed149fdb07cfac",
+              "label": "形成",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_bbbc79ec97fb8f7085d4"
+              ],
+              "retrieved": true
+            },
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_85d7c2e6732f8a304f88"
+              ],
+              "id": "R_30bf49bc0f38645ff31c",
+              "label": "形成",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_23b6984d594ee0674998"
+              ],
+              "retrieved": true
+            },
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_85d7c2e6732f8a304f88"
+              ],
+              "id": "R_92a43480096d210c6ba6",
+              "label": "产生",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_e93d960291ef82ed2a2c"
+              ],
+              "retrieved": true
+            },
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_e93d960291ef82ed2a2c"
+              ],
+              "id": "R_92ea9560d7f254ee1fe2",
+              "label": "形成",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "retrieved": true
+            },
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_e56f1a44eef9d89bc3b6"
+              ],
+              "id": "R_bacd990da3482215545f",
+              "label": "减小",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_52c1a1e08cb0ee536af8"
+              ],
+              "retrieved": true
+            },
+            {
+              "aliases": [],
+              "datatype": null,
+              "definition_available": false,
+              "direction": "head_to_tail",
+              "direction_basis": "formal_property_signature_not_semantic_approval",
+              "domain": [
+                "C_e56f1a44eef9d89bc3b6"
+              ],
+              "id": "R_dea5c49458b0cebab6ea",
+              "label": "产生",
+              "missing_information": [
+                "definition_missing_in_bound_release"
+              ],
+              "property_kind": "object",
+              "range": [
+                "C_bbbc79ec97fb8f7085d4"
+              ],
+              "retrieved": true
+            }
+          ],
+          "release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "ontology_context_hash": "fc499bfda947331c85dd33a81f03837db7d74f99f7e97e303b2790fb36e0f11f"
+        },
+        {
+          "stage": "entity_identity",
+          "status": "not_found",
+          "entities": {
+            "head": {
+              "aliases": [],
+              "aliases_are_unconfirmed": true,
+              "assigned_type": "C_9ca2918a695c60178dcc",
+              "candidate_id": "local_6392dedee12e687305f647dbcf93a0cb6ece4b790daa90786244f2c823a30b64",
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "missing_information": [],
+              "referent_scope": null,
+              "source_evidence_ids": [
+                "ev_b9da151192c2b2f7471b",
+                "ev_3fa93d4e0d6519345518"
+              ],
+              "surface": "涡流阻力",
+              "type_candidate_ids": [
+                "C_9ca2918a695c60178dcc"
+              ]
+            },
+            "tail": {
+              "aliases": [],
+              "aliases_are_unconfirmed": true,
+              "assigned_type": null,
+              "candidate_id": "local_8727204b2c2b254457f1154a99ffe72a190b8456de6060f45d1840f161390f01",
+              "document_id": "火炮弹道学_钱林方_第一章",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "missing_information": [
+                "endpoint_type_unassigned_or_ambiguous"
+              ],
+              "referent_scope": null,
+              "source_evidence_ids": [
+                "ev_7266b96bc5e3e52d2acc",
+                "ev_3fa93d4e0d6519345518"
+              ],
+              "surface": "弯曲壁面边界层出现分离现象",
+              "type_candidate_ids": []
+            }
+          },
+          "candidate_ids_are_formal_entity_ids": false
+        },
+        {
+          "stage": "mapping_attempt",
+          "status": "completed",
+          "opinions": [
+            {
+              "voter_id": "judge_a",
+              "response_status": "ok",
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_7266b96bc5e3e52d2acc",
+                "ev_3fa93d4e0d6519345518"
+              ],
+              "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+              "note": "预检未就绪，缺少关系定义与尾端类型，保持未分配。",
+              "relation_id": null,
+              "status": "unassigned"
+            },
+            {
+              "voter_id": "judge_b",
+              "response_status": "ok",
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_7266b96bc5e3e52d2acc"
+              ],
+              "issue_code": "",
+              "note": "本体中无匹配的“类似于”关系，且mapping_preflight指示judgment_ready为false。",
+              "relation_id": null,
+              "status": "unassigned"
+            },
+            {
+              "voter_id": "judge_c",
+              "response_status": "ok",
+              "competing_relation_ids": [],
+              "evidence_ids": [
+                "ev_7266b96bc5e3e52d2acc"
+              ],
+              "issue_code": "FORMAL_MAPPING_UNASSIGNED",
+              "note": "预检judgment_ready=false，关系定义缺失且尾实体类型未定，正式映射保留未分配。",
+              "relation_id": null,
+              "status": "unassigned"
+            }
+          ],
+          "formal_assignment": {
+            "assigned_head_type": "C_9ca2918a695c60178dcc",
+            "assigned_relation_id": null,
+            "assigned_tail_type": null,
+            "candidate_relation_ids": [
+              "R_029d377fdd30415aa4e3",
+              "R_0e6aeaed149fdb07cfac",
+              "R_30bf49bc0f38645ff31c",
+              "R_92a43480096d210c6ba6",
+              "R_92ea9560d7f254ee1fe2",
+              "R_bacd990da3482215545f",
+              "R_dea5c49458b0cebab6ea"
+            ],
+            "semantic_approval": false
+          },
+          "original_expression": {
+            "candidate_id": "cand_de3414495fa05d4e6672",
+            "head": "涡流阻力",
+            "qualifier_status": {
+              "applicability": "not_stated",
+              "condition": "not_stated",
+              "modality": "extracted",
+              "polarity": "unknown",
+              "quantifier": "not_stated",
+              "time_scope": "not_stated"
+            },
+            "qualifiers": {
+              "applicability": null,
+              "condition": null,
+              "modality": "asserted",
+              "polarity": "unknown",
+              "quantifier": null,
+              "time_scope": null
+            },
+            "revision": 1,
+            "surface_relation": "类似于",
+            "tail": "弯曲壁面边界层出现分离现象"
+          },
+          "semantic_equivalence_confirmed": false
+        },
+        {
+          "stage": "constraint_check",
+          "status": "not_found",
+          "result": "unknown",
+          "reason_codes": [
+            "FORMAL_MAPPING_UNASSIGNED"
+          ]
+        },
+        {
+          "stage": "state_summary",
+          "status": "observed",
+          "candidate_assignment": {
+            "assigned_head_type": "C_9ca2918a695c60178dcc",
+            "assigned_relation_id": null,
+            "assigned_tail_type": null,
+            "candidate_relation_ids": [
+              "R_029d377fdd30415aa4e3",
+              "R_0e6aeaed149fdb07cfac",
+              "R_30bf49bc0f38645ff31c",
+              "R_92a43480096d210c6ba6",
+              "R_92ea9560d7f254ee1fe2",
+              "R_bacd990da3482215545f",
+              "R_dea5c49458b0cebab6ea"
+            ],
+            "semantic_approval": false
+          },
+          "guard_status": "unknown",
+          "publication_is_mapping_validation": false
+        }
+      ],
+      "blockers": [
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_029d377fdd30415aa4e3",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_0e6aeaed149fdb07cfac",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_30bf49bc0f38645ff31c",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_92a43480096d210c6ba6",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_92ea9560d7f254ee1fe2",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_bacd990da3482215545f",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "relation_definitions",
+          "reason": "definition_missing",
+          "detail": {
+            "fields": [
+              "definition_missing_in_bound_release"
+            ],
+            "id": "R_dea5c49458b0cebab6ea",
+            "kind": "relation"
+          }
+        },
+        {
+          "stage": "entity_identity",
+          "reason": "identity_ambiguous",
+          "detail": {
+            "fields": [
+              "endpoint_type_unassigned_or_ambiguous"
+            ],
+            "id": "tail",
+            "kind": "entity"
+          }
+        }
+      ],
+      "milestones": {
+        "proposal_formed": true,
+        "candidate_id_assigned": false,
+        "structural_constraints_passed": false,
+        "full_guard_passed": false,
+        "human_confirmed": null,
+        "formally_registered": null
+      },
+      "blocking_information": [
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_029d377fdd30415aa4e3",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_0e6aeaed149fdb07cfac",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_30bf49bc0f38645ff31c",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_92a43480096d210c6ba6",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_92ea9560d7f254ee1fe2",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_bacd990da3482215545f",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "definition_missing_in_bound_release"
+          ],
+          "id": "R_dea5c49458b0cebab6ea",
+          "kind": "relation"
+        },
+        {
+          "fields": [
+            "endpoint_type_unassigned_or_ambiguous"
+          ],
+          "id": "tail",
+          "kind": "entity"
+        }
+      ],
+      "global_gap_confirmed": false,
+      "mapping_accuracy": "requires_current_packet_human_annotation"
+    },
+    "review_completed": false,
+    "recommendation": "manual_review",
+    "action_taken": "none",
+    "blocking_reasons": [
+      "candidate_expression_incomplete",
+      "candidate_identity_unresolved",
+      "critical_issue_unresolved",
+      "formal_mapping_not_bound_to_candidate",
+      "gap:critical_issues_unresolved",
+      "gap:identity_unresolved",
+      "mapping:context_incomplete",
+      "ontology_guard_not_passed",
+      "required_committee_incomplete",
+      "source:unresolved",
+      "unresolved_claim_dispute"
+    ],
+    "writes_authorized": false,
+    "derivation": "current_frozen_input_only",
+    "research_operation": "manual_review"
+  },
+  "weight_snapshot": {
+    "version": "axis_weighting_v1",
+    "mode": "dynamic",
+    "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+    "reliability_hash": "2e93273b371caf979218d3375365f74751be9ed70eacf20d0bd1d3311c00157f",
+    "feature_version": "check_completion_v1",
+    "candidate_hash": "bb6367637f6121257de215c500c82496f966579844aa6703749f05404dc058a3",
+    "proposal_digest": "c6b70ed332554726ab81f59e52b7e2203216e086a34203135c7a6bfd2044abc8",
+    "evidence_hash": "f1fee27b7a82a5558e74267db0eea5dabc06f6fbb1ff4575f587326882615ad1",
+    "ontology_context_hash": "fc499bfda947331c85dd33a81f03837db7d74f99f7e97e303b2790fb36e0f11f",
+    "committee_members_hash": "3bfb9b630cce06552d1a6f6714f3e442236ce2d30408e3f76426bdaeb8f654a9",
+    "original_votes_hash": "c42f90fdc29421549457b95902604b4bc5f39260f9b1b784075ce6293edf94d9",
+    "critical_counter_evidence_ids": [],
+    "axes": {
+      "source": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "supported",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.345679012345679,
+            "effective_weight": 0.345679012345679
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "supported",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.345679012345679,
+            "effective_weight": 0.345679012345679
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.8928571428571428,
+            "features": {
+              "available": true,
+              "known_fraction": 0.8571428571428571,
+              "known_checks": [
+                "counterevidence",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "counterevidence",
+                "entity_reference",
+                "evidence_sufficiency",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "insufficient",
+            "usable": false,
+            "missing_reasons": [],
+            "weight": 0.30864197530864196,
+            "effective_weight": 0.0
+          }
+        },
+        "scores": {
+          "contradicted": 0.0,
+          "supported": 0.691358024691358
+        },
+        "available_mass": 0.691358024691358,
+        "valid_opinion_count": 2,
+        "threshold": 0.7,
+        "status": "unresolved",
+        "has_conflict": false
+      },
+      "expression": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "standard",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.3508771929824561,
+            "effective_weight": 0.3508771929824561
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "standard",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.3508771929824561,
+            "effective_weight": 0.3508771929824561
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.8500000000000001,
+            "features": {
+              "available": true,
+              "known_fraction": 0.8,
+              "known_checks": [
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "required_checks": [
+                "entity_reference",
+                "qualifiers",
+                "relation_direction",
+                "relation_semantics",
+                "triple_support"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "unresolved",
+            "usable": false,
+            "missing_reasons": [],
+            "weight": 0.29824561403508776,
+            "effective_weight": 0.0
+          }
+        },
+        "scores": {
+          "lossless_normalization": 0.0,
+          "semantic_revision": 0.0,
+          "standard": 0.7017543859649122
+        },
+        "available_mass": 0.7017543859649122,
+        "valid_opinion_count": 2,
+        "threshold": 0.7,
+        "status": "standard",
+        "has_conflict": false
+      },
+      "mapping": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "unassigned",
+            "usable": false,
+            "missing_reasons": [],
+            "weight": 0.3333333333333333,
+            "effective_weight": 0.0
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "unassigned",
+            "usable": false,
+            "missing_reasons": [],
+            "weight": 0.3333333333333333,
+            "effective_weight": 0.0
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 0.25,
+            "features": {
+              "available": true,
+              "known_fraction": 0.0,
+              "known_checks": [],
+              "required_checks": [
+                "mapping"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "unassigned",
+            "usable": false,
+            "missing_reasons": [],
+            "weight": 0.3333333333333333,
+            "effective_weight": 0.0
+          }
+        },
+        "scores": {
+          "conflict": 0.0,
+          "valid": 0.0
+        },
+        "available_mass": 0.0,
+        "valid_opinion_count": 0,
+        "threshold": 0.7,
+        "status": "context_incomplete",
+        "has_conflict": false
+      },
+      "scope": {
+        "seats": {
+          "judge_a": {
+            "model_id": "Qwen",
+            "model_family": "qwen",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "knowledge_scope"
+              ],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.3333333333333333,
+            "effective_weight": 0.3333333333333333
+          },
+          "judge_b": {
+            "model_id": "Gemma",
+            "model_family": "gemma",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "knowledge_scope"
+              ],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.3333333333333333,
+            "effective_weight": 0.3333333333333333
+          },
+          "judge_c": {
+            "model_id": "deepseek-flash",
+            "model_family": "deepseek",
+            "reliability": 0.5,
+            "history": {
+              "reason": "insufficient_history",
+              "counts": null
+            },
+            "adaptation": 1.0,
+            "features": {
+              "available": true,
+              "known_fraction": 1.0,
+              "known_checks": [
+                "knowledge_scope"
+              ],
+              "required_checks": [
+                "knowledge_scope"
+              ],
+              "meaning": "recorded_completion_not_entailment"
+            },
+            "opinion": "include",
+            "usable": true,
+            "missing_reasons": [],
+            "weight": 0.3333333333333333,
+            "effective_weight": 0.3333333333333333
+          }
+        },
+        "scores": {
+          "exclude": 0.0,
+          "include": 1.0
+        },
+        "available_mass": 1.0,
+        "valid_opinion_count": 3,
+        "threshold": 0.7,
+        "status": "include",
+        "has_conflict": false
+      }
+    },
+    "effective_observations_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "resolved_counter_evidence_ids": [],
+    "snapshot_id": "weights_bf2ddaa0a1e664b2533e5c03b1a53f833cb416ec0b5ec3ec7b85ca57e51b38d6"
+  },
+  "research_operation": "manual_review",
+  "research_operation_basis": [
+    "candidate_expression_incomplete",
+    "candidate_identity_unresolved",
+    "critical_issue_unresolved",
+    "formal_mapping_not_bound_to_candidate",
+    "gap:critical_issues_unresolved",
+    "gap:identity_unresolved",
+    "mapping:context_incomplete",
+    "ontology_guard_not_passed",
+    "required_committee_incomplete",
+    "source:unresolved",
+    "unresolved_claim_dispute"
+  ],
+  "committed": true
+}

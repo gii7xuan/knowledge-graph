@@ -1,0 +1,31 @@
+test_billing_pauses_batch_and_does_not_dispatch_remaining_candidates (tests.test_review_execution.BatchExecutionTests) ... ok
+test_expired_agent_checkpoint_does_not_reuse_an_expired_execution_deadline (tests.test_review_execution.BatchExecutionTests) ... ok
+test_explicit_force_run_really_sends_a_fresh_model_request (tests.test_review_execution.BatchExecutionTests) ... ok
+test_healthy_checkpoints_skip_and_incomplete_votes_require_targeted_recovery (tests.test_review_execution.BatchExecutionTests) ... ok
+test_http_job_pause_status_is_terminal_until_explicit_resume (tests.test_review_execution.BatchExecutionTests) ... ok
+test_late_result_cannot_commit_a_decision (tests.test_review_execution.BatchExecutionTests) ... ok
+test_model_or_contract_change_does_not_reuse_checkpoint (tests.test_review_execution.BatchExecutionTests) ... ok
+test_persistently_locked_status_file_does_not_interrupt_review (tests.test_review_execution.BatchExecutionTests) ... ok
+test_real_sdk_402_pauses_http_service_and_persists_audit (tests.test_review_execution.BatchExecutionTests) ... ok
+test_real_sdk_cli_completes_and_resumes_without_another_request (tests.test_review_execution.BatchExecutionTests) ... ok
+test_real_sdk_planner_is_injected_into_spawned_candidate_worker (tests.test_review_execution.BatchExecutionTests) ... ok
+test_status_file_recovers_on_next_publish_after_lock_is_released (tests.test_review_execution.BatchExecutionTests) ... ok
+test_status_write_failure_does_not_mask_a_billing_pause (tests.test_review_execution.BatchExecutionTests) ... ok
+test_total_deadline_kills_blocked_process_and_keeps_audit (tests.test_review_execution.BatchExecutionTests) ... ok
+test_two_candidates_actually_overlap_and_leave_no_children (tests.test_review_execution.BatchExecutionTests) ... FAIL
+test_402_does_not_wait_for_other_model_sockets (tests.test_review_execution.RequestDeadlineTests) ... ok
+test_402_is_not_retried (tests.test_review_execution.RequestDeadlineTests) ... ok
+test_blocked_request_returns_by_its_deadline (tests.test_review_execution.RequestDeadlineTests) ... ok
+
+======================================================================
+FAIL: test_two_candidates_actually_overlap_and_leave_no_children (tests.test_review_execution.BatchExecutionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_review_execution.py", line 113, in test_two_candidates_actually_overlap_and_leave_no_children
+    self.assertEqual(result["completed"], 4)
+AssertionError: 2 != 4
+
+----------------------------------------------------------------------
+Ran 18 tests in 53.927s
+
+FAILED (failures=1)

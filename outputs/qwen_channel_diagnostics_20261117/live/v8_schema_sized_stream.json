@@ -1,0 +1,234 @@
+{
+  "attempt_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+  "client_request_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+  "consistency_issues": [],
+  "counts_as_review_vote": false,
+  "finish_reason": "stop",
+  "gateway_request_id": "2026111710283793949230697689381",
+  "input_tokens": 35918,
+  "late_response": false,
+  "latency_ms": 37547,
+  "model_family": "qwen",
+  "model_id": "Qwen",
+  "model_identity": "qwen",
+  "object_revision": 1,
+  "output_tokens": 914,
+  "proposal_digest": "6ae971339140b1daf2fcc0842414eba2e90415683ba7f788ef66a8ffbdd1b0b0",
+  "provider_started_at": 1794882515.2594528,
+  "queue_time_ms": 394,
+  "raw_response": "{\n  \"counterevidence_reviewed_ids\": [],\n  \"dimensions\": {\n    \"counterevidence\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"已检查唯一来源，未发现与原始候选相矛盾的材料。\",\n      \"status\": \"pass\"\n    },\n    \"entity_reference\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"头尾实体与来源中的合成测试装置A、合成部件B一致。\",\n      \"status\": \"pass\"\n    },\n    \"evidence_sufficiency\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"唯一来源完整覆盖候选三元组及限定语。\",\n      \"status\": \"pass\"\n    },\n    \"knowledge_scope\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"命题限定在合成测试场景中，属条件性范围。\",\n      \"status\": \"conditional\"\n    },\n    \"mapping\": {\n      \"competing_relation_ids\": [],\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"无正式关系ID，映射保持未分配。\",\n      \"relation_id\": null,\n      \"status\": \"unassigned\"\n    },\n    \"qualifiers\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"条件、断言与极性均与来源一致，无频率词。\",\n      \"status\": \"pass\"\n    },\n    \"relation_direction\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"方向为装置A包含部件B，与来源一致。\",\n      \"status\": \"pass\"\n    },\n    \"relation_semantics\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"表面关系“包含”与来源表述一致。\",\n      \"status\": \"pass\"\n    },\n    \"triple_support\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"来源直接支持该三元组。\",\n      \"status\": \"supported\"\n    }\n  },\n  \"evidence_assessments\": [\n    {\n      \"evidence_id\": \"ev_gateway_0fa802b18a01abfa839c\",\n      \"note\": \"直接支持原始候选的实体、关系、方向与限定语。\",\n      \"role\": \"support\"\n    }\n  ],\n  \"expression_findings\": [],\n  \"primary_evidence_ids\": [\n    \"ev_gateway_0fa802b18a01abfa839c\"\n  ],\n  \"requested_context\": null,\n  \"schema_change_hint\": null,\n  \"suggested_revision\": null\n}",
+  "reasoning_tokens": null,
+  "request_key": "619044f6d6d1fe3e24f5dda9e3fbc519832990d5afdb1d4b412be70e55aa9ce2",
+  "response_id": "chatcmpl-b7c3388a67ef804d",
+  "response_status": "ok",
+  "returned_model_id": "Qwen",
+  "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:v8_schema_sized_stream",
+  "task_type": "synthetic_channel_probe_v1",
+  "transport_metrics": {
+    "body_bytes_received": 197161,
+    "body_chunk_count": 913,
+    "chunk_count": 916,
+    "client_request_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+    "first_body_byte_ms": 16514.592,
+    "first_chunk_ms": 16516,
+    "first_content_ms": 16516,
+    "gateway_request_id": "2026111710283793949230697689381",
+    "http_status": 200,
+    "max_inter_body_chunk_gap_ms": 41.417,
+    "max_inter_chunk_gap_ms": 48,
+    "reasoning_chars": 0,
+    "request_body_bytes": 73730,
+    "response_headers": {
+      "connection": "keep-alive",
+      "content-type": "text/event-stream",
+      "date": "Tue, 17 Nov 2026 02:28:51 GMT",
+      "server": "nginx/1.24.0 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "x-oneapi-request-id": "2026111710283793949230697689381"
+    },
+    "response_headers_ms": 16514.373,
+    "stream": true,
+    "terminal_ms": 37547,
+    "trace": [
+      {
+        "elapsed_ms": 2126.247,
+        "event": "connection.connect_tcp.started"
+      },
+      {
+        "elapsed_ms": 2202.912,
+        "event": "connection.connect_tcp.complete"
+      },
+      {
+        "elapsed_ms": 2202.965,
+        "event": "connection.start_tls.started"
+      },
+      {
+        "elapsed_ms": 2266.34,
+        "event": "connection.start_tls.complete"
+      },
+      {
+        "elapsed_ms": 2266.459,
+        "event": "http11.send_request_headers.started"
+      },
+      {
+        "elapsed_ms": 2266.861,
+        "event": "http11.send_request_headers.complete"
+      },
+      {
+        "elapsed_ms": 2266.875,
+        "event": "http11.send_request_body.started"
+      },
+      {
+        "elapsed_ms": 2387.962,
+        "event": "http11.send_request_body.complete"
+      },
+      {
+        "elapsed_ms": 2387.998,
+        "event": "http11.receive_response_headers.started"
+      },
+      {
+        "elapsed_ms": 16513.736,
+        "event": "http11.receive_response_headers.complete"
+      },
+      {
+        "elapsed_ms": 16514.547,
+        "event": "http11.receive_response_body.started"
+      },
+      {
+        "elapsed_ms": 37548.993,
+        "event": "http11.receive_response_body.complete"
+      },
+      {
+        "elapsed_ms": 37549.045,
+        "event": "http11.response_closed.started"
+      },
+      {
+        "elapsed_ms": 37549.064,
+        "event": "http11.response_closed.complete"
+      }
+    ],
+    "transport_elapsed_ms": 37549.209,
+    "visible_chars": 2228
+  },
+  "validation_errors": [],
+  "voter_id": "qwen_diagnostic",
+  "attempts": [
+    {
+      "attempt_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+      "client_request_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+      "consistency_issues": [],
+      "counts_as_review_vote": false,
+      "finish_reason": "stop",
+      "gateway_request_id": "2026111710283793949230697689381",
+      "input_tokens": 35918,
+      "late_response": false,
+      "latency_ms": 37547,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "output_tokens": 914,
+      "proposal_digest": "6ae971339140b1daf2fcc0842414eba2e90415683ba7f788ef66a8ffbdd1b0b0",
+      "provider_started_at": 1794882515.2594528,
+      "queue_time_ms": 394,
+      "raw_response": "{\n  \"counterevidence_reviewed_ids\": [],\n  \"dimensions\": {\n    \"counterevidence\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"已检查唯一来源，未发现与原始候选相矛盾的材料。\",\n      \"status\": \"pass\"\n    },\n    \"entity_reference\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"头尾实体与来源中的合成测试装置A、合成部件B一致。\",\n      \"status\": \"pass\"\n    },\n    \"evidence_sufficiency\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"唯一来源完整覆盖候选三元组及限定语。\",\n      \"status\": \"pass\"\n    },\n    \"knowledge_scope\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"命题限定在合成测试场景中，属条件性范围。\",\n      \"status\": \"conditional\"\n    },\n    \"mapping\": {\n      \"competing_relation_ids\": [],\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"无正式关系ID，映射保持未分配。\",\n      \"relation_id\": null,\n      \"status\": \"unassigned\"\n    },\n    \"qualifiers\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"条件、断言与极性均与来源一致，无频率词。\",\n      \"status\": \"pass\"\n    },\n    \"relation_direction\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"方向为装置A包含部件B，与来源一致。\",\n      \"status\": \"pass\"\n    },\n    \"relation_semantics\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"表面关系“包含”与来源表述一致。\",\n      \"status\": \"pass\"\n    },\n    \"triple_support\": {\n      \"evidence_ids\": [\n        \"ev_gateway_0fa802b18a01abfa839c\"\n      ],\n      \"issue_code\": null,\n      \"note\": \"来源直接支持该三元组。\",\n      \"status\": \"supported\"\n    }\n  },\n  \"evidence_assessments\": [\n    {\n      \"evidence_id\": \"ev_gateway_0fa802b18a01abfa839c\",\n      \"note\": \"直接支持原始候选的实体、关系、方向与限定语。\",\n      \"role\": \"support\"\n    }\n  ],\n  \"expression_findings\": [],\n  \"primary_evidence_ids\": [\n    \"ev_gateway_0fa802b18a01abfa839c\"\n  ],\n  \"requested_context\": null,\n  \"schema_change_hint\": null,\n  \"suggested_revision\": null\n}",
+      "reasoning_tokens": null,
+      "request_key": "619044f6d6d1fe3e24f5dda9e3fbc519832990d5afdb1d4b412be70e55aa9ce2",
+      "response_id": "chatcmpl-b7c3388a67ef804d",
+      "response_status": "ok",
+      "returned_model_id": "Qwen",
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:v8_schema_sized_stream",
+      "task_type": "synthetic_channel_probe_v1",
+      "transport_metrics": {
+        "body_bytes_received": 197161,
+        "body_chunk_count": 913,
+        "chunk_count": 916,
+        "client_request_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+        "first_body_byte_ms": 16514.592,
+        "first_chunk_ms": 16516,
+        "first_content_ms": 16516,
+        "gateway_request_id": "2026111710283793949230697689381",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 41.417,
+        "max_inter_chunk_gap_ms": 48,
+        "reasoning_chars": 0,
+        "request_body_bytes": 73730,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:28:51 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710283793949230697689381"
+        },
+        "response_headers_ms": 16514.373,
+        "stream": true,
+        "terminal_ms": 37547,
+        "trace": [
+          {
+            "elapsed_ms": 2126.247,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2202.912,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2202.965,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2266.34,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2266.459,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2266.861,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2266.875,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2387.962,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2387.998,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 16513.736,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 16514.547,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 37548.993,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 37549.045,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 37549.064,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 37549.209,
+        "visible_chars": 2228
+      },
+      "validation_errors": [],
+      "voter_id": "qwen_diagnostic",
+      "attempt_no": 1
+    }
+  ],
+  "actual_calls": 1
+}

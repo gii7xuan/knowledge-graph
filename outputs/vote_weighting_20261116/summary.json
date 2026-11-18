@@ -1,0 +1,141 @@
+{
+  "stage": "dynamic_weighting_minimal_loop",
+  "base_commit": "016347875f01cc5f0f9f358f8ec48ce3b0d35221",
+  "modes": [
+    "equal",
+    "static",
+    "dynamic"
+  ],
+  "axes": [
+    "source",
+    "expression",
+    "mapping",
+    "scope"
+  ],
+  "extended_checks": {
+    "run": 209,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 22,
+    "skip_reason": "isolated real Neo4j URI required"
+  },
+  "final_targeted_checks": {
+    "run": 100,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "new_weighting_checks": 17
+  },
+  "replay": {
+    "records": 3,
+    "distinct_candidates": 3,
+    "operations": {
+      "equal": {
+        "manual_review": 3
+      },
+      "static": {
+        "manual_review": 3
+      },
+      "dynamic": {
+        "manual_review": 3
+      }
+    },
+    "dynamic_static_differences": 0,
+    "model_calls": 0
+  },
+  "live_smoke": {
+    "status": "completed",
+    "research_operation": "manual_review",
+    "dimension_statuses": {
+      "source": "unresolved",
+      "expression": "standard",
+      "mapping": "context_incomplete",
+      "scope": "include"
+    },
+    "model_request_attempts": 6,
+    "request_states": [
+      {
+        "state": "completed",
+        "count": 5
+      },
+      {
+        "state": "unknown",
+        "count": 1
+      }
+    ],
+    "budget": {
+      "llm_calls": 6,
+      "tool_calls": 3,
+      "planner_steps": 3,
+      "validation_rounds": 1,
+      "input_tokens": 78828,
+      "output_tokens": 3653,
+      "unknown_token_requests": 1,
+      "deadline_epoch": 1794816734.582362
+    },
+    "accounting": {
+      "request_states": {
+        "completed": 5,
+        "unknown": 1
+      },
+      "reservation_states": {
+        "completed": 5,
+        "unknown": 1
+      },
+      "unresolved_attempts": 1,
+      "unresolved_reservations": 1,
+      "planner_request_states": {
+        "ok": 2,
+        "api_error": 1
+      },
+      "unresolved_planner_requests": 1,
+      "requests_settled": false
+    },
+    "weight_snapshot_id": "weights_bf2ddaa0a1e664b2533e5c03b1a53f833cb416ec0b5ec3ec7b85ca57e51b38d6",
+    "source_candidate_unchanged": true,
+    "isolated_import_outbox": 0,
+    "production_written": false,
+    "accuracy": null,
+    "human_labels_used": false,
+    "failure": null
+  },
+  "current_source_sha256": {
+    "config/vote_weighting.example.json": "6d62c340a3ca4b29eb5302e9955f53f8f77d7e7f5f773b36396a45929e360252",
+    "docs/dynamic_vote_weighting_20261116.md": "70dc3e7c8d2b42ec20bd09e1a7b6acfadc3a5ada7fc874c2f16ccc90d36fdd71",
+    "evaluation/experiment.py": "1cff3400b6f9b5785854f1c4bc74c3cbc38c8ef0788e291f956d733b78dca088",
+    "evaluation/vote_weighting_replay.py": "98237cebc03ef227bdecc61f51530c981e41140229911f06842b4988a4ee5d5a",
+    "evaluation/weighting_smoke.py": "2f1a51e168dfbf68249ee791ec59b280f96e90e53276942d87a945945c3bbe83",
+    "review_agent/admission_repository.py": "795414ac336262cfb2649a1ab184dfca356361c35a3fd94f8509a8652c739522",
+    "review_agent/batch.py": "a4a7549d7b6a0a8e97b35430ecca75a2cf051ea7df9a4631a6b43df5d30d04f3",
+    "review_agent/configuration.py": "c3ca23f1473c32b6ed40d000ed3551d99579a5d463581a1ec77d0e907abe1271",
+    "review_agent/consensus.py": "20220f0e5f294701a5d10730ae2592da8b72909b849afdf495442e110d944127",
+    "review_agent/dispute_review.py": "5f5d7ab5b3eab5389b43dc48f5adb5660926ce8a6c79b51afed017f4fe687055",
+    "review_agent/experiment_profiles.py": "9b7352c715dbcd5e7af44584adb857cd2c96cfd295fa272dff0e39f75939330e",
+    "review_agent/issue_ledger.py": "6f1196f13cda440d321c113bcba9ec6e3cb4f6402c4217c4472a63365b5215b1",
+    "review_agent/monitor.py": "103d12f1a9a5315342dd8beab55197b6821fabf7912520cc3cd3afcf645833d9",
+    "review_agent/orchestrator.py": "59180114c477628b5b01a003837edeae86154885ac8671884cc499083f6f3ad3",
+    "review_agent/planner_view.py": "58ed4c014246e4b9a088f87200dfd95efaa3bc45b35770ca0c15fecade3c9351",
+    "review_agent/proposal_resolver.py": "5fc95feb18d399942b6b2bfa610e93201a8a52c44beb9fa697aeabaf70d7008d",
+    "review_agent/resolution_recovery.py": "56b43c151014cf0d5fe3957143807904d5c43649566b8a42b36ade660eb12321",
+    "review_agent/resolution_state.py": "051c04429c284b6b3333cd1c09c60c02744fadb3502ff690423bbfd98c00cd20",
+    "review_agent/resolution_status.py": "10a57d7de82ac3cd3bdcffcbd0a97150ff52cc08f96948c24783df1b23e58d69",
+    "review_agent/review_actions.py": "104e7128be7c3cc9a6e78f26a212de7091c68d7d52766529de6d0ba6f1b52d90",
+    "review_agent/review_observability.py": "2b00f8548106c932d094afdefd98a1e3492186f8026cca13e40cbd17ad172c79",
+    "review_agent/runtime.py": "6fda73184b115b9db6973d144485afa3eb68e54514157061984e05659b28c98d",
+    "review_agent/service.py": "06b496cd58cbdb27a89d54e33fffab5ff10528abfcc059805f4e1a0d4d07cd01",
+    "review_agent/tools.py": "99efe75ff3c2beea5326f74e8523a6a4c56d5abe4dbfe56f0238f72f6fd3cc73",
+    "review_agent/vote_weighting.py": "c47617fdef09cc726ffcbe761dfba716104c7f2c9f3da7ddfadd9fbc3772fdb7",
+    "runs/revalidate_v8.py": "4d14cd934ec2236a46482942a29ad7eae9a9a6dee4a5ccfc0cfe45c8de5d1c12",
+    "scripts/run_weighting_checks.py": "ef4e177e9beeee8ac11b4dc1c8d2953b790526f265470fef86fde6a94500f269",
+    "tests/test_review_four_axes.py": "b70c80410575b47eedaf235762065eece0adff45dc3981b7ffcfb9ba25e71d0e",
+    "tests/test_vote_weighting.py": "ee6cec4f4c4546bd5921072c0a0b12e1f7413bf39963a8624657314de2980576"
+  },
+  "accuracy": null,
+  "human_labels_available_for_this_run": false,
+  "remaining": [
+    "validate completion features and thresholds against independent human development labels",
+    "prepare complete candidate qualifiers and common ontology mapping material",
+    "reconcile the gateway-504 planner outcome without automatic resend",
+    "run labeled controlled method and weighting comparisons"
+  ]
+}

@@ -1,0 +1,507 @@
+{
+  "kind": "recorded_engineering_failures_not_human_labels",
+  "response_contract_version": "validator_response_v8",
+  "original_candidate": {
+    "head": "法线方向",
+    "surface_relation": "平行于",
+    "tail": "切线方向"
+  },
+  "source_meaning": "法线方向与切线方向垂直",
+  "raw_judgments_must_not_be_silently_rewritten": true,
+  "responses": [
+    {
+      "voter_id": "judge_a",
+      "raw_response": {
+        "dimensions": {
+          "triple_support": {
+            "status": "contradicted",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "原文明确法线方向与切线方向垂直，候选surface_relation“平行于”与来源直接矛盾。",
+            "issue_code": "SOURCE_CONTRADICTS"
+          },
+          "entity_reference": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "法线方向与切线方向均指向原文自然坐标系中的同一对象，指代一致。",
+            "issue_code": null
+          },
+          "relation_semantics": {
+            "status": "fail",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "“平行于”与原文“垂直”关系含义相反，不能保留为同一关系。",
+            "issue_code": "RELATION_MISMATCH"
+          },
+          "relation_direction": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "法线方向与切线方向之间的垂直关系在原文中无方向性歧义，头尾方向可接受。",
+            "issue_code": null
+          },
+          "qualifiers": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "原文为定义性陈述，无频率、条件、数量或时间限定，极性为肯定，模态为断言，字段完整。",
+            "issue_code": null
+          },
+          "evidence_sufficiency": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "来源段落完整给出切线方向与法线方向的定义及垂直关系，足以确认完整含义。",
+            "issue_code": null
+          },
+          "mapping": {
+            "status": "candidate_mapping_error",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "R_198245964490791fcd11定义为“垂直于”，与候选surface_relation“平行于”不匹配，映射错误。",
+            "issue_code": "RELATION_MISMATCH",
+            "relation_id": "R_198245964490791fcd11",
+            "competing_relation_ids": []
+          },
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "法线方向与切线方向垂直是自然坐标系中的通用几何定义，属于可复用的一般知识。",
+            "issue_code": null
+          },
+          "counterevidence": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47",
+              "ev_72da4f55c9a202fc6063",
+              "ev_40934fae9e2a1dfd1fe8"
+            ],
+            "note": "已核验材料中未发现支持“平行于”的反证，但原文本身即为“垂直于”的正面证据。",
+            "issue_code": null
+          }
+        },
+        "evidence_assessments": [
+          {
+            "evidence_id": "ev_a3da0498469c6db1da87",
+            "role": "support",
+            "note": "明确给出切线方向与法线方向的定义及垂直关系。"
+          },
+          {
+            "evidence_id": "ev_72da4f55c9a202fc6063",
+            "role": "support",
+            "note": "直接说明法线方向与切线方向垂直。"
+          },
+          {
+            "evidence_id": "ev_49a0b96c3f815e30ee47",
+            "role": "support",
+            "note": "完整段落包含自然坐标系定义及切线、法线方向关系。"
+          },
+          {
+            "evidence_id": "ev_0cfba6985c52b79d48d6",
+            "role": "context",
+            "note": "提供自然坐标系的背景定义，辅助理解切线方向。"
+          },
+          {
+            "evidence_id": "ev_40934fae9e2a1dfd1fe8",
+            "role": "context",
+            "note": "公式展示重力加速度在切线和法线方向的分量，辅助验证垂直关系。"
+          },
+          {
+            "evidence_id": "ev_d0ec2e5f0aadf56dd39d",
+            "role": "context",
+            "note": "提及自然坐标系弹丸质心运动方程组，提供上下文。"
+          },
+          {
+            "evidence_id": "ev_36b11a0539a7496c2eb4",
+            "role": "irrelevant",
+            "note": "非实质性公式分隔符，无独立语义。"
+          },
+          {
+            "evidence_id": "ev_c256a5ac395fbbcdc39d",
+            "role": "irrelevant",
+            "note": "图片URL，无法独立证明事实。"
+          }
+        ],
+        "primary_evidence_ids": [
+          "ev_a3da0498469c6db1da87",
+          "ev_72da4f55c9a202fc6063",
+          "ev_49a0b96c3f815e30ee47"
+        ],
+        "counterevidence_reviewed_ids": [
+          "ev_40934fae9e2a1dfd1fe8",
+          "ev_d0ec2e5f0aadf56dd39d"
+        ],
+        "requested_context": null,
+        "suggested_revision": {
+          "surface_relation": "垂直于",
+          "relation_id": "R_198245964490791fcd11",
+          "relation_label": "垂直于"
+        },
+        "schema_change_hint": null,
+        "expression_findings": [
+          {
+            "check": "relation_semantics",
+            "kind": "semantic_error",
+            "note": "候选“平行于”与原文“垂直”关系含义相反，构成实质性语义错误。",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "normalization": null,
+            "rule_id": "MEANING-001",
+            "meaning_effect": "changed",
+            "suggested_change": "将surface_relation从“平行于”修改为“垂直于”，与原文及本体定义一致。"
+          }
+        ]
+      },
+      "observed_errors": [
+        "contradicted requires counter_evidence_ids and verdict=invalid"
+      ]
+    },
+    {
+      "voter_id": "judge_b",
+      "raw_response": {
+        "dimensions": {
+          "triple_support": {
+            "status": "contradicted",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "原文明确指出法线方向与切线方向垂直，而非平行。"
+          },
+          "entity_reference": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "实体指称正确。"
+          },
+          "relation_semantics": {
+            "status": "fail",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "候选关系为“平行于”，而原文为“垂直”。"
+          },
+          "relation_direction": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "方向正确。"
+          },
+          "qualifiers": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "无特殊限定词。"
+          },
+          "evidence_sufficiency": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "证据足以确认关系。"
+          },
+          "mapping": {
+            "status": "candidate_mapping_error",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "表面关系“平行于”与映射关系 R_198245964490791fcd11（垂直于）语义矛盾。",
+            "relation_id": "R_198245964490791fcd11",
+            "competing_relation_ids": []
+          },
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "属于几何定义的一般知识。"
+          },
+          "counterevidence": {
+            "status": "fail",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "note": "原文明确指出两者垂直，直接反驳平行关系。"
+          }
+        },
+        "evidence_assessments": [
+          {
+            "evidence_id": "ev_a3da0498469c6db1da87",
+            "role": "counter",
+            "note": "明确指出法线方向与切线方向垂直。"
+          },
+          {
+            "evidence_id": "ev_72da4f55c9a202fc6063",
+            "role": "counter",
+            "note": "明确指出法线方向与其（切线方向）垂直。"
+          },
+          {
+            "evidence_id": "ev_49a0b96c3f815e30ee47",
+            "role": "counter",
+            "note": "明确指出法线方向与其垂直。"
+          },
+          {
+            "evidence_id": "ev_0cfba6985c52b79d48d6",
+            "role": "context",
+            "note": "提供自然坐标系的背景。"
+          },
+          {
+            "evidence_id": "ev_40934fae9e2a1dfd1fe8",
+            "role": "irrelevant",
+            "note": "关于重力加速度分量的公式。"
+          },
+          {
+            "evidence_id": "ev_d0ec2e5f0aadf56dd39d",
+            "role": "irrelevant",
+            "note": "关于运动方程组的引导语。"
+          },
+          {
+            "evidence_id": "ev_36b11a0539a7496c2eb4",
+            "role": "irrelevant",
+            "note": "非实质性内容。"
+          },
+          {
+            "evidence_id": "ev_c256a5ac395fbbcdc39d",
+            "role": "irrelevant",
+            "note": "图像内容。"
+          }
+        ],
+        "primary_evidence_ids": [],
+        "counterevidence_reviewed_ids": [
+          "ev_a3da0498469c6db1da87",
+          "ev_72da4f55c9a202fc6063",
+          "ev_49a0b96c3f815e30ee47"
+        ],
+        "requested_context": null,
+        "suggested_revision": {
+          "triple": {
+            "surface_relation": "垂直于"
+          }
+        },
+        "schema_change_hint": null,
+        "expression_findings": [
+          {
+            "check": "relation_semantics",
+            "kind": "semantic_error",
+            "note": "将原文的“垂直”错误地表达为“平行”。",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_72da4f55c9a202fc6063"
+            ],
+            "normalization": null,
+            "rule_id": "MEANING-001",
+            "meaning_effect": "changed",
+            "suggested_change": "将 surface_relation 修改为“垂直于”"
+          }
+        ]
+      },
+      "observed_errors": [
+        "dismissed counterexamples and unresolved material counterevidence have different roles"
+      ]
+    },
+    {
+      "voter_id": "judge_c",
+      "raw_response": {
+        "dimensions": {
+          "triple_support": {
+            "status": "contradicted",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "原文明确说法线方向与切线方向垂直，而非平行。",
+            "issue_code": "SOURCE_CONTRADICTS"
+          },
+          "entity_reference": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "法线方向与切线方向均指向原文同一对象，无需拆分。",
+            "issue_code": null
+          },
+          "relation_semantics": {
+            "status": "fail",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "原文关系为垂直，候选表面关系“平行于”语义相反。",
+            "issue_code": "RELATION_MISMATCH"
+          },
+          "relation_direction": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "头尾对象顺序与原文一致，方向无问题。",
+            "issue_code": null
+          },
+          "qualifiers": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "断言、肯定极性、无条件频率，与原文一致。",
+            "issue_code": null
+          },
+          "evidence_sufficiency": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "证据完整给出两方向及其垂直关系。",
+            "issue_code": null
+          },
+          "mapping": {
+            "status": "matched",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "R_198245964490791fcd11定义即法线方向垂直于切线方向，类型约束满足。",
+            "issue_code": null,
+            "relation_id": "R_198245964490791fcd11",
+            "competing_relation_ids": []
+          },
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_a3da0498469c6db1da87",
+              "ev_49a0b96c3f815e30ee47"
+            ],
+            "note": "自然坐标系中法线与切线垂直的通用领域定义。",
+            "issue_code": null
+          },
+          "counterevidence": {
+            "status": "fail",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87"
+            ],
+            "note": "原文“与其垂直”直接反证“平行于”关系。",
+            "issue_code": "SOURCE_CONTRADICTS"
+          }
+        },
+        "evidence_assessments": [
+          {
+            "evidence_id": "ev_72da4f55c9a202fc6063",
+            "role": "counter",
+            "note": "明确说法线方向与切线方向垂直，反证平行。"
+          },
+          {
+            "evidence_id": "ev_a3da0498469c6db1da87",
+            "role": "counter",
+            "note": "完整句给出垂直关系，反证平行。"
+          },
+          {
+            "evidence_id": "ev_49a0b96c3f815e30ee47",
+            "role": "support",
+            "note": "同段完整表述支持两方向定义。"
+          },
+          {
+            "evidence_id": "ev_0cfba6985c52b79d48d6",
+            "role": "context",
+            "note": "自然坐标背景，未直接述及垂直关系。"
+          },
+          {
+            "evidence_id": "ev_40934fae9e2a1dfd1fe8",
+            "role": "context",
+            "note": "分量公式，非关系证据。"
+          },
+          {
+            "evidence_id": "ev_d0ec2e5f0aadf56dd39d",
+            "role": "context",
+            "note": "引出方程组，非关系证据。"
+          },
+          {
+            "evidence_id": "ev_36b11a0539a7496c2eb4",
+            "role": "irrelevant",
+            "note": "仅公式定界符。"
+          },
+          {
+            "evidence_id": "ev_c256a5ac395fbbcdc39d",
+            "role": "irrelevant",
+            "note": "图片链接，不能独立证明事实。"
+          }
+        ],
+        "primary_evidence_ids": [
+          "ev_72da4f55c9a202fc6063",
+          "ev_a3da0498469c6db1da87",
+          "ev_49a0b96c3f815e30ee47"
+        ],
+        "counterevidence_reviewed_ids": [],
+        "requested_context": null,
+        "suggested_revision": {
+          "surface_relation": "垂直于",
+          "relation_id": "R_198245964490791fcd11",
+          "note": "将表面关系改为原文支持的“垂直于”。"
+        },
+        "schema_change_hint": null,
+        "expression_findings": [
+          {
+            "check": "relation_semantics",
+            "kind": "semantic_error",
+            "note": "原文为垂直，候选“平行于”语义相反。",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87"
+            ],
+            "normalization": null,
+            "rule_id": "MEANING-001",
+            "meaning_effect": "changed",
+            "suggested_change": "将surface_relation改为“垂直于”。"
+          },
+          {
+            "check": "triple_support",
+            "kind": "semantic_error",
+            "note": "核心关系与原文垂直表述矛盾。",
+            "evidence_ids": [
+              "ev_72da4f55c9a202fc6063",
+              "ev_a3da0498469c6db1da87"
+            ],
+            "normalization": null,
+            "rule_id": "MEANING-001",
+            "meaning_effect": "changed",
+            "suggested_change": "按原文垂直关系重建三元组。"
+          }
+        ]
+      },
+      "observed_errors": [
+        "$.expression_findings[1].check: value outside enum"
+      ]
+    }
+  ]
+}

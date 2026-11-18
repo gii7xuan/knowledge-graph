@@ -1,0 +1,448 @@
+{
+  "kind": "recorded_engineering_protocol_failures_not_human_gold",
+  "response_contract_version": "validator_response_v8",
+  "responses": [
+    {
+      "case": "positive_mapping",
+      "voter_id": "judge_b",
+      "failure_kind": "mapping_fields_at_wrong_level",
+      "raw_response": {
+        "dimensions": {
+          "triple_support": {
+            "status": "supported",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "原文明确指出空气可近似看成理想气体。"
+          },
+          "entity_reference": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "头尾实体指称与原文一致。"
+          },
+          "relation_semantics": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "关系语义与原文“近似看成”完全一致。"
+          },
+          "relation_direction": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "方向为空气到理想气体，与原文一致。"
+          },
+          "qualifiers": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "模态can对应原文“可”，极性正确。"
+          },
+          "evidence_sufficiency": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "证据足以支持该命题。"
+          },
+          "mapping": {
+            "status": "matched",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "关系ID R_406bc04a6711460b8da5 的定义与原文语义完全匹配。"
+          },
+          "relation_id": "R_406bc04a6711460b8da5",
+          "competing_relation_ids": [],
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "该命题属于领域内可复用的物理事实。"
+          },
+          "counterevidence": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_b6e7a7036f328a430b3a"
+            ],
+            "note": "提及湿空气需进一步研究，但不否定空气可近似看成理想气体的基本前提。"
+          }
+        },
+        "evidence_assessments": [
+          {
+            "evidence_id": "ev_fb32c0b835deace58bfa",
+            "role": "support",
+            "note": "直接支持空气可近似看成理想气体。"
+          },
+          {
+            "evidence_id": "ev_df581a342a45722ca57b",
+            "role": "support",
+            "note": "直接支持空气可近似看成理想气体。"
+          },
+          {
+            "evidence_id": "ev_b6e7a7036f328a430b3a",
+            "role": "context",
+            "note": "提供关于湿空气的补充背景，不构成反证。"
+          },
+          {
+            "evidence_id": "ev_fd76cb51ab3671178106",
+            "role": "context",
+            "note": "章节标题，提供上下文。"
+          },
+          {
+            "evidence_id": "ev_0391f3d828c7953906f9",
+            "role": "context",
+            "note": "章节标题，提供上下文。"
+          }
+        ],
+        "primary_evidence_ids": [
+          "ev_fb32c0b835deace58bfa",
+          "ev_df581a342a45722ca57b"
+        ],
+        "counterevidence_reviewed_ids": [
+          "ev_b6e7a7036f328a430b3a"
+        ],
+        "requested_context": null,
+        "suggested_revision": null,
+        "schema_change_hint": null,
+        "expression_findings": []
+      },
+      "validation_errors": [
+        "$.dimensions.relation_id: unknown field",
+        "$.dimensions.competing_relation_ids: unknown field",
+        "$.dimensions.mapping.relation_id: required",
+        "$.dimensions.mapping.competing_relation_ids: required"
+      ],
+      "raw_attempt_id": "attempt_e55504635bb143d8a8013ef8e2663ead"
+    },
+    {
+      "case": "positive_mapping",
+      "voter_id": "judge_c",
+      "failure_kind": "unresolved_finding_with_pass_dimension",
+      "raw_response": {
+        "dimensions": {
+          "triple_support": {
+            "status": "supported",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "原文直接陈述空气可近似看成理想气体。",
+            "issue_code": null
+          },
+          "entity_reference": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "空气与理想气体均指向原文同一对象，无需拆分。",
+            "issue_code": null
+          },
+          "relation_semantics": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "近似看成与原文关系表达一致。",
+            "issue_code": null
+          },
+          "relation_direction": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "原文方向为空气到理想气体，与候选一致。",
+            "issue_code": null
+          },
+          "qualifiers": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "极性为正；模态需结合语境复核，见表达发现。",
+            "issue_code": null
+          },
+          "evidence_sufficiency": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "直接陈述句足以确认完整含义。",
+            "issue_code": null
+          },
+          "mapping": {
+            "status": "matched",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "R_406bc04a6711460b8da5定义与原文一致，域范围匹配。",
+            "issue_code": null,
+            "relation_id": "R_406bc04a6711460b8da5",
+            "competing_relation_ids": []
+          },
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "空气近似为理想气体是可复用的领域事实。",
+            "issue_code": null
+          },
+          "counterevidence": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b",
+              "ev_b6e7a7036f328a430b3a"
+            ],
+            "note": "已核验材料未见推翻该关系的反证。",
+            "issue_code": null
+          }
+        },
+        "evidence_assessments": [
+          {
+            "evidence_id": "ev_fb32c0b835deace58bfa",
+            "role": "support",
+            "note": "直接陈述空气可近似看成理想气体。"
+          },
+          {
+            "evidence_id": "ev_df581a342a45722ca57b",
+            "role": "support",
+            "note": "完整句再次确认该近似关系。"
+          },
+          {
+            "evidence_id": "ev_fd76cb51ab3671178106",
+            "role": "context",
+            "note": "章节标题，提供主题背景。"
+          },
+          {
+            "evidence_id": "ev_0391f3d828c7953906f9",
+            "role": "context",
+            "note": "章节标题，提供主题背景。"
+          },
+          {
+            "evidence_id": "ev_1c843963c93e22bc17f3",
+            "role": "context",
+            "note": "状态方程公式，非直接支持该关系。"
+          },
+          {
+            "evidence_id": "ev_e88a9615a52979f2ad04",
+            "role": "context",
+            "note": "符号定义，辅助理解语境。"
+          },
+          {
+            "evidence_id": "ev_b6e7a7036f328a430b3a",
+            "role": "context",
+            "note": "湿空气说明，未构成反证。"
+          },
+          {
+            "evidence_id": "ev_f3ea9f9df924b34527a8",
+            "role": "irrelevant",
+            "note": "公式定界符，无实质内容。"
+          }
+        ],
+        "primary_evidence_ids": [
+          "ev_fb32c0b835deace58bfa",
+          "ev_df581a342a45722ca57b"
+        ],
+        "counterevidence_reviewed_ids": [
+          "ev_b6e7a7036f328a430b3a"
+        ],
+        "requested_context": null,
+        "suggested_revision": null,
+        "schema_change_hint": null,
+        "expression_findings": [
+          {
+            "check": "qualifiers",
+            "kind": "unresolved",
+            "note": "模态can需结合完整句与公式判断，材料未明确能力或可能性。",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "normalization": null,
+            "rule_id": "MOD-001",
+            "meaning_effect": "unresolved",
+            "suggested_change": "结合完整句与公式复核模态，必要时改为asserted或保留待确认。"
+          }
+        ]
+      },
+      "validation_errors": [
+        "unresolved findings must agree with the unresolved expression check",
+        "unresolved meaning requires an unresolved check"
+      ],
+      "raw_attempt_id": "attempt_58af93ee75a246e28f838ccef2afd095"
+    },
+    {
+      "case": "semantic_mismatch",
+      "voter_id": "judge_b",
+      "failure_kind": "counter_roles_with_pass_counter_check",
+      "raw_response": {
+        "dimensions": {
+          "triple_support": {
+            "status": "contradicted",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "原文表述为“近似看成”，而非“完全等同于”。",
+            "issue_code": "RELATION_MISMATCH"
+          },
+          "entity_reference": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "实体指称正确。",
+            "issue_code": null
+          },
+          "relation_semantics": {
+            "status": "fail",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "“完全等同于”与原文的“近似看成”语义不一致，前者表示绝对等价，后者表示近似模型。",
+            "issue_code": "RELATION_MISMATCH"
+          },
+          "relation_direction": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "方向正确。",
+            "issue_code": null
+          },
+          "qualifiers": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "模态can与原文“可”一致。",
+            "issue_code": null
+          },
+          "evidence_sufficiency": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "证据足以确认关系语义不匹配。",
+            "issue_code": null
+          },
+          "mapping": {
+            "status": "candidate_mapping_error",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "候选关系 surface_relation 为“完全等同于”，而映射的 R_406bc04a6711460b8da5 定义为“近似看成”，两者不匹配。",
+            "issue_code": "RELATION_MISMATCH",
+            "relation_id": "R_406bc04a6711460b8da5",
+            "competing_relation_ids": []
+          },
+          "knowledge_scope": {
+            "status": "general",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "note": "属于领域内通用的物理近似事实。",
+            "issue_code": null
+          },
+          "counterevidence": {
+            "status": "pass",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa",
+              "ev_df581a342a45722ca57b"
+            ],
+            "note": "无其他矛盾材料，但原文本身即是对“完全等同于”的反证。",
+            "issue_code": null
+          }
+        },
+        "evidence_assessments": [
+          {
+            "evidence_id": "ev_fb32c0b835deace58bfa",
+            "role": "counter",
+            "note": "明确指出是“近似看成”，反驳了“完全等同于”。"
+          },
+          {
+            "evidence_id": "ev_df581a342a45722ca57b",
+            "role": "counter",
+            "note": "重复确认“近似看成”的语义。"
+          },
+          {
+            "evidence_id": "ev_fd76cb51ab3671178106",
+            "role": "context",
+            "note": "提供章节背景。"
+          },
+          {
+            "evidence_id": "ev_0391f3d828c7953906f9",
+            "role": "context",
+            "note": "提供章节标题。"
+          },
+          {
+            "evidence_id": "ev_1c843963c93e22bc17f3",
+            "role": "context",
+            "note": "提供状态方程公式。"
+          },
+          {
+            "evidence_id": "ev_e88a9615a52979f2ad04",
+            "role": "context",
+            "note": "提供参数定义。"
+          },
+          {
+            "evidence_id": "ev_b6e7a7036f328a430b3a",
+            "role": "context",
+            "note": "讨论湿空气的进一步研究。"
+          },
+          {
+            "evidence_id": "ev_f3ea9f9df924b34527a8",
+            "role": "irrelevant",
+            "note": "非实质性内容。"
+          }
+        ],
+        "primary_evidence_ids": [],
+        "counterevidence_reviewed_ids": [],
+        "requested_context": null,
+        "suggested_revision": {
+          "surface_relation": "近似看成"
+        },
+        "schema_change_hint": null,
+        "expression_findings": [
+          {
+            "check": "relation_semantics",
+            "kind": "semantic_error",
+            "note": "将“近似看成”错误地表达为“完全等同于”，改变了物理含义的强度。",
+            "evidence_ids": [
+              "ev_fb32c0b835deace58bfa"
+            ],
+            "normalization": null,
+            "rule_id": "MEANING-001",
+            "meaning_effect": "changed",
+            "suggested_change": "将 surface_relation 修改为“近似看成”"
+          }
+        ]
+      },
+      "validation_errors": [
+        "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+      ],
+      "raw_attempt_id": "attempt_317881217ed2457395106a10cb2180b6"
+    }
+  ],
+  "original_judgments_must_not_be_rewritten": true
+}

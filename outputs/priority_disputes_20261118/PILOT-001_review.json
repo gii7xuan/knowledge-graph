@@ -1,0 +1,584 @@
+{
+  "status": "review_incomplete",
+  "draft_id": "draft_a48c1424d0ba410da08251436cbe4971",
+  "draft_hash": "51531436b9e235f79f2298a883780d63468fd6c46d88bde27e5767324c424ed8",
+  "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+  "evidence_hash": "da2adb1468d1daf1c2e436e91b8d0610196a14925836930e744a1babeb1d890c",
+  "approved_voter_ids": [],
+  "votes": [
+    {
+      "attempt_id": "attempt_29fc01a3f13f4dffbf5c495efb3d05f5",
+      "client_request_id": "attempt_29fc01a3f13f4dffbf5c495efb3d05f5",
+      "document_version": "4f03a95382e75586a737789d89b96e6df8671ca36824e2e2390a8168212b8305",
+      "draft_hash": "51531436b9e235f79f2298a883780d63468fd6c46d88bde27e5767324c424ed8",
+      "error": "every changed field requires exactly one review",
+      "evidence_hash": "da2adb1468d1daf1c2e436e91b8d0610196a14925836930e744a1babeb1d890c",
+      "finish_reason": "stop",
+      "gateway_request_id": "202611181059027134901603100552",
+      "input_tokens": 12277,
+      "late_response": false,
+      "latency_ms": 38437,
+      "model_family": "qwen",
+      "model_id": "Qwen",
+      "model_identity": "qwen",
+      "object_revision": 1,
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "output_tokens": 1321,
+      "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+      "provider_started_at": 1794970736.9642854,
+      "queue_time_ms": 360,
+      "raw_response": "{\n  \"decision\": \"reject\",\n  \"field_reviews\": [\n    {\n      \"field\": \"head\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\"],\n      \"note\": \"The source text 'Think of it as...' uses the pronoun 'it', which refers to 'the covolume of the gas' from the preceding sentence (ev_701d34fe9e0b6fefaeb8). The revision changes the head to 'this passage', which is a meta-reference to the text itself rather than the entity being discussed. The original head 'covolume' correctly identifies the referent of the pronoun 'it'.\"\n    },\n    {\n      \"field\": \"surface_relation\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes the relation from 'does not have' to 'instructs readers to treat'. While 'Think of it as' is an imperative/instruction, the core semantic content is about the nature of the covolume (that it lacks physical meaning in this context). The relation 'instructs readers to treat' shifts the focus to the act of instruction rather than the property being ascribed. The original 'does not have' captures the negated possession of physical meaning, which is the key semantic content.\"\n    },\n    {\n      \"field\": \"tail\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes the tail from 'physical meaning' to 'covolume as an empirical fitting parameter without assigning it physical meaning here'. This is a significant expansion that goes beyond the source text. The source says 'not having physical meaning but as simply a number that allows for a better fit to observed experimental data'. The phrase 'empirical fitting parameter' is an interpretation, not a direct quote. The original tail 'physical meaning' is more faithful to the source.\"\n    },\n    {\n      \"field\": \"tail_kind\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes tail_kind from 'entity' to 'proposition'. While the new tail is indeed a proposition, the original tail 'physical meaning' is an entity/concept. The change in tail_kind is a consequence of the problematic tail change.\"\n    },\n    {\n      \"field\": \"qualifiers.polarity\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes polarity from 'negative' to 'positive'. The source text 'not having physical meaning' contains a negation. The original polarity 'negative' correctly captures this. The new polarity 'positive' is incorrect because the statement is about what the covolume does NOT have.\"\n    },\n    {\n      \"field\": \"qualifiers.applicability\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision adds applicability 'the interpretive instruction in this passage'. This is a meta-level description of the text's function, not a qualifier of the fact itself. The source does not explicitly state this as a qualifier.\"\n    },\n    {\n      \"field\": \"semantic_context\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\"],\n      \"note\": \"The semantic_context changes are problematic. The head referent_scope is changed from 'the covolume of the gas from the preceding sentence' to 'this frozen source passage', which loses the important contextual information about what 'it' refers to. The tail referent_scope is changed to 'this frozen source passage', which is vague. The knowledge_scope change from 'general' to 'local_definition' is not clearly supported.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [],\n  \"counter_evidence_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\"],\n  \"counterevidence_reviewed_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\", \"ev_8e0541c169b320813b8f\", \"ev_f41093b626530e66ae06\"],\n  \"rationale_summary\": \"The revision fundamentally misinterprets the source text. The pronoun 'it' in 'Think of it as...' refers to 'the covolume of the gas' (ev_701d34fe9e0b6fefaeb8), not to 'this passage'. The revision changes the head to a meta-reference, loses the negation (changing polarity from negative to positive), and expands the tail with interpretive language not present in the source. The original extraction correctly identified the head as 'covolume', the relation as 'does not have', the tail as 'physical meaning', and the polarity as 'negative'. The revision should be rejected.\"\n}",
+      "reasoning_tokens": null,
+      "request_key": "ce9142cc295e926c1a5c50e83d91ede17d71b5dc8d4f220a64184d25318eebf4",
+      "response_contract_version": "candidate_revision_review_v1",
+      "response_id": "chatcmpl-a490b0baeebc2900",
+      "response_status": "invalid_contract",
+      "returned_model_id": "Qwen",
+      "task_id": "draft_a48c1424d0ba410da08251436cbe4971",
+      "task_type": "candidate_revision_review",
+      "transport_metrics": {
+        "body_bytes_received": 285346,
+        "body_chunk_count": 1321,
+        "chunk_count": 1323,
+        "client_request_id": "attempt_29fc01a3f13f4dffbf5c495efb3d05f5",
+        "first_body_byte_ms": 9412.482,
+        "first_chunk_ms": 9422,
+        "first_content_ms": 9422,
+        "gateway_request_id": "202611181059027134901603100552",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 41.268,
+        "max_inter_chunk_gap_ms": 47,
+        "reasoning_chars": 0,
+        "request_body_bytes": 38821,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Wed, 18 Nov 2026 02:59:06 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "202611181059027134901603100552"
+        },
+        "response_headers_ms": 9412.11,
+        "stream": true,
+        "terminal_ms": 38437,
+        "trace": [
+          {
+            "elapsed_ms": 4521.391,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 4628.026,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 4628.854,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 4704.544,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 4704.671,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 4706.357,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 4706.373,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 4706.76,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 4706.77,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 9411.209,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 9412.397,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 38434.095,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 38434.151,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 38434.171,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 38434.326,
+        "visible_chars": 4570
+      },
+      "voter_id": "judge_a",
+      "attempts": [
+        {
+          "attempt_id": "attempt_29fc01a3f13f4dffbf5c495efb3d05f5",
+          "client_request_id": "attempt_29fc01a3f13f4dffbf5c495efb3d05f5",
+          "document_version": "4f03a95382e75586a737789d89b96e6df8671ca36824e2e2390a8168212b8305",
+          "draft_hash": "51531436b9e235f79f2298a883780d63468fd6c46d88bde27e5767324c424ed8",
+          "error": "every changed field requires exactly one review",
+          "evidence_hash": "da2adb1468d1daf1c2e436e91b8d0610196a14925836930e744a1babeb1d890c",
+          "finish_reason": "stop",
+          "gateway_request_id": "202611181059027134901603100552",
+          "input_tokens": 12277,
+          "late_response": false,
+          "latency_ms": 38437,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "output_tokens": 1321,
+          "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+          "provider_started_at": 1794970736.9642854,
+          "queue_time_ms": 360,
+          "raw_response": "{\n  \"decision\": \"reject\",\n  \"field_reviews\": [\n    {\n      \"field\": \"head\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\"],\n      \"note\": \"The source text 'Think of it as...' uses the pronoun 'it', which refers to 'the covolume of the gas' from the preceding sentence (ev_701d34fe9e0b6fefaeb8). The revision changes the head to 'this passage', which is a meta-reference to the text itself rather than the entity being discussed. The original head 'covolume' correctly identifies the referent of the pronoun 'it'.\"\n    },\n    {\n      \"field\": \"surface_relation\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes the relation from 'does not have' to 'instructs readers to treat'. While 'Think of it as' is an imperative/instruction, the core semantic content is about the nature of the covolume (that it lacks physical meaning in this context). The relation 'instructs readers to treat' shifts the focus to the act of instruction rather than the property being ascribed. The original 'does not have' captures the negated possession of physical meaning, which is the key semantic content.\"\n    },\n    {\n      \"field\": \"tail\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes the tail from 'physical meaning' to 'covolume as an empirical fitting parameter without assigning it physical meaning here'. This is a significant expansion that goes beyond the source text. The source says 'not having physical meaning but as simply a number that allows for a better fit to observed experimental data'. The phrase 'empirical fitting parameter' is an interpretation, not a direct quote. The original tail 'physical meaning' is more faithful to the source.\"\n    },\n    {\n      \"field\": \"tail_kind\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes tail_kind from 'entity' to 'proposition'. While the new tail is indeed a proposition, the original tail 'physical meaning' is an entity/concept. The change in tail_kind is a consequence of the problematic tail change.\"\n    },\n    {\n      \"field\": \"qualifiers.polarity\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision changes polarity from 'negative' to 'positive'. The source text 'not having physical meaning' contains a negation. The original polarity 'negative' correctly captures this. The new polarity 'positive' is incorrect because the statement is about what the covolume does NOT have.\"\n    },\n    {\n      \"field\": \"qualifiers.applicability\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\"],\n      \"note\": \"The revision adds applicability 'the interpretive instruction in this passage'. This is a meta-level description of the text's function, not a qualifier of the fact itself. The source does not explicitly state this as a qualifier.\"\n    },\n    {\n      \"field\": \"semantic_context\",\n      \"status\": \"not_stated_in_scope\",\n      \"evidence_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\"],\n      \"note\": \"The semantic_context changes are problematic. The head referent_scope is changed from 'the covolume of the gas from the preceding sentence' to 'this frozen source passage', which loses the important contextual information about what 'it' refers to. The tail referent_scope is changed to 'this frozen source passage', which is vague. The knowledge_scope change from 'general' to 'local_definition' is not clearly supported.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [],\n  \"counter_evidence_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\"],\n  \"counterevidence_reviewed_ids\": [\"ev_64c2f06c54275de9bacf\", \"ev_701d34fe9e0b6fefaeb8\", \"ev_8e0541c169b320813b8f\", \"ev_f41093b626530e66ae06\"],\n  \"rationale_summary\": \"The revision fundamentally misinterprets the source text. The pronoun 'it' in 'Think of it as...' refers to 'the covolume of the gas' (ev_701d34fe9e0b6fefaeb8), not to 'this passage'. The revision changes the head to a meta-reference, loses the negation (changing polarity from negative to positive), and expands the tail with interpretive language not present in the source. The original extraction correctly identified the head as 'covolume', the relation as 'does not have', the tail as 'physical meaning', and the polarity as 'negative'. The revision should be rejected.\"\n}",
+          "reasoning_tokens": null,
+          "request_key": "ce9142cc295e926c1a5c50e83d91ede17d71b5dc8d4f220a64184d25318eebf4",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-a490b0baeebc2900",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Qwen",
+          "task_id": "draft_a48c1424d0ba410da08251436cbe4971",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "body_bytes_received": 285346,
+            "body_chunk_count": 1321,
+            "chunk_count": 1323,
+            "client_request_id": "attempt_29fc01a3f13f4dffbf5c495efb3d05f5",
+            "first_body_byte_ms": 9412.482,
+            "first_chunk_ms": 9422,
+            "first_content_ms": 9422,
+            "gateway_request_id": "202611181059027134901603100552",
+            "http_status": 200,
+            "max_inter_body_chunk_gap_ms": 41.268,
+            "max_inter_chunk_gap_ms": 47,
+            "reasoning_chars": 0,
+            "request_body_bytes": 38821,
+            "response_headers": {
+              "connection": "keep-alive",
+              "content-type": "text/event-stream",
+              "date": "Wed, 18 Nov 2026 02:59:06 GMT",
+              "server": "nginx/1.24.0 (Ubuntu)",
+              "transfer-encoding": "chunked",
+              "x-oneapi-request-id": "202611181059027134901603100552"
+            },
+            "response_headers_ms": 9412.11,
+            "stream": true,
+            "terminal_ms": 38437,
+            "trace": [
+              {
+                "elapsed_ms": 4521.391,
+                "event": "connection.connect_tcp.started"
+              },
+              {
+                "elapsed_ms": 4628.026,
+                "event": "connection.connect_tcp.complete"
+              },
+              {
+                "elapsed_ms": 4628.854,
+                "event": "connection.start_tls.started"
+              },
+              {
+                "elapsed_ms": 4704.544,
+                "event": "connection.start_tls.complete"
+              },
+              {
+                "elapsed_ms": 4704.671,
+                "event": "http11.send_request_headers.started"
+              },
+              {
+                "elapsed_ms": 4706.357,
+                "event": "http11.send_request_headers.complete"
+              },
+              {
+                "elapsed_ms": 4706.373,
+                "event": "http11.send_request_body.started"
+              },
+              {
+                "elapsed_ms": 4706.76,
+                "event": "http11.send_request_body.complete"
+              },
+              {
+                "elapsed_ms": 4706.77,
+                "event": "http11.receive_response_headers.started"
+              },
+              {
+                "elapsed_ms": 9411.209,
+                "event": "http11.receive_response_headers.complete"
+              },
+              {
+                "elapsed_ms": 9412.397,
+                "event": "http11.receive_response_body.started"
+              },
+              {
+                "elapsed_ms": 38434.095,
+                "event": "http11.receive_response_body.complete"
+              },
+              {
+                "elapsed_ms": 38434.151,
+                "event": "http11.response_closed.started"
+              },
+              {
+                "elapsed_ms": 38434.171,
+                "event": "http11.response_closed.complete"
+              }
+            ],
+            "transport_elapsed_ms": 38434.326,
+            "visible_chars": 4570
+          },
+          "voter_id": "judge_a",
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "task_type": "candidate_revision_review",
+      "task_id": "draft_a48c1424d0ba410da08251436cbe4971",
+      "object_revision": 1,
+      "draft_hash": "51531436b9e235f79f2298a883780d63468fd6c46d88bde27e5767324c424ed8",
+      "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+      "evidence_hash": "da2adb1468d1daf1c2e436e91b8d0610196a14925836930e744a1babeb1d890c",
+      "response_contract_version": "candidate_revision_review_v1",
+      "voter_id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma",
+      "document_version": "4f03a95382e75586a737789d89b96e6df8671ca36824e2e2390a8168212b8305",
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "response_status": "timeout",
+      "verdict": null,
+      "retryable": false,
+      "outcome_unknown": true,
+      "error_code": "HARD_REQUEST_TIMEOUT",
+      "error": "caller wait deadline reached; original request may complete later",
+      "attempt_id": "attempt_a1fb18ef6c93469db606951a68e3b5ca",
+      "request_key": "06a06ab6ba126f2cea318dfd9c91e89e3537bfb9b93a9ffe014a58090adb0798",
+      "latency_ms": 240000,
+      "attempts": [
+        {
+          "task_type": "candidate_revision_review",
+          "task_id": "draft_a48c1424d0ba410da08251436cbe4971",
+          "object_revision": 1,
+          "draft_hash": "51531436b9e235f79f2298a883780d63468fd6c46d88bde27e5767324c424ed8",
+          "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+          "evidence_hash": "da2adb1468d1daf1c2e436e91b8d0610196a14925836930e744a1babeb1d890c",
+          "response_contract_version": "candidate_revision_review_v1",
+          "voter_id": "judge_b",
+          "model_id": "Gemma",
+          "model_family": "gemma",
+          "model_identity": "gemma",
+          "document_version": "4f03a95382e75586a737789d89b96e6df8671ca36824e2e2390a8168212b8305",
+          "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+          "response_status": "timeout",
+          "verdict": null,
+          "retryable": false,
+          "outcome_unknown": true,
+          "error_code": "HARD_REQUEST_TIMEOUT",
+          "error": "caller wait deadline reached; original request may complete later",
+          "attempt_id": "attempt_a1fb18ef6c93469db606951a68e3b5ca",
+          "request_key": "06a06ab6ba126f2cea318dfd9c91e89e3537bfb9b93a9ffe014a58090adb0798",
+          "latency_ms": 240000,
+          "attempt_no": 1
+        }
+      ],
+      "actual_calls": 1
+    },
+    {
+      "task_type": "candidate_revision_review",
+      "task_id": "draft_a48c1424d0ba410da08251436cbe4971",
+      "object_revision": 1,
+      "draft_hash": "51531436b9e235f79f2298a883780d63468fd6c46d88bde27e5767324c424ed8",
+      "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+      "evidence_hash": "da2adb1468d1daf1c2e436e91b8d0610196a14925836930e744a1babeb1d890c",
+      "response_contract_version": "candidate_revision_review_v1",
+      "voter_id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash",
+      "document_version": "4f03a95382e75586a737789d89b96e6df8671ca36824e2e2390a8168212b8305",
+      "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+      "response_status": "api_error",
+      "not_sent": true,
+      "actual_calls": 0,
+      "retryable": false,
+      "error_code": "REVISION_DISPATCH_HALTED",
+      "error": "earlier revision request is unresolved or its service is paused"
+    }
+  ],
+  "task_type": "candidate_revision_review",
+  "committee_members": [
+    {
+      "id": "judge_a",
+      "model_id": "Qwen",
+      "model_family": "qwen",
+      "model_identity": "qwen"
+    },
+    {
+      "id": "judge_b",
+      "model_id": "Gemma",
+      "model_family": "gemma",
+      "model_identity": "gemma"
+    },
+    {
+      "id": "judge_c",
+      "model_id": "deepseek-flash",
+      "model_family": "deepseek",
+      "model_identity": "deepseek-flash"
+    }
+  ],
+  "committee_policy": {
+    "committee_size": 3,
+    "required_votes": 3,
+    "minimum_distinct_families": 3,
+    "vote_weighting": {
+      "mode": "dynamic",
+      "version": "axis_weighting_v1",
+      "feature_version": "check_completion_v1",
+      "thresholds": {
+        "source": 0.7,
+        "expression": 0.7,
+        "mapping": 0.7,
+        "scope": 0.7
+      },
+      "min_available_mass": 0.65,
+      "min_opinions": 2,
+      "min_families": 2,
+      "max_seat_weight": 0.49,
+      "adaptation_floor": 0.25,
+      "prior": 0.5,
+      "prior_strength": 4.0,
+      "min_history_samples": 8,
+      "reliability": {
+        "data_version": "cold_start",
+        "partition": "development",
+        "models": {}
+      }
+    }
+  },
+  "weight_snapshot": {
+    "version": "revision_weights_v1",
+    "by_check": {
+      "entity_reference": {
+        "version": "axis_weighting_v1",
+        "kind": "focused_review",
+        "mode": "dynamic",
+        "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+        "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+        "votes_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "axes": {
+          "expression": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              }
+            },
+            "available_mass": 0.0,
+            "winner": null,
+            "threshold": 0.7
+          },
+          "source": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              }
+            },
+            "available_mass": 0.0,
+            "winner": null,
+            "threshold": 0.7
+          }
+        },
+        "snapshot_id": "weights_3635c336d4a3ab9ad35d08e2314943b92e1990e24354e526f0c1e80fa5a05b65"
+      },
+      "qualifiers": {
+        "version": "axis_weighting_v1",
+        "kind": "focused_review",
+        "mode": "dynamic",
+        "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+        "proposal_digest": "3fa20604297bf49fcda55216b1eb75d1666d53138225155cd6daa8d8c7da81a8",
+        "votes_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "axes": {
+          "expression": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              }
+            },
+            "available_mass": 0.0,
+            "winner": null,
+            "threshold": 0.7
+          },
+          "source": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": null,
+                "usable": false,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.0
+              }
+            },
+            "available_mass": 0.0,
+            "winner": null,
+            "threshold": 0.7
+          }
+        },
+        "snapshot_id": "weights_3635c336d4a3ab9ad35d08e2314943b92e1990e24354e526f0c1e80fa5a05b65"
+      }
+    }
+  }
+}

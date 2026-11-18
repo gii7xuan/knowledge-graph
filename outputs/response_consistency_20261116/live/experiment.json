@@ -1,0 +1,41 @@
+{
+  "kind": "fresh_engineering_response_consistency_smoke",
+  "max_initial_calls": 9,
+  "max_new_calls_including_bounded_field_corrections": 12,
+  "known_token_stop": 300000,
+  "ontology": {
+    "ontology_release_id": "release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590",
+    "ontology_version": "1f5aeedfee21957b4ca3dfbe607c2508fa17591468b880f17e5abb21ad2bf5b9",
+    "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+    "ontology_release_path": "D:\\knowledge-huopao\\outputs\\ontology_freeze_20261116\\live\\releases\\release_b983ac2cbc54c6c14229aaf7658be6710980b7e8fe02fc621e8393238c9ba590"
+  },
+  "consistency_policy": {
+    "version": "original_candidate_response_consistency_v1",
+    "evidence_role_target": "exact_original_candidate_full_expression",
+    "expression_checks": [
+      "entity_reference",
+      "relation_semantics",
+      "relation_direction",
+      "qualifiers"
+    ],
+    "rules": [
+      "Assign support/counter/context/irrelevant relative to the ORIGINAL candidate, including its exact surface predicate, not a corrected candidate or a true sentence considered alone.",
+      "A positive source statement may contradict the original candidate. If triple_support=contradicted, at least one actual evidence_assessment must have role=counter. Do not label that evidence support merely because it proves a proposed correction.",
+      "primary_evidence_ids contains only role=support IDs and never counter IDs. It may be empty when the original candidate is contradicted; a correction needs a separate reviewed revision.",
+      "dimensions.counterevidence.evidence_ids cites material inspected for contradiction. counterevidence_reviewed_ids instead records dismissed potential counterexamples; it never includes unresolved role=counter IDs.",
+      "Actual unresolved role=counter evidence requires counterevidence=fail/unknown, never pass. Without an actual contradiction use insufficient/unknown where appropriate; do not fabricate counterevidence for consistency.",
+      "expression_findings.check uses ONLY expression_checks. Mapping findings belong in dimensions.mapping; do not add mapping/ontology/counterevidence as expression finding checks.",
+      "Complete every required mapping field: status, relation_id, competing_relation_ids, evidence_ids and note. A known ID and compatible types alone do not establish equivalence of the exact surface predicate to that property.",
+      "Check consistency of the independently reached statuses, roles and findings BEFORE sending. Do not alter substantive judgments merely to pass validation. Return no additional top-level fields and no admission decision."
+    ]
+  },
+  "source_database": "D:\\knowledge-huopao\\outputs\\review_completion_20261116\\live\\review.sqlite3",
+  "source_database_sha256": "9a60ae06b09de236944b91f7c972916819cba4728392da8d6204aafdf1749a97",
+  "old_votes_used": false,
+  "old_decisions_rewritten": false,
+  "selection": "same three authored engineering fixtures; mismatch first",
+  "human_gold": false,
+  "paper_accuracy": null,
+  "production_written": false,
+  "timeout_change": "explicit 240s wait for all seats; does not change semantic judgments"
+}

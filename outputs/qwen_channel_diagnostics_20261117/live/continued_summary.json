@@ -1,0 +1,589 @@
+{
+  "study_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7",
+  "results": [
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:small_json_stream",
+      "response_status": "invalid_contract",
+      "outcome_unknown": null,
+      "input_tokens": 172,
+      "output_tokens": 93,
+      "transport_metrics": {
+        "body_bytes_received": 20477,
+        "body_chunk_count": 93,
+        "chunk_count": 95,
+        "client_request_id": "attempt_fd0c76d16df444579d513ed7c011c70f",
+        "first_body_byte_ms": 2416.763,
+        "first_chunk_ms": 2422,
+        "first_content_ms": 2422,
+        "gateway_request_id": "2026111710210623568785548553475",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 30.154,
+        "max_inter_chunk_gap_ms": 33,
+        "reasoning_chars": 0,
+        "request_body_bytes": 587,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:21:06 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710210623568785548553475"
+        },
+        "response_headers_ms": 2416.53,
+        "stream": true,
+        "terminal_ms": 4375,
+        "trace": [
+          {
+            "elapsed_ms": 2000.966,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2058.916,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2058.991,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2125.748,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2125.851,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2126.203,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2126.214,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2126.362,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2126.371,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2415.954,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2416.714,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 4393.378,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 4393.467,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 4393.501,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 4393.749,
+        "visible_chars": 221
+      },
+      "error_code": null,
+      "validation_errors": [
+        "$.instruction: unknown field",
+        "$.probe_id: unknown field",
+        "$.task: unknown field",
+        "synthetic token mismatch"
+      ]
+    },
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:small_schema_stream",
+      "response_status": "ok",
+      "outcome_unknown": null,
+      "input_tokens": 170,
+      "output_tokens": 26,
+      "transport_metrics": {
+        "body_bytes_received": 6085,
+        "body_chunk_count": 26,
+        "chunk_count": 28,
+        "client_request_id": "attempt_99d5373cd0564d8cae134a6d949cbdea",
+        "first_body_byte_ms": 2463.344,
+        "first_chunk_ms": 2468,
+        "first_content_ms": 2468,
+        "gateway_request_id": "2026111710280334642558814744186",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 24.386,
+        "max_inter_chunk_gap_ms": 32,
+        "reasoning_chars": 0,
+        "request_body_bytes": 810,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:28:03 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710280334642558814744186"
+        },
+        "response_headers_ms": 2463.089,
+        "stream": true,
+        "terminal_ms": 2984,
+        "trace": [
+          {
+            "elapsed_ms": 2007.65,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2095.747,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2095.812,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2159.968,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2160.07,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2160.461,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2160.473,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2160.601,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2160.61,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 2462.442,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 2463.29,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 2995.608,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 2995.692,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 2995.723,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 2995.959,
+        "visible_chars": 45
+      },
+      "error_code": null,
+      "validation_errors": []
+    },
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:small_json_nonstream",
+      "response_status": "invalid_contract",
+      "outcome_unknown": null,
+      "input_tokens": 171,
+      "output_tokens": 92,
+      "transport_metrics": {
+        "body_bytes_received": 922,
+        "body_chunk_count": 1,
+        "client_request_id": "attempt_5e80a8b68247423390f37c79bebaac52",
+        "first_body_byte_ms": 4305.143,
+        "gateway_request_id": "2026111710280690041940268779681",
+        "http_status": 200,
+        "request_body_bytes": 536,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-length": "922",
+          "content-type": "application/json",
+          "date": "Tue, 17 Nov 2026 02:28:09 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "x-oneapi-request-id": "2026111710280690041940268779681"
+        },
+        "response_headers_ms": 4305.005,
+        "stream": false,
+        "trace": [
+          {
+            "elapsed_ms": 2001.305,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2043.545,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2043.599,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2098.127,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2098.242,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2098.577,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2098.587,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2098.718,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2098.726,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 4304.323,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 4305.1,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 4305.176,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 4305.212,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 4305.229,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 4313.723
+      },
+      "error_code": null,
+      "validation_errors": [
+        "$.probe_id: unknown field",
+        "$.instruction: unknown field",
+        "$.task: unknown field",
+        "synthetic token mismatch"
+      ]
+    },
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:v8_schema_small_stream",
+      "response_status": "ok",
+      "outcome_unknown": null,
+      "input_tokens": 6139,
+      "output_tokens": 943,
+      "transport_metrics": {
+        "body_bytes_received": 203349,
+        "body_chunk_count": 943,
+        "chunk_count": 945,
+        "client_request_id": "attempt_24ab2eb0935a4f0292bc437f9bcfc881",
+        "first_body_byte_ms": 4588.94,
+        "first_chunk_ms": 4592,
+        "first_content_ms": 4592,
+        "gateway_request_id": "2026111710281197930441283367491",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 40.486,
+        "max_inter_chunk_gap_ms": 47,
+        "reasoning_chars": 0,
+        "request_body_bytes": 33459,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:28:14 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710281197930441283367491"
+        },
+        "response_headers_ms": 4588.503,
+        "stream": true,
+        "terminal_ms": 25062,
+        "trace": [
+          {
+            "elapsed_ms": 2047.912,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2094.231,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2094.291,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2163.564,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2163.674,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2164.011,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2164.022,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2164.328,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2164.337,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 4587.469,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 4588.826,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 25077.959,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 25078.015,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 25078.034,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 25078.186,
+        "visible_chars": 2242
+      },
+      "error_code": null,
+      "validation_errors": []
+    },
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:v8_schema_sized_stream",
+      "response_status": "ok",
+      "outcome_unknown": null,
+      "input_tokens": 35918,
+      "output_tokens": 914,
+      "transport_metrics": {
+        "body_bytes_received": 197161,
+        "body_chunk_count": 913,
+        "chunk_count": 916,
+        "client_request_id": "attempt_ef8a01cba7114cd68337b6b5cdb6323c",
+        "first_body_byte_ms": 16514.592,
+        "first_chunk_ms": 16516,
+        "first_content_ms": 16516,
+        "gateway_request_id": "2026111710283793949230697689381",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 41.417,
+        "max_inter_chunk_gap_ms": 48,
+        "reasoning_chars": 0,
+        "request_body_bytes": 73730,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:28:51 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710283793949230697689381"
+        },
+        "response_headers_ms": 16514.373,
+        "stream": true,
+        "terminal_ms": 37547,
+        "trace": [
+          {
+            "elapsed_ms": 2126.247,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2202.912,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2202.965,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2266.34,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2266.459,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2266.861,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2266.875,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2387.962,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2387.998,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 16513.736,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 16514.547,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 37548.993,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 37549.045,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 37549.064,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 37549.209,
+        "visible_chars": 2228
+      },
+      "error_code": null,
+      "validation_errors": []
+    },
+    {
+      "task_id": "qwen_diag_1daa8f851a8245eeb47c5f0d4b7c9fd7:v8_template_sized_stream",
+      "response_status": "ok",
+      "outcome_unknown": null,
+      "input_tokens": 35095,
+      "output_tokens": 869,
+      "transport_metrics": {
+        "body_bytes_received": 187348,
+        "body_chunk_count": 868,
+        "chunk_count": 871,
+        "client_request_id": "attempt_67cc01b87e2c4f9ca5d9c2d074231b7b",
+        "first_body_byte_ms": 15566.312,
+        "first_chunk_ms": 15577,
+        "first_content_ms": 15577,
+        "gateway_request_id": "2026111710291616324429155244933",
+        "http_status": 200,
+        "max_inter_body_chunk_gap_ms": 44.439,
+        "max_inter_chunk_gap_ms": 47,
+        "reasoning_chars": 0,
+        "request_body_bytes": 68118,
+        "response_headers": {
+          "connection": "keep-alive",
+          "content-type": "text/event-stream",
+          "date": "Tue, 17 Nov 2026 02:29:29 GMT",
+          "server": "nginx/1.24.0 (Ubuntu)",
+          "transfer-encoding": "chunked",
+          "x-oneapi-request-id": "2026111710291616324429155244933"
+        },
+        "response_headers_ms": 15566.054,
+        "stream": true,
+        "terminal_ms": 35530,
+        "trace": [
+          {
+            "elapsed_ms": 2120.128,
+            "event": "connection.connect_tcp.started"
+          },
+          {
+            "elapsed_ms": 2181.193,
+            "event": "connection.connect_tcp.complete"
+          },
+          {
+            "elapsed_ms": 2181.256,
+            "event": "connection.start_tls.started"
+          },
+          {
+            "elapsed_ms": 2249.764,
+            "event": "connection.start_tls.complete"
+          },
+          {
+            "elapsed_ms": 2249.869,
+            "event": "http11.send_request_headers.started"
+          },
+          {
+            "elapsed_ms": 2250.214,
+            "event": "http11.send_request_headers.complete"
+          },
+          {
+            "elapsed_ms": 2250.226,
+            "event": "http11.send_request_body.started"
+          },
+          {
+            "elapsed_ms": 2341.485,
+            "event": "http11.send_request_body.complete"
+          },
+          {
+            "elapsed_ms": 2341.517,
+            "event": "http11.receive_response_headers.started"
+          },
+          {
+            "elapsed_ms": 15564.082,
+            "event": "http11.receive_response_headers.complete"
+          },
+          {
+            "elapsed_ms": 15566.247,
+            "event": "http11.receive_response_body.started"
+          },
+          {
+            "elapsed_ms": 35541.356,
+            "event": "http11.receive_response_body.complete"
+          },
+          {
+            "elapsed_ms": 35541.949,
+            "event": "http11.response_closed.started"
+          },
+          {
+            "elapsed_ms": 35542.195,
+            "event": "http11.response_closed.complete"
+          }
+        ],
+        "transport_elapsed_ms": 35544.478,
+        "visible_chars": 1992
+      },
+      "error_code": null,
+      "validation_errors": []
+    }
+  ],
+  "skipped": [],
+  "generation_calls": 6,
+  "unknown_results": 0,
+  "known_input_tokens": 77665,
+  "known_output_tokens": 2937,
+  "original_databases_unchanged": true,
+  "old_unknown_requests_resent": 0,
+  "production_configuration_changed": false,
+  "review_votes_created": 0,
+  "price": null,
+  "unknown_cost_is_zero": false,
+  "full_committee_validated": false
+}

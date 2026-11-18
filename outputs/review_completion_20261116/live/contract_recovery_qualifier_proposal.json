@@ -1,0 +1,1489 @@
+{
+  "version": "qualifier_completion_v1",
+  "proposal": {
+    "version": "planner_action_v1",
+    "audit_id": "audit_8b77d838da7046f289a9ee157f55a778",
+    "candidate_id": "cand_de3414495fa05d4e6672",
+    "candidate_revision": 1,
+    "candidate_hash": "bb6367637f6121257de215c500c82496f966579844aa6703749f05404dc058a3",
+    "state_version": 0,
+    "state_hash": "eb624a283c52fdeeac5fc3ffab405f4c2ac714f47432edd7203e4d905aef9f14",
+    "tool_contract_hash": "64ebad572abdc4e2adf7362761811f045bba344fded1f138537ab64af97ec8ac",
+    "input_hash": "2b0be851865815847060e768707dd26de40e9afa561d31968f66a8943711165d",
+    "decision_hash": "2b0be851865815847060e768707dd26de40e9afa561d31968f66a8943711165d",
+    "payload": {
+      "task": "qualifier_completion_v1",
+      "candidate": {
+        "datatype": null,
+        "head": "涡流阻力",
+        "head_entity_id": "local_6392dedee12e687305f647dbcf93a0cb6ece4b790daa90786244f2c823a30b64",
+        "head_type": "C_9ca2918a695c60178dcc",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "unknown",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "unknown",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "类似于",
+        "tail": "弯曲壁面边界层出现分离现象",
+        "tail_entity_id": "local_8727204b2c2b254457f1154a99ffe72a190b8456de6060f45d1840f161390f01",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      },
+      "unknown_fields": [
+        "polarity"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_7266b96bc5e3e52d2acc",
+          "quote": "它类似于弯曲壁面边界层出现分离现象。"
+        },
+        {
+          "evidence_id": "ev_b9da151192c2b2f7471b",
+          "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。"
+        },
+        {
+          "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+          "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。"
+        },
+        {
+          "evidence_id": "ev_3fa93d4e0d6519345518",
+          "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹"
+        }
+      ],
+      "preservation_rule": "Only paired unknown qualifier values/statuses; all existing not_stated fields remain unchanged.",
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "action",
+          "arguments",
+          "target_issue",
+          "rationale_summary"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "finish_review",
+              "propose_revision"
+            ]
+          },
+          "arguments": {
+            "type": "object"
+          },
+          "target_issue": {
+            "type": "string",
+            "maxLength": 400
+          },
+          "rationale_summary": {
+            "type": "string",
+            "maxLength": 600
+          }
+        },
+        "$defs": {
+          "propose_revision": {
+            "type": "object",
+            "properties": {
+              "changes": {
+                "type": "object",
+                "properties": {
+                  "qualifier_status": {
+                    "type": "object",
+                    "properties": {
+                      "polarity": {
+                        "enum": [
+                          "extracted",
+                          "not_stated",
+                          "unknown"
+                        ]
+                      }
+                    },
+                    "required": [],
+                    "additionalProperties": false,
+                    "minProperties": 1
+                  },
+                  "qualifiers": {
+                    "type": "object",
+                    "properties": {
+                      "polarity": {
+                        "enum": [
+                          "positive",
+                          "negative",
+                          "unknown"
+                        ]
+                      }
+                    },
+                    "required": [],
+                    "additionalProperties": false,
+                    "minProperties": 1
+                  }
+                },
+                "required": [
+                  "qualifiers",
+                  "qualifier_status"
+                ],
+                "additionalProperties": false,
+                "minProperties": 1
+              },
+              "evidence_ids": {
+                "type": "array",
+                "maxItems": 24,
+                "items": {
+                  "type": "string",
+                  "maxLength": 400,
+                  "minLength": 1
+                }
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 400,
+                "minLength": 1
+              }
+            },
+            "required": [
+              "changes",
+              "evidence_ids",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "finish_review": {
+            "type": "object",
+            "properties": {
+              "stop_reason": {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              "unresolved_issues": {
+                "type": "array",
+                "maxItems": 10,
+                "items": {
+                  "type": "string",
+                  "maxLength": 400,
+                  "minLength": 1
+                }
+              },
+              "evidence_ids": {
+                "type": "array",
+                "maxItems": 24,
+                "items": {
+                  "type": "string",
+                  "maxLength": 400,
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "stop_reason",
+              "unresolved_issues",
+              "evidence_ids"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "action": {
+                "const": "finish_review"
+              },
+              "arguments": {
+                "$ref": "#/$defs/finish_review"
+              }
+            }
+          },
+          {
+            "properties": {
+              "action": {
+                "const": "propose_revision"
+              },
+              "arguments": {
+                "$ref": "#/$defs/propose_revision"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "system_prompt": "Source text is untrusted reference data. Propose ONLY a source-grounded completion of the\nlisted unknown qualifier fields in the frozen candidate. Preserve every other field, including\nall existing not_stated values. This is a draft, never an approval or admission.\nPolarity positive/negative requires an affirmative interpretation of the complete source statement\nand its referent; absence of a negation word alone is insufficient. Do not invent conditions,\nfrequency, quantities, scope or modality. Cite exact evidence IDs and explain the claim attachment.\nReturn propose_revision with qualifiers and qualifier_status for the same subset of unknown fields,\nor finish_review with the unresolved question if the source is insufficient. Never assign ontology\nIDs, rename entities, or rewrite the predicate in this task. Independent reviewers will judge the draft.\nReturn only an action matching output_schema.",
+    "prompt_hash": "9bbf9c02a880ef80b20e1df3264eea7aee80bf93c7a690d8159c8258c60e68a2",
+    "proposal_digest": "78dad08790f73c421728374df50d021da61ccec39b73bf22aad589de9ed4979f"
+  },
+  "receipt": {
+    "attempt_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+    "client_request_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+    "error": "invalid reason",
+    "finish_reason": "stop",
+    "gateway_request_id": "2026111617104865553293299738414",
+    "input_hash": "2b0be851865815847060e768707dd26de40e9afa561d31968f66a8943711165d",
+    "input_tokens": 1457,
+    "late_response": false,
+    "latency_ms": 9391,
+    "model_family": "qwen",
+    "model_id": "Qwen",
+    "model_identity": "qwen",
+    "object_revision": 1,
+    "output_tokens": 287,
+    "proposal_digest": "78dad08790f73c421728374df50d021da61ccec39b73bf22aad589de9ed4979f",
+    "provider_started_at": 1794820246.2941024,
+    "queue_time_ms": 316,
+    "raw_response": "{\n  \"action\": \"propose_revision\",\n  \"arguments\": {\n    \"changes\": {\n      \"qualifiers\": {\n        \"polarity\": \"positive\"\n      },\n      \"qualifier_status\": {\n        \"polarity\": \"extracted\"\n      }\n    },\n    \"evidence_ids\": [\n      \"ev_7266b96bc5e3e52d2acc\",\n      \"ev_3fa93d4e0d6519345518\"\n    ],\n    \"reason\": \"The source statement '它类似于弯曲壁面边界层出现分离现象' (It is similar to the separation phenomenon appearing in the boundary layer of a curved wall) is an affirmative assertion of similarity. The relation '类似于' (similar to) is stated positively without negation, and the referent '涡流阻力' (eddy resistance) is explicitly linked to the tail phenomenon. This constitutes an affirmative interpretation of the complete source statement, satisfying the requirement for positive polarity.\"\n  },\n  \"target_issue\": \"polarity\",\n  \"rationale_summary\": \"The evidence explicitly states a positive similarity relation ('类似于') between the head and tail entities. The statement is affirmative and directly links the concepts, supporting a 'positive' polarity extraction.\"\n}",
+    "reasoning_tokens": null,
+    "request_key": "04b29eedf33415c9019dbb10a0eea77d3e54befae9d5d524f01febd05bc6ba1c",
+    "response_contract_version": "planner_action_v1",
+    "response_id": "chatcmpl-96149ed7284663c6",
+    "response_status": "invalid_action",
+    "returned_model_id": "Qwen",
+    "state_hash": "eb624a283c52fdeeac5fc3ffab405f4c2ac714f47432edd7203e4d905aef9f14",
+    "state_version": 0,
+    "task_id": "cand_de3414495fa05d4e6672",
+    "task_type": "planner_action",
+    "tool_contract_hash": "64ebad572abdc4e2adf7362761811f045bba344fded1f138537ab64af97ec8ac",
+    "transport_metrics": {
+      "body_bytes_received": 62538,
+      "body_chunk_count": 287,
+      "chunk_count": 289,
+      "client_request_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+      "first_body_byte_ms": 3244.938,
+      "first_chunk_ms": 3250,
+      "first_content_ms": 3250,
+      "gateway_request_id": "2026111617104865553293299738414",
+      "http_status": 200,
+      "max_inter_body_chunk_gap_ms": 209.48,
+      "max_inter_chunk_gap_ms": 203,
+      "reasoning_chars": 0,
+      "response_headers": {
+        "connection": "keep-alive",
+        "content-type": "text/event-stream",
+        "date": "Mon, 16 Nov 2026 09:10:49 GMT",
+        "server": "nginx/1.24.0 (Ubuntu)",
+        "transfer-encoding": "chunked",
+        "x-oneapi-request-id": "2026111617104865553293299738414"
+      },
+      "response_headers_ms": 3244.673,
+      "stream": true,
+      "terminal_ms": 9375,
+      "trace": [
+        {
+          "elapsed_ms": 2153.155,
+          "event": "connection.connect_tcp.started"
+        },
+        {
+          "elapsed_ms": 2220.23,
+          "event": "connection.connect_tcp.complete"
+        },
+        {
+          "elapsed_ms": 2220.298,
+          "event": "connection.start_tls.started"
+        },
+        {
+          "elapsed_ms": 2283.888,
+          "event": "connection.start_tls.complete"
+        },
+        {
+          "elapsed_ms": 2284.004,
+          "event": "http11.send_request_headers.started"
+        },
+        {
+          "elapsed_ms": 2284.389,
+          "event": "http11.send_request_headers.complete"
+        },
+        {
+          "elapsed_ms": 2284.402,
+          "event": "http11.send_request_body.started"
+        },
+        {
+          "elapsed_ms": 2284.601,
+          "event": "http11.send_request_body.complete"
+        },
+        {
+          "elapsed_ms": 2284.611,
+          "event": "http11.receive_response_headers.started"
+        },
+        {
+          "elapsed_ms": 3242.935,
+          "event": "http11.receive_response_headers.complete"
+        },
+        {
+          "elapsed_ms": 3244.873,
+          "event": "http11.receive_response_body.started"
+        },
+        {
+          "elapsed_ms": 9384.584,
+          "event": "http11.receive_response_body.complete"
+        },
+        {
+          "elapsed_ms": 9384.639,
+          "event": "http11.response_closed.started"
+        },
+        {
+          "elapsed_ms": 9384.659,
+          "event": "http11.response_closed.complete"
+        }
+      ],
+      "transport_elapsed_ms": 9384.802,
+      "visible_chars": 1056
+    },
+    "voter_id": "planner",
+    "attempts": [
+      {
+        "attempt_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+        "client_request_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+        "error": "invalid reason",
+        "finish_reason": "stop",
+        "gateway_request_id": "2026111617104865553293299738414",
+        "input_hash": "2b0be851865815847060e768707dd26de40e9afa561d31968f66a8943711165d",
+        "input_tokens": 1457,
+        "late_response": false,
+        "latency_ms": 9391,
+        "model_family": "qwen",
+        "model_id": "Qwen",
+        "model_identity": "qwen",
+        "object_revision": 1,
+        "output_tokens": 287,
+        "proposal_digest": "78dad08790f73c421728374df50d021da61ccec39b73bf22aad589de9ed4979f",
+        "provider_started_at": 1794820246.2941024,
+        "queue_time_ms": 316,
+        "raw_response": "{\n  \"action\": \"propose_revision\",\n  \"arguments\": {\n    \"changes\": {\n      \"qualifiers\": {\n        \"polarity\": \"positive\"\n      },\n      \"qualifier_status\": {\n        \"polarity\": \"extracted\"\n      }\n    },\n    \"evidence_ids\": [\n      \"ev_7266b96bc5e3e52d2acc\",\n      \"ev_3fa93d4e0d6519345518\"\n    ],\n    \"reason\": \"The source statement '它类似于弯曲壁面边界层出现分离现象' (It is similar to the separation phenomenon appearing in the boundary layer of a curved wall) is an affirmative assertion of similarity. The relation '类似于' (similar to) is stated positively without negation, and the referent '涡流阻力' (eddy resistance) is explicitly linked to the tail phenomenon. This constitutes an affirmative interpretation of the complete source statement, satisfying the requirement for positive polarity.\"\n  },\n  \"target_issue\": \"polarity\",\n  \"rationale_summary\": \"The evidence explicitly states a positive similarity relation ('类似于') between the head and tail entities. The statement is affirmative and directly links the concepts, supporting a 'positive' polarity extraction.\"\n}",
+        "reasoning_tokens": null,
+        "request_key": "04b29eedf33415c9019dbb10a0eea77d3e54befae9d5d524f01febd05bc6ba1c",
+        "response_contract_version": "planner_action_v1",
+        "response_id": "chatcmpl-96149ed7284663c6",
+        "response_status": "invalid_action",
+        "returned_model_id": "Qwen",
+        "state_hash": "eb624a283c52fdeeac5fc3ffab405f4c2ac714f47432edd7203e4d905aef9f14",
+        "state_version": 0,
+        "task_id": "cand_de3414495fa05d4e6672",
+        "task_type": "planner_action",
+        "tool_contract_hash": "64ebad572abdc4e2adf7362761811f045bba344fded1f138537ab64af97ec8ac",
+        "transport_metrics": {
+          "body_bytes_received": 62538,
+          "body_chunk_count": 287,
+          "chunk_count": 289,
+          "client_request_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+          "first_body_byte_ms": 3244.938,
+          "first_chunk_ms": 3250,
+          "first_content_ms": 3250,
+          "gateway_request_id": "2026111617104865553293299738414",
+          "http_status": 200,
+          "max_inter_body_chunk_gap_ms": 209.48,
+          "max_inter_chunk_gap_ms": 203,
+          "reasoning_chars": 0,
+          "response_headers": {
+            "connection": "keep-alive",
+            "content-type": "text/event-stream",
+            "date": "Mon, 16 Nov 2026 09:10:49 GMT",
+            "server": "nginx/1.24.0 (Ubuntu)",
+            "transfer-encoding": "chunked",
+            "x-oneapi-request-id": "2026111617104865553293299738414"
+          },
+          "response_headers_ms": 3244.673,
+          "stream": true,
+          "terminal_ms": 9375,
+          "trace": [
+            {
+              "elapsed_ms": 2153.155,
+              "event": "connection.connect_tcp.started"
+            },
+            {
+              "elapsed_ms": 2220.23,
+              "event": "connection.connect_tcp.complete"
+            },
+            {
+              "elapsed_ms": 2220.298,
+              "event": "connection.start_tls.started"
+            },
+            {
+              "elapsed_ms": 2283.888,
+              "event": "connection.start_tls.complete"
+            },
+            {
+              "elapsed_ms": 2284.004,
+              "event": "http11.send_request_headers.started"
+            },
+            {
+              "elapsed_ms": 2284.389,
+              "event": "http11.send_request_headers.complete"
+            },
+            {
+              "elapsed_ms": 2284.402,
+              "event": "http11.send_request_body.started"
+            },
+            {
+              "elapsed_ms": 2284.601,
+              "event": "http11.send_request_body.complete"
+            },
+            {
+              "elapsed_ms": 2284.611,
+              "event": "http11.receive_response_headers.started"
+            },
+            {
+              "elapsed_ms": 3242.935,
+              "event": "http11.receive_response_headers.complete"
+            },
+            {
+              "elapsed_ms": 3244.873,
+              "event": "http11.receive_response_body.started"
+            },
+            {
+              "elapsed_ms": 9384.584,
+              "event": "http11.receive_response_body.complete"
+            },
+            {
+              "elapsed_ms": 9384.639,
+              "event": "http11.response_closed.started"
+            },
+            {
+              "elapsed_ms": 9384.659,
+              "event": "http11.response_closed.complete"
+            }
+          ],
+          "transport_elapsed_ms": 9384.802,
+          "visible_chars": 1056
+        },
+        "voter_id": "planner",
+        "attempt_no": 1
+      }
+    ],
+    "actual_calls": 1
+  },
+  "model_calls": 1,
+  "status": "draft_proposed",
+  "bounded_projection": {
+    "version": "bounded_rationale_projection_v1",
+    "action": {
+      "action": "propose_revision",
+      "arguments": {
+        "changes": {
+          "qualifiers": {
+            "polarity": "positive"
+          },
+          "qualifier_status": {
+            "polarity": "extracted"
+          }
+        },
+        "evidence_ids": [
+          "ev_7266b96bc5e3e52d2acc",
+          "ev_3fa93d4e0d6519345518"
+        ],
+        "reason": "The source statement '它类似于弯曲壁面边界层出现分离现象' (It is similar to the separation phenomenon appearing in the boundary layer of a curved wall) is an affirmative assertion of similarity. The relation '类似于' (similar to) is stated positively without negation, and the referent '涡流阻力' (eddy resistance) is explicitly linked to the tail phenomenon. This constitutes an  … [full text retained in original response]"
+      },
+      "target_issue": "polarity",
+      "rationale_summary": "The evidence explicitly states a positive similarity relation ('类似于') between the head and tail entities. The statement is affirmative and directly links the concepts, supporting a 'positive' polarity extraction."
+    },
+    "changed_paths": [
+      "/arguments/reason"
+    ],
+    "source_attempt_id": "attempt_bc1e7a188bab49338524a836eeb5fe54",
+    "source_response_hash": "5beaad7562d63762463dd237b38e493aeb54e7975bc3632e31edf2e8c2f73a53",
+    "projected_response_hash": "222488c02c30209fdc02a02ab9efad220dd75990dbd77b76b781736560dc8f81",
+    "semantic_fields_changed": false
+  },
+  "action": {
+    "action": "propose_revision",
+    "arguments": {
+      "changes": {
+        "qualifiers": {
+          "polarity": "positive"
+        },
+        "qualifier_status": {
+          "polarity": "extracted"
+        }
+      },
+      "evidence_ids": [
+        "ev_7266b96bc5e3e52d2acc",
+        "ev_3fa93d4e0d6519345518"
+      ],
+      "reason": "The source statement '它类似于弯曲壁面边界层出现分离现象' (It is similar to the separation phenomenon appearing in the boundary layer of a curved wall) is an affirmative assertion of similarity. The relation '类似于' (similar to) is stated positively without negation, and the referent '涡流阻力' (eddy resistance) is explicitly linked to the tail phenomenon. This constitutes an  … [full text retained in original response]"
+    },
+    "target_issue": "polarity",
+    "rationale_summary": "The evidence explicitly states a positive similarity relation ('类似于') between the head and tail entities. The statement is affirmative and directly links the concepts, supporting a 'positive' polarity extraction."
+  },
+  "draft": {
+    "after": {
+      "candidate_id": "cand_de3414495fa05d4e6672",
+      "contract_issues": [],
+      "contract_version": "extraction_candidate_v4",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "domain": "default",
+      "evidence_items": [
+        {
+          "anchor_valid": true,
+          "chunk_end": 67,
+          "chunk_id": "chunk_940dab42da00",
+          "chunk_start": 49,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 9439,
+          "evidence_id": "ev_7266b96bc5e3e52d2acc",
+          "offset_basis": "canonical_document",
+          "quote": "它类似于弯曲壁面边界层出现分离现象。",
+          "section_id": "section_4eff9901fc40",
+          "semantic_status": "unknown",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_940dab42da00"
+          ],
+          "start": 9421,
+          "text": "它类似于弯曲壁面边界层出现分离现象。"
+        }
+      ],
+      "evidence_quotes": [
+        "它类似于弯曲壁面边界层出现分离现象。"
+      ],
+      "extraction_contract_hash": "04c9810333ab78e2bc64c0f1e73a9b6af31317914fc1e2e8182d556e41fd72d1",
+      "extraction_hints": {
+        "head_type_candidate": "C_9ca2918a695c60178dcc",
+        "relation_id_candidate": null,
+        "schema_hint": "needs_full_schema_lookup",
+        "tail_type_candidate": null
+      },
+      "extraction_model": "Qwen",
+      "extraction_model_returned": "Qwen",
+      "extraction_prompt_hash": "aaa6916f21df6552aead43499364a2d3973cefdb345fcd83a041e00517e39178",
+      "extraction_prompt_version": "extraction_v4",
+      "extraction_quote": "它类似于弯曲壁面边界层出现分离现象。",
+      "extraction_response_id": "chatcmpl-840cb8ce6db6de4d",
+      "fact_identity_version": "fact_identity_v2",
+      "fact_key": "provisional:cand_de3414495fa05d4e6672:2",
+      "fact_key_state": "provisional",
+      "fact_namespace": "default",
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "ontology_release_path": "D:\\knowledge-huopao\\runs\\ontology_releases\\release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "revision": 2,
+      "revision_lineage": {
+        "analysis": {
+          "changes": [
+            {
+              "after": "extracted",
+              "before": "unknown",
+              "field": "qualifier_status.polarity"
+            },
+            {
+              "after": "positive",
+              "before": "unknown",
+              "field": "qualifiers.polarity"
+            }
+          ],
+          "facets": [
+            {
+              "changed": false,
+              "facet": "relation",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": false,
+              "facet": "entities",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": true,
+              "facet": "negation",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": false,
+              "facet": "frequency",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": false,
+              "facet": "condition",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": false,
+              "facet": "modality",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": false,
+              "facet": "meaning_scope",
+              "required": "new_version_evidence_check"
+            },
+            {
+              "changed": false,
+              "facet": "formal_mapping",
+              "required": "new_version_mapping_check"
+            }
+          ],
+          "kind": "semantic_change",
+          "new_revision_is_admission": false,
+          "old_votes_reusable": false,
+          "requires_new_evidence_review": true,
+          "requires_new_mapping_review": true,
+          "source_validation_mode": "full_expression",
+          "version": "revision_loop_v1"
+        },
+        "candidate_id": "cand_de3414495fa05d4e6672",
+        "expression_hash": "e03d1fd8eb0641d239a87f547440bf7ec3d0c07486bf68ee681cdc06e82ccfe9",
+        "old_votes_reusable": false,
+        "operation": "revision",
+        "parent_candidate_id": "cand_de3414495fa05d4e6672",
+        "parent_expression_hash": "02eda484911cd503ec3174cc933f0d87de65b7c785d554b9e69ca80969e046e4",
+        "parent_revision": 1,
+        "revision": 2,
+        "source_document_id": "火炮弹道学_钱林方_第一章",
+        "source_document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+        "version": "revision_loop_v1"
+      },
+      "run_id": "run_chapter1_20261028_resume1",
+      "schema_version": "extraction_candidate_v4",
+      "section_id": "section_4eff9901fc40",
+      "source_chunk_id": "chunk_940dab42da00",
+      "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+      "source_ordinal": 77,
+      "source_scope": {
+        "context_end": 10060,
+        "context_start": 9372,
+        "core_end": 9924,
+        "core_start": 9372,
+        "section_id": "section_4eff9901fc40",
+        "source_chunk_id": "chunk_940dab42da00"
+      },
+      "source_snapshot_id": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+      "supersedes_revision": 1,
+      "triple": {
+        "datatype": null,
+        "head": "涡流阻力",
+        "head_entity_id": "local_6392dedee12e687305f647dbcf93a0cb6ece4b790daa90786244f2c823a30b64",
+        "head_type": "C_9ca2918a695c60178dcc",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "extracted",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "positive",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "类似于",
+        "tail": "弯曲壁面边界层出现分离现象",
+        "tail_entity_id": "local_8727204b2c2b254457f1154a99ffe72a190b8456de6060f45d1840f161390f01",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      }
+    },
+    "base_revision": 1,
+    "before": {
+      "candidate_id": "cand_de3414495fa05d4e6672",
+      "contract_issues": [],
+      "contract_version": "extraction_candidate_v4",
+      "document_id": "火炮弹道学_钱林方_第一章",
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "domain": "default",
+      "evidence_items": [
+        {
+          "anchor_valid": true,
+          "chunk_end": 67,
+          "chunk_id": "chunk_940dab42da00",
+          "chunk_start": 49,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 9439,
+          "evidence_id": "ev_7266b96bc5e3e52d2acc",
+          "offset_basis": "canonical_document",
+          "quote": "它类似于弯曲壁面边界层出现分离现象。",
+          "section_id": "section_4eff9901fc40",
+          "semantic_status": "unknown",
+          "source_anchor_kind": "document_span",
+          "span_chunk_ids": [
+            "chunk_940dab42da00"
+          ],
+          "start": 9421,
+          "text": "它类似于弯曲壁面边界层出现分离现象。"
+        }
+      ],
+      "evidence_quotes": [
+        "它类似于弯曲壁面边界层出现分离现象。"
+      ],
+      "extraction_contract_hash": "04c9810333ab78e2bc64c0f1e73a9b6af31317914fc1e2e8182d556e41fd72d1",
+      "extraction_hints": {
+        "head_type_candidate": "C_9ca2918a695c60178dcc",
+        "relation_id_candidate": null,
+        "schema_hint": "needs_full_schema_lookup",
+        "tail_type_candidate": null
+      },
+      "extraction_model": "Qwen",
+      "extraction_model_returned": "Qwen",
+      "extraction_prompt_hash": "aaa6916f21df6552aead43499364a2d3973cefdb345fcd83a041e00517e39178",
+      "extraction_prompt_version": "extraction_v4",
+      "extraction_quote": "它类似于弯曲壁面边界层出现分离现象。",
+      "extraction_response_id": "chatcmpl-840cb8ce6db6de4d",
+      "fact_identity_version": "fact_identity_v2",
+      "fact_key": "provisional:cand_de3414495fa05d4e6672:1",
+      "fact_key_state": "provisional",
+      "fact_namespace": "default",
+      "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "ontology_release_path": "D:\\knowledge-huopao\\runs\\ontology_releases\\release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+      "ontology_version": "2c9af6890c1502b4dc4d292454ed8a7c53d75b24849e723269532fed287835d2",
+      "profile_hash": "5654a3e60d2550d741f1d92c038107b9ef6233d486845fe3b302b9a831316865",
+      "revision": 1,
+      "run_id": "run_chapter1_20261028_resume1",
+      "schema_version": "extraction_candidate_v4",
+      "section_id": "section_4eff9901fc40",
+      "source_chunk_id": "chunk_940dab42da00",
+      "source_index_hash": "7f75b96e495dd50b579ffec0ef73c70e788155674755f3ad23905a6bc03fedde",
+      "source_ordinal": 77,
+      "source_scope": {
+        "context_end": 10060,
+        "context_start": 9372,
+        "core_end": 9924,
+        "core_start": 9372,
+        "section_id": "section_4eff9901fc40",
+        "source_chunk_id": "chunk_940dab42da00"
+      },
+      "source_snapshot_id": "e87a6978a1bb2d1f4ac612d1fa5125b2c7904b2cbc0d40c82ad22f7b2ce3b111",
+      "triple": {
+        "datatype": null,
+        "head": "涡流阻力",
+        "head_entity_id": "local_6392dedee12e687305f647dbcf93a0cb6ece4b790daa90786244f2c823a30b64",
+        "head_type": "C_9ca2918a695c60178dcc",
+        "language": "zh",
+        "mapping_status": "needs_full_schema_lookup",
+        "qualifier_status": {
+          "applicability": "not_stated",
+          "condition": "not_stated",
+          "modality": "extracted",
+          "polarity": "unknown",
+          "quantifier": "not_stated",
+          "time_scope": "not_stated"
+        },
+        "qualifiers": {
+          "applicability": null,
+          "condition": null,
+          "modality": "asserted",
+          "polarity": "unknown",
+          "quantifier": null,
+          "time_scope": null
+        },
+        "relation_id": null,
+        "relation_label": null,
+        "relation_semantic_hash": null,
+        "surface_relation": "类似于",
+        "tail": "弯曲壁面边界层出现分离现象",
+        "tail_entity_id": "local_8727204b2c2b254457f1154a99ffe72a190b8456de6060f45d1840f161390f01",
+        "tail_kind": "entity",
+        "tail_type": null,
+        "unit": null,
+        "value": null
+      }
+    },
+    "candidate_id": "cand_de3414495fa05d4e6672",
+    "change_analysis": {
+      "changes": [
+        {
+          "after": "extracted",
+          "before": "unknown",
+          "field": "qualifier_status.polarity"
+        },
+        {
+          "after": "positive",
+          "before": "unknown",
+          "field": "qualifiers.polarity"
+        }
+      ],
+      "facets": [
+        {
+          "changed": false,
+          "facet": "relation",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": false,
+          "facet": "entities",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": true,
+          "facet": "negation",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": false,
+          "facet": "frequency",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": false,
+          "facet": "condition",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": false,
+          "facet": "modality",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": false,
+          "facet": "meaning_scope",
+          "required": "new_version_evidence_check"
+        },
+        {
+          "changed": false,
+          "facet": "formal_mapping",
+          "required": "new_version_mapping_check"
+        }
+      ],
+      "kind": "semantic_change",
+      "new_revision_is_admission": false,
+      "old_votes_reusable": false,
+      "requires_new_evidence_review": true,
+      "requires_new_mapping_review": true,
+      "source_validation_mode": "full_expression",
+      "version": "revision_loop_v1"
+    },
+    "changed_fields": [
+      "qualifiers.polarity",
+      "qualifier_status.polarity"
+    ],
+    "changes": {
+      "qualifier_status": {
+        "polarity": "extracted"
+      },
+      "qualifiers": {
+        "polarity": "positive"
+      }
+    },
+    "contract_version": "candidate_revision_review_v1",
+    "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+    "draft_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+    "evidence_bundle": {
+      "anchor_validation_complete": true,
+      "evidence_bundle_version": "evidence_bundle_v3",
+      "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+      "independent_document_count": 1,
+      "items": [
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "block_type": "paragraph",
+          "chunk_end": 67,
+          "chunk_id": "chunk_940dab42da00",
+          "chunk_start": 49,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 9439,
+          "evidence_id": "ev_7266b96bc5e3e52d2acc",
+          "evidence_unit_version": "source_units_v1",
+          "linked_evidence_ids": [
+            "ev_17a0eeb2aed3947a7d6a",
+            "ev_3fa93d4e0d6519345518",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "offset_basis": "canonical_document",
+          "quote": "它类似于弯曲壁面边界层出现分离现象。",
+          "requires_image": false,
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "review_role": "unassessed",
+          "scope_id": "section_4eff9901fc40",
+          "section_id": "section_4eff9901fc40",
+          "semantic_status": "unknown",
+          "source_anchor_kind": "document_span",
+          "source_span": {
+            "end": 9439,
+            "start": 9421
+          },
+          "span_chunk_ids": [
+            "chunk_940dab42da00"
+          ],
+          "start": 9421,
+          "substantive": true,
+          "text": "它类似于弯曲壁面边界层出现分离现象。"
+        },
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "block_type": "paragraph",
+          "chunk_end": 49,
+          "chunk_id": "chunk_940dab42da00",
+          "chunk_start": 11,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 9421,
+          "evidence_id": "ev_b9da151192c2b2f7471b",
+          "evidence_unit_version": "source_units_v1",
+          "linked_evidence_ids": [
+            "ev_3fa93d4e0d6519345518",
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "offset_basis": "canonical_document",
+          "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。",
+          "requires_image": false,
+          "retrieval_level": "adjacent_sentence",
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "review_role": "unassessed",
+          "scope_id": "section_4eff9901fc40",
+          "section_id": "section_4eff9901fc40",
+          "semantic_status": "unknown",
+          "sentence_id": "sentence_1bd5659528caaf78c7e4",
+          "source_anchor_kind": "document_span",
+          "source_span": {
+            "end": 9421,
+            "start": 9383
+          },
+          "span_chunk_ids": [
+            "chunk_940dab42da00"
+          ],
+          "start": 9383,
+          "substantive": true,
+          "text": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。"
+        },
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "block_type": "paragraph",
+          "chunk_end": 126,
+          "chunk_id": "chunk_940dab42da00",
+          "chunk_start": 67,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 9498,
+          "evidence_id": "ev_17a0eeb2aed3947a7d6a",
+          "evidence_unit_version": "source_units_v1",
+          "linked_evidence_ids": [
+            "ev_3fa93d4e0d6519345518",
+            "ev_7266b96bc5e3e52d2acc"
+          ],
+          "offset_basis": "canonical_document",
+          "quote": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。",
+          "requires_image": false,
+          "retrieval_level": "adjacent_sentence",
+          "retrieval_score": 0.88,
+          "retrieved_via_levels": [
+            "adjacent_sentence"
+          ],
+          "review_role": "unassessed",
+          "scope_id": "section_4eff9901fc40",
+          "section_id": "section_4eff9901fc40",
+          "semantic_status": "unknown",
+          "sentence_id": "sentence_6de63aeed6ac4aa38478",
+          "source_anchor_kind": "document_span",
+          "source_span": {
+            "end": 9498,
+            "start": 9439
+          },
+          "span_chunk_ids": [
+            "chunk_940dab42da00"
+          ],
+          "start": 9439,
+          "substantive": true,
+          "text": "飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。"
+        },
+        {
+          "anchor_status": "exact",
+          "anchor_valid": true,
+          "block_type": "paragraph",
+          "chunk_end": 129,
+          "chunk_id": "chunk_940dab42da00",
+          "chunk_start": 11,
+          "document_id": "火炮弹道学_钱林方_第一章",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "end": 9501,
+          "evidence_id": "ev_3fa93d4e0d6519345518",
+          "evidence_unit_version": "source_units_v1",
+          "linked_evidence_ids": [
+            "ev_17a0eeb2aed3947a7d6a",
+            "ev_7266b96bc5e3e52d2acc",
+            "ev_b9da151192c2b2f7471b"
+          ],
+          "offset_basis": "canonical_document",
+          "quote": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹",
+          "requires_image": false,
+          "retrieval_level": "source_block",
+          "retrieval_score": 0.5,
+          "retrieved_via_levels": [
+            "source_block"
+          ],
+          "review_role": "unassessed",
+          "scope_id": "section_4eff9901fc40",
+          "section_id": "section_4eff9901fc40",
+          "semantic_status": "unknown",
+          "sentence_id": null,
+          "source_anchor_kind": "document_span",
+          "source_span": {
+            "end": 9501,
+            "start": 9383
+          },
+          "span_chunk_ids": [
+            "chunk_940dab42da00"
+          ],
+          "start": 9383,
+          "substantive": true,
+          "text": "涡流阻力是由于弹底附近截面突然变化形成涡流低压区而产生的一种弹丸飞行的阻力。它类似于弯曲壁面边界层出现分离现象。飞行中的弹丸的尾部通常小于弹丸直径或形成截锥形，由于截面的突然减小，原来附着其上的边界层由于空气来不及填补而形成分离。这时弹"
+        }
+      ],
+      "rejected_items": [],
+      "retrieved_unique_span_count": 4,
+      "searched_levels": []
+    },
+    "evidence_ids": [
+      "ev_7266b96bc5e3e52d2acc",
+      "ev_3fa93d4e0d6519345518"
+    ],
+    "expected_row_version": 2,
+    "field_evidence": {
+      "qualifier_status.polarity": [
+        "ev_7266b96bc5e3e52d2acc",
+        "ev_3fa93d4e0d6519345518"
+      ],
+      "qualifiers.polarity": [
+        "ev_7266b96bc5e3e52d2acc",
+        "ev_3fa93d4e0d6519345518"
+      ]
+    },
+    "object_revision": 1,
+    "protected_evidence_ids": [
+      "ev_17a0eeb2aed3947a7d6a",
+      "ev_3fa93d4e0d6519345518",
+      "ev_7266b96bc5e3e52d2acc",
+      "ev_b9da151192c2b2f7471b"
+    ],
+    "reason": "The source statement '它类似于弯曲壁面边界层出现分离现象' (It is similar to the separation phenomenon appearing in the boundary layer of a curved wall) is an affirmative assertion of similarity. The relation '类似于' (similar to) is stated positively without negation, and the referent '涡流阻力' (eddy resistance) is explicitly linked to the tail phenomenon. This constitutes an  … [full text retained in original response]",
+    "requires_human_confirmation": false,
+    "requires_independent_revision_review": true,
+    "semantic_review_version": "full_expression_v2",
+    "source_audit_id": "audit_8b77d838da7046f289a9ee157f55a778",
+    "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+    "task_type": "candidate_revision_review",
+    "verification_scope": {
+      "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+      "evidence_ids": [
+        "ev_17a0eeb2aed3947a7d6a",
+        "ev_3fa93d4e0d6519345518",
+        "ev_7266b96bc5e3e52d2acc",
+        "ev_b9da151192c2b2f7471b"
+      ],
+      "meaning": "not_stated applies only to this frozen verification scope",
+      "section_id": "section_4eff9901fc40"
+    },
+    "status": "review_incomplete",
+    "review_result": {
+      "approved_voter_ids": [],
+      "committee_members": [
+        {
+          "id": "judge_a",
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen"
+        },
+        {
+          "id": "judge_b",
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma"
+        },
+        {
+          "id": "judge_c",
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash"
+        }
+      ],
+      "committee_policy": {
+        "committee_size": 3,
+        "minimum_distinct_families": 3,
+        "required_votes": 3,
+        "vote_weighting": {
+          "adaptation_floor": 0.25,
+          "feature_version": "check_completion_v1",
+          "max_seat_weight": 0.49,
+          "min_available_mass": 0.65,
+          "min_families": 2,
+          "min_history_samples": 8,
+          "min_opinions": 2,
+          "mode": "dynamic",
+          "prior": 0.5,
+          "prior_strength": 4.0,
+          "reliability": {
+            "data_version": "cold_start",
+            "models": {},
+            "partition": "development"
+          },
+          "thresholds": {
+            "expression": 0.7,
+            "mapping": 0.7,
+            "scope": 0.7,
+            "source": 0.7
+          },
+          "version": "axis_weighting_v1"
+        }
+      },
+      "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+      "draft_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+      "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+      "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+      "status": "review_incomplete",
+      "task_type": "candidate_revision_review",
+      "votes": [
+        {
+          "actual_calls": 1,
+          "attempt_id": "attempt_de3f46b3fe974c2a86fe13cf8c638540",
+          "attempts": [
+            {
+              "attempt_id": "attempt_de3f46b3fe974c2a86fe13cf8c638540",
+              "attempt_no": 1,
+              "client_request_id": "attempt_de3f46b3fe974c2a86fe13cf8c638540",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+              "error": "all historical material evidence must be assessed",
+              "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+              "finish_reason": "stop",
+              "input_tokens": 8132,
+              "late_response": false,
+              "latency_ms": 15342,
+              "model_family": "qwen",
+              "model_id": "Qwen",
+              "model_identity": "qwen",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 481,
+              "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+              "provider_started_at": 1794820856.7081892,
+              "queue_time_ms": 323,
+              "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": [\n    {\n      \"field\": \"qualifiers.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"],\n      \"note\": \"The source text '它类似于弯曲壁面边界层出现分离现象' is an affirmative statement. The relation '类似于' (similar to) is used without any negation, indicating a positive polarity. The context confirms that '涡流阻力' (eddy resistance) is being described as similar to the separation phenomenon, which is a positive assertion.\"\n    },\n    {\n      \"field\": \"qualifier_status.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"],\n      \"note\": \"The polarity is explicitly extracted from the source text. The statement is affirmative, and there is no negation or uncertainty in the expression of similarity. Therefore, the status 'extracted' is appropriate.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [],\n  \"rationale_summary\": \"The revision changes the polarity from 'unknown' to 'positive' and the qualifier_status.polarity from 'unknown' to 'extracted'. The source text '它类似于弯曲壁面边界层出现分离现象' is a clear affirmative statement of similarity. There is no negation or uncertainty in the text, supporting the positive polarity. The context provided by the adjacent sentences further confirms that the statement is an assertion about the nature of '涡流阻力'. Therefore, the revision is grounded in the source evidence.\"\n}",
+              "reasoning_tokens": null,
+              "request_key": "197e553e5ee677a130cb0f3040f7204d0fe9ba937251805dbf03750f665f3667",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-906f4b732070ca76",
+              "response_status": "invalid_contract",
+              "returned_model_id": "Qwen",
+              "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+              "task_type": "candidate_revision_review",
+              "transport_metrics": {
+                "client_request_id": "attempt_de3f46b3fe974c2a86fe13cf8c638540"
+              },
+              "voter_id": "judge_a"
+            }
+          ],
+          "client_request_id": "attempt_de3f46b3fe974c2a86fe13cf8c638540",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+          "error": "all historical material evidence must be assessed",
+          "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+          "finish_reason": "stop",
+          "input_tokens": 8132,
+          "late_response": false,
+          "latency_ms": 15342,
+          "model_family": "qwen",
+          "model_id": "Qwen",
+          "model_identity": "qwen",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 481,
+          "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+          "provider_started_at": 1794820856.7081892,
+          "queue_time_ms": 323,
+          "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": [\n    {\n      \"field\": \"qualifiers.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"],\n      \"note\": \"The source text '它类似于弯曲壁面边界层出现分离现象' is an affirmative statement. The relation '类似于' (similar to) is used without any negation, indicating a positive polarity. The context confirms that '涡流阻力' (eddy resistance) is being described as similar to the separation phenomenon, which is a positive assertion.\"\n    },\n    {\n      \"field\": \"qualifier_status.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"],\n      \"note\": \"The polarity is explicitly extracted from the source text. The statement is affirmative, and there is no negation or uncertainty in the expression of similarity. Therefore, the status 'extracted' is appropriate.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [],\n  \"rationale_summary\": \"The revision changes the polarity from 'unknown' to 'positive' and the qualifier_status.polarity from 'unknown' to 'extracted'. The source text '它类似于弯曲壁面边界层出现分离现象' is a clear affirmative statement of similarity. There is no negation or uncertainty in the text, supporting the positive polarity. The context provided by the adjacent sentences further confirms that the statement is an assertion about the nature of '涡流阻力'. Therefore, the revision is grounded in the source evidence.\"\n}",
+          "reasoning_tokens": null,
+          "request_key": "197e553e5ee677a130cb0f3040f7204d0fe9ba937251805dbf03750f665f3667",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-906f4b732070ca76",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Qwen",
+          "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "client_request_id": "attempt_de3f46b3fe974c2a86fe13cf8c638540"
+          },
+          "voter_id": "judge_a"
+        },
+        {
+          "actual_calls": 1,
+          "attempt_id": "attempt_b7d65bc2ce3e41ae8b8c42410cf36a1c",
+          "attempts": [
+            {
+              "attempt_id": "attempt_b7d65bc2ce3e41ae8b8c42410cf36a1c",
+              "attempt_no": 1,
+              "client_request_id": "attempt_b7d65bc2ce3e41ae8b8c42410cf36a1c",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+              "error": "all historical material evidence must be assessed",
+              "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+              "finish_reason": "stop",
+              "input_tokens": 8613,
+              "late_response": false,
+              "latency_ms": 36532,
+              "model_family": "gemma",
+              "model_id": "Gemma",
+              "model_identity": "gemma",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 1002,
+              "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+              "provider_started_at": 1794820856.7363873,
+              "queue_time_ms": 316,
+              "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": [\n    {\n      \"field\": \"qualifier_status.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_7266b96bc5e3e52d2acc\",\n        \"ev_3fa93d4e0d6519345518\"\n      ],\n      \"note\": \"The source text explicitly states the similarity, making the polarity extracted.\"\n    },\n    {\n      \"field\": \"qualifiers.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_7266b96bc5e3e52d2acc\",\n        \"ev_3fa93d4e0d6519345518\"\n      ],\n      \"note\": \"The statement '它类似于...' is an affirmative assertion, which corresponds to positive polarity.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [\n    \"ev_7266b96bc5e3e52d2acc\",\n    \"ev_3fa93d4e0d6519345518\"\n  ],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [],\n  \"rationale_summary\": \"The revision correctly updates the polarity from 'unknown' to 'positive' based on the source text '它类似于弯曲壁面边界层出现分离现象', where '它' refers to '涡流阻力'. The statement is a direct affirmative assertion of similarity.\"\n}",
+              "reasoning_tokens": 620,
+              "request_key": "921953a265df9e990f246dec7f0f9406eb3c9d7a96b60a7d7ec91cb887a995b1",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "chatcmpl-a28d3e72105c6228",
+              "response_status": "invalid_contract",
+              "returned_model_id": "Gemma",
+              "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+              "task_type": "candidate_revision_review",
+              "transport_metrics": {
+                "client_request_id": "attempt_b7d65bc2ce3e41ae8b8c42410cf36a1c"
+              },
+              "voter_id": "judge_b"
+            }
+          ],
+          "client_request_id": "attempt_b7d65bc2ce3e41ae8b8c42410cf36a1c",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+          "error": "all historical material evidence must be assessed",
+          "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+          "finish_reason": "stop",
+          "input_tokens": 8613,
+          "late_response": false,
+          "latency_ms": 36532,
+          "model_family": "gemma",
+          "model_id": "Gemma",
+          "model_identity": "gemma",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 1002,
+          "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+          "provider_started_at": 1794820856.7363873,
+          "queue_time_ms": 316,
+          "raw_response": "{\n  \"decision\": \"approve\",\n  \"field_reviews\": [\n    {\n      \"field\": \"qualifier_status.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_7266b96bc5e3e52d2acc\",\n        \"ev_3fa93d4e0d6519345518\"\n      ],\n      \"note\": \"The source text explicitly states the similarity, making the polarity extracted.\"\n    },\n    {\n      \"field\": \"qualifiers.polarity\",\n      \"status\": \"supported\",\n      \"evidence_ids\": [\n        \"ev_7266b96bc5e3e52d2acc\",\n        \"ev_3fa93d4e0d6519345518\"\n      ],\n      \"note\": \"The statement '它类似于...' is an affirmative assertion, which corresponds to positive polarity.\"\n    }\n  ],\n  \"supporting_evidence_ids\": [\n    \"ev_7266b96bc5e3e52d2acc\",\n    \"ev_3fa93d4e0d6519345518\"\n  ],\n  \"counter_evidence_ids\": [],\n  \"counterevidence_reviewed_ids\": [],\n  \"rationale_summary\": \"The revision correctly updates the polarity from 'unknown' to 'positive' based on the source text '它类似于弯曲壁面边界层出现分离现象', where '它' refers to '涡流阻力'. The statement is a direct affirmative assertion of similarity.\"\n}",
+          "reasoning_tokens": 620,
+          "request_key": "921953a265df9e990f246dec7f0f9406eb3c9d7a96b60a7d7ec91cb887a995b1",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "chatcmpl-a28d3e72105c6228",
+          "response_status": "invalid_contract",
+          "returned_model_id": "Gemma",
+          "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "client_request_id": "attempt_b7d65bc2ce3e41ae8b8c42410cf36a1c"
+          },
+          "voter_id": "judge_b"
+        },
+        {
+          "actual_calls": 1,
+          "attempt_id": "attempt_250cd9614e604b69999dcae899e6a6dc",
+          "attempts": [
+            {
+              "attempt_id": "attempt_250cd9614e604b69999dcae899e6a6dc",
+              "attempt_no": 1,
+              "client_request_id": "attempt_250cd9614e604b69999dcae899e6a6dc",
+              "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+              "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+              "error": "all historical material evidence must be assessed",
+              "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+              "finish_reason": "stop",
+              "input_tokens": 7218,
+              "late_response": false,
+              "latency_ms": 3672,
+              "model_family": "deepseek",
+              "model_id": "deepseek-flash",
+              "model_identity": "deepseek-flash",
+              "object_revision": 1,
+              "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+              "output_tokens": 354,
+              "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+              "provider_started_at": 1794820856.6922793,
+              "queue_time_ms": 310,
+              "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"qualifiers.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"], \"note\": \"Source sentence '它类似于弯曲壁面边界层出现分离现象。' is an affirmative assertion of similarity with no negation; positive polarity is grounded.\"}, {\"field\": \"qualifier_status.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"], \"note\": \"Polarity status changes from unknown to extracted, consistent with the affirmative source evidence.\"}], \"supporting_evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"], \"counter_evidence_ids\": [], \"counterevidence_reviewed_ids\": [\"ev_17a0eeb2aed3947a7d6a\", \"ev_b9da151192c2b2f7471b\"], \"rationale_summary\": \"The only change is polarity from unknown to positive/extracted. The source sentence is an affirmative similarity assertion ('类似于') with no negation, so positive polarity is directly grounded. No conditions, quantifiers, modality, or scope were altered; unchanged fields remain intact. Adjacent evidence (definition of eddy resistance and boundary-layer separation) is consistent and contains no counterevidence to the affirmative polarity.\"}",
+              "reasoning_tokens": null,
+              "request_key": "4ae5e8ce261e9f8cbb47c4e8c347271bbe5c974aaa08561dd91dc22c9520b6b2",
+              "response_contract_version": "candidate_revision_review_v1",
+              "response_id": "2240fb8c-c89b-45a3-a45b-665a36b01f0a",
+              "response_status": "invalid_contract",
+              "returned_model_id": "deepseek-flash",
+              "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+              "task_type": "candidate_revision_review",
+              "transport_metrics": {
+                "client_request_id": "attempt_250cd9614e604b69999dcae899e6a6dc"
+              },
+              "voter_id": "judge_c"
+            }
+          ],
+          "client_request_id": "attempt_250cd9614e604b69999dcae899e6a6dc",
+          "document_version": "30d21c1ba6aa6002a87e02e2044621def9fefe197d4f1c86a4401c27826e1dc9",
+          "draft_hash": "2cbc301ac37ca825b852ce16be087b7419f24e655da4533bf50fca5beef5db18",
+          "error": "all historical material evidence must be assessed",
+          "evidence_hash": "161a7e4812a3943277868174cc7d46fe86f4a8200acf15926b7042b8ca324e2d",
+          "finish_reason": "stop",
+          "input_tokens": 7218,
+          "late_response": false,
+          "latency_ms": 3672,
+          "model_family": "deepseek",
+          "model_id": "deepseek-flash",
+          "model_identity": "deepseek-flash",
+          "object_revision": 1,
+          "ontology_release_id": "release_c722d176f283335f3f398e3559da5ead968973a870efdea663359669db07b6bb",
+          "output_tokens": 354,
+          "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+          "provider_started_at": 1794820856.6922793,
+          "queue_time_ms": 310,
+          "raw_response": "{\"decision\": \"approve\", \"field_reviews\": [{\"field\": \"qualifiers.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"], \"note\": \"Source sentence '它类似于弯曲壁面边界层出现分离现象。' is an affirmative assertion of similarity with no negation; positive polarity is grounded.\"}, {\"field\": \"qualifier_status.polarity\", \"status\": \"supported\", \"evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"], \"note\": \"Polarity status changes from unknown to extracted, consistent with the affirmative source evidence.\"}], \"supporting_evidence_ids\": [\"ev_7266b96bc5e3e52d2acc\", \"ev_3fa93d4e0d6519345518\"], \"counter_evidence_ids\": [], \"counterevidence_reviewed_ids\": [\"ev_17a0eeb2aed3947a7d6a\", \"ev_b9da151192c2b2f7471b\"], \"rationale_summary\": \"The only change is polarity from unknown to positive/extracted. The source sentence is an affirmative similarity assertion ('类似于') with no negation, so positive polarity is directly grounded. No conditions, quantifiers, modality, or scope were altered; unchanged fields remain intact. Adjacent evidence (definition of eddy resistance and boundary-layer separation) is consistent and contains no counterevidence to the affirmative polarity.\"}",
+          "reasoning_tokens": null,
+          "request_key": "4ae5e8ce261e9f8cbb47c4e8c347271bbe5c974aaa08561dd91dc22c9520b6b2",
+          "response_contract_version": "candidate_revision_review_v1",
+          "response_id": "2240fb8c-c89b-45a3-a45b-665a36b01f0a",
+          "response_status": "invalid_contract",
+          "returned_model_id": "deepseek-flash",
+          "task_id": "draft_3f1d2b003b514b65b18487285136d5b4",
+          "task_type": "candidate_revision_review",
+          "transport_metrics": {
+            "client_request_id": "attempt_250cd9614e604b69999dcae899e6a6dc"
+          },
+          "voter_id": "judge_c"
+        }
+      ],
+      "weight_snapshot": {
+        "by_check": {
+          "qualifiers": {
+            "axes": {
+              "expression": {
+                "available_mass": 0.0,
+                "seats": {
+                  "judge_a": {
+                    "adaptation": 1.0,
+                    "answer": null,
+                    "effective_weight": 0.0,
+                    "history": {
+                      "counts": null,
+                      "reason": "insufficient_history"
+                    },
+                    "model_family": "qwen",
+                    "reliability": 0.5,
+                    "usable": false,
+                    "weight": 0.3333333333333333
+                  },
+                  "judge_b": {
+                    "adaptation": 1.0,
+                    "answer": null,
+                    "effective_weight": 0.0,
+                    "history": {
+                      "counts": null,
+                      "reason": "insufficient_history"
+                    },
+                    "model_family": "gemma",
+                    "reliability": 0.5,
+                    "usable": false,
+                    "weight": 0.3333333333333333
+                  },
+                  "judge_c": {
+                    "adaptation": 1.0,
+                    "answer": null,
+                    "effective_weight": 0.0,
+                    "history": {
+                      "counts": null,
+                      "reason": "insufficient_history"
+                    },
+                    "model_family": "deepseek",
+                    "reliability": 0.5,
+                    "usable": false,
+                    "weight": 0.3333333333333333
+                  }
+                },
+                "threshold": 0.7,
+                "winner": null
+              },
+              "source": {
+                "available_mass": 0.0,
+                "seats": {
+                  "judge_a": {
+                    "adaptation": 1.0,
+                    "answer": null,
+                    "effective_weight": 0.0,
+                    "history": {
+                      "counts": null,
+                      "reason": "insufficient_history"
+                    },
+                    "model_family": "qwen",
+                    "reliability": 0.5,
+                    "usable": false,
+                    "weight": 0.3333333333333333
+                  },
+                  "judge_b": {
+                    "adaptation": 1.0,
+                    "answer": null,
+                    "effective_weight": 0.0,
+                    "history": {
+                      "counts": null,
+                      "reason": "insufficient_history"
+                    },
+                    "model_family": "gemma",
+                    "reliability": 0.5,
+                    "usable": false,
+                    "weight": 0.3333333333333333
+                  },
+                  "judge_c": {
+                    "adaptation": 1.0,
+                    "answer": null,
+                    "effective_weight": 0.0,
+                    "history": {
+                      "counts": null,
+                      "reason": "insufficient_history"
+                    },
+                    "model_family": "deepseek",
+                    "reliability": 0.5,
+                    "usable": false,
+                    "weight": 0.3333333333333333
+                  }
+                },
+                "threshold": 0.7,
+                "winner": null
+              }
+            },
+            "kind": "focused_review",
+            "mode": "dynamic",
+            "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+            "proposal_digest": "195766a2d9fce6adc3e94d29b318e978f01d40888ac6af741644574f31c55769",
+            "snapshot_id": "weights_425e29db47304d5ef1e3b565954b37a58efd6d86b41895561ce179142fcceffd",
+            "version": "axis_weighting_v1",
+            "votes_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        },
+        "version": "revision_weights_v1"
+      }
+    }
+  },
+  "candidate_unchanged": true
+}

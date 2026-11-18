@@ -1,0 +1,127 @@
+test_exporter_annotation_helper_preserves_property_definition (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_round_trip_preserves_source_definition_and_formal_identity (tests.test_review_completion.DefinitionRestorationTests) ... ok
+test_agent_can_abstain_without_default_positive_or_revision (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_long_rationale_is_projected_without_changing_fields_or_resending (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_only_unknown_paired_fields_can_be_proposed (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_proposal_does_not_mutate_candidate_and_approval_requires_new_version (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_unknown_request_remains_fenced_and_is_reported_without_resend (tests.test_review_completion.QualifierCompletionTests) ... ok
+test_504_without_provider_id_keeps_client_correlation_and_unknown (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_revision_review_preserves_gateway_metadata_and_rejects_truncation (tests.test_review_completion.RequestCorrelationTests) ... ok
+test_competency_fail_and_invalid_json_keep_metadata_and_judgment (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_contexts_are_isolated_for_simultaneous_requests (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_fact_timeout_keeps_latest_transport_metrics_without_partial_response (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_http504_keeps_gateway_identity_and_unknown_state (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_interrupted_stream_retains_diagnostics_but_never_partial_text (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_nonstream_headers_and_first_byte_are_kept (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_ontology_wrapper_keeps_metadata_for_valid_and_bad_json (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_original_reviewer_invalid_json_keeps_transport_metadata (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_real_sdk_stream_keeps_timing_usage_and_safe_ids_without_secrets (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_sqlite_keeps_gateway_id_separate_from_body_id_and_unknown (tests.test_transport_diagnostics.TransportDiagnosticsTests) ... ok
+test_ancestor_approval_does_not_close_later_revision_obligation (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_current_source_objection_remains_open (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_missing_grounded_qualifier_check_remains_open (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_revision_number_alone_without_verified_expression_change_is_insufficient (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_verified_changed_expression_can_resolve_old_insufficiency_with_same_evidence (tests.test_revision_source_obligation.RevisionSourceObligationTests) ... ok
+test_mapping_change_carries_published_class_definitions_bound_to_original_release (tests.test_revision_mapping_context.RevisionMappingContextTests) ... ok
+test_unchanged_patch_cannot_manufacture_a_new_revision_review (tests.test_revision_mapping_context.RevisionMappingContextTests) ... ok
+test_corrupted_applied_draft_cannot_supply_new_audit_evidence (tests.test_revision_evidence_handoff.RevisionEvidenceHandoffTests) ... ok
+test_fresh_review_inherits_supplement_and_protects_its_source_id (tests.test_revision_evidence_handoff.RevisionEvidenceHandoffTests) ... ok
+test_later_revision_can_retain_ancestor_source_without_reusing_approval (tests.test_revision_evidence_handoff.RevisionEvidenceHandoffTests) ... ok
+test_exact_duplicate_cleanup_has_a_preservation_path_but_still_needs_new_mapping (tests.test_revision_loop.RevisionDeltaTests) ... ok
+test_lost_condition_frequency_negation_or_modality_requires_full_review (tests.test_revision_loop.RevisionDeltaTests) ... ok
+test_unanchored_cleanup_or_endpoint_change_is_not_simplified (tests.test_revision_loop.RevisionDeltaTests) ... ok
+test_all_children_apply_atomically_and_get_their_own_fresh_audits (tests.test_revision_loop.RevisionLoopIntegrationTests) ... ok
+test_human_partial_qualifier_patch_preserves_every_other_qualifier (tests.test_revision_loop.RevisionLoopIntegrationTests) ... ok
+test_parent_or_sibling_ballots_do_not_approve_another_child (tests.test_revision_loop.RevisionLoopIntegrationTests) ... ok
+test_revision_stores_before_after_and_has_no_old_active_decision (tests.test_revision_loop.RevisionLoopIntegrationTests) ... ok
+test_split_has_independent_drafts_and_no_candidates_before_all_approvals (tests.test_revision_loop.RevisionLoopIntegrationTests) ... ok
+test_stale_parent_and_invalid_child_sources_do_not_publish_partial_children (tests.test_revision_loop.RevisionLoopIntegrationTests) ... ok
+test_T01_markers_cannot_support_but_complete_formula_is_retained (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T02_reviewed_primary_quote_and_counterevidence_are_both_visible (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T03_expanded_package_gets_new_hash_without_rewriting_old_ids (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T04_conflicting_human_claim_is_preserved_pending (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T05_mapping_yes_without_formal_id_is_not_verified (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T06_insufficient_is_never_a_contradiction_training_label (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T07_entity_scope_revision_retains_original_mention (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T08_predicate_edit_does_not_swap_endpoints (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T09_generic_predicate_still_requires_complete_independent_expression_check (tests.test_dev_semantic_revision.SemanticRevisionTests) ... FAIL
+test_T10_qualifier_attachment_is_kept_on_its_branch (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T11_unknown_polarity_never_fills_itself (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T12_same_name_relations_expose_definitions_without_guessing (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T13_constraint_failure_exposes_requested_type_range_and_paths (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T14_scope_exclusion_preserves_source_truth (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T15_annotations_and_fact_identity_do_not_transfer_to_new_revision (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T16_pending_adjudication_is_excluded_from_training (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T17_production_modules_do_not_branch_on_development_ids (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_T18_versions_and_grouped_test_split_are_frozen (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_adding_referent_metadata_to_legacy_expression_keeps_the_old_surface (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_class_existence_alone_does_not_prove_formal_schema_coverage (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_counterevidence_role_conflict_is_invalid_contract_not_negative_fact (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_experiment_entry_rejects_development_test_near_duplicate_before_execution (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_legacy_support_lists_do_not_claim_a_complete_primary_set (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_literal_and_proposition_tails_do_not_inherit_entity_class_hints (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_near_duplicate_from_another_document_cannot_be_an_independent_test (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_new_negative_adjudication_also_records_model_support_conflict (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_partial_semantic_revision_preserves_tail_reference_and_local_qualifier (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_pass_without_qualifier_citation_is_contract_error (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_text_waiver_cannot_turn_missing_or_format_only_evidence_into_gold (tests.test_dev_semantic_revision.SemanticRevisionTests) ... ok
+test_core_supported_expression_fail_cannot_count_as_complete_support (tests.test_dev_semantic_revision.V5IntegrationTests) ... ok
+test_shared_admission_checks_scope_from_bound_assessments_even_without_route_flag (tests.test_dev_semantic_revision.V5IntegrationTests) ... ok
+test_v51_end_to_end_keeps_three_seats_and_mapping_route (tests.test_dev_semantic_revision.V5IntegrationTests) ... ok
+test_v52_nullable_codes_keep_independent_review_and_revision_obligations (tests.test_dev_semantic_revision.V5IntegrationTests) ... ok
+test_v5_full_committee_mapping_route_and_frozen_export (tests.test_dev_semantic_revision.V5IntegrationTests) ... ok
+test_v5_scope_exclusion_preserves_actual_source_consensus (tests.test_dev_semantic_revision.V5IntegrationTests) ... ok
+test_imported_revision_ancestry_does_not_become_a_new_experiment_operation (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_isolated_runner_drains_new_rebind_jobs_but_bounds_the_queue (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_late_subscription_rebind_preserves_original_publication_receipt (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_mapping_proposal_review_isolated_application_and_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_no_new_information_stops_without_forcing_agreement (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_semantic_revision_keeps_modality_and_requires_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_experiment_modes_are_explicit_and_versioned (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_invalid_modes_numbers_caps_and_history_are_rejected (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_projection_is_bounded_normalized_and_deterministic (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_unsupported_legacy_boolean_fails_explicitly (tests.test_vote_weighting.WeightPolicyTests) ... ok
+test_agent_runtime_and_resolution_snapshot_use_the_same_weighting (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_dynamic_weights_change_operation_and_are_replayable (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_equal_weights_match_explicit_mass_baseline (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_focused_weighting_and_new_evidence_recompute_without_rewriting_votes (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_low_weight_material_counterevidence_still_blocks (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_missing_or_duplicate_model_cannot_become_full_mass (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_planner_view_exposes_weight_reasons_without_repeating_full_snapshots (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_scope_exclusion_does_not_require_an_irrelevant_formal_mapping (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_scope_exclusion_is_discard (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_semantic_repair_and_scope_exclusion_are_separate_operations (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_static_weights_ignore_current_features_but_use_frozen_history (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_strategy_and_candidate_revisions_invalidate_old_bindings (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_verified_counterevidence_resolution_closes_only_the_bound_obligations (tests.test_vote_weighting.WeightingIntegrationTests) ... ok
+test_completed_receipt_is_reused_and_duplicate_completion_is_fenced (tests.test_agent_resolution.DurablePlannerTests) ... ok
+test_gateway_504_remains_unknown_and_channel_breaker_does_not_pause_other_models (tests.test_agent_resolution.DurablePlannerTests) ... ok
+test_late_receipt_is_saved_unknown_is_not_resent_and_stale_action_is_not_executed (tests.test_agent_resolution.DurablePlannerTests) ... ok
+test_datatype_definitions_survive_the_adapter (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_known_invalid_committee_material_is_a_technical_task_even_with_known_usage (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_profiles_are_independent_and_fund_the_final_full_committee (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_same_code_different_targets_are_not_closed_together (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_technical_unknown_is_visible_without_overriding_complete_semantic_judgment (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_agent_supplements_a_real_index_then_closes_exact_dispute_without_replacing_original_votes (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_fixed_initial_steps_use_no_planner_calls_and_technical_cost_is_separate (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_mapping_type_must_be_proposed_from_source_and_legal_ids (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_missing_finding_gets_one_separate_semantic_reassessment_without_changing_invalid_original (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_new_source_dependency_gets_its_own_scoped_review_before_closure (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_shared_definition_tasks_aggregate_and_enter_publication_impact_without_copying_votes (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_focused_support_updates_only_covered_checks_and_preserves_original_votes (tests.test_agent_resolution.ResolutionSnapshotTests) ... ok
+test_opposition_routes_to_revision_and_changed_candidate_invalidates_old_snapshot (tests.test_agent_resolution.ResolutionSnapshotTests) ... ok
+test_other_unresolved_obligation_and_evidence_spillover_still_block_closure (tests.test_agent_resolution.ResolutionSnapshotTests) ... ok
+
+======================================================================
+FAIL: test_T09_generic_predicate_still_requires_complete_independent_expression_check (tests.test_dev_semantic_revision.SemanticRevisionTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_dev_semantic_revision.py", line 119, in test_T09_generic_predicate_still_requires_complete_independent_expression_check
+    self.assertEqual(revision_prompt({}),PROMPT)
+AssertionError: "Inde[719 chars]ings.\ncounterevidence_reviewed_ids records EV[482 chars]ent." != "Inde[719 chars]ings."
+Diff is 1503 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 113 tests in 150.223s
+
+FAILED (failures=1)

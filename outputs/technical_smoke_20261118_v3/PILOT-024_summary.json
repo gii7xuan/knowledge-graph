@@ -1,0 +1,263 @@
+{
+  "sample_id": "PILOT-024",
+  "role": "revision_review",
+  "status": "needs_human",
+  "votes": [
+    {
+      "voter_id": "judge_a",
+      "response_status": "ok",
+      "decision": "reject",
+      "outcome_unknown": null,
+      "not_sent": null,
+      "response_projection": {
+        "canonical_hash": "b29b8f58f0b8b3d2192c1aca7fb16dbdbc167a3d84a45ee683f79b5864843a32",
+        "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+        "operation": "named_fields_to_canonical_array_only",
+        "semantic_values_changed": false,
+        "version": "revision_field_map_v2",
+        "wire_hash": "17d7e7bd8232d7af9b9866647482ed772c6c57a6909e7e80b0324ab7d6879ab5"
+      }
+    },
+    {
+      "voter_id": "judge_b",
+      "response_status": "ok",
+      "decision": "approve",
+      "outcome_unknown": null,
+      "not_sent": null,
+      "response_projection": {
+        "canonical_hash": "68f51c5644a5f675c248750abfa89ff27540c992649e3af7bf8c1ed910a0cf9d",
+        "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+        "operation": "named_fields_to_canonical_array_only",
+        "semantic_values_changed": false,
+        "version": "revision_field_map_v2",
+        "wire_hash": "0f602ce966860da736e2c0d2e0e168ffeec17a917f9d777f32927dc9b19861c9"
+      }
+    },
+    {
+      "voter_id": "judge_c",
+      "response_status": "ok",
+      "decision": "reject",
+      "outcome_unknown": null,
+      "not_sent": null,
+      "response_projection": {
+        "canonical_hash": "8a9268b24896dcb5379cbca3620186a2733b17ed0df7cb34cb8c92208cb83581",
+        "field_names_hash": "ec4037ebc1c45928864965d27d665fe0731af6f03f30633ee481aec4c39498e8",
+        "operation": "named_fields_to_canonical_array_only",
+        "semantic_values_changed": false,
+        "version": "revision_field_map_v2",
+        "wire_hash": "6a423859d434bb545a672afc89bca522a33a5739a88d660f2789efc2dfee9be7"
+      }
+    }
+  ],
+  "weight_snapshot": {
+    "version": "revision_weights_v1",
+    "by_check": {
+      "entity_reference": {
+        "version": "axis_weighting_v1",
+        "kind": "focused_review",
+        "mode": "dynamic",
+        "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+        "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+        "votes_hash": "222ec10db8c4af46bce6718cac9536c9d3885ab2a7842aa641c53f3013714709",
+        "axes": {
+          "expression": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          },
+          "source": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          }
+        },
+        "snapshot_id": "weights_bb1ab7494fad9051bdfa3b7cf8fdfc6cba0c9fd183d8b90ebcd1f6f34b90b944"
+      },
+      "qualifiers": {
+        "version": "axis_weighting_v1",
+        "kind": "focused_review",
+        "mode": "dynamic",
+        "policy_hash": "539da925edd2bd8345873d243841537ee7067f0ffd9953503a6608b91fec184c",
+        "proposal_digest": "d749a91779d183e5b6fb845b4bf158d3cb8db77d88274b6019ac2518e26d3a0c",
+        "votes_hash": "222ec10db8c4af46bce6718cac9536c9d3885ab2a7842aa641c53f3013714709",
+        "axes": {
+          "expression": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          },
+          "source": {
+            "seats": {
+              "judge_a": {
+                "model_family": "qwen",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_b": {
+                "model_family": "gemma",
+                "answer": "supports",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              },
+              "judge_c": {
+                "model_family": "deepseek",
+                "answer": "opposes",
+                "usable": true,
+                "reliability": 0.5,
+                "adaptation": 1.0,
+                "history": {
+                  "reason": "insufficient_history",
+                  "counts": null
+                },
+                "weight": 0.3333333333333333,
+                "effective_weight": 0.3333333333333333
+              }
+            },
+            "available_mass": 1.0,
+            "winner": null,
+            "threshold": 0.7
+          }
+        },
+        "snapshot_id": "weights_bb1ab7494fad9051bdfa3b7cf8fdfc6cba0c9fd183d8b90ebcd1f6f34b90b944"
+      }
+    }
+  }
+}
