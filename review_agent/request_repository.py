@@ -78,6 +78,28 @@ class RequestRepository:
                 started(c,correction,attempt_id)
         return attempt_id
 
+    def record_extraction_progress(self, attempt_id, owner, response):
+        """Visible extraction output only; progress never becomes a completed vote."""
+        from .repository import ConflictError
+        from .llm_clients import response_metadata
+        content=response.content
+        if not isinstance(content,str):raise ValueError('stream checkpoint requires visible text')
+        detail={'version':'visible_extraction_checkpoint_v1','visible_content':content,
+                'visible_characters':len(content),**response_metadata(response)}
+        with self.transaction(immediate=True) as c:
+            row=c.execute('SELECT * FROM request_attempts WHERE attempt_id=?',(attempt_id,)).fetchone()
+            if not row or row['owner_token']!=owner:raise ConflictError('checkpoint attempt owner changed')
+            metadata=json.loads(row['metadata_json'])
+            if metadata.get('task_type')!='source_candidate_extraction_v2':
+                raise ValueError('visible checkpoints are restricted to explicit extraction v2')
+            if row['state'] not in {'running','unknown'}:return False
+            identity=response.gateway_request_id or response.response_id
+            if identity:c.execute('UPDATE request_attempts SET provider_request_id=COALESCE(provider_request_id,?) WHERE attempt_id=?',
+                                  (identity,attempt_id))
+            c.execute('INSERT INTO request_attempt_events VALUES(?,?,?,?,?)',
+                (uuid4().hex,attempt_id,'visible_extraction_checkpoint',time.time(),canonical_json(detail)))
+        return True
+
     def finish_request_attempt(self, attempt_id, owner, vote, *, late=False):
         from .repository import ConflictError
         now = time.time()
@@ -97,7 +119,7 @@ class RequestRepository:
             if any(vote.get(k) != value for k,value in bound.items()):
                 raise ConflictError('late result differs from frozen attempt binding')
             stored = {**vote,'attempt_id':attempt_id,'request_key':row['request_key'],'late_response':late}
-            c.execute('UPDATE request_attempts SET state=?,response_received_at=?,response_status=?,provider_request_id=?,raw_response_ref=?,usage_state=?,result_json=? WHERE attempt_id=? AND owner_token=?',
+            c.execute('UPDATE request_attempts SET state=?,response_received_at=?,response_status=?,provider_request_id=COALESCE(?,provider_request_id),raw_response_ref=?,usage_state=?,result_json=? WHERE attempt_id=? AND owner_token=?',
                       (status,now,vote.get('response_status'),vote.get('gateway_request_id') or vote.get('response_id'),
                        attempt_id + '#result_json', 'known' if any(type(vote.get(k)) is int for k in ('input_tokens','output_tokens')) else 'unknown',
                        canonical_json(stored),attempt_id,owner))

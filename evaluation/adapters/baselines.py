@@ -16,8 +16,7 @@ def simple_majority(votes: Iterable[Mapping[str, Any]]) -> Dict[str, Any]:
         if vote.get("response_status") == "ok" and vote.get("verdict") in counts:
             counts[vote["verdict"]] += 1
         else: errors += 1
-    highest = max(counts.values())
-    winners = [v for v, n in counts.items() if n == highest]
-    winner = winners[0] if highest > 0 and len(winners) == 1 and winners[0] != "uncertain" else "unresolved"
+    required = population // 2 + 1
+    winner = next((v for v in ("valid", "invalid") if counts[v] >= required), "unresolved")
     return {"method": "simple_majority", "verdict": winner, "counts": counts,
-            "population_count": population, "error_votes": errors}
+            "population_count": population, "error_votes": errors, "required_votes": required}

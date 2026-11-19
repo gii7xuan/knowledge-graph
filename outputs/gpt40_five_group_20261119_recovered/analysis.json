@@ -1,0 +1,540 @@
+{
+  "population": 40,
+  "label_source": "gpt_preannotation",
+  "human_gold_count": 0,
+  "known_reference_counts": {
+    "source_support": 38,
+    "expression_status": 38
+  },
+  "source_group_counts": {
+    "book_88e8310c22d9ffd3": 32,
+    "book_62aab259f62f40d9": 8
+  },
+  "source_group_count": 2,
+  "development_budget_projection_300": {
+    "candidate_count": 300,
+    "estimated_shared_requests": 1777,
+    "estimated_known_tokens": 34223238,
+    "observed_candidates": 26,
+    "observed_useful_requests": 154,
+    "observed_useful_known_tokens": 2966014,
+    "scope": "same review protocol and similar context lengths; excludes candidate extraction, annotation, engineering interruptions, the case with unknown requests, and monetary unit pricing"
+  },
+  "physical_usage": {
+    "requests": 170,
+    "input_tokens": 3194279,
+    "output_tokens": 127199,
+    "known_tokens": 3321478,
+    "engineering_only_requests": 13,
+    "engineering_only_known_tokens": 330609,
+    "request_states": {
+      "completed": 131,
+      "failed": 37,
+      "unknown": 2
+    },
+    "response_statuses": {
+      "ok": 131,
+      "invalid_action": 7,
+      "invalid_contract": 28,
+      "output_incomplete": 2,
+      "timeout": 2
+    }
+  },
+  "paired_comparison": {
+    "source_support": {
+      "axis": "source_support",
+      "known_reference_count_in_paired_executed_cases": 24,
+      "known_reference_cases_not_run": 14,
+      "agent_match_only": 0,
+      "b3_match_only": 0,
+      "both_match": 11,
+      "both_resolved": 13,
+      "both_unresolved": 11,
+      "matching_coverage_difference_agent_minus_b3": 0.0,
+      "paired_bootstrap_95_percentile_interval": [
+        0.0,
+        0.0
+      ],
+      "both_resolved_mean_match_difference": 0.0,
+      "interpretation": "matching coverage against GPT reference, unresolved counts as no match; not human accuracy"
+    },
+    "expression_status": {
+      "axis": "expression_status",
+      "known_reference_count_in_paired_executed_cases": 24,
+      "known_reference_cases_not_run": 14,
+      "agent_match_only": 0,
+      "b3_match_only": 0,
+      "both_match": 15,
+      "both_resolved": 17,
+      "both_unresolved": 7,
+      "matching_coverage_difference_agent_minus_b3": 0.0,
+      "paired_bootstrap_95_percentile_interval": [
+        0.0,
+        0.0
+      ],
+      "both_resolved_mean_match_difference": 0.0,
+      "interpretation": "matching coverage against GPT reference, unresolved counts as no match; not human accuracy"
+    }
+  },
+  "weight_replay": {
+    "records": 27,
+    "errors": 0,
+    "operation_changes_dynamic_vs_static": 0,
+    "axis_status_changes_dynamic_vs_static": {
+      "source": 2,
+      "expression": 6,
+      "mapping": 0,
+      "scope": 0
+    },
+    "weight_changes_dynamic_vs_static": {
+      "source": 11,
+      "expression": 11,
+      "mapping": 1,
+      "scope": 3
+    },
+    "extra_model_calls": 0,
+    "nonuniform_historical_reliability_available": false
+  },
+  "verification": {
+    "population_preserved": true,
+    "candidate_bindings_preserved": true,
+    "prior_databases_unchanged": true,
+    "frozen_code_unchanged": true,
+    "gpt_source_unchanged": true,
+    "local_request_accounting_reconciled": true,
+    "unknown_requests": 2
+  },
+  "agent_vs_b3_known_deployment_token_difference": 446347,
+  "agent_vs_b3_known_deployment_token_relative_difference": 0.21163033500735873,
+  "provider_failures": [
+    {
+      "attempt_id": "attempt_5d91ae913ffe4dcd97e07e07fd8a4dd8",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 22458,
+      "output_tokens": 801,
+      "not_sent": null,
+      "error": "issue/rationale must be bounded strings"
+    },
+    {
+      "attempt_id": "attempt_28b1825deac941fc87bd5bc2a44d45b6",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 29009,
+      "output_tokens": 523,
+      "not_sent": null,
+      "error": "issue/rationale must be bounded strings"
+    },
+    {
+      "attempt_id": "attempt_1ede4418402e43088a2abf29e9b34cc0",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 29075,
+      "output_tokens": 476,
+      "not_sent": null,
+      "error": "invalid stop_reason"
+    },
+    {
+      "attempt_id": "attempt_d246a072626d4441a1dad2c1f6d00a83",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Qwen",
+      "response_status": "invalid_contract",
+      "input_tokens": 8856,
+      "output_tokens": 889,
+      "not_sent": null,
+      "error": "only actual counterevidence has counter evidence IDs"
+    },
+    {
+      "attempt_id": "attempt_627a9008d0ba4b8c977761a53253e5f1",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 9447,
+      "output_tokens": 1602,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; material support and counterevidence must remain an unresolved conflict; positive support cannot be discarded to declare opposition"
+    },
+    {
+      "attempt_id": "attempt_f24aa45627014dea95c40733ee4a9f1b",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 8194,
+      "output_tokens": 532,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_d049c2a7d402457588d46eb3a69455c9",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 28865,
+      "output_tokens": 316,
+      "not_sent": null,
+      "error": "issue/rationale must be bounded strings"
+    },
+    {
+      "attempt_id": "attempt_9aea8529b194440993e5ba2560a9bf09",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Qwen",
+      "response_status": "invalid_contract",
+      "input_tokens": 10964,
+      "output_tokens": 350,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_da4d6730d1df420ba14679f6acc22b58",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 10141,
+      "output_tokens": 447,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_30693287c7ab4cd98f0f0709ad917c53",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 11442,
+      "output_tokens": 1408,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_6d67aad6162047669a1bf37441f3a558",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 18032,
+      "output_tokens": 467,
+      "not_sent": null,
+      "error": "issue/rationale must be bounded strings"
+    },
+    {
+      "attempt_id": "attempt_00b74eb80c2d423aa21b9fe5bb626b24",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 14334,
+      "output_tokens": 920,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_eec005e566114714b16a4d0b75e96334",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 12423,
+      "output_tokens": 361,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_e1b98f2cd3b14e0ba5516f803397671f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Qwen",
+      "response_status": "invalid_contract",
+      "input_tokens": 13489,
+      "output_tokens": 741,
+      "not_sent": null,
+      "error": "source references outside frozen focused context"
+    },
+    {
+      "attempt_id": "attempt_a342ae0ed838470a88d468417eddeec2",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "output_incomplete",
+      "input_tokens": 14231,
+      "output_tokens": 2048,
+      "not_sent": null,
+      "error": "focused review output truncated"
+    },
+    {
+      "attempt_id": "attempt_9fdac2b506184b7381cc51b498fc909f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 12359,
+      "output_tokens": 551,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; only actual counterevidence has counter evidence IDs"
+    },
+    {
+      "attempt_id": "attempt_3767f27424b241cc94e5bfe7d34ab767",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 11495,
+      "output_tokens": 459,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_2ffc9220a7a6489abc2c40037586fe92",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 13294,
+      "output_tokens": 1070,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_886041c2c5f747f29457cc66d93a4463",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 10305,
+      "output_tokens": 385,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_45ea2f56610b40c6a6d49da3ac5f1928",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 11685,
+      "output_tokens": 1140,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_11f8a3c9b41444159c09599d176453a2",
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 18836,
+      "output_tokens": 1163,
+      "not_sent": null,
+      "error": "$.dimensions.evidence_sufficiency.status: value outside enum"
+    },
+    {
+      "attempt_id": "attempt_3c76c891fe2d4baab1d60aa4520a2ebd",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 22797,
+      "output_tokens": 484,
+      "not_sent": null,
+      "error": "issue/rationale must be bounded strings"
+    },
+    {
+      "attempt_id": "attempt_e8556ea1024a452a8389909975a6433a",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 11352,
+      "output_tokens": 826,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_353e295b406640728213cc1e15ee80df",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 9947,
+      "output_tokens": 483,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_eaa74a36ccc74508b5b42a263c6a60f4",
+      "state": "failed",
+      "task_type": "triple_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 18273,
+      "output_tokens": 1110,
+      "not_sent": null,
+      "error": "unresolved material counter_evidence_ids conflict with counterevidence=pass; clarify roles"
+    },
+    {
+      "attempt_id": "attempt_d4fb741ce9b147fb99934d073ca29a67",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Qwen",
+      "response_status": "invalid_contract",
+      "input_tokens": 9467,
+      "output_tokens": 788,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_a500f485cd934f91b8735aee3d16eda2",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 9882,
+      "output_tokens": 1160,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_972d6742c7b04380aba885fe1fff422e",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 8760,
+      "output_tokens": 414,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; positive support requires affirmative cited evidence; only actual counterevidence has counter evidence IDs; one source item cannot be both support and counterevidence"
+    },
+    {
+      "attempt_id": "attempt_489aa57cac13448b9f5b5e5d357e4f53",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 10161,
+      "output_tokens": 579,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_96718284d49b401c9e5955b05f1f07c5",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 11481,
+      "output_tokens": 1339,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_7bfd69156a114820bf19be0acce62971",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "output_incomplete",
+      "input_tokens": 10985,
+      "output_tokens": 2048,
+      "not_sent": null,
+      "error": "focused review output truncated"
+    },
+    {
+      "attempt_id": "attempt_801b37643bfe4cad9cccf5ef4ba38fa5",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 9598,
+      "output_tokens": 460,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover"
+    },
+    {
+      "attempt_id": "attempt_80dbf5aaaecb476fb9411405223fe7d7",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 9622,
+      "output_tokens": 975,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_001c16674c13470aa80676aafdb2fe09",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 8340,
+      "output_tokens": 499,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; only actual counterevidence has counter evidence IDs"
+    },
+    {
+      "attempt_id": "attempt_196e5ae0af274a4db9faf8920ed03a26",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model_id": "Qwen",
+      "response_status": "invalid_action",
+      "input_tokens": 25633,
+      "output_tokens": 377,
+      "not_sent": null,
+      "error": "invalid stop_reason"
+    },
+    {
+      "attempt_id": "attempt_5e66079c0dd04a5c8ca93f2ad1939256",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "input_tokens": 13920,
+      "output_tokens": 677,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; only actual counterevidence has counter evidence IDs"
+    },
+    {
+      "attempt_id": "attempt_264ea8d102514388ac14a502c068fc17",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model_id": "Gemma",
+      "response_status": "invalid_contract",
+      "input_tokens": 16128,
+      "output_tokens": 739,
+      "not_sent": null,
+      "error": "explicit review of other affected checks is required; use [] only after assessing spillover; prior material evidence must be reviewed"
+    },
+    {
+      "attempt_id": "attempt_1ceff5ce3cf2442d810c8d44f5106623",
+      "state": "unknown",
+      "task_type": "triple_review",
+      "model_id": "Gemma",
+      "response_status": "timeout",
+      "input_tokens": null,
+      "output_tokens": null,
+      "not_sent": null,
+      "error": "The read operation timed out"
+    },
+    {
+      "attempt_id": "attempt_5fc25aa3131e4759b98a70e1cd2320b4",
+      "state": "unknown",
+      "task_type": "triple_review",
+      "model_id": "Qwen",
+      "response_status": "timeout",
+      "input_tokens": null,
+      "output_tokens": null,
+      "not_sent": null,
+      "error": "The read operation timed out"
+    }
+  ]
+}

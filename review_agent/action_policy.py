@@ -65,6 +65,13 @@ class ActionPolicy:
     def validate_request(self, action, state):
         validate_action(action)
         if action['action'] not in self.allowed: raise ActionError('tool not permitted by execution policy')
+        if self.config.get('fixed_candidate_limits'):
+            from .fixed_candidate_workflow import action_counts
+            counts=action_counts(state)
+            if action['action'] in {'search_evidence','inspect_context'} and counts['supplements']>=2:
+                raise ActionError('fixed candidate protocol permits at most two evidence supplements')
+            if action['action']=='review_dispute' and counts['focused_reviews']>=1:
+                raise ActionError('fixed candidate protocol permits at most one focused dispute review')
         args=action['arguments']
         available={x['evidence_id'] for x in state.archive if x.get('anchor_valid') is True}
         cited=args.get('evidence_ids',[])+([args['evidence_id']] if 'evidence_id' in args else [])

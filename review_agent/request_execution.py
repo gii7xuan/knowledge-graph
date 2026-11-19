@@ -142,6 +142,14 @@ def durable_attempt(repository, key, owner, binding, voter, proposal, feedback, 
     if paused:
         return {**binding,'response_status':'api_error','verdict':None,'pause_job':True,
                 'error_code':'SERVICE_PAUSED','retryable':False,'actual_calls':0,'error':'model service is paused'}
+    request_guard=getattr(voter['client'],'request_dispatch_guard',None)
+    if request_guard is not None and not request_guard(voter,proposal,task_type):
+        return {**binding,'response_status':'api_error','error_code':'EXPERIMENT_REQUEST_SUPPRESSED',
+                'not_sent':True,'actual_calls':0,'retryable':False,'error':'comparison guard suppressed a duplicate task, quarantined candidate, or exhausted study budget; no request sent'}
+    dispatch_guard=voter.get('dispatch_guard') or getattr(voter['client'],'dispatch_guard',None)
+    if dispatch_guard is not None and not dispatch_guard():
+        return {**binding,'response_status':'api_error','error_code':'EXPERIMENT_DISPATCH_STOPPED',
+                'not_sent':True,'actual_calls':0,'retryable':False,'error':'shared comparison dispatch fence stopped this call'}
     metadata={'binding':binding,'task_type':task_type,'proposal':proposal,'feedback':feedback,'service_key':skey,
               'generation':{'max_output_tokens':voter.get('max_output_tokens',4096),
                   **({'ontology_delivery_version':voter['ontology_delivery_version']} if voter.get('ontology_delivery_version') else {}),

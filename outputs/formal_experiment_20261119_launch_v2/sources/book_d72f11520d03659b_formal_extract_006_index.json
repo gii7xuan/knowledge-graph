@@ -1,0 +1,856 @@
+{
+  "schema_version": "document_index_v3",
+  "document_id": "book_d72f11520d03659b_formal_extract_006",
+  "document_version": "c1d2b2661f5b2c72ec189a5f0d54e774b7015492c78bf20b4d39518517aff872",
+  "source_snapshot": {
+    "document_id": "book_d72f11520d03659b_formal_extract_006",
+    "document_version": "c1d2b2661f5b2c72ec189a5f0d54e774b7015492c78bf20b4d39518517aff872",
+    "raw_file_hash": "c1d2b2661f5b2c72ec189a5f0d54e774b7015492c78bf20b4d39518517aff872",
+    "normalizer_version": "canonical_text_v1",
+    "offset_unit": "unicode_code_point",
+    "span_convention": "[start,end)",
+    "pdf_character_mapping": "unavailable",
+    "snapshot_id": "a8536f29ac6d13ce6300be87a2f3c26a8d2d2d8660bdcee79b40832c15581f95",
+    "raw_text": "# Descriptive concept source excerpt\n\n[Source paragraph 1; # （二）高射速自动机内源式FORC实现浮动的仿真结果; intervening text may be omitted]\n\n通过建立包含内源气液式FORC装置的高射速自动机动力学模型，并编程仿真，其一组结果如图7.1.6至图7.1.10所示，能够实现稳定浮动。后经分析表明，在高射速自动\n\n[Source paragraph 2; # 一、基本物理方程与湍流模型; intervening text may be omitted]\n\n任何流体运动的规律都是以质量守恒、动量守恒和能量守恒定律为基础的，这些基本定律可由数学方程组来描述，体现为连续性方程、动量方程和能量方程。\n\n[Source paragraph 3; # （一）包含弹丸运动的膛口流场仿真网格模型建立; intervening text may be omitted]\n\n数值计算采用的网格可分为结构化网格和非结构化网格，两维时分别是四边形网格单元和三角形网格单元，三维时分别是六面体和四面体单元。结构化网格一般是在正交与非正交曲线坐标系中生成的，每一节点与邻点之间的联结关系固定不变，其拓扑结构对复杂边界的描述比较困难。而在非结构网格中，节点的编号没有规则，甚至是完全随意的，而且每一个节点的邻点个数也不是规定不变的。非结构网格的这种不规则，无固定结构的特点，使其具有十分灵活的适用性和对复杂边界较强的描述能力，而且可以方便地在计算流场中应用网格自适应方法。通常采用阵面推进法生成非结构网格，其生成节点和网格是同步进行的，可以根据不同的空间尺度来控制网格密度大小。网格生成过程中，网格点的编号不必顺序进行，但输入几何位置的坐标时应按上述规定方向进行，一旦新的节点确定下来，它与阵面中的一条活动边就确定了一个新的网格，则该网格活动边就不再是阵面元素了，新网格中刚生成的两条边加入了阵面元素的行列，阵面推进法得以进行。直到阵面上活动边数目减少到零，计算区域的非结构化网格划分过程才能结束。该方法生成的网格质量较好，对边界的离散也很理想。非结构网格的优越性使其成为近年来研究的热点，被广泛应用于求解Euler方程和N-S方程、大范围瞬态流动、高速黏性流动等方面。\n\n[Source paragraph 4; # 四、基于有限体积法流体力学方程离散及求解方法; intervening text may be omitted]\n\n有限体积法（FVM），又称控制体法，是将计算区域划分为网格，并使每个网格点周围有一个互不重复的控制体积，将待解的微分方程对每个控制体积积分，从而得到一组离散方程。其中未知数是网格节点上的因变量。子域法加离散，就是有限体积法的基本思路。离散方程的物理意义就是因变量在有限大小的控制体积中的守恒原理，如同微分方程表示因变量在无限小的控制体积中的守恒原理一样。有限体积法得出的离散方程，要求因变量的积分守恒对任意一组控制体积都得到满足，对整个计算区域，自然也得到满足。有限体积法适于流体计算，可以应用于不规则网格，即使在粗网格情况下，也显示出准确的积分守恒。有限体积法是将非线性偏微分方程转变为网格单元上的线性代数方程，然后通过求解线性方程组，得出流场的解。网格划分可以将连续的空间划分为相互连接的网格单元。每个网格单元由位于几何中心的控制点和将网格单元包围起来的网格面（或线）构成。所谓求解流场的控制方程，最终目的就是获得所有控制点上流场变量的值。\n\n",
+    "canonical_text": "# Descriptive concept source excerpt\n\n[Source paragraph 1; # （二）高射速自动机内源式FORC实现浮动的仿真结果; intervening text may be omitted]\n\n通过建立包含内源气液式FORC装置的高射速自动机动力学模型，并编程仿真，其一组结果如图7.1.6至图7.1.10所示，能够实现稳定浮动。后经分析表明，在高射速自动\n\n[Source paragraph 2; # 一、基本物理方程与湍流模型; intervening text may be omitted]\n\n任何流体运动的规律都是以质量守恒、动量守恒和能量守恒定律为基础的，这些基本定律可由数学方程组来描述，体现为连续性方程、动量方程和能量方程。\n\n[Source paragraph 3; # （一）包含弹丸运动的膛口流场仿真网格模型建立; intervening text may be omitted]\n\n数值计算采用的网格可分为结构化网格和非结构化网格，两维时分别是四边形网格单元和三角形网格单元，三维时分别是六面体和四面体单元。结构化网格一般是在正交与非正交曲线坐标系中生成的，每一节点与邻点之间的联结关系固定不变，其拓扑结构对复杂边界的描述比较困难。而在非结构网格中，节点的编号没有规则，甚至是完全随意的，而且每一个节点的邻点个数也不是规定不变的。非结构网格的这种不规则，无固定结构的特点，使其具有十分灵活的适用性和对复杂边界较强的描述能力，而且可以方便地在计算流场中应用网格自适应方法。通常采用阵面推进法生成非结构网格，其生成节点和网格是同步进行的，可以根据不同的空间尺度来控制网格密度大小。网格生成过程中，网格点的编号不必顺序进行，但输入几何位置的坐标时应按上述规定方向进行，一旦新的节点确定下来，它与阵面中的一条活动边就确定了一个新的网格，则该网格活动边就不再是阵面元素了，新网格中刚生成的两条边加入了阵面元素的行列，阵面推进法得以进行。直到阵面上活动边数目减少到零，计算区域的非结构化网格划分过程才能结束。该方法生成的网格质量较好，对边界的离散也很理想。非结构网格的优越性使其成为近年来研究的热点，被广泛应用于求解Euler方程和N-S方程、大范围瞬态流动、高速黏性流动等方面。\n\n[Source paragraph 4; # 四、基于有限体积法流体力学方程离散及求解方法; intervening text may be omitted]\n\n有限体积法（FVM），又称控制体法，是将计算区域划分为网格，并使每个网格点周围有一个互不重复的控制体积，将待解的微分方程对每个控制体积积分，从而得到一组离散方程。其中未知数是网格节点上的因变量。子域法加离散，就是有限体积法的基本思路。离散方程的物理意义就是因变量在有限大小的控制体积中的守恒原理，如同微分方程表示因变量在无限小的控制体积中的守恒原理一样。有限体积法得出的离散方程，要求因变量的积分守恒对任意一组控制体积都得到满足，对整个计算区域，自然也得到满足。有限体积法适于流体计算，可以应用于不规则网格，即使在粗网格情况下，也显示出准确的积分守恒。有限体积法是将非线性偏微分方程转变为网格单元上的线性代数方程，然后通过求解线性方程组，得出流场的解。网格划分可以将连续的空间划分为相互连接的网格单元。每个网格单元由位于几何中心的控制点和将网格单元包围起来的网格面（或线）构成。所谓求解流场的控制方程，最终目的就是获得所有控制点上流场变量的值。\n\n"
+  },
+  "source_sections": [
+    {
+      "section_id": "section_134d74754da8",
+      "title": "正文",
+      "breadcrumb_path": "正文",
+      "parent_section_id": null,
+      "header_level": 0,
+      "start": 0,
+      "end": 0,
+      "body_start": 0,
+      "section_order": 0
+    },
+    {
+      "section_id": "section_a21ef50e1574",
+      "title": "Descriptive concept source excerpt",
+      "breadcrumb_path": "Descriptive concept source excerpt",
+      "parent_section_id": null,
+      "header_level": 1,
+      "start": 0,
+      "end": 1479,
+      "body_start": 37,
+      "section_order": 1
+    }
+  ],
+  "sentences": [
+    {
+      "sentence_id": "sentence_435b8bff8945fc824fce",
+      "document_start": 0,
+      "document_end": 36,
+      "text": "# Descriptive concept source excerpt",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_1cc47bda5f4021a97dda",
+      "document_start": 38,
+      "document_end": 58,
+      "text": "[Source paragraph 1;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_be6d7b28e87e48853832",
+      "document_start": 59,
+      "document_end": 87,
+      "text": "# （二）高射速自动机内源式FORC实现浮动的仿真结果;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_7348586a25921adefc82",
+      "document_start": 88,
+      "document_end": 120,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_30379360728a39b60ec9",
+      "document_start": 122,
+      "document_end": 190,
+      "text": "通过建立包含内源气液式FORC装置的高射速自动机动力学模型，并编程仿真，其一组结果如图7.1.6至图7.1.10所示，能够实现稳定浮动。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_ac0870f4c59aab5c64d6",
+      "document_start": 190,
+      "document_end": 203,
+      "text": "后经分析表明，在高射速自动",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_02b68c107f7641fe9c4c",
+      "document_start": 205,
+      "document_end": 225,
+      "text": "[Source paragraph 2;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_59cc87791430f72be56e",
+      "document_start": 226,
+      "document_end": 242,
+      "text": "# 一、基本物理方程与湍流模型;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_72c1b83d61f30dab297e",
+      "document_start": 243,
+      "document_end": 275,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_5198729ee609be00eeff",
+      "document_start": 277,
+      "document_end": 346,
+      "text": "任何流体运动的规律都是以质量守恒、动量守恒和能量守恒定律为基础的，这些基本定律可由数学方程组来描述，体现为连续性方程、动量方程和能量方程。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_db09d510e336ccc312e0",
+      "document_start": 348,
+      "document_end": 368,
+      "text": "[Source paragraph 3;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_f957df5c090a6fdb3e85",
+      "document_start": 369,
+      "document_end": 394,
+      "text": "# （一）包含弹丸运动的膛口流场仿真网格模型建立;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_977f511f00ee0a935420",
+      "document_start": 395,
+      "document_end": 427,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_a306b401df9035e198bd",
+      "document_start": 429,
+      "document_end": 492,
+      "text": "数值计算采用的网格可分为结构化网格和非结构化网格，两维时分别是四边形网格单元和三角形网格单元，三维时分别是六面体和四面体单元。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_271c0461cb0df7719ae1",
+      "document_start": 492,
+      "document_end": 554,
+      "text": "结构化网格一般是在正交与非正交曲线坐标系中生成的，每一节点与邻点之间的联结关系固定不变，其拓扑结构对复杂边界的描述比较困难。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_af63b1b444fb9fea68dc",
+      "document_start": 554,
+      "document_end": 603,
+      "text": "而在非结构网格中，节点的编号没有规则，甚至是完全随意的，而且每一个节点的邻点个数也不是规定不变的。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_b4d9ed641d96873c3a59",
+      "document_start": 603,
+      "document_end": 673,
+      "text": "非结构网格的这种不规则，无固定结构的特点，使其具有十分灵活的适用性和对复杂边界较强的描述能力，而且可以方便地在计算流场中应用网格自适应方法。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_309b24bdf46f98056836",
+      "document_start": 673,
+      "document_end": 726,
+      "text": "通常采用阵面推进法生成非结构网格，其生成节点和网格是同步进行的，可以根据不同的空间尺度来控制网格密度大小。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_fd84ff429a2282bef026",
+      "document_start": 726,
+      "document_end": 851,
+      "text": "网格生成过程中，网格点的编号不必顺序进行，但输入几何位置的坐标时应按上述规定方向进行，一旦新的节点确定下来，它与阵面中的一条活动边就确定了一个新的网格，则该网格活动边就不再是阵面元素了，新网格中刚生成的两条边加入了阵面元素的行列，阵面推进法得以进行。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_2ae1f406f4e865ef9563",
+      "document_start": 851,
+      "document_end": 886,
+      "text": "直到阵面上活动边数目减少到零，计算区域的非结构化网格划分过程才能结束。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_68604c33ab959f71a91a",
+      "document_start": 886,
+      "document_end": 910,
+      "text": "该方法生成的网格质量较好，对边界的离散也很理想。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_b14ac53f6a54294be51f",
+      "document_start": 910,
+      "document_end": 972,
+      "text": "非结构网格的优越性使其成为近年来研究的热点，被广泛应用于求解Euler方程和N-S方程、大范围瞬态流动、高速黏性流动等方面。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_7a6ec23ad639cc7c49f5",
+      "document_start": 974,
+      "document_end": 994,
+      "text": "[Source paragraph 4;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_5e2075824e15197757df",
+      "document_start": 995,
+      "document_end": 1020,
+      "text": "# 四、基于有限体积法流体力学方程离散及求解方法;",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_7a65dbd8463c9d6b5b5d",
+      "document_start": 1021,
+      "document_end": 1053,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_ffa5545bbe5290cbe8d0",
+      "document_start": 1055,
+      "document_end": 1136,
+      "text": "有限体积法（FVM），又称控制体法，是将计算区域划分为网格，并使每个网格点周围有一个互不重复的控制体积，将待解的微分方程对每个控制体积积分，从而得到一组离散方程。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_4e65bb45af12e1ac5e30",
+      "document_start": 1136,
+      "document_end": 1152,
+      "text": "其中未知数是网格节点上的因变量。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_01e55284f308a8cf65b9",
+      "document_start": 1152,
+      "document_end": 1172,
+      "text": "子域法加离散，就是有限体积法的基本思路。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_e569e53e27b4777ab47a",
+      "document_start": 1172,
+      "document_end": 1232,
+      "text": "离散方程的物理意义就是因变量在有限大小的控制体积中的守恒原理，如同微分方程表示因变量在无限小的控制体积中的守恒原理一样。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_12a74d3732c73356189a",
+      "document_start": 1232,
+      "document_end": 1286,
+      "text": "有限体积法得出的离散方程，要求因变量的积分守恒对任意一组控制体积都得到满足，对整个计算区域，自然也得到满足。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_72cc28169ea42a072648",
+      "document_start": 1286,
+      "document_end": 1331,
+      "text": "有限体积法适于流体计算，可以应用于不规则网格，即使在粗网格情况下，也显示出准确的积分守恒。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_9e023f4fd567fee6a315",
+      "document_start": 1331,
+      "document_end": 1381,
+      "text": "有限体积法是将非线性偏微分方程转变为网格单元上的线性代数方程，然后通过求解线性方程组，得出流场的解。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_02b1698a335da78e4b99",
+      "document_start": 1381,
+      "document_end": 1406,
+      "text": "网格划分可以将连续的空间划分为相互连接的网格单元。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_0691427e7509070012dd",
+      "document_start": 1406,
+      "document_end": 1444,
+      "text": "每个网格单元由位于几何中心的控制点和将网格单元包围起来的网格面（或线）构成。",
+      "section_id": "section_a21ef50e1574"
+    },
+    {
+      "sentence_id": "sentence_7d6430c63902d8603fcd",
+      "document_start": 1444,
+      "document_end": 1477,
+      "text": "所谓求解流场的控制方程，最终目的就是获得所有控制点上流场变量的值。",
+      "section_id": "section_a21ef50e1574"
+    }
+  ],
+  "sections": [
+    {
+      "section_id": "section_a21ef50e1574",
+      "document_id": "book_d72f11520d03659b_formal_extract_006",
+      "document_version": "c1d2b2661f5b2c72ec189a5f0d54e774b7015492c78bf20b4d39518517aff872",
+      "breadcrumb_path": "Descriptive concept source excerpt",
+      "parent_section_id": null,
+      "children_section_ids": [],
+      "section_order": 1,
+      "text_start": 0,
+      "text_end": 1479,
+      "chunk_ids": [
+        "chunk_07c3b5f8dd62"
+      ],
+      "title": "Descriptive concept source excerpt",
+      "header_level": 1,
+      "start": 0,
+      "end": 1479,
+      "body_start": 37
+    },
+    {
+      "chunk_ids": [],
+      "children_section_ids": [],
+      "section_id": "section_134d74754da8",
+      "title": "正文",
+      "breadcrumb_path": "正文",
+      "parent_section_id": null,
+      "header_level": 0,
+      "start": 0,
+      "end": 0,
+      "body_start": 0,
+      "section_order": 0,
+      "text_start": 0,
+      "text_end": 0
+    }
+  ],
+  "chunks": [
+    {
+      "document_id": "book_d72f11520d03659b_formal_extract_006",
+      "document_version": "c1d2b2661f5b2c72ec189a5f0d54e774b7015492c78bf20b4d39518517aff872",
+      "chunk_id": "chunk_07c3b5f8dd62",
+      "section_id": "section_a21ef50e1574",
+      "parent_section_id": null,
+      "breadcrumb_path": "Descriptive concept source excerpt",
+      "header_level": 1,
+      "chunk_order": 0,
+      "content": "# Descriptive concept source excerpt\n\n[Source paragraph 1; # （二）高射速自动机内源式FORC实现浮动的仿真结果; intervening text may be omitted]\n\n通过建立包含内源气液式FORC装置的高射速自动机动力学模型，并编程仿真，其一组结果如图7.1.6至图7.1.10所示，能够实现稳定浮动。后经分析表明，在高射速自动\n\n[Source paragraph 2; # 一、基本物理方程与湍流模型; intervening text may be omitted]\n\n任何流体运动的规律都是以质量守恒、动量守恒和能量守恒定律为基础的，这些基本定律可由数学方程组来描述，体现为连续性方程、动量方程和能量方程。\n\n[Source paragraph 3; # （一）包含弹丸运动的膛口流场仿真网格模型建立; intervening text may be omitted]\n\n数值计算采用的网格可分为结构化网格和非结构化网格，两维时分别是四边形网格单元和三角形网格单元，三维时分别是六面体和四面体单元。结构化网格一般是在正交与非正交曲线坐标系中生成的，每一节点与邻点之间的联结关系固定不变，其拓扑结构对复杂边界的描述比较困难。而在非结构网格中，节点的编号没有规则，甚至是完全随意的，而且每一个节点的邻点个数也不是规定不变的。非结构网格的这种不规则，无固定结构的特点，使其具有十分灵活的适用性和对复杂边界较强的描述能力，而且可以方便地在计算流场中应用网格自适应方法。通常采用阵面推进法生成非结构网格，其生成节点和网格是同步进行的，可以根据不同的空间尺度来控制网格密度大小。网格生成过程中，网格点的编号不必顺序进行，但输入几何位置的坐标时应按上述规定方向进行，一旦新的节点确定下来，它与阵面中的一条活动边就确定了一个新的网格，则该网格活动边就不再是阵面元素了，新网格中刚生成的两条边加入了阵面元素的行列，阵面推进法得以进行。直到阵面上活动边数目减少到零，计算区域的非结构化网格划分过程才能结束。该方法生成的网格质量较好，对边界的离散也很理想。非结构网格的优越性使其成为近年来研究的热点，被广泛应用于求解Euler方程和N-S方程、大范围瞬态流动、高速黏性流动等方面。\n\n[Source paragraph 4; # 四、基于有限体积法流体力学方程离散及求解方法; intervening text may be omitted]\n\n有限体积法（FVM），又称控制体法，是将计算区域划分为网格，并使每个网格点周围有一个互不重复的控制体积，将待解的微分方程对每个控制体积积分，从而得到一组离散方程。其中未知数是网格节点上的因变量。子域法加离散，就是有限体积法的基本思路。离散方程的物理意义就是因变量在有限大小的控制体积中的守恒原理，如同微分方程表示因变量在无限小的控制体积中的守恒原理一样。有限体积法得出的离散方程，要求因变量的积分守恒对任意一组控制体积都得到满足，对整个计算区域，自然也得到满足。有限体积法适于流体计算，可以应用于不规则网格，即使在粗网格情况下，也显示出准确的积分守恒。有限体积法是将非线性偏微分方程转变为网格单元上的线性代数方程，然后通过求解线性方程组，得出流场的解。网格划分可以将连续的空间划分为相互连接的网格单元。每个网格单元由位于几何中心的控制点和将网格单元包围起来的网格面（或线）构成。所谓求解流场的控制方程，最终目的就是获得所有控制点上流场变量的值。\n\n",
+      "sentences": [
+        {
+          "sentence_id": "sentence_435b8bff8945fc824fce",
+          "document_start": 0,
+          "document_end": 36,
+          "text": "# Descriptive concept source excerpt",
+          "section_id": "section_a21ef50e1574",
+          "start": 0,
+          "end": 36,
+          "chunk_start": 0,
+          "chunk_end": 36,
+          "sentence_document_start": 0,
+          "sentence_document_end": 36,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_1cc47bda5f4021a97dda",
+          "document_start": 38,
+          "document_end": 58,
+          "text": "[Source paragraph 1;",
+          "section_id": "section_a21ef50e1574",
+          "start": 38,
+          "end": 58,
+          "chunk_start": 38,
+          "chunk_end": 58,
+          "sentence_document_start": 38,
+          "sentence_document_end": 58,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_be6d7b28e87e48853832",
+          "document_start": 59,
+          "document_end": 87,
+          "text": "# （二）高射速自动机内源式FORC实现浮动的仿真结果;",
+          "section_id": "section_a21ef50e1574",
+          "start": 59,
+          "end": 87,
+          "chunk_start": 59,
+          "chunk_end": 87,
+          "sentence_document_start": 59,
+          "sentence_document_end": 87,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_7348586a25921adefc82",
+          "document_start": 88,
+          "document_end": 120,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_a21ef50e1574",
+          "start": 88,
+          "end": 120,
+          "chunk_start": 88,
+          "chunk_end": 120,
+          "sentence_document_start": 88,
+          "sentence_document_end": 120,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_30379360728a39b60ec9",
+          "document_start": 122,
+          "document_end": 190,
+          "text": "通过建立包含内源气液式FORC装置的高射速自动机动力学模型，并编程仿真，其一组结果如图7.1.6至图7.1.10所示，能够实现稳定浮动。",
+          "section_id": "section_a21ef50e1574",
+          "start": 122,
+          "end": 190,
+          "chunk_start": 122,
+          "chunk_end": 190,
+          "sentence_document_start": 122,
+          "sentence_document_end": 190,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_ac0870f4c59aab5c64d6",
+          "document_start": 190,
+          "document_end": 203,
+          "text": "后经分析表明，在高射速自动",
+          "section_id": "section_a21ef50e1574",
+          "start": 190,
+          "end": 203,
+          "chunk_start": 190,
+          "chunk_end": 203,
+          "sentence_document_start": 190,
+          "sentence_document_end": 203,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_02b68c107f7641fe9c4c",
+          "document_start": 205,
+          "document_end": 225,
+          "text": "[Source paragraph 2;",
+          "section_id": "section_a21ef50e1574",
+          "start": 205,
+          "end": 225,
+          "chunk_start": 205,
+          "chunk_end": 225,
+          "sentence_document_start": 205,
+          "sentence_document_end": 225,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_59cc87791430f72be56e",
+          "document_start": 226,
+          "document_end": 242,
+          "text": "# 一、基本物理方程与湍流模型;",
+          "section_id": "section_a21ef50e1574",
+          "start": 226,
+          "end": 242,
+          "chunk_start": 226,
+          "chunk_end": 242,
+          "sentence_document_start": 226,
+          "sentence_document_end": 242,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_72c1b83d61f30dab297e",
+          "document_start": 243,
+          "document_end": 275,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_a21ef50e1574",
+          "start": 243,
+          "end": 275,
+          "chunk_start": 243,
+          "chunk_end": 275,
+          "sentence_document_start": 243,
+          "sentence_document_end": 275,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_5198729ee609be00eeff",
+          "document_start": 277,
+          "document_end": 346,
+          "text": "任何流体运动的规律都是以质量守恒、动量守恒和能量守恒定律为基础的，这些基本定律可由数学方程组来描述，体现为连续性方程、动量方程和能量方程。",
+          "section_id": "section_a21ef50e1574",
+          "start": 277,
+          "end": 346,
+          "chunk_start": 277,
+          "chunk_end": 346,
+          "sentence_document_start": 277,
+          "sentence_document_end": 346,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_db09d510e336ccc312e0",
+          "document_start": 348,
+          "document_end": 368,
+          "text": "[Source paragraph 3;",
+          "section_id": "section_a21ef50e1574",
+          "start": 348,
+          "end": 368,
+          "chunk_start": 348,
+          "chunk_end": 368,
+          "sentence_document_start": 348,
+          "sentence_document_end": 368,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_f957df5c090a6fdb3e85",
+          "document_start": 369,
+          "document_end": 394,
+          "text": "# （一）包含弹丸运动的膛口流场仿真网格模型建立;",
+          "section_id": "section_a21ef50e1574",
+          "start": 369,
+          "end": 394,
+          "chunk_start": 369,
+          "chunk_end": 394,
+          "sentence_document_start": 369,
+          "sentence_document_end": 394,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_977f511f00ee0a935420",
+          "document_start": 395,
+          "document_end": 427,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_a21ef50e1574",
+          "start": 395,
+          "end": 427,
+          "chunk_start": 395,
+          "chunk_end": 427,
+          "sentence_document_start": 395,
+          "sentence_document_end": 427,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_a306b401df9035e198bd",
+          "document_start": 429,
+          "document_end": 492,
+          "text": "数值计算采用的网格可分为结构化网格和非结构化网格，两维时分别是四边形网格单元和三角形网格单元，三维时分别是六面体和四面体单元。",
+          "section_id": "section_a21ef50e1574",
+          "start": 429,
+          "end": 492,
+          "chunk_start": 429,
+          "chunk_end": 492,
+          "sentence_document_start": 429,
+          "sentence_document_end": 492,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_271c0461cb0df7719ae1",
+          "document_start": 492,
+          "document_end": 554,
+          "text": "结构化网格一般是在正交与非正交曲线坐标系中生成的，每一节点与邻点之间的联结关系固定不变，其拓扑结构对复杂边界的描述比较困难。",
+          "section_id": "section_a21ef50e1574",
+          "start": 492,
+          "end": 554,
+          "chunk_start": 492,
+          "chunk_end": 554,
+          "sentence_document_start": 492,
+          "sentence_document_end": 554,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_af63b1b444fb9fea68dc",
+          "document_start": 554,
+          "document_end": 603,
+          "text": "而在非结构网格中，节点的编号没有规则，甚至是完全随意的，而且每一个节点的邻点个数也不是规定不变的。",
+          "section_id": "section_a21ef50e1574",
+          "start": 554,
+          "end": 603,
+          "chunk_start": 554,
+          "chunk_end": 603,
+          "sentence_document_start": 554,
+          "sentence_document_end": 603,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_b4d9ed641d96873c3a59",
+          "document_start": 603,
+          "document_end": 673,
+          "text": "非结构网格的这种不规则，无固定结构的特点，使其具有十分灵活的适用性和对复杂边界较强的描述能力，而且可以方便地在计算流场中应用网格自适应方法。",
+          "section_id": "section_a21ef50e1574",
+          "start": 603,
+          "end": 673,
+          "chunk_start": 603,
+          "chunk_end": 673,
+          "sentence_document_start": 603,
+          "sentence_document_end": 673,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_309b24bdf46f98056836",
+          "document_start": 673,
+          "document_end": 726,
+          "text": "通常采用阵面推进法生成非结构网格，其生成节点和网格是同步进行的，可以根据不同的空间尺度来控制网格密度大小。",
+          "section_id": "section_a21ef50e1574",
+          "start": 673,
+          "end": 726,
+          "chunk_start": 673,
+          "chunk_end": 726,
+          "sentence_document_start": 673,
+          "sentence_document_end": 726,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_fd84ff429a2282bef026",
+          "document_start": 726,
+          "document_end": 851,
+          "text": "网格生成过程中，网格点的编号不必顺序进行，但输入几何位置的坐标时应按上述规定方向进行，一旦新的节点确定下来，它与阵面中的一条活动边就确定了一个新的网格，则该网格活动边就不再是阵面元素了，新网格中刚生成的两条边加入了阵面元素的行列，阵面推进法得以进行。",
+          "section_id": "section_a21ef50e1574",
+          "start": 726,
+          "end": 851,
+          "chunk_start": 726,
+          "chunk_end": 851,
+          "sentence_document_start": 726,
+          "sentence_document_end": 851,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_2ae1f406f4e865ef9563",
+          "document_start": 851,
+          "document_end": 886,
+          "text": "直到阵面上活动边数目减少到零，计算区域的非结构化网格划分过程才能结束。",
+          "section_id": "section_a21ef50e1574",
+          "start": 851,
+          "end": 886,
+          "chunk_start": 851,
+          "chunk_end": 886,
+          "sentence_document_start": 851,
+          "sentence_document_end": 886,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_68604c33ab959f71a91a",
+          "document_start": 886,
+          "document_end": 910,
+          "text": "该方法生成的网格质量较好，对边界的离散也很理想。",
+          "section_id": "section_a21ef50e1574",
+          "start": 886,
+          "end": 910,
+          "chunk_start": 886,
+          "chunk_end": 910,
+          "sentence_document_start": 886,
+          "sentence_document_end": 910,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_b14ac53f6a54294be51f",
+          "document_start": 910,
+          "document_end": 972,
+          "text": "非结构网格的优越性使其成为近年来研究的热点，被广泛应用于求解Euler方程和N-S方程、大范围瞬态流动、高速黏性流动等方面。",
+          "section_id": "section_a21ef50e1574",
+          "start": 910,
+          "end": 972,
+          "chunk_start": 910,
+          "chunk_end": 972,
+          "sentence_document_start": 910,
+          "sentence_document_end": 972,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_7a6ec23ad639cc7c49f5",
+          "document_start": 974,
+          "document_end": 994,
+          "text": "[Source paragraph 4;",
+          "section_id": "section_a21ef50e1574",
+          "start": 974,
+          "end": 994,
+          "chunk_start": 974,
+          "chunk_end": 994,
+          "sentence_document_start": 974,
+          "sentence_document_end": 994,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_5e2075824e15197757df",
+          "document_start": 995,
+          "document_end": 1020,
+          "text": "# 四、基于有限体积法流体力学方程离散及求解方法;",
+          "section_id": "section_a21ef50e1574",
+          "start": 995,
+          "end": 1020,
+          "chunk_start": 995,
+          "chunk_end": 1020,
+          "sentence_document_start": 995,
+          "sentence_document_end": 1020,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_7a65dbd8463c9d6b5b5d",
+          "document_start": 1021,
+          "document_end": 1053,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_a21ef50e1574",
+          "start": 1021,
+          "end": 1053,
+          "chunk_start": 1021,
+          "chunk_end": 1053,
+          "sentence_document_start": 1021,
+          "sentence_document_end": 1053,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_ffa5545bbe5290cbe8d0",
+          "document_start": 1055,
+          "document_end": 1136,
+          "text": "有限体积法（FVM），又称控制体法，是将计算区域划分为网格，并使每个网格点周围有一个互不重复的控制体积，将待解的微分方程对每个控制体积积分，从而得到一组离散方程。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1055,
+          "end": 1136,
+          "chunk_start": 1055,
+          "chunk_end": 1136,
+          "sentence_document_start": 1055,
+          "sentence_document_end": 1136,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_4e65bb45af12e1ac5e30",
+          "document_start": 1136,
+          "document_end": 1152,
+          "text": "其中未知数是网格节点上的因变量。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1136,
+          "end": 1152,
+          "chunk_start": 1136,
+          "chunk_end": 1152,
+          "sentence_document_start": 1136,
+          "sentence_document_end": 1152,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_01e55284f308a8cf65b9",
+          "document_start": 1152,
+          "document_end": 1172,
+          "text": "子域法加离散，就是有限体积法的基本思路。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1152,
+          "end": 1172,
+          "chunk_start": 1152,
+          "chunk_end": 1172,
+          "sentence_document_start": 1152,
+          "sentence_document_end": 1172,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_e569e53e27b4777ab47a",
+          "document_start": 1172,
+          "document_end": 1232,
+          "text": "离散方程的物理意义就是因变量在有限大小的控制体积中的守恒原理，如同微分方程表示因变量在无限小的控制体积中的守恒原理一样。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1172,
+          "end": 1232,
+          "chunk_start": 1172,
+          "chunk_end": 1232,
+          "sentence_document_start": 1172,
+          "sentence_document_end": 1232,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_12a74d3732c73356189a",
+          "document_start": 1232,
+          "document_end": 1286,
+          "text": "有限体积法得出的离散方程，要求因变量的积分守恒对任意一组控制体积都得到满足，对整个计算区域，自然也得到满足。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1232,
+          "end": 1286,
+          "chunk_start": 1232,
+          "chunk_end": 1286,
+          "sentence_document_start": 1232,
+          "sentence_document_end": 1286,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_72cc28169ea42a072648",
+          "document_start": 1286,
+          "document_end": 1331,
+          "text": "有限体积法适于流体计算，可以应用于不规则网格，即使在粗网格情况下，也显示出准确的积分守恒。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1286,
+          "end": 1331,
+          "chunk_start": 1286,
+          "chunk_end": 1331,
+          "sentence_document_start": 1286,
+          "sentence_document_end": 1331,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_9e023f4fd567fee6a315",
+          "document_start": 1331,
+          "document_end": 1381,
+          "text": "有限体积法是将非线性偏微分方程转变为网格单元上的线性代数方程，然后通过求解线性方程组，得出流场的解。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1331,
+          "end": 1381,
+          "chunk_start": 1331,
+          "chunk_end": 1381,
+          "sentence_document_start": 1331,
+          "sentence_document_end": 1381,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_02b1698a335da78e4b99",
+          "document_start": 1381,
+          "document_end": 1406,
+          "text": "网格划分可以将连续的空间划分为相互连接的网格单元。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1381,
+          "end": 1406,
+          "chunk_start": 1381,
+          "chunk_end": 1406,
+          "sentence_document_start": 1381,
+          "sentence_document_end": 1406,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_0691427e7509070012dd",
+          "document_start": 1406,
+          "document_end": 1444,
+          "text": "每个网格单元由位于几何中心的控制点和将网格单元包围起来的网格面（或线）构成。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1406,
+          "end": 1444,
+          "chunk_start": 1406,
+          "chunk_end": 1444,
+          "sentence_document_start": 1406,
+          "sentence_document_end": 1444,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_7d6430c63902d8603fcd",
+          "document_start": 1444,
+          "document_end": 1477,
+          "text": "所谓求解流场的控制方程，最终目的就是获得所有控制点上流场变量的值。",
+          "section_id": "section_a21ef50e1574",
+          "start": 1444,
+          "end": 1477,
+          "chunk_start": 1444,
+          "chunk_end": 1477,
+          "sentence_document_start": 1444,
+          "sentence_document_end": 1477,
+          "sentence_complete": true
+        }
+      ],
+      "document_start": 0,
+      "document_end": 1479,
+      "offset_basis": "canonical_document",
+      "section_ancestry": [
+        {
+          "section_id": "section_a21ef50e1574",
+          "title": "Descriptive concept source excerpt",
+          "breadcrumb_path": "Descriptive concept source excerpt",
+          "parent_section_id": null,
+          "header_level": 1,
+          "start": 0,
+          "end": 1479,
+          "body_start": 37,
+          "section_order": 1
+        }
+      ],
+      "metadata": {
+        "Header-1": "Descriptive concept source excerpt"
+      },
+      "splitter_version": "hierarchy_v3_chunk12000_overlap0",
+      "prev_chunk_id": null,
+      "next_chunk_id": null,
+      "core_start": 0,
+      "core_end": 1479
+    }
+  ],
+  "structure_hash": "dd0399dd698ba4013c35ae975b71e708a9168383eaefed1e60e3c682c4fa8462",
+  "splitter_version": "hierarchy_v3_chunk12000_overlap0",
+  "index_content_hash": "6b1fcd5c618d40b0ecc5a9451db5b70ca82bb75c0c2b02e42e33df1635fdadbe"
+}

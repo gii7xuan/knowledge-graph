@@ -7,9 +7,47 @@ from uuid import uuid4
 from review_agent.contracts import sha256_json
 
 
+class StudyBudget:
+    """Global budget limits; request uncertainty is tracked for human handoff."""
+    def __init__(self, limits):
+        self.limits=dict(limits);self.calls=0;self.known_tokens=0;self.blocked_reason=None
+        self.started=time.monotonic();self.lock=threading.Lock()
+        self.unknown_requests={}
+
+    def begin(self):
+        with self.lock:
+            reason=self.blocked_reason
+            if self.calls>=self.limits['llm_calls']:reason=reason or 'study_call_budget_exhausted'
+            if self.known_tokens>=self.limits['known_tokens']:reason=reason or 'study_token_stop_reached'
+            if time.monotonic()-self.started>=self.limits['seconds']:reason=reason or 'study_timeout'
+            if reason:
+                self.blocked_reason=reason
+                raise RuntimeError(reason)
+            self.calls+=1
+
+    def finish(self, record):
+        with self.lock:
+            self.known_tokens+=sum(record.get(k) or 0 for k in ('input_tokens','output_tokens'))
+            if record['status']=='outcome_unknown':self.unknown_requests[record['request_id']]=tuple(record.get('case_ids',[]))
+            else:self.unknown_requests.pop(record['request_id'],None)
+
+    def block_unknown(self,record):
+        # Keep the request quarantined by its durable identity; do not stop
+        # other candidates or methods because one request has no final result.
+        with self.lock:self.unknown_requests[record['request_id']]=tuple(record.get('case_ids',[]))
+
+    def snapshot(self):
+        with self.lock:
+            return {'limits':dict(self.limits),'physical_calls':self.calls,'known_tokens':self.known_tokens,
+                    'outcome_unknown_requests':len(self.unknown_requests),
+                    'human_review_case_ids':sorted({cid for ids in self.unknown_requests.values() for cid in ids}),
+                    'blocked_reason':self.blocked_reason,'token_limit_kind':'known-usage dispatch stop; in-flight usage may exceed it'}
+
+
 class RequestMeter:
-    def __init__(self,path,limits):
+    def __init__(self,path,limits,study=None):
         self.path=path; self.limits=limits; self.records={}; self.lock=threading.Lock(); self.usage={}
+        self.study=study
 
     def write(self,record):
         with self.path.open('a',encoding='utf-8') as stream:
@@ -25,6 +63,7 @@ class RequestMeter:
             if any(a['calls']>=self.limits['llm_calls'] or a['tokens']>=self.limits['tokens']
                    or now-a['started']>=self.limits['seconds'] for a in accounts):
                 raise RuntimeError('shared experiment case budget exhausted')
+            if self.study:self.study.begin()
             for account in accounts: account['calls']+=1
             record={'request_id':uuid4().hex,'role':role,'case_ids':list(case_ids),'model_id':client.model_id,
                 'model_family':client.model_family,'payload_hash':sha256_json(payload),
@@ -56,12 +95,15 @@ class RequestMeter:
             if error is not None: record['error_type']=type(error).__name__
             for cid in record['case_ids']:
                 self.usage[cid]['tokens']+=sum(record.get(k) or 0 for k in ('input_tokens','output_tokens'))
+            if self.study:self.study.finish(record)
             self.write(record)
 
     def snapshot(self):
         with self.lock:
             for record in self.records.values():
-                if record['status']=='started': record['status']='outcome_unknown';self.write(record)
+                if record['status']=='started':
+                    record['status']='outcome_unknown';self.write(record)
+                    if self.study:self.study.block_unknown(record)
             return deepcopy(list(self.records.values()))
 
 

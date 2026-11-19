@@ -20,12 +20,18 @@ def report(repository,*,candidate_id=None):
                     data=json.loads(record[0]);chosen=data.get('selected_attempt_id')or data.get('attempt_id')
                     if chosen==row['attempt_id'] and data.get('action_executed'):action_applied=True
             request_id=row['provider_request_id']or receipt.get('gateway_request_id')or receipt.get('response_id')
+            progress={}
+            if meta.get('task_type')=='source_candidate_extraction_v2':
+                checkpoint=connection.execute('SELECT detail_json FROM request_attempt_events WHERE attempt_id=? AND event=? ORDER BY at DESC LIMIT 1',
+                    (row['attempt_id'],'visible_extraction_checkpoint')).fetchone()
+                if checkpoint:progress=json.loads(checkpoint[0])
             result.append({'attempt_id':row['attempt_id'],'request_key':row['request_key'],'task_type':meta.get('task_type'),
                 'candidate_id':identity,'candidate_revision':binding.get('object_revision'),
                 'current_revision':current.get('revision') if current else None,
                 'started_at_beijing':datetime.fromtimestamp(row['started_at'],timezone(timedelta(hours=8))).isoformat(),
                 'state':row['state'],'http_status':receipt.get('http_status'),'error_code':receipt.get('error_code'),
-                'provider_request_id':request_id,'client_request_id':(receipt.get('transport_metrics')or{}).get('client_request_id'),
+                'provider_request_id':request_id,'client_request_id':(receipt.get('transport_metrics')or{}).get('client_request_id') or
+                    (progress.get('transport_metrics')or{}).get('client_request_id'),
                 'usage_known':row['usage_state']=='known','semantic_dependency':not planner,
                 'planner_action_applied':action_applied if planner else None,
                 'receipt_available':bool(receipt.get('response_status')=='ok'),
@@ -33,6 +39,9 @@ def report(repository,*,candidate_id=None):
                 'next_step':'query_provider_by_request_id' if request_id else 'provider_logs_required_by_time_model_and_input_hash',
                 'input_hash':proposal.get('input_hash')or proposal.get('proposal_digest'),
                 'model_id':binding.get('model_id'),'late_action_execution_allowed':False})
+            if progress:result[-1].update(visible_checkpoint_available=True,
+                last_progress_visible_characters=progress.get('visible_characters'),
+                progress_response_id=progress.get('response_id'),progress_finish_reason=progress.get('finish_reason'))
     return {'version':'request_reconciliation_v1','model_calls':0,'requests':result,
         'execution_unknown_count':len(result),'usage_unknown_count':sum(not r['usage_known'] for r in result),
         'original_request_states_changed':False,'unknown_does_not_mean_not_executed':True}

@@ -1,0 +1,115 @@
+[
+  {
+    "request_id": "609b39d84d954f6584c43519dc0b0ac6",
+    "role": "candidate_extraction",
+    "case_ids": [
+      "book_012357c27dcf95cb_formal_extract_001"
+    ],
+    "model_id": "deepseek-flash",
+    "model_family": "deepseek",
+    "payload_hash": "30fc9295ba231b0f9a4bd4a0104d17e08a311b6fc9a0dccf80da3c9dafef33c6",
+    "provider_endpoint_hash": "146dfd3a1cc41399419742ea11b6564accec6249bd2d758fff680b61caf3881e",
+    "context_limit": null,
+    "capability_verification": "not_run",
+    "retry": false,
+    "status": "completed",
+    "generation_settings": {
+      "temperature": 0.0,
+      "max_tokens": 9000
+    },
+    "input_tokens": 9312,
+    "output_tokens": 9000,
+    "latency_ms": 58172,
+    "late_response": false,
+    "response_reconciled": true,
+    "returned_model_id": "deepseek-flash",
+    "response_id": "ffa9aff9-85da-4418-906f-f674308ebfe6"
+  },
+  {
+    "request_id": "80a57ab6cfdc485fbd565c2fc9e11c19",
+    "role": "candidate_extraction",
+    "case_ids": [
+      "book_56ac85d7aef33db5_formal_extract_001"
+    ],
+    "model_id": "deepseek-flash",
+    "model_family": "deepseek",
+    "payload_hash": "367775aef9e9a75c4ee8e8dc4f364fdf973a10773268b534d904a8ed3cc32980",
+    "provider_endpoint_hash": "146dfd3a1cc41399419742ea11b6564accec6249bd2d758fff680b61caf3881e",
+    "context_limit": null,
+    "capability_verification": "not_run",
+    "retry": false,
+    "status": "outcome_unknown",
+    "generation_settings": {
+      "temperature": 0.0,
+      "max_tokens": 9000
+    },
+    "input_tokens": null,
+    "output_tokens": null,
+    "latency_ms": 180250,
+    "late_response": true,
+    "response_reconciled": true,
+    "http_status": null,
+    "retryable": false,
+    "pause_job": false,
+    "outcome_unknown": true,
+    "error_code": "UNKNOWN_REQUEST_OUTCOME",
+    "transport_metrics": {
+      "trace": [
+        {
+          "event": "http11.send_request_headers.started",
+          "elapsed_ms": 3.961
+        },
+        {
+          "event": "http11.send_request_headers.complete",
+          "elapsed_ms": 4.505
+        },
+        {
+          "event": "http11.send_request_body.started",
+          "elapsed_ms": 4.526
+        },
+        {
+          "event": "http11.send_request_body.complete",
+          "elapsed_ms": 5.264
+        },
+        {
+          "event": "http11.receive_response_headers.started",
+          "elapsed_ms": 5.287
+        },
+        {
+          "event": "http11.receive_response_headers.complete",
+          "elapsed_ms": 216.324
+        },
+        {
+          "event": "http11.receive_response_body.started",
+          "elapsed_ms": 217.11
+        },
+        {
+          "event": "http11.receive_response_body.failed",
+          "elapsed_ms": 180234.895
+        },
+        {
+          "event": "http11.response_closed.started",
+          "elapsed_ms": 180234.95
+        },
+        {
+          "event": "http11.response_closed.complete",
+          "elapsed_ms": 180251.035
+        }
+      ],
+      "request_body_bytes": 26581,
+      "response_headers_ms": 216.914,
+      "http_status": 200,
+      "response_headers": {
+        "server": "openresty",
+        "content-type": "application/json",
+        "content-encoding": "gzip",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "date": "Thu, 19 Nov 2026 01:43:53 GMT"
+      },
+      "gateway_request_id": null,
+      "transport_elapsed_ms": 180251.406
+    },
+    "error_type": "APITimeoutError"
+  }
+]

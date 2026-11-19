@@ -1,0 +1,481 @@
+{
+  "population": 40,
+  "excluded_unknown_candidates": 2,
+  "comparison_cohort": 38,
+  "label_source": "gpt_preannotation",
+  "human_gold_count": 0,
+  "binary_admission_truth_count": 0,
+  "dimension_interpretation": "agreement with GPT reference, not independent human accuracy",
+  "operational_interpretation": "research recommendations, not production admissions; denominator is all 40 planned candidates",
+  "groups": {
+    "b0_all_keep": {
+      "outcome_counts": {
+        "automatic_accept": 38,
+        "skipped_unknown": 2
+      },
+      "dimensions": {
+        "source_support": {
+          "reference_agreement": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 0,
+            "denominator": 36,
+            "value": 0.0
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 0,
+            "denominator": 36,
+            "value": 0.0
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 36
+        },
+        "expression_status": {
+          "reference_agreement": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 0,
+            "denominator": 36,
+            "value": 0.0
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 0,
+            "denominator": 36,
+            "value": 0.0
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 36
+        }
+      },
+      "operational": {
+        "automatic_decision_coverage": {
+          "numerator": 38,
+          "denominator": 40,
+          "value": 0.95
+        },
+        "manual_recommendation_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "technical_incompletion_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "unknown_candidate_exclusion_rate": {
+          "numerator": 2,
+          "denominator": 40,
+          "value": 0.05
+        },
+        "not_started_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        }
+      },
+      "unavailable_quality_metrics": {
+        "admission_precision": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "correct_candidate_retention": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "false_acceptance_rate": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        }
+      },
+      "deployment_usage": {
+        "provider_attempts": 0,
+        "known_tokens": 0,
+        "unknown_usage_requests": 0
+      }
+    },
+    "b1_single": {
+      "outcome_counts": {
+        "manual_recommendation": 35,
+        "technical_incomplete": 3,
+        "skipped_unknown": 2
+      },
+      "dimensions": {
+        "source_support": {
+          "reference_agreement": {
+            "numerator": 22,
+            "denominator": 33,
+            "value": 0.6666666666666666
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 33,
+            "denominator": 36,
+            "value": 0.9166666666666666
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 22,
+            "denominator": 36,
+            "value": 0.6111111111111112
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 3
+        },
+        "expression_status": {
+          "reference_agreement": {
+            "numerator": 16,
+            "denominator": 23,
+            "value": 0.6956521739130435
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 23,
+            "denominator": 36,
+            "value": 0.6388888888888888
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 16,
+            "denominator": 36,
+            "value": 0.4444444444444444
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 13
+        }
+      },
+      "operational": {
+        "automatic_decision_coverage": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "manual_recommendation_rate": {
+          "numerator": 35,
+          "denominator": 40,
+          "value": 0.875
+        },
+        "technical_incompletion_rate": {
+          "numerator": 3,
+          "denominator": 40,
+          "value": 0.075
+        },
+        "unknown_candidate_exclusion_rate": {
+          "numerator": 2,
+          "denominator": 40,
+          "value": 0.05
+        },
+        "not_started_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        }
+      },
+      "unavailable_quality_metrics": {
+        "admission_precision": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "correct_candidate_retention": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "false_acceptance_rate": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        }
+      },
+      "deployment_usage": {
+        "provider_attempts": 40,
+        "known_tokens": 816440,
+        "unknown_usage_requests": 0,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    },
+    "b2_majority": {
+      "outcome_counts": {
+        "manual_recommendation": 35,
+        "technical_incomplete": 3,
+        "skipped_unknown": 2
+      },
+      "dimensions": {
+        "source_support": {
+          "reference_agreement": {
+            "numerator": 27,
+            "denominator": 35,
+            "value": 0.7714285714285715
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 35,
+            "denominator": 36,
+            "value": 0.9722222222222222
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 27,
+            "denominator": 36,
+            "value": 0.75
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 1
+        },
+        "expression_status": {
+          "reference_agreement": {
+            "numerator": 21,
+            "denominator": 28,
+            "value": 0.75
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 28,
+            "denominator": 36,
+            "value": 0.7777777777777778
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 21,
+            "denominator": 36,
+            "value": 0.5833333333333334
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 8
+        }
+      },
+      "operational": {
+        "automatic_decision_coverage": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "manual_recommendation_rate": {
+          "numerator": 35,
+          "denominator": 40,
+          "value": 0.875
+        },
+        "technical_incompletion_rate": {
+          "numerator": 3,
+          "denominator": 40,
+          "value": 0.075
+        },
+        "unknown_candidate_exclusion_rate": {
+          "numerator": 2,
+          "denominator": 40,
+          "value": 0.05
+        },
+        "not_started_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        }
+      },
+      "unavailable_quality_metrics": {
+        "admission_precision": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "correct_candidate_retention": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "false_acceptance_rate": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        }
+      },
+      "deployment_usage": {
+        "provider_attempts": 120,
+        "known_tokens": 2475758,
+        "unknown_usage_requests": 2,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    },
+    "b3_fixed_workflow": {
+      "outcome_counts": {
+        "technical_incomplete": 15,
+        "manual_recommendation": 23,
+        "skipped_unknown": 2
+      },
+      "dimensions": {
+        "source_support": {
+          "reference_agreement": {
+            "numerator": 16,
+            "denominator": 23,
+            "value": 0.6956521739130435
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 23,
+            "denominator": 36,
+            "value": 0.6388888888888888
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 16,
+            "denominator": 36,
+            "value": 0.4444444444444444
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 13
+        },
+        "expression_status": {
+          "reference_agreement": {
+            "numerator": 21,
+            "denominator": 27,
+            "value": 0.7777777777777778
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 27,
+            "denominator": 36,
+            "value": 0.75
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 21,
+            "denominator": 36,
+            "value": 0.5833333333333334
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 9
+        }
+      },
+      "operational": {
+        "automatic_decision_coverage": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "manual_recommendation_rate": {
+          "numerator": 23,
+          "denominator": 40,
+          "value": 0.575
+        },
+        "technical_incompletion_rate": {
+          "numerator": 15,
+          "denominator": 40,
+          "value": 0.375
+        },
+        "unknown_candidate_exclusion_rate": {
+          "numerator": 2,
+          "denominator": 40,
+          "value": 0.05
+        },
+        "not_started_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        }
+      },
+      "unavailable_quality_metrics": {
+        "admission_precision": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "correct_candidate_retention": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "false_acceptance_rate": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        }
+      },
+      "deployment_usage": {
+        "provider_attempts": 163,
+        "known_tokens": 2978785,
+        "unknown_usage_requests": 3,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    },
+    "agent": {
+      "outcome_counts": {
+        "manual_recommendation": 27,
+        "technical_incomplete": 8,
+        "automatic_reject": 3,
+        "skipped_unknown": 2
+      },
+      "dimensions": {
+        "source_support": {
+          "reference_agreement": {
+            "numerator": 16,
+            "denominator": 23,
+            "value": 0.6956521739130435
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 23,
+            "denominator": 36,
+            "value": 0.6388888888888888
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 16,
+            "denominator": 36,
+            "value": 0.4444444444444444
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 13
+        },
+        "expression_status": {
+          "reference_agreement": {
+            "numerator": 21,
+            "denominator": 27,
+            "value": 0.7777777777777778
+          },
+          "judgment_coverage_on_known_reference": {
+            "numerator": 27,
+            "denominator": 36,
+            "value": 0.75
+          },
+          "matching_coverage_on_known_reference": {
+            "numerator": 21,
+            "denominator": 36,
+            "value": 0.5833333333333334
+          },
+          "known_reference_count": 36,
+          "unresolved_on_known_reference": 9
+        }
+      },
+      "operational": {
+        "automatic_decision_coverage": {
+          "numerator": 3,
+          "denominator": 40,
+          "value": 0.075
+        },
+        "manual_recommendation_rate": {
+          "numerator": 27,
+          "denominator": 40,
+          "value": 0.675
+        },
+        "technical_incompletion_rate": {
+          "numerator": 8,
+          "denominator": 40,
+          "value": 0.2
+        },
+        "unknown_candidate_exclusion_rate": {
+          "numerator": 2,
+          "denominator": 40,
+          "value": 0.05
+        },
+        "not_started_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        }
+      },
+      "unavailable_quality_metrics": {
+        "admission_precision": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "correct_candidate_retention": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        },
+        "false_acceptance_rate": {
+          "value": null,
+          "reason": "No scored binary admissible/inadmissible reference; admission_preference is not admission truth."
+        }
+      },
+      "deployment_usage": {
+        "provider_attempts": 182,
+        "known_tokens": 3724633,
+        "unknown_usage_requests": 3,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    }
+  }
+}

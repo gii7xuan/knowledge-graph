@@ -126,6 +126,8 @@ class OpenAICompatibleClient:
                 raise
 
     def _complete_json(self, payload, *, system_prompt, started, diagnostics, **kwargs):
+        if kwargs.get('on_progress') is not None and not callable(kwargs['on_progress']):
+            raise ValueError('on_progress must be callable')
         user_suffix=kwargs.get('user_suffix','')
         if not isinstance(user_suffix,str):raise ValueError('user_suffix must be text')
         user_content=json.dumps(payload,ensure_ascii=False,**({'separators':(',',':')} if kwargs.get('compact_json') else {}))+(('\n\n'+user_suffix) if user_suffix else '')
@@ -154,6 +156,8 @@ class OpenAICompatibleClient:
             parts=[];usage=None;finish=None;response_id=None;model=None
             first_chunk=None;first_content=None;terminal=None;last_chunk=None;max_gap=0;chunks=0;reasoning_chars=0
             delta_fields=set();non_content_string_chars={}
+            on_progress=kwargs.get('on_progress')
+            progress_at=None;progress_chars=0;progress_content_seen=False
             def snapshot():
                 return LLMResponse(''.join(parts),latency_ms=int((time.monotonic()-started)*1000),
                     input_tokens=getattr(usage,'prompt_tokens',None),output_tokens=getattr(usage,'completion_tokens',None),
@@ -190,7 +194,14 @@ class OpenAICompatibleClient:
                             if isinstance(reasoning,str):reasoning_chars+=len(reasoning)
                         finish=getattr(choice,'finish_reason',None) or finish
                         if finish is not None and terminal is None:terminal=arrived
+                    visible_chars=sum(map(len,parts))
+                    if on_progress and (progress_at is None or visible_chars and not progress_content_seen or
+                            arrived-progress_at>=1000 or visible_chars-progress_chars>=2048 or finish is not None):
+                        on_progress(snapshot())
+                        progress_at=arrived;progress_chars=visible_chars
+                        progress_content_seen=progress_content_seen or bool(visible_chars)
                 if finish is None:raise ConnectionError('stream ended without a terminal completion; provider outcome unknown')
+                if on_progress:on_progress(snapshot())
             except Exception as exc:
                 exc.llm_response=snapshot()
                 raise

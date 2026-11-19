@@ -1,0 +1,75 @@
+test_shared_ballots_survive_both_branches_without_duplicate_initial_calls (tests.test_gpt_five_group.FiveGroupTests) ... ERROR
+test_unknown_and_token_stop_prevent_next_dispatch (tests.test_gpt_five_group.FiveGroupTests) ... ERROR
+test_agent_and_fixed_workflow_share_server_enforced_action_limits (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_all_keep_executes_with_zero_requests_even_when_ontology_has_a_gap (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_disjoint_excerpts_of_one_book_cannot_cross_development_and_test (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_experiment_study_fence_preserves_both_groups_and_marks_failed_ballot (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_extraction_batches_cross_small_sections_without_changing_paragraphs (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_fixed_workflow_is_explicit_and_not_a_planner_failure_fallback (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_fixed_workflow_runs_real_shared_runtime_without_planner_requests (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_frozen_single_voter_is_not_silently_replaced_by_first_slot (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_metrics_keep_unknown_truth_and_failed_predictions_in_the_population (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_missing_and_abstaining_seats_do_not_turn_one_vote_into_a_majority (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_preparation_lexical_scope_preserves_only_general_descriptions (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_study_request_cap_is_shared_by_different_method_meters (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_unknown_request_in_one_method_blocks_dispatch_in_another (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_workflow_uses_ordered_supplements_then_one_fixed_dispute (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+
+======================================================================
+ERROR: test_shared_ballots_survive_both_branches_without_duplicate_initial_calls (tests.test_gpt_five_group.FiveGroupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_gpt_five_group.py", line 51, in test_shared_ballots_survive_both_branches_without_duplicate_initial_calls
+    result=run(folder,services=factory)
+  File "D:\knowledge-huopao\evaluation\gpt_five_group.py", line 229, in run
+    repository.register_v4_run({'run_id':c['run_id'],'mode':'shadow','document_path':sample['document_index_path'],
+  File "D:\knowledge-huopao\review_agent\repository.py", line 494, in register_v4_run
+    raise ValidationError("candidate v4 pool binding mismatch")
+review_agent.repository.ValidationError: candidate v4 pool binding mismatch
+
+======================================================================
+ERROR: test_unknown_and_token_stop_prevent_next_dispatch (tests.test_gpt_five_group.FiveGroupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 618, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'D:\\knowledge-huopao\\outputs\\weighting_test_temp\\tmpa3fc192b31fd419883f2c9977af0b93c\\ledger.sqlite3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 852, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'D:\\knowledge-huopao\\outputs\\weighting_test_temp\\tmpa3fc192b31fd419883f2c9977af0b93c\\ledger.sqlite3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_gpt_five_group.py", line 73, in test_unknown_and_token_stop_prevent_next_dispatch
+    with tempfile.TemporaryDirectory() as temp:
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 878, in __exit__
+    self.cleanup()
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 882, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 620, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 855, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "D:\miniconda3\envs\knowledge\lib\tempfile.py", line 864, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 750, in rmtree
+    return _rmtree_unsafe(path, onerror)
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 601, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "D:\miniconda3\envs\knowledge\lib\shutil.py", line 598, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+NotADirectoryError: [WinError 267] 目录名称无效。: 'D:\\knowledge-huopao\\outputs\\weighting_test_temp\\tmpa3fc192b31fd419883f2c9977af0b93c\\ledger.sqlite3'
+
+----------------------------------------------------------------------
+Ran 16 tests in 14.049s
+
+FAILED (errors=2)

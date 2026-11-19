@@ -1,0 +1,1066 @@
+{
+  "schema_version": "document_index_v3",
+  "document_id": "book_012357c27dcf95cb_stream_extract_008",
+  "document_version": "672ca7879f717e25bb65dd4461da928c0dc8304b412a2eaf948660d551485bc4",
+  "source_snapshot": {
+    "document_id": "book_012357c27dcf95cb_stream_extract_008",
+    "document_version": "672ca7879f717e25bb65dd4461da928c0dc8304b412a2eaf948660d551485bc4",
+    "raw_file_hash": "672ca7879f717e25bb65dd4461da928c0dc8304b412a2eaf948660d551485bc4",
+    "normalizer_version": "canonical_text_v1",
+    "offset_unit": "unicode_code_point",
+    "span_convention": "[start,end)",
+    "pdf_character_mapping": "unavailable",
+    "snapshot_id": "690ed12689bf17175e6d5152da7183fe6588e6a575f51051a4851266bd248235",
+    "raw_text": "# Descriptive concept source excerpt\n\n[Source paragraph 1; # 2.碰撞检测; intervening text may be omitted]\n\n碰撞检测问题广泛存在于计算机辅助设计与制造、工程分析、机器人和自动化、虚拟现实等领域，甚至成为其中的关键问题。在不同的领域中出现了很多碰撞检测算法，很多算法已经应用到实际中。进行碰撞检测的目的是检测模型之间是否发生碰撞，报告发生或即将发生碰撞的部位，动态查询模型之间的距离。在求解系统动力学方程时，求解器将碰撞力并入广义力矩阵中求解。未发生碰撞前，每一次迭代都将预先判定碰撞是否发生，一旦碰撞发生，为了更精确计算碰撞力，求解器动态地将迭代步长调整到比用户设定值小很多的值，并且在这些小步长迭代的过程中仍然继续判断是否有其他接触发生。碰撞检测算法的选择对求解速度及精度有着重要作用。\n\n[Source paragraph 2; # 1）Parasolid几何引擎; intervening text may be omitted]\n\nParasolid 引擎计算碰撞物体相互穿透区域的质心，以此作为作用力施加点，施加大小相等、方向相反的碰撞力。穿透距离及作用力方向的计算有以下两种方法：\n\n[Source paragraph 3; # 3. 碰撞响应; intervening text may be omitted]\n\n碰撞响应一般采用两种碰撞模型，即泊松模型和碰撞函数模型，分别处理两类碰撞：瞬间非持续碰撞和持续碰撞。这两类模型的主要区别在于法向碰撞力的计算，而其碰撞约束方程、碰撞检测和碰撞摩擦力的计算都是相同的。\n\n[Source paragraph 4; # 2）碰撞函数模型; intervening text may be omitted]\n\n碰撞函数模型将碰撞体的变形等效为弹簧-阻尼效应。假设变形只发生在弹性碰撞区域内，碰撞力按照Hertz碰撞理论计算，则碰撞过程的能量损失可由一个与弹簧并联的阻尼器模拟。碰撞函数模型为\n\n[Source paragraph 5; # 2）碰撞函数模型; intervening text may be omitted]\n\n该模型在数学上便于处理，但可以看出在碰撞开始时，会出现非零阻尼力的突变。为了避免这种现象，可通过修正阻尼系数对模型进行修正。定义的阻尼系数为\n\n[Source paragraph 6; # 4. 碰撞动力学的算法; intervening text may be omitted]\n\n摩擦力并入系统动力学方程组的广义力矩阵中，将接触约束方程并入约束代数方程，进行微分-代数方程求解。在进行迭代计算的过程中，为避免发生明显的穿透现象，可根据碰撞检测的判别调整迭代步长。当一个新的碰撞发生时，解算器将会计算碰撞体的瞬时穿透量和穿透速度，根据缩小的迭代时间步长重新计算。\n\n[Source paragraph 7; # 2.2.4 数值求解算法; intervening text may be omitted]\n\n微分-代数方程（Differential-Algebraic Equations，DAEs）问题的求解方法是计算多体系统动力学领域的一个热点问题。根据相对坐标阵和拉格朗日乘子处理技术的不同，微分-代数方程的求解方法可以分为增广法和缩并法。\n\n",
+    "canonical_text": "# Descriptive concept source excerpt\n\n[Source paragraph 1; # 2.碰撞检测; intervening text may be omitted]\n\n碰撞检测问题广泛存在于计算机辅助设计与制造、工程分析、机器人和自动化、虚拟现实等领域，甚至成为其中的关键问题。在不同的领域中出现了很多碰撞检测算法，很多算法已经应用到实际中。进行碰撞检测的目的是检测模型之间是否发生碰撞，报告发生或即将发生碰撞的部位，动态查询模型之间的距离。在求解系统动力学方程时，求解器将碰撞力并入广义力矩阵中求解。未发生碰撞前，每一次迭代都将预先判定碰撞是否发生，一旦碰撞发生，为了更精确计算碰撞力，求解器动态地将迭代步长调整到比用户设定值小很多的值，并且在这些小步长迭代的过程中仍然继续判断是否有其他接触发生。碰撞检测算法的选择对求解速度及精度有着重要作用。\n\n[Source paragraph 2; # 1）Parasolid几何引擎; intervening text may be omitted]\n\nParasolid 引擎计算碰撞物体相互穿透区域的质心，以此作为作用力施加点，施加大小相等、方向相反的碰撞力。穿透距离及作用力方向的计算有以下两种方法：\n\n[Source paragraph 3; # 3. 碰撞响应; intervening text may be omitted]\n\n碰撞响应一般采用两种碰撞模型，即泊松模型和碰撞函数模型，分别处理两类碰撞：瞬间非持续碰撞和持续碰撞。这两类模型的主要区别在于法向碰撞力的计算，而其碰撞约束方程、碰撞检测和碰撞摩擦力的计算都是相同的。\n\n[Source paragraph 4; # 2）碰撞函数模型; intervening text may be omitted]\n\n碰撞函数模型将碰撞体的变形等效为弹簧-阻尼效应。假设变形只发生在弹性碰撞区域内，碰撞力按照Hertz碰撞理论计算，则碰撞过程的能量损失可由一个与弹簧并联的阻尼器模拟。碰撞函数模型为\n\n[Source paragraph 5; # 2）碰撞函数模型; intervening text may be omitted]\n\n该模型在数学上便于处理，但可以看出在碰撞开始时，会出现非零阻尼力的突变。为了避免这种现象，可通过修正阻尼系数对模型进行修正。定义的阻尼系数为\n\n[Source paragraph 6; # 4. 碰撞动力学的算法; intervening text may be omitted]\n\n摩擦力并入系统动力学方程组的广义力矩阵中，将接触约束方程并入约束代数方程，进行微分-代数方程求解。在进行迭代计算的过程中，为避免发生明显的穿透现象，可根据碰撞检测的判别调整迭代步长。当一个新的碰撞发生时，解算器将会计算碰撞体的瞬时穿透量和穿透速度，根据缩小的迭代时间步长重新计算。\n\n[Source paragraph 7; # 2.2.4 数值求解算法; intervening text may be omitted]\n\n微分-代数方程（Differential-Algebraic Equations，DAEs）问题的求解方法是计算多体系统动力学领域的一个热点问题。根据相对坐标阵和拉格朗日乘子处理技术的不同，微分-代数方程的求解方法可以分为增广法和缩并法。\n\n"
+  },
+  "source_sections": [
+    {
+      "section_id": "section_cdcb275c85f0",
+      "title": "正文",
+      "breadcrumb_path": "正文",
+      "parent_section_id": null,
+      "header_level": 0,
+      "start": 0,
+      "end": 0,
+      "body_start": 0,
+      "section_order": 0
+    },
+    {
+      "section_id": "section_34e0470d368b",
+      "title": "Descriptive concept source excerpt",
+      "breadcrumb_path": "Descriptive concept source excerpt",
+      "parent_section_id": null,
+      "header_level": 1,
+      "start": 0,
+      "end": 1416,
+      "body_start": 37,
+      "section_order": 1
+    }
+  ],
+  "sentences": [
+    {
+      "sentence_id": "sentence_75692b5d9c8757ce874b",
+      "document_start": 0,
+      "document_end": 36,
+      "text": "# Descriptive concept source excerpt",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_678e2bb3799e5cff3b3f",
+      "document_start": 38,
+      "document_end": 58,
+      "text": "[Source paragraph 1;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_4189295eadd1aa90d229",
+      "document_start": 59,
+      "document_end": 68,
+      "text": "# 2.碰撞检测;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_2e1278ecac7f1a73e4fd",
+      "document_start": 69,
+      "document_end": 101,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_66e6118a0f1fd0cdaa3d",
+      "document_start": 103,
+      "document_end": 158,
+      "text": "碰撞检测问题广泛存在于计算机辅助设计与制造、工程分析、机器人和自动化、虚拟现实等领域，甚至成为其中的关键问题。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_9e23f4d9790d36f47223",
+      "document_start": 158,
+      "document_end": 190,
+      "text": "在不同的领域中出现了很多碰撞检测算法，很多算法已经应用到实际中。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_47fcb8a764f9f4a799de",
+      "document_start": 190,
+      "document_end": 240,
+      "text": "进行碰撞检测的目的是检测模型之间是否发生碰撞，报告发生或即将发生碰撞的部位，动态查询模型之间的距离。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_33a0dc8dd48353252150",
+      "document_start": 240,
+      "document_end": 270,
+      "text": "在求解系统动力学方程时，求解器将碰撞力并入广义力矩阵中求解。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_40c4c35cd1d745f20696",
+      "document_start": 270,
+      "document_end": 369,
+      "text": "未发生碰撞前，每一次迭代都将预先判定碰撞是否发生，一旦碰撞发生，为了更精确计算碰撞力，求解器动态地将迭代步长调整到比用户设定值小很多的值，并且在这些小步长迭代的过程中仍然继续判断是否有其他接触发生。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_2d3156f8b3a531e4ec6f",
+      "document_start": 369,
+      "document_end": 393,
+      "text": "碰撞检测算法的选择对求解速度及精度有着重要作用。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_1c02cf9d4083093fee65",
+      "document_start": 395,
+      "document_end": 415,
+      "text": "[Source paragraph 2;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_3ea183f726bccc152043",
+      "document_start": 416,
+      "document_end": 434,
+      "text": "# 1）Parasolid几何引擎;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_2b967bd98505bbf69350",
+      "document_start": 435,
+      "document_end": 467,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_cc9830b26aefb46be175",
+      "document_start": 469,
+      "document_end": 524,
+      "text": "Parasolid 引擎计算碰撞物体相互穿透区域的质心，以此作为作用力施加点，施加大小相等、方向相反的碰撞力。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_f9c3ef8546f6e4865a63",
+      "document_start": 524,
+      "document_end": 545,
+      "text": "穿透距离及作用力方向的计算有以下两种方法：",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_b39fde6802932a22fea0",
+      "document_start": 547,
+      "document_end": 567,
+      "text": "[Source paragraph 3;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_40671db3a12044d55dc5",
+      "document_start": 568,
+      "document_end": 572,
+      "text": "# 3.",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_c2e81d3fc1803c61a071",
+      "document_start": 573,
+      "document_end": 578,
+      "text": "碰撞响应;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_2a35db5a3ce901a513e5",
+      "document_start": 579,
+      "document_end": 611,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_000c01278911f9766493",
+      "document_start": 613,
+      "document_end": 663,
+      "text": "碰撞响应一般采用两种碰撞模型，即泊松模型和碰撞函数模型，分别处理两类碰撞：瞬间非持续碰撞和持续碰撞。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_0126e6b94a54dada3c46",
+      "document_start": 663,
+      "document_end": 712,
+      "text": "这两类模型的主要区别在于法向碰撞力的计算，而其碰撞约束方程、碰撞检测和碰撞摩擦力的计算都是相同的。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_b9452100912da0b22caa",
+      "document_start": 714,
+      "document_end": 734,
+      "text": "[Source paragraph 4;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_e09ee4e4262df2af031d",
+      "document_start": 735,
+      "document_end": 746,
+      "text": "# 2）碰撞函数模型;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_3b1305072376ca895c2b",
+      "document_start": 747,
+      "document_end": 779,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_b2792bf166243a8d0e96",
+      "document_start": 781,
+      "document_end": 805,
+      "text": "碰撞函数模型将碰撞体的变形等效为弹簧-阻尼效应。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_4060b0cf1eb61e3a2849",
+      "document_start": 805,
+      "document_end": 864,
+      "text": "假设变形只发生在弹性碰撞区域内，碰撞力按照Hertz碰撞理论计算，则碰撞过程的能量损失可由一个与弹簧并联的阻尼器模拟。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_03678e5c22bd634629ae",
+      "document_start": 864,
+      "document_end": 871,
+      "text": "碰撞函数模型为",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_d80871413a6684ebe872",
+      "document_start": 873,
+      "document_end": 893,
+      "text": "[Source paragraph 5;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_d7631d09d1574adb3b81",
+      "document_start": 894,
+      "document_end": 905,
+      "text": "# 2）碰撞函数模型;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_48c555be5331b250ea09",
+      "document_start": 906,
+      "document_end": 938,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_e6ba7ece575266016c03",
+      "document_start": 940,
+      "document_end": 976,
+      "text": "该模型在数学上便于处理，但可以看出在碰撞开始时，会出现非零阻尼力的突变。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_388f470e0092371af2b5",
+      "document_start": 976,
+      "document_end": 1002,
+      "text": "为了避免这种现象，可通过修正阻尼系数对模型进行修正。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_1300b1cd792dd27472f4",
+      "document_start": 1002,
+      "document_end": 1010,
+      "text": "定义的阻尼系数为",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_9a9aaaa7c4e8b2a7f164",
+      "document_start": 1012,
+      "document_end": 1032,
+      "text": "[Source paragraph 6;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_ec0bd952ceecfe32c031",
+      "document_start": 1033,
+      "document_end": 1037,
+      "text": "# 4.",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_ebd407daa4ad2742e816",
+      "document_start": 1038,
+      "document_end": 1047,
+      "text": "碰撞动力学的算法;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_e5d04c23853b3b067c62",
+      "document_start": 1048,
+      "document_end": 1080,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_1e0503702ce86d3f6978",
+      "document_start": 1082,
+      "document_end": 1131,
+      "text": "摩擦力并入系统动力学方程组的广义力矩阵中，将接触约束方程并入约束代数方程，进行微分-代数方程求解。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_d6ebdd3db6ea71b7748c",
+      "document_start": 1131,
+      "document_end": 1173,
+      "text": "在进行迭代计算的过程中，为避免发生明显的穿透现象，可根据碰撞检测的判别调整迭代步长。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_b244d8e62b09be625049",
+      "document_start": 1173,
+      "document_end": 1222,
+      "text": "当一个新的碰撞发生时，解算器将会计算碰撞体的瞬时穿透量和穿透速度，根据缩小的迭代时间步长重新计算。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_34b00164d7e6733e84ea",
+      "document_start": 1224,
+      "document_end": 1244,
+      "text": "[Source paragraph 7;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_c47d59f0df12ad9e5416",
+      "document_start": 1245,
+      "document_end": 1260,
+      "text": "# 2.2.4 数值求解算法;",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_3d259ec9810c92100e0d",
+      "document_start": 1261,
+      "document_end": 1293,
+      "text": "intervening text may be omitted]",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_fb78dfcfa65465462acf",
+      "document_start": 1295,
+      "document_end": 1368,
+      "text": "微分-代数方程（Differential-Algebraic Equations，DAEs）问题的求解方法是计算多体系统动力学领域的一个热点问题。",
+      "section_id": "section_34e0470d368b"
+    },
+    {
+      "sentence_id": "sentence_5c29c492bbbe82ed969c",
+      "document_start": 1368,
+      "document_end": 1414,
+      "text": "根据相对坐标阵和拉格朗日乘子处理技术的不同，微分-代数方程的求解方法可以分为增广法和缩并法。",
+      "section_id": "section_34e0470d368b"
+    }
+  ],
+  "sections": [
+    {
+      "section_id": "section_34e0470d368b",
+      "document_id": "book_012357c27dcf95cb_stream_extract_008",
+      "document_version": "672ca7879f717e25bb65dd4461da928c0dc8304b412a2eaf948660d551485bc4",
+      "breadcrumb_path": "Descriptive concept source excerpt",
+      "parent_section_id": null,
+      "children_section_ids": [],
+      "section_order": 1,
+      "text_start": 0,
+      "text_end": 1416,
+      "chunk_ids": [
+        "chunk_19ff15b6a194"
+      ],
+      "title": "Descriptive concept source excerpt",
+      "header_level": 1,
+      "start": 0,
+      "end": 1416,
+      "body_start": 37
+    },
+    {
+      "chunk_ids": [],
+      "children_section_ids": [],
+      "section_id": "section_cdcb275c85f0",
+      "title": "正文",
+      "breadcrumb_path": "正文",
+      "parent_section_id": null,
+      "header_level": 0,
+      "start": 0,
+      "end": 0,
+      "body_start": 0,
+      "section_order": 0,
+      "text_start": 0,
+      "text_end": 0
+    }
+  ],
+  "chunks": [
+    {
+      "document_id": "book_012357c27dcf95cb_stream_extract_008",
+      "document_version": "672ca7879f717e25bb65dd4461da928c0dc8304b412a2eaf948660d551485bc4",
+      "chunk_id": "chunk_19ff15b6a194",
+      "section_id": "section_34e0470d368b",
+      "parent_section_id": null,
+      "breadcrumb_path": "Descriptive concept source excerpt",
+      "header_level": 1,
+      "chunk_order": 0,
+      "content": "# Descriptive concept source excerpt\n\n[Source paragraph 1; # 2.碰撞检测; intervening text may be omitted]\n\n碰撞检测问题广泛存在于计算机辅助设计与制造、工程分析、机器人和自动化、虚拟现实等领域，甚至成为其中的关键问题。在不同的领域中出现了很多碰撞检测算法，很多算法已经应用到实际中。进行碰撞检测的目的是检测模型之间是否发生碰撞，报告发生或即将发生碰撞的部位，动态查询模型之间的距离。在求解系统动力学方程时，求解器将碰撞力并入广义力矩阵中求解。未发生碰撞前，每一次迭代都将预先判定碰撞是否发生，一旦碰撞发生，为了更精确计算碰撞力，求解器动态地将迭代步长调整到比用户设定值小很多的值，并且在这些小步长迭代的过程中仍然继续判断是否有其他接触发生。碰撞检测算法的选择对求解速度及精度有着重要作用。\n\n[Source paragraph 2; # 1）Parasolid几何引擎; intervening text may be omitted]\n\nParasolid 引擎计算碰撞物体相互穿透区域的质心，以此作为作用力施加点，施加大小相等、方向相反的碰撞力。穿透距离及作用力方向的计算有以下两种方法：\n\n[Source paragraph 3; # 3. 碰撞响应; intervening text may be omitted]\n\n碰撞响应一般采用两种碰撞模型，即泊松模型和碰撞函数模型，分别处理两类碰撞：瞬间非持续碰撞和持续碰撞。这两类模型的主要区别在于法向碰撞力的计算，而其碰撞约束方程、碰撞检测和碰撞摩擦力的计算都是相同的。\n\n[Source paragraph 4; # 2）碰撞函数模型; intervening text may be omitted]\n\n碰撞函数模型将碰撞体的变形等效为弹簧-阻尼效应。假设变形只发生在弹性碰撞区域内，碰撞力按照Hertz碰撞理论计算，则碰撞过程的能量损失可由一个与弹簧并联的阻尼器模拟。碰撞函数模型为\n\n[Source paragraph 5; # 2）碰撞函数模型; intervening text may be omitted]\n\n该模型在数学上便于处理，但可以看出在碰撞开始时，会出现非零阻尼力的突变。为了避免这种现象，可通过修正阻尼系数对模型进行修正。定义的阻尼系数为\n\n[Source paragraph 6; # 4. 碰撞动力学的算法; intervening text may be omitted]\n\n摩擦力并入系统动力学方程组的广义力矩阵中，将接触约束方程并入约束代数方程，进行微分-代数方程求解。在进行迭代计算的过程中，为避免发生明显的穿透现象，可根据碰撞检测的判别调整迭代步长。当一个新的碰撞发生时，解算器将会计算碰撞体的瞬时穿透量和穿透速度，根据缩小的迭代时间步长重新计算。\n\n[Source paragraph 7; # 2.2.4 数值求解算法; intervening text may be omitted]\n\n微分-代数方程（Differential-Algebraic Equations，DAEs）问题的求解方法是计算多体系统动力学领域的一个热点问题。根据相对坐标阵和拉格朗日乘子处理技术的不同，微分-代数方程的求解方法可以分为增广法和缩并法。\n\n",
+      "sentences": [
+        {
+          "sentence_id": "sentence_75692b5d9c8757ce874b",
+          "document_start": 0,
+          "document_end": 36,
+          "text": "# Descriptive concept source excerpt",
+          "section_id": "section_34e0470d368b",
+          "start": 0,
+          "end": 36,
+          "chunk_start": 0,
+          "chunk_end": 36,
+          "sentence_document_start": 0,
+          "sentence_document_end": 36,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_678e2bb3799e5cff3b3f",
+          "document_start": 38,
+          "document_end": 58,
+          "text": "[Source paragraph 1;",
+          "section_id": "section_34e0470d368b",
+          "start": 38,
+          "end": 58,
+          "chunk_start": 38,
+          "chunk_end": 58,
+          "sentence_document_start": 38,
+          "sentence_document_end": 58,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_4189295eadd1aa90d229",
+          "document_start": 59,
+          "document_end": 68,
+          "text": "# 2.碰撞检测;",
+          "section_id": "section_34e0470d368b",
+          "start": 59,
+          "end": 68,
+          "chunk_start": 59,
+          "chunk_end": 68,
+          "sentence_document_start": 59,
+          "sentence_document_end": 68,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_2e1278ecac7f1a73e4fd",
+          "document_start": 69,
+          "document_end": 101,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 69,
+          "end": 101,
+          "chunk_start": 69,
+          "chunk_end": 101,
+          "sentence_document_start": 69,
+          "sentence_document_end": 101,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_66e6118a0f1fd0cdaa3d",
+          "document_start": 103,
+          "document_end": 158,
+          "text": "碰撞检测问题广泛存在于计算机辅助设计与制造、工程分析、机器人和自动化、虚拟现实等领域，甚至成为其中的关键问题。",
+          "section_id": "section_34e0470d368b",
+          "start": 103,
+          "end": 158,
+          "chunk_start": 103,
+          "chunk_end": 158,
+          "sentence_document_start": 103,
+          "sentence_document_end": 158,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_9e23f4d9790d36f47223",
+          "document_start": 158,
+          "document_end": 190,
+          "text": "在不同的领域中出现了很多碰撞检测算法，很多算法已经应用到实际中。",
+          "section_id": "section_34e0470d368b",
+          "start": 158,
+          "end": 190,
+          "chunk_start": 158,
+          "chunk_end": 190,
+          "sentence_document_start": 158,
+          "sentence_document_end": 190,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_47fcb8a764f9f4a799de",
+          "document_start": 190,
+          "document_end": 240,
+          "text": "进行碰撞检测的目的是检测模型之间是否发生碰撞，报告发生或即将发生碰撞的部位，动态查询模型之间的距离。",
+          "section_id": "section_34e0470d368b",
+          "start": 190,
+          "end": 240,
+          "chunk_start": 190,
+          "chunk_end": 240,
+          "sentence_document_start": 190,
+          "sentence_document_end": 240,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_33a0dc8dd48353252150",
+          "document_start": 240,
+          "document_end": 270,
+          "text": "在求解系统动力学方程时，求解器将碰撞力并入广义力矩阵中求解。",
+          "section_id": "section_34e0470d368b",
+          "start": 240,
+          "end": 270,
+          "chunk_start": 240,
+          "chunk_end": 270,
+          "sentence_document_start": 240,
+          "sentence_document_end": 270,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_40c4c35cd1d745f20696",
+          "document_start": 270,
+          "document_end": 369,
+          "text": "未发生碰撞前，每一次迭代都将预先判定碰撞是否发生，一旦碰撞发生，为了更精确计算碰撞力，求解器动态地将迭代步长调整到比用户设定值小很多的值，并且在这些小步长迭代的过程中仍然继续判断是否有其他接触发生。",
+          "section_id": "section_34e0470d368b",
+          "start": 270,
+          "end": 369,
+          "chunk_start": 270,
+          "chunk_end": 369,
+          "sentence_document_start": 270,
+          "sentence_document_end": 369,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_2d3156f8b3a531e4ec6f",
+          "document_start": 369,
+          "document_end": 393,
+          "text": "碰撞检测算法的选择对求解速度及精度有着重要作用。",
+          "section_id": "section_34e0470d368b",
+          "start": 369,
+          "end": 393,
+          "chunk_start": 369,
+          "chunk_end": 393,
+          "sentence_document_start": 369,
+          "sentence_document_end": 393,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_1c02cf9d4083093fee65",
+          "document_start": 395,
+          "document_end": 415,
+          "text": "[Source paragraph 2;",
+          "section_id": "section_34e0470d368b",
+          "start": 395,
+          "end": 415,
+          "chunk_start": 395,
+          "chunk_end": 415,
+          "sentence_document_start": 395,
+          "sentence_document_end": 415,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_3ea183f726bccc152043",
+          "document_start": 416,
+          "document_end": 434,
+          "text": "# 1）Parasolid几何引擎;",
+          "section_id": "section_34e0470d368b",
+          "start": 416,
+          "end": 434,
+          "chunk_start": 416,
+          "chunk_end": 434,
+          "sentence_document_start": 416,
+          "sentence_document_end": 434,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_2b967bd98505bbf69350",
+          "document_start": 435,
+          "document_end": 467,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 435,
+          "end": 467,
+          "chunk_start": 435,
+          "chunk_end": 467,
+          "sentence_document_start": 435,
+          "sentence_document_end": 467,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_cc9830b26aefb46be175",
+          "document_start": 469,
+          "document_end": 524,
+          "text": "Parasolid 引擎计算碰撞物体相互穿透区域的质心，以此作为作用力施加点，施加大小相等、方向相反的碰撞力。",
+          "section_id": "section_34e0470d368b",
+          "start": 469,
+          "end": 524,
+          "chunk_start": 469,
+          "chunk_end": 524,
+          "sentence_document_start": 469,
+          "sentence_document_end": 524,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_f9c3ef8546f6e4865a63",
+          "document_start": 524,
+          "document_end": 545,
+          "text": "穿透距离及作用力方向的计算有以下两种方法：",
+          "section_id": "section_34e0470d368b",
+          "start": 524,
+          "end": 545,
+          "chunk_start": 524,
+          "chunk_end": 545,
+          "sentence_document_start": 524,
+          "sentence_document_end": 545,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_b39fde6802932a22fea0",
+          "document_start": 547,
+          "document_end": 567,
+          "text": "[Source paragraph 3;",
+          "section_id": "section_34e0470d368b",
+          "start": 547,
+          "end": 567,
+          "chunk_start": 547,
+          "chunk_end": 567,
+          "sentence_document_start": 547,
+          "sentence_document_end": 567,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_40671db3a12044d55dc5",
+          "document_start": 568,
+          "document_end": 572,
+          "text": "# 3.",
+          "section_id": "section_34e0470d368b",
+          "start": 568,
+          "end": 572,
+          "chunk_start": 568,
+          "chunk_end": 572,
+          "sentence_document_start": 568,
+          "sentence_document_end": 572,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_c2e81d3fc1803c61a071",
+          "document_start": 573,
+          "document_end": 578,
+          "text": "碰撞响应;",
+          "section_id": "section_34e0470d368b",
+          "start": 573,
+          "end": 578,
+          "chunk_start": 573,
+          "chunk_end": 578,
+          "sentence_document_start": 573,
+          "sentence_document_end": 578,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_2a35db5a3ce901a513e5",
+          "document_start": 579,
+          "document_end": 611,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 579,
+          "end": 611,
+          "chunk_start": 579,
+          "chunk_end": 611,
+          "sentence_document_start": 579,
+          "sentence_document_end": 611,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_000c01278911f9766493",
+          "document_start": 613,
+          "document_end": 663,
+          "text": "碰撞响应一般采用两种碰撞模型，即泊松模型和碰撞函数模型，分别处理两类碰撞：瞬间非持续碰撞和持续碰撞。",
+          "section_id": "section_34e0470d368b",
+          "start": 613,
+          "end": 663,
+          "chunk_start": 613,
+          "chunk_end": 663,
+          "sentence_document_start": 613,
+          "sentence_document_end": 663,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_0126e6b94a54dada3c46",
+          "document_start": 663,
+          "document_end": 712,
+          "text": "这两类模型的主要区别在于法向碰撞力的计算，而其碰撞约束方程、碰撞检测和碰撞摩擦力的计算都是相同的。",
+          "section_id": "section_34e0470d368b",
+          "start": 663,
+          "end": 712,
+          "chunk_start": 663,
+          "chunk_end": 712,
+          "sentence_document_start": 663,
+          "sentence_document_end": 712,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_b9452100912da0b22caa",
+          "document_start": 714,
+          "document_end": 734,
+          "text": "[Source paragraph 4;",
+          "section_id": "section_34e0470d368b",
+          "start": 714,
+          "end": 734,
+          "chunk_start": 714,
+          "chunk_end": 734,
+          "sentence_document_start": 714,
+          "sentence_document_end": 734,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_e09ee4e4262df2af031d",
+          "document_start": 735,
+          "document_end": 746,
+          "text": "# 2）碰撞函数模型;",
+          "section_id": "section_34e0470d368b",
+          "start": 735,
+          "end": 746,
+          "chunk_start": 735,
+          "chunk_end": 746,
+          "sentence_document_start": 735,
+          "sentence_document_end": 746,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_3b1305072376ca895c2b",
+          "document_start": 747,
+          "document_end": 779,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 747,
+          "end": 779,
+          "chunk_start": 747,
+          "chunk_end": 779,
+          "sentence_document_start": 747,
+          "sentence_document_end": 779,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_b2792bf166243a8d0e96",
+          "document_start": 781,
+          "document_end": 805,
+          "text": "碰撞函数模型将碰撞体的变形等效为弹簧-阻尼效应。",
+          "section_id": "section_34e0470d368b",
+          "start": 781,
+          "end": 805,
+          "chunk_start": 781,
+          "chunk_end": 805,
+          "sentence_document_start": 781,
+          "sentence_document_end": 805,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_4060b0cf1eb61e3a2849",
+          "document_start": 805,
+          "document_end": 864,
+          "text": "假设变形只发生在弹性碰撞区域内，碰撞力按照Hertz碰撞理论计算，则碰撞过程的能量损失可由一个与弹簧并联的阻尼器模拟。",
+          "section_id": "section_34e0470d368b",
+          "start": 805,
+          "end": 864,
+          "chunk_start": 805,
+          "chunk_end": 864,
+          "sentence_document_start": 805,
+          "sentence_document_end": 864,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_03678e5c22bd634629ae",
+          "document_start": 864,
+          "document_end": 871,
+          "text": "碰撞函数模型为",
+          "section_id": "section_34e0470d368b",
+          "start": 864,
+          "end": 871,
+          "chunk_start": 864,
+          "chunk_end": 871,
+          "sentence_document_start": 864,
+          "sentence_document_end": 871,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_d80871413a6684ebe872",
+          "document_start": 873,
+          "document_end": 893,
+          "text": "[Source paragraph 5;",
+          "section_id": "section_34e0470d368b",
+          "start": 873,
+          "end": 893,
+          "chunk_start": 873,
+          "chunk_end": 893,
+          "sentence_document_start": 873,
+          "sentence_document_end": 893,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_d7631d09d1574adb3b81",
+          "document_start": 894,
+          "document_end": 905,
+          "text": "# 2）碰撞函数模型;",
+          "section_id": "section_34e0470d368b",
+          "start": 894,
+          "end": 905,
+          "chunk_start": 894,
+          "chunk_end": 905,
+          "sentence_document_start": 894,
+          "sentence_document_end": 905,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_48c555be5331b250ea09",
+          "document_start": 906,
+          "document_end": 938,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 906,
+          "end": 938,
+          "chunk_start": 906,
+          "chunk_end": 938,
+          "sentence_document_start": 906,
+          "sentence_document_end": 938,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_e6ba7ece575266016c03",
+          "document_start": 940,
+          "document_end": 976,
+          "text": "该模型在数学上便于处理，但可以看出在碰撞开始时，会出现非零阻尼力的突变。",
+          "section_id": "section_34e0470d368b",
+          "start": 940,
+          "end": 976,
+          "chunk_start": 940,
+          "chunk_end": 976,
+          "sentence_document_start": 940,
+          "sentence_document_end": 976,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_388f470e0092371af2b5",
+          "document_start": 976,
+          "document_end": 1002,
+          "text": "为了避免这种现象，可通过修正阻尼系数对模型进行修正。",
+          "section_id": "section_34e0470d368b",
+          "start": 976,
+          "end": 1002,
+          "chunk_start": 976,
+          "chunk_end": 1002,
+          "sentence_document_start": 976,
+          "sentence_document_end": 1002,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_1300b1cd792dd27472f4",
+          "document_start": 1002,
+          "document_end": 1010,
+          "text": "定义的阻尼系数为",
+          "section_id": "section_34e0470d368b",
+          "start": 1002,
+          "end": 1010,
+          "chunk_start": 1002,
+          "chunk_end": 1010,
+          "sentence_document_start": 1002,
+          "sentence_document_end": 1010,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_9a9aaaa7c4e8b2a7f164",
+          "document_start": 1012,
+          "document_end": 1032,
+          "text": "[Source paragraph 6;",
+          "section_id": "section_34e0470d368b",
+          "start": 1012,
+          "end": 1032,
+          "chunk_start": 1012,
+          "chunk_end": 1032,
+          "sentence_document_start": 1012,
+          "sentence_document_end": 1032,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_ec0bd952ceecfe32c031",
+          "document_start": 1033,
+          "document_end": 1037,
+          "text": "# 4.",
+          "section_id": "section_34e0470d368b",
+          "start": 1033,
+          "end": 1037,
+          "chunk_start": 1033,
+          "chunk_end": 1037,
+          "sentence_document_start": 1033,
+          "sentence_document_end": 1037,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_ebd407daa4ad2742e816",
+          "document_start": 1038,
+          "document_end": 1047,
+          "text": "碰撞动力学的算法;",
+          "section_id": "section_34e0470d368b",
+          "start": 1038,
+          "end": 1047,
+          "chunk_start": 1038,
+          "chunk_end": 1047,
+          "sentence_document_start": 1038,
+          "sentence_document_end": 1047,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_e5d04c23853b3b067c62",
+          "document_start": 1048,
+          "document_end": 1080,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 1048,
+          "end": 1080,
+          "chunk_start": 1048,
+          "chunk_end": 1080,
+          "sentence_document_start": 1048,
+          "sentence_document_end": 1080,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_1e0503702ce86d3f6978",
+          "document_start": 1082,
+          "document_end": 1131,
+          "text": "摩擦力并入系统动力学方程组的广义力矩阵中，将接触约束方程并入约束代数方程，进行微分-代数方程求解。",
+          "section_id": "section_34e0470d368b",
+          "start": 1082,
+          "end": 1131,
+          "chunk_start": 1082,
+          "chunk_end": 1131,
+          "sentence_document_start": 1082,
+          "sentence_document_end": 1131,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_d6ebdd3db6ea71b7748c",
+          "document_start": 1131,
+          "document_end": 1173,
+          "text": "在进行迭代计算的过程中，为避免发生明显的穿透现象，可根据碰撞检测的判别调整迭代步长。",
+          "section_id": "section_34e0470d368b",
+          "start": 1131,
+          "end": 1173,
+          "chunk_start": 1131,
+          "chunk_end": 1173,
+          "sentence_document_start": 1131,
+          "sentence_document_end": 1173,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_b244d8e62b09be625049",
+          "document_start": 1173,
+          "document_end": 1222,
+          "text": "当一个新的碰撞发生时，解算器将会计算碰撞体的瞬时穿透量和穿透速度，根据缩小的迭代时间步长重新计算。",
+          "section_id": "section_34e0470d368b",
+          "start": 1173,
+          "end": 1222,
+          "chunk_start": 1173,
+          "chunk_end": 1222,
+          "sentence_document_start": 1173,
+          "sentence_document_end": 1222,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_34b00164d7e6733e84ea",
+          "document_start": 1224,
+          "document_end": 1244,
+          "text": "[Source paragraph 7;",
+          "section_id": "section_34e0470d368b",
+          "start": 1224,
+          "end": 1244,
+          "chunk_start": 1224,
+          "chunk_end": 1244,
+          "sentence_document_start": 1224,
+          "sentence_document_end": 1244,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_c47d59f0df12ad9e5416",
+          "document_start": 1245,
+          "document_end": 1260,
+          "text": "# 2.2.4 数值求解算法;",
+          "section_id": "section_34e0470d368b",
+          "start": 1245,
+          "end": 1260,
+          "chunk_start": 1245,
+          "chunk_end": 1260,
+          "sentence_document_start": 1245,
+          "sentence_document_end": 1260,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_3d259ec9810c92100e0d",
+          "document_start": 1261,
+          "document_end": 1293,
+          "text": "intervening text may be omitted]",
+          "section_id": "section_34e0470d368b",
+          "start": 1261,
+          "end": 1293,
+          "chunk_start": 1261,
+          "chunk_end": 1293,
+          "sentence_document_start": 1261,
+          "sentence_document_end": 1293,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_fb78dfcfa65465462acf",
+          "document_start": 1295,
+          "document_end": 1368,
+          "text": "微分-代数方程（Differential-Algebraic Equations，DAEs）问题的求解方法是计算多体系统动力学领域的一个热点问题。",
+          "section_id": "section_34e0470d368b",
+          "start": 1295,
+          "end": 1368,
+          "chunk_start": 1295,
+          "chunk_end": 1368,
+          "sentence_document_start": 1295,
+          "sentence_document_end": 1368,
+          "sentence_complete": true
+        },
+        {
+          "sentence_id": "sentence_5c29c492bbbe82ed969c",
+          "document_start": 1368,
+          "document_end": 1414,
+          "text": "根据相对坐标阵和拉格朗日乘子处理技术的不同，微分-代数方程的求解方法可以分为增广法和缩并法。",
+          "section_id": "section_34e0470d368b",
+          "start": 1368,
+          "end": 1414,
+          "chunk_start": 1368,
+          "chunk_end": 1414,
+          "sentence_document_start": 1368,
+          "sentence_document_end": 1414,
+          "sentence_complete": true
+        }
+      ],
+      "document_start": 0,
+      "document_end": 1416,
+      "offset_basis": "canonical_document",
+      "section_ancestry": [
+        {
+          "section_id": "section_34e0470d368b",
+          "title": "Descriptive concept source excerpt",
+          "breadcrumb_path": "Descriptive concept source excerpt",
+          "parent_section_id": null,
+          "header_level": 1,
+          "start": 0,
+          "end": 1416,
+          "body_start": 37,
+          "section_order": 1
+        }
+      ],
+      "metadata": {
+        "Header-1": "Descriptive concept source excerpt"
+      },
+      "splitter_version": "hierarchy_v3_chunk12000_overlap0",
+      "prev_chunk_id": null,
+      "next_chunk_id": null,
+      "core_start": 0,
+      "core_end": 1416
+    }
+  ],
+  "structure_hash": "aaeaa604ebb2b8779d6138f9e1fe84bcd7bb834523880d9ea2861b7ca6927f34",
+  "splitter_version": "hierarchy_v3_chunk12000_overlap0",
+  "index_content_hash": "59a846c52cf94f4bad112a574cc4426749b4a5fc49bff962c974e0f1c278db8c"
+}

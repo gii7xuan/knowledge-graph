@@ -26,6 +26,10 @@ def resolution_obligations(state,budget=None):
     result=[];policy=state.context.get('agent_resolution_policy') or {}
     maximum=int(policy.get('max_attempts_per_issue',2))
     attempts=state.context.get('resolution_attempts') or {}
+    fixed_counts=None
+    if policy.get('fixed_candidate_limits'):
+        from .fixed_candidate_workflow import action_counts
+        fixed_counts=action_counts(state)
     def add(identity,kind,tool,reason,*,ready=False,arguments=None):
         n=attempts.get(identity,0)
         reserve=int(policy.get('reserve_final_committee_calls',3))
@@ -33,10 +37,15 @@ def resolution_obligations(state,budget=None):
         funded=remaining>=reserve+(3 if tool in {'review_dispute','review_revision'} else 1)
         legal=bool(tool and n<maximum and funded and
                    (not policy.get('final_review_only') or tool in {'recover_validation','review_semantic_contract','review_dispute','search_evidence'}))
+        fixed_exhausted=bool(fixed_counts is not None and (
+            tool not in {'review_dispute','search_evidence','inspect_context'} or
+            tool=='review_dispute' and fixed_counts['focused_reviews']>=1 or
+            tool in {'search_evidence','inspect_context'} and fixed_counts['supplements']>=2))
+        if fixed_exhausted:legal=False
         result.append({'obligation_id':identity,'kind':kind,'reason':reason,'attempts':n,'attempt_limit':maximum,
             'legal_next_tool':tool if legal else None,'ready':ready and legal,'arguments':arguments,
             'expected_information_gain':reason,'terminal_reason':None if legal else
-                'budget_reserved_for_final_committee' if not funded else 'bounded_attempts_exhausted' if n>=maximum else 'external_or_domain_decision_required'})
+                'fixed_candidate_action_limit' if fixed_exhausted else 'budget_reserved_for_final_committee' if not funded else 'bounded_attempts_exhausted' if n>=maximum else 'external_or_domain_decision_required'})
     for voter in candidates(state):
         add('semantic:'+voter,'semantic_contract','review_semantic_contract','补全缺失判断依据，允许维持未知',ready=True,arguments={'voter_id':voter})
     recoverable=state.validation_recovery.get('recoverable_voter_ids',[])

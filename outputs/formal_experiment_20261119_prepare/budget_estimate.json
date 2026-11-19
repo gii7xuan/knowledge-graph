@@ -1,0 +1,147 @@
+{
+  "target": 300,
+  "historical_task_usage": {
+    "synthetic_channel_probe_v1": {
+      "calls": 2,
+      "known_tokens": 420,
+      "mean_tokens": 210.0,
+      "maximum_tokens": 275
+    },
+    "triple_review": {
+      "calls": 6,
+      "known_tokens": 126908,
+      "mean_tokens": 21151.333333333332,
+      "maximum_tokens": 23416
+    },
+    "planner_action": {
+      "calls": 3,
+      "known_tokens": 81114,
+      "mean_tokens": 27038.0,
+      "maximum_tokens": 32796
+    },
+    "candidate_revision_review": {
+      "calls": 3,
+      "known_tokens": 45558,
+      "mean_tokens": 15186.0,
+      "maximum_tokens": 16633
+    }
+  },
+  "light_scenario_no_focus_two_planner_calls": {
+    "groups": [
+      {
+        "group": "b0_all_keep",
+        "review_requests": 0,
+        "planner_requests": 0,
+        "physical_requests": 0,
+        "estimated_tokens": 0
+      },
+      {
+        "group": "b1_single",
+        "review_requests": 300,
+        "planner_requests": 0,
+        "physical_requests": 300,
+        "estimated_tokens": 6345400
+      },
+      {
+        "group": "b2_majority",
+        "review_requests": 900,
+        "planner_requests": 0,
+        "physical_requests": 900,
+        "estimated_tokens": 19036200
+      },
+      {
+        "group": "b3_fixed_workflow",
+        "review_requests": 900,
+        "planner_requests": 0,
+        "physical_requests": 900,
+        "estimated_tokens": 19036200
+      },
+      {
+        "group": "agent_dynamic",
+        "review_requests": 900,
+        "planner_requests": 600,
+        "physical_requests": 1500,
+        "estimated_tokens": 35259000
+      },
+      {
+        "group": "agent_static",
+        "review_requests": 900,
+        "planner_requests": 600,
+        "physical_requests": 1500,
+        "estimated_tokens": 35259000
+      }
+    ],
+    "review_and_planning_requests": 5100,
+    "review_and_planning_estimated_tokens": 114935800,
+    "candidate_extraction_request_allowance": 60,
+    "extraction_estimated_tokens": 735526,
+    "total_requests_including_extraction": 5160,
+    "total_estimated_tokens_including_extraction": 115671326
+  },
+  "full_action_scenario_three_focus_four_planner_calls": {
+    "groups": [
+      {
+        "group": "b0_all_keep",
+        "review_requests": 0,
+        "planner_requests": 0,
+        "physical_requests": 0,
+        "estimated_tokens": 0
+      },
+      {
+        "group": "b1_single",
+        "review_requests": 300,
+        "planner_requests": 0,
+        "physical_requests": 300,
+        "estimated_tokens": 6345400
+      },
+      {
+        "group": "b2_majority",
+        "review_requests": 900,
+        "planner_requests": 0,
+        "physical_requests": 900,
+        "estimated_tokens": 19036200
+      },
+      {
+        "group": "b3_fixed_workflow",
+        "review_requests": 1800,
+        "planner_requests": 0,
+        "physical_requests": 1800,
+        "estimated_tokens": 38072400
+      },
+      {
+        "group": "agent_dynamic",
+        "review_requests": 1800,
+        "planner_requests": 1200,
+        "physical_requests": 3000,
+        "estimated_tokens": 70518000
+      },
+      {
+        "group": "agent_static",
+        "review_requests": 1800,
+        "planner_requests": 1200,
+        "physical_requests": 3000,
+        "estimated_tokens": 70518000
+      }
+    ],
+    "review_and_planning_requests": 9000,
+    "review_and_planning_estimated_tokens": 204490000,
+    "candidate_extraction_request_allowance": 60,
+    "extraction_estimated_tokens": 735526,
+    "total_requests_including_extraction": 9060,
+    "total_estimated_tokens_including_extraction": 205225526
+  },
+  "assumptions": [
+    "No request reuse discount",
+    "B1 fixed before test, not selected by held-out accuracy",
+    "B3 and both Agent arms share the same per-case limits",
+    "No retries or model-based format repair",
+    "Focused-review cost uses ordinary-review mean as an unvalidated proxy",
+    "Extraction allowance does not guarantee 300 natural candidates",
+    "Historical means come from six ordinary and three planner requests, not a representative cost benchmark"
+  ],
+  "currency_cost": null,
+  "price_status": "gateway/model-specific billed prices not supplied; currency cost cannot be inferred",
+  "token_limit_kind": "known-usage dispatch stop; not a guaranteed billed-token or currency ceiling",
+  "independent_double_annotation_hours_at_4_minutes": 40.0,
+  "annotation_time_status": "illustrative only; excludes adjudication and requires human timing"
+}

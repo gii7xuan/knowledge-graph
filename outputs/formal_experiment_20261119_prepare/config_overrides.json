@@ -1,0 +1,76 @@
+{
+  "mode": "shadow",
+  "validator_contract_version": "validator_response_v8",
+  "planner": {
+    "enabled": true,
+    "strategy": "llm_react",
+    "durable_requests": true,
+    "compact_view": true,
+    "state_driven_steps": true,
+    "fixed_candidate_limits": true,
+    "fallback": "manual",
+    "max_output_tokens": 2048,
+    "allowed_tools": [
+      "inspect_ontology",
+      "run_validation",
+      "search_evidence",
+      "inspect_context",
+      "review_dispute",
+      "finish_review"
+    ]
+  },
+  "budget": {
+    "max_llm_calls_per_candidate": 10,
+    "max_total_tokens": 250000,
+    "max_planner_steps": 4,
+    "max_validation_rounds": 1,
+    "max_tool_calls": 12,
+    "max_retries_per_request": 0,
+    "max_parallel_candidates": 1,
+    "max_parallel_validators": 1,
+    "total_timeout_seconds": 540,
+    "per_call_timeout_seconds": 180,
+    "max_evidence_items": 12,
+    "max_evidence_chars": 12000
+  },
+  "case_budget": {
+    "llm_calls": 10,
+    "tokens": 250000,
+    "tool_calls": 12,
+    "extension_requests": 1,
+    "rebinds": 1
+  },
+  "response_correction": {
+    "max_corrections_per_seat": 0,
+    "max_calls_per_candidate_version": 0
+  },
+  "semantic_clarification": {
+    "enabled": false
+  },
+  "dispute_review": {
+    "enabled": true
+  },
+  "agent_resolution": {
+    "enabled": false
+  },
+  "ontology_extension": {
+    "enabled": false,
+    "auto_publish_enabled": false
+  },
+  "memory": {
+    "enabled": false,
+    "scope": {
+      "mode": "disabled"
+    }
+  },
+  "routing": {
+    "auto_accept_enabled": false,
+    "semantic_auto_reject_enabled": false
+  },
+  "neo4j": {
+    "auto_import_enabled": false
+  },
+  "vote_weighting": {
+    "mode": "dynamic"
+  }
+}

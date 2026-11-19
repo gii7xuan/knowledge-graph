@@ -17,12 +17,13 @@ def leakage_groups(candidates):
             # document_version is the canonical document text hash, so renaming
             # a source document cannot make identical source text independent.
             same_text=bool(a.get('document_version')) and a.get('document_version')==b.get('document_version')
+            same_parent=bool(a.get('source_group_id')) and a.get('source_group_id')==b.get('source_group_id')
             text=lambda c:'|'.join(str(c.get('triple',{}).get(k) or '').strip().casefold() for k in ('head','surface_relation','tail'))
             complete=all(a.get('triple',{}).get(k) and b.get('triple',{}).get(k) for k in ('head','surface_relation','tail'))
             normalized=lambda c,k:str(c['triple'][k]).strip().casefold()
             duplicate=bool(complete and normalized(a,'head')==normalized(b,'head') and
                 normalized(a,'surface_relation')==normalized(b,'surface_relation') and SequenceMatcher(None,text(a),text(b)).ratio()>=.9)
-            if a['candidate_id']==b['candidate_id'] or same_fact or shared or same_text or duplicate: parents[root(i)]=root(j)
+            if a['candidate_id']==b['candidate_id'] or same_fact or shared or same_text or same_parent or duplicate: parents[root(i)]=root(j)
     groups={}
     for i,c in enumerate(candidates):groups.setdefault(root(i),[]).append((c['candidate_id'],c['revision']))
     return [sorted(group) for group in groups.values()]
@@ -38,5 +39,5 @@ def verify_split(candidates,assignments):
         roles={assignments[item] for item in group}
         if not roles<={'development','independent_test','training','calibration'} or len(roles)!=1:
             raise ValueError('related facts/revisions/source documents/evidence cross evaluation splits')
-    return {'split_integrity_version':'source_fact_split_v2','groups':groups,'groups_hash':sha256_json(groups),
+    return {'split_integrity_version':'source_fact_split_v3','groups':groups,'groups_hash':sha256_json(groups),
             'development_and_independent_test_reported_separately':True}

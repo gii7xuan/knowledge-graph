@@ -1,0 +1,697 @@
+{
+  "version": "human_handoff_policy_reclassification_v1",
+  "source_run": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown",
+  "user_clarification": "semantic uncertainty and timeout/technical judgment failure are human-review outcomes; continue other candidates",
+  "policy_change_is_posthoc_and_explicit": true,
+  "population": 40,
+  "excluded_candidates": 0,
+  "new_provider_requests": 0,
+  "unknown_requests_resent": 0,
+  "source_prediction_sha256": {
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\b0_all_keep_predictions.json": "517a386522e85256058bc29ea3260b71616e5a3c17188aa407eac66e60e7aa8b",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\quarantined_case_27.json": "ccac4c4488d812aa8d855a017fb76fb558a5555cdca2f7d0757464a01500d1ea",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\quarantined_case_40.json": "1216939a08d6c26d0a3379d0910c94d37ea836e122661841136931791efe25de",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\b1_single_predictions.json": "b26e336153cabda7308e3a76bcff036d13d13ee092679c3412d85ea55f180e99",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\b2_majority_predictions.json": "7122ce06ca28b4490391b9b7db26850176409d95f990f0eb86166b35233cc544",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\b3_fixed_workflow_predictions.json": "719d71b52dd5c56d0fca18b07573aa4147fb33eed71cd200424cbb3640f2ee6d",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\agent_predictions.json": "21d79f082c095a889cd6fa2a5ffd34f9265d069a48a35d07c1185cf104dc3ade"
+  },
+  "source_databases_unchanged": true,
+  "source_database_sha256": {
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_01\\agent.sqlite3": "b76aab49116a56bcfe5490ab1acacd0ad654fdd07c49a6cb581d3ae5390899eb",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_01\\b3_fixed_workflow.sqlite3": "2441263020e6ae51671908edab27e057f51989d552692d430d07436d5d65ffc6",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_01\\common.sqlite3": "bf52e4175e5189688f09f6765051e42b50c94b2a82bd7123029456ee9ebc2950",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_02\\agent.sqlite3": "78514b143b8a4d3ff2e050df725fab99a6a0d542b4ab21bb9dbd06c99b736a79",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_02\\b3_fixed_workflow.sqlite3": "c99205dac90992c3aa3ca3e20bfb0854f5da0ebcfcf5f156abf6f4a0b335c9b0",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_02\\common.sqlite3": "0c5386096a2e66d7e2f5810a6c8f5390f2265a92988d16f5608da7c0178fbc35",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_03\\agent.sqlite3": "193cf815f943eb337ef6633739891942e55d7dff93e4c73fe6b685b11364960e",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_03\\b3_fixed_workflow.sqlite3": "d4eb75ba5c529d88b2a236124fad4864d5835253c35766f0e4c82b64d91b8c9e",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_03\\common.sqlite3": "ae251528f99192ab3edcdaf07413b9f5506dd144044d636ddff12d421a64dd31",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_04\\agent.sqlite3": "4c2baa0a10b4e83e7d9f4d08d91e9f58784854e4776d84ee0cd8ba7dca6beab2",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_04\\b3_fixed_workflow.sqlite3": "79ffdd6c123c695dae36b1441e07826b1b32fe1ae2dade94aab24418906de9d9",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_04\\common.sqlite3": "b7758a931d7822d33e8fbd7fe3aada51d1a1b47606c9a5270967bbf788ee522c",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_05\\agent.sqlite3": "12ad51e89c904859b4091ae6dcb307b100887ad0a89ea3752df2cb4aca5765ed",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_05\\b3_fixed_workflow.sqlite3": "b4d6ba3823df9160e41eb17f97683bd30b0f0334a26e7e08ac68ea4239de6c83",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_05\\common.sqlite3": "436b97d87f8d04e309fdae4dad8d8652c8d0ebe10e56b666bdcda3875f78c993",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_06\\agent.sqlite3": "e77a9e12993e804441d9f5bc8a33eeeb84af782ee338b3d1c74c2c9b3770d0f2",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_06\\b3_fixed_workflow.sqlite3": "bb6a6d89e85e822eca3fae8f2dc28f07328bc19f8b4edfea378e357fb29f1320",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_06\\common.sqlite3": "d8076abd5edeecd22b78475cfbfbc7a2c114ccc362eb0ac0b8ee1ef562e02a38",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\case_07\\common.sqlite3": "61fec649a98e524f7f0a5469278ad46920157a0236c541dbe1e317dd0d4a7252",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_01\\agent.sqlite3": "8e35fb7453cd9a39f1fddd25e38cce28d104eb63ba63c94d3e0eeefd29cd5410",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_01\\b3_fixed_workflow.sqlite3": "974cdb5fae990c75a6bd6bb913963e75817e97b2d311b1d93cec83fefc875961",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_01\\common.sqlite3": "03ae253fc3c65265013bd02c7b1a2be1433e94df3e7ba199d2a18a3bce62a32e",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_02\\agent.sqlite3": "c5cf8cdb40edb40aad34dc9fbf417ac802ec1e496f9ed6e2fc0b4e5b84dc3e53",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_02\\b3_fixed_workflow.sqlite3": "bd68840aa70ed85a7e0590fa7efe5a67c5b04d5698cf0084c6cc0088967b96e5",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_02\\common.sqlite3": "e4b400bbbdbb6a40b51c5713013998099255c5703a20b3f3155aec20874d956f",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_03\\agent.sqlite3": "91a6546129907d2a562727651c863c4f110353a2075f99be1e7aa5df47631917",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_03\\b3_fixed_workflow.sqlite3": "43b179d688b5f1881ec8ba130324e482f897a60cb70b24eb403c4a56bcef416c",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_03\\common.sqlite3": "fed55dd4a6f175734ed67428551e5eb23ce72d12a1fc2493ed12bfa909c070c1",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_04\\agent.sqlite3": "a621b64680891761825087cfcdfe0aed0babc52d5b8f71a52a64fe79d90610ba",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_04\\b3_fixed_workflow.sqlite3": "1d884e23874628da795e4cb244856f4e3455318686e8d3ecbf2a83617b46cb22",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_04\\common.sqlite3": "1a13fd8b9a9002d44bf228db8c9cfb19b71a8aca70a59d5394881099331e79e2",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_05\\agent.sqlite3": "99f89ccbce42bde72cfdc6d9934240e72a337b2add8cf06154201a28dd597832",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_05\\b3_fixed_workflow.sqlite3": "fa3b524c6541d965b01afa1f164b7777899a730b421c79b84f2ddb576d28ff10",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_05\\common.sqlite3": "dea65ae11b266f7278713d7e79b3fb4d63dcca832aac484b194af2ffe90ab9e1",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_06\\agent.sqlite3": "712eaeddea15b3e0d0c40d1dae5c64e90129dbf050775b288b5a8ab8bc8bebc9",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_06\\b3_fixed_workflow.sqlite3": "21042af260d205ed8f9e2dde89bd075032ae5a28385825a5feef593a53187754",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_06\\common.sqlite3": "f3ac8f42a3c6dc69525f5bfc94ed339efea7b0b1661dda1a639ef85facb4d99c",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_07\\agent.sqlite3": "1629ead122e63b7ac032e5ac1f60c77f79c1876a56197c72c885adc7e3c5f776",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_07\\b3_fixed_workflow.sqlite3": "0592cb835afb5dab1408194b7f70cfcc271b56dca27eadfcd3e5833dd4323567",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_07\\common.sqlite3": "f032808b8c14895c40feca4459e255e56041380000bea37668af1ecafdf35252",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_08\\agent.sqlite3": "9d1ea983f7e00151902d319249867130e189b1c2ef805df16e7773e6ad88ea10",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_08\\b3_fixed_workflow.sqlite3": "b547d14c2efbae389369cd32f94afe3de82499d459a22a5eebcaac10cd11c5f2",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_08\\common.sqlite3": "109bcbaf98f85bec17523a0333437b98b7795729b92a6643406afe85326116ed",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_09\\agent.sqlite3": "3cc5da92fb9b624f1868d8f6f5d97a893d9a20f655ec2837429ff0af67e21aa1",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_09\\b3_fixed_workflow.sqlite3": "b9437aab74864026ebea9ed080ec51e28df9434aa67c8e443f8a5c48cf547e44",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_09\\common.sqlite3": "047597159e39352254f83ef4481acf36bb936de884d37bc03c968d1e21985901",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_10\\agent.sqlite3": "af18528bcf1a5048bc8a53e64b4937c11f072751939c038290ebee1abb2c89b2",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_10\\b3_fixed_workflow.sqlite3": "f76e3367a6d2348791bf794de4cfebb450f3dbfa9d5038d226e35674b548775b",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_10\\common.sqlite3": "944b7ec323bd6c159f3070acd405d76ff55565a9288b5e734d78db3aac52fdc7",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_11\\agent.sqlite3": "a3747badf2676eac3eb5cdab334e380b6a2ea762d4c84dd02b99dd4f832fd446",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_11\\b3_fixed_workflow.sqlite3": "f0bc046da40e526f8dfc3d22ff9b694d5e961f6b018ddbe5150b805f9ad20081",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_11\\common.sqlite3": "746f4ad5381043b3643d0f61acf1630c81924458fc68048fc6f3450d8063d30e",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_12\\agent.sqlite3": "afd5438fefbd84c757682c05a298cb4c577459e90337147353055ce01ecc7c37",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_12\\b3_fixed_workflow.sqlite3": "5c7d3f388a15e48b184b3a45aadd7534a6438cdccd9a7bfaa8482817964f57e4",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_12\\common.sqlite3": "37957ec8ff257934b89e71001da8af14f9b83cf460bf13d4d907f17a1cefd2e9",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_13\\agent.sqlite3": "20ce1bcba47cbbb4e3dc0e98dc29da6f2864effb3fa09623d4efe27887caf335",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_13\\b3_fixed_workflow.sqlite3": "970fa0fa90547341dc4ca6a6416f40db7c8a1ae6cc9f8b63ce30ba8c58fa9431",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_13\\common.sqlite3": "9b149ad643a0b7ef987160b98d5a23632f1609f56d2da68c6327200faf8ee843",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_14\\agent.sqlite3": "1d6f79ad72ebeb0778ed94a5567638a40ad98e6a2665e19a6fc445b89033c519",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_14\\b3_fixed_workflow.sqlite3": "5864cb4d348d5d39ba982137b31ab243d92cee5995ac0b11cf46903a59d1a937",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_14\\common.sqlite3": "c64a3b0c0a313df1a61d233e3b0c4b1a1001e8b75ac2784a0f2e07f65f051046",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_15\\agent.sqlite3": "1d3acfc0a34965700e43edb3cbf84a7692305892b4483abc764c22c6a6aec2bb",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_15\\b3_fixed_workflow.sqlite3": "490fad5362c9245e434de84f72d80161b99127cabdc654defea79ead06487186",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_15\\common.sqlite3": "30e2816b71c203fedd85b6cd1cc7ca27560abf8e0bfa4204d7c86a6b46b0a2c3",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_16\\agent.sqlite3": "d6e482416afec62bf6d495663e0a28f6631a49ab60d513dafb7e936faed5e09a",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_16\\b3_fixed_workflow.sqlite3": "6e4a229e1a25766649195170e6340b69da04adf2a68259bb0a2f6d96d8009231",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_16\\common.sqlite3": "2701ac6013b3d983d59387b0b48fdbf4665b6a0110478c5ff4df007880200617",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_17\\agent.sqlite3": "6099410af3df29655728e3154b6b106f887c0ecb65507bffb0a2d4b8524a7c83",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_17\\b3_fixed_workflow.sqlite3": "8987575c71c7dd5618acf9ed3a9cf7da04836214b37105be38d4c01acb970c1e",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_17\\common.sqlite3": "8a8b957f8e4eb1588b3a8e493367dd8b11dd77925515f99e3c3628cac8db0c38",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_18\\agent.sqlite3": "fa0e6099c8f4c51893184e5d6cbe025093a0552203e286a3ffb9cc635043bb7a",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_18\\b3_fixed_workflow.sqlite3": "92ea139b923b76a814e6b83705b86356688696184b95be967b9c4a978f98bbfe",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_18\\common.sqlite3": "5d5f0594ea40846e42a7061ec59ff7f8ee1d82e271a51d4d5ddf31bfc8fb2cdb",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_19\\agent.sqlite3": "73f9ac258c850f4c0e01e3ac7f159fff03264dcbf02d099706d702a26f7f0b20",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_19\\b3_fixed_workflow.sqlite3": "a8fae61990e35b8af29a86cb5454f9f1a701bede2c9351a5aa91703baa833829",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_19\\common.sqlite3": "9c3b1ba93d696b886366d3870bc09915b28c74a7a1954ed0fd0adf04c7b380e1",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_20\\agent.sqlite3": "eec9ffeb027c25e5ab23a92f6235bf8a6a67533758e1a02cb2f9245baa810760",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_20\\b3_fixed_workflow.sqlite3": "9ef8c0cb1cfccc9e152e87379dfe07e926fe835ee4b4600d5d7f4e31c8beda69",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_20\\common.sqlite3": "a6dacf95b084438dc6c5ad1f36e9e34d4b405e0f5babf1182b0c7e5038c28be9",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_21\\agent.sqlite3": "a66a4ce3936141ca4e7702904b32c9afd6e6fec618ab75e5d1079b9866441129",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_21\\b3_fixed_workflow.sqlite3": "5093bc17a5415e48d943266a773aa499c654785e0c14f1adc497dbf64b498f21",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_21\\common.sqlite3": "dd7b206f4aa7b0fd4028865991db72e7c8a4a7f786526bdb5e57549832b1cd86",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_22\\agent.sqlite3": "560bb1c040eb8a73a95e082375a6c9fbe04b01c6c97999da69d99b9141ae5cf2",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_22\\b3_fixed_workflow.sqlite3": "1a78aba4790ec132a9e7e9b4b276215ce1d9c1c9d7f4a31ae0051e90f775f0c5",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_22\\common.sqlite3": "7a7d9686e16dc841b8f4b63c08e744654fa7dc2ef8e58341e352c352153dc58f",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_23\\agent.sqlite3": "2fe5ff2965c962f96c0b65d43bef2dbe0854574f860261826123e3f188a7a5b5",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_23\\b3_fixed_workflow.sqlite3": "f6e34460972322ae5a52b8393b6a98c40e86c710161116039a1e1c1c962d7a53",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_23\\common.sqlite3": "6fa9d570ee4e50bd7fb9362a2656d52701e18c22fc03fba7eef5372ec145a64c",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_24\\agent.sqlite3": "803d893177143850beb302bb376642ddf3202fae5c62e371c2211935f063f393",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_24\\b3_fixed_workflow.sqlite3": "e2b1fca8c2d54df3785637897d9bd574e0adeb01a7cf8d9560ec1e7aab060106",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_24\\common.sqlite3": "1c3e708dcf9c707762acfa5595b6a341fcbc439389831e7f033d09b98125f400",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_25\\agent.sqlite3": "7f200696ef71a9435daef8f7cd7b403330aac8046da87997a46a75669b28a2c6",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_25\\b3_fixed_workflow.sqlite3": "8abfdaf844c3b4079cdf08bd87df46c0bd9f451a3b9a2bbbd857ba8bf46e83a9",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_25\\common.sqlite3": "fbef378042357a8c23c565cc9e29bc68aa65dd84c6c05b17dc9e21fa9bff6f73",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_26\\agent.sqlite3": "e4abeeabc0f489f972652bcd65792405e2d50a2d90865ed9c53bc62bc1053741",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_26\\b3_fixed_workflow.sqlite3": "0e14d1f6f9330abcae4413e19d4cada6c1e0a36a762eaa0aaaaa099957792941",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_26\\common.sqlite3": "445da1111b5c32acd15d437eb2bbae07efab90ad4354edfc3066fedabaded209",
+    "outputs\\gpt40_five_group_20261119_recovered\\case_27\\common.sqlite3": "9c73b73965f88ebf1fa1fca3d35b5d585e713f5a2d1887c076da10db098acd76",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_28\\agent.sqlite3": "45153630ec285140d792492c87bd1f9572723372df78dc2d631b43638800fcb1",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_28\\b3_fixed_workflow.sqlite3": "f1a6d829102560c2288a56f1988b366974e4d55617b3e7b5abf76d3f37c58a73",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_28\\common.sqlite3": "fd17ac528ff916bcc092ce98073de47ee9aba714e329a6f8f2d0716f9fce3757",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_29\\agent.sqlite3": "cbaa1afab53e8c4884e7e996a05c14f5d8a83605c8c145ce2877a70ff70ad4ea",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_29\\b3_fixed_workflow.sqlite3": "504137fb282bd0ba36e4dd9239d25f4198366628def3458c41c3faf14b2c8a93",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_29\\common.sqlite3": "ea73742ffb7fd55814a2773f2b564964559cd9ad1e8ce9e16e0f5c4614e85f8c",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_30\\agent.sqlite3": "658bca1ac24adfa47ab7de8eee558bfcada6c180c47dab21da8508ba632ddd78",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_30\\b3_fixed_workflow.sqlite3": "845ef2a4d1fc0319598bc180939bcbf073bf69fa346589c792da00ba15a1bb46",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_30\\common.sqlite3": "855f9321980d395fb43129482e421b2804441b818bc9a01e898980fb088a0af1",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_31\\agent.sqlite3": "5bdde49a486ad25d40e6557d80c3494eacad31af1a69036518b8f1ded595288d",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_31\\b3_fixed_workflow.sqlite3": "0b4980ce2c843723bea225110eb8d1fe6036db53d9f14005a36dec507764f0ef",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_31\\common.sqlite3": "779023f0d73ed8cbb33cf1de1428af8f94b382531c4720f819724ae1f9ef746c",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_32\\agent.sqlite3": "912d046d24a54271970b29988bf1472ddaa46f26c048d8debac7335965d3ed10",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_32\\b3_fixed_workflow.sqlite3": "e3ac4271f483384adfbc484f30d11cb4f831183dd8bdaf8959a3555e372b6ba1",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_32\\common.sqlite3": "416f33415c9e5ec306ebb5df6fe55b513c9450ca492ee0592145514bae4a9299",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_33\\agent.sqlite3": "3e9d4eefd1223be65fbcf280f26c8fc0291e6fcd33726e8d58a932b193072e94",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_33\\b3_fixed_workflow.sqlite3": "ba67de89b109bde521fe4840c280df1eebdf936aa5dff206ce2eca0bab954862",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_33\\common.sqlite3": "91c775c74b93b150b6e5145bf7cc7bb9b2a73b0f8627cea38030a47a282b4dbc",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_34\\agent.sqlite3": "125125bc954d9b700ab827716f854a6d25c9f13fdb3bb7adb5e272cfbdb37577",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_34\\b3_fixed_workflow.sqlite3": "e62e43436a5f898a2b9b302d9cf8d5fb8051f083cb8f1f8d544d32321c386db1",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_34\\common.sqlite3": "bef8e7e764b9a87894255c069f50c1c9925793f0822675e0a00495419a4671e2",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_35\\agent.sqlite3": "63e69129ed6a8df863af5dfb6979df70dffaab6874887a8737588ffb929d3914",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_35\\b3_fixed_workflow.sqlite3": "d0bab338e8e6c53e63c4d49c8516755072ba2ab4e52caa99ce5bd5e06c759858",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_35\\common.sqlite3": "7decfa744b8994e854e1030a88b18d3f626d349c634eb2f0041d413a7c42f308",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_36\\agent.sqlite3": "79d3b0a8adc4df5304e7b21010dfc6f2dff96dcef32ba83b97d417d3df3422eb",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_36\\b3_fixed_workflow.sqlite3": "82acc9f7c75a2ea138291ada56eb0756748c7bc940acc1d46260b9d38f08962f",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_36\\common.sqlite3": "bfcd0bfe83e9d31e8f9c1745b4d59d611669c60860cbfd3f2314756bcb140083",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_37\\agent.sqlite3": "98b0d55c1513dde25967b2d84a2461ec67e1250e18e0aba533ab70347581d51a",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_37\\b3_fixed_workflow.sqlite3": "cbf276377ace0fded6d7c1b51712a087f2c46414b03aa379112d06b8b342a2b1",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_37\\common.sqlite3": "0d9375bd39b3faf248b5ddb6aa933e9a636afef46c6fdc7a193587ff3f7a36d5",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_38\\agent.sqlite3": "342697a2475b8dcfcf655f7285db177061390a63a05a248b39589834fdd782e7",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_38\\b3_fixed_workflow.sqlite3": "191442824ba93fd5c0e2bc54f2a47c9a9459667def27f9522411436eac9d4b8f",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_38\\common.sqlite3": "5ecec3dbb0ecc5dbdcf9a1b26edf3e2f418d3394e5cf37fad6e400ecbdc9fe64",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_39\\agent.sqlite3": "b50f35ebec38ad997e2536a865839faedab3127ea1c7346cc982fd8fa3c3708b",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_39\\b3_fixed_workflow.sqlite3": "5289bba7038167ac5af213e0a24f3c195dbfec30a39c4226ae36a4eb1a4d8d45",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_39\\common.sqlite3": "264a4807fbe059624e566a2724b711358b3905ededbdafb5e066acbdf07578fb",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_40\\agent.sqlite3": "39a66c911cde50b8148e2562a4603bd0bbcc37edff4ba94553b48eef12df1957",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_40\\b3_fixed_workflow.sqlite3": "083df5c4652d11c6173565c00657dc6ad4929843facc0c07ad58806e946f6125",
+    "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\case_40\\common.sqlite3": "882b8bdad3986e31f6a98626a19852faf84efc57b118607086057a930a1e9c5a"
+  },
+  "source_execution_code_snapshot": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_skip_unknown\\code_fingerprints.json",
+  "rescoring_code_sha256": {
+    "evaluation\\reclassify_human_handoff.py": "c395f97156cef1f77c4779900f6c74b0e51c144a65b1a4672c1e728900af4506",
+    "evaluation\\human_handoff.py": "677063c7f6a5e961abb1d86eeb73d53f2bab4b2d21042589402fc3b51550eb8f",
+    "evaluation\\metrics.py": "66ea3004d43ddf6baa8211f90ff55dec423334b04d3108c90cdc5e264032f692"
+  },
+  "human_gold_count": 0,
+  "label_source": "gpt_preannotation",
+  "groups": {
+    "b0_all_keep": {
+      "reference_comparison": {
+        "label_source": "gpt_preannotation",
+        "interpretation": "agreement with GPT reference; not independent human accuracy",
+        "human_gold_count": 0,
+        "metrics": {
+          "source_support": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "expression_status": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "mapping_status": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "schema_coverage": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "knowledge_scope": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "admission_preference": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          }
+        }
+      },
+      "operational": {
+        "version": "fixed_candidate_metrics_v2_human_handoff",
+        "population": 40,
+        "outcomes": {
+          "accept": 40,
+          "reject": 0,
+          "manual": 0,
+          "pending": 0
+        },
+        "technical_failure_handoff_count": 0,
+        "semantic_handoff_count": 0,
+        "technical_failure_is_subset_of_manual": true,
+        "admission_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "correct_candidate_retention": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "automatic_decision_coverage": {
+          "numerator": 40,
+          "denominator": 40,
+          "value": 1.0
+        },
+        "manual_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "technical_incompletion_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "pending_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "unknown_truth_count": 40,
+        "unknown_truth_accept_count": 40,
+        "decisions_are_research_recommendations": true
+      },
+      "deployment_usage": {
+        "provider_attempts": 0,
+        "known_tokens": 0,
+        "unknown_usage_requests": 0
+      }
+    },
+    "b1_single": {
+      "reference_comparison": {
+        "label_source": "gpt_preannotation",
+        "interpretation": "agreement with GPT reference; not independent human accuracy",
+        "human_gold_count": 0,
+        "metrics": {
+          "source_support": {
+            "agreement_count": 23,
+            "comparable_count": 35,
+            "population": 40,
+            "value": 0.6571428571428571
+          },
+          "expression_status": {
+            "agreement_count": 16,
+            "comparable_count": 25,
+            "population": 40,
+            "value": 0.64
+          },
+          "mapping_status": {
+            "agreement_count": 37,
+            "comparable_count": 37,
+            "population": 40,
+            "value": 1.0
+          },
+          "schema_coverage": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "knowledge_scope": {
+            "agreement_count": 26,
+            "comparable_count": 36,
+            "population": 40,
+            "value": 0.7222222222222222
+          },
+          "admission_preference": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          }
+        }
+      },
+      "operational": {
+        "version": "fixed_candidate_metrics_v2_human_handoff",
+        "population": 40,
+        "outcomes": {
+          "accept": 0,
+          "reject": 0,
+          "manual": 40,
+          "pending": 0
+        },
+        "technical_failure_handoff_count": 3,
+        "semantic_handoff_count": 37,
+        "technical_failure_is_subset_of_manual": true,
+        "admission_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "correct_candidate_retention": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "automatic_decision_coverage": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "manual_rate": {
+          "numerator": 40,
+          "denominator": 40,
+          "value": 1.0
+        },
+        "technical_incompletion_rate": {
+          "numerator": 3,
+          "denominator": 40,
+          "value": 0.075
+        },
+        "pending_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "unknown_truth_count": 40,
+        "unknown_truth_accept_count": 0,
+        "decisions_are_research_recommendations": true
+      },
+      "deployment_usage": {
+        "provider_attempts": 40,
+        "known_tokens": 816440,
+        "unknown_usage_requests": 0,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    },
+    "b2_majority": {
+      "reference_comparison": {
+        "label_source": "gpt_preannotation",
+        "interpretation": "agreement with GPT reference; not independent human accuracy",
+        "human_gold_count": 0,
+        "metrics": {
+          "source_support": {
+            "agreement_count": 28,
+            "comparable_count": 36,
+            "population": 40,
+            "value": 0.7777777777777778
+          },
+          "expression_status": {
+            "agreement_count": 21,
+            "comparable_count": 29,
+            "population": 40,
+            "value": 0.7241379310344828
+          },
+          "mapping_status": {
+            "agreement_count": 39,
+            "comparable_count": 39,
+            "population": 40,
+            "value": 1.0
+          },
+          "schema_coverage": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "knowledge_scope": {
+            "agreement_count": 27,
+            "comparable_count": 38,
+            "population": 40,
+            "value": 0.7105263157894737
+          },
+          "admission_preference": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          }
+        }
+      },
+      "operational": {
+        "version": "fixed_candidate_metrics_v2_human_handoff",
+        "population": 40,
+        "outcomes": {
+          "accept": 0,
+          "reject": 0,
+          "manual": 40,
+          "pending": 0
+        },
+        "technical_failure_handoff_count": 4,
+        "semantic_handoff_count": 36,
+        "technical_failure_is_subset_of_manual": true,
+        "admission_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "correct_candidate_retention": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "automatic_decision_coverage": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "manual_rate": {
+          "numerator": 40,
+          "denominator": 40,
+          "value": 1.0
+        },
+        "technical_incompletion_rate": {
+          "numerator": 4,
+          "denominator": 40,
+          "value": 0.1
+        },
+        "pending_rate": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "unknown_truth_count": 40,
+        "unknown_truth_accept_count": 0,
+        "decisions_are_research_recommendations": true
+      },
+      "deployment_usage": {
+        "provider_attempts": 120,
+        "known_tokens": 2475758,
+        "unknown_usage_requests": 2,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    },
+    "b3_fixed_workflow": {
+      "reference_comparison": {
+        "label_source": "gpt_preannotation",
+        "interpretation": "agreement with GPT reference; not independent human accuracy",
+        "human_gold_count": 0,
+        "metrics": {
+          "source_support": {
+            "agreement_count": 16,
+            "comparable_count": 23,
+            "population": 40,
+            "value": 0.6956521739130435
+          },
+          "expression_status": {
+            "agreement_count": 21,
+            "comparable_count": 27,
+            "population": 40,
+            "value": 0.7777777777777778
+          },
+          "mapping_status": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "schema_coverage": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "knowledge_scope": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "admission_preference": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          }
+        }
+      },
+      "operational": {
+        "version": "fixed_candidate_metrics_v2_human_handoff",
+        "population": 40,
+        "outcomes": {
+          "accept": 0,
+          "reject": 0,
+          "manual": 39,
+          "pending": 1
+        },
+        "technical_failure_handoff_count": 16,
+        "semantic_handoff_count": 23,
+        "technical_failure_is_subset_of_manual": true,
+        "admission_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "correct_candidate_retention": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "automatic_decision_coverage": {
+          "numerator": 0,
+          "denominator": 40,
+          "value": 0.0
+        },
+        "manual_rate": {
+          "numerator": 39,
+          "denominator": 40,
+          "value": 0.975
+        },
+        "technical_incompletion_rate": {
+          "numerator": 16,
+          "denominator": 40,
+          "value": 0.4
+        },
+        "pending_rate": {
+          "numerator": 1,
+          "denominator": 40,
+          "value": 0.025
+        },
+        "unknown_truth_count": 40,
+        "unknown_truth_accept_count": 0,
+        "decisions_are_research_recommendations": true
+      },
+      "deployment_usage": {
+        "provider_attempts": 163,
+        "known_tokens": 2978785,
+        "unknown_usage_requests": 3,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    },
+    "agent": {
+      "reference_comparison": {
+        "label_source": "gpt_preannotation",
+        "interpretation": "agreement with GPT reference; not independent human accuracy",
+        "human_gold_count": 0,
+        "metrics": {
+          "source_support": {
+            "agreement_count": 16,
+            "comparable_count": 23,
+            "population": 40,
+            "value": 0.6956521739130435
+          },
+          "expression_status": {
+            "agreement_count": 21,
+            "comparable_count": 27,
+            "population": 40,
+            "value": 0.7777777777777778
+          },
+          "mapping_status": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "schema_coverage": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "knowledge_scope": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          },
+          "admission_preference": {
+            "agreement_count": 0,
+            "comparable_count": 0,
+            "population": 40,
+            "value": null
+          }
+        }
+      },
+      "operational": {
+        "version": "fixed_candidate_metrics_v2_human_handoff",
+        "population": 40,
+        "outcomes": {
+          "accept": 0,
+          "reject": 3,
+          "manual": 36,
+          "pending": 1
+        },
+        "technical_failure_handoff_count": 9,
+        "semantic_handoff_count": 27,
+        "technical_failure_is_subset_of_manual": true,
+        "admission_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "correct_candidate_retention": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "automatic_decision_coverage": {
+          "numerator": 3,
+          "denominator": 40,
+          "value": 0.075
+        },
+        "manual_rate": {
+          "numerator": 36,
+          "denominator": 40,
+          "value": 0.9
+        },
+        "technical_incompletion_rate": {
+          "numerator": 9,
+          "denominator": 40,
+          "value": 0.225
+        },
+        "pending_rate": {
+          "numerator": 1,
+          "denominator": 40,
+          "value": 0.025
+        },
+        "unknown_truth_count": 40,
+        "unknown_truth_accept_count": 0,
+        "decisions_are_research_recommendations": true
+      },
+      "deployment_usage": {
+        "provider_attempts": 182,
+        "known_tokens": 3724633,
+        "unknown_usage_requests": 3,
+        "accounting": "standalone deployment attribution, includes shared first-round requests; do not sum across arms"
+      }
+    }
+  },
+  "physical_usage_unchanged": {
+    "dispatch_reservations": 239,
+    "unique_provider_attempts": 238,
+    "known_tokens": 4558269,
+    "unknown_requests": 4,
+    "unknown_usage_requests": 4,
+    "prior_engineering_requests": 170,
+    "suppressed_exact_prior_tasks": 0,
+    "quarantined_candidate_ids": [
+      "cand_9c16cc7eb125b3377f69",
+      "cand_a8f30a593fbf5bf0ea24"
+    ],
+    "stop_reason": null,
+    "limits": {
+      "llm_calls": 520,
+      "known_tokens": 15000000,
+      "seconds": 43200
+    }
+  }
+}

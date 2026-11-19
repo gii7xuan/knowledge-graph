@@ -1,0 +1,57 @@
+test_late_receipts_restore_all_seats_without_repeating_initial_requests (tests.test_gpt_comparison_recovery.RecordedRecoveryTests) ... ok
+test_two_supplements_leave_the_single_focused_review_available (tests.test_gpt_comparison_recovery.RecordedRecoveryTests) ... FAIL
+test_shared_ballots_survive_both_branches_without_duplicate_initial_calls (tests.test_gpt_five_group.FiveGroupTests) ... ok
+test_unknown_and_token_stop_prevent_next_dispatch (tests.test_gpt_five_group.FiveGroupTests) ... ok
+test_agent_and_fixed_workflow_share_server_enforced_action_limits (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_all_keep_executes_with_zero_requests_even_when_ontology_has_a_gap (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_disjoint_excerpts_of_one_book_cannot_cross_development_and_test (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_experiment_study_fence_preserves_both_groups_and_marks_failed_ballot (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_extraction_batches_cross_small_sections_without_changing_paragraphs (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_fixed_workflow_is_explicit_and_not_a_planner_failure_fallback (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_fixed_workflow_runs_real_shared_runtime_without_planner_requests (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_frozen_single_voter_is_not_silently_replaced_by_first_slot (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_metrics_keep_unknown_truth_and_failed_predictions_in_the_population (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_missing_and_abstaining_seats_do_not_turn_one_vote_into_a_majority (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_preparation_lexical_scope_preserves_only_general_descriptions (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_study_request_cap_is_shared_by_different_method_meters (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_unknown_request_in_one_method_blocks_dispatch_in_another (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_workflow_uses_ordered_supplements_then_one_fixed_dispute (tests.test_fixed_candidate_experiment.FixedCandidateTests) ... ok
+test_imported_revision_ancestry_does_not_become_a_new_experiment_operation (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_isolated_runner_drains_new_rebind_jobs_but_bounds_the_queue (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_late_subscription_rebind_preserves_original_publication_receipt (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_mapping_proposal_review_isolated_application_and_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_no_new_information_stops_without_forcing_agreement (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_semantic_revision_keeps_modality_and_requires_new_ballot (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+test_completed_receipt_is_reused_and_duplicate_completion_is_fenced (tests.test_agent_resolution.DurablePlannerTests) ... ok
+test_gateway_504_remains_unknown_and_channel_breaker_does_not_pause_other_models (tests.test_agent_resolution.DurablePlannerTests) ... ok
+test_late_receipt_is_saved_unknown_is_not_resent_and_stale_action_is_not_executed (tests.test_agent_resolution.DurablePlannerTests) ... ok
+test_datatype_definitions_survive_the_adapter (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_known_invalid_committee_material_is_a_technical_task_even_with_known_usage (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_profiles_are_independent_and_fund_the_final_full_committee (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_same_code_different_targets_are_not_closed_together (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_technical_unknown_is_visible_without_overriding_complete_semantic_judgment (tests.test_agent_resolution.ProfileAndAdapterTests) ... ok
+test_agent_supplements_a_real_index_then_closes_exact_dispute_without_replacing_original_votes (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_fixed_initial_steps_use_no_planner_calls_and_technical_cost_is_separate (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_mapping_type_must_be_proposed_from_source_and_legal_ids (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_missing_finding_gets_one_separate_semantic_reassessment_without_changing_invalid_original (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_new_source_dependency_gets_its_own_scoped_review_before_closure (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_shared_definition_tasks_aggregate_and_enter_publication_impact_without_copying_votes (tests.test_agent_resolution.ResolutionRuntimeTests) ... ok
+test_focused_support_updates_only_covered_checks_and_preserves_original_votes (tests.test_agent_resolution.ResolutionSnapshotTests) ... ok
+test_opposition_routes_to_revision_and_changed_candidate_invalidates_old_snapshot (tests.test_agent_resolution.ResolutionSnapshotTests) ... ok
+test_other_unresolved_obligation_and_evidence_spillover_still_block_closure (tests.test_agent_resolution.ResolutionSnapshotTests) ... ok
+
+======================================================================
+FAIL: test_two_supplements_leave_the_single_focused_review_available (tests.test_gpt_comparison_recovery.RecordedRecoveryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_gpt_comparison_recovery.py", line 44, in test_two_supplements_leave_the_single_focused_review_available
+    self.assertEqual(runtime.state.observations[-1]['status'],'ok',runtime.state.observations[-1])
+AssertionError: 'empty' != 'ok'
+- empty
++ ok
+ : {'step_no': 4, 'tool': 'search_evidence', 'arguments': {'scope': 'same_section', 'query': 'covolume does not have physical meaning', 'purpose': 'check_support', 'limit': 6}, 'status': 'empty', 'scope': 'same_section', 'query': 'covolume does not have physical meaning', 'purpose': 'check_support', 'query_used_for': 'lexical_recall_and_ranking', 'new_evidence_count': 0, 'items': [], 'semantic_status': 'unknown', 'deduplicated_against_archive': True, 'action_fingerprint': '6bd69d313743a831416e1fcd9dacf1768fe8abdca86c3e3cd6c3c66a3ebadacb'}
+
+----------------------------------------------------------------------
+Ran 41 tests in 99.046s
+
+FAILED (failures=1)

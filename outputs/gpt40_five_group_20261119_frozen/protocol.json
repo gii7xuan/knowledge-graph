@@ -1,0 +1,53 @@
+{
+  "version": "gpt40_shared_ballot_comparison_v1",
+  "population": 40,
+  "partition": "development",
+  "label_source": "gpt_preannotation",
+  "groups": [
+    "b0_all_keep",
+    "b1_single",
+    "b2_majority",
+    "b3_fixed_workflow",
+    "agent"
+  ],
+  "shared_first_round": true,
+  "first_round_reuse": "B1/B2 are derived controls; B3/Agent fork identical original ballots without rebinding votes",
+  "single_slot": "judge_c",
+  "majority_rule": "at least two of three explicit same verdicts; axis labels also use absolute majority",
+  "comparison_limits": {
+    "llm_calls": 520,
+    "known_tokens": 15000000,
+    "seconds": 43200
+  },
+  "per_case_limits": {
+    "max_planner_steps": 4,
+    "max_validation_rounds": 1,
+    "max_tool_calls": 12,
+    "max_llm_calls_per_candidate": 10,
+    "max_total_tokens": 250000,
+    "max_evidence_items": 64,
+    "max_evidence_chars": 40000,
+    "per_call_timeout_seconds": 180,
+    "total_timeout_seconds": 540,
+    "max_retries_per_request": 0,
+    "max_parallel_validators": 3,
+    "max_parallel_candidates": 1,
+    "planner_timeout_seconds": 120
+  },
+  "initial_packet_policy": "exact GPT-reference initial candidate and evidence; GPT labels never sent",
+  "branches": "B3 and Agent start concurrently from the same post-initial checkpoint and deadline",
+  "weight_policy": "frozen dynamic check_completion_v1 with common cold-start prior; no online reliability update",
+  "primary_metrics": [
+    "source_support_reference_agreement",
+    "expression_reference_agreement",
+    "manual_recommendations",
+    "technical_incomplete",
+    "provider_usage"
+  ],
+  "full_admission_quality_evaluated": false,
+  "prior_extraction_unknown": "retained separately; no extraction request is repeated",
+  "reference_binding_role": "identifies original GPT packet; current audit/proposal IDs are recorded separately",
+  "public_settings_hash": "f64c43fd980c7252080d87310d3b27429848ea5cf0aaea558fcb0438dfe7aff2",
+  "human_gold_count": 0,
+  "production_writes": false
+}

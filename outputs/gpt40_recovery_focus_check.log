@@ -1,0 +1,17 @@
+test_two_supplements_leave_the_single_focused_review_available (tests.test_gpt_comparison_recovery.RecordedRecoveryTests) ... FAIL
+
+======================================================================
+FAIL: test_two_supplements_leave_the_single_focused_review_available (tests.test_gpt_comparison_recovery.RecordedRecoveryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_gpt_comparison_recovery.py", line 44, in test_two_supplements_leave_the_single_focused_review_available
+    self.assertEqual(runtime.state.observations[-1]['status'],'ok',runtime.state.observations[-1])
+AssertionError: 'empty' != 'ok'
+- empty
++ ok
+ : {'step_no': 4, 'tool': 'search_evidence', 'arguments': {'scope': 'same_section', 'query': 'covolume does not have physical meaning', 'purpose': 'check_support', 'limit': 6}, 'status': 'empty', 'scope': 'same_section', 'query': 'covolume does not have physical meaning', 'purpose': 'check_support', 'query_used_for': 'lexical_recall_and_ranking', 'new_evidence_count': 0, 'items': [], 'semantic_status': 'unknown', 'deduplicated_against_archive': True, 'action_fingerprint': '6bd69d313743a831416e1fcd9dacf1768fe8abdca86c3e3cd6c3c66a3ebadacb'}
+
+----------------------------------------------------------------------
+Ran 1 test in 3.488s
+
+FAILED (failures=1)

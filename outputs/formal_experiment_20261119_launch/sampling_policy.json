@@ -1,0 +1,20 @@
+{
+  "version": "fixed_candidate_formal_preparation_v1",
+  "target": 300,
+  "source_patterns": [
+    "现代火炮自动机设计理论.md",
+    "火炮与自动武器动力学*.md",
+    "火炮构造与原理*.md"
+  ],
+  "paragraph_selection": "fixed lexical prescreen of general descriptive concepts before extraction",
+  "exclusion_regex": "炮|枪|武器|弹丸|弹药|装药|膛|射击|击发|后坐|复进|供弹|弹道|爆炸|燃烧|战术|军用|发射|杀伤|穿甲|火药",
+  "concept_regex": "刚体|柔性体|广义坐标|虚功|虚位移|质点|质心|惯性|阻尼|线性系统|弹性|黏性|键合|通口|能量|热力学|热传导|传热|温度|热容|疲劳|应力|应变|有限元|摩擦|振动|质量守恒|运动学|力学|流体|连续介质",
+  "candidate_selection": "source/section round-robin independent of labels and review outcomes",
+  "extraction_request_cap": 60,
+  "extraction_known_token_stop": 1200000,
+  "extraction_retries": 0,
+  "stop_on_unknown": true,
+  "semantic_changes_during_review": false,
+  "test_labels_used_for_preparation": false,
+  "source_group_unit": "original book"
+}

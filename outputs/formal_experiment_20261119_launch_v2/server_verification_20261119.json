@@ -1,0 +1,117 @@
+{
+  "status": "server_http_response_confirmed_completion_and_billing_unverified",
+  "attempt_id": "attempt_8373599cfa9a43288473df4a3371a6ce",
+  "local_request_key": "96adb924224905c67fd224dab6de4f7b67ffbb7fc82c477506412388d55a4306",
+  "proposal_digest": "08dba6810e26f682005c8ddf2cd590382bb27843ad5cd50474f3408fefe84e7a",
+  "started_at_beijing": "2026-11-19T09:43:51.614124+08:00",
+  "recipient": "https://api.deepseek.com",
+  "model_id": "deepseek-flash",
+  "server_evidence": {
+    "http_status": 200,
+    "response_headers_ms": 216.914,
+    "response_headers": {
+      "connection": "keep-alive",
+      "content-encoding": "gzip",
+      "content-type": "application/json",
+      "date": "Thu, 19 Nov 2026 01:43:53 GMT",
+      "server": "openresty",
+      "transfer-encoding": "chunked"
+    },
+    "request_body_bytes": 26581,
+    "trace": [
+      {
+        "elapsed_ms": 3.961,
+        "event": "http11.send_request_headers.started"
+      },
+      {
+        "elapsed_ms": 4.505,
+        "event": "http11.send_request_headers.complete"
+      },
+      {
+        "elapsed_ms": 4.526,
+        "event": "http11.send_request_body.started"
+      },
+      {
+        "elapsed_ms": 5.264,
+        "event": "http11.send_request_body.complete"
+      },
+      {
+        "elapsed_ms": 5.287,
+        "event": "http11.receive_response_headers.started"
+      },
+      {
+        "elapsed_ms": 216.324,
+        "event": "http11.receive_response_headers.complete"
+      },
+      {
+        "elapsed_ms": 217.11,
+        "event": "http11.receive_response_body.started"
+      },
+      {
+        "elapsed_ms": 180234.895,
+        "event": "http11.receive_response_body.failed"
+      },
+      {
+        "elapsed_ms": 180234.95,
+        "event": "http11.response_closed.started"
+      },
+      {
+        "elapsed_ms": 180251.035,
+        "event": "http11.response_closed.complete"
+      }
+    ],
+    "response_body_available": false,
+    "response_id": null,
+    "provider_request_id": null,
+    "client_request_id": null
+  },
+  "interpretation": {
+    "server_returned_http_headers": true,
+    "generation_started": null,
+    "generation_completed": null,
+    "billed": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "late_result_is_model_completion": false,
+    "late_result_actual_status": "api_error"
+  },
+  "request_event_timeline": [
+    {
+      "event": "started",
+      "at_beijing": "2026-11-19T09:43:51.614124+08:00",
+      "response_status": null
+    },
+    {
+      "event": "unknown",
+      "at_beijing": "2026-11-19T09:46:51.591324+08:00",
+      "response_status": "timeout"
+    },
+    {
+      "event": "late_result",
+      "at_beijing": "2026-11-19T09:46:51.931429+08:00",
+      "response_status": "api_error"
+    }
+  ],
+  "original_database_state": "unknown",
+  "original_database_usage_state": "unknown",
+  "database_sha256_unchanged": true,
+  "database_sha256": "0bd5175ad9ea5de7faaf80093c97a589973f67e34b835e35ba0683cf6189d713",
+  "new_model_calls": 0,
+  "original_request_resent": false,
+  "browser_usage_verification": "native Chrome access approval timed out; account usage page not accessed",
+  "public_reference_checks": [
+    {
+      "url": "https://api-docs.deepseek.com/quick_start/rate_limit/",
+      "finding": "Non-streaming requests can remain connected before the final JSON response; response headers alone do not establish completed generation."
+    },
+    {
+      "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+      "finding": "Checked documented creation API; no retrieval by this local attempt ID or input hash was found in the checked reference."
+    },
+    {
+      "url": "https://api-docs.deepseek.com/api/get-user-balance/",
+      "finding": "Balance response is account-level and cannot identify this request."
+    }
+  ],
+  "next_required_evidence": "Provider-side record for 2026-11-19 09:43:51 Beijing, deepseek-flash, same API key: completed/failed/queued status, usage and final response or provider request ID. An aggregate balance change alone is insufficient."
+}

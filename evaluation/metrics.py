@@ -8,6 +8,36 @@ def ratio(a,b): return a/b if b else None
 def binary(value): return type(value) is int and value in (0,1)
 
 
+def fixed_candidate_metrics(rows):
+    """Technical failures are causes of human handoff, not excluded candidates."""
+    from .human_handoff import outcome,technical_failure
+    t=[r for r in rows if technical_failure(r) and outcome(r)=='manual']
+    a=[r for r in rows if outcome(r)=='accept']
+    rejected=[r for r in rows if outcome(r)=='reject']
+    h=[r for r in rows if outcome(r)=='manual']
+    pending=[r for r in rows if outcome(r)=='pending']
+    positive=[r for r in rows if binary(r.get('label')) and r['label']==1]
+    negative=[r for r in rows if binary(r.get('label')) and r['label']==0]
+    judged=[r for r in a if binary(r.get('label'))]
+    correct=sum(r.get('label')==1 for r in judged)
+    incorrect=sum(r.get('label')==0 for r in judged)
+    def fraction(n,d):return {'numerator':n,'denominator':d,'value':ratio(n,d)}
+    return {'version':'fixed_candidate_metrics_v2_human_handoff','population':len(rows),
+        'outcomes':{'accept':len(a),'reject':len(rejected),'manual':len(h),'pending':len(pending)},
+        'technical_failure_handoff_count':len(t),'semantic_handoff_count':len(h)-len(t),
+        'technical_failure_is_subset_of_manual':True,
+        'admission_precision':fraction(correct,len(judged)),
+        'correct_candidate_retention':fraction(correct,len(positive)),
+        'false_acceptance_rate':fraction(incorrect,len(negative)),
+        'automatic_decision_coverage':fraction(len(a)+len(rejected),len(rows)),
+        'manual_rate':fraction(len(h),len(rows)),
+        'technical_incompletion_rate':fraction(len(t),len(rows)),
+        'pending_rate':fraction(len(pending),len(rows)),
+        'unknown_truth_count':sum(not binary(r.get('label')) for r in rows),
+        'unknown_truth_accept_count':len(a)-len(judged),
+        'decisions_are_research_recommendations':True}
+
+
 def current_truth(rows,revision_labels=None):
     labels={}
     for row in revision_labels or []:
@@ -58,7 +88,8 @@ def research_metrics(rows,*,gold_facts=None,extension_records=None,extension_lab
     conflicts=[i for i in issues if i.get('code') in {'source_conflict','counterevidence'}]
     revisions=[r for r in rows if (r.get('final_candidate') or {}).get('revision',r.get('revision',1))!=r.get('revision',1)]
     gaps=[r for r in rows if r.get('ontology_gap')==1 and binary(r.get('ontology_gap'))]
-    result={'recommendation_precision':ratio(sum(r['label'] for r in judged),len(judged)),
+    result={'fixed_candidate_review':fixed_candidate_metrics(rows),
+        'recommendation_precision':ratio(sum(r['label'] for r in judged),len(judged)),
         'recommendation_labeled_accept_count':len(judged),'recommendation_unknown_accept_count':len(accepted)-len(judged),
         'recommendation_coverage':ratio(len(accepted),len(rows)),
         'false_rejection_rate':ratio(sum(r in rejected for r in positives),len(positives)),

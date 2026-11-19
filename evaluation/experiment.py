@@ -20,11 +20,11 @@ from review_agent.ontology_guard import OntologyGuard,load_snapshot
 from review_agent.orchestrator import ReviewOrchestrator
 from review_agent.batch import versions_for
 from .manifest import freeze_manifest,validate_manifest,key
-from .request_meter import RequestMeter
+from .request_meter import RequestMeter,StudyBudget
 from .adapters.baselines import single_judge,simple_majority
 from .metrics import usage_metrics
 
-METHODS={'rules','single','majority','fixed_workflow','agent'}
+METHODS={'all_keep','rules','single','majority','fixed_workflow','agent'}
 ABLATIONS={'no_targeted_retrieval','no_issue_resolution','no_counterevidence_resolution','no_extension'}
 
 
@@ -55,6 +55,13 @@ def configure(config,group,scope,limits):
     result.setdefault('neo4j',{})['auto_import_enabled']=False
     planner=result.setdefault('planner',{})
     planner.update(enabled=group['method']=='agent',strategy='llm_react' if group['method']=='agent' else 'deterministic')
+    planner.pop('fixed_workflow_policy',None)
+    if group.get('workflow_policy'):
+        if group['method']!='fixed_workflow' or group['workflow_policy']!='fixed_candidate_workflow_v1':
+            raise ValueError('unknown fixed workflow policy')
+        planner.update(enabled=True,strategy='llm_react',fixed_workflow_policy=group['workflow_policy'])
+    if group.get('single_voter_id'):
+        result['experiment_single_voter_id']=group['single_voter_id']
     from review_agent.planner_contracts import TOOL_SCHEMAS
     allowed=set(planner.get('allowed_tools') or TOOL_SCHEMAS)
     ablations=group.get('ablations',[])
@@ -85,6 +92,9 @@ def seed_catalog(base,root):
 
 
 def baseline(repository,candidate,document,release,config,voters,method):
+    if method=='all_keep':
+        return {'predicted_decision':'accept','baseline':'all_original_candidates_kept',
+                'evidence_anchors':candidate.get('evidence_items',[]),'model_calls':0}
     from evidence.hierarchical_retriever import retrieve_initial
     from evidence.verification import verify_evidence_bundle
     from review_agent.validators import judge_independently,model_request_count
@@ -103,7 +113,10 @@ def baseline(repository,candidate,document,release,config,voters,method):
         return {'predicted_decision':'accept' if guard['status']=='pass' and supported else 'defer','baseline':'literal_cooccurrence_with_guard',
             'source_support':'rule_supported' if supported else 'unknown','evidence_anchors':bundle['items']}
     if not voters: raise ValueError('baseline model services are not configured')
-    voters=voters[:1] if method=='single' else voters
+    if method=='single':
+        selected=config.get('experiment_single_voter_id')
+        voters=[v for v in voters if v['id']==selected] if selected else voters[:1]
+        if len(voters)!=1:raise ValueError('single-model baseline needs one configured frozen voter')
     owner=ReviewOrchestrator(repository,OntologyGuard(load_snapshot(release.snapshot_path)),voters,config=config)
     scope=resolve_scope(config);memory=ReviewMemory(repository).lookup(scope=scope,exclude_candidate_id=candidate['candidate_id'],domain=candidate.get('domain'))
     context={**versions_for(config),'mode':'shadow','memory_scope':scope,'memory_scope_hash':scope_hash(scope),
@@ -125,14 +138,17 @@ def baseline(repository,candidate,document,release,config,voters,method):
     with repository.transaction(immediate=True) as connection:
         connection.execute("UPDATE audit_runs SET status='completed',completed_at=? WHERE audit_id=?",(utc_now(),audit_id))
     prediction='accept' if result['verdict']=='valid' and guard['status']=='pass' else 'reject' if result['verdict']=='invalid' else 'defer'
-    return {'audit_id':audit_id,'predicted_decision':prediction,'baseline_result':result,'evidence_anchors':bundle['items']}
+    incomplete=result['verdict'] not in {'valid','invalid'} and any(v.get('response_status')!='ok' for v in votes)
+    return {'audit_id':audit_id,'predicted_decision':prediction,'baseline_result':result,'evidence_anchors':bundle['items'],
+            'status':'failed' if incomplete else 'completed',
+            'stop_reason':'baseline_technical_incomplete' if incomplete else None}
 
 
 def run_experiment(spec,candidates,documents,base_release,output,config,*,services_factory=None,memory_cases=None,manifest=None,development_candidates=None):
     """No truth labels are accepted by this execution API. Evaluation is separate."""
     from review_agent.configuration import normalize_config
     config=normalize_config(config)
-    if set(spec)-{'split','groups','limits','prices','experiment_id','evaluation_partition'}: raise ValueError('unknown experiment spec fields; labels are evaluated separately')
+    if set(spec)-{'split','groups','limits','study_limits','prices','experiment_id','evaluation_partition'}: raise ValueError('unknown experiment spec fields; labels are evaluated separately')
     scope=scope_from_split(spec['split'])
     groups=spec.get('groups') or []
     if not groups or len({g['id'] for g in groups})!=len(groups): raise ValueError('unique experimental groups required')
@@ -140,8 +156,16 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
     if set(limits)-{'llm_calls','tokens','tool_calls','extension_requests','rebinds','seconds'}: raise ValueError('unknown experiment limit')
     if any(type(v) not in (int,float) or v<=0 for v in limits.values()): raise ValueError('experiment limits must be positive')
     if any(type(limits[k]) is not int for k in limits if k!='seconds'): raise ValueError('count budgets must be integers')
+    study_limits=spec.get('study_limits')
+    if study_limits is not None:
+        if (set(study_limits)!={'llm_calls','known_tokens','seconds'} or
+                any(type(v) is not int or v<=0 for v in study_limits.values())):
+            raise ValueError('study limits require positive integer llm_calls, known_tokens and seconds')
+    study=StudyBudget(study_limits) if study_limits is not None else None
     for group in groups:
-        if set(group)-{'id','method','ontology_mode','ablations','weighting_mode'}: raise ValueError('unknown experiment group field')
+        if set(group)-{'id','method','ontology_mode','ablations','weighting_mode','single_voter_id','workflow_policy'}: raise ValueError('unknown experiment group field')
+        if 'single_voter_id' in group and (group['method']!='single' or not isinstance(group['single_voter_id'],str) or not group['single_voter_id']):
+            raise ValueError('single_voter_id applies only to a single-model baseline')
         if 'weighting_mode' in group and group['method'] not in {'agent','fixed_workflow'}:raise ValueError('weighting controls apply to agent/fixed_workflow groups')
         if (not re.fullmatch('[a-z][a-z0-9_-]{0,63}',group['id']) or group.get('method') not in METHODS
                 or set(group.get('ablations',[]))-ABLATIONS or group.get('ontology_mode','fixed') not in {'fixed','dynamic'}): raise ValueError('invalid experimental group')
@@ -213,7 +237,7 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
                     'ontology_path':str(catalog.current().snapshot_path),'ontology_hash':base.manifest['ontology_version'],'candidate_contract_version':'extraction_candidate_v4'})
                 runs[candidate['run_id']]=document['index_content_hash']
             repository.add_candidate(deepcopy(candidate))
-        meter=RequestMeter(folder/'request_journal.jsonl',limits)
+        meter=RequestMeter(folder/'request_journal.jsonl',limits,study=study)
         def services(case_ids,ontology=False):
             nonlocal reference_pool
             raw=(services_factory or default_services)(effective)
@@ -230,7 +254,7 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
             candidate=repository.get_revision(cid);document=document_for(candidate)
             release=load_release(folder/'releases'/candidate['ontology_release_id'])
             svc=services([cid])
-            if group['method'] in {'rules','single','majority'}:
+            if group['method'] in {'all_keep','rules','single','majority'}:
                 result=baseline(repository,candidate,document,release,effective,svc['validators'],group['method'])
             else:
                 context={'request_cache_namespace':'experiment:'+group['id'],'experimental_policy':{a:True for a in group.get('ablations',[])}}
@@ -240,6 +264,10 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
         for candidate in candidates:
             try: audit(candidate['candidate_id'])
             except Exception as exc: errors[candidate['candidate_id']]=type(exc).__name__+': '+str(exc)
+            finally:
+                # A returned timeout may leave its transport thread running.
+                # Fence other candidates and groups before dispatching again.
+                if study:meter.snapshot()
         if effective['ontology_extension']['enabled']:
             from ontology_review.runtime import OntologyReviewRuntime
             from ontology_review.publisher import OntologyPublisher
@@ -339,6 +367,7 @@ def run_experiment(spec,candidates,documents,base_release,output,config,*,servic
     report={'version':'controlled_review_experiment_v1','groups':summaries,'population_hash':manifest['manifest_hash'],
         'evaluation_partition':partition,
         'truth_labels_used_during_execution':False,'quality_evaluated':False}
+    if study:report['study_budget']=study.snapshot()
     save(output/'experiment_result.json',report)
     return report
 

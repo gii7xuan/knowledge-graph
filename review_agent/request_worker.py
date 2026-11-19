@@ -57,6 +57,11 @@ def main():
         elif descriptor['task_type']=='source_candidate_extraction_v1':
             from extract_triplets.audited_requests import judge_once
             vote=judge_once(voter,proposal,feedback)
+        elif descriptor['task_type']=='source_candidate_extraction_v2':
+            from extract_triplets.streaming_extraction import judge_once
+            voter['on_stream_progress']=lambda response:repository.record_extraction_progress(
+                descriptor['attempt_id'],descriptor['owner'],response)
+            vote=judge_once(voter,proposal,feedback)
         else:
             raise ValueError('unknown frozen request task_type')
     except Exception as exc:

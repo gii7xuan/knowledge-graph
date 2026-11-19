@@ -129,6 +129,12 @@ class AgentRuntime:
         if (self.orchestrator.config.get('agent_resolution') or {}).get('enabled'):
             ctx.update(resolution_snapshots_enabled=True,
                        agent_resolution_policy=self.orchestrator.config['agent_resolution'])
+        elif self.planner_config.get('fixed_candidate_limits'):
+            # Focused review must affect the same bound consensus in both arms,
+            # without enabling revision application or ontology publication.
+            ctx.update(resolution_snapshots_enabled=True,
+                       agent_resolution_policy={'max_attempts_per_issue':3,'max_semantic_revisions':0,
+                           'reserve_final_committee_calls':0,'fixed_candidate_limits':True})
         ctx["execution_row_version"] = self.repository.get_candidate(candidate_id)["row_version"]
         self.state = AgentState(candidate=candidate, context=ctx, audit_id=audit_id)
         from .issue_ledger import IssueLedger
@@ -137,6 +143,20 @@ class AgentRuntime:
         if prior: self.state.votes=prior.get('votes',[])
         self.state.consensus = aggregate_votes([], self.orchestrator.committee)
         self.repository.start_audit(candidate_id, revision, ctx)
+        frozen_initial=supplied.get('initial_evidence_bundle')
+        if frozen_initial is not None:
+            from copy import deepcopy
+            from evidence.verification import verify_evidence_bundle
+            checked=verify_evidence_bundle(frozen_initial,self.document,candidate)
+            if checked['evidence_hash']!=frozen_initial.get('evidence_hash'):
+                raise ValueError('frozen initial evidence bundle changed during verification')
+            self.initial_ids={x['evidence_id'] for x in checked['items']}
+            self.state.archive=deepcopy(checked['items']);self.state.bundle=deepcopy(checked)
+            self.state.searched_scopes=list(checked.get('searched_levels',[]))
+            ctx.pop('initial_evidence_bundle',None)
+            ctx.update(initial_evidence_ids=sorted(self.initial_ids),frozen_initial_evidence_hash=checked['evidence_hash'])
+            self.repository.update_audit_context(audit_id,ctx);self.checkpoint()
+            return None
         initial = retrieve_initial(candidate, self.document, max_items=6)
         self.initial_ids = {i["evidence_id"] for i in initial["items"] if i.get("retrieval_level") == "local_sentence" or i.get("source_anchor_kind") == "document_span"}
         ctx["initial_evidence_ids"] = sorted(self.initial_ids)
@@ -344,6 +364,13 @@ class AgentRuntime:
         if self.initialize(candidate_id, revision, document, context) == "completed":
             return {"audit_id": self.state.audit_id, "reused_completed": True, "committed": False}
         state, budget = self.state, self.budget
+        fixed_workflow=self.planner_config.get('fixed_workflow_policy')
+        if fixed_workflow:
+            from .fixed_candidate_workflow import VERSION
+            if fixed_workflow!=VERSION:raise ValueError('unknown fixed workflow policy')
+            state.executed_strategy='fixed_workflow'
+            state.context.update(configured_strategy='fixed_workflow',executed_strategy='fixed_workflow',
+                                 fixed_workflow_policy=VERSION)
         planner = LLMPlanner(self.orchestrator.planner_client,
             max_retries=1 if self.planner_config.get('failure_policy')=='bounded_minimum_v1' else int(budget.config.get("max_retries_per_request", 1)),
             max_output_tokens=int(self.planner_config.get("max_output_tokens", 1024)),
@@ -371,8 +398,13 @@ class AgentRuntime:
                     self.issue("planner_budget", "规划步数耗尽", critical=True)
                     break
                 state.step_no += 1
+                if self.planner_config.get('fixed_candidate_limits'):
+                    state.context['resolution_no_further_validation']=budget.usage['validation_rounds']>=int(budget.config.get('max_validation_rounds',2))
                 fixed=None
-                if self.planner_config.get('state_driven_steps'):
+                if fixed_workflow:
+                    from .fixed_candidate_workflow import next_action
+                    fixed=next_action(state)
+                elif self.planner_config.get('state_driven_steps'):
                     from .resolution_obligations import ready_action,resolution_obligations
                     from .validation_recovery import recovery_plan
                     state.validation_recovery=recovery_plan(state,self.repository)
