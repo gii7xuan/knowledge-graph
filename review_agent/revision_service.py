@@ -234,7 +234,7 @@ class RevisionService:
             if not entry and not vote.get('outcome_unknown'): return True
         return False
 
-    def propose(self, candidate, expected_row_version, changes, evidence_ids, reason, bundle, document, *, protected_ids=(), source_audit_id=None, _connection=None, _split_context=None, mapping_rationale=None):
+    def propose(self, candidate, expected_row_version, changes, evidence_ids, reason, bundle, document, *, protected_ids=(), source_audit_id=None, _connection=None, _split_context=None, mapping_rationale=None, field_evidence=None, qualifier_verification=None):
         from .repository import ConflictError, ValidationError
         updated=deepcopy(candidate)
         updated['triple']=merge_triple_patch(candidate['triple'],changes,
@@ -284,6 +284,12 @@ class RevisionService:
                 'meaning':'not_stated applies only to this frozen verification scope'},
             'field_evidence':{field:list(evidence_ids) for field in fields}}
         draft['change_analysis']=analyze(candidate,updated,verified)
+        if field_evidence is not None:
+            for field,ids in field_evidence.items():
+                if field not in fields or not ids or not set(ids)<=set(evidence_ids):
+                    raise ValidationError('field evidence must bind a changed field to verified draft evidence')
+                draft['field_evidence'][field]=list(ids)
+        if qualifier_verification is not None:draft['qualifier_verification']=deepcopy(qualifier_verification)
         if mapping_rationale is not None:draft['mapping_rationale']=deepcopy(mapping_rationale)
         if _split_context: draft.update(operation='split_child',split_context=deepcopy(_split_context))
         if ontology_context:draft['ontology_context']=ontology_context

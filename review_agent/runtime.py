@@ -120,6 +120,7 @@ class AgentRuntime:
             "configured_strategy": "llm_react", "executed_strategy": "llm_react",
             "orchestrator_kind": "bounded_agent_runtime", "agent_versions": versions,
             "committee_members": self.orchestrator.committee_members(),
+            "resolution_allowed_tools": sorted(self.policy.allowed),
             "budget_config": budget_config, "memory_snapshot_id": memory_version,
             'memory_scope':memory_scope,'memory_scope_hash':scope_hash(memory_scope),
             "review_memory": examples, "memory_bundle_hash": sha256_json(examples),
@@ -219,7 +220,7 @@ class AgentRuntime:
                 if receipt:
                     self.budget.tokens(receipt)
                     action, error = current_action(receipt, proposal, state,
-                        lambda a: self.policy.validate_request(a, state))
+                        lambda a: self.policy.validate_request(a, state,self.budget))
                     if action is not None:
                         state.pending_action = action
                         recovered_planner = True
@@ -227,6 +228,13 @@ class AgentRuntime:
                             state.state_version, state.digest(), {**step, 'status': 'recovered_original_receipt',
                                 'action': action, 'attempts': [receipt]},
                             checkpoint=(state.export(), self.budget.snapshot(), 'planned'))
+                    elif isinstance(error,dict):
+                        state.context['planner_policy_feedback']=error
+                        state.state_version+=1
+                        recovered_planner=True
+                        self.repository.record_planner_step(state.audit_id,state.step_no,state.state_version,state.digest(),
+                            {**step,'status':'policy_rejected_original_receipt','policy_feedback':error,'attempts':[receipt]},
+                            checkpoint=(state.export(),self.budget.snapshot(),'ready'))
                     else:
                         state.context.setdefault('technical_recovery_tasks', []).append({
                             'task_type': 'planner_action', 'request_key': receipt.get('request_key'),
@@ -318,13 +326,18 @@ class AgentRuntime:
             return
         before = state.digest()
         name = action["action"]
+        search_record=None
+        if name in {'inspect_context','search_evidence'}:
+            from .action_availability import search_key,evidence_version
+            search_record={'key':search_key(action,state),'evidence_version':evidence_version(state),
+                'target_issue':action['target_issue'],'tool':name,'arguments':action['arguments']}
         if state.context.get('resolution_snapshots_enabled'):
             state.context['resolution_remaining_calls']=budget.remaining_calls()
         self.repository.record_agent_tool(state.audit_id, state.step_no, name, "started",
             {"arguments": action["arguments"], "before_state_hash": before},
             checkpoint=(state.export(), budget.snapshot(), "tool_running"))
         try:
-            fingerprint = self.policy.check(action, state)
+            fingerprint = self.policy.check(action, state, budget, tool_reserved=True)
             if state.context.get('resolution_snapshots_enabled'):
                 from .resolution_obligations import attempt_targets
                 counts=state.context.setdefault('resolution_attempts',{})
@@ -334,6 +347,7 @@ class AgentRuntime:
             if name not in {'apply_reviewed_revision','apply_reviewed_split'} and state.stop_reason!='revision_submitted_for_reaudit': self.check_live()
         except ActionError as exc:
             outcome = {"status": "invalid_action", "error": str(exc)}
+            if hasattr(exc,'feedback'):outcome['policy_feedback']=exc.feedback
             if "repeated" in str(exc):
                 state.stop_reason = "no_information_gain"
                 self.issue("repeated_action", str(exc), critical=True)
@@ -347,9 +361,9 @@ class AgentRuntime:
         if state.context.get('resolution_snapshots_enabled'):
             if name in {'inspect_context','search_evidence'}:
                 state.context['resolution_no_gain']=not bool(outcome.get('new_evidence_count'))
-                if not outcome.get('new_evidence_count'):
-                    from .resolution_obligations import attempt_targets
-                    state.context['resolution_no_gain_targets']=sorted(set(state.context.get('resolution_no_gain_targets',[]))|set(attempt_targets(action,state)))
+                if outcome['status'] in {'ok','empty'}:
+                    state.context.setdefault('resolution_search_history',{})[search_record['key']]={
+                        **search_record,'new_evidence_count':outcome.get('new_evidence_count',0),'status':outcome['status']}
             if name not in {'finish_review','apply_reviewed_revision','apply_reviewed_split'}:
                 self.refresh_resolution()
         state.pending_action = {}
@@ -374,7 +388,7 @@ class AgentRuntime:
         planner = LLMPlanner(self.orchestrator.planner_client,
             max_retries=1 if self.planner_config.get('failure_policy')=='bounded_minimum_v1' else int(budget.config.get("max_retries_per_request", 1)),
             max_output_tokens=int(self.planner_config.get("max_output_tokens", 1024)),
-            action_validator=lambda action:self.policy.validate_request(action,state),
+            action_validator=lambda action:self.policy.validate_request(action,state,budget),
             repository=self.repository if self.planner_config.get('durable_requests') else None,
             request_settings=self.planner_config) if self.orchestrator.planner_client else None
         invalid_steps = 0
@@ -388,15 +402,6 @@ class AgentRuntime:
                 if state.pending_action:
                     self.execute(state.pending_action)
                     continue
-                maximum = int(budget.config.get("max_planner_steps", 6))
-                if state.executed_strategy != "deterministic_fallback" and budget.usage["planner_steps"] >= maximum:
-                    if self.planner_config.get('failure_policy')=='bounded_minimum_v1':
-                        self.fallback('planner step budget exhausted; perform remaining minimum obligations')
-                        self.checkpoint()
-                        continue
-                    state.stop_reason = "planner_step_budget_exhausted"
-                    self.issue("planner_budget", "规划步数耗尽", critical=True)
-                    break
                 state.step_no += 1
                 if self.planner_config.get('fixed_candidate_limits'):
                     state.context['resolution_no_further_validation']=budget.usage['validation_rounds']>=int(budget.config.get('max_validation_rounds',2))
@@ -435,6 +440,14 @@ class AgentRuntime:
                     self.checkpoint()
                     continue
                 else:
+                    maximum = int(budget.config.get("max_planner_steps", 6))
+                    if budget.usage['planner_steps']>=maximum:
+                        if self.planner_config.get('failure_policy')=='bounded_minimum_v1':
+                            self.fallback('planner step budget exhausted; perform remaining minimum obligations')
+                            self.checkpoint();continue
+                        state.stop_reason='planner_step_budget_exhausted'
+                        self.issue('planner_budget','规划步数耗尽；具体未决问题转人工',critical=True)
+                        break
                     from .validation_recovery import recovery_plan
                     state.validation_recovery=recovery_plan(state,self.repository)
                     from .revision_service import RevisionService
@@ -460,6 +473,20 @@ class AgentRuntime:
                             (not self.planner_config.get('durable_requests') or a.get('error_code')!='SERVICE_PAUSED')), None)
                         if fatal:
                             raise AuditPaused({**fatal, "voter_id": "planner", "role": "planner"})
+                        if result.get('policy_feedback'):
+                            state.context['planner_policy_feedback']=result['policy_feedback']
+                            state.state_version+=1
+                            invalid_steps+=1
+                            if invalid_steps>=int(self.planner_config.get('max_invalid_steps',2)):
+                                state.context['resolution_local_supplements_only']=True
+                            from .resolution_obligations import resolution_obligations
+                            legal=[o for o in resolution_obligations(state,budget,self.policy.allowed) if o['legal_next_tool'] and o['ready']]
+                            if len(legal)==1 and legal[0]['ready'] and legal[0]['legal_next_tool'] in {'search_evidence','inspect_context'}:
+                                o=legal[0]
+                                state.pending_action={'action':o['legal_next_tool'],'arguments':o['arguments'],
+                                    'target_issue':o['obligation_id'],'rationale_summary':o['reason']}
+                            self.checkpoint()
+                            continue
                         invalid_steps += 1
                         only_contract = result.get("attempts") and all(a["response_status"] == "invalid_action" for a in result["attempts"])
                         if self.planner_config.get('failure_policy')=='bounded_minimum_v1' or not only_contract or invalid_steps >= int(self.planner_config.get("max_invalid_steps", 2)):

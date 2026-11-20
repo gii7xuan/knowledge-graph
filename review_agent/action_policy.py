@@ -62,8 +62,11 @@ class ActionPolicy:
             blocked.pop('finish_review',None) # Explicit incomplete handoff; final_gaps still blocks admission.
         return blocked
 
-    def validate_request(self, action, state):
+    def validate_request(self, action, state, budget=None, *, tool_reserved=False):
         validate_action(action)
+        from .action_availability import unavailable_reason
+        reason=unavailable_reason(action['action'],state,budget,self.allowed,action=action,tool_reserved=tool_reserved)
+        if reason:raise ActionError(reason)
         if action['action'] not in self.allowed: raise ActionError('tool not permitted by execution policy')
         if self.config.get('fixed_candidate_limits'):
             from .fixed_candidate_workflow import action_counts
@@ -85,9 +88,13 @@ class ActionPolicy:
             if any(state.context.get('resolution_attempts',{}).get(k,0)>=maximum for k in attempt_targets(action,state)):
                 raise ActionError('bounded recovery attempt limit for the exact server issue')
             if action['action']=='finish_review':
-                remaining=[o for o in resolution_obligations(state) if o['legal_next_tool'] in self.allowed]
+                remaining=resolution_obligations(state,budget,self.allowed)
+                # Concrete recoveries have executable arguments. A semantic draft
+                # that still requires a model judgment may legitimately abstain.
+                remaining=[o for o in remaining if o['legal_next_tool'] and o['ready']]
                 if remaining and not state.context.get('resolution_budget_exhausted'):
-                    raise ActionError('known funded recovery remains: '+remaining[0]['legal_next_tool'])
+                    from .planner_contracts import PolicyRejection
+                    raise PolicyRejection('known funded recovery remains: '+remaining[0]['legal_next_tool'],remaining)
             if action['action'] in {'propose_revision','propose_mapping','propose_split_revision'}:
                 if state.context.get('agent_resolution_policy',{}).get('final_review_only') or state.revision_drafts or state.context.get('split_revision_groups'):
                     raise ActionError('one semantic revision version per candidate in this experiment')
@@ -119,8 +126,8 @@ class ActionPolicy:
                 raise ActionError('extension evidence_ids must select current source_supported_evidence_ids')
         return action
 
-    def check(self, action, state):
-        self.validate_request(action,state)
+    def check(self, action, state, budget=None, *, tool_reserved=False):
+        self.validate_request(action,state,budget,tool_reserved=tool_reserved)
         args = action["arguments"]
         available = {x["evidence_id"] for x in state.archive if x.get("anchor_valid") is True}
         cited = args.get("evidence_ids", []) + ([args["evidence_id"]] if "evidence_id" in args else [])
@@ -147,6 +154,10 @@ class ActionPolicy:
         gaps["validation_missing"] = validation is None and not scoped
         gaps["version_stale"] = bool(state.validations and validation is None and not scoped)
         unresolved = [i for i in state.issues if i.get("status", "open") != "resolved"]
+        if snapshot.get('scope_exclusion_complete'):
+            from .resolution_state import mapping_only_issue
+            unresolved=[i for i in unresolved if not mapping_only_issue(i)]
+            gaps['ontology_disagreement']=False
         gaps["critical_issues_unresolved"] = any(i.get("critical") for i in unresolved)
         selected = {i["evidence_id"] for i in state.bundle.get("items", [])}
         gaps["protected_evidence_omitted"] = bool(set(state.protected_ids) - selected - set(state.evidence_exclusions))

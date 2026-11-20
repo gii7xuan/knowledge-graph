@@ -19,17 +19,18 @@ from runs.revalidate_v8 import digest
 VERSION='isolated_agent_resolution_experiment_v1'
 
 
-def prepare(directory,*,limit=3,data_path=DATA):
+def prepare(directory,*,limit=3,data_path=DATA,profile='agent_resolution'):
     directory=Path(directory).resolve()
-    if type(limit) is not int or not 1<=limit<=30:raise ValueError('select 1..30 fixed development cases')
-    initial=prepare_diagnostic(directory,data_path)
+    if profile not in {'agent_resolution','handoff_revision'}:raise ValueError('isolated revision profile required')
+    if type(limit) is not int or not 1<=limit<=len(read(Path(data_path))['bindings']):raise ValueError('select a nonempty bounded frozen population')
+    initial=prepare_diagnostic(directory,data_path,population_policy='bound_candidates' if profile=='handoff_revision' else 'development30')
     bindings=read(directory/'sample_bindings.json')[:limit]
     source=Path(read(Path(data_path))['source_database']).resolve()
-    config=configuration(profile='agent_resolution',directory=directory)
+    config=configuration(profile=profile,directory=directory)
     settings=public_settings(config)
     target=ReviewRepository(directory/'review.sqlite3')
     for b in bindings:target.ensure_case(b['candidate_id'],config['case_budget'])
-    frozen={**initial,'version':VERSION,'population':len(bindings),
+    frozen={**initial,'version':VERSION,'profile_name':profile,'population':len(bindings),
         'candidate_hashes':[b['candidate_content_hash'] for b in bindings],
         'sample_bindings_hash':sha256_json(bindings),'settings_hash':sha256_json(settings),
         'selection_policy':'first N original frozen bindings, before observing new outcomes',
@@ -52,7 +53,7 @@ def prepare(directory,*,limit=3,data_path=DATA):
 def verify(directory):
     directory=Path(directory).resolve();frozen=read(directory/'experiment.json')
     if frozen.get('version')!=VERSION or frozen['freeze_hash']!=sha256_json({k:v for k,v in frozen.items() if k!='freeze_hash'}):raise ValueError('experiment binding changed')
-    config=configuration(profile='agent_resolution',directory=directory)
+    config=configuration(profile=frozen.get('profile_name','agent_resolution'),directory=directory)
     if frozen['settings_hash']!=sha256_json(public_settings(config)) or read(directory/'settings.json')!=public_settings(config):raise ValueError('effective profile changed')
     if fingerprints()!=read(directory/'code_fingerprints.json') or sha256_json(fingerprints())!=frozen['code_hash']:raise ValueError('execution code changed after preparation')
     bindings=read(directory/'sample_bindings.json')
@@ -74,14 +75,21 @@ def execute(directory):
         json.dump({'freeze_hash':frozen['freeze_hash'],'automatic_relaunch':False,'started_at_epoch':time.time()},stream)
     with ZipFile(directory/'execution_code_snapshot.zip','x',ZIP_DEFLATED) as archive:
         for name in read(directory/'code_fingerprints.json'):archive.write(ROOT/name,name)
-    repository=ReviewRepository(directory/'review.sqlite3');config=configuration(profile='agent_resolution',directory=directory)
-    run_id=repository.get_revision(bindings[0]['candidate_id'])['run_id']
+    repository=ReviewRepository(directory/'review.sqlite3');config=configuration(profile=frozen.get('profile_name','agent_resolution'),directory=directory)
+    by_run={}
+    for binding in bindings:
+        run_id=repository.get_revision(binding['candidate_id'],binding['revision'])['run_id']
+        by_run.setdefault(run_id,[]).append(binding['candidate_id'])
     save(directory,'status.json',{'status':'running','stage':'initial','population':len(bindings)})
     try:
-        result=run_review_batch(repository,run_id,config,candidate_ids=[b['candidate_id'] for b in bindings],status_file=directory/'progress.json')
-        save(directory,'initial_batch.json',result)
-        drain_reaudits(repository,run_id,config,directory,max_jobs=len(bindings)*frozen['limits']['reaudit_jobs_per_root'],
-                       root_candidate_ids={b['candidate_id'] for b in bindings})
+        results=[]
+        for run_id,candidate_ids in by_run.items():
+            progress='progress.json' if len(by_run)==1 else 'progress_'+sha256_json(run_id)[:12]+'.json'
+            result=run_review_batch(repository,run_id,config,candidate_ids=candidate_ids,status_file=directory/progress)
+            results.append({'run_id':run_id,'result':result})
+            save(directory,'initial_batch.json',result if len(by_run)==1 else results)
+            drain_reaudits(repository,run_id,config,directory,max_jobs=len(candidate_ids)*frozen['limits']['reaudit_jobs_per_root'],
+                           root_candidate_ids=set(candidate_ids))
         verify(directory)
         report=seal(directory)
         save(directory,'status.json',{'status':'processing_completed','semantic_completed':report['semantic_completed'],
@@ -94,7 +102,7 @@ def execute(directory):
     return read(directory/'status.json')
 
 
-def drain_reaudits(repository,run_id,config,directory,*,max_jobs,root_candidate_ids=None):
+def drain_reaudits(repository,run_id,config,directory,*,max_jobs,root_candidate_ids=None,batch_runner=None):
     """Consume new revision/rebind jobs, including jobs created by a prior re-audit."""
     owner='isolated_resolution_runner';processed=[]
     while True:
@@ -116,7 +124,7 @@ def drain_reaudits(repository,run_id,config,directory,*,max_jobs,root_candidate_
         if not job:raise ValueError('queued re-audit is paused or claimed; explicit recovery required')
         child_config=deepcopy(config)
         child_config['agent_resolution']['final_review_only']=not bool(payload.get('ontology_rebind'))
-        child=run_review_batch(repository,run_id,child_config,candidate_ids=payload['candidate_ids'],
+        child=(batch_runner or run_review_batch)(repository,run_id,child_config,candidate_ids=payload['candidate_ids'],
             status_file=Path(directory)/('reaudit_'+identity+'.json'),job_id=identity,
             job_binding={'job_id':identity,'owner':owner,'lease_token':job['lease_token']},
             on_progress=lambda p:repository.heartbeat_job(identity,p,lease_seconds=1800,owner=owner,lease_token=job['lease_token']))

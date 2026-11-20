@@ -100,4 +100,4 @@ def current_action(result, proposal, state, validator=validate_action):
     try:
         return validator(deepcopy(result['action'])), None
     except (ValueError, TypeError, KeyError) as exc:
-        return None, str(exc)
+        return None, getattr(exc,'feedback',str(exc))

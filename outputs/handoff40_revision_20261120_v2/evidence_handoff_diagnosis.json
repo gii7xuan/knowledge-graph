@@ -1,0 +1,2293 @@
+{
+  "version": "evidence_handoff_trace_diagnosis_v1",
+  "scope": "14 roots previously summarized as domain_or_evidence_review; overlapping mechanisms are not additive",
+  "population": 14,
+  "all_attempted_supplement": true,
+  "all_indexes_are_single_excerpt_chunk": true,
+  "all_same_and_parent_section_target_sets_empty": true,
+  "search_calls": 33,
+  "search_empty_calls": 33,
+  "inspect_context_calls": 18,
+  "roots_with_new_context": 11,
+  "focused_packet_too_large_roots": [
+    "PILOT-002",
+    "PILOT-015",
+    "PILOT-017",
+    "PILOT-029",
+    "PILOT-032",
+    "PILOT-037"
+  ],
+  "focused_model_review_incomplete_roots": [
+    "PILOT-012",
+    "PILOT-036"
+  ],
+  "non_qualifier_revision_rejected_roots": [
+    "PILOT-006",
+    "PILOT-017"
+  ],
+  "findings": [
+    "Supplement tools executed on all 14 roots.",
+    "Their bound retrieval indexes contain only one excerpt chunk. same_section excludes that chunk and parent_section has no eligible chunks, so these search returns cannot establish absence from the parent book.",
+    "Six roots fetched additional context but focused review returned human_review without a model call because serialized evidence bundle exceeded max_evidence_chars=12000.",
+    "PILOT-006 and PILOT-017 attempted changes to head/predicate/tail, rejected by the qualifier-only revision contract. These are semantic review issues rather than evidence retrieval alone.",
+    "Some focused model responses also failed contract checks or were truncated. Such failures require a separate engineering category.",
+    "This audit does not establish that all fourteen are intrinsically ambiguous or that all should be accepted."
+  ],
+  "suggested_order": [
+    "Provide all arms the same frozen complete source hierarchy with verified parent-book anchors; preserve the initial packet and mark supplemental evidence as a new review round.",
+    "Verify legal current/same/parent/cross-section retrieval has eligible targets and can return actual source text. Treat unavailable scope separately from an exhausted search.",
+    "Build bounded focused review packets retaining all material evidence and provenance; classify impossible packing and invalid responses as technical handoff.",
+    "Evaluate original candidate semantic errors explicitly under fixed-candidate policy; score revised versions separately and require independent review for allowed edits."
+  ],
+  "cases": [
+    {
+      "sample_id": "PILOT-002",
+      "candidate_id": "cand_1c49ce3e5f3cc639175f",
+      "original_triple": {
+        "head": "thermodynamics",
+        "surface_relation": "introduced concepts of",
+        "tail": "work and energy"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_04.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_9c8003097a4abe03db67"
+          },
+          "new_evidence_count": 2
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 4,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_bf3824ba4f9d607fff33e3da"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 5,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_04e4b9f65b190581c03996a7"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 6,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_26de845f2fcb67d23865c5fe"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 7,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_de966962b8ecff0ea7e8492b"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 8,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_bfcbb39427a545caad16bcb1"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 9,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_0854c2f96bc171a9db91d0bf"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "step": 10,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_104ab667421e4743f36f07ff"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_581cc4a54a4646d1a253d76d39854659",
+          "revision": 1,
+          "stop_reason": "No legal action with information gain: source dispute already sent to human review six times; mapping blocked by unassigned endpoint types and no matching frozen relation; extensions blocked pending source consensus; run_validation and review_dispute blocked.",
+          "budget_usage": {
+            "input_tokens": 155855,
+            "llm_calls": 5,
+            "output_tokens": 3492,
+            "planner_steps": 2,
+            "tool_calls": 11,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 19,
+          "remaining_seconds_at_end": 1089.7179999999935,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 13280,
+          "final_bundle_quote_chars": 3981,
+          "final_evidence_item_count": 6
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-003",
+      "candidate_id": "cand_fb4e5b2348020e963976",
+      "original_triple": {
+        "head": "gas",
+        "surface_relation": "is considered to be",
+        "tail": "thermally perfect"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_06.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_99adba39cfa5440e9ed98d630cef57c8",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_e697ced760a612c8cfeb"
+          },
+          "new_evidence_count": 1
+        },
+        {
+          "audit_id": "audit_99adba39cfa5440e9ed98d630cef57c8",
+          "revision": 1,
+          "step": 5,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_e697ced760a612c8cfeb"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_99adba39cfa5440e9ed98d630cef57c8",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "gas is considered to be thermally perfect",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "gas is considered to be thermally perfect",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_99adba39cfa5440e9ed98d630cef57c8",
+          "revision": 1,
+          "step": 7,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "gas is considered to be thermally perfect",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "gas is considered to be thermally perfect",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_99adba39cfa5440e9ed98d630cef57c8",
+          "revision": 1,
+          "stop_reason": "No legal action can resolve the blocking QUALIFIER_UNKNOWN fields (time_scope, quantifier) or the ontology_gap; current validation is frozen and no recoverable seats exist.",
+          "budget_usage": {
+            "input_tokens": 169638,
+            "llm_calls": 7,
+            "output_tokens": 6261,
+            "planner_steps": 1,
+            "tool_calls": 8,
+            "unknown_token_requests": 0,
+            "validation_rounds": 2
+          },
+          "remaining_llm_calls_at_end": 17,
+          "remaining_seconds_at_end": 1080.0466282367706,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 10208,
+          "final_bundle_quote_chars": 2971,
+          "final_evidence_item_count": 5
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-004",
+      "candidate_id": "cand_29b12271b98f4caa3b39",
+      "original_triple": {
+        "head": "实际流体的流动",
+        "surface_relation": "不符合",
+        "tail": "式(3.9)"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_62aab259f62f40d9_excerpt_03.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_90dd74765f954e74a6dc37ce58b21c17",
+          "revision": 1,
+          "step": 3,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体的流动 不符合 式(3.9)",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "实际流体的流动 不符合 式(3.9)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_90dd74765f954e74a6dc37ce58b21c17",
+          "revision": 1,
+          "step": 4,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体的流动 不符合 式(3.9)",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "实际流体的流动 不符合 式(3.9)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_90dd74765f954e74a6dc37ce58b21c17",
+          "revision": 1,
+          "step": 5,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体的流动 不符合 式(3.9)",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "实际流体的流动 不符合 式(3.9)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_90dd74765f954e74a6dc37ce58b21c17",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体的流动 不符合 式(3.9)",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "实际流体的流动 不符合 式(3.9)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_90dd74765f954e74a6dc37ce58b21c17",
+          "revision": 1,
+          "stop_reason": "当前验证已冻结且无合法可执行动作：run_validation 被阻止，recover_validation 无安全可恢复席位，propose_mapping 缺少端点类型与来源身份证据，review_dispute 需先补充上下文但 search_evidence 已多次返回空且无新证据，本体映射未分配且扩展资格为空。",
+          "budget_usage": {
+            "input_tokens": 185713,
+            "llm_calls": 6,
+            "output_tokens": 3574,
+            "planner_steps": 3,
+            "tool_calls": 7,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 18,
+          "remaining_seconds_at_end": 1083.8129999999655,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 5207,
+          "final_bundle_quote_chars": 1002,
+          "final_evidence_item_count": 4
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-006",
+      "candidate_id": "cand_73c575625609bc94dc31",
+      "original_triple": {
+        "head": "实际流体管流的伯努利方程",
+        "surface_relation": "由",
+        "tail": "将式(3.10)在管道截面上积分平均"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "exclude"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_62aab259f62f40d9_excerpt_03.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 3,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体管流的伯努利方程 由 将式(3.10)在管道截面上积分平均",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "实际流体管流的伯努利方程 由 将式(3.10)在管道截面上积分平均",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 9,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体管流的伯努利方程 由 将式(3.10)在管道截面上积分平均",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "实际流体管流的伯努利方程 由 将式(3.10)在管道截面上积分平均",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 10,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "实际流体管流的伯努利方程 由 将式(3.10)在管道截面上积分平均",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "实际流体管流的伯努利方程 由 将式(3.10)在管道截面上积分平均",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 4,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_12911fb4c879ac576069358a"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "no new relevant source context retrieved",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 7,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_2cae52342a2ad7c2f23a58ad"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "no new relevant source context retrieved",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 8,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_78dac42924c948528f1abe0f"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "no new relevant source context retrieved",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 5,
+          "tool": "propose_revision",
+          "status": "tool_error",
+          "arguments": {
+            "changes": {
+              "head": "将式(3.10)在管道截面上积分平均",
+              "qualifier_status": {
+                "applicability": "not_stated",
+                "condition": "extracted",
+                "modality": "extracted",
+                "polarity": "extracted",
+                "quantifier": "not_stated",
+                "time_scope": "not_stated"
+              },
+              "qualifiers": {
+                "condition": "对于有限过流截面的实际流体管流",
+                "modality": "asserted",
+                "polarity": "positive"
+              },
+              "semantic_context": {
+                "entity_mentions": {
+                  "head": {
+                    "entity_surface": "将式(3.10)在管道截面上积分平均",
+                    "referent_scope": "对式(3.10)在管道截面上积分平均的推导操作"
+                  },
+                  "tail": {
+                    "entity_surface": "实际流体管流的伯努利方程",
+                    "referent_scope": "实际流体管流的伯努利方程"
+                  }
+                },
+                "knowledge_scope": "derivation",
+                "qualifier_attachments": [
+                  {
+                    "attachment": "relation",
+                    "qualifier_kind": "condition",
+                    "scope_id": "p5_s1",
+                    "value": "对于有限过流截面的实际流体管流"
+                  }
+                ],
+                "relation_meaning": {
+                  "note": "原文为“将式(3.10)在管道截面上积分平均，即得到实际流体管流的伯努利方程”，操作在前、结果在后；保留条件、断言与极性，不改变未陈述字段。",
+                  "semantic_equivalence": "needs_review"
+                }
+              },
+              "surface_relation": "得到",
+              "tail": "实际流体管流的伯努利方程"
+            },
+            "evidence_ids": [
+              "ev_75955fb1183af72ef1f9",
+              "ev_71b927084cd64739e35e"
+            ],
+            "field_evidence": {
+              "condition": [
+                "ev_75955fb1183af72ef1f9"
+              ],
+              "modality": [
+                "ev_75955fb1183af72ef1f9"
+              ],
+              "polarity": [
+                "ev_75955fb1183af72ef1f9"
+              ]
+            },
+            "field_notes": {
+              "condition": "条件“对于有限过流截面的实际流体管流”直接限定该推导操作与结果，保留原范围。",
+              "modality": "原文以陈述句给出推导结果，保持 asserted。",
+              "polarity": "原文为肯定陈述，保持 positive。"
+            },
+            "reason": "冻结证据明确为“将式(3.10)在管道截面上积分平均，即得到实际流体管流的伯努利方程”。当前候选把结果作头、操作作尾且谓词“由”与原文“得到”的方向/语义不一致；按 MEANING-001 提出局部修订：交换头尾、将 surface_relation 改为“得到”，并保留条件、模态、极性和未陈述字段。",
+            "reviewed_scopes": {
+              "condition": {
+                "evidence_ids": [
+                  "ev_75955fb1183af72ef1f9"
+                ],
+                "scope": "current_chunk"
+              },
+              "modality": {
+                "evidence_ids": [
+                  "ev_75955fb1183af72ef1f9"
+                ],
+                "scope": "current_chunk"
+              },
+              "polarity": {
+                "evidence_ids": [
+                  "ev_75955fb1183af72ef1f9"
+                ],
+                "scope": "current_chunk"
+              }
+            }
+          },
+          "error": "completion cannot edit non-qualifier fields"
+        },
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "step": 6,
+          "tool": "propose_revision",
+          "status": "tool_error",
+          "arguments": {
+            "changes": {
+              "head": "将式(3.10)在管道截面上积分平均",
+              "surface_relation": "得到",
+              "tail": "实际流体管流的伯努利方程"
+            },
+            "evidence_ids": [
+              "ev_75955fb1183af72ef1f9"
+            ],
+            "reason": "冻结证据明确为“将式(3.10)在管道截面上积分平均，即得到实际流体管流的伯努利方程”。当前候选把结果作头、操作作尾且谓词“由”与原文“得到”的方向/语义不一致；按 MEANING-001 提出局部修订：交换头尾、将 surface_relation 改为“得到”，并保留条件、模态、极性和未陈述字段。",
+            "reviewed_scopes": {
+              "condition": {
+                "evidence_ids": [
+                  "ev_75955fb1183af72ef1f9"
+                ],
+                "scope": "current_chunk"
+              },
+              "modality": {
+                "evidence_ids": [
+                  "ev_75955fb1183af72ef1f9"
+                ],
+                "scope": "current_chunk"
+              },
+              "polarity": {
+                "evidence_ids": [
+                  "ev_75955fb1183af72ef1f9"
+                ],
+                "scope": "current_chunk"
+              }
+            }
+          },
+          "error": "completion cannot edit non-qualifier fields"
+        }
+      ],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_b0534a6f66e740d69e3f8a4ac1757cce",
+          "revision": 1,
+          "stop_reason": "冻结证据已明确显示原文为“将式(3.10)在管道截面上积分平均，即得到实际流体管流的伯努利方程”，但当前候选仍为“实际流体管流的伯努利方程 — 由 — 将式(3.10)在管道截面上积分平均”。独立验证中，judge_b 支持来源，judge_a 与 judge_c 对谓词语义、方向及实体指称存在未解决分歧；且 propose_revision 因“completion cannot edit non-qualifier fields”无法修改 head/tail/surface_relation，review_dispute 已返回 human_review，run_validation 被阻止，无法在当前工具集内完成语义修订或重新独立投票。本体映射亦因端点类型未分配、事件/命题需显式建模修订而保持 unassigned。因此保留真实待审任务并移交人工处理。",
+          "budget_usage": {
+            "input_tokens": 357269,
+            "llm_calls": 10,
+            "output_tokens": 5664,
+            "planner_steps": 7,
+            "tool_calls": 11,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 14,
+          "remaining_seconds_at_end": 964.5776424407959,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 5257,
+          "final_bundle_quote_chars": 1027,
+          "final_evidence_item_count": 4
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-012",
+      "candidate_id": "cand_5d2bcc4902e79c36b827",
+      "original_triple": {
+        "head": "压力比",
+        "surface_relation": "是",
+        "tail": "激波强度"
+      },
+      "final_recommendation": "insufficient_evidence",
+      "final_dimension_statuses": {
+        "source": "insufficient",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_13.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_7ef68ff1401985d0b9f6"
+          },
+          "new_evidence_count": 1
+        },
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "step": 6,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_7ef68ff1401985d0b9f6"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "step": 7,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "压力比 是 激波强度",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "压力比 是 激波强度",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "step": 8,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "压力比 是 激波强度",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "压力比 是 激波强度",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "step": 4,
+          "tool": "review_dispute",
+          "status": "review_incomplete",
+          "arguments": {
+            "dispute_id": "dispute_9200452ff3c154846eae6e1c"
+          },
+          "focused_result": {
+            "status": "review_incomplete",
+            "model_calls": 3,
+            "eligible_voter_ids": [
+              "judge_a"
+            ],
+            "whole_candidate_admitted": false
+          }
+        },
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "step": 5,
+          "tool": "review_dispute",
+          "status": "review_incomplete",
+          "arguments": {
+            "dispute_id": "dispute_5a3ad55a70644d0730714b1a"
+          },
+          "focused_result": {
+            "status": "review_incomplete",
+            "model_calls": 3,
+            "eligible_voter_ids": [
+              "judge_a"
+            ],
+            "whole_candidate_admitted": false
+          }
+        }
+      ],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_c94e3a4ac36849118c91d3234d7bfdde",
+          "revision": 1,
+          "stop_reason": "deterministic_fallback_finished",
+          "budget_usage": {
+            "input_tokens": 247356,
+            "llm_calls": 12,
+            "output_tokens": 12683,
+            "planner_steps": 2,
+            "tool_calls": 9,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 12,
+          "remaining_seconds_at_end": 891.1804552078247,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 11714,
+          "final_bundle_quote_chars": 3422,
+          "final_evidence_item_count": 6
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "original_triple": {
+        "head": "more tightly packed molecules",
+        "surface_relation": "cause",
+        "tail": "more collisions and higher pressure"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_01.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_3b3d972462acd9b2078a"
+          },
+          "new_evidence_count": 1
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "step": 4,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_26f1024720bbcbe234d04bb9"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "step": 5,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_8dd4e62b29bd527fd9465a28"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "step": 6,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_40f0cbc0708fd9edd5069d19"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "step": 7,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_b7653ad2c54ac2551a228c23"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "step": 8,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_e0a32351703b0d74d0d118d0"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_6c4124e4be8145e3b92bb98b77bb688b",
+          "revision": 1,
+          "stop_reason": "No legal information-gain action remains: review_dispute is blocked, run_validation is blocked, mapping is unassigned with no approved revision draft, and all disputes have already been routed to human review.",
+          "budget_usage": {
+            "input_tokens": 130078,
+            "llm_calls": 5,
+            "output_tokens": 4300,
+            "planner_steps": 2,
+            "tool_calls": 9,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 19,
+          "remaining_seconds_at_end": 1101.2029999999795,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 12710,
+          "final_bundle_quote_chars": 4193,
+          "final_evidence_item_count": 5
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-017",
+      "candidate_id": "cand_e8245c9e46331262412b",
+      "original_triple": {
+        "head": "Eulerian frame",
+        "surface_relation": "chooses",
+        "tail": "a CV (real or imaginary)"
+      },
+      "final_recommendation": "revise",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "semantic_revision",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_04.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 3,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "Eulerian frame chooses a CV (real or imaginary)",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "Eulerian frame chooses a CV (real or imaginary)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 4,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "Eulerian frame chooses a CV (real or imaginary)",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "Eulerian frame chooses a CV (real or imaginary)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "Eulerian frame chooses a CV (real or imaginary)",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "Eulerian frame chooses a CV (real or imaginary)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 8,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "Eulerian frame chooses a CV (real or imaginary)",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "Eulerian frame chooses a CV (real or imaginary)",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 9,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 2,
+            "before": 2,
+            "evidence_id": "ev_121e777e4803343e579e"
+          },
+          "new_evidence_count": 4
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 5,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_39f9850bbba7e23dc4a92419"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "no new relevant source context retrieved",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 10,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_c4634bb27f3e290b97e7e1d5"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 11,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_1b7618f5eee531d9d4b574f8"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 12,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_3bfb864d2bcc80b6d6387272"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 13,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_1121dadacc6f99856fbd9a25"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "step": 7,
+          "tool": "propose_revision",
+          "status": "tool_error",
+          "arguments": {
+            "changes": {
+              "head": "we",
+              "semantic_context": {
+                "entity_mentions": {
+                  "head": {
+                    "canonical_entity": null,
+                    "entity_surface": "we",
+                    "referent_scope": "authors"
+                  },
+                  "tail": {
+                    "canonical_entity": null,
+                    "entity_surface": "a CV (real or imaginary)",
+                    "referent_scope": "control volume"
+                  }
+                },
+                "relation_meaning": {
+                  "note": "原文为“in the Eulerian frame, we chose a CV”，选择主体是作者，Eulerian frame 是方法语境；保留原限定与方向。",
+                  "semantic_equivalence": "needs_review"
+                }
+              },
+              "surface_relation": "chose",
+              "tail": "a CV (real or imaginary)"
+            },
+            "evidence_ids": [
+              "ev_121e777e4803343e579e"
+            ],
+            "field_evidence": {
+              "modality": [
+                "ev_121e777e4803343e579e"
+              ],
+              "polarity": [
+                "ev_121e777e4803343e579e"
+              ]
+            },
+            "field_notes": {
+              "modality": "原文为作者方法描述中的断言，不引入假设或能力。",
+              "polarity": "原文为肯定陈述。"
+            },
+            "reason": "独立审核一致指出候选把作者行为误归因于 Eulerian frame；按原文局部修正主语和谓词，保留 CV 与限定，不改变未陈述字段。",
+            "reviewed_scopes": {
+              "modality": {
+                "evidence_ids": [
+                  "ev_121e777e4803343e579e"
+                ],
+                "scope": "current_chunk"
+              },
+              "polarity": {
+                "evidence_ids": [
+                  "ev_121e777e4803343e579e"
+                ],
+                "scope": "current_chunk"
+              }
+            }
+          },
+          "error": "completion cannot edit non-qualifier fields"
+        }
+      ],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_99fb3b0df3fb4d2ea6f536e3ef884d26",
+          "revision": 1,
+          "stop_reason": "No legal action with information gain: source contradiction is established (we chose, not frame chooses), mapping is unassigned with no compatible frozen relation, and all extension/revision tools are blocked pending independent source-support consensus.",
+          "budget_usage": {
+            "input_tokens": 400640,
+            "llm_calls": 11,
+            "output_tokens": 6955,
+            "planner_steps": 8,
+            "tool_calls": 14,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 13,
+          "remaining_seconds_at_end": 890.7719807624817,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 16648,
+          "final_bundle_quote_chars": 4582,
+          "final_evidence_item_count": 8
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-018",
+      "candidate_id": "cand_2e0d61cecd869c0659f5",
+      "original_triple": {
+        "head": "fluids",
+        "surface_relation": "can support",
+        "tail": "little or no shear loads or tensile stress"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_07.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_c818a98e60df7e13727c"
+          },
+          "new_evidence_count": 1
+        },
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "step": 7,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_c818a98e60df7e13727c"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "step": 8,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "fluids can support little or no shear loads or tensile stress",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "fluids can support little or no shear loads or tensile stress",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "step": 9,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "fluids can support little or no shear loads or tensile stress",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "fluids can support little or no shear loads or tensile stress",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "step": 5,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_db8def7a2d4d29fa7ab411bf"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "no new relevant source context retrieved",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "step": 6,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_752388d8fa6b8bf67d863f95"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "no new relevant source context retrieved",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_923c26194ced411abe20795daab2e4ce",
+          "revision": 1,
+          "stop_reason": "No legal action with information gain remains: expression completion is blocked by QUALIFIER_UNKNOWN and mapping is unassigned due to missing endpoint types; both obligations are terminal (external_or_domain_decision_required).",
+          "budget_usage": {
+            "input_tokens": 173802,
+            "llm_calls": 7,
+            "output_tokens": 6671,
+            "planner_steps": 1,
+            "tool_calls": 10,
+            "unknown_token_requests": 0,
+            "validation_rounds": 2
+          },
+          "remaining_llm_calls_at_end": 17,
+          "remaining_seconds_at_end": 1050.1075756549835,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 11594,
+          "final_bundle_quote_chars": 3660,
+          "final_evidence_item_count": 5
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-026",
+      "candidate_id": "cand_b7cbabd1fecdf8165d07",
+      "original_triple": {
+        "head": "运动微分方程",
+        "surface_relation": "是",
+        "tail": "牛顿第二运动定律在流体力学中的表达形式"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_62aab259f62f40d9_excerpt_03.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_c63d9f3f7f5c4a3eb7e23a5e30630fb2",
+          "revision": 1,
+          "step": 3,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "运动微分方程 是 牛顿第二运动定律在流体力学中的表达形式",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "运动微分方程 是 牛顿第二运动定律在流体力学中的表达形式",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_c63d9f3f7f5c4a3eb7e23a5e30630fb2",
+          "revision": 1,
+          "step": 4,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "运动微分方程 是 牛顿第二运动定律在流体力学中的表达形式",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "运动微分方程 是 牛顿第二运动定律在流体力学中的表达形式",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_c63d9f3f7f5c4a3eb7e23a5e30630fb2",
+          "revision": 1,
+          "stop_reason": "冻结本体无匹配关系且端点类型未定，来源支持虽获三票但语义争议与映射缺口需人工/领域决定",
+          "budget_usage": {
+            "input_tokens": 110077,
+            "llm_calls": 4,
+            "output_tokens": 3142,
+            "planner_steps": 1,
+            "tool_calls": 5,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 20,
+          "remaining_seconds_at_end": 1131.801084280014,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 5221,
+          "final_bundle_quote_chars": 1010,
+          "final_evidence_item_count": 4
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-029",
+      "candidate_id": "cand_e8b57c7d4a6370da244d",
+      "original_triple": {
+        "head": "first law of thermodynamics",
+        "surface_relation": "can be written for",
+        "tail": "a fixed mass of material undergoing some thermodynamic process"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_04.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 3,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 4,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 5,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "first law of thermodynamics can be written for a fixed mass of material undergoing some thermodynamic process",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 7,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 2,
+            "before": 1,
+            "evidence_id": "ev_40f327dfa7b396584c6c"
+          },
+          "new_evidence_count": 3
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 8,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_66f22bcfc05c71066151acd6"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        },
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "step": 9,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_17a3c47322b0248180116032"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_4d74ebfdf5724b678a374aa054ea99f4",
+          "revision": 1,
+          "stop_reason": "No legal information-gaining action remains: review_dispute is blocked, run_validation is blocked, mapping is unassigned with endpoint types unresolved, and no independently approved revision draft exists.",
+          "budget_usage": {
+            "input_tokens": 181018,
+            "llm_calls": 7,
+            "output_tokens": 4025,
+            "planner_steps": 4,
+            "tool_calls": 10,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 17,
+          "remaining_seconds_at_end": 1076.1386194229126,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 13875,
+          "final_bundle_quote_chars": 3778,
+          "final_evidence_item_count": 7
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-032",
+      "candidate_id": "cand_b616c903145361531b01",
+      "original_triple": {
+        "head": "specific gas constant",
+        "surface_relation": "can be determined from",
+        "tail": "universal gas constant"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_01.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_807ee36570804280b5db9402e39b65fc",
+          "revision": 1,
+          "step": 3,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "specific gas constant can be determined from universal gas constant",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "specific gas constant can be determined from universal gas constant",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_807ee36570804280b5db9402e39b65fc",
+          "revision": 1,
+          "step": 4,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_support",
+            "query": "specific gas constant can be determined from universal gas constant",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "specific gas constant can be determined from universal gas constant",
+          "purpose": "check_support",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_807ee36570804280b5db9402e39b65fc",
+          "revision": 1,
+          "step": 5,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_a546d4db7dfd9962840d"
+          },
+          "new_evidence_count": 2
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_807ee36570804280b5db9402e39b65fc",
+          "revision": 1,
+          "step": 6,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_4d332dedf9ea839ef989f135"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_807ee36570804280b5db9402e39b65fc",
+          "revision": 1,
+          "stop_reason": "deterministic_fallback_finished",
+          "budget_usage": {
+            "input_tokens": 167643,
+            "llm_calls": 6,
+            "output_tokens": 5416,
+            "planner_steps": 2,
+            "tool_calls": 7,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 18,
+          "remaining_seconds_at_end": 1026.6851618289948,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 12742,
+          "final_bundle_quote_chars": 3719,
+          "final_evidence_item_count": 6
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-036",
+      "candidate_id": "cand_7f05c38a350ef3efcb6d",
+      "original_triple": {
+        "head": "proper thermodynamics terminology",
+        "surface_relation": "would require",
+        "tail": "use of δ'' instead of d in Equation 2.43"
+      },
+      "final_recommendation": "insufficient_evidence",
+      "final_dimension_statuses": {
+        "source": "insufficient",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_05.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_84534c4ecac32a5f5410"
+          },
+          "new_evidence_count": 1
+        },
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 5,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_84534c4ecac32a5f5410"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "proper thermodynamics terminology would require use of δ'' instead of d in Equation 2.43",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "proper thermodynamics terminology would require use of δ'' instead of d in Equation 2.43",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 7,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "proper thermodynamics terminology would require use of δ'' instead of d in Equation 2.43",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "proper thermodynamics terminology would require use of δ'' instead of d in Equation 2.43",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 4,
+          "tool": "review_dispute",
+          "status": "review_incomplete",
+          "arguments": {
+            "dispute_id": "dispute_20270ef621bff36ae22170d7"
+          },
+          "focused_result": {
+            "status": "review_incomplete",
+            "model_calls": 3,
+            "eligible_voter_ids": [
+              "judge_a",
+              "judge_c"
+            ],
+            "whole_candidate_admitted": false
+          }
+        }
+      ],
+      "revision_attempts": [
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 8,
+          "tool": "propose_revision",
+          "status": "draft_proposed",
+          "arguments": {
+            "changes": {
+              "qualifier_status": {
+                "modality": "extracted"
+              },
+              "qualifiers": {
+                "modality": "necessary"
+              }
+            },
+            "evidence_ids": [
+              "ev_84534c4ecac32a5f5410"
+            ],
+            "field_evidence": {
+              "modality": [
+                "ev_84534c4ecac32a5f5410"
+              ]
+            },
+            "field_notes": {
+              "modality": "原文“would require”表达规范性要求，结合“proper thermodynamics terminology”语境，判定为必要性（necessary）而非单纯假设或可能性。"
+            },
+            "reason": "根据原文“Proper thermodynamics terminology would require us to use the δ'' instead of d in Equation 2.43 because of path dependency considerations”，“would require”在此语境下表达的是规范性要求（normative requirement），即使用δ''是必要的，因此将modality从unknown更新为necessary，并将qualifier_status.modality更新为extracted。",
+            "reviewed_scopes": {
+              "modality": {
+                "evidence_ids": [
+                  "ev_84534c4ecac32a5f5410"
+                ],
+                "scope": "current_chunk"
+              }
+            }
+          }
+        },
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "step": 9,
+          "tool": "review_revision",
+          "status": "needs_human",
+          "arguments": {
+            "draft_id": "draft_400f669973a94131afa1a5a01d0a1e72"
+          }
+        }
+      ],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_597c4d06870944bfaa32eed9bcf62d51",
+          "revision": 1,
+          "stop_reason": "deterministic_fallback_finished",
+          "budget_usage": {
+            "input_tokens": 203315,
+            "llm_calls": 13,
+            "output_tokens": 9344,
+            "planner_steps": 3,
+            "tool_calls": 10,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 11,
+          "remaining_seconds_at_end": 955.7841308116913,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 11253,
+          "final_bundle_quote_chars": 3519,
+          "final_evidence_item_count": 5
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-037",
+      "candidate_id": "cand_aea63f9a08e744124b10",
+      "original_triple": {
+        "head": "equation of conservation of mass",
+        "surface_relation": "is commonly called",
+        "tail": "continuity equation"
+      },
+      "final_recommendation": "manual_review",
+      "final_dimension_statuses": {
+        "source": "unresolved",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_08.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_1c19e19747d7c74eae0d"
+          },
+          "new_evidence_count": 2
+        },
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 5,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_1c19e19747d7c74eae0d"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "equation of conservation of mass is commonly called continuity equation",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "equation of conservation of mass is commonly called continuity equation",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 7,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "equation of conservation of mass is commonly called continuity equation",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "equation of conservation of mass is commonly called continuity equation",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_38cbc2cbcae640f78f2c643ace98ef80",
+          "revision": 2,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_1c19e19747d7c74eae0d"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_38cbc2cbcae640f78f2c643ace98ef80",
+          "revision": 2,
+          "step": 4,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "equation of conservation of mass is commonly called continuity equation",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "equation of conservation of mass is commonly called continuity equation",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_38cbc2cbcae640f78f2c643ace98ef80",
+          "revision": 2,
+          "step": 5,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "equation of conservation of mass is commonly called continuity equation",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "equation of conservation of mass is commonly called continuity equation",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 4,
+          "tool": "review_dispute",
+          "status": "human_review",
+          "arguments": {
+            "dispute_id": "dispute_767f1d860be9f7fa987d3a6b"
+          },
+          "focused_result": {
+            "status": "human_review",
+            "reason": "full protected packet exceeds focused context budget",
+            "model_calls": 0
+          }
+        }
+      ],
+      "revision_attempts": [
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 8,
+          "tool": "propose_revision",
+          "status": "draft_proposed",
+          "arguments": {
+            "changes": {
+              "qualifier_status": {
+                "polarity": "extracted"
+              },
+              "qualifiers": {
+                "polarity": "positive"
+              }
+            },
+            "evidence_ids": [
+              "ev_1c19e19747d7c74eae0d",
+              "ev_943a5d9540a10104ecbc",
+              "ev_d967a45a88a5d6f7ef19"
+            ],
+            "field_evidence": {
+              "polarity": [
+                "ev_1c19e19747d7c74eae0d",
+                "ev_943a5d9540a10104ecbc",
+                "ev_d967a45a88a5d6f7ef19"
+              ]
+            },
+            "field_notes": {
+              "polarity": "原文以肯定陈述给出命名关系，无否定词，极性为 positive。"
+            },
+            "reason": "根据原文完整陈述，该命名关系为肯定陈述，极性应为 positive，而非 unknown。",
+            "reviewed_scopes": {
+              "polarity": {
+                "evidence_ids": [
+                  "ev_1c19e19747d7c74eae0d",
+                  "ev_943a5d9540a10104ecbc",
+                  "ev_d967a45a88a5d6f7ef19"
+                ],
+                "scope": "current_chunk"
+              }
+            }
+          }
+        },
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "step": 9,
+          "tool": "review_revision",
+          "status": "approved",
+          "arguments": {
+            "draft_id": "draft_8a1fac62e5844609bdc55c7c9bea5afe"
+          }
+        }
+      ],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_69b45c5cfbdf4d91b924a24b38c2639c",
+          "revision": 1,
+          "stop_reason": "revision_submitted_for_reaudit",
+          "budget_usage": {
+            "input_tokens": 171156,
+            "llm_calls": 8,
+            "output_tokens": 5622,
+            "planner_steps": 2,
+            "tool_calls": 10,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 16,
+          "remaining_seconds_at_end": 1069.0,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 12899,
+          "final_bundle_quote_chars": 3773,
+          "final_evidence_item_count": 6
+        },
+        {
+          "audit_id": "audit_38cbc2cbcae640f78f2c643ace98ef80",
+          "revision": 2,
+          "stop_reason": "冻结本体无匹配命名关系且端点类型未定；来源支持已确认，但限定词争议与映射缺口需人工/领域决定",
+          "budget_usage": {
+            "input_tokens": 101462,
+            "llm_calls": 4,
+            "output_tokens": 3531,
+            "planner_steps": 1,
+            "tool_calls": 6,
+            "unknown_token_requests": 0,
+            "validation_rounds": 1
+          },
+          "remaining_llm_calls_at_end": 20,
+          "remaining_seconds_at_end": 1128.920999999973,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 12842,
+          "final_bundle_quote_chars": 3773,
+          "final_evidence_item_count": 6
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-039",
+      "candidate_id": "cand_63b67f5ebf438199db7c",
+      "original_triple": {
+        "head": "Many of the fluids we will deal with",
+        "surface_relation": "are",
+        "tail": "Newtonian"
+      },
+      "final_recommendation": "insufficient_evidence",
+      "final_dimension_statuses": {
+        "source": "insufficient",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "index_path": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen\\sources\\book_88e8310c22d9ffd3_excerpt_07.json",
+      "index_chunk_count": 1,
+      "eligible_chunks_for_executed_search_scopes": {
+        "same_section": 0,
+        "parent_section": 0
+      },
+      "retrieval_actions": [
+        {
+          "audit_id": "audit_7d43f379ca214b02a712b4863cf4a0f3",
+          "revision": 1,
+          "step": 3,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_09061cb04b15ebec1845"
+          },
+          "new_evidence_count": 2
+        },
+        {
+          "audit_id": "audit_7d43f379ca214b02a712b4863cf4a0f3",
+          "revision": 1,
+          "step": 5,
+          "tool": "inspect_context",
+          "status": "ok",
+          "arguments": {
+            "after": 1,
+            "before": 1,
+            "evidence_id": "ev_09061cb04b15ebec1845"
+          },
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_7d43f379ca214b02a712b4863cf4a0f3",
+          "revision": 1,
+          "step": 6,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "Many of the fluids we will deal with are Newtonian",
+            "scope": "same_section"
+          },
+          "scope": "same_section",
+          "query": "Many of the fluids we will deal with are Newtonian",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        },
+        {
+          "audit_id": "audit_7d43f379ca214b02a712b4863cf4a0f3",
+          "revision": 1,
+          "step": 7,
+          "tool": "search_evidence",
+          "status": "empty",
+          "arguments": {
+            "limit": 6,
+            "purpose": "check_qualifiers",
+            "query": "Many of the fluids we will deal with are Newtonian",
+            "scope": "parent_section"
+          },
+          "scope": "parent_section",
+          "query": "Many of the fluids we will deal with are Newtonian",
+          "purpose": "check_qualifiers",
+          "new_evidence_count": 0
+        }
+      ],
+      "focused_reviews": [],
+      "revision_attempts": [],
+      "audit_end_states": [
+        {
+          "audit_id": "audit_7d43f379ca214b02a712b4863cf4a0f3",
+          "revision": 1,
+          "stop_reason": "No legal action with information gain: current validation is frozen and must be consumed; qualifier unknowns cannot be resolved by default, and mapping cannot be proposed because endpoint types are unassigned and recalled ontology candidates are unrelated to fluids/Newtonian behavior.",
+          "budget_usage": {
+            "input_tokens": 166917,
+            "llm_calls": 7,
+            "output_tokens": 5672,
+            "planner_steps": 1,
+            "tool_calls": 8,
+            "unknown_token_requests": 0,
+            "validation_rounds": 2
+          },
+          "remaining_llm_calls_at_end": 17,
+          "remaining_seconds_at_end": 1094.7656552791595,
+          "max_evidence_chars": 12000,
+          "final_bundle_json_chars": 12233,
+          "final_bundle_quote_chars": 3457,
+          "final_evidence_item_count": 6
+        }
+      ]
+    }
+  ],
+  "source_artifacts_sha256": {
+    "model_inputs.json": "87fcf3166b0b7cc6632ae286b4f7df7e72f785a323e09515c215e04a8697b487",
+    "resolution_report.json": "4f45fa024e91cea1eb670f2d91f1c81628f2f8a028ae38fa2ddc56166dbd3319",
+    "verified_operational_summary.json": "2b1749c1ffa9eeed9a1bc71121259f5ca4de04fdae06850fc1d0735ec4ba364f"
+  },
+  "new_model_calls": 0,
+  "original_results_changed": false
+}

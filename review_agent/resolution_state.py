@@ -14,6 +14,10 @@ def formal_context_hash(context):
     return sha256_json({k:context.get(k) for k in ('properties','classes','source_catalog_hash','ontology_release_id','profile_hash')})
 
 
+def mapping_only_issue(issue):
+    return issue.get('code')=='ontology_gap' or issue.get('target',{}).get('check')=='mapping' or set(issue.get('dimensions') or [])=={'mapping'}
+
+
 def resolve_review_state(base_proposal, original_votes, focused_results, issue_ledger, committee,
                          *, candidate=None, bundle=None, ontology_context=None, semantic_results=(),original_receipts=()):
     from .review_observability import summarize_dimensions
@@ -83,6 +87,10 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
                 or (committee.weighting_policy and proposal.get('committee_policy') != base_proposal.get('committee_policy'))
                 or proposal.get('resolution_policy') != VERSION):
             reason = 'focused binding or dependency-review policy mismatch'
+        elif target['check']=='knowledge_scope' and (
+                proposal.get('version')!=(base_proposal.get('dispute_policy') or {}).get('scope_review_contract') or
+                proposal.get('scope_policy')!=base_proposal.get('review_scope_policy')):
+            reason='scope response contract or frozen classification policy mismatch'
         elif target['check'] == 'mapping' and formal_context_hash(proposal.get('ontology_context')) != formal_context_hash(ontology_context):
             reason = 'mapping definitions changed after focused review'
         if not reason:
@@ -95,7 +103,7 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
         if not reason:
             decision = focused_consensus(result.get('votes', []), proposal)
             status = decision['status']
-            if status not in {'resolved_supports', 'resolved_opposes'}:
+            if status not in {'resolved_supports', 'resolved_opposes','resolved_scope'}:
                 reason = 'focused committee is incomplete or disagrees'
         if reason:
             rejected.append({'dispute_id': did, 'reason': reason})
@@ -108,15 +116,23 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
         rid = 'resolution_' + sha256_json([proposal['proposal_digest'], votes])[:32]
         accepted.append({'resolution_id': rid, 'dispute_id': did, 'claim_id': target['claim']['claim_id'],
             'check': check, 'status': status, 'evidence_ids': sorted({eid for v in votes for eid in v['reviewed_evidence_ids']}),
-            'supporting_evidence_ids':sorted({eid for v in votes for eid in v['positive_support']['evidence_ids']}),
-            'counter_evidence_ids':sorted({eid for v in votes for eid in v['counterevidence_search']['evidence_ids']}),
+            'supporting_evidence_ids':sorted({eid for v in votes for eid in v.get('positive_support',{}).get('evidence_ids',[])}),
+            'counter_evidence_ids':sorted({eid for v in votes for eid in v.get('counterevidence_search',{}).get('evidence_ids',[])}),
             'other_affected_checks': sorted(other), 'proposal_digest': proposal['proposal_digest']})
+        if check=='knowledge_scope':
+            accepted[-1].update(knowledge_scope=decision['knowledge_scope'],classification=decision['classification'],
+                policy_equivalent=decision['policy_equivalent'])
         if decision.get('weight_snapshot'):
             accepted[-1]['weight_snapshot'] = deepcopy(decision['weight_snapshot'])
         targets[did]=target
         # These are ephemeral check observations. They are never serialized as replacement votes.
         for voter_id, observation in raw.items():
             if check not in observation.get('dimensions', {}):
+                continue
+            if check=='knowledge_scope':
+                focused=next((v for v in votes if v['voter_id']==voter_id),None)
+                if focused:
+                    observation['dimensions'][check].update(status=focused['knowledge_scope'],evidence_ids=focused['evidence_ids'])
                 continue
             supports = status == 'resolved_supports'
             if committee.weighting_policy:
@@ -176,8 +192,8 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
         claim=target_for(candidate,check)
         did='dispute_'+sha256_json([base_proposal['proposal_digest'],claim['claim_id']])[:24]
         dependency_disputes.append({'dispute_id':did,'claim':claim,'check':check,'question':claim['question'],
-            'issue_type':TYPE_FOR[check],'opinions':[],'status':'human_review' if check=='knowledge_scope' else 'open',
-            'route':'supplement_mapping_information' if check=='mapping' else 'human_scope_review' if check=='knowledge_scope' else 'supplement_source_context',
+            'issue_type':TYPE_FOR[check],'opinions':[],'status':'human_review' if check=='knowledge_scope' and not (base_proposal.get('dispute_policy') or {}).get('scope_review_contract') else 'open',
+            'route':'supplement_mapping_information' if check=='mapping' else 'human_scope_review' if check=='knowledge_scope' and not (base_proposal.get('dispute_policy') or {}).get('scope_review_contract') else 'supplement_source_context',
             'required_material':'new evidence or formal context affecting this check','dependency_generated':True})
     unresolved = [i for i in issue_ledger if i.get('status', 'open') != 'resolved']
     weighted_report = None
@@ -198,6 +214,26 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
             dimension['resolution_ids']=[a['resolution_id'] for a in accepted if axis in CHECK_AXES[a['check']]]
         annotate_disputes(disputes,weighted_report)
         complete=all(d['judgment_complete'] for d in dimensions.values())
+    scope_enabled=bool((base_proposal.get('dispute_policy') or {}).get('scope_review_contract'))
+    scope_resolution=next((a for a in accepted if a['check']=='knowledge_scope'),None)
+    if scope_enabled:
+        from .scope_policy import classification_decision,DEFAULT_POLICY
+        policy=base_proposal.get('review_scope_policy') or DEFAULT_POLICY
+        scopes={r['dimensions']['knowledge_scope']['status'] for r in raw.values() if 'knowledge_scope' in r.get('dimensions',{})}
+        equivalent=bool(scopes) and scopes<={'general','conditional'} and all(classification_decision(s,True,policy)['status']=='include' for s in scopes)
+        confirmed=bool(eligible==set(committee.voter_ids) and scopes and 'unresolved' not in scopes and (len(scopes)==1 or equivalent))
+        category=scope_resolution['knowledge_scope'] if scope_resolution else ('conditional' if 'conditional' in scopes else next(iter(scopes))) if confirmed else 'unresolved'
+        classification=classification_decision(category,confirmed,policy)
+        dimensions['scope'].update(classification,status=classification['status'],judgment_complete=confirmed,
+            has_conflict=not confirmed and len(scopes)>1,policy_equivalent=equivalent,
+            resolution_ids=[a['resolution_id'] for a in accepted if a['check']=='knowledge_scope'])
+        for dispute in disputes['disputes']:
+            if dispute['check']=='knowledge_scope' and equivalent:dispute['status']='policy_equivalent'
+    excluded=scope_enabled and dimensions['scope']['status']=='exclude' and dimensions['scope'].get('judgment_complete')
+    if excluded:
+        # Formal main-graph mapping is irrelevant to a confirmed, source-grounded exclusion.
+        pending=[p for p in pending if p.get('kind')!='formal_context_changed_requires_mapping_review' and p.get('check')!='mapping']
+        unresolved=[i for i in unresolved if not mapping_only_issue(i)]
     result = {'version': VERSION, 'candidate_hash': sha256_json(candidate), 'candidate_revision': candidate['revision'],
         'base_proposal_digest': base_proposal['proposal_digest'], 'original_votes_hash': original_hash,
         'evidence_hash': bundle.get('evidence_hash'), 'ontology_context_hash': sha256_json(ontology_context),
@@ -217,11 +253,14 @@ def resolve_review_state(base_proposal, original_votes, focused_results, issue_l
         'expression_findings':[dict(deepcopy(f),voter_id=v) for v,r in raw.items() for f in r.get('expression_findings',[])],
         'unresolved_issue_ids': [i['issue_id'] for i in unresolved if i.get('critical')],
         'unresolved_dispute_ids': [did for did in targets if not any(a['dispute_id'] == did for a in accepted)
-            and (not committee.weighting_policy or next((d.get('status') for d in disputes['disputes'] if d['dispute_id']==did),None) not in {'nonblocking_abstention','policy_equivalent'})],
+            and not (excluded and targets[did]['check']=='mapping')
+            and (not (committee.weighting_policy or scope_enabled) or next((d.get('status') for d in disputes['disputes'] if d['dispute_id']==did),None) not in {'nonblocking_abstention','policy_equivalent'})],
         'retained_counter_evidence_ids': sorted({e for v in [*original_votes,*effective_votes] for e in v.get('counter_evidence_ids', [])}|
                                               {e for r in accepted for e in r['counter_evidence_ids']}),
         'original_votes_changed': False, 'whole_candidate_admitted': False}
+    if excluded:complete=all(d.get('judgment_complete') for axis,d in dimensions.items() if axis!='mapping')
     result['semantic_obligations_complete'] = complete and not pending and not result['unresolved_issue_ids'] and not result['unresolved_dispute_ids']
+    result['scope_exclusion_complete']=bool(excluded and result['semantic_obligations_complete'] and dimensions['source']['status']=='supported' and dimensions['expression']['status']=='standard')
     if weighted_report:
         result['weight_snapshot']=weighted_report['weight_snapshot']
     if any(a['check']=='mapping' and a['status']=='resolved_supports' for a in accepted) and dimensions['mapping']['status']=='valid':
@@ -249,6 +288,8 @@ def apply_consensus(consensus, snapshot):
     if snapshot.get('weight_snapshot'):
         from .vote_weighting import apply_to_consensus
         result=apply_to_consensus(result, snapshot, {}, admission_blocked=not snapshot['semantic_obligations_complete'])
+        if snapshot.get('scope_exclusion_complete'):
+            result.update(weighted_review_complete=True,diversity_ready=True)
     dimensions = snapshot['dimension_results']
     result['resolution_snapshot'] = deepcopy(snapshot)
     result['resolution_snapshot_id'] = snapshot['snapshot_id']
@@ -258,6 +299,11 @@ def apply_consensus(consensus, snapshot):
         result['diversity_ready']=snapshot['effective_distinct_families']>=result.get('minimum_distinct_families',3)
     for axis, dimension in dimensions.items():
         result.setdefault('review_axes', {}).setdefault(axis, {}).update(status=dimension['status'])
+    scope=dimensions['scope']
+    if 'classification_confirmed' in scope:
+        result.update(knowledge_scope=scope['knowledge_scope'],scope_confirmed=scope['classification_confirmed'])
+        result['review_axes']['scope'].update({k:deepcopy(scope[k]) for k in
+            ('knowledge_scope','classification_confirmed','policy_version','policy_hash','authority') if k in scope})
     expression=result['review_axes']['expression']
     resolved={r['check'] for r in snapshot['accepted_resolutions']}
     original_findings=expression.get('historical_findings',expression.get('findings',[]))
@@ -305,8 +351,9 @@ def update_issue_ledger(state,base,original_votes,committee,snapshot):
                 evidence_ids=[e['evidence_id'] for e in state.bundle.get('items',[])],
                 target={'claim_id':dispute['claim']['claim_id'],'check':dispute['check']},dimensions=CHECK_AXES[dispute['check']])
     for resolution in snapshot['accepted_resolutions']:
-        state.protected_ids=sorted(set(state.protected_ids)|set(resolution.get('supporting_evidence_ids',[]))|set(resolution.get('counter_evidence_ids',[])))
-        if resolution['status']!='resolved_supports':continue
+        state.protected_ids=sorted(set(state.protected_ids)|set(resolution.get('supporting_evidence_ids',[]))|set(resolution.get('counter_evidence_ids',[]))|
+            (set(resolution['evidence_ids']) if resolution['check']=='knowledge_scope' else set()))
+        if resolution['status'] not in {'resolved_supports','resolved_scope'}:continue
         for issue in list(ledger.unresolved()):
             if issue.get('target',{}).get('claim_id')==resolution['claim_id']:
                 ledger.resolve_target(issue['issue_id'],CHECK_AXES[resolution['check']],

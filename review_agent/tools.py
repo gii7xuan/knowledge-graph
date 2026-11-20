@@ -11,6 +11,11 @@ from .memory import ReviewMemory
 from .validators import judge_independently, model_request_count
 
 
+def checked_source_scopes(state):
+    return {('adjacent_sentence' if r['tool']=='inspect_context' else r['arguments']['scope'])
+        for r in state.context.get('resolution_search_history',{}).values() if r.get('status') in {'ok','empty'}}
+
+
 class AgentTools:
     def __init__(self, runtime):
         self.runtime = runtime
@@ -48,7 +53,23 @@ class AgentTools:
         content = lambda bundle: sorted((x["evidence_id"], x["quote"], x.get("anchor_valid")) for x in bundle.get("items", []))
         if not state.bundle or content(next_bundle) != content(state.bundle):
             state.bundle = next_bundle
+            if state.ontology_checked:self.refresh_mapping_preflight()
         return len({x["evidence_id"] for x in state.archive} - previous)
+
+    def refresh_mapping_preflight(self):
+        state=self.state
+        if 'mapping_preflight_policy' not in state.context:return
+        from .ontology_context import select_context
+        from .mapping_preflight import prepare
+        guard=self.runtime.orchestrator.ontology_guard
+        retrieval=state.context.get('ontology_retrieval') or {}
+        selected=select_context(guard,state.candidate,state.bundle,state.context['ontology_context_policy'],retrieval)
+        selected,report=prepare(guard,state.candidate,state.bundle,selected,state.context['ontology_context_policy'],
+            state.context['mapping_preflight_policy'],retrieval)
+        state.ontology_lookup.update(mapping_preflight=report,retrieved_context=selected,retrieved_context_hash=sha256_json(selected))
+        if state.context.get('resolution_snapshots_enabled'):
+            from .definition_tasks import sync
+            state.context['shared_definition_tasks']=sync(self.runtime.repository,state)
 
     def execute(self, name, args):
         # No dynamic import, eval, arbitrary attribute or filesystem/SQL tool.
@@ -358,12 +379,24 @@ class AgentTools:
             runtime.refresh_resolution()
         return {'status':result['status'],'dispute_id':dispute_id,'focused_result':result,'original_votes_changed':False}
 
-    def propose_revision(self, changes, evidence_ids, reason):
+    def propose_revision(self, changes, evidence_ids, reason,field_evidence=None,reviewed_scopes=None,field_notes=None):
         self.reserve_revision_path()
         from .revision_service import RevisionService
+        field_map=None;verification=None
+        policy=self.state.context.get('agent_resolution_policy',{})
+        if policy.get('expression_grounding_required') or policy.get('qualifier_grounding_required') or any(
+                value is not None for value in (field_evidence,reviewed_scopes,field_notes)):
+            from .expression_revision import validate_revision_action,VERSION
+            args={'changes':changes,'evidence_ids':evidence_ids,'reason':reason,'field_evidence':field_evidence or {},
+                'reviewed_scopes':reviewed_scopes or {},'field_notes':field_notes or {}}
+            field_map=validate_revision_action({'action':'propose_revision','arguments':args,'target_issue':'expression',
+                'rationale_summary':reason},self.state.candidate,self.state.bundle,
+                checked_scopes=checked_source_scopes(self.state))
+            verification={'version':VERSION,'reviewed_scopes':reviewed_scopes or {},'field_notes':field_notes or {}}
         draft=RevisionService(self.runtime.repository).propose(self.state.candidate,
             self.state.context['execution_row_version'],changes,evidence_ids,reason,self.state.bundle,
-            self.runtime.document,protected_ids=self.state.protected_ids,source_audit_id=self.state.audit_id)
+            self.runtime.document,protected_ids=self.state.protected_ids,source_audit_id=self.state.audit_id,
+            field_evidence=field_map,qualifier_verification=verification)
         self.state.revision_drafts.append(draft)
         self.runtime.issue("revision_proposed", "修订草案需独立审核及新版本复核", critical=True)
         return {"status": "draft_proposed", "draft": draft, "candidate_unchanged": True}

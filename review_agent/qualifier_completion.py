@@ -36,7 +36,7 @@ def tools_for(candidate):
     return selected
 
 
-def validate_completion_action(action,candidate,bundle):
+def validate_completion_action(action,candidate,bundle,*,require_grounding=False,checked_scopes=None):
     action=validate_action(deepcopy(action))
     allowed={e['evidence_id'] for e in bundle['items'] if e.get('anchor_valid')}
     ids=action['arguments'].get('evidence_ids',[])
@@ -54,10 +54,30 @@ def validate_completion_action(action,candidate,bundle):
             raise ValueError('unresolved qualifiers must remain a handoff, not a completed draft')
         if field=='polarity' and (changes['qualifiers'][field] not in {'positive','negative'} or changes['qualifier_status'][field]!='extracted'):
             raise ValueError('polarity requires an explicit source-grounded positive/negative assessment')
+    if require_grounding:
+        args=action['arguments'];field_evidence=args.get('field_evidence') or {};notes=args.get('field_notes') or {}
+        if set(field_evidence)!=fields or set(notes)!=fields:
+            raise ValueError('each completed qualifier requires its own evidence IDs and source interpretation')
+        for field in fields:
+            refs=field_evidence[field]
+            if not refs or not set(refs)<=set(ids) or not str(notes[field]).strip():
+                raise ValueError('qualifier field evidence must be selected from the verified draft evidence')
+            if changes['qualifier_status'][field]=='not_stated':
+                scope=(args.get('reviewed_scopes') or {}).get(field) or {}
+                if not scope.get('evidence_ids') or not set(scope['evidence_ids'])<=set(refs) or not scope.get('scope'):
+                    raise ValueError('not_stated requires the checked source scope and exact evidence IDs')
+                if checked_scopes is not None and scope['scope'] not in checked_scopes:
+                    raise ValueError('not_stated scope has not been inspected by the source tools')
     from .repository import ValidationError
     try:merge_triple_patch(candidate['triple'],changes,strict=True)
     except ValidationError as exc:raise ValueError(str(exc)) from exc
     return action
+
+
+def qualifier_field_map(candidate,changes,evidence):
+    return {prefix+'.'+field:ids for field,ids in (evidence or {}).items()
+        for prefix in ('qualifiers','qualifier_status')
+        if candidate['triple'].get(prefix,{}).get(field)!=changes.get(prefix,{}).get(field)}
 
 
 def bounded_rationale_projection(receipt):

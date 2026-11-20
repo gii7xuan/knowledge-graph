@@ -8,6 +8,7 @@ from schema.relation_registry import RelationRegistry
 from .contracts import sha256_json
 
 VERSION = 'mapping_preflight_v1'
+REVISION_VERSION='mapping_preflight_v2'
 MODEL_RULE = ('Mapping metadata was checked before dispatch. If judgment_ready is false, preserve the original '
               'source opinion, keep formal mapping unassigned, and explain missing metadata. Do not treat missing '
               'metadata or lexical non-matches as a global ontology gap. Recalled IDs are candidates, not approved '
@@ -16,11 +17,19 @@ MODEL_RULE = ('Mapping metadata was checked before dispatch. If judgment_ready i
 
 def policy_for(config):
     incoming = config.get('mapping_preflight') or {}
-    if set(incoming) - {'enabled'} or type(incoming.get('enabled', False)) is not bool:
-        raise ValueError('mapping_preflight accepts only a boolean enabled setting')
-    return {'version': VERSION, 'search_order': ['review_subset', 'full_bound_release_and_aliases'],
+    if set(incoming) - {'enabled','revision_proposals'} or any(type(v) is not bool for v in incoming.values()):
+        raise ValueError('mapping_preflight accepts boolean enabled/revision_proposals settings')
+    policy={'version': VERSION, 'search_order': ['review_subset', 'full_bound_release_and_aliases'],
             'automatic_assignment': False, 'absence_from_recall_is_gap_proof': False,
             'entity_identity': 'document_local_with_explicit_types_and_source', 'model_rule': MODEL_RULE}
+    if incoming.get('revision_proposals'):
+        policy.update(version=REVISION_VERSION,type_material='source_grounded_candidates_with_complete_class_definitions')
+    return policy
+
+
+def known_policies():
+    return [policy_for({'mapping_preflight':{'enabled':True}}),
+        policy_for({'mapping_preflight':{'enabled':True,'revision_proposals':True}})]
 
 
 def definitions(item):
@@ -58,6 +67,16 @@ def _entity(candidate, side, context, bundle, classes):
     provided_alias = mention.get('canonical_entity')
     refs = [e['evidence_id'] for e in bundle.get('items', []) if surface and e.get('anchor_valid') and
             (surface in str(e.get('quote') or '') or str(mention.get('entity_surface') or surface) in str(e.get('quote') or ''))]
+    from .ontology_context import _similarity
+    source=' '.join(str(e.get('quote') or '') for e in bundle.get('items',[]) if e['evidence_id'] in refs)
+    # These are hypotheses with source packets, never types inferred from a property's signature.
+    recalled=sorted((-_similarity(surface+' '+source,item),identity) for identity,item in classes.items()
+                    if _similarity(surface+' '+source,item)>0)
+    possible=sorted(set(possible)|{identity for _,identity in recalled[:8]})
+    retrieved={c['id'] for c in context.get('classes',[])}
+    type_material=[{'class_id':identity,'definition_available':bool(definitions(classes[identity])),
+        'source_evidence_ids':refs[:4],'retrieved':identity in retrieved,
+        'status':'source_grounding_requires_independent_review'} for identity in possible]
     missing = []
     if not candidate.get('document_id') or not candidate.get('document_version'):
         missing.append('source_identity_unavailable')
@@ -67,12 +86,14 @@ def _entity(candidate, side, context, bundle, classes):
     if len(exact_types) == 1 and exact_types[0] not in {c['id'] for c in context.get('classes', [])}:
         missing.append('endpoint_type_not_retrieved')
     if not refs: missing.append('referent_source_context_unavailable')
-    return {'candidate_id': triple.get(side + '_entity_id'), 'surface': surface,
+    result={'candidate_id': triple.get(side + '_entity_id'), 'surface': surface,
             'assigned_type': assigned, 'type_candidate_ids': possible,
             'aliases': [provided_alias] if provided_alias and provided_alias != surface else [],
             'aliases_are_unconfirmed': True, 'source_evidence_ids': refs[:4],
             'document_id': candidate.get('document_id'), 'document_version': candidate.get('document_version'),
             'referent_scope': mention.get('referent_scope'), 'missing_information': missing}
+    result['type_candidates']=type_material
+    return result
 
 
 def _inspect(guard, candidate, bundle, context):
@@ -121,14 +142,15 @@ def _inspect(guard, candidate, bundle, context):
 
 
 def model_view(report):
-    return {key: deepcopy(report[key]) for key in ('version', 'judgment_ready', 'blocking_information',
-            'relation_candidates', 'entities', 'confusable_relations', 'search_trace', 'global_gap_confirmed', 'model_rule')}
+    keys=('version', 'judgment_ready', 'proposal_ready', 'proposal_relation_ids', 'proposal_blocking_information', 'blocking_information',
+            'relation_candidates', 'entities', 'confusable_relations', 'search_trace', 'global_gap_confirmed', 'model_rule')
+    return {key:deepcopy(report[key]) for key in keys if key in report}
 
 
 def prepare(guard, candidate, bundle, context, context_policy, policy, lookup=None):
     """Subset first; missing metadata triggers full-release exact alias and lexical recall."""
     from .ontology_context import select_context, _similarity
-    if policy != policy_for({'mapping_preflight': {'enabled': True}}):
+    if policy not in known_policies():
         raise ValueError('mapping preparation policy changed')
     original = deepcopy(context); context = deepcopy(context); lookup = deepcopy(lookup or {})
     rows, entities, blockers, required, exact = _inspect(guard, candidate, bundle, context)
@@ -159,11 +181,48 @@ def prepare(guard, candidate, bundle, context, context_policy, policy, lookup=No
         rows, entities, blockers, required, exact = _inspect(guard, candidate, bundle, context)
         if excluded: blockers.append({'kind': 'context', 'id': None, 'fields': ['supplementary_context_budget_exceeded']})
     triple = candidate['triple']
-    report = {'version': VERSION, 'policy_hash': sha256_json(policy),
+    if policy['version']==REVISION_VERSION:
+        for side,entity in entities.items():
+            assigned=_class_matches(guard.classes,entity['assigned_type'])
+            if len(assigned)==1 and not definitions(guard.classes[assigned[0]]):
+                blockers.append({'kind':'entity','id':side,'fields':['endpoint_type_definition_missing']})
+    for side,entity in entities.items():
+        for term in entity['type_candidates']:
+            compatible=[]
+            for row in rows:
+                signature=guard.relations.get(row['id']) or {}
+                key='domain' if side=='head' else 'range'
+                semantics=signature.get(key+'_semantics','all' if guard.snapshot.constraint_semantics=='required_all' else 'any')
+                if guard._endpoint_status(term['class_id'],signature.get(key) or [],semantics)!='fail':compatible.append(row['id'])
+            term['compatible_relation_ids']=compatible
+            term['constraint_compatibility_is_type_evidence']=False
+    proposal_blockers=[]
+    viable={r['id'] for r in rows if not r['missing_information']}
+    if not viable:
+        proposal_blockers.append('complete_relation_definition_not_recalled')
+    if any(r['id'] in required and r['missing_information'] for r in rows):
+        proposal_blockers.append('required_relation_or_competitor_metadata_incomplete')
+    for side,entity in entities.items():
+        proposal_blockers.extend(side+':'+reason for reason in entity['missing_information'] if reason in
+            {'source_identity_unavailable','candidate_identity_unverified','referent_source_context_unavailable'})
+        typed=[c for c in entity['type_candidates'] if c['definition_available'] and c['source_evidence_ids'] and c['retrieved']]
+        compatible={identity for c in typed for identity in c['compatible_relation_ids']}
+        viable &= compatible
+        if not compatible:
+            proposal_blockers.append(side+':source_grounded_type_material_missing')
+    if not viable:proposal_blockers.append('no_joint_source_grounded_endpoint_mapping')
+    if triple.get('tail_kind') in {'event','proposition'}:
+        proposal_blockers.append('bound_property_signatures_cannot_represent_event_or_proposition')
+    if triple.get('tail_kind')=='literal' and (not triple.get('datatype') or triple.get('value') is None):
+        proposal_blockers.append('typed_literal_incomplete')
+    if excluded:proposal_blockers.append('supplementary_context_budget_exceeded')
+    report = {'version': policy['version'], 'policy_hash': sha256_json(policy),
         'candidate_hash': sha256_json(candidate), 'evidence_hash': bundle.get('evidence_hash'),
         'ontology_context_hash': sha256_json(context), 'source_catalog_hash': context['source_catalog_hash'],
         'ontology_release_id': candidate.get('ontology_release_id'), 'ontology_version': candidate.get('ontology_version'),
-        'judgment_ready': not blockers, 'blocking_information': blockers, 'relation_candidates': rows,
+        'judgment_ready': not blockers and bool(triple.get('relation_id')),
+        'proposal_ready':not proposal_blockers,'proposal_relation_ids':sorted(viable),'proposal_blocking_information':proposal_blockers,
+        'blocking_information': blockers, 'relation_candidates': rows,
         'entities': entities, 'search_trace': trace, 'budget_excluded_property_ids': excluded,
         'confusable_relations': [{'query': triple.get('surface_relation'), 'candidate_ids': sorted(exact),
              'comparison': 'compare full definitions, declared direction and endpoint constraints'}] if len(exact) > 1 else [],
@@ -183,7 +242,7 @@ def frozen(proposal):
     if 'mapping_preflight_policy' not in proposal: return None
     report = proposal.get('mapping_preflight'); policy = proposal['mapping_preflight_policy']
     from .contracts import proposal_digest
-    if (not isinstance(report, dict) or policy != policy_for({'mapping_preflight': {'enabled': True}}) or
+    if (not isinstance(report, dict) or policy not in known_policies() or
             sha256_json(policy) != proposal.get('mapping_preflight_policy_hash') or
             sha256_json(report) != proposal.get('mapping_preflight_hash') or
             report.get('policy_hash') != sha256_json(policy) or

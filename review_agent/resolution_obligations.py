@@ -13,39 +13,52 @@ def attempt_targets(action,state):
     incomplete=not expression_diagnostics(state.candidate)['expression_complete']
     if name=='propose_revision' and incomplete:return [expression_id]
     if name in {'search_evidence','inspect_context'}:
-        known={d['dispute_id'] for d in (state.context.get('dispute_report') or {}).get('disputes',[]) if d['status']=='open'}
-        known|={i['issue_id'] for i in state.issues if i.get('status','open')!='resolved' and i['code']=='EVIDENCE_INSUFFICIENT'}
-        if incomplete:known.add(expression_id)
-        return [action['target_issue']] if action['target_issue'] in known else sorted(known) or ['source_supplement']
+        from .action_availability import search_key
+        return ['supplement:'+search_key(action,state)]
     return []
 
 
-def resolution_obligations(state,budget=None):
+def targeted_supplement(state,identity,*,qualifiers=False):
+    """Arguments come from verified anchors; no planner-invented offsets or IDs."""
+    from .action_availability import search_key
+    evidence=[e for e in state.bundle.get('items',[]) if e.get('anchor_valid')]
+    choices=[]
+    if qualifiers:
+        choices += [('inspect_context',{'evidence_id':e['evidence_id'],'before':1,'after':1}) for e in evidence[:1]]
+    triple=state.candidate['triple']
+    query=' '.join(str(triple.get(k) or '') for k in ('head','surface_relation','tail')).strip()[:600]
+    if query:
+        for scope in ('same_section','parent_section'):
+            choices.append(('search_evidence',{'scope':scope,'query':query,
+                'purpose':'check_qualifiers' if qualifiers else 'check_support','limit':6}))
+    for tool,args in choices:
+        action={'action':tool,'arguments':args,'target_issue':identity,'rationale_summary':'核查此问题尚未读取的原文范围'}
+        if search_key(action,state) not in state.context.get('resolution_search_history',{}):return action
+    return None
+
+
+def resolution_obligations(state,budget=None,allowed_tools=None):
     if not state.context.get('resolution_snapshots_enabled'):return []
     from .semantic_recheck import candidates
+    from .action_availability import unavailable_reason,required_budget,mapping_source_ready
+    from .planner_contracts import TOOL_SCHEMAS,RESOLUTION_TOOLS
     result=[];policy=state.context.get('agent_resolution_policy') or {}
-    maximum=int(policy.get('max_attempts_per_issue',2))
-    attempts=state.context.get('resolution_attempts') or {}
-    fixed_counts=None
-    if policy.get('fixed_candidate_limits'):
-        from .fixed_candidate_workflow import action_counts
-        fixed_counts=action_counts(state)
+    allowed=set(allowed_tools if allowed_tools is not None else state.context.get('resolution_allowed_tools',
+        [*TOOL_SCHEMAS,*RESOLUTION_TOOLS,'review_dispute']))
+    maximum=int(policy.get('max_attempts_per_issue',2));attempts=state.context.get('resolution_attempts') or {}
     def add(identity,kind,tool,reason,*,ready=False,arguments=None):
-        n=attempts.get(identity,0)
-        reserve=int(policy.get('reserve_final_committee_calls',3))
-        remaining=budget.remaining_calls() if budget else state.context.get('resolution_remaining_calls',10**9)
-        funded=remaining>=reserve+(3 if tool in {'review_dispute','review_revision'} else 1)
-        legal=bool(tool and n<maximum and funded and
-                   (not policy.get('final_review_only') or tool in {'recover_validation','review_semantic_contract','review_dispute','search_evidence'}))
-        fixed_exhausted=bool(fixed_counts is not None and (
-            tool not in {'review_dispute','search_evidence','inspect_context'} or
-            tool=='review_dispute' and fixed_counts['focused_reviews']>=1 or
-            tool in {'search_evidence','inspect_context'} and fixed_counts['supplements']>=2))
-        if fixed_exhausted:legal=False
-        result.append({'obligation_id':identity,'kind':kind,'reason':reason,'attempts':n,'attempt_limit':maximum,
-            'legal_next_tool':tool if legal else None,'ready':ready and legal,'arguments':arguments,
-            'expected_information_gain':reason,'terminal_reason':None if legal else
-                'fixed_candidate_action_limit' if fixed_exhausted else 'budget_reserved_for_final_committee' if not funded else 'bounded_attempts_exhausted' if n>=maximum else 'external_or_domain_decision_required'})
+        action={'action':tool,'arguments':arguments or {},'target_issue':identity,'rationale_summary':reason}
+        error=unavailable_reason(tool,state,budget,allowed,action=action) if tool else 'external_or_domain_decision_required'
+        result.append({'obligation_id':identity,'target_issue':identity,'kind':kind,'reason':reason,
+            'attempts':attempts.get(identity,0),'attempt_limit':maximum,
+            'legal_next_tool':tool if not error else None,'ready':ready and not error,'arguments':arguments,
+            'required_budget':required_budget(tool,state) if tool else None,
+            'expected_information_gain':reason,'terminal_reason':error})
+    def supplement(identity,reason,*,qualifiers=False):
+        action=targeted_supplement(state,identity,qualifiers=qualifiers)
+        add(identity,'expression_completion' if qualifiers else 'source_supplement',
+            action['action'] if action else None,reason,ready=bool(action),arguments=action['arguments'] if action else None)
+        return action
     for voter in candidates(state):
         add('semantic:'+voter,'semantic_contract','review_semantic_contract','补全缺失判断依据，允许维持未知',ready=True,arguments={'voter_id':voter})
     recoverable=state.validation_recovery.get('recoverable_voter_ids',[])
@@ -63,38 +76,54 @@ def resolution_obligations(state,budget=None):
         add('split:'+group['group_id'],'split_revision',tool,'每个子候选独立审核并重新核验',ready=True,arguments={'group_id':group['group_id']})
     original=set(state.context.get('dispute_source_evidence_ids',[]))
     fresh={e['evidence_id'] for e in state.bundle.get('items',[])}-original
+    snapshot_axes=(state.context.get('resolution_snapshot') or {}).get('dimension_results') or {}
     for dispute in (state.context.get('dispute_report') or {}).get('disputes',[]):
         if dispute['status']!='open':continue
+        if dispute['check']=='mapping' and snapshot_axes.get('scope',{}).get('status')=='exclude':continue
         if fresh or dispute['check']=='mapping' and state.ontology_lookup.get('mapping_preflight',{}).get('judgment_ready'):
             add(dispute['dispute_id'],'focused_dispute','review_dispute','新增原文可核验该具体争议',ready=True,arguments={'dispute_id':dispute['dispute_id']})
-        elif dispute['dispute_id'] not in state.context.get('resolution_no_gain_targets',[]):
-            add(dispute['dispute_id'],'source_supplement','search_evidence','读取尚未核查的相关上下文后复核该争议')
-        else:add(dispute['dispute_id'],'semantic_dispute',None,'补证没有新增材料，保留原争议')
+        else:supplement(dispute['dispute_id'],'读取尚未核查的相关上下文后复核该争议',qualifiers=dispute['check'] in {'qualifiers','knowledge_scope'})
     if not state.context.get('dispute_baseline'):
         for issue in state.issues:
             if issue.get('status','open')!='resolved' and issue['code']=='EVIDENCE_INSUFFICIENT':
-                active=issue['issue_id'] not in state.context.get('resolution_no_gain_targets',[]) and not state.context.get('resolution_no_further_validation')
-                add(issue['issue_id'],'source_supplement','search_evidence' if active else None,
-                    '针对尚未核查的来源补证，新增材料后独立复核')
-    validation=state.current_validation() or {}
+                supplement(issue['issue_id'],'针对尚未核查的来源补证，新增材料后独立复核')
     from .revision_patch import expression_diagnostics
-    if not expression_diagnostics(state.candidate)['expression_complete']:
-        identity='expression:'+sha256_json(state.candidate)[:12]
-        n=attempts.get(identity,0)
-        tool=None if identity in state.context.get('resolution_no_gain_targets',[]) or state.revision_drafts else 'search_evidence' if not n else 'propose_revision'
-        add(identity,'expression_completion',tool,'从原文核验未知限定，再提出有依据的新版本；不得填默认值')
+    expression=expression_diagnostics(state.candidate)
+    prep=state.ontology_lookup.get('mapping_preflight') or {}
+    validation=state.current_validation() or {}
     axes=(state.context.get('resolution_snapshot') or {}).get('dimension_results') or validation.get('consensus',{}).get('review_axes') or {}
-    if not state.revision_drafts and axes.get('mapping',{}).get('status') in {'unassigned','context_incomplete'}:
-        prep=state.ontology_lookup.get('mapping_preflight') or {}
+    if (policy.get('expression_grounding_required') and not state.revision_drafts
+            and axes.get('expression',{}).get('status') in {'semantic_revision','unresolved'}
+            and state.bundle.get('items')):
+        add('semantic_expression:'+sha256_json(state.candidate)[:12],'expression_revision','propose_revision',
+            '依据原文提出头实体、尾实体、关系方向或限定信息的统一修订草案，逐字段说明证据；独立审核后再复审新版本')
+    mapping_needed=axes.get('mapping',{}).get('status') in {'unassigned','context_incomplete'}
+    if not expression['expression_complete'] and not state.revision_drafts:
+        identity='expression:'+sha256_json(state.candidate)[:12]
+        if not supplement(identity,'从完整陈述核验未知限定；不得填默认值',qualifiers=True):
+            if not mapping_needed:
+                add(identity,'expression_completion','propose_revision','成对填写有逐字段证据的限定值和状态；未述明须记录核查范围')
+    if not state.revision_drafts and mapping_needed and axes.get('scope',{}).get('status')!='exclude':
         missing=[r['id'] for r in prep.get('relation_candidates',[]) if 'definition_missing_in_bound_release' in r.get('missing_information',[])]
         if missing:add('definitions:'+sha256_json(missing)[:12],'shared_definition',None,'等待共用正式定义的集中审核和发布')
-        elif prep.get('relation_candidates'):
-            add('mapping:'+sha256_json(state.candidate)[:12],'mapping_proposal','propose_mapping','依据实体来源和完整定义提出可独立审核的映射')
+        elif prep.get('proposal_ready') and mapping_source_ready(state,axes) and axes.get('scope',{}).get('status')=='include' and (
+                axes.get('expression',{}).get('status')=='standard' or expression['blocking_fields']):
+            add('mapping:'+sha256_json(state.candidate)[:12],'mapping_proposal','propose_mapping',
+                '依据来源、定义与方向提出映射；未知限定须在同一草案内附逐字段证据补齐')
+        elif prep and not prep.get('relation_candidates') and axes.get('source',{}).get('status')=='supported' and not state.context.get('coverage_assessment'):
+            add('coverage:'+sha256_json(state.candidate)[:12],'ontology_coverage','assess_ontology_coverage','先核查完整绑定本体；召回为空不等于本体缺口')
+        else:add('mapping:'+sha256_json(state.candidate)[:12],'mapping_information',None,
+            '缺少来源支持、范围判断、端点类型证据或可表达该陈述的冻结本体结构')
     return result
 
 
 def ready_action(state,budget):
-    for obligation in resolution_obligations(state,budget):
+    obligations=resolution_obligations(state,budget)
+    ready=[o for o in obligations if o['ready']]
+    for obligation in ready:
+        if (obligation['legal_next_tool'] in {'search_evidence','inspect_context'} and len([o for o in obligations if o['legal_next_tool'] and o['ready']])>1
+                and not state.context.get('resolution_local_supplements_only') and budget.usage['planner_steps']<int(budget.config.get('max_planner_steps',6))):
+            continue
         if obligation['ready']:
             return {'action':obligation['legal_next_tool'],'arguments':obligation['arguments'],
                 'target_issue':obligation['obligation_id'],'rationale_summary':obligation['reason']}
@@ -106,6 +135,9 @@ def ready_action(state,budget):
     blocked=any(gaps.get(k) for k in ('critical_issues_unresolved','protected_evidence_omitted','unreviewed_discovered_evidence',
         'validation_missing','version_stale','ontology_not_checked','need_more_evidence','ontology_disagreement'))
     identity=state.candidate.get('contract_version')!='extraction_candidate_v4' or state.candidate.get('fact_key_state')=='canonical'
+    if not blocked and snapshot.get('scope_exclusion_complete'):
+        return {'action':'finish_review','arguments':{'stop_reason':'program_verified_scope_exclusion','unresolved_issues':[],
+            'evidence_ids':[]},'target_issue':'scope_exclusion','rationale_summary':'来源、表达与排除类别已独立核验，主图映射不再需要'}
     if not blocked and identity and expression_diagnostics(state.candidate)['expression_complete'] and snapshot.get('semantic_obligations_complete') and all(dimensions.get(k,{}).get('status')==v for k,v in
         {'source':'supported','expression':'standard','mapping':'valid'}.items()) and dimensions.get('scope',{}).get('status') in {'include','exclude'}:
         return {'action':'finish_review','arguments':{'stop_reason':'program_verified_all_review_obligations',
@@ -115,6 +147,7 @@ def ready_action(state,budget):
 
 
 def human_cards(state,obligations):
+    from .revision_patch import expression_diagnostics
     sources={e['evidence_id']:e for e in state.archive}
     counters={eid for v in state.votes for eid in v.get('counter_evidence_ids',[])}
     supports={eid for v in state.votes for eid in v.get('supporting_evidence_ids',[])}
@@ -125,6 +158,8 @@ def human_cards(state,obligations):
             for eid in sorted(set(i.get('evidence_ids',[]))) if eid in sources],
         'shared_definitions':[{'task_id':t['task_id'],'term_id':t['term_id'],'affected_candidates':t['affected_candidates']}
                               for t in state.context.get('shared_definition_tasks',[]) if t.get('priority')!='weak_recall'],
+        'blocking_qualifier_fields':expression_diagnostics(state.candidate)['blocking_fields'],
+        'mapping_missing_information':(state.ontology_lookup.get('mapping_preflight') or {}).get('proposal_blocking_information',[]),
         'unresolved_reason':next((o.get('terminal_reason') or o['reason'] for o in obligations if o['obligation_id']==i['issue_id']),None),
         'attempted_steps':[{'tool':o.get('tool'),'status':o.get('status'),'new_evidence_count':o.get('new_evidence_count')}
                            for o in state.observations if o.get('tool')],

@@ -1,0 +1,33 @@
+{
+  "version": "gpt40_handoff_revision_rerun_v2",
+  "source_directory": "D:\\knowledge-huopao\\outputs\\gpt40_five_group_20261119_frozen",
+  "population": 14,
+  "sample_ids": [
+    "PILOT-002",
+    "PILOT-003",
+    "PILOT-004",
+    "PILOT-006",
+    "PILOT-012",
+    "PILOT-015",
+    "PILOT-017",
+    "PILOT-018",
+    "PILOT-026",
+    "PILOT-029",
+    "PILOT-032",
+    "PILOT-036",
+    "PILOT-037",
+    "PILOT-039"
+  ],
+  "selection_policy": "explicit user-requested original sample IDs",
+  "partition": "development",
+  "limits": {
+    "llm_calls": 448,
+    "known_tokens": 15000000,
+    "seconds": 43200
+  },
+  "initial_evidence": "exact original GPT-bound packet",
+  "unknown_policy": "manual handoff for affected candidate; continue other candidates; no automatic resend",
+  "reference_policy": "GPT reference used only on original initial ballots; never inherited by revised versions",
+  "production_written": false,
+  "zero_automatic_retries": true
+}

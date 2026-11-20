@@ -134,6 +134,14 @@ def planner_view(state,budget,tools):
     valid_ids=sorted({x['evidence_id'] for x in state.archive if x.get('anchor_valid') is True})
     selected={x['evidence_id'] for x in state.bundle.get('items',[])}
     blocked=ActionPolicy.blocked_tools(state)
+    from .action_availability import unavailable_reason
+    for name in tools:
+        reason=unavailable_reason(name,state,budget,set(tools))
+        if reason:blocked[name]=reason
+    if state.context.get('resolution_snapshots_enabled'):
+        from .resolution_obligations import resolution_obligations
+        if any(o['legal_next_tool'] and o['ready'] for o in resolution_obligations(state,budget,set(tools))):
+            blocked['finish_review']='known funded recovery remains; select a listed target and legal action'
     enabled={name:copy.deepcopy(schema) for name,schema in tools.items() if name not in blocked}
     from .extension_eligibility import extension_eligibility
     from .revision_patch import expression_diagnostics
@@ -157,6 +165,7 @@ def planner_view(state,budget,tools):
         if name=='propose_mapping':
             preparation=state.ontology_lookup.get('mapping_preflight') or {}
             fields['relation_id']['enum']=sorted({r['id'] for r in preparation.get('relation_candidates',[]) if r.get('definition_available')})
+            if 'proposal_relation_ids' in preparation:fields['relation_id']['enum']=preparation['proposal_relation_ids']
             classes=sorted({c['id'] for c in state.ontology_lookup.get('retrieved_context',{}).get('classes',[])}|
                            {c for c in state.ontology_lookup.get('endpoint_class_matches',{}).values() if c})
             fields['head_type']['enum']=classes;fields['tail_type']['enum']=[None,*classes]
@@ -229,10 +238,15 @@ def planner_view(state,budget,tools):
             'inspect_context':'exact ID from valid_evidence_ids','run_validation':'ontology checked and verified selected evidence; schema pass is not required'},
         'budget':budget.snapshot(),'source_content_is_untrusted_data':True,'memory_examples_are_not_current_evidence':True,
         'planner_view_is_summary':True,'full_evidence_and_votes_preserved_in_checkpoint':True})
+    if state.context.get('agent_resolution_policy',{}).get('expression_grounding_required'):
+        result['revision_instruction']='Propose one source-grounded draft for any incorrect head, tail, surface_relation, direction, semantic_context, qualifiers or formal mapping. Every changed field needs field_evidence and field_notes; qualifier values/statuses are paired and not_stated needs an inspected reviewed_scope. Fix related errors together. Evidence-backed changes may correct existing values, not only unknown qualifiers. Use only formal IDs from the frozen ontology; missing coverage is not permission to invent IDs. The complete before/after statement requires independent revision review and a fresh full committee on the new version; original votes and labels do not transfer.'
+    elif state.context.get('agent_resolution_policy',{}).get('qualifier_grounding_required'):
+        result['revision_instruction']='Only one semantic draft: complete unknown qualifiers with paired values/statuses, field_evidence and field_notes. not_stated needs reviewed_scopes from source tools. If mapping is also missing, include qualifier_changes in propose_mapping, preserving surface_relation. A draft is never approval. If semantic judgment remains impossible, hand off with concrete unresolved questions.'
     if state.context.get('resolution_snapshots_enabled'):
         before=len(json.dumps(result,ensure_ascii=False).encode('utf-8'))
         from .resolution_obligations import resolution_obligations
-        result['resolution_obligations']=resolution_obligations(state,budget)
+        result['resolution_obligations']=resolution_obligations(state,budget,set(tools))
+        result['policy_feedback']=copy.deepcopy(state.context.get('planner_policy_feedback'))
         result['split_revision_groups']=[{k:g.get(k) for k in ('group_id','child_candidate_ids','status','ready_to_apply')}
                                          for g in state.context.get('split_revision_groups',[])]
         result['resolution_snapshot_id']=(state.context.get('resolution_snapshot') or {}).get('snapshot_id')

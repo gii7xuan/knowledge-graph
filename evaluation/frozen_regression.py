@@ -46,25 +46,28 @@ def settings_for(directory,profile='diagnostic'):
     return configuration(profile=profile,directory=directory)
 
 
-def prepare(directory,data_path=DATA):
+def prepare(directory,data_path=DATA,*,population_policy='development30'):
     directory=Path(directory).resolve();data_path=Path(data_path).resolve()
     if not directory.is_relative_to(ROOT/'outputs') or directory.exists():
         raise ValueError('prepare requires a new separate directory under outputs')
     data=read(data_path);pairs=validated_population(data)
-    if len(pairs)!=30 or not set(SMOKE)<={b['sample_id'] for b,_ in pairs}:
+    if population_policy not in {'development30','bound_candidates'}:raise ValueError('unknown frozen population policy')
+    if population_policy=='development30' and (len(pairs)!=30 or not set(SMOKE)<={b['sample_id'] for b,_ in pairs}):
         raise ValueError('the fixed 30-case development population is required')
     source=ReadOnlyRepository(data['source_database'])
-    original=source.get_run(pairs[0][1]['run_id'])
+    original=source.get_run(pairs[0][1]['run_id']);originals={original['run_id']:original}
     indexes={};releases={};assets={str(data_path):digest(data_path)}
     for binding,candidate in pairs:
-        if candidate['run_id']!=original['run_id']:
+        if population_policy=='development30' and candidate['run_id']!=original['run_id']:
             raise ValueError('population run differs from the frozen source')
+        source_run=source.get_run(candidate['run_id']);originals[source_run['run_id']]=source_run
         if sha256_json(source.get_revision(candidate['candidate_id'],candidate['revision']))!=binding['candidate_content_hash']:
             raise ValueError('source candidate differs from development binding')
-        index=load_document_index(original['document_path'],candidate['source_index_hash'],require_verified=True)
-        if index['source_snapshot']['canonical_text']!=data['source_canonical_text']:
+        index=load_document_index(source_run['document_path'],candidate['source_index_hash'],require_verified=True)
+        expected_text=(data.get('source_canonical_texts') or {}).get(candidate['document_id'],data.get('source_canonical_text'))
+        if (population_policy=='development30' or expected_text is not None) and index['source_snapshot']['canonical_text']!=expected_text:
             raise ValueError('source document differs from frozen population')
-        indexes[original['document_path']]=index
+        indexes[source_run['document_path']]=index
         release_path=candidate['ontology_release_path']
         if release_path not in releases:releases[release_path]=load_release(release_path)
         release=releases[release_path]
@@ -77,15 +80,16 @@ def prepare(directory,data_path=DATA):
     # Freeze comparison evidence and prior labels as files, never feed them to a model.
     historical=[data_path,ROOT/'outputs/dev30_20261031/第一章30条开发样本_人工填写.xlsx',
         ROOT/'outputs/dev30_v8_full_20261111/review.sqlite3',ROOT/'outputs/dev30_v8_full_20261111/smoke_report.json']
-    protected={str(path.relative_to(ROOT)):digest(path) for path in historical}
-    production=ReadOnlyRepository(ROOT/'runs/v3/review.sqlite3')
+    if population_policy=='bound_candidates':historical=[data_path]
+    protected={str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path):digest(path) for path in historical}
+    production=ReadOnlyRepository(ROOT/'runs/v3/review.sqlite3') if population_policy=='development30' else source
     production_hashes={b['candidate_id']:sha256_json(production.get_revision(b['candidate_id'])) for b,_ in pairs}
     if any(production_hashes[b['candidate_id']]!=b['candidate_content_hash'] for b,_ in pairs):
         raise ValueError('production revision changed; do not silently replace frozen samples')
     config=settings_for(directory);settings=public_settings(config)
     directory.mkdir(parents=True)
     repo=ReviewRepository(directory/'review.sqlite3');repo.initialize()
-    repo.create_run({**deepcopy(original),'mode':'shadow','experiment_id':directory.name})
+    for source_run in originals.values():repo.create_run({**deepcopy(source_run),'mode':'shadow','experiment_id':directory.name})
     for _,candidate in pairs:repo.add_candidate(deepcopy(candidate))
     copy_revision_ancestry(source,repo,[c for _,c in pairs])
     with repo.connect() as connection:
@@ -94,7 +98,7 @@ def prepare(directory,data_path=DATA):
     frozen={'version':VERSION,'partition':'development','prepared_at':datetime.now(timezone.utc).isoformat(),
         'population':len(pairs),'candidate_hashes':[b['candidate_content_hash'] for b,_ in pairs],
         'sample_bindings_hash':sha256_json(data['bindings']),'settings_hash':sha256_json(settings),
-        'code_hash':sha256_json(code),'assets':assets,'smoke_sample_ids':list(SMOKE),
+        'code_hash':sha256_json(code),'assets':assets,'smoke_sample_ids':list(SMOKE) if population_policy=='development30' else [],
         'execution_policy':'7 initial cases, then only the remaining 23; one ballot per stage, no repeated smoke cases',
         'limits':{'llm_calls_per_candidate':18,'llm_calls_total_upper_bound':540,
             'tokens_per_case_stop_threshold':400000,'candidate_deadline_seconds':420,

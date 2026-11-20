@@ -261,6 +261,7 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
     complete=set(report['whole_vote_eligible_voter_ids'])==set(committee.voter_ids)
     if committee.weighting_policy:
         complete=all(d['judgment_complete'] for d in dimensions.values())
+        if snapshot and snapshot.get('scope_exclusion_complete'):complete=True
     if not complete:blockers.append('required_committee_incomplete')
     guard=proposal.get('ontology_check') or {}
     if guard.get('status')!='pass':blockers.append('ontology_guard_not_passed')
@@ -297,14 +298,17 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
         'paused' if audit_status=='paused' else 'failed' if audit_status=='failed' else 'completed' if complete else 'partial_failure')
     if execution not in {'completed','partial_failure'} and not (context.get('semantic_recovery_projection') and
             snapshot and snapshot['semantic_obligations_complete']):blockers.append('execution:'+execution)
-    recommendation=('exclude' if dimensions['scope']['status']=='exclude' else 'admit' if not blockers else
+    scoped_exclusion=bool((proposal.get('dispute_policy') or {}).get('scope_review_contract'))
+    exclusion_ready=bool(not scoped_exclusion or snapshot and snapshot.get('scope_exclusion_complete'))
+    recommendation=('exclude' if dimensions['scope']['status']=='exclude' and exclusion_ready else
+        'manual_review' if dimensions['scope']['status']=='exclude' and scoped_exclusion else 'admit' if not blockers else
         'revise' if dimensions['expression']['status'] in {'semantic_revision','lossless_normalization'} or dimensions['source']['status']=='contradicted' else
         'wait_mapping' if dimensions['source']['status']=='supported' and dimensions['expression']['status']=='standard' and dimensions['mapping']['status']!='valid' else
         'insufficient_evidence' if dimensions['source']['status']=='insufficient' else 'manual_review')
     from .mapping_trace import process
     result={**report,'policy_hash':sha256_json(policy()),'execution_status':execution,'execution_reason':stop_reason or context.get('agent_stop_reason') or context.get('execution_failure',{}).get('reason_code') or audit_status,
         'mapping_process':process(proposal,votes),
-        'review_completed':complete and all(d['judgment_complete'] for d in dimensions.values()) and
+        'review_completed':complete and (all(d['judgment_complete'] for d in dimensions.values()) or bool(snapshot and snapshot.get('scope_exclusion_complete'))) and
             (not snapshot or snapshot['semantic_obligations_complete']),
         'recommendation':recommendation,'action_taken':'none','blocking_reasons':sorted(set(blockers)),
         'writes_authorized':False,'derivation':'current_frozen_input_only'}
@@ -316,6 +320,8 @@ def outcome(proposal,votes,committee,*,audit_status='completed',stop_reason=None
             hard = [b for b in hard if b.startswith(('execution:', 'resolution_dependency', 'gap:version_stale',
                 'gap:validation_missing', 'gap:protected_evidence', 'gap:unreviewed_discovered'))]
         result['research_operation']=operation(report, blockers=hard)
+        if scoped_exclusion and dimensions['scope']['status']=='exclude' and not exclusion_ready:
+            result['research_operation']='manual_review'
         result['policy_hash']=sha256_json({'observability':policy(),'weighting':committee.weighting_policy})
     if context.get('resolution_snapshots_enabled'):
         from .resolution_status import classify

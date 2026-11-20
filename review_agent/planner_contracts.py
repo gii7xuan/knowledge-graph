@@ -18,7 +18,8 @@ TOOL_SCHEMAS = {
     'recover_validation':{},
     'review_revision':{'draft_id':'current proposed draft ID'},
     'apply_reviewed_revision':{'draft_id':'current approved draft ID','draft_hash':'exact approved draft hash'},
-    "propose_revision": {"changes": "nonempty object containing triple fields only", "evidence_ids": "current evidence IDs", "reason": "string <=400"},
+    "propose_revision": {"changes": "nonempty object containing triple fields only", "evidence_ids": "current evidence IDs", "reason": "string <=400",
+        'field_evidence':'per-changed-field evidence','reviewed_scopes':'optional per-field checked source scope','field_notes':'per-changed-field source interpretation'},
     "finish_review": {"stop_reason": "nonempty string <=200", "unresolved_issues": "array of strings <=400, max 10", "evidence_ids": "current evidence IDs"},
     "request_ontology_extension": {"change_kind": "add_class/add_object_property/add_data_property/add_alias/revise_definition/revise_constraint/merge_terms",
                                    "description": "nonempty string <=800", "proposed_changes": "bounded draft object", "evidence_ids": "current evidence IDs"},
@@ -43,6 +44,15 @@ class ActionError(ValueError):
     pass
 
 
+class PolicyRejection(ActionError):
+    def __init__(self, message, obligations):
+        super().__init__(message)
+        self.feedback={'code':'funded_recovery_remaining','error':message,
+            'legal_actions':[{'action':o['legal_next_tool'],'target_issue':o['obligation_id'],
+                'arguments':o['arguments'],'ready':o['ready'],'required_budget':o['required_budget']}
+                for o in obligations]}
+
+
 def _text(value, maximum, *, nonempty=False):
     return isinstance(value, str) and len(value) <= maximum and (not nonempty or bool(value.strip()))
 
@@ -65,10 +75,17 @@ def validate_action(value):
                 validate_action({'action':'propose_revision','arguments':{**child,'reason':args['reason']},
                     'target_issue':value['target_issue'],'rationale_summary':value['rationale_summary']})
         return value
-    required = set(shapes[name]) - ({"endpoint_types", "surface_relation", "query"} if name == "inspect_ontology" else set())
+    optional=({'endpoint_types','surface_relation','query'} if name=='inspect_ontology' else
+              {'field_evidence','reviewed_scopes','field_notes'} if name=='propose_revision' else set())
+    required = set(shapes[name]) - optional
     if not required <= set(args) or set(args) - set(shapes[name]):
         raise ActionError("missing or forbidden tool arguments")
     for key, item in args.items():
+        if key in {'field_evidence','reviewed_scopes','field_notes'}:
+            from .schema_validation import schema_errors
+            errors=schema_errors(item,argument_schemas(False,True)[name]['properties'][key])
+            if errors:raise ActionError('; '.join(errors))
+            continue
         if name == "inspect_ontology" and key == "relation_id" and item is None:
             continue
         if key == "change_kind":
@@ -174,7 +191,18 @@ def argument_schemas(include_disputes=False,include_resolution=False):
         "get_ontology_extension_status":obj({"extension_id":text(nonempty=True)}),
     }
     if include_disputes:schemas['review_dispute']=obj({'dispute_id':text(nonempty=True)})
+    qualifier_fields=('polarity','condition','time_scope','applicability','modality','quantifier')
+    field_evidence=obj({f:array(24) for f in qualifier_fields},optional=qualifier_fields)
+    reviewed_scopes=obj({f:obj({'scope':{'enum':[*CONTEXT_SCOPES,'adjacent_sentence']},'evidence_ids':array(24)})
+                         for f in qualifier_fields},optional=qualifier_fields)
+    field_notes=obj({f:text(800,nonempty=True) for f in qualifier_fields},optional=qualifier_fields)
     if include_resolution:
+        revision_fields=(*qualifier_fields,*sorted(EDITABLE_TRIPLE_FIELDS-{'qualifiers','qualifier_status'}))
+        schemas['propose_revision']=obj({**schemas['propose_revision']['properties'],
+            'field_evidence':obj({f:array(24) for f in revision_fields},optional=revision_fields),
+            'reviewed_scopes':reviewed_scopes,
+            'field_notes':obj({f:text(800,nonempty=True) for f in revision_fields},optional=revision_fields)},
+            optional=('field_evidence','reviewed_scopes','field_notes'))
         source_ids=array(24);source_ids['minItems']=1
         justification=obj({'evidence_ids':source_ids,'basis':{'enum':['source']},'note':text(800,nonempty=True)})
         entity_ids=obj({'head':source_ids,'tail':source_ids},optional=('tail',))
@@ -184,7 +212,9 @@ def argument_schemas(include_disputes=False,include_resolution=False):
         schemas.update({
             'propose_mapping':obj({'relation_id':text(200,nonempty=True),'head_type':text(200,nonempty=True),
                 'tail_type':text(200,nullable=True),'identity_evidence':entity_ids,'type_evidence':typing,
-                'competing_relations':exclusions,'evidence_ids':source_ids,'reason':text(nonempty=True)}),
+                'competing_relations':exclusions,'evidence_ids':source_ids,'reason':text(nonempty=True),
+                'qualifier_changes':changes,'field_evidence':field_evidence,'reviewed_scopes':reviewed_scopes,'field_notes':field_notes},
+                optional=('qualifier_changes','field_evidence','reviewed_scopes','field_notes')),
             'propose_split_revision':obj({'children':{'type':'array','minItems':2,'maxItems':4,
                 'items':obj({'changes':changes,'evidence_ids':source_ids})},'reason':text(nonempty=True)}),
             'review_split_revision':obj({'group_id':text(nonempty=True)}),

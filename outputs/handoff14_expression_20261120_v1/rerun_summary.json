@@ -1,0 +1,145 @@
+{
+  "population": 14,
+  "outcomes": {
+    "manual": 13,
+    "reject": 1
+  },
+  "technical_incomplete": 2,
+  "applied_revisions": 2,
+  "costs": {
+    "physical_model_calls": 147,
+    "by_task_type": {
+      "triple_review": 60,
+      "planner_action": 31,
+      "candidate_dispute_review": 48,
+      "candidate_semantic_recheck_v1": 2,
+      "candidate_revision_review": 6
+    },
+    "reported_tokens": {
+      "input_tokens": 2979795,
+      "output_tokens": 128935
+    },
+    "usage_missing_requests": 1,
+    "by_model": {
+      "Qwen": {
+        "physical_requests": 69,
+        "unknown_execution": 1,
+        "failed_responses": 8,
+        "usage_missing": 1,
+        "error_codes": {
+          "UNKNOWN_REQUEST_OUTCOME": 1
+        }
+      },
+      "Gemma": {
+        "physical_requests": 38,
+        "unknown_execution": 0,
+        "failed_responses": 12,
+        "usage_missing": 0,
+        "error_codes": {}
+      },
+      "deepseek-flash": {
+        "physical_requests": 40,
+        "unknown_execution": 0,
+        "failed_responses": 4,
+        "usage_missing": 0,
+        "error_codes": {}
+      }
+    },
+    "physical_calls_by_phase": {
+      "initial_review": 54,
+      "preprocessing": 31,
+      "evidence_dispute": 50,
+      "revision_review": 6,
+      "final_review": 6
+    },
+    "elapsed_seconds": 3240.0763940811157
+  },
+  "roots": {
+    "cand_1c49ce3e5f3cc639175f": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_fb4e5b2348020e963976": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_29b12271b98f4caa3b39": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_73c575625609bc94dc31": {
+      "decision": "reject",
+      "recommendation": "exclude",
+      "technical_incomplete": false,
+      "required_human_action": "quality_sampling"
+    },
+    "cand_5d2bcc4902e79c36b827": {
+      "decision": "manual",
+      "recommendation": "insufficient_evidence",
+      "technical_incomplete": true,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_495514d901678b084b1f": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_e8245c9e46331262412b": {
+      "decision": "manual",
+      "recommendation": "revise",
+      "technical_incomplete": true,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_2e0d61cecd869c0659f5": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_b7cbabd1fecdf8165d07": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_e8b57c7d4a6370da244d": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_b616c903145361531b01": {
+      "decision": "manual",
+      "recommendation": "manual_review",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_7f05c38a350ef3efcb6d": {
+      "decision": "manual",
+      "recommendation": "insufficient_evidence",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    },
+    "cand_aea63f9a08e744124b10": {
+      "decision": "manual",
+      "recommendation": "wait_mapping",
+      "technical_incomplete": false,
+      "required_human_action": "shared_definition_or_mapping_review"
+    },
+    "cand_63b67f5ebf438199db7c": {
+      "decision": "manual",
+      "recommendation": "insufficient_evidence",
+      "technical_incomplete": false,
+      "required_human_action": "domain_adjudication"
+    }
+  },
+  "reference_labels_transferred_to_revisions": false,
+  "production_written": false
+}

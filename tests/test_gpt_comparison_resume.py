@@ -5,6 +5,7 @@ from pathlib import Path
 import sqlite3
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from evaluation.gpt_five_group import ROOT,Fence,prepare,run,read
 from evaluation.gpt_comparison_resume import restore
@@ -35,6 +36,13 @@ class SkipUnknownFenceTests(unittest.TestCase):
 
 @unittest.skipUnless((PRIOR/'final_verification.json').exists(),'requires recorded study prefix')
 class ResumeRecordedTests(unittest.TestCase):
+    def setUp(self):
+        # Replay the recorded study inside its authorized time window. Real runs
+        # must still expire after 12 hours, regardless of when this test is run.
+        recorded_now=read(PRIOR/'started.json')['time']+60
+        clock=patch('evaluation.gpt_five_group.time.time',return_value=recorded_now)
+        clock.start();self.addCleanup(clock.stop)
+
     def test_restore_keeps_26_predictions_and_all_170_prior_requests(self):
         with tempfile.TemporaryDirectory() as temp:
             output=Path(temp)/'resume';prepare(output,resume_from=PRIOR)

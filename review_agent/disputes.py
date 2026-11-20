@@ -11,13 +11,16 @@ TYPE_FOR={'triple_support':'relation_meaning','relation_semantics':'relation_mea
 
 
 def policy_for(config):
-    return {'version':VERSION,'adjudication':'no_majority_override','max_rechecks_per_dispute':1,
+    policy={'version':VERSION,'adjudication':'no_majority_override','max_rechecks_per_dispute':1,
         'scope':'one_frozen_claim_question','counter_role':'seek possible falsification, never mandatory opposition',
         'counter_absence_is_positive_support':False,'scoped_review_is_admission':False,
         'model_rule':'Address each frozen claim target in the corresponding dimension, citing exact source evidence. '
             'Explain the specific expression, issue and effect on meaning; use expression_findings for field rules. '
             'Search for possible falsification without being required to oppose. No counterevidence found is not '
             'positive support. Preserve both observations independently. Do not settle a semantic disagreement by majority.'}
+    if (config.get('dispute_review') or {}).get('scope_review'):
+        policy.update(version='claim_disputes_v2',scope_review_contract='candidate_scope_review_v2')
+    return policy
 
 
 def target_for(candidate,check):
@@ -47,7 +50,7 @@ def request_context(candidate,policy):
 def frozen(proposal):
     from .contracts import proposal_digest
     policy=proposal.get('dispute_policy');context=proposal.get('dispute_context')
-    if (policy!=policy_for({}) or sha256_json(policy)!=proposal.get('dispute_policy_hash') or
+    if (policy not in [policy_for({}),policy_for({'dispute_review':{'scope_review':True}})] or sha256_json(policy)!=proposal.get('dispute_policy_hash') or
         context!=request_context(proposal['candidate'],policy) or sha256_json(context)!=proposal.get('dispute_context_hash') or
         proposal_digest(proposal)!=proposal.get('proposal_digest')):
         raise ValueError('frozen claim-dispute context mismatch')
@@ -116,12 +119,18 @@ def build_report(proposal,votes,eligible_ids=None):
         role_conflict=check=='triple_support' and any(x['positive_support']['status']=='unresolved' for x in observations)
         if not differing and not role_conflict:continue
         norm=bool(group) and all(o['issue_type']=='field_normalization' and o['meaning_effect']=='preserved' for o in group)
-        route='apply_field_spec' if norm else 'supplement_mapping_information' if check=='mapping' else 'human_scope_review' if check=='knowledge_scope' else 'supplement_source_context'
+        scope_review=check=='knowledge_scope' and bool((proposal.get('dispute_policy') or {}).get('scope_review_contract'))
+        equivalent=False
+        if scope_review:
+            from .scope_policy import classification_decision
+            equivalent=bool(group) and {o['status'] for o in group}<={'general','conditional'} and all(
+                classification_decision(o['status'],True,proposal.get('review_scope_policy'))['status']=='include' for o in group)
+        route='apply_field_spec' if norm else 'supplement_mapping_information' if check=='mapping' else 'human_scope_review' if check=='knowledge_scope' and not scope_review else 'supplement_source_context'
         target=target_for(proposal['candidate'],check)
         dispute={'dispute_id':'dispute_'+sha256_json([proposal['proposal_digest'],target['claim_id']])[:24],
             'claim':target,'check':check,'issue_type':'field_normalization' if norm else TYPE_FOR[check],
             'question':target['question'],'opinions':group,'route':route,
-            'status':'normalization_pending' if norm else 'human_review' if check=='knowledge_scope' else 'open',
+            'status':'policy_equivalent' if equivalent else 'normalization_pending' if norm else 'human_review' if check=='knowledge_scope' and not scope_review else 'open',
             'positive_role_conflict':role_conflict,'majority_is_resolution':False,
             'required_material':'完整正式定义、竞争关系和实体身份' if check=='mapping' else '相关完整句子、条件、公式及前后文'}
         disputes.append(dispute)

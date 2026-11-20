@@ -1,0 +1,1549 @@
+{
+  "version": "fourteen_candidate_subset_comparison_v1",
+  "population": 14,
+  "sample_ids": [
+    "PILOT-002",
+    "PILOT-003",
+    "PILOT-004",
+    "PILOT-006",
+    "PILOT-012",
+    "PILOT-015",
+    "PILOT-017",
+    "PILOT-018",
+    "PILOT-026",
+    "PILOT-029",
+    "PILOT-032",
+    "PILOT-036",
+    "PILOT-037",
+    "PILOT-039"
+  ],
+  "completed": 14,
+  "before_outcomes": {
+    "manual": 14
+  },
+  "after_outcomes": {
+    "accept": 0,
+    "reject": 1,
+    "manual": 13
+  },
+  "automatic_closure_rate": {
+    "before": {
+      "numerator": 0,
+      "denominator": 14,
+      "value": 0
+    },
+    "after": {
+      "numerator": 1,
+      "denominator": 14,
+      "value": 0.07142857142857142
+    },
+    "meaning": "operational closure, not truth-validated accuracy"
+  },
+  "applied_revisions": [
+    {
+      "sample_id": "PILOT-006",
+      "candidate_id": "cand_73c575625609bc94dc31",
+      "status": "applied",
+      "changed_fields": [
+        "head",
+        "semantic_context",
+        "surface_relation",
+        "tail"
+      ],
+      "changes": {
+        "head": "将式(3.10)在管道截面上积分平均",
+        "semantic_context": {
+          "entity_mentions": {
+            "head": {
+              "entity_surface": "将式(3.10)在管道截面上积分平均",
+              "referent_scope": "得到该方程的推导操作"
+            },
+            "tail": {
+              "entity_surface": "实际流体管流的伯努利方程",
+              "referent_scope": "实际流体管流的伯努利方程"
+            }
+          },
+          "relation_meaning": {
+            "note": "原文为推导/操作关系，操作对象是式(3.10)，操作结果是实际流体管流的伯努利方程；不可颠倒主宾语。",
+            "semantic_equivalence": "needs_review"
+          }
+        },
+        "surface_relation": "得到",
+        "tail": "实际流体管流的伯努利方程"
+      },
+      "before": {
+        "head": "实际流体管流的伯努利方程",
+        "surface_relation": "由",
+        "tail": "将式(3.10)在管道截面上积分平均"
+      },
+      "after": {
+        "head": "将式(3.10)在管道截面上积分平均",
+        "surface_relation": "得到",
+        "tail": "实际流体管流的伯努利方程"
+      },
+      "reference_labels_transferred": false
+    },
+    {
+      "sample_id": "PILOT-037",
+      "candidate_id": "cand_aea63f9a08e744124b10",
+      "status": "applied",
+      "changed_fields": [
+        "qualifier_status.polarity",
+        "qualifiers.polarity"
+      ],
+      "changes": {
+        "qualifier_status": {
+          "polarity": "extracted"
+        },
+        "qualifiers": {
+          "polarity": "positive"
+        }
+      },
+      "before": {
+        "head": "equation of conservation of mass",
+        "surface_relation": "is commonly called",
+        "tail": "continuity equation"
+      },
+      "after": {
+        "head": "equation of conservation of mass",
+        "surface_relation": "is commonly called",
+        "tail": "continuity equation"
+      },
+      "reference_labels_transferred": false
+    }
+  ],
+  "formal_mapping_statuses": {
+    "context_incomplete": 14
+  },
+  "costs": {
+    "physical_model_calls": 147,
+    "by_task_type": {
+      "triple_review": 60,
+      "planner_action": 31,
+      "candidate_dispute_review": 48,
+      "candidate_semantic_recheck_v1": 2,
+      "candidate_revision_review": 6
+    },
+    "reported_tokens": {
+      "input_tokens": 2979795,
+      "output_tokens": 128935
+    },
+    "usage_missing_requests": 1,
+    "by_model": {
+      "Qwen": {
+        "physical_requests": 69,
+        "unknown_execution": 1,
+        "failed_responses": 8,
+        "usage_missing": 1,
+        "error_codes": {
+          "UNKNOWN_REQUEST_OUTCOME": 1
+        }
+      },
+      "Gemma": {
+        "physical_requests": 38,
+        "unknown_execution": 0,
+        "failed_responses": 12,
+        "usage_missing": 0,
+        "error_codes": {}
+      },
+      "deepseek-flash": {
+        "physical_requests": 40,
+        "unknown_execution": 0,
+        "failed_responses": 4,
+        "usage_missing": 0,
+        "error_codes": {}
+      }
+    },
+    "physical_calls_by_phase": {
+      "initial_review": 54,
+      "preprocessing": 31,
+      "evidence_dispute": 50,
+      "revision_review": 6,
+      "final_review": 6
+    },
+    "elapsed_seconds": 3240.0763940811157
+  },
+  "request_states": {
+    "completed": 122,
+    "failed": 24,
+    "unknown": 1
+  },
+  "known_failed_response_count": 24,
+  "failed_response_affected_candidates": 9,
+  "known_failed_response_error_counts": {
+    "focused review output truncated": 6,
+    "prior material evidence must be reviewed": 5,
+    "relation_semantics: failed or unresolved checks require an explicit finding": 2,
+    "all cited and protected scope evidence must be reviewed": 1,
+    "only actual counterevidence has counter evidence IDs": 1,
+    "invalid stop_reason": 1,
+    "$.qualifiers: unknown field": 1,
+    "planner output truncated at token limit": 3,
+    "issue/rationale must be bounded strings": 3,
+    "semantic findings must agree with the failed expression check; semantic change requires changed meaning and failed check": 1
+  },
+  "known_failed_response_records": [
+    {
+      "attempt_id": "attempt_fb24e513871e48c68f76f199340d8b6c",
+      "sample_id": "PILOT-002",
+      "candidate_id": "cand_1c49ce3e5f3cc639175f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "output_incomplete",
+      "error": "focused review output truncated",
+      "error_code": null,
+      "input_tokens": 8501,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_5d8bc35f891042a385e870c6080bd846",
+      "sample_id": "PILOT-002",
+      "candidate_id": "cand_1c49ce3e5f3cc639175f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "output_incomplete",
+      "error": "focused review output truncated",
+      "error_code": null,
+      "input_tokens": 8494,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_45561e43482b41b897747561fb421c58",
+      "sample_id": "PILOT-002",
+      "candidate_id": "cand_1c49ce3e5f3cc639175f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "invalid_contract",
+      "error": "prior material evidence must be reviewed",
+      "error_code": null,
+      "input_tokens": 8468,
+      "output_tokens": 2044
+    },
+    {
+      "attempt_id": "attempt_3a227704848c4fe2b4ca3f85968dfe3e",
+      "sample_id": "PILOT-002",
+      "candidate_id": "cand_1c49ce3e5f3cc639175f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "invalid_contract",
+      "error": "prior material evidence must be reviewed",
+      "error_code": null,
+      "input_tokens": 8474,
+      "output_tokens": 1876
+    },
+    {
+      "attempt_id": "attempt_754679a7f4814d4592b4e6829f5468d0",
+      "sample_id": "PILOT-003",
+      "candidate_id": "cand_fb4e5b2348020e963976",
+      "state": "failed",
+      "task_type": "triple_review",
+      "model": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error": "relation_semantics: failed or unresolved checks require an explicit finding",
+      "error_code": null,
+      "input_tokens": 22820,
+      "output_tokens": 853
+    },
+    {
+      "attempt_id": "attempt_0254a4bd2bb04b24916ee2c0e5b7120f",
+      "sample_id": "PILOT-004",
+      "candidate_id": "cand_29b12271b98f4caa3b39",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "invalid_contract",
+      "error": "prior material evidence must be reviewed",
+      "error_code": null,
+      "input_tokens": 12097,
+      "output_tokens": 1243
+    },
+    {
+      "attempt_id": "attempt_2ad781a5570848839cd9e5e9aeb87252",
+      "sample_id": "PILOT-004",
+      "candidate_id": "cand_29b12271b98f4caa3b39",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "output_incomplete",
+      "error": "focused review output truncated",
+      "error_code": null,
+      "input_tokens": 12078,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_cf0ac7afc2c646948a59ee581dde15a2",
+      "sample_id": "PILOT-004",
+      "candidate_id": "cand_29b12271b98f4caa3b39",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "invalid_contract",
+      "error": "all cited and protected scope evidence must be reviewed",
+      "error_code": null,
+      "input_tokens": 12252,
+      "output_tokens": 1519
+    },
+    {
+      "attempt_id": "attempt_62804bb23b7440b186d8ff725679a06e",
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "output_incomplete",
+      "error": "focused review output truncated",
+      "error_code": null,
+      "input_tokens": 7694,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_25e08f5a121646988145e39c6f9f97fd",
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "invalid_contract",
+      "error": "prior material evidence must be reviewed",
+      "error_code": null,
+      "input_tokens": 7686,
+      "output_tokens": 1161
+    },
+    {
+      "attempt_id": "attempt_b11b6daf3ed24c4ea68d4ed555e82cf1",
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "invalid_contract",
+      "error": "prior material evidence must be reviewed",
+      "error_code": null,
+      "input_tokens": 7683,
+      "output_tokens": 1322
+    },
+    {
+      "attempt_id": "attempt_dadd62c747f543f89f7798b3d9537fa9",
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "output_incomplete",
+      "error": "focused review output truncated",
+      "error_code": null,
+      "input_tokens": 7692,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_b3a007473b9e405b895c7a1dfac81afe",
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error": "only actual counterevidence has counter evidence IDs",
+      "error_code": null,
+      "input_tokens": 6920,
+      "output_tokens": 509
+    },
+    {
+      "attempt_id": "attempt_37bdfd256ef14496a101e6d6d7a57450",
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "invalid stop_reason",
+      "error_code": null,
+      "input_tokens": 31031,
+      "output_tokens": 688
+    },
+    {
+      "attempt_id": "attempt_4959f32bc5ea4115ae30c2bf993b70e3",
+      "sample_id": "PILOT-017",
+      "candidate_id": "cand_e8245c9e46331262412b",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "$.qualifiers: unknown field",
+      "error_code": null,
+      "input_tokens": 40933,
+      "output_tokens": 851
+    },
+    {
+      "attempt_id": "attempt_3875e210838d43bfb189be037a3901c4",
+      "sample_id": "PILOT-017",
+      "candidate_id": "cand_e8245c9e46331262412b",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "planner output truncated at token limit",
+      "error_code": null,
+      "input_tokens": 49374,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_2992ae7e34e340ccb4fe38e7b8c9e419",
+      "sample_id": "PILOT-018",
+      "candidate_id": "cand_2e0d61cecd869c0659f5",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "issue/rationale must be bounded strings",
+      "error_code": null,
+      "input_tokens": 35749,
+      "output_tokens": 606
+    },
+    {
+      "attempt_id": "attempt_566d3831962c4f839a5047b5ca1620bc",
+      "sample_id": "PILOT-018",
+      "candidate_id": "cand_2e0d61cecd869c0659f5",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "planner output truncated at token limit",
+      "error_code": null,
+      "input_tokens": 44319,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_0a7e57d0ea4344dab20f68eda085f4b7",
+      "sample_id": "PILOT-029",
+      "candidate_id": "cand_e8b57c7d4a6370da244d",
+      "state": "failed",
+      "task_type": "triple_review",
+      "model": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error": "relation_semantics: failed or unresolved checks require an explicit finding",
+      "error_code": null,
+      "input_tokens": 21893,
+      "output_tokens": 876
+    },
+    {
+      "attempt_id": "attempt_e0f93e9d3fc341c8b5fd7b34db4e238d",
+      "sample_id": "PILOT-037",
+      "candidate_id": "cand_aea63f9a08e744124b10",
+      "state": "failed",
+      "task_type": "candidate_dispute_review",
+      "model": "Gemma",
+      "response_status": "output_incomplete",
+      "error": "focused review output truncated",
+      "error_code": null,
+      "input_tokens": 8611,
+      "output_tokens": 2048
+    },
+    {
+      "attempt_id": "attempt_abc5d44e10db4020be2ced4f306da2c5",
+      "sample_id": "PILOT-037",
+      "candidate_id": "cand_aea63f9a08e744124b10",
+      "state": "failed",
+      "task_type": "triple_review",
+      "model": "deepseek-flash",
+      "response_status": "invalid_contract",
+      "error": "semantic findings must agree with the failed expression check; semantic change requires changed meaning and failed check",
+      "error_code": null,
+      "input_tokens": 23618,
+      "output_tokens": 983
+    },
+    {
+      "attempt_id": "attempt_e707851a1394487c88ff33463a3ac8b4",
+      "sample_id": "PILOT-037",
+      "candidate_id": "cand_aea63f9a08e744124b10",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "issue/rationale must be bounded strings",
+      "error_code": null,
+      "input_tokens": 23074,
+      "output_tokens": 322
+    },
+    {
+      "attempt_id": "attempt_e6c3a27c96904b34ae326e3f8bf737a7",
+      "sample_id": "PILOT-039",
+      "candidate_id": "cand_63b67f5ebf438199db7c",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "issue/rationale must be bounded strings",
+      "error_code": null,
+      "input_tokens": 30910,
+      "output_tokens": 395
+    },
+    {
+      "attempt_id": "attempt_b7473cabff8e49038027a00402209c84",
+      "sample_id": "PILOT-039",
+      "candidate_id": "cand_63b67f5ebf438199db7c",
+      "state": "failed",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "invalid_action",
+      "error": "planner output truncated at token limit",
+      "error_code": null,
+      "input_tokens": 39648,
+      "output_tokens": 2048
+    }
+  ],
+  "unknown_requests": [
+    {
+      "attempt_id": "attempt_00411550e6fb4845922c3b2c4831789f",
+      "sample_id": "PILOT-012",
+      "candidate_id": "cand_5d2bcc4902e79c36b827",
+      "state": "unknown",
+      "task_type": "planner_action",
+      "model": "Qwen",
+      "response_status": "api_error",
+      "error": "Connection error.",
+      "error_code": "UNKNOWN_REQUEST_OUTCOME",
+      "input_tokens": null,
+      "output_tokens": null
+    }
+  ],
+  "focused_review_statuses": {
+    "review_incomplete": 12,
+    "resolved_supports": 3,
+    "human_review": 1
+  },
+  "focused_review_records": [
+    {
+      "sample_id": "PILOT-002",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 25204
+      }
+    },
+    {
+      "sample_id": "PILOT-002",
+      "status": "resolved_supports",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 25146
+      }
+    },
+    {
+      "sample_id": "PILOT-002",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 25190
+      }
+    },
+    {
+      "sample_id": "PILOT-002",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 25031
+      }
+    },
+    {
+      "sample_id": "PILOT-002",
+      "status": "resolved_supports",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 25178
+      }
+    },
+    {
+      "sample_id": "PILOT-002",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 25112
+      }
+    },
+    {
+      "sample_id": "PILOT-004",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 32206
+      }
+    },
+    {
+      "sample_id": "PILOT-004",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 32172
+      }
+    },
+    {
+      "sample_id": "PILOT-004",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 32873
+      }
+    },
+    {
+      "sample_id": "PILOT-015",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 23350
+      }
+    },
+    {
+      "sample_id": "PILOT-015",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 23292
+      }
+    },
+    {
+      "sample_id": "PILOT-015",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 23302
+      }
+    },
+    {
+      "sample_id": "PILOT-015",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 23324
+      }
+    },
+    {
+      "sample_id": "PILOT-015",
+      "status": "resolved_supports",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 23258
+      }
+    },
+    {
+      "sample_id": "PILOT-036",
+      "status": "human_review",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_b",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 19551
+      }
+    },
+    {
+      "sample_id": "PILOT-037",
+      "status": "review_incomplete",
+      "eligible_voter_ids": [
+        "judge_a",
+        "judge_c"
+      ],
+      "input_budget": {
+        "exceeded": false,
+        "limit_bytes": 262144,
+        "policy": "focused_input_bytes_v1",
+        "serialized_input_bytes": 24468
+      }
+    }
+  ],
+  "local_focused_input_budget_blocks": 0,
+  "revision_tool_errors": [
+    {
+      "sample_id": "PILOT-018",
+      "tool": "propose_revision",
+      "error": "each changed expression field needs its own evidence and interpretation",
+      "arguments": {
+        "changes": {
+          "qualifier_status": {
+            "applicability": "extracted",
+            "condition": "not_stated",
+            "modality": "extracted",
+            "polarity": "unknown",
+            "quantifier": "extracted",
+            "time_scope": "not_stated"
+          },
+          "qualifiers": {
+            "applicability": "In general",
+            "condition": null,
+            "modality": "can",
+            "polarity": "unknown",
+            "quantifier": "little or no",
+            "time_scope": null
+          },
+          "semantic_context": {
+            "qualifier_attachments": [
+              {
+                "attachment": "relation",
+                "qualifier_kind": "modality",
+                "scope_id": "p1_s2",
+                "value": "can"
+              },
+              {
+                "attachment": "tail",
+                "qualifier_kind": "quantity",
+                "scope_id": "p1_s2",
+                "value": "little or no"
+              },
+              {
+                "attachment": "relation",
+                "qualifier_kind": "applicability",
+                "scope_id": "p1_s2",
+                "value": "In general"
+              }
+            ],
+            "relation_meaning": {
+              "note": "“In general”限定流体一般性质；“can support”保留原文能力/承载表述，不改为断言；“little or no”附着于剪切载荷或拉应力。",
+              "semantic_equivalence": "needs_review"
+            }
+          }
+        },
+        "evidence_ids": [
+          "ev_c818a98e60df7e13727c",
+          "ev_9e40f5b7505c969c7f18"
+        ],
+        "field_evidence": {
+          "applicability": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "condition": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "modality": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "quantifier": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "time_scope": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ]
+        },
+        "field_notes": {
+          "applicability": "原文以“In general”限定该陈述适用于流体一般情况，应记入applicability而非频率。",
+          "condition": "完整段落未给出额外成立条件，保持not_stated。",
+          "modality": "原文使用“can support”，保留can；不自动改为asserted。",
+          "quantifier": "“little or no”是对象数量/程度限定，保留原值。",
+          "time_scope": "原文未给出时间范围，保持not_stated。"
+        },
+        "reason": "将“In general”从discourse改为applicability，并保留can与little or no的原文附着，以解决限定字段未完整入字段的争议。",
+        "reviewed_scopes": {
+          "applicability": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "condition": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "modality": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "quantifier": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "time_scope": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "PILOT-018",
+      "tool": "propose_revision",
+      "error": "each changed expression field needs its own evidence and interpretation",
+      "arguments": {
+        "changes": {
+          "qualifier_status": {
+            "applicability": "extracted",
+            "condition": "not_stated",
+            "modality": "extracted",
+            "polarity": "unknown",
+            "quantifier": "extracted",
+            "time_scope": "not_stated"
+          },
+          "qualifiers": {
+            "applicability": "In general",
+            "condition": null,
+            "modality": "can",
+            "polarity": "unknown",
+            "quantifier": "little or no",
+            "time_scope": null
+          },
+          "semantic_context": {
+            "qualifier_attachments": [
+              {
+                "attachment": "relation",
+                "qualifier_kind": "modality",
+                "scope_id": "p1_s2",
+                "value": "can"
+              },
+              {
+                "attachment": "tail",
+                "qualifier_kind": "quantity",
+                "scope_id": "p1_s2",
+                "value": "little or no"
+              },
+              {
+                "attachment": "relation",
+                "qualifier_kind": "applicability",
+                "scope_id": "p1_s2",
+                "value": "In general"
+              }
+            ],
+            "relation_meaning": {
+              "note": "“In general”限定流体一般性质；“can support”保留原文能力/承载表述，不改为断言；“little or no”附着于剪切载荷或拉应力。",
+              "semantic_equivalence": "needs_review"
+            }
+          }
+        },
+        "evidence_ids": [
+          "ev_c818a98e60df7e13727c",
+          "ev_9e40f5b7505c969c7f18"
+        ],
+        "field_evidence": {
+          "applicability": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "condition": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "modality": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "quantifier": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ],
+          "time_scope": [
+            "ev_c818a98e60df7e13727c",
+            "ev_9e40f5b7505c969c7f18"
+          ]
+        },
+        "field_notes": {
+          "applicability": "原文以“In general”限定该陈述适用于流体一般情况，应记入applicability而非频率。",
+          "condition": "完整段落未给出额外成立条件，保持not_stated。",
+          "modality": "原文使用“can support”，保留can；不自动改为asserted。",
+          "quantifier": "“little or no”是对象数量/程度限定，保留原值。",
+          "time_scope": "原文未给出时间范围，保持not_stated。"
+        },
+        "reason": "将“In general”从discourse改为applicability，并保留can与little or no的原文附着，以解决限定字段未完整入字段的争议。",
+        "reviewed_scopes": {
+          "applicability": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "condition": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "modality": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "quantifier": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          },
+          "time_scope": {
+            "evidence_ids": [
+              "ev_c818a98e60df7e13727c",
+              "ev_9e40f5b7505c969c7f18"
+            ],
+            "scope": "current_chunk"
+          }
+        }
+      }
+    }
+  ],
+  "system_technical_incomplete_count": 2,
+  "technical_reason_count_is_not_failed_request_count": true,
+  "cases": [
+    {
+      "sample_id": "PILOT-002",
+      "candidate_id": "cand_1c49ce3e5f3cc639175f",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "gap:need_more_evidence",
+        "gap:validation_missing",
+        "gap:version_stale",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "resolution_dependency_review_pending",
+        "scope:unclear",
+        "source:unresolved",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-003",
+      "candidate_id": "cand_fb4e5b2348020e963976",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_expression_incomplete",
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:unresolved",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-004",
+      "candidate_id": "cand_29b12271b98f4caa3b39",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "gap:validation_missing",
+        "gap:version_stale",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "resolution_dependency_review_pending",
+        "scope:unclear",
+        "source:unresolved",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-006",
+      "candidate_id": "cand_73c575625609bc94dc31",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "reject",
+        "recommendation": "exclude",
+        "technical_incomplete": false,
+        "required_human_action": "quality_sampling"
+      },
+      "dimension_statuses": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "exclude"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "scope:exclude"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-012",
+      "candidate_id": "cand_5d2bcc4902e79c36b827",
+      "before": {
+        "decision": "manual",
+        "recommendation": "insufficient_evidence",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "insufficient_evidence",
+        "technical_incomplete": true,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "insufficient",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "blocking_reasons": [
+        "candidate_expression_incomplete",
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "scope:unclear",
+        "source:insufficient",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "technical_recovery_tasks": [
+        {
+          "task_type": "planner_action",
+          "attempt_id": "attempt_00411550e6fb4845922c3b2c4831789f",
+          "request_key": "5902ebd7660adff9cd32109b53b881e07f672fa39d6b8c836d077e1650014097",
+          "request_state": "unknown",
+          "execution_unknown": true,
+          "usage_unknown": true,
+          "semantic_dependency": false,
+          "action_executed": false,
+          "automatic_resend": false,
+          "required_action": "technical_recovery"
+        },
+        {
+          "task_type": "execution_obligation",
+          "issue_id": "issue_977f4fb1b7a8f25efdd68ac6",
+          "execution_unknown": false,
+          "usage_unknown": false,
+          "required_action": "technical_recovery",
+          "automatic_resend": false
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-015",
+      "candidate_id": "cand_495514d901678b084b1f",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "gap:need_more_evidence",
+        "gap:validation_missing",
+        "gap:version_stale",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "resolution_dependency_review_pending",
+        "source:unresolved",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-017",
+      "candidate_id": "cand_e8245c9e46331262412b",
+      "before": {
+        "decision": "manual",
+        "recommendation": "revise",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "revise",
+        "technical_incomplete": true,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "contradicted",
+        "expression": "semantic_revision",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:semantic_revision",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:contradicted",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": [
+        {
+          "task_type": "execution_obligation",
+          "issue_id": "issue_20c03fde38d0284cc9a369aa",
+          "execution_unknown": false,
+          "usage_unknown": false,
+          "required_action": "technical_recovery",
+          "automatic_resend": false
+        }
+      ]
+    },
+    {
+      "sample_id": "PILOT-018",
+      "candidate_id": "cand_2e0d61cecd869c0659f5",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_expression_incomplete",
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:unresolved",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-026",
+      "candidate_id": "cand_b7cbabd1fecdf8165d07",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:unresolved",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-029",
+      "candidate_id": "cand_e8b57c7d4a6370da244d",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:unresolved",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-032",
+      "candidate_id": "cand_b616c903145361531b01",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "unresolved",
+        "expression": "unresolved",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "expression:unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:unresolved",
+        "unresolved_claim_dispute"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-036",
+      "candidate_id": "cand_7f05c38a350ef3efcb6d",
+      "before": {
+        "decision": "manual",
+        "recommendation": "insufficient_evidence",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "insufficient_evidence",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "insufficient",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "blocking_reasons": [
+        "candidate_expression_incomplete",
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "gap:validation_missing",
+        "gap:version_stale",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "resolution_dependency_review_pending",
+        "scope:unclear",
+        "source:insufficient",
+        "unresolved_claim_dispute",
+        "unresolved_dimension_disagreement"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-037",
+      "candidate_id": "cand_aea63f9a08e744124b10",
+      "before": {
+        "decision": "manual",
+        "recommendation": "manual_review",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "wait_mapping",
+        "technical_incomplete": false,
+        "required_human_action": "shared_definition_or_mapping_review"
+      },
+      "dimension_statuses": {
+        "source": "supported",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "unclear"
+      },
+      "blocking_reasons": [
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "scope:unclear"
+      ],
+      "technical_recovery_tasks": []
+    },
+    {
+      "sample_id": "PILOT-039",
+      "candidate_id": "cand_63b67f5ebf438199db7c",
+      "before": {
+        "decision": "manual",
+        "recommendation": "insufficient_evidence",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "after": {
+        "decision": "manual",
+        "recommendation": "insufficient_evidence",
+        "technical_incomplete": false,
+        "required_human_action": "domain_adjudication"
+      },
+      "dimension_statuses": {
+        "source": "insufficient",
+        "expression": "standard",
+        "mapping": "context_incomplete",
+        "scope": "include"
+      },
+      "blocking_reasons": [
+        "candidate_expression_incomplete",
+        "candidate_identity_unresolved",
+        "critical_issue_unresolved",
+        "formal_mapping_not_bound_to_candidate",
+        "gap:critical_issues_unresolved",
+        "mapping:context_incomplete",
+        "ontology_guard_not_passed",
+        "required_committee_incomplete",
+        "source:insufficient"
+      ],
+      "technical_recovery_tasks": []
+    }
+  ],
+  "freeze_verified": true,
+  "freeze_hash": "1488e5637d1e6fd9fdf5bbc094ccd30ad1ed4e7176ba2191f5da7f99537ce2dd",
+  "previous_result_file_hash_checks": {
+    "D:\\knowledge-huopao\\outputs\\handoff40_revision_20261120_v2\\rerun_summary.json": true,
+    "D:\\knowledge-huopao\\outputs\\handoff40_revision_20261120_v2\\resolution_report.json": true,
+    "D:\\knowledge-huopao\\outputs\\handoff40_revision_20261120_v2\\status.json": true,
+    "D:\\knowledge-huopao\\outputs\\handoff40_revision_20261120_v2\\model_inputs.json": true,
+    "D:\\knowledge-huopao\\outputs\\handoff40_revision_20261120_v2\\gpt_reference.json": true
+  },
+  "only_selected_candidates_sent": true,
+  "other_26_candidates_rerun": false,
+  "original_reference_evaluated": 14,
+  "reference_labels_transferred_to_revisions": false,
+  "quality_limit": "New revisions lack independent version-matched truth labels. Operational approval and exclusion are not revision accuracy. Original GPT reference agreement is reported separately.",
+  "production_written": false
+}

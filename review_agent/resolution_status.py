@@ -6,6 +6,8 @@ def technical_tasks(repository, audit_id):
     with repository.connect() as connection:
         rows=connection.execute("SELECT attempt_id,request_key,state,metadata_json,result_json FROM request_attempts "
             "WHERE json_extract(metadata_json,'$.proposal.audit_id')=?",(audit_id,)).fetchall()
+        local_blocks=connection.execute("SELECT tool_call_id,record_json FROM agent_tool_calls WHERE audit_id=? "
+            "AND json_extract(record_json,'$.focused_result.error_code')='FOCUSED_INPUT_BUDGET_EXCEEDED'",(audit_id,)).fetchall()
     result=[]
     for row in rows:
         response=json.loads(row['result_json'] or '{}');meta=json.loads(row['metadata_json'])
@@ -19,6 +21,13 @@ def technical_tasks(repository, audit_id):
                 'semantic_dependency':meta.get('task_type')!='planner_action' and execution_unknown,
                 'action_executed':False if meta.get('task_type')=='planner_action' and execution_unknown else None,
                 'automatic_resend':False,'required_action':'technical_recovery' if execution_unknown else 'usage_reconciliation'})
+    for row in local_blocks:
+        record=json.loads(row['record_json']);focused=record['focused_result']
+        result.append({'task_type':'focused_input_budget','tool_call_id':row['tool_call_id'],
+            'dispute_id':record.get('dispute_id'),'error_code':focused['error_code'],
+            'input_budget':focused['input_budget'],'semantic_dependency':True,
+            'execution_unknown':False,'usage_unknown':False,'action_executed':False,
+            'automatic_resend':False,'required_action':'technical_recovery'})
     return result
 
 

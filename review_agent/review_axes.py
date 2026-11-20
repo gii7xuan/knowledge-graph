@@ -128,13 +128,13 @@ def route_axes(axes, *, complete=True):
     source, expression, mapping, scope = (axes[n]['status'] for n in ('source', 'expression', 'mapping', 'scope'))
     actions = []
     if not complete: actions.append('review_incomplete')
-    if scope == 'exclude': actions.append('excluded_by_scope')
+    if scope == 'exclude' and complete and source=='supported' and expression=='standard': actions.append('excluded_by_scope')
     if expression == 'semantic_revision' or source == 'contradicted': actions.append('semantic_revision_required')
     if complete and source == 'insufficient': actions.append('evidence_insufficient')
     if complete and source == 'unresolved': actions.append('source_review')
     if complete and expression == 'unresolved': actions.append('expression_review')
     if expression == 'lossless_normalization': actions.append('normalization_required')
-    if mapping != 'valid': actions.append('mapping_review')
+    if mapping != 'valid' and scope!='exclude': actions.append('mapping_review')
     if scope == 'unclear': actions.append('scope_review')
     return {'workflow_state': actions[0] if actions else 'review_completed', 'pending_actions': actions,
             'ready_for_admission': not actions, 'review_axes': axes}

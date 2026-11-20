@@ -1,0 +1,30 @@
+test_empty_scope_does_not_close_other_scope_issue_or_new_evidence (tests.test_handoff_revision.FundedRecoveryTests) ... ok
+test_focus_cost_uses_actual_seats_and_whitelist_is_obeyed (tests.test_handoff_revision.FundedRecoveryTests) ... ok
+test_local_supplement_needs_no_model_calls_and_survives_planner_exhaustion (tests.test_handoff_revision.FundedRecoveryTests) ... ok
+test_schema_and_runtime_reject_the_same_premature_finish_with_targets (tests.test_handoff_revision.FundedRecoveryTests) ... ok
+test_combined_mapping_and_qualifier_draft_has_one_review_and_fresh_final_ballot (tests.test_handoff_revision.QualifierAndProfileTests) ... ok
+test_isolated_prepare_supports_multiple_source_runs_without_model_calls (tests.test_handoff_revision.QualifierAndProfileTests) ... ok
+test_not_stated_requires_real_scope_and_polarity_cannot_be_defaulted (tests.test_handoff_revision.QualifierAndProfileTests) ... ok
+test_profile_freezes_contracts_permissions_and_whole_revision_budget (tests.test_handoff_revision.QualifierAndProfileTests) ... ERROR
+test_unassigned_mapping_can_be_proposed_from_recalled_definitions_and_source (tests.test_handoff_revision.QualifierAndProfileTests) ... ok
+test_confirmed_exclusion_updates_category_and_skips_main_graph_mapping (tests.test_handoff_revision.ScopeResolutionTests) ... ok
+test_general_and_conditional_are_equivalent_only_when_both_included (tests.test_handoff_revision.ScopeResolutionTests) ... ok
+test_include_exclude_disagreement_and_changed_frozen_policy_stay_unresolved (tests.test_handoff_revision.ScopeResolutionTests) ... ok
+test_scope_request_uses_versioned_contract_and_three_independent_mock_receipts (tests.test_handoff_revision.ScopeResolutionTests) ... ok
+test_weighted_exclusion_completes_without_mapping_but_pending_evidence_blocks_it (tests.test_handoff_revision.ScopeResolutionTests) ... ok
+test_isolated_runner_drains_new_rebind_jobs_but_bounds_the_queue (tests.test_resolution_workflows.ResolutionWorkflowTests) ... ok
+
+======================================================================
+ERROR: test_profile_freezes_contracts_permissions_and_whole_revision_budget (tests.test_handoff_revision.QualifierAndProfileTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\knowledge-huopao\tests\test_handoff_revision.py", line 117, in test_profile_freezes_contracts_permissions_and_whole_revision_budget
+    config=build_config(base,profile='handoff_revision');description=describe(config)
+  File "D:\knowledge-huopao\review_agent\experiment_profiles.py", line 62, in build_config
+    config['vote_weighting']=normalize_policy({'mode':'dynamic'},int(config['consensus']['committee_size']))
+KeyError: 'consensus'
+
+----------------------------------------------------------------------
+Ran 15 tests in 28.152s
+
+FAILED (errors=1)

@@ -75,6 +75,9 @@ class LLMPlanner:
                 if action is not None:
                     return {'action': action, 'status': 'ok', 'attempts': attempts,
                             'request_proposal': proposal}
+                if isinstance(action_error,dict):
+                    return {'action':None,'status':'policy_rejected','policy_feedback':action_error,
+                        'attempts':attempts,'error':action_error['error'],'request_proposal':proposal}
                 attempt['error'] = action_error
                 # State drift and unknown outcomes never become a new format request.
                 if receipt.get('response_status') != 'invalid_action' or action_error == 'stale_planner_state':
@@ -105,6 +108,10 @@ class LLMPlanner:
                     attempt["response_status"] = "ok"
                 except (ValueError, TypeError) as exc:
                     attempt.update(response_status="invalid_action", error=str(exc))
+                    if hasattr(exc,'feedback'):
+                        budget.tokens(attempt);attempts.append(attempt)
+                        return {'action':None,'status':'policy_rejected','policy_feedback':exc.feedback,
+                            'attempts':attempts,'error':str(exc)}
             else:
                 timed_out = isinstance(error, TimeoutError) or "timeout" in type(error).__name__.lower()
                 attempt.update(response_status="timeout" if timed_out else "api_error",
